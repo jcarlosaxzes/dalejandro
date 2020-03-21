@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "dalejandroHTML5", ".", "{BC04C688-CB44-414F-BA60-C64E0F5BC778}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_60934"
+		Debug.AspNetCompiler.PhysicalPath = "..\dalejandroHTML5\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60934\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_60934"
+		Release.AspNetCompiler.PhysicalPath = "..\dalejandroHTML5\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60934\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "60934"
+		SlnRelativePath = "..\dalejandroHTML5\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC04C688-CB44-414F-BA60-C64E0F5BC778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC04C688-CB44-414F-BA60-C64E0F5BC778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC04C688-CB44-414F-BA60-C64E0F5BC778}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BC04C688-CB44-414F-BA60-C64E0F5BC778}.Debug|x86.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5AC9ACA9-1802-4592-A076-51BE1C68E4CC}
+	EndGlobalSection
+EndGlobal
