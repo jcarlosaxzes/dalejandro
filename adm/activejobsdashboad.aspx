@@ -17,6 +17,7 @@
         .panel-body {
             padding: 5px;
             padding-left: 30px;
+
         }
     </style>
     <link rel="manifest" href="../manifest.json" />
