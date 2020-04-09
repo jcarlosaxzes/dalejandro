@@ -353,7 +353,7 @@ Public Class activejobsdashboad
     Public Function GetViewEditRevisionToolTip() As String
         If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
             ' Programmers/Computer/IT
-            Return "View/Edit Ticket List. The amount represents the tickets in status 'Ready for Development','In Progress' or 'Development Closed"
+            Return "View/Edit Ticket List. The amount represents the tickets in status 'Ready for Development', 'In Progress' or 'Development Closed"
         Else
             Return "View/Edit Revisions List"
         End If
