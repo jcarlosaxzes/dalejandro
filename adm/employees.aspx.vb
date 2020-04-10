@@ -172,7 +172,7 @@ Public Class employees
         Try
             Dim id As Integer = CType(sender, ImageButton).CommandArgument
             If Val(id) > 0 Then
-                qbAPI.CreateUpdateQBEmployee(id, lblCompanyId.Text, lblEmployee.Text)
+                'qbAPI.CreateUpdateQBEmployee(id, lblCompanyId.Text, lblEmployee.Text)
                 Master.InfoMessage("Employee successfully synchronized with QuickBook", 0)
             End If
         Catch ex As Exception

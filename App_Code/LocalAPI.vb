@@ -5662,7 +5662,7 @@ Public Class LocalAPI
 
                             ' Definir el Role
 
-                            Roles.AddUsersToRole(username, sRole)
+                            'Roles.AddUsersToRole(username, sRole)
                             AddAllClientsToUsers_ant = AddAllClientsToUsers_ant + 1
                         End If
                     End If
@@ -5709,7 +5709,7 @@ Public Class LocalAPI
                     username(0) = sUserName
 
                     ' Definir el Role
-                    Roles.AddUsersToRole(username, sRole)
+                    'Roles.AddUsersToRole(username, sRole)
                     If bSendCredentials Then ClientEmailCredentials(lClientId, companyId)
                     AddClientToUser_ant = True
                 End If
@@ -7480,9 +7480,9 @@ Public Class LocalAPI
             End Select
 
             username(0) = sEmail
-            If Not Roles.IsUserInRole(sEmail, sRole) Then
-                Roles.AddUsersToRole(username, sRole)
-            End If
+            'If Not Roles.IsUserInRole(sEmail, sRole) Then
+            '    Roles.AddUsersToRole(username, sRole)
+            'End If
             RefrescarUsuarioVinculado = sMsgRes
 
         Catch ex As Exception
@@ -7491,21 +7491,22 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function IsADMCLIuserAutorized(sEmail As String, companyId As Integer) As Boolean
-        If Roles.IsUserInRole(sEmail, "Clientes") Then
-            If IsClientEmail(sEmail, companyId) Then
-                Return True
-            End If
-        End If
-        If Roles.IsUserInRole(sEmail, "Administradores") Then
-            If IsEmployeeEmail(sEmail, companyId) Then
-                Return True
-            End If
-        End If
-        If Roles.IsUserInRole(sEmail, "Subconsultans") Then
-            If IsSubconsultantEmail(sEmail, companyId) Then
-                Return True
-            End If
-        End If
+        'If Roles.IsUserInRole(sEmail, "Clientes") Then
+        '    If IsClientEmail(sEmail, companyId) Then
+        '        Return True
+        '    End If
+        'End If
+        'If Roles.IsUserInRole(sEmail, "Administradores") Then
+        '    If IsEmployeeEmail(sEmail, companyId) Then
+        '        Return True
+        '    End If
+        'End If
+        'If Roles.IsUserInRole(sEmail, "Subconsultans") Then
+        '    If IsSubconsultantEmail(sEmail, companyId) Then
+        '        Return True
+        '    End If
+        'End If
+        Return True
     End Function
 
     Public Shared Function CreateUserPassword() As String
@@ -7527,7 +7528,7 @@ Public Class LocalAPI
                     ' No existe usuario. Crearlo
                     Membership.CreateUser(sEmail, sPassword, sEmail)
                     username(0) = sEmail
-                    Roles.AddUsersToRole(username, sRole)
+                    'Roles.AddUsersToRole(username, sRole)
                     sMsgRes = sEmail & " user was created. Send new credentials"
 
                 Case Else
@@ -7543,14 +7544,14 @@ Public Class LocalAPI
                         If Membership.FindUsersByEmail(sEmail).Count = 0 Then
                             Membership.CreateUser(sEmail, sPassword, sEmail)
                             username(0) = sEmail
-                            Roles.AddUsersToRole(username, sRole)
+                            'Roles.AddUsersToRole(username, sRole)
                             sMsgRes = sMsgRes & sEmail & " user was created. Send new credentials"
                         End If
                         If sMsgRes.Length = 0 Then sMsgRes = "The user is updated"
                     Else
                         ' No eliminar ni crear, solo a�adir nuevo role
                         username(0) = sEmail
-                        Roles.AddUsersToRole(username, sRole)
+                        'Roles.AddUsersToRole(username, sRole)
                     End If
             End Select
             RefrescarUsuarioVinculado_ant = sMsgRes
@@ -7611,7 +7612,7 @@ Public Class LocalAPI
                     Dim newUser As MembershipUser = Membership.CreateUser(sNewUserEmail, currentPassword, sNewUserEmail)
                     Dim username(0) As String
                     username(0) = sNewUserEmail
-                    Roles.AddUsersToRole(username, "Clientes")
+                    'Roles.AddUsersToRole(username, "Clientes")
 
                     ' Actualizar la Ficha del cliente
                     LocalAPI.ActualizarClient(lClientId, "Email", sNewUserEmail)
