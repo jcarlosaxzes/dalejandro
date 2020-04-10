@@ -86,7 +86,7 @@
                     <Columns>
                         <telerik:LayoutColumn Span="4">
                             <div style="padding-top: 3px">
-                                <asp:Image ID="Image4" runat="server" SkinID="headerpasconceptlogo" />
+                                <img src="../App_Themes/Estandar/Images/header-pasconcept-logo.png" style="border-width:0" />
                             </div>
                         </telerik:LayoutColumn>
                         <telerik:LayoutColumn Span="8">
@@ -141,7 +141,7 @@
                 <telerik:LayoutRow StaticId="Menu">
                     <Content>
                         <div class="noprint" style="text-align: center">
-                            <telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" Skin="BlackMetroTouch" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">
+                            <telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" Skin="MetroTouch" Width="100%">
                                 <Items>
 
                                     <%--Start menu--%>

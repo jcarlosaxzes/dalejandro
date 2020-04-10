@@ -1,0 +1,1526 @@
+/*******************************************************/
+/*-----------------------------------------------------*/
+/*-----------------------------------------------------*/
+/*-----------------------------------------------------*/
+/*--------------------THEME ESTANDAR ------------------*/
+/*-----------------------------------------------------*/
+/*-----------------------------------------------------*/
+/*-----------------------------------------------------*/
+/*-----------1. CABECERA (HEADER)----------------------*/
+/*-----------2. MENU DE CABECERA (HEADER MEMU)---------*/
+/*-----------3. CONTENIDOS-----------------------------*/
+/*-----------4. FOOTER---------------------------------*/
+/*-----------5. LEGAL ZONE-----------------------------*/
+/*------. CONTROLES------------------------------------*/
+/*-----------------------------------------------------*/
+/*******************************************************/
+
+body
+{
+    font-family: Calibri, Arial, Helvetica, sans-serif;
+    background-color: #e1eaf3;
+    margin-top: 0px;
+}
+
+.Formulario
+{
+    padding: 2px;
+    background-color: #f1f5fb;
+    border: 1px solid #aabfd6;
+}
+
+.Normal
+{
+    font-size: 12px;
+    font-weight: normal;
+    color: #333333;
+}
+
+.NormalNegrita
+{
+    font-size: 12px;
+    font-weight: bold;
+    color: #6c6c6c;
+}
+.Pequena
+{
+    font-size: x-small;
+    font-weight: normal;
+    color: Black;
+    font-family: Calibri;
+}
+
+.PequenaNegrita
+{
+    font-size: x-small;
+    font-weight: bold;
+    color: Black;
+    font-family: Calibri;
+}
+
+.Titulo1
+{
+    font-size: x-large;
+    font-weight: bold;
+    color: #00CCFF;
+    font-family: Calibri, Verdana;
+}
+
+.Titulo2
+{
+    font-size: x-large;
+    font-weight: bold;
+    color: #ff8c00;
+    font-family: Calibri, Verdana;
+}
+
+.Titulo3
+{
+    font-size: 20px;
+    font-weight: bold;
+    color: #333333;
+    font-family: Calibri;
+}
+
+
+.Titulo4
+{
+    font-size: 18px;
+    font-weight: normal;
+    color: #ff8c00;
+    font-family: Calibri, Verdana;
+}
+
+.Titulo4Negrita
+{
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff8c00;
+    font-family: Calibri, Verdana;
+}
+
+.Error
+{
+    font-size: 12px;
+    font-weight: bold;
+    color: #FF0000;
+}
+
+.Legal
+{
+    font-size: 10px;
+    font-weight: normal;
+    color: #999;
+}
+
+.EnlaceAzulNegrita
+{
+    font-size: 12px;
+    font-weight: bold;
+    color: #0CA1D6;
+}
+
+.EnlaceGrisSmall
+{
+    font-size: 9px;
+    font-weight: bold;
+    color: #8C8C8C;
+}
+
+.Panel
+{
+    border-left: 1px solid #6c6c6c;
+    border-right: 1px solid #6c6c6c;
+    border-bottom: 1px solid #6c6c6c;
+    width: 618px;
+    height: 156px;
+    background-color: #FFFFFF;
+    border-top-color: #6c6c6c;
+    border-top-width: 1px;
+}
+
+.Suscription
+{
+    border-width: 1px;
+    border-color: #6c6c6c;
+    width: 518px;
+    height: 35px;
+    background-color: #FFFFFF;
+    border-right-style: solid;
+    border-top-style: solid;
+    border-left-style: solid;
+    height: 50px;
+}
+
+.LoginCentralPanel
+{
+    border: 1px solid #6c6c6c;
+    width: 359px;
+    height: 35px;
+    background-color: #FFFFFF;
+    height: 50px;
+}
+
+.TBL_FORM
+{
+    border-style: solid;
+    border-width: 3px 0px 0px 0px;
+    border-color: #0072C6;
+    width: 700px;
+    background-color: #FFFFFF;
+    float: left;
+    font-size: 11px;
+    color: #333333;
+    margin-left: 0px;
+}
+
+.TBL_FORM_CELL_Left
+{
+    width: 120px;
+    background-color: #FFFFFF;
+    text-align: right;
+}
+
+.TBL_FORM_CELL_Middle
+{
+    border: 1px solid #eff3ff;
+    text-align: left;
+    letter-spacing: inherit;
+    background-color: #f7fbff;
+}
+
+.M4
+{
+    font-size: medium;
+    font-weight: bold;
+    color: #134d86;
+    font-family: Calibri, Verdana;
+}
+
+.MenuItemSelected
+{
+    font-size: 24pt;
+    font-weight: bold;
+    color: Black;
+    font-family: Calibri, Verdana;
+}
+
+.MenuItemHover
+{
+    font-size: 24pt;
+    font-weight: bold;
+    color: #000099;
+    font-family: Calibri, Verdana;
+}
+
+.Cabecera1
+{
+    font-size: large;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: Calibri, Verdana;
+}
+
+.Pestana
+{
+    font-size: small;
+    font-weight: bold;
+    color: white;
+    background-color: gray;
+    margin-right: 5px;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.Link
+{
+    font-size: 11px;
+    font-weight: normal;
+}
+
+A.Link:hover
+{
+    font-size: 11px;
+    font-weight: normal;
+    color: #ff9966;
+}
+
+/*--------------------------------------------------------------------------------*/
+/* ------------- ESTILOS QUE DEFINEN LA MASTER PAGE (CABECERA Y FOOTER)-----------*/
+/*--------------------------------------------------------------------------------*/
+/* La página está divida en tres columnas, dos laterales fijos y el central adaptable*/
+.CABECERA
+{
+    min-width: 700px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px 0px 0px 0px;
+    background-image: url(Images/HEAD_BGND_REPEAT_X.jpg);
+    background-repeat: repeat-x;
+}
+
+.IHEAD /*COLUMNA IZQUIERDA*/
+{
+    position: absolute;
+    margin: 0px;
+    left: 0px;
+    top: 0px;
+    width: 183;
+    height: 100px;
+    /*background-image: url(Images/HEAD_IZQUIERDO.jpg);*/
+    background-repeat: no-repeat;
+    z-index: 80;
+}
+
+.CHEAD /*COLUMNA IZQUIERDA*/
+{
+    padding-right: 20px;
+    text-align: right;
+    margin-left: 150px;
+    margin-right: 150px;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    height: 100px;
+    width: auto;
+    /*background-image: url(Images/HEAD_CENTRAL.jpg); /*FONDO QUE SE REPITE HORIZONTALMENTE*/
+    background-position: left;
+    background-repeat: no-repeat;
+}
+
+.RHEAD
+{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 800px;
+    background: url(Images/HEAD_DERECHO.jpg) #fff no-repeat right 0%;
+    height: 100px;
+    border-right: 1px solid dimgray;
+}
+
+.HEADLOGOTIPO
+{
+    margin-top: 0px;
+    margin-left: 2px;
+    text-align: left;
+    /*background-image: url(Images/Logotipo.jpg);*/
+    background-repeat: no-repeat;
+}
+
+.HEADUSERNAME
+{
+    width: 150px;
+    color: black;
+    font-size: x-small;
+    font-family: Calibri, Verdana;
+    text-decoration: none; /*background-image: url(Images/MENUIZQ_TOP.jpg);
+    background-repeat: no-repeat;*/
+    height: 25px;
+    padding-top: 0px;
+}
+
+.HEADHORIZONTAL1
+{
+    width: 100%;
+    height: 18PX;
+    background-image: url(Images/HEAD_HORIZONTAL1.jpg);
+    background-repeat: no-repeat;
+    background-color: white;
+    text-align: right;
+}
+
+.HEADHORIZONTAL2
+{
+    width: 100%;
+    height: 20PX;
+    background-image: url(Images/HEAD_HORIZONTAL2.jpg);
+    background-repeat: repeat-x;
+    background-color: white;
+}
+
+.HEADTOOLBAR
+{
+    position: relative;
+    top: 0px;
+    width: auto;
+    text-align: right;
+    margin-right: 15px;
+    padding-right: 1px;
+    padding-left: 1px;
+    height: 18px;
+}
+
+.HEADITEMTOOLBARHOVER
+{
+    font-size: 12pt;
+    font-weight: bold;
+    color: #000099;
+    width: 85px;
+    text-align: center;
+    padding-top: 1px;
+    height: 18px;
+    font-family: Calibri, Verdana;
+}
+
+.HEADITEMTOOLBARSELECTED
+{
+    font-size: 8pt;
+    font-weight: normal;
+    color: #000000;
+    width: 85px;
+    text-align: center;
+    background-color: transparent;
+    background-image: url(Images/Selected.png);
+}
+
+.HEADSITEMAP
+{
+    position: absolute;
+    top: 118px;
+    left: 13px;
+}
+
+.HEADFECHA
+{
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    color: #ffffff;
+    font-size: 8pt;
+    font-family: Calibri, Tahoma;
+    text-align: right;
+    width: 100%;
+    font-weight: bolder;
+}
+
+.BANNER
+{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    left: 100px;
+    background-color: Aqua;
+    width: auto;
+}
+
+.HEADTABLAC /* LA TABLA QUE CONTIENE LA IMAGEN CENTRAL */
+{
+    border: 0;
+    width: 100%;
+    height: 74px;
+    background-image: url(Images/HEAD_CENTRAL.jpg);
+    border-right: 0px solid;
+    border-top: 0px solid;
+    border-left: 0px solid;
+    border-bottom: 0px solid;
+    background-repeat: no-repeat;
+}
+
+.HEADLOGIN
+{
+    text-align: right;
+    width: 110px;
+    height: 18px;
+    font-size: x-small;
+    color: black;
+    background-color: transparent;
+}
+
+.ICONLOGIN
+{
+}
+
+.ICONUSER
+{
+}
+/* --------------------- FIN ESTILOS QUE DEFINEN LA MASTER PAGE (CABECERA)--------*/
+/*--------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------------------------*/
+/* ------------------------- DIVISION DE LA PAGINA DE CONTENIDOS -----------------*/
+/*--------------------------------------------------------------------------------*/
+.CONTENEDOR
+{
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    vertical-align: top;
+    height: 600px;
+}
+
+.ICOL
+{
+    position: absolute;
+    left: 0px;
+    top: 138px;
+    width: 140px;
+    height: 100%;
+    background-color: White;
+}
+
+
+.CCOL
+{
+    min-height: 700px;
+    margin-left: 141px;
+    margin-right: 142px;
+    text-align: left;
+    voice-family: inherit;
+    width: AUTO;
+    background-color: White;
+    height: 100%;
+    border-left: silver 1px solid;
+    border-right: silver 1px solid;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+
+A.CCOL:hover
+{
+    color: #ff9966;
+}
+
+.RCOL /*COLUMNA DERECHA*/
+{
+    position: absolute;
+    right: 1px;
+    top: 138px;
+    width: 140px;
+    HEIGHT: 300px;
+    background-color: White;
+    padding-left: 1px;
+}
+
+/*--------------------------------------------------------------------------------*/
+/* ------------------------FIN DIVISION DE LA PAGINA DEONTENIDOS -----------------*/
+/*--------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------*/
+/* ------------------------ESTILOS FUENTES MENU IZQUIERDO------- -----------------*/
+/*--------------------------------------------------------------------------------*/
+.ICOL_CUADRO
+{
+    border-right: #DCDCDC 1px solid;
+    border-top: #DCDCDC 1px solid;
+    border-left: #DCDCDC 1px solid;
+    border-bottom: #DCDCDC 1px solid;
+    background-color: #f5f5f5;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    width: 135px;
+}
+
+
+.ICOL_H1
+{
+    font-size: 11px;
+    color: #696969;
+    float: left;
+    margin-top: 10px;
+    margin-left: 2px;
+    font-weight: bold;
+    text-align: left;
+    letter-spacing: -0.3pt;
+    font-family: Calibri, Tahoma;
+}
+
+
+.ICOL_NORMAL
+{
+    font-size: 11px;
+    color: gray;
+    float: left;
+    text-align: left;
+    margin-left: 2px;
+    font-family: Calibri, Tahoma;
+    letter-spacing: -0.2pt;
+}
+
+.ICOL_NORMAL_BULLETS
+{
+    font-size: x-small;
+    color: gray;
+    float: left;
+    text-align: left;
+    margin-left: 2px;
+    list-style-position: outside;
+    list-style-image: url(Images/Bullets.png);
+}
+
+A.MENU_VERTICAL_LINKS:hover
+{
+    background-color: #e6e6fa;
+}
+
+
+.HEADLOGIN_LINKS
+{
+    color: white;
+    display: block;
+    padding: 2px 0px 2px 6px;
+    font-size: x-small;
+    text-decoration: none;
+}
+
+A.HEADLOGIN_LINKS:hover
+{
+    color: orange;
+}
+
+
+/* ------------------------FIN ESTILOS FUENTES MENU IZQUIERDO---------------------*/
+/*--------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------*/
+/* ------------------------ESTILOS FUENTES MENU DERECHO---------------------------*/
+/*--------------------------------------------------------------------------------*/
+
+.RCOL_H1
+{
+    font-size: medium;
+    color: blue;
+    float: left;
+    margin-top: 10px;
+    margin-left: 2px;
+}
+
+.RCOL_NORMAL
+{
+    font-size: x-small;
+    color: gray;
+    float: left;
+    text-align: left;
+    margin-left: 2px;
+}
+
+
+/* ------------------------FIN ESTILOS FUENTES MENU DERECHO-----------------------*/
+/*--------------------------------------------------------------------------------*/
+
+/* ------------------- MASTER PAGE - FOOTER(3 CONTENEDORES) -------------------*/
+
+/* La página está divida en tres columnas, dos laterales fijos y el central adaptable.
+   1.- IFOOT (COLUMNA IZQUIERDA)
+   2.- CFOOT (COLUMNA CENTRAL)
+   3.- RFOOT (COLUMNA DERECHA) 
+*/
+.CONTENEDORFOOTER
+{
+    /*	background-image: url(Images/FOOT_BGND_REPEAT_X.jpg);*/
+    background-color: white;
+    background-position: bottom;
+    margin-left: 0px;
+    margin-right: 0px;
+    background-position: 50% bottom;
+    vertical-align: top;
+}
+
+.IFOOTER
+{
+    left: 0px;
+    position: absolute;
+    width: 150px;
+    height: 59px;
+    text-align: left;
+    background-position: right top;
+    background-image: url(Images/FOOT_IZQUIERDO.jpg);
+    background-repeat: no-repeat;
+}
+
+.CFOOTER
+{
+    height: 59px;
+    background-image: url(Images/FOOT_BGND_REPEAT_X.jpg);
+    text-align: center;
+    margin-left: 150px;
+    margin-right: 150px;
+    background-repeat: repeat-x;
+    background-position: 50% top;
+}
+
+.FOOTERTABLAC
+{
+    width: 100%;
+    height: 59px;
+    z-index: 10;
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.RFOOTER /*COLUMNA DERECHA*/
+{
+    position: absolute;
+    right: 0px;
+    height: 59px;
+    width: 150px;
+    background-image: url(Images/FOOT_DERECHO.jpg);
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+
+.CARROCOMPRA
+{
+    left: 18px;
+    top: 6px;
+    width: 130px;
+    position: absolute;
+    z-index: 15;
+    font-weight: bold;
+    font-size: xx-small;
+    color: white;
+    font-family: Calibri, Verdana;
+}
+
+.USERICON
+{
+    background-image: url(Images/ICON_LOGIN.gif);
+    background-repeat: no-repeat;
+}
+
+/* ------------------- FIN DE LA MASTER PAGE -------------------*/
+
+/* 1 CABECERA****************************************************************************************/
+
+.headerbg
+{
+    /*clase creada para la extension sobrante de los 800+ 600 (igual que footer)*/
+    width: auto;
+    height: 74px;
+}
+
+.conectar
+{
+    color: #414141;
+    font-weight: bold;
+    text-align: right;
+    text-decoration: none;
+    font-size: x-small;
+}
+
+.menu
+{
+    position: relative;
+    float: right;
+    top: 15px;
+    left: -5px;
+    text-transform: uppercase;
+    clear: left;
+}
+
+.sitemappath
+{
+    position: relative;
+    float: right;
+    left: 600px;
+    top: 58px;
+    clear: left;
+    color: #ff8c00;
+    font-family: Calibri, Verdana;
+    font-size: 7pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 100%;
+    direction: ltr;
+    text-align: justify;
+}
+
+.MENU_VERTICAL_LINKS
+{
+    color: #6495ed;
+    display: block;
+    padding: 2px 0px 2px 6px;
+    font-size: x-small;
+    text-align: left;
+    text-decoration: none;
+}
+
+
+.COMBOBOX
+{
+    border-right: gray 1px solid;
+    border-top: gray 1px solid;
+    border-left: gray 1px solid;
+    border-bottom: gray 1px solid;
+    font-weight: bold;
+    font-size: x-small;
+    color: Gray;
+    font-family: Calibri, Verdana;
+}
+
+.CATALOGOTOOLBAR
+{
+    height: 23px; /*background-color: #f5f5f5;*/
+    text-align: left; /*border-right: #d3d3d3 1px solid;*/ /*border-top: #d3d3d3 1px solid;*/ /*border-left: #d3d3d3 1px solid;*/ /*border-bottom: #d3d3d3 1px solid;*/ /*background-image: url(Images/CatToolBar-repeat.gif);*/
+    background-repeat: repeat-x;
+    background-color: #f5f5f5;
+    font-size: xx-small;
+    font-weight: bold;
+    color: Gray;
+    padding-right: 4px;
+    padding-left: 4px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    border-right: gainsboro 1px solid;
+    border-top: gainsboro 1px solid;
+    border-left: gainsboro 1px solid;
+    border-bottom: gainsboro 1px solid;
+    background-repeat: repeat-x;
+}
+
+.copyright
+{
+    margin-top: 20px;
+    font-size: x-small;
+    color: graytext;
+    font-family: Calibri, verdana;
+}
+
+.TextboxBuscar
+{
+    width: 150px;
+    height: 15px;
+    border-right: SteelBlue 1px solid;
+    border-top: SteelBlue 1px solid;
+    border-left: SteelBlue 1px solid;
+    border-bottom: SteelBlue 1px solid;
+    font-weight: bold;
+    font-size: x-small;
+    color: black;
+}
+
+.Textbox
+{
+    width: 150px;
+    border-right: gray 1px solid;
+    border-top: gray 1px solid;
+    border-left: gray 1px solid;
+    border-bottom: gray 1px solid;
+    font-weight: bold;
+    font-size: x-small;
+    color: black;
+}
+
+.btnBuscar
+{
+    height: 10px;
+    font-weight: bold;
+    font-size: x-small;
+}
+
+.btnEstandar
+{
+    height: 20px;
+    width: 80px;
+    font-weight: bold;
+    font-size: xx-small;
+    border-right: cornflowerblue 1px solid;
+    border-top: cornflowerblue 1px solid;
+    border-left: cornflowerblue 1px solid;
+    border-bottom: cornflowerblue 1px solid;
+    background-color: ActiveBorder;
+}
+
+.btnGrande
+{
+    height: 20px;
+    width: 125px;
+    font-weight: bold;
+    font-size: xx-small;
+}
+
+.btnPeque
+{
+    height: 20px;
+    width: 40px;
+    font-weight: bold;
+    font-size: xx-small;
+}
+
+
+/* PAGINA CATALOGO ********************************************************************/
+
+.Disponible
+{
+}
+
+.CabeceraGrid
+{
+    background-color: #dcdcdc;
+    color: #696969; /*font-weight: bold;*/
+    font-size: x-small;
+}
+
+.pagergrid
+{
+    background-color: transparent;
+    font-size: small;
+    color: #990033;
+    font-family: Calibri, Arial;
+}
+
+A.pagergrid:visited
+{
+    color: white;
+}
+
+A.pagergrid:hover
+{
+    color: #ff9966;
+}
+
+
+.footergrid
+{
+    background-color: transparent;
+    color: white;
+}
+
+.rowgrid
+{
+    background-color: green;
+    color: white;
+}
+
+.NAVEGACION_FAMILIAS
+{
+    /*BORDER-RIGHT:  #DCDCDC 1px solid; 
+BORDER-TOP: #DCDCDC 1px solid; 
+BORDER-LEFT: #DCDCDC 1px solid; 
+BORDER-BOTTOM: #DCDCDC 1px solid; */
+    BACKGROUND-COLOR: White;
+    margin-bottom: 5px;
+    width: 135px;
+}
+/* FIN pagina catalogo *******************************************************************/
+
+/* FICHA PRODUCTO**************************************************************************/
+
+.FichaProducto
+{
+}
+
+/* Fin ficha producto****************************************************************************/
+
+
+/* OFERTAS****************************************************************************************/
+
+.Ofertas
+{
+}
+/* Fin pagina ofertas***************************************************************************/
+
+/* FICHA OFERTAS********************************************************************************/
+.FichaOferta
+{
+    border-right: maroon 7px double;
+    border-top: maroon 7px double;
+    border-left: maroon 7px double;
+    border-bottom: maroon 7px double;
+    width: 550px;
+}
+
+.FichaOfertaTitulo
+{
+    font-size: medium;
+    color: white;
+    font-family: Calibri, Arial;
+    font-weight: bold;
+    text-transform: none;
+}
+
+.FichaOfertaFondoTitulo
+{
+    background-color: #8b0000;
+    width: 550px;
+    height: 22px;
+}
+/* Fin ficha ofertas**************************************************************************/
+
+/* PAGINA LOGIN*********************************************************************************/
+.Login
+{
+    border-right: black 1px solid;
+    border-top: black 1px solid;
+    border-left: black 1px solid;
+    border-bottom: black 1px solid;
+    font-weight: bold;
+    font-size: x-small;
+    color: gray;
+    font-family: Calibri, Verdana;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+.LoginImage
+{
+    background: transparent url(Images/security.jpg);
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+}
+
+.LoginButton
+{
+    background-color: #f5f5f5;
+    border-right: gainsboro 1px solid;
+    border-top: gainsboro 1px solid;
+    border-left: gainsboro 1px solid;
+    border-bottom: gainsboro 1px solid;
+    font-weight: bold;
+    font-size: x-small;
+    font-family: Calibri, Verdana;
+    width: 100px;
+    color: #696969;
+    clear: none;
+    text-align: center;
+}
+
+.LoginTitulo
+{
+    color: #cc6666;
+    font-family: Calibri, Verdana;
+    background-color: #f5f5f5;
+    font-weight: bold;
+    font-size: small;
+    text-align: left;
+}
+
+.LoginTextbox
+{
+    width: 120px;
+    height: 14px;
+    border-right: silver 1px solid;
+    border-top: silver 1px solid;
+    border-left: silver 1px solid;
+    border-bottom: silver 1px solid;
+    font-weight: bold;
+    font-size: x-small;
+    color: black;
+    background-color: #f5f5f5;
+}
+
+.LoginCrear
+{
+    /*visibility:true;*/
+    font-weight: bold;
+    font-size: x-small;
+    color: #cc6666;
+    font-family: Calibri, Verdana;
+}
+/* FIN pagina login*****************************************************************************/
+
+/* PAGINA CONTACTO *****************************************************************************/
+.Contacto
+{
+    Width: 80%;
+    padding-right: 1px;
+    padding-left: 1px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    color: #333333;
+    border-right: silver 1px solid;
+    border-top: silver 1px solid;
+    border-left: silver 1px solid;
+    border-bottom: silver 1px solid;
+    vertical-align: top;
+    text-align: center;
+}
+
+.ContactoHeader
+{
+    background-color: #8b0000;
+    font-weight: bold;
+    font-size: small;
+    color: white;
+}
+
+.ContactoFieldHeader /*Columna Izda:palabras contacto,dirección,.)*/
+{
+    font-weight: bold;
+    color: #C00000;
+    text-align: left;
+    width: 150px;
+    font-size: small;
+}
+/* FIN pagina contacto**************************************************************************/
+
+/*PAGINA DE PEDIDOS*******************/
+.PEDIDOTOOLBAR
+{
+    position: relative;
+    left: 0px;
+    /*	width: 100%;*/
+    top: 1px;
+    height: 21px;
+    /*background-color: #f5f5f5;*/
+    text-align: right;
+    /*border-right: #d3d3d3 1px solid;*/
+    /*border-top: #d3d3d3 1px solid;*/
+    /*border-left: #d3d3d3 1px solid;*/
+    /*border-bottom: #d3d3d3 1px solid;*/
+    vertical-align: top;
+    padding-top: 4px;
+    padding: 4px 4px 4px 4px;
+    background-image: url(Images/CatToolBar-repeat.gif);
+    background-repeat: repeat-x;
+    font-size: xx-small;
+    font-weight: bold;
+    color: White;
+}
+
+.ConfirmarBorrado
+{
+    top: 400px;
+    left: 400px;
+    background-color: Blue;
+}
+
+.iNormal
+{
+    font-size: 11;
+    font-weight: normal;
+    color: Black;
+    font-family: Calibri;
+}
+
+.iNormalNegrita
+{
+    font-size: 11;
+    font-weight: bold;
+    color: Black;
+    font-family: Calibri;
+}
+
+.iPequena
+{
+    font-size: 8;
+    font-weight: normal;
+    color: Black;
+    font-family: Calibri;
+}
+
+.iPequenaNegrita
+{
+    font-size: 8;
+    font-weight: bold;
+    color: Black;
+    font-family: Calibri;
+}
+
+.iTitulo3
+{
+    font-size: 13;
+    font-weight: normal;
+    color: #4f81bd;
+    font-family: Calibri, Cambria;
+}
+
+.iTitulo2
+{
+    font-size: 22px;
+    font-weight: bold;
+    color: #365f91;
+    font-family: Calibri;
+}
+
+.iTitulo1
+{
+    font-size: 36px;
+    font-weight: bold;
+    color: #365f91;
+    font-family: Calibri;
+}
+
+/**************************************************************/
+/*1 CABECERA 
+    Objetivos: Soporte para el logotipo empresa suscriptora
+    Objetos:  1 Tabla de una columna y una fila
+    Posicion: Top de la pagina
+    ---------------------------------------------*/
+.TBL_Header
+{
+    width: 98%;
+    background-color: #333333;
+    border-style: none;
+    height: 21px;
+}
+/*  ----------------------------------------------*/
+
+/*************************************************************/
+
+/*2 HEADER MENU
+    Objetivos: Soporte menus generales, mensaje y titulo de la pg.
+    Objetos:  1 Tabla de tres columnas y una fila
+    Posicion: Debajo del Header
+    ---------------------------------------------*/
+
+.TBL_HeaderMenu
+{
+    width: 98%;
+    background-color: #666666;
+    border-style: none;
+    height: 25px;
+    vertical-align: middle;
+    color: #C0C0C0;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+    .TBL_HeaderMenu a:link
+    {
+        color: #C0C0C0;
+    }
+
+    .TBL_HeaderMenu a:visited
+    {
+        color: #C0C0C0;
+    }
+
+    .TBL_HeaderMenu a:hover
+    {
+        color: #0072C6;
+    }
+
+.TBL_HeaderMenu_CELL_Left
+{
+    width: 197px;
+    text-align: left;
+    display:none;
+}
+
+.TBL_HeaderMenu_CELL_Middle
+{
+    background-color: #0072C6;
+    width: 150px;
+    text-align: left;
+    color: White;
+    font-weight: bold;
+    padding-left: 3px;
+    font-size: small;
+    border-width: 0px 0px 0px 1px;
+    border-left-style: outset;
+    border-left-color: #000000;
+    font-family: Calibri, Tahoma;
+}
+
+.TBL_HeaderMenu_CELL_Right
+{
+    text-align: right;
+    border-width: 0px 0px 2px 0px;
+    border-bottom-color: #0072C6;
+    border-bottom-style: solid;
+    padding-right: 5px;
+}
+
+/*  ----------------------------------------------*/
+
+/*************************************************************/
+
+/*3 CONTENIDOS
+    Objetivos: Soporte para el menu vertical y contemplace
+    Objetos:  1 Tabla de dos columnas (una fija) y una fila
+    Posicion: Debajo del Header Menu
+    Notas:    la columna de la izquierda tiene un ancho filo (270px) y la derecha es variable
+    ---------------------------------------------*/
+.TBL_Contenidos
+{
+    width: 98%;
+    background-color: #FFFFFF;
+}
+
+.TBL_Contenidos_CELL_Left
+{
+    border-color: #C0C0C0;
+    border-style: solid;
+    border-width: 0px 1px 0px 1px;
+    width: 200px;
+    vertical-align: top;
+    background-color: #F4F4F4;
+    height: 550px;
+    display:none
+}
+
+.TBL_Contenidos_CELL_Middle
+{
+    vertical-align: top;
+    border-color: #C0C0C0;
+    border-style: solid;
+    border-width: 0px 1px 0px 0px;
+}
+
+/*  ----------------------------------------------*/
+
+/*************************************************************/
+
+/*4 MENU VERTICAL   
+    Objetivos: Soporte para el menu vertical. Cada blogque es una division
+    Objetos:  1 Division y dentro una tabla con una cabecera y luego filas de dos columnas
+    Posicion: A la izquierda del contenido
+    
+    ---------------------------------------------*/
+.DIV_PANEL_Vertical
+{
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    background-color: #FFFFFF;
+    height: auto;
+}
+
+.DIV_PANEL_VERTICAL_TBL
+{
+    width: 100%;
+    font-size: 11px;
+    background-color: #eff3ff;
+}
+
+.DIV_PANEL_VERTICAL_CELL_Header
+{
+    background-color: #999999;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bolder;
+    height: 20px;
+}
+
+.DIV_PANEL_VERTICAL_CELL_Left
+{
+    width: 113px;
+    text-align: right;
+}
+
+.DIV_PANEL_VERTICAL_CELL_Right
+{
+    border: 1px solid #eff3ff;
+    font-size: 12px;
+    text-align: right;
+    color: #333333;
+    letter-spacing: inherit;
+    background-color: #FFFFFF;
+}
+
+    .DIV_PANEL_VERTICAL_CELL_Right a:link
+    {
+        color: #0072C6;
+        text-decoration: none;
+    }
+
+    .DIV_PANEL_VERTICAL_CELL_Right a:hover
+    {
+        color: #000000;
+        font-weight: bold;
+    }
+
+/*  ----------------------------------------------*/
+
+/*  ----------------------------------------------*/
+/**************************************************/
+
+/*5 FOOTER
+    Objetivos: Soporte menus logo inferior y version
+    Objetos:  1 Tabla de dos columnas
+    Posicion: Debajo de los conenidos
+    ---------------------------------------------*/
+
+.TBL_Footer
+{
+    width: 98%;
+    background-color: #0072C6;
+    border-style: none;
+    height: 25px;
+    vertical-align: middle;
+    color: #C0C0C0;
+    font-size: 10px;
+    text-decoration: none;
+    padding-right: 5px;
+}
+
+    .TBL_Footer a:link
+    {
+        color: #C0C0C0;
+    }
+
+    .TBL_Footer a:visited
+    {
+        color: #C0C0C0;
+    }
+
+    .TBL_Footer a:hover
+    {
+        color: #0072C6;
+    }
+
+.TBL_Footer_CELL_Left
+{
+    /*width: 267px;*/
+    width: 197px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+
+.TBL_Footer_CELL_Right
+{
+    text-align: right;
+    padding-right: 5px;
+    color: #FFFFFF;
+}
+
+/*  ----------------------------------------------*/
+/**************************************************/
+
+/*6 LEGAL FOOTER
+    Objetivos: Soporte para temas legales
+    Objetos:  1 Tabla 1 columna
+    Posicion: Debajo Del footer
+    ---------------------------------------------*/
+
+.TBL_Legal
+{
+    width: 98%;
+    border-style: none;
+    height: 25px;
+    vertical-align: middle;
+    color: #666666;
+    font-size: 11px;
+    text-decoration: none;
+    padding-right: 5px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+    .TBL_Legal a:link
+    {
+        color: #666666;
+        text-decoration: none;
+    }
+
+    .TBL_Legal a:visited
+    {
+        color: #666666;
+        text-decoration: none;
+    }
+
+    .TBL_Legal a:hover
+    {
+        color: #000000;
+        text-decoration: none;
+    }
+/*  ----------------------------------------------*/
+
+/**************************************************/
+
+/*7 CONTROLES
+    Objetivos: Tema para botones y combo      
+    ---------------------------------------------*/
+
+.COMBO_Action
+{
+    font-size: 11px;
+    border: 1px solid #adc3de;
+    color: #333333;
+    width: 113px; /*background-color: #eff3ff;*/
+}
+
+
+.BOTON_Action
+{
+    font-size: 11px;
+    border: 0px solid #808080;
+    font-weight: bold;
+    background-color: #eff3ff;
+    color: #0072C6;
+    width: 30px;
+    height: 20px;
+    cursor: auto;
+}
+
+
+
+.RadComboBox_Default
+{
+    vertical-align: bottom;
+}
+
+.RadComboBox_Default
+{
+    font: 12px Calibri,verdana,sans-serif;
+    color: #000;
+    text-align: left;
+}
+
+
+    .RadComboBox_Default *
+    {
+        margin: 0;
+        padding: 0;
+    }
+
+.RadPicker_Default
+{
+    vertical-align: middle;
+}
+
+    .RadPicker_Default .rcInputCell
+    {
+        padding: 0 4px 0 0;
+    }
+
+.RadInput_Default
+{
+    font: 12px Calibri,sans-serif;
+}
+
+.RadInput_Default
+{
+    vertical-align: middle;
+}
+
+.RadPicker_Default .rcCalPopup
+{
+    background-position: 0 -200px;
+}
+
+.RadPicker_Default .rcTimePopup
+{
+    background-position: 0 -300px;
+}
+/*  ----------------------------------------------*/
+
+/**************************************************/
+
+/* ESTILOS GENERICOS
+    Objetivos: Tema para botones y combo      
+    ---------------------------------------------*/
+
+
+
+.FooterText
+{
+    font-family: Calibri, Arial;
+    font-size: 10px;
+    color: #6c6c6c;
+}
+
+.EnlaceGrisSmall
+{
+    font-size: 9px;
+    font-weight: bold;
+    color: #8C8C8C;
+}
+
+.LegalTex
+{
+    font-size: 9px;
+    font-weight: bold;
+    color: #FFFFFF;
+    vertical-align: middle;
+}
+
+.RadGrid caption
+{
+    font-family: Calibri;
+    font-size: large;
+    font-weight: bold;
+}

@@ -46,9 +46,40 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hyak.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Hyak.Common.1.0.2\lib\net45\Hyak.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Azure.KeyVault.Core.2.0.4\lib\net45\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Storage.Common, Version=11.1.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Azure.Storage.Common.11.1.3\lib\net452\Microsoft.Azure.Storage.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Data.Services.Client.5.6.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\WindowsAzure.Storage.9.2.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Services.Client" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -58,7 +89,14 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
@@ -84,6 +122,9 @@
       <HintPath>packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
@@ -285,9 +326,49 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="adm\activejobsdashboad.aspx" />
+    <Content Include="adm\avgeemployeesprofit.aspx" />
+    <Content Include="adm\bill-collected-employees.aspx" />
+    <Content Include="adm\billingactivity.aspx" />
+    <Content Include="adm\billingagingreport.aspx" />
+    <Content Include="adm\billingmanager.aspx" />
+    <Content Include="adm\billvscollected.aspx" />
+    <Content Include="adm\calculator.aspx" />
+    <Content Include="adm\clientfiles.aspx" />
+    <Content Include="adm\clientmanagement.aspx" />
+    <Content Include="adm\clients.aspx" />
+    <Content Include="adm\clientsbalance.aspx" />
+    <Content Include="adm\clienttypes.aspx" />
+    <Content Include="adm\dashboardemployee.aspx" />
     <Content Include="adm\Default.aspx" />
+    <Content Include="adm\departmentslist.aspx" />
+    <Content Include="adm\discipline.aspx" />
+    <Content Include="adm\employees.aspx" />
+    <Content Include="adm\employee_permissions.aspx" />
+    <Content Include="adm\exportclientscsv.aspx" />
+    <Content Include="adm\invoices.aspx" />
+    <Content Include="adm\jobs.aspx" />
+    <Content Include="adm\jobtickets.aspx" />
+    <Content Include="adm\jobtypes.aspx" />
+    <Content Include="adm\jobuse.aspx" />
+    <Content Include="adm\paiddaylist.aspx" />
+    <Content Include="adm\payments.aspx" />
+    <Content Include="adm\phasestemplate.aspx" />
+    <Content Include="adm\pre-projects.aspx" />
+    <Content Include="adm\projecttags.aspx" />
+    <Content Include="adm\proposals.aspx" />
+    <Content Include="adm\proposal_tasks.aspx" />
+    <Content Include="adm\requestforproposals.aspx" />
+    <Content Include="adm\rfps.aspx" />
+    <Content Include="adm\roles.aspx" />
     <Content Include="adm\schedule.aspx" />
     <Content Include="adm\settingstatus.aspx" />
+    <Content Include="adm\statement.aspx" />
+    <Content Include="adm\subconsultants.aspx" />
+    <Content Include="adm\tagcloud.aspx" />
+    <Content Include="adm\tandctemplates.aspx" />
+    <Content Include="adm\time.aspx" />
+    <Content Include="adm\timesbyperiords.aspx" />
+    <Content Include="adm\timesheet.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
     <Content Include="App_Data\RadCaptcha\2.wav" />
@@ -324,6 +405,39 @@
     <Content Include="App_Data\RadCaptcha\X.wav" />
     <Content Include="App_Data\RadCaptcha\Y.wav" />
     <Content Include="App_Data\RadCaptcha\Z.wav" />
+    <Content Include="App_Themes\Estandar\background.jpg" />
+    <Content Include="App_Themes\Estandar\chart.png" />
+    <Content Include="App_Themes\Estandar\DefaultAdministratorIcon.gif" />
+    <Content Include="App_Themes\Estandar\DefaultClientIcon.gif" />
+    <Content Include="App_Themes\Estandar\DefaultEmployeeIcon.gif" />
+    <Content Include="App_Themes\Estandar\DefaultHeader.gif" />
+    <Content Include="App_Themes\Estandar\Estandar.css" />
+    <Content Include="App_Themes\Estandar\Images\administrator.png" />
+    <Content Include="App_Themes\Estandar\Images\customer.png" />
+    <Content Include="App_Themes\Estandar\Images\employee.png" />
+    <Content Include="App_Themes\Estandar\Images\header-pasconcept-logo.png" />
+    <Content Include="App_Themes\Estandar\Images\smallOutlook.gif" />
+    <Content Include="App_Themes\Estandar\Images\subconsultans.png" />
+    <Content Include="App_Themes\Estandar\LoginHeader.gif" />
+    <Content Include="App_Themes\Estandar\LogoPasTrans.png" />
+    <Content Include="App_Themes\Estandar\Menu.BlackMetroTouch.css" />
+    <Content Include="App_Themes\Estandar\OrgChartStyle.css" />
+    <Content Include="App_Themes\Estandar\reloj.png" />
+    <Content Include="App_Themes\Smartphone\background.jpg" />
+    <Content Include="App_Themes\Smartphone\chart.png" />
+    <Content Include="App_Themes\Smartphone\DefaultAdministratorIcon.gif" />
+    <Content Include="App_Themes\Smartphone\DefaultClientIcon.gif" />
+    <Content Include="App_Themes\Smartphone\DefaultEmployeeIcon.gif" />
+    <Content Include="App_Themes\Smartphone\DefaultHeader.gif" />
+    <Content Include="App_Themes\Smartphone\Estandar.css" />
+    <Content Include="App_Themes\Smartphone\Images\administrator.png" />
+    <Content Include="App_Themes\Smartphone\Images\customer.png" />
+    <Content Include="App_Themes\Smartphone\Images\employee.png" />
+    <Content Include="App_Themes\Smartphone\Images\header-pasconcept-logo.png" />
+    <Content Include="App_Themes\Smartphone\Images\subconsultans.png" />
+    <Content Include="App_Themes\Smartphone\LoginHeader.gif" />
+    <Content Include="App_Themes\Smartphone\LogoPasTrans.png" />
+    <Content Include="App_Themes\Smartphone\reloj.png" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -353,6 +467,10 @@
     <Content Include="adm\web.config" />
     <Content Include="Images\.DS_Store" />
     <Content Include="Images\Thumbs.db" />
+    <Content Include="App_Themes\Estandar\Combo.skin" />
+    <Content Include="App_Themes\Estandar\Default.skin" />
+    <Content Include="App_Themes\Smartphone\Combo.skin" />
+    <Content Include="App_Themes\Smartphone\Default.skin" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\Admin Account Edit Proposal  .JPG" />
     <Content Include="Images\Admin Account Job Details.JPG" />
@@ -561,11 +679,242 @@
       <DependentUpon>ADM_Main_Responsive.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\avgeemployeesprofit.aspx.designer.vb">
+      <DependentUpon>avgeemployeesprofit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\avgeemployeesprofit.aspx.vb">
+      <DependentUpon>avgeemployeesprofit.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\bill-collected-employees.aspx.designer.vb">
+      <DependentUpon>bill-collected-employees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\bill-collected-employees.aspx.vb">
+      <DependentUpon>bill-collected-employees.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\billingactivity.aspx.designer.vb">
+      <DependentUpon>billingactivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\billingactivity.aspx.vb">
+      <DependentUpon>billingactivity.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\billingagingreport.aspx.designer.vb">
+      <DependentUpon>billingagingreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\billingagingreport.aspx.vb">
+      <DependentUpon>billingagingreport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\billingmanager.aspx.designer.vb">
+      <DependentUpon>billingmanager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\billingmanager.aspx.vb">
+      <DependentUpon>billingmanager.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\billvscollected.aspx.designer.vb">
+      <DependentUpon>billvscollected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\billvscollected.aspx.vb">
+      <DependentUpon>billvscollected.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\calculator.aspx.designer.vb">
+      <DependentUpon>calculator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\calculator.aspx.vb">
+      <DependentUpon>calculator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\clientfiles.aspx.designer.vb">
+      <DependentUpon>clientfiles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clientfiles.aspx.vb">
+      <DependentUpon>clientfiles.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\clientmanagement.aspx.designer.vb">
+      <DependentUpon>clientmanagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clientmanagement.aspx.vb">
+      <DependentUpon>clientmanagement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\clients.aspx.designer.vb">
+      <DependentUpon>clients.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clients.aspx.vb">
+      <DependentUpon>clients.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\clientsbalance.aspx.designer.vb">
+      <DependentUpon>clientsbalance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clientsbalance.aspx.vb">
+      <DependentUpon>clientsbalance.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\clienttypes.aspx.designer.vb">
+      <DependentUpon>clienttypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clienttypes.aspx.vb">
+      <DependentUpon>clienttypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\dashboardemployee.aspx.designer.vb">
+      <DependentUpon>dashboardemployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\dashboardemployee.aspx.vb">
+      <DependentUpon>dashboardemployee.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\Default.aspx.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\departmentslist.aspx.designer.vb">
+      <DependentUpon>departmentslist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\departmentslist.aspx.vb">
+      <DependentUpon>departmentslist.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\discipline.aspx.designer.vb">
+      <DependentUpon>discipline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\discipline.aspx.vb">
+      <DependentUpon>discipline.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\employees.aspx.designer.vb">
+      <DependentUpon>employees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employees.aspx.vb">
+      <DependentUpon>employees.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\employee_permissions.aspx.designer.vb">
+      <DependentUpon>employee_permissions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employee_permissions.aspx.vb">
+      <DependentUpon>employee_permissions.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\exportclientscsv.aspx.designer.vb">
+      <DependentUpon>exportclientscsv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\exportclientscsv.aspx.vb">
+      <DependentUpon>exportclientscsv.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\invoices.aspx.designer.vb">
+      <DependentUpon>invoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\invoices.aspx.vb">
+      <DependentUpon>invoices.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobs.aspx.designer.vb">
+      <DependentUpon>jobs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobs.aspx.vb">
+      <DependentUpon>jobs.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobtickets.aspx.designer.vb">
+      <DependentUpon>jobtickets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobtickets.aspx.vb">
+      <DependentUpon>jobtickets.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobtypes.aspx.designer.vb">
+      <DependentUpon>jobtypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobtypes.aspx.vb">
+      <DependentUpon>jobtypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobuse.aspx.designer.vb">
+      <DependentUpon>jobuse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobuse.aspx.vb">
+      <DependentUpon>jobuse.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\paiddaylist.aspx.designer.vb">
+      <DependentUpon>paiddaylist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\paiddaylist.aspx.vb">
+      <DependentUpon>paiddaylist.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\payments.aspx.designer.vb">
+      <DependentUpon>payments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\payments.aspx.vb">
+      <DependentUpon>payments.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\phasestemplate.aspx.designer.vb">
+      <DependentUpon>phasestemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\phasestemplate.aspx.vb">
+      <DependentUpon>phasestemplate.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pre-projects.aspx.designer.vb">
+      <DependentUpon>pre-projects.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pre-projects.aspx.vb">
+      <DependentUpon>pre-projects.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\projecttags.aspx.designer.vb">
+      <DependentUpon>projecttags.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\projecttags.aspx.vb">
+      <DependentUpon>projecttags.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\proposals.aspx.designer.vb">
+      <DependentUpon>proposals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposals.aspx.vb">
+      <DependentUpon>proposals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\proposal_tasks.aspx.designer.vb">
+      <DependentUpon>proposal_tasks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposal_tasks.aspx.vb">
+      <DependentUpon>proposal_tasks.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\requestforproposals.aspx.designer.vb">
+      <DependentUpon>requestforproposals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\requestforproposals.aspx.vb">
+      <DependentUpon>requestforproposals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\rfps.aspx.designer.vb">
+      <DependentUpon>rfps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\rfps.aspx.vb">
+      <DependentUpon>rfps.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\roles.aspx.designer.vb">
+      <DependentUpon>roles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\roles.aspx.vb">
+      <DependentUpon>roles.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">
@@ -582,6 +931,56 @@
       <DependentUpon>settingstatus.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\statement.aspx.designer.vb">
+      <DependentUpon>statement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\statement.aspx.vb">
+      <DependentUpon>statement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\subconsultants.aspx.designer.vb">
+      <DependentUpon>subconsultants.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\subconsultants.aspx.vb">
+      <DependentUpon>subconsultants.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\tagcloud.aspx.designer.vb">
+      <DependentUpon>tagcloud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\tagcloud.aspx.vb">
+      <DependentUpon>tagcloud.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\tandctemplates.aspx.designer.vb">
+      <DependentUpon>tandctemplates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\tandctemplates.aspx.vb">
+      <DependentUpon>tandctemplates.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\time.aspx.designer.vb">
+      <DependentUpon>time.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\time.aspx.vb">
+      <DependentUpon>time.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\timesbyperiords.aspx.designer.vb">
+      <DependentUpon>timesbyperiords.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\timesbyperiords.aspx.vb">
+      <DependentUpon>timesbyperiords.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\timesheet.aspx.designer.vb">
+      <DependentUpon>timesheet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\timesheet.aspx.vb">
+      <DependentUpon>timesheet.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\azurestorage.vb" />
     <Compile Include="App_Code\LocalAPI.vb" />
     <Compile Include="App_Code\OneSignalNotification.vb" />
     <Compile Include="App_Code\agilecrm_api.vb" />

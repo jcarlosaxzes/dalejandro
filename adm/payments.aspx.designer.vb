@@ -11,232 +11,187 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ADM_Main_Responsive
+Partial Public Class payments
     
     '''<summary>
-    '''Head1 control.
+    '''pnlFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''form1 control.
+    '''RadDatePickerFrom control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents RadDatePickerFrom As Global.Telerik.Web.UI.RadDatePicker
     
     '''<summary>
-    '''RadScriptManager1 control.
+    '''RadDatePickerTo control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
+    Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
     
     '''<summary>
-    '''RadPageLayout1 control.
+    '''cboClients control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
+    Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''FormViewCompany control.
+    '''cboDepartments control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormViewCompany As Global.System.Web.UI.WebControls.FormView
+    Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''lblCompanyName control.
+    '''cboPaymentMethod control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblCompanyName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents cboPaymentMethod As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''lblUserName control.
+    '''txtFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''btnSwitchCompany control.
+    '''btnRefresh control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSwitchCompany As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''RadMenu2 control.
+    '''RadGridPayments control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadMenu2 As Global.Telerik.Web.UI.RadMenu
+    Protected WithEvents RadGridPayments As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
-    '''btnAvoidEnterKey control.
+    '''RadToolTipEditPayment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAvoidEnterKey As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents RadToolTipEditPayment As Global.Telerik.Web.UI.RadToolTip
     
     '''<summary>
-    '''ContentPlaceHolder1 control.
+    '''FormViewPayment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ContentPlaceHolder1 As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents FormViewPayment As Global.System.Web.UI.WebControls.FormView
     
     '''<summary>
-    '''lblVersion control.
+    '''PanelUpload control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblVersion As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents PanelUpload As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''Image2 control.
+    '''RadCloudUpload1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Image2 As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
     
     '''<summary>
-    '''lnkHelp control.
+    '''btnUpdatePayment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkHelp As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents btnUpdatePayment As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lnkAyuda control.
+    '''btnCancelUpdatePayment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkAyuda As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents btnCancelUpdatePayment As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''Label11 control.
+    '''SqlDataSourcePayment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label11 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents SqlDataSourcePayment As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''HyperLink1 control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents HyperLink1 As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''Label1 control.
+    '''SqlDataSourceDepartments control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''lblPageTitle control.
+    '''SqlDataSourceClient control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblPageTitle As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents SqlDataSourceClient As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''RadToolTipSwitchCompany control.
+    '''SqlDataSourcePaymentMethod control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadToolTipSwitchCompany As Global.Telerik.Web.UI.RadToolTip
-    
-    '''<summary>
-    '''cboCompany control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboCompany As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''chkSetAsDefault control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkSetAsDefault As Global.Telerik.Web.UI.RadCheckBox
-    
-    '''<summary>
-    '''btnSwitchCompanyConfirm control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSwitchCompanyConfirm As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''SqlDataSourceCompany control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceCompany As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceCompanyLogo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceCompanyLogo As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourcePaymentMethod As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.
@@ -248,47 +203,59 @@ Partial Public Class ADM_Main_Responsive
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''UpdatePanel1 control.
+    '''lblPaymentId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents lblPaymentId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''RadNotificationWarning control.
+    '''lblOriginalFileName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadNotificationWarning As Global.Telerik.Web.UI.RadNotification
+    Protected WithEvents lblOriginalFileName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''RadNotificationError control.
+    '''lblKeyName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadNotificationError As Global.Telerik.Web.UI.RadNotification
+    Protected WithEvents lblKeyName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblEmployeeId control.
+    '''lblContentBytes control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblContentBytes As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblEmployeeEmail control.
+    '''lblContentType control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblContentType As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+        Get
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+        End Get
+    End Property
 End Class

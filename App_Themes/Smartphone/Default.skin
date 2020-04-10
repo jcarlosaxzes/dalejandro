@@ -1,0 +1,65 @@
+<%----------------------------------------------------------%>
+<%----------CONTROLES GENERALES A TODAS LAS PAGINAS---------%>
+<%----------------------------------------------------------%>
+
+<asp:Image SkinID="headerpasconceptlogo" runat="server" ImageUrl="Images/header-pasconcept-logo.png" />
+<asp:Image SkinID="roleIcon" runat="server" ImageAlign="Middle" ImageUrl="Images/administrator.png" />
+
+
+    <%------------------TOOL BAR DE LA CABECERA ----------------%>
+    <asp:Menu SkinID="HeadToolBar" runat="server" PathSeparator="|"
+        Font-Bold="True" Font-Names="Georgia" Font-Size="Medium" ForeColor="White"
+        MaximumDynamicDisplayLevels="1" Orientation="Horizontal" StaticDisplayLevels="3">
+        <StaticHoverStyle ForeColor="#333333" />
+    </asp:Menu>
+
+    <%----------------------------------------------------------%>
+
+    <%----------------------------------------------------------%>
+
+    <%------------------SITEMAPPATH --------------------%>
+    <asp:SiteMapPath SkinID="HeadSiteMap" runat="server" Font-Bold="True" ForeColor="Gray" Font-Names="Verdana" Font-Size="x-Small" PathSeparator=" / ">
+        <RootNodeStyle Font-Underline="False" ForeColor="Gray" />
+        <CurrentNodeStyle ForeColor="#696969" />
+    </asp:SiteMapPath>
+    <%----------------------------------------------------------%>
+
+   
+    <%----------------------------------------------------------%>
+
+    <asp:ImageButton SKINID="IconLogin"  runat="server" ImageUrl="Images/ICON_LOGIN.gif"  />
+    <asp:ImageButton SKINID="IconCarroCompra"  runat="server" ImageUrl="Images/cart.gif"  />
+     <asp:ImageButton SKINID="IconUser"  runat="server" ImageUrl="Images/ICONuser.gif"  />    
+
+<%----------------------------------------------------------%>
+<%----FIN DE LOS CONTROLES GENERALES A TODAS LAS PAGINAS----%>
+<%----------------------------------------------------------%>
+
+
+
+
+<%----------------------------------------------------------%>
+<%---------------------H O M E     P A G E------------------%>
+<%----------------------------------------------------------%>
+
+
+ 
+
+    <asp:Label SkinID="lblHome_Emp_Nombre" runat="server" Visible="false"></asp:Label>
+    <asp:Label SkinID="lblHome_Emp_Descripcion" runat="server" Visible="true"></asp:Label>
+    
+    <asp:Label SkinID="lblHome_Conten_Titulo" runat="server" Visible="true"></asp:Label>
+    <asp:Label SkinID="lblHome_Conten_Descripcion" runat="server" Visible="true"></asp:Label>
+    
+
+
+ 
+ <%--DISEÑO GRIDVIEW --%>
+ 
+    <asp:Image SkinID="FotoCarnet" runat="server" Width="90px" style="BORDER-RIGHT: Maroon 4px solid; BORDER-TOP: Maroon 4px solid; BORDER-LEFT: Maroon 4px solid; BORDER-BOTTOM: Maroon 4px solid"/>
+    <asp:Image SkinID="FotoGaleria" runat="server" Height="450px"  style="BORDER-RIGHT: Maroon 4px solid; BORDER-TOP: Maroon 4px solid; BORDER-LEFT: Maroon 4px solid; BORDER-BOTTOM: Maroon 4px solid"/>
+    <asp:Image SkinID="FotoCronologia" runat="server" Width="160px"  style="BORDER-RIGHT: Maroon 4px solid; BORDER-TOP: Maroon 4px solid; BORDER-LEFT: Maroon 4px solid; BORDER-BOTTOM: Maroon 4px solid"/>
+
+
+<%--NOVEDADES --%>
+<asp:Label SkinID="lblNovedadesTituloPg" runat="server" Text="Novedades" Visible="True"></asp:Label>
