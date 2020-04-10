@@ -285,9 +285,30 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="adm\activejobsdashboad.aspx" />
+    <Content Include="adm\bill-collected-employees.aspx" />
+    <Content Include="adm\billingactivity.aspx" />
+    <Content Include="adm\billingagingreport.aspx" />
+    <Content Include="adm\billingmanager.aspx" />
+    <Content Include="adm\billvscollected.aspx" />
+    <Content Include="adm\calculator.aspx" />
+    <Content Include="adm\clientsbalance.aspx" />
     <Content Include="adm\Default.aspx" />
+    <Content Include="adm\invoices.aspx" />
+    <Content Include="adm\jobs.aspx" />
+    <Content Include="adm\jobtickets.aspx" />
+    <Content Include="adm\jobtypes.aspx" />
+    <Content Include="adm\jobuse.aspx" />
+    <Content Include="adm\payments.aspx" />
+    <Content Include="adm\phasestemplate.aspx" />
+    <Content Include="adm\pre-projects.aspx" />
+    <Content Include="adm\projecttags.aspx" />
+    <Content Include="adm\proposals.aspx" />
+    <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\schedule.aspx" />
     <Content Include="adm\settingstatus.aspx" />
+    <Content Include="adm\statement.aspx" />
+    <Content Include="adm\tagcloud.aspx" />
+    <Content Include="adm\tandctemplates.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
     <Content Include="App_Data\RadCaptcha\2.wav" />
@@ -324,6 +345,39 @@
     <Content Include="App_Data\RadCaptcha\X.wav" />
     <Content Include="App_Data\RadCaptcha\Y.wav" />
     <Content Include="App_Data\RadCaptcha\Z.wav" />
+    <Content Include="App_Themes\Estandar\background.jpg" />
+    <Content Include="App_Themes\Estandar\chart.png" />
+    <Content Include="App_Themes\Estandar\DefaultAdministratorIcon.gif" />
+    <Content Include="App_Themes\Estandar\DefaultClientIcon.gif" />
+    <Content Include="App_Themes\Estandar\DefaultEmployeeIcon.gif" />
+    <Content Include="App_Themes\Estandar\DefaultHeader.gif" />
+    <Content Include="App_Themes\Estandar\Estandar.css" />
+    <Content Include="App_Themes\Estandar\Images\administrator.png" />
+    <Content Include="App_Themes\Estandar\Images\customer.png" />
+    <Content Include="App_Themes\Estandar\Images\employee.png" />
+    <Content Include="App_Themes\Estandar\Images\header-pasconcept-logo.png" />
+    <Content Include="App_Themes\Estandar\Images\smallOutlook.gif" />
+    <Content Include="App_Themes\Estandar\Images\subconsultans.png" />
+    <Content Include="App_Themes\Estandar\LoginHeader.gif" />
+    <Content Include="App_Themes\Estandar\LogoPasTrans.png" />
+    <Content Include="App_Themes\Estandar\Menu.BlackMetroTouch.css" />
+    <Content Include="App_Themes\Estandar\OrgChartStyle.css" />
+    <Content Include="App_Themes\Estandar\reloj.png" />
+    <Content Include="App_Themes\Smartphone\background.jpg" />
+    <Content Include="App_Themes\Smartphone\chart.png" />
+    <Content Include="App_Themes\Smartphone\DefaultAdministratorIcon.gif" />
+    <Content Include="App_Themes\Smartphone\DefaultClientIcon.gif" />
+    <Content Include="App_Themes\Smartphone\DefaultEmployeeIcon.gif" />
+    <Content Include="App_Themes\Smartphone\DefaultHeader.gif" />
+    <Content Include="App_Themes\Smartphone\Estandar.css" />
+    <Content Include="App_Themes\Smartphone\Images\administrator.png" />
+    <Content Include="App_Themes\Smartphone\Images\customer.png" />
+    <Content Include="App_Themes\Smartphone\Images\employee.png" />
+    <Content Include="App_Themes\Smartphone\Images\header-pasconcept-logo.png" />
+    <Content Include="App_Themes\Smartphone\Images\subconsultans.png" />
+    <Content Include="App_Themes\Smartphone\LoginHeader.gif" />
+    <Content Include="App_Themes\Smartphone\LogoPasTrans.png" />
+    <Content Include="App_Themes\Smartphone\reloj.png" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -353,6 +407,10 @@
     <Content Include="adm\web.config" />
     <Content Include="Images\.DS_Store" />
     <Content Include="Images\Thumbs.db" />
+    <Content Include="App_Themes\Estandar\Combo.skin" />
+    <Content Include="App_Themes\Estandar\Default.skin" />
+    <Content Include="App_Themes\Smartphone\Combo.skin" />
+    <Content Include="App_Themes\Smartphone\Default.skin" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\Admin Account Edit Proposal  .JPG" />
     <Content Include="Images\Admin Account Job Details.JPG" />
@@ -561,11 +619,137 @@
       <DependentUpon>ADM_Main_Responsive.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\bill-collected-employees.aspx.designer.vb">
+      <DependentUpon>bill-collected-employees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\bill-collected-employees.aspx.vb">
+      <DependentUpon>bill-collected-employees.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\billingactivity.aspx.designer.vb">
+      <DependentUpon>billingactivity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\billingactivity.aspx.vb">
+      <DependentUpon>billingactivity.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\billingagingreport.aspx.designer.vb">
+      <DependentUpon>billingagingreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\billingagingreport.aspx.vb">
+      <DependentUpon>billingagingreport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\billingmanager.aspx.designer.vb">
+      <DependentUpon>billingmanager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\billingmanager.aspx.vb">
+      <DependentUpon>billingmanager.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\billvscollected.aspx.designer.vb">
+      <DependentUpon>billvscollected.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\billvscollected.aspx.vb">
+      <DependentUpon>billvscollected.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\calculator.aspx.designer.vb">
+      <DependentUpon>calculator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\calculator.aspx.vb">
+      <DependentUpon>calculator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\clientsbalance.aspx.designer.vb">
+      <DependentUpon>clientsbalance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clientsbalance.aspx.vb">
+      <DependentUpon>clientsbalance.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\Default.aspx.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\invoices.aspx.designer.vb">
+      <DependentUpon>invoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\invoices.aspx.vb">
+      <DependentUpon>invoices.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobs.aspx.designer.vb">
+      <DependentUpon>jobs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobs.aspx.vb">
+      <DependentUpon>jobs.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobtickets.aspx.designer.vb">
+      <DependentUpon>jobtickets.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobtickets.aspx.vb">
+      <DependentUpon>jobtickets.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobtypes.aspx.designer.vb">
+      <DependentUpon>jobtypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobtypes.aspx.vb">
+      <DependentUpon>jobtypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobuse.aspx.designer.vb">
+      <DependentUpon>jobuse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobuse.aspx.vb">
+      <DependentUpon>jobuse.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\payments.aspx.designer.vb">
+      <DependentUpon>payments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\payments.aspx.vb">
+      <DependentUpon>payments.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\phasestemplate.aspx.designer.vb">
+      <DependentUpon>phasestemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\phasestemplate.aspx.vb">
+      <DependentUpon>phasestemplate.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pre-projects.aspx.designer.vb">
+      <DependentUpon>pre-projects.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pre-projects.aspx.vb">
+      <DependentUpon>pre-projects.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\projecttags.aspx.designer.vb">
+      <DependentUpon>projecttags.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\projecttags.aspx.vb">
+      <DependentUpon>projecttags.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\proposals.aspx.designer.vb">
+      <DependentUpon>proposals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposals.aspx.vb">
+      <DependentUpon>proposals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\proposal_tasks.aspx.designer.vb">
+      <DependentUpon>proposal_tasks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposal_tasks.aspx.vb">
+      <DependentUpon>proposal_tasks.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">
@@ -580,6 +764,27 @@
     </Compile>
     <Compile Include="adm\settingstatus.aspx.vb">
       <DependentUpon>settingstatus.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\statement.aspx.designer.vb">
+      <DependentUpon>statement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\statement.aspx.vb">
+      <DependentUpon>statement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\tagcloud.aspx.designer.vb">
+      <DependentUpon>tagcloud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\tagcloud.aspx.vb">
+      <DependentUpon>tagcloud.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\tandctemplates.aspx.designer.vb">
+      <DependentUpon>tandctemplates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\tandctemplates.aspx.vb">
+      <DependentUpon>tandctemplates.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="App_Code\LocalAPI.vb" />
@@ -726,7 +931,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
