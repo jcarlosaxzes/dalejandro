@@ -327,12 +327,14 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="adm\activejobsdashboad.aspx" />
     <Content Include="adm\avgeemployeesprofit.aspx" />
+    <Content Include="adm\balancedepartments.aspx" />
     <Content Include="adm\bill-collected-employees.aspx" />
     <Content Include="adm\billingactivity.aspx" />
     <Content Include="adm\billingagingreport.aspx" />
     <Content Include="adm\billingmanager.aspx" />
     <Content Include="adm\billvscollected.aspx" />
     <Content Include="adm\calculator.aspx" />
+    <Content Include="adm\chartdepartments.aspx" />
     <Content Include="adm\clientfiles.aspx" />
     <Content Include="adm\clientmanagement.aspx" />
     <Content Include="adm\clients.aspx" />
@@ -350,6 +352,7 @@
     <Content Include="adm\jobtickets.aspx" />
     <Content Include="adm\jobtypes.aspx" />
     <Content Include="adm\jobuse.aspx" />
+    <Content Include="adm\orgchartbydepartment.aspx" />
     <Content Include="adm\paiddaylist.aspx" />
     <Content Include="adm\payments.aspx" />
     <Content Include="adm\phasestemplate.aspx" />
@@ -686,6 +689,13 @@
       <DependentUpon>avgeemployeesprofit.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\balancedepartments.aspx.designer.vb">
+      <DependentUpon>balancedepartments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\balancedepartments.aspx.vb">
+      <DependentUpon>balancedepartments.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\bill-collected-employees.aspx.designer.vb">
       <DependentUpon>bill-collected-employees.aspx</DependentUpon>
     </Compile>
@@ -726,6 +736,13 @@
     </Compile>
     <Compile Include="adm\calculator.aspx.vb">
       <DependentUpon>calculator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\chartdepartments.aspx.designer.vb">
+      <DependentUpon>chartdepartments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\chartdepartments.aspx.vb">
+      <DependentUpon>chartdepartments.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\clientfiles.aspx.designer.vb">
@@ -845,6 +862,13 @@
     </Compile>
     <Compile Include="adm\jobuse.aspx.vb">
       <DependentUpon>jobuse.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\orgchartbydepartment.aspx.designer.vb">
+      <DependentUpon>orgchartbydepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\orgchartbydepartment.aspx.vb">
+      <DependentUpon>orgchartbydepartment.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\paiddaylist.aspx.designer.vb">
@@ -1125,7 +1149,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
