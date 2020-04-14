@@ -37,6 +37,10 @@ Public Class ApplicationUserManager
           .RequireUniqueEmail = True
         }
 
+        'Change Password Hash to fit Identity V2
+        manager.PasswordHasher = New PASPasswordHasher()
+
+
         ' Configure validation logic for passwords
         manager.PasswordValidator = New PasswordValidator() With {
           .RequiredLength = 6,
