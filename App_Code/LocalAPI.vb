@@ -916,6 +916,54 @@ Public Class LocalAPI
         Return "DateAdd(hour,-5,GetDate())"
     End Function
 
+
+    Public Shared Function GetDateFromOfTimeFrame(TimeFrameId As Integer) As DateTime
+        '@TimeFrameId
+        '    1:  All Years
+        '    2:  Last Years
+        '    3:  This Years
+        '    4:  Last Quarter
+        '    5:  This Quarter
+        '    6:  Last Month
+        '    7:  This Month
+        '    8:  Last 30 Days
+        '    9:  Last 15 Days
+        '    10: Last 7 Days
+        '    11: Last  Day
+        '    12: Today
+        '    13: MTD Y - 1
+        '    14: MTD
+        '    15: QTD Y - 1
+        '    16: QTD
+        '    17: YTD Y - 1
+        '    18: YTD
+
+        Return GetDateTimeEscalar(String.Format("select dbo.GetDateFromOfTimeFrame({0})", TimeFrameId))
+    End Function
+
+    Public Shared Function GetDateToOfTimeFrame(TimeFrameId As Integer) As DateTime
+        '@TimeFrameId
+        '	1:  All Years
+        '    2:  Last Years
+        '    3:  This Years
+        '    4:  Last Quarter
+        '    5:  This Quarter
+        '    6:  Last Month
+        '    7:  This Month
+        '    8:  Last 30 Days
+        '    9:  Last 15 Days
+        '    10: Last 7 Days
+        '    11: Last  Day
+        '    12: Today
+
+        '13:     TDY-1(for MTD Y-1, QTD Y-1, YTD Y-1) Today Time 00:00:00 -365
+        '	14: TD(for MTD, QTD, YTD.) Today: Time 0:  00:00 period starting from the beginning of the current X up until now 
+        '										… but Not including today's date, because it might not be complete yet.
+
+        Return GetDateTimeEscalar(String.Format("select dbo.GetDateToOfTimeFrame({0})", TimeFrameId))
+    End Function
+
+
     Public Shared Function GetMailTemplateFromHTML(TemplateName As String) As String
         Try
             Dim sBody = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/MailTemplates/" & TemplateName))

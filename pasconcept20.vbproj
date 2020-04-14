@@ -327,33 +327,49 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="adm\activejobsdashboad.aspx" />
     <Content Include="adm\avgeemployeesprofit.aspx" />
+    <Content Include="adm\balancedepartments.aspx" />
     <Content Include="adm\bill-collected-employees.aspx" />
     <Content Include="adm\billingactivity.aspx" />
     <Content Include="adm\billingagingreport.aspx" />
     <Content Include="adm\billingmanager.aspx" />
     <Content Include="adm\billvscollected.aspx" />
     <Content Include="adm\calculator.aspx" />
+    <Content Include="adm\cashflow.aspx" />
+    <Content Include="adm\chartdepartments.aspx" />
     <Content Include="adm\clientfiles.aspx" />
     <Content Include="adm\clientmanagement.aspx" />
     <Content Include="adm\clients.aspx" />
     <Content Include="adm\clientsbalance.aspx" />
+    <Content Include="adm\clientsmap.aspx" />
     <Content Include="adm\clienttypes.aspx" />
+    <Content Include="adm\contacts.aspx" />
+    <Content Include="adm\contactypes.aspx" />
+    <Content Include="adm\dashboard.aspx" />
     <Content Include="adm\dashboardemployee.aspx" />
     <Content Include="adm\Default.aspx" />
+    <Content Include="adm\departmentbudgetbystatus.aspx" />
+    <Content Include="adm\departmentreport.aspx" />
     <Content Include="adm\departmentslist.aspx" />
     <Content Include="adm\discipline.aspx" />
+    <Content Include="adm\employeereport.aspx" />
     <Content Include="adm\employees.aspx" />
     <Content Include="adm\employee_permissions.aspx" />
+    <Content Include="adm\expenseschart.aspx" />
     <Content Include="adm\exportclientscsv.aspx" />
+    <Content Include="adm\importdata.aspx" />
     <Content Include="adm\invoices.aspx" />
     <Content Include="adm\jobs.aspx" />
     <Content Include="adm\jobtickets.aspx" />
     <Content Include="adm\jobtypes.aspx" />
     <Content Include="adm\jobuse.aspx" />
+    <Content Include="adm\monthlyexpenses.aspx" />
+    <Content Include="adm\orgchartbydepartment.aspx" />
     <Content Include="adm\paiddaylist.aspx" />
     <Content Include="adm\payments.aspx" />
     <Content Include="adm\phasestemplate.aspx" />
     <Content Include="adm\pre-projects.aspx" />
+    <Content Include="adm\projectmap.aspx" />
+    <Content Include="adm\projectschedule.aspx" />
     <Content Include="adm\projecttags.aspx" />
     <Content Include="adm\proposals.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
@@ -369,6 +385,8 @@
     <Content Include="adm\time.aspx" />
     <Content Include="adm\timesbyperiords.aspx" />
     <Content Include="adm\timesheet.aspx" />
+    <Content Include="adm\vendors.aspx" />
+    <Content Include="adm\vendortypes.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
     <Content Include="App_Data\RadCaptcha\2.wav" />
@@ -686,6 +704,13 @@
       <DependentUpon>avgeemployeesprofit.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\balancedepartments.aspx.designer.vb">
+      <DependentUpon>balancedepartments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\balancedepartments.aspx.vb">
+      <DependentUpon>balancedepartments.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\bill-collected-employees.aspx.designer.vb">
       <DependentUpon>bill-collected-employees.aspx</DependentUpon>
     </Compile>
@@ -728,6 +753,20 @@
       <DependentUpon>calculator.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\cashflow.aspx.designer.vb">
+      <DependentUpon>cashflow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\cashflow.aspx.vb">
+      <DependentUpon>cashflow.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\chartdepartments.aspx.designer.vb">
+      <DependentUpon>chartdepartments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\chartdepartments.aspx.vb">
+      <DependentUpon>chartdepartments.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\clientfiles.aspx.designer.vb">
       <DependentUpon>clientfiles.aspx</DependentUpon>
     </Compile>
@@ -756,11 +795,39 @@
       <DependentUpon>clientsbalance.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\clientsmap.aspx.designer.vb">
+      <DependentUpon>clientsmap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clientsmap.aspx.vb">
+      <DependentUpon>clientsmap.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\clienttypes.aspx.designer.vb">
       <DependentUpon>clienttypes.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\clienttypes.aspx.vb">
       <DependentUpon>clienttypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\contacts.aspx.designer.vb">
+      <DependentUpon>contacts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\contacts.aspx.vb">
+      <DependentUpon>contacts.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\contactypes.aspx.designer.vb">
+      <DependentUpon>contactypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\contactypes.aspx.vb">
+      <DependentUpon>contactypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\dashboard.aspx.designer.vb">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\dashboard.aspx.vb">
+      <DependentUpon>dashboard.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\dashboardemployee.aspx.designer.vb">
@@ -777,6 +844,20 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\departmentbudgetbystatus.aspx.designer.vb">
+      <DependentUpon>departmentbudgetbystatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\departmentbudgetbystatus.aspx.vb">
+      <DependentUpon>departmentbudgetbystatus.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\departmentreport.aspx.designer.vb">
+      <DependentUpon>departmentreport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\departmentreport.aspx.vb">
+      <DependentUpon>departmentreport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\departmentslist.aspx.designer.vb">
       <DependentUpon>departmentslist.aspx</DependentUpon>
     </Compile>
@@ -789,6 +870,13 @@
     </Compile>
     <Compile Include="adm\discipline.aspx.vb">
       <DependentUpon>discipline.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\employeereport.aspx.designer.vb">
+      <DependentUpon>employeereport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employeereport.aspx.vb">
+      <DependentUpon>employeereport.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\employees.aspx.designer.vb">
@@ -805,11 +893,25 @@
       <DependentUpon>employee_permissions.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\expenseschart.aspx.designer.vb">
+      <DependentUpon>expenseschart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\expenseschart.aspx.vb">
+      <DependentUpon>expenseschart.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\exportclientscsv.aspx.designer.vb">
       <DependentUpon>exportclientscsv.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\exportclientscsv.aspx.vb">
       <DependentUpon>exportclientscsv.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\importdata.aspx.designer.vb">
+      <DependentUpon>importdata.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\importdata.aspx.vb">
+      <DependentUpon>importdata.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\invoices.aspx.designer.vb">
@@ -847,6 +949,20 @@
       <DependentUpon>jobuse.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\monthlyexpenses.aspx.designer.vb">
+      <DependentUpon>monthlyexpenses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\monthlyexpenses.aspx.vb">
+      <DependentUpon>monthlyexpenses.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\orgchartbydepartment.aspx.designer.vb">
+      <DependentUpon>orgchartbydepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\orgchartbydepartment.aspx.vb">
+      <DependentUpon>orgchartbydepartment.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\paiddaylist.aspx.designer.vb">
       <DependentUpon>paiddaylist.aspx</DependentUpon>
     </Compile>
@@ -873,6 +989,20 @@
     </Compile>
     <Compile Include="adm\pre-projects.aspx.vb">
       <DependentUpon>pre-projects.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\projectmap.aspx.designer.vb">
+      <DependentUpon>projectmap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\projectmap.aspx.vb">
+      <DependentUpon>projectmap.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\projectschedule.aspx.designer.vb">
+      <DependentUpon>projectschedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\projectschedule.aspx.vb">
+      <DependentUpon>projectschedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\projecttags.aspx.designer.vb">
@@ -978,6 +1108,20 @@
     </Compile>
     <Compile Include="adm\timesheet.aspx.vb">
       <DependentUpon>timesheet.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\vendors.aspx.designer.vb">
+      <DependentUpon>vendors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\vendors.aspx.vb">
+      <DependentUpon>vendors.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\vendortypes.aspx.designer.vb">
+      <DependentUpon>vendortypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\vendortypes.aspx.vb">
+      <DependentUpon>vendortypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="App_Code\azurestorage.vb" />
