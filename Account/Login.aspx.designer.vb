@@ -12,34 +12,61 @@ Option Explicit On
 
 
 Partial Public Class Login
-    
+
     '''<summary>
-    '''ErrorMessage control.
+    '''Head1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ErrorMessage As Global.System.Web.UI.WebControls.PlaceHolder
-    
+    Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
+
     '''<summary>
-    '''FailureText control.
+    '''form1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FailureText As Global.System.Web.UI.WebControls.Literal
-    
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
     '''<summary>
-    '''Email control.
+    '''RadScriptManager1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Email As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
+
+    '''<summary>
+    '''pnlLogin control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlLogin As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''UserName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UserName As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''UserNameRequired control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UserNameRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
     '''<summary>
     '''Password control.
     '''</summary>
@@ -47,8 +74,17 @@ Partial Public Class Login
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Password As Global.System.Web.UI.WebControls.TextBox
-    
+    Protected WithEvents Password As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''PasswordRequired control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PasswordRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
     '''<summary>
     '''RememberMe control.
     '''</summary>
@@ -57,31 +93,31 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RememberMe As Global.System.Web.UI.WebControls.CheckBox
-    
+
     '''<summary>
-    '''RegisterHyperLink control.
+    '''LoginButton control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RegisterHyperLink As Global.System.Web.UI.WebControls.HyperLink
-    
+    Protected WithEvents LoginButton As Global.System.Web.UI.WebControls.LinkButton
+
     '''<summary>
-    '''ForgotPasswordHyperLink control.
+    '''FailureText control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ForgotPasswordHyperLink As Global.System.Web.UI.WebControls.HyperLink
-    
+    Protected WithEvents FailureText As Global.System.Web.UI.WebControls.Literal
+
     '''<summary>
-    '''OpenAuthLogin control.
+    '''lblError control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents OpenAuthLogin As Global.pasconcept20.OpenAuthProviders
+    Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
 End Class
