@@ -1130,6 +1130,7 @@
     <Compile Include="adm\vendortypes.aspx.vb">
       <DependentUpon>vendortypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+	</Compile>
     <Compile Include="adm\usercrud.aspx.designer.vb">
       <DependentUpon>usercrud.aspx</DependentUpon>
     </Compile>
