@@ -457,9 +457,6 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Clients_MonthlyTimeAndCosts.aspx" Text="Margins per Client"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") And VersionCaracteristica(706)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ReportClientBalance.aspx"
-                                                Text="Clients Balance Report" Visible='<%# EmployeePermission("Deny_AnalyticReports") And VersionCaracteristica(706)%>'>
-                                            </telerik:RadMenuItem>
                                         </Items>
                                     </telerik:RadMenuItem>
 
