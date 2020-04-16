@@ -375,6 +375,7 @@
     <Content Include="adm\time.aspx" />
     <Content Include="adm\timesbyperiords.aspx" />
     <Content Include="adm\timesheet.aspx" />
+    <Content Include="adm\usercrud.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
     <Content Include="App_Data\RadCaptcha\2.wav" />
@@ -986,6 +987,13 @@
       <DependentUpon>timesheet.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\usercrud.aspx.designer.vb">
+      <DependentUpon>usercrud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\usercrud.aspx.vb">
+      <DependentUpon>usercrud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="App_Code\azurestorage.vb" />
     <Compile Include="App_Code\LocalAPI.vb" />
     <Compile Include="App_Code\OneSignalNotification.vb" />
@@ -1001,6 +1009,7 @@
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="App_Code\SqlMembershipProviderHelper.vb" />
     <Compile Include="App_Start\Startup.Auth.vb" />
     <Compile Include="Contact.aspx.designer.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -1063,6 +1072,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

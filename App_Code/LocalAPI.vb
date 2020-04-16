@@ -17,6 +17,8 @@ Imports System.Threading.Tasks
 Imports System.Linq
 Imports System.Net.Http
 
+Imports Microsoft.AspNet.Identity.Owin
+
 
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
@@ -266,7 +268,7 @@ Public Class LocalAPI
         Try
             Dim cnn1 As SqlConnection
             ' Connect to the source
-            cnn1 = New SqlConnection(ConfigurationManager.ConnectionStrings("LocalSqlServer").ToString)
+            cnn1 = New SqlConnection(ConfigurationManager.ConnectionStrings("cnnAspNetUsers").ToString)
             ' Open the database
             cnn1.Open()
             ' Return the object
@@ -9783,6 +9785,63 @@ Public Class LocalAPI
     Public Shared Function GetForgotpasswordUser(forgot_key As String) As String
         Return GetStringEscalar("Select TOP 1 Email FROM sys_Forgotpassword where [GUID]='" & forgot_key & "'")
     End Function
+
+    Public Shared Function GetMembershipUserPasswod(sEmail As String) As String
+        Dim password As String = Nothing
+        Dim PasswordHasher = New SqlMembershipProviderHelper()
+
+        Dim cnnUsers = GetUsersConnection()
+        Dim cmd As SqlCommand = cnnUsers.CreateCommand()
+        ' get user
+        cmd.CommandText = "select * from [dbo].[aspnet_Membership] where email  = '" & sEmail & "'"
+        Dim rdr As SqlDataReader
+        rdr = cmd.ExecuteReader
+        rdr.Read()
+        If rdr.HasRows Then
+            Dim passHash = rdr("Password")
+            password = PasswordHasher.GetClearTextPassword(passHash)
+        End If
+        cnnUsers.Close()
+        Return password
+    End Function
+
+    Public Shared Async Function CreateOrUpdateUser(email As String, password As String, manager As pasconcept20.ApplicationUserManager) As Task(Of pasconcept20.ApplicationUser)
+        Dim identityUser As pasconcept20.ApplicationUser = Await manager.FindByEmailAsync(email)
+        If identityUser IsNot Nothing Then
+            Dim token = Await manager.GeneratePasswordResetTokenAsync(identityUser.Id)
+            Await manager.ResetPasswordAsync(identityUser.Id, token, password)
+            Return identityUser
+        Else
+            Dim user = New pasconcept20.ApplicationUser With {
+                .Email = email,
+                .UserName = email,
+                .EmailConfirmed = True
+            }
+            Await manager.CreateAsync(user, password)
+            LocalAPI.NormalizeUser(email)
+            Return user
+        End If
+        Return identityUser
+    End Function
+
+
+    Public Shared Sub NormalizeUser(email As String)
+        Try
+            Dim cnn1 As SqlConnection = GetUsersConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "AspNetUsers_Normalized"
+            cmd.CommandType = CommandType.StoredProcedure
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Email", email)
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
 
 #End Region
 
