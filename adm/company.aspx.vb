@@ -76,13 +76,13 @@ Public Class company
         Try
             If LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
                 Dim sCellPhone As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Movile")
-                If SMS.IsValidPhone(sCellPhone) Then
-                    If SMS.SendSMS(sCellPhone, "Test SMS from PASconcept", lblCompanyId.Text) Then
-                        Master.InfoMessage("The TEST SMS was sent")
-                    End If
-                Else
-                    Master.ErrorMessage("SMS Error. Telephone format must be 10-digit number, eg.: 3058889999")
-                End If
+                'If SMS.IsValidPhone(sCellPhone) Then
+                '    If SMS.SendSMS(sCellPhone, "Test SMS from PASconcept", lblCompanyId.Text) Then
+                '        Master.InfoMessage("The TEST SMS was sent")
+                '    End If
+                'Else
+                '    Master.ErrorMessage("SMS Error. Telephone format must be 10-digit number, eg.: 3058889999")
+                'End If
             Else
                 Master.ErrorMessage("To hire the notification service by SMS to Customers and Employees, contact AXZES.")
             End If

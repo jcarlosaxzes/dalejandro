@@ -198,7 +198,7 @@
                                             </td>
                                             <td style="width: 33%; text-align: center">
                                                 <a class="glyphicon glyphicon-share" title="View Statement Page to share link" 
-                                                    href='<%# Eval("Id", "../ADMCLI/ShareLink.aspx?ObjType=55&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                                    href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=55&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
 
                                             </td>
                                             <td style="text-align: center">

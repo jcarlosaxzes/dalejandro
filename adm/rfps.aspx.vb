@@ -100,10 +100,6 @@ Public Class rfps
                     RadToolTipAccept.Visible = True
                     RadToolTipAccept.Show()
 
-                Case "RFPPrint"
-                    sUrl = "~/ADMCLI/RequestForProposal.aspx?rfpId=" & e.CommandArgument & "&Origen=2"
-                    CreateRadWindows(e.CommandName, sUrl, 960, 700, False)
-
                 Case "ViewJobPage"
                     sUrl = "~/ADM/Job_rfps.aspx?JobId=" & e.CommandArgument
                     CreateRadWindows(e.CommandName, sUrl, 960, 820, False)

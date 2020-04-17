@@ -1,0 +1,103 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterJOB.master.vb" Inherits="pasconcept20.MasterJOB" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title></title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        </telerik:RadScriptManager>
+
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+
+                <asp:LoginView runat="server" ViewStateMode="Disabled" ID="LoginViewMenuApp">
+                    <LoggedInTemplate>
+                        <ul class="nav nav-pills">
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text = 0, "btn-primary", "btn-default")%>'
+                                style="display: normal"
+                                href='<%# String.Concat("~/ADM/Job_job.aspx?jobId=", lblJobId.Text)%>'>Job Info</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=1,"btn-primary","btn-default")%>'
+                                style='<%# IIf(EmployeePermission("Deny_InvoicesList") ,"display:normal","display:none")%>'
+                                href='<%# String.Concat("~/ADM/Job_accounting.aspx?jobId=", lblJobId.Text)%>'>Accounting</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=2,"btn-primary","btn-default")%>' title="Employees of Job"
+                                href='<%# String.Concat("~/ADM/Job_employees.aspx?jobId=", lblJobId.Text)%>'>Employees</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=3,"btn-primary","btn-default")%>' title="Proposals of Job"
+                                href='<%# String.Concat("~/ADM/Job_proposals.aspx?jobId=", lblJobId.Text)%>'>Proposals</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=4,"btn-primary","btn-default")%>' title="Direct Job Expenses"
+                                href='<%# String.Concat("~/ADM/Job_rfps.aspx?jobId=", lblJobId.Text)%>'>Expenses</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=5,"btn-primary","btn-default")%>' title="Notes of Job"
+                                href='<%# String.Concat("~/ADM/Job_notes.aspx?jobId=", lblJobId.Text)%>'>Notes</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=6,"btn-primary","btn-default")%>' title="Times of Job"
+                                href='<%# String.Concat("~/ADM/Job_times.aspx?jobId=", lblJobId.Text)%>'>Times</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=7,"btn-primary","btn-default")%>' title="Files of Job"
+                                href='<%# String.Concat("~/ADM/Job_links.aspx?jobId=", lblJobId.Text)%>'>Files</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=8,"btn-primary","btn-default")%>' title="Schedule of Job"
+                                href='<%# String.Concat("~/ADM/Job_schedule.aspx?jobId=", lblJobId.Text)%>'>Schedule</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=9,"btn-primary","btn-default")%>' title="Revisions of Job"
+                                href='<%# String.Concat("~/ADM/Job_reviews.aspx?jobId=", lblJobId.Text)%>'>Revisions</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=10,"btn-primary","btn-default")%>' title="Tags of Job"
+                                href='<%# String.Concat("~/ADM/Job_tags.aspx?jobId=", lblJobId.Text)%>'>Tags</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=11,"btn-primary","btn-default")%>' title="Trasmittals of Job"
+                                href='<%# String.Concat("~/ADM/Job_trasmittals.aspx?jobId=", lblJobId.Text)%>'>Trasmittals</a></li>
+                            <li><a runat="server"
+                                class='<%# IIf(lblActiveTab.Text=12,"btn-primary","btn-default")%>' title="Images of Job"
+                                href='<%# String.Concat("~/ADM/Job_images_files.aspx?jobId=", lblJobId.Text)%>'>Images</a></li>
+                        </ul>
+                    </LoggedInTemplate>
+                </asp:LoginView>
+
+            </div>
+        </div>
+
+        <div class="container body-content" style="padding-top: 70px !important;">
+
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+
+
+        </div>
+
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <telerik:RadNotification ID="RadNotificationWarning" runat="server"
+                    Animation="FlyIn" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="info" Text="Warning"
+                    Position="BottomRight" VisibleTitlebar="false" Opacity="75" Width="300px" Skin="Sunset">
+                </telerik:RadNotification>
+                <telerik:RadNotification ID="RadNotificationError" runat="server" Width="300px" Skin="Sunset"
+                    Animation="Fade" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="deny" Text="Error" Position="TopCenter">
+                </telerik:RadNotification>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblJobId" runat="server" Visible="False" Text="0"></asp:Label>
+        <asp:Label ID="lblActiveTab" runat="server" Visible="False" Text="0"></asp:Label>
+        <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
+    </form>
+</body>
+</html>

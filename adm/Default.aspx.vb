@@ -136,7 +136,7 @@ Public Class _Default1
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "GetSharedLink"
-                sUrl = "~/ADMCLI/ShareLink.aspx?ObjType=2&ObjId=" & e.CommandArgument
+                sUrl = "~/adm/sharelink.aspx?ObjType=2&ObjId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
 
             Case "EditClient"

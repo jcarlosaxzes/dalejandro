@@ -88,12 +88,8 @@ Public Class proposals
                 'sUrl = "~/ADMCLI/ProposalRDLC.aspx?ProposalId=" & e.CommandArgument & "&Origen=2"
                 sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&Origen=2"
                 CreateRadWindows(e.CommandName, sUrl, 980, 740, False)
-            Case "AceptProposal"
-                sUrl = "~/ADMCLI/AceptProposal.aspx?ProposalId=" & e.CommandArgument
-                'Response.RedirectPermanent(sUrl)
-                CreateRadWindows(e.CommandName, sUrl, 960, 700, True)
             Case "GetSharedLink"
-                sUrl = "~/ADMCLI/ShareLink.aspx?ObjType=11&ObjId=" & e.CommandArgument
+                sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
                 ' Codigo sapx anterior
@@ -209,10 +205,6 @@ Public Class proposals
     'End Sub
     Protected Sub btnNewWizard_Click(sender As Object, e As EventArgs) Handles btnNewWizard.Click
         CreateRadWindows("NewWizard", "~/ADM/ProposalNewWizard.aspx", 970, 810, True)
-    End Sub
-
-    Protected Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        CreateRadWindows("rptProposalList", "~/RPT/rptProposalList.aspx?Year=" & Today.Year & "&Period=" & cboPeriod.SelectedValue & "&Client=" & cboClients.SelectedValue & "&StatusId=" & cboStatus.SelectedValue & "&Find=" & txtFind.Text, 850, 700, False)
     End Sub
 
 End Class
