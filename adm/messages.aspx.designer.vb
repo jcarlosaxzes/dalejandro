@@ -11,113 +11,98 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Login
-
+Partial Public Class messages
+    
     '''<summary>
-    '''Head1 control.
+    '''pnlFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
-
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
     '''<summary>
-    '''form1 control.
+    '''txtFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
+    
     '''<summary>
-    '''RadScriptManager1 control.
+    '''btnFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+    Protected WithEvents btnFind As Global.Telerik.Web.UI.RadButton
+    
     '''<summary>
-    '''pnlLogin control.
+    '''RadGrid1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlLogin As Global.System.Web.UI.WebControls.Panel
-
+    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
+    
     '''<summary>
-    '''UserName control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UserName As Global.Telerik.Web.UI.RadTextBox
-
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    
     '''<summary>
-    '''UserNameRequired control.
+    '''SqlDataSourceDelete control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UserNameRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    Protected WithEvents SqlDataSourceDelete As Global.System.Web.UI.WebControls.SqlDataSource
+    
     '''<summary>
-    '''Password control.
+    '''lblSelectedMessage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Password As Global.Telerik.Web.UI.RadTextBox
-
+    Protected WithEvents lblSelectedMessage As Global.System.Web.UI.WebControls.Label
+    
     '''<summary>
-    '''PasswordRequired control.
+    '''lblCompanyId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PasswordRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+    
     '''<summary>
-    '''RememberMe control.
+    '''lblEmployeeEmail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RememberMe As Global.System.Web.UI.WebControls.CheckBox
-
+    Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
+    
     '''<summary>
-    '''LoginButton control.
+    '''Master property.
     '''</summary>
     '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
+    '''Auto-generated property.
     '''</remarks>
-    Protected WithEvents LoginButton As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''FailureText control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FailureText As Global.System.Web.UI.WebControls.Literal
-
-    '''<summary>
-    '''lblError control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+        Get
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+        End Get
+    End Property
 End Class

@@ -188,7 +188,7 @@ Public Class contacts
         CreateRadWindows("NewClient", "~/ADM/NewClient.aspx", 850, 600)
     End Sub
     Protected Sub btnNewEmployee_Click(sender As Object, e As EventArgs) Handles btnNewEmployee.Click
-        CreateRadWindows("NewEmployee", "~/ADM/NewEmployee.aspx", 850, 700)
+        CreateRadWindows("NewEmployee", "~/ADM/newemployee.aspx", 850, 700)
     End Sub
 
     Protected Sub btnNewSubconsultant_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewSubconsultant.Click

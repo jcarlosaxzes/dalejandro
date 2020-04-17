@@ -11,16 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Login
+Partial Public Class ADM_Basic
 
     '''<summary>
-    '''Head1 control.
+    '''head control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
+    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
 
     '''<summary>
     '''form1 control.
@@ -41,83 +41,83 @@ Partial Public Class Login
     Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
 
     '''<summary>
-    '''pnlLogin control.
+    '''RadPageLayout1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlLogin As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
 
     '''<summary>
-    '''UserName control.
+    '''ContentPlaceHolder1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UserName As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents ContentPlaceHolder1 As Global.System.Web.UI.WebControls.ContentPlaceHolder
 
     '''<summary>
-    '''UserNameRequired control.
+    '''UpdatePanel1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UserNameRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
 
     '''<summary>
-    '''Password control.
+    '''RadNotificationWarning control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Password As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents RadNotificationWarning As Global.Telerik.Web.UI.RadNotification
 
     '''<summary>
-    '''PasswordRequired control.
+    '''RadNotificationError control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents PasswordRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents RadNotificationError As Global.Telerik.Web.UI.RadNotification
 
     '''<summary>
-    '''RememberMe control.
+    '''lblEmployeeId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RememberMe As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''LoginButton control.
+    '''lblEmployeeEmail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LoginButton As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''FailureText control.
+    '''lblUserName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FailureText As Global.System.Web.UI.WebControls.Literal
+    Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblError control.
+    '''lblPageTitle control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblPageTitle As Global.System.Web.UI.WebControls.Label
 End Class

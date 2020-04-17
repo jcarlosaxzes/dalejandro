@@ -38,8 +38,8 @@ Partial Class Usercrud
                 Dim item As GridDataItem = CType(e.Item, GridDataItem)
                 Dim email As String = item("Email").Text
                 Dim password = LocalAPI.GetMembershipUserPasswod(email)
-                Dim manager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
-                Dim user = Await LocalAPI.CreateOrUpdateUser(email, password, manager)
+                LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
+                Dim user = Await LocalAPI.CreateOrUpdateUser(email, password)
 
                 Dim query = "update [dbo].[Employees] set [IsMigrate] = 1 where [Email] = '" & email & "'"
                 LocalAPI.ExecuteNonQuery(query)

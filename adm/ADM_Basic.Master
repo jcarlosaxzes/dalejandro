@@ -1,0 +1,96 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="ADM_Basic.master.vb" Inherits="pasconcept20.ADM_Basic" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <%--Bootstrap reference begin--%>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <%--Bootstrap reference end--%>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <%--Bootstrap reference begin--%>
+    <script src="../Scripts/jquery-1.9.1.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <%--Bootstrap reference end--%>
+    <script src="../jscript.js" type="text/javascript"></script>
+    <style type="text/css">
+        .borderCssClass div {
+            border: 1px solid red;
+        }
+
+        .badge {
+            background-color: red !important;
+            color: white;
+        }
+
+         .pas-container .RadWizard {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            *border: 1px solid #ddd;
+        }
+
+        .pas-container .RadWizard_BlackMetroTouch {
+            border: 1px solid #333;
+        }
+         #wrap {
+            /*width: 600px;*/
+            /*height: 390px;*/
+            padding: 0;
+            overflow: hidden;
+        }
+
+
+        #frame {
+            zoom: 0.75;
+            -moz-transform: scale(0.75);
+            -moz-transform-origin: 0 0;
+        }
+
+        .borderless table {
+            border-top-style: none;
+            border-left-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+        }
+    </style>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        </telerik:RadScriptManager>
+
+        <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
+            <Rows>
+                <telerik:LayoutRow StaticId="Content">
+                    <Content>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </Content>
+                </telerik:LayoutRow>
+            </Rows>
+        </telerik:RadPageLayout>
+
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <telerik:RadNotification ID="RadNotificationWarning" runat="server"
+                    Animation="FlyIn" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="info" Text="Warning"
+                    Position="BottomRight" VisibleTitlebar="false" Opacity="75" Width="300px" Skin="Sunset">
+                </telerik:RadNotification>
+                <telerik:RadNotification ID="RadNotificationError" runat="server" Width="300px" Skin="Sunset"
+                    Animation="Fade" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="deny" Text="Error" Position="TopCenter">
+                </telerik:RadNotification>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <br />
+        <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblUserName" runat="server" Text="lblUserName" Visible="False"></asp:Label>
+        <asp:Label ID="lblPageTitle" runat="server" Visible="False"></asp:Label>
+    </form>
+</body>
+</html>
