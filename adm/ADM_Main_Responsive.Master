@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="ADM_Main_Responsive.master.vb" Inherits="pasconcept20.ADM_Main_Responsive" %>
 
+<%@ Import Namespace="LocalApi" %>
 <%@ Import Namespace="Microsoft.AspNet.Identity" %>
 
 
