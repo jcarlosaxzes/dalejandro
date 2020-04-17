@@ -70,6 +70,12 @@
     <Reference Include="Microsoft.Data.Services.Client, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Data.Services.Client.5.6.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Logging.1.1.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
@@ -90,6 +96,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
       <Private>True</Private>
@@ -360,6 +369,7 @@
     <Content Include="adm\departmentreport.aspx" />
     <Content Include="adm\departmentslist.aspx" />
     <Content Include="adm\discipline.aspx" />
+    <Content Include="adm\employee.aspx" />
     <Content Include="adm\employeereport.aspx" />
     <Content Include="adm\employees.aspx" />
     <Content Include="adm\employee_permissions.aspx" />
@@ -376,6 +386,7 @@
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
+    <Content Include="adm\newemployee.aspx" />
     <Content Include="adm\nojobstimetypes.aspx" />
     <Content Include="adm\orgchartbydepartment.aspx" />
     <Content Include="adm\paiddaylist.aspx" />
@@ -510,6 +521,7 @@
     <Content Include="App_Themes\Estandar\Default.skin" />
     <Content Include="App_Themes\Smartphone\Combo.skin" />
     <Content Include="App_Themes\Smartphone\Default.skin" />
+    <Content Include="adm\ADM_Basic.Master" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\Admin Account Edit Proposal  .JPG" />
     <Content Include="Images\Admin Account Job Details.JPG" />
@@ -710,6 +722,13 @@
     <Compile Include="adm\activejobsdashboad.aspx.vb">
       <DependentUpon>activejobsdashboad.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\ADM_Basic.Master.designer.vb">
+      <DependentUpon>ADM_Basic.Master</DependentUpon>
+    </Compile>
+    <Compile Include="adm\ADM_Basic.Master.vb">
+      <DependentUpon>ADM_Basic.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\ADM_Main_Responsive.Master.designer.vb">
       <DependentUpon>ADM_Main_Responsive.Master</DependentUpon>
@@ -914,6 +933,13 @@
       <DependentUpon>discipline.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\employee.aspx.designer.vb">
+      <DependentUpon>employee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employee.aspx.vb">
+      <DependentUpon>employee.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\employeereport.aspx.designer.vb">
       <DependentUpon>employeereport.aspx</DependentUpon>
     </Compile>
@@ -1024,6 +1050,13 @@
     </Compile>
     <Compile Include="adm\monthlyexpenses.aspx.vb">
       <DependentUpon>monthlyexpenses.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\newemployee.aspx.designer.vb">
+      <DependentUpon>newemployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\newemployee.aspx.vb">
+      <DependentUpon>newemployee.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\nojobstimetypes.aspx.designer.vb">
@@ -1242,7 +1275,7 @@
     <Compile Include="adm\vendortypes.aspx.vb">
       <DependentUpon>vendortypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-	</Compile>
+    </Compile>
     <Compile Include="adm\usercrud.aspx.designer.vb">
       <DependentUpon>usercrud.aspx</DependentUpon>
     </Compile>

@@ -23,6 +23,7 @@ Imports Microsoft.AspNet.Identity.Owin
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
     Public DataBaseSubscriber As String
+    Public Shared AppUserManager As pasconcept20.ApplicationUserManager
 
 #Region "Enum"
     Public Enum sys_log_AccionENUM
@@ -5963,7 +5964,7 @@ Public Class LocalAPI
                     sFullBody.Append("Your Credentials:")
                     sFullBody.Append("<br />")
                     'sFullBody.Append("User: " & Left(rdr("Email").ToString, lPos - 1))
-                    sFullBody.Append("User: " & GetUserName(rdr("Email").ToString))
+                    sFullBody.Append("User: " & rdr("Email"))
                     sFullBody.Append("<br />")
                     sFullBody.Append("Password: " & GetEmployeePassword(rdr("Email")))
                     Try
@@ -7515,25 +7516,24 @@ Public Class LocalAPI
             Dim username(0) As String
             Dim sPassword As String = CreateUserPassword()
 
-            ' Leo la colecion de todos los usuarios con ese Email
-            Dim arrUsersColleccion As MembershipUserCollection = New MembershipUserCollection()
-            arrUsersColleccion = Membership.FindUsersByEmail(sEmail)
-            Select Case arrUsersColleccion.Count
-                Case 0
-                    ' No existe usuario. Crearlo
-                    Membership.CreateUser(sEmail, sPassword, sEmail)
+            ' 3 Casos
+            '   1: Es usuario del portal y de la aplicacion, No hacer nada.
+            '   2: Es usuairo del portal pero no de la aplicacion, Migrar a Identity
+            '   3: No es usuario del Portal, Crear nuevo
+            Dim UsuarioApp = LocalAPI.ExisteUserIdentity(sEmail)
+            If Not UsuarioApp Then
+                Dim UsuarioPortal = LocalAPI.ExisteUser(sEmail)
+                If UsuarioPortal Then  ' Migrate to Identity
+                    Dim password = LocalAPI.GetMembershipUserPasswod(sEmail)
+                    LocalAPI.CreateOrUpdateUser(sEmail, password)
+                Else
+                    Dim password = LocalAPI.CreateUserPassword()
+                    LocalAPI.CreateOrUpdateUser(sEmail, password)
                     sMsgRes = "Se ha creado el usuario " & sEmail
-                Case Else
-                    ' Unlocj user por si estaba bloqueado
-                    UnlockUser(sEmail)
+                End If
+            End If
 
-            End Select
-
-            username(0) = sEmail
-            'If Not Roles.IsUserInRole(sEmail, sRole) Then
-            '    Roles.AddUsersToRole(username, sRole)
-            'End If
-            RefrescarUsuarioVinculado = sMsgRes
+            Return sMsgRes
 
         Catch ex As Exception
             Throw ex
@@ -8957,25 +8957,26 @@ Public Class LocalAPI
 
     Private Shared Function GetEmployeePassword(ByVal sUserEmail As String) As String
         Try
-            Dim user As MembershipUser = Membership.GetUser(Membership.GetUserNameByEmail(sUserEmail))
-            Dim sUserName As String = user.UserName
-            Dim cnn1 As SqlConnection = GetUsersConnection()
-            Dim sPassword As String = ""
-            Dim cmd As New SqlCommand("SELECT TOP 1 PasswordFormat FROM aspnet_Membership WHERE Email='" & sUserEmail & "'", cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                If rdr("PasswordFormat").ToString = MembershipPasswordFormat.Encrypted Then
-                    ' El usuario ya tiene el Password tipo "Encrypted", podemos leerlo
-                    sPassword = user.GetPassword()
-                Else
-                    sPassword = CreateUserPassword()
-                End If
-            End If
-            rdr.Close()
-            cnn1.Close()
-            GetEmployeePassword = sPassword
+            'Dim user As MembershipUser = Membership.GetUser(Membership.GetUserNameByEmail(sUserEmail))
+            'Dim sUserName As String = user.UserName
+            'Dim cnn1 As SqlConnection = GetUsersConnection()
+            'Dim sPassword As String = ""
+            'Dim cmd As New SqlCommand("SELECT TOP 1 PasswordFormat FROM aspnet_Membership WHERE Email='" & sUserEmail & "'", cnn1)
+            'Dim rdr As SqlDataReader
+            'rdr = cmd.ExecuteReader
+            'rdr.Read()
+            'If rdr.HasRows Then
+            '    If rdr("PasswordFormat").ToString = MembershipPasswordFormat.Encrypted Then
+            '        ' El usuario ya tiene el Password tipo "Encrypted", podemos leerlo
+            '        sPassword = user.GetPassword()
+            '    Else
+            '        sPassword = CreateUserPassword()
+            '    End If
+            'End If
+            'rdr.Close()
+            'cnn1.Close()
+
+            GetEmployeePassword = "Password de Prueba"
         Catch ex As Exception
             ' Si hay error, en ultima instancia devolver el Id como password.
             Throw ex
@@ -9821,13 +9822,28 @@ Public Class LocalAPI
 #End Region
 
 #Region "Users"
-    Public Shared Function ExisteUser(sEmail As String) As Boolean
-        Dim user As MembershipUser = Membership.GetUser(sEmail)
-        If user Is Nothing Then
-            Return False
-        Else
-            Return True
-        End If
+    Public Shared Function ExisteUser(email As String) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetUsersConnection()
+            Dim cmd As New SqlCommand("Select count(*) from [dbo].[aspnet_Membership] where Email = '" & email & "'", cnn1)
+            Dim count = cmd.ExecuteScalar()
+            cnn1.Close()
+            Return count > 0
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function ExisteUserIdentity(email As String) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetUsersConnection()
+            Dim cmd As New SqlCommand("Select count(*) from [dbo].[AspNetUsers] where Email = '" & email & "'", cnn1)
+            Dim count = cmd.ExecuteScalar()
+            cnn1.Close()
+            Return count > 0
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Shared Function GetForgotpasswordUser(forgot_key As String) As String
@@ -9853,11 +9869,11 @@ Public Class LocalAPI
         Return password
     End Function
 
-    Public Shared Async Function CreateOrUpdateUser(email As String, password As String, manager As pasconcept20.ApplicationUserManager) As Task(Of pasconcept20.ApplicationUser)
-        Dim identityUser As pasconcept20.ApplicationUser = Await manager.FindByEmailAsync(email)
+    Public Shared Async Function CreateOrUpdateUser(email As String, password As String) As Task(Of pasconcept20.ApplicationUser)
+        Dim identityUser As pasconcept20.ApplicationUser = Await AppUserManager.FindByEmailAsync(email)
         If identityUser IsNot Nothing Then
-            Dim token = Await manager.GeneratePasswordResetTokenAsync(identityUser.Id)
-            Await manager.ResetPasswordAsync(identityUser.Id, token, password)
+            Dim token = Await AppUserManager.GeneratePasswordResetTokenAsync(identityUser.Id)
+            Await AppUserManager.ResetPasswordAsync(identityUser.Id, token, password)
             Return identityUser
         Else
             Dim user = New pasconcept20.ApplicationUser With {
@@ -9865,7 +9881,7 @@ Public Class LocalAPI
                 .UserName = email,
                 .EmailConfirmed = True
             }
-            Await manager.CreateAsync(user, password)
+            Await AppUserManager.CreateAsync(user, password)
             LocalAPI.NormalizeUser(email)
             Return user
         End If

@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.AspNet.Identity
+Imports Microsoft.AspNet.Identity.Owin
 
 Public Class ADM_Main_Responsive
     Inherits System.Web.UI.MasterPage
@@ -39,6 +40,9 @@ Public Class ADM_Main_Responsive
             End If
 
             CheckbillingExpirationDate(lblCompanyId.Text)
+
+            LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
+
 
         Catch ex As Exception
             Dim e1 As String = ex.Message

@@ -155,7 +155,7 @@ Public Class employees
     End Sub
 
     Protected Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
-        CreateRadWindows("NewEmployee", "~/ADM/NewEmployee.aspx", 850, 700, True)
+        CreateRadWindows("NewEmployee", "~/ADM/newemployee.aspx", 850, 700, True)
     End Sub
 
     Protected Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
