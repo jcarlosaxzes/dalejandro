@@ -155,7 +155,7 @@
                                                 <asp:Label ID="MovileLabel" runat="server" Text='<%# Eval("Movile")%>' />
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         &nbsp;&nbsp;&nbsp;
-                                        <telerik:RadButton ID="btnSMS" runat="server" Text="Send Test SMS" OnClick="btnSMS_Click" ToolTip="Send SMS to CellPhone" Visible="false">
+                                        <telerik:RadButton ID="btnSMS" runat="server" Text="Send Test SMS" OnClick="btnSMS_Click" ToolTip="Send SMS to CellPhone" Visible='<%# LocalAPI.IsCompanySMSservice(lblCompanyId.Text)%>'>
                                         </telerik:RadButton>
                                                 &nbsp;
 

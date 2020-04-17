@@ -59,15 +59,6 @@ Partial Public Class proposals
     Protected WithEvents btnNewWizard As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnPrint control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnPrint As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnPrivate control.
     '''</summary>
     '''<remarks>
