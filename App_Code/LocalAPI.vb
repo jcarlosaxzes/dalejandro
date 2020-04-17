@@ -9873,7 +9873,9 @@ Public Class LocalAPI
         Dim identityUser As pasconcept20.ApplicationUser = Await AppUserManager.FindByEmailAsync(email)
         If identityUser IsNot Nothing Then
             Dim token = Await AppUserManager.GeneratePasswordResetTokenAsync(identityUser.Id)
-            Await AppUserManager.ResetPasswordAsync(identityUser.Id, token, password)
+            Dim passwordHasher = New pasconcept20.PASPasswordHasher()
+            identityUser.PasswordHash = passwordHasher.HashPassword(password)
+            Await AppUserManager.UpdateAsync(identityUser)
             Return identityUser
         Else
             Dim user = New pasconcept20.ApplicationUser With {
