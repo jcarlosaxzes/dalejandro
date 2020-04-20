@@ -142,7 +142,7 @@
                 <telerik:LayoutRow StaticId="Menu">
                     <Content>
                         <div class="noprint" style="text-align: center">
-                            <telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" Skin="MetroTouch" Width="100%">
+                            <telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" EnableEmbeddedSkins="false" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">
                                 <Items>
 
                                     <%--Start menu--%>
