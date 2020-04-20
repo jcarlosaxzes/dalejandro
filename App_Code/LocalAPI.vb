@@ -8,17 +8,13 @@ Imports System.Web.Configuration
 Imports System.Net
 Imports System.Runtime.Remoting.Contexts
 Imports Telerik.Web.UI
-Imports Microsoft.Reporting.WebForms
 Imports System.Configuration
 Imports System.Threading.Tasks
 
-'Imports SendGrid
-'Imports SendGrid.Helpers.Mail
 Imports System.Linq
 Imports System.Net.Http
 
 Imports Microsoft.AspNet.Identity.Owin
-
 
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION

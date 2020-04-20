@@ -519,6 +519,9 @@
     <Content Include="adm\ADM_Basic.Master" />
     <Content Include="adm\BasicMasterPage.Master" />
     <Content Include="adm\MasterJOB.Master" />
+    <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
+    <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
+    <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\Admin Account Edit Proposal  .JPG" />
     <Content Include="Images\Admin Account Job Details.JPG" />
@@ -1724,7 +1727,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

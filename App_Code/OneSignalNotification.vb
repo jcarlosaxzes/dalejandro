@@ -14,7 +14,7 @@ Public Class OneSignalNotification
 
             If Len(UserEmailList) > 0 Then
                 Dim recipients As List(Of RecipientViewModel) = New List(Of RecipientViewModel)()
-                ' Componer json com parametros externos
+                ' Componer json 
                 Dim i As Integer
                 Dim sArrValues As String() = Split(UserEmailList, ",")
                 Dim nValues As Integer = sArrValues.Length
