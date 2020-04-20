@@ -1592,9 +1592,7 @@
     <Compile Include="App_Code\eeg360.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="App_Code\LocalAPI.vb">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="App_Code\LocalAPI.vb" />
     <Compile Include="App_Code\OneSignalNotification.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
