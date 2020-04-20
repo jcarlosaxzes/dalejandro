@@ -71,11 +71,6 @@
                     <span class="glyphicon glyphicon-plus"></span> Proposal
                     </asp:LinkButton>
                 </td>
-                <td style="width: 100px">
-                    <asp:LinkButton ID="btnPrint" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-print"></span> Print Report
-                    </asp:LinkButton>
-                </td>
                 <td></td>
                 <td style="width: 200px; text-align: right">
                     <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" class="checkbox-inline" ToolTip="Private/Public Mode">
@@ -190,7 +185,7 @@
 
                                 &nbsp;
 
-                                        <a class="glyphicon glyphicon-share" title="Preview Proposal " href='<%# Eval("Id", "../ADMCLI/ShareLink.aspx?ObjType=111&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                        <a class="glyphicon glyphicon-share" title="Preview Proposal " href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=111&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
                                 &nbsp;
                                 <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Upload Files"
                                     CommandName="UploadFiles" UseSubmitBehavior="false">
