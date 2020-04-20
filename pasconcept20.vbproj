@@ -492,6 +492,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\Menu.PASMenuBlackMetroTouch.css" />
     <Content Include="css\menu\PASMenuBlackMetroTouch.gif" />
+    <Content Include="css\menu\radActionsSprite.png" />
     <Content Include="css\menu\rmArrows.png" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
