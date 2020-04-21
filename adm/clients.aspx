@@ -201,7 +201,6 @@
         </telerik:RadGrid>
     </div>
 
-
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CLIENTS_SELECT" SelectCommandType="StoredProcedure"
         InsertCommand="Client_DUPLICATE" InsertCommandType="StoredProcedure">
