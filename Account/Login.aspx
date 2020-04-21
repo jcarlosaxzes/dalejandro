@@ -70,7 +70,7 @@
                                             </label>
                                         </div>
                                         <div class="form-group">
-                                            <a href="RecoverPassword.aspx">Forgot password?</a>
+                                            <a href="ResetPassword.aspx">Forgot password?</a>
                                         </div>
                                         
 

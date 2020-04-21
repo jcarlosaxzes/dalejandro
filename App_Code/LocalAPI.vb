@@ -5939,6 +5939,23 @@ Public Class LocalAPI
     ' ................................................................................................................................
     Public Shared Function EmployeeEmailCredentials(ByVal EmployeeId As Integer, ByVal companyId As Integer) As Boolean
         Try
+
+            Dim sName = ""
+            Dim sAddress = ""
+            Dim sCity = ""
+            Dim sState = ""
+            Dim sZipcode = ""
+            Dim sPhone = ""
+            Dim sCellular = ""
+            Dim sEmail = ""
+            Dim sHourRate = ""
+            Dim startingDate = ""
+            Dim sSS = ""
+            Dim sDOB = ""
+            Dim bInactive As Short
+            Dim userGuid = ""
+            Dim data = GetEmployeeData(EmployeeId, sName, sAddress, sCity, sState, sZipcode, sPhone, sCellular, sEmail, sHourRate, startingDate, sSS, sDOB, bInactive, userGuid)
+
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As New SqlCommand("SELECT * FROM Employees WHERE Id=" & EmployeeId, cnn1)
             Dim rdr As SqlDataReader
@@ -5953,16 +5970,18 @@ Public Class LocalAPI
 
                     sFullBody.Append("<br />")
                     sFullBody.Append("<br />")
+                    sFullBody.Append("wellcome to PASconcept. ")
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("You can set a new password")
+                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                    sFullBody.Append("<br />")
+
+
+                    sFullBody.Append("Or you can got to Employee Site")
+                    sFullBody.Append("<br />")
                     sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Default.aspx" & """" & ">Link to Employee Site</a>")
 
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Your Credentials:")
-                    sFullBody.Append("<br />")
-                    'sFullBody.Append("User: " & Left(rdr("Email").ToString, lPos - 1))
-                    sFullBody.Append("User: " & rdr("Email"))
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Password: " & GetEmployeePassword(rdr("Email")))
+
                     Try
                         If ConfigurationManager.AppSettings("Debug") = "1" Then
                             SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
@@ -5980,6 +5999,78 @@ Public Class LocalAPI
         Catch ex As Exception
             Throw ex
         End Try
+    End Function
+
+    Public Shared Async Function EmployeeEmailResetPassword(Email As String) As Task(Of Boolean)
+        Try
+            Dim identityUser As pasconcept20.ApplicationUser = Await AppUserManager.FindByEmailAsync(Email)
+            If identityUser IsNot Nothing Then
+                Dim companyId = GetActiveCompanyIdFromEmployee(Email)
+                Dim employeeId = GetEmployeeId(Email, companyId)
+
+                Dim sName = ""
+                Dim sAddress = ""
+                Dim sCity = ""
+                Dim sState = ""
+                Dim sZipcode = ""
+                Dim sPhone = ""
+                Dim sCellular = ""
+                Dim sEmail = ""
+                Dim sHourRate = ""
+                Dim startingDate = ""
+                Dim sSS = ""
+                Dim sDOB = ""
+                Dim bInactive As Short
+                Dim userGuid = ""
+
+
+                Dim data = GetEmployeeData(employeeId, sName, sAddress, sCity, sState, sZipcode, sPhone, sCellular, sEmail, sHourRate, startingDate, sSS, sDOB, bInactive, userGuid)
+
+                Dim sFullBody As New System.Text.StringBuilder
+
+                sFullBody.Append("Hello:")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("Someone recently requested a password change for your PASconcept account.")
+                sFullBody.Append("<br />")
+                sFullBody.Append("If this was you, you can set a new password")
+                sFullBody.Append("<a href=" & """" & GetHostAppSite() & "Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("If you don't want to change your password or didn't request this, just ")
+                sFullBody.Append("<br />")
+                sFullBody.Append("ignore and delete this message.")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("To keep your account secure, please don't forward this email to anyone.")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("If you have any questions or require additional information, please ")
+                sFullBody.Append("<a href=" & """" & "http://pasconcept.com/contact.html" & """" & ">contact us</a>")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("Thank you,")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<a href=" & """" & GetHostAppSite() & """" & ">PASconcept</a> Notification")
+                sFullBody.Append("<br />")
+
+                Dim sbody = sFullBody.ToString()
+
+                Try
+                    If ConfigurationManager.AppSettings("Debug") = "1" Then
+                        SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
+                    Else
+                        SendMail(Email, "", "", ConfigurationManager.AppSettings("Titulo") & ". Reset Password", sFullBody.ToString, companyId)
+                    End If
+                    Return True
+                Finally
+                End Try
+            End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+        Return False
     End Function
 
     Public Shared Function EmployeeEmailMemory(ByVal EmployeeId As Integer, ByVal companyId As Integer, year As Integer) As Boolean
@@ -7507,7 +7598,6 @@ Public Class LocalAPI
 
     Public Shared Function RefrescarUsuarioVinculado(ByVal sEmail As String, ByVal sRole As String) As String
         Try
-            Dim i As Integer
             Dim sMsgRes As String = ""
             Dim username(0) As String
             Dim sPassword As String = CreateUserPassword()
@@ -8611,7 +8701,7 @@ Public Class LocalAPI
                                         ByRef sName As String, ByRef sAddress As String, ByRef sCity As String, ByRef sState As String,
                                             ByRef sZipCode As String, ByRef sPhone As String, ByRef sCellular As String,
                                             ByRef sEmail As String, ByRef sHourRate As String, ByRef sSartingDate As String,
-                                            ByRef sSS As String, ByRef sDOB As String, ByRef bInactive As Boolean) As Boolean
+                                            ByRef sSS As String, ByRef sDOB As String, ByRef bInactive As Boolean, ByRef guid As String) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As New SqlCommand("SELECT * FROM [Employees] WHERE [Id]=" & lId, cnn1)
@@ -8631,6 +8721,7 @@ Public Class LocalAPI
                 sSartingDate = "" & rdr("starting_Date").ToString
                 sSS = "" & rdr("SS").ToString
                 sDOB = "" & rdr("DOB").ToString
+                guid = rdr("guid").ToString
                 If Len("" & rdr("Inactive")) > 0 Then
                     bInactive = rdr("Inactive")
                 Else
@@ -9842,8 +9933,8 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function GetForgotpasswordUser(forgot_key As String) As String
-        Return GetStringEscalar("Select TOP 1 Email FROM sys_Forgotpassword where [GUID]='" & forgot_key & "'")
+    Public Shared Function GetUserEmailByGuid(guid As String) As String
+        Return GetStringEscalar("Select TOP 1 Email FROM Employees where [guid]='" & guid & "'")
     End Function
 
     Public Shared Function GetMembershipUserPasswod(sEmail As String) As String
@@ -9885,7 +9976,6 @@ Public Class LocalAPI
         End If
         Return identityUser
     End Function
-
 
     Public Shared Sub NormalizeUser(email As String)
         Try

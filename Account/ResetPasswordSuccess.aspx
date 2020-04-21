@@ -1,4 +1,5 @@
-﻿<%@ Page Title="Reset Password" Language="vb" AutoEventWireup="true" CodeBehind="ResetPassword.aspx.vb" Inherits="pasconcept20.ResetPassword" Async="true" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ResetPasswordSuccess.aspx.vb" Inherits="pasconcept20.ResetPasswordSuccess" %>
+
 
 
 <!DOCTYPE html>
@@ -40,7 +41,7 @@
             <div class="row">
                 <div class="col-md-5 col-lg-offset-4" style="margin-top: 5em">
                         <LayoutTemplate>
-                            <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton">
+                            <asp:Panel ID="pnlLogin" runat="server">
                                 <div class="well">
 
                                     <%--<img class="img-thumbnail" src="/images/logopasconcept-index.png"  />--%>
@@ -48,29 +49,8 @@
 
                                     <form>
                                         <div class="form-group" style="margin-top: 1em">
-                                            <label for="email" class="control-label" style="font-size:large">User Email</label>
-                                            <telerik:RadTextBox ID="Email" runat="server" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
-                                            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="Email"
-                                                ErrorMessage="Email is required." ToolTip="Email is required." ValidationGroup="Login2"
-                                                Font-Bold="True" Font-Size="Small" ForeColor="#00A8E4">*Email is required.</asp:RequiredFieldValidator>
-                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="Email"
-                                                ErrorMessage="*Invalid Email Address" SetFocusOnError="True" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                                                 ValidationGroup="Login2"  Font-Bold="True" Font-Size="Small" ForeColor="#00A8E4"></asp:RegularExpressionValidator>
-                                        </div>
-                                        
-
-                                        <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
-                                             OnClick="Reset_Click" ValidationGroup="Login2">
-                                                                        <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Reset Password
-                                        </asp:LinkButton>
-                                        <p></p>
-                                        <div>
-                                            <asp:Label runat="server" ID="lblMsg" Visible="False" Font-Bold="True" Font-Size="Medium" ForeColor="#00A8E4"/>
-                                        </div>
-
-                                        <div class="form-group" style="margin-top:1em;">
-                                            <a href="Login.aspx">Log In</a>
-                                        </div>
+                                            <p><H3>Your password has been changed. Click <asp:HyperLink ID="login" runat="server" NavigateUrl="~/Account/Login">here</asp:HyperLink> to login </p></H3>                                  
+                                        </div>                                       
                                     </form>
                                 </div>
                             </asp:Panel>
@@ -91,5 +71,3 @@
     </form>
 </body>
 </html>
-
-
