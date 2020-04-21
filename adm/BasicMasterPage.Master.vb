@@ -1,13 +1,14 @@
-﻿Public Class BasicMasterPage
+﻿Imports Microsoft.AspNet.Identity
+Imports Microsoft.AspNet.Identity.Owin
+Public Class BasicMasterPage
     Inherits System.Web.UI.MasterPage
 
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         Try
             ' Inicializando Controles y Properties de la Master Page
-            Dim user As MembershipUser = Membership.GetUser()
-            UserEmail = user.Email
+            UserEmail = Context.User.Identity.GetUserName()
 
-            UserId = LocalAPI.GetEmployeeId(user.Email, Session("companyId"))
+            UserId = LocalAPI.GetEmployeeId(UserEmail, Session("companyId"))
             Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
             UserName = LocalAPI.GetEmployeeFullName(UserEmail)
 

@@ -1,15 +1,17 @@
-﻿Imports System.IO
+﻿Imports Microsoft.AspNet.Identity
+Imports System.IO
 Imports Microsoft.VisualBasic.FileIO
 Public Class importdata
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            Dim user As MembershipUser = Membership.GetUser()
+            Dim UserEmail As String = Context.User.Identity.GetUserName()
+
             lblCompanyId.Text = Session("companyId")
             Me.Title = "Others/Import data"
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(LocalAPI.GetEmployeeId(user.Email, lblCompanyId.Text), "Deny_Importdata") Then
+            If Not LocalAPI.GetEmployeePermission(LocalAPI.GetEmployeeId(UserEmail, lblCompanyId.Text), "Deny_Importdata") Then
                 Response.RedirectPermanent("~/ADM/Default.aspx")
             End If
 
