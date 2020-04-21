@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Subconsultant" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="subconsultant.aspx.vb" Inherits="pasconcept20.subconsultant" %>
 
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<%@ Import Namespace="pasconcept20" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 

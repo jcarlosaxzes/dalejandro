@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="Request For Proposals" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="requestforproposals.aspx.vb" Inherits="pasconcept20.requestforproposals" %>
+
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style>

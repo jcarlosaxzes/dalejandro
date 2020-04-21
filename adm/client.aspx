@@ -1,8 +1,7 @@
 ﻿<%@ Page Title="Client" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="client.aspx.vb" Inherits="pasconcept20.client" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLuxW5zYQh_ClJfDEBpTLlT_tf8JVcxf0&libraries=places&callback=initAutocomplete"

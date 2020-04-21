@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Send Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="sendproposal.aspx.vb" Inherits="pasconcept20.sendproposal" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
