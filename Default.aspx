@@ -4,12 +4,20 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Welcome to PASconcept. Project Administration Services</title>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
+        
+        <h3>Connection Failure or Firewall violation</h3>
+        <p>
+            We apologize for the inconveniences.
+            <br />
+            Contact the PASconcept Administrator
+        </p>
+            
+        
+        <asp:Label ID="lblIPAddress" runat="server" Text="" ></asp:Label>
     </form>
 </body>
 </html>

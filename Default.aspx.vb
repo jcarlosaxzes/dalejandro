@@ -3,7 +3,17 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            Response.Redirect("~/adm/Default.aspx")
+            ' Borrar todas las variables de sesion
+            Session.Abandon()
+
+            If Not Request.QueryString("IPAddress") Is Nothing Then
+                lblIPAddress.Text = Request.QueryString("IPAddress")
+            Else
+                If Request.QueryString("LoginRole") Is Nothing Then
+                    Response.Redirect("~/adm/Default.aspx")
+                End If
+            End If
+
         End If
     End Sub
 

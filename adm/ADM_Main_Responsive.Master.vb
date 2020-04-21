@@ -7,7 +7,6 @@ Public Class ADM_Main_Responsive
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         Try
             ' Inicializando Controles y Properties de la Master Page
-            'Dim user As MembershipUser = Membership.GetUser() Codigo MEMBERSHIP
             UserEmail = Context.User.Identity.GetUserName()
             cboCompany.DataBind()
             If Session("companyId") Is Nothing Then
