@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Employee Report" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="employeereport.aspx.vb" Inherits="pasconcept20.employeereport" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row" style="padding-top: 5px; padding-bottom: 10px; background-color: darkgray">
