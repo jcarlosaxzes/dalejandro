@@ -5939,6 +5939,23 @@ Public Class LocalAPI
     ' ................................................................................................................................
     Public Shared Function EmployeeEmailCredentials(ByVal EmployeeId As Integer, ByVal companyId As Integer) As Boolean
         Try
+
+            Dim sName = ""
+            Dim sAddress = ""
+            Dim sCity = ""
+            Dim sState = ""
+            Dim sZipcode = ""
+            Dim sPhone = ""
+            Dim sCellular = ""
+            Dim sEmail = ""
+            Dim sHourRate = ""
+            Dim startingDate = ""
+            Dim sSS = ""
+            Dim sDOB = ""
+            Dim bInactive As Short
+            Dim userGuid = ""
+            Dim data = GetEmployeeData(EmployeeId, sName, sAddress, sCity, sState, sZipcode, sPhone, sCellular, sEmail, sHourRate, startingDate, sSS, sDOB, bInactive, userGuid)
+
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As New SqlCommand("SELECT * FROM Employees WHERE Id=" & EmployeeId, cnn1)
             Dim rdr As SqlDataReader
@@ -5953,16 +5970,18 @@ Public Class LocalAPI
 
                     sFullBody.Append("<br />")
                     sFullBody.Append("<br />")
+                    sFullBody.Append("wellcome to PASconcept. ")
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("You can set a new password")
+                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                    sFullBody.Append("<br />")
+
+
+                    sFullBody.Append("Or you can got to Employee Site")
+                    sFullBody.Append("<br />")
                     sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Default.aspx" & """" & ">Link to Employee Site</a>")
 
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Your Credentials:")
-                    sFullBody.Append("<br />")
-                    'sFullBody.Append("User: " & Left(rdr("Email").ToString, lPos - 1))
-                    sFullBody.Append("User: " & rdr("Email"))
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Password: " & GetEmployeePassword(rdr("Email")))
+
                     Try
                         If ConfigurationManager.AppSettings("Debug") = "1" Then
                             SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
