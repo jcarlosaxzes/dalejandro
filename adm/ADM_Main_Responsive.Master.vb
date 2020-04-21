@@ -67,7 +67,7 @@ Public Class ADM_Main_Responsive
         If Not IsPostBack Then
 
             If Not LocalAPI.IAgree(UserEmail) And Val("" & Session("ReadLater")) <> "1" Then
-                Response.RedirectPermanent("~/ADM/UserAgree.aspx")
+                Response.RedirectPermanent("~/adm/useragree.aspx")
             Else
 
                 Dim Asunto As String
@@ -216,6 +216,10 @@ Public Class ADM_Main_Responsive
         Return (LocalAPI.GetCompanyProperty(Session("companyId"), "Type") = 16)
     End Function
 
+    Protected Sub Unnamed_LoggingOut(sender As Object, e As LoginCancelEventArgs)
+        Context.GetOwinContext().Authentication.SignOut()
+        Session.Abandon()
+    End Sub
 End Class
 
 
