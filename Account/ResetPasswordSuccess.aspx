@@ -1,6 +1,6 @@
-﻿<%@ Page Title="Log in" Language="vb" AutoEventWireup="false" CodeBehind="Login.aspx.vb" Inherits="pasconcept20.Login" Async="true" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ResetPasswordSuccess.aspx.vb" Inherits="pasconcept20.ResetPasswordSuccess" %>
 
-<%@ Register Src="~/Account/OpenAuthProviders.ascx" TagPrefix="uc" TagName="OpenAuthProviders" %>
+
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-md-5 col-lg-offset-4" style="margin-top: 5em">
                         <LayoutTemplate>
-                            <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton">
+                            <asp:Panel ID="pnlLogin" runat="server">
                                 <div class="well">
 
                                     <%--<img class="img-thumbnail" src="/images/logopasconcept-index.png"  />--%>
@@ -49,39 +49,8 @@
 
                                     <form>
                                         <div class="form-group" style="margin-top: 1em">
-                                            <label for="email" class="control-label" style="font-size:large">User Email</label>
-                                            <telerik:RadTextBox ID="UserName" runat="server" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
-                                            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
-                                                ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="Login2"
-                                                Font-Bold="True" Font-Size="Small" ForeColor="#00A8E4">*</asp:RequiredFieldValidator>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password" class="control-label" style="font-size:large">Password</label>
-                                            <telerik:RadTextBox ID="Password"  runat="server" TextMode="Password" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
-                                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server"
-                                                ControlToValidate="Password" ErrorMessage="Password is required."
-                                                Font-Bold="False" Font-Size="Small" ForeColor="#00A8E4"
-                                                ToolTip="Password is required." ValidationGroup="Login2">*</asp:RequiredFieldValidator>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <asp:CheckBox runat="server" ID="RememberMe" class="RememberMe" TextAlign="Left"/>
-                                                <asp:Label runat="server" AssociatedControlID="RememberMe">Remember me?</asp:Label>
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <a href="ResetPassword.aspx">Forgot password?</a>
-                                        </div>
-                                        
-
-                                        <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
-                                            UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
-                                                                        <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Sign in
-                                        </asp:LinkButton>
-
-                                        <div>
-                                            <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
-                                        </div>
+                                            <p><H3>Your password has been changed. Click <asp:HyperLink ID="login" runat="server" NavigateUrl="~/Account/Login">here</asp:HyperLink> to login </p></H3>                                  
+                                        </div>                                       
                                     </form>
                                 </div>
                             </asp:Panel>
@@ -96,7 +65,7 @@
                     <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank">Terms & Condition</a>
                 </div>
             </div>
-            <asp:Label runat="server" ID="lblError"></asp:Label>
+            
         </div>
 
     </form>
