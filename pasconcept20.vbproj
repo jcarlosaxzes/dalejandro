@@ -400,6 +400,7 @@
     <Content Include="adm\sendticketpage.aspx" />
     <Content Include="adm\settingstatus.aspx" />
     <Content Include="adm\sharelink.aspx" />
+    <Content Include="adm\start.aspx" />
     <Content Include="adm\statement.aspx" />
     <Content Include="adm\subconsultant.aspx" />
     <Content Include="adm\subconsultants.aspx" />
@@ -412,6 +413,7 @@
     <Content Include="adm\timesheet.aspx" />
     <Content Include="adm\topten.aspx" />
     <Content Include="adm\uploadphoto.aspx" />
+    <Content Include="adm\useragree.aspx" />
     <Content Include="adm\vendor.aspx" />
     <Content Include="adm\vendors.aspx" />
     <Content Include="adm\vendortypes.aspx" />
@@ -1482,6 +1484,13 @@
       <DependentUpon>sharelink.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\start.aspx.designer.vb">
+      <DependentUpon>start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\start.aspx.vb">
+      <DependentUpon>start.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\statement.aspx.designer.vb">
       <DependentUpon>statement.aspx</DependentUpon>
     </Compile>
@@ -1564,6 +1573,13 @@
     </Compile>
     <Compile Include="adm\uploadphoto.aspx.vb">
       <DependentUpon>uploadphoto.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\useragree.aspx.designer.vb">
+      <DependentUpon>useragree.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\useragree.aspx.vb">
+      <DependentUpon>useragree.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\vendor.aspx.designer.vb">
