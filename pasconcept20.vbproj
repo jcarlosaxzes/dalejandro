@@ -367,6 +367,7 @@
     <Content Include="adm\newsubconsultant.aspx" />
     <Content Include="adm\newvendor.aspx" />
     <Content Include="adm\nojobstimetypes.aspx" />
+    <Content Include="adm\options.aspx" />
     <Content Include="adm\orgchartbydepartment.aspx" />
     <Content Include="adm\paiddaylist.aspx" />
     <Content Include="adm\payments.aspx" />
@@ -1253,6 +1254,13 @@
       <DependentUpon>nojobstimetypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\options.aspx.designer.vb">
+      <DependentUpon>options.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\options.aspx.vb">
+      <DependentUpon>options.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\orgchartbydepartment.aspx.designer.vb">
       <DependentUpon>orgchartbydepartment.aspx</DependentUpon>
     </Compile>
@@ -1736,6 +1744,7 @@
   <ItemGroup>
     <Folder Include="Images\clients\" />
     <Folder Include="Images\employees\" />
+    <Folder Include="temp\RadUploadTestFile\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1772,7 +1781,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
