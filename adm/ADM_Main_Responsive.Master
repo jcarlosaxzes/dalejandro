@@ -130,7 +130,7 @@
                                             <asp:LoginStatus runat="server" LogoutAction="Redirect"
                                                 ToolTip="Logout"
                                                 LogoutText="Log out &lt;i aria-hidden=&quot;true&quot; class=&quot;glyphicon glyphicon-log-out&quot;&gt;&lt;/i&gt;"
-                                                LogoutPageUrl="http://pasconcept.com/" />
+                                                LogoutPageUrl="http://pasconcept.com/" OnLoggingOut="Unnamed_LoggingOut"/>
                                         </li>
                                     </ul>
                                 </li>
