@@ -41,23 +41,6 @@ Public Class client
         e.NewValues("Subtype") = CType(FormView1.FindControl("cboSubtype"), RadComboBox).SelectedValue
         e.NewValues("TAGS") = CType(FormView1.FindControl("lblActualTAGS"), Label).Text + CType(FormView1.FindControl("cboTags"), RadAutoCompleteBox).Text
     End Sub
-    Protected Sub btnCredentials_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Try
-            'Master.InfoMessage("Sending credentials ... please wait", 10)
-            Dim sEmail As String = LocalAPI.GetClientEmail(lblClientId.Text)
-            If sEmail.Length > 0 Then
-                LocalAPI.RefrescarUsuarioVinculado(sEmail, "Clientes")
-                If LocalAPI.ClientEmailCredentials(lblClientId.Text, lblCompanyId.Text) Then
-                    lblStatus.Text = "The Client Credentials have been sent by email"
-                End If
-            End If
-
-        Catch ex As Exception
-            lblStatus.Text = "Error. " & ex.Message
-
-        End Try
-
-    End Sub
 
     Protected Sub btnUpdateClient1_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Try

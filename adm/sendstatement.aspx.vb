@@ -10,7 +10,7 @@
                 lblStatementId.Text = Request.QueryString("StatementNo")
                 lblCompanyId.Text = LocalAPI.GetCompanyIdFromStatement(lblStatementId.Text)
 
-                lblEmployeeEmail.Text = Membership.GetUser().Email
+                lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
                 txtBody.DisableFilter(Telerik.Web.UI.EditorFilters.ConvertFontToSpan)  ' Evita un error de ConvertFontToSpan

@@ -6,7 +6,7 @@ Public Class rfps
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
             lblCompanyId.Text = Session("companyId")
-            Dim EmployeeId As Integer = LocalAPI.GetEmployeeId(Membership.GetUser().UserName, lblCompanyId.Text)
+            Dim EmployeeId As Integer = Master.ValidateRequestMode
             If Not LocalAPI.GetEmployeePermission(EmployeeId, "Deny_RequestsProposalsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
             ' Si no tiene permiso New, boton.Visible=False
             btnNew.Visible = LocalAPI.GetEmployeePermission(EmployeeId, "Deny_NewRequestProposals")

@@ -8,7 +8,7 @@ Public Class time
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
                 lblCompanyId.Text = Session("companyId")
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Membership.GetUser().UserName, lblCompanyId.Text)
+                lblEmployeeId.Text = Master.UserId
                 If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Time Entries"
