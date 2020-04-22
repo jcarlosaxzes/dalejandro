@@ -24,7 +24,7 @@ Public Class proposalnewwizard
 
                 SqlDataSourceEmployees.DataBind()
 
-                cboEmployee.SelectedValue = LocalAPI.GetEmployeeId(Membership.GetUser().UserName, lblCompanyId.Text)
+                cboEmployee.SelectedValue = Master.UserId
 
                 LocalAPI.FirstDeparment(lblCompanyId.Text)
                 SqlDataSourceDepartments.DataBind()

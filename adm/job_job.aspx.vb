@@ -1,4 +1,6 @@
-﻿Public Class Job_job
+﻿Imports Microsoft.AspNet.Identity
+
+Public Class Job_job
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -7,8 +9,8 @@
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
 
-                lblEmployeeEmail.Text = Membership.GetUser().Email
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+                lblEmployeeEmail.Text = Master.UserEmail
+                lblEmployeeId.Text = Master.UserId
 
                 lblJobId.Text = Request.QueryString("JobId")
 

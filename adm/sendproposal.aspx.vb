@@ -29,8 +29,7 @@ Public Class sendproposal
                         PanelEmail.Visible = True
                         PanelSMS.Visible = True
                         txtTo.Text = LocalAPI.GetClientEmailFromProposal(lblProposalId.Text)
-                        Dim user As MembershipUser = Membership.GetUser()
-                        txtCC.Text = user.Email
+                        txtCC.Text = Master.UserEmail
                         LeerProposalTemplate()
                         SMS_Init()
                         Dim clientId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")

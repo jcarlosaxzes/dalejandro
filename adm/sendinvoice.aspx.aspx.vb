@@ -24,7 +24,7 @@ Public Class sendinvoice_aspx
 
                     lblCompanyId.Text = LocalAPI.GetCompanyIdFromInvoice(lblInvoice.Text)
 
-                    lblEmployeeEmail.Text = Membership.GetUser().Email
+                    lblEmployeeEmail.Text = Master.UserEmail
                     lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
                     lblEmployeeName.Text = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
 
@@ -198,7 +198,7 @@ Public Class sendinvoice_aspx
                     If Len(sTo) > 1 Then sTo = Left(sTo, Len(sTo) - 1)
 
                     Dim SenderDisplay As String = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
-                    Dim sBCO As String = Membership.GetUser().Email
+                    Dim sBCO As String = Master.UserEmail
                     Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
                     If LocalAPI.ValidEmail(AccountantEmail) Then
                         sBCO = sBCO & "," & AccountantEmail

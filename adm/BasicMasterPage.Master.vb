@@ -6,11 +6,11 @@ Public Class BasicMasterPage
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         Try
             ' Inicializando Controles y Properties de la Master Page
-            UserEmail = Context.User.Identity.GetUserName()
+            lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
 
-            UserId = LocalAPI.GetEmployeeId(UserEmail, Session("companyId"))
+            UserId = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, Session("companyId"))
             Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
-            UserName = LocalAPI.GetEmployeeFullName(UserEmail)
+            UserName = LocalAPI.GetEmployeeFullName(lblEmployeeEmail.Text)
 
         Catch ex As Exception
 
