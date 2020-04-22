@@ -11,16 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ResetPassword
-
-    '''<summary>
-    '''Head1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
+Partial Public Class useragree
 
     '''<summary>
     '''form1 control.
@@ -41,56 +32,74 @@ Partial Public Class ResetPassword
     Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
 
     '''<summary>
-    '''pnlLogin control.
+    '''lblTitle control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlLogin As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents lblTitle As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Email control.
+    '''lblTitle1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Email As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents lblTitle1 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''UserNameRequired control.
+    '''lblTitle2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UserNameRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents lblTitle2 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''RegularExpressionValidator1 control.
+    '''lblTerms control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    Protected WithEvents lblTerms As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''LoginButton control.
+    '''btnDISAGREE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LoginButton As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnDISAGREE As Global.Telerik.Web.UI.RadButton
 
     '''<summary>
-    '''lblMsg control.
+    '''btnAGREE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMsg As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnAGREE As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnREADLATER control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnREADLATER As Global.Telerik.Web.UI.RadButton
+
+    '''<summary>
+    '''btnSENDByEMAIL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSENDByEMAIL As Global.Telerik.Web.UI.RadButton
 End Class

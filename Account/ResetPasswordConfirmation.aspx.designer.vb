@@ -14,11 +14,119 @@ Option Explicit On
 Partial Public Class ResetPasswordConfirmation
 
     '''<summary>
-    '''login control.
+    '''Head1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents login As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
+
+    '''<summary>
+    '''form1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
+    '''RadScriptManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
+
+    '''<summary>
+    '''pnlLogin control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlLogin As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Email control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Email As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''UserNameRequired control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UserNameRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''RegularExpressionValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''Password1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Password1 As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''PasswordRequired control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PasswordRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''password2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents password2 As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''RequiredFieldValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''LoginButton control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LoginButton As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''lblMsg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMsg As Global.System.Web.UI.WebControls.Label
 End Class
