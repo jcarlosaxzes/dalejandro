@@ -276,6 +276,13 @@
                                                 <asp:Label ID="labelBox4ff" runat="server" Text='<%# Eval("webEmailPort")%>'></asp:Label>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>SMTP Use Default Credentials:
+                                            </td>
+                                            <td>
+                                                <asp:CheckBox ID="CheckBox13" runat="server" Checked='<%# Eval("webUseDefaultCredentials")%>' Enabled="false" />
+                                            </td>
+                                        </tr>
 
 
 
@@ -848,6 +855,13 @@
                                                 </telerik:RadNumericTextBox>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>SMTP Use Default Credentials:
+                                            </td>
+                                            <td>
+                                                <asp:CheckBox ID="CheckBox14" runat="server" Checked='<%# Bind("webUseDefaultCredentials")%>' />
+                                            </td>
+                                        </tr>
                                     </table>
                                 </telerik:RadWizardStep>
 
@@ -1309,6 +1323,7 @@
             <asp:Parameter Name="webEmailSMTP" Type="String" />
             <asp:Parameter Name="webEmailEnableSsl" />
             <asp:Parameter Name="webEmailPort" />
+            <asp:Parameter Name="webUseDefaultCredentials" />
             <asp:Parameter Name="webEmailUserName" Type="String" />
             <asp:Parameter Name="webEmailPassword" Type="String" />
             <asp:Parameter Name="webEmailProfitWarningCC" Type="String" />

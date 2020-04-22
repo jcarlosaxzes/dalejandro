@@ -399,6 +399,7 @@
     <Content Include="adm\sendticketpage.aspx" />
     <Content Include="adm\settingstatus.aspx" />
     <Content Include="adm\sharelink.aspx" />
+    <Content Include="adm\start.aspx" />
     <Content Include="adm\statement.aspx" />
     <Content Include="adm\subconsultant.aspx" />
     <Content Include="adm\subconsultants.aspx" />
@@ -1474,6 +1475,13 @@
       <DependentUpon>sharelink.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\start.aspx.designer.vb">
+      <DependentUpon>start.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\start.aspx.vb">
+      <DependentUpon>start.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\statement.aspx.designer.vb">
       <DependentUpon>statement.aspx</DependentUpon>
     </Compile>
@@ -1748,7 +1756,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
