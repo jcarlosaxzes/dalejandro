@@ -90,18 +90,6 @@ Public Class clients
                 sUrl = "~/ADM/AzureStorage_client.aspx?clientId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 800, 600)
 
-            Case "ClientCredential"
-                Dim id As String = e.CommandArgument
-                If Val(id) > 0 Then
-                    Dim sEmail As String = LocalAPI.GetClientEmail(id)
-                    If sEmail.Length > 0 Then
-                        LocalAPI.RefrescarUsuarioVinculado(sEmail, "Clientes")
-                        If LocalAPI.ClientEmailCredentials(id, lblCompanyId.Text) Then
-                            Master.InfoMessage("The client Credentials have been sent by email")
-                        End If
-                    End If
-                End If
-
             Case "Duplicate"
                 lblSelected.Text = e.CommandArgument
                 SqlDataSource1.Insert()

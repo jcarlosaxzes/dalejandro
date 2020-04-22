@@ -1,4 +1,6 @@
-﻿Public Class job_notes
+﻿Imports Microsoft.AspNet.Identity
+
+Public Class job_notes
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -8,7 +10,7 @@
                 lblCompanyId.Text = Session("companyId")
                 lblJobId.Text = Request.QueryString("JobId")
 
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Membership.GetUser().Email, lblCompanyId.Text)
+                lblEmployeeId.Text = Master.UserId
 
             End If
 

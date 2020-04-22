@@ -8,8 +8,8 @@ Public Class rfp
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
 
-                lblEmployeeEmail.Text = Membership.GetUser().Email
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+                lblEmployeeEmail.Text = Master.UserEmail
+                lblEmployeeId.Text = Master.UserId
 
                 lblRFPId.Text = Request.QueryString("rfpId")
                 lblGuiId.Text = LocalAPI.GetRFPProperty(lblRFPId.Text, "guid")

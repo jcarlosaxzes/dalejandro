@@ -1,17 +1,34 @@
-﻿Public Class MasterJOB
+﻿Imports Microsoft.AspNet.Identity
+
+Public Class MasterJOB
     Inherits System.Web.UI.MasterPage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
             lblCompanyId.Text = Session("companyId")
-            lblEmployeeEmail.Text = Membership.GetUser().Email
+            lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
             lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
         End If
         Refresh()
     End Sub
 
-
+    Public Property UserId() As Integer
+        Get
+            UserId = lblEmployeeId.Text
+        End Get
+        Set(ByVal value As Integer)
+            lblEmployeeId.Text = value.ToString
+        End Set
+    End Property
+    Public Property UserEmail() As String
+        Get
+            UserEmail = lblEmployeeEmail.Text
+        End Get
+        Set(ByVal value As String)
+            lblEmployeeEmail.Text = value.ToString
+        End Set
+    End Property
     Private Sub Refresh()
         lblJobId.Text = Request.QueryString("JobId")
         Dim sPage = Mid(Request.Url.AbsolutePath, InStrRev(Request.Url.AbsolutePath, "/Job_") + 1)

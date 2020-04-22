@@ -9,7 +9,7 @@ Public Class billingmanager
                 ' Si no tiene permiso, la dirijo a message
                 lblEmployeeId.Text = Master.UserId
 
-                lblEmployeeEmail.Text = Membership.GetUser().Email
+                lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeName.Text = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
 
                 If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingManager") Then Response.RedirectPermanent("~/ADM/Default.aspx")
