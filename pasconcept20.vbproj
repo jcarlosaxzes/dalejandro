@@ -523,7 +523,6 @@
     <Content Include="App_Themes\Estandar\Default.skin" />
     <Content Include="App_Themes\Smartphone\Combo.skin" />
     <Content Include="App_Themes\Smartphone\Default.skin" />
-    <Content Include="adm\ADM_Basic.Master" />
     <Content Include="adm\BasicMasterPage.Master" />
     <Content Include="adm\MasterJOB.Master" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
@@ -736,13 +735,6 @@
     <Compile Include="adm\activejobsdashboad.aspx.vb">
       <DependentUpon>activejobsdashboad.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="adm\ADM_Basic.Master.designer.vb">
-      <DependentUpon>ADM_Basic.Master</DependentUpon>
-    </Compile>
-    <Compile Include="adm\ADM_Basic.Master.vb">
-      <DependentUpon>ADM_Basic.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\ADM_Main_Responsive.Master.designer.vb">
       <DependentUpon>ADM_Main_Responsive.Master</DependentUpon>
@@ -1791,7 +1783,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
