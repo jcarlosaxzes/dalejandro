@@ -1209,7 +1209,7 @@ Public Class LocalAPI
                 Case "Multiplier"
                     Return GetCompanyMultiplier(companyId, GetDateTime().Year)
 
-                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId"
+                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials"
                     Return GetNumericEscalar("SELECT ISNULL([" & sProperty & "],0) FROM [Company] WHERE [companyId]=" & companyId)
 
                 Case "StartYear"
@@ -6629,6 +6629,7 @@ Public Class LocalAPI
             Dim sPassword As String
             Dim EnableSsl As Integer
             Dim Port As Integer
+            Dim UseDefaultCredentials As Boolean
 
             If companyId > 0 Then
                 ' Si existe credenciales de envio de email desde una company, se utilizan
@@ -6638,6 +6639,7 @@ Public Class LocalAPI
                 sPassword = GetCompanyProperty(companyId, "webEmailPassword")
                 EnableSsl = GetCompanyProperty(companyId, "webEmailEnableSsl")
                 Port = GetCompanyProperty(companyId, "webEmailPort")
+                UseDefaultCredentials = GetCompanyProperty(companyId, "webUseDefaultCredentials")
             End If
 
             If Len(host) = 0 Then
@@ -6652,7 +6654,7 @@ Public Class LocalAPI
             End If
 
             Dim smtp As New SmtpClient(host)
-            smtp.UseDefaultCredentials = False
+            smtp.UseDefaultCredentials = UseDefaultCredentials
             smtp.Credentials = New System.Net.NetworkCredential(sUserName, sPassword)
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network
             smtp.EnableSsl = EnableSsl

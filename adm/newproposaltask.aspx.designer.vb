@@ -11,169 +11,169 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class start
+Partial Public Class newproposaltask
     
     '''<summary>
-    '''FormDecorator1 control.
+    '''RadAjaxManager1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormDecorator1 As Global.Telerik.Web.UI.RadFormDecorator
+    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
     
     '''<summary>
-    '''chkCompanyInfo control.
+    '''RadAjaxLoadingPanel1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkCompanyInfo As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
-    '''lblCompanyInfo control.
+    '''pnlTemplate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblCompanyInfo As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents pnlTemplate As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''chkEmployee control.
+    '''cboMulticolumnTask control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkEmployee As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents cboMulticolumnTask As Global.Telerik.Web.UI.RadMultiColumnComboBox
     
     '''<summary>
-    '''lnkEmployee control.
+    '''cboPhase control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkEmployee As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents cboPhase As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''chkClient control.
+    '''cboPosition control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkClient As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents cboPosition As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''lblClient control.
+    '''txtName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblClient As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents txtName As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''chkTyC control.
+    '''RequiredFieldValidator2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkTyC As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''lblTyC control.
+    '''txtDescriptionPlus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTyC As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents txtDescriptionPlus As Global.Telerik.Web.UI.RadEditor
     
     '''<summary>
-    '''chkPaymentSch control.
+    '''txtAmount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkPaymentSch As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents txtAmount As Global.Telerik.Web.UI.RadNumericTextBox
     
     '''<summary>
-    '''lblPaymentSch control.
+    '''txtTimeSel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblPaymentSch As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents txtTimeSel As Global.Telerik.Web.UI.RadNumericTextBox
     
     '''<summary>
-    '''chkProposal control.
+    '''txtRates control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkProposal As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents txtRates As Global.Telerik.Web.UI.RadNumericTextBox
     
     '''<summary>
-    '''lblProposal control.
+    '''btnCancel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblProposal As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''chkJobsCodes control.
+    '''btnUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkJobsCodes As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblJobsCodes control.
+    '''ValidationSummaryTaskUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblJobsCodes As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents ValidationSummaryTaskUpdate As Global.System.Web.UI.WebControls.ValidationSummary
     
     '''<summary>
-    '''chkJob control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkJob As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''lblJob control.
+    '''SqlDataSourcePhases control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblJob As Global.System.Web.UI.WebControls.HyperLink
+    Protected WithEvents SqlDataSourcePhases As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''btnSettingStatus control.
+    '''SqlDataSourcePositions control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSettingStatus As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents SqlDataSourcePositions As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.
@@ -185,13 +185,22 @@ Partial Public Class start
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblEmployee control.
+    '''lblproposalId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEmployee As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblproposalId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lbldetailId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbldetailId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.
@@ -199,9 +208,9 @@ Partial Public Class start
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
         End Get
     End Property
 End Class

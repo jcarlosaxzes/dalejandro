@@ -1,5 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="start.aspx.vb" MasterPageFile="~/adm/ADM_Main_Responsive.Master"  Inherits="pasconcept20.start" %>
-
+﻿<%@ Page Title="Getting Started" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="start.aspx.vb" Inherits="pasconcept20.start" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
@@ -83,3 +82,4 @@
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
 
 </asp:Content>
+
