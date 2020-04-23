@@ -163,9 +163,9 @@ Partial Public Class employee
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Basic
+    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
         Get
-            Return CType(MyBase.Master, pasconcept20.ADM_Basic)
+            Return CType(MyBase.Master, pasconcept20.BasicMasterPage)
         End Get
     End Property
 End Class
