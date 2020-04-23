@@ -65,8 +65,7 @@
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <asp:CheckBox runat="server" ID="RememberMe" class="RememberMe" TextAlign="Left"/>
-                                                <asp:Label runat="server" AssociatedControlID="RememberMe">Remember me?</asp:Label>
+                                                <telerik:RadCheckBox runat="server" ID="RememberMe" class="RememberMe" TextAlign="Left" Text="Remember me?"/>
                                             </label>
                                         </div>
                                         <div class="form-group">
@@ -82,6 +81,11 @@
                                         <div>
                                             <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label  style= "color:#337ab7"> By clicking Sing In, You agree out terms & Conditions</label>
+                                        </div>
+
                                     </form>
                                 </div>
                             </asp:Panel>
