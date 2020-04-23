@@ -364,6 +364,7 @@
     <Content Include="adm\newcontact.aspx" />
     <Content Include="adm\newemployee.aspx" />
     <Content Include="adm\newjob.aspx" />
+    <Content Include="adm\newproposaltask.aspx" />
     <Content Include="adm\newsubconsultant.aspx" />
     <Content Include="adm\newvendor.aspx" />
     <Content Include="adm\nojobstimetypes.aspx" />
@@ -1231,6 +1232,13 @@
     </Compile>
     <Compile Include="adm\newjob.aspx.vb">
       <DependentUpon>newjob.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\newproposaltask.aspx.designer.vb">
+      <DependentUpon>newproposaltask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\newproposaltask.aspx.vb">
+      <DependentUpon>newproposaltask.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\newsubconsultant.aspx.designer.vb">
