@@ -35,7 +35,16 @@ Partial Public Class Login
 
                 Select Case result
                     Case SignInStatus.Success
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString("ReturnUrl"), Response)
+                        If LocalAPI.IAgree(Context.User.Identity.GetUserName()) = 1 Then
+                            If IsNothing(Request.QueryString("ReturnUrl")) Then
+                                Response.Redirect("~/adm/dashboard.aspx")
+                            Else
+                                Response.Redirect(Request.QueryString("ReturnUrl"))
+                            End If
+                        Else
+                            Response.Redirect("~/adm/useragree.aspx")
+                        End If
+
                         Exit Select
                     Case SignInStatus.LockedOut
                         Response.Redirect("/Account/Lockout")

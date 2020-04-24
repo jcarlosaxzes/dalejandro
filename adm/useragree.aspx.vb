@@ -12,8 +12,6 @@ Public Class useragree
                 Response.RedirectPermanent("~/adm/dashboard.aspx")
             Else
                 lblTerms.Text = ReadFile(Server.MapPath("~/Legal/ENG/Terms.html"))
-                LocalAPI.SetIAgree(Context.User.Identity.GetUserName())
-                Response.RedirectPermanent("~/adm/dashboard.aspx")
             End If
 
         End If
@@ -31,19 +29,19 @@ Public Class useragree
 
 
     Protected Sub btnDISAGREE_Click(sender As Object, e As EventArgs) Handles btnDISAGREE.Click
-        LocalAPI.SetIDisagree(Membership.GetUser().UserName)
+        LocalAPI.SetIDisagree(Context.User.Identity.GetUserName())
+        Context.GetOwinContext().Authentication.SignOut()
         Session.Abandon()
-        System.Web.Security.FormsAuthentication.SignOut()
         Response.RedirectPermanent(LocalAPI.GetHostAppSite())
     End Sub
 
     Protected Sub btnAGREE_Click(sender As Object, e As EventArgs) Handles btnAGREE.Click
-        LocalAPI.SetIAgree(Membership.GetUser().UserName)
+        LocalAPI.SetIAgree(Context.User.Identity.GetUserName())
         Response.RedirectPermanent("~/ADM/Start.aspx")
     End Sub
 
     Protected Sub btnREADLATER_Click(sender As Object, e As EventArgs) Handles btnREADLATER.Click
-        Dim sEmail As String = Membership.GetUser().UserName
+        Dim sEmail As String = Context.User.Identity.GetUserName()
         If LocalAPI.GetIReadLater(sEmail) > 5 Then
             Session.Abandon()
             System.Web.Security.FormsAuthentication.SignOut()
