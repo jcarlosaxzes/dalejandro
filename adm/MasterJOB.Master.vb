@@ -2,12 +2,14 @@
 
 Public Class MasterJOB
     Inherits System.Web.UI.MasterPage
+    Private Sub MasterJOB_Init(sender As Object, e As EventArgs) Handles Me.Init
+        lblCompanyId.Text = Session("companyId")
+        lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
+        lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+    End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
-            lblCompanyId.Text = Session("companyId")
-            lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
-            lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
         End If
         Refresh()
