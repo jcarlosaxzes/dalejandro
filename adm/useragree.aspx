@@ -40,6 +40,7 @@
                     <div>
                         <telerik:RadButton ID="btnSENDByEMAIL" runat="server" CausesValidation="False" Text="Send By Email" Width="120px" Visible="False"/>
                     </div>
+                    <br/>
                 </td>
             </tr>
         </table>
