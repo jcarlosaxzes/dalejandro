@@ -585,6 +585,9 @@
     <Content Include="Images\updaded-Linkedin.png" />
     <Content Include="Images\updated-FB.png" />
     <Content Include="Images\yelp_review.png" />
+    <Content Include="jscript.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Legal\ENG\Privacity.htm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
