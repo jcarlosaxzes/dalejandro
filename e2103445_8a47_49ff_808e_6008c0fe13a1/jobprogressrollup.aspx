@@ -2,6 +2,7 @@
 
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" %>
 
+<%@ Import Namespace="pasconcept20" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style>

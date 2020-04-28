@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="invoice.aspx.vb" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" Inherits="pasconcept20.invoice" %>
 
+<%@ Import Namespace="pasconcept20" %>
 
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
