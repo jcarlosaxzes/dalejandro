@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="ClientPortalMP.master.vb" Inherits="pasconcept20.ClientPortalMP1" %>
 
+<%@ Import Namespace="pasconcept20" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
