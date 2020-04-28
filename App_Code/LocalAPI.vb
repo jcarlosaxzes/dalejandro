@@ -829,11 +829,18 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetHostAppSite() As String
-        Try
-            GetHostAppSite = ConfigurationManager.AppSettings("HostAppSite")
-        Catch ex As Exception
-        End Try
-        If Len(GetHostAppSite) = 0 Then GetHostAppSite = "https://pasconcept.com/"
+        'Try
+        '    GetHostAppSite = ConfigurationManager.AppSettings("HostAppSite")
+        'Catch ex As Exception
+        'End Try
+        'If Len(GetHostAppSite) = 0 Then GetHostAppSite = "https://pasconcept.com/"
+
+        'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) Return https://localhost:44308
+        'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path) Return https://localhost:44308/adm/sharelink
+        'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Query) Return https://localhost:44308/adm/sharelink?ObjType=111&ObjId=23396
+        'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Scheme) Return https://
+
+        Return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
     End Function
 
     Public Shared Function GetSubscriberDatabase(ByVal sSubscriberCode As String) As String
@@ -3951,9 +3958,6 @@ Public Class LocalAPI
 
             Dim clientId As Integer = parOUT_ID.Value
             cnn1.Close()
-
-
-            RefrescarUsuarioVinculado(sEmail, "Clientes")
 
             LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewClient, companyId, sName)
 
@@ -9740,10 +9744,10 @@ Public Class LocalAPI
             If objId > 0 Then
 
                 Select Case objType
-                    Case 1, 11, 111 ' Firmar/Ver Proposal
-                        'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Proposal.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
-                        'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Proposal.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 1, 11 ' Firmar/Ver Proposal from client
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 111 ' Firmar/Ver Proposal from /adm/proposals
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid") & "&source=111"
                     Case 2
                         ' Tratamiento especifico de Job(Projects) para paginas publicas
                         Dim companyId As Integer = GetJobProperty(objId, "companyId")
@@ -13030,7 +13034,38 @@ Public Class LocalAPI
     End Function
 #End Region
 
+#Region "ClientPortal"
+    Public Shared Function sys_Log_clients_INSERT(IP_Address As String, clientId As Integer, ActionId As Integer, DocumentId As Integer, companyId As Integer) As Boolean
+        Try
+            ' ActionId codes
+            '   1:  Proposal visit page
 
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "sys_Log_clients_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@IP_Address", IP_Address)
+            cmd.Parameters.AddWithValue("@clientId", clientId)
+            cmd.Parameters.AddWithValue("@ActionId", ActionId)
+            cmd.Parameters.AddWithValue("@DocumentId", DocumentId)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+#End Region
 
 End Class
 

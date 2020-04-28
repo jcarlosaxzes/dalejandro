@@ -1,0 +1,46 @@
+﻿body {
+    font-size: 0.9em !important;
+}
+
+@page {
+    size: auto; /* auto is the initial value */
+    margin: 0; /* this affects the margin in the printer settings */
+}
+
+.row.page {
+    page-break-after: always;
+    page-break-before: avoid;
+}
+
+@media(min-width:992px) {
+    .content {
+        padding: 15px 220px 42px !important;
+    }
+}
+
+@media print {
+    .content {
+        padding: 15px 0px 42px !important;
+    }
+
+    p {
+        page-break-inside: avoid;
+    }
+
+    .print-nobreak {
+        page-break-inside: avoid;
+        padding-top: 30px;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-header-group;
+    }
+}
+
+.widget-invoice > header + .widget-body {
+    margin-top: 25px !important;
+}
