@@ -1,0 +1,107 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="singclientportal.master.vb" Inherits="pasconcept20.singclientportal" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <title>PASconcept -- Client Portal</title>
+    <link rel="stylesheet" href="~/Content/sing-theme/application.css" />
+    <link rel="stylesheet" href="~/Content/sing-theme/telerik-form-fixes.css" />
+    <link rel="stylesheet" href="~/Content/sing-theme/template-fixes.css" />
+    <link rel="stylesheet" href="~/Content/sing-theme/print-page.css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.1.1-web/css/all.css" rel="stylesheet" />
+    <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
+    <!--[if IE 9]>
+        <link href="Content/application-ie9-part2.css" rel="stylesheet">
+    <![endif]-->
+    <!-- Toastr -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css" rel="stylesheet" />
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Content/sing-theme/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/Content/sing-theme/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Content/sing-theme/favicons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/Content/sing-theme/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Content/sing-theme/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/Content/sing-theme/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Content/sing-theme/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/Content/sing-theme/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/sing-theme/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/Content/sing-theme/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/sing-theme/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/Content/sing-theme/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Content/sing-theme/favicons/favicon-16x16.png">
+    <link rel="manifest" href="~/Content/sing-theme/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/Content/sing-theme/favicons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="DESCRIPTION" content="A web-based application conceived and designed to provide an all-inclusive management tool for architectural and engineering firms who wish to integrate the interaction." />
+    <meta name="KEYWORDS" content="pasconcept,saas,online project administration,architectural app,engineering app,project app,time sheet,proposals online,job online,civil app,mechanical app,structural app,
+          electrical app,request for proposal, rfp,subconsultant,
+          engineering Software,cloud accounting software,billing system,engineering services,A/E online app,A/E online services,Rational Engineering, Lifecycle Manager, engineering data, engineering lifecycle,
+          systems engineering, lifecycle data, open architecture,architectural firm,A/E online administration,proposal for architectural,budget for architectural,budeget for engineering,proposal for engineering,
+          proposal for A/E,budget for A/E,agreement for architectural, agreement for engineering,contract for engineering,contract for architectural,agreement for engineering,invoice for engineering,
+          invoice for architectural,invoice service, invoice online,time sheet for architectural,time sheet for engineering,rfp for architectural,rfp for engineering,rfp for subconsultant" />
+    <meta name="google-site-verification" content="-YpSUSprv2srj8BMkivDa3xokq246v05MmoAXtqSF38" />
+    <meta name="AUTHOR" content="AXZES, LLC" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <script>
+        /* yeah we need this empty stylesheet here. It's cool chrome & chromium fix
+         chrome fix https://code.google.com/p/chromium/issues/detail?id=167083
+         https://code.google.com/p/chromium/issues/detail?id=332189
+         */
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-27665861-1']);
+        _gaq.push(['_setDomainName', 'pasconcept.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="nav-collapsed">
+    <form runat="server" class="main-form">
+        <asp:ScriptManager runat="server">
+        </asp:ScriptManager>
+
+        <div class="content-wrap no-sidebar">
+            <main id="content" class="content" role="main">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </main>
+        </div>
+        <!-- The Loader. Is shown when pjax happens -->
+        <div class="loader-wrap hiding hide">
+            <i class="fa fa-circle-o-notch fa-spin-fast"></i>
+        </div>
+        <!-- common libraries. required for every page-->
+        <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/site.min.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Scripts/sing-theme/vendor/pace.js/pace.js") %>' data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
+        <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/bootstrap-fix/button.js") %>'></script>
+
+        <!-- common app js -->
+        <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/settings.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/app.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/invoice.js") %>'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.phone').text(function (i, text) {
+                    return text.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+                });
+            });
+        </script>
+        <asp:ContentPlaceHolder ID="Scripts" runat="server"></asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
