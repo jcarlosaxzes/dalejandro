@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <td>
-                               <telerik:RadAsyncUpload ID="RadAsyncUpload1" runat="server"
+                               <telerik:RadAsyncUpload ID="RadAsyncUpload1" runat="server" RenderMode="Classic"
                                     AllowedFileExtensions=".jpeg,.jpg,.png"
                                     MaxFileInputsCount="1"
                                     Width="100%" InputSize="45" ControlObjectsVisibility="None" MaxFileSize="524288">
