@@ -23,6 +23,8 @@ Partial Public Class ResetPassword
                 lblMsg.Text = "Review you Email to Reset your Password"
                 lblMsg.Visible = True
                 lblMsg.ForeColor = Drawing.ColorTranslator.FromHtml("#00A8E4")
+                LoginButton.Visible = False
+                Email.Enabled = False
             Else
                 lblMsg.Text = "No user found"
                 lblMsg.ForeColor = Drawing.Color.Red
