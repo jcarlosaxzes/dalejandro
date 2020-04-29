@@ -492,6 +492,9 @@
     <Content Include="App_Themes\Smartphone\LoginHeader.gif" />
     <Content Include="App_Themes\Smartphone\LogoPasTrans.png" />
     <Content Include="App_Themes\Smartphone\reloj.png" />
+    <Content Include="BasicTools.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
