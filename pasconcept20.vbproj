@@ -1851,6 +1851,9 @@
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\jobprogressrollup.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\statement.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp_continue.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\ticket.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\tickets.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\transmittal.aspx" />
@@ -1993,6 +1996,7 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -3552,6 +3556,34 @@
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\statement.aspx.vb">
       <DependentUpon>statement.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx.designer.vb">
+      <DependentUpon>rfp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx.vb">
+      <DependentUpon>rfp.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx.designer.vb">
+      <DependentUpon>rfps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx.vb">
+      <DependentUpon>rfps.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp_continue.aspx.designer.vb">
+      <DependentUpon>rfp_continue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp_continue.aspx.vb">
+      <DependentUpon>rfp_continue.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master.designer.vb">
+      <DependentUpon>SubconsultantMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master.vb">
+      <DependentUpon>SubconsultantMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\ticket.aspx.designer.vb">
       <DependentUpon>ticket.aspx</DependentUpon>
