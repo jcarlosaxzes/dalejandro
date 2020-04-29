@@ -28,7 +28,7 @@
 
     <title>PASconcept. Your complete online platform of Project </title>
 
-    <link href="App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
+    <link href="~/App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
     <%--Bootstrap reference begin--%>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <%--Bootstrap reference end--%>
