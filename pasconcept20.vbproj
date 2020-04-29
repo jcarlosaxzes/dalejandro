@@ -492,6 +492,9 @@
     <Content Include="App_Themes\Smartphone\LoginHeader.gif" />
     <Content Include="App_Themes\Smartphone\LogoPasTrans.png" />
     <Content Include="App_Themes\Smartphone\reloj.png" />
+    <Content Include="BasicTools.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -1846,10 +1849,14 @@
     <Content Include="css\menu\radActionsSprite.png" />
     <Content Include="css\menu\rmArrows.png" />
     <Content Include="Default.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\cp_jobs.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\invoice.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\jobprogressrollup.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\statement.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp_continue.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\ticket.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\tickets.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\transmittal.aspx" />
@@ -1992,6 +1999,7 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -2073,6 +2081,8 @@
     <Content Include="Legal\Version.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="register.aspx" />
+    <Content Include="registerconfirm.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -3515,6 +3525,13 @@
       <DependentUpon>ClientPortalMP.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\cp_jobs.aspx.designer.vb">
+      <DependentUpon>cp_jobs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\cp_jobs.aspx.vb">
+      <DependentUpon>cp_jobs.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\invoice.aspx.designer.vb">
       <DependentUpon>invoice.aspx</DependentUpon>
     </Compile>
@@ -3543,6 +3560,34 @@
       <DependentUpon>statement.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx.designer.vb">
+      <DependentUpon>rfp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx.vb">
+      <DependentUpon>rfp.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx.designer.vb">
+      <DependentUpon>rfps.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx.vb">
+      <DependentUpon>rfps.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp_continue.aspx.designer.vb">
+      <DependentUpon>rfp_continue.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp_continue.aspx.vb">
+      <DependentUpon>rfp_continue.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master.designer.vb">
+      <DependentUpon>SubconsultantMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master.vb">
+      <DependentUpon>SubconsultantMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\ticket.aspx.designer.vb">
       <DependentUpon>ticket.aspx</DependentUpon>
     </Compile>
@@ -3562,7 +3607,7 @@
     </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\transmittal.aspx.vb">
       <DependentUpon>transmittal.aspx</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\signature.aspx.designer.vb">
       <DependentUpon>signature.aspx</DependentUpon>
     </Compile>
@@ -3606,6 +3651,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="register.aspx.designer.vb">
+      <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="register.aspx.vb">
+      <DependentUpon>register.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="registerconfirm.aspx.designer.vb">
+      <DependentUpon>registerconfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="registerconfirm.aspx.vb">
+      <DependentUpon>registerconfirm.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Site.Master.designer.vb">
       <DependentUpon>Site.Master</DependentUpon>
@@ -3717,7 +3776,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

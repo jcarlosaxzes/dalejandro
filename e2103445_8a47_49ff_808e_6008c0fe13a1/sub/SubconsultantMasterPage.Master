@@ -1,4 +1,4 @@
-﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="ClientPortalMP.master.vb" Inherits="pasconcept20.ClientPortalMP1" %>
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="SubconsultantMasterPage.master.vb" Inherits="pasconcept20.SubconsultantMasterPage" %>
 
 <%@ Import Namespace="pasconcept20" %>
 
@@ -6,10 +6,13 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>PASconcept -- Client Portal</title>
+    <title>PASconcept -- Subconsultant Portal</title>
 
     <%--Bootstrap reference begin--%>
+    <link href="~/Content/fontawesome-free-5.1.1-web/css/all.css" rel="stylesheet" />
+    <link href="~/Content/sing-theme/application.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
     <%--Bootstrap reference end--%>
 
     <meta name="DESCRIPTION" content="A web-based application conceived and designed to provide an all-inclusive management tool for architectural and engineering firms who wish to integrate the interaction." />
@@ -48,12 +51,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
     <style>
         img.resize {
             width: 150px; /* you can use % */
             height: auto;
         }
     </style>
+    <asp:ContentPlaceHolder ID="Head" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -71,7 +77,7 @@
                                         <tr>
                                             <td style="text-align: left; width: 250px">
                                                 <a href='<%# Eval("web") %>' target="_blank">
-                                                    <telerik:RadBinaryImage ID="RadBinaryImage1" runat="server" AlternateText="Logo" CssClass="img-responsive"
+                                                    <telerik:RadBinaryImage ID="RadBinaryImage1" runat="server" AlternateText="Logo" CssClass="img-responsive" 
                                                         Style="width: 150px; height: auto;"
                                                         DataValue='<%# IIf(Eval("Logo") Is DBNull.Value, Nothing, Eval("Logo"))%>'></telerik:RadBinaryImage>
                                                 </a>
@@ -87,7 +93,7 @@
 
                                                 <a class="btn btn-primary noprint" href="paymenthistory.aspx" role="button">Payment History</a>
                                                 &nbsp;&nbsp;
-                                                <a class="btn btn-danger noprint" href="CP_jobs.aspx" role="button">My Jobs</a>
+                                                <a class="btn btn-danger noprint" href="rfps.aspx" title="My Request for Proposals" role="button">My RFP</a>
                                                 &nbsp;&nbsp;
                                                 <script type="text/javascript">
                                                     function PrintPage(sender, args) {
@@ -153,6 +159,7 @@
                         </asp:Panel>
                     </Content>
                 </telerik:LayoutRow>
+               
                 <telerik:LayoutRow CssClass="noprint">
                     <Columns>
                         <telerik:LayoutColumn Span="4">
@@ -163,7 +170,7 @@
                         <telerik:LayoutColumn Span="8">
                             <p class="small" style="text-align: right">
                                 <br />
-                                &copy; 2009-2019 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="https://www.axzes.com/" target="_blank">Axzes llc</a>
+                                &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="https://www.axzes.com/" target="_blank">Axzes llc</a>
                             </p>
                         </telerik:LayoutColumn>
                     </Columns>
