@@ -115,21 +115,28 @@
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <a runat="server" href="~/ADM/Options.aspx" title="User profile">My Account</a>
+                                            <a runat="server" href="~/ADM/Options.aspx" title="User profile">
+                                                <i class="fas fa-user-edit"></i>
+                                                &nbsp;My Account
+                                            </a>
                                         </li>
                                         <li>
-                                            <a runat="server" href="~/EMP/Default.aspx" title="User profile">Employee Portal</a>
+                                            <a runat="server" role="menuitem" href="https://video.spike.chat/?" title="Video Chat Meeting" target="_blank">
+                                                <i class="fas fa-video"></i> 
+                                                &nbsp;Video Chat
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false">
+                                                <i class="fas fa-exchange-alt"></i>        
+                                                &nbsp;Switch Company
+                                            </asp:LinkButton>
                                         </li>
                                         <li class="divider" runat="server"></li>
                                         <li>
-                                            <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false">
-                                                        Switch Company
-                                            </asp:LinkButton>
-                                        </li>
-                                        <li>
                                             <asp:LoginStatus runat="server" LogoutAction="Redirect"
                                                 ToolTip="Logout"
-                                                LogoutText="Log out &lt;i aria-hidden=&quot;true&quot; class=&quot;glyphicon glyphicon-log-out&quot;&gt;&lt;/i&gt;"
+                                                LogoutText="Log out &lt;i aria-hidden=&quot;true&quot; class=&quot;fas fa-sign-out-alt&quot;&gt;&lt;/i&gt;"
                                                 LogoutPageUrl="http://pasconcept.com/" OnLoggingOut="Unnamed_LoggingOut"/>
                                         </li>
                                     </ul>
