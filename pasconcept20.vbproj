@@ -2083,6 +2083,7 @@
     </Content>
     <Content Include="register.aspx" />
     <Content Include="registerconfirm.aspx" />
+    <Content Include="registerend.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -3666,6 +3667,13 @@
       <DependentUpon>registerconfirm.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="registerend.aspx.designer.vb">
+      <DependentUpon>registerend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="registerend.aspx.vb">
+      <DependentUpon>registerend.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Site.Master.designer.vb">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
@@ -3776,7 +3784,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
