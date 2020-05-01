@@ -409,6 +409,7 @@
     <Content Include="adm\statement.aspx" />
     <Content Include="adm\subconsultant.aspx" />
     <Content Include="adm\subconsultants.aspx" />
+    <Content Include="adm\subscribe\pro.aspx" />
     <Content Include="adm\tagcloud.aspx" />
     <Content Include="adm\tandctemplates.aspx" />
     <Content Include="adm\ticket.aspx" />
@@ -1851,12 +1852,14 @@
     <Content Include="Default.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\cp_jobs.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\invoice.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\job.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\jobprogressrollup.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\statement.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp_continue.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\thank-you-proposal.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\ticket.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\tickets.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\transmittal.aspx" />
@@ -2000,6 +2003,7 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master" />
+    <Content Include="adm\subscribe\web.config" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -3366,6 +3370,13 @@
       <DependentUpon>subconsultants.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\subscribe\pro.aspx.designer.vb">
+      <DependentUpon>pro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\subscribe\pro.aspx.vb">
+      <DependentUpon>pro.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\tagcloud.aspx.designer.vb">
       <DependentUpon>tagcloud.aspx</DependentUpon>
     </Compile>
@@ -3540,6 +3551,13 @@
       <DependentUpon>invoice.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\job.aspx.designer.vb">
+      <DependentUpon>job.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\job.aspx.vb">
+      <DependentUpon>job.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\jobprogressrollup.aspx.designer.vb">
       <DependentUpon>jobprogressrollup.aspx</DependentUpon>
     </Compile>
@@ -3588,6 +3606,13 @@
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master.vb">
       <DependentUpon>SubconsultantMasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\thank-you-proposal.aspx.designer.vb">
+      <DependentUpon>thank-you-proposal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\thank-you-proposal.aspx.vb">
+      <DependentUpon>thank-you-proposal.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\ticket.aspx.designer.vb">
       <DependentUpon>ticket.aspx</DependentUpon>

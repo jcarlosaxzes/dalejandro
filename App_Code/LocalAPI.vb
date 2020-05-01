@@ -9644,6 +9644,16 @@ Public Class LocalAPI
         End Try
     End Sub
 
+    Public Shared Function IsMasterUser(email As String, companyId As String) As Boolean
+        If ConfigurationManager.AppSettings("Debug") <> "1" Then
+            Dim sMasterEmail As String = LocalAPI.GetCompanyProperty(companyId, "Email")
+            Dim empId = GetEmployeeId(email, companyId)
+            Return ((email.ToLower = sMasterEmail.ToLower) Or GetEmployeePermission(empId, "Allow_EmployeesPermissions"))
+        Else
+            Return True
+        End If
+    End Function
+
 #End Region
 
 #Region "PreUse"

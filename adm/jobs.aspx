@@ -437,7 +437,7 @@
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td>
-                                                    <a class="glyphicon glyphicon-share" title="Click to View Job" href='<%#String.Concat("../ADMCLI/Job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
+                                                    <a class="glyphicon glyphicon-share" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
                                                 </td>
                                                 <td>
                                                     <asp:LinkButton ID="btnImages" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Images"
