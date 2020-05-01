@@ -84,24 +84,7 @@
                                 <telerik:RadMaskedTextBox ID="PhoneTextBox" Width="400px" runat="server" Mask="(###) ###-####" Skin="MetroTouch" SelectionOnFocus="CaretToBeginning" />
                                 <br />
                             </td>
-                        </tr>
-                        <tr>
-                            <td class="NormalNegrita">Password&nbsp;&nbsp;&nbsp;<asp:Label ID="lblPass" runat="server" CssClass="Pequena" Text="(6 characters and 1 nonalphanumeric)"></asp:Label><br />
-                                <telerik:RadTextBox ID="txtPassword" runat="server" Width="400px" MaxLength="80" Skin="MetroTouch" TextMode="Password">
-                                </telerik:RadTextBox>
-                                &nbsp;
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ControlToValidate="txtPassword" ValidationGroup="SubmitInfo"
-                                    runat="server" ErrorMessage="(*) " Display="Dynamic" ToolTip="Field Required"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="NormalNegrita">
-                                Confirm Password<br />
-                                <telerik:RadTextBox ID="txtConfirmPassword" runat="server" Width="400px" MaxLength="80" Skin="MetroTouch" TextMode="Password">
-                                </telerik:RadTextBox>
-                                <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="(*)" ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword" ToolTip="Password Not Match"></asp:CompareValidator>
-                            </td>
-                        </tr>
+                        </tr>                        
                     </table>
                 </td>
             </tr>

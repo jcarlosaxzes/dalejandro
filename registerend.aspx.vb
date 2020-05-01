@@ -38,7 +38,7 @@ Public Class registerend
                 .UserName = txtEmail.Text,
                 .EmailConfirmed = True}
 
-                Dim resutl = Await LocalAPI.AppUserManager.CreateAsync(user, txtPassword.Text)
+                Dim resutl = Await LocalAPI.AppUserManager.CreateAsync(user)
                 If Not resutl.Succeeded Then
                     lblMsg.Text = resutl.Errors(0)
                     Return False
@@ -105,13 +105,11 @@ Public Class registerend
                 ' Crear este usuario como Employee de la company
                 'LocalAPI.NuevoEmpleado_obsolete(txtContact.Text, "Admin", 0, "", "", "", "", "", "", PhoneTextBox.Text, "", txtEmail.Text, "", "", companyId)
 
-                LocalAPI.NewEmployee(txtContact.Text, "Admin", 0, "", "", "", "", "", "", PhoneTextBox.Text, "", txtEmail.Text, "", "", companyId)
+                Dim employeeId = LocalAPI.NewEmployee(txtContact.Text, "Admin", 0, "", "", "", "", "", "", PhoneTextBox.Text, "", txtEmail.Text, "", "", companyId)
                 ' Eliminar PreUser
                 LocalAPI.EliminarpreUser(txtEmail.Text)
 
-                MailCredentials()
-
-                SendRegisterEndEmail()
+                SendRegisterEndEmail(employeeId)
 
                 Response.RedirectPermanent("~/RegisterConfirm.aspx?Step=4")
             End If
@@ -121,19 +119,28 @@ Public Class registerend
         End Try
     End Sub
 
-    Private Sub MailCredentials()
+
+    Private Sub SendRegisterEndEmail(employeeId As Integer)
         Try
-            If LocalAPI.MasterEmailCredentials(txtEmail.Text, txtContact.Text) Then
-                lblMsg.Text = "The credentials were sent by email"
-            End If
 
-        Catch ex As Exception
+            Dim sName = ""
+            Dim sAddress = ""
+            Dim sCity = ""
+            Dim sState = ""
+            Dim sZipcode = ""
+            Dim sPhone = ""
+            Dim sCellular = ""
+            Dim sEmail = ""
+            Dim sHourRate = ""
+            Dim startingDate = ""
+            Dim sSS = ""
+            Dim sDOB = ""
+            Dim bInactive As Short
+            Dim userGuid = ""
 
-        End Try
-    End Sub
 
-    Private Sub SendRegisterEndEmail()
-        Try
+            Dim data = LocalAPI.GetEmployeeData(employeeId, sName, sAddress, sCity, sState, sZipcode, sPhone, sCellular, sEmail, sHourRate, startingDate, sSS, sDOB, bInactive, userGuid)
+
 
             ' Componer el Body
             Dim sMsg As New System.Text.StringBuilder
@@ -158,6 +165,11 @@ Public Class registerend
             sMsg.Append("<br />")
             sMsg.Append("Phone: ")
             sMsg.Append(PhoneTextBox.Text)
+            sMsg.Append("<br />")
+            sMsg.Append("<br />")
+            sMsg.Append("<br />")
+            sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> click here to finish your account setup</a>")
+            sMsg.Append("<br />")
             sMsg.Append("<br />")
             sMsg.Append("<br />")
             sMsg.Append("<br />")

@@ -5844,7 +5844,7 @@ Public Class LocalAPI
                 sFullBody.Append("Someone recently requested a password change for your PASconcept account.")
                 sFullBody.Append("<br />")
                 sFullBody.Append("If this was you, you can set a new password")
-                sFullBody.Append("<a href=" & """" & GetHostAppSite() & "Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
                 sFullBody.Append("<br />")
                 sFullBody.Append("<br />")
                 sFullBody.Append("If you don't want to change your password or didn't request this, just ")
