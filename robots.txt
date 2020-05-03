@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /*.html$
+Disallow: /*/App_Data/*
+Sitemap: https://www.dalejandro.com/sitemap.xml
