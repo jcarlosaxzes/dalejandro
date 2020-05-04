@@ -401,7 +401,7 @@
     <Content Include="adm\role_permissions_form.aspx" />
     <Content Include="adm\role_permissions_form.aspx.aspx" />
     <Content Include="adm\schedule.aspx" />
-    <Content Include="adm\sendinvoice.aspx.aspx" />
+    <Content Include="adm\sendinvoice.aspx" />
     <Content Include="adm\sendproposal.aspx" />
     <Content Include="adm\sendstatement.aspx" />
     <Content Include="adm\sendticketpage.aspx" />
@@ -3316,11 +3316,11 @@
       <DependentUpon>schedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\sendinvoice.aspx.aspx.designer.vb">
-      <DependentUpon>sendinvoice.aspx.aspx</DependentUpon>
+    <Compile Include="adm\sendinvoice.aspx.designer.vb">
+      <DependentUpon>sendinvoice.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adm\sendinvoice.aspx.aspx.vb">
-      <DependentUpon>sendinvoice.aspx.aspx</DependentUpon>
+    <Compile Include="adm\sendinvoice.aspx.vb">
+      <DependentUpon>sendinvoice.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\sendproposal.aspx.designer.vb">
@@ -3825,7 +3825,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

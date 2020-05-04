@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class sendinvoice_aspx
+Partial Public Class sendinvoice
     
     '''<summary>
     '''RadAjaxManager1 control.
