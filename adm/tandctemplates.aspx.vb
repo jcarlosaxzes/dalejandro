@@ -10,6 +10,8 @@
             Master.PageTitle = "Proposals/Terms & Conditions"
             Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-terms-and-conditions.html"
             lblCompanyId.Text = Session("companyId")
+
+            Response.AddHeader("Set-Cookie", "HttpOnly;Secure;SameSite=Strict")
         End If
 
     End Sub

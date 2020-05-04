@@ -345,7 +345,8 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimeSheet.aspx" Text="Time Sheet"
                                                 Visible='<%# EmployeePermission("Deny_Timesheet") And VersionCaracteristica(605)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimesByPeriords.aspx" Text="Times by Periods">
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimesByPeriords.aspx" Text="Times by Periods" 
+                                                Visible='<%# EmployeePermission("Deny_ProjectTimeEntries") And VersionCaracteristica(603)%>'>
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/AvgEEmployeesProfit.aspx"
                                                 Text="Employees Efficiency Chart" Visible='<%# EmployeePermission("Deny_EmployeesEfficiencyGraphic") And VersionCaracteristica(606)%>'>
