@@ -347,6 +347,7 @@
     <Content Include="adm\importdata.aspx" />
     <Content Include="adm\importtickets.aspx" />
     <Content Include="adm\invoices.aspx" />
+    <Content Include="adm\invoicestypes.aspx" />
     <Content Include="adm\jobs.aspx" />
     <Content Include="adm\jobtickets.aspx" />
     <Content Include="adm\jobtypes.aspx" />
@@ -397,6 +398,7 @@
     <Content Include="adm\rfpnewwizard.aspx" />
     <Content Include="adm\rfps.aspx" />
     <Content Include="adm\roles.aspx" />
+    <Content Include="adm\role_permissions_form.aspx" />
     <Content Include="adm\role_permissions_form.aspx.aspx" />
     <Content Include="adm\schedule.aspx" />
     <Content Include="adm\sendinvoice.aspx.aspx" />
@@ -2929,6 +2931,13 @@
       <DependentUpon>invoices.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\invoicestypes.aspx.designer.vb">
+      <DependentUpon>invoicestypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\invoicestypes.aspx.vb">
+      <DependentUpon>invoicestypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\jobs.aspx.designer.vb">
       <DependentUpon>jobs.aspx</DependentUpon>
     </Compile>
@@ -3291,6 +3300,13 @@
     </Compile>
     <Compile Include="adm\role_permissions_form.aspx.aspx.vb">
       <DependentUpon>role_permissions_form.aspx.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\role_permissions_form.aspx.designer.vb">
+      <DependentUpon>role_permissions_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\role_permissions_form.aspx.vb">
+      <DependentUpon>role_permissions_form.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">

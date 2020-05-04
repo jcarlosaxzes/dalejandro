@@ -1,95 +1,67 @@
-﻿Public Class pre_projects
+﻿Imports Telerik.Web.UI
+Public Class pre_projects
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Try
+        If (Not Page.IsPostBack) Then
+            ' Si no tiene permiso, la dirijo a message
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
-            If (Not Page.IsPostBack) Then
-                lblCompanyId.Text = Session("companyId")
-                lblEmployeeEmail.Text = Master.UserEmail
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+            Title = ConfigurationManager.AppSettings("Titulo") & ". Pre_Projects"
+            Master.PageTitle = "Clients/Pre_Projects"
+            lblCompanyId.Text = Session("companyId")
 
-                cboPreparedBy.DataBind()
-                cboProposalBy.DataBind()
-                cboDepartment.DataBind()
-                If Request.QueryString("preprojectsId") Is Nothing Then
-                    ' Mode NEW
-                    btnUpdate.Text = "Insert"
-                    btnUpload.Visible = False
-                    cboPreparedBy.SelectedValue = lblEmployeeId.Text
-                    cboProposalBy.SelectedValue = lblEmployeeId.Text
-                    cboDepartment.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "DepartmentId")
-                Else
-                    ' Mode EDIT
-                    btnUpdate.Text = "Update"
-                    btnUpload.Visible = True
-                    lblPreProjectId.Text = Request.QueryString("preprojectsId")
-                    cboCliente.DataBind()
-                    cboType.DataBind()
-                    cboStatus.DataBind()
-                    ReadPreProject()
-
-                End If
-
-            End If
-
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub ReadPreProject()
-        Dim PreProjectInfo = LocalAPI.GetRecord(lblPreProjectId.Text, "Pre_Project_SELECT")
-
-        lblPre_ProjectNumber.Text = PreProjectInfo("Pre_ProjectNumber")
-        txtName.Text = PreProjectInfo("Name")
-        cboCliente.SelectedValue = PreProjectInfo("clientId")
-        cboType.SelectedValue = PreProjectInfo("ProjectType")
-        txtProjectLocation.Text = PreProjectInfo("ProjectLocation")
-        txtDescription.Text = PreProjectInfo("Description")
-        cboStatus.SelectedValue = PreProjectInfo("statusId")
-        Try
-            If PreProjectInfo("PreparedBy") > 0 Then
-                cboPreparedBy.SelectedValue = PreProjectInfo("PreparedBy")
-            Else
-                cboPreparedBy.SelectedValue = lblEmployeeId.Text
-            End If
-            If PreProjectInfo("ProposalBy") > 0 Then
-                cboProposalBy.SelectedValue = PreProjectInfo("ProposalBy")
-            Else
-                cboProposalBy.SelectedValue = lblEmployeeId.Text
-            End If
-            If PreProjectInfo("DepartmentId") > 0 Then
-                cboDepartment.SelectedValue = PreProjectInfo("DepartmentId")
-            Else
-                cboDepartment.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "DepartmentId")
-            End If
-        Catch ex As Exception
-        End Try
-        Try
-
-        Catch ex As Exception
-        End Try
-    End Sub
-
-    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        If lblPreProjectId.Text > 0 Then
-            SqlDataSource1.Update()
-            Master.InfoMessage("Pre-Project was updated!")
-        Else
-            SqlDataSource1.Insert()
-            btnUpdate.Text = "Update"
-            btnUpload.Visible = True
-            Master.InfoMessage("Pre-Project was Inserted!")
         End If
+        RadWindowManager1.EnableViewState = False
+    End Sub
+    Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
+        Dim sUrl As String = ""
+        Select Case e.CommandName
+            Case "EditPre_Project"
+                sUrl = "~/ADM/Pre-Project.aspx?preprojectsId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 800, 610, False, True)
+
+            Case "EditProposal"
+                sUrl = "~/ADM/Proposal.aspx?Id=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 970, 810, True, False)
+
+            Case "NewProposal"
+                sUrl = "~/ADM/ProposalNewWizard.aspx?preprojectId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 970, 810, True, True)
+
+            Case "AzureUpload"
+                Dim clientId As Integer = LocalAPI.GetPreProjectProperty(e.CommandArgument, "clientId")
+                sUrl = "~/ADM/AzureStorage_client.aspx?clientId=" & clientId & "&preprojectId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 960, 750, False, False)
+
+        End Select
     End Sub
 
-    Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        lblPreProjectId.Text = LocalAPI.GetLastPreProjectInsertedId(txtName.Text)
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean, bRefreshOnClose As Boolean)
+        Try
+
+            RadWindowManager1.Windows.Clear()
+            Dim window1 As RadWindow = New RadWindow()
+            window1.NavigateUrl = sUrl
+            window1.VisibleOnPageLoad = True
+            window1.VisibleStatusbar = False
+            window1.ID = WindowsID
+            If Maximize Then window1.InitialBehaviors = WindowBehaviors.Maximize
+            window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize
+            window1.Width = Width
+            window1.Height = Height
+            window1.Modal = True
+            window1.DestroyOnClose = True
+            If bRefreshOnClose Then window1.OnClientClose = "OnClientClose"
+            window1.ShowOnTopWhenMaximized = Maximize
+            RadWindowManager1.Windows.Add(window1)
+        Catch ex As Exception
+            Master.ErrorMessage("Error. " & ex.Message)
+        End Try
     End Sub
 
-    Private Sub btnUpload_Click(sender As Object, e As EventArgs) Handles btnUpload.Click
-        Dim clientId As Integer = LocalAPI.GetPreProjectProperty(lblPreProjectId.Text, "clientId")
-        Response.Redirect("~/ADM/AzureStorage_client.aspx?clientId=" & clientId & "&preprojectId=" & lblPreProjectId.Text)
+    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+        Dim sUrl As String = "~/ADM/Pre-Project.aspx"
+        CreateRadWindows("Windows1", sUrl, 800, 610, False, True)
     End Sub
 End Class

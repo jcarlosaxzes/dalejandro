@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="TandC templates" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="tandctemplates.aspx.vb" Inherits="pasconcept20.tandctemplates" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
@@ -28,16 +28,16 @@
                 <Content>
                     <div class="PanelFilter">
                         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                            <table style="width:100%" class="table-condensed Formulario">
+                            <table style="width: 100%" class="table-condensed Formulario">
                                 <tr>
-                                    <td style="width:100px">Find:
+                                    <td style="width: 100px">Find:
                                     </td>
                                     <td>
                                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%" EmptyMessage="Find">
                                         </telerik:RadTextBox>
                                     </td>
-                                    <td style="width:120px">
-                                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                                    <td style="width: 120px">
+                                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                             <span class="glyphicon glyphicon-search"></span> Search
                                         </asp:LinkButton>
                                     </td>
@@ -71,30 +71,25 @@
                                 var popUpWidth = popUp.style.width.substr(0, popUp.style.width.indexOf("px"));
                                 var popUpHeight = popUp.style.height.substr(0, popUp.style.height.indexOf("px"));
                                 popUp.style.left = ((gridWidth - popUpWidth) / 2 + sender.get_element().offsetLeft).toString() + "px";
-                                popUp.style.top = 25 + "px";
+                                popUp.style.top = 10 + "px";
                             }
                         </script>
                     </telerik:RadCodeBlock>
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                         AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-                        Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" AllowSorting="True" PageSize="25">
+                        Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" AllowSorting="True" PageSize="25"
+                        EditMode="PopUp">
                         <PagerStyle Mode="Slider" AlwaysVisible="false" />
                         <ClientSettings>
                             <ClientEvents OnPopUpShowing="PopUpShowing" />
                         </ClientSettings>
-                        <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id" >
+                        <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id">
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                    HeaderText=""  ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center">
+                                    HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center">
                                 </telerik:GridEditCommandColumn>
                                 <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column"
                                     HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
-                                    <EditItemTemplate>
-                                        <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80"
-                                            Width="800px">
-                                        </telerik:RadTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
-                                    </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name")%>'></asp:Label>
                                     </ItemTemplate>
@@ -107,21 +102,62 @@
                                     <ItemTemplate>
                                         <asp:Label ID="DescripctionLabel" runat="server" Text='<%# Eval("Descripction")%>'></asp:Label>
                                     </ItemTemplate>
-                                    <EditItemTemplate>
-                                        <telerik:RadEditor ID="gridEditor_Saludo" runat="server" Content='<%# Bind("Descripction")%>' Height="400px" AllowScripts="True" Width="800px"
-                                            ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
-                                        </telerik:RadEditor>
-                                    </EditItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this template?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                                     HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                                 </telerik:GridButtonColumn>
                             </Columns>
-                            <EditFormSettings>
-                                <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
-                                </EditColumn>
+
+                            <EditFormSettings EditFormType="Template" FormCaptionStyle-Width="1024px" CaptionFormatString="Terms &amp; Conditions: {0}"
+                                PopUpSettings-Modal="true" CaptionDataField="Name">
+                                <PopUpSettings ScrollBars="Auto" Modal="true" Width="960px" />
+                                <FormTemplate>
+                                    <table style="width: 100%" class="table-condensed">
+
+                                        <tr>
+                                            <td style="width: 150px; text-align: right">Name:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="100%">
+                                                </telerik:RadTextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Terms & Conditions:
+                                            </td>
+                                            <td>
+                                                <telerik:RadEditor ID="gridEditor_Saludo" runat="server" Content='<%# Bind("Descripction")%>' Height="400px" AllowScripts="True" Width="800px"
+                                                    ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
+                                                </telerik:RadEditor>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center">
+                                                <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false"
+                                                    CommandName='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "PerformInsert", "Update")%>'
+                                                    CausesValidation="true">
+                                                <span class="glyphicon glyphicon-save"></span>&nbsp;Update
+                                                </asp:LinkButton>
+
+                                                &nbsp;&nbsp;
+                                                <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CssClass="btn btn-default" CausesValidation="False" CommandName="Cancel">
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right"></td>
+                                            <td></td>
+                                        </tr>
+
+
+                                    </table>
+                                </FormTemplate>
                             </EditFormSettings>
+
+
                         </MasterTableView>
                     </telerik:RadGrid>
                 </Content>
