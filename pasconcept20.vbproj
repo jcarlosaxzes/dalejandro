@@ -398,6 +398,8 @@
     <Content Include="adm\rfps.aspx" />
     <Content Include="adm\roles.aspx" />
     <Content Include="adm\role_permissions_form.aspx.aspx" />
+    <Content Include="adm\saveproposalas.aspx" />
+    <Content Include="adm\saveproposalastemplate.aspx" />
     <Content Include="adm\schedule.aspx" />
     <Content Include="adm\sendinvoice.aspx.aspx" />
     <Content Include="adm\sendproposal.aspx" />
@@ -3291,6 +3293,20 @@
     </Compile>
     <Compile Include="adm\role_permissions_form.aspx.aspx.vb">
       <DependentUpon>role_permissions_form.aspx.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\saveproposalas.aspx.designer.vb">
+      <DependentUpon>saveproposalas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\saveproposalas.aspx.vb">
+      <DependentUpon>saveproposalas.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
+      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\saveproposalastemplate.aspx.vb">
+      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">
