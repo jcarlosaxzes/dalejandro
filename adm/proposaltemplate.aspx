@@ -2,16 +2,6 @@
 
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="btnUpdate">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="btnUpdate" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
     <div>
         <asp:ValidationSummary ID="vsPre_Project" runat="server" ValidationGroup="Template"

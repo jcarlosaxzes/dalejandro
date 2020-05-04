@@ -5,6 +5,7 @@
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
 
+            lblCompanyId.Text = Session("companyId")
             If Request.QueryString("templateId") Is Nothing Then
                 ' Mode NEW
                 btnUpdate.Text = "Insert"
@@ -39,6 +40,10 @@
             btnUpdate.Text = "Update"
             Master.InfoMessage("Term & Condition was Inserted!")
         End If
+    End Sub
+
+    Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
+        lblTemplateId.Text = LocalAPI.GetProposal_TandCtemplatesId(NameTextBox.Text, lblCompanyId.Text)
     End Sub
 
 
