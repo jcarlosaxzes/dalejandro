@@ -175,12 +175,7 @@ Public Class ADM_Main_Responsive
     End Property
 
     Public Function IsMasterUser() As Boolean
-        If ConfigurationManager.AppSettings("Debug") <> "1" Then
-            Dim sMasterEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Email")
-            Return ((UserEmail.ToLower = sMasterEmail.ToLower) Or LocalAPI.GetEmployeePermission(UserId, "Allow_EmployeesPermissions"))
-        Else
-            Return True
-        End If
+        Return LocalAPI.IsMasterUser(UserEmail, lblCompanyId.Text)
     End Function
     Public Function VersionCaracteristica(CaracteristicaId As Integer) As Boolean
         Return LocalAPI.sys_CaracteristicaVisible(CaracteristicaId, Session("Version"))
