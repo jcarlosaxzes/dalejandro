@@ -23,6 +23,24 @@ Partial Public Class tandctemplates
     Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
     
     '''<summary>
+    '''RadCodeBlock control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
+    
+    '''<summary>
+    '''RadWindowManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
+    
+    '''<summary>
     '''RadAjaxLoadingPanel1 control.
     '''</summary>
     '''<remarks>
@@ -75,15 +93,6 @@ Partial Public Class tandctemplates
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''RadCodeBlock1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
     
     '''<summary>
     '''RadGrid1 control.

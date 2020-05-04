@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="Proposal Template" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="proposaltemplate.aspx.vb" Inherits="pasconcept20.proposaltemplate" %>
 
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
