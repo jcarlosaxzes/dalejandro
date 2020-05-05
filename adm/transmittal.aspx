@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="Transmittal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal1" %>
 
-<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/BasicMasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
