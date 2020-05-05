@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Transmittal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal1" %>
+﻿<%@ Page Title="Transmittal Letter" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal1" %>
 
 <%@ MasterType VirtualPath="~/adm/BasicMasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
