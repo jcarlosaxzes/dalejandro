@@ -425,6 +425,7 @@
     <Content Include="adm\timesbyperiords.aspx" />
     <Content Include="adm\timesheet.aspx" />
     <Content Include="adm\topten.aspx" />
+    <Content Include="adm\transmittal.aspx" />
     <Content Include="adm\transmittals.aspx" />
     <Content Include="adm\uploadphoto.aspx" />
     <Content Include="adm\useragree.aspx" />
@@ -3488,6 +3489,13 @@
       <DependentUpon>topten.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\transmittal.aspx.designer.vb">
+      <DependentUpon>transmittal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\transmittal.aspx.vb">
+      <DependentUpon>transmittal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="adm\transmittals.aspx.designer.vb">
       <DependentUpon>transmittals.aspx</DependentUpon>
     </Compile>
@@ -3907,7 +3915,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
