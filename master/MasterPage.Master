@@ -1,0 +1,196 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterPage.master.vb" Inherits="pasconcept20.MasterPage" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>PASconcept</title>
+    <link href="Master.css" rel="stylesheet" type="text/css" />
+    <meta name="DESCRIPTION" content="PasConcept" />
+    <meta name="KEYWORDS" content="Professional Engineers, 40-Year Recertifications, Miami Engineer, Miami Architect, Florida Engineer, Florida Architect, structural safety, electrical safety" />
+    <meta name="COPYRIGHT" content="Copyright (c) 2005-2020 PasConcept" />
+    <meta name="GENERATOR" content="DotNetNuke" />
+    <meta name="RESOURCE-TYPE" content="DOCUMENT" />
+    <meta name="DISTRIBUTION" content="GLOBAL" />
+    <meta name="AUTHOR" content="AXZES" />
+    <meta name="ROBOTS" content="INDEX, FOLLOW" />
+    <meta name="REVISIT-AFTER" content="1 DAYS" />
+    <meta name="RATING" content="GENERAL" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        </telerik:RadScriptManager>
+
+        <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
+            <Rows>
+
+                <telerik:LayoutRow>
+                    <Content>
+                        <table class="table-condensed" style="width: 100%">
+                            <tr>
+                                <td>
+                                    <asp:Label ID="lblPageTitle" runat="server" Text="lblTitlePage"> </asp:Label>
+                                </td>
+                                <td style="text-align: right">
+                                    <asp:Label ID="lblUserName" runat="server" Text="lblUserName" ForeColor="White"></asp:Label>
+                                </td>
+                                <td style="width: 100px; text-align: right">
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="LogIn" LogoutAction="Redirect"
+                                        LogoutPageUrl="http://pasconcept.com/" ForeColor="Orange" />
+                                </td>
+                            </tr>
+                        </table>
+                    </Content>
+                </telerik:LayoutRow>
+                <telerik:LayoutRow>
+                    <Content>
+                        <div>
+                            <telerik:RadMenu ID="RadMenu1" runat="server" Style="z-index: 700" ClickToOpen="True" Skin="Metro" Width="100%">
+                                <Items>
+                                    <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Default.aspx" Text="Master Dashboard">
+                                    </telerik:RadMenuItem>
+                                    <telerik:RadMenuItem runat="server" Text="Company">
+                                        <Items>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/CompanyList.aspx" Text="Company List">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/CompanyTypes.aspx" Text="Company Types &amp; Templates">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/CompanyPendingBills.aspx"
+                                                Text="Company Billing">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/HistoryLog.aspx"
+                                                Text="History Log">
+                                            </telerik:RadMenuItem>
+                                        </Items>
+                                    </telerik:RadMenuItem>
+                                    <telerik:RadMenuItem runat="server" Text="Billing">
+                                        <Items>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Invoices.aspx" Text="PAS Invoices"></telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" Text="Plans" NavigateUrl="~/MASTER/BillingPlans.aspx"></telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" Text="SMS/Campaigns Billing" NavigateUrl="~/MASTER/SMS_Bill.aspx" Visible="false"></telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" Text="Company Activity" NavigateUrl="~/MASTER/ActiveUsers.aspx"></telerik:RadMenuItem>
+                                        </Items>
+                                    </telerik:RadMenuItem>
+
+                                    <telerik:RadMenuItem runat="server" Text="Mass Communication" NavigateUrl="~/MASTER/MassCommunication.aspx">
+                                    </telerik:RadMenuItem>
+
+
+                                    <telerik:RadMenuItem runat="server" Text="Templates">
+                                        <Items>
+                                            <telerik:RadMenuItem runat="server" Text="Proposal T &amp; C" NavigateUrl="~/MASTER/ProposalTandC.aspx"></telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/ProposalTask_TEMPLATE.aspx" Text="Proposal Task">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Disciplines.aspx" Text="Disciplines">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/MessagesTemplates.aspx" Text="Messages Templates">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/MiscellaneousTimeCodes.aspx" Text="Miscellaneous Time Codes">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Transmittals_package_types.aspx" Text="Transmittals Package Types">
+                                            </telerik:RadMenuItem>
+                                        </Items>
+                                    </telerik:RadMenuItem>
+                                    <telerik:RadMenuItem runat="server" Text="Term &amp; Conditions">
+                                        <Items>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/TandCedit.aspx" Text="Term &amp; Conditions Pages">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/UsersAgreeList.aspx" Text="Users Agree List">
+                                            </telerik:RadMenuItem>
+                                        </Items>
+                                    </telerik:RadMenuItem>
+                                    <telerik:RadMenuItem runat="server" Text="Versiones">
+                                        <Items>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Versiones.aspx" Text="Versiones List">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Features.aspx" Text="Version Features">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/FeaturesCount.aspx" Text="Features Count">
+                                            </telerik:RadMenuItem>
+                                        </Items>
+                                    </telerik:RadMenuItem>
+                                    <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/DataTool.aspx" Text="Data Tools">
+                                    </telerik:RadMenuItem>
+                                    <telerik:RadMenuItem runat="server" Text="User">
+                                        <Items>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/LockedUsers.aspx" Text="Locked Users">
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/PreUsers.aspx" Text="Pre-Users">
+                                            </telerik:RadMenuItem>
+                                        </Items>
+                                    </telerik:RadMenuItem>
+                                </Items>
+                                <WebServiceSettings>
+                                    <ODataSettings InitialContainerName=""></ODataSettings>
+                                </WebServiceSettings>
+                            </telerik:RadMenu>
+                        </div>
+                    </Content>
+                </telerik:LayoutRow>
+                <telerik:LayoutRow>
+                    <Content>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+
+                    </Content>
+                </telerik:LayoutRow>
+
+                <telerik:LayoutRow>
+                    <Content>
+                        <table id='TBL_Footer' class="TBL_Footer noprint" border="0" cellpadding="5" cellspacing="0" align="center">
+                            <tr>
+                                <td dir="ltr" class="TBL_Footer_CELL_Left">
+                                    <asp:Image ID="Image3" runat="server" ImageUrl="~/App_Themes/Estandar/LogoPasTrans.png" />
+                                </td>
+                                <td dir="ltr" class="TBL_Footer_CELL_Right">
+                                    <asp:Label ID="lblVersion" runat="server" Text="Free"></asp:Label>
+                                </td>
+                                <td style="text-align: right;">
+                                    <div title="Click to check: This Web site is secured with a GoDaddy.com Web Server Certificate. Transactions on the site are protected with up to 256-bit Secure Sockets Layer encryption.">
+                                        <span id="siteseal">
+                                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=fx5biLCC3cLKJUHvcVIRpASihEa0DHQ4NtHKvPiGoK1XPPmlTy"></script>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </Content>
+                </telerik:LayoutRow>
+
+                <telerik:LayoutRow>
+                    <Content>
+                        <asp:Label ID="lblWarning" runat="server"></asp:Label>
+                        <table class="FondoPie noprint" cellpadding="0" cellspacing="0" style="text-align: center; width: 100%">
+                            <tr>
+                                <td align="center">
+                                    <a href="http://blog.pasconcept.com" target="_blank" class="enlacepie">Help | </a>
+                                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Privacy | </a>
+                                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Terms & Condition | </a>
+                                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Security | </a>
+                                    <a href="https://axzes.zendesk.com/hc/en-us/requests" target="_blank" class="enlacepie">Support</a>
+                                    <br />
+                                    <asp:Label ID="Label31" runat="server" class="enlacepie" Text="&copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <b>AXZes</b>"></asp:Label>
+                                    <br />
+                                </td>
+                            </tr>
+                        </table>
+                    </Content>
+                </telerik:LayoutRow>
+            </Rows>
+        </telerik:RadPageLayout>
+
+
+
+        <asp:Label ID="Label1" runat="server" Text="Free" Visible="false"></asp:Label>
+        <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
+    </form>
+</body>
+</html>
