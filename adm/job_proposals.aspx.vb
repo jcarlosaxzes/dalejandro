@@ -8,7 +8,7 @@ Public Class job_proposals
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
 
-                lblEmployeeEmail.Text = Membership.GetUser().Email
+                lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
                 lblJobId.Text = Request.QueryString("JobId")
