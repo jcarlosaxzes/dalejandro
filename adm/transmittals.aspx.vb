@@ -87,7 +87,7 @@ Public Class transmittals
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditTransmittal"
-                sUrl = "~/ADMCLI/Transmittal.aspx?transmittalId=" & e.CommandArgument
+                sUrl = "~/ADM/Transmittal.aspx?transmittalId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 970, 810, False)
 
             Case "Email"
