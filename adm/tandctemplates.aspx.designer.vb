@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class tandctemplates
     
     '''<summary>
-    '''RadCodeBlock control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
-    
-    '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
     '''<remarks>
@@ -30,15 +21,6 @@ Partial Public Class tandctemplates
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-    
-    '''<summary>
-    '''RadPageLayout1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
     
     '''<summary>
     '''pnlFind control.
