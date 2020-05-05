@@ -83,15 +83,17 @@ Partial Class Usercrud
 
         For Each f As String In files
             Dim name = Path.GetFileNameWithoutExtension(f)
-            Dim empEmail = LocalAPI.GetEmployeeEmail(Convert.ToInt32(name))
-            If Not IsNothing(empEmail) And Len(empEmail) > 0 Then
+            If IsNumeric(name) Then
+                Dim empEmail = LocalAPI.GetEmployeeEmail(Convert.ToInt32(name))
+                If Not IsNothing(empEmail) And Len(empEmail) > 0 Then
 
-                Dim uploadFileStream = File.OpenRead(f)
+                    Dim uploadFileStream = File.OpenRead(f)
 
-                Dim Url = AzureStorageApi.UploadFilesStream(uploadFileStream, "2016/Employess/", "image/jpeg")
+                    Dim Url = AzureStorageApi.UploadFilesStream(uploadFileStream, "2016/Employess/", "image/jpeg")
 
-                LocalAPI.EmployeeAddUpdatePhoto(empEmail, Url, "image/jpeg", DateTime.Now)
+                    LocalAPI.EmployeeAddUpdatePhoto(empEmail, Url, "image/jpeg", DateTime.Now)
 
+                End If
             End If
         Next
 
