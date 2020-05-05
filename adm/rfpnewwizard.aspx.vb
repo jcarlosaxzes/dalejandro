@@ -242,7 +242,7 @@ Public Class rfpnewwizard
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetRequestForProposalsAzureFileKeyName(e.Command.Parameters("@Id").Value)
-        azurestorage.DeleteFile(KeyName)
+        AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
     Private Sub cboPaymentSchedules_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboPaymentSchedules.SelectedIndexChanged

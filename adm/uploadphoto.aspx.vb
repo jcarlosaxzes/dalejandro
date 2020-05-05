@@ -9,6 +9,7 @@ Public Class uploadphoto
                 lblCompanyId.Text = Session("companyId")
                 lblCodeId.Text = Request.QueryString("Id")
                 lblEntity.Text = Request.QueryString("Entity")
+                lblEmail.Text = Request.QueryString("Email")
                 Page.Title = lblEntity.Text & " Avatar"
 
                 If lblEntity.Text = "Client" Then
@@ -26,10 +27,20 @@ Public Class uploadphoto
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-
-            Dim urlPath As String = lblPath.Text & "/" & lblCodeId.Text & ".jpg"
             For Each f As UploadedFile In RadAsyncUpload1.UploadedFiles
-                f.SaveAs(Server.MapPath(urlPath), True)
+
+
+                If lblEntity.Text = "Client" Then
+                    Dim Url = AzureStorageApi.UploadFilesStream(f.InputStream, "2016/Clients/", "image/jpeg")
+                    LocalAPI.ClientAddUpdatePhoto(Convert.ToInt32(lblCodeId.Text), Url, f.ContentType, DateTime.Now)
+                End If
+                If lblEntity.Text = "Employee" Then
+                    Dim Url = AzureStorageApi.UploadFilesStream(f.InputStream, "2016/Employess/", "image/jpeg")
+                    Dim empEmail = LocalAPI.GetEmployeeEmail(Convert.ToInt32(lblCodeId.Text))
+                    LocalAPI.EmployeeAddUpdatePhoto(empEmail, Url, f.ContentType, DateTime.Now)
+                End If
+
+
             Next
             Label1.Text = "Photo has been uploaded successfully"
         Catch ex As Exception

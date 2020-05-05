@@ -81,7 +81,7 @@
                                 </td>
                                 <td>
                                     <telerik:RadButton ID="btnCredentials" runat="server" CausesValidation="False" Text="Send Credentials"
-                                        OnClick="btnCredentials_Click" ToolTip="Send Email with credentials" Visible="false">
+                                       ToolTip="Send Email with credentials" Visible="false">
                                         <Icon PrimaryIconCssClass="rbMail"></Icon>
                                     </telerik:RadButton>
                                 </td>

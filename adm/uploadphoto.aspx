@@ -23,7 +23,7 @@
             <div style="padding-left:150px">
                 <telerik:RadAsyncUpload ID="RadAsyncUpload1" runat="server" DropZones=".DropZone1" MultipleFileSelection="Disabled"
                 MaxFileSize="2097152" AllowedFileExtensions="jpg,png,gif,bmp"
-                AutoAddFileInputs="false" />
+                AutoAddFileInputs="false" RenderMode="Classic"/>
             </div>
             
         </div>
@@ -42,6 +42,7 @@
         <asp:Label ID="lblCodeId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblEntity" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblPath" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblEmail" runat="server" Visible="False"></asp:Label>
     </form>
 </body>
 </html>

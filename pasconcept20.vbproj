@@ -400,6 +400,8 @@
     <Content Include="adm\roles.aspx" />
     <Content Include="adm\role_permissions_form.aspx" />
     <Content Include="adm\role_permissions_form.aspx.aspx" />
+    <Content Include="adm\saveproposalas.aspx" />
+    <Content Include="adm\saveproposalastemplate.aspx" />
     <Content Include="adm\schedule.aspx" />
     <Content Include="adm\sendinvoice.aspx" />
     <Content Include="adm\sendproposal.aspx" />
@@ -3296,12 +3298,19 @@
       <DependentUpon>roles.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\role_permissions_form.aspx.aspx.designer.vb">
-      <DependentUpon>role_permissions_form.aspx.aspx</DependentUpon>
+    <Compile Include="adm\saveproposalas.aspx.designer.vb">
+      <DependentUpon>saveproposalas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adm\role_permissions_form.aspx.aspx.vb">
-      <DependentUpon>role_permissions_form.aspx.aspx</DependentUpon>
+    <Compile Include="adm\saveproposalas.aspx.vb">
+      <DependentUpon>saveproposalas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
+      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\saveproposalastemplate.aspx.vb">
+      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\role_permissions_form.aspx.designer.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
@@ -3657,6 +3666,7 @@
     </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\transmittal.aspx.vb">
       <DependentUpon>transmittal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\signature.aspx.designer.vb">
       <DependentUpon>signature.aspx</DependentUpon>
