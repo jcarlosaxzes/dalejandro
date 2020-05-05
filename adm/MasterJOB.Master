@@ -59,8 +59,8 @@
                                 class='<%# IIf(lblActiveTab.Text=10,"btn-primary","btn-default")%>' title="Tags of Job"
                                 href='<%# String.Concat("~/ADM/Job_tags.aspx?jobId=", lblJobId.Text)%>'>Tags</a></li>
                             <li><a runat="server"
-                                class='<%# IIf(lblActiveTab.Text=11,"btn-primary","btn-default")%>' title="Trasmittals of Job"
-                                href='<%# String.Concat("~/ADM/Job_trasmittals.aspx?jobId=", lblJobId.Text)%>'>Trasmittals</a></li>
+                                class='<%# IIf(lblActiveTab.Text=11,"btn-primary","btn-default")%>' title="Transmittals of Job"
+                                href='<%# String.Concat("~/ADM/Job_transmittals.aspx?jobId=", lblJobId.Text)%>'>Transmittals</a></li>
                             <li><a runat="server"
                                 class='<%# IIf(lblActiveTab.Text=12,"btn-primary","btn-default")%>' title="Images of Job"
                                 href='<%# String.Concat("~/ADM/Job_images_files.aspx?jobId=", lblJobId.Text)%>'>Images</a></li>

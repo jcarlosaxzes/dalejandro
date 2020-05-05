@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
     </telerik:RadWindowManager>
 
     <table style="width: 100%" class="table-condensed">
