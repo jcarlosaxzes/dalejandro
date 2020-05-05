@@ -94,13 +94,13 @@ Public Class employees
 
     Public Function GetEmployeePhotoURL(employeeId As Integer) As String
         Try
-            'Return "~/Images/Employees/" & employeeId.ToString & ".jpg"
-            Dim sImageURL = "~/Images/Employees/" & employeeId.ToString & ".jpg"
+            Dim sImageURL = LocalAPI.GetEmployeePhotoURL(employeeId)
 
-            If System.IO.File.Exists(Server.MapPath(sImageURL)) Then
-                GetEmployeePhotoURL = sImageURL
+            If IsNothing(sImageURL) Or Len(sImageURL) = 0 Then
+                Return "~/Images/Employees/NophotoForList.jpg"
             End If
-            If Len(GetEmployeePhotoURL) = 0 Then GetEmployeePhotoURL = "~/Images/Employees/NophotoForList.jpg"
+
+            Return sImageURL
 
         Catch ex As Exception
         End Try

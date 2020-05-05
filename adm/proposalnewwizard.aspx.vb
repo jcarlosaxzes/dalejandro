@@ -434,7 +434,7 @@ Public Class proposalnewwizard
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetClientProsalJobAzureFileKeyName(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Source").Value)
-        azurestorage.DeleteFile(KeyName)
+        AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
     Private Sub SqlDataSourceProposal_Step1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProposal_Step1.Updating

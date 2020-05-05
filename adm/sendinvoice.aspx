@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Send Invoice" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="sendinvoice.aspx.aspx.vb" Inherits="pasconcept20.sendinvoice_aspx" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="sendinvoice.aspx.vb" Inherits="pasconcept20.sendinvoice" %>
 
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>

@@ -11,86 +11,80 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Usercrud
-
+Partial Public Class tandctemplate_form
+    
     '''<summary>
-    '''RadStyleSheetManager1 control.
+    '''NameTextBox control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadStyleSheetManager1 As Global.Telerik.Web.UI.RadStyleSheetManager
-
+    Protected WithEvents NameTextBox As Global.Telerik.Web.UI.RadTextBox
+    
     '''<summary>
-    '''form1 control.
+    '''RequiredFieldValidator1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
     '''<summary>
-    '''btnClients control.
+    '''gridEditor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnClients As Global.System.Web.UI.WebControls.Button
-
+    Protected WithEvents gridEditor As Global.Telerik.Web.UI.RadEditor
+    
     '''<summary>
-    '''RadScriptManager1 control.
+    '''btnUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+    Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
+    
     '''<summary>
-    '''RadAjaxLoadingPanel1 control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    
     '''<summary>
-    '''RadAjaxPanel1 control.
+    '''lblCompanyId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxPanel1 As Global.Telerik.Web.UI.RadAjaxPanel
-
+    Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+    
     '''<summary>
-    '''RadGrid1 control.
+    '''lblTemplateId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
+    Protected WithEvents lblTemplateId As Global.System.Web.UI.WebControls.Label
+    
     '''<summary>
-    '''RadWindowManager1 control.
+    '''Master property.
     '''</summary>
     '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
+    '''Auto-generated property.
     '''</remarks>
-    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-
-    '''<summary>
-    '''DataSource1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+        Get
+            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+        End Get
+    End Property
 End Class

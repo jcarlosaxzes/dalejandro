@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.IO
 Imports Microsoft.AspNet.Identity.Owin
 Imports Telerik.Web.UI
 
@@ -73,5 +74,45 @@ Partial Class Usercrud
 
     Private Sub SetMessage(ByVal message As String)
         gridMessage = message
+    End Sub
+
+    Protected Sub Unnamed_Click(sender As Object, e As EventArgs)
+        Dim sImagePath = "~/Images/Employees/"
+
+        Dim files() As String = Directory.GetFiles(HttpContext.Current.Server.MapPath(sImagePath))
+
+        For Each f As String In files
+            Dim name = Path.GetFileNameWithoutExtension(f)
+            Dim empEmail = LocalAPI.GetEmployeeEmail(Convert.ToInt32(name))
+            If Not IsNothing(empEmail) And Len(empEmail) > 0 Then
+
+                Dim uploadFileStream = File.OpenRead(f)
+
+                Dim Url = AzureStorageApi.UploadFilesStream(uploadFileStream, "2016/Employess/", "image/jpeg")
+
+                LocalAPI.EmployeeAddUpdatePhoto(empEmail, Url, "image/jpeg", DateTime.Now)
+
+            End If
+        Next
+
+    End Sub
+
+    Protected Sub btnClients_Click(sender As Object, e As EventArgs)
+        Dim sImagePath = "~/Images/Clients/"
+
+        Dim files() As String = Directory.GetFiles(HttpContext.Current.Server.MapPath(sImagePath))
+
+        For Each f As String In files
+            Dim name = Path.GetFileNameWithoutExtension(f)
+            If Not IsNothing(name) And Len(name) > 0 And IsNumeric(name) Then
+
+                Dim uploadFileStream = File.OpenRead(f)
+
+                Dim Url = AzureStorageApi.UploadFilesStream(uploadFileStream, "2016/Clients/", "image/jpeg")
+
+                LocalAPI.ClientAddUpdatePhoto(Convert.ToInt32(name), Url, "image/jpeg", DateTime.Now)
+
+            End If
+        Next
     End Sub
 End Class

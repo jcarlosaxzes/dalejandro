@@ -178,7 +178,7 @@
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceRFP" GridLines="None" AllowAutomaticUpdates="True"
             AllowAutomaticDeletes="True" AllowSorting="True" AllowPaging="True" PageSize="25" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center">
-            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True" EditMode="PopUp"
+            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True" 
                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                 <Columns>

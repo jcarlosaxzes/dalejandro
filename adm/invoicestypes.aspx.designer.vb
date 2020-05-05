@@ -11,44 +11,17 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Usercrud
-
+Partial Public Class invoicestypes
+    
     '''<summary>
-    '''RadStyleSheetManager1 control.
+    '''RadAjaxManager1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadStyleSheetManager1 As Global.Telerik.Web.UI.RadStyleSheetManager
-
-    '''<summary>
-    '''form1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
-    '''<summary>
-    '''btnClients control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnClients As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''RadScriptManager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
+    
     '''<summary>
     '''RadAjaxLoadingPanel1 control.
     '''</summary>
@@ -57,16 +30,34 @@ Partial Public Class Usercrud
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-
+    
     '''<summary>
-    '''RadAjaxPanel1 control.
+    '''RadPageLayout1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxPanel1 As Global.Telerik.Web.UI.RadAjaxPanel
-
+    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
+    
+    '''<summary>
+    '''btnNew control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''printbutton control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
+    
     '''<summary>
     '''RadGrid1 control.
     '''</summary>
@@ -75,22 +66,34 @@ Partial Public Class Usercrud
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
+    
     '''<summary>
-    '''RadWindowManager1 control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    
     '''<summary>
-    '''DataSource1 control.
+    '''lblCompanyId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+        Get
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+        End Get
+    End Property
 End Class

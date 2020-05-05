@@ -11,17 +11,8 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Usercrud
-
-    '''<summary>
-    '''RadStyleSheetManager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadStyleSheetManager1 As Global.Telerik.Web.UI.RadStyleSheetManager
-
+Partial Public Class role_permissions_form
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -30,16 +21,7 @@ Partial Public Class Usercrud
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
-    '''<summary>
-    '''btnClients control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnClients As Global.System.Web.UI.WebControls.Button
-
+    
     '''<summary>
     '''RadScriptManager1 control.
     '''</summary>
@@ -48,49 +30,40 @@ Partial Public Class Usercrud
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+    
     '''<summary>
-    '''RadAjaxLoadingPanel1 control.
+    '''successMessage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-
+    Protected WithEvents successMessage As Global.System.Web.UI.WebControls.PlaceHolder
+    
     '''<summary>
-    '''RadAjaxPanel1 control.
+    '''FormView1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxPanel1 As Global.Telerik.Web.UI.RadAjaxPanel
-
+    Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
+    
     '''<summary>
-    '''RadGrid1 control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    
     '''<summary>
-    '''RadWindowManager1 control.
+    '''lblRoleId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-
-    '''<summary>
-    '''DataSource1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents lblRoleId As Global.System.Web.UI.WebControls.Label
 End Class
