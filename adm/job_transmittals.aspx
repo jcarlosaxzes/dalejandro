@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Trasmittal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterJOB.Master" CodeBehind="job_transmittals.aspx.vb" Inherits="pasconcept20.job_transmittals" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
@@ -8,7 +9,7 @@
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
              <span class="glyphicon glyphicon-plus"></span> Transmittal
                 </asp:LinkButton>
-            </div>
+            </div>loca
         </div>
         <div class="row">
             <div class="form-group">
