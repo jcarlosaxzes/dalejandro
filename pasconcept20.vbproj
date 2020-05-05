@@ -347,6 +347,7 @@
     <Content Include="adm\importdata.aspx" />
     <Content Include="adm\importtickets.aspx" />
     <Content Include="adm\invoices.aspx" />
+    <Content Include="adm\invoicestypes.aspx" />
     <Content Include="adm\jobs.aspx" />
     <Content Include="adm\jobtickets.aspx" />
     <Content Include="adm\jobtypes.aspx" />
@@ -397,9 +398,10 @@
     <Content Include="adm\rfpnewwizard.aspx" />
     <Content Include="adm\rfps.aspx" />
     <Content Include="adm\roles.aspx" />
+    <Content Include="adm\role_permissions_form.aspx" />
     <Content Include="adm\role_permissions_form.aspx.aspx" />
     <Content Include="adm\schedule.aspx" />
-    <Content Include="adm\sendinvoice.aspx.aspx" />
+    <Content Include="adm\sendinvoice.aspx" />
     <Content Include="adm\sendproposal.aspx" />
     <Content Include="adm\sendstatement.aspx" />
     <Content Include="adm\sendticketpage.aspx" />
@@ -412,6 +414,7 @@
     <Content Include="adm\subscribe\pro.aspx" />
     <Content Include="adm\tagcloud.aspx" />
     <Content Include="adm\tandctemplates.aspx" />
+    <Content Include="adm\tandctemplate_form.aspx" />
     <Content Include="adm\ticket.aspx" />
     <Content Include="adm\time.aspx" />
     <Content Include="adm\timecategory.aspx" />
@@ -2929,6 +2932,13 @@
       <DependentUpon>invoices.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\invoicestypes.aspx.designer.vb">
+      <DependentUpon>invoicestypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\invoicestypes.aspx.vb">
+      <DependentUpon>invoicestypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\jobs.aspx.designer.vb">
       <DependentUpon>jobs.aspx</DependentUpon>
     </Compile>
@@ -3293,6 +3303,13 @@
       <DependentUpon>role_permissions_form.aspx.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\role_permissions_form.aspx.designer.vb">
+      <DependentUpon>role_permissions_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\role_permissions_form.aspx.vb">
+      <DependentUpon>role_permissions_form.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">
       <DependentUpon>schedule.aspx</DependentUpon>
     </Compile>
@@ -3300,11 +3317,11 @@
       <DependentUpon>schedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\sendinvoice.aspx.aspx.designer.vb">
-      <DependentUpon>sendinvoice.aspx.aspx</DependentUpon>
+    <Compile Include="adm\sendinvoice.aspx.designer.vb">
+      <DependentUpon>sendinvoice.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adm\sendinvoice.aspx.aspx.vb">
-      <DependentUpon>sendinvoice.aspx.aspx</DependentUpon>
+    <Compile Include="adm\sendinvoice.aspx.vb">
+      <DependentUpon>sendinvoice.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\sendproposal.aspx.designer.vb">
@@ -3389,6 +3406,13 @@
     </Compile>
     <Compile Include="adm\tandctemplates.aspx.vb">
       <DependentUpon>tandctemplates.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\tandctemplate_form.aspx.designer.vb">
+      <DependentUpon>tandctemplate_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\tandctemplate_form.aspx.vb">
+      <DependentUpon>tandctemplate_form.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\ticket.aspx.designer.vb">

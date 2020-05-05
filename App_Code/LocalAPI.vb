@@ -10392,6 +10392,15 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetProposal_TandCtemplatesId(ByVal Name As String, companyId As Integer) As Integer
+        Return GetNumericEscalar(String.Format("SELECT top 1 Id FROM [Proposal_TandCtemplates] WHERE companyId={0} and [Name]='{1}' order by Id desc", companyId, Name))
+    End Function
+    Public Shared Function GetProposal_Proposal_typesId(ByVal Name As String, companyId As Integer) As Double
+        Return GetNumericEscalar(String.Format("SELECT top 1 Id FROM [Proposal_types] WHERE companyId={0} and [Name]='{1}' order by Id desc", companyId, Name))
+    End Function
+
+
+
     Private Shared Function CreateInvoicesFromPaymentSchedule(ByVal proposalId As Integer, jobId As Integer, dTotal As Double, bRetainer As Boolean, companyId As Integer) As Boolean
         Try
 

@@ -11,79 +11,43 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class tandctemplates
+Partial Public Class tandctemplate_form
     
     '''<summary>
-    '''RadCodeBlock control.
+    '''NameTextBox control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
+    Protected WithEvents NameTextBox As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''RadWindowManager1 control.
+    '''RequiredFieldValidator1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''RadPageLayout1 control.
+    '''gridEditor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
+    Protected WithEvents gridEditor As Global.Telerik.Web.UI.RadEditor
     
     '''<summary>
-    '''pnlFind control.
+    '''btnUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''txtFind control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
-    '''btnFind control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnNew control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''RadGrid1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''SqlDataSource1 control.
@@ -104,14 +68,23 @@ Partial Public Class tandctemplates
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblTemplateId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTemplateId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Master property.
     '''</summary>
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
         End Get
     End Property
 End Class
