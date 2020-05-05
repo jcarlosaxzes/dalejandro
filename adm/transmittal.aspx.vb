@@ -17,7 +17,6 @@ Public Class transmittal1
                 FormView1.DataBind()
                 CType(FormView1.FindControl("RadBarcode1"), RadBarcode).Text = LocalAPI.GetSharedLink_URL(66, lblTransmittalId.Text)
 
-
                 If Not LocalAPI.IsADMCLIuserAutorized(lblEmployeeEmail.Text, lblCompanyId.Text) Then
                     lblTransmittalId.Text = 0
                 End If
@@ -36,15 +35,9 @@ Public Class transmittal1
 
             Dim bIsTransmittalReadyToSigned As Boolean = LocalAPI.IsTransmittalReadyToSigned(lblTransmittalId.Text)
 
-            If roles.IsUserInRole(lblEmployeeEmail.Text, "Administradores") Then
-                ' Administrators
-                CType(FormView1.FindControl("btnMailReadyToSign"), RadButton).Visible = bIsTransmittalReadyToSigned
-                CType(FormView1.FindControl("btnPickUp2"), RadButton).Visible = bIsTransmittalReadyToSigned
-            Else
-                ' Clients
-                CType(FormView1.FindControl("btnEdit"), RadButton).Visible = False
-                CType(FormView1.FindControl("btnEdit2"), RadButton).Visible = False
-            End If
+            ' Administrators
+            CType(FormView1.FindControl("btnMailReadyToSign"), RadButton).Visible = bIsTransmittalReadyToSigned
+            CType(FormView1.FindControl("btnPickUp2"), RadButton).Visible = bIsTransmittalReadyToSigned
             CType(FormView1.FindControl("btnPickUp"), RadButton).Visible = bIsTransmittalReadyToSigned
         Catch ex As Exception
 
