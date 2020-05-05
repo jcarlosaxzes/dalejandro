@@ -3298,7 +3298,6 @@
       <DependentUpon>roles.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-
     <Compile Include="adm\saveproposalas.aspx.designer.vb">
       <DependentUpon>saveproposalas.aspx</DependentUpon>
     </Compile>
@@ -3311,7 +3310,7 @@
     </Compile>
     <Compile Include="adm\saveproposalastemplate.aspx.vb">
       <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
-
+	</Compile>
     <Compile Include="adm\role_permissions_form.aspx.designer.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
     </Compile>
