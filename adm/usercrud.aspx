@@ -21,6 +21,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:Button Text="Employes Photos" runat="server" OnClick="Unnamed_Click" />
+
+        <asp:Button ID="btnClients" Text="Clients Photos" runat="server" OnClick="btnClients_Click" />
+        <br/>
         <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
             <Scripts>
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.Core.js" />

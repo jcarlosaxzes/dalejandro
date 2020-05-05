@@ -52,20 +52,7 @@ Public Class client
 
     End Sub
     Public Function GetClientPhotoURL(clientId As Integer) As String
-        Try
-
-            Dim sImageURL = "~/Images/Clients/" & clientId.ToString & ".jpg"
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(Server.MapPath(sImageURL)) Then
-                    GetClientPhotoURL = sImageURL
-                End If
-            End If
-            If Len(GetClientPhotoURL) = 0 Then GetClientPhotoURL = "~/Images/Clients/nophoto.jpg"
-
-        Catch ex As Exception
-        End Try
+        Return LocalAPI.GetClientPhotoURL(clientId)
     End Function
 
     Private Sub FormView1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormView1.ItemCommand

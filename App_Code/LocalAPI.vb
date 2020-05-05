@@ -8160,19 +8160,38 @@ Public Class LocalAPI
         Return GetNumericEscalar(String.Format("SELECT TOP 1 Id FROM [Employee_HourlyWageHistory] where [employeeId]={0} And Year([Date])={1} order by [Date] desc", EmployeeId, year))
     End Function
 
+
+    Public Shared Function EmployeeAddUpdatePhoto(Email As String, PhotoURL As String, ContentType As String, sDate As DateTime) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Employee_AddUpdatePhoto"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Email", Email)
+            cmd.Parameters.AddWithValue("@PhotoURL", PhotoURL)
+            cmd.Parameters.AddWithValue("@ContentType", ContentType)
+            cmd.Parameters.AddWithValue("@Date", sDate)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Shared Function GetEmployeePhotoURL(employeeId As Integer) As String
         Try
-
-            Dim sImageURL = "~/Images/Employees/" & employeeId.ToString & ".jpg"
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(HttpContext.Current.Server.MapPath(sImageURL)) Then
-                    GetEmployeePhotoURL = sImageURL
-                End If
-            End If
-            If Len(GetEmployeePhotoURL) = 0 Then GetEmployeePhotoURL = "~/Images/Employees/nophoto.jpg"
-
+            Dim email = GetEmployeeEmail(employeeId)
+            Dim sQuery = "SELECT PhotoURL FROM [dbo].[Employees_Photo] WHERE Email='" & email & "'"
+            Return GetStringEscalar(sQuery)
         Catch ex As Exception
         End Try
     End Function
@@ -9050,19 +9069,41 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function ClientAddUpdatePhoto(ClientId As Integer, PhotoURL As String, ContentType As String, sDate As DateTime) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Clients_AddUpdatePhoto"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@PhotoURL", PhotoURL)
+            cmd.Parameters.AddWithValue("@ContentType", ContentType)
+            cmd.Parameters.AddWithValue("@Date", sDate)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+
     Public Shared Function GetClientPhotoURL(ClientId As Integer) As String
         Try
-
-            Dim sImageURL = "~/Images/Clients/" & ClientId.ToString & ".jpg"
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(HttpContext.Current.Server.MapPath(sImageURL)) Then
-                    GetClientPhotoURL = sImageURL
-                End If
+            Dim sQuery = "SELECT PhotoURL FROM [dbo].[Clients_Photo] WHERE ClientId=" & ClientId
+            Dim url = GetStringEscalar(sQuery)
+            If IsNothing(url) Or Len(url) = 0 Then
+                Return "~/Images/Clients/nophoto.jpg"
             End If
-            If Len(GetClientPhotoURL) = 0 Then GetClientPhotoURL = "~/Images/Clients/nophoto.jpg"
-
+            Return url
         Catch ex As Exception
         End Try
     End Function
