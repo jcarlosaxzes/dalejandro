@@ -9,6 +9,7 @@
     <tool separator="true"/>
     <tool name="InsertLink" />
     <tool separator="true"/>
+    <tool name="FormatStripper" />
   </tools>
   <tools name="Font" tab="Home">
     <tool name="Bold" strip="FontBasicTools" shortcut="CTRL+B"/>

@@ -273,7 +273,7 @@
         </telerik:RadGrid>
 
     </div>
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
     <telerik:RadToolTip ID="RadToolTipNewCampaign" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"

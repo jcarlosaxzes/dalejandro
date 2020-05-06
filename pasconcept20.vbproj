@@ -358,9 +358,11 @@
     <Content Include="adm\job_job.aspx" />
     <Content Include="adm\job_links.aspx.aspx" />
     <Content Include="adm\job_notes.aspx" />
+    <Content Include="adm\job_proposals.aspx" />
     <Content Include="adm\job_rfps.aspx" />
     <Content Include="adm\job_tags.aspx" />
     <Content Include="adm\job_times.aspx" />
+    <Content Include="adm\job_transmittals.aspx" />
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
@@ -423,6 +425,8 @@
     <Content Include="adm\timesbyperiords.aspx" />
     <Content Include="adm\timesheet.aspx" />
     <Content Include="adm\topten.aspx" />
+    <Content Include="adm\transmittal.aspx" />
+    <Content Include="adm\transmittals.aspx" />
     <Content Include="adm\uploadphoto.aspx" />
     <Content Include="adm\useragree.aspx" />
     <Content Include="adm\vendor.aspx" />
@@ -3034,6 +3038,13 @@
       <DependentUpon>job_notes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\job_proposals.aspx.designer.vb">
+      <DependentUpon>job_proposals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\job_proposals.aspx.vb">
+      <DependentUpon>job_proposals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\job_rfps.aspx.designer.vb">
       <DependentUpon>job_rfps.aspx</DependentUpon>
     </Compile>
@@ -3053,6 +3064,13 @@
     </Compile>
     <Compile Include="adm\job_times.aspx.vb">
       <DependentUpon>job_times.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\job_transmittals.aspx.designer.vb">
+      <DependentUpon>job_transmittals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\job_transmittals.aspx.vb">
+      <DependentUpon>job_transmittals.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\MasterJOB.Master.designer.vb">
@@ -3487,6 +3505,20 @@
     </Compile>
     <Compile Include="adm\topten.aspx.vb">
       <DependentUpon>topten.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\transmittal.aspx.designer.vb">
+      <DependentUpon>transmittal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\transmittal.aspx.vb">
+      <DependentUpon>transmittal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\transmittals.aspx.designer.vb">
+      <DependentUpon>transmittals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\transmittals.aspx.vb">
+      <DependentUpon>transmittals.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\uploadphoto.aspx.designer.vb">

@@ -61,7 +61,7 @@
                     </EditFormSettings>
                 </MasterTableView>
             </telerik:RadGrid>
-            <telerik:RadWindowManager ID="RadWindowManager1" runat="server"></telerik:RadWindowManager>
+            <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook"></telerik:RadWindowManager>
         </telerik:RadAjaxPanel>
         <asp:SqlDataSource SelectCommand="SELECT [Id] ,[Name] ,[LastName] ,[FullName] ,[Email] ,[companyId],  isnull([IsMigrate], 0) as IsMigrate FROM [dbo].[Employees] where Inactive = 0" ConnectionString="Server=axzesu1server.database.windows.net;Database=pasconcept_db;User ID=axzesu1@axzesu1server;Password=P@ssw0rd;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" ProviderName="System.Data.SqlClient" ID="DataSource1" runat="server"></asp:SqlDataSource>
     </form>

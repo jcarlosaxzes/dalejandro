@@ -127,7 +127,7 @@
 
     </telerik:RadCodeBlock>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server"></telerik:RadWindowManager>
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook"></telerik:RadWindowManager>
     <telerik:RadWindowManager ID="RadWindowManager2" runat="server">
         <Windows>
             <telerik:RadWindow ID="RadWindowDataProcessing"
