@@ -98,7 +98,7 @@
         </div>
     </div>
     <br />
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
     <asp:SqlDataSource ID="SqlDataSourceAssignedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

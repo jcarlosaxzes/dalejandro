@@ -29,7 +29,7 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
         <script type="text/javascript">

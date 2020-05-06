@@ -46,7 +46,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>--%>
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
     <table class="table-condensed" style="padding-left: 50px; padding-top: 10px">
         <tr>

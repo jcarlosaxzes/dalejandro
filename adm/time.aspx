@@ -60,7 +60,7 @@
             font-size: x-small;
         }
     </style>
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
         <Windows>
             <telerik:RadWindow ID="RadWindow1"
                 VisibleOnPageLoad="false" Behaviors="Close, Move" Modal="true" Top="20" Left="100" Height="680px" Width="850px" runat="server" VisibleStatusbar="false">

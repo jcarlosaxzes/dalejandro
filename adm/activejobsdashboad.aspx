@@ -675,7 +675,7 @@
         ValidationGroup="review_insert"></asp:RequiredFieldValidator>
 
 
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
 

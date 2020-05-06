@@ -33,7 +33,7 @@
         }
     </style>
 
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
         <Windows>
             <telerik:RadWindow ID="RadWindow1"
                 VisibleOnPageLoad="false" Behaviors="Close, Move,Maximize,Resize" Modal="true" Width="600" Height="480" runat="server" Title="Project" VisibleStatusbar="False" BorderStyle="None">
