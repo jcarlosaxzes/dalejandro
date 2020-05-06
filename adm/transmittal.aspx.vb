@@ -54,7 +54,7 @@ Public Class transmittal1
     End Sub
 
     Protected Sub btnPickUp_Click(sender As Object, e As EventArgs)
-        Response.RedirectPermanent("~/ADMCLI/Signature.aspx?ObjId=2&Id=" & lblTransmittalId.Text)
+        Response.RedirectPermanent("~/adm/signature.aspx?ObjId=2&Id=" & lblTransmittalId.Text)
     End Sub
 
     Protected Sub btnMailReadyToSign_Click(sender As Object, e As EventArgs)

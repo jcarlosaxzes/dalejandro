@@ -133,11 +133,11 @@
                         </td>
                         <td style="width: 150px"></td>
                         <td>
-                            <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="80px" Culture="en-US" Enabled="false" DatePopupButton-Visible="false" ToolTip="Date From of the filter">
+                            <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Enabled="false" DatePopupButton-Visible="false" ToolTip="Date From of the filter">
                             </telerik:RadDatePicker>
                         </td>
                         <td>
-                            <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="80px" Culture="en-US" Enabled="false" DatePopupButton-Visible="false" ToolTip="Date To of the filter">
+                            <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Enabled="false" DatePopupButton-Visible="false" ToolTip="Date To of the filter">
                             </telerik:RadDatePicker>
                         </td>
                     </tr>

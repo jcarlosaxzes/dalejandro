@@ -411,6 +411,7 @@
     <Content Include="adm\sendticketpage.aspx" />
     <Content Include="adm\settingstatus.aspx" />
     <Content Include="adm\sharelink.aspx" />
+    <Content Include="adm\signature.aspx" />
     <Content Include="adm\start.aspx" />
     <Content Include="adm\statement.aspx" />
     <Content Include="adm\subconsultant.aspx" />
@@ -2137,6 +2138,7 @@
     <Content Include="Scripts\signature-pad\app.js" />
     <Content Include="Scripts\signature-pad\signature_pad.js" />
     <Content Include="Scripts\signature-pad\signature_pad132.js" />
+    <Content Include="Scripts\signature_pad132.js" />
     <Content Include="Scripts\sing-theme\bootstrap-fix\button.js" />
     <Content Include="Scripts\sing-theme\bootstrap-fix\collapse.js" />
     <Content Include="Scripts\sing-theme\js\app.js" />
@@ -3416,6 +3418,13 @@
       <DependentUpon>sharelink.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\signature.aspx.designer.vb">
+      <DependentUpon>signature.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\signature.aspx.vb">
+      <DependentUpon>signature.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\start.aspx.designer.vb">
       <DependentUpon>start.aspx</DependentUpon>
     </Compile>
@@ -4066,7 +4075,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

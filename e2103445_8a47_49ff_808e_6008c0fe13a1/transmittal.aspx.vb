@@ -28,7 +28,6 @@ Public Class transmittal
     End Sub
 
     Protected Sub btnPickUp_Click(sender As Object, e As EventArgs)
-        'Response.RedirectPermanent("~/ADMCLI/Signature.aspx?ObjId=2&Id=" & lblTransmittalId.Text)
         Response.RedirectPermanent(LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Signature.aspx?GuiId=" & lblguid.Text & "&ObjType=22")
 
     End Sub
