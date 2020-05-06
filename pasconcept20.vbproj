@@ -2009,10 +2009,20 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master" />
     <Content Include="adm\subscribe\web.config" />
+    <Content Include="master\activeusers.aspx" />
+    <Content Include="master\billingplans.aspx" />
     <Content Include="master\company.aspx" />
     <Content Include="master\companylist.aspx" />
+    <Content Include="master\companypendingbills.aspx" />
+    <Content Include="master\companytypes.aspx" />
     <Content Include="master\CreateCompany.aspx" />
     <Content Include="master\Default.aspx" />
+    <Content Include="master\disciplines.aspx" />
+    <Content Include="master\features.aspx" />
+    <Content Include="master\featurescount.aspx" />
+    <Content Include="master\historylog.aspx" />
+    <Content Include="master\invoices.aspx" />
+    <Content Include="master\masscommunication.aspx" />
     <Content Include="master\MasterPage.Master" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
@@ -2095,6 +2105,14 @@
     <Content Include="Legal\Version.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="master\messagestemplates.aspx" />
+    <Content Include="master\miscellaneoustimecodes.aspx" />
+    <Content Include="master\proposaltandc.aspx" />
+    <Content Include="master\proposaltask_TEMPLATE.aspx" />
+    <Content Include="master\tandcedit.aspx" />
+    <Content Include="master\transmittals_package_types.aspx" />
+    <Content Include="master\usersagreelist.aspx" />
+    <Content Include="master\versiones.aspx" />
     <Content Include="register.aspx" />
     <Content Include="registerconfirm.aspx" />
     <Content Include="registerend.aspx" />
@@ -3697,6 +3715,20 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="master\activeusers.aspx.designer.vb">
+      <DependentUpon>activeusers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\activeusers.aspx.vb">
+      <DependentUpon>activeusers.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\billingplans.aspx.designer.vb">
+      <DependentUpon>billingplans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\billingplans.aspx.vb">
+      <DependentUpon>billingplans.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="master\company.aspx.designer.vb">
       <DependentUpon>company.aspx</DependentUpon>
     </Compile>
@@ -3709,6 +3741,20 @@
     </Compile>
     <Compile Include="master\companylist.aspx.vb">
       <DependentUpon>companylist.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\companypendingbills.aspx.designer.vb">
+      <DependentUpon>companypendingbills.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\companypendingbills.aspx.vb">
+      <DependentUpon>companypendingbills.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\companytypes.aspx.designer.vb">
+      <DependentUpon>companytypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\companytypes.aspx.vb">
+      <DependentUpon>companytypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="master\CreateCompany.aspx.designer.vb">
@@ -3725,12 +3771,110 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="master\disciplines.aspx.designer.vb">
+      <DependentUpon>disciplines.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\disciplines.aspx.vb">
+      <DependentUpon>disciplines.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\features.aspx.designer.vb">
+      <DependentUpon>features.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\features.aspx.vb">
+      <DependentUpon>features.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\featurescount.aspx.designer.vb">
+      <DependentUpon>featurescount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\featurescount.aspx.vb">
+      <DependentUpon>featurescount.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\historylog.aspx.designer.vb">
+      <DependentUpon>historylog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\historylog.aspx.vb">
+      <DependentUpon>historylog.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\invoices.aspx.designer.vb">
+      <DependentUpon>invoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\invoices.aspx.vb">
+      <DependentUpon>invoices.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\masscommunication.aspx.designer.vb">
+      <DependentUpon>masscommunication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\masscommunication.aspx.vb">
+      <DependentUpon>masscommunication.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="master\MasterPage.Master.designer.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="master\MasterPage.Master.vb">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="master\messagestemplates.aspx.designer.vb">
+      <DependentUpon>messagestemplates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\messagestemplates.aspx.vb">
+      <DependentUpon>messagestemplates.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\miscellaneoustimecodes.aspx.designer.vb">
+      <DependentUpon>miscellaneoustimecodes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\miscellaneoustimecodes.aspx.vb">
+      <DependentUpon>miscellaneoustimecodes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\proposaltandc.aspx.designer.vb">
+      <DependentUpon>proposaltandc.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\proposaltandc.aspx.vb">
+      <DependentUpon>proposaltandc.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\proposaltask_TEMPLATE.aspx.designer.vb">
+      <DependentUpon>proposaltask_TEMPLATE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\proposaltask_TEMPLATE.aspx.vb">
+      <DependentUpon>proposaltask_TEMPLATE.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\tandcedit.aspx.designer.vb">
+      <DependentUpon>tandcedit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\tandcedit.aspx.vb">
+      <DependentUpon>tandcedit.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\transmittals_package_types.aspx.designer.vb">
+      <DependentUpon>transmittals_package_types.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\transmittals_package_types.aspx.vb">
+      <DependentUpon>transmittals_package_types.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\usersagreelist.aspx.designer.vb">
+      <DependentUpon>usersagreelist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\usersagreelist.aspx.vb">
+      <DependentUpon>usersagreelist.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\versiones.aspx.designer.vb">
+      <DependentUpon>versiones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\versiones.aspx.vb">
+      <DependentUpon>versiones.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Models\IdentityModels.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -3883,7 +4027,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
