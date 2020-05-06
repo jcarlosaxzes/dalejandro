@@ -15,37 +15,6 @@
         }
     </style>
 
-
-
-    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" DefaultLoadingPanelID="RadAjaxLoadingPanel1">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="FormView1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="FormView1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="lblWarning" />
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadGridHoliday">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridHoliday" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnEmail">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="FormView1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="lblWarning" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnQB">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="FormView1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>--%>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
     <table class="table-condensed" style="padding-left: 50px; padding-top: 10px">
@@ -402,6 +371,56 @@
                                         <li>Once the above step is done, you will be taken to the API token page. It is important that once you are there, under the area labeled "Secret" you click the "Show" button. The following are the fields you should provide to Form in <b>Edit Profile</b></li>
                                     </ol>
                                 </telerik:RadWizardStep>
+
+                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepCollection" Title="Collection " ValidationGroup="PayPal" StepType="Step">
+                                    <table style="width: 98%">
+                                        <tr>
+                                            <td>
+                                                <h3 style="margin: 0">Collection Attorney Firm</h3>
+                                            </td>
+                                            <td style="text-align: right">
+                                                <asp:LinkButton ID="LinkButton13" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
+                                                    CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <p>
+                                        Profile of the law firm that processes client files that go into debt collection status and temporarily lock their accounts.
+                                    </p>
+                                     <table class="table-condensed">
+                                        <tr>
+                                            <td style="width:160px">Attorney Firm :
+                                            </td>
+                                            <td>
+                                                <%# Eval("AttorneyFirm") %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Attorney Firm:
+                                            </td>
+                                            <td>
+                                                <%# Eval("AttorneyName")%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Attorney Email:
+                                            </td>
+                                            <td>
+                                                <%# Eval("AttorneyEmail")%>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone:
+                                            </td>
+                                            <td>
+                                                <%# Eval("AttorneyPhone")%>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </telerik:RadWizardStep>
+
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepLogo" Title="Logo & Signature" StepType="Step">
                                     <h3 style="margin: 0">Logo & Signature Setting</h3>
@@ -964,7 +983,7 @@
                                         <tr>
                                             <td>
                                                 <h3 style="margin: 0">
-                                                    <h3></h3>
+                                                    <h3>PayPal Setting</h3>
                                                 </h3>
                                             </td>
                                             <td style="text-align: right">
@@ -1017,6 +1036,62 @@
 
                                     </table>
                                 </telerik:RadWizardStep>
+
+                                
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepCollection2" Title="Collection " ValidationGroup="Collection" StepType="Step">
+                                    <table style="width: 98%">
+                                        <tr>
+                                            <td>
+                                                <h3 style="margin: 0">
+                                                    <h3>Collection Setting</h3>
+                                                </h3>
+                                            </td>
+                                            <td style="text-align: right">
+                                                <asp:LinkButton ID="LinkButton14" runat="server" ToolTip="Update changes to Company" CommandName="Update" CausesValidation="True"
+                                                    CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                </asp:LinkButton>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <asp:LinkButton ID="LinkButton15" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
+                                                    CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                                    Cancel
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="table-condensed" style="width: 100%">
+                                        <tr>
+                                            <td width="180px">Attorney Firm:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox6" runat="server" Text='<%# Bind("AttorneyFirm") %>' Width="100%" MaxLength="80" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Attorney Name:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox7" runat="server" Text='<%# Bind("AttorneyName") %>' Width="100%" MaxLength="80" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Attorney Phone:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox8" runat="server" Text='<%# Bind("AttorneyPhone") %>' Width="100%" MaxLength="10" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Attorney Email:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox11" runat="server" Text='<%# Bind("AttorneyEmail") %>' Width="100%" MaxLength="80" />
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </telerik:RadWizardStep>
+
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepQuickBooks2" Title="QuickBooks" ValidationGroup="QuickBooks" StepType="Step" CssClass="wizardStepHidden">
                                     <table class="table-condensed">
@@ -1353,6 +1428,11 @@
             <asp:Parameter Name="PayPalClientId" />
             <asp:Parameter Name="PayPalClientSecret" />
             <asp:Parameter Name="PayHereMax" />
+
+            <asp:Parameter Name="AttorneyFirm" />
+            <asp:Parameter Name="AttorneyName" />
+            <asp:Parameter Name="AttorneyPhone" />
+            <asp:Parameter Name="AttorneyEmail" />
 
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
