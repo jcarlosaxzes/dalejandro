@@ -9,7 +9,7 @@
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
              <span class="glyphicon glyphicon-plus"></span> Transmittal
                 </asp:LinkButton>
-            </div>loca
+            </div>
         </div>
         <div class="row">
             <div class="form-group">

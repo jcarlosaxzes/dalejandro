@@ -10,7 +10,7 @@ Public Class job_transmittals
                 lblJobId.Text = Request.QueryString("JobId")
 
 
-                lblEmployeeEmail.Text = Membership.GetUser().Email
+                lblEmployeeEmail.Text = Master.UserEmail
 
             End If
 
