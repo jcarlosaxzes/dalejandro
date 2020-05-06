@@ -1,4 +1,5 @@
-﻿Imports Telerik.Web.UI
+﻿Imports Microsoft.AspNet.Identity.Owin
+Imports Telerik.Web.UI
 
 Public Class companylist
     Inherits System.Web.UI.Page
@@ -20,6 +21,7 @@ Public Class companylist
     Private Async Function SendMasterCredentilasAsync(companyId As Integer) As Threading.Tasks.Task
         Try
             If Val(companyId) > 0 Then
+                LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
                 Dim sEmail As String = LocalAPI.GetCompanyProperty(companyId, "Email")
                 If sEmail.Length > 0 Then
                     Await LocalAPI.EmployeeEmailResetPassword(sEmail)
