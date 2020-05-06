@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class transmittal1
     
     '''<summary>
+    '''FormViewCompany control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormViewCompany As Global.System.Web.UI.WebControls.FormView
+    
+    '''<summary>
     '''FormView1 control.
     '''</summary>
     '''<remarks>
@@ -48,6 +57,15 @@ Partial Public Class transmittal1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelMail As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''Image1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
     '''SqlDataSource1 control.
@@ -93,6 +111,15 @@ Partial Public Class transmittal1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEmployee As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceCompany control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceCompany As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.
