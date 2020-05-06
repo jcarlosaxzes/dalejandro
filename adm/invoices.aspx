@@ -292,7 +292,7 @@
                             &nbsp;
                                     <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="label-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
                                         ToolTip="Mark Invoice as BadDept" CausesValidation="false">
-                                        <span class="glyphicon glyphicon-bitcoin"></span>
+                                        B
                                     </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
