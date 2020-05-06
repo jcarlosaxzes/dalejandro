@@ -38,6 +38,13 @@
                     <telerik:AjaxUpdatedControl ControlID="cboDepartments" />
                     <telerik:AjaxUpdatedControl ControlID="lblDepartmentIdIN_List" />
                     <telerik:AjaxUpdatedControl ControlID="lblExcludeClientId_List" />
+
+                    <telerik:AjaxUpdatedControl ControlID="lblTotalBudget" />
+                    <telerik:AjaxUpdatedControl ControlID="lblTotalBilled" />
+                    <telerik:AjaxUpdatedControl ControlID="lblTotalCollected" />
+                    <telerik:AjaxUpdatedControl ControlID="lblTotalPending" />
+                    <telerik:AjaxUpdatedControl ControlID="LabelblTotalBalance" />
+                    <telerik:AjaxUpdatedControl ControlID="lblTotalPending" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnUnhide">
@@ -332,26 +339,47 @@
             <div class="card card-body">
                 <table class="table-condensed" style="font-size: small">
                     <tr>
-                        <td style="text-align: right">Budget (This Month):
+                        <td colspan="12">
+                            <hr style="margin:0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <h3  style="margin:0">Job Totals (applied filter)</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Budget:
                         </td>
                         <td style="width: 120px;">
-                            <asp:Label ID="lblTotalBudgetMonth" Font-Bold="true" runat="server" Text="$0.00"></asp:Label>
+                            <asp:Label ID="lblTotalBudget" Font-Bold="true" runat="server" Text="$0.00"></asp:Label>
                         </td>
-                        <td style="text-align: right">Budget (Year to Date):
-                        </td>
-                        <td style="width: 120px;">
-                            <asp:Label ID="lblTotalBudgetYear" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
-                        </td>
-                        <td style="text-align: right">Pending (All Years):
+                        <td style="text-align: right">Billed:
                         </td>
                         <td style="width: 120px;">
-                            <asp:Label ID="lblTotalAmountPending" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
+                            <asp:Label ID="lblTotalBilled" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
                         </td>
-                        <td style="font-size: small; text-align: right">Receivables (All Years):
+                        <td style="font-size: small; text-align: right">Collected:
                         </td>
                         <td style="width: 120px;">
-                            <asp:Label ID="lblPendingToCollect" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
+                            <asp:Label ID="lblTotalCollected" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
                         </td>
+                        <td style="text-align: right">Pending:
+                        </td>
+                        <td style="width: 120px;">
+                            <asp:Label ID="lblTotalPending" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
+                        </td>
+                        <td style="text-align: right">Balance:
+                        </td>
+                        <td style="width: 120px;">
+                            <asp:Label ID="LabelblTotalBalance" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
+                        </td>
+                        <td style="text-align: right">SubContract:
+                        </td>
+                        <td style="width: 120px;">
+                            <asp:Label ID="lblTotalSubContract" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
+                        </td>
+
                     </tr>
                 </table>
             </div>
@@ -691,11 +719,14 @@
                             </telerik:GridTemplateColumn>
 
                             <%--Columnas No visibles para propositos de calculos--%>
+                            <telerik:GridBoundColumn DataField="JobInvoiceAmount" UniqueName="JobInvoiceAmountHide" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="Collected" UniqueName="CollectedtHide" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" Visible="false" />
                             <telerik:GridBoundColumn DataField="SubContract" UniqueName="SubContractHide" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="JobInvoiceAmountPending" UniqueName="JobInvoiceAmountPendingHide" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" Visible="false" />
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Job?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete" Display="false"
-                                UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
+                                UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
                             </telerik:GridButtonColumn>
 
@@ -753,20 +784,19 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <small>
-                        Complete the body of the email about the shared filters:
+                    <small>Complete the body of the email about the shared filters:
                     </small>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                     <telerik:RadTextBox ID="txtShareFilter" runat="server" Skin="Bootstrap" EmptyMessage="Share Filter Message" Width="100%" TextMode="MultiLine" Rows="6">
-                                </telerik:RadTextBox>
+                    <telerik:RadTextBox ID="txtShareFilter" runat="server" Skin="Bootstrap" EmptyMessage="Share Filter Message" Width="100%" TextMode="MultiLine" Rows="6">
+                    </telerik:RadTextBox>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="padding-top: 50px; padding-bottom: 10px; text-align: right; padding-right: 15px">
-                     <asp:LinkButton ID="btnShareF" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" ToolTip="Share Filters with other Employee">
+                    <asp:LinkButton ID="btnShareF" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" ToolTip="Share Filters with other Employee">
                                         <span class="glyphicon glyphicon-share"></span>&nbsp;Share
                     </asp:LinkButton>
                 </td>
