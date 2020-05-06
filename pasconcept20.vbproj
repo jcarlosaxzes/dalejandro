@@ -1894,6 +1894,13 @@
     <Content Include="Images\.DS_Store" />
     <Content Include="Images\clients\Nophoto.jpg" />
     <Content Include="Images\employees\Nophoto.jpg" />
+    <Content Include="Images\markerimages\blackmarker.png" />
+    <Content Include="Images\markerimages\bluemarker.png" />
+    <Content Include="Images\markerimages\greenmarker.png" />
+    <Content Include="Images\markerimages\institution-marker.png" />
+    <Content Include="Images\markerimages\private-marker.png" />
+    <Content Include="Images\markerimages\public-marker.png" />
+    <Content Include="Images\markerimages\redmarker.png" />
     <Content Include="Images\Thumbs.db" />
     <Content Include="App_Themes\Estandar\Combo.skin" />
     <Content Include="App_Themes\Estandar\Default.skin" />
@@ -4059,7 +4066,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

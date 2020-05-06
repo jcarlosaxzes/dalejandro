@@ -54,11 +54,13 @@ Public Class projectmap
         Try
 
             Dim mapLayer As MapLayer = RadMap1.LayersCollection.Item(0)
-            If Not ConfigurationManager.AppSettings.Get("BingMapKey") Is Nothing And (btnSattelite.Text = "Earth View") Then
+
+            If btnSattelite.Text = "Earth View" Then
                 ' Layer con el Mapa de Bing
                 mapLayer.Type = Map.LayerType.Bing
                 mapLayer.ImagerySet = "Aerial"
                 mapLayer.Key = ConfigurationManager.AppSettings.Get("BingMapKey").ToString()
+
                 btnSattelite.Text = "Map View"
             Else
                 ' Layer Predeterminado gratuito
@@ -68,9 +70,9 @@ Public Class projectmap
                 mapLayer.Subdomains = subdomains
                 mapLayer.UrlTemplate = "http://#= subdomain #.tile.thunderforest.com/cycle/#= zoom #/#= x #/#= y #.png"
                 mapLayer.Attribution = "&copy; <a href='http://www.thunderforest.com/' title='ThunderForest contributors' target='_blank'>ThunderForest contributors</a>."
+
                 btnSattelite.Text = "Earth View"
             End If
-
 
         Catch ex As Exception
             Master.ErrorMessage("ConfigureLayes Error. " & ex.Message)
