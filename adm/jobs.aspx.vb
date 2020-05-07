@@ -42,8 +42,6 @@ Public Class jobs
 
                 cboDepartments.DataBind()
 
-                TotalesPage()
-
                 If LocalAPI.IsFilterClipboard(lblEmployeeId.Text, lblCompanyId.Text) Then
                     btnPasteF.Enabled = True
                 Else
@@ -151,18 +149,6 @@ Public Class jobs
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
 
-    End Sub
-
-    Private Sub TotalesPage()
-        Try
-
-            lblTotalBudgetMonth.Text = FormatCurrency(LocalAPI.GetJobTotalBudgetThisMonth(lblCompanyId.Text) - LocalAPI.GetSubcontratTotalThisMonth(lblCompanyId.Text), 0)
-            lblTotalBudgetYear.Text = FormatCurrency(LocalAPI.GetJobTotalBudgetThisYear(lblCompanyId.Text) - LocalAPI.GetSubcontratTotalThisYear(lblCompanyId.Text), 0)
-            lblTotalAmountPending.Text = FormatCurrency(LocalAPI.GetJobTotalAmountPending(lblCompanyId.Text), 0)
-            lblPendingToCollect.Text = FormatCurrency(LocalAPI.GetTotalPendingToCollect(lblCompanyId.Text), 0)
-        Catch ex As Exception
-            Master.ErrorMessage("Error in TotalPage. " & ex.Message)
-        End Try
     End Sub
 
     'Protected Sub RadGrid1_BatchEditCommand(sender As Object, e As Telerik.Web.UI.GridBatchEditingEventArgs) Handles RadGrid1.BatchEditCommand
@@ -562,12 +548,13 @@ Public Class jobs
 
     Protected Sub RadGrid1_DataBound(ByVal sender As Object, ByVal e As System.EventArgs) Handles RadGrid1.DataBound
         Try
-
             Dim footerItem As GridFooterItem = RadGrid1.MasterTableView.GetItems(GridItemType.Footer)(0)
-
-            If Double.Parse(footerItem("SubContractHide").Text) > 0 Then
-                footerItem("Budget").Text = "Budget : " & footerItem("Budget").Text & "<br>" & "SubContract : " & footerItem("SubContractHide").Text & "<br>" & "Total : <b>" & FormatCurrency(Double.Parse(footerItem("Budget").Text) - Double.Parse(footerItem("SubContractHide").Text), 0) & "</b>"
-            End If
+            lblTotalBudget.Text = footerItem("Budget").Text
+            lblTotalBilled.Text = footerItem("JobInvoiceAmountHide").Text
+            lblTotalCollected.Text = footerItem("CollectedtHide").Text
+            lblTotalPending.Text = footerItem("JobInvoiceAmountPendingHide").Text
+            LabelblTotalBalance.Text = footerItem("Balance").Text
+            lblTotalSubContract.Text = footerItem("SubContractHide").Text
         Catch ex As Exception
 
         End Try

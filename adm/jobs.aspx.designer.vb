@@ -257,40 +257,58 @@ Partial Public Class jobs
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblTotalBudgetMonth control.
+    '''lblTotalBudget control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTotalBudgetMonth As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblTotalBudget As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblTotalBudgetYear control.
+    '''lblTotalBilled control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTotalBudgetYear As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblTotalBilled As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblTotalAmountPending control.
+    '''lblTotalCollected control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTotalAmountPending As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblTotalCollected As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblPendingToCollect control.
+    '''lblTotalPending control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblPendingToCollect As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblTotalPending As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''LabelblTotalBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LabelblTotalBalance As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblTotalSubContract control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalSubContract As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''RadGrid1 control.
