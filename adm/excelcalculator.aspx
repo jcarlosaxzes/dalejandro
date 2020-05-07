@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <telerik:radscriptmanager runat="server" id="RadScriptManager1" />
-        <script type="text/javascript">
+<%--        <script type="text/javascript">
             var $ = $telerik.$;
 
             function exportFile() {
@@ -26,7 +26,7 @@
 
                 $(args.get_row()).remove();
             }
-        </script>
+        </script>--%>
         <div>
             <table class="ToolButtom" cellpadding="3" style="width: 400px">
                 <tr>
@@ -44,7 +44,7 @@
             </table>
 
         </div>
-        <telerik:radspreadsheet runat="server" id="RadSpreadsheet1" height="700px">
+<%--        <telerik:radspreadsheet runat="server" id="RadSpreadsheet1" height="700px">
             <ContextMenus>
                 <RowHeaderContextMenu>
                     <Items>
@@ -54,7 +54,7 @@
                 </RowHeaderContextMenu>
 
             </ContextMenus>
-        </telerik:radspreadsheet>
+        </telerik:radspreadsheet>--%>
 
         
     <asp:label id="lblCompanyId" runat="server" visible="False"></asp:label>
