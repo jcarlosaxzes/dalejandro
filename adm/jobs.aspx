@@ -138,6 +138,29 @@
             .RadProgressBar_Material.rpbHorizontal {
                 margin: 0 !important;
             }
+            .DashboardFont1{
+                font-family: Muli,Helvetica Neue,Arial,sans-serif;
+                font-size: 36px;
+                color: #fff!important;
+                font-weight: 300;
+                line-height: 1;
+                margin-top:16px;
+
+            }
+            .DashboardFont2{
+                font-family: Muli,Helvetica Neue,Arial,sans-serif;
+                font-size: 20px;
+                color: #fff!important;
+                line-height: 1.8!important;
+            }
+            .DashboardFont3{
+                margin-left: 8px!important;
+                font-family: Muli,Helvetica Neue,Arial,sans-serif;
+                color: #fff!important;
+                font-size: 14px;
+                line-height: 1.4!important;
+                letter-spacing: -.1px!important;
+            }
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -161,7 +184,7 @@
                 <td style="width: 80px; text-align: center">
                     <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
                         <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
-                            $ Totals
+                            $ Dashboard
                         </button>
                     </asp:Panel>
 
@@ -337,47 +360,46 @@
 
         <div class="collapse" id="collapseTotals">
             <div class="card card-body">
-                <table class="table-condensed" style="font-size: small">
+                <table class="table-condensed" style="width:100%">
                     <tr>
-                        <td colspan="12">
+                        <td colspan="11">
                             <hr style="margin:0" />
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="12">
-                            <h3  style="margin:0">Job Totals (applied filter)</h3>
+                        <td colspan="11" style="text-align:center">
+                            <h2  style="margin:0">Job Dashboard</h2>
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: right">Budget:
+                        <td style="width: 14%;text-align:center; background-color:#039be5">
+                            <span class="DashboardFont2">Budget</span>
+                            <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text="$0.00"></asp:Label>
                         </td>
-                        <td style="width: 120px;">
-                            <asp:Label ID="lblTotalBudget" Font-Bold="true" runat="server" Text="$0.00"></asp:Label>
+                        <td></td>
+                        <td style="width: 14%;text-align:center; background-color:#546e7a">
+                            <span class="DashboardFont2">Billed</span>
+                            <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
-                        <td style="text-align: right">Billed:
+                        <td></td>
+                        <td style="width: 14%;text-align:center; background-color:#43a047">
+                            <span class="DashboardFont2">Collected</span>
+                            <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
-                        <td style="width: 120px;">
-                            <asp:Label ID="lblTotalBilled" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
+                        <td></td>
+                        <td style="width: 14%;text-align:center; background-color:#e53935">
+                            <span class="DashboardFont2">Pending</span>
+                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
-                        <td style="font-size: small; text-align: right">Collected:
+                        <td></td>
+                        <td style="width: 14%;text-align:center; background-color:#43a047">
+                            <span class="DashboardFont2">Balance</span>
+                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
-                        <td style="width: 120px;">
-                            <asp:Label ID="lblTotalCollected" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
-                        </td>
-                        <td style="text-align: right">Pending:
-                        </td>
-                        <td style="width: 120px;">
-                            <asp:Label ID="lblTotalPending" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
-                        </td>
-                        <td style="text-align: right">Balance:
-                        </td>
-                        <td style="width: 120px;">
-                            <asp:Label ID="LabelblTotalBalance" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
-                        </td>
-                        <td style="text-align: right">SubContract:
-                        </td>
-                        <td style="width: 120px;">
-                            <asp:Label ID="lblTotalSubContract" runat="server" Font-Bold="true" Text="$0.00"></asp:Label>
+                        <td></td>
+                        <td style="width: 14%;text-align:center; background-color:#039be5">
+                            <span class="DashboardFont2">SubContract</span>
+                            <asp:Label ID="lblTotalSubContract" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
 
                     </tr>
@@ -603,7 +625,7 @@
 
                             <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected (%)<br/>Budget Used (%)" SortExpression="Profit"
                                 UniqueName="Profit" ItemStyle-HorizontalAlign="Right"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}"
+                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
                                 HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                                 <ItemTemplate>
                                     <table style="width: 100%">
@@ -654,7 +676,7 @@
 
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Date - Budget<br/>Budget Used ($%)" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}"
+                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
                                 HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                                 <ItemTemplate>
                                     <table style="width: 100%">
@@ -689,7 +711,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Balance" Display="false"
                                 Groupable="False" HeaderText="Billed - Collected<br/> Subc.Fee - Balance" SortExpression="Balance"
-                                UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}"
+                                UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
                                 HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                                 <ItemTemplate>
                                     <table style="width: 100%; vertical-align: top">
@@ -719,10 +741,10 @@
                             </telerik:GridTemplateColumn>
 
                             <%--Columnas No visibles para propositos de calculos--%>
-                            <telerik:GridBoundColumn DataField="JobInvoiceAmount" UniqueName="JobInvoiceAmountHide" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" Visible="false" />
-                            <telerik:GridBoundColumn DataField="Collected" UniqueName="CollectedtHide" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" Visible="false" />
-                            <telerik:GridBoundColumn DataField="SubContract" UniqueName="SubContractHide" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" Visible="false" />
-                            <telerik:GridBoundColumn DataField="JobInvoiceAmountPending" UniqueName="JobInvoiceAmountPendingHide" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="JobInvoiceAmount" UniqueName="JobInvoiceAmountHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="Collected" UniqueName="CollectedtHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="SubContract" UniqueName="SubContractHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="JobInvoiceAmountPending" UniqueName="JobInvoiceAmountPendingHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Job?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete" Display="false"
