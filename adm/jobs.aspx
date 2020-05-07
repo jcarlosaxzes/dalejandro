@@ -44,7 +44,7 @@
                     <telerik:AjaxUpdatedControl ControlID="lblTotalCollected" />
                     <telerik:AjaxUpdatedControl ControlID="lblTotalPending" />
                     <telerik:AjaxUpdatedControl ControlID="LabelblTotalBalance" />
-                    <telerik:AjaxUpdatedControl ControlID="lblTotalPending" />
+                    <telerik:AjaxUpdatedControl ControlID="lblTotalSubContract" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnUnhide">
