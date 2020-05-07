@@ -1,0 +1,28 @@
+﻿<root>
+	<tools name="MainToolbar" dockable="true" enabled="true">
+    <tool name="Undo" />
+		<tool name="Redo" />
+		<tool separator="true"/>
+		<tool name="Cut" />
+		<tool name="Copy" />
+		<tool name="Paste" shortcut="CTRL+!"/>
+    <tool separator="true"/>
+    <tool name="InsertLink" />
+    <tool separator="true"/>
+    <tool name="FormatStripper" />
+  </tools>
+  <tools name="Font" tab="Home">
+    <tool name="Bold" strip="FontBasicTools" shortcut="CTRL+B"/>
+    <tool name="Italic" strip="FontBasicTools" shortcut="CTRL+I"/>
+    <tool name="Underline" strip="FontBasicTools" shortcut="CTRL+U"/>
+    <tool name="ForeColor"/>
+    <tool separator="true"/>
+    <tool name="JustifyLeft" />
+    <tool name="JustifyCenter" />
+    <tool name="JustifyRight" />
+    <tool name="JustifyFull" />
+    <tool name="JustifyNone" />
+    <tool name="InsertOrderedList" />
+    <tool name="InsertUnorderedList"/>    
+  </tools>
+</root>

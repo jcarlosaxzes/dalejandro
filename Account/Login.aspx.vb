@@ -26,7 +26,6 @@ Partial Public Class Login
         If lnk.CommandName = "Login" Then
             If IsValid Then
                 ' Validate the user password
-                Dim manager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
                 Dim signinManager = Context.GetOwinContext().GetUserManager(Of ApplicationSignInManager)()
 
                 ' This doen't count login failures towards account lockout
@@ -35,7 +34,16 @@ Partial Public Class Login
 
                 Select Case result
                     Case SignInStatus.Success
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString("ReturnUrl"), Response)
+                        If LocalAPI.IAgree(UserName.Text) Then
+                            If IsNothing(Request.QueryString("ReturnUrl")) Then
+                                Response.Redirect("~/adm/dashboard.aspx")
+                            Else
+                                Response.Redirect(Request.QueryString("ReturnUrl"))
+                            End If
+                        Else
+                            Response.Redirect("~/adm/useragree.aspx")
+                        End If
+
                         Exit Select
                     Case SignInStatus.LockedOut
                         Response.Redirect("/Account/Lockout")

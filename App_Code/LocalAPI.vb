@@ -829,11 +829,18 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetHostAppSite() As String
-        Try
-            GetHostAppSite = ConfigurationManager.AppSettings("HostAppSite")
-        Catch ex As Exception
-        End Try
-        If Len(GetHostAppSite) = 0 Then GetHostAppSite = "https://pasconcept.com/"
+        'Try
+        '    GetHostAppSite = ConfigurationManager.AppSettings("HostAppSite")
+        'Catch ex As Exception
+        'End Try
+        'If Len(GetHostAppSite) = 0 Then GetHostAppSite = "https://pasconcept.com/"
+
+        'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) Return https://localhost:44308
+        'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path) Return https://localhost:44308/adm/sharelink
+        'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Query) Return https://localhost:44308/adm/sharelink?ObjType=111&ObjId=23396
+        'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Scheme) Return https://
+
+        Return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
     End Function
 
     Public Shared Function GetSubscriberDatabase(ByVal sSubscriberCode As String) As String
@@ -1209,7 +1216,7 @@ Public Class LocalAPI
                 Case "Multiplier"
                     Return GetCompanyMultiplier(companyId, GetDateTime().Year)
 
-                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId"
+                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials"
                     Return GetNumericEscalar("SELECT ISNULL([" & sProperty & "],0) FROM [Company] WHERE [companyId]=" & companyId)
 
                 Case "StartYear"
@@ -3952,9 +3959,6 @@ Public Class LocalAPI
             Dim clientId As Integer = parOUT_ID.Value
             cnn1.Close()
 
-
-            RefrescarUsuarioVinculado(sEmail, "Clientes")
-
             LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewClient, companyId, sName)
 
             ' Update Latitude, Longitude
@@ -5731,204 +5735,10 @@ Public Class LocalAPI
         End Try
     End Function
 
-    ' ................................................................................................................................
-    ' Funcion: AddClientToUser
-    '          Inicializa los usuarios desde los clients con Email
-    ' Retorno: True si tuvo exito. 
-    '          False en caso contrario 
-    ' ................................................................................................................................
-    Public Shared Function AddClientToUser_ant(ByVal sEmail As String, ByVal lClientId As Integer, ByVal bSendCredentials As Boolean, ByVal companyId As Integer) As Boolean
-        Try
-            Dim Status As MembershipCreateStatus
-            Dim sUserName As String
-            Dim User As MembershipUser
-            Dim username(0) As String
-            Dim sRole As String = "Clientes"
-            Dim lPos As Integer
-            Dim sPassword As String = GetInitialClientPassword(lClientId)
-            lPos = InStr(sEmail, "@")
-            If lPos > 1 Then
-                'sUserName = Left(sEmail, lPos - 1)
-                sUserName = sEmail
-                If (Membership.FindUsersByName(sUserName).Count = 0) Then
-                    User = Membership.CreateUser(sUserName, sPassword, sEmail.ToString, "a", "b", True, Status)
-                    ' A�adir el usuario a su Role
-                    username(0) = sUserName
-
-                    ' Definir el Role
-                    'Roles.AddUsersToRole(username, sRole)
-                    If bSendCredentials Then ClientEmailCredentials(lClientId, companyId)
-                    AddClientToUser_ant = True
-                End If
-            End If
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
 
     Public Shared Function GetInitialClientPassword(ByVal lClient As Long) As String
         Dim l1 As Long = 901003 + lClient
         GetInitialClientPassword = "@" & l1.ToString
-    End Function
-
-
-    ' ................................................................................................................................
-    ' Funcion: ClientMailling
-    '          Envia mails a todos
-    ' Retorno: True si tuvo exito. 
-    '          False en caso contrario 
-    ' ................................................................................................................................
-    Public Shared Function ClientMailling(ByVal sRecordSource As String, ByVal sSubject As String,
-                                    ByVal sBody As String, ByVal bAddCredentials As Boolean, ByVal companyId As Integer) As Long
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand(sRecordSource, cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            Dim lPos As Integer
-            While rdr.Read()
-                If rdr.HasRows Then
-                    lPos = InStr(rdr("Email"), "@")
-                    If lPos > 1 Then
-                        Dim sFullBody As New System.Text.StringBuilder
-                        sFullBody.Append(sBody)
-
-                        sFullBody.Append("<br />")
-                        sFullBody.Append("<br />")
-                        sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/CLI/Client.aspx" & """" & ">Link to personal Client Site</a>")
-
-                        If bAddCredentials Then
-                            sFullBody.Append("<br />")
-                            sFullBody.Append("<br />")
-                            sFullBody.Append("Credentials:")
-                            sFullBody.Append("<br />")
-                            'sFullBody.Append("User: " & Left(rdr("Email").ToString, lPos - 1))
-                            sFullBody.Append("User: " & GetUserName(rdr("Email").ToString))
-                            sFullBody.Append("<br />")
-                            sFullBody.Append("Password: " & GetClientPassword(rdr("Email").ToString))
-                        End If
-                        Try
-                            SendMail(rdr("Email").ToString, "", "", sSubject, sFullBody.ToString, companyId)
-                            ClientMailling = ClientMailling + 1
-                        Finally
-                        End Try
-
-                    End If
-                End If
-            End While
-            rdr.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    ' ................................................................................................................................
-    ' Funcion: ClientEmailCredentials
-    '          Envia mails a todos
-    ' Retorno: True si tuvo exito. 
-    '          False en caso contrario 
-    ' ................................................................................................................................
-    Public Shared Function ClientEmailCredentials(ByVal ClientId As Integer, ByVal companyId As Integer) As Boolean
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT * FROM Clients WHERE Id=" & ClientId, cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            Dim lPos As Integer
-            rdr.Read()
-            If rdr.HasRows Then
-                lPos = InStr(rdr("Email"), "@")
-                If lPos > 1 Then
-                    Dim sFullBody As New System.Text.StringBuilder
-                    sFullBody.Append("Greetings,")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Thank you for contacting <strong>" & LocalAPI.GetCompanyProperty(companyId, "Name") & "</strong>.")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("This email contains your Client Login Information to access PASconcept web application, which will allow you to view your current and past projects with the firm, accept or decline fee proposals, and view and print invoices. ")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("To access PASconcept ")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/CLI/Client.aspx" & """" & ">click here</a>")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Please consider bookmarking the page for future use. ")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<strong>Login Information</strong> ")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Username: " & GetUserName(rdr("Email").ToString))
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Password: " & GetClientPassword(rdr("Email").ToString))
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("You will be able to change your password above once you log in, as part of your account options.")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("If you have any questions or require additional information, please contact the office of <strong>" & LocalAPI.GetCompanyProperty(companyId, "Name") & "</strong>. ")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Thank you,")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & """" & ">PASconcept</a> Notification")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append(LocalAPI.GetPASSign())
-                    Try
-                        If ConfigurationManager.AppSettings("Debug") <> "0" Then
-                            SendMail("fernando@easterneg.com", "jcarlos@axzes.com", "", ConfigurationManager.AppSettings("TituloWeb") & " Clients Credentials", sFullBody.ToString, companyId)
-
-                        Else
-                            SendMail(rdr("Email").ToString, "", "fernando@easterneg.com", "Your PASconcept credentials", sFullBody.ToString, companyId, LocalAPI.GetCompanyProperty(companyId, "Email"), LocalAPI.GetCompanyProperty(companyId, "Name"))
-                        End If
-                        ClientEmailCredentials = True
-                    Finally
-                    End Try
-
-                End If
-            End If
-            rdr.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    ' ................................................................................................................................
-    ' Funcion: ClientMaillingTest
-    '          Envia mails a todos
-    ' Retorno: True si tuvo exito. 
-    '          False en caso contrario 
-    ' ................................................................................................................................
-    Public Shared Function ClientMaillingTest(ByVal sTo As String, ByVal sSubject As String,
-                                    ByVal sBody As String, ByVal bAddCredentials As Boolean, ByVal companyId As Integer) As Long
-        Try
-            Dim lPos As Integer
-            lPos = InStr(sTo, "@")
-            If lPos > 1 Then
-
-                Dim sFullBody As New System.Text.StringBuilder
-                sFullBody.Append(sBody)
-
-                sFullBody.Append("<br />")
-                sFullBody.Append("<br />")
-                sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/CLI/Client.aspx" & """" & ">Link to personal Client Site</a>")
-
-                If bAddCredentials Then
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Credentials:")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("User: " & GetUserName(sTo))
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Password: 11111")
-                End If
-                SendMail(sTo, "", "", sSubject, sFullBody.ToString, companyId)
-                ClientMaillingTest = 1
-            End If
-        Catch ex As Exception
-            Throw ex
-        End Try
     End Function
 
     ' ................................................................................................................................
@@ -5939,6 +5749,23 @@ Public Class LocalAPI
     ' ................................................................................................................................
     Public Shared Function EmployeeEmailCredentials(ByVal EmployeeId As Integer, ByVal companyId As Integer) As Boolean
         Try
+
+            Dim sName = ""
+            Dim sAddress = ""
+            Dim sCity = ""
+            Dim sState = ""
+            Dim sZipcode = ""
+            Dim sPhone = ""
+            Dim sCellular = ""
+            Dim sEmail = ""
+            Dim sHourRate = ""
+            Dim startingDate = ""
+            Dim sSS = ""
+            Dim sDOB = ""
+            Dim bInactive As Short
+            Dim userGuid = ""
+            Dim data = GetEmployeeData(EmployeeId, sName, sAddress, sCity, sState, sZipcode, sPhone, sCellular, sEmail, sHourRate, startingDate, sSS, sDOB, bInactive, userGuid)
+
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As New SqlCommand("SELECT * FROM Employees WHERE Id=" & EmployeeId, cnn1)
             Dim rdr As SqlDataReader
@@ -5953,16 +5780,18 @@ Public Class LocalAPI
 
                     sFullBody.Append("<br />")
                     sFullBody.Append("<br />")
+                    sFullBody.Append("wellcome to PASconcept. ")
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("You can set a new password")
+                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                    sFullBody.Append("<br />")
+
+
+                    sFullBody.Append("Or you can got to Employee Site")
+                    sFullBody.Append("<br />")
                     sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Default.aspx" & """" & ">Link to Employee Site</a>")
 
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Your Credentials:")
-                    sFullBody.Append("<br />")
-                    'sFullBody.Append("User: " & Left(rdr("Email").ToString, lPos - 1))
-                    sFullBody.Append("User: " & rdr("Email"))
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Password: " & GetEmployeePassword(rdr("Email")))
+
                     Try
                         If ConfigurationManager.AppSettings("Debug") = "1" Then
                             SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
@@ -5980,6 +5809,78 @@ Public Class LocalAPI
         Catch ex As Exception
             Throw ex
         End Try
+    End Function
+
+    Public Shared Async Function EmployeeEmailResetPassword(Email As String) As Task(Of Boolean)
+        Try
+            Dim identityUser As pasconcept20.ApplicationUser = Await AppUserManager.FindByEmailAsync(Email)
+            If identityUser IsNot Nothing Then
+                Dim companyId = GetActiveCompanyIdFromEmployee(Email)
+                Dim employeeId = GetEmployeeId(Email, companyId)
+
+                Dim sName = ""
+                Dim sAddress = ""
+                Dim sCity = ""
+                Dim sState = ""
+                Dim sZipcode = ""
+                Dim sPhone = ""
+                Dim sCellular = ""
+                Dim sEmail = ""
+                Dim sHourRate = ""
+                Dim startingDate = ""
+                Dim sSS = ""
+                Dim sDOB = ""
+                Dim bInactive As Short
+                Dim userGuid = ""
+
+
+                Dim data = GetEmployeeData(employeeId, sName, sAddress, sCity, sState, sZipcode, sPhone, sCellular, sEmail, sHourRate, startingDate, sSS, sDOB, bInactive, userGuid)
+
+                Dim sFullBody As New System.Text.StringBuilder
+
+                sFullBody.Append("Hello:")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("Someone recently requested a password change for your PASconcept account.")
+                sFullBody.Append("<br />")
+                sFullBody.Append("If this was you, you can set a new password")
+                sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("If you don't want to change your password or didn't request this, just ")
+                sFullBody.Append("<br />")
+                sFullBody.Append("ignore and delete this message.")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("To keep your account secure, please don't forward this email to anyone.")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("If you have any questions or require additional information, please ")
+                sFullBody.Append("<a href=" & """" & "http://pasconcept.com/contact.html" & """" & ">contact us</a>")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("Thank you,")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<br />")
+                sFullBody.Append("<a href=" & """" & GetHostAppSite() & """" & ">PASconcept</a> Notification")
+                sFullBody.Append("<br />")
+
+                Dim sbody = sFullBody.ToString()
+
+                Try
+                    If ConfigurationManager.AppSettings("Debug") = "1" Then
+                        SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
+                    Else
+                        SendMail(Email, "", "", ConfigurationManager.AppSettings("Titulo") & ". Reset Password", sFullBody.ToString, companyId)
+                    End If
+                    Return True
+                Finally
+                End Try
+            End If
+        Catch ex As Exception
+            Throw ex
+        End Try
+        Return False
     End Function
 
     Public Shared Function EmployeeEmailMemory(ByVal EmployeeId As Integer, ByVal companyId As Integer, year As Integer) As Boolean
@@ -6018,50 +5919,8 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-    Public Shared Function MasterEmailCredentials(ByVal sUserEmail As String, UserName As String) As Boolean
-        Try
-            Dim user As MembershipUser = Membership.GetUser(Membership.GetUserNameByEmail(sUserEmail))
-            Dim sPassword As String = user.GetPassword()
-            Dim sFullBody As New System.Text.StringBuilder
-            sFullBody.Append("Mr./Mrs. " & UserName & ",")
-            sFullBody.Append("<br />")
-            sFullBody.Append("<br />")
-            sFullBody.Append("This e-mail is to notify you that your registration is complete.")
-            sFullBody.Append("<br />")
-            sFullBody.Append("<br />")
-            sFullBody.Append("The following is your login information:")
-            sFullBody.Append("<br />")
-            sFullBody.Append("Username: " & GetUserName(sUserEmail))
-            sFullBody.Append("<br />")
-            sFullBody.Append("Password: " & sPassword)
-            sFullBody.Append("<br />")
-            sFullBody.Append("<br />")
-            sFullBody.Append("<br />")
-            sFullBody.Append("Click ")
-            sFullBody.Append("<a href=" & """" & "https://www.pasconcept.com/Default.aspx" & """" & "> here </a> to log in to your account.")
-            sFullBody.Append("<br />")
-            sFullBody.Append("<br />")
-            sFullBody.Append("Thank you,")
-            sFullBody.Append("<br />")
-            sFullBody.Append("<br />")
-            sFullBody.Append(LocalAPI.GetPASShortSign())
 
-            Try
-                If ConfigurationManager.AppSettings("Debug") = "1" Then
-                    SendMail("jcarlos@axzes.com", "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
-                Else
-                    SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
-                End If
-                MasterEmailCredentials = True
-            Finally
-            End Try
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Shared Function ForgotPasswordEmail(ByVal sUserEmail As String, sGUID As String) As Boolean
+    Public Shared Function ForgotPasswordEmail_old(ByVal sUserEmail As String, sGUID As String) As Boolean
         Try
             Dim user As MembershipUser = Membership.GetUser(Membership.GetUserNameByEmail(sUserEmail))
             Dim sPassword As String = user.GetPassword()
@@ -6464,65 +6323,6 @@ Public Class LocalAPI
         GetOnlineUsersSQL = "SELECT aspnet_Users.UserName, RPX_Users.Email, RPX_Users.RoleName FROM aspnet_Users INNER JOIN RPX_Users ON aspnet_Users.UserName = RPX_Users.UserName WHERE (aspnet_Users.IsAnonymous = 0) AND (aspnet_Users.LastActivityDate > DATEADD(minute, - 5, " & GetDateUTHlocal() & ")) AND (RPX_Users.RoleName = N'Empleados')"
     End Function
 
-    Public Shared Function GetUserName(ByVal sUserEmail As String) As String
-        Try
-            If (Membership.FindUsersByEmail(sUserEmail).Count = 0) Then
-                ' El usuario no existe, crearlo
-                ' Es cliente?
-                Dim companyId As Integer = GetCompanyIdFromClient(sUserEmail)
-                If IsClientEmail(sUserEmail, companyId) Then
-                    companyId = GetCompanyIdFromClient(sUserEmail)
-                    If RefrescarUsuarioVinculado(sUserEmail, "Clientes") Then
-                        GetUserName = sUserEmail
-                    Else
-                        GetUserName = "Invalid user"
-                    End If
-                ElseIf IsEmployeeEmail(sUserEmail, companyId) Then
-                    companyId = GetCompanyIdFromEmployee(sUserEmail)
-                    If RefrescarUsuarioVinculado(sUserEmail, "Empleados") Then
-                        GetUserName = sUserEmail
-                    Else
-                        GetUserName = "Invalid user"
-                    End If
-                ElseIf IsSubConsultanEmail(sUserEmail, companyId) Then
-                    If RefrescarUsuarioVinculado(sUserEmail, "Subconsultans") Then
-                        GetUserName = sUserEmail
-                    End If
-                End If
-            Else
-                GetUserName = Membership.GetUserNameByEmail(sUserEmail)
-            End If
-        Catch ex As Exception
-            ' Si hay error, en ultima instancia devolver el Id como password.
-            GetUserName = "Invalid user"
-        End Try
-    End Function
-
-    Private Shared Function GetClientPassword(ByVal sUserEmail As String) As String
-        Try
-            Dim user As MembershipUser = Membership.GetUser(Membership.GetUserNameByEmail(sUserEmail))
-            Dim sUserName As String = user.UserName
-            Dim cnn1 As SqlConnection = GetUsersConnection()
-            Dim sPassword As String = ""
-            Dim cmd As New SqlCommand("SELECT TOP 1 PasswordFormat FROM aspnet_Membership WHERE Email='" & sUserEmail & "'", cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                If rdr("PasswordFormat").ToString = MembershipPasswordFormat.Encrypted Then
-                    ' El usuario ya tiene el Password tipo "Encrypted", podemos leerlo
-                    sPassword = user.GetPassword()
-                Else
-                    sPassword = CreateUserPassword()
-                End If
-            End If
-            rdr.Close()
-            cnn1.Close()
-            GetClientPassword = sPassword
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
 
     Public Shared Function GetNonRegularHoursTypesByweekly(ByVal nEmployee As Integer, ByVal sFechaDesde As String, ByVal sFechaHasta As String, ByVal NonRegularHoursTypeIndex As Int16, companyId As Integer) As String
         Try
@@ -6833,6 +6633,7 @@ Public Class LocalAPI
             Dim sPassword As String
             Dim EnableSsl As Integer
             Dim Port As Integer
+            Dim UseDefaultCredentials As Boolean
 
             If companyId > 0 Then
                 ' Si existe credenciales de envio de email desde una company, se utilizan
@@ -6842,6 +6643,7 @@ Public Class LocalAPI
                 sPassword = GetCompanyProperty(companyId, "webEmailPassword")
                 EnableSsl = GetCompanyProperty(companyId, "webEmailEnableSsl")
                 Port = GetCompanyProperty(companyId, "webEmailPort")
+                UseDefaultCredentials = GetCompanyProperty(companyId, "webUseDefaultCredentials")
             End If
 
             If Len(host) = 0 Then
@@ -6856,7 +6658,7 @@ Public Class LocalAPI
             End If
 
             Dim smtp As New SmtpClient(host)
-            smtp.UseDefaultCredentials = False
+            smtp.UseDefaultCredentials = UseDefaultCredentials
             smtp.Credentials = New System.Net.NetworkCredential(sUserName, sPassword)
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network
             smtp.EnableSsl = EnableSsl
@@ -7485,7 +7287,7 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Private Shared Function UnlockUser(ByVal sEmail As String) As Boolean
+    Private Shared Function UnlockUser_old(ByVal sEmail As String) As Boolean
         Try
             Dim usr As MembershipUser = Membership.GetUser(sEmail)
             If usr.IsLockedOut Then
@@ -7507,7 +7309,6 @@ Public Class LocalAPI
 
     Public Shared Function RefrescarUsuarioVinculado(ByVal sEmail As String, ByVal sRole As String) As String
         Try
-            Dim i As Integer
             Dim sMsgRes As String = ""
             Dim username(0) As String
             Dim sPassword As String = CreateUserPassword()
@@ -8359,19 +8160,38 @@ Public Class LocalAPI
         Return GetNumericEscalar(String.Format("SELECT TOP 1 Id FROM [Employee_HourlyWageHistory] where [employeeId]={0} And Year([Date])={1} order by [Date] desc", EmployeeId, year))
     End Function
 
+
+    Public Shared Function EmployeeAddUpdatePhoto(Email As String, PhotoURL As String, ContentType As String, sDate As DateTime) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Employee_AddUpdatePhoto"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Email", Email)
+            cmd.Parameters.AddWithValue("@PhotoURL", PhotoURL)
+            cmd.Parameters.AddWithValue("@ContentType", ContentType)
+            cmd.Parameters.AddWithValue("@Date", sDate)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Shared Function GetEmployeePhotoURL(employeeId As Integer) As String
         Try
-
-            Dim sImageURL = "~/Images/Employees/" & employeeId.ToString & ".jpg"
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(HttpContext.Current.Server.MapPath(sImageURL)) Then
-                    GetEmployeePhotoURL = sImageURL
-                End If
-            End If
-            If Len(GetEmployeePhotoURL) = 0 Then GetEmployeePhotoURL = "~/Images/Employees/nophoto.jpg"
-
+            Dim email = GetEmployeeEmail(employeeId)
+            Dim sQuery = "SELECT PhotoURL FROM [dbo].[Employees_Photo] WHERE Email='" & email & "'"
+            Return GetStringEscalar(sQuery)
         Catch ex As Exception
         End Try
     End Function
@@ -8611,7 +8431,7 @@ Public Class LocalAPI
                                         ByRef sName As String, ByRef sAddress As String, ByRef sCity As String, ByRef sState As String,
                                             ByRef sZipCode As String, ByRef sPhone As String, ByRef sCellular As String,
                                             ByRef sEmail As String, ByRef sHourRate As String, ByRef sSartingDate As String,
-                                            ByRef sSS As String, ByRef sDOB As String, ByRef bInactive As Boolean) As Boolean
+                                            ByRef sSS As String, ByRef sDOB As String, ByRef bInactive As Boolean, ByRef guid As String) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As New SqlCommand("SELECT * FROM [Employees] WHERE [Id]=" & lId, cnn1)
@@ -8631,6 +8451,7 @@ Public Class LocalAPI
                 sSartingDate = "" & rdr("starting_Date").ToString
                 sSS = "" & rdr("SS").ToString
                 sDOB = "" & rdr("DOB").ToString
+                guid = rdr("guid").ToString
                 If Len("" & rdr("Inactive")) > 0 Then
                     bInactive = rdr("Inactive")
                 Else
@@ -9248,19 +9069,41 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function ClientAddUpdatePhoto(ClientId As Integer, PhotoURL As String, ContentType As String, sDate As DateTime) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Clients_AddUpdatePhoto"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@PhotoURL", PhotoURL)
+            cmd.Parameters.AddWithValue("@ContentType", ContentType)
+            cmd.Parameters.AddWithValue("@Date", sDate)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+
     Public Shared Function GetClientPhotoURL(ClientId As Integer) As String
         Try
-
-            Dim sImageURL = "~/Images/Clients/" & ClientId.ToString & ".jpg"
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(HttpContext.Current.Server.MapPath(sImageURL)) Then
-                    GetClientPhotoURL = sImageURL
-                End If
+            Dim sQuery = "SELECT PhotoURL FROM [dbo].[Clients_Photo] WHERE ClientId=" & ClientId
+            Dim url = GetStringEscalar(sQuery)
+            If IsNothing(url) Or Len(url) = 0 Then
+                Return "~/Images/Clients/nophoto.jpg"
             End If
-            If Len(GetClientPhotoURL) = 0 Then GetClientPhotoURL = "~/Images/Clients/nophoto.jpg"
-
+            Return url
         Catch ex As Exception
         End Try
     End Function
@@ -9457,70 +9300,8 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-    Public Shared Function SubConsultanEmailCredentials(ByVal SubConsultanId As Integer, ByVal companyId As Integer) As Boolean
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT * FROM SubConsultans WHERE Id=" & SubConsultanId, cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            Dim lPos As Integer
-            rdr.Read()
-            If rdr.HasRows Then
-                lPos = InStr(rdr("Email"), "@")
-                If lPos > 1 Then
-                    Dim sFullBody As New System.Text.StringBuilder
-                    sFullBody.Append("Greetings,")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("This email contains your Login Information to access PASconcept web application, where you will be able to receive and respond to Requests For Proposals as a potential Subconsultant to <strong>" & LocalAPI.GetCompanyProperty(companyId, "Name") & "</strong>.")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("To access PASconcept  ")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/SUB/RequestForProposals.aspx" & """" & ">click here</a>")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Please consider bookmarking the page for future use. ")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<strong>Login Information</strong> ")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Username: " & GetUserName(rdr("Email").ToString))
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Password: " & GetSubConsultanPassword(rdr("Email").ToString))
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("You will be able to change your password above once you log in, as part of your account options.")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("If you have any questions or require additional information, please contact the office of <strong>" & LocalAPI.GetCompanyProperty(companyId, "Name") & "</strong>. ")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("Thank you,")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & """" & ">PASconcept</a> Notification")
-                    sFullBody.Append("<br />")
-                    sFullBody.Append(LocalAPI.GetPASSign())
-                    Try
-                        If ConfigurationManager.AppSettings("Debug") = "1" Then
-                            SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("TituloWeb") & " SubConsultans Credentials", sFullBody.ToString, companyId)
-                        Else
-                            SendMail(rdr("Email").ToString, "", "fernando@easterneg.com", "Your PASconcept credentials", sFullBody.ToString, companyId, LocalAPI.GetCompanyProperty(companyId, "Email"), LocalAPI.GetCompanyProperty(companyId, "Name"))
-                        End If
-                        SubConsultanEmailCredentials = True
-                    Finally
-                    End Try
 
-                End If
-            End If
-            rdr.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Shared Function GetSubConsultanPassword(ByVal sUserEmail As String) As String
+    Public Shared Function GetSubConsultanPassword_old(ByVal sUserEmail As String) As String
         Try
             Dim user As MembershipUser = Membership.GetUser(Membership.GetUserNameByEmail(sUserEmail))
             Dim sUserName As String = user.UserName
@@ -9539,7 +9320,7 @@ Public Class LocalAPI
             rdr.Close()
             cnn1.Close()
 
-            GetSubConsultanPassword = sPassword
+            Return sPassword
 
         Catch ex As Exception
             Throw ex
@@ -9842,8 +9623,8 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function GetForgotpasswordUser(forgot_key As String) As String
-        Return GetStringEscalar("Select TOP 1 Email FROM sys_Forgotpassword where [GUID]='" & forgot_key & "'")
+    Public Shared Function GetUserEmailByGuid(guid As String) As String
+        Return GetStringEscalar("Select TOP 1 Email FROM Employees where [guid]='" & guid & "'")
     End Function
 
     Public Shared Function GetMembershipUserPasswod(sEmail As String) As String
@@ -9886,7 +9667,6 @@ Public Class LocalAPI
         Return identityUser
     End Function
 
-
     Public Shared Sub NormalizeUser(email As String)
         Try
             Dim cnn1 As SqlConnection = GetUsersConnection()
@@ -9904,6 +9684,16 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Sub
+
+    Public Shared Function IsMasterUser(email As String, companyId As String) As Boolean
+        If ConfigurationManager.AppSettings("Debug") <> "1" Then
+            Dim sMasterEmail As String = LocalAPI.GetCompanyProperty(companyId, "Email")
+            Dim empId = GetEmployeeId(email, companyId)
+            Return ((email.ToLower = sMasterEmail.ToLower) Or GetEmployeePermission(empId, "Allow_EmployeesPermissions"))
+        Else
+            Return True
+        End If
+    End Function
 
 #End Region
 
@@ -10005,10 +9795,10 @@ Public Class LocalAPI
             If objId > 0 Then
 
                 Select Case objType
-                    Case 1, 11, 111 ' Firmar/Ver Proposal
-                        'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Proposal.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
-                        'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Proposal.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 1, 11 ' Firmar/Ver Proposal from client
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 111 ' Firmar/Ver Proposal from /adm/proposals
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid") & "&source=111"
                     Case 2
                         ' Tratamiento especifico de Job(Projects) para paginas publicas
                         Dim companyId As Integer = GetJobProperty(objId, "companyId")
@@ -10602,6 +10392,15 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetProposal_TandCtemplatesId(ByVal Name As String, companyId As Integer) As Integer
+        Return GetNumericEscalar(String.Format("SELECT top 1 Id FROM [Proposal_TandCtemplates] WHERE companyId={0} and [Name]='{1}' order by Id desc", companyId, Name))
+    End Function
+    Public Shared Function GetProposal_Proposal_typesId(ByVal Name As String, companyId As Integer) As Double
+        Return GetNumericEscalar(String.Format("SELECT top 1 Id FROM [Proposal_types] WHERE companyId={0} and [Name]='{1}' order by Id desc", companyId, Name))
+    End Function
+
+
+
     Private Shared Function CreateInvoicesFromPaymentSchedule(ByVal proposalId As Integer, jobId As Integer, dTotal As Double, bRetainer As Boolean, companyId As Integer) As Boolean
         Try
 
@@ -10636,8 +10435,6 @@ Public Class LocalAPI
             Dim sInvoiceNumber As String = LocalAPI.InvoiceNumber(invoiceId)
 
             Dim sClientEmail As String = LocalAPI.GetClientEmailFromInvoice(invoiceId)
-
-            Dim sUser As String = LocalAPI.GetUserName(sClientEmail)
 
             If LocalAPI.IsClientNotification(clientId, "Notification_invoiceemitted") Or Not LocalAPI.ExisteUser(sClientEmail) Then
 
@@ -13297,7 +13094,38 @@ Public Class LocalAPI
     End Function
 #End Region
 
+#Region "ClientPortal"
+    Public Shared Function sys_Log_clients_INSERT(IP_Address As String, clientId As Integer, ActionId As Integer, DocumentId As Integer, companyId As Integer) As Boolean
+        Try
+            ' ActionId codes
+            '   1:  Proposal visit page
 
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "sys_Log_clients_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@IP_Address", IP_Address)
+            cmd.Parameters.AddWithValue("@clientId", clientId)
+            cmd.Parameters.AddWithValue("@ActionId", ActionId)
+            cmd.Parameters.AddWithValue("@DocumentId", DocumentId)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+#End Region
 
 End Class
 

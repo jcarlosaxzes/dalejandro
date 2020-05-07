@@ -1,4 +1,5 @@
-﻿Imports Telerik.Web.UI
+﻿Imports Microsoft.AspNet.Identity
+Imports Telerik.Web.UI
 Public Class excelcalculator
     Inherits System.Web.UI.Page
 
@@ -6,8 +7,9 @@ Public Class excelcalculator
 
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         lblCompanyId.Text = Session("companyId")
-        Dim user As MembershipUser = Membership.GetUser()
-        Dim UserId As String = LocalAPI.GetEmployeeId(user.Email, lblCompanyId.Text)
+        Dim UserEmail As String = Context.User.Identity.GetUserName()
+
+        Dim UserId As String = LocalAPI.GetEmployeeId(UserEmail, lblCompanyId.Text)
 
         If (Not System.IO.Directory.Exists(Server.MapPath("~/App_Data/" & lblCompanyId.Text))) Then
             ' Crear directorio de la companyId
@@ -27,7 +29,7 @@ Public Class excelcalculator
             provider = DirectCast(Session(ProviderSessionKey), SpreadsheetDocumentProvider)
         End If
 
-        RadSpreadsheet1.Provider = provider
+        'RadSpreadsheet1.Provider = provider
     End Sub
 
 End Class

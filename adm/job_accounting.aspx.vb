@@ -1,4 +1,5 @@
-﻿Imports Telerik.Web.UI
+﻿Imports Microsoft.AspNet.Identity
+Imports Telerik.Web.UI
 Public Class Job_accounting
     Inherits System.Web.UI.Page
 
@@ -8,8 +9,8 @@ Public Class Job_accounting
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
 
-                lblEmployeeEmail.Text = Membership.GetUser().Email
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+                lblEmployeeEmail.Text = Master.UserEmail
+                lblEmployeeId.Text = Master.UserId
 
                 lblJobId.Text = Request.QueryString("JobId")
                 lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")

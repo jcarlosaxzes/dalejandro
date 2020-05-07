@@ -24,11 +24,13 @@ Public Class clientsmap
         Try
 
             Dim mapLayer As MapLayer = RadMap1.LayersCollection.Item(0)
-            If Not ConfigurationManager.AppSettings.Get("BingMapKey") Is Nothing And (btnSattelite.Text = "Earth View") Then
+
+            If btnSattelite.Text = "Earth View" Then
                 ' Layer con el Mapa de Bing
                 mapLayer.Type = Map.LayerType.Bing
                 mapLayer.ImagerySet = "Aerial"
                 mapLayer.Key = ConfigurationManager.AppSettings.Get("BingMapKey").ToString()
+
                 btnSattelite.Text = "Map View"
             Else
                 ' Layer Predeterminado gratuito

@@ -1,0 +1,198 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="ClientPortalMP.master.vb" Inherits="pasconcept20.ClientPortalMP1" %>
+
+<%@ Import Namespace="pasconcept20" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>PASconcept -- Client Portal</title>
+
+    <%--Bootstrap reference begin--%>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <%--Bootstrap reference end--%>
+
+    <meta name="DESCRIPTION" content="A web-based application conceived and designed to provide an all-inclusive management tool for architectural and engineering firms who wish to integrate the interaction." />
+    <meta name="KEYWORDS" content="pasconcept,saas,online project administration,architectural app,engineering app,project app,time sheet,proposals online,job online,civil app,mechanical app,structural app,
+          electrical app,request for proposal, rfp,subconsultant,
+          engineering Software,cloud accounting software,billing system,engineering services,A/E online app,A/E online services,Rational Engineering, Lifecycle Manager, engineering data, engineering lifecycle,
+          systems engineering, lifecycle data, open architecture,architectural firm,A/E online administration,proposal for architectural,budget for architectural,budeget for engineering,proposal for engineering,
+          proposal for A/E,budget for A/E,agreement for architectural, agreement for engineering,contract for engineering,contract for architectural,agreement for engineering,invoice for engineering,
+          invoice for architectural,invoice service, invoice online,time sheet for architectural,time sheet for engineering,rfp for architectural,rfp for engineering,rfp for subconsultant" />
+    <meta name="google-site-verification" content="-YpSUSprv2srj8BMkivDa3xokq246v05MmoAXtqSF38" />
+    <meta name="AUTHOR" content="AXZES, LLC" />
+    <meta name="COPYRIGHT" content="Copyright (c) 2005-2016 PASconcept" />
+    <meta name="RESOURCE-TYPE" content="DOCUMENT" />
+    <meta name="DISTRIBUTION" content="GLOBAL" />
+    <meta name="AUTHOR" content="AXZES, LLC" />
+    <meta name="ROBOTS" content="INDEX, FOLLOW" />
+    <meta name="REVISIT-AFTER" content="1 DAYS" />
+    <meta name="RATING" content="GENERAL" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-27665861-1']);
+        _gaq.push(['_setDomainName', 'pasconcept.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        img.resize {
+            width: 150px; /* you can use % */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        </telerik:RadScriptManager>
+
+        <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
+            <Rows>
+                <telerik:LayoutRow StaticId="LetterHead">
+                    <Content>
+                        <div style="margin-top: 3px">
+                            <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompany" RenderOuterTable="false">
+                                <ItemTemplate>
+                                    <table class="table-condensed" style="width: 100%;">
+                                        <tr>
+                                            <td style="text-align: left; width: 250px">
+                                                <a href='<%# Eval("web") %>' target="_blank">
+                                                    <telerik:RadBinaryImage ID="RadBinaryImage1" runat="server" AlternateText="Logo" CssClass="img-responsive"
+                                                        Style="width: 150px; height: auto;"
+                                                        DataValue='<%# IIf(Eval("Logo") Is DBNull.Value, Nothing, Eval("Logo"))%>'></telerik:RadBinaryImage>
+                                                </a>
+                                            </td>
+                                            <td style="vertical-align: top; text-align: center">
+                                                <asp:Panel ID="pnl_advertising" runat="server" Visible="false">
+                                                    <a class="btn btn-info " href="http://www.easternengineeringgroup.com/#services" role="button" target="_blank">Online Services</a>
+                                                    <a class="btn btn-info " href="http://www.easternengineeringgroup.com/" role="button" target="_blank">Other Services</a>
+                                                </asp:Panel>
+                                            </td>
+                                            <td style="text-align: right; width: 450px; vertical-align: top; margin: 6px">
+
+
+                                                <a class="btn btn-primary noprint" href="paymenthistory.aspx" role="button">Payment History</a>
+                                                &nbsp;&nbsp;
+                                                <a class="btn btn-danger noprint" href="CP_jobs.aspx" role="button">My Jobs</a>
+                                                &nbsp;&nbsp;
+                                                <script type="text/javascript">
+                                                    function PrintPage(sender, args) {
+                                                        window.print();
+                                                    }
+                                                </script>
+                                                <button type="button" class="btn btn-default noprint" onclick="PrintPage()">Print</button>
+                                                <h3 style="margin: 5px"><%# Eval("Name") %></h3>
+                                                <span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%# Eval("Address") %><br>
+                                                <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
+                                                <span class="glyphicon glyphicon-earphone"></span>&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br>
+                                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;<%# Eval("Email") %><br>
+                                                <span class="glyphicon glyphicon-globe"></span>&nbsp;<a href='<%# Eval("web") %>' target="_blank"><%# Eval("web") %></a>
+                                            </td>
+                                        </tr>
+
+
+                                    </table>
+                                </ItemTemplate>
+                            </asp:FormView>
+                        </div>
+                    </Content>
+                </telerik:LayoutRow>
+
+                <telerik:LayoutRow>
+                    <Content>
+                        <div style="text-align: center; background-color: white">
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
+                    </Content>
+                </telerik:LayoutRow>
+
+                <telerik:LayoutRow CssClass="noprint">
+                    <Content>
+                        <asp:Panel ID="pnl_reviews" runat="server" Visible="false">
+                            <table class="table-condensed" style="width: 100%">
+                                <tr>
+                                    <td style="text-align: center" colspan="3">
+                                        <small>
+                                            <i>Thank you for trusting <b>Eastern Engineering Group</b> with your project needs. Make sure to take a minute to tell us about your experience, we’d love to hear your feedback!</i>
+                                        </small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; width: 33%">
+                                        <a class="img-thumbnail" href="https://www.facebook.com/pg/EasternEG/reviews" target="_blank">
+                                            <img alt="Facebook review" height="80" src='<%= ResolveUrl("https://pasconcept.com/images/facebook_review.png") %>' />
+                                        </a>
+                                    </td>
+                                    <td style="text-align: center; width: 33%">
+                                        <a class="img-thumbnail" href="https://www.google.com/search?q=google+eastern+engineering+group+reviews&oq=google+eastern+engineering+group+reviews&aqs=chrome..69i57j69i64.8535j0j7&sourceid=chrome&ie=UTF-8#lrd=0x88d9b96a969c58a3:0x33f0b5a8509473c8,1,,," target="_blank">
+                                            <img alt="Google review" height="80" src='<%= ResolveUrl("https://pasconcept.com/images/google_review.png") %>' />
+                                        </a>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <a class="img-thumbnail" href="https://www.yelp.com/writeareview/biz/b1JaVVzb8GpHCkVPLS8v4w?return_url=%2Fbiz%2Fb1JaVVzb8GpHCkVPLS8v4w&source=biz_details_war_button" target="_blank">
+                                            <img alt="Yelp review" height="80" src='<%= ResolveUrl("https://pasconcept.com/images/yelp_review.png") %>' />
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
+                    </Content>
+                </telerik:LayoutRow>
+                <telerik:LayoutRow CssClass="noprint">
+                    <Columns>
+                        <telerik:LayoutColumn Span="4">
+                            <a href="https://pasconcept.com/" target="_blank">
+                                <asp:Image ID="Image1" runat="server" SkinID="headerpasconceptlogo" />
+                            </a>
+                        </telerik:LayoutColumn>
+                        <telerik:LayoutColumn Span="8">
+                            <p class="small" style="text-align: right">
+                                <br />
+                                &copy; 2009-2019 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="https://www.axzes.com/" target="_blank">Axzes llc</a>
+                            </p>
+                        </telerik:LayoutColumn>
+                    </Columns>
+                </telerik:LayoutRow>
+            </Rows>
+        </telerik:RadPageLayout>
+
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <telerik:RadNotification ID="RadNotificationWarning" runat="server"
+                    Animation="FlyIn" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="info" Text="Warning"
+                    Position="BottomRight" VisibleTitlebar="false" Opacity="75" Width="300px" Skin="Sunset">
+                </telerik:RadNotification>
+                <telerik:RadNotification ID="RadNotificationError" runat="server" Width="300px" Skin="Sunset"
+                    Animation="Fade" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="deny" Text="Error" Position="TopCenter">
+                </telerik:RadNotification>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <asp:SqlDataSource ID="SqlDataSourceCompany" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+            SelectCommand="Company_SELECT" SelectCommandType="StoredProcedure">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+
+
+    </form>
+</body>
+</html>

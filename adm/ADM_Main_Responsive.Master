@@ -42,7 +42,7 @@
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet" />
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-   <%-- <style>
+    <%-- <style>
         div.RadMenu_BlackMetroTouch .rmGroup .rmText,
         div.RadMenu_BlackMetroTouch .rmGroup .rmText:hover {
             background-color: #25a0da;
@@ -75,6 +75,13 @@
         .leftcheckbox input[type="checkbox"] {
             margin-left: 20px;
         }
+
+        .rmRootLink {
+            font-size: large !important;
+        }
+        .rmLink{
+            font-size: medium !important;
+        }
     </style>
     <form id="form1" runat="server">
         <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
@@ -87,19 +94,19 @@
                     <Columns>
                         <telerik:LayoutColumn Span="4">
                             <div style="padding-top: 3px">
-                                <img src="../App_Themes/Estandar/Images/header-pasconcept-logo.png" style="border-width:0" />
+                                <img src="../App_Themes/Estandar/Images/header-pasconcept-logo.png" style="border-width: 0" />
                             </div>
                         </telerik:LayoutColumn>
                         <telerik:LayoutColumn Span="8">
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
-                                    <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompanyLogo" 
+                                    <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompanyLogo"
                                         RenderOuterTable="false">
                                         <ItemTemplate>
                                             <div style="padding: 3px">
-                                            <telerik:RadBinaryImage ID="RadBinaryImage1" runat="server" AlternateText="Logo" CssClass="img-responsive"
-                                                Style="width: auto; height: 42px;"
-                                                DataValue='<%# IIf(Eval("Logo") Is DBNull.Value, Nothing, Eval("Logo"))%>'></telerik:RadBinaryImage>
+                                                <telerik:RadBinaryImage ID="RadBinaryImage1" runat="server" AlternateText="Logo" CssClass="img-responsive"
+                                                    Style="width: auto; height: 42px;"
+                                                    DataValue='<%# IIf(Eval("Logo") Is DBNull.Value, Nothing, Eval("Logo"))%>'></telerik:RadBinaryImage>
                                             </div>
                                         </ItemTemplate>
                                     </asp:FormView>
@@ -115,22 +122,29 @@
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <a runat="server" href="~/ADM/Options.aspx" title="User profile">My Account</a>
+                                            <a runat="server" href="~/ADM/Options.aspx" title="User profile">
+                                                <i class="fas fa-user-edit"></i>
+                                                &nbsp;My Account
+                                            </a>
                                         </li>
                                         <li>
-                                            <a runat="server" href="~/EMP/Default.aspx" title="User profile">Employee Portal</a>
+                                            <a runat="server" role="menuitem" href="https://video.spike.chat/?" title="Video Chat Meeting" target="_blank">
+                                                <i class="fas fa-video"></i>
+                                                &nbsp;Video Chat
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false">
+                                                <i class="fas fa-exchange-alt"></i>        
+                                                &nbsp;Switch Company
+                                            </asp:LinkButton>
                                         </li>
                                         <li class="divider" runat="server"></li>
                                         <li>
-                                            <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false">
-                                                        Switch Company
-                                            </asp:LinkButton>
-                                        </li>
-                                        <li>
                                             <asp:LoginStatus runat="server" LogoutAction="Redirect"
                                                 ToolTip="Logout"
-                                                LogoutText="Log out &lt;i aria-hidden=&quot;true&quot; class=&quot;glyphicon glyphicon-log-out&quot;&gt;&lt;/i&gt;"
-                                                LogoutPageUrl="http://pasconcept.com/" />
+                                                LogoutText="Log out &lt;i aria-hidden=&quot;true&quot; class=&quot;fas fa-sign-out-alt&quot;&gt;&lt;/i&gt;"
+                                                LogoutPageUrl="http://pasconcept.com/" OnLoggingOut="Unnamed_LoggingOut" />
                                         </li>
                                     </ul>
                                 </li>
@@ -141,12 +155,13 @@
                 </telerik:LayoutRow>
                 <telerik:LayoutRow StaticId="Menu">
                     <Content>
+                        <%--<telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" EnableEmbeddedSkins="false" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">--%>
                         <div class="noprint" style="text-align: center">
-                            <telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" EnableEmbeddedSkins="false" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">
+                            <telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" Width="100%" Skin="WebBlue">
                                 <Items>
 
                                     <%--Start menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Start">
+                                    <telerik:RadMenuItem runat="server" Text="START" >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Default.aspx" Text="Home">
                                             </telerik:RadMenuItem>
@@ -162,7 +177,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Jobs menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Jobs" Visible='<%# EmployeePermission("Deny_JobsMenu") %>'>
+                                    <telerik:RadMenuItem runat="server" Text="JOBS" Visible='<%# EmployeePermission("Deny_JobsMenu") %>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Jobs.aspx" Text="Job List"
                                                 Visible='<%# EmployeePermission("Deny_JobsList") %>'>
@@ -171,12 +186,12 @@
                                                 Visible='<%# IsTicketsVisible() %>'>
                                             </telerik:RadMenuItem>
 
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" BackColor="White">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" BackColor="White">
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TagCloud.aspx" Text="Tag Finder"
                                                 Visible='<%# EmployeePermission("Deny_JobTagFinder") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
 
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/JobTypes.aspx" Text="Job Types"
@@ -194,7 +209,7 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TransmittalPackageTypes.aspx" Text="Transmittal Package Types"
                                                 Visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And VersionCaracteristica(105) And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16%>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ProjectClasification.aspx" Text="Project Classification"
                                                 Visible='<%# EmployeePermission("Deny_ProjectClasification") And VersionCaracteristica(106) And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
@@ -203,7 +218,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Proposals menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Proposals" Visible='<%# EmployeePermission("Deny_ProposalsMenu") %>'>
+                                    <telerik:RadMenuItem runat="server" Text="PROPOSALS" Visible='<%# EmployeePermission("Deny_ProposalsMenu") %>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Proposals.aspx" Text="Proposal List"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
@@ -214,7 +229,7 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/calculator.aspx" Text="Calculator"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Proposal_tasks.aspx" Text="Proposal Tasks"
                                                 Visible='<%# EmployeePermission("Deny_ProposalTasksList") And VersionCaracteristica(203)%>'>
@@ -239,12 +254,12 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Billing menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Billing" Visible='<%# EmployeePermission("Deny_BillingMenu") %>'>
+                                    <telerik:RadMenuItem runat="server" Text="BILLING" Visible='<%# EmployeePermission("Deny_BillingMenu") %>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BillingManager.aspx"  Text="Billing Assistant"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BillingManager.aspx" Text="Billing Assistant"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Invoices.aspx"  Text="Invoices"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Invoices.aspx" Text="Invoices"
                                                 Visible='<%# EmployeePermission("Deny_InvoicesList") %>'>
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Statement.aspx" Text="Statements"
@@ -253,30 +268,30 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Payments.aspx" Text="Payments"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BillingActivity.aspx"  Text="Activity Chart"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BillingActivity.aspx" Text="Activity Chart"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BillingAgingReport.aspx"
-                                                 Text="Client Aging Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(303)%>'>
+                                                Text="Client Aging Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(303)%>'>
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ClientsBalance.aspx"
-                                                 Text="Client Balance Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(303)%>'>
+                                                Text="Client Balance Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(303)%>'>
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BILLvsCOLLECTED.aspx"
-                                                 Text="Bill vs Collected" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(304) %>'>
+                                                Text="Bill vs Collected" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(304) %>'>
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/bill-collected-employees.aspx"
-                                                 Text="Bill vs Collected by Employee" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(304) %>'>
+                                                Text="Bill vs Collected by Employee" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(304) %>'>
                                             </telerik:RadMenuItem>
                                         </Items>
                                     </telerik:RadMenuItem>
 
                                     <%--Clients menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Clients" Visible='<%# EmployeePermission("Deny_ClientsMenu") %>'>
+                                    <telerik:RadMenuItem runat="server" Text="CLIENTS" Visible='<%# EmployeePermission("Deny_ClientsMenu") %>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Clients.aspx" Text="Client List"
                                                 Visible='<%# EmployeePermission("Deny_ClientsList") %>'>
@@ -287,7 +302,7 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ClientFiles.aspx" Text="Client Uploaded Files"
                                                 Visible='<%# EmployeePermission("Deny_ClientsList") And VersionCaracteristica(405)%>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ClientTypes.aspx" Text="Client Types"
                                                 Visible='<%# EmployeePermission("Deny_ClientType") And VersionCaracteristica(404)%>'>
@@ -299,12 +314,12 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Subconsultants menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Subconsultants"  Visible='<%# EmployeePermission("Deny_SubconsultantsMenu") And VersionCaracteristica(500)%>'>
+                                    <telerik:RadMenuItem runat="server" Text="SUBCONSULTANTS" Visible='<%# EmployeePermission("Deny_SubconsultantsMenu") And VersionCaracteristica(500)%>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" Text="Subconsultants List" NavigateUrl="~/ADM/subconsultants.aspx"
                                                 Visible='<%# EmployeePermission("Deny_SubconsultantsList") And VersionCaracteristica(503)%>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
 
                                             <telerik:RadMenuItem runat="server" Text="Requests for Proposals" NavigateUrl="~/ADM/rfps.aspx"
@@ -319,7 +334,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Employees menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Employees" Visible='<%# EmployeePermission("Deny_EmployeesMenu") And VersionCaracteristica(600)%>' >
+                                    <telerik:RadMenuItem runat="server" Text="EMPLOYEES" Visible='<%# EmployeePermission("Deny_EmployeesMenu") And VersionCaracteristica(600)%>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Employees.aspx" Text="Employee List"
                                                 Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
@@ -327,7 +342,7 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/DashboardEmployee.aspx" Text="Dashboard"
                                                 Visible='<%# EmployeePermission("Deny_Dashboard") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Time.aspx" Text="Time Entries"
                                                 Visible='<%# EmployeePermission("Deny_ProjectTimeEntries") And VersionCaracteristica(603)%>'>
@@ -338,7 +353,8 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimeSheet.aspx" Text="Time Sheet"
                                                 Visible='<%# EmployeePermission("Deny_Timesheet") And VersionCaracteristica(605)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimesByPeriords.aspx" Text="Times by Periods">
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimesByPeriords.aspx" Text="Times by Periods"
+                                                Visible='<%# EmployeePermission("Deny_ProjectTimeEntries") And VersionCaracteristica(603)%>'>
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/AvgEEmployeesProfit.aspx"
                                                 Text="Employees Efficiency Chart" Visible='<%# EmployeePermission("Deny_EmployeesEfficiencyGraphic") And VersionCaracteristica(606)%>'>
@@ -353,7 +369,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Departments menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Departments" Visible='<%# EmployeePermission("Deny_DepartmentsMenu") %>'>
+                                    <telerik:RadMenuItem runat="server" Text="DEPARTMENTS" Visible='<%# EmployeePermission("Deny_DepartmentsMenu") %>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" Text="Departments List" NavigateUrl="~/ADM/DepartmentsList.aspx" Visible='<%# EmployeePermission("Deny_DepartmentsList") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
@@ -361,7 +377,7 @@
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" Text="Organization Chart" NavigateUrl="~/ADM/OrgChartByDepartment.aspx" Visible='<%# EmployeePermission("Deny_OrganizationChart") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" Visible='<%# EmployeePermission("Deny_DepartmentBalance") And VersionCaracteristica(1101)%>'>
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" Visible='<%# EmployeePermission("Deny_DepartmentBalance") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" Text="Balance" NavigateUrl="~/ADM/BalanceDepartments.aspx" Visible='<%# EmployeePermission("Deny_DepartmentBalance") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
@@ -373,7 +389,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Expenses menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Expenses" Visible='<%# EmployeePermission("Deny_ExpensesMenu") %>'>
+                                    <telerik:RadMenuItem runat="server" Text="EXPENSES" Visible='<%# EmployeePermission("Deny_ExpensesMenu") %>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" Text="Vendors List" NavigateUrl="~/ADM/Vendors.aspx" Visible='<%# EmployeePermission("Deny_ContactsList") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
@@ -393,7 +409,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Contacts menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Contacts" Visible='<%# EmployeePermission("Deny_ContactsMenu") %>'>
+                                    <telerik:RadMenuItem runat="server" Text="CONTACTS" Visible='<%# EmployeePermission("Deny_ContactsMenu") %>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" Text="Contacts List" NavigateUrl="~/ADM/Contacts.aspx" Visible='<%# EmployeePermission("Deny_ContactsList") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
@@ -411,7 +427,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Analytics menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Analytics" Visible='<%# EmployeePermission("Deny_Analytics") And VersionCaracteristica(700)%>'>
+                                    <telerik:RadMenuItem runat="server" Text="ANALYTICS" Visible='<%# EmployeePermission("Deny_Analytics") And VersionCaracteristica(700)%>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Dashboard.aspx" Text="Dashboard"
                                                 Visible='<%# EmployeePermission("Deny_Dashboard") And VersionCaracteristica(702)%>'>
@@ -442,7 +458,7 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ReportJobs.aspx" Text="Jobs Report"
                                                 Visible="false">
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TopTen.aspx" Text="Top Ten Charts"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(702)%>'>
@@ -462,7 +478,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Company menu--%>
-                                    <telerik:RadMenuItem runat="server" Text="Company" Visible='<%# EmployeePermission("Deny_CompanyMenu") And VersionCaracteristica(800)%>'>
+                                    <telerik:RadMenuItem runat="server" Text="COMPANY" Visible='<%# EmployeePermission("Deny_CompanyMenu") And VersionCaracteristica(800)%>' >
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Company.aspx" Text="Company Profile"
                                                 Visible='<%# EmployeePermission("Deny_CompanyProfile") And VersionCaracteristica(801)%>'>
@@ -470,7 +486,7 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/CompanyMultiplier.aspx" Text="Company Multiplier"
                                                 Visible='<%# EmployeePermission("Deny_CompanyProfile") And VersionCaracteristica(801)%>'>
                                             </telerik:RadMenuItem>
-                                           <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
+                                            <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
 
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Messages.aspx" Text="Email Records"
                                                 Visible='<%# VersionCaracteristica(802)%>'>
@@ -499,7 +515,7 @@
                                     </telerik:RadMenuItem>
 
                                     <%--Help--%>
-                                    <telerik:RadMenuItem runat="server" Target="_blank" Text="Help" NavigateUrl="http://blog.pasconcept.com/p/contents.html">
+                                    <telerik:RadMenuItem runat="server" Target="_blank" Text="Help" NavigateUrl="http://blog.pasconcept.com/p/contents.html" >
                                     </telerik:RadMenuItem>
 
                                 </Items>
@@ -522,7 +538,6 @@
                     <Columns>
                         <telerik:LayoutColumn Span="4">
                             <div style="padding-top: 2px">
-                                
                             </div>
                         </telerik:LayoutColumn>
                         <telerik:LayoutColumn Span="5">
@@ -608,13 +623,13 @@
                     </tr>
                     <tr>
 
-                        <td style="font-size:large; font-weight:bold">Select Company:
+                        <td style="font-size: large; font-weight: bold">Select Company:
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <telerik:RadComboBox ID="cboCompany" runat="server" DataSourceID="SqlDataSourceCompany" ToolTip="Company" ZIndex="50001" Width="100%"
-                                DataTextField="Name" DataValueField="companyId" Height="200px" Font-Size="Large">
+                                DataTextField="Name" DataValueField="companyId" Height="200px" >
                             </telerik:RadComboBox>
                         </td>
                     </tr>
@@ -622,7 +637,7 @@
                 <table class="table-condensed" style="width: 450px">
                     <tr>
                         <td>
-                            <telerik:RadCheckBox runat="server" ID="chkSetAsDefault" Text="Set As Default" AutoPostBack="false" ></telerik:RadCheckBox>
+                            <telerik:RadCheckBox runat="server" ID="chkSetAsDefault" Text="Set As Default" AutoPostBack="false"></telerik:RadCheckBox>
                         </td>
                     </tr>
                     <tr>
@@ -656,7 +671,7 @@
             </UpdateParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceCompanyLogo" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="CompanyLogo_SELECT" SelectCommandType="StoredProcedure" >
+            SelectCommand="CompanyLogo_SELECT" SelectCommandType="StoredProcedure">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             </SelectParameters>
@@ -679,7 +694,7 @@
         <br />
         <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
-       
+
     </form>
 </body>
 </html>

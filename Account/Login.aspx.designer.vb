@@ -92,7 +92,7 @@ Partial Public Class Login
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RememberMe As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents RememberMe As Global.Telerik.Web.UI.RadCheckBox
 
     '''<summary>
     '''LoginButton control.

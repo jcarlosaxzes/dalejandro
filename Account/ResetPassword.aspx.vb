@@ -14,24 +14,25 @@ Partial Public Class ResetPassword
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     End Sub
 
-    Protected Sub Reset_Click(sender As Object, e As EventArgs)
-        Dim code As String = IdentityHelper.GetCodeFromRequest(Request)
-        If code IsNot Nothing Then
-            Dim manager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
-            Dim user = manager.FindByName(Email.Text)
-            If user Is Nothing Then
-                ErrorMessage.Text = "No user found"
-                Return
+    Protected Async Sub Reset_Click(sender As Object, e As EventArgs)
+        If IsValid Then
+            LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
+            Dim user = LocalAPI.ExisteUserIdentity(Email.Text)
+            If user Then
+                Await LocalAPI.EmployeeEmailResetPassword(Email.Text)
+                lblMsg.Text = "Review you Email to Reset your Password"
+                lblMsg.Visible = True
+                lblMsg.ForeColor = Drawing.ColorTranslator.FromHtml("#00A8E4")
+                LoginButton.Visible = False
+                Email.Enabled = False
+            Else
+                lblMsg.Text = "No user found"
+                lblMsg.ForeColor = Drawing.Color.Red
+                lblMsg.Visible = True
+
+
             End If
-            Dim result = manager.ResetPassword(user.Id, code, Password.Text)
-            If result.Succeeded Then
-                Response.Redirect("~/Account/ResetPasswordConfirmation")
-                Return
-            End If
-            ErrorMessage.Text = result.Errors.FirstOrDefault()
-            Return
         End If
 
-        ErrorMessage.Text = "An error has occurred"
     End Sub
 End Class

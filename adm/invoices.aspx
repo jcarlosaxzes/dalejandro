@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
-
+<%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <script type="text/javascript">
         function onRequestStart(sender, args) {
@@ -37,7 +37,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
 
@@ -292,7 +292,7 @@
                             &nbsp;
                                     <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="label-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
                                         ToolTip="Mark Invoice as BadDept" CausesValidation="false">
-                                        <span class="glyphicon glyphicon-bitcoin"></span>
+                                        B
                                     </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>

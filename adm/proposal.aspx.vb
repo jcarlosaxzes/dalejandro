@@ -309,10 +309,10 @@ Public Class proposal
         RadWindowManager1.Windows.Add(window1)
     End Sub
     Protected Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
-        CreateRadWindows("SaveAs", "~/ADMCLI/SaveProposalAs.aspx?ProposalId=" & lblId.Text, 550, 400, False)
+        CreateRadWindows("SaveAs", "~/adm/saveproposalas.aspx?ProposalId=" & lblId.Text, 550, 400, False)
     End Sub
     Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
-        CreateRadWindows("SaveAs", "~/ADMCLI/SaveProposalAsTemplate.aspx?ProposalId=" & lblId.Text, 550, 400, False)
+        CreateRadWindows("SaveAs", "~/adm/saveproposalastemplate.aspx?ProposalId=" & lblId.Text, 550, 400, False)
     End Sub
     Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
         Try
@@ -358,7 +358,7 @@ Public Class proposal
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetClientProsalJobAzureFileKeyName(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Source").Value)
-        azurestorage.DeleteFile(KeyName)
+        AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
     Private Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender

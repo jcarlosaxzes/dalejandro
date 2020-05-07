@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="Subconsultants" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="subconsultants.aspx.vb" Inherits="pasconcept20.subconsultants" %>
-<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
+<%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
     <div class="Formulario">

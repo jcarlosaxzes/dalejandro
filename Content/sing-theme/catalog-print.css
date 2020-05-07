@@ -1,0 +1,35 @@
+﻿@media print {
+    .search-result-item {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .search-result-item-body {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    p {
+        page-break-inside: avoid;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .row {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body {
+        font-size: 0.9em !important;
+    }
+
+    .content {
+        padding: 15px 0px 42px !important;
+    }
+}
+
+@page {
+    size: auto; /* auto is the initial value */
+    margin: 0; /* this affects the margin in the printer settings */
+}

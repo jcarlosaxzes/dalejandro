@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="Default.aspx.vb" Inherits="pasconcept20._Default1" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
-
-
 <%@ Import Namespace="pasconcept20" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -239,7 +237,7 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="year-4" UniqueName="year-4" HeaderText="year-4" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="NameLabel17" runat="server" CssClass="GridRow" Text='<%# Eval("year-4", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-4"), Eval("IsRate"))%>'></asp:Label>
+                                                    <asp:Label ID="NameLabel171" runat="server" CssClass="GridRow" Text='<%# Eval("year-4", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-4"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="year-3" UniqueName="year-3" HeaderText="year-3" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
@@ -328,22 +326,22 @@
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Workload" UniqueName="Workload" HeaderText="Workload" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="# Hours assigned to active projects">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="NameLabel17" runat="server" CssClass="GridRow" Text='<%# Eval("Workload", "{0:N0}")%>' ForeColor='<%# LocalAPI.DegradadoDeColorWorkload(Eval("Workload"))%>'></asp:Label>
+                                                    <asp:Label ID="NameLabel172" runat="server" CssClass="GridRow" Text='<%# Eval("Workload", "{0:N0}")%>' ForeColor='<%# LocalAPI.DegradadoDeColorWorkload(Eval("Workload"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="EfficiencyAsPM" UniqueName="EfficiencyAsPM" HeaderText="Efficiency As PM" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Efficiency As Project Manager">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="NameLabel17" runat="server" CssClass="GridRow" Text='<%# Eval("EfficiencyAsPM", "{0:N0}")%>' ForeColor='<%# LocalAPI.DegradadoDeEfficiency(Eval("EfficiencyAsPM"))%>'></asp:Label>
+                                                    <asp:Label ID="NameLabel173" runat="server" CssClass="GridRow" Text='<%# Eval("EfficiencyAsPM", "{0:N0}")%>' ForeColor='<%# LocalAPI.DegradadoDeEfficiency(Eval("EfficiencyAsPM"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="EfficiencyAsTM" UniqueName="EfficiencyAsTM" HeaderText="Efficiency As TM" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Efficiency As Team Member">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="NameLabel17" runat="server" CssClass="GridRow" Text='<%# Eval("EfficiencyAsTM", "{0:N0}")%>' ForeColor='<%# LocalAPI.DegradadoDeEfficiency(Eval("EfficiencyAsTM"))%>'></asp:Label>
+                                                    <asp:Label ID="NameLabel174" runat="server" CssClass="GridRow" Text='<%# Eval("EfficiencyAsTM", "{0:N0}")%>' ForeColor='<%# LocalAPI.DegradadoDeEfficiency(Eval("EfficiencyAsTM"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="WeeklyHours" UniqueName="WeeklyHours" HeaderText="WeeklyHours" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Weekly Timesheet Hours">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="NameLabel17" runat="server" CssClass="GridRow" Text='<%# Eval("WeeklyHours", "{0:N0}")%>'></asp:Label>
+                                                    <asp:Label ID="NameLabel175" runat="server" CssClass="GridRow" Text='<%# Eval("WeeklyHours", "{0:N0}")%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="RemainingWeekDays" UniqueName="RemainingWeekDays" HeaderText="RemainingWeekDays" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Remaining Timesheet Week Days">

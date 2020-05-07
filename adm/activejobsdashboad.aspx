@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="activejobsdashboad.aspx.vb" Inherits="pasconcept20.activejobsdashboad" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style>
         .panel-heading {
@@ -302,7 +302,7 @@
                                     </asp:LinkButton>
                                 </td>
                                 <td>
-                                    <a class="glyphicon glyphicon-share" title="Click to View Job" href='<%#String.Concat("../ADMCLI/Job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
+                                    <a class="glyphicon glyphicon-share" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
                                 </td>
                             </tr>
                         </table>
@@ -675,7 +675,7 @@
         ValidationGroup="review_insert"></asp:RequiredFieldValidator>
 
 
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
 

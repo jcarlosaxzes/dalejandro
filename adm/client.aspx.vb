@@ -41,23 +41,6 @@ Public Class client
         e.NewValues("Subtype") = CType(FormView1.FindControl("cboSubtype"), RadComboBox).SelectedValue
         e.NewValues("TAGS") = CType(FormView1.FindControl("lblActualTAGS"), Label).Text + CType(FormView1.FindControl("cboTags"), RadAutoCompleteBox).Text
     End Sub
-    Protected Sub btnCredentials_Click(ByVal sender As Object, ByVal e As System.EventArgs)
-        Try
-            'Master.InfoMessage("Sending credentials ... please wait", 10)
-            Dim sEmail As String = LocalAPI.GetClientEmail(lblClientId.Text)
-            If sEmail.Length > 0 Then
-                LocalAPI.RefrescarUsuarioVinculado(sEmail, "Clientes")
-                If LocalAPI.ClientEmailCredentials(lblClientId.Text, lblCompanyId.Text) Then
-                    lblStatus.Text = "The Client Credentials have been sent by email"
-                End If
-            End If
-
-        Catch ex As Exception
-            lblStatus.Text = "Error. " & ex.Message
-
-        End Try
-
-    End Sub
 
     Protected Sub btnUpdateClient1_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
@@ -69,20 +52,7 @@ Public Class client
 
     End Sub
     Public Function GetClientPhotoURL(clientId As Integer) As String
-        Try
-
-            Dim sImageURL = "~/Images/Clients/" & clientId.ToString & ".jpg"
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(Server.MapPath(sImageURL)) Then
-                    GetClientPhotoURL = sImageURL
-                End If
-            End If
-            If Len(GetClientPhotoURL) = 0 Then GetClientPhotoURL = "~/Images/Clients/nophoto.jpg"
-
-        Catch ex As Exception
-        End Try
+        Return LocalAPI.GetClientPhotoURL(clientId)
     End Function
 
     Private Sub FormView1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormView1.ItemCommand

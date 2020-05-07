@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="Request For Proposals" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="requestforproposals.aspx.vb" Inherits="pasconcept20.requestforproposals" %>
+
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style>
@@ -37,7 +39,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
     <div class="Formulario">
@@ -176,7 +178,7 @@
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceRFP" GridLines="None" AllowAutomaticUpdates="True"
             AllowAutomaticDeletes="True" AllowSorting="True" AllowPaging="True" PageSize="25" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center">
-            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True" EditMode="PopUp"
+            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True" 
                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                 <Columns>

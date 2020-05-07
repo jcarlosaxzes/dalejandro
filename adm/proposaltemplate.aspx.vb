@@ -3,8 +3,7 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
-            ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalTemplates") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
             lblCompanyId.Text = Session("companyId")
 
             If Request.QueryString("templateId") Is Nothing Then
@@ -49,7 +48,7 @@
     End Sub
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        'lblTemplateId.Text = LocalAPI.GetLastPreProjectInsertedId(NameTextBox.Text, lblCompanyId.Text)
+        lblTemplateId.Text = LocalAPI.GetProposal_Proposal_typesId(NameTextBox.Text, lblCompanyId.Text)
     End Sub
 
     Private Sub btnAddTaskID_Click(sender As Object, e As EventArgs) Handles btnAddTaskID.Click

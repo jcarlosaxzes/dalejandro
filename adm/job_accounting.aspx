@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterJOB.Master" CodeBehind="job_accounting.aspx.vb" Inherits="pasconcept20.Job_accounting" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <script type="text/javascript">
@@ -289,7 +290,7 @@
                                     &nbsp;
                                                         <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="label-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt")=0%>'
                                                             ToolTip="Mark Invoice as BadDept" CausesValidation="false">
-                                                            <span class="glyphicon glyphicon-bitcoin"></span>
+                                                            B
                                                         </asp:LinkButton>
 
                                 </ItemTemplate>
@@ -380,7 +381,7 @@
         </div>
     </div>
 
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
 

@@ -35,13 +35,13 @@ Public Class company
                 Select Case Request.QueryString("Tab")
                     Case "1", "SMTP"
                         CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 1
-                    Case 2, "Notifications"
+                    Case "2", "Notifications"
                         CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 2
-                    Case 3, "Paypal"
+                    Case "3", "Paypal"
                         CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 3
                     Case "4", "Logo"
                         CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
-                    Case 5
+                    Case "5"
                         CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
                 End Select
             End If

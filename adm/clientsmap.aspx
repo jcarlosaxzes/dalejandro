@@ -33,7 +33,7 @@
         }
     </style>
 
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
         <Windows>
             <telerik:RadWindow ID="RadWindow1"
                 VisibleOnPageLoad="false" Behaviors="Close, Move,Maximize,Resize" Modal="true" Width="600" Height="480" runat="server" Title="Project" VisibleStatusbar="False" BorderStyle="None">
@@ -51,7 +51,7 @@
                     </button>
                 </td>
                 <td style="width: 100px">
-                     <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Map View">
+                     <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Earth View">
                     </asp:LinkButton>
                 </td>
                 <td style="width: 120px">

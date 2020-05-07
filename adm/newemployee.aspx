@@ -1,6 +1,6 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="newemployee.aspx.vb" MasterPageFile="~/adm/ADM_Basic.Master" Async="true" Inherits="pasconcept20.newemployee" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="newemployee.aspx.vb" MasterPageFile="~/adm/BasicMasterPage.Master" Async="true" Inherits="pasconcept20.newemployee" %>
 
-<%@ MasterType VirtualPath="~/ADM/ADM_Basic.master" %>
+<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
