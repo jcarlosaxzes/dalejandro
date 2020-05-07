@@ -26,8 +26,10 @@ Public Class ApplicationDbContext
     Inherits IdentityDbContext(Of ApplicationUser)
     Public Sub New()
         MyBase.New("cnnAspNetUsers", throwIfV1Schema:=False)
+        ' See: https://stackoverflow.com/a/34966050/2146113
+        Database.SetInitializer(Of ApplicationDbContext)(Nothing)
     End Sub
-    
+
     Public Shared Function Create As ApplicationDbContext
         Return New ApplicationDbContext()
     End Function    
