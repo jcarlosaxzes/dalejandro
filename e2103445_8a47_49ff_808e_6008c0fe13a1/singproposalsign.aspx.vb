@@ -334,7 +334,68 @@ Public Class singproposalsign
 
                 Dim CompanyName As String = LocalAPI.GetCompanyProperty(companyid, "Name")
 
-                Dim sSubject As String = "Proposal Acceptance Confirmation: " & ProposalObject("ProjectName")
+                Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Proposal Acceptance", lblCompanyId.Text)
+                Dim sBody As String = LocalAPI.GetMessageTemplateBody("Proposal Acceptance", lblCompanyId.Text)
+
+                sSubject = Replace(sSubject, "[Project Name]", ProposalObject("ProjectName"))
+
+                sBody = Replace(sBody, "[Project Name]", ProposalObject("ProjectName"))
+                sBody = Replace(sBody, "[Company Name]", CompanyName)
+                sBody = Replace(sBody, "[PASconceptLink]", LocalAPI.GetSharedLink_URL(11, lblProposalId.Text))
+                sBody = Replace(sBody, "[ProposalBy]", ProposalObject("ProposalBy"))
+                sBody = Replace(sBody, "[ProposalByEmail]", ProposalObject("ProposalByEmail"))
+                sBody = Replace(sBody, "[CompamyPhone]", LocalAPI.GetCompanyProperty(companyid, "Phone"))
+
+                Dim sCC As String = ""
+                Dim sProjectManagerEmail As String = ""
+                Dim sCCO As String = ""
+
+                If LocalAPI.IsCompanyNotification(lblCompanyId.Text, "Notification_AceptedProposal") Then
+                    sProjectManagerEmail = LocalAPI.GetProjectManagerEmailFromProposal(lProposalId)
+                    sCC = sProjectManagerEmail & IIf(Len(sProjectManagerEmail) > 0, ", ", "") & LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCC")
+                    sCCO = LocalAPI.GetHeadDepartmentEmailFromProposal(lProposalId)
+                End If
+
+
+                If companyid = 260962 Then
+                    ' !!! Parche1, copia a Raissa
+                    Dim departmentId As Integer = LocalAPI.GetProposalProperty(lProposalId, "DepartmentId")
+                    Select Case departmentId
+                        Case 3, 4, 5, 12
+                            sCC = sCC & IIf(Len(sCC) > 0, ", ", "") & "raissa@easterneg.com"
+                    End Select
+                End If
+
+
+                Dim sProjectManagerName As String = ""
+                If Len(sProjectManagerEmail) > 0 Then
+                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
+                End If
+                Task.Run(Function() LocalAPI.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+
+
+                Dim recipientEmailSent As String = sCC & IIf(Len(sCCO) > 0, "," & sCCO, "")
+                OneSignalNotification.SendNotification(recipientEmailSent, "Proposal Accepted", "Proposal " & ProposalObject("ProposalNumber") & " from " & ProposalObject("ClientName") & " has been accepted. Click here to view.", ProposalObject("ProposalURL"), companyid)
+
+            End If
+
+        Catch ex As Exception
+            Master.DisplayMsg("Proposal Error", ex.Message.ToString(), "error")
+        End Try
+
+    End Function
+
+    Private Function ProposalAcceptedEmail_old(ByVal lProposalId As Integer, ByVal companyid As Integer) As Boolean
+        Try
+            Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
+            Dim sClientEmail As String = ProposalObject("ClientEmail")
+
+            If Not LocalAPI.sys_IsLog(sClientEmail, LocalAPI.sys_log_AccionENUM.AceptProposal, companyid, "Proposal ID: " & lProposalId) Then
+                LocalAPI.sys_log_Nuevo(sClientEmail, LocalAPI.sys_log_AccionENUM.AceptProposal, companyid, "Proposal ID: " & lProposalId)
+
+                Dim CompanyName As String = LocalAPI.GetCompanyProperty(companyid, "Name")
+
+                Dim sSubject As String = "Confirmation Proposal Acceptance, " & ProposalObject("ProjectName")
                 Dim sMsg As New System.Text.StringBuilder
 
                 sMsg.Append("Greetings,")

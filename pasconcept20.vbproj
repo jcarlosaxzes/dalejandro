@@ -2125,6 +2125,46 @@
     <Content Include="master\transmittals_package_types.aspx" />
     <Content Include="master\usersagreelist.aspx" />
     <Content Include="master\versiones.aspx" />
+    <Content Include="RadEditorDialogs\About.ascx" />
+    <Content Include="RadEditorDialogs\AccessibleTable.ascx" />
+    <Content Include="RadEditorDialogs\Border.ascx" />
+    <Content Include="RadEditorDialogs\CellProperties.ascx" />
+    <Content Include="RadEditorDialogs\CSDialog.ascx" />
+    <Content Include="RadEditorDialogs\DocumentManager.ascx" />
+    <Content Include="RadEditorDialogs\FileBrowser.ascx" />
+    <Content Include="RadEditorDialogs\FindAndReplace.ascx" />
+    <Content Include="RadEditorDialogs\FindReplaceSettings.ascx" />
+    <Content Include="RadEditorDialogs\FlashManager.ascx" />
+    <Content Include="RadEditorDialogs\FormatCodeBlock.ascx" />
+    <Content Include="RadEditorDialogs\Help.ascx" />
+    <Content Include="RadEditorDialogs\ImageEditor.ascx" />
+    <Content Include="RadEditorDialogs\ImageManager.ascx" />
+    <Content Include="RadEditorDialogs\ImageMap.ascx" />
+    <Content Include="RadEditorDialogs\InsertExternalVideo.ascx" />
+    <Content Include="RadEditorDialogs\InsertImage.ascx" />
+    <Content Include="RadEditorDialogs\InsertLink.ascx" />
+    <Content Include="RadEditorDialogs\InsertSelectDialog.ascx" />
+    <Content Include="RadEditorDialogs\InsertTable.ascx" />
+    <Content Include="RadEditorDialogs\InsertTableLight.ascx" />
+    <Content Include="RadEditorDialogs\InsertTableLight_Lite.ascx" />
+    <Content Include="RadEditorDialogs\LinkManager.ascx" />
+    <Content Include="RadEditorDialogs\MediaManager.ascx" />
+    <Content Include="RadEditorDialogs\MobileImageManager.ascx" />
+    <Content Include="RadEditorDialogs\MobileImageProperties.ascx" />
+    <Content Include="RadEditorDialogs\MobileLinkManager.ascx" />
+    <Content Include="RadEditorDialogs\MobileTableProperties.ascx" />
+    <Content Include="RadEditorDialogs\MozillaPasteHtmlDialog.ascx" />
+    <Content Include="RadEditorDialogs\MozillaPasteTextDialog.ascx" />
+    <Content Include="RadEditorDialogs\PageProperties.ascx" />
+    <Content Include="RadEditorDialogs\SetImageProperties.ascx" />
+    <Content Include="RadEditorDialogs\SilverlightManager.ascx" />
+    <Content Include="RadEditorDialogs\SizeMargins.ascx" />
+    <Content Include="RadEditorDialogs\StyleBuilder.ascx" />
+    <Content Include="RadEditorDialogs\TableLayouts.ascx" />
+    <Content Include="RadEditorDialogs\TableProperties.ascx" />
+    <Content Include="RadEditorDialogs\TableWizard.ascx" />
+    <Content Include="RadEditorDialogs\TemplateManager.ascx" />
+    <Content Include="RadEditorDialogs\XhtmlValidator.ascx" />
     <Content Include="register.aspx" />
     <Content Include="registerconfirm.aspx" />
     <Content Include="registerend.aspx" />
@@ -2504,6 +2544,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="temp\WebForm1.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -3973,6 +4014,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Startup.vb" />
+    <Compile Include="temp\WebForm1.aspx.designer.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="temp\WebForm1.aspx.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.vb">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -4075,7 +4123,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
