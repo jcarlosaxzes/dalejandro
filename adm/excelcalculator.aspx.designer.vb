@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class excelcalculator
-    
+
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class excelcalculator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-    
+
     '''<summary>
     '''RadScriptManager1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class excelcalculator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-    
+
     '''<summary>
     '''btnExport control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class excelcalculator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnExport As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''RadAsyncUpload1 control.
     '''</summary>
@@ -48,16 +48,7 @@ Partial Public Class excelcalculator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAsyncUpload1 As Global.Telerik.Web.UI.RadAsyncUpload
-    
-    '''<summary>
-    '''RadSpreadsheet1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadSpreadsheet1 As Global.Telerik.Web.UI.RadSpreadsheet
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>

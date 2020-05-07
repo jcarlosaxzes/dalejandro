@@ -401,7 +401,6 @@
     <Content Include="adm\rfps.aspx" />
     <Content Include="adm\roles.aspx" />
     <Content Include="adm\role_permissions_form.aspx" />
-    <Content Include="adm\role_permissions_form.aspx.aspx" />
     <Content Include="adm\saveproposalas.aspx" />
     <Content Include="adm\saveproposalastemplate.aspx" />
     <Content Include="adm\schedule.aspx" />

@@ -29,7 +29,7 @@ Public Class excelcalculator
             provider = DirectCast(Session(ProviderSessionKey), SpreadsheetDocumentProvider)
         End If
 
-        RadSpreadsheet1.Provider = provider
+        'RadSpreadsheet1.Provider = provider
     End Sub
 
 End Class
