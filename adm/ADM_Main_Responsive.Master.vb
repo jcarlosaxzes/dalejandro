@@ -182,7 +182,10 @@ Public Class ADM_Main_Responsive
     End Function
 
     Public Function EmployeePermission(sOpcion As String) As Boolean
-        Return LocalAPI.GetEmployeePermission(UserId, sOpcion)
+        If Session(sOpcion) Is Nothing Then
+            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
+        End If
+        Return Session(sOpcion)
     End Function
 
     Private Sub btnSwitchCompany_Click(sender As Object, e As EventArgs) Handles btnSwitchCompany.Click
@@ -191,6 +194,9 @@ Public Class ADM_Main_Responsive
     End Sub
 
     Private Sub btnSwitchCompanyConfirm_Click(sender As Object, e As EventArgs) Handles btnSwitchCompanyConfirm.Click
+        ' Clear session Permissions
+        Session.Contents.RemoveAll()
+
         Session("companyId") = cboCompany.SelectedValue
         lblCompanyId.Text = cboCompany.SelectedValue
 
@@ -198,6 +204,7 @@ Public Class ADM_Main_Responsive
             SqlDataSourceCompany.Update()
         End If
         LocalAPI.SetLastCompanyId(lblEmployeeId.Text, cboCompany.SelectedValue)
+
         Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
         lblCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
         FormViewCompany.DataBind()
@@ -212,6 +219,7 @@ Public Class ADM_Main_Responsive
 
     Protected Sub Unnamed_LoggingOut(sender As Object, e As LoginCancelEventArgs)
         Context.GetOwinContext().Authentication.SignOut()
+        Session.Contents.RemoveAll()
         Session.Abandon()
     End Sub
 End Class
