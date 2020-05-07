@@ -73,9 +73,9 @@ Public Class ADM_Main_Responsive
                 Dim MessId As Integer
 
                 RadMenu2.DataBind()
-                If LocalAPI.GetNotificationPending(Context.User.Identity.GetUserName(), Asunto, MessId) Then
-                    InfoMessage(Asunto)
-                End If
+                'If LocalAPI.GetNotificationPending(Context.User.Identity.GetUserName(), Asunto, MessId) Then
+                '    InfoMessage(Asunto)
+                'End If
 
                 ' Device detection
                 'Dim screenSize As DeviceScreenSize = Detector.GetScreenSize(Request.UserAgent)
