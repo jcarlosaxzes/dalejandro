@@ -182,7 +182,10 @@ Public Class ADM_Main_Responsive
     End Function
 
     Public Function EmployeePermission(sOpcion As String) As Boolean
-        Return LocalAPI.GetEmployeePermission(UserId, sOpcion)
+        If Session(sOpcion) Is Nothing Then
+            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
+        End If
+        Return Session(sOpcion)
     End Function
 
     Private Sub btnSwitchCompany_Click(sender As Object, e As EventArgs) Handles btnSwitchCompany.Click
