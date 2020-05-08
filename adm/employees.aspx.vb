@@ -120,7 +120,7 @@ Public Class employees
             Case "SendCredentials"
                 Dim sEmail As String = LocalAPI.GetEmployeeEmail(lId:=e.CommandArgument)
                 If LocalAPI.ValidEmail(sEmail) Then
-                    LocalAPI.RefrescarUsuarioVinculado(sEmail, "Empleados")
+                    LocalAPI.RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
                     If LocalAPI.EmployeeEmailCredentials(EmployeeId:=e.CommandArgument, companyId:=lblCompanyId.Text) Then
                         Master.InfoMessage("The credentials were sent by email", 0)
                     End If

@@ -15,6 +15,7 @@ Imports System.Linq
 Imports System.Net.Http
 
 Imports Microsoft.AspNet.Identity.Owin
+Imports Microsoft.AspNet.Identity.EntityFramework
 
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
@@ -5728,7 +5729,7 @@ Public Class LocalAPI
 
     Public Shared Function AddEmployeeToUser(ByVal sEmail As String, ByVal companyId As Integer) As Boolean
         Try
-            RefrescarUsuarioVinculado(sEmail, "Empleados")
+            RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
 
         Catch ex As Exception
 
@@ -5783,7 +5784,7 @@ Public Class LocalAPI
                     sFullBody.Append("wellcome to PASconcept. ")
                     sFullBody.Append("<br />")
                     sFullBody.Append("You can set a new password")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
                     sFullBody.Append("<br />")
 
 
@@ -7307,7 +7308,7 @@ Public Class LocalAPI
 
 
 
-    Public Shared Function RefrescarUsuarioVinculado(ByVal sEmail As String, ByVal sRole As String) As String
+    Public Shared Async Function RefrescarUsuarioVinculadoAsync(ByVal sEmail As String, ByVal sRole As String) As Task(Of String)
         Try
             Dim sMsgRes As String = ""
             Dim username(0) As String
@@ -7322,10 +7323,10 @@ Public Class LocalAPI
                 Dim UsuarioPortal = LocalAPI.ExisteUser(sEmail)
                 If UsuarioPortal Then  ' Migrate to Identity
                     Dim password = LocalAPI.GetMembershipUserPasswod(sEmail)
-                    LocalAPI.CreateOrUpdateUser(sEmail, password)
+                    Await LocalAPI.CreateOrUpdateUser(sEmail, password)
                 Else
                     Dim password = LocalAPI.CreateUserPassword()
-                    LocalAPI.CreateOrUpdateUser(sEmail, password)
+                    Await LocalAPI.CreateOrUpdateUser(sEmail, password)
                     sMsgRes = "Se ha creado el usuario " & sEmail
                 End If
             End If
@@ -8305,7 +8306,7 @@ Public Class LocalAPI
                 ExecuteNonQuery(String.Format("UPDATE Employees Set [Employee_Code]= '{0}' WHERE Id={1}", sEmployee_Code, employeeId))
             End If
 
-            RefrescarUsuarioVinculado(sEmail, "Empleados")
+            RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
             ' Set algunos perminos de inicio
             ExecuteNonQuery("UPDATE [Employees] SET [Allow_OtherEmployeeJobs]=1 WHERE Id=" & employeeId)
 
@@ -8377,7 +8378,7 @@ Public Class LocalAPI
 
             'Dim lEmplId  As Integer = GetEmployeeId(sEmail)
             'If lEmplId > 0 Then AddEmployeeToUser(sEmail, lEmplId, bAdministrator, True, companyId)
-            RefrescarUsuarioVinculado(sEmail, "Empleados")
+            RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
 
 
             ' Set algunos perminos de inicio
@@ -9455,7 +9456,7 @@ Public Class LocalAPI
             cmd.ExecuteNonQuery()
             cnn1.Close()
 
-            RefrescarUsuarioVinculado(sEmail, "Subconsultans")
+            RefrescarUsuarioVinculadoAsync(sEmail, "Subconsultans")
 
             LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewSubconsultan, companyId, sName)
 
@@ -9647,7 +9648,7 @@ Public Class LocalAPI
     End Function
 
     Public Shared Async Function CreateOrUpdateUser(email As String, password As String) As Task(Of pasconcept20.ApplicationUser)
-        Dim identityUser As pasconcept20.ApplicationUser = Await AppUserManager.FindByEmailAsync(email)
+        Dim identityUser = Await AppUserManager.FindByEmailAsync(email)
         If identityUser IsNot Nothing Then
             Dim token = Await AppUserManager.GeneratePasswordResetTokenAsync(identityUser.Id)
             Dim passwordHasher = New pasconcept20.PASPasswordHasher()
