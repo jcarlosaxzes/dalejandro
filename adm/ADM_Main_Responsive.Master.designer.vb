@@ -50,6 +50,15 @@ Partial Public Class ADM_Main_Responsive
     Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
     
     '''<summary>
+    '''HeaderPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HeaderPanel As Global.Telerik.Web.UI.LayoutRow
+    
+    '''<summary>
     '''FormViewCompany control.
     '''</summary>
     '''<remarks>

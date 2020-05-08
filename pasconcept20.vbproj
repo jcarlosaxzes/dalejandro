@@ -1808,6 +1808,7 @@
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-brands-400.svg" />
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-regular-400.svg" />
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\pasconcept.css" />
     <Content Include="Content\sing-theme\application-ie9-part2.css" />
     <Content Include="Content\sing-theme\application.css" />
     <Content Include="Content\sing-theme\application.min.css" />
@@ -2035,6 +2036,8 @@
     <Content Include="master\invoices.aspx" />
     <Content Include="master\masscommunication.aspx" />
     <Content Include="master\MasterPage.Master" />
+    <Content Include="help\eng\PASconcept_Help_EN.pdf" />
+    <Content Include="help\esp\PASconcept_Help_ES.pdf" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -4122,7 +4125,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

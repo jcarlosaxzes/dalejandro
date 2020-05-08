@@ -138,29 +138,6 @@
             .RadProgressBar_Material.rpbHorizontal {
                 margin: 0 !important;
             }
-            .DashboardFont1{
-                font-family: Muli,Helvetica Neue,Arial,sans-serif;
-                font-size: 36px;
-                color: #fff!important;
-                font-weight: 300;
-                line-height: 1;
-                margin-top:16px;
-
-            }
-            .DashboardFont2{
-                font-family: Muli,Helvetica Neue,Arial,sans-serif;
-                font-size: 20px;
-                color: #fff!important;
-                line-height: 1.8!important;
-            }
-            .DashboardFont3{
-                margin-left: 8px!important;
-                font-family: Muli,Helvetica Neue,Arial,sans-serif;
-                color: #fff!important;
-                font-size: 14px;
-                line-height: 1.4!important;
-                letter-spacing: -.1px!important;
-            }
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -183,7 +160,7 @@
                 </td>
                 <td style="width: 80px; text-align: center">
                     <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
-                        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
+                        <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
                             $ Dashboard
                         </button>
                     </asp:Panel>
@@ -372,32 +349,32 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 14%;text-align:center; background-color:#039be5">
+                        <td style="width: 14%;text-align:center;background-color: #039be5;">
                             <span class="DashboardFont2">Budget</span>
                             <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#546e7a">
+                        <td style="width: 14%;text-align:center;background-color: #546e7a;">
                             <span class="DashboardFont2">Billed</span>
                             <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#43a047">
+                        <td style="width: 14%;text-align:center;background-color: #43a047;">
                             <span class="DashboardFont2">Collected</span>
                             <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#e53935">
+                        <td style="width: 14%;text-align:center;background-color: #e53935;">
                             <span class="DashboardFont2">Pending</span>
                             <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#43a047">
+                        <td style="width: 14%;text-align:center;background-color: #43a047;">
                             <span class="DashboardFont2">Balance</span>
                             <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#039be5">
+                        <td style="width: 14%;text-align:center;background-color: #e53935;">
                             <span class="DashboardFont2">SubContract</span>
                             <asp:Label ID="lblTotalSubContract" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>

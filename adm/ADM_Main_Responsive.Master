@@ -14,6 +14,7 @@
     <%--Bootstrap reference end--%>
     <link href="~/Content/fontawesome-free-5.1.1-web/css/all.css" rel="stylesheet" />
     <link href="~/css/Menu.PASMenuBlackMetroTouch.css" rel="stylesheet" />
+    <link href="~/Content/pasconcept.css" rel="stylesheet" />
 
     <meta name="DESCRIPTION" content="A web-based application conceived and designed to provide an all-inclusive management tool for architectural and engineering firms who wish to integrate the interaction." />
     <meta name="KEYWORDS" content="pasconcept,saas,online project administration,architectural app,engineering app,project app,time sheet,proposals online,job online,civil app,mechanical app,structural app,
@@ -89,7 +90,7 @@
 
         <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
             <Rows>
-                <telerik:LayoutRow StaticId="Header1" CssClass="noprint">
+                <telerik:LayoutRow runat="server"  StaticId="Header1" CssClass="noprint" ID="HeaderPanel">
 
                     <Columns>
                         <telerik:LayoutColumn Span="4">
@@ -165,8 +166,7 @@
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Default.aspx" Text="Home">
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/activejobsdashboad.aspx" Text="Active-jobs Dashboad"
-                                                Visible='<%# EmployeePermission("Deny_Analytics") %>'>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/activejobsdashboad.aspx" Text="Active-jobs Dashboad">
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Schedule.aspx" Text="Calendar">
                                             </telerik:RadMenuItem>
@@ -354,7 +354,7 @@
                                                 Visible='<%# EmployeePermission("Deny_Timesheet") And VersionCaracteristica(605)%>'>
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimesByPeriords.aspx" Text="Times by Periods"
-                                                Visible='<%# EmployeePermission("Deny_ProjectTimeEntries") And VersionCaracteristica(603)%>'>
+                                                Visible='<%# EmployeePermission("Deny_EmployeesList")%>'>
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/AvgEEmployeesProfit.aspx"
                                                 Text="Employees Efficiency Chart" Visible='<%# EmployeePermission("Deny_EmployeesEfficiencyGraphic") And VersionCaracteristica(606)%>'>
@@ -565,10 +565,10 @@
                         <div style="text-align: center; padding-top: 2px" class="noprint">
                             <asp:HyperLink ID="lnkHelp" runat="server" CssClass="enlacepie" ToolTip="Help" Target="_blank" NavigateUrl="http://blog.pasconcept.com/p/contents.html">Blog | 
                             </asp:HyperLink>
-                            <asp:HyperLink ID="lnkAyuda" runat="server" CssClass="pieayuda" ToolTip="User Manual (PDF)" Target="_blank" NavigateUrl="https://pasconcept.com/Help/ENG/PASconcept_Help_EN.pdf">Help (ENG)  
+                            <asp:HyperLink ID="lnkAyuda" runat="server" CssClass="pieayuda" ToolTip="User Manual (PDF)" Target="_blank" NavigateUrl="~/help/eng/PASconcept_Help_EN.pdf">Help (ENG)  
                             </asp:HyperLink>
                             <asp:Label ID="Label11" runat="server" class="enlacepie" Text=" |"></asp:Label>
-                            <asp:HyperLink ID="HyperLink1" runat="server" CssClass="pieayuda" ToolTip="Documentación de PASconcept en Español (PDF)" Target="_blank" NavigateUrl="https://pasconcept.com/Help/ESP/PASconcept_Help_ES.pdf">Ayuda (ESP)  
+                            <asp:HyperLink ID="HyperLink1" runat="server" CssClass="pieayuda" ToolTip="Documentación de PASconcept en Español (PDF)" Target="_blank" NavigateUrl="~/help/esp/PASconcept_Help_ES.pdf">Ayuda (ESP)  
                             </asp:HyperLink>
                             <asp:Label ID="Label1" runat="server" class="enlacepie" Text=" |"></asp:Label>
                             <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Privacy | </a>

@@ -366,7 +366,7 @@
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this note?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
+                                UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
                             </telerik:GridButtonColumn>
 
