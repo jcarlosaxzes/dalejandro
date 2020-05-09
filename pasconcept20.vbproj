@@ -332,6 +332,7 @@
     <Content Include="adm\departmentbudgetbystatus.aspx" />
     <Content Include="adm\departmentreport.aspx" />
     <Content Include="adm\departmentslist.aspx" />
+    <Content Include="adm\department_form.aspx" />
     <Content Include="adm\discipline.aspx" />
     <Content Include="adm\employee.aspx" />
     <Content Include="adm\employeenewtime.aspx" />
@@ -2908,6 +2909,13 @@
       <DependentUpon>departmentslist.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\department_form.aspx.designer.vb">
+      <DependentUpon>department_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\department_form.aspx.vb">
+      <DependentUpon>department_form.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\discipline.aspx.designer.vb">
       <DependentUpon>discipline.aspx</DependentUpon>
     </Compile>
@@ -4125,7 +4133,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

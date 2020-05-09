@@ -15,6 +15,13 @@
     End Sub
 
     Protected Sub btnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNew.Click
-        RadGrid1.MasterTableView.InsertItem()
+        Response.Redirect("~/adm/department_form.aspx")
+    End Sub
+    Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
+        Select Case e.CommandName
+            Case "EditDepartment"
+                Response.Redirect("~/adm/department_form.aspx?DepartmentId=" & e.CommandArgument)
+
+        End Select
     End Sub
 End Class
