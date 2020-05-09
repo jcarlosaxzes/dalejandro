@@ -115,7 +115,7 @@ Public Class invoices
                 sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
                 CreateRadWindows(e.CommandName, sUrl, 960, 790, False)
 
-            Case "RecibePayment"
+            Case "RecivePayment"
                 lblInvoiceId.Text = e.CommandArgument
                 txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
                 txtAmountPayment.DbValue = txtAmountPayment.MaxValue

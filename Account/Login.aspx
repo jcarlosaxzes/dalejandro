@@ -83,7 +83,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label  style= "color:#337ab7"> By clicking Sing In, You agree out terms & Conditions</label>
+                                            <label  style= "color:#337ab7"> By clicking Sign In, You agree out terms & Conditions</label>
                                         </div>
 
                                     </form>

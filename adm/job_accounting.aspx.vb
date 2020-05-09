@@ -65,7 +65,7 @@ Public Class Job_accounting
                 lblInvoiceId.Text = e.CommandArgument
                 InvoiceDlg()
 
-            Case "RecibePayment"
+            Case "RecivePayment"
                 lblInvoiceId.Text = e.CommandArgument
                 txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
                 txtAmountPayment.DbValue = txtAmountPayment.MaxValue
