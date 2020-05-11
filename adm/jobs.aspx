@@ -508,7 +508,7 @@
                                             CommandName="HideClient" UseSubmitBehavior="false">
                                                     <span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span>
                                         </asp:LinkButton>
-                                        <a title="Click here to view Scope Of Work" href='<%#String.Concat("../EMP/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
+                                        <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
                                             <span class="glyphicon glyphicon glyphicon-th-list"></span>
                                         </a>
                                         <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name")," - ",Eval("Company"))%>' CssClass="lnkGrid"></asp:Label>

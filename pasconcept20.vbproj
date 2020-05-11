@@ -408,6 +408,7 @@
     <Content Include="adm\saveproposalas.aspx" />
     <Content Include="adm\saveproposalastemplate.aspx" />
     <Content Include="adm\schedule.aspx" />
+    <Content Include="adm\scopeofwork.aspx" />
     <Content Include="adm\sendinvoice.aspx" />
     <Content Include="adm\sendproposal.aspx" />
     <Content Include="adm\sendstatement.aspx" />
@@ -428,6 +429,7 @@
     <Content Include="adm\timecategory.aspx" />
     <Content Include="adm\timesbyperiords.aspx" />
     <Content Include="adm\timesheet.aspx" />
+    <Content Include="adm\titleblock.aspx" />
     <Content Include="adm\topten.aspx" />
     <Content Include="adm\transmittal.aspx" />
     <Content Include="adm\transmittals.aspx" />
@@ -3451,6 +3453,13 @@
       <DependentUpon>schedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\scopeofwork.aspx.designer.vb">
+      <DependentUpon>scopeofwork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\scopeofwork.aspx.vb">
+      <DependentUpon>scopeofwork.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\sendinvoice.aspx.designer.vb">
       <DependentUpon>sendinvoice.aspx</DependentUpon>
     </Compile>
@@ -3589,6 +3598,13 @@
     </Compile>
     <Compile Include="adm\timesheet.aspx.vb">
       <DependentUpon>timesheet.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\titleblock.aspx.designer.vb">
+      <DependentUpon>titleblock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\titleblock.aspx.vb">
+      <DependentUpon>titleblock.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\topten.aspx.designer.vb">
@@ -4157,7 +4173,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

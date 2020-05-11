@@ -10686,7 +10686,7 @@ Public Class LocalAPI
                     sMsg.Append("<b>Scope of Work</b>")
                     sMsg.Append("<br />")
                     sMsg.Append("Click here to ")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/EMP/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
+                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
                     sMsg.Append("<br />")
 
                 Catch ex As Exception
