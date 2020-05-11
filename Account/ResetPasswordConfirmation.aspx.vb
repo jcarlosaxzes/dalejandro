@@ -26,6 +26,12 @@ Partial Public Class ResetPasswordConfirmation
         If IsValid Then
             LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
             If Password1.Text = password2.Text Then
+                If Not (Await LocalAPI.AppUserManager.PasswordValidator.ValidateAsync(Password1.Text)).Succeeded Then
+                    lblMsg.Text = "Minimum 6 (six) characters in length required,   Minimum 1 (one) nonalphanumeric character required"
+                    lblMsg.ForeColor = Drawing.Color.Red
+                    lblMsg.Visible = True
+                    Return
+                End If
                 Dim user = Await LocalAPI.CreateOrUpdateUser(Email.Text, Password1.Text)
                 lblMsg.Text = "Password Resset. Go to Login"
                 lblMsg.Visible = True

@@ -1,5 +1,8 @@
 ﻿Imports Microsoft.AspNet.Identity.Owin
 Imports Telerik.Web.UI
+Imports Microsoft.AspNet.Identity
+Imports Microsoft.AspNet.Identity.EntityFramework
+Imports Owin
 
 Public Class companylist
     Inherits System.Web.UI.Page
@@ -18,13 +21,16 @@ Public Class companylist
         End If
     End Sub
 
-    Private Async Function SendMasterCredentilasAsync(companyId As Integer) As Threading.Tasks.Task
+    Private Async Function SendMasterCredentilasAsync(companyId As Integer) As Threading.Tasks.Task(Of Boolean)
         Try
             If Val(companyId) > 0 Then
-                LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
                 Dim sEmail As String = LocalAPI.GetCompanyProperty(companyId, "Email")
                 If sEmail.Length > 0 Then
-                    Await LocalAPI.EmployeeEmailResetPassword(sEmail)
+                    LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
+                    Dim user = LocalAPI.ExisteUserIdentity(sEmail)
+                    If user Then
+                        Await LocalAPI.EmployeeEmailResetPassword(sEmail)
+                    End If
                     lblMsg.Text = "The credentials were sent by email"
                 End If
             End If
@@ -32,7 +38,7 @@ Public Class companylist
             lblMsg.Text = "Error. " & ex.Message
 
         End Try
-
+        Return True
     End Function
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
