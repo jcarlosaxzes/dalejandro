@@ -9650,6 +9650,13 @@ Public Class LocalAPI
 
     Public Shared Async Function CreateOrUpdateUser(email As String, password As String) As Task(Of pasconcept20.ApplicationUser)
         Dim identityUser = Await AppUserManager.FindByEmailAsync(email)
+        If IsNothing(password) Then
+            password = "ValidPassword@#$<GDE45"
+        End If
+        If Not (Await AppUserManager.PasswordValidator.ValidateAsync(password)).Succeeded Then
+            password = "ValidPassword@#$<GDE45"
+        End If
+
         If identityUser IsNot Nothing Then
             Dim token = Await AppUserManager.GeneratePasswordResetTokenAsync(identityUser.Id)
             Dim passwordHasher = New pasconcept20.PASPasswordHasher()
@@ -9662,12 +9669,7 @@ Public Class LocalAPI
                 .UserName = email,
                 .EmailConfirmed = True
             }
-            If IsNothing(password) Then
-                password = "ValidPassword@#$<GDE45"
-            End If
-            If Not (Await AppUserManager.PasswordValidator.ValidateAsync(password)).Succeeded Then
-                password = "ValidPassword@#$<GDE45"
-            End If
+
             Dim result = Await AppUserManager.CreateAsync(user, password)
             If result.Succeeded Then
                 LocalAPI.NormalizeUser(email)
