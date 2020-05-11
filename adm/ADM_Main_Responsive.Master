@@ -145,7 +145,7 @@
                                             <asp:LoginStatus runat="server" LogoutAction="Redirect"
                                                 ToolTip="Logout"
                                                 LogoutText="Log out &lt;i aria-hidden=&quot;true&quot; class=&quot;fas fa-sign-out-alt&quot;&gt;&lt;/i&gt;"
-                                                LogoutPageUrl="http://pasconcept.com/" OnLoggingOut="Unnamed_LoggingOut" />
+                                                LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                         </li>
                                     </ul>
                                 </li>

@@ -59,15 +59,6 @@ Partial Public Class departmentslist
     Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
     
     '''<summary>
-    '''RadCodeBlock1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
-    
-    '''<summary>
     '''RadGrid1 control.
     '''</summary>
     '''<remarks>

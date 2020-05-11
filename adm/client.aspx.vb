@@ -88,4 +88,8 @@ Public Class client
         window1.OnClientClose = "OnClientClose"
         RadWindowManager1.Windows.Add(window1)
     End Sub
+
+    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
+        FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
+    End Sub
 End Class

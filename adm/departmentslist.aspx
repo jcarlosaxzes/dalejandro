@@ -44,27 +44,12 @@
 
             <telerik:LayoutRow>
                 <Content>
-                    <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
-                        <script type="text/javascript">
-                            var popUp;
-                            function PopUpShowing(sender, eventArgs) {
-                                popUp = eventArgs.get_popUp();
-                                var gridWidth = sender.get_element().offsetWidth;
-                                var gridHeight = sender.get_element().offsetHeight;
-                                var popUpWidth = popUp.style.width.substr(0, popUp.style.width.indexOf("px"));
-                                var popUpHeight = popUp.style.height.substr(0, popUp.style.height.indexOf("px"));
-                                popUp.style.left = ((gridWidth - popUpWidth) / 2 + sender.get_element().offsetLeft).toString() + "px";
-                                popUp.style.top = 10 + "px";
-                            }
-                        </script>
-                    </telerik:RadCodeBlock>
                     <div style="text-align: left">
                         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
-                            AutoGenerateColumns="False" AllowAutomaticDeletes="True" ShowFooter="true"
+                            AutoGenerateColumns="False" AllowAutomaticDeletes="True" ShowFooter="false"
                             AllowPaging="True" PageSize="25" AllowSorting="True" CellSpacing="0">
                             <ClientSettings>
                                 <Scrolling AllowScroll="True"></Scrolling>
-                                <ClientEvents OnPopUpShowing="PopUpShowing" />
                             </ClientSettings>
                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" EditMode="PopUp">
                                 <PagerStyle Mode="Slider" AlwaysVisible="false" />

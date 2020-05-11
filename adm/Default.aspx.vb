@@ -128,8 +128,7 @@ Public Class _Default1
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "NewTime"
-                sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 1024, 820, True)
+                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & e.CommandArgument & "&back=2")
 
             Case "JobTags"
                 sUrl = "~/ADM/Job_tags.aspx?JobId=" & e.CommandArgument

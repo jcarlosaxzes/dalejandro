@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class employeenewtime
     
     '''<summary>
+    '''btnTotals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''Image7 control.
     '''</summary>
     '''<remarks>
@@ -275,14 +293,23 @@ Partial Public Class employeenewtime
     Protected WithEvents lblSelectedTicket As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblBackId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBackId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Master property.
     '''</summary>
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

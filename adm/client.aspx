@@ -65,23 +65,21 @@
         <table class="table-condensed" style="width: 100%">
             <tr>
                 <td style="width: 80px">
-                    <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
-                        <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
-                            $ Dashboard
-                        </button>
-                    </asp:Panel>
+                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
+                       $ Dashboard
+                    </asp:LinkButton>
                 </td>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                        Back to List
                     </asp:LinkButton>
                 </td>
                 <td></td>
             </tr>
         </table>
-        <div class="collapse" id="collapseTotals">
+        <div id="collapseTotals">
             <div class="card card-body">
-                <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
+                <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" Visible="false">
                     <ItemTemplate>
                         <table class="table-condensed" style="width: 100%">
                             <tr>

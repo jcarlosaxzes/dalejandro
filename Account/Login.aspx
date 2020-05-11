@@ -71,20 +71,18 @@
                                         <div class="form-group">
                                             <a href="ResetPassword.aspx">Forgot password?</a>
                                         </div>
-                                        
 
                                         <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
                                             UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
                                                                         <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Sign in
                                         </asp:LinkButton>
-
+                                        <div style="text-align:center">
+                                            <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, You agree out terms & Conditions</a>
+                                        </div>
                                         <div>
                                             <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label  style= "color:#337ab7"> By clicking Sign In, You agree out terms & Conditions</label>
-                                        </div>
 
                                     </form>
                                 </div>

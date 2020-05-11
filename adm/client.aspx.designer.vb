@@ -32,13 +32,13 @@ Partial Public Class client
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''panelTotals control.
+    '''btnTotals control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents panelTotals As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnBack control.
