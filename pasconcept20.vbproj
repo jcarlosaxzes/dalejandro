@@ -349,6 +349,7 @@
     <Content Include="adm\importtickets.aspx" />
     <Content Include="adm\invoices.aspx" />
     <Content Include="adm\invoicestypes.aspx" />
+    <Content Include="adm\jobassignemployee.aspx" />
     <Content Include="adm\jobs.aspx" />
     <Content Include="adm\jobtickets.aspx" />
     <Content Include="adm\jobtypes.aspx" />
@@ -364,6 +365,7 @@
     <Content Include="adm\job_tags.aspx" />
     <Content Include="adm\job_times.aspx" />
     <Content Include="adm\job_transmittals.aspx" />
+    <Content Include="adm\managementrequest.aspx" />
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
@@ -3028,6 +3030,13 @@
       <DependentUpon>invoicestypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\jobassignemployee.aspx.designer.vb">
+      <DependentUpon>jobassignemployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobassignemployee.aspx.vb">
+      <DependentUpon>jobassignemployee.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\jobs.aspx.designer.vb">
       <DependentUpon>jobs.aspx</DependentUpon>
     </Compile>
@@ -3131,6 +3140,13 @@
     </Compile>
     <Compile Include="adm\job_transmittals.aspx.vb">
       <DependentUpon>job_transmittals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\managementrequest.aspx.designer.vb">
+      <DependentUpon>managementrequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\managementrequest.aspx.vb">
+      <DependentUpon>managementrequest.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\MasterJOB.Master.designer.vb">
@@ -4133,7 +4149,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
