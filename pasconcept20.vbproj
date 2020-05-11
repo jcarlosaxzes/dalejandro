@@ -338,6 +338,7 @@
     <Content Include="adm\employeenewtime.aspx" />
     <Content Include="adm\employeereport.aspx" />
     <Content Include="adm\employees.aspx" />
+    <Content Include="adm\employee_hourlywagehistory.aspx" />
     <Content Include="adm\employee_permissions.aspx" />
     <Content Include="adm\employee_permissions_form.aspx" />
     <Content Include="adm\employee_status_form.aspx" />
@@ -2953,6 +2954,13 @@
       <DependentUpon>employees.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\employee_hourlywagehistory.aspx.designer.vb">
+      <DependentUpon>employee_hourlywagehistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employee_hourlywagehistory.aspx.vb">
+      <DependentUpon>employee_hourlywagehistory.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\employee_permissions.aspx.designer.vb">
       <DependentUpon>employee_permissions.aspx</DependentUpon>
     </Compile>
@@ -4149,7 +4157,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
