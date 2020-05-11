@@ -95,24 +95,6 @@ Partial Public Class time
     Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
     
     '''<summary>
-    '''cboJob control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboJob As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''cboClient control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboClient As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
     '''cboDepartments control.
     '''</summary>
     '''<remarks>
@@ -129,6 +111,24 @@ Partial Public Class time
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboEmployee As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboJob control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboJob As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboClient As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''btnRefresh control.

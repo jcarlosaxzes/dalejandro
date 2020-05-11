@@ -77,7 +77,7 @@
                                                                         <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Sign in
                                         </asp:LinkButton>
                                         <div style="text-align:center">
-                                            <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, You agree out terms & Conditions</a>
+                                            <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, you agree Terms & Conditions</a>
                                         </div>
                                         <div>
                                             <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
