@@ -202,8 +202,8 @@
 
                                             </td>
                                             <td style="text-align: center">
-                                                <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecibePayment" CommandArgument='<%# Eval("Id") %>' 
-                                                    ToolTip="Recibe Payments" Visible='<%# Eval("AmountDue") > 0 %>' 
+                                                <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>' 
+                                                    ToolTip="Recive Payments" Visible='<%# Eval("AmountDue") > 0 %>' 
                                                     CssClass="label-success label">
                                                     <span class="glyphicon glyphicon-usd"></span>
                                                  </asp:LinkButton>

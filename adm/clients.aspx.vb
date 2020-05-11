@@ -78,8 +78,7 @@ Public Class clients
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 700)
+                Response.Redirect("~/ADM/Client.aspx?clientId=" & e.CommandArgument & "&FullPage=1")
 
             Case "EditPhoto"
                 'sUrl = "~/ADM/EditAvatar.aspx?Id=" & e.CommandArgument & "&Entity=Client"

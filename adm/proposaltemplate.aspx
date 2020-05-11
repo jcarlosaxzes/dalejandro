@@ -31,7 +31,7 @@
                 <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
                     <table class="table-condensed" style="width: 100%">
                         <tr>
-                            <td colspan="3" class="Pequena">To find out the 'task id' codes, show 'Task lisk'
+                            <td colspan="3" class="Pequena">To find out the 'task id' codes, show 'Task List'
                             </td>
                         </tr>
                         <tr>

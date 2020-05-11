@@ -75,7 +75,7 @@ Public Class activejobsdashboad
         Select Case e.CommandName
 
             Case "AddNewTime"
-                CreateRadWindows("NewTime", "~/ADM/EmployeeNewTime.aspx?JobId=" & e.CommandArgument, 1024, 900, True, True)
+                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & e.CommandArgument & "&back=1")
 
             Case "AddReview"
                 lblSelectedJob.Text = e.CommandArgument

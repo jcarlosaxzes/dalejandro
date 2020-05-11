@@ -283,7 +283,7 @@
                                                             </asp:LinkButton>
 
                                     &nbsp;
-                                                        <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="label-success label" UseSubmitBehavior="false" CommandName="RecibePayment" CommandArgument='<%# Eval("Id") %>'
+                                                        <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="label-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                                             ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                                             <span class="glyphicon glyphicon-usd"></span>
                                                         </asp:LinkButton>
@@ -366,7 +366,7 @@
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this note?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
+                                UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
                             </telerik:GridButtonColumn>
 

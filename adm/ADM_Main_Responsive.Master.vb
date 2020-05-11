@@ -222,6 +222,12 @@ Public Class ADM_Main_Responsive
         Session.Contents.RemoveAll()
         Session.Abandon()
     End Sub
+
+    Public Function HideMasterMenu() As Boolean
+        RadMenu2.Visible = False
+        HeaderPanel.Visible = False
+    End Function
+
 End Class
 
 

@@ -1,0 +1,40 @@
+﻿DashboardBackcolorBLUE {
+    background-color: #039be5;
+}
+
+DashboardBackcolorGRAY {
+    background-color: #546e7a;
+}
+
+DashboardBackcolorGREEN {
+    background-color: #43a047;
+}
+
+DashboardBackcolorRED {
+    background-color: #e53935;
+}
+
+.DashboardFont1 {
+    font-family: Muli,Helvetica Neue,Arial,sans-serif;
+    font-size: 32px;
+    color: #fff !important;
+    font-weight: 300;
+    line-height: 1;
+    margin-top: 16px;
+}
+
+.DashboardFont2 {
+    font-family: Muli,Helvetica Neue,Arial,sans-serif;
+    font-size: 20px;
+    color: #fff !important;
+    line-height: 1.8 !important;
+}
+
+.DashboardFont3 {
+    margin-left: 8px !important;
+    font-family: Muli,Helvetica Neue,Arial,sans-serif;
+    color: #fff !important;
+    font-size: 14px;
+    line-height: 1.4 !important;
+    letter-spacing: -.1px !important;
+}

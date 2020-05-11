@@ -19,7 +19,6 @@ Public Class employeenewtime
                     lblSelectedTicket.Text = Request.QueryString("JobTicketId")
                 End If
 
-
                 ' Botones Time & TimeAndInvoices Visible????
                 Dim type As Integer = LocalAPI.GetClientProperty(clientId, "BillType")
                 Select Case type
@@ -37,6 +36,15 @@ Public Class employeenewtime
                                 btnInsertTime.Visible = False
                         End Select
                 End Select
+
+                If Not Request.QueryString("Dialog") Is Nothing Then
+                    Master.HideMasterMenu()
+                    btnBack.Visible = False
+                End If
+                If Not Request.QueryString("back") Is Nothing Then
+                    lblBackId.Text = Request.QueryString("back")
+                End If
+
 
                 InitDialog()
 
@@ -104,9 +112,13 @@ Public Class employeenewtime
         Try
 
             If LocalNewTime() Then
-                InitDialog()
-                RadGridTimes.DataBind()
-                Master.InfoMessage("New time inserted")
+                If btnBack.Visible Then
+                    BackPage()
+                Else
+                    InitDialog()
+                    RadGridTimes.DataBind()
+                    Master.InfoMessage("New time inserted")
+                End If
             End If
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
@@ -120,8 +132,12 @@ Public Class employeenewtime
                 Dim TimeId As Integer = LocalAPI.GetLastTimeId(lblEmployeeId.Text, lblSelectedJob.Text)
                 LocalNewInvoice(TimeId)
 
-                InitDialog()
-                Master.InfoMessage("New time & invoice inserted")
+                If btnBack.Visible Then
+                    BackPage()
+                Else
+                    InitDialog()
+                    Master.InfoMessage("New time & invoice inserted")
+                End If
             End If
 
         Catch ex As Exception
@@ -188,6 +204,19 @@ Public Class employeenewtime
                 txtDescription.Focus()
             End If
         End If
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        BackPage()
+    End Sub
+    Private Sub BackPage()
+        Select Case lblBackId.Text
+            Case 1
+                Response.Redirect("~/adm/activejobsdashboad.aspx")
+            Case 2
+                Response.Redirect("~/adm/default.aspx")
+        End Select
+
     End Sub
 End Class
 

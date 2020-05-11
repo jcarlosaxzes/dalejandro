@@ -332,6 +332,7 @@
     <Content Include="adm\departmentbudgetbystatus.aspx" />
     <Content Include="adm\departmentreport.aspx" />
     <Content Include="adm\departmentslist.aspx" />
+    <Content Include="adm\department_form.aspx" />
     <Content Include="adm\discipline.aspx" />
     <Content Include="adm\employee.aspx" />
     <Content Include="adm\employeenewtime.aspx" />
@@ -1808,6 +1809,7 @@
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-brands-400.svg" />
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-regular-400.svg" />
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\pasconcept.css" />
     <Content Include="Content\sing-theme\application-ie9-part2.css" />
     <Content Include="Content\sing-theme\application.css" />
     <Content Include="Content\sing-theme\application.min.css" />
@@ -2035,6 +2037,8 @@
     <Content Include="master\invoices.aspx" />
     <Content Include="master\masscommunication.aspx" />
     <Content Include="master\MasterPage.Master" />
+    <Content Include="help\eng\PASconcept_Help_EN.pdf" />
+    <Content Include="help\esp\PASconcept_Help_ES.pdf" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -2903,6 +2907,13 @@
     </Compile>
     <Compile Include="adm\departmentslist.aspx.vb">
       <DependentUpon>departmentslist.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\department_form.aspx.designer.vb">
+      <DependentUpon>department_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\department_form.aspx.vb">
+      <DependentUpon>department_form.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\discipline.aspx.designer.vb">

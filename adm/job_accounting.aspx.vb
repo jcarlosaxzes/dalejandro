@@ -33,6 +33,7 @@ Public Class Job_accounting
                     ' Refrescar el grid
                     cboInvoiceFilterCode.SelectedValue = 0
                     RadGridIncoices.DataBind()
+                    UpdateValues()
                 Else
                     Master.InfoMessage("The Invoice(s) was not inserted.")
                 End If
@@ -49,10 +50,6 @@ Public Class Job_accounting
         InvoiceDlg()
     End Sub
 
-    'Protected Sub chkAmountDueNoCero_CheckedChanged(sender As Object, e As EventArgs) Handles chkAmountDueNoCero.CheckedChanged
-    '    RadGridIncoices.DataBind()
-    'End Sub
-
     Protected Sub RadGridIncoices_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridIncoices.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
@@ -68,7 +65,7 @@ Public Class Job_accounting
                 lblInvoiceId.Text = e.CommandArgument
                 InvoiceDlg()
 
-            Case "RecibePayment"
+            Case "RecivePayment"
                 lblInvoiceId.Text = e.CommandArgument
                 txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
                 txtAmountPayment.DbValue = txtAmountPayment.MaxValue
@@ -99,21 +96,25 @@ Public Class Job_accounting
     End Sub
 
     Protected Sub SqlDataSourceInvoices_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceInvoices.Deleted
-        RadGridPayments.DataBind()
         RadGridIncoices.DataBind()
+        UpdateValues()
     End Sub
 
     Private Sub btnUpdateInvoice_Click(sender As Object, e As EventArgs) Handles btnUpdateInvoice.Click
         RadToolTipEditInvoice.Visible = False
         FormViewInvoice.UpdateItem(True)
+
+        UpdateValues()
         Master.InfoMessage("Invoice updated!")
+
     End Sub
 
     Private Sub SqlDataSourceInvoice_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceInvoice.Updated
         RadGridIncoices.DataBind()
-        RadGridPayments.DataBind()
         FormViewInvoice.DataBind()
-        FormViewStatus.DataBind()
+
+        UpdateValues()
+
     End Sub
 
     Private Sub btnCancelInvoice_Click(sender As Object, e As EventArgs) Handles btnCancelInvoice.Click
@@ -162,7 +163,9 @@ Public Class Job_accounting
         If txtDiscountPercent.Value <> 0 Or txtDiscountAmount.Value <> 0 Then
             SqlDataSourceInvoices.Update()
             RadGridIncoices.DataBind()
-            FormViewStatus.DataBind()
+
+            UpdateValues()
+
             Master.InfoMessage("The discount was applied successfully!")
         Else
             Master.ErrorMessage("The discount could not be applied. The Amount or Percent must be different from zero!")
@@ -175,6 +178,7 @@ Public Class Job_accounting
 #Region "Payments"
     Protected Sub btnInsertPayment_Click(sender As Object, e As EventArgs) Handles btnInsertPayment.Click
         SqlDataSourcePayment.Insert()
+        UpdateValues()
     End Sub
 
     Protected Sub RadGridPayments_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridPayments.ItemCommand
@@ -193,16 +197,17 @@ Public Class Job_accounting
     Protected Sub SqlDataSourcePayments_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayments.Deleted
         SqlDataSourceInvoices.DataBind()
         RadGridIncoices.DataBind()
+        UpdateValues()
     End Sub
 
     Protected Sub SqlDataSourcePayments_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayments.Updated
-        SqlDataSourceInvoices.DataBind()
         RadGridIncoices.DataBind()
+        UpdateValues()
     End Sub
     Private Sub SqlDataSourcePayment_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayment.Inserted
         Try
-            RadGridPayments.DataBind()
             RadGridIncoices.DataBind()
+            UpdateValues()
             CleanForm()
             Master.InfoMessage("Payment insertd!")
         Catch ex As Exception
@@ -266,6 +271,18 @@ Public Class Job_accounting
     Private Sub SqlDataSourceInvoice_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceInvoice.Updating
         Dim e1 As String = e.Command.Parameters(5).Value
     End Sub
+    Private Sub SqlDataSourcePayment_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayment.Deleted
+        UpdateValues()
+    End Sub
+    Private Sub SqlDataSourceInvoice_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceInvoice.Inserted
+        UpdateValues()
+    End Sub
 
+    Private Function UpdateValues()
+        RadGridPayments.DataBind()
+        FormViewStatus.DataBind()
+        SqlDataSourceClientBalance.DataBind()
+        FormViewClientBalance.DataBind()
+    End Function
 #End Region
 End Class

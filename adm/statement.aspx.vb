@@ -68,7 +68,7 @@ Public Class statement
                     sUrl = "~/adm/sharelink.aspx?ObjType=5&ObjId=" & e.CommandArgument
                     CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
 
-                Case "RecibePayment"
+                Case "RecivePayment"
                     RadDatePickerPayment2.DbSelectedDate = LocalAPI.GetDateTime()
                     txtPaymentNotes2.Text = ""
                     lblStatementId.Text = e.CommandArgument

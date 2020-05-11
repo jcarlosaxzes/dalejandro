@@ -15,11 +15,13 @@ Public Class timesheet
                 lblCompanyId.Text = Session("companyId")
 
                 Dim lEmplId As Integer = Val("" & Request.QueryString("EmployeeId"))
+                cboEmployee.DataBind()
                 If lEmplId = 0 Then
                     cboEmployee.SelectedValue = Master.UserId
                 Else
                     cboEmployee.SelectedValue = lEmplId
                 End If
+                cboEmployee.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_EmployeesList")
 
                 Dim sFecha As String = Request.QueryString("From")
                 Dim sFechaDes As String
