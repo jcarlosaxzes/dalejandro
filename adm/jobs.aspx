@@ -590,7 +590,7 @@
                                                 <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditStatus" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Job Status">
                                                     <span title="Clic to edit Job Status" class="label  <%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>"><%# Eval("nStatus") %></span>
                                                 </asp:LinkButton>
-                                                <a title="Click here to download titlebox file" href='<%#String.Concat("../EMP/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
+                                                <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
                                                     <span class="glyphicon glyphicon-cloud-download"></span>
                                                 </a>
                                             </td>
