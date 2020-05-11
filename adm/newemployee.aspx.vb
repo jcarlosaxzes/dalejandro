@@ -38,8 +38,6 @@ Public Class newemployee
             Dim employeeId As Integer = e.Command.Parameters("@Id_OUT").Value
             If employeeId > 0 Then
 
-                LocalAPI.RefrescarUsuarioVinculado(employeeId, "Empleados")
-
                 ' Employee Role
                 If cboSourceRole.SelectedValue > 0 Then
                     lblNewEmployeeInsertedId.Text = employeeId
@@ -51,18 +49,22 @@ Public Class newemployee
                 Dim dbMultiplier As Double = LocalAPI.GetCompanyMultiplier(lblCompanyId.Text, Year(Today))
                 LocalAPI.DeparmentBudgetByBaseSalaryForMultiplierFromThisMonth(lblCompanyId.Text, dbMultiplier, Year(Today), Month(Today))
 
-                ' Parasa a Edit....
-                Response.RedirectPermanent("~/ADM/Employee.aspx?employeeId=" & employeeId)
             End If
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
     End Sub
 
-    Protected Sub btnNuevo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
+    Protected Async Sub btnNuevo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
         Try
             If Not LocalAPI.IsEmployeeEmail(txtEmail.Text, lblCompanyId.Text) Then
                 SqlDataSource1.Insert()
+                LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
+                Await LocalAPI.RefrescarUsuarioVinculadoAsync(txtEmail.Text, "Empleados")
+
+                ' Parasa a Edit....
+                Dim employeeId = LocalAPI.GetEmployeeId(txtEmail.Text, lblCompanyId.Text)
+                Response.RedirectPermanent("~/ADM/Employee.aspx?employeeId=" & employeeId)
             Else
                 Master.ErrorMessage("There is already an employee with email: " & txtEmail.Text)
                 txtEmail.Focus()

@@ -45,9 +45,9 @@ Public Class ApplicationUserManager
         manager.PasswordValidator = New PasswordValidator() With {
           .RequiredLength = 6,
           .RequireNonLetterOrDigit = True,
-          .RequireDigit = True,
-          .RequireLowercase = True,
-          .RequireUppercase = True
+          .RequireDigit = False,
+          .RequireLowercase = False,
+          .RequireUppercase = False
         }
         ' Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user. 
         ' You can write your own provider and plug in here.
