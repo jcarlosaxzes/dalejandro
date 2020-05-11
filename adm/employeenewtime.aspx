@@ -18,10 +18,9 @@
                 <td></td>
             </tr>
         </table>
-        <div id="collapseTotals">
+        <div>
             <div class="card card-body">
-                Time Dashboard
-                <%--<asp:FormView ID="FormViewTimeBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceTimeBalance" Width="100%" Visible="false">
+                <asp:FormView ID="FormViewTimeBalance" runat="server" DataSourceID="SqlDataSourceTimeBalance" Width="100%">
                     <ItemTemplate>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
@@ -30,63 +29,38 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="9" style="text-align: center">
-                                    <h2 style="margin: 0"><%# Eval("TimeName")%>, <%# Eval("TimeCompany") %></h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 18%; text-align: center; background-color: #039be5">
-                                    <span class="DashboardFont2"># Pending Proposals:</span><br />
-                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
+                                <td style="width: 19%; text-align: center; background-color: #039be5">
+                                    <span class="DashboardFont2">Hours Worked</span><br />
+                                    <asp:Label ID="Label1" CssClass="DashboardFont1" runat="server" Text='<%# Eval("TotalJobHours") %>'></asp:Label>
                                 </td>
                                 <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #546e7a">
-                                    <span class="DashboardFont2">Acepted Proposal</span>
-                                    <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
+                                <td style='<%# String.Concat("width: 19%; text-align: center;",iif(Eval("OverDue") = 1,"background-color:#e53935","background-color:#43a047")) %>'>
+                                    <span class="DashboardFont2">Hours Assigned</span><br />
+                                    <asp:Label ID="Label2" CssClass="DashboardFont1" runat="server" Text='<%# Eval("HoursAssigned") %>'></asp:Label>
                                 </td>
                                 <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Jobs Budget</span>
-                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
+                                <td style='<%# String.Concat("width: 19%; text-align: center;",iif(Eval("OverDue") = 1,"background-color:#e53935","background-color:#43a047")) %>'>
+                                    <span class="DashboardFont2">Hour Used %</span><br />
+                                    <asp:Label ID="Label4" CssClass="DashboardFont1" runat="server" Text='<%# Eval("PercentUsed", "{0:P0}") %>'></asp:Label>
                                 </td>
                                 <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Amount Paid</span>
-                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
+                                <td style="width: 19%; text-align: center; background-color: #039be5">
+                                    <span class="DashboardFont2">Hours This Week</span><br />
+                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("TotalWeekHours") %>'></asp:Label>
                                 </td>
                                 <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #e53935">
-                                    <span class="DashboardFont2">Remaining Balance</span>
-                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
+                                <td style="width: 19%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Remaining</span><br />
+                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("TotalWeekHoursRemaining") %>'></asp:Label>
                                 </td>
                             </tr>
                         </table>
                     </ItemTemplate>
-                </asp:FormView>--%>
+                </asp:FormView>
 
             </div>
         </div>
     </div>
-    <table>
-        <tr>
-            <td style="width: 220px"></td>
-            <td>
-                <div class="TBL_FORM">
-                    <table class="table-condensed TBL_FORM" style="width: 100%">
-                        <tr>
-                            <td style="width: 130px; text-align: center;">
-                                <asp:Image ID="Image7" runat="server" ImageUrl="~/App_Themes/Estandar/reloj.png" />
-                            </td>
-                            <td style="text-align: left;">Enter time (in hours) and date that work was performed.
-                                <br />
-                                Click "<b>Add New Time</b>" to complete.
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </table>
 
     <div>
         <h3>
@@ -99,13 +73,6 @@
                 <td style="width: 80px; text-align: center; vertical-align: bottom">
                     <b>(Hours)</b>
                 </td>
-                <td style="width: 80px; text-align: center; vertical-align: bottom">
-                    <b>This Week</b>
-                </td>
-                <td style="width: 80px; text-align: center; vertical-align: bottom">
-                    <b>Last Weeks</b>
-                </td>
-                <td></td>
             </tr>
             <tr>
                 <td style="text-align: center">Time Worked (in hours 0.25-24):
@@ -118,15 +85,6 @@
                         <IncrementSettings Step="1" />
                     </telerik:RadNumericTextBox>
                 </td>
-                <td style="text-align: right">
-                    <span class="label label-default">Submitted:</span>
-                </td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblTotalWeekHours" runat="server"></asp:Label>
-                </td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblTotalBiWeekHours" runat="server"></asp:Label>
-                </td>
             </tr>
             <tr>
                 <td style="text-align: right">Date of Work:
@@ -135,19 +93,6 @@
                     <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US">
                     </telerik:RadDatePicker>
                 </td>
-                <td style="text-align: right">
-                    <span class="label label-warning">Remaining:</span>
-
-                </td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblRemaining" runat="server"></asp:Label>
-
-
-                </td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblRemaining2Week" runat="server"></asp:Label>
-                </td>
-
             </tr>
         </table>
         <div id="divProposalTask" runat="server">
@@ -342,13 +287,14 @@
             <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <%--<asp:SqlDataSource ID="SqlDataSourceTimeBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Client_Balance" SelectCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="SqlDataSourceTimeBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="EmployeeTime_Balance" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="ClientId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="EmployeeId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="CompanyId" PropertyName="Text" />
         </SelectParameters>
-    </asp:SqlDataSource>--%>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
