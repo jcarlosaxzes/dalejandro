@@ -16,6 +16,7 @@ Imports System.Net.Http
 
 Imports Microsoft.AspNet.Identity.Owin
 Imports Microsoft.AspNet.Identity.EntityFramework
+Imports Microsoft.AspNetCore.Identity
 
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
@@ -9661,8 +9662,16 @@ Public Class LocalAPI
                 .UserName = email,
                 .EmailConfirmed = True
             }
-            Await AppUserManager.CreateAsync(user, password)
-            LocalAPI.NormalizeUser(email)
+            If IsNothing(password) Then
+                password = "ValidPassword@#$<GDE45"
+            End If
+            If Not (Await AppUserManager.PasswordValidator.ValidateAsync(password)).Succeeded Then
+                password = "ValidPassword@#$<GDE45"
+            End If
+            Dim result = Await AppUserManager.CreateAsync(user, password)
+            If result.Succeeded Then
+                LocalAPI.NormalizeUser(email)
+            End If
             Return user
         End If
         Return identityUser
