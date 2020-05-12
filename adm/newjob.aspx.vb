@@ -23,12 +23,18 @@ Public Class newjob
 
                 SqlDataSourceEmployee.DataBind()
                 SqlDataSourceJobStatus.DataBind()
-                cboStatus.DataBind()
                 InitPage(lblId.Text)
                 txtCode.Enabled = True
 
+                If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
+                    ' Initialize for IT companies
+                    cboSector.DataBind()
+                    cboSector.SelectedValue = 2
+                    cboUse.DataBind()
+                    cboUse.SelectedValue = "B"
+                End If
+
                 txtCode.Focus()
-                lblReturn.Text = "" & Request.QueryString("Origen")
 
             End If
             Title = ConfigurationManager.AppSettings("Titulo") & IIf(lblId.Text > 0, ". Job Details", ". New Job")
@@ -56,16 +62,10 @@ Public Class newjob
 
             Me.RadDatePicker1.SelectedDate = Date.Today
 
-
-            cboStatus.Visible = False
-            lblJobStatus.Visible = False
-
             If Len(txtCode.Text) = 0 Then
                 'txtCode.Text = LocalAPI.GetNewJobCode(Left(Me.lblYear.Text, 2), lblCompanyId.Text)
                 txtCode.Text = Mid(LocalAPI.GetNextJobCode(Right(cboYear.SelectedValue, 2), lblCompanyId.Text), 4)
             End If
-
-
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
@@ -77,50 +77,22 @@ Public Class newjob
         CreateJob()
     End Sub
 
-
-    Private Function ValidarDatos() As Boolean
-        ValidarDatos = Len(Me.txtJob.Text) > 0 _
-                                And Len(Me.txtCode.Text) > 0 _
-                                And cboCliente.SelectedValue > 0 _
-                                And Len("" & cboType.SelectedValue) > 0
-
-
-        If Not ValidarDatos Then
-            Master.InfoMessage("Define the obligatory fields(*)")
-        Else
-            Dim lActualJob As Integer
-            If Len(lblId.Text) > 0 Then
-                lActualJob = lblId.Text
-            Else
-                lActualJob = -1
-                If LocalAPI.IsJobName(lActualJob, Me.txtJob.Text, lblCompanyId.Text) Then
-                    Master.InfoMessage("'" & txtJob.Text & "' is the name of other job. Change this property.")
-                    ValidarDatos = False
-                    txtJob.Focus()
-                End If
-            End If
-        End If
-    End Function
-
-
     Private Sub CreateJob()
         Try
-
-            If ValidarDatos() Then
-                Dim nEmployee As Integer = IIf(Val("" & cboEmployee.SelectedValue) > 0, cboEmployee.SelectedValue, 0)
-                Dim departmentId As Integer = LocalAPI.GetEmployeeProperty(nEmployee, "DepartmentId")
+            If Not LocalAPI.IsJobName(-1, txtJob.Text, lblCompanyId.Text) Then
                 Dim EngRecord As Integer = IIf(Val("" & cboEngRecord.SelectedValue) > 0, cboEngRecord.SelectedValue, 0)
                 Dim dCost As Double = IIf(Val("" & txtCost.Value) > 0, txtCost.Value, 0)
                 'Me.lblYear.Text = Right(Year(Me.RadDatePicker1.SelectedDate.Value), 2) & "-"
                 Dim nProposalType As Integer = IIf(Val("" & cboProposalType.SelectedValue) > 0, cboProposalType.SelectedValue, 0)
                 lblId.Text = LocalAPI.NuevoJob(lblYear.Text & txtCode.Text, txtJob.Text, RadDatePicker1.SelectedDate.Value, cboCliente.SelectedValue,
-                                       txtBudgest.Text, nProposalType, cboType.SelectedValue, nEmployee, txtProjectLocation.Text, txtProjectArea.Text, 0, 0, "", departmentId, txtOwnerName.Text, EngRecord, dCost, lblCompanyId.Text)
+                                       txtBudgest.Text, nProposalType, cboType.SelectedValue, cboEmployee.SelectedValue, txtProjectLocation.Text, "", cboSector.SelectedValue, cboUse.SelectedValue, "", cboDepartment.SelectedValue, txtOwnerName.Text, EngRecord, dCost, lblCompanyId.Text)
 
-                lblCreatedJobTitle.Text = lblYear.Text & txtCode.Text & " " & txtJob.Text
-                InsertForm.Visible = False
-                FinalPanel.Visible = True
+                ' Return con llamado a job_page!!!
+                Response.Redirect("~/adm/jobs.aspx?JobIdInput=" & lblId.Text)
+
             Else
                 txtJob.Focus()
+                Master.ErrorMessage("'" & txtJob.Text & "' is the name of other job. Change this property.")
             End If
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
@@ -132,7 +104,9 @@ Public Class newjob
         txtCode.Text = Mid(LocalAPI.GetNextJobCode(Right(cboYear.SelectedValue, 2), lblCompanyId.Text), 4)
     End Sub
 
-
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/jobs.aspx")
+    End Sub
 End Class
 
 
