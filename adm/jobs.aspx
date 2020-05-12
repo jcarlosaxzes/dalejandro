@@ -893,4 +893,5 @@
     <asp:Label ID="lblSelectedJobId" runat="server" Visible="False" Text=""></asp:Label>
     <asp:Label ID="lblTagId" runat="server" Visible="False" Text=""></asp:Label>
     <asp:Label ID="lblTagIN_List" runat="server" Visible="False" Text=""></asp:Label>
+    <asp:Label ID="lblJobIdInput" runat="server" Visible="False" Text="0"></asp:Label>
 </asp:Content>
