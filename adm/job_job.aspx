@@ -41,13 +41,13 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <div class="container">
+    <div class="pas-container">
         <asp:ValidationSummary ID="ValidationSummaryJobUpdate" runat="server"
             Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="JobUpdate" />
         <div class="row">
             <div class="form-group">
 
-                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceJob" DefaultMode="Edit" Width="100%">
+                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceJob" DefaultMode="Edit" Width="98%">
                     <EditItemTemplate>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
@@ -326,7 +326,7 @@
         </div>
         <div class="row">
             <div class="form-group" style="text-align: right">
-                <table style="width:100%">
+                <table style="width:98%">
                     <tr>
                         <td style="width: 150px; text-align: right;vertical-align:top">
                             Tags: 
@@ -342,11 +342,6 @@
                     </tr>
                 </table>
                
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group" style="text-align: right">
-                
             </div>
         </div>
     </div>

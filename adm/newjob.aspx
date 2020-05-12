@@ -19,223 +19,221 @@
             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were this errors:"></asp:ValidationSummary>
     </div>
-
-    <table class="table-condensed" style="width: 100%">
-        <tr>
-            <td style="width: 200px; text-align: right">Project Year:
-            </td>
-            <td style="width: 180px; text-align: right">
-                <telerik:RadDropDownList ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
-                    DataValueField="Year" Width="100%" AutoPostBack="true" CausesValidation="false" UseSubmitBehavior="false">
-                </telerik:RadDropDownList>
-            </td>
-            <td style="width: 180px; text-align: right">Project Code:</td>
-            <td style="width: 40px; text-align: right">
-                <asp:Label ID="lblYear" runat="server" Font-Bold="true" Font-Size="Medium">
-                </asp:Label>
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtCode" runat="server" Width="100px" MaxLength="4" Font-Bold="true">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-    </table>
-    <table class="table-condensed" style="width: 100%">
-        <tr>
-            <td style="width: 200px; text-align: right">Opening Date:
-            </td>
-            <td>
-                <telerik:RadDatePicker ID="RadDatePicker1" runat="server" Width="180px">
-                </telerik:RadDatePicker>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Job Name:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtJob" runat="server" Width="100%" MaxLength="80">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Template:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboProposalType" runat="server" DataSourceID="SqlDataSourceProposalType" DataTextField="Name"
-                    DataValueField="Id" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" Filter="Contains" Height="300px">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Template...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Type:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceJobTypes" DataTextField="Name"
-                    DataValueField="Id" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" Filter="Contains" Height="300px">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Job Type...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Client:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboCliente" runat="server" DataSourceID="SqlDataSourceClientes"
-                    DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True" Height="300px"
-                    MarkFirstMatch="True" Filter="Contains">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Client...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Owner Name:</td>
-            <td>
-                <telerik:RadTextBox ID="txtOwnerName" runat="server" Width="100%" MaxLength="80">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Department:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboDepartment" runat="server"
-                    AppendDataBoundItems="True"
-                    DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id"
-                    Width="100%" MarkFirstMatch="True"
-                    Filter="Contains" Height="300px">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Assigned Employee:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboEmployee" runat="server"
-                    DataSourceID="SqlDataSourceEmployee" DataTextField="Name" DataValueField="Id"
-                    Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="True">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Employee...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">A/E of Record:</td>
-            <td>
-                <telerik:RadComboBox ID="cboEngRecord" runat="server"
-                    DataSourceID="SqlDataSourceEmployee" DataTextField="Name" DataValueField="Id"
-                    Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="True">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select  A/E of Record...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Location:</td>
-            <td>
-                <telerik:RadTextBox ID="txtProjectLocation" runat="server" Width="100%" MaxLength="80" EmptyMessage="Project Address">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right"></td>
-            <td></td>
-        </tr>
-    </table>
-
-
-
-    <%--Engeniering companies--%>
-    <table class="table-condensed" style="width: 100%">
-        <tr>
-            <td style="width: 200px; text-align: right">Budget:</td>
-            <td style="width: 180px;">
-                <telerik:RadNumericTextBox ID="txtBudgest" runat="server" Width="180px">
-                </telerik:RadNumericTextBox>
-            </td>
-            <td style="width: 180px; text-align: right">Construction Cost:</td>
-            <td>
-                <telerik:RadNumericTextBox ID="txtCost" runat="server" Width="180px">
-                </telerik:RadNumericTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Sector:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboSector" runat="server" AppendDataBoundItems="True"
-                    DataSourceID="SqlDataSourceProjectSector" DataTextField="Name" DataValueField="Id"
-                    Width="100%" MarkFirstMatch="True"
-                    Filter="Contains" Height="300px">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Sector...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-            <td style="text-align: right">Use &amp; Occupancy::
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboUse" runat="server" AppendDataBoundItems="True"
-                    DataSourceID="SqlDataSourceProjectUse" DataTextField="Name" DataValueField="Id"
-                    Width="180px" MarkFirstMatch="True"
-                    Filter="Contains" Height="300px">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Use...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Signed Date::
-            </td>
-            <td>
-                <telerik:RadDatePicker ID="RadDatePickerSigned" runat="server" Width="180px" ToolTip="Signed Date">
-                </telerik:RadDatePicker>
-            </td>
-            <td style="text-align: right">Deadline:
-            </td>
-            <td>
-                <telerik:RadDatePicker ID="RadDatePickerDeadline" runat="server" Width="180px" ToolTip="Job Deadline">
-                </telerik:RadDatePicker>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Unit:
-            </td>
-            <td>
-                <telerik:RadNumericTextBox ID="txtUnit" runat="server" Width="100%">
-                </telerik:RadNumericTextBox>
-            </td>
-            <td style="text-align: right">Measure:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="180px" AppendDataBoundItems="True">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-    </table>
-    <hr />
-    <div style="text-align: center">
-        <asp:LinkButton ID="btnCreateJob" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" ValidationGroup="JobUpdate">
+    <div class="pas-container">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 200px; text-align: right">Project Year:
+                </td>
+                <td style="width: 180px; text-align: right">
+                    <telerik:RadDropDownList ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
+                        DataValueField="Year" Width="100%" AutoPostBack="true" CausesValidation="false" UseSubmitBehavior="false">
+                    </telerik:RadDropDownList>
+                </td>
+                <td style="width: 180px; text-align: right">Project Code:</td>
+                <td style="width: 40px; text-align: right">
+                    <asp:Label ID="lblYear" runat="server" Font-Bold="true" Font-Size="Medium">
+                    </asp:Label>
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtCode" runat="server" Width="100px" MaxLength="4" Font-Bold="true">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+        </table>
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 200px; text-align: right">Opening Date:
+                </td>
+                <td>
+                    <telerik:RadDatePicker ID="RadDatePicker1" runat="server" Width="180px">
+                    </telerik:RadDatePicker>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Job Name:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtJob" runat="server" Width="100%" MaxLength="80">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Template:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboProposalType" runat="server" DataSourceID="SqlDataSourceProposalType" DataTextField="Name"
+                        DataValueField="Id" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Template...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Type:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceJobTypes" DataTextField="Name"
+                        DataValueField="Id" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Job Type...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Client:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboCliente" runat="server" DataSourceID="SqlDataSourceClientes"
+                        DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True" Height="300px"
+                        MarkFirstMatch="True" Filter="Contains">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Client...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Owner Name:</td>
+                <td>
+                    <telerik:RadTextBox ID="txtOwnerName" runat="server" Width="100%" MaxLength="80">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Department:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboDepartment" runat="server"
+                        AppendDataBoundItems="True"
+                        DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id"
+                        Width="100%" MarkFirstMatch="True"
+                        Filter="Contains" Height="300px">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Assigned Employee:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboEmployee" runat="server"
+                        DataSourceID="SqlDataSourceEmployee" DataTextField="Name" DataValueField="Id"
+                        Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="True">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Employee...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">A/E of Record:</td>
+                <td>
+                    <telerik:RadComboBox ID="cboEngRecord" runat="server"
+                        DataSourceID="SqlDataSourceEmployee" DataTextField="Name" DataValueField="Id"
+                        Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="True">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select  A/E of Record...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Location:</td>
+                <td>
+                    <telerik:RadTextBox ID="txtProjectLocation" runat="server" Width="100%" MaxLength="80" EmptyMessage="Project Address">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right"></td>
+                <td></td>
+            </tr>
+        </table>
+        <%--Engeniering companies--%>
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 200px; text-align: right">Budget:</td>
+                <td style="width: 180px;">
+                    <telerik:RadNumericTextBox ID="txtBudgest" runat="server" Width="180px">
+                    </telerik:RadNumericTextBox>
+                </td>
+                <td style="width: 180px; text-align: right">Construction Cost:</td>
+                <td>
+                    <telerik:RadNumericTextBox ID="txtCost" runat="server" Width="180px">
+                    </telerik:RadNumericTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Sector:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboSector" runat="server" AppendDataBoundItems="True"
+                        DataSourceID="SqlDataSourceProjectSector" DataTextField="Name" DataValueField="Id"
+                        Width="100%" MarkFirstMatch="True"
+                        Filter="Contains" Height="300px">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Sector...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+                <td style="text-align: right">Use &amp; Occupancy::
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboUse" runat="server" AppendDataBoundItems="True"
+                        DataSourceID="SqlDataSourceProjectUse" DataTextField="Name" DataValueField="Id"
+                        Width="180px" MarkFirstMatch="True"
+                        Filter="Contains" Height="300px">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Use...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Signed Date::
+                </td>
+                <td>
+                    <telerik:RadDatePicker ID="RadDatePickerSigned" runat="server" Width="180px" ToolTip="Signed Date">
+                    </telerik:RadDatePicker>
+                </td>
+                <td style="text-align: right">Deadline:
+                </td>
+                <td>
+                    <telerik:RadDatePicker ID="RadDatePickerDeadline" runat="server" Width="180px" ToolTip="Job Deadline">
+                    </telerik:RadDatePicker>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Unit:
+                </td>
+                <td>
+                    <telerik:RadNumericTextBox ID="txtUnit" runat="server" Width="100%">
+                    </telerik:RadNumericTextBox>
+                </td>
+                <td style="text-align: right">Measure:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="180px" AppendDataBoundItems="True">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+        </table>
+        <hr />
+        <div style="text-align: center">
+            <asp:LinkButton ID="btnCreateJob" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="JobUpdate">
                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Job
-        </asp:LinkButton>
+            </asp:LinkButton>
+        </div>
+        <br />
+        <br />
     </div>
-    <br />
-    <br />
     <%--RequiredFieldValidator--%>
     <div>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCode" ValidationGroup="JobUpdate"
