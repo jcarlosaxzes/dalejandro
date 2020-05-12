@@ -1624,7 +1624,7 @@ Public Class LocalAPI
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            If LocalAPI.GetCompanyProperty(companyId, "Type") = 16 Then
+            If LocalAPI.GetCompanyProperty(companyId, "Type") = 16 And nSector = 0 Then
                 ' Initialize for IT companies
                 nSector = 2
                 sCodeUse = "B"
