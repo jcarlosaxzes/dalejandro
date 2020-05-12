@@ -2127,6 +2127,7 @@
     <Content Include="master\proposaltask_TEMPLATE.aspx" />
     <Content Include="master\tandcedit.aspx" />
     <Content Include="master\transmittals_package_types.aspx" />
+    <Content Include="master\useradmin.aspx" />
     <Content Include="master\usersagreelist.aspx" />
     <Content Include="master\versiones.aspx" />
     <Content Include="RadEditorDialogs\About.ascx" />
@@ -3969,6 +3970,13 @@
       <DependentUpon>transmittals_package_types.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="master\useradmin.aspx.designer.vb">
+      <DependentUpon>useradmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\useradmin.aspx.vb">
+      <DependentUpon>useradmin.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="master\usersagreelist.aspx.designer.vb">
       <DependentUpon>usersagreelist.aspx</DependentUpon>
     </Compile>
@@ -4141,7 +4149,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

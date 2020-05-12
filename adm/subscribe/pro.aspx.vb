@@ -77,8 +77,10 @@ Public Class pro
                                 Dim createdPayment = CreatePayment(apiContext, lblCompanyPaymentsPendingId.Text, g)
                                 lblPayPalPaymentId.Text = createdPayment.id
                                 Dim payLink = createdPayment.GetApprovalUrl()
+                                'Dim payLink = "pro.aspx?payment_guid=" & g & "&paymentId=PAY-1FS744526K867052KLDRGZHI" & "&token=EC-5YB58532HX951702N" & "&PayerID=RLBGQWGB5R24Q"
                                 btnPay.Attributes.Add("href", payLink)
                                 Session.Add(g, createdPayment.id)
+                                'Session.Add(g, "123456")
                             Else
                                 ' Return sample
                                 ' http://localhost:30284/ADM/subscribe/pro.aspx
