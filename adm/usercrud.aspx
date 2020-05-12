@@ -25,7 +25,11 @@
 
         <asp:Button ID="btnClients" Text="Clients Photos" runat="server" OnClick="btnClients_Click" />
         <br/>
-        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        <telerik:RadScriptManager 
+            runat="server" 
+            ID="RadScriptManager1" 
+            CdnSettings-CombinedResource="Disabled"
+            EnableCdn="false"> 
             <Scripts>
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.Core.js" />
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQuery.js" />
@@ -40,7 +44,7 @@
                 AllowFilteringByColumn="True" 
                 OnDataBound="RadGrid1_DataBound" OnItemCommand="RadGrid1_ItemCommand" OnItemDataBound="RadGrid1_ItemDataBound" OnPreRender="RadGrid1_PreRender" >
                 <PagerStyle Mode="NextPrevAndNumeric" />
-                <MasterTableView Width="100%" CommandItemDisplay="None" DataKeyNames="Email"
+                <MasterTableView Width="100%" CommandItemDisplay="None" DataKeyNames="Email" AllowFilteringByColumn="true"
                     DataSourceID="DataSource1" HorizontalAlign="NotSet" EditMode="EditForms">
                     <Columns>
                         <telerik:GridButtonColumn ButtonType="PushButton" HeaderText="Migrate Password" 
