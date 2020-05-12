@@ -88,7 +88,7 @@
         <telerik:RadScriptManager 
             runat="server" 
             ID="RadScriptManager1" 
-            CdnSettings-CombinedResource="Enabled"
+            CdnSettings-CombinedResource="Disabled"
             EnableCdn="true"> 
         </telerik:RadScriptManager>
         

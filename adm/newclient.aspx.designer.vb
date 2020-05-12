@@ -23,13 +23,22 @@ Partial Public Class newclient
     Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
     
     '''<summary>
-    '''Image8 control.
+    '''btnBack control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Image8 As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''vsClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents vsClient As Global.System.Web.UI.WebControls.ValidationSummary
     
     '''<summary>
     '''cboSource control.
@@ -334,9 +343,9 @@ Partial Public Class newclient
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class
