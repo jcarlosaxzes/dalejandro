@@ -85,8 +85,18 @@
         }
     </style>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        <telerik:RadScriptManager 
+            runat="server" 
+            ID="RadScriptManager1" 
+            CdnSettings-CombinedResource="Enabled"
+            EnableCdn="true"> 
         </telerik:RadScriptManager>
+        
+        <telerik:RadStyleSheetManager 
+            runat="server" 
+            ID="RadStyleSheetManager1">
+            <CdnSettings TelerikCdn="Enabled" CombinedResource="Enabled" />
+        </telerik:RadStyleSheetManager>
 
         <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
             <Rows>
