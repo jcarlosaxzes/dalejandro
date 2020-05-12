@@ -359,10 +359,12 @@
     <Content Include="adm\job_employees.aspx" />
     <Content Include="adm\job_images_files.aspx" />
     <Content Include="adm\job_job.aspx" />
-    <Content Include="adm\job_links.aspx.aspx" />
+    <Content Include="adm\job_links.aspx" />
     <Content Include="adm\job_notes.aspx" />
     <Content Include="adm\job_proposals.aspx" />
+    <Content Include="adm\job_reviews.aspx" />
     <Content Include="adm\job_rfps.aspx" />
+    <Content Include="adm\job_schedule.aspx" />
     <Content Include="adm\job_tags.aspx" />
     <Content Include="adm\job_times.aspx" />
     <Content Include="adm\job_transmittals.aspx" />
@@ -3103,11 +3105,11 @@
       <DependentUpon>job_job.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\job_links.aspx.aspx.designer.vb">
-      <DependentUpon>job_links.aspx.aspx</DependentUpon>
+    <Compile Include="adm\job_links.aspx.designer.vb">
+      <DependentUpon>job_links.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adm\job_links.aspx.aspx.vb">
-      <DependentUpon>job_links.aspx.aspx</DependentUpon>
+    <Compile Include="adm\job_links.aspx.vb">
+      <DependentUpon>job_links.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\job_notes.aspx.designer.vb">
@@ -3124,11 +3126,25 @@
       <DependentUpon>job_proposals.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\job_reviews.aspx.designer.vb">
+      <DependentUpon>job_reviews.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\job_reviews.aspx.vb">
+      <DependentUpon>job_reviews.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\job_rfps.aspx.designer.vb">
       <DependentUpon>job_rfps.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\job_rfps.aspx.vb">
       <DependentUpon>job_rfps.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\job_schedule.aspx.designer.vb">
+      <DependentUpon>job_schedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\job_schedule.aspx.vb">
+      <DependentUpon>job_schedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\job_tags.aspx.designer.vb">
@@ -4173,7 +4189,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

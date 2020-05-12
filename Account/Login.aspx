@@ -29,6 +29,7 @@
     <title>PASconcept. Your complete online platform of Project </title>
 
     <link href="~/App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/pasconcept.css" rel="stylesheet" />
     <%--Bootstrap reference begin--%>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <%--Bootstrap reference end--%>
@@ -37,13 +38,10 @@
     <form id="form1" runat="server">
         <telerik:RadScriptManager runat="server" ID="RadScriptManager1" />
         <div class="container">
-
             <div class="row">
                 <div class="col-md-5 col-lg-offset-4" style="margin-top: 5em">
                     <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton">
                         <div class="well">
-
-                            <%--<img class="img-thumbnail" src="/images/logopasconcept-index.png"  />--%>
                             <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logopasconcept-index.png" Width="100%" />
 
                             <div class="form-group" style="margin-top: 1em">
