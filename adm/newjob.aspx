@@ -10,6 +10,9 @@
                        Cancel
                     </asp:LinkButton>
                 </td>
+                <td style="text-align: center">
+                    <h3>New Job</h3>
+                </td>
 
             </tr>
         </table>

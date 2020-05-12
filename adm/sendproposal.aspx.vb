@@ -35,7 +35,7 @@ Public Class sendproposal
                         Dim clientId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
                 End Select
                 'btnBack.Visible = (lblOrigen.Text = "12" Or lblOrigen.Text = "15" Or lblOrigen.Text = "152")
-                RadWizard1.DisplayCancelButton = (lblOrigen.Text = "12" Or lblOrigen.Text = "15" Or lblOrigen.Text = "152")
+                RadWizard1.DisplayCancelButton = (lblOrigen.Text = "15" Or lblOrigen.Text = "152")
 
                 If (lblCompanyId.Text = 260962) Then
                     cboAgile.Visible = True

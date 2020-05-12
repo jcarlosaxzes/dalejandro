@@ -92,13 +92,8 @@ Public Class proposals
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
-                ' Codigo sapx anterior
-                '<asp:HyperLink ID="hlkProposalEdit" runat="server" Text='<%# Eval("ProposalNumber")%>' NavigateUrl='<%# Eval("Id", "~/ADM/Proposal.aspx?Id={0}")%>' ToolTip="Click to edit proposal in new tab" Target="_blank"></asp:HyperLink>
+                Response.Redirect("~/ADM/Proposal.aspx?Id=" & e.CommandArgument)
 
-                sUrl = "~/ADM/Proposal.aspx?Id=" & e.CommandArgument
-
-                'sUrl = "~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 970, 810, True)
             Case "EditWizard"
                 sUrl = "~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 970, 810, True)

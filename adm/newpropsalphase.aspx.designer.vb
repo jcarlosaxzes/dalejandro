@@ -11,25 +11,52 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class saveproposalas
+Partial Public Class newpropsalphase
     
     '''<summary>
-    '''lblProposalNumber control.
+    '''RadAjaxManager1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblProposalNumber As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
     
     '''<summary>
-    '''txtName control.
+    '''RadAjaxLoadingPanel1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtName As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+    
+    '''<summary>
+    '''FormDecorator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormDecorator1 As Global.Telerik.Web.UI.RadFormDecorator
+    
+    '''<summary>
+    '''cboPhaseTemplate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboPhaseTemplate As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''CodeTextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CodeTextBox As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
     '''RequiredFieldValidator1 control.
@@ -41,31 +68,49 @@ Partial Public Class saveproposalas
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''opcCopiar control.
+    '''NameTextBox control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents opcCopiar As Global.System.Web.UI.WebControls.RadioButton
+    Protected WithEvents NameTextBox As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''opcRevisar control.
+    '''RequiredFieldValidator2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents opcRevisar As Global.System.Web.UI.WebControls.RadioButton
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''btnOk control.
+    '''DescriptionEditor control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOk As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents DescriptionEditor As Global.Telerik.Web.UI.RadEditor
+    
+    '''<summary>
+    '''PeriodoTextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PeriodoTextBox As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''btnNew control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNew As Global.Telerik.Web.UI.RadButton
     
     '''<summary>
     '''btnCancel control.
@@ -77,13 +122,13 @@ Partial Public Class saveproposalas
     Protected WithEvents btnCancel As Global.Telerik.Web.UI.RadButton
     
     '''<summary>
-    '''lblProposalId control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblProposalId As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.
@@ -95,29 +140,23 @@ Partial Public Class saveproposalas
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblOption control.
+    '''lblproposalId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblOption As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblproposalId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblEmployeeId control.
+    '''Master property.
     '''</summary>
     '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
+    '''Auto-generated property.
     '''</remarks>
-    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''SqlDataSource1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+        Get
+            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+        End Get
+    End Property
 End Class

@@ -68,6 +68,24 @@ Partial Public Class proposal
     Protected WithEvents panelToolbar As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''btnTotals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''btnUpdate1 control.
     '''</summary>
     '''<remarks>
@@ -129,6 +147,15 @@ Partial Public Class proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnHelp As Global.Telerik.Web.UI.RadButton
+    
+    '''<summary>
+    '''FormViewClientBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormViewClientBalance As Global.System.Web.UI.WebControls.FormView
     
     '''<summary>
     '''ValidationSummary1 control.
@@ -617,6 +644,15 @@ Partial Public Class proposal
     Protected WithEvents SqlDataSourceEmployee As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
+    '''SqlDataSourceClientBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceClientBalance As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -703,9 +739,9 @@ Partial Public Class proposal
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

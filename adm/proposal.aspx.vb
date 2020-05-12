@@ -52,16 +52,6 @@ Public Class proposal
 
                 RadBinaryImageAceptanceSignature.DataValue = LocalAPI.GetSignProposal(lblId.Text)
 
-                'PanelJobAsociado()
-                'If Not Request.QueryString("Tab2") Is Nothing Then
-                'CType(sender.NamingContainer.FindControl("RadWizardStepPaymentSchedules"), RadWizardStep).Active = True
-                '    RadTabStrip2.SelectedIndex = Request.QueryString("Tab2")
-                '    RadMultiPage2.SelectedIndex = RadTabStrip2.SelectedIndex
-                'End If
-
-
-                'btnSaveAs.Attributes.Add("onClick", "SaveAs")
-
             End If
             RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblId.Text
 
@@ -118,7 +108,7 @@ Public Class proposal
 
     Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
         LocalAPI.EliminarProposal(lblId.Text)
-        Response.Redirect("~/ADM/Proposals.aspx")
+        Response.Redirect("~/adm/proposals.aspx")
     End Sub
 
     Protected Sub btnCancelDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDelete.Click
@@ -157,8 +147,9 @@ Public Class proposal
 
     Protected Sub btnPrintProposal_Click(sender As Object, e As EventArgs) Handles btnPrintProposal.Click
         If LocalAPI.GetProposalProperty(lblId.Text, "ClientId") > 0 Then
-            'Response.RedirectPermanent("~/ADMCLI/ProposalRDLC.aspx?ProposalId=" & lblId.Text & "&Origen=12")
-            Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12")
+            'Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12")
+            CreateRadWindows("Form", "~/adm/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12", 1024, 768, True)
+
         Else
             Master.InfoMessage("You Must Specify the Client and Update Proposal")
         End If
@@ -232,20 +223,20 @@ Public Class proposal
         GuardarProposal(False)
     End Sub
     Protected Sub btnNewPhase_Click(sender As Object, e As EventArgs) Handles btnNewPhase.Click
-        Response.Redirect("~/ADM/NewPropsalPhase.aspx?Id=" & lblId.Text)
+        Response.Redirect("~/adm/newpropsalphase.aspx?Id=" & lblId.Text)
     End Sub
     Protected Sub btnPivotPhases_Click(sender As Object, e As EventArgs) Handles btnPivotPhases.Click
-        Response.Redirect("~/ADM/ProposalPhases.aspx?Id=" & lblId.Text)
+        Response.Redirect("~/adm/proposalphases.aspx?Id=" & lblId.Text)
     End Sub
 
     Protected Sub btnSchedule_Click(sender As Object, e As EventArgs) Handles btnSchedule.Click
-        Response.Redirect("~/ADM/ProposalSchedule.aspx?Id=" & lblId.Text)
+        Response.Redirect("~/adm/proposalschedule.aspx?Id=" & lblId.Text)
     End Sub
 
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Select Case e.CommandName
             Case "EditTask"
-                Response.Redirect("~/ADM/NewProposalTask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument)
+                CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument, 1024, 768, False)
             Case "DetailDuplicate"
                 lblDetailSelectedId.Text = e.CommandArgument
                 SqlDataSourceProposaldDetailDuplicate.Insert()
@@ -257,7 +248,7 @@ Public Class proposal
     Private Sub RadGridPhases_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPhases.ItemCommand
         Select Case e.CommandName
             Case "EditPhase"
-                Response.Redirect("~/ADM/EditProposalPhase.aspx?Id=" & e.CommandArgument)
+                Response.Redirect("~/adm/editproposalphase.aspx?Id=" & e.CommandArgument)
         End Select
 
     End Sub
@@ -308,16 +299,20 @@ Public Class proposal
         window1.Modal = True
         RadWindowManager1.Windows.Add(window1)
     End Sub
+
     Protected Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
-        CreateRadWindows("SaveAs", "~/adm/saveproposalas.aspx?ProposalId=" & lblId.Text, 550, 400, False)
+        'CreateRadWindows("SaveAs", "~/adm/saveproposalas.aspx?ProposalId=" & lblId.Text, 550, 400, False)
+        Response.Redirect("~/adm/saveproposalas.aspx?ProposalId=" & lblId.Text)
     End Sub
     Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
-        CreateRadWindows("SaveAs", "~/adm/saveproposalastemplate.aspx?ProposalId=" & lblId.Text, 550, 400, False)
+        'CreateRadWindows("SaveAs", "~/adm/saveproposalastemplate.aspx?ProposalId=" & lblId.Text, 550, 400, False)
+        Response.Redirect("~/adm/saveproposalastemplate.aspx?ProposalId=" & lblId.Text)
     End Sub
     Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
         Try
             GuardarProposal(False)
-            Response.Redirect("~/ADM/NewProposalTask.aspx?Id=" & lblId.Text)
+            'Response.Redirect("~/ADM/NewProposalTask.aspx?Id=" & lblId.Text)
+            CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text, 1024, 768, False)
         Catch ex As Exception
         End Try
     End Sub
@@ -363,6 +358,13 @@ Public Class proposal
 
     Private Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
         RadGrid1.MasterTableView.GetColumn("phaseId").Display = IIf(LocalAPI.GetProposalPhasesCount(lblId.Text) = 0, False, True)
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/proposals.aspx")
+    End Sub
+    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
+        FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
     End Sub
 End Class
 

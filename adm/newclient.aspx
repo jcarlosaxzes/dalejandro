@@ -65,7 +65,9 @@
                        Cancel
                     </asp:LinkButton>
                 </td>
-
+                <td style="text-align:center">
+                    <h3 style="margin:0">New Client</h3>
+                </td>
             </tr>
         </table>
     </div>

@@ -64,7 +64,7 @@ Public Class newemployee
 
                 ' Parasa a Edit....
                 Dim employeeId = LocalAPI.GetEmployeeId(txtEmail.Text, lblCompanyId.Text)
-                Response.RedirectPermanent("~/ADM/Employee.aspx?employeeId=" & employeeId)
+                Response.RedirectPermanent("~/adm/Employee.aspx?employeeId=" & employeeId)
             Else
                 Master.ErrorMessage("There is already an employee with email: " & txtEmail.Text)
                 txtEmail.Focus()
@@ -123,4 +123,8 @@ Public Class newemployee
         RadDatePickerStartingDate.SelectedDate = Today.Date
         'RadDatePickerDOB.SelectedDate = RadDatePickerDOB.MinDate
     End Sub
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/employees.aspx")
+    End Sub
+
 End Class
