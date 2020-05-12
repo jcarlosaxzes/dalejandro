@@ -24,9 +24,6 @@ Public Class pro
                 cboCompany.SelectedValue = lblCompanyId.Text
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
-                If Not LocalAPI.IsMasterUser(lblEmployeeEmail.Text, lblCompanyId.Text) Then
-                    Response.RedirectPermanent("~/ADM/Default.aspx")
-                End If
 
                 Select Case lblEmployeeEmail.Text
                     Case "jcarlos@axzes.com", "fernando@easterneg.com", "sandra@easterneg.com", "matt@axzes.com"
@@ -80,8 +77,10 @@ Public Class pro
                                 Dim createdPayment = CreatePayment(apiContext, lblCompanyPaymentsPendingId.Text, g)
                                 lblPayPalPaymentId.Text = createdPayment.id
                                 Dim payLink = createdPayment.GetApprovalUrl()
+                                'Dim payLink = "pro.aspx?payment_guid=" & g & "&paymentId=PAY-1FS744526K867052KLDRGZHI" & "&token=EC-5YB58532HX951702N" & "&PayerID=RLBGQWGB5R24Q"
                                 btnPay.Attributes.Add("href", payLink)
                                 Session.Add(g, createdPayment.id)
+                                'Session.Add(g, "123456")
                             Else
                                 ' Return sample
                                 ' http://localhost:30284/ADM/subscribe/pro.aspx
@@ -117,7 +116,7 @@ Public Class pro
 
         Catch ex As Exception
             lblError.Visible = True
-            lblError.Text = ex.Message & ex.InnerException.Message & ex.HResult
+            lblError.Text = ex.Message '& ex.InnerException.Message & ex.HResult
         End Try
 
     End Sub
@@ -184,7 +183,7 @@ Public Class pro
 
 
     Protected Sub btnAdminPay_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAdminPay.Click
-        UpdatePayment_and_MessagePayHere(Membership.GetUser().Email, 8)
+        UpdatePayment_and_MessagePayHere(Context.User.Identity.GetUserName(), 8)
     End Sub
 
     Private Sub SqlDataSourcePayment_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourcePayment.Updating
@@ -298,8 +297,28 @@ Public Class pro
             ' 3.- Update Company billingExpirationDate
             '..............................................................................
 
+            'Get or Create AxzesClientId
+            Dim AxzesClientId As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AxzesClientId")
+            If IsNothing(AxzesClientId) Or Len(AxzesClientId) = 0 Or AxzesClientId = 0 Then
+                Dim clientId As Integer = LocalAPI.BindCompanyToAxzesClient(lblCompanyId.Text, 0)
+                AxzesClientId = clientId.ToString()
+            End If
+
+            'Get or Create AxzesJob
+            Dim AxzesJobId As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AxzesJobId")
+            If IsNothing(AxzesJobId) Or Len(AxzesJobId) = 0 Or AxzesJobId = 0 Then
+                LocalAPI.BindCompanyToAxzesJob(lblCompanyId.Text, AxzesClientId, 0)
+                AxzesJobId = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AxzesJobId")
+            End If
 
             Dim AxzesInvoiceId As Integer = LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "AxzesInvoiceId")
+            If IsNothing(AxzesInvoiceId) Or Len(AxzesInvoiceId) = 0 Or AxzesInvoiceId = 0 Then
+                LocalAPI.BindCompanyToAxzesInvoice(AxzesJobId, lblCompanyPaymentsPendingId.Text, 0)
+                AxzesInvoiceId = LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "AxzesInvoiceId")
+                'Else
+                '    LocalAPI.BindCompanyToAxzesInvoice(AxzesJobId, lblCompanyPaymentsPendingId.Text, AxzesInvoiceId)
+            End If
+
             Dim AxzesInvoiceNumber As String = LocalAPI.InvoiceNumber(AxzesInvoiceId)
             Dim sMsg As New System.Text.StringBuilder
 
@@ -332,7 +351,7 @@ Public Class pro
                 LocalAPI.SendMail("jcarlos@axzes.com", "", "matt@axzes.com", sSubject, sBody, lblCompanyId.Text)
             End If
 
-            Response.Redirect("~/ADM/subscribe/pro.aspx")
+            Response.Redirect("~/ADM/subscribe/subscribesuccess.aspx")
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

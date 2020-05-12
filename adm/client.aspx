@@ -93,28 +93,28 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 19%; text-align: center; background-color: #039be5">
-                                    <span class="DashboardFont2"># Pending Props.</span><br />
+                                <td style="width: 18%; text-align: center; background-color: #039be5">
+                                    <span class="DashboardFont2"># Pending Proposals:</span><br />
                                     <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
                                 </td>
                                 <td></td>
-                                <td style="width: 19%; text-align: center; background-color: #546e7a">
-                                    <span class="DashboardFont2">Acepted Props.</span><br />
+                                <td style="width: 18%; text-align: center; background-color: #546e7a">
+                                    <span class="DashboardFont2">Acepted Proposal</span>
                                     <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
                                 </td>
                                 <td></td>
-                                <td style="width: 19%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Jobs Budget</span><br />
+                                <td style="width: 18%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Jobs Budget</span>
                                     <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
                                 </td>
                                 <td></td>
-                                <td style="width: 19%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Amount Paid</span><br />
+                                <td style="width: 18%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Amount Paid</span>
                                     <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
                                 </td>
                                 <td></td>
-                                <td style="width: 19%; text-align: center; background-color: #e53935">
-                                    <span class="DashboardFont2">Remaining Balance</span><br />
+                                <td style="width: 18%; text-align: center; background-color: #e53935">
+                                    <span class="DashboardFont2">Remaining Balance</span>
                                     <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
                                 </td>
                             </tr>

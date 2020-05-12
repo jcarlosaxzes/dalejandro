@@ -40,47 +40,53 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5 col-lg-offset-4" style="margin-top: 5em">
+
+                 <LayoutTemplate>
                     <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton">
                         <div class="well">
                             <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logopasconcept-index.png" Width="100%" />
+                                 <form>
+                                        <div class="form-group" style="margin-top: 1em">
+                                            <label for="email" class="control-label" style="font-size:large">User Email</label>
+                                            <telerik:RadTextBox ID="UserName" runat="server" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
+                                            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
+                                                ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="Login2"
+                                                Font-Bold="True" Font-Size="Small" ForeColor="#00A8E4">*</asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" class="control-label" style="font-size:large">Password</label>
+                                            <telerik:RadTextBox ID="Password"  runat="server" TextMode="Password" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
+                                            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server"
+                                                ControlToValidate="Password" ErrorMessage="Password is required."
+                                                Font-Bold="False" Font-Size="Small" ForeColor="#00A8E4"
+                                                ToolTip="Password is required." ValidationGroup="Login2">*</asp:RequiredFieldValidator>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <telerik:RadCheckBox runat="server" ID="RememberMe" class="RememberMe" TextAlign="Left" Text="Remember me?"/>
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <a href="ResetPassword.aspx">Forgot password?</a>
+                                        </div>
 
-                            <div class="form-group" style="margin-top: 1em">
-                                <label for="email" class="control-label" style="font-size: large">User Email</label>
-                                <telerik:RadTextBox ID="UserName" runat="server" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
-                                <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
-                                    ErrorMessage="User Name is required." ToolTip="User Name is required." ValidationGroup="Login2"
-                                    Font-Bold="True" Font-Size="Small" ForeColor="#00A8E4">*</asp:RequiredFieldValidator>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="control-label" style="font-size: large">Password</label>
-                                <telerik:RadTextBox ID="Password" runat="server" TextMode="Password" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
-                                <asp:RequiredFieldValidator ID="PasswordRequired" runat="server"
-                                    ControlToValidate="Password" ErrorMessage="Password is required."
-                                    Font-Bold="False" Font-Size="Small" ForeColor="#00A8E4"
-                                    ToolTip="Password is required." ValidationGroup="Login2">*</asp:RequiredFieldValidator>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <telerik:RadCheckBox runat="server" ID="RememberMe" class="RememberMe" TextAlign="Left" Text="Remember me?" />
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <a href="ResetPassword">Forgot password?</a>
-                            </div>
-
-                            <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
-                                UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
+                                        <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
+                                            UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
                                                                         <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Sign in
-                            </asp:LinkButton>
-                            <div style="text-align: center">
-                                <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, you agree Terms & Conditions</a>
-                            </div>
-                            <div>
-                                <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
-                            </div>
+                                        </asp:LinkButton>
+                                        <div style="text-align:center">
+                                            <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, You agree out terms & Conditions</a>
+                                        </div>
+                                        <div>
+                                            <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
+                                        </div>
 
-                        </div>
-                    </asp:Panel>
+
+                                    </form>
+                                </div>
+                            </asp:Panel>
+                        </LayoutTemplate>
+                    
                 </div>
             </div>
             <div class="row">

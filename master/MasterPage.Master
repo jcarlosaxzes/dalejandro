@@ -23,7 +23,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
         </telerik:RadScriptManager>
 
         <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
@@ -120,7 +120,7 @@
                                     </telerik:RadMenuItem>
                                     <telerik:RadMenuItem runat="server" Text="User">
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/LockedUsers.aspx" Text="Locked Users">
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Admin Users">
                                             </telerik:RadMenuItem>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/PreUsers.aspx" Text="Pre-Users">
                                             </telerik:RadMenuItem>

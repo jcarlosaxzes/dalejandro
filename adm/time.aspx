@@ -33,7 +33,7 @@
                     </button>
                 </td>
                 <td>
-                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" Visible="false">
+                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Time
                     </asp:LinkButton>
                 </td>
@@ -54,9 +54,9 @@
     <div class="collapse" id="collapseFilter">
         <div class="card card-body">
             <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-                <table class="table-condensed" style="width: 100%" >
+                <table class="table-condensed" style="width: 100%">
                     <tr>
-                        <td style="width: 200px">
+                        <td style="width: 160px">
                             <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
                                 <Items>
                                     <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" Selected="true" />
@@ -70,15 +70,34 @@
                                 </Items>
                             </telerik:RadComboBox>
                         </td>
-                        <td style="width: 150px">
+                        <td style="width: 120px">
                             <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
                             </telerik:RadDatePicker>
                         </td>
-                        <td style="width: 150px">
+                        <td style="width: 120px">
                             <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter">
                             </telerik:RadDatePicker>
                         </td>
-                        <td style="width: 400px">
+                        <td style="width: 380px">
+                            <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJobs"
+                                DataTextField="Job" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="260px"
+                                AppendDataBoundItems="true">
+                                <Items>
+                                    <telerik:RadComboBoxItem Text="(All Jobs...)" Value="-1" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+                        <td colspan="2">
+                            <telerik:RadComboBox ID="cboClient" runat="server" DataSourceID="SqlDataSourceClients"
+                                DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                                <Items>
+                                    <telerik:RadComboBoxItem Text="(All Clients...)" Value="-1" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="100%">
                                 <Items>
                                     <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
@@ -93,30 +112,10 @@
                                     <telerik:RadComboBoxItem Text="(All Employee...)" Value="-1" />
                                 </Items>
                             </telerik:RadComboBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJobs"
-                                DataTextField="Job" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="260px"
-                                AppendDataBoundItems="true">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="(All Jobs...)" Value="-1" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td>
-                            <telerik:RadComboBox ID="cboClient" runat="server" DataSourceID="SqlDataSourceClients"
-                                DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="(All Clients...)" Value="-1" />
-                                </Items>
-                            </telerik:RadComboBox>
-
 
                         </td>
                         <td></td>
-                        <td style="width: 150px; text-align: right">
+                        <td style="width: 120px; text-align: right">
                             <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-search"></span> Search
                             </asp:LinkButton>
@@ -334,7 +333,7 @@
                 </div>
             </telerik:RadWizardStep>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Other Times" StepType="Step">
-                <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
+                                <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSource2" GridLines="None" Width="100%" AllowPaging="True" PageSize="25"
                     AllowSorting="True">
                     <PagerStyle Mode="Slider" AlwaysVisible="false" />
@@ -586,13 +585,13 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="DELETE FROM Employees_NonRegularHours WHERE (Id = @Id)"
-        SelectCommand="Employees_NonRegularHours_SELECT" SelectCommandType="StoredProcedure"
+         DeleteCommand="DELETE FROM Employees_NonRegularHours WHERE (Id = @Id)"
+        SelectCommand="Employees_NonRegularHours_SELECT" SelectCommandType="StoredProcedure" 
         UpdateCommand="Employees_NonRegularHours_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboEmployee" DefaultValue=" " Name="EmployeeId" PropertyName="SelectedValue" />
-            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime"  />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
         </SelectParameters>
         <DeleteParameters>
@@ -607,7 +606,7 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+     <asp:SqlDataSource ID="SqlDataSourceType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="MiscellaneousType_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />

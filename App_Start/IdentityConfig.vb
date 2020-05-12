@@ -62,8 +62,8 @@ Public Class ApplicationUserManager
         ' Configure user lockout defaults
         manager.UserLockoutEnabledByDefault = True
         manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5)
-        manager.MaxFailedAccessAttemptsBeforeLockout = 5
-        
+        manager.MaxFailedAccessAttemptsBeforeLockout = 100
+
         manager.EmailService = New EmailService()
         manager.SmsService = New SmsService()
         Dim dataProtectionProvider = options.DataProtectionProvider

@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
         </telerik:RadScriptManager>
         <div>
             <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" Width="100%">

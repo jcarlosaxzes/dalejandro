@@ -2,11 +2,31 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+<<<<<<< HEAD
     <div class="pas-container" style="padding-left: 50px">
         <h2>Save Proposal As Template</h2>
         <table class="table-condensed" style="width: 800px">
             <tr>
                 <td style="text-align: center;">You can save the Proposal as a Template (Proposal Type) for later use when creating New Proposal
+=======
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Save Proposal As Template</title>
+</head>
+<body>
+    <script src="../jscript.js" type="text/javascript"></script>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
+        </telerik:RadScriptManager>
+        <div style="padding-left: 20px; padding-top: 15px">
+            <table width="470px">
+                <tr>
+                    <td style="padding-top:15px; text-align: center;" class="Normal">
+                        You can save the Proposal as a Template (Proposal Type) for later use when creating New Proposal
+>>>>>>> 738bf357dc56d70a72f928fb45685eff190ff49f
                         <br />
                 </td>
             </tr>

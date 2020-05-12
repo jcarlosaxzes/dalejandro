@@ -17,7 +17,11 @@
             color: #0066cc;
         }
     </style>
-    <telerik:RadStyleSheetManager ID="RadStyleSheetManager1" runat="server" />
+        <telerik:RadStyleSheetManager 
+            runat="server" 
+            ID="RadStyleSheetManager1">
+            <CdnSettings TelerikCdn="Enabled" CombinedResource="Enabled" />
+        </telerik:RadStyleSheetManager>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -29,7 +33,7 @@
             runat="server" 
             ID="RadScriptManager1" 
             CdnSettings-CombinedResource="Disabled"
-            EnableCdn="false"> 
+            EnableCdn="true"> 
             <Scripts>
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.Core.js" />
                 <asp:ScriptReference Assembly="Telerik.Web.UI" Name="Telerik.Web.UI.Common.jQuery.js" />

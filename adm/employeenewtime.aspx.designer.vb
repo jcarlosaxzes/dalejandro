@@ -32,13 +32,13 @@ Partial Public Class employeenewtime
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''FormViewTimeBalance control.
+    '''Image7 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormViewTimeBalance As Global.System.Web.UI.WebControls.FormView
+    Protected WithEvents Image7 As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
     '''lblJobName control.
@@ -59,6 +59,24 @@ Partial Public Class employeenewtime
     Protected WithEvents txtTimeSel As Global.Telerik.Web.UI.RadNumericTextBox
     
     '''<summary>
+    '''lblTotalWeekHours control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalWeekHours As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblTotalBiWeekHours control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalBiWeekHours As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''RadDatePicker1 control.
     '''</summary>
     '''<remarks>
@@ -66,6 +84,24 @@ Partial Public Class employeenewtime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePicker1 As Global.Telerik.Web.UI.RadDatePicker
+    
+    '''<summary>
+    '''lblRemaining control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblRemaining As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblRemaining2Week control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblRemaining2Week As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''divProposalTask control.
@@ -219,15 +255,6 @@ Partial Public Class employeenewtime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceActiveTickets As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceTimeBalance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceTimeBalance As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblEmployeeId control.
