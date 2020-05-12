@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+            <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
             </telerik:RadScriptManager>
             <br />
             <telerik:RadGrid ID="RadGridReviewsPermits" runat="server" DataSourceID="SqlDataSourceReviewsPermits"

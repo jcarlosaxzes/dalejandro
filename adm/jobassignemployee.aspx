@@ -15,7 +15,7 @@
     <script src="../Scripts/bootstrap.js"></script>
     <%--Bootstrap reference end--%>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
         </telerik:RadScriptManager>
         <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
             <AjaxSettings>

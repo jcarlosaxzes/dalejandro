@@ -11,7 +11,7 @@
 <body>
     <script src="../jscript.js" type="text/javascript"></script>
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
         </telerik:RadScriptManager>
         <div style="padding-left: 20px; padding-top: 15px">
             <table width="470px">
