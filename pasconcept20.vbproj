@@ -1863,6 +1863,7 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\HELP-US-OUT.txt" />
     <Content Include="Content\Site.css" />
     <Content Include="css\Menu.PASMenuBlackMetroTouch.css" />
+    <Content Include="css\Menu.PASMenuBlackMetroTouch.min.css" />
     <Content Include="css\menu\PASMenuBlackMetroTouch.gif" />
     <Content Include="css\menu\radActionsSprite.png" />
     <Content Include="css\menu\rmArrows.png" />
@@ -2028,6 +2029,7 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master" />
     <Content Include="adm\subscribe\web.config" />
+    <Content Include="jscript.min.js" />
     <Content Include="master\activeusers.aspx" />
     <Content Include="master\billingplans.aspx" />
     <Content Include="master\company.aspx" />
