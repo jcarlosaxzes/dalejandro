@@ -1311,7 +1311,7 @@ Public Class LocalAPI
 
                 ' New Payment?
                 If Company_PaymentObject("Status") = "Paid" Then
-                    Invoice_Payment_INSERT(AxzesInvoiceId, Company_PaymentObject("PaidDate"), Company_PaymentObject("Method"), Company_PaymentObject("Amount"), Company_PaymentObject("Collected from PASconcept"))
+                    Invoice_Payment_INSERT(AxzesInvoiceId, Company_PaymentObject("PaidDate"), Company_PaymentObject("Method"), Company_PaymentObject("Amount"), "Automatic payment from PASconcet subscription")
                 End If
 
             End If
@@ -2724,17 +2724,18 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Method", Method)
             cmd.Parameters.AddWithValue("@Amount", Amount)
             cmd.Parameters.AddWithValue("@CollectedNotes", CollectedNotes)
-            ' Execute the stored procedure.
-            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
-            parOUT_ID.Direction = ParameterDirection.Output
-            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.Parameters.AddWithValue("@OriginalFileName", "")
+            cmd.Parameters.AddWithValue("@KeyName", "")
+            cmd.Parameters.AddWithValue("@ContentBytes", 0)
+            cmd.Parameters.AddWithValue("@ContentType", "")
+
 
             cmd.ExecuteNonQuery()
 
-            Dim paymentId As Integer = parOUT_ID.Value
             cnn1.Close()
 
-            Return paymentId
+            Return InvoiceId
 
         Catch ex As Exception
             Throw ex
@@ -3428,7 +3429,7 @@ Public Class LocalAPI
 
                 cnn1.Close()
 
-                EliminarUser(sEmail)
+                'EliminarUser(sEmail)
 
                 EliminarEmployee = True
             End If
@@ -3447,7 +3448,7 @@ Public Class LocalAPI
                 If nRegs = 0 Then
                     nRegs = GetNumericEscalar("SELECT COUNT(*) FROM [SubConsultans] WHERE [Email]='" & sEmail & "'")
                     If nRegs = 0 Then
-                        Membership.DeleteUser(sEmail, True)
+                        'Membership.DeleteUser(sEmail, True)
                         Return True
                     End If
                 End If
@@ -8253,11 +8254,11 @@ Public Class LocalAPI
     End Function
 
 
-    Public Shared Function NewEmployee(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
+    Public Shared Async Function NewEmployeeAsync(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
                                          ByVal sAddress As String, ByVal sAddress2 As String, ByVal sCity As String, ByVal sSate As String,
                                             ByVal sZipCode As String, ByVal sPhone As String, ByVal sCellular As String,
                                             ByVal sEmail As String, ByVal sHourRate As String, ByVal sNotes As String,
-                                            ByVal companyId As Integer) As Integer
+                                            ByVal companyId As Integer) As Task(Of Integer)
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
@@ -8307,7 +8308,7 @@ Public Class LocalAPI
                 ExecuteNonQuery(String.Format("UPDATE Employees Set [Employee_Code]= '{0}' WHERE Id={1}", sEmployee_Code, employeeId))
             End If
 
-            RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
+            Await RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
             ' Set algunos perminos de inicio
             ExecuteNonQuery("UPDATE [Employees] SET [Allow_OtherEmployeeJobs]=1 WHERE Id=" & employeeId)
 
@@ -9649,7 +9650,6 @@ Public Class LocalAPI
     End Function
 
     Public Shared Async Function CreateOrUpdateUser(email As String, password As String) As Task(Of pasconcept20.ApplicationUser)
-        Dim identityUser = Await AppUserManager.FindByEmailAsync(email)
         If IsNothing(password) Then
             password = "ValidPassword@#$<GDE45"
         End If
@@ -9657,6 +9657,7 @@ Public Class LocalAPI
             password = "ValidPassword@#$<GDE45"
         End If
 
+        Dim identityUser As pasconcept20.ApplicationUser = Await AppUserManager.FindByEmailAsync(email)
         If identityUser IsNot Nothing Then
             Dim token = Await AppUserManager.GeneratePasswordResetTokenAsync(identityUser.Id)
             Dim passwordHasher = New pasconcept20.PASPasswordHasher()
