@@ -28,7 +28,11 @@
     End Sub
 
     Protected Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/Proposal.aspx?Id=" & lblProposalId.Text & "';</script>")
+        'Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/proposal.aspx?Id=" & lblProposalId.Text & "';</script>")
+        Response.Redirect("~/adm/proposal.aspx?Id=" & lblProposalId.Text)
+    End Sub
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Response.Redirect("~/adm/proposal.aspx?Id=" & lblProposalId.Text)
     End Sub
 
 End Class

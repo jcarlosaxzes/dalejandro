@@ -334,6 +334,7 @@
     <Content Include="adm\departmentslist.aspx" />
     <Content Include="adm\department_form.aspx" />
     <Content Include="adm\discipline.aspx" />
+    <Content Include="adm\editproposalphase.aspx" />
     <Content Include="adm\employee.aspx" />
     <Content Include="adm\employeenewtime.aspx" />
     <Content Include="adm\employeereport.aspx" />
@@ -377,6 +378,7 @@
     <Content Include="adm\newemployee.aspx" />
     <Content Include="adm\newjob.aspx" />
     <Content Include="adm\newproposaltask.aspx" />
+    <Content Include="adm\newpropsalphase.aspx" />
     <Content Include="adm\newsubconsultant.aspx" />
     <Content Include="adm\newvendor.aspx" />
     <Content Include="adm\nojobstimetypes.aspx" />
@@ -393,7 +395,9 @@
     <Content Include="adm\projecttags.aspx" />
     <Content Include="adm\proposal.aspx" />
     <Content Include="adm\proposalnewwizard.aspx" />
+    <Content Include="adm\proposalphases.aspx" />
     <Content Include="adm\proposals.aspx" />
+    <Content Include="adm\proposalschedule.aspx" />
     <Content Include="adm\proposaltemplate.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
@@ -2937,6 +2941,13 @@
       <DependentUpon>discipline.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\editproposalphase.aspx.designer.vb">
+      <DependentUpon>editproposalphase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\editproposalphase.aspx.vb">
+      <DependentUpon>editproposalphase.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\employee.aspx.designer.vb">
       <DependentUpon>employee.aspx</DependentUpon>
     </Compile>
@@ -3245,6 +3256,13 @@
       <DependentUpon>newproposaltask.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\newpropsalphase.aspx.designer.vb">
+      <DependentUpon>newpropsalphase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\newpropsalphase.aspx.vb">
+      <DependentUpon>newpropsalphase.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\newsubconsultant.aspx.designer.vb">
       <DependentUpon>newsubconsultant.aspx</DependentUpon>
     </Compile>
@@ -3357,11 +3375,25 @@
       <DependentUpon>proposalnewwizard.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\proposalphases.aspx.designer.vb">
+      <DependentUpon>proposalphases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposalphases.aspx.vb">
+      <DependentUpon>proposalphases.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\proposals.aspx.designer.vb">
       <DependentUpon>proposals.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\proposals.aspx.vb">
       <DependentUpon>proposals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\proposalschedule.aspx.designer.vb">
+      <DependentUpon>proposalschedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposalschedule.aspx.vb">
+      <DependentUpon>proposalschedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\proposaltemplate.aspx.designer.vb">
@@ -3455,18 +3487,18 @@
       <DependentUpon>saveproposalas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
-      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\saveproposalastemplate.aspx.vb">
-      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="adm\role_permissions_form.aspx.designer.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\role_permissions_form.aspx.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
+      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\saveproposalastemplate.aspx.vb">
+      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">
@@ -4210,7 +4242,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

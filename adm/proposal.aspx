@@ -1,61 +1,7 @@
-﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="proposal.aspx.vb" Inherits="pasconcept20.proposal" %>
+﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposal.aspx.vb" Inherits="pasconcept20.proposal" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" DefaultLoadingPanelID="RadAjaxLoadingPanel1">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="btnUpdate1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="EditionZone" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="lblWarning" />
-                    <telerik:AjaxUpdatedControl ControlID="RadNotificationWarning" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnUpdate2">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="EditionZone" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="lblWarning" />
-                    <telerik:AjaxUpdatedControl ControlID="RadNotificationWarning" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnPrintProposal">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="FormViewProp1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnNewTask">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="FormViewProp1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="FormViewProp1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="lblWarning" />
-                    <telerik:AjaxUpdatedControl ControlID="RadNotificationWarning" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadGrid1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="FormViewTC">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="FormViewTC" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadAjaxManager1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="btnUpdate1" />
-                    <telerik:AjaxUpdatedControl ControlID="btnUpdate2" />
-                    <telerik:AjaxUpdatedControl ControlID="btnNewTask" />
-                    <telerik:AjaxUpdatedControl ControlID="FormViewProp1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-    </telerik:RadAjaxManager>--%>
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
             function DataProcessing(sender, args) {
@@ -140,6 +86,16 @@
         <table class="table-condensed">
             <tr>
                 <td>
+                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
+                       $ Dashboard
+                    </asp:LinkButton>
+                </td>
+                <td>
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                       Back to List
+                    </asp:LinkButton>
+                </td>
+                <td>
                     <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
                              Update
                     </asp:LinkButton>
@@ -183,6 +139,53 @@
                 </td>
             </tr>
         </table>
+        <div id="collapseTotals">
+            <div class="card card-body">
+                <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" Visible="false">
+                    <ItemTemplate>
+                        <table class="table-condensed" style="width: 100%">
+                            <tr>
+                                <td colspan="9">
+                                    <hr style="margin: 0" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="9" style="text-align: center">
+                                    <h2 style="margin: 0"><%# Eval("ClientName")%>, <%# Eval("ClientCompany") %></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 19%; text-align: center; background-color: #039be5">
+                                    <span class="DashboardFont2"># Pending Props.</span><br />
+                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 19%; text-align: center; background-color: #546e7a">
+                                    <span class="DashboardFont2">Acepted Props.</span><br />
+                                    <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 19%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Jobs Budget</span><br />
+                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 19%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Amount Paid</span><br />
+                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 19%; text-align: center; background-color: #e53935">
+                                    <span class="DashboardFont2">Remaining Balance</span><br />
+                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </ItemTemplate>
+                </asp:FormView>
+
+            </div>
+        </div>
     </asp:Panel>
     <div>
         <asp:ValidationSummary ID="ValidationSummary1" runat="server"
@@ -1027,7 +1030,7 @@
                     </div>
                     <div style="padding-top: 12px; padding-left: 18px; padding-bottom: 10px">
                         <telerik:RadGrid ID="RadGridPhases" runat="server" DataSourceID="SqlDataSourcePhases" GridLines="None" AllowAutomaticDeletes="true"
-                            AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" 
+                            AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
                             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePhases">
                                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
@@ -1070,7 +1073,7 @@
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep23" Title="Schedule" StepType="Step">
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
-                         <asp:LinkButton ID="btnSchedule" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" >
+                        <asp:LinkButton ID="btnSchedule" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false">
                              Project Schedule
                         </asp:LinkButton>
                     </div>
@@ -1640,6 +1643,14 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceClientBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Client_Balance" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="lblClientId" Name="ClientId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+
     </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>

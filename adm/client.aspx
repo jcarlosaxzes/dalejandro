@@ -136,31 +136,24 @@
                         <EditItemTemplate>
                             <table class="table-condensed">
                                 <tr>
-                                    <td style="width: 200px">
+                                    <td style="width: 220px">
                                         <asp:Image ID="ImageClientPhoto" ImageUrl='<%# GetClientPhotoURL(Eval("Id"))%>'
                                             runat="server" Width="45" Height="50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
-                                    </td>
-                                    <td>
-                                        <asp:LinkButton ID="btnUpdateClient1" runat="server" CommandName="Update" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                     Update Client
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <telerik:RadButton ID="btnCredentials" runat="server" CausesValidation="False" Text="Send Credentials"
-                                            ToolTip="Send Email with credentials" Visible="false">
-                                            <Icon PrimaryIconCssClass="rbMail"></Icon>
-                                        </telerik:RadButton>
                                     </td>
                                     <td>
                                         <telerik:RadButton ID="btnPhoto" runat="server" CommandName="Photo" Text="Client Photo">
                                             <Icon PrimaryIconCssClass=" rbUpload"></Icon>
                                         </telerik:RadButton>
                                     </td>
+                                        <asp:LinkButton ID="btnUpdateClient1" runat="server" CommandName="Update" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                                            Update Client
+                                        </asp:LinkButton>
+                                    <td>
+                                    </td>
                                     <td></td>
                                 </tr>
                             </table>
 
-                            <h4>Client Information</h4>
                             <table class="table-condensed" style="width: 100%">
                                 <tr>
                                     <td style="width: 220px; text-align:right">Client Code:
