@@ -1,6 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="saveproposalas.aspx.vb" Inherits="pasconcept20.saveproposalas" %>
-
-<<<<<<< HEAD
+﻿<%@ Page Title="Save Proposal As" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="saveproposalas.aspx.vb" Inherits="pasconcept20.saveproposalas" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pas-container" style="padding-left: 50px">
         <h2>Save Proposal As</h2>
@@ -12,29 +10,6 @@
             <tr>
                 <td>Project Name:
                         <telerik:RadTextBox ID="txtName" runat="server" LabelWidth="" Width="500px">
-=======
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Save Proposal As</title>
-</head>
-<body>
-    <script src="../jscript.js" type="text/javascript"></script>
-    <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
-        </telerik:RadScriptManager>
-        <div style="padding-left: 20px; padding-top: 20px">
-            <table width="470px">
-                <tr>
-                    <td style="padding-top:15px">Proposal Number:&nbsp;<asp:Label ID="lblProposalNumber" CssClass="Titulo4Negrita" runat="server" Width="250px"></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="padding-top:15px">Project Name:
-                        <telerik:RadTextBox ID="txtName" runat="server" LabelWidth="" Width="350px">
->>>>>>> 738bf357dc56d70a72f928fb45685eff190ff49f
                         </telerik:RadTextBox>
                 </td>
             </tr>
