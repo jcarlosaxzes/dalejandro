@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/master/MasterPage.Master" CodeBehind="useradmin.aspx.vb" Inherits="pasconcept20.useradmin" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/master/MasterPage.Master" CodeBehind="useradmin.aspx.vb" Inherits="pasconcept20.useradmin" Async="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
  
@@ -24,6 +24,14 @@
                         <telerik:GridButtonColumn ButtonType="PushButton" HeaderText="Unlock User" 
                             UniqueName="cmdUnlock" CommandName="cmdUnlock" Text="Unlock">
                         </telerik:GridButtonColumn>
+
+                        <telerik:GridButtonColumn ButtonType="PushButton" HeaderText="Confirm Email" 
+                            UniqueName="cmdConfirm" CommandName="cmdConfirm" Text="Confirm Email">
+                        </telerik:GridButtonColumn>
+
+                        <telerik:GridButtonColumn ButtonType="PushButton" HeaderText="Send Credentials" 
+                            UniqueName="cmdSend" CommandName="cmdSend" Text="Send Credentials">
+                        </telerik:GridButtonColumn>
                     </Columns>
                     <EditFormSettings>
                         <FormTableItemStyle Wrap="False"></FormTableItemStyle>
@@ -41,6 +49,6 @@
             </telerik:RadGrid>
             <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook"></telerik:RadWindowManager>
         </telerik:RadAjaxPanel>
-        <asp:SqlDataSource SelectCommand="SELECT [Id] ,[Name] ,[LastName] ,[FullName] ,[Email] ,[companyId],  isnull([IsMigrate], 0) as IsMigrate FROM [dbo].[Employees] where Inactive = 0" ConnectionString="Server=axzesu1server.database.windows.net;Database=pasconcept_db;User ID=axzesu1@axzesu1server;Password=P@ssw0rd;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" ProviderName="System.Data.SqlClient" ID="DataSource1" runat="server"></asp:SqlDataSource>
+        <asp:SqlDataSource SelectCommand="SELECT [Id] ,[FullName] ,[Email] ,[companyId],  isnull([IsMigrate], 0) as IsMigrate FROM [dbo].[Employees] where Inactive = 0" ConnectionString="Server=axzesu1server.database.windows.net;Database=pasconcept_db;User ID=axzesu1@axzesu1server;Password=P@ssw0rd;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" ProviderName="System.Data.SqlClient" ID="DataSource1" runat="server"></asp:SqlDataSource>
 
 </asp:Content>

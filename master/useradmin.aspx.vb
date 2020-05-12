@@ -15,8 +15,8 @@ Public Class useradmin
 
     Protected Sub RadGrid1_ItemDataBound(ByVal sender As Object, ByVal e As Telerik.Web.UI.GridItemEventArgs)
         If TypeOf e.Item Is GridDataItem Then
-            Dim dataItem As GridDataItem = CType(e.Item, GridDataItem)
-            Dim IsMigrate = dataItem.DataItem.Row.ItemArray(6)
+            'Dim dataItem As GridDataItem = CType(e.Item, GridDataItem)
+            'Dim IsMigrate = dataItem.DataItem.Row.ItemArray(6)
             'If IsMigrate = True Then
             '    dataItem("cmdMigrate").Controls(0).Visible = False
             'Else
@@ -56,11 +56,28 @@ Public Class useradmin
             Try
                 Dim item As GridDataItem = CType(e.Item, GridDataItem)
                 Dim email As String = item("Email").Text
+                LocalAPI.UnlockUser(email)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End If
+
+        If e.CommandName = "cmdConfirm" Then
+            Try
+                Dim item As GridDataItem = CType(e.Item, GridDataItem)
+                Dim email As String = item("Email").Text
+                LocalAPI.ConfirmEmailUser(email)
+            Catch ex As Exception
+                Throw ex
+            End Try
+        End If
+
+        If e.CommandName = "cmdSend" Then
+            Try
+                Dim item As GridDataItem = CType(e.Item, GridDataItem)
+                Dim email As String = item("Email").Text
                 LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
-                Dim identityUser As pasconcept20.ApplicationUser = Await LocalAPI.AppUserManager.FindByEmailAsync(email)
-                If identityUser IsNot Nothing Then
-                    LocalAPI.AppUserManager.SetLockoutEnabledAsync(identityUser.Id, False)
-                End If
+                Await LocalAPI.EmployeeEmailResetPassword(email)
             Catch ex As Exception
                 Throw ex
             End Try

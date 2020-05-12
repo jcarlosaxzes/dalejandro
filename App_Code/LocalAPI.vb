@@ -9698,6 +9698,28 @@ Public Class LocalAPI
         End Try
     End Sub
 
+    Public Shared Sub UnlockUser(email As String)
+        Try
+            Dim cnn1 As SqlConnection = GetUsersConnection()
+            Dim cmd As New SqlCommand("update [dbo].[AspNetUsers] set LockoutEnabled = 1, AccessFailedCount = 0, LockoutEnd = null where Email = '" & email & "'", cnn1)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Shared Sub ConfirmEmailUser(email As String)
+        Try
+            Dim cnn1 As SqlConnection = GetUsersConnection()
+            Dim cmd As New SqlCommand("update [dbo].[AspNetUsers] set EmailConfirmed = 1 where Email = '" & email & "'", cnn1)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
     Public Shared Function IsMasterUser(email As String, companyId As String) As Boolean
         If ConfigurationManager.AppSettings("Debug") <> "1" Then
             Dim sMasterEmail As String = LocalAPI.GetCompanyProperty(companyId, "Email")
