@@ -222,7 +222,7 @@
 
                             </ContentTemplate>
                         </telerik:RadDock>
-                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockProposals" runat="server" Title="<a class='lnkGrid' href='Proposals.aspx' title='Go to Proposals List'>Proposals  / </a><a class='lnkGrid' href='Jobs.aspx' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
+                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockProposals" runat="server" Title="<a class='lnkGrid' href='Proposals' title='Go to Proposals List'>Proposals  / </a><a class='lnkGrid' href='Jobs' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
                                 <telerik:RadGrid ID="RadGridProposalJobs" runat="server" DataSourceID="SqlDataSourceProposalJobs" Width="100%" AutoGenerateColumns="False">
@@ -267,7 +267,7 @@
                             </ContentTemplate>
                         </telerik:RadDock>
 
-                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockJobs" runat="server" Title="<a class='lnkGrid' href='Jobs.aspx' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
+                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockJobs" runat="server" Title="<a class='lnkGrid' href='Jobs' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
                                 <telerik:RadGrid ID="RadGridJobs" runat="server" DataSourceID="SqlDataSourceJobs" Width="100%" AutoGenerateColumns="False">
@@ -312,7 +312,7 @@
                             </ContentTemplate>
                         </telerik:RadDock>
 
-                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockEmployeeStatistics" runat="server" Title="<a class='lnkGrid' href='TimesByPeriords.aspx' title='Go to Times By Periords'>Employee Statistics</a>" EnableAnimation="true"
+                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockEmployeeStatistics" runat="server" Title="<a class='lnkGrid' href='TimesByPeriords' title='Go to Times By Periords'>Employee Statistics</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
                                 <telerik:RadGrid ID="RadGridEmployeeStatistics" runat="server" DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%" AutoGenerateColumns="False" pag
@@ -356,7 +356,7 @@
                             </ContentTemplate>
                         </telerik:RadDock>
 
-                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockClients" runat="server" Title="<a class='lnkGrid' href='Clients.aspx' title='Go to Clients List'>Clients</a>" EnableAnimation="true"
+                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockClients" runat="server" Title="<a class='lnkGrid' href='Clients' title='Go to Clients List'>Clients</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
                                 <telerik:RadGrid ID="RadGridClients" runat="server" DataSourceID="SqlDataSourceClients" Width="100%" AutoGenerateColumns="False">
@@ -400,7 +400,7 @@
                                 </telerik:RadGrid>
                             </ContentTemplate>
                         </telerik:RadDock>
-                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockSubconsultants" runat="server" Title="<a class='lnkGrid' href='SubConsultans.aspx' title='Go to SubConsultants List'>Subconsultants  / </a><a class='lnkGrid' href='RequestForProposals.aspx' title='Go to Jobs List'>Request for Proposals</a>" EnableAnimation="true"
+                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockSubconsultants" runat="server" Title="<a class='lnkGrid' href='SubConsultans' title='Go to SubConsultants List'>Subconsultants  / </a><a class='lnkGrid' href='RequestForProposals' title='Go to Jobs List'>Request for Proposals</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
                                 <telerik:RadGrid ID="RadGridSubConsultants" runat="server" DataSourceID="SqlDataSourceSubConsultants" Width="100%" AutoGenerateColumns="False">
