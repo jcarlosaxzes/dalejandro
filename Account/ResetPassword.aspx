@@ -69,7 +69,7 @@
                                         </div>
 
                                         <div class="form-group" style="margin-top:1em;">
-                                            <a href="Login.aspx">Log In</a>
+                                            <a href="Login">Log In</a>
                                         </div>
                                     </form>
                                 </div>
