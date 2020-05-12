@@ -10,11 +10,11 @@
     <title>PASconcept</title>
 
     <%--Bootstrap reference begin--%>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <%--Bootstrap reference end--%>
-    <link href="~/Content/fontawesome-free-5.1.1-web/css/all.css" rel="stylesheet" />
-    <link href="~/css/Menu.PASMenuBlackMetroTouch.css" rel="stylesheet" />
-    <link href="~/Content/pasconcept.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.1.1-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/Menu.PASMenuBlackMetroTouch.min.css" rel="stylesheet" />
+    <link href="~/Content/pasconcept.min.css" rel="stylesheet" />
 
     <meta name="DESCRIPTION" content="A web-based application conceived and designed to provide an all-inclusive management tool for architectural and engineering firms who wish to integrate the interaction." />
     <meta name="KEYWORDS" content="pasconcept,saas,online project administration,architectural app,engineering app,project app,time sheet,proposals online,job online,civil app,mechanical app,structural app,
@@ -51,7 +51,7 @@
     </style>--%>
 </head>
 <body>
-    <script src="../jscript.js" type="text/javascript"></script>
+    <script src="../jscript.min.js" type="text/javascript"></script>
     <style type="text/css">
         .borderCssClass div {
             border: 1px solid red;
