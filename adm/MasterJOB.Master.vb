@@ -33,33 +33,33 @@ Public Class MasterJOB
     End Property
     Private Sub Refresh()
         lblJobId.Text = Request.QueryString("jobId")
-        Dim sPage = Mid(Request.Url.AbsolutePath, InStrRev(Request.Url.AbsolutePath, "/job_") + 1)
-        Select Case sPage
-            Case "job_job.aspx"
+        Dim sPage = Mid(Request.Url.GetLeftPart(UriPartial.Path), InStr(LCase(Request.Url.GetLeftPart(UriPartial.Path)), "/job_") + 1)
+        Select Case LCase(sPage)
+            Case "job_job"
                 lblActiveTab.Text = 0
-            Case "job_accounting.aspx"
+            Case "job_accounting"
                 lblActiveTab.Text = 1
-            Case "job_employees.aspx"
+            Case "job_employees"
                 lblActiveTab.Text = 2
-            Case "job_proposals.aspx"
+            Case "job_proposals"
                 lblActiveTab.Text = 3
-            Case "job_rfps.aspx"
+            Case "job_rfps"
                 lblActiveTab.Text = 4
-            Case "job_notes.aspx"
+            Case "job_notes"
                 lblActiveTab.Text = 5
-            Case "job_times.aspx"
+            Case "job_times"
                 lblActiveTab.Text = 6
-            Case "job_links.aspx"
+            Case "job_links"
                 lblActiveTab.Text = 7
-            Case "job_schedule.aspx"
+            Case "job_schedule"
                 lblActiveTab.Text = 8
-            Case "job_reviews.aspx"
+            Case "job_reviews"
                 lblActiveTab.Text = 9
-            Case "job_tags.aspx"
+            Case "job_tags"
                 lblActiveTab.Text = 10
-            Case "job_trasmittals.aspx"
+            Case "job_trasmittals"
                 lblActiveTab.Text = 11
-            Case "job_images_files.aspx"
+            Case "job_images_files"
                 lblActiveTab.Text = 12
         End Select
         Page.Title = LocalAPI.GetJobCodeName(lblJobId.Text)

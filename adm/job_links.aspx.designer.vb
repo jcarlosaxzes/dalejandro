@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class job_links_aspx
+Partial Public Class job_links
     
     '''<summary>
     '''RadCodeBlock control.

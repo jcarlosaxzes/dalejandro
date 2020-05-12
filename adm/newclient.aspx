@@ -1,6 +1,6 @@
-﻿<%@ Page Title="New Client" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="newclient.aspx.vb" Inherits="pasconcept20.newclient" %>
+﻿<%@ Page Title="New Client" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="newclient.aspx.vb" Inherits="pasconcept20.newclient" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLuxW5zYQh_ClJfDEBpTLlT_tf8JVcxf0&libraries=places&callback=initAutocomplete"
@@ -57,190 +57,197 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <table style="width: 100%" class="table-condensed">
-        <tr>
-            <td style="text-align: center; padding-top: 15px; padding-bottom: 15px; width: 125px">
-                <asp:Image ID="Image8" runat="server"
-                    ImageUrl="~/Images/Toolbar/new-client-256.png" Width="64px" />
-            </td>
-            <td class="Titulo3" style="padding-left: 25px">New Client 
-            </td>
-        </tr>
-    </table>
-    
-    <table style="width: 100%" class="table-condensed">
-        <tr>
-            <td style="width: 140px; text-align: right">Source:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboSource" runat="server" DataSourceID="SqlDataSourceClientSources" AllowCustomText="true" AppendDataBoundItems="true"
-                    MarkFirstMatch="True" Filter="Contains" DataTextField="Name" Width="300px" DataValueField="Id">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Client Source Not Defined...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                       Cancel
+                    </asp:LinkButton>
+                </td>
 
-        <tr>
-            <td style="text-align: right">(*) Full Name:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtName" runat="server" MaxLength="80" Width="90%" EmptyMessage="Required">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Position:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtPosition" runat="server" Width="90%" MaxLength="80">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Organization:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtCompany" runat="server" MaxLength="80" Width="90%">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">(*) Client Code:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtInitials" runat="server" MaxLength="7" Width="100px" EmptyMessage="Up to 7 characters">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right" class="auto-style2">(*) Email:
-            </td>
-            <td class="auto-style2">
-                <telerik:RadTextBox ID="txtEmail" runat="server" MaxLength="80" Width="90%" EmptyMessage="Required">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Type/Subtype:</td>
-            <td>
-                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceTypes"
-                    DataTextField="Name" DataValueField="Id" Width="44%" AppendDataBoundItems="true" AutoPostBack="True">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Types Not Defined...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-                &nbsp;
+            </tr>
+        </table>
+    </div>
+    <div>
+        <asp:ValidationSummary ID="vsClient" runat="server" ValidationGroup="UpdateClient" ForeColor="Red"
+            HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+                                        There were this errors:"></asp:ValidationSummary>
+    </div>
+    <div class="pas-container">
+        <table style="width: 100%" class="table-condensed">
+            <tr>
+                <td style="width: 200px; text-align: right">Source:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboSource" runat="server" DataSourceID="SqlDataSourceClientSources" AllowCustomText="true" AppendDataBoundItems="true"
+                        MarkFirstMatch="True" Filter="Contains" DataTextField="Name" Width="300px" DataValueField="Id">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Client Source Not Defined...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+
+            <tr>
+                <td style="text-align: right">(*) Full Name:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtName" runat="server" MaxLength="80" Width="90%" EmptyMessage="Required">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Position:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtPosition" runat="server" Width="90%" MaxLength="80">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Organization:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtCompany" runat="server" MaxLength="80" Width="90%">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">(*) Client Code:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtInitials" runat="server" MaxLength="7" Width="100px" EmptyMessage="Up to 7 characters">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right" class="auto-style2">(*) Email:
+                </td>
+                <td class="auto-style2">
+                    <telerik:RadTextBox ID="txtEmail" runat="server" MaxLength="80" Width="90%" EmptyMessage="Required">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Type/Subtype:</td>
+                <td>
+                    <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceTypes"
+                        DataTextField="Name" DataValueField="Id" Width="44%" AppendDataBoundItems="true" AutoPostBack="True">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Types Not Defined...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                    &nbsp;
                 <telerik:RadComboBox ID="cboSubtype" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceSubtypes" DataTextField="Name" DataValueField="Id"
                     Width="44%">
                     <Items>
                         <telerik:RadComboBoxItem runat="server" Text="(Subtypes Not Defined...)" Value="0" />
                     </Items>
                 </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Address Line 1:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtAdress" runat="server" MaxLength="80" Width="90%" CssClass="input-address">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Address Line 2:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtDireccion2" runat="server" Width="90%" MaxLength="80">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">City/State/Zip Code::
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtCity" runat="server" MaxLength="50" Width="200px" ToolTip="City" EmptyMessage="City" CssClass="input-city">
-                </telerik:RadTextBox>
-                <telerik:RadTextBox ID="txtState" runat="server" MaxLength="50" Width="100px" ToolTip="State" EmptyMessage="State" CssClass="input-state">
-                </telerik:RadTextBox>
-                <telerik:RadTextBox ID="txtZipCode" runat="server" MaxLength="50" Width="100px" EmptyMessage="Zip Code" CssClass="input-zip">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Phone/Cell:
-            </td>
-            <td>
-                <telerik:RadMaskedTextBox ID="txtPhone" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="200px" ToolTip="Phone" />
-                <telerik:RadMaskedTextBox ID="txtCellular" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="200px" ToolTip="Cell" />
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Web Page:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtWeb" runat="server" MaxLength="50" Width="90%">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Billing Contact:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtBillingContact" runat="server" MaxLength="80" Width="90%" EmptyMessage="Name...">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Billing Phone/Email:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtBillingTelephone" runat="server" MaxLength="25" Width="200px" EmptyMessage="Phone...">
-                </telerik:RadTextBox>
-                <telerik:RadTextBox ID="txtBillingEmail" runat="server" MaxLength="25" Width="395px" EmptyMessage="Email...">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">TAGs:
-            </td>
-            <td>
-                <telerik:RadAutoCompleteBox RenderMode="Lightweight" ID="cboTags" runat="server" EnableClientFiltering="true" Width="90%"
-                    DropDownHeight="150" DataSourceID="SqlDataSourceTags" DataTextField="Tag" EmptyMessage="Add New Tags"
-                    DataValueField="Tag">
-                </telerik:RadAutoCompleteBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">&nbsp;
-            </td>
-            <td>
-                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
-                                        <span class="glyphicon glyphicon-plus"></span> Client
-                </asp:LinkButton>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Address Line 1:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtAdress" runat="server" MaxLength="80" Width="90%" CssClass="input-address">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Address Line 2:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtDireccion2" runat="server" Width="90%" MaxLength="80">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">City/State/Zip Code::
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtCity" runat="server" MaxLength="50" Width="200px" ToolTip="City" EmptyMessage="City" CssClass="input-city">
+                    </telerik:RadTextBox>
+                    <telerik:RadTextBox ID="txtState" runat="server" MaxLength="50" Width="100px" ToolTip="State" EmptyMessage="State" CssClass="input-state">
+                    </telerik:RadTextBox>
+                    <telerik:RadTextBox ID="txtZipCode" runat="server" MaxLength="50" Width="100px" EmptyMessage="Zip Code" CssClass="input-zip">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Phone/Cell:
+                </td>
+                <td>
+                    <telerik:RadMaskedTextBox ID="txtPhone" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="200px" ToolTip="Phone" />
+                    <telerik:RadMaskedTextBox ID="txtCellular" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="200px" ToolTip="Cell" />
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Web Page:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtWeb" runat="server" MaxLength="50" Width="90%">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Billing Contact:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtBillingContact" runat="server" MaxLength="80" Width="90%" EmptyMessage="Name...">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Billing Phone/Email:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtBillingTelephone" runat="server" MaxLength="25" Width="200px" EmptyMessage="Phone...">
+                    </telerik:RadTextBox>
+                    <telerik:RadTextBox ID="txtBillingEmail" runat="server" MaxLength="25" Width="395px" EmptyMessage="Email...">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">TAGs:
+                </td>
+                <td>
+                    <telerik:RadAutoCompleteBox RenderMode="Lightweight" ID="cboTags" runat="server" EnableClientFiltering="true" Width="90%"
+                        DropDownHeight="150" DataSourceID="SqlDataSourceTags" DataTextField="Tag" EmptyMessage="Add New Tags"
+                        DataValueField="Tag">
+                    </telerik:RadAutoCompleteBox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center">
+                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="UpdateClient">
+                                        Create Client
+                    </asp:LinkButton>
 
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
     <div>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName"
-            ErrorMessage="(*) Name is Required" Display="Dynamic"></asp:RequiredFieldValidator>
+            ErrorMessage="(*) Name is Required" Display="None" ValidationGroup="UpdateClient"></asp:RequiredFieldValidator>
         <br />
-        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtEmail"
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ValidationGroup="UpdateClient" ControlToValidate="txtEmail"
             runat="server" ErrorMessage="(*) Enter a valid email address" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-            Display="Dynamic"></asp:RegularExpressionValidator>
+            Display="None"></asp:RegularExpressionValidator>
         <br />
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmail"
-            ErrorMessage="(*) Email is Required" Display="Dynamic"></asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmail" ValidationGroup="UpdateClient"
+            ErrorMessage="(*) Email is Required" Display="None"></asp:RequiredFieldValidator>
         <br />
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtInitials"
-            ErrorMessage=" (*) Client code is required"></asp:RequiredFieldValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtInitials" ValidationGroup="UpdateClient"
+            ErrorMessage=" (*) Client code is required" Display="None"></asp:RequiredFieldValidator>
         <br />
-        <asp:CompareValidator runat="server" ID="Comparevalidator1" Operator="NotEqual" ForeColor="Red"
+        <asp:CompareValidator runat="server" ID="Comparevalidator1" Operator="NotEqual" ValidationGroup="UpdateClient"
             ControlToValidate="cboSource"
             ValueToCompare="(Client Source Not Defined...)"
-            ErrorMessage="(*) You must select Client Source!">
+            ErrorMessage="(*) You must select Client Source!"
+            Display="None">
         </asp:CompareValidator>
 
     </div>

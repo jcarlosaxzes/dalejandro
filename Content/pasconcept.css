@@ -1,4 +1,9 @@
-﻿DashboardBackcolorBLUE {
+﻿.pas-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid #ddd;
+}
+
+DashboardBackcolorBLUE {
     background-color: #039be5;
 }
 
