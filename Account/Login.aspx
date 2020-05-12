@@ -67,7 +67,7 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <a href="ResetPassword.aspx">Forgot password?</a>
+                                <a href="ResetPassword">Forgot password?</a>
                             </div>
 
                             <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
