@@ -25,7 +25,7 @@ Public Class _Default1
                 RadDockSubconsultants.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDS_Collapsed")
             Else
                 ' User con Permiso al Employee PORTAL
-                Response.Redirect("~/ADM/activejobsdashboad.aspx")
+                Response.Redirect("~/ADM/activejobsdashboad")
                 'RadDockLayout1.Visible = False
                 'panelEmployeePortal.Visible = True
             End If
@@ -102,52 +102,52 @@ Public Class _Default1
         Dim sUrl As String
         Select Case e.CommandName
             Case "EditJob"
-                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/Job_job?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "Accounting"
-                sUrl = "~/ADM/Job_accounting.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/Job_accounting?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "Tickets"
                 If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                     ' Programmers/Computer/IT
-                    Response.Redirect("~/ADM/JobTickets.aspx?JobId=" & e.CommandArgument)
+                    Response.Redirect("~/ADM/JobTickets?JobId=" & e.CommandArgument)
                 End If
 
             Case "Images"
-                sUrl = "~/ADM/Job_images_files.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/Job_images_files?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "JobTimes"
-                sUrl = "~/ADM/Job_times.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/Job_times?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "Notes"
-                sUrl = "~/ADM/Job_notes.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/Job_notes?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "NewTime"
-                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & e.CommandArgument & "&back=2")
+                Response.Redirect("~/adm/employeenewtime?JobId=" & e.CommandArgument & "&back=2")
 
             Case "JobTags"
-                sUrl = "~/ADM/Job_tags.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/Job_tags?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "GetSharedLink"
-                sUrl = "~/adm/sharelink.aspx?ObjType=2&ObjId=" & e.CommandArgument
+                sUrl = "~/adm/sharelink?ObjType=2&ObjId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
 
             Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
+                sUrl = "~/ADM/Client?clientId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 850, 750, False)
 
             Case "Tags"
-                sUrl = "~/ADM/Job_tags.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/Job_tags?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "AzureUpload"
-                sUrl = "~/ADM/Job_links.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/Job_links?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
 
@@ -176,6 +176,6 @@ Public Class _Default1
     End Sub
 
     Private Sub btnEmployeePortal_Click(sender As Object, e As EventArgs) Handles btnEmployeePortal.Click
-        Response.Redirect("~/EMP/Default.aspx")
+        Response.Redirect("~/EMP/Default")
     End Sub
 End Class

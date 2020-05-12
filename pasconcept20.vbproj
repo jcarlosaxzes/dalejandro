@@ -483,6 +483,7 @@
     <Content Include="App_Themes\Estandar\DefaultEmployeeIcon.gif" />
     <Content Include="App_Themes\Estandar\DefaultHeader.gif" />
     <Content Include="App_Themes\Estandar\Estandar.css" />
+    <Content Include="App_Themes\Estandar\Estandar.min.css" />
     <Content Include="App_Themes\Estandar\Images\administrator.png" />
     <Content Include="App_Themes\Estandar\Images\customer.png" />
     <Content Include="App_Themes\Estandar\Images\employee.png" />
@@ -2183,6 +2184,7 @@
     <Content Include="registerend.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
