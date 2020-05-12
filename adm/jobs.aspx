@@ -508,7 +508,7 @@
                                             CommandName="HideClient" UseSubmitBehavior="false">
                                                     <span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span>
                                         </asp:LinkButton>
-                                        <a title="Click here to view Scope Of Work" href='<%#String.Concat("../EMP/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
+                                        <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
                                             <span class="glyphicon glyphicon glyphicon-th-list"></span>
                                         </a>
                                         <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name")," - ",Eval("Company"))%>' CssClass="lnkGrid"></asp:Label>
@@ -590,7 +590,7 @@
                                                 <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditStatus" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Job Status">
                                                     <span title="Clic to edit Job Status" class="label  <%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>"><%# Eval("nStatus") %></span>
                                                 </asp:LinkButton>
-                                                <a title="Click here to download titlebox file" href='<%#String.Concat("../EMP/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
+                                                <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
                                                     <span class="glyphicon glyphicon-cloud-download"></span>
                                                 </a>
                                             </td>
@@ -893,4 +893,5 @@
     <asp:Label ID="lblSelectedJobId" runat="server" Visible="False" Text=""></asp:Label>
     <asp:Label ID="lblTagId" runat="server" Visible="False" Text=""></asp:Label>
     <asp:Label ID="lblTagIN_List" runat="server" Visible="False" Text=""></asp:Label>
+    <asp:Label ID="lblJobIdInput" runat="server" Visible="False" Text="0"></asp:Label>
 </asp:Content>

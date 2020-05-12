@@ -218,7 +218,7 @@ Public Class singproposalsign
                     sMsg.Append("<b>Titleblock</b>")
                     sMsg.Append("<br />")
                     sMsg.Append("Click here to")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/EMP/titleblock.aspx?guid=" & JobGUID & """" & "> download Titleblock </a> csv file")
+                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/titleblock.aspx?guid=" & JobGUID & """" & "> download Titleblock </a> csv file")
                     sMsg.Append("<br />")
 
                     sMsg.Append("<br />")
@@ -228,7 +228,7 @@ Public Class singproposalsign
                     sMsg.Append("<b>Scope of Work</b>")
                     sMsg.Append("<br />")
                     sMsg.Append("Click here to ")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/EMP/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
+                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
                     sMsg.Append("<br />")
 
                 Catch ex As Exception

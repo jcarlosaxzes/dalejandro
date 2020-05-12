@@ -1624,7 +1624,7 @@ Public Class LocalAPI
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            If LocalAPI.GetCompanyProperty(companyId, "Type") = 16 Then
+            If LocalAPI.GetCompanyProperty(companyId, "Type") = 16 And nSector = 0 Then
                 ' Initialize for IT companies
                 nSector = 2
                 sCodeUse = "B"
@@ -10679,7 +10679,7 @@ Public Class LocalAPI
                     sMsg.Append("<b>Titleblock</b>")
                     sMsg.Append("<br />")
                     sMsg.Append("Click here to")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/EMP/titleblock.aspx?guid=" & JobGUID & """" & "> download Titleblock </a> csv file")
+                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/titleblock.aspx?guid=" & JobGUID & """" & "> download Titleblock </a> csv file")
                     sMsg.Append("<br />")
 
                     sMsg.Append("<br />")
@@ -10689,7 +10689,7 @@ Public Class LocalAPI
                     sMsg.Append("<b>Scope of Work</b>")
                     sMsg.Append("<br />")
                     sMsg.Append("Click here to ")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/EMP/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
+                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
                     sMsg.Append("<br />")
 
                 Catch ex As Exception

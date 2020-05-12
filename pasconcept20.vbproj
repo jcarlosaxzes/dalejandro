@@ -338,6 +338,7 @@
     <Content Include="adm\employeenewtime.aspx" />
     <Content Include="adm\employeereport.aspx" />
     <Content Include="adm\employees.aspx" />
+    <Content Include="adm\employee_hourlywagehistory.aspx" />
     <Content Include="adm\employee_permissions.aspx" />
     <Content Include="adm\employee_permissions_form.aspx" />
     <Content Include="adm\employee_status_form.aspx" />
@@ -349,6 +350,7 @@
     <Content Include="adm\importtickets.aspx" />
     <Content Include="adm\invoices.aspx" />
     <Content Include="adm\invoicestypes.aspx" />
+    <Content Include="adm\jobassignemployee.aspx" />
     <Content Include="adm\jobs.aspx" />
     <Content Include="adm\jobtickets.aspx" />
     <Content Include="adm\jobtypes.aspx" />
@@ -364,6 +366,7 @@
     <Content Include="adm\job_tags.aspx" />
     <Content Include="adm\job_times.aspx" />
     <Content Include="adm\job_transmittals.aspx" />
+    <Content Include="adm\managementrequest.aspx" />
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
@@ -405,6 +408,7 @@
     <Content Include="adm\saveproposalas.aspx" />
     <Content Include="adm\saveproposalastemplate.aspx" />
     <Content Include="adm\schedule.aspx" />
+    <Content Include="adm\scopeofwork.aspx" />
     <Content Include="adm\sendinvoice.aspx" />
     <Content Include="adm\sendproposal.aspx" />
     <Content Include="adm\sendstatement.aspx" />
@@ -426,6 +430,7 @@
     <Content Include="adm\timecategory.aspx" />
     <Content Include="adm\timesbyperiords.aspx" />
     <Content Include="adm\timesheet.aspx" />
+    <Content Include="adm\titleblock.aspx" />
     <Content Include="adm\topten.aspx" />
     <Content Include="adm\transmittal.aspx" />
     <Content Include="adm\transmittals.aspx" />
@@ -1879,8 +1884,8 @@
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\singproposalsign.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -2953,6 +2958,13 @@
       <DependentUpon>employees.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\employee_hourlywagehistory.aspx.designer.vb">
+      <DependentUpon>employee_hourlywagehistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employee_hourlywagehistory.aspx.vb">
+      <DependentUpon>employee_hourlywagehistory.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\employee_permissions.aspx.designer.vb">
       <DependentUpon>employee_permissions.aspx</DependentUpon>
     </Compile>
@@ -3028,6 +3040,13 @@
     </Compile>
     <Compile Include="adm\invoicestypes.aspx.vb">
       <DependentUpon>invoicestypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\jobassignemployee.aspx.designer.vb">
+      <DependentUpon>jobassignemployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobassignemployee.aspx.vb">
+      <DependentUpon>jobassignemployee.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\jobs.aspx.designer.vb">
@@ -3133,6 +3152,13 @@
     </Compile>
     <Compile Include="adm\job_transmittals.aspx.vb">
       <DependentUpon>job_transmittals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\managementrequest.aspx.designer.vb">
+      <DependentUpon>managementrequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\managementrequest.aspx.vb">
+      <DependentUpon>managementrequest.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\MasterJOB.Master.designer.vb">
@@ -3429,6 +3455,13 @@
       <DependentUpon>schedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\scopeofwork.aspx.designer.vb">
+      <DependentUpon>scopeofwork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\scopeofwork.aspx.vb">
+      <DependentUpon>scopeofwork.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\sendinvoice.aspx.designer.vb">
       <DependentUpon>sendinvoice.aspx</DependentUpon>
     </Compile>
@@ -3574,6 +3607,13 @@
     </Compile>
     <Compile Include="adm\timesheet.aspx.vb">
       <DependentUpon>timesheet.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\titleblock.aspx.designer.vb">
+      <DependentUpon>titleblock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\titleblock.aspx.vb">
+      <DependentUpon>titleblock.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\topten.aspx.designer.vb">
