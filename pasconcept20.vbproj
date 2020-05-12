@@ -423,6 +423,7 @@
     <Content Include="adm\subconsultant.aspx" />
     <Content Include="adm\subconsultants.aspx" />
     <Content Include="adm\subscribe\pro.aspx" />
+    <Content Include="adm\subscribe\subscribesuccess.aspx" />
     <Content Include="adm\tagcloud.aspx" />
     <Content Include="adm\tandctemplates.aspx" />
     <Content Include="adm\tandctemplate_form.aspx" />
@@ -2137,6 +2138,7 @@
     <Content Include="master\proposaltask_TEMPLATE.aspx" />
     <Content Include="master\tandcedit.aspx" />
     <Content Include="master\transmittals_package_types.aspx" />
+    <Content Include="master\useradmin.aspx" />
     <Content Include="master\usersagreelist.aspx" />
     <Content Include="master\versiones.aspx" />
     <Content Include="RadEditorDialogs\About.ascx" />
@@ -3565,6 +3567,13 @@
       <DependentUpon>pro.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\subscribe\subscribesuccess.aspx.designer.vb">
+      <DependentUpon>subscribesuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\subscribe\subscribesuccess.aspx.vb">
+      <DependentUpon>subscribesuccess.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\tagcloud.aspx.designer.vb">
       <DependentUpon>tagcloud.aspx</DependentUpon>
     </Compile>
@@ -4020,6 +4029,13 @@
     </Compile>
     <Compile Include="master\transmittals_package_types.aspx.vb">
       <DependentUpon>transmittals_package_types.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\useradmin.aspx.designer.vb">
+      <DependentUpon>useradmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\useradmin.aspx.vb">
+      <DependentUpon>useradmin.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="master\usersagreelist.aspx.designer.vb">

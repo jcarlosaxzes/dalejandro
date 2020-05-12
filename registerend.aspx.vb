@@ -92,7 +92,7 @@ Public Class registerend
         End Select
     End Function
 
-    Protected Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
+    Protected Async Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Try
 
             ' Confirmar que la company se ha creado OK
@@ -105,7 +105,7 @@ Public Class registerend
                 ' Crear este usuario como Employee de la company
                 'LocalAPI.NuevoEmpleado_obsolete(txtContact.Text, "Admin", 0, "", "", "", "", "", "", PhoneTextBox.Text, "", txtEmail.Text, "", "", companyId)
 
-                Dim employeeId = LocalAPI.NewEmployee(txtContact.Text, "Admin", 0, "", "", "", "", "", "", PhoneTextBox.Text, "", txtEmail.Text, "", "", companyId)
+                Dim employeeId = Await LocalAPI.NewEmployeeAsync(txtContact.Text, "Admin", 0, "", "", "", "", "", "", PhoneTextBox.Text, "", txtEmail.Text, "", "", companyId)
                 ' Eliminar PreUser
                 LocalAPI.EliminarpreUser(txtEmail.Text)
 
