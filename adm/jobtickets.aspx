@@ -166,7 +166,7 @@
                     </telerik:GridClientSelectColumn>
                     <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="Id" HeaderText="Ticket" SortExpression="Id" UniqueName="Ticket" HeaderStyle-Width="110px"
+                    <telerik:GridTemplateColumn DataField="Id" HeaderText="Ticket" SortExpression="Id" UniqueName="Ticket" HeaderStyle-Width="135px"
                         FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <table style="width: 100%; text-align: center">
@@ -180,6 +180,13 @@
                                         <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
                                             CommandName="NewTime" UseSubmitBehavior="false">
                                                 <span style="font-size: 16px" aria-hidden="true" class="glyphicon glyphicon-time"></span>
+                                        </asp:LinkButton>
+                                    </td>
+                                    <td style="width: 24px; text-align: right">
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("Id")%>' 
+                                            Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>' ToolTip="Click to View Ticket Balance"
+                                            CommandName="TicketBalance" UseSubmitBehavior="false">
+                                                <span style="font-size: 16px" aria-hidden="true" class="fas fa-chart-bar"></span>
                                         </asp:LinkButton>
                                     </td>
                                     <td style="width: 24px; text-align: right">
@@ -249,7 +256,7 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align: center">
-                                        <span style="font-size: x-small" title="Number of Hours"><%# Eval("Hours") %></span>
+                                        <span style="font-size: x-small" title="Number of Hours"><%# Eval("Hours") %> / <%# Eval("EstimatedHours") %></span>
                                     </td>
                                 </tr>
                             </table>
@@ -313,6 +320,8 @@
                         </telerik:GridBoundColumn>
 
                         <telerik:GridBoundColumn DataField="Hours" HeaderText="Hours" UniqueName="Hours">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="EstimatedHours" HeaderText="EstimatedHours" UniqueName="EstimatedHours">
                         </telerik:GridBoundColumn>
 
                     </Columns>
@@ -590,15 +599,17 @@
                 </tr>
 
             </table>
-            <table class="table-condensed" style="width: 960px" border="1">
+            <table class="table-condensed" style="width: 960px">
                 <tr>
                     <td style="width: 150px"></td>
                     <td style="width: 330px">
                         <asp:CheckBox ID="chkNotifyClient" runat="server" ToolTip="Notifiy changes to client when Save?" Text="&nbsp;Notify client on Save?" />
                     </td>
-                    <td style="width: 150px"></td>
+                    <td style="width:150px; text-align: right">Estimated Hours:</td>
                     <td>
-                        <asp:CheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
+                        <telerik:RadTextBox ID="txtEstimatedHours" runat="server" Width="150px" ToolTip="Estimated Hours for Complete Ticket">
+                        </telerik:RadTextBox> 
+                        
                     </td>
                 </tr>
                 <tr>
@@ -606,10 +617,9 @@
                     <td>
                         <asp:CheckBox ID="chkIsBillable" runat="server" ToolTip="Is Billable?" Text="&nbsp;Is Billable?" />
                     </td>
-                    <td style="text-align: right">Estimated Hours:</td>
+                    <td></td>
                     <td>
-                       <telerik:RadTextBox ID="txtEstimatedHours" runat="server" MaxLength="128" Width="100%" ToolTip="Estimated Hours for Complete Ticket">
-                        </telerik:RadTextBox> 
+                       <asp:CheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
                     </td>
                 </tr>
                 <tr>
