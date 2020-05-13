@@ -619,7 +619,7 @@
                     </td>
                     <td></td>
                      <td style="text-align: center;">
-                        <asp:LinkButton runat="server" ID="LinkButton1" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
+                        <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
                             <span class="glyphicon glyphicon-save"> Update</span>
                         </asp:LinkButton>
                     </td>
