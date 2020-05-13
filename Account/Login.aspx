@@ -36,7 +36,7 @@
 </head>
 <body title="Welcome to PASconcept. Project Administration Services" style="background-color: white">
     <form id="form1" runat="server">
-        <telerik:RadScriptManager runat="server" ID="RadScriptManager1" />
+        <telerik:RadScriptManager runat="server"  EnableCdn="true" ID="RadScriptManager1" />
         <div class="container">
             <div class="row">
                 <div class="col-md-5 col-lg-offset-4" style="margin-top: 5em">

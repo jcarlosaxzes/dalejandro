@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <telerik:radscriptmanager runat="server" id="RadScriptManager1" />
+        <telerik:RadScriptManager runat="server"  EnableCdn="true" ID="RadScriptManager1" />
 <%--        <script type="text/javascript">
             var $ = $telerik.$;
 
