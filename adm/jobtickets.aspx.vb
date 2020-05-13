@@ -232,6 +232,8 @@ Public Class jobtickets
             chkIsBillable.Checked = ticketRecord("Billable")
             chkIsPrivate.Checked = ticketRecord("IsPrivate")
 
+            txtEstimatedHours.Text = ticketRecord("EstimatedHours")
+
             RadDatePickerExpectedStartDate.SelectedDate = Nothing
             Try
 

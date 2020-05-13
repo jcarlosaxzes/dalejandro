@@ -145,6 +145,7 @@ Public Class LocalAPI
         Public ExpectedStartDate As String
         Public StagingDate As String
         Public ProductionDate As String
+        Public EstimatedHours As Double
     End Structure
 #End Region
 
@@ -12850,6 +12851,7 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@trelloURL", JobTicketObject.trelloURL)
             cmd.Parameters.AddWithValue("@jiraURL", JobTicketObject.jiraURL)
             cmd.Parameters.AddWithValue("@Tags", JobTicketObject.Tags)
+            cmd.Parameters.AddWithValue("@EstimatedHours", JobTicketObject.EstimatedHours)
 
             ' Execute the stored procedure.
             cmd.ExecuteNonQuery()
