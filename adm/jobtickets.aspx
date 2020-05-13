@@ -590,7 +590,7 @@
                 </tr>
 
             </table>
-            <table class="table-condensed" style="width: 960px">
+            <table class="table-condensed" style="width: 960px" border="1">
                 <tr>
                     <td style="width: 150px"></td>
                     <td style="width: 330px">
@@ -606,11 +606,10 @@
                     <td>
                         <asp:CheckBox ID="chkIsBillable" runat="server" ToolTip="Is Billable?" Text="&nbsp;Is Billable?" />
                     </td>
-                    <td></td>
-                    <td style="text-align: center; vertical-align: middle" rowspan="2">
-                        <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
-                            <span class="glyphicon glyphicon-save"> Update</span>
-                        </asp:LinkButton>
+                    <td style="text-align: right">Estimated Hours:</td>
+                    <td>
+                       <telerik:RadTextBox ID="txtEstimatedHours" runat="server" MaxLength="128" Width="100%" ToolTip="Estimated Hours for Complete Ticket">
+                        </telerik:RadTextBox> 
                     </td>
                 </tr>
                 <tr>
@@ -618,7 +617,12 @@
                     <td>
                         <asp:CheckBox ID="chkIsPrivate" runat="server" ToolTip="Is Private?" Text="&nbsp;Is Private?" />
                     </td>
-
+                    <td></td>
+                     <td style="text-align: center;">
+                        <asp:LinkButton runat="server" ID="LinkButton1" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
+                            <span class="glyphicon glyphicon-save"> Update</span>
+                        </asp:LinkButton>
+                    </td>
                 </tr>
             </table>
 
@@ -843,6 +847,8 @@
 
             <asp:ControlParameter ControlID="chkIsBillable" Name="Billable" PropertyName="Checked" />
             <asp:ControlParameter ControlID="chkIsPrivate" Name="IsPrivate" PropertyName="Checked" />
+
+            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text"  />
 
             <asp:ControlParameter ControlID="lblTicketId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>

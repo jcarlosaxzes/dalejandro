@@ -66,6 +66,7 @@ Public Class ticket
             chkIsBillable.Checked = ticketRecord("Billable")
             chkIsPrivate.Checked = ticketRecord("IsPrivate")
 
+            txtEstimatedHours.Text = ticketRecord("EstimatedHours")
             Try
                 RadDatePickerExpectedStartDate.SelectedDate = ticketRecord("ExpectedStartDate")
             Catch ex As Exception
