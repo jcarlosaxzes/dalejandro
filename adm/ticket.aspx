@@ -209,7 +209,7 @@
             </td>
             <td style="width: 20%;text-align: right">Estimated Hours:</td>
             <td>
-                <telerik:RadTextBox ID="txtEstimatedHours" runat="server" MaxLength="128" Width="100%" ToolTip="Estimated Hours for Complete Ticket">
+                <telerik:RadTextBox ID="txtEstimatedHours" runat="server" Width="150px" ToolTip="Estimated Hours for Complete Ticket">
                 </telerik:RadTextBox>
             </td>
         </tr>
