@@ -590,15 +590,17 @@
                 </tr>
 
             </table>
-            <table class="table-condensed" style="width: 960px" border="1">
+            <table class="table-condensed" style="width: 960px">
                 <tr>
                     <td style="width: 150px"></td>
                     <td style="width: 330px">
                         <asp:CheckBox ID="chkNotifyClient" runat="server" ToolTip="Notifiy changes to client when Save?" Text="&nbsp;Notify client on Save?" />
                     </td>
-                    <td style="width: 150px"></td>
+                    <td style="text-align: right">Estimated Hours:</td>
                     <td>
-                        <asp:CheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
+                        <telerik:RadTextBox ID="txtEstimatedHours" runat="server" MaxLength="128" Width="100%" ToolTip="Estimated Hours for Complete Ticket">
+                        </telerik:RadTextBox> 
+                        
                     </td>
                 </tr>
                 <tr>
@@ -606,10 +608,9 @@
                     <td>
                         <asp:CheckBox ID="chkIsBillable" runat="server" ToolTip="Is Billable?" Text="&nbsp;Is Billable?" />
                     </td>
-                    <td style="text-align: right">Estimated Hours:</td>
+                    <td></td>
                     <td>
-                       <telerik:RadTextBox ID="txtEstimatedHours" runat="server" MaxLength="128" Width="100%" ToolTip="Estimated Hours for Complete Ticket">
-                        </telerik:RadTextBox> 
+                       <asp:CheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
                     </td>
                 </tr>
                 <tr>
