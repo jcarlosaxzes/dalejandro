@@ -432,6 +432,7 @@
     <Content Include="adm\tandctemplates.aspx" />
     <Content Include="adm\tandctemplate_form.aspx" />
     <Content Include="adm\ticket.aspx" />
+    <Content Include="adm\ticket_time.aspx" />
     <Content Include="adm\time.aspx" />
     <Content Include="adm\timecategory.aspx" />
     <Content Include="adm\timesbyperiords.aspx" />
@@ -3634,6 +3635,13 @@
       <DependentUpon>ticket.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\ticket_time.aspx.designer.vb">
+      <DependentUpon>ticket_time.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\ticket_time.aspx.vb">
+      <DependentUpon>ticket_time.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\time.aspx.designer.vb">
       <DependentUpon>time.aspx</DependentUpon>
     </Compile>
@@ -4242,7 +4250,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

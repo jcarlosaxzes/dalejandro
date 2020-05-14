@@ -536,13 +536,13 @@ Partial Public Class jobtickets
     Protected WithEvents chkNotifyClient As Global.System.Web.UI.WebControls.CheckBox
     
     '''<summary>
-    '''chkNotifyEmployee control.
+    '''txtEstimatedHours control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkNotifyEmployee As Global.System.Web.UI.WebControls.CheckBox
+    Protected WithEvents txtEstimatedHours As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
     '''chkIsBillable control.
@@ -554,13 +554,13 @@ Partial Public Class jobtickets
     Protected WithEvents chkIsBillable As Global.System.Web.UI.WebControls.CheckBox
     
     '''<summary>
-    '''btnSave control.
+    '''chkNotifyEmployee control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents chkNotifyEmployee As Global.System.Web.UI.WebControls.CheckBox
     
     '''<summary>
     '''chkIsPrivate control.
@@ -570,6 +570,15 @@ Partial Public Class jobtickets
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkIsPrivate As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''btnSave control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''Comparevalidator3 control.

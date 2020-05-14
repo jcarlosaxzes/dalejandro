@@ -13,12 +13,12 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    
+
     <asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="BulletList"
         HeaderText="Following error occurs:" ShowMessageBox="false" ShowSummary="true" CssClass="alert alert-danger alert-dismissable"
         ValidationGroup="Ticket" />
 
-    <table class="table-condensed" style="width: 100%; text-align: left" >
+    <table class="table-condensed" style="width: 100%; text-align: left">
         <tr>
             <td style="width: 20%; text-align: right">Title:
             </td>
@@ -32,7 +32,7 @@
         <tr>
             <td style="text-align: right">App. Name:
             </td>
-            <td style="width:30%">
+            <td style="width: 30%">
                 <telerik:RadDropDownList ID="cboAppNameEdit" runat="server" AppendDataBoundItems="true" Width="100%"
                     DataSourceID="SqlDataSourceTicketAppName" DataTextField="Name" DataValueField="Id">
                     <Items>
@@ -201,15 +201,16 @@
         </tr>
 
     </table>
-    <table class="table-condensed" style="width: 100%;" >
+    <table class="table-condensed" style="width: 100%;">
         <tr>
-            <td style="width:20%"></td>
-            <td style="width:30%">
+            <td style="width: 20%"></td>
+            <td style="width: 30%">
                 <telerik:RadCheckBox ID="chkNotifyClient" runat="server" ToolTip="Notifiy changes to client when Save?" Text="&nbsp;Notify client on Save?" />
             </td>
-            <td style="width:20%"></td>
+            <td style="width: 20%;text-align: right">Estimated Hours:</td>
             <td>
-                <telerik:RadCheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?"/>
+                <telerik:RadTextBox ID="txtEstimatedHours" runat="server" Width="150px" ToolTip="Estimated Hours for Complete Ticket">
+                </telerik:RadTextBox>
             </td>
         </tr>
         <tr>
@@ -218,16 +219,21 @@
                 <telerik:RadCheckBox ID="chkIsBillable" runat="server" ToolTip="Is Billable?" Text="&nbsp;Is Billable?" />
             </td>
             <td></td>
-             <td style="text-align: center; vertical-align: middle" rowspan="2">
-                <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
-                            <span class="glyphicon glyphicon-save"> Update</span>
-                </asp:LinkButton>
+            <td>
+                
+                <telerik:RadCheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
             </td>
         </tr>
         <tr>
             <td></td>
             <td>
-                <telerik:RadCheckBox ID="chkIsPrivate" runat="server" ToolTip="Is Private?" Text="&nbsp;Is Private?"/>
+                <telerik:RadCheckBox ID="chkIsPrivate" runat="server" ToolTip="Is Private?" Text="&nbsp;Is Private?" />
+            </td>
+            <td></td>
+            <td style="text-align: center;">
+                <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
+                            <span class="glyphicon glyphicon-save"> Update</span>
+                </asp:LinkButton>
             </td>
         </tr>
     </table>
@@ -283,6 +289,8 @@
             <asp:ControlParameter ControlID="chkIsBillable" Name="Billable" PropertyName="Checked" />
             <asp:ControlParameter ControlID="chkIsPrivate" Name="IsPrivate" PropertyName="Checked" />
 
+            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text"  />
+
         </InsertParameters>
         <UpdateParameters>
             <asp:ControlParameter ControlID="RadDatePickerExpectedStartDate" Name="ExpectedStartDate" PropertyName="SelectedDate" Type="DateTime" />
@@ -308,6 +316,8 @@
 
             <asp:ControlParameter ControlID="chkIsBillable" Name="Billable" PropertyName="Checked" />
             <asp:ControlParameter ControlID="chkIsPrivate" Name="IsPrivate" PropertyName="Checked" />
+
+            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text"  />
 
             <asp:ControlParameter ControlID="lblTicketId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
