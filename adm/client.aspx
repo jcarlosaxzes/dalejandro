@@ -94,7 +94,7 @@
                             </tr>
                             <tr>
                                 <td style="width: 18%; text-align: center; background-color: #039be5">
-                                    <span class="DashboardFont2">Pending Proposals:</span><br />
+                                    <span class="DashboardFont2">Pending Proposals</span><br />
                                     <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
                                 </td>
                                 <td></td>
