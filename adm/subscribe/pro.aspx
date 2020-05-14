@@ -133,8 +133,8 @@
                     <telerik:GridBoundColumn DataField="Status" HeaderText="Status" HeaderStyle-Width="150px"
                         SortExpression="Status" UniqueName="Status">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Notes" ItemStyle-Font-Size="Small"
-                        SortExpression="InvoiceNotes" UniqueName="InvoiceNotes">
+                    <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" ItemStyle-Font-Size="Small"
+                        SortExpression="Notes" UniqueName="Notes">
                     </telerik:GridBoundColumn>
                 </Columns>
             </MasterTableView>

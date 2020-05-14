@@ -86,6 +86,32 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
+                            <telerik:GridTemplateColumn DataField="Custom"
+                                FilterControlAltText="Filter Custom column" HeaderText="Custom"
+                                SortExpression="Custom" UniqueName="Custom" HeaderStyle-Width="70px">
+                                <EditItemTemplate>
+                                    <telerik:RadCheckBox ID="CustomCHBox" runat="server" Checked='<%# Bind("Custom") %>'
+                                        Width="150px" Style="text-align: right">
+                                    </telerik:RadCheckBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <%# Eval("Custom")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Inactive"
+                                FilterControlAltText="Filter Inactive column" HeaderText="Inactive"
+                                SortExpression="Inactive" UniqueName="Inactive" HeaderStyle-Width="70px">
+                                <EditItemTemplate>
+                                    <telerik:RadCheckBox ID="InactiveCHBox" runat="server" Checked='<%# Bind("Inactive") %>'
+                                        Width="150px" Style="text-align: right">
+                                    </telerik:RadCheckBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <%# Eval("Inactive")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
 
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this plan?"
@@ -119,6 +145,8 @@
             <asp:Parameter Name="billing_otheruser" Type="Double" />
             <asp:Parameter Name="billing_period_Id" />
             <asp:Parameter Name="Id" Type="Int32" />
+            <asp:Parameter Name="Custom" Type="Boolean" />
+            <asp:Parameter Name="Inactive" Type="Boolean" />
         </UpdateParameters>
         <InsertParameters>
             <asp:Parameter Name="Name" Type="String" />
