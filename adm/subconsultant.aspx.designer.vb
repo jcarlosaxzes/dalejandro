@@ -14,31 +14,49 @@ Option Explicit On
 Partial Public Class subconsultant
     
     '''<summary>
-    '''RadTabStrip1 control.
+    '''btnTotals control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadTabStrip1 As Global.Telerik.Web.UI.RadTabStrip
+    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''RadMultiPage1 control.
+    '''btnBack control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadMultiPage1 As Global.Telerik.Web.UI.RadMultiPage
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''RadPageView1 control.
+    '''FormViewSubconsultBalance control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageView1 As Global.Telerik.Web.UI.RadPageView
+    Protected WithEvents FormViewSubconsultBalance As Global.System.Web.UI.WebControls.FormView
+    
+    '''<summary>
+    '''RadWizard1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
+    
+    '''<summary>
+    '''RadWizardStep1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''lblStatus control.
@@ -59,22 +77,13 @@ Partial Public Class subconsultant
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
     
     '''<summary>
-    '''RadPageView2 control.
+    '''RadWizardStep2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageView2 As Global.Telerik.Web.UI.RadPageView
-    
-    '''<summary>
-    '''FormViewBalance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FormViewBalance As Global.System.Web.UI.WebControls.FormView
+    Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''RadGridRFPs control.
@@ -104,15 +113,6 @@ Partial Public Class subconsultant
     Protected WithEvents SqlDataSourceDiscipline As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''SqlDataSourceSubconsultantBalance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceSubconsultantBalance As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
     '''SqlDataSourceRFP control.
     '''</summary>
     '''<remarks>
@@ -120,6 +120,15 @@ Partial Public Class subconsultant
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceRFP As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceSubconsultantBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceSubconsultantBalance As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.
@@ -145,9 +154,9 @@ Partial Public Class subconsultant
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

@@ -19,8 +19,11 @@
     Protected Sub FormView1_ItemUpdated(sender As Object, e As FormViewUpdatedEventArgs) Handles FormView1.ItemUpdated
         lblStatus.Text = "Updated Subconsultant Details"
     End Sub
-
-    Protected Sub FormView1_ItemUpdating(sender As Object, e As FormViewUpdateEventArgs) Handles FormView1.ItemUpdating
-        lblStatus.Text = ""
+    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
+        FormViewSubconsultBalance.Visible = Not FormViewSubconsultBalance.Visible
     End Sub
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/subconsultants.aspx")
+    End Sub
+
 End Class
