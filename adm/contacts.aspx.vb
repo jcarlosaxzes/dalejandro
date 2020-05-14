@@ -44,6 +44,8 @@ Public Class contacts
                 Response.Redirect("~/ADM/Client.aspx?clientId=" & e.CommandArgument)
             Case "e"
                 Response.Redirect("~/ADM/Employee.aspx?employeeId=" & e.CommandArgument)
+            Case "s"
+                Response.Redirect("~/adm/subconsultant.aspx?subconsultantId=" & e.CommandArgument)
         End Select
     End Sub
     Private Sub SqlDataSource1_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSource1.Selecting

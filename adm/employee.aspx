@@ -81,12 +81,12 @@
                     <ItemTemplate>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
-                                <td colspan="9">
+                                <td colspan="11">
                                     <hr style="margin: 0" />
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="9" style="text-align: center">
+                                <td colspan="11" style="text-align: center">
                                     <h2 style="margin: 0"><%# Eval("EmployeeName")%></h2>
                                 </td>
                             </tr>

@@ -20,8 +20,7 @@
         </table>
         <div id="collapseTotals">
             <div class="card card-body">
-                Time Dashboard
-                <%--<asp:FormView ID="FormViewTimeBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceTimeBalance" Width="100%" Visible="false">
+                <asp:FormView ID="FormViewTimeBalance" runat="server" DataSourceID="SqlDataSourceTimeBalance" Width="100%">
                     <ItemTemplate>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
@@ -31,86 +30,54 @@
                             </tr>
                             <tr>
                                 <td colspan="9" style="text-align: center">
-                                    <h2 style="margin: 0"><%# Eval("TimeName")%>, <%# Eval("TimeCompany") %></h2>
+                                    <h2 style="margin: 0"><%# Eval("JobName")%></h2>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="width: 18%; text-align: center; background-color: #039be5">
-                                    <span class="DashboardFont2"># Pending Proposals:</span><br />
-                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
+                                <td style="width: 19%; text-align: center; background-color: #039be5">
+                                    <span class="DashboardFont2">Hour Worked</span><br />
+                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("TotalJobHours", "{0:N0}") %>'></asp:Label><br />
+                                    <span class="DashboardFont3">This Job</span>
                                 </td>
                                 <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #546e7a">
-                                    <span class="DashboardFont2">Acepted Proposal</span>
-                                    <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
+                                <td style="width: 19%; text-align: center; background-color: #546e7a">
+                                    <span class="DashboardFont2">Hour Assigned</span><br />
+                                    <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("HoursAssigned", "{0:N0}") %>'></asp:Label><br />
+                                    <span class="DashboardFont3">This Job</span>
                                 </td>
                                 <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Jobs Budget</span>
-                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
+                                <td style='<%# iif(Eval("OverDue")=1,"width: 19%; text-align: center; background-color: #43a047","width: 19%; text-align: center; background-color: #e53935") %>' >
+                                    <span class="DashboardFont2">Hour Used</span>
+                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("PercentUsed", "{0:P0}") %>'></asp:Label><br />
+                                    <span class="DashboardFont3">This Job</span>
                                 </td>
                                 <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Amount Paid</span>
-                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
+                                <td style="width: 19%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Hours Submitted</span>
+                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("TotalWeekHours", "{0:N0}") %>'></asp:Label><br />
+                                    <span class="DashboardFont3">This Week</span>
                                 </td>
                                 <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #e53935">
-                                    <span class="DashboardFont2">Remaining Balance</span>
-                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
+                                <td style="width: 19%; text-align: center; background-color: #e53935">
+                                    <span class="DashboardFont2">Hours Remaining</span>
+                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("TotalWeekHoursRemaining", "{0:N0}") %>'></asp:Label>
+                                    <span class="DashboardFont3">This Week</span>
                                 </td>
                             </tr>
                         </table>
                     </ItemTemplate>
-                </asp:FormView>--%>
+                </asp:FormView>
 
             </div>
         </div>
     </div>
-    <table>
-        <tr>
-            <td style="width: 220px"></td>
-            <td>
-                <div class="TBL_FORM">
-                    <table class="table-condensed TBL_FORM" style="width: 100%">
-                        <tr>
-                            <td style="width: 130px; text-align: center;">
-                                <asp:Image ID="Image7" runat="server" ImageUrl="~/App_Themes/Estandar/reloj.png" />
-                            </td>
-                            <td style="text-align: left;">Enter time (in hours) and date that work was performed.
-                                <br />
-                                Click "<b>Add New Time</b>" to complete.
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </table>
 
-    <div>
-        <h3>
-            <asp:Label ID="lblJobName" runat="server"></asp:Label></h3>
-    </div>
-    <div>
+    <div class="pas-container">
         <table class="table-condensed" style="width: 100%">
             <tr>
-                <td style="width: 220px;"></td>
-                <td style="width: 80px; text-align: center; vertical-align: bottom">
-                    <b>(Hours)</b>
+                <td style="width:250px; text-align: right">Time Worked (in hours 0.25-24):
                 </td>
-                <td style="width: 80px; text-align: center; vertical-align: bottom">
-                    <b>This Week</b>
-                </td>
-                <td style="width: 80px; text-align: center; vertical-align: bottom">
-                    <b>Last Weeks</b>
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td style="text-align: center">Time Worked (in hours 0.25-24):
-                </td>
-                <td style="text-align: left; width: 400px">
+                <td>
                     <telerik:RadNumericTextBox ID="txtTimeSel" runat="server"
                         MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours"
                         Value="1" Width="155px" MaxValue="24">
@@ -118,42 +85,20 @@
                         <IncrementSettings Step="1" />
                     </telerik:RadNumericTextBox>
                 </td>
-                <td style="text-align: right">
-                    <span class="label label-default">Submitted:</span>
-                </td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblTotalWeekHours" runat="server"></asp:Label>
-                </td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblTotalBiWeekHours" runat="server"></asp:Label>
-                </td>
             </tr>
             <tr>
                 <td style="text-align: right">Date of Work:
                 </td>
-                <td style="text-align: left; width: 400px">
+                <td style="text-align: left;">
                     <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US">
                     </telerik:RadDatePicker>
                 </td>
-                <td style="text-align: right">
-                    <span class="label label-warning">Remaining:</span>
-
-                </td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblRemaining" runat="server"></asp:Label>
-
-
-                </td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblRemaining2Week" runat="server"></asp:Label>
-                </td>
-
             </tr>
         </table>
         <div id="divProposalTask" runat="server">
             <table class="table-condensed" style="width: 100%">
                 <tr>
-                    <td style="text-align: right; width: 220px">Proposal Task:
+                    <td style="text-align: right; width: 250px">Proposal Task:
                     </td>
                     <td style="text-align: left">
                         <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="400px" Sort="Descending"
@@ -166,7 +111,7 @@
         <div id="divTickets" runat="server">
             <table class="table-condensed" style="width: 100%">
                 <tr>
-                    <td style="text-align: right; width: 220px">Ticket:
+                    <td style="text-align: right; width: 250px">Ticket:
                     </td>
                     <td style="text-align: left">
                         <telerik:RadComboBox ID="cboActiveTickets" runat="server" DataSourceID="SqlDataSourceActiveTickets" Width="400px" AutoPostBack="true"
@@ -182,7 +127,7 @@
         </div>
         <table class="table-condensed" style="width: 100%">
             <tr>
-                <td style="text-align: right; width: 220px">Category:
+                <td style="text-align: right; width: 250px">Category:
                 </td>
                 <td style="text-align: left">
                     <telerik:RadComboBox ID="cboCategory" runat="server" DataSourceID="SqlDataSourceCategory" ValidationGroup="time_insert"
@@ -197,7 +142,7 @@
                 <td style="text-align: right">Notes:
                 </td>
                 <td style="text-align: left">
-                    <telerik:RadTextBox ID="txtDescription" runat="server" Width="100%" MaxLength="512" Rows="3" TextMode="MultiLine" ValidationGroup="time_insert">
+                    <telerik:RadTextBox ID="txtDescription" runat="server" Width="90%" MaxLength="512" Rows="3" TextMode="MultiLine" ValidationGroup="time_insert">
                     </telerik:RadTextBox>
                 </td>
             </tr>
@@ -212,7 +157,7 @@
             </tr>
 
             <tr>
-                <td colspan="2">
+                <td colspan="2" style="text-align:center">
 
                     <asp:LinkButton ID="btnInsertTime" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="time_insert" Width="200px">
                         <span class="glyphicon glyphicon-plus"></span> Time
@@ -224,8 +169,8 @@
                 </td>
             </tr>
         </table>
-    </div>
-    <div style="text-align: left">
+
+        <div style="margin-left:10px;margin-right:10px">
         <h3>Last Time Records of this Job</h3>
         <telerik:RadGrid ID="RadGridTimes" runat="server" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true" AllowSorting="True" DataSourceID="SqlDataSourceTimes"
             Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="500px"
@@ -294,6 +239,9 @@
             <PagerStyle AlwaysVisible="false" />
         </telerik:RadGrid>
     </div>
+    </div>
+    
+
     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDescription" ErrorMessage="(*) Notes can not be empty"
         ValidationGroup="time_insert">
     </asp:RequiredFieldValidator>
@@ -342,13 +290,14 @@
             <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <%--<asp:SqlDataSource ID="SqlDataSourceTimeBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Client_Balance" SelectCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="SqlDataSourceTimeBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="EmployeeTime_Balance" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="ClientId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="EmployeeId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
         </SelectParameters>
-    </asp:SqlDataSource>--%>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
