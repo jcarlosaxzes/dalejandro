@@ -48,6 +48,7 @@ Public Class LocalAPI
         NewNonJobTime = 1501
         NewSubconsultan = 1601
         PAS_IntuitQB = 2001
+        UnhandleError = 404
     End Enum
 
     Public Enum MensajeOneTime_ENUM
