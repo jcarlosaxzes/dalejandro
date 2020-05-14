@@ -9,7 +9,7 @@
 </head>
 <body style="background-color: white; padding-top: 200px;">
     <form id="form1" runat="server">
-        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
         </telerik:RadScriptManager>
         <table align="center" class="RegisterCentralPanel" style="width:550px">
             <tr>

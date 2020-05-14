@@ -17,8 +17,12 @@ Public Class client
                 SqlDataSource1.DataBind()
                 FormView1.DataBind()
 
+                If Request.QueryString("FullPage") Is Nothing Then
+                    Master.HideMasterMenu()
+                    btnBack.Visible = False
+                End If
             End If
-
+            RadWindowManager1.EnableViewState = False
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
@@ -58,9 +62,34 @@ Public Class client
     Private Sub FormView1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormView1.ItemCommand
         Select Case e.CommandName
             Case "Photo"
-                'Response.Redirect("~/ADM/EditAvatar.aspx?Id=" & lblClientId.Text & "&Entity=Client")
-                Response.Redirect("~/ADM/UploadPhoto.aspx?Id=" & lblClientId.Text & "&Entity=Client")
+                'Response.Redirect("~/ADM/UploadPhoto.aspx?Id=" & lblClientId.Text & "&Entity=Client")
+                Dim sUrl As String = "~/ADM/UploadPhoto.aspx?Id=" & lblClientId.Text & "&Entity=Client"
+                CreateRadWindows(e.CommandName, sUrl, 640, 400)
+
         End Select
     End Sub
 
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/clients.aspx")
+    End Sub
+
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer)
+        RadWindowManager1.Windows.Clear()
+        Dim window1 As RadWindow = New RadWindow()
+        window1.NavigateUrl = sUrl
+        window1.VisibleOnPageLoad = True
+        window1.VisibleStatusbar = False
+        window1.ID = WindowsID
+        'window1.InitialBehaviors = WindowBehaviors.Maximize
+        window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize
+        window1.Width = Width
+        window1.Height = Height
+        window1.Modal = True
+        window1.OnClientClose = "OnClientClose"
+        RadWindowManager1.Windows.Add(window1)
+    End Sub
+
+    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
+        FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
+    End Sub
 End Class

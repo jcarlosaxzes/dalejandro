@@ -28,14 +28,14 @@
 
     <title>PASconcept. Your complete online platform of Project </title>
 
-    <link href="App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
+    <link href="~/App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
     <%--Bootstrap reference begin--%>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <%--Bootstrap reference end--%>
 </head>
 <body title="Welcome to PASconcept. Project Administration Services" style="background-color: white">
     <form id="form1" runat="server">
-        <telerik:RadScriptManager runat="server" ID="RadScriptManager1" />
+        <telerik:RadScriptManager runat="server"  EnableCdn="true" ID="RadScriptManager1" />
         <div class="container">
 
             <div class="row">
@@ -62,7 +62,7 @@
                 <div class="col-md-3 col-lg-offset-5 ">
                     <a href="http://blog.pasconcept.com" target="_blank">Help</a>
                     &nbsp;|&nbsp;
-                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank">Terms & Condition</a>
+                    <a href="../Legal/ENG/Terms.html" target="_blank">Terms & Condition</a>
                 </div>
             </div>
             

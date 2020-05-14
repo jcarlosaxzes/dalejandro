@@ -15,6 +15,8 @@ Imports System.Linq
 Imports System.Net.Http
 
 Imports Microsoft.AspNet.Identity.Owin
+Imports Microsoft.AspNet.Identity.EntityFramework
+Imports Microsoft.AspNetCore.Identity
 
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
@@ -143,6 +145,7 @@ Public Class LocalAPI
         Public ExpectedStartDate As String
         Public StagingDate As String
         Public ProductionDate As String
+        Public EstimatedHours As Double
     End Structure
 #End Region
 
@@ -1216,7 +1219,7 @@ Public Class LocalAPI
                 Case "Multiplier"
                     Return GetCompanyMultiplier(companyId, GetDateTime().Year)
 
-                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials"
+                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials", "Custom"
                     Return GetNumericEscalar("SELECT ISNULL([" & sProperty & "],0) FROM [Company] WHERE [companyId]=" & companyId)
 
                 Case "StartYear"
@@ -1309,7 +1312,7 @@ Public Class LocalAPI
 
                 ' New Payment?
                 If Company_PaymentObject("Status") = "Paid" Then
-                    Invoice_Payment_INSERT(AxzesInvoiceId, Company_PaymentObject("PaidDate"), Company_PaymentObject("Method"), Company_PaymentObject("Amount"), Company_PaymentObject("Collected from PASconcept"))
+                    Invoice_Payment_INSERT(AxzesInvoiceId, Company_PaymentObject("PaidDate"), Company_PaymentObject("Method"), Company_PaymentObject("Amount"), "Automatic payment from PASconcet subscription")
                 End If
 
             End If
@@ -1622,7 +1625,7 @@ Public Class LocalAPI
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            If LocalAPI.GetCompanyProperty(companyId, "Type") = 16 Then
+            If LocalAPI.GetCompanyProperty(companyId, "Type") = 16 And nSector = 0 Then
                 ' Initialize for IT companies
                 nSector = 2
                 sCodeUse = "B"
@@ -2722,17 +2725,18 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Method", Method)
             cmd.Parameters.AddWithValue("@Amount", Amount)
             cmd.Parameters.AddWithValue("@CollectedNotes", CollectedNotes)
-            ' Execute the stored procedure.
-            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
-            parOUT_ID.Direction = ParameterDirection.Output
-            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.Parameters.AddWithValue("@OriginalFileName", "")
+            cmd.Parameters.AddWithValue("@KeyName", "")
+            cmd.Parameters.AddWithValue("@ContentBytes", 0)
+            cmd.Parameters.AddWithValue("@ContentType", "")
+
 
             cmd.ExecuteNonQuery()
 
-            Dim paymentId As Integer = parOUT_ID.Value
             cnn1.Close()
 
-            Return paymentId
+            Return InvoiceId
 
         Catch ex As Exception
             Throw ex
@@ -3426,7 +3430,7 @@ Public Class LocalAPI
 
                 cnn1.Close()
 
-                EliminarUser(sEmail)
+                'EliminarUser(sEmail)
 
                 EliminarEmployee = True
             End If
@@ -3445,7 +3449,7 @@ Public Class LocalAPI
                 If nRegs = 0 Then
                     nRegs = GetNumericEscalar("SELECT COUNT(*) FROM [SubConsultans] WHERE [Email]='" & sEmail & "'")
                     If nRegs = 0 Then
-                        Membership.DeleteUser(sEmail, True)
+                        'Membership.DeleteUser(sEmail, True)
                         Return True
                     End If
                 End If
@@ -5728,7 +5732,7 @@ Public Class LocalAPI
 
     Public Shared Function AddEmployeeToUser(ByVal sEmail As String, ByVal companyId As Integer) As Boolean
         Try
-            RefrescarUsuarioVinculado(sEmail, "Empleados")
+            RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
 
         Catch ex As Exception
 
@@ -5783,7 +5787,7 @@ Public Class LocalAPI
                     sFullBody.Append("wellcome to PASconcept. ")
                     sFullBody.Append("<br />")
                     sFullBody.Append("You can set a new password")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
                     sFullBody.Append("<br />")
 
 
@@ -7307,7 +7311,7 @@ Public Class LocalAPI
 
 
 
-    Public Shared Function RefrescarUsuarioVinculado(ByVal sEmail As String, ByVal sRole As String) As String
+    Public Shared Async Function RefrescarUsuarioVinculadoAsync(ByVal sEmail As String, ByVal sRole As String) As Task(Of String)
         Try
             Dim sMsgRes As String = ""
             Dim username(0) As String
@@ -7322,10 +7326,10 @@ Public Class LocalAPI
                 Dim UsuarioPortal = LocalAPI.ExisteUser(sEmail)
                 If UsuarioPortal Then  ' Migrate to Identity
                     Dim password = LocalAPI.GetMembershipUserPasswod(sEmail)
-                    LocalAPI.CreateOrUpdateUser(sEmail, password)
+                    Await LocalAPI.CreateOrUpdateUser(sEmail, password)
                 Else
                     Dim password = LocalAPI.CreateUserPassword()
-                    LocalAPI.CreateOrUpdateUser(sEmail, password)
+                    Await LocalAPI.CreateOrUpdateUser(sEmail, password)
                     sMsgRes = "Se ha creado el usuario " & sEmail
                 End If
             End If
@@ -8251,11 +8255,11 @@ Public Class LocalAPI
     End Function
 
 
-    Public Shared Function NewEmployee(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
+    Public Shared Async Function NewEmployeeAsync(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
                                          ByVal sAddress As String, ByVal sAddress2 As String, ByVal sCity As String, ByVal sSate As String,
                                             ByVal sZipCode As String, ByVal sPhone As String, ByVal sCellular As String,
                                             ByVal sEmail As String, ByVal sHourRate As String, ByVal sNotes As String,
-                                            ByVal companyId As Integer) As Integer
+                                            ByVal companyId As Integer) As Task(Of Integer)
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
@@ -8305,7 +8309,7 @@ Public Class LocalAPI
                 ExecuteNonQuery(String.Format("UPDATE Employees Set [Employee_Code]= '{0}' WHERE Id={1}", sEmployee_Code, employeeId))
             End If
 
-            RefrescarUsuarioVinculado(sEmail, "Empleados")
+            Await RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
             ' Set algunos perminos de inicio
             ExecuteNonQuery("UPDATE [Employees] SET [Allow_OtherEmployeeJobs]=1 WHERE Id=" & employeeId)
 
@@ -8377,7 +8381,7 @@ Public Class LocalAPI
 
             'Dim lEmplId  As Integer = GetEmployeeId(sEmail)
             'If lEmplId > 0 Then AddEmployeeToUser(sEmail, lEmplId, bAdministrator, True, companyId)
-            RefrescarUsuarioVinculado(sEmail, "Empleados")
+            RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
 
 
             ' Set algunos perminos de inicio
@@ -9455,7 +9459,7 @@ Public Class LocalAPI
             cmd.ExecuteNonQuery()
             cnn1.Close()
 
-            RefrescarUsuarioVinculado(sEmail, "Subconsultans")
+            RefrescarUsuarioVinculadoAsync(sEmail, "Subconsultans")
 
             LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewSubconsultan, companyId, sName)
 
@@ -9647,6 +9651,13 @@ Public Class LocalAPI
     End Function
 
     Public Shared Async Function CreateOrUpdateUser(email As String, password As String) As Task(Of pasconcept20.ApplicationUser)
+        If IsNothing(password) Then
+            password = "ValidPassword@#$<GDE45"
+        End If
+        If Not (Await AppUserManager.PasswordValidator.ValidateAsync(password)).Succeeded Then
+            password = "ValidPassword@#$<GDE45"
+        End If
+
         Dim identityUser As pasconcept20.ApplicationUser = Await AppUserManager.FindByEmailAsync(email)
         If identityUser IsNot Nothing Then
             Dim token = Await AppUserManager.GeneratePasswordResetTokenAsync(identityUser.Id)
@@ -9660,8 +9671,11 @@ Public Class LocalAPI
                 .UserName = email,
                 .EmailConfirmed = True
             }
-            Await AppUserManager.CreateAsync(user, password)
-            LocalAPI.NormalizeUser(email)
+
+            Dim result = Await AppUserManager.CreateAsync(user, password)
+            If result.Succeeded Then
+                LocalAPI.NormalizeUser(email)
+            End If
             Return user
         End If
         Return identityUser
@@ -9679,6 +9693,28 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Email", email)
             cmd.ExecuteNonQuery()
 
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Shared Sub UnlockUser(email As String)
+        Try
+            Dim cnn1 As SqlConnection = GetUsersConnection()
+            Dim cmd As New SqlCommand("update [dbo].[AspNetUsers] set LockoutEnabled = 1, AccessFailedCount = 0, LockoutEnd = null where Email = '" & email & "'", cnn1)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Shared Sub ConfirmEmailUser(email As String)
+        Try
+            Dim cnn1 As SqlConnection = GetUsersConnection()
+            Dim cmd As New SqlCommand("update [dbo].[AspNetUsers] set EmailConfirmed = 1 where Email = '" & email & "'", cnn1)
+            cmd.ExecuteNonQuery()
             cnn1.Close()
         Catch ex As Exception
             Throw ex
@@ -10666,7 +10702,7 @@ Public Class LocalAPI
                     sMsg.Append("<b>Titleblock</b>")
                     sMsg.Append("<br />")
                     sMsg.Append("Click here to")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/EMP/titleblock.aspx?guid=" & JobGUID & """" & "> download Titleblock </a> csv file")
+                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/titleblock.aspx?guid=" & JobGUID & """" & "> download Titleblock </a> csv file")
                     sMsg.Append("<br />")
 
                     sMsg.Append("<br />")
@@ -10676,7 +10712,7 @@ Public Class LocalAPI
                     sMsg.Append("<b>Scope of Work</b>")
                     sMsg.Append("<br />")
                     sMsg.Append("Click here to ")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/EMP/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
+                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
                     sMsg.Append("<br />")
 
                 Catch ex As Exception
@@ -12561,6 +12597,14 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function SetCompanyPaymentsPlan(billingPlanId As Integer, companyId As Integer) As Boolean
+        Try
+            ExecuteNonQuery("UPDATE [Company_Payments] set [Company_Payments].Billing_plan = [Billing_plans].Id, [Company_Payments].Amount = [Billing_plans].[billing_baseprice], [Company_Payments].Notes =[Billing_plans].[Name] from [Company_Payments] INNER JOIN [dbo].[Billing_plans] on [Billing_plans].Id=" & billingPlanId & " WHERE [Company_Payments].companyId=" & companyId & " and [Company_Payments].PaidDate Is Null")
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 #End Region
 
 #Region "Agile CRM"
@@ -12815,6 +12859,7 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@trelloURL", JobTicketObject.trelloURL)
             cmd.Parameters.AddWithValue("@jiraURL", JobTicketObject.jiraURL)
             cmd.Parameters.AddWithValue("@Tags", JobTicketObject.Tags)
+            cmd.Parameters.AddWithValue("@EstimatedHours", JobTicketObject.EstimatedHours)
 
             ' Execute the stored procedure.
             cmd.ExecuteNonQuery()

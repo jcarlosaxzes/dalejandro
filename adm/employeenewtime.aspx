@@ -1,7 +1,72 @@
-﻿<%@ Page Title="Employee New Time" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="employeenewtime.aspx.vb" Inherits="pasconcept20.employeenewtime" %>
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+﻿<%@ Page Title="Employee New Time" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="employeenewtime.aspx.vb" Inherits="pasconcept20.employeenewtime" %>
 
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 80px">
+                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
+                       $ Dashboard
+                    </asp:LinkButton>
+                </td>
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       Back to List
+                    </asp:LinkButton>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+        <div id="collapseTotals">
+            <div class="card card-body">
+                Time Dashboard
+                <%--<asp:FormView ID="FormViewTimeBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceTimeBalance" Width="100%" Visible="false">
+                    <ItemTemplate>
+                        <table class="table-condensed" style="width: 100%">
+                            <tr>
+                                <td colspan="9">
+                                    <hr style="margin: 0" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="9" style="text-align: center">
+                                    <h2 style="margin: 0"><%# Eval("TimeName")%>, <%# Eval("TimeCompany") %></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 18%; text-align: center; background-color: #039be5">
+                                    <span class="DashboardFont2"># Pending Proposals:</span><br />
+                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 18%; text-align: center; background-color: #546e7a">
+                                    <span class="DashboardFont2">Acepted Proposal</span>
+                                    <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 18%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Jobs Budget</span>
+                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 18%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Amount Paid</span>
+                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 18%; text-align: center; background-color: #e53935">
+                                    <span class="DashboardFont2">Remaining Balance</span>
+                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </ItemTemplate>
+                </asp:FormView>--%>
+
+            </div>
+        </div>
+    </div>
     <table>
         <tr>
             <td style="width: 220px"></td>
@@ -24,13 +89,13 @@
     </table>
 
     <div>
-        <h3><asp:Label ID="lblJobName" runat="server"></asp:Label></h3>
+        <h3>
+            <asp:Label ID="lblJobName" runat="server"></asp:Label></h3>
     </div>
     <div>
         <table class="table-condensed" style="width: 100%">
             <tr>
-                <td style="width: 220px; ">
-                </td>
+                <td style="width: 220px;"></td>
                 <td style="width: 80px; text-align: center; vertical-align: bottom">
                     <b>(Hours)</b>
                 </td>
@@ -82,7 +147,7 @@
                 <td style="text-align: center">
                     <asp:Label ID="lblRemaining2Week" runat="server"></asp:Label>
                 </td>
-                
+
             </tr>
         </table>
         <div id="divProposalTask" runat="server">
@@ -163,7 +228,7 @@
     <div style="text-align: left">
         <h3>Last Time Records of this Job</h3>
         <telerik:RadGrid ID="RadGridTimes" runat="server" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true" AllowSorting="True" DataSourceID="SqlDataSourceTimes"
-            Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="500px" 
+            Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="500px"
             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -277,10 +342,18 @@
             <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <%--<asp:SqlDataSource ID="SqlDataSourceTimeBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Client_Balance" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="ClientId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>--%>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedJob" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedTicket" runat="server" Visible="False" Text="0"></asp:Label>
+    <asp:Label ID="lblBackId" runat="server" Visible="False" Text="1"></asp:Label>
 
 </asp:Content>

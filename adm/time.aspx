@@ -3,50 +3,6 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="RadGrid1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadGridAssignedEmployees">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridAssignedEmployees" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadGrid2">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid2" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="cboJob">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="PanelAssignedEmployees" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnRefresh">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadGridAssignedEmployees" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid2" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="cboYear" />
-                    <telerik:AjaxUpdatedControl ControlID="cboMes" />
-                    <telerik:AjaxUpdatedControl ControlID="cboJob" />
-                    <telerik:AjaxUpdatedControl ControlID="cboEmployee" />
-                    <telerik:AjaxUpdatedControl ControlID="cboClient" />
-                    <telerik:AjaxUpdatedControl ControlID="PanelAssignedEmployees" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnPrint">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
             function PrintReport(sender, args) {
@@ -377,7 +333,65 @@
                 </div>
             </telerik:RadWizardStep>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Other Times" StepType="Step">
-                <telerik:RadGrid ID="RadGrid2" runat="server" AllowSorting="True" DataSourceID="SqlDataSource2" AllowAutomaticDeletes="true"
+                                <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
+                    AutoGenerateColumns="False" DataSourceID="SqlDataSource2" GridLines="None" Width="100%" AllowPaging="True" PageSize="25"
+                    AllowSorting="True">
+                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource2">
+                        <Columns>
+                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                                HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="30px">
+                            </telerik:GridEditCommandColumn>
+                            <telerik:GridBoundColumn AllowFiltering="False" DataField="nEmployee" HeaderText="Employee" ReadOnly="True"
+                                SortExpression="nEmployee" UniqueName="nEmployee" HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Category"
+                                SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
+                                <EditItemTemplate>
+                                    <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" Width="100%"
+                                        DataValueField="Id" AppendDataBoundItems="True" Height="300px" SelectedValue='<%# Bind("Type") %>'>
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="(Select Category...)" Value="0"></telerik:RadComboBoxItem>
+                                        </Items>
+                                    </telerik:RadComboBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <%# Eval("Name") %>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From"
+                                SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" ItemStyle-Width="60px"
+                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="DateTo" DataType="System.DateTime" HeaderText="To"
+                                SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}" ItemStyle-Width="60px"
+                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
+                                <ItemStyle HorizontalAlign="Right" Width="60px" />
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Hours" DataType="System.Double" HeaderText="Time"
+                                SortExpression="Hours" UniqueName="Hours" ItemStyle-Width="40px" HeaderStyle-HorizontalAlign="Center"
+                                ItemStyle-HorizontalAlign="Right">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
+                                UniqueName="Notes" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
+                                CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
+                                HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                                <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
+                                <ItemStyle HorizontalAlign="Center" />
+                            </telerik:GridButtonColumn>
+                        </Columns>
+                        <EditFormSettings>
+                            <EditColumn ButtonType="PushButton" UniqueName="EditCommandColumn1">
+                            </EditColumn>
+                        </EditFormSettings>
+                    </MasterTableView>
+                </telerik:RadGrid>
+
+
+                <%--<telerik:RadGrid ID="RadGrid2222" runat="server" AllowSorting="True" DataSourceID="SqlDataSource2" AllowAutomaticDeletes="true"
                     GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="700px">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -427,7 +441,7 @@
                         </Columns>
                     </MasterTableView>
                     <PagerStyle AlwaysVisible="false" />
-                </telerik:RadGrid>
+                </telerik:RadGrid>--%>
             </telerik:RadWizardStep>
         </WizardSteps>
     </telerik:RadWizard>
@@ -571,28 +585,34 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="TIMES_OTHES_SELECT" SelectCommandType="StoredProcedure"
-        DeleteCommand="Delete from Employees_NonRegularHours where Id=@Id">
+         DeleteCommand="DELETE FROM Employees_NonRegularHours WHERE (Id = @Id)"
+        SelectCommand="Employees_NonRegularHours_SELECT" SelectCommandType="StoredProcedure" 
+        UpdateCommand="Employees_NonRegularHours_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" />
-            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
-            <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboEmployee" DefaultValue=" " Name="EmployeeId" PropertyName="SelectedValue" />
-            <asp:Parameter DefaultValue="-1" Name="TypeId" Type="Int32" />
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime"  />
+            <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
         </SelectParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Fecha" Type="DateTime" />
-            <asp:Parameter Name="DateEntry" Type="DateTime" />
-            <asp:Parameter Name="Time" />
-            <asp:Parameter Name="categoryId" />
-            <asp:Parameter Name="Description" />
-            <asp:Parameter Name="Id" />
-        </UpdateParameters>
         <DeleteParameters>
-            <asp:Parameter Name="Id" />
+            <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="DateFrom" />
+            <asp:Parameter Name="DateTo" />
+            <asp:Parameter Name="Hours" />
+            <asp:Parameter Name="Type" />
+            <asp:Parameter Name="Notes" />
+            <asp:Parameter Name="Id" Type="Int32" />
+        </UpdateParameters>
     </asp:SqlDataSource>
+     <asp:SqlDataSource ID="SqlDataSourceType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="MiscellaneousType_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
     <asp:SqlDataSource ID="SqlDataSourceAssignedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Jobs_Employees_assigned_SELECT" SelectCommandType="StoredProcedure"
         InsertCommand="Jobs_Employees_assigned_INSERT" InsertCommandType="StoredProcedure"

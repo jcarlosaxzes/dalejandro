@@ -40,7 +40,12 @@ Public Class jobtickets
             Case "NewTime"
                 lblTicketId.Text = e.CommandArgument
                 lblJobId.Text = LocalAPI.GetTicketProperty(lblTicketId.Text, "jobId")
-                CreateRadWindows(e.CommandName, "~/ADM/EmployeeNewTime.aspx?JobTicketId=" & e.CommandArgument & "&JobId=" & lblJobId.Text, 1024, 820, True)
+                CreateRadWindows(e.CommandName, "~/ADM/EmployeeNewTime.aspx?JobTicketId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Dialog=1", 1024, 820, True)
+
+            Case "TicketBalance"
+                lblTicketId.Text = e.CommandArgument
+                lblJobId.Text = LocalAPI.GetTicketProperty(lblTicketId.Text, "jobId")
+                Response.Redirect("~/adm/ticket_time.aspx?JobTicketId=" & lblTicketId.Text & "&jobId=" & lblJobId.Text)
 
             Case "Invoice"
                 lblTicketId.Text = e.CommandArgument
@@ -231,6 +236,8 @@ Public Class jobtickets
 
             chkIsBillable.Checked = ticketRecord("Billable")
             chkIsPrivate.Checked = ticketRecord("IsPrivate")
+
+            txtEstimatedHours.Text = ticketRecord("EstimatedHours")
 
             RadDatePickerExpectedStartDate.SelectedDate = Nothing
             Try

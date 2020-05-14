@@ -1,6 +1,6 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="newemployee.aspx.vb" MasterPageFile="~/adm/BasicMasterPage.Master" Async="true" Inherits="pasconcept20.newemployee" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="newemployee.aspx.vb" MasterPageFile="~/adm/ADM_Main_Responsive.Master" Async="true" Inherits="pasconcept20.newemployee" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
@@ -58,51 +58,32 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <div>
-
-        <table style="width: 100%" class="table-condensed">
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
             <tr>
-                <td style="text-align: center; padding-top: 15px; padding-bottom: 15px; width: 175px">
-                    <asp:Image ID="Image8" runat="server"
-                        ImageUrl="~/Images/Toolbar/new-employee-256.png" Width="64px" />
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                       Cancel
+                    </asp:LinkButton>
                 </td>
-                <td class="Titulo3">Enter New Employee Details
-                        <br />
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName" CssClass="Error "
-                        ErrorMessage=" (*) Name is Required"></asp:RequiredFieldValidator>
-                    &nbsp;&nbsp;
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEmail" CssClass="Error "
-                            ErrorMessage="(*) Email is Required" Display="Dynamic"></asp:RequiredFieldValidator>
-                    &nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtEmail" CssClass="Error "
-                        runat="server" ErrorMessage="(*) Enter an valid email address" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                        Display="Dynamic"></asp:RegularExpressionValidator>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">New Employee</h3>
                 </td>
+
             </tr>
         </table>
+    </div>
+    <div>
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" ForeColor="Red"
+            Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true"
+            ValidationGroup="Employee" />
 
-        <div>
-            <asp:ValidationSummary ID="ValidationSummary1" runat="server"
-                Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true"
-                ValidationGroup="Employee" />
+    </div>
+    <div class="pas-container">
 
-        </div>
-        <table style="width: 100%" class="table-condensed">
+        <table style="width: 90%" class="table-condensed">
             <tr>
-                <td style="text-align: right; width: 180px">
-                    <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                        ControlToValidate="txtEmail"
-                        Text="*"
-                        ErrorMessage="Email Invalid Format"
-                        ValidationGroup="Employee">
-                    </asp:RegularExpressionValidator>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
-                        ControlToValidate="txtEmail"
-                        Text="*"
-                        ErrorMessage="Email is required"
-                        ValidationGroup="Employee">
-                    </asp:RequiredFieldValidator>
-
-                    Email/User Name:
+                <td style="text-align: right; width: 200px">Email/User Name:
                 </td>
                 <td>
                     <telerik:RadTextBox ID="txtEmail" runat="server" Width="100%" EmptyMessage="(*)Required"
@@ -111,14 +92,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
-                        ControlToValidate="txtName"
-                        Text="*"
-                        ErrorMessage="Firt Name is required"
-                        ValidationGroup="Employee">
-                    </asp:RequiredFieldValidator>
-                    First Name:
+                <td style="text-align: right">First Name:
                 </td>
                 <td>
                     <telerik:RadTextBox ID="txtName" runat="server" Width="100%" EmptyMessage="(*)Required"
@@ -127,14 +101,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
-                        ControlToValidate="txtLastName"
-                        Text="*"
-                        ErrorMessage="Last Name is required"
-                        ValidationGroup="Employee">
-                    </asp:RequiredFieldValidator>
-                    Last Name:
+                <td style="text-align: right">Last Name:
                 </td>
                 <td>
                     <telerik:RadTextBox ID="txtLastName" runat="server" Width="100%" EmptyMessage="(*)Required"
@@ -157,11 +124,7 @@
             </tr>
 
             <tr>
-                <td style="text-align: right">
-                    <asp:CompareValidator runat="server" ID="Comparevalidator5" ValueToCompare="(Select Department...)"
-                        Operator="NotEqual" ControlToValidate="DepartmentDropDown" Text="*" ErrorMessage="Department is required" ValidationGroup="Employee">
-                    </asp:CompareValidator>
-                    Department:
+                <td style="text-align: right">Department:
                 </td>
                 <td>
                     <telerik:RadDropDownList runat="server" ID="DepartmentDropDown" DataValueField="Id" Width="100%" DropDownWidth="450px" DropDownHeight="250px"
@@ -267,7 +230,7 @@
                 <td style="text-align: right">Hourly Rate:
                 </td>
                 <td>
-                    <telerik:RadNumericTextBox ID="txtHourRate" runat="server" MinValue="0" MaxValue="999" Width="125"
+                    <telerik:RadNumericTextBox ID="txtHourRate" runat="server" MinValue="0" MaxValue="999" Width="180px"
                         ShowSpinButtons="True"
                         ButtonsPosition="Right">
                         <NumberFormat DecimalDigits="2" />
@@ -279,7 +242,7 @@
                 <td style="text-align: right">Producer Rate:
                 </td>
                 <td>
-                    <telerik:RadNumericTextBox ID="txtProducerRate" runat="server" MinValue="0" Width="125" MaxValue="1" Value="0">
+                    <telerik:RadNumericTextBox ID="txtProducerRate" runat="server" MinValue="0" Width="180px" MaxValue="1" Value="0">
                         <NumberFormat DecimalDigits="2" />
                     </telerik:RadNumericTextBox>
                 </td>
@@ -288,25 +251,25 @@
                 <td style="text-align: right">Vacations(Hours):
                 </td>
                 <td>
-                    <telerik:RadNumericTextBox ID="txtVacations" runat="server" MinValue="0" MaxValue="160" Width="125" Value="40">
-                                    <NumberFormat DecimalDigits="0" />
-                                </telerik:RadNumericTextBox>
+                    <telerik:RadNumericTextBox ID="txtVacations" runat="server" MinValue="0" MaxValue="160" Width="180px" Value="40">
+                        <NumberFormat DecimalDigits="0" />
+                    </telerik:RadNumericTextBox>
                 </td>
             </tr>
             <tr>
                 <td style="text-align: right">Personal/Sicks (Hours):
                 </td>
                 <td>
-                    <telerik:RadNumericTextBox ID="txtPersonal" runat="server" MinValue="0" MaxValue="32" Width="125" Value="16">
-                                    <NumberFormat DecimalDigits="0" />
-                                </telerik:RadNumericTextBox>
+                    <telerik:RadNumericTextBox ID="txtPersonal" runat="server" MinValue="0" MaxValue="32" Width="180px" Value="16">
+                        <NumberFormat DecimalDigits="0" />
+                    </telerik:RadNumericTextBox>
                 </td>
             </tr>
             <tr>
                 <td style="text-align: right">Gender:
                 </td>
                 <td>
-                    <telerik:RadDropDownList runat="server" ID="cboGender" Width="150px">
+                    <telerik:RadDropDownList runat="server" ID="cboGender" Width="180px">
                         <Items>
                             <telerik:DropDownListItem Text="(Select Gender...)" Value="0" />
                             <telerik:DropDownListItem Text="Male" Value="M" />
@@ -319,18 +282,10 @@
                 <td style="text-align: right">Notes:
                 </td>
                 <td>
-                    <telerik:RadTextBox ID="txtNotes" runat="server" MaxLength="255" Width="100%" >
+                    <telerik:RadTextBox ID="txtNotes" runat="server" MaxLength="255" Width="100%">
                     </telerik:RadTextBox>
                 </td>
             </tr>
-           <%-- <tr>
-                <td style="text-align: right">Admin Portal Access:
-                </td>
-                <td>
-                    <asp:CheckBox ID="chkAdmin" runat="server" />
-                </td>
-            </tr>--%>
-
             <tr>
                 <td style="text-align: right">Employee Role:
                 </td>
@@ -346,74 +301,107 @@
 
 
             <tr>
-                <td colspan="2" style="text-align: right">
-                    <asp:LinkButton ID="btnNuevo" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" ValidationGroup="Employee">
-                         <span class="glyphicon glyphicon-plus"></span>&nbsp;Employee
+                <td colspan="2" style="text-align: center">
+                    <asp:LinkButton ID="btnNuevo" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="Employee" CausesValidation="true">
+                         Create Employee
                     </asp:LinkButton>
+                    <br /><br />
                 </td>
             </tr>
         </table>
 
     </div>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="EMPLOYEE_INSERT" InsertCommandType="StoredProcedure"
-        UpdateCommand="empl_COPY_ROLE" UpdateCommandType="StoredProcedure">
-        <InsertParameters>
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="txtEmail" Name="Email" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtName" Name="Name" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtLastName" Name="LastName" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtDireccion" Name="Address" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtDireccion2" Name="Address2" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtCiudad" Name="City" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtState" Name="State" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtZipCode" Name="ZipCode" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtTelefono" Name="Phone" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtCellular" Name="Cellular" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtSS" Name="SS" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="RadDatePickerDOB" Name="DOB" PropertyName="SelectedDate" Type="DateTime" />
-            <asp:ControlParameter ControlID="cboGender" Name="Gender" PropertyName="SelectedValue" Type="String" />
-            <asp:ControlParameter ControlID="txtNotes" Name="Notes" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="DepartmentDropDown" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboPosition" Name="PositionId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="txtVacations" Name="Benefits_vacations" PropertyName="Value"  />
-            <asp:ControlParameter ControlID="txtPersonal" Name="Benefits_personals" PropertyName="Value"  />
-            <asp:ControlParameter ControlID="RadDatePickerStartingDate" Name="starting_Date" PropertyName="SelectedDate" Type="DateTime" />
-            <asp:ControlParameter ControlID="txtHourRate" Name="HourRate" PropertyName="Value"  />
-            <asp:ControlParameter ControlID="txtProducerRate" Name="ProducerRate" PropertyName="Value" />
-            <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
-            <asp:Parameter Direction="InputOutput" Name="Id_OUT" Type="Int32" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:ControlParameter ControlID="cboSourceRole" Name="roleId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="lblNewEmployeeInsertedId" Name="empl_Dest" PropertyName="Text" Type="Int32" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
+    <div>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName" ValidationGroup="Employee"
+            ErrorMessage="Name is Required" Display="None"></asp:RequiredFieldValidator>
 
-    <asp:SqlDataSource ID="SqlDataSourceRoles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Select Id, Name from Employees_roles where companyId=@companyId order by Name">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
+            ControlToValidate="txtLastName"
+            Text="*" Display="None"
+            ErrorMessage="Last Name is required"
+            ValidationGroup="Employee">
+        </asp:RequiredFieldValidator>
 
-    <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Select Id, Name from Company_Department where companyId=@companyId Order By Name">
-        <SelectParameters>
-            <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
-            <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>
+        <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+            ControlToValidate="txtEmail"
+            Text="*" Display="None"
+            ErrorMessage="Email Invalid Format"
+            ValidationGroup="Employee">
+        </asp:RegularExpressionValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
+            ControlToValidate="txtEmail"
+            Text="*" Display="None"
+            ErrorMessage="Email is required"
+            ValidationGroup="Employee">
+        </asp:RequiredFieldValidator>
 
-    <asp:SqlDataSource ID="SqlDataSourcePosition" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Select Id, Name from Employees_Position where companyId=@companyId Order By Name">
-        <SelectParameters>
-            <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
-            <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-    <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblNewEmployeeInsertedId" runat="server" Visible="False"></asp:Label>
+        <asp:CompareValidator runat="server" ID="Comparevalidator5" ValueToCompare="(Select Department...)"
+            Operator="NotEqual" ControlToValidate="DepartmentDropDown" Text="*" ErrorMessage="Department is required" ValidationGroup="Employee">
+        </asp:CompareValidator>
+    </div>
+
+    <div>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+            InsertCommand="EMPLOYEE_INSERT" InsertCommandType="StoredProcedure"
+            UpdateCommand="empl_COPY_ROLE" UpdateCommandType="StoredProcedure">
+            <InsertParameters>
+                <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+                <asp:ControlParameter ControlID="txtEmail" Name="Email" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtName" Name="Name" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtLastName" Name="LastName" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtDireccion" Name="Address" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtDireccion2" Name="Address2" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtCiudad" Name="City" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtState" Name="State" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtZipCode" Name="ZipCode" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtTelefono" Name="Phone" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtCellular" Name="Cellular" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtSS" Name="SS" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="RadDatePickerDOB" Name="DOB" PropertyName="SelectedDate" Type="DateTime" />
+                <asp:ControlParameter ControlID="cboGender" Name="Gender" PropertyName="SelectedValue" Type="String" />
+                <asp:ControlParameter ControlID="txtNotes" Name="Notes" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="DepartmentDropDown" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
+                <asp:ControlParameter ControlID="cboPosition" Name="PositionId" PropertyName="SelectedValue" Type="Int32" />
+                <asp:ControlParameter ControlID="txtVacations" Name="Benefits_vacations" PropertyName="Value" />
+                <asp:ControlParameter ControlID="txtPersonal" Name="Benefits_personals" PropertyName="Value" />
+                <asp:ControlParameter ControlID="RadDatePickerStartingDate" Name="starting_Date" PropertyName="SelectedDate" Type="DateTime" />
+                <asp:ControlParameter ControlID="txtHourRate" Name="HourRate" PropertyName="Value" />
+                <asp:ControlParameter ControlID="txtProducerRate" Name="ProducerRate" PropertyName="Value" />
+                <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
+                <asp:Parameter Direction="InputOutput" Name="Id_OUT" Type="Int32" />
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:ControlParameter ControlID="cboSourceRole" Name="roleId" PropertyName="SelectedValue" Type="Int32" />
+                <asp:ControlParameter ControlID="lblNewEmployeeInsertedId" Name="empl_Dest" PropertyName="Text" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="SqlDataSourceRoles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+            SelectCommand="Select Id, Name from Employees_roles where companyId=@companyId order by Name">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+            SelectCommand="Select Id, Name from Company_Department where companyId=@companyId Order By Name">
+            <SelectParameters>
+                <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
+                <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="SqlDataSourcePosition" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+            SelectCommand="Select Id, Name from Employees_Position where companyId=@companyId Order By Name">
+            <SelectParameters>
+                <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
+                <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblNewEmployeeInsertedId" runat="server" Visible="False"></asp:Label>
+    </div>
+
 </asp:Content>
 

@@ -286,7 +286,7 @@
                                                                 <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
                                                                     <table style="width: 100%">
                                                                         <tr>
-                                                                            <td class="Pequena">To find out the 'task id' codes, show 'Task lisk'
+                                                                            <td class="Pequena">To find out the 'task id' codes, show 'Task List'
                                                                             </td>
                                                                         </tr>
                                                                         <tr>

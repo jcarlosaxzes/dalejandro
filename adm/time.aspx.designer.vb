@@ -383,6 +383,15 @@ Partial Public Class time
     Protected WithEvents SqlDataSource2 As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
+    '''SqlDataSourceType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceType As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''SqlDataSourceAssignedEmployees control.
     '''</summary>
     '''<remarks>

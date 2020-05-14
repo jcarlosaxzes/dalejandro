@@ -39,8 +39,7 @@ Public Class subconsultants
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditSubconsultant"
-                sUrl = "~/ADM/Subconsultant.aspx?subconsultantId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 700)
+                Response.Redirect("~/adm/subconsultant.aspx?subconsultantId=" & e.CommandArgument)
 
             Case "SendCredential"
                 Master.InfoMessage("Sending credentials ... please wait")
@@ -73,7 +72,7 @@ Public Class subconsultants
     End Sub
 
     Protected Sub btnNewSubconsultant_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewSubconsultant.Click
-        CreateRadWindows("NewSubconsultant", "~/ADM/NewSubConsultant.aspx", 850, 700)
+        Response.Redirect("~/adm/newsubconsultant.aspx")
     End Sub
 
 End Class

@@ -11,26 +11,8 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class SaveProposalAs
-
-    '''<summary>
-    '''form1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
-    '''<summary>
-    '''RadScriptManager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+Partial Public Class saveproposalas
+    
     '''<summary>
     '''lblProposalNumber control.
     '''</summary>
@@ -39,7 +21,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblProposalNumber As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''txtName control.
     '''</summary>
@@ -48,7 +30,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtName As Global.Telerik.Web.UI.RadTextBox
-
+    
     '''<summary>
     '''RequiredFieldValidator1 control.
     '''</summary>
@@ -57,7 +39,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    
     '''<summary>
     '''opcCopiar control.
     '''</summary>
@@ -66,7 +48,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents opcCopiar As Global.System.Web.UI.WebControls.RadioButton
-
+    
     '''<summary>
     '''opcRevisar control.
     '''</summary>
@@ -75,7 +57,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents opcRevisar As Global.System.Web.UI.WebControls.RadioButton
-
+    
     '''<summary>
     '''btnOk control.
     '''</summary>
@@ -84,7 +66,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnOk As Global.Telerik.Web.UI.RadButton
-
+    
     '''<summary>
     '''btnCancel control.
     '''</summary>
@@ -93,7 +75,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancel As Global.Telerik.Web.UI.RadButton
-
+    
     '''<summary>
     '''lblProposalId control.
     '''</summary>
@@ -102,7 +84,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblProposalId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -111,7 +93,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblOption control.
     '''</summary>
@@ -120,7 +102,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblOption As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblEmployeeId control.
     '''</summary>
@@ -129,7 +111,7 @@ Partial Public Class SaveProposalAs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>

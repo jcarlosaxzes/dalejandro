@@ -1,4 +1,4 @@
-﻿Public Class job_links_aspx
+﻿Public Class job_links
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

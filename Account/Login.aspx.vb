@@ -36,12 +36,12 @@ Partial Public Class Login
                     Case SignInStatus.Success
                         If LocalAPI.IAgree(UserName.Text) Then
                             If IsNothing(Request.QueryString("ReturnUrl")) Then
-                                Response.Redirect("~/adm/dashboard.aspx")
+                                Response.Redirect("~/adm/dashboard")
                             Else
                                 Response.Redirect(Request.QueryString("ReturnUrl"))
                             End If
                         Else
-                            Response.Redirect("~/adm/useragree.aspx")
+                            Response.Redirect("~/adm/useragree")
                         End If
 
                         Exit Select

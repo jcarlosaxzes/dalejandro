@@ -1,7 +1,7 @@
-﻿<%@ Page Title="Client" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="client.aspx.vb" Inherits="pasconcept20.client" %>
+﻿<%@ Page Title="Client" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="client.aspx.vb" Inherits="pasconcept20.client" %>
 
 <%@ Import Namespace="pasconcept20" %>
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLuxW5zYQh_ClJfDEBpTLlT_tf8JVcxf0&libraries=places&callback=initAutocomplete"
@@ -58,364 +58,409 @@
             }
         </script>
     </telerik:RadCodeBlock>
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    </telerik:RadWindowManager>
 
-
-     <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material" DisplayNavigationButtons="false" DisplayProgressBar="false">
-            <WizardSteps>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Client Details" StepType="Step">
-                     <div style="padding-left: 10px">
-                    <asp:Label ID="lblStatus" runat="server" Style="font-size: 10pt; color: forestgreen; font-family: Calibri, Verdana"></asp:Label>
-                </div>
-                <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" DefaultMode="Edit">
-                    <EditItemTemplate>
-                        <table class="table-condensed">
-                            <tr>
-                                <td style="width: 180px">
-                                    <asp:Image ID="ImageClientPhoto" ImageUrl='<%# GetClientPhotoURL(Eval("Id"))%>'
-                                        runat="server" Width="45" Height="50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
-                                </td>
-                                <td>
-                                    <asp:LinkButton ID="btnUpdateClient1" runat="server" CommandName="Update" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                     Update Client
-                                    </asp:LinkButton>
-                                </td>
-                                <td>
-                                    <telerik:RadButton ID="btnCredentials" runat="server" CausesValidation="False" Text="Send Credentials"
-                                       ToolTip="Send Email with credentials" Visible="false">
-                                        <Icon PrimaryIconCssClass="rbMail"></Icon>
-                                    </telerik:RadButton>
-                                </td>
-                                <td>
-                                    <telerik:RadButton ID="btnPhoto" runat="server" CommandName="Photo" Text="Client Photo">
-                                        <Icon PrimaryIconCssClass=" rbUpload"></Icon>
-                                    </telerik:RadButton>
-                                </td>
-                                <td></td>
-                            </tr>
-                        </table>
-
-                        <h4>Client Information</h4>
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 80px">
+                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
+                       $ Dashboard
+                    </asp:LinkButton>
+                </td>
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       Back to List
+                    </asp:LinkButton>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+        <div id="collapseTotals">
+            <div class="card card-body">
+                <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
+                    <ItemTemplate>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
-                                <td style="width:180px">Client Code:
+                                <td colspan="9">
+                                    <hr style="margin: 0" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="9" style="text-align: center">
+                                    <h2 style="margin: 0"><%# Eval("ClientName")%>, <%# Eval("ClientCompany") %></h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 18%; text-align: center; background-color: #039be5">
+                                    <span class="DashboardFont2">Pending Proposals</span><br />
+                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 18%; text-align: center; background-color: #546e7a">
+                                    <span class="DashboardFont2">Acepted Proposal</span><br />
+                                    <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 18%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Jobs Budget</span><br />
+                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 18%; text-align: center; background-color: #43a047">
+                                    <span class="DashboardFont2">Amount Paid</span><br />
+                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
+                                </td>
+                                <td></td>
+                                <td style="width: 18%; text-align: center; background-color: #e53935">
+                                    <span class="DashboardFont2">Remaining Balance</span><br />
+                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </ItemTemplate>
+                </asp:FormView>
+
+            </div>
+        </div>
+    </div>
+    <div class="pas-container">
+        <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material" DisplayNavigationButtons="false" DisplayProgressBar="false">
+            <WizardSteps>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Client Details" StepType="Step">
+                    <div style="padding-left: 10px">
+                        <asp:Label ID="lblStatus" runat="server" Style="font-size: 10pt; color: forestgreen; font-family: Calibri, Verdana"></asp:Label>
+                    </div>
+                    <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" DefaultMode="Edit">
+                        <EditItemTemplate>
+                            <table class="table-condensed">
+                                <tr>
+                                    <td style="width: 220px">
+                                        <asp:Image ID="ImageClientPhoto" ImageUrl='<%# GetClientPhotoURL(Eval("Id"))%>'
+                                            runat="server" Width="45" Height="50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
+                                    </td>
+                                    <td>
+                                        <telerik:RadButton ID="btnPhoto" runat="server" CommandName="Photo" Text="Client Photo">
+                                            <Icon PrimaryIconCssClass=" rbUpload"></Icon>
+                                        </telerik:RadButton>
+                                    </td>
+                                        <asp:LinkButton ID="btnUpdateClient1" runat="server" CommandName="Update" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                                            Update Client
+                                        </asp:LinkButton>
+                                    <td>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+
+                            <table class="table-condensed" style="width: 100%">
+                                <tr>
+                                    <td style="width: 220px; text-align:right">Client Code:
                                                                 <asp:Label ID="IdLabel1" runat="server" Text='<%# Eval("Id") %>' Visible="false" />
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtCode" runat="server" Text='<%# Bind("Initials") %>' EmptyMessage="Up to 7 characters"
-                                        MaxLength="7">
-                                    </telerik:RadTextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCode"
-                                        ErrorMessage=" (*) Client code is required"></asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Name:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtClientName" runat="server" Text='<%# Bind("Name") %>' MaxLength="80"
-                                        Width="500px" EmptyMessage="Required">
-                                    </telerik:RadTextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtClientName"
-                                        ErrorMessage="(*) Name is Required" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Email:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtEmail" runat="server" Text='<%# Bind("Email") %>' MaxLength="128" Width="500px" EmptyMessage="Required">
-                                    </telerik:RadTextBox>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtEmail"
-                                        runat="server" ErrorMessage="(*) Enter a valid email address"
-                                        ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                                        Display="Dynamic"></asp:RegularExpressionValidator>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmail"
-                                        ErrorMessage="(*) Email is Required" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Position:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="RadTextBox3" runat="server" Text='<%# Bind("Position") %>'
-                                        MaxLength="80" Width="500px">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Organization:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("Company") %>'
-                                        MaxLength="80" Width="500px">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Type:
-                                </td>
-                                <td>
-                                    <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceTypes"
-                                        DataTextField="Name" DataValueField="Id" Width="300px" SelectedValue='<%# Bind("Type") %>' AppendDataBoundItems="true" AutoPostBack="True">
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Types Not Defined...)" Value="0" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Subtype:
-                                </td>
-                                <td>
-                                    <telerik:RadComboBox ID="cboSubtype" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceSubtypes" DataTextField="Name" DataValueField="Id"
-                                        SelectedValue='<%# DataBinder.Eval(Container.DataItem, "Subtype")%>' Width="300px">
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Subtypes Not Defined...)" Value="0" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                    <asp:SqlDataSource ID="SqlDataSourceSubtypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-                                        SelectCommand="SELECT [Id], [Name] FROM [Clients_Subtypes] Where typeId=@typeId ORDER BY Name">
-                                        <SelectParameters>
-                                            <asp:ControlParameter ControlID="cboType" Name="typeId" PropertyName="SelectedValue" />
-                                        </SelectParameters>
-                                    </asp:SqlDataSource>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Address Line 1:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtAddress" runat="server" Text='<%# Bind("Address") %>'
-                                        MaxLength="80" Width="500px" CssClass="input-address">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Address Line 2:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtAddress2" runat="server" Text='<%# Bind("Address2") %>'
-                                        MaxLength="80" Width="500px">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>City/State/Zip:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtCity" runat="server" Text='<%# Bind("City") %>' MaxLength="50"
-                                        Width="160px" ToolTip="City" EmptyMessage="City" CssClass="input-city">
-                                    </telerik:RadTextBox>
-                                    &nbsp;
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtCode" runat="server" Text='<%# Bind("Initials") %>' EmptyMessage="Up to 7 characters"
+                                            MaxLength="7">
+                                        </telerik:RadTextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCode"
+                                            ErrorMessage=" (*) Client code is required"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Name:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtClientName" runat="server" Text='<%# Bind("Name") %>' MaxLength="80"
+                                            Width="90%" EmptyMessage="Required">
+                                        </telerik:RadTextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtClientName"
+                                            ErrorMessage="(*) Name is Required" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Email:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtEmail" runat="server" Text='<%# Bind("Email") %>' MaxLength="128" Width="90%" EmptyMessage="Required">
+                                        </telerik:RadTextBox>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtEmail"
+                                            runat="server" ErrorMessage="(*) Enter a valid email address"
+                                            ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+                                            Display="Dynamic"></asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmail"
+                                            ErrorMessage="(*) Email is Required" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Position:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox3" runat="server" Text='<%# Bind("Position") %>'
+                                            MaxLength="80" Width="90%">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Organization:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("Company") %>'
+                                            MaxLength="80" Width="90%">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Type:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceTypes"
+                                            DataTextField="Name" DataValueField="Id" Width="300px" SelectedValue='<%# Bind("Type") %>' AppendDataBoundItems="true" AutoPostBack="True">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(Types Not Defined...)" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Subtype:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboSubtype" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceSubtypes" DataTextField="Name" DataValueField="Id"
+                                            SelectedValue='<%# DataBinder.Eval(Container.DataItem, "Subtype")%>' Width="300px">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(Subtypes Not Defined...)" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                        <asp:SqlDataSource ID="SqlDataSourceSubtypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+                                            SelectCommand="SELECT [Id], [Name] FROM [Clients_Subtypes] Where typeId=@typeId ORDER BY Name">
+                                            <SelectParameters>
+                                                <asp:ControlParameter ControlID="cboType" Name="typeId" PropertyName="SelectedValue" />
+                                            </SelectParameters>
+                                        </asp:SqlDataSource>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Address Line 1:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtAddress" runat="server" Text='<%# Bind("Address") %>'
+                                            MaxLength="80" Width="90%" CssClass="input-address">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Address Line 2:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtAddress2" runat="server" Text='<%# Bind("Address2") %>'
+                                            MaxLength="80" Width="90%">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">City/State/Zip:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtCity" runat="server" Text='<%# Bind("City") %>' MaxLength="50"
+                                            Width="160px" ToolTip="City" EmptyMessage="City" CssClass="input-city">
+                                        </telerik:RadTextBox>
+                                        &nbsp;
                                                                 <telerik:RadTextBox ID="txtState" runat="server" Text='<%# Bind("State") %>'
                                                                     MaxLength="50" Width="160px" ToolTip="State" EmptyMessage="State" CssClass="input-state">
                                                                 </telerik:RadTextBox>
-                                    &nbsp;
+                                        &nbsp;
                                                                 <telerik:RadTextBox ID="txtZipCode" runat="server" Text='<%# Bind("ZipCode") %>' ToolTip="Zip Code" EmptyMessage="Zip Code"
                                                                     MaxLength="50" Width="160px" CssClass="input-zip">
                                                                 </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Phone/Cell/Fax:
-                                </td>
-                                <td>
-                                    <telerik:RadMaskedTextBox ID="RadMaskedTextBox1" runat="server" Text='<%# Bind("Phone") %>' Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" ToolTip="Phone" />
-                                    &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Phone/Cell/Fax:
+                                    </td>
+                                    <td>
+                                        <telerik:RadMaskedTextBox ID="RadMaskedTextBox1" runat="server" Text='<%# Bind("Phone") %>' Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" ToolTip="Phone" />
+                                        &nbsp;
                                                                 <telerik:RadMaskedTextBox ID="RadMaskedTextBox2" runat="server" Text='<%# Bind("Cellular") %>' Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" ToolTip="Cell" />
-                                    &nbsp;
+                                        &nbsp;
                                                                 <telerik:RadMaskedTextBox ID="RadMaskedTextBox3" runat="server" Text='<%# Bind("Fax") %>' Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" ToolTip="Facsimile" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Web Page:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="RadTextBox1" runat="server" Text='<%# Bind("Web") %>' MaxLength="50"
-                                        Width="500px">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Availability/Starting Date:
-                                </td>
-                                <td>
-                                    <telerik:RadComboBox ID="cboAvailability" runat="server" DataSourceID="SqlDataSourceAvailability"
-                                        DataTextField="Name" DataValueField="Id" Width="250px" SelectedValue='<%# Bind("AvailabilityId") %>'>
-                                    </telerik:RadComboBox>
-                                    &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Web Page:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox1" runat="server" Text='<%# Bind("Web") %>' MaxLength="50"
+                                            Width="90%">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Availability/Starting Date:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboAvailability" runat="server" DataSourceID="SqlDataSourceAvailability"
+                                            DataTextField="Name" DataValueField="Id" Width="250px" SelectedValue='<%# Bind("AvailabilityId") %>'>
+                                        </telerik:RadComboBox>
+                                        &nbsp;
                                                                 <telerik:RadDatePicker ID="RadDatePickerStartingDate" runat="server" DbSelectedDate='<%# Bind("StartingDate")%>' ToolTip="Starting Date"
                                                                     MaxDate="01/01/2099 0:00:00" MinDate="01/01/1900 0:00:00">
                                                                 </telerik:RadDatePicker>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>Notes:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="RadTextBox14" runat="server" Text='<%# Bind("Notes") %>'
-                                        TextMode="MultiLine" Width="500px" MaxLength="1024" Rows="2">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>TAGs:
-                                </td>
-                                <td>
+                                <tr>
+                                    <td style="text-align:right">Notes:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox14" runat="server" Text='<%# Bind("Notes") %>'
+                                            TextMode="MultiLine" Width="90%" MaxLength="1024" Rows="2">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">TAGs:
+                                    </td>
+                                    <td>
 
-                                    <asp:Label ID="lblActualTAGS" runat="server" Text='<%# Eval("TAGS") %>'></asp:Label>
-                                    <br />
-                                    <telerik:RadAutoCompleteBox RenderMode="Lightweight" ID="cboTags" runat="server" EnableClientFiltering="true" Width="500px"
-                                        DropDownHeight="150" DataSourceID="SqlDataSourceTags" DataTextField="Tag" EmptyMessage="Add New Tags"
-                                        DataValueField="Tag">
-                                    </telerik:RadAutoCompleteBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Source:
-                                </td>
-                                <td>
-                                    <telerik:RadComboBox ID="cboSource" runat="server" DataSourceID="SqlDataSourceClientSources" AllowCustomText="true"
-                                       MarkFirstMatch="True" Filter="Contains" DataTextField="Name" Width="300px" 
-                                        Text='<%# Bind("Source") %>' EmptyMessage="Type or select client source...">
-                                    </telerik:RadComboBox>
-                                </td>
-                            </tr>
+                                        <asp:Label ID="lblActualTAGS" runat="server" Text='<%# Eval("TAGS") %>'></asp:Label>
+                                        <br />
+                                        <telerik:RadAutoCompleteBox RenderMode="Lightweight" ID="cboTags" runat="server" EnableClientFiltering="true" Width="90%"
+                                            DropDownHeight="150" DataSourceID="SqlDataSourceTags" DataTextField="Tag" EmptyMessage="Add New Tags"
+                                            DataValueField="Tag">
+                                        </telerik:RadAutoCompleteBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Source:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboSource" runat="server" DataSourceID="SqlDataSourceClientSources" AllowCustomText="true"
+                                            MarkFirstMatch="True" Filter="Contains" DataTextField="Name" Width="300px"
+                                            Text='<%# Bind("Source") %>' EmptyMessage="Type or select client source...">
+                                        </telerik:RadComboBox>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>Customer Representative:
-                                </td>
-                                <td>
-                                     <telerik:RadComboBox ID="cboSalesRep1" runat="server" AppendDataBoundItems="True" 
-                                         DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id"
-                                         MarkFirstMatch="True" Filter="Contains"
-                                        SelectedValue='<%# Bind("SalesRep1")%>' 
-                                         Width="300px">
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Customer Rep 1 Not Defined...)" Value="0" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                </td>
-                            </tr>
-                            <%--<tr>
-                                <td>Sales Representative 2:
-                                </td>
-                                <td>
-                                     <telerik:RadComboBox ID="cboSalesRep2" runat="server" AppendDataBoundItems="True" 
-                                         DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id"
-                                         MarkFirstMatch="True" Filter="Contains"
-                                        SelectedValue='<%# Bind("SalesRep2")%>' Width="300px">
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Sales Rep 2 Not Defined...)" Value="0" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                </td>--%>
-                            </tr>
-                        </table>
+                                <tr>
+                                    <td style="text-align:right">Customer Representative:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboSalesRep1" runat="server" AppendDataBoundItems="True"
+                                            DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id"
+                                            MarkFirstMatch="True" Filter="Contains"
+                                            SelectedValue='<%# Bind("SalesRep1")%>'
+                                            Width="300px">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(Customer Rep 1 Not Defined...)" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+                                </tr>
+                            </table>
 
-                        <h4>Billing Contact</h4>
-                        <table class="table-condensed" style="width: 100%">
-                            <tr>
-                                <td style="width:180px">Name:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="RadTextBox12" runat="server" Text='<%# Bind("Billing_contact") %>'
-                                        MaxLength="80" Width="500px">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Email:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="RadTextBox2" runat="server" Text='<%# Bind("Billing_Email")%>'
-                                        MaxLength="80" Width="500px">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Telephone:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="RadTextBox13" runat="server" Text='<%# Bind("Billing_Telephone") %>'
-                                        MaxLength="25">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Bill Type:
-                                </td>
-                                <td>
-                                    <telerik:RadComboBox ID="cboBillType" runat="server" SelectedValue='<%# Bind("BillType") %>' Width="500px">
-                                                    <Items>
-                                                        <telerik:RadComboBoxItem runat="server" Text="Undefined" Value="0" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Flat Rate" Value="1" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Hourly Rate" Value="2" />
-                                                    </Items>
-                                                </telerik:RadComboBox>
-                                </td>
-                            </tr>
-                        </table>
+                            <h4>Billing Contact</h4>
+                            <table class="table-condensed" style="width: 100%">
+                                <tr>
+                                    <td style="width: 220px;text-align:right">Name:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox12" runat="server" Text='<%# Bind("Billing_contact") %>'
+                                            MaxLength="80" Width="90%">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Email:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox2" runat="server" Text='<%# Bind("Billing_Email")%>'
+                                            MaxLength="80" Width="90%">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Telephone:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox13" runat="server" Text='<%# Bind("Billing_Telephone") %>'
+                                            MaxLength="25">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Bill Type:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboBillType" runat="server" SelectedValue='<%# Bind("BillType") %>' Width="90%">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="Undefined" Value="0" />
+                                                <telerik:RadComboBoxItem runat="server" Text="Flat Rate" Value="1" />
+                                                <telerik:RadComboBoxItem runat="server" Text="Hourly Rate" Value="2" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+                                </tr>
+                            </table>
 
-                        <h4>Notification</h4>
-                        <table class="table-condensed" style="width: 100%">
-                            <tr>
-                                <td style="width: 220px">For Invoice Emitted:
-                                </td>
-                                <td>
-                                    <asp:CheckBox ID="Notification_invoiceemittedCheckBox1" runat="server" Checked='<%# Bind("Notification_invoiceemitted")%>' />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Job Inactive or Invoice Collected:
-                                </td>
-                                <td>
-                                    <asp:CheckBox ID="Notification_invoicecollectedCheckBox1" runat="server" Checked='<%# Bind("Notification_invoicecollected")%>' />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Proposal PDF Attached:
-                                </td>
-                                <td>
-                                    <asp:CheckBox ID="CheckBox2" runat="server" Checked='<%# Bind("ProposalPDFattached")%>' />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>For Proposal Accepted:
-                                </td>
-                                <td>
-                                    <asp:CheckBox ID="Notification_acceptedproposalCheckBox1" runat="server" Checked='<%# Bind("Notification_acceptedproposal")%>' Enabled="false" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>For Proposal Declined:
-                                </td>
-                                <td>
-                                    <asp:CheckBox ID="Notification_declinedproposalCheckBox1" runat="server" Checked='<%# Bind("Notification_declinedproposal")%>' Enabled="false" />
-                                </td>
-                            </tr>
+                            <h4>Notification</h4>
+                            <table class="table-condensed" style="width: 100%">
+                                <tr>
+                                    <td style="width: 220px;text-align:right">For Invoice Emitted:
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="Notification_invoiceemittedCheckBox1" runat="server" Checked='<%# Bind("Notification_invoiceemitted")%>' />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Job Inactive or Invoice Collected:
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="Notification_invoicecollectedCheckBox1" runat="server" Checked='<%# Bind("Notification_invoicecollected")%>' />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">Proposal PDF Attached:
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="CheckBox2" runat="server" Checked='<%# Bind("ProposalPDFattached")%>' />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">For Proposal Accepted:
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="Notification_acceptedproposalCheckBox1" runat="server" Checked='<%# Bind("Notification_acceptedproposal")%>' Enabled="false" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">For Proposal Declined:
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="Notification_declinedproposalCheckBox1" runat="server" Checked='<%# Bind("Notification_declinedproposal")%>' Enabled="false" />
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>Deny SMS Notifications:
-                                </td>
-                                <td>
-                                    <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("Deny_SMSnotification")%>' />
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td style="text-align:right">Deny SMS Notifications:
+                                    </td>
+                                    <td>
+                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("Deny_SMSnotification")%>' />
+                                    </td>
+                                </tr>
 
 
-                        </table>
+                            </table>
 
-                        <div style="padding-left: 170px; padding-top: 10px; padding-bottom: 15px">
-                            <asp:LinkButton ID="btnUpdateClient2" runat="server" CommandName="Update" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                            <div style="text-align:center">
+                                <asp:LinkButton ID="btnUpdateClient2" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                      Update Client
-                            </asp:LinkButton>
-                        </div>
-                    </EditItemTemplate>
+                                </asp:LinkButton>
+                                <br /><br />
+                            </div>
+                        </EditItemTemplate>
 
-                </asp:FormView>
+                    </asp:FormView>
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="History" StepType="Step">
                     <h4>Proposals History</h4>
@@ -586,7 +631,7 @@
                     </telerik:RadGrid>
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Schedule" StepType="Step">
-                                        <h4>Schedule</h4>
+                    <h4>Schedule</h4>
                     <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" ToolTip="Press 'Double-Click' to insert/edit client's appointment"
                         Height="950px"
                         SelectedView="MonthView"
@@ -628,7 +673,7 @@
 
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Appointments & Activity" StepType="Step">
-                                        <h4>Appointments & Activity</h4>
+                    <h4>Appointments & Activity</h4>
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceAppointments" AllowPaging="true" PageSize="10"
                         AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True" Width="100%"
                         ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small">
@@ -657,7 +702,10 @@
 
                 </telerik:RadWizardStep>
             </WizardSteps>
-     </telerik:RadWizard>
+        </telerik:RadWizard>
+    </div>
+
+
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         UpdateCommand="CLIENT_UPDATE" UpdateCommandType="StoredProcedure"
@@ -831,7 +879,7 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDocTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Jobs_azureuploads_types] ORDER BY [Id]"></asp:SqlDataSource>
-     <asp:SqlDataSource ID="SqlDataSourceClientBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+    <asp:SqlDataSource ID="SqlDataSourceClientBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Client_Balance" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
@@ -839,7 +887,7 @@
         </SelectParameters>
 
     </asp:SqlDataSource>
-    
+
     <asp:SqlDataSource ID="SqlDataSourceClientSources" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Clients_sources] ORDER BY [Id]"></asp:SqlDataSource>
 

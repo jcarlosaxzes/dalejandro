@@ -51,6 +51,11 @@ Public Class jobs
                 ShowCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
 
                 SqlDataSourceJobs.DataBind()
+
+                If Not Request.QueryString("JobIdInput") Is Nothing Then
+                    lblJobIdInput.Text = Request.QueryString("JobIdInput")
+                End If
+
             End If
 
             If RadWindowManagerJob.Windows.Count > 0 Then
@@ -60,6 +65,18 @@ Public Class jobs
         Catch ex As Exception
 
         End Try
+    End Sub
+    Private Sub jobs_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
+        If lblJobIdInput.Text > 0 Then
+            Dim sUrl As String
+            If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") Then
+                sUrl = "~/adm/Job_accounting.aspx?JobId=" & lblJobIdInput.Text
+            Else
+                sUrl = "~/adm/Job_job.aspx?JobId=" & lblJobIdInput.Text
+            End If
+            lblJobIdInput.Text = "0"
+            CreateRadWindows("Job", sUrl, 960, 820, True, True)
+        End If
     End Sub
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)
@@ -365,7 +382,7 @@ Public Class jobs
                 RadToolTipJobStatus.Show()
 
             Case "NewTime"
-                sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & e.CommandArgument & "&Dialog=1"
                 CreateRadWindows(e.CommandName, sUrl, 1024, 820, True, False)
 
         End Select
@@ -421,7 +438,7 @@ Public Class jobs
 
     Protected Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         Try
-            CreateRadWindows("NewJob", "~/ADM/newjob.aspx", 800, 720, False, True)
+            Response.Redirect("~/adm/newjob.aspx")
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try

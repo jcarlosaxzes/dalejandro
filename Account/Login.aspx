@@ -29,25 +29,23 @@
     <title>PASconcept. Your complete online platform of Project </title>
 
     <link href="~/App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/pasconcept.css" rel="stylesheet" />
     <%--Bootstrap reference begin--%>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <%--Bootstrap reference end--%>
 </head>
 <body title="Welcome to PASconcept. Project Administration Services" style="background-color: white">
     <form id="form1" runat="server">
-        <telerik:RadScriptManager runat="server" ID="RadScriptManager1" />
+        <telerik:RadScriptManager runat="server"  EnableCdn="true" ID="RadScriptManager1" />
         <div class="container">
-
             <div class="row">
                 <div class="col-md-5 col-lg-offset-4" style="margin-top: 5em">
-                        <LayoutTemplate>
-                            <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton">
-                                <div class="well">
 
-                                    <%--<img class="img-thumbnail" src="/images/logopasconcept-index.png"  />--%>
-                                    <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logopasconcept-index.png" Width="100%" />
-
-                                    <form>
+                 <LayoutTemplate>
+                    <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton">
+                        <div class="well">
+                            <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logopasconcept-index.png" Width="100%" />
+                                 <form>
                                         <div class="form-group" style="margin-top: 1em">
                                             <label for="email" class="control-label" style="font-size:large">User Email</label>
                                             <telerik:RadTextBox ID="UserName" runat="server" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
@@ -71,20 +69,18 @@
                                         <div class="form-group">
                                             <a href="ResetPassword.aspx">Forgot password?</a>
                                         </div>
-                                        
 
                                         <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
                                             UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
                                                                         <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Sign in
                                         </asp:LinkButton>
-
+                                        <div style="text-align:center">
+                                            <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, You agree out terms & Conditions</a>
+                                        </div>
                                         <div>
                                             <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label  style= "color:#337ab7"> By clicking Sing In, You agree out terms & Conditions</label>
-                                        </div>
 
                                     </form>
                                 </div>
@@ -97,7 +93,7 @@
                 <div class="col-md-3 col-lg-offset-5 ">
                     <a href="http://blog.pasconcept.com" target="_blank">Help</a>
                     &nbsp;|&nbsp;
-                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank">Terms & Condition</a>
+                    <a href="../Legal/ENG/Terms.html" target="_blank">Terms & Condition</a>
                 </div>
             </div>
             <asp:Label runat="server" ID="lblError"></asp:Label>

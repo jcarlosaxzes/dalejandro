@@ -1,6 +1,6 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="pro.aspx.vb" MasterPageFile="~/adm/ADM_Main_Responsive.Master" Inherits="pasconcept20.pro" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="pro.aspx.vb" MasterPageFile="~/adm/BasicMasterPage.Master" Inherits="pasconcept20.pro" %>
 
-<%@ MasterType VirtualPath="~/adm/ADM_Main_Responsive.Master" %>
+<%@ MasterType VirtualPath="~/adm/BasicMasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
 
@@ -133,8 +133,8 @@
                     <telerik:GridBoundColumn DataField="Status" HeaderText="Status" HeaderStyle-Width="150px"
                         SortExpression="Status" UniqueName="Status">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Notes" ItemStyle-Font-Size="Small"
-                        SortExpression="InvoiceNotes" UniqueName="InvoiceNotes">
+                    <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" ItemStyle-Font-Size="Small"
+                        SortExpression="Notes" UniqueName="Notes">
                     </telerik:GridBoundColumn>
                 </Columns>
             </MasterTableView>

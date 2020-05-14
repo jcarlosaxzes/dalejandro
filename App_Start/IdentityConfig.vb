@@ -45,9 +45,9 @@ Public Class ApplicationUserManager
         manager.PasswordValidator = New PasswordValidator() With {
           .RequiredLength = 6,
           .RequireNonLetterOrDigit = True,
-          .RequireDigit = True,
-          .RequireLowercase = True,
-          .RequireUppercase = True
+          .RequireDigit = False,
+          .RequireLowercase = False,
+          .RequireUppercase = False
         }
         ' Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user. 
         ' You can write your own provider and plug in here.
@@ -62,8 +62,8 @@ Public Class ApplicationUserManager
         ' Configure user lockout defaults
         manager.UserLockoutEnabledByDefault = True
         manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5)
-        manager.MaxFailedAccessAttemptsBeforeLockout = 5
-        
+        manager.MaxFailedAccessAttemptsBeforeLockout = 100
+
         manager.EmailService = New EmailService()
         manager.SmsService = New SmsService()
         Dim dataProtectionProvider = options.DataProtectionProvider

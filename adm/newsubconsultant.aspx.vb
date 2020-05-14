@@ -43,7 +43,7 @@
                                               txtAdress.Text, txtDireccion2.Text, txtCity.Text, txtState.Text, txtZipCode.Text, txtPhone.Text, txtCellular.Text,
                                               txtFax.Text, txtWeb.Text, RadDatePickerStartingDate.SelectedDate, txtPosition.Text, txtBillingContact.Text, txtBillingTelephone.Text, txtNotes.Text)
                         If subconsultantId > 0 Then
-                            Response.Redirect("~/ADM/SubConsultant.aspx?subconsultantId=" & subconsultantId)
+                            Response.Redirect("~/adm/subconsultant.aspx?subconsultantId=" & subconsultantId)
                         Else
                             Master.ErrorMessage("Duplicate Subconsultant Email", 0)
                             txtEmail.Focus()
@@ -82,6 +82,10 @@
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/subconsultants.aspx")
     End Sub
 
 End Class

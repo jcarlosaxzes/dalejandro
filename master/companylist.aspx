@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="companylist.aspx.vb" Inherits="pasconcept20.companylist" MasterPageFile="~/master/MasterPage.Master" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="companylist.aspx.vb" Inherits="pasconcept20.companylist" MasterPageFile="~/master/MasterPage.Master" Async="true" %>
 
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ MasterType VirtualPath="~/master/MasterPage.Master" %>

@@ -20,8 +20,9 @@ Public Class CreateCompany
 
     'End Sub
 
-    Protected Sub RadWizard1_FinishButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.FinishButtonClick
+    Protected Async Sub RadWizard1_FinishButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.FinishButtonClick
         Try
+            LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
             ' Crear la compania en la tabla Company
             SqlDataSource1.Insert()
 
@@ -32,7 +33,7 @@ Public Class CreateCompany
         End Try
     End Sub
 
-    Protected Async Function SqlDataSource1_InsertedAsync(sender As Object, e As SqlDataSourceStatusEventArgs) As Threading.Tasks.Task Handles SqlDataSource1.Inserted
+    Protected Async Sub SqlDataSource1_InsertedAsync(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Try
             '1.- Recibimos nuevo companyId
             lblCompanyId.Text = e.Command.Parameters("@OUT_companylId").Value
@@ -42,29 +43,18 @@ Public Class CreateCompany
 
 
                 '2.- Crear este usuario como Employee de la company
-                LocalAPI.NewEmployee(txtContact.Text, "Admin", 0, "", "", "", "", "", "", txtTelephone.Text, txtCellPhone.Text, txtEmail.Text, "", "", lblCompanyId.Text)
+                Await LocalAPI.NewEmployeeAsync(txtContact.Text, "Admin", 0, "", "", "", "", "", "", txtTelephone.Text, txtCellPhone.Text, txtEmail.Text, "", "", lblCompanyId.Text)
 
                 '3.- Eliminar PreUser
                 LocalAPI.EliminarpreUser(txtEmail.Text)
 
-
                 Dim sEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Email")
                 If sEmail.Length > 0 Then
-
                     ' ¿Usuario ya existe?
                     LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
-                    Dim existUser = LocalAPI.ExisteUserIdentity(sEmail)
-                    If Not existUser Then
-                        Dim user = New pasconcept20.ApplicationUser With {
-                        .Email = txtEmail.Text,
-                        .UserName = txtEmail.Text,
-                        .EmailConfirmed = True}
-                        Dim resutl = Await LocalAPI.AppUserManager.CreateAsync(user)
-                        If Not resutl.Succeeded Then
-                            lblMsg.Text = resutl.Errors(0)
-                        Else
-                            LocalAPI.NormalizeUser(txtEmail.Text)
-                        End If
+
+                    If chkSendAdminCredentials.Checked Then
+                        Await LocalAPI.EmployeeEmailResetPassword(sEmail)
                     End If
 
                     If chkSendGetStarted.Checked Then
@@ -75,12 +65,13 @@ Public Class CreateCompany
                     End If
                 End If
 
+
             End If
         Catch ex As Exception
             lblMsg.Text = "Error. " & ex.Message
         End Try
 
-    End Function
+    End Sub
 
     Private Sub cboClient_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboClient.SelectedIndexChanged
         cboJob.Items.Clear()

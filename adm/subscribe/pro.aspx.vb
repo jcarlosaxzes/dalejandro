@@ -24,9 +24,6 @@ Public Class pro
                 cboCompany.SelectedValue = lblCompanyId.Text
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
-                If Not LocalAPI.IsMasterUser(lblEmployeeEmail.Text, lblCompanyId.Text) Then
-                    Response.RedirectPermanent("~/ADM/Default.aspx")
-                End If
 
                 Select Case lblEmployeeEmail.Text
                     Case "jcarlos@axzes.com", "fernando@easterneg.com", "sandra@easterneg.com", "matt@axzes.com"
@@ -36,17 +33,22 @@ Public Class pro
 
                 lblbillingExpirationDate.Text = LocalAPI.GetCompanybillingExpirationDate(lblCompanyId.Text)
 
+                cboPlans.DataBind()
+
                 ' Inserto Company_Payments si no existe. 
                 ' Company_Payments_INSERT do:
                 ' 1.- New Axzes Invoice 
                 ' 2.- New Company Invoice
                 ' 3.- Company Binded to Axzes. 
-                SqlDataSourcePayment.Insert()
+                Dim payerId As String = Request.Params("PayerID")
+                If String.IsNullOrEmpty(payerId) Then
+                    SqlDataSourcePayment.Insert()
 
-                ' Enabled=False para planes antiguos
-                cboPlans.DataBind()
-                'If Val("" & cboPlans.SelectedValue) < 100 Then cboPlans.Enabled = False
-                cboPlans.Enabled = False
+                    Dim planId = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Billing_plan").ToString()
+                    cboPlans.SelectedValue = planId
+                    cboPlans.Enabled = True
+                End If
+
 
                 ' Refreco FormView
                 SqlDataSourcePayment.DataBind()
@@ -74,14 +76,17 @@ Public Class pro
                             ' (that ensures idempotency). The SDK generates
                             ' a request id if you do not pass one explicitly. 
                             Dim apiContext = Configuration.GetAPIContext("", clientId, clientSecret)
-                            Dim payerId As String = Request.Params("PayerID")
+
                             If String.IsNullOrEmpty(payerId) Then
                                 Dim g = Guid.NewGuid().ToString()
                                 Dim createdPayment = CreatePayment(apiContext, lblCompanyPaymentsPendingId.Text, g)
                                 lblPayPalPaymentId.Text = createdPayment.id
                                 Dim payLink = createdPayment.GetApprovalUrl()
+                                'lblPayPalPaymentId.Text = g
+                                'Dim payLink = "https://localhost:44308/ADM/subscribe/pro.aspx?payment_guid=" & g & "&paymentId=PAY-1FS744526K867052KLDRGZHI" & "&token=EC-5YB58532HX951702N" & "&PayerID=RLBGQWGB5R24Q"
                                 btnPay.Attributes.Add("href", payLink)
                                 Session.Add(g, createdPayment.id)
+                                'Session.Add(g, "123456")
                             Else
                                 ' Return sample
                                 ' http://localhost:30284/ADM/subscribe/pro.aspx
@@ -117,7 +122,7 @@ Public Class pro
 
         Catch ex As Exception
             lblError.Visible = True
-            lblError.Text = ex.Message & ex.InnerException.Message & ex.HResult
+            lblError.Text = ex.Message '& ex.InnerException.Message & ex.HResult
         End Try
 
     End Sub
@@ -129,6 +134,13 @@ Public Class pro
         LocalAPI.SetLastCompanyId(lblEmployeeId.Text, cboCompany.SelectedValue)
         Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
         Response.RedirectPermanent("~/ADM/Start.aspx")
+    End Sub
+
+    Protected Sub cboPlans_SelectedIndexChanged(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs) Handles cboPlans.SelectedIndexChanged
+        Dim plan = cboPlans.SelectedValue
+        LocalAPI.SetCompanyPaymentsPlan(plan, lblCompanyId.Text)
+        ' Refreco FormView
+        RadGridPayments.Rebind()
     End Sub
 
     Protected Sub btnAgreeCreditCard_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAgreeCreditCard.Click
@@ -184,7 +196,7 @@ Public Class pro
 
 
     Protected Sub btnAdminPay_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAdminPay.Click
-        UpdatePayment_and_MessagePayHere(Membership.GetUser().Email, 8)
+        UpdatePayment_and_MessagePayHere(Context.User.Identity.GetUserName(), 8)
     End Sub
 
     Private Sub SqlDataSourcePayment_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourcePayment.Updating
@@ -291,6 +303,21 @@ Public Class pro
             lblPayPalPaymentId.Text = PayPalID
             lblPaymentMethodId.Text = PaymentMethodId
 
+
+            'Get or Create AxzesClientId
+            Dim AxzesClientId As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AxzesClientId")
+            If IsNothing(AxzesClientId) Or Len(AxzesClientId) = 0 Or AxzesClientId = 0 Then
+                Dim clientId As Integer = LocalAPI.BindCompanyToAxzesClient(lblCompanyId.Text, 0)
+                AxzesClientId = clientId.ToString()
+            End If
+
+            'Get or Create AxzesJob
+            Dim AxzesJobId As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AxzesJobId")
+            If IsNothing(AxzesJobId) Or Len(AxzesJobId) = 0 Or AxzesJobId = 0 Then
+                LocalAPI.BindCompanyToAxzesJob(lblCompanyId.Text, AxzesClientId, 0)
+                AxzesJobId = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AxzesJobId")
+            End If
+
             SqlDataSourcePayment.Update()
             ' Company_Payments_UPDATE do:
             ' 1.- Confirm Company Payment
@@ -298,8 +325,8 @@ Public Class pro
             ' 3.- Update Company billingExpirationDate
             '..............................................................................
 
-
             Dim AxzesInvoiceId As Integer = LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "AxzesInvoiceId")
+
             Dim AxzesInvoiceNumber As String = LocalAPI.InvoiceNumber(AxzesInvoiceId)
             Dim sMsg As New System.Text.StringBuilder
 
@@ -332,7 +359,7 @@ Public Class pro
                 LocalAPI.SendMail("jcarlos@axzes.com", "", "matt@axzes.com", sSubject, sBody, lblCompanyId.Text)
             End If
 
-            Response.Redirect("~/ADM/subscribe/pro.aspx")
+            Response.Redirect("~/ADM/subscribe/subscribesuccess.aspx")
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

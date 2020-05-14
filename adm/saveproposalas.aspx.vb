@@ -1,6 +1,6 @@
 ﻿Imports Microsoft.AspNet.Identity
 
-Public Class SaveProposalAs
+Public Class saveproposalas
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -34,7 +34,8 @@ Public Class SaveProposalAs
     Protected Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Dim Id As String = e.Command.Parameters("@ProposalId").Value
         If Val(Id) > 0 Then
-            Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../ADM/Proposal.aspx?Id=" & Id & "';</script>")
+            'Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/proposal.aspx?Id=" & Id & "';</script>")
+            Response.Redirect("~/adm/proposal.aspx?Id=" & Id)
         End If
     End Sub
 
@@ -46,4 +47,7 @@ Public Class SaveProposalAs
         lblOption.Text = "1"
     End Sub
 
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Response.Redirect("~/adm/proposal.aspx?Id=" & lblProposalId.Text)
+    End Sub
 End Class

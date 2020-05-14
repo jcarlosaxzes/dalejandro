@@ -78,8 +78,7 @@ Public Class clients
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 700)
+                Response.Redirect("~/ADM/Client.aspx?clientId=" & e.CommandArgument & "&FullPage=1")
 
             Case "EditPhoto"
                 'sUrl = "~/ADM/EditAvatar.aspx?Id=" & e.CommandArgument & "&Entity=Client"
@@ -114,7 +113,7 @@ Public Class clients
     End Sub
 
     Protected Sub btnNewClient_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewClient.Click
-        CreateRadWindows("NewClient", "~/ADM/NewClient.aspx", 960, 700)
+        Response.Redirect("~/adm/newclient.aspx")
     End Sub
 
     Protected Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
@@ -140,8 +139,7 @@ Public Class clients
     End Sub
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-
-        Dim sUrl As String = "~/ADM/Client.aspx?clientId=" & e.Command.Parameters("@Id_OUT").Value
-        CreateRadWindows("EditClient", sUrl, 960, 700)
+        ' Duplicate client
+        Response.Redirect("~/ADM/Client.aspx?clientId=" & e.Command.Parameters("@Id_OUT").Value)
     End Sub
 End Class

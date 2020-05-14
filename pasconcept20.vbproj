@@ -332,11 +332,14 @@
     <Content Include="adm\departmentbudgetbystatus.aspx" />
     <Content Include="adm\departmentreport.aspx" />
     <Content Include="adm\departmentslist.aspx" />
+    <Content Include="adm\department_form.aspx" />
     <Content Include="adm\discipline.aspx" />
+    <Content Include="adm\editproposalphase.aspx" />
     <Content Include="adm\employee.aspx" />
     <Content Include="adm\employeenewtime.aspx" />
     <Content Include="adm\employeereport.aspx" />
     <Content Include="adm\employees.aspx" />
+    <Content Include="adm\employee_hourlywagehistory.aspx" />
     <Content Include="adm\employee_permissions.aspx" />
     <Content Include="adm\employee_permissions_form.aspx" />
     <Content Include="adm\employee_status_form.aspx" />
@@ -348,6 +351,7 @@
     <Content Include="adm\importtickets.aspx" />
     <Content Include="adm\invoices.aspx" />
     <Content Include="adm\invoicestypes.aspx" />
+    <Content Include="adm\jobassignemployee.aspx" />
     <Content Include="adm\jobs.aspx" />
     <Content Include="adm\jobtickets.aspx" />
     <Content Include="adm\jobtypes.aspx" />
@@ -356,13 +360,16 @@
     <Content Include="adm\job_employees.aspx" />
     <Content Include="adm\job_images_files.aspx" />
     <Content Include="adm\job_job.aspx" />
-    <Content Include="adm\job_links.aspx.aspx" />
+    <Content Include="adm\job_links.aspx" />
     <Content Include="adm\job_notes.aspx" />
     <Content Include="adm\job_proposals.aspx" />
+    <Content Include="adm\job_reviews.aspx" />
     <Content Include="adm\job_rfps.aspx" />
+    <Content Include="adm\job_schedule.aspx" />
     <Content Include="adm\job_tags.aspx" />
     <Content Include="adm\job_times.aspx" />
     <Content Include="adm\job_transmittals.aspx" />
+    <Content Include="adm\managementrequest.aspx" />
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
@@ -371,6 +378,7 @@
     <Content Include="adm\newemployee.aspx" />
     <Content Include="adm\newjob.aspx" />
     <Content Include="adm\newproposaltask.aspx" />
+    <Content Include="adm\newpropsalphase.aspx" />
     <Content Include="adm\newsubconsultant.aspx" />
     <Content Include="adm\newvendor.aspx" />
     <Content Include="adm\nojobstimetypes.aspx" />
@@ -387,7 +395,9 @@
     <Content Include="adm\projecttags.aspx" />
     <Content Include="adm\proposal.aspx" />
     <Content Include="adm\proposalnewwizard.aspx" />
+    <Content Include="adm\proposalphases.aspx" />
     <Content Include="adm\proposals.aspx" />
+    <Content Include="adm\proposalschedule.aspx" />
     <Content Include="adm\proposaltemplate.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
@@ -404,6 +414,7 @@
     <Content Include="adm\saveproposalas.aspx" />
     <Content Include="adm\saveproposalastemplate.aspx" />
     <Content Include="adm\schedule.aspx" />
+    <Content Include="adm\scopeofwork.aspx" />
     <Content Include="adm\sendinvoice.aspx" />
     <Content Include="adm\sendproposal.aspx" />
     <Content Include="adm\sendstatement.aspx" />
@@ -416,14 +427,17 @@
     <Content Include="adm\subconsultant.aspx" />
     <Content Include="adm\subconsultants.aspx" />
     <Content Include="adm\subscribe\pro.aspx" />
+    <Content Include="adm\subscribe\subscribesuccess.aspx" />
     <Content Include="adm\tagcloud.aspx" />
     <Content Include="adm\tandctemplates.aspx" />
     <Content Include="adm\tandctemplate_form.aspx" />
     <Content Include="adm\ticket.aspx" />
+    <Content Include="adm\ticket_time.aspx" />
     <Content Include="adm\time.aspx" />
     <Content Include="adm\timecategory.aspx" />
     <Content Include="adm\timesbyperiords.aspx" />
     <Content Include="adm\timesheet.aspx" />
+    <Content Include="adm\titleblock.aspx" />
     <Content Include="adm\topten.aspx" />
     <Content Include="adm\transmittal.aspx" />
     <Content Include="adm\transmittals.aspx" />
@@ -476,6 +490,7 @@
     <Content Include="App_Themes\Estandar\DefaultEmployeeIcon.gif" />
     <Content Include="App_Themes\Estandar\DefaultHeader.gif" />
     <Content Include="App_Themes\Estandar\Estandar.css" />
+    <Content Include="App_Themes\Estandar\Estandar.min.css" />
     <Content Include="App_Themes\Estandar\Images\administrator.png" />
     <Content Include="App_Themes\Estandar\Images\customer.png" />
     <Content Include="App_Themes\Estandar\Images\employee.png" />
@@ -1808,6 +1823,8 @@
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-brands-400.svg" />
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-regular-400.svg" />
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\pasconcept.css" />
+    <Content Include="Content\pasconcept.min.css" />
     <Content Include="Content\sing-theme\application-ie9-part2.css" />
     <Content Include="Content\sing-theme\application.css" />
     <Content Include="Content\sing-theme\application.min.css" />
@@ -1855,6 +1872,7 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\HELP-US-OUT.txt" />
     <Content Include="Content\Site.css" />
     <Content Include="css\Menu.PASMenuBlackMetroTouch.css" />
+    <Content Include="css\Menu.PASMenuBlackMetroTouch.min.css" />
     <Content Include="css\menu\PASMenuBlackMetroTouch.gif" />
     <Content Include="css\menu\radActionsSprite.png" />
     <Content Include="css\menu\rmArrows.png" />
@@ -1876,8 +1894,8 @@
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\singproposalsign.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -2020,6 +2038,7 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master" />
     <Content Include="adm\subscribe\web.config" />
+    <Content Include="jscript.min.js" />
     <Content Include="master\activeusers.aspx" />
     <Content Include="master\billingplans.aspx" />
     <Content Include="master\company.aspx" />
@@ -2035,6 +2054,8 @@
     <Content Include="master\invoices.aspx" />
     <Content Include="master\masscommunication.aspx" />
     <Content Include="master\MasterPage.Master" />
+    <Content Include="help\eng\PASconcept_Help_EN.pdf" />
+    <Content Include="help\esp\PASconcept_Help_ES.pdf" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -2122,6 +2143,7 @@
     <Content Include="master\proposaltask_TEMPLATE.aspx" />
     <Content Include="master\tandcedit.aspx" />
     <Content Include="master\transmittals_package_types.aspx" />
+    <Content Include="master\useradmin.aspx" />
     <Content Include="master\usersagreelist.aspx" />
     <Content Include="master\versiones.aspx" />
     <Content Include="RadEditorDialogs\About.ascx" />
@@ -2169,6 +2191,7 @@
     <Content Include="registerend.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -2905,11 +2928,25 @@
       <DependentUpon>departmentslist.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\department_form.aspx.designer.vb">
+      <DependentUpon>department_form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\department_form.aspx.vb">
+      <DependentUpon>department_form.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\discipline.aspx.designer.vb">
       <DependentUpon>discipline.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\discipline.aspx.vb">
       <DependentUpon>discipline.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\editproposalphase.aspx.designer.vb">
+      <DependentUpon>editproposalphase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\editproposalphase.aspx.vb">
+      <DependentUpon>editproposalphase.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\employee.aspx.designer.vb">
@@ -2938,6 +2975,13 @@
     </Compile>
     <Compile Include="adm\employees.aspx.vb">
       <DependentUpon>employees.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\employee_hourlywagehistory.aspx.designer.vb">
+      <DependentUpon>employee_hourlywagehistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employee_hourlywagehistory.aspx.vb">
+      <DependentUpon>employee_hourlywagehistory.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\employee_permissions.aspx.designer.vb">
@@ -3017,6 +3061,13 @@
       <DependentUpon>invoicestypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\jobassignemployee.aspx.designer.vb">
+      <DependentUpon>jobassignemployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\jobassignemployee.aspx.vb">
+      <DependentUpon>jobassignemployee.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\jobs.aspx.designer.vb">
       <DependentUpon>jobs.aspx</DependentUpon>
     </Compile>
@@ -3073,11 +3124,11 @@
       <DependentUpon>job_job.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\job_links.aspx.aspx.designer.vb">
-      <DependentUpon>job_links.aspx.aspx</DependentUpon>
+    <Compile Include="adm\job_links.aspx.designer.vb">
+      <DependentUpon>job_links.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adm\job_links.aspx.aspx.vb">
-      <DependentUpon>job_links.aspx.aspx</DependentUpon>
+    <Compile Include="adm\job_links.aspx.vb">
+      <DependentUpon>job_links.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\job_notes.aspx.designer.vb">
@@ -3094,11 +3145,25 @@
       <DependentUpon>job_proposals.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\job_reviews.aspx.designer.vb">
+      <DependentUpon>job_reviews.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\job_reviews.aspx.vb">
+      <DependentUpon>job_reviews.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\job_rfps.aspx.designer.vb">
       <DependentUpon>job_rfps.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\job_rfps.aspx.vb">
       <DependentUpon>job_rfps.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\job_schedule.aspx.designer.vb">
+      <DependentUpon>job_schedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\job_schedule.aspx.vb">
+      <DependentUpon>job_schedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\job_tags.aspx.designer.vb">
@@ -3120,6 +3185,13 @@
     </Compile>
     <Compile Include="adm\job_transmittals.aspx.vb">
       <DependentUpon>job_transmittals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\managementrequest.aspx.designer.vb">
+      <DependentUpon>managementrequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\managementrequest.aspx.vb">
+      <DependentUpon>managementrequest.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\MasterJOB.Master.designer.vb">
@@ -3183,6 +3255,13 @@
     </Compile>
     <Compile Include="adm\newproposaltask.aspx.vb">
       <DependentUpon>newproposaltask.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\newpropsalphase.aspx.designer.vb">
+      <DependentUpon>newpropsalphase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\newpropsalphase.aspx.vb">
+      <DependentUpon>newpropsalphase.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\newsubconsultant.aspx.designer.vb">
@@ -3297,11 +3376,25 @@
       <DependentUpon>proposalnewwizard.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\proposalphases.aspx.designer.vb">
+      <DependentUpon>proposalphases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposalphases.aspx.vb">
+      <DependentUpon>proposalphases.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\proposals.aspx.designer.vb">
       <DependentUpon>proposals.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\proposals.aspx.vb">
       <DependentUpon>proposals.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\proposalschedule.aspx.designer.vb">
+      <DependentUpon>proposalschedule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposalschedule.aspx.vb">
+      <DependentUpon>proposalschedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\proposaltemplate.aspx.designer.vb">
@@ -3395,13 +3488,6 @@
       <DependentUpon>saveproposalas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
-      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\saveproposalastemplate.aspx.vb">
-      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="adm\role_permissions_form.aspx.designer.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
     </Compile>
@@ -3409,11 +3495,25 @@
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
+      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\saveproposalastemplate.aspx.vb">
+      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">
       <DependentUpon>schedule.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\schedule.aspx.vb">
       <DependentUpon>schedule.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\scopeofwork.aspx.designer.vb">
+      <DependentUpon>scopeofwork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\scopeofwork.aspx.vb">
+      <DependentUpon>scopeofwork.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\sendinvoice.aspx.designer.vb">
@@ -3500,6 +3600,13 @@
       <DependentUpon>pro.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\subscribe\subscribesuccess.aspx.designer.vb">
+      <DependentUpon>subscribesuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\subscribe\subscribesuccess.aspx.vb">
+      <DependentUpon>subscribesuccess.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\tagcloud.aspx.designer.vb">
       <DependentUpon>tagcloud.aspx</DependentUpon>
     </Compile>
@@ -3528,6 +3635,13 @@
       <DependentUpon>ticket.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\ticket_time.aspx.designer.vb">
+      <DependentUpon>ticket_time.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\ticket_time.aspx.vb">
+      <DependentUpon>ticket_time.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\time.aspx.designer.vb">
       <DependentUpon>time.aspx</DependentUpon>
     </Compile>
@@ -3554,6 +3668,13 @@
     </Compile>
     <Compile Include="adm\timesheet.aspx.vb">
       <DependentUpon>timesheet.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\titleblock.aspx.designer.vb">
+      <DependentUpon>titleblock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\titleblock.aspx.vb">
+      <DependentUpon>titleblock.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\topten.aspx.designer.vb">
@@ -3948,6 +4069,13 @@
     </Compile>
     <Compile Include="master\transmittals_package_types.aspx.vb">
       <DependentUpon>transmittals_package_types.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\useradmin.aspx.designer.vb">
+      <DependentUpon>useradmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\useradmin.aspx.vb">
+      <DependentUpon>useradmin.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="master\usersagreelist.aspx.designer.vb">

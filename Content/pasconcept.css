@@ -1,0 +1,43 @@
+﻿.pas-container {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid #ddd !important;
+}
+
+DashboardBackcolorBLUE {
+    background-color: #039be5;
+}
+
+DashboardBackcolorGRAY {
+    background-color: #546e7a;
+}
+
+DashboardBackcolorGREEN {
+    background-color: #43a047;
+}
+
+DashboardBackcolorRED {
+    background-color: #e53935;
+}
+
+.DashboardFont1 {
+    font-family: Muli,Helvetica Neue,Arial,sans-serif;
+    font-size: 32px;
+    color: #fff !important;
+    font-weight: 300;
+    margin-top: 24px;
+    margin-bottom: 20px;
+}
+
+.DashboardFont2 {
+    font-family: Muli,Helvetica Neue,Arial,sans-serif;
+    font-size: 20px;
+    color: #fff !important;
+    margin-top: 0;
+}
+
+.DashboardFont3 {
+    font-family: Muli,Helvetica Neue,Arial,sans-serif;
+    color: #fff !important;
+    font-size: x-small;
+    margin-bottom: 0;
+}

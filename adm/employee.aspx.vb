@@ -11,6 +11,11 @@
 
                 lblInactive.Text = IIf(LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "Inactive"), 1, 0)
                 FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewEmployee")
+
+                'If Request.QueryString("FullPage") Is Nothing Then
+                '    Master.HideMasterMenu()
+                '    btnBack.Visible = False
+                'End If
             End If
 
         Catch ex As Exception
@@ -37,4 +42,11 @@
         End If
 
     End Sub
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/employees.aspx")
+    End Sub
+    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
+        FormViewEmployeeBalance.Visible = Not FormViewEmployeeBalance.Visible
+    End Sub
+
 End Class

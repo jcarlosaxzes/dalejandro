@@ -138,29 +138,6 @@
             .RadProgressBar_Material.rpbHorizontal {
                 margin: 0 !important;
             }
-            .DashboardFont1{
-                font-family: Muli,Helvetica Neue,Arial,sans-serif;
-                font-size: 36px;
-                color: #fff!important;
-                font-weight: 300;
-                line-height: 1;
-                margin-top:16px;
-
-            }
-            .DashboardFont2{
-                font-family: Muli,Helvetica Neue,Arial,sans-serif;
-                font-size: 20px;
-                color: #fff!important;
-                line-height: 1.8!important;
-            }
-            .DashboardFont3{
-                margin-left: 8px!important;
-                font-family: Muli,Helvetica Neue,Arial,sans-serif;
-                color: #fff!important;
-                font-size: 14px;
-                line-height: 1.4!important;
-                letter-spacing: -.1px!important;
-            }
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -183,7 +160,7 @@
                 </td>
                 <td style="width: 80px; text-align: center">
                     <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
-                        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
+                        <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
                             $ Dashboard
                         </button>
                     </asp:Panel>
@@ -372,32 +349,32 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 14%;text-align:center; background-color:#039be5">
+                        <td style="width: 14%;text-align:center;background-color: #039be5;">
                             <span class="DashboardFont2">Budget</span>
                             <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#546e7a">
+                        <td style="width: 14%;text-align:center;background-color: #546e7a;">
                             <span class="DashboardFont2">Billed</span>
                             <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#43a047">
+                        <td style="width: 14%;text-align:center;background-color: #43a047;">
                             <span class="DashboardFont2">Collected</span>
                             <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#e53935">
+                        <td style="width: 14%;text-align:center;background-color: #e53935;">
                             <span class="DashboardFont2">Pending</span>
                             <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#43a047">
+                        <td style="width: 14%;text-align:center;background-color: #43a047;">
                             <span class="DashboardFont2">Balance</span>
                             <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center; background-color:#039be5">
+                        <td style="width: 14%;text-align:center;background-color: #e53935;">
                             <span class="DashboardFont2">SubContract</span>
                             <asp:Label ID="lblTotalSubContract" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
@@ -531,7 +508,7 @@
                                             CommandName="HideClient" UseSubmitBehavior="false">
                                                     <span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span>
                                         </asp:LinkButton>
-                                        <a title="Click here to view Scope Of Work" href='<%#String.Concat("../EMP/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
+                                        <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
                                             <span class="glyphicon glyphicon glyphicon-th-list"></span>
                                         </a>
                                         <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name")," - ",Eval("Company"))%>' CssClass="lnkGrid"></asp:Label>
@@ -613,7 +590,7 @@
                                                 <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditStatus" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Job Status">
                                                     <span title="Clic to edit Job Status" class="label  <%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>"><%# Eval("nStatus") %></span>
                                                 </asp:LinkButton>
-                                                <a title="Click here to download titlebox file" href='<%#String.Concat("../EMP/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
+                                                <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
                                                     <span class="glyphicon glyphicon-cloud-download"></span>
                                                 </a>
                                             </td>
@@ -916,4 +893,5 @@
     <asp:Label ID="lblSelectedJobId" runat="server" Visible="False" Text=""></asp:Label>
     <asp:Label ID="lblTagId" runat="server" Visible="False" Text=""></asp:Label>
     <asp:Label ID="lblTagIN_List" runat="server" Visible="False" Text=""></asp:Label>
+    <asp:Label ID="lblJobIdInput" runat="server" Visible="False" Text="0"></asp:Label>
 </asp:Content>
