@@ -1219,7 +1219,7 @@ Public Class LocalAPI
                 Case "Multiplier"
                     Return GetCompanyMultiplier(companyId, GetDateTime().Year)
 
-                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials"
+                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials", "Custom"
                     Return GetNumericEscalar("SELECT ISNULL([" & sProperty & "],0) FROM [Company] WHERE [companyId]=" & companyId)
 
                 Case "StartYear"
@@ -12592,6 +12592,14 @@ Public Class LocalAPI
                     Return GetStringEscalar("SELECT ISNULL([" & sProperty & "],'') FROM [Company_Payments] WHERE Id=" & companypaymentId)
 
             End Select
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function SetCompanyPaymentsPlan(billingPlanId As Integer, companyId As Integer) As Boolean
+        Try
+            ExecuteNonQuery("UPDATE [Company_Payments] set [Company_Payments].Billing_plan = [Billing_plans].Id, [Company_Payments].Amount = [Billing_plans].[billing_baseprice], [Company_Payments].Notes =[Billing_plans].[Name] from [Company_Payments] INNER JOIN [dbo].[Billing_plans] on [Billing_plans].Id=" & billingPlanId & " WHERE [Company_Payments].companyId=" & companyId & " and [Company_Payments].PaidDate Is Null")
         Catch ex As Exception
             Throw ex
         End Try
