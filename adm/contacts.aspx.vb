@@ -41,11 +41,9 @@ Public Class contacts
                 sUrl = "~/ADM/Contact.aspx?ContactId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 850, 700)
             Case "c"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 700)
+                Response.Redirect("~/ADM/Client.aspx?clientId=" & e.CommandArgument)
             Case "e"
-                sUrl = "~/ADM/Employee.aspx?employeeId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 700)
+                Response.Redirect("~/ADM/Employee.aspx?employeeId=" & e.CommandArgument)
         End Select
     End Sub
     Private Sub SqlDataSource1_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSource1.Selecting
