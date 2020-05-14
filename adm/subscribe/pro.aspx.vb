@@ -33,17 +33,22 @@ Public Class pro
 
                 lblbillingExpirationDate.Text = LocalAPI.GetCompanybillingExpirationDate(lblCompanyId.Text)
 
+                cboPlans.DataBind()
+
                 ' Inserto Company_Payments si no existe. 
                 ' Company_Payments_INSERT do:
                 ' 1.- New Axzes Invoice 
                 ' 2.- New Company Invoice
                 ' 3.- Company Binded to Axzes. 
-                SqlDataSourcePayment.Insert()
+                Dim payerId As String = Request.Params("PayerID")
+                If String.IsNullOrEmpty(payerId) Then
+                    SqlDataSourcePayment.Insert()
 
-                ' Enabled=False para planes antiguos
-                cboPlans.DataBind()
-                'If Val("" & cboPlans.SelectedValue) < 100 Then cboPlans.Enabled = False
-                cboPlans.Enabled = False
+                    Dim planId = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Billing_plan").ToString()
+                    cboPlans.SelectedValue = planId
+                    cboPlans.Enabled = True
+                End If
+
 
                 ' Refreco FormView
                 SqlDataSourcePayment.DataBind()
@@ -71,13 +76,14 @@ Public Class pro
                             ' (that ensures idempotency). The SDK generates
                             ' a request id if you do not pass one explicitly. 
                             Dim apiContext = Configuration.GetAPIContext("", clientId, clientSecret)
-                            Dim payerId As String = Request.Params("PayerID")
+
                             If String.IsNullOrEmpty(payerId) Then
                                 Dim g = Guid.NewGuid().ToString()
                                 Dim createdPayment = CreatePayment(apiContext, lblCompanyPaymentsPendingId.Text, g)
                                 lblPayPalPaymentId.Text = createdPayment.id
                                 Dim payLink = createdPayment.GetApprovalUrl()
-                                'Dim payLink = "pro.aspx?payment_guid=" & g & "&paymentId=PAY-1FS744526K867052KLDRGZHI" & "&token=EC-5YB58532HX951702N" & "&PayerID=RLBGQWGB5R24Q"
+                                'lblPayPalPaymentId.Text = g
+                                'Dim payLink = "https://localhost:44308/ADM/subscribe/pro.aspx?payment_guid=" & g & "&paymentId=PAY-1FS744526K867052KLDRGZHI" & "&token=EC-5YB58532HX951702N" & "&PayerID=RLBGQWGB5R24Q"
                                 btnPay.Attributes.Add("href", payLink)
                                 Session.Add(g, createdPayment.id)
                                 'Session.Add(g, "123456")
@@ -128,6 +134,13 @@ Public Class pro
         LocalAPI.SetLastCompanyId(lblEmployeeId.Text, cboCompany.SelectedValue)
         Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
         Response.RedirectPermanent("~/ADM/Start.aspx")
+    End Sub
+
+    Protected Sub cboPlans_SelectedIndexChanged(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs) Handles cboPlans.SelectedIndexChanged
+        Dim plan = cboPlans.SelectedValue
+        LocalAPI.SetCompanyPaymentsPlan(plan, lblCompanyId.Text)
+        ' Refreco FormView
+        RadGridPayments.Rebind()
     End Sub
 
     Protected Sub btnAgreeCreditCard_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAgreeCreditCard.Click
@@ -290,12 +303,6 @@ Public Class pro
             lblPayPalPaymentId.Text = PayPalID
             lblPaymentMethodId.Text = PaymentMethodId
 
-            SqlDataSourcePayment.Update()
-            ' Company_Payments_UPDATE do:
-            ' 1.- Confirm Company Payment
-            ' 2.- New Axzes Payment
-            ' 3.- Update Company billingExpirationDate
-            '..............................................................................
 
             'Get or Create AxzesClientId
             Dim AxzesClientId As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AxzesClientId")
@@ -311,13 +318,14 @@ Public Class pro
                 AxzesJobId = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AxzesJobId")
             End If
 
+            SqlDataSourcePayment.Update()
+            ' Company_Payments_UPDATE do:
+            ' 1.- Confirm Company Payment
+            ' 2.- New Axzes Payment
+            ' 3.- Update Company billingExpirationDate
+            '..............................................................................
+
             Dim AxzesInvoiceId As Integer = LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "AxzesInvoiceId")
-            If IsNothing(AxzesInvoiceId) Or Len(AxzesInvoiceId) = 0 Or AxzesInvoiceId = 0 Then
-                LocalAPI.BindCompanyToAxzesInvoice(AxzesJobId, lblCompanyPaymentsPendingId.Text, 0)
-                AxzesInvoiceId = LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "AxzesInvoiceId")
-                'Else
-                '    LocalAPI.BindCompanyToAxzesInvoice(AxzesJobId, lblCompanyPaymentsPendingId.Text, AxzesInvoiceId)
-            End If
 
             Dim AxzesInvoiceNumber As String = LocalAPI.InvoiceNumber(AxzesInvoiceId)
             Dim sMsg As New System.Text.StringBuilder
