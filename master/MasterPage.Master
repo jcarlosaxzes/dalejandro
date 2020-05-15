@@ -122,8 +122,6 @@
                                         <Items>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Admin Users">
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/PreUsers.aspx" Text="Pre-Users">
-                                            </telerik:RadMenuItem>
                                         </Items>
                                     </telerik:RadMenuItem>
                                 </Items>

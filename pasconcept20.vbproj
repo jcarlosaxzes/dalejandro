@@ -447,6 +447,9 @@
     <Content Include="adm\vendors.aspx" />
     <Content Include="adm\vendortypes.aspx" />
     <Content Include="adm\usercrud.aspx" />
+    <Content Include="api\paypal\webhooks\payment.aspx" />
+    <Content Include="api\paypal\webhooks\plan.aspx" />
+    <Content Include="api\paypal\webhooks\subscription.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
     <Content Include="App_Data\RadCaptcha\2.wav" />
@@ -3740,6 +3743,27 @@
     <Compile Include="adm\usercrud.aspx.vb">
       <DependentUpon>usercrud.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\payment.aspx.designer.vb">
+      <DependentUpon>payment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\payment.aspx.vb">
+      <DependentUpon>payment.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\plan.aspx.designer.vb">
+      <DependentUpon>plan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\plan.aspx.vb">
+      <DependentUpon>plan.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\subscription.aspx.designer.vb">
+      <DependentUpon>subscription.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\subscription.aspx.vb">
+      <DependentUpon>subscription.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="App_Code\azurestorage.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
