@@ -422,6 +422,28 @@ Public Class LocalAPI
             Return result
         End Try
     End Function
+
+    Public Shared Function sys_error_INSERT(ByVal companyId As Integer, userEmail As String, Message As String, Source As String, StackTrace As String) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "sys_error_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@userEmail", userEmail)
+            cmd.Parameters.AddWithValue("@Message", Message)
+            cmd.Parameters.AddWithValue("@Source", Source)
+            cmd.Parameters.AddWithValue("@StackTrace", StackTrace)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
     Public Shared Function DefinirTheme(ByVal sUserAgent As String) As String
         'Try
         Return "Estandar"

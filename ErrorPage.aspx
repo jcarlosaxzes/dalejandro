@@ -39,22 +39,24 @@
 
             <div class="row">
                 <div class="col-md-5 col-lg-offset-4" style="margin-top: 5em">
-                        <LayoutTemplate>
-                            <asp:Panel ID="pnlLogin" runat="server">
-                                <div class="well">
 
-                                    <%--<img class="img-thumbnail" src="/images/logopasconcept-index.png"  />--%>
-                                    <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logopasconcept-index.png" Width="100%" />
+                    <asp:Panel ID="pnlLogin" runat="server">
+                        <div class="well">
 
-                                    <form>
-                                        <div class="form-group" style="margin-top: 1em">
-                                            <p><H3  style="color:red;">There was an Error loading this Page. Please click <asp:HyperLink runat="server" NavigateUrl="~/adm/Default.aspx">here</asp:HyperLink> to continue with PASconcept </p></H3>                                  
-                                        </div>                                       
-                                    </form>
-                                </div>
-                            </asp:Panel>
-                        </LayoutTemplate>
-                    
+                            <%--<img class="img-thumbnail" src="/images/logopasconcept-index.png"  />--%>
+                            <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logopasconcept-index.png" Width="100%" />
+
+                            <div class="form-group" style="margin-top: 1em">
+                                <h3 style="color: red;">An Error has Occurred</h3>
+                                <p>
+                                    An unexcepted error has occurred on our webapp. The website administrator has been notified.<br />
+                                    Please, <a href="~/adm/Default.aspx">click here </a> to continue with PASconcept
+                                </p>
+                            </div>
+
+                        </div>
+                    </asp:Panel>
+
                 </div>
             </div>
             <div class="row">
@@ -64,7 +66,7 @@
                     <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank">Terms & Condition</a>
                 </div>
             </div>
-            
+
         </div>
 
     </form>
