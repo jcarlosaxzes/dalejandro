@@ -13,7 +13,7 @@ Public Class Global_asax
     End Sub
     Private Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
         Dim exc As Exception = Server.GetLastError()
-        Server.Transfer("ErrorPage.aspx", True)
+        Server.Transfer("~/ErrorPage.aspx", True)
         LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.UnhandleError, 0, exc.Message & " -- " & exc.StackTrace)
     End Sub
 End Class

@@ -7,6 +7,9 @@
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblSubconsultantId.Text = Request.QueryString("SubconsultantId")
+
+                If LocalAPI.IsCompanyViolation(lblSubconsultantId.Text, "SubConsultans", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
                 Master.PageTitle = "Subconsultants/Edit Subconsultant: " & LocalAPI.GetSubConsultanName(lblSubconsultantId.Text)
 
             End If

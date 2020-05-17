@@ -7,6 +7,9 @@
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblEmployeeId.Text = Request.QueryString("employeeId")
+
+                If LocalAPI.IsCompanyViolation(lblEmployeeId.Text, "Employees", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
                 Master.PageTitle = "Employees/Edit Employee: " & LocalAPI.GetEmployeeName(lblEmployeeId.Text)
 
                 lblInactive.Text = IIf(LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "Inactive"), 1, 0)

@@ -317,6 +317,7 @@
     <Content Include="adm\clientmanagement.aspx" />
     <Content Include="adm\clients.aspx" />
     <Content Include="adm\clientsbalance.aspx" />
+    <Content Include="adm\clientscolletion.aspx" />
     <Content Include="adm\clientsmap.aspx" />
     <Content Include="adm\clientsmarketing.aspx" />
     <Content Include="adm\clients_monthlytimeandcosts.aspx" />
@@ -374,6 +375,7 @@
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
     <Content Include="adm\newclient.aspx" />
+    <Content Include="adm\newclientcollection.aspx" />
     <Content Include="adm\newcontact.aspx" />
     <Content Include="adm\newemployee.aspx" />
     <Content Include="adm\newjob.aspx" />
@@ -2824,6 +2826,13 @@
       <DependentUpon>clientsbalance.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\clientscolletion.aspx.designer.vb">
+      <DependentUpon>clientscolletion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clientscolletion.aspx.vb">
+      <DependentUpon>clientscolletion.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\clientsmap.aspx.designer.vb">
       <DependentUpon>clientsmap.aspx</DependentUpon>
     </Compile>
@@ -3228,6 +3237,13 @@
     </Compile>
     <Compile Include="adm\newclient.aspx.vb">
       <DependentUpon>newclient.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\newclientcollection.aspx.designer.vb">
+      <DependentUpon>newclientcollection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\newclientcollection.aspx.vb">
+      <DependentUpon>newclientcollection.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\newcontact.aspx.designer.vb">
@@ -4258,7 +4274,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

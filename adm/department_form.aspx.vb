@@ -13,6 +13,9 @@
                     ' Mode EDIT
                     btnUpdate.Text = "Update"
                     lblDepartmentId.Text = Request.QueryString("DepartmentId")
+
+                    If LocalAPI.IsCompanyViolation(lblDepartmentId.Text, "Company_Department", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
                     ReadDepartmentInfo()
 
                 End If

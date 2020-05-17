@@ -1256,7 +1256,9 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-
+    Public Shared Function IsCompanyViolation(entityId As Integer, Entity As String, companyId As Integer) As Boolean
+        Return IIf(GetNumericEscalar(String.Format("select count(*) from [{0}] where Id={1} and [companyId]={2}", Entity, entityId, companyId)) = 0, True, False)
+    End Function
     Public Shared Function GetCompanyMultiplier(ByVal companyId As Integer, Year As Integer) As Double
         Dim Multiplier As Double = GetNumericEscalar("SELECT ISNULL([Multiplier],0) FROM [Company_MultiplierByYear] WHERE [companyId]=" & companyId & " and [Year]=" & Year)
         Return IIf(Multiplier < 1, 1, Multiplier)
@@ -12984,6 +12986,15 @@ Public Class LocalAPI
             Case "Epic"
                 Return "label label-primary"
             Case Else
+                Return "label label-default"
+        End Select
+    End Function
+
+    Public Shared Function GetCollectionStatusLabelCSS(ByVal StatusValue As String) As String
+        Select Case StatusValue
+            Case "Active"
+                Return "label label-danger"
+            Case "Closed"
                 Return "label label-default"
         End Select
     End Function
