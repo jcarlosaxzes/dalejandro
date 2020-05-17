@@ -8,21 +8,24 @@ Public Class client
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblClientId.Text = Request.QueryString("clientId")
+
+                If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
                 lblEmployee.Text = Master.UserEmail
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
-                Master.PageTitle = "Client List/Edit Client: " & LocalAPI.GetClientName(CInt(lblClientId.Text))
+                    lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
+                    Master.PageTitle = "Client List/Edit Client: " & LocalAPI.GetClientName(CInt(lblClientId.Text))
 
-                FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
+                    FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
 
-                SqlDataSource1.DataBind()
-                FormView1.DataBind()
+                    SqlDataSource1.DataBind()
+                    FormView1.DataBind()
 
-                If Request.QueryString("FullPage") Is Nothing Then
-                    Master.HideMasterMenu()
-                    btnBack.Visible = False
+                    If Request.QueryString("FullPage") Is Nothing Then
+                        Master.HideMasterMenu()
+                        btnBack.Visible = False
+                    End If
                 End If
-            End If
-            RadWindowManager1.EnableViewState = False
+                RadWindowManager1.EnableViewState = False
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
