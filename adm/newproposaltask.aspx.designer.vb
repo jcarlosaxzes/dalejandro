@@ -122,15 +122,6 @@ Partial Public Class newproposaltask
     Protected WithEvents txtRates As Global.Telerik.Web.UI.RadNumericTextBox
     
     '''<summary>
-    '''btnCancel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnUpdate control.
     '''</summary>
     '''<remarks>

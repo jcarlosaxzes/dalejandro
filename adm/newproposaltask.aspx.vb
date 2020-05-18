@@ -67,14 +67,12 @@ Public Class newproposaltask
         txtAmount.Text = LocalAPI.GetProposalDetailProperty(lbldetailId.Text, "Amount")
 
     End Sub
-    Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text)
-    End Sub
 
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If Val(lbldetailId.Text) > 0 Then
             ' Edit
             SqlDataSource1.Update()
+            Master.InfoMessage("Record updated!")
         Else
             ' Insert
             SqlDataSource1.Insert()
@@ -85,9 +83,9 @@ Public Class newproposaltask
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text)
     End Sub
-    Private Sub SqlDataSource1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Updated
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text)
-    End Sub
+    'Private Sub SqlDataSource1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Updated
+    '    Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text)
+    'End Sub
 
     Protected Sub cboPosition_SelectedIndexChanged(sender As Object, e As Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs) Handles cboPosition.SelectedIndexChanged
         If cboPosition.SelectedValue > 0 Then

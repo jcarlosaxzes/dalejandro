@@ -9,35 +9,36 @@
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="txtName" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="txtDescriptionPlus" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="txtTimeSel"  />
-                    <telerik:AjaxUpdatedControl ControlID="txtRates"  />
-                    
+                    <telerik:AjaxUpdatedControl ControlID="txtTimeSel" />
+                    <telerik:AjaxUpdatedControl ControlID="txtRates" />
+
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
 
-    <table class="table-condensed" style="width: 100%">
-        <tr>
-            <td style="100%">
-                <h3>Complete Task details</h3>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Panel ID="pnlTemplate" runat="server">
-                    <telerik:RadMultiColumnComboBox ID="cboMulticolumnTask" runat="server" DataSourceID="SqlDataSource1" DataTextField="Description" DataValueField="Id" AutoPostBack="true"
-                            Width="800px" DropDownWidth="800" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
+    <div class="pas-container">
+        <table class="table-condensed" style="width: 95%;margin-left:25px">
+            <tr>
+                <td style="width:95%;text-align:center">
+                    <h3>Complete Task details</h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Panel ID="pnlTemplate" runat="server">
+                        <telerik:RadMultiColumnComboBox ID="cboMulticolumnTask" runat="server" DataSourceID="SqlDataSource1" DataTextField="Description" DataValueField="Id" AutoPostBack="true"
+                            Width="95%" DropDownWidth="800" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
                             FilterFields="taskcode, Description" Placeholder="(Select Task...)">
                             <ColumnsCollection>
                                 <telerik:MultiColumnComboBoxColumn Field="taskcode" Title="Code" Width="100px" />
-                                <telerik:MultiColumnComboBoxColumn Field="Description" Title="Description"  />
-                                <telerik:MultiColumnComboBoxColumn Field="Hours" Title="Hours"  Width="100px" />
+                                <telerik:MultiColumnComboBoxColumn Field="Description" Title="Description" />
+                                <telerik:MultiColumnComboBoxColumn Field="Hours" Title="Hours" Width="100px" />
                                 <telerik:MultiColumnComboBoxColumn Field="Rates" Title="Rates" Width="150px" />
                             </ColumnsCollection>
                         </telerik:RadMultiColumnComboBox>
-                    <%--<telerik:RadComboBox ID="cboTaskTemplate" runat="server" DataSourceID="SqlDataSource1" DataTextField="Description" DataValueField="Id" Width="800px" MarkFirstMatch="True"
+                        <%--<telerik:RadComboBox ID="cboTaskTemplate" runat="server" DataSourceID="SqlDataSource1" DataTextField="Description" DataValueField="Id" Width="95%" MarkFirstMatch="True"
                         Filter="Contains" Height="300px" AppendDataBoundItems="true" AutoPostBack="true" CausesValidation="false">
                         <Items>
                             <telerik:RadComboBoxItem runat="server" Text="(Select Task...)" Value="0" />
@@ -65,89 +66,88 @@
                     <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Task...)"
                         Operator="NotEqual" ControlToValidate="cboTaskTemplate" CssClass="Error" ValidationGroup="TaskUpdate" Text="*" ErrorMessage="Select Task">
                     </asp:CompareValidator>--%>
-                </asp:Panel>
+                    </asp:Panel>
 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <telerik:RadComboBox runat="server" ID="cboPhase" DataValueField="Id" Width="800px" Height="250px"
-                    DataTextField="Name" DataSourceID="SqlDataSourcePhases" AppendDataBoundItems="true">
-                    <Items>
-                        <telerik:RadComboBoxItem Text="(Select phase...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <telerik:RadComboBox runat="server" ID="cboPosition" DataValueField="Id" Width="800px" Height="250px" AutoPostBack="true" CausesValidation="false"
-                    DataTextField="Name" DataSourceID="SqlDataSourcePositions" AppendDataBoundItems="true">
-                    <Items>
-                        <telerik:RadComboBoxItem Text="(Select position...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <telerik:RadTextBox ID="txtName" runat="server" MaxLength="80" Width="800px" EmptyMessage="Task Name"></telerik:RadTextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtName" CssClass="Error" ValidationGroup="TaskUpdate" Text="*" ErrorMessage="Define Task Name">
-                </asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <telerik:RadComboBox runat="server" ID="cboPhase" DataValueField="Id" Width="95%" Height="250px"
+                        DataTextField="Name" DataSourceID="SqlDataSourcePhases" AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="(Select phase...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <telerik:RadComboBox runat="server" ID="cboPosition" DataValueField="Id" Width="95%" Height="250px" AutoPostBack="true" CausesValidation="false"
+                        DataTextField="Name" DataSourceID="SqlDataSourcePositions" AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="(Select position...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <telerik:RadTextBox ID="txtName" runat="server" MaxLength="80" Width="95%" EmptyMessage="Task Name"></telerik:RadTextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtName" CssClass="Error" ValidationGroup="TaskUpdate" Text="*" ErrorMessage="Define Task Name">
+                    </asp:RequiredFieldValidator>
 
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: left">
-                <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="300px"
-                    AllowScripts="True" Width="800px"
-                    ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
-                </telerik:RadEditor>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: left">
+                    <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="300px"
+                        AllowScripts="True" Width="95%"
+                        ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
+                    </telerik:RadEditor>
 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <small>Total = [Quantity] * [Hours] * [Rates]</small>&nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <small>Total = [Quantity] * [Hours] * [Rates]</small>&nbsp;&nbsp;&nbsp;
                 <telerik:RadNumericTextBox ID="txtAmount" runat="server" Width="155px" EmptyMessage="Quantity">
                     <NumberFormat DecimalDigits="2" />
                 </telerik:RadNumericTextBox>
-                &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                         <telerik:RadNumericTextBox ID="txtTimeSel" runat="server" Width="155px" MaxLength="5" EmptyMessage="Hours">
                             <NumberFormat DecimalDigits="2" />
                         </telerik:RadNumericTextBox>
-                &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                         <telerik:RadNumericTextBox ID="txtRates" runat="server" Width="155px" EmptyMessage="Rates">
                             <NumberFormat DecimalDigits="2" />
                         </telerik:RadNumericTextBox>
 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <table style="width: 800px">
-                    <tr>
-                        <td>
-                            <small>if [Quantity] or [Hours] 'is blank' then Total = [1] * [1] * [Rates]</small>
-                        </td>
-                        <td style="width: 180px; text-align: right">
-                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default" Width="150px" CausesValidation="false" Text="Cancel">
-                            </asp:LinkButton>
-                        </td>
-                        <td style="width: 180px; text-align: right">
-                            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success" Width="150px" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert Task">
-                            </asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: center"></td>
-        </tr>
-    </table>
-    <div style="padding-top: 10px;">
-        <asp:ValidationSummary ID="ValidationSummaryTaskUpdate" Font-Size="X-Small" runat="server" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="TaskUpdate" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table style="width: 95%">
+                        <tr>
+                            <td>
+                                <small>if [Quantity] or [Hours] 'is blank' then Total = [1] * [1] * [Rates]</small>
+                            </td>
+                            <td style="width: 180px; text-align: right">
+                            </td>
+                            <td style="width: 180px; text-align: right">
+                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success" Width="150px" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert Task">
+                                </asp:LinkButton>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: center"></td>
+            </tr>
+        </table>
+        <div style="padding-top: 10px;">
+            <asp:ValidationSummary ID="ValidationSummaryTaskUpdate" Font-Size="X-Small" runat="server" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="TaskUpdate" />
+        </div>
     </div>
 
 
