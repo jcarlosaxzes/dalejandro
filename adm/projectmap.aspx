@@ -51,7 +51,7 @@
                     </button>
                 </td>
                 <td style="width: 100px">
-                    <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Earth View">
+                    <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Map View">
                     </asp:LinkButton>
                 </td>
                 <td style="width: 120px">
