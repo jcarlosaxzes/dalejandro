@@ -16,6 +16,8 @@ Public Class proposal
                 lblCompanyId.Text = Session("companyId")
                 lId = Me.Request.QueryString("Id")
 
+                If LocalAPI.IsCompanyViolation(lId, "Proposal", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
                 If Val(lblCompanyId.Text) = 0 Then
                     ' Link externo de EEG
                     lblCompanyId.Text = 260962
