@@ -104,6 +104,7 @@
         SelectCommand="Clients_collection_SELECT" SelectCommandType="StoredProcedure" DeleteCommand="delete from [Clients_collection] where Id=@Id">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboStatus" Name="StatusId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Filter" PropertyName="Text" Type="String" />
         </SelectParameters>
         <DeleteParameters>
