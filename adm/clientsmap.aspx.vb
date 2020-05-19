@@ -34,13 +34,9 @@ Public Class clientsmap
                 btnSattelite.Text = "Map View"
             Else
                 ' Layer Predeterminado gratuito
-                mapLayer.Type = Map.LayerType.Tile
-
-                Dim subdomains() As String = {"a", "b", "c"}
-                mapLayer.Subdomains = subdomains
-                mapLayer.UrlTemplate = "http://#= subdomain #.tile.thunderforest.com/cycle/#= zoom #/#= x #/#= y #.png"
-                mapLayer.Attribution = "&copy; <a href='http://www.thunderforest.com/' title='ThunderForest contributors' target='_blank'>ThunderForest contributors</a>."
-
+                mapLayer.Type = Map.LayerType.Bing
+                mapLayer.ImagerySet = "RoadOnDemand"
+                mapLayer.Key = ConfigurationManager.AppSettings.Get("BingMapKey").ToString()
                 btnSattelite.Text = "Earth View"
             End If
 
