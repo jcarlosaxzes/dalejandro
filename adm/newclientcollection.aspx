@@ -29,9 +29,9 @@
             <WizardSteps>
 
                 <%-- Contact Information --%>
-                <telerik:RadWizardStep runat="server" ID="Client" Title="Client" ValidationGroup="Client" StepType="Start">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepClient" Title="Client" ValidationGroup="Collection" StepType="Start">
                     <div>
-                        <asp:ValidationSummary ID="vsConfirmation" runat="server" ValidationGroup="Confirmation"
+                        <asp:ValidationSummary ID="vsConfirmation" runat="server" ValidationGroup="Collection" ForeColor="Red"
                             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
                     </div>
@@ -41,16 +41,110 @@
                             <td style="width: 180px; text-align: right">Client:
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" Width="90%"
+                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients" Width="90%"
                                     DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="250px"
-                                    AppendDataBoundItems="true" >
+                                    AppendDataBoundItems="true">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="(Select client...)" Value="0" />
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
                         </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Notes:
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="txtNotes" runat="server" Width="100%" EmptyMessage="Collection notes..." TextMode="MultiLine" Rows="4">
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Attorney Firm:
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="txtAttorneyFirm" runat="server" Width="100%" MaxLength="80">
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Attorney Name:
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="txtAttorneyName" runat="server" Width="100%" MaxLength="80">
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Attorney Phone:
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="txtAttorneyPhone" runat="server" Width="100%" MaxLength="10">
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Attorney Email:
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="txtAttorneyEmail" runat="server" Width="100%" MaxLength="80">
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Past Due Balance:
+                            </td>
+                            <td>
+                                <telerik:RadNumericTextBox ID="txtPastDueBalance" runat="server" MinValue="1" Width="150px" Type="Currency">
+                                    <NumberFormat DecimalDigits="2" />
+                                </telerik:RadNumericTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Amount of Days Past Due:
+                            </td>
+                            <td>
+                                <telerik:RadNumericTextBox ID="txtDaysPastDue" runat="server" MinValue="1" Width="150px">
+                                    <NumberFormat DecimalDigits="0" />
+                                </telerik:RadNumericTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Date of Contract:
+                            </td>
+                            <td>
+                                <telerik:RadDatePicker ID="RadDatePickerDateofContract" runat="server" Width="150px" Culture="en-US">
+                                </telerik:RadDatePicker>
+                            </td>
+                        </tr>
                     </table>
+
+                    <div>
+                        <asp:CompareValidator runat="server" ID="Comparevalidator5" ValueToCompare="(Select client...)"
+                            Operator="NotEqual" ControlToValidate="cboClients" Text="*" ErrorMessage="<span><b>Client </b> is required</span>" ValidationGroup="Collection" Display="None">
+                        </asp:CompareValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ValidationGroup="Collection" Display="None"
+                            ControlToValidate="txtNotes"
+                            ErrorMessage="<span><b>Notes/b> is required</span>">
+                        </asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="Collection" Display="None"
+                            ControlToValidate="txtAttorneyFirm"
+                            ErrorMessage="<span><b>Attorney Firm/b> is required</span>">
+                        </asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ValidationGroup="Collection" Display="None"
+                            ControlToValidate="txtAttorneyName"
+                            ErrorMessage="<span><b>Attorney Name/b> is required</span>">
+                        </asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ValidationGroup="Collection" Display="None"
+                            ControlToValidate="txtAttorneyPhone"
+                            ErrorMessage="<span><b>Attorney Phone/b> is required</span>">
+                        </asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ValidationGroup="Collection" Display="None"
+                            ControlToValidate="txtAttorneyEmail"
+                            ErrorMessage="<span><b>Attorney Email/b> is required</span>">
+                        </asp:RequiredFieldValidator>
+
+
+                    </div>
                 </telerik:RadWizardStep>
 
                 <%-- Send --%>
@@ -63,7 +157,7 @@
                                     <td>Clieent To:
                                     </td>
                                     <td style="width: 45%">
-                                        <telerik:RadTextBox ID="txtClientTo" runat="server" Width="100%" EmptyMessage="Client email">
+                                        <telerik:RadTextBox ID="txtClientTo" runat="server" Width="100%" Enabled="false">
                                         </telerik:RadTextBox>
                                     </td>
                                     <td>Client CC:
@@ -107,7 +201,7 @@
                                     <td>Attorney To:
                                     </td>
                                     <td style="width: 45%">
-                                        <telerik:RadTextBox ID="txtAttorneyTo" runat="server" Width="100%" EmptyMessage="Attorney email">
+                                        <telerik:RadTextBox ID="txtAttorneyTo" runat="server" Width="100%" Enabled="false">
                                         </telerik:RadTextBox>
                                     </td>
                                     <td>Attorney CC:
@@ -166,7 +260,27 @@
         </telerik:RadWizard>
 
     </div>
-    <asp:SqlDataSource ID="SqlDataSourceClientes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        InsertCommand="Clients_collection_INSERT" InsertCommandType="StoredProcedure">
+        <InsertParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="cboClients" Name="clientId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="txtNotes" Name="Notes" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAttorneyFirm" Name="AttorneyFirm" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAttorneyName" Name="AttorneyName" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAttorneyPhone" Name="AttorneyPhone" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAttorneyEmail" Name="AttorneyEmail" PropertyName="Text" />
+
+            <asp:ControlParameter ControlID="txtPastDueBalance" Name="PastDueBalance" PropertyName="Text" Type="Double" />
+            <asp:ControlParameter ControlID="txtDaysPastDue" Name="DaysPastDue" PropertyName="Text" />
+            <asp:ControlParameter ControlID="RadDatePickerDateofContract" Name="DateofContract" PropertyName="SelectedDate" />
+
+
+            <asp:Parameter Direction="InputOutput" Name="Id_OUT" Type="Int32" />
+        </InsertParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceClients" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name]+' [' + isnull(Company,'...') + ']' As Name FROM Clients WHERE companyId=@companyId ORDER BY Name">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
@@ -174,7 +288,7 @@
     </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblCollectionId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblCollectionId" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeName" runat="server" Visible="False"></asp:Label>

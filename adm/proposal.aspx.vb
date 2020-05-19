@@ -55,9 +55,9 @@ Public Class proposal
                 RadBinaryImageAceptanceSignature.DataValue = LocalAPI.GetSignProposal(lblId.Text)
 
             End If
-            RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblId.Text
-
-            RadWindowManager2.EnableViewState = False
+            'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblId.Text
+            'RadWindowManager2.EnableViewState = False
+            RadWindowManager1.EnableViewState = False
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
@@ -150,7 +150,7 @@ Public Class proposal
     Protected Sub btnPrintProposal_Click(sender As Object, e As EventArgs) Handles btnPrintProposal.Click
         If LocalAPI.GetProposalProperty(lblId.Text, "ClientId") > 0 Then
             'Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12")
-            CreateRadWindows("Form", "~/adm/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12", 1024, 768, True)
+            CreateRadWindows("Form", "~/adm/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12", 1024, 768, True, "")
 
         Else
             Master.InfoMessage("You Must Specify the Client and Update Proposal")
@@ -238,7 +238,7 @@ Public Class proposal
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Select Case e.CommandName
             Case "EditTask"
-                CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument, 1024, 768, False)
+                CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument, 1024, 768, False, "OnClientClose")
             Case "DetailDuplicate"
                 lblDetailSelectedId.Text = e.CommandArgument
                 SqlDataSourceProposaldDetailDuplicate.Insert()
@@ -287,7 +287,7 @@ Public Class proposal
         End Try
     End Sub
 
-    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean, OnClientClose As String)
         RadWindowManager1.Windows.Clear()
         Dim window1 As RadWindow = New RadWindow()
         window1.NavigateUrl = sUrl
@@ -299,22 +299,20 @@ Public Class proposal
         window1.Width = Width
         window1.Height = Height
         window1.Modal = True
+        If Len(OnClientClose) > 0 Then window1.OnClientClose = OnClientClose
         RadWindowManager1.Windows.Add(window1)
     End Sub
 
     Protected Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
-        'CreateRadWindows("SaveAs", "~/adm/saveproposalas.aspx?ProposalId=" & lblId.Text, 550, 400, False)
         Response.Redirect("~/adm/saveproposalas.aspx?ProposalId=" & lblId.Text)
     End Sub
     Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
-        'CreateRadWindows("SaveAs", "~/adm/saveproposalastemplate.aspx?ProposalId=" & lblId.Text, 550, 400, False)
         Response.Redirect("~/adm/saveproposalastemplate.aspx?ProposalId=" & lblId.Text)
     End Sub
     Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
         Try
             GuardarProposal(False)
-            'Response.Redirect("~/ADM/NewProposalTask.aspx?Id=" & lblId.Text)
-            CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text, 1024, 768, False)
+            CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text, 1024, 768, False, "OnClientClose")
         Catch ex As Exception
         End Try
     End Sub

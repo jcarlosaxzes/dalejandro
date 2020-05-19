@@ -32,13 +32,13 @@ Partial Public Class newclientcollection
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
     
     '''<summary>
-    '''Client control.
+    '''RadWizardStepClient control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Client As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadWizardStepClient As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''vsConfirmation control.
@@ -57,6 +57,132 @@ Partial Public Class newclientcollection
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''txtNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNotes As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''txtAttorneyFirm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtAttorneyFirm As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''txtAttorneyName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtAttorneyName As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''txtAttorneyPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtAttorneyPhone As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''txtAttorneyEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtAttorneyEmail As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''txtPastDueBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPastDueBalance As Global.Telerik.Web.UI.RadNumericTextBox
+    
+    '''<summary>
+    '''txtDaysPastDue control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDaysPastDue As Global.Telerik.Web.UI.RadNumericTextBox
+    
+    '''<summary>
+    '''RadDatePickerDateofContract control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerDateofContract As Global.Telerik.Web.UI.RadDatePicker
+    
+    '''<summary>
+    '''Comparevalidator5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator5 As Global.System.Web.UI.WebControls.CompareValidator
+    
+    '''<summary>
+    '''RequiredFieldValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''RequiredFieldValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''RequiredFieldValidator3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''RequiredFieldValidator4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''RequiredFieldValidator5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''Message control.
@@ -140,13 +266,22 @@ Partial Public Class newclientcollection
     Protected WithEvents txtAttorneyBody As Global.Telerik.Web.UI.RadEditor
     
     '''<summary>
-    '''SqlDataSourceClientes control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceClientes As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceClients control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceClients As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.

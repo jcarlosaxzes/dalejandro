@@ -1,4 +1,6 @@
-﻿Public Class clientscolletion
+﻿Imports Telerik.Web.UI
+
+Public Class clientscolletion
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -15,5 +17,12 @@
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         Response.Redirect("~/adm/newclientcollection.aspx")
+    End Sub
+
+    Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
+        Select Case e.CommandName
+            Case "Notification"
+                Response.Redirect("~/adm/newclientcollection.aspx?collectionId=" & e.CommandArgument)
+        End Select
     End Sub
 End Class

@@ -881,16 +881,10 @@
                             <td style="padding-top: 10px; padding-bottom: 10px">
                                 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
                                     <script type="text/javascript">
-                                        var popUp;
-                                        function PopUpShowing(sender, eventArgs) {
-                                            popUp = eventArgs.get_popUp();
-                                            var gridWidth = sender.get_element().offsetWidth;
-                                            var gridHeight = sender.get_element().offsetHeight;
-                                            var popUpWidth = popUp.style.width.substr(0, popUp.style.width.indexOf("px"));
-                                            var popUpHeight = popUp.style.height.substr(0, popUp.style.height.indexOf("px"));
-                                            popUp.style.left = ((gridWidth - popUpWidth) / 2 + sender.get_element().offsetLeft).toString() + "px";
-                                            popUp.style.top = 25 + "px";
-                                        }
+                                        function OnClientClose(sender, args) {
+                                            var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+                                             masterTable.rebind();
+                                         }
                                     </script>
                                 </telerik:RadCodeBlock>
                                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"

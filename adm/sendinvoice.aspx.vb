@@ -32,9 +32,9 @@ Public Class sendinvoice
                         lblInvoice.Text = "0"
                     End If
 
-                    If nInvoiceType = 0 Then
-                        ' Simple charge
-                        Select Case lblOrigen.Text
+                    'If nInvoiceType = 0 Then
+                    ' Simple charge
+                    Select Case lblOrigen.Text
                             Case 5, 6, 7   ' Desde Perfil Client, no hay opciones de Mail
                                 'PanelEmail.Visible = False
                                 PanelSMS.Visible = False
@@ -54,10 +54,10 @@ Public Class sendinvoice
                                 SMS_Init()
                         End Select
 
-                    Else
-                        ' Hourly rate
-                        Response.RedirectPermanent("~/ADMCLI/InvoiceHR_RDLC.aspx?InvoiceNo=" & lblInvoice.Text & "&Origen=" & lblOrigen.Text)
-                    End If
+                    'Else
+                    ' Hourly rate Page not exist in 2020
+                    'Response.RedirectPermanent("~/ADMCLI/InvoiceHR_RDLC.aspx?InvoiceNo=" & lblInvoice.Text & "&Origen=" & lblOrigen.Text)
+                    'End If
 
                     ' Tratamiento boton back
                     Select Case lblOrigen.Text
