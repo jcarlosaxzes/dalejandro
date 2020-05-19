@@ -7,7 +7,7 @@ Public Class newclientcollection
         If (Not Page.IsPostBack) Then
             lblCompanyId.Text = Session("companyId")
             lblEmployeeEmail.Text = Master.UserEmail
-
+            lblEmployeeId.Text = Master.UserId
             If Request.QueryString("collectionId") Is Nothing Then
                 ' New Collection.....................
                 lblCollectionId.Text = 0
@@ -22,24 +22,22 @@ Public Class newclientcollection
     End Sub
 
     Private Sub ReadCompanyCollectionSetting()
-        Dim CollectionInfo = LocalAPI.GetRecord(lblCompanyId.Text, "Company_collection_Init_SELECT")
-
         Try
-            txtAttorneyFirm.Text = CollectionInfo("AttorneyFirm")
-            txtAttorneyName.Text = CollectionInfo("AttorneyName")
-            txtAttorneyPhone.Text = CollectionInfo("AttorneyPhone")
-            txtAttorneyEmail.Text = CollectionInfo("AttorneyEmail")
 
-            ' Next Step
-            txtClientCC.Text = lblEmployeeEmail.Text
-            txtAttorneyTo.Text = CollectionInfo("AttorneyEmail")
-            txtAttorneyCC.Text = lblEmployeeEmail.Text
+            txtAttorneyFirm.Text = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AttorneyFirm")
+            txtAttorneyName.Text = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AttorneyName")
+            txtAttorneyPhone.Text = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AttorneyPhone")
+            txtAttorneyEmail.Text = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AttorneyEmail")
+
 
             RadDatePickerDateofContract.DbSelectedDate = "1-1-2020"
             txtDaysPastDue.DbValue = 1
             txtPastDueBalance.DbValue = 0
         Catch ex As Exception
         End Try
+    End Sub
+    Private Sub cboClients_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboClients.SelectedIndexChanged
+        lblClientAddress.Text = LocalAPI.GetClientProperty(cboClients.SelectedValue, "FullAddress")
     End Sub
 
     Private Sub ReadCollectionRecord()
@@ -48,51 +46,63 @@ Public Class newclientcollection
         Try
             cboClients.DataBind()
             cboClients.SelectedValue = CollectionInfo("clientId")
-            cboClients.Enabled = cboClients.SelectedValue > 0
+            lblClientAddress.Text = CollectionInfo("FullAddress")
+            cboClients.Enabled = cboClients.SelectedValue = 0
             txtNotes.Text = CollectionInfo("Notes")
             txtAttorneyFirm.Text = CollectionInfo("AttorneyFirm")
             txtAttorneyName.Text = CollectionInfo("AttorneyName")
             txtAttorneyPhone.Text = CollectionInfo("AttorneyPhone")
             txtAttorneyEmail.Text = CollectionInfo("AttorneyEmail")
 
-            ' Next Step
-            txtClientCC.Text = CollectionInfo("clientEmail")
-            txtClientCC.Text = lblEmployeeEmail.Text
-            txtAttorneyTo.Text = CollectionInfo("AttorneyEmail")
-            txtAttorneyCC.Text = lblEmployeeEmail.Text
-
             txtPastDueBalance.DbValue = CollectionInfo("PastDueBalance")
             txtDaysPastDue.DbValue = CollectionInfo("DaysPastDue")
             RadDatePickerDateofContract.DbSelectedDate = CollectionInfo("DateofContract")
 
-            ' Message Template 
-            Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
-            Dim sMsg As New System.Text.StringBuilder
-            'Attorney Message
-            txtAttorneySubject.Text = "New Matter for Collection"
-            sMsg.Append("Creditor/Client Name: " & CollectionInfo("Name") & ", " & CollectionInfo("Company"))
-            sMsg.Append("Debtor Name: " & CollectionInfo("Name") & ", " & CollectionInfo("Company"))
-            sMsg.Append("Debtor Address, " & CollectionInfo("FullAddress"))
-
-            sMsg.Append("Past Due Balance: " & CollectionInfo("PastDueBalance"))
-            sMsg.Append("Amount of Days Past Due: " & CollectionInfo("DaysPastDue"))
-            sMsg.Append("Date of Contract: " & CollectionInfo("DateofContract"))
-            txtAttorneyBody.Content = sMsg.ToString & "<br /><br />" & sSign
-
-
-            sMsg.Append("Law Firm Name: " & CollectionInfo("AttorneyFirm"))
-            sMsg.Append("Law Firm Contact: " & CollectionInfo("AttorneyName"))
-            sMsg.Append("Law Firm Phone: " & CollectionInfo("AttorneyPhone"))
-            sMsg.Append("Law Firm Email: " & CollectionInfo("AttorneyEmail"))
-            txtClientBody.Content = sMsg.ToString & "<br /><br />" & sSign
-
-            'Client Message
-            txtClientSubject.Text = "New Matter for Collection"
 
         Catch ex As Exception
         End Try
     End Sub
 
+    Private Sub InitMessages()
+        Try
+
+            ' Message Template 
+            Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
+            Dim sMsg As New System.Text.StringBuilder
+
+            txtClientCC.Text = lblEmployeeEmail.Text
+            txtAttorneyCC.Text = lblEmployeeEmail.Text
+
+            'Attorney Message
+            txtAttorneySubject.Text = "New Matter for Collection"
+            sMsg.Append("Creditor/Client Name: <b>" & cboClients.Text & "</b><br />")
+            sMsg.Append("Debtor Name: <b>" & cboClients.Text & "</b><br />")
+            sMsg.Append("Debtor Address: <b>" & lblClientAddress.Text & "</b><br />")
+
+            sMsg.Append("Past Due Balance: <b>" & txtPastDueBalance.Text & "</b><br />")
+            sMsg.Append("Amount of Days Past Due: <b>" & txtDaysPastDue.Text & "</b><br />")
+            sMsg.Append("Date of Contract: <b>" & RadDatePickerDateofContract.SelectedDate & "</b><br />")
+            txtAttorneyBody.Content = sMsg.ToString & "<br />" & sSign
+
+
+            sMsg.Append("Law Firm Name: <b>" & txtAttorneyFirm.Text & "</b><br />")
+            sMsg.Append("Law Firm Contact: <b>" & txtAttorneyName.Text & "</b><br />")
+            sMsg.Append("Law Firm Phone: <b>" & txtAttorneyPhone.Text & "</b><br />")
+            sMsg.Append("Law Firm Email: <b>" & txtAttorneyEmail.Text & "</b><br />")
+            txtClientBody.Content = sMsg.ToString & "<br />" & sSign
+
+            'Client Message
+            txtClientSubject.Text = "New Matter for Collection"
+
+            txtClientTo.Text = LocalAPI.GetClientEmail(cboClients.SelectedValue)
+            txtClientCC.Text = lblEmployeeEmail.Text
+            txtAttorneyTo.Text = txtAttorneyEmail.Text
+            txtAttorneyCC.Text = lblEmployeeEmail.Text
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Response.Redirect("~/adm/clientscolletion.aspx")
     End Sub
@@ -101,6 +111,7 @@ Public Class newclientcollection
 
         Select Case e.CurrentStep.ID
             Case "RadWizardStepClient"
+                InitMessages()
                 RadWizard1.WizardSteps(1).Enabled = (cboClients.SelectedValue) > 0
 
         End Select
@@ -121,7 +132,31 @@ Public Class newclientcollection
         Else
             SqlDataSource1.Update()
         End If
-        ' Send Notifications...
+        Dim SenderDisplay As String = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
+        If SendClientNotification(SenderDisplay) Then
+            SendAttorneyNotification(SenderDisplay)
+        End If
 
     End Sub
+    Private Function SendClientNotification(SenderDisplay As String) As Boolean
+        Try
+            Dim bRes As Boolean = LocalAPI.SendMail(txtClientTo.Text, txtClientCC.Text, "", txtClientSubject.Text, txtClientBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
+            If bRes Then
+                Master.InfoMessage("Client notification sent!")
+                Return True
+            End If
+        Catch ex As Exception
+        End Try
+    End Function
+    Private Function SendAttorneyNotification(SenderDisplay As String) As Boolean
+        Try
+            Dim bRes As Boolean = LocalAPI.SendMail(txtAttorneyTo.Text, txtAttorneyCC.Text, "", txtAttorneySubject.Text, txtAttorneyBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
+            If bRes Then
+                Master.InfoMessage("Attorney notification sent!")
+                Return True
+            End If
+        Catch ex As Exception
+        End Try
+    End Function
+
 End Class

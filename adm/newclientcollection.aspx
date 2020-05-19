@@ -41,7 +41,7 @@
                             <td style="width: 180px; text-align: right">Client:
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients" Width="90%"
+                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients" Width="90%" AutoPostBack="true"
                                     DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="250px"
                                     AppendDataBoundItems="true">
                                     <Items>
@@ -51,10 +51,19 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>
+
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblClientAddress" Font-Size="Small" ></asp:Label>
+                            </td>
+                            
+                        </tr>
+                        <tr>
                             <td style="width: 180px; text-align: right">Notes:
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtNotes" runat="server" Width="100%" EmptyMessage="Collection notes..." TextMode="MultiLine" Rows="4">
+                                <telerik:RadTextBox ID="txtNotes" runat="server" Width="90%" EmptyMessage="Collection notes..." TextMode="MultiLine" Rows="4">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -62,7 +71,7 @@
                             <td style="width: 180px; text-align: right">Attorney Firm:
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtAttorneyFirm" runat="server" Width="100%" MaxLength="80">
+                                <telerik:RadTextBox ID="txtAttorneyFirm" runat="server" Width="90%" MaxLength="80">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -70,7 +79,7 @@
                             <td style="width: 180px; text-align: right">Attorney Name:
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtAttorneyName" runat="server" Width="100%" MaxLength="80">
+                                <telerik:RadTextBox ID="txtAttorneyName" runat="server" Width="90%" MaxLength="80">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -78,7 +87,7 @@
                             <td style="width: 180px; text-align: right">Attorney Phone:
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtAttorneyPhone" runat="server" Width="100%" MaxLength="10">
+                                <telerik:RadTextBox ID="txtAttorneyPhone" runat="server" Width="90%" MaxLength="10">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -86,7 +95,7 @@
                             <td style="width: 180px; text-align: right">Attorney Email:
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtAttorneyEmail" runat="server" Width="100%" MaxLength="80">
+                                <telerik:RadTextBox ID="txtAttorneyEmail" runat="server" Width="90%" MaxLength="80">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
@@ -154,16 +163,16 @@
                             <h4>Client Email</h4>
                             <table style="width: 100%" class="table-condensed">
                                 <tr>
-                                    <td>Clieent To:
+                                    <td>Client To:
                                     </td>
                                     <td style="width: 45%">
-                                        <telerik:RadTextBox ID="txtClientTo" runat="server" Width="100%" Enabled="false">
+                                        <telerik:RadTextBox ID="txtClientTo" runat="server" Width="90%" Enabled="false">
                                         </telerik:RadTextBox>
                                     </td>
                                     <td>Client CC:
                                     </td>
                                     <td>
-                                        <telerik:RadTextBox ID="txtClientCC" runat="server" Width="100%" EmptyMessage="CC email">
+                                        <telerik:RadTextBox ID="txtClientCC" runat="server" Width="90%" EmptyMessage="CC email">
                                         </telerik:RadTextBox>
                                     </td>
                                 </tr>
@@ -171,14 +180,14 @@
                                     <td>Client Subject:
                                     </td>
                                     <td colspan="3">
-                                        <telerik:RadTextBox ID="txtClientSubject" runat="server" Width="100%">
+                                        <telerik:RadTextBox ID="txtClientSubject" runat="server" Width="90%">
                                         </telerik:RadTextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
                                         <telerik:RadEditor ID="txtClientBody" runat="server" Height="250px" RenderMode="Auto"
-                                            AllowScripts="True" EditModes="Design" Width="100%">
+                                            AllowScripts="True" EditModes="Design" Width="90%">
                                             <Tools>
                                                 <telerik:EditorToolGroup>
                                                     <telerik:EditorTool Name="Cut" />
@@ -201,13 +210,13 @@
                                     <td>Attorney To:
                                     </td>
                                     <td style="width: 45%">
-                                        <telerik:RadTextBox ID="txtAttorneyTo" runat="server" Width="100%" Enabled="false">
+                                        <telerik:RadTextBox ID="txtAttorneyTo" runat="server" Width="90%" Enabled="false">
                                         </telerik:RadTextBox>
                                     </td>
                                     <td>Attorney CC:
                                     </td>
                                     <td>
-                                        <telerik:RadTextBox ID="txtAttorneyCC" runat="server" Width="100%" EmptyMessage="Attorney CC email">
+                                        <telerik:RadTextBox ID="txtAttorneyCC" runat="server" Width="90%" EmptyMessage="Attorney CC email">
                                         </telerik:RadTextBox>
                                     </td>
                                 </tr>
@@ -215,14 +224,14 @@
                                     <td>Attorney Subject:
                                     </td>
                                     <td colspan="3">
-                                        <telerik:RadTextBox ID="txtAttorneySubject" runat="server" Width="100%">
+                                        <telerik:RadTextBox ID="txtAttorneySubject" runat="server" Width="90%">
                                         </telerik:RadTextBox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colspan="4">
                                         <telerik:RadEditor ID="txtAttorneyBody" runat="server" Height="250px" RenderMode="Auto"
-                                            AllowScripts="True" EditModes="Design" Width="100%">
+                                            AllowScripts="True" EditModes="Design" Width="90%">
                                             <Tools>
                                                 <telerik:EditorToolGroup>
                                                     <telerik:EditorTool Name="Cut" />
@@ -261,7 +270,8 @@
 
     </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="Clients_collection_INSERT" InsertCommandType="StoredProcedure">
+        InsertCommand="Clients_collection_INSERT" InsertCommandType="StoredProcedure" 
+        UpdateCommand="Clients_collection_UPDATE" UpdateCommandType="StoredProcedure">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="cboClients" Name="clientId" PropertyName="SelectedValue" Type="Int32" />
@@ -275,9 +285,22 @@
             <asp:ControlParameter ControlID="txtDaysPastDue" Name="DaysPastDue" PropertyName="Text" />
             <asp:ControlParameter ControlID="RadDatePickerDateofContract" Name="DateofContract" PropertyName="SelectedDate" />
 
-
             <asp:Parameter Direction="InputOutput" Name="Id_OUT" Type="Int32" />
         </InsertParameters>
+        <UpdateParameters>
+            <asp:ControlParameter ControlID="cboClients" Name="clientId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="txtNotes" Name="Notes" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAttorneyFirm" Name="AttorneyFirm" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAttorneyName" Name="AttorneyName" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAttorneyPhone" Name="AttorneyPhone" PropertyName="Text" />
+            <asp:ControlParameter ControlID="txtAttorneyEmail" Name="AttorneyEmail" PropertyName="Text" />
+
+            <asp:ControlParameter ControlID="txtPastDueBalance" Name="PastDueBalance" PropertyName="Text" Type="Double" />
+            <asp:ControlParameter ControlID="txtDaysPastDue" Name="DaysPastDue" PropertyName="Text" />
+            <asp:ControlParameter ControlID="RadDatePickerDateofContract" Name="DateofContract" PropertyName="SelectedDate" />
+
+            <asp:ControlParameter ControlID="lblCollectionId" Name="d" PropertyName="Text" />
+        </UpdateParameters>
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceClients" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
