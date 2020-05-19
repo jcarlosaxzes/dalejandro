@@ -104,6 +104,33 @@ Partial Public Class newclientcollection
     Protected WithEvents txtAttorneyEmail As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
+    '''txtPastDueBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPastDueBalance As Global.Telerik.Web.UI.RadNumericTextBox
+    
+    '''<summary>
+    '''txtDaysPastDue control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDaysPastDue As Global.Telerik.Web.UI.RadNumericTextBox
+    
+    '''<summary>
+    '''RadDatePickerDateofContract control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerDateofContract As Global.Telerik.Web.UI.RadDatePicker
+    
+    '''<summary>
     '''Comparevalidator5 control.
     '''</summary>
     '''<remarks>

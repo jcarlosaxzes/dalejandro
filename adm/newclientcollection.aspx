@@ -55,7 +55,7 @@
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtNotes" runat="server" Width="100%" EmptyMessage="Collection notes..." TextMode="MultiLine" Rows="4">
-                                        </telerik:RadTextBox>
+                                </telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
@@ -63,7 +63,7 @@
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtAttorneyFirm" runat="server" Width="100%" MaxLength="80">
-                                        </telerik:RadTextBox>
+                                </telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
@@ -71,7 +71,7 @@
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtAttorneyName" runat="server" Width="100%" MaxLength="80">
-                                        </telerik:RadTextBox>
+                                </telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
@@ -79,7 +79,7 @@
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtAttorneyPhone" runat="server" Width="100%" MaxLength="10">
-                                        </telerik:RadTextBox>
+                                </telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
@@ -87,7 +87,33 @@
                             </td>
                             <td>
                                 <telerik:RadTextBox ID="txtAttorneyEmail" runat="server" Width="100%" MaxLength="80">
-                                        </telerik:RadTextBox>
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Past Due Balance:
+                            </td>
+                            <td>
+                                <telerik:RadNumericTextBox ID="txtPastDueBalance" runat="server" MinValue="1" Width="150px" Type="Currency">
+                                    <NumberFormat DecimalDigits="2" />
+                                </telerik:RadNumericTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Amount of Days Past Due:
+                            </td>
+                            <td>
+                                <telerik:RadNumericTextBox ID="txtDaysPastDue" runat="server" MinValue="1" Width="150px">
+                                    <NumberFormat DecimalDigits="0" />
+                                </telerik:RadNumericTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 180px; text-align: right">Date of Contract:
+                            </td>
+                            <td>
+                                <telerik:RadDatePicker ID="RadDatePickerDateofContract" runat="server" Width="150px" Culture="en-US">
+                                </telerik:RadDatePicker>
                             </td>
                         </tr>
                     </table>
@@ -244,6 +270,12 @@
             <asp:ControlParameter ControlID="txtAttorneyName" Name="AttorneyName" PropertyName="Text" />
             <asp:ControlParameter ControlID="txtAttorneyPhone" Name="AttorneyPhone" PropertyName="Text" />
             <asp:ControlParameter ControlID="txtAttorneyEmail" Name="AttorneyEmail" PropertyName="Text" />
+
+            <asp:ControlParameter ControlID="txtPastDueBalance" Name="PastDueBalance" PropertyName="Text" Type="Double" />
+            <asp:ControlParameter ControlID="txtDaysPastDue" Name="DaysPastDue" PropertyName="Text" />
+            <asp:ControlParameter ControlID="RadDatePickerDateofContract" Name="DateofContract" PropertyName="SelectedDate" />
+
+
             <asp:Parameter Direction="InputOutput" Name="Id_OUT" Type="Int32" />
         </InsertParameters>
     </asp:SqlDataSource>

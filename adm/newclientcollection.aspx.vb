@@ -34,6 +34,10 @@ Public Class newclientcollection
             txtClientCC.Text = lblEmployeeEmail.Text
             txtAttorneyTo.Text = CollectionInfo("AttorneyEmail")
             txtAttorneyCC.Text = lblEmployeeEmail.Text
+
+            RadDatePickerDateofContract.DbSelectedDate = "1-1-2020"
+            txtDaysPastDue.DbValue = 1
+            txtPastDueBalance.DbValue = 0
         Catch ex As Exception
         End Try
     End Sub
@@ -56,6 +60,35 @@ Public Class newclientcollection
             txtClientCC.Text = lblEmployeeEmail.Text
             txtAttorneyTo.Text = CollectionInfo("AttorneyEmail")
             txtAttorneyCC.Text = lblEmployeeEmail.Text
+
+            txtPastDueBalance.DbValue = CollectionInfo("PastDueBalance")
+            txtDaysPastDue.DbValue = CollectionInfo("DaysPastDue")
+            RadDatePickerDateofContract.DbSelectedDate = CollectionInfo("DateofContract")
+
+            ' Message Template 
+            Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
+            Dim sMsg As New System.Text.StringBuilder
+            'Attorney Message
+            txtAttorneySubject.Text = "New Matter for Collection"
+            sMsg.Append("Creditor/Client Name: " & CollectionInfo("Name") & ", " & CollectionInfo("Company"))
+            sMsg.Append("Debtor Name: " & CollectionInfo("Name") & ", " & CollectionInfo("Company"))
+            sMsg.Append("Debtor Address, " & CollectionInfo("FullAddress"))
+
+            sMsg.Append("Past Due Balance: " & CollectionInfo("PastDueBalance"))
+            sMsg.Append("Amount of Days Past Due: " & CollectionInfo("DaysPastDue"))
+            sMsg.Append("Date of Contract: " & CollectionInfo("DateofContract"))
+            txtAttorneyBody.Content = sMsg.ToString & "<br /><br />" & sSign
+
+
+            sMsg.Append("Law Firm Name: " & CollectionInfo("AttorneyFirm"))
+            sMsg.Append("Law Firm Contact: " & CollectionInfo("AttorneyName"))
+            sMsg.Append("Law Firm Phone: " & CollectionInfo("AttorneyPhone"))
+            sMsg.Append("Law Firm Email: " & CollectionInfo("AttorneyEmail"))
+            txtClientBody.Content = sMsg.ToString & "<br /><br />" & sSign
+
+            'Client Message
+            txtClientSubject.Text = "New Matter for Collection"
+
         Catch ex As Exception
         End Try
     End Sub
