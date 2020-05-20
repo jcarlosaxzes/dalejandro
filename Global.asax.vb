@@ -15,7 +15,7 @@ Public Class Global_asax
     Private Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
         Dim exc As Exception = Server.GetLastError()
         InsertSysError(exc)
-        Server.Transfer("ErrorPage.aspx", True)
+        Server.Transfer("~/ErrorPage.aspx", True)
     End Sub
 
     Private Sub InsertSysError(objError As Exception)

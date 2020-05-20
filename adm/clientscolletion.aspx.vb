@@ -6,7 +6,7 @@ Public Class clientscolletion
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientManagement") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Clients Collection"
             Master.PageTitle = "Clients Collection"
@@ -23,6 +23,10 @@ Public Class clientscolletion
         Select Case e.CommandName
             Case "Notification"
                 Response.Redirect("~/adm/newclientcollection.aspx?collectionId=" & e.CommandArgument)
+            Case "Close"
+                LocalAPI.SetClientCollectionCloseOpen(e.CommandArgument)
+                RadGrid1.DataBind()
+                Master.InfoMessage("The record has changed its status!")
         End Select
     End Sub
 End Class
