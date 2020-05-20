@@ -133,7 +133,7 @@
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li>
-                                            <a runat="server" href="~/ADM/Options" title="User profile">
+                                            <a runat="server" href="~/adm/Options" title="User profile">
                                                 <i class="fas fa-user-edit"></i>
                                                 &nbsp;My Account
                                             </a>
@@ -174,13 +174,13 @@
                                     <%--Start menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Start" >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Default" Text="Home">
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Default" Text="Home">
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/activejobsdashboad" Text="Active-jobs Dashboad">
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/activejobsdashboad" Text="Active-jobs Dashboad">
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Schedule" Text="Calendar">
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Schedule" Text="Calendar">
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/settingstatus" Text="Setting Status"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/settingstatus" Text="Setting Status"
                                                 Visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -189,39 +189,39 @@
                                     <%--Jobs menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Jobs" Visible='<%# EmployeePermission("Deny_JobsMenu") %>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Jobs" Text="Job List"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Jobs" Text="Job List"
                                                 Visible='<%# EmployeePermission("Deny_JobsList") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/JobTickets" Text="Tickets"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/JobTickets" Text="Tickets"
                                                 Visible='<%# IsTicketsVisible() %>'>
                                             </telerik:RadMenuItem>
 
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" BackColor="White">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TagCloud" Text="Tag Finder"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/TagCloud" Text="Tag Finder"
                                                 Visible='<%# EmployeePermission("Deny_JobTagFinder") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
 
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/JobTypes" Text="Job Types"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/JobTypes" Text="Job Types"
                                                 Visible='<%# EmployeePermission("Deny_JobCodes") And VersionCaracteristica(103)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ProjectTags" Text="Project Tags"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ProjectTags" Text="Project Tags"
                                                 Visible='<%# EmployeePermission("Deny_JobCodes") And VersionCaracteristica(103)%>'>
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"
                                                 Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Transmittals" Text="Transmittals"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Transmittals" Text="Transmittals"
                                                 Visible='<%# EmployeePermission("Deny_TransmittalList") And VersionCaracteristica(104) And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TransmittalPackageTypes" Text="Transmittal Package Types"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/TransmittalPackageTypes" Text="Transmittal Package Types"
                                                 Visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And VersionCaracteristica(105) And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16%>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ProjectClasification" Text="Project Classification"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ProjectClasification" Text="Project Classification"
                                                 Visible='<%# EmployeePermission("Deny_ProjectClasification") And VersionCaracteristica(106) And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -230,34 +230,34 @@
                                     <%--Proposals menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Proposals" Visible='<%# EmployeePermission("Deny_ProposalsMenu") %>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Proposals" Text="Proposal List"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Proposals" Text="Proposal List"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Pre-Projects" Text="Pre-Project List"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Pre-Projects" Text="Pre-Project List"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/calculator" Text="Calculator"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/calculator" Text="Calculator"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Proposal_tasks" Text="Proposal Tasks"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Proposal_tasks" Text="Proposal Tasks"
                                                 Visible='<%# EmployeePermission("Deny_ProposalTasksList") And VersionCaracteristica(203)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TandCtemplates" Text="Terms &amp; Conditions"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/TandCtemplates" Text="Terms &amp; Conditions"
                                                 Visible='<%# EmployeePermission("Deny_ProposalTermsConditions") And VersionCaracteristica(205)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/InvoicesTypes" Text="Payment Schedules" Visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/InvoicesTypes" Text="Payment Schedules" Visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Proposal_types" Text="Proposal Templates"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Proposal_types" Text="Proposal Templates"
                                                 Visible='<%# EmployeePermission("Deny_ProposalTemplates") And VersionCaracteristica(204)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/PhasesTemplate" Text="Phases Templates"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/PhasesTemplate" Text="Phases Templates"
                                                 Visible='<%# EmployeePermission("Deny_ProposalTemplates") And VersionCaracteristica(204) and LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" Text="Use & Occupancy Classification" NavigateUrl="~/ADM/JobUse"
+                                            <telerik:RadMenuItem runat="server" Text="Use & Occupancy Classification" NavigateUrl="~/adm/JobUse"
                                                 Visible='<%# EmployeePermission("Deny_UseClassification") And VersionCaracteristica(206) And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -266,35 +266,35 @@
                                     <%--Billing menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Billing" Visible='<%# EmployeePermission("Deny_BillingMenu") %>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BillingManager" Text="Billing Assistant"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/BillingManager" Text="Billing Assistant"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Invoices" Text="Invoices"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Invoices" Text="Invoices"
                                                 Visible='<%# EmployeePermission("Deny_InvoicesList") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Statement" Text="Statements"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Statement" Text="Statements"
                                                 Visible='<%# EmployeePermission("Deny_StatementList") And VersionCaracteristica(302)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Payments" Text="Payments"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Payments" Text="Payments"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BillingActivity" Text="Activity Chart"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/BillingActivity" Text="Activity Chart"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BillingAgingReport"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/BillingAgingReport"
                                                 Text="Client Aging Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(303)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ClientsBalance"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ClientsBalance"
                                                 Text="Client Balance Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(303)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/BILLvsCOLLECTED"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/BILLvsCOLLECTED"
                                                 Text="Bill vs Collected" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(304) %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/bill-collected-employees"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/bill-collected-employees"
                                                 Text="Bill vs Collected by Employee" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") And VersionCaracteristica(304) %>'>
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -303,21 +303,24 @@
                                     <%--Clients menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Clients" Visible='<%# EmployeePermission("Deny_ClientsMenu") %>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Clients" Text="Client List"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Clients" Text="Client List"
                                                 Visible='<%# EmployeePermission("Deny_ClientsList") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ClientManagement" Text="Client Management"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ClientManagement" Text="Client Management"
                                                 Visible='<%# EmployeePermission("Deny_ClientManagement") And VersionCaracteristica(405)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ClientFiles" Text="Client Uploaded Files"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/clientscolletion" Text="Client Collection"
+                                                Visible='<%# EmployeePermission("Deny_ClientManagement") And VersionCaracteristica(405)%>'>
+                                            </telerik:RadMenuItem>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ClientFiles" Text="Client Uploaded Files"
                                                 Visible='<%# EmployeePermission("Deny_ClientsList") And VersionCaracteristica(405)%>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ClientTypes" Text="Client Types"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ClientTypes" Text="Client Types"
                                                 Visible='<%# EmployeePermission("Deny_ClientType") And VersionCaracteristica(404)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ExportClientsCSV" Text="Export"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ExportClientsCSV" Text="Export"
                                                 Visible='<%# EmployeePermission("Deny_ClientsList") And VersionCaracteristica(403)%>'>
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -326,18 +329,18 @@
                                     <%--Subconsultants menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Subconsultants" Visible='<%# EmployeePermission("Deny_SubconsultantsMenu") And VersionCaracteristica(500)%>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" Text="Subconsultants List" NavigateUrl="~/ADM/subconsultants"
+                                            <telerik:RadMenuItem runat="server" Text="Subconsultants List" NavigateUrl="~/adm/subconsultants"
                                                 Visible='<%# EmployeePermission("Deny_SubconsultantsList") And VersionCaracteristica(503)%>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
 
-                                            <telerik:RadMenuItem runat="server" Text="Requests for Proposals" NavigateUrl="~/ADM/rfps"
+                                            <telerik:RadMenuItem runat="server" Text="Requests for Proposals" NavigateUrl="~/adm/rfps"
                                                 Visible='<%# EmployeePermission("Deny_RequestsProposalsList") %>'>
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" Text="A/E Disciplines" NavigateUrl="~/ADM/Discipline"
+                                            <telerik:RadMenuItem runat="server" Text="A/E Disciplines" NavigateUrl="~/adm/Discipline"
                                                 Visible='<%# EmployeePermission("Deny_DisciplinesList") And VersionCaracteristica(505)%>'>
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -346,33 +349,33 @@
                                     <%--Employees menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Employees" Visible='<%# EmployeePermission("Deny_EmployeesMenu") And VersionCaracteristica(600)%>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Employees" Text="Employee List"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Employees" Text="Employee List"
                                                 Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/DashboardEmployee" Text="Dashboard"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/DashboardEmployee" Text="Dashboard"
                                                 Visible='<%# EmployeePermission("Deny_Dashboard") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Time" Text="Time Entries"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Time" Text="Time Entries"
                                                 Visible='<%# EmployeePermission("Deny_ProjectTimeEntries") And VersionCaracteristica(603)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/PaidDayList" Text="Payroll"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/PaidDayList" Text="Payroll"
                                                 Visible='<%# EmployeePermission("Deny_PayrollCalendar") And VersionCaracteristica(604)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimeSheet" Text="Time Sheet"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/TimeSheet" Text="Time Sheet"
                                                 Visible='<%# EmployeePermission("Deny_Timesheet") And VersionCaracteristica(605)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimesByPeriords" Text="Times by Periods"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/TimesByPeriords" Text="Times by Periods"
                                                 Visible='<%# EmployeePermission("Deny_EmployeesList")%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/AvgEEmployeesProfit"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/AvgEEmployeesProfit"
                                                 Text="Employees Efficiency Chart" Visible='<%# EmployeePermission("Deny_EmployeesEfficiencyGraphic") And VersionCaracteristica(606)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" Text="Employees Permissions" NavigateUrl="~/ADM/Employee_Permissions"
+                                            <telerik:RadMenuItem runat="server" Text="Employees Permissions" NavigateUrl="~/adm/Employee_Permissions"
                                                 Visible="<%# IsMasterUser() And VersionCaracteristica(708)%>">
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" Text="Roles Permissions" NavigateUrl="~/ADM/roles"
+                                            <telerik:RadMenuItem runat="server" Text="Roles Permissions" NavigateUrl="~/adm/roles"
                                                 Visible="<%# IsMasterUser() And VersionCaracteristica(708)%>">
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -381,19 +384,19 @@
                                     <%--Departments menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Departments" Visible='<%# EmployeePermission("Deny_DepartmentsMenu") %>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" Text="Departments List" NavigateUrl="~/ADM/DepartmentsList" Visible='<%# EmployeePermission("Deny_DepartmentsList") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" Text="Departments List" NavigateUrl="~/adm/DepartmentsList" Visible='<%# EmployeePermission("Deny_DepartmentsList") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
-                                            <%-- <telerik:RadMenuItem runat="server" Text="Monthly Target" NavigateUrl="~/ADM/BudgetDepartments" Visible='<%# EmployeePermission("Deny_MonthlyBudget") And VersionCaracteristica(1101)%>'>
+                                            <%-- <telerik:RadMenuItem runat="server" Text="Monthly Target" NavigateUrl="~/adm/BudgetDepartments" Visible='<%# EmployeePermission("Deny_MonthlyBudget") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" Text="Organization Chart" NavigateUrl="~/ADM/OrgChartByDepartment" Visible='<%# EmployeePermission("Deny_OrganizationChart") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" Text="Organization Chart" NavigateUrl="~/adm/OrgChartByDepartment" Visible='<%# EmployeePermission("Deny_OrganizationChart") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" Visible='<%# EmployeePermission("Deny_DepartmentBalance") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" Text="Balance" NavigateUrl="~/ADM/BalanceDepartments" Visible='<%# EmployeePermission("Deny_DepartmentBalance") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" Text="Balance" NavigateUrl="~/adm/BalanceDepartments" Visible='<%# EmployeePermission("Deny_DepartmentBalance") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" Text="Current vs Target Chart" NavigateUrl="~/ADM/ChartDepartments" Visible='<%# EmployeePermission("Deny_DepartmentChart") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" Text="Current vs Target Chart" NavigateUrl="~/adm/ChartDepartments" Visible='<%# EmployeePermission("Deny_DepartmentChart") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" Text="Budget by Status" NavigateUrl="~/ADM/DepartmentBudgetByStatus" Visible='<%# EmployeePermission("Deny_Budget") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" Text="Budget by Status" NavigateUrl="~/adm/DepartmentBudgetByStatus" Visible='<%# EmployeePermission("Deny_Budget") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
                                         </Items>
                                     </telerik:RadMenuItem>
@@ -401,18 +404,18 @@
                                     <%--Expenses menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Expenses" Visible='<%# EmployeePermission("Deny_ExpensesMenu") %>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" Text="Vendors List" NavigateUrl="~/ADM/Vendors" Visible='<%# EmployeePermission("Deny_ContactsList") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" Text="Vendors List" NavigateUrl="~/adm/Vendors" Visible='<%# EmployeePermission("Deny_ContactsList") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/VendorTypes" Text="Vendor Types"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/VendorTypes" Text="Vendor Types"
                                                 Visible='<%# EmployeePermission("Deny_ClientType") And VersionCaracteristica(404)%>'>
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/MonthlyExpenses" Text="Expenses" Visible='<%# EmployeePermission("Deny_CompanyProfile") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/MonthlyExpenses" Text="Expenses" Visible='<%# EmployeePermission("Deny_CompanyProfile") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/cashflow" Text="Cash Flow" Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/cashflow" Text="Cash Flow" Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Expenseschart" Text="Expenses Chart" Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(702)%>'>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Expenseschart" Text="Expenses Chart" Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
 
                                         </Items>
@@ -421,16 +424,16 @@
                                     <%--Contacts menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Contacts" Visible='<%# EmployeePermission("Deny_ContactsMenu") %>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" Text="Contacts List" NavigateUrl="~/ADM/Contacts" Visible='<%# EmployeePermission("Deny_ContactsList") And VersionCaracteristica(1101)%>'>
+                                            <telerik:RadMenuItem runat="server" Text="Contacts List" NavigateUrl="~/adm/Contacts" Visible='<%# EmployeePermission("Deny_ContactsList") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
-                                            <%--<telerik:RadMenuItem runat="server" Text="Reviewers List" NavigateUrl="~/ADM/Reviewers" Visible='<%# EmployeePermission("Deny_ReviewersList") And VersionCaracteristica(1101)%>'>
+                                            <%--<telerik:RadMenuItem runat="server" Text="Reviewers List" NavigateUrl="~/adm/Reviewers" Visible='<%# EmployeePermission("Deny_ReviewersList") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>--%>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ContacTypes" Text="Contact Types"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ContacTypes" Text="Contact Types"
                                                 Visible='<%# EmployeePermission("Deny_ClientType") And VersionCaracteristica(404)%>'>
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ImportData"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ImportData"
                                                 Text="Import Data" Visible='<%# EmployeePermission("Deny_Importdata") And VersionCaracteristica(806)%>'>
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -439,49 +442,49 @@
                                     <%--Analytics menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Analytics" Visible='<%# EmployeePermission("Deny_Analytics") And VersionCaracteristica(700)%>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Dashboard" Text="Dashboard"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Dashboard" Text="Dashboard"
                                                 Visible='<%# EmployeePermission("Deny_Dashboard") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/DepartmentReport" Text="Department Report"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/DepartmentReport" Text="Department Report"
                                                 Visible='<%# EmployeePermission("Allow_DepartmentReport") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/EmployeeReport" Text="Employee Report"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/EmployeeReport" Text="Employee Report"
                                                 Visible='<%# EmployeePermission("Allow_DepartmentReport") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
 
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
 
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ProjectMap" Text="Projects Map"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ProjectMap" Text="Projects Map"
                                                 Visible='<%# EmployeePermission("Deny_Projectmap") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ClientsMap" Text="Clients Map"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ClientsMap" Text="Clients Map"
                                                 Visible='<%# EmployeePermission("Deny_Clientmap") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ProjectSchedule" Text="Project Schedule"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ProjectSchedule" Text="Project Schedule"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Reports" Text="Reports"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Reports" Text="Reports"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") And VersionCaracteristica(701)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ReportJobs" Text="Jobs Report"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ReportJobs" Text="Jobs Report"
                                                 Visible="false">
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TopTen" Text="Top Ten Charts"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/TopTen" Text="Top Ten Charts"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(702)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ResultByMonth" Text="Job Chart by Month"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ResultByMonth" Text="Job Chart by Month"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(703)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ResultByYear" Text="Job Chart by Year"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ResultByYear" Text="Job Chart by Year"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticCharts") And VersionCaracteristica(704)%>'>
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Clients_MonthlyTimeAndCosts" Text="Margins per Client"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Clients_MonthlyTimeAndCosts" Text="Margins per Client"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") And VersionCaracteristica(706)%>'>
                                             </telerik:RadMenuItem>
                                         </Items>
@@ -490,35 +493,35 @@
                                     <%--Company menu--%>
                                     <telerik:RadMenuItem runat="server" Text="Company" Visible='<%# EmployeePermission("Deny_CompanyMenu") And VersionCaracteristica(800)%>' >
                                         <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Company" Text="Company Profile"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Company" Text="Company Profile"
                                                 Visible='<%# EmployeePermission("Deny_CompanyProfile") And VersionCaracteristica(801)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/CompanyMultiplier" Text="Company Multiplier"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/CompanyMultiplier" Text="Company Multiplier"
                                                 Visible='<%# EmployeePermission("Deny_CompanyProfile") And VersionCaracteristica(801)%>'>
                                             </telerik:RadMenuItem>
                                             <%-- <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
 
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Messages" Text="Email Records"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Messages" Text="Email Records"
                                                 Visible='<%# VersionCaracteristica(802)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/HistoryLog" Text="History Log"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/HistoryLog" Text="History Log"
                                                 Visible='<%# EmployeePermission("Deny_HistoryLog") And VersionCaracteristica(803)%>'>
                                             </telerik:RadMenuItem>
 
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/TimeCategory" Text="Time Categories"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/TimeCategory" Text="Time Categories"
                                                 Visible='<%# EmployeePermission("Deny_TimeCategory") And VersionCaracteristica(809)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/NoJobsTimeTypes" Text="Miscellaneous Time Codes"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/NoJobsTimeTypes" Text="Miscellaneous Time Codes"
                                                 Visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") And VersionCaracteristica(804)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" Text="Messages Templates" NavigateUrl="~/ADM/MessagesTemplates"
+                                            <telerik:RadMenuItem runat="server" Text="Messages Templates" NavigateUrl="~/adm/MessagesTemplates"
                                                 Visible='<%# EmployeePermission("Deny_MessagesTemplates") And VersionCaracteristica(805)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/Position" Text="Employee's Positions"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Position" Text="Employee's Positions"
                                                 Visible='<%# EmployeePermission("Deny_NewEmployee")%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/ADM/ExcelCalculator" Target="_blank"
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ExcelCalculator" Target="_blank"
                                                 Text="Sheet Calculator">
                                             </telerik:RadMenuItem>
                                         </Items>
