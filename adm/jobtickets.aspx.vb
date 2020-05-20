@@ -41,6 +41,7 @@ Public Class jobtickets
                 lblTicketId.Text = e.CommandArgument
                 lblJobId.Text = LocalAPI.GetTicketProperty(lblTicketId.Text, "jobId")
                 CreateRadWindows(e.CommandName, "~/ADM/EmployeeNewTime.aspx?JobTicketId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Dialog=1", 1024, 820, True)
+                Response.Redirect("~/ADM/EmployeeNewTime.aspx?JobTicketId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Dialog=1")
 
             Case "TicketBalance"
                 lblTicketId.Text = e.CommandArgument
@@ -56,7 +57,7 @@ Public Class jobtickets
     End Sub
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
-        CreateRadWindows("NewTicket", "~/ADM/Ticket.aspx?JobId=" & lblJobId.Text, 960, 740, False)
+        Response.Redirect("~/ADM/Ticket.aspx?JobId=" & lblJobId.Text)
     End Sub
 
     Private Sub SqlDataSource1_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSource1.Selecting
