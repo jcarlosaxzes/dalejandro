@@ -328,7 +328,7 @@ Public Class billingmanager
                         LocalAPI.ActualizarEmittedInvoice(invoiceId, lblEmployeeId.Text)
                         emailTo = LocalAPI.GetClientEmailFromInvoice(invoiceId)
 
-                        LocalAPI.SendMail(emailTo, "", "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text)
+                        SendGrid.Email.SendMail(emailTo, "", "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text)
 
                         LocalAPI.NewAutomaticInvoiceReminderFromEmitted(invoiceId, lblEmployeeId.Text, lblCompanyId.Text)
 
@@ -366,7 +366,7 @@ Public Class billingmanager
                             AccountantEmail = AccountantEmail
                         End If
 
-                        LocalAPI.SendMail(emailTo, "", AccountantEmail, Subject, Body, lblCompanyId.Text,, lblEmployeeName.Text, lblEmployeeEmail.Text, lblEmployeeName.Text)
+                        SendGrid.Email.SendMail(emailTo, "", AccountantEmail, Subject, Body, lblCompanyId.Text,, lblEmployeeName.Text, lblEmployeeEmail.Text, lblEmployeeName.Text)
 
                         LocalAPI.NewAutomaticStatementReminderFromEmitted(statementId, lblEmployeeId.Text, lblCompanyId.Text)
 
@@ -614,7 +614,7 @@ Public Class billingmanager
                 Body = Replace(Body, "[Notes]", txtRemainderNotes.Text)
                 Body = Replace(Body, "[EmployeeName]", lblEmployeeName.Text)
 
-                Task.Run(Function() LocalAPI.SendMail(sTo, sCC, "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text))
+                Task.Run(Function() SendGrid.Email.SendMail(sTo, sCC, "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text))
 
                 ' Añadir una Note al Job
                 LocalAPI.NewJobNote(invoiceInfo("jobId"), Subject, lblEmployeeId.Text)
@@ -646,7 +646,7 @@ Public Class billingmanager
                 Body = Replace(Body, "[Notes]", txtRemainderNotes2.Text)
                 Body = Replace(Body, "[EmployeeName]", lblEmployeeName.Text)
 
-                Task.Run(Function() LocalAPI.SendMail(sTo, sCC, "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text))
+                Task.Run(Function() SendGrid.Email.SendMail(sTo, sCC, "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text))
 
             End If
 

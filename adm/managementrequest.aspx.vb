@@ -78,7 +78,7 @@ Public Class managementrequest
             Dim sBody As String = sMsg.ToString
             Dim sSubject As String = "PASconcept. Request has been reviewed and processed"
 
-            Return LocalAPI.SendMail(EmployeeEmail, "", "", sSubject, sBody, lblCompanyId.Text)
+            Return SendGrid.Email.SendMail(EmployeeEmail, "", "", sSubject, sBody, lblCompanyId.Text)
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

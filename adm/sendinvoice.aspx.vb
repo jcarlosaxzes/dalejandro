@@ -204,7 +204,7 @@ Public Class sendinvoice
                         sBCO = sBCO & "," & AccountantEmail
                     End If
 
-                    bSendEmail = LocalAPI.SendMail(sTo, txtCC.Text, sBCO, txtSubject.Text, txtBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
+                    bSendEmail = SendGrid.Email.SendMail(sTo, txtCC.Text, sBCO, txtSubject.Text, txtBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
 
                     LocalAPI.NewAutomaticInvoiceReminderFromEmitted(lblInvoice.Text, lblEmployeeId.Text, lblCompanyId.Text)
 

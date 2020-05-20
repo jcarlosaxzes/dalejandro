@@ -263,7 +263,7 @@ Public Class schedule
                 Dim sBody As String = sMsg.ToString
                 Dim sSubject As String = "PASconcet client activity. " & cboClient.Text & ", [" & cboActivityType.Text & "]"
 
-                Task.Run(Function() LocalAPI.SendMail(sEmailTo, Master.UserEmail, "", sSubject, sBody, lblCompanyId.Text))
+                Task.Run(Function() SendGrid.Email.SendMail(sEmailTo, Master.UserEmail, "", sSubject, sBody, lblCompanyId.Text))
 
             End If
             Return True
