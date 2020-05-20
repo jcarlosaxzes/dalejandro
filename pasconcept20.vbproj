@@ -3501,18 +3501,18 @@
       <DependentUpon>roles.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\saveproposalas.aspx.designer.vb">
-      <DependentUpon>saveproposalas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\saveproposalas.aspx.vb">
-      <DependentUpon>saveproposalas.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="adm\role_permissions_form.aspx.designer.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\role_permissions_form.aspx.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\saveproposalas.aspx.designer.vb">
+      <DependentUpon>saveproposalas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\saveproposalas.aspx.vb">
+      <DependentUpon>saveproposalas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
@@ -4298,7 +4298,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
