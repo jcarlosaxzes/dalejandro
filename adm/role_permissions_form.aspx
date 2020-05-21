@@ -297,6 +297,11 @@
                                         <td>
                                             <asp:CheckBox ID="Deny_ClientManagementCheckBox" runat="server" Checked='<%# Bind("Deny_ClientManagement") %>' /></td>
                                     </tr>
+                                    <tr>
+                                        <td>Deny Clients Colletion:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox41" runat="server" Checked='<%# Bind("Deny_ClientsColletion") %>' /></td>
+                                    </tr>
 
                                     <%--Contact Deny Permits--%>
                                     <tr>
@@ -446,6 +451,11 @@
                                             <asp:CheckBox ID="Deny_TimesheetCheckBox" runat="server" Checked='<%# Bind("Deny_Timesheet") %>' /></td>
                                     </tr>
                                     <tr>
+                                        <td>Deny Times by Periods:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox39" runat="server" Checked='<%# Bind("Deny_TimesbyPeriods") %>' /></td>
+                                    </tr>
+                                    <tr>
                                         <td>Deny Employees Efficiency Chart:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_EmployeesEfficiencyGraphicCheckBox" runat="server" Checked='<%# Bind("Deny_EmployeesEfficiencyGraphic") %>' /></td>
@@ -515,6 +525,11 @@
                                         <td>Deny New Vendor:</td>
                                         <td>
                                             <asp:CheckBox ID="CheckBox20" runat="server" Checked='<%# Bind("Deny_NewVendor") %>' /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Deny Vendor Types:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox44" runat="server" Checked='<%# Bind("DenyVendorTypes") %>' /></td>
                                     </tr>
                                     <tr>
                                         <td>Deny Expenses:</td>
@@ -909,6 +924,11 @@
                                         <td>
                                             <asp:CheckBox ID="Deny_ClientManagementCheckBox" runat="server" Checked='<%# Eval("Deny_ClientManagement") %>' Enabled="false" /></td>
                                     </tr>
+                                    <tr>
+                                        <td>Deny Clients Colletion:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox42" runat="server" Checked='<%# Eval("Deny_ClientsColletion") %>' Enabled="false" /></td>
+                                    </tr>
 
                                     <%--Contact Deny Permits--%>
                                     <tr>
@@ -1051,6 +1071,11 @@
                                             <asp:CheckBox ID="Deny_TimesheetCheckBox" runat="server" Checked='<%# Eval("Deny_Timesheet") %>' Enabled="false" /></td>
                                     </tr>
                                     <tr>
+                                        <td>Deny Times by Periods:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox40" runat="server" Checked='<%# Eval("Deny_TimesbyPeriods") %>' Enabled="false" /></td>
+                                    </tr>
+                                    <tr>
                                         <td>Deny Employees Efficiency Chart:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_EmployeesEfficiencyGraphicCheckBox" runat="server" Checked='<%# Eval("Deny_EmployeesEfficiencyGraphic") %>' Enabled="false" /></td>
@@ -1120,6 +1145,11 @@
                                         <td>Deny New Vendor:</td>
                                         <td>
                                             <asp:CheckBox ID="CheckBox22" runat="server" Checked='<%# Eval("Deny_NewVendor") %>' Enabled="false" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Deny Vendor Types:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox43" runat="server" Checked='<%# Eval("DenyVendorTypes") %>' Enabled="false" /></td>
                                     </tr>
                                     <tr>
                                         <td>Deny Expenses:</td>
@@ -1343,6 +1373,10 @@
             <asp:Parameter Name="Name" Type="String" />
 
             <asp:Parameter Name="MobileRole" />
+
+            <asp:Parameter Name="Deny_TimesbyPeriods" Type="Boolean" />
+            <asp:Parameter Name="Deny_ClientsColletion" Type="Boolean" />
+            <asp:Parameter Name="DenyVendorTypes" Type="Boolean" />
 
             <asp:ControlParameter ControlID="lblRoleId" Name="Id" PropertyName="Text" />
         </UpdateParameters>
