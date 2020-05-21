@@ -238,7 +238,8 @@ Public Class proposal
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Select Case e.CommandName
             Case "EditTask"
-                CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument, 1024, 768, False, "OnClientClose")
+                'CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument, 1024, 768, False, "OnClientClose")
+                Response.Redirect("~/adm/proposaltask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument)
             Case "DetailDuplicate"
                 lblDetailSelectedId.Text = e.CommandArgument
                 SqlDataSourceProposaldDetailDuplicate.Insert()
@@ -317,7 +318,8 @@ Public Class proposal
     Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
         Try
             GuardarProposal(False)
-            CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text, 1024, 768, False, "OnClientClose")
+            'CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text, 1024, 768, False, "OnClientClose")
+            Response.Redirect("~/adm/proposaltask.aspx?Id=" & lblId.Text)
         Catch ex As Exception
         End Try
     End Sub

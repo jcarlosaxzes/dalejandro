@@ -65,13 +65,6 @@ Public Class company
         End Try
     End Sub
 
-    Protected Sub SendGridTestEmail()
-        'Try
-        '    LocalAPI.SendGridMail(lblEmployeeEmail.Text, "", "", ConfigurationManager.AppSettings("Titulo") & ". PASconcept Test SendGrid Email ", "This is a test Email of SendGrid setting", lblCompanyId.Text)
-        'Catch ex As Exception
-        '    Master.ErrorMessage("Error. " & ex.Message)
-        'End Try
-    End Sub
     Protected Sub btnSMS_Click(sender As Object, e As EventArgs)
         Try
             If LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
@@ -193,8 +186,6 @@ Public Class company
             Case "SendTestEmail"
                 SendTestEmail()
 
-            Case "SendSendGridEmail"
-                SendGridTestEmail()
         End Select
 
     End Sub
