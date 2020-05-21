@@ -27,36 +27,19 @@ Module SendGrid
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
             Try
 
-                Dim host As String
+                'Dim host As String
                 Dim fromAddr As String
-                Dim sUserName As String
-                Dim sPassword As String
-                Dim EnableSsl As Integer
-                Dim Port As Integer
-                Dim UseDefaultCredentials As Boolean
+                'Dim sUserName As String
+                'Dim sPassword As String
+                'Dim EnableSsl As Integer
+                'Dim Port As Integer
+                'Dim UseDefaultCredentials As Boolean
 
                 If companyId > 0 Then
-                    ' Si existe credenciales de envio de email desde una company, se utilizan
-                    host = LocalAPI.GetCompanyProperty(companyId, "webEmailSMTP")
                     fromAddr = LocalAPI.GetCompanyProperty(companyId, "webEmailUserName")
-                    sUserName = LocalAPI.GetCompanyProperty(companyId, "webEmailUserName")
-                    sPassword = LocalAPI.GetCompanyProperty(companyId, "webEmailPassword")
-                    EnableSsl = LocalAPI.GetCompanyProperty(companyId, "webEmailEnableSsl")
-                    Port = LocalAPI.GetCompanyProperty(companyId, "webEmailPort")
-                    UseDefaultCredentials = LocalAPI.GetCompanyProperty(companyId, "webUseDefaultCredentials")
-                End If
-
-                If Len(host) = 0 Then
-                    ' Se usan las predeterminadas (info@pasconcept.com), si NO existe credenciales de envio de email desde una company
-                    host = ConfigurationManager.AppSettings("SMTPPASconceptEmail")
+                Else
                     fromAddr = ConfigurationManager.AppSettings("FromPASconceptEmail")
-                    sUserName = ConfigurationManager.AppSettings("UserPASconceptEmail")
-                    sPassword = ConfigurationManager.AppSettings("PasswordPASconceptEmail")
-                    sFromMail = fromAddr
-                    EnableSsl = ConfigurationManager.AppSettings("EnableSslPASconceptEmail")
-                    Port = ConfigurationManager.AppSettings("PortPASconceptEmail")
                 End If
-
 
                 Dim sFrom As String = sFromMail
                 If sFrom.Length = 0 Then sFrom = fromAddr

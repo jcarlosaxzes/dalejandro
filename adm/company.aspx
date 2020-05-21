@@ -182,11 +182,11 @@
                                     </table>
                                 </telerik:RadWizardStep>
 
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStepSMTP" Title="SMTP Settings" ValidationGroup="SMTP" StepType="Step">
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepSMTP" Title="Email/Storage" ValidationGroup="SMTP" StepType="Step">
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">Email SMTP Outgoing Settings</h3>
+                                                <h3 style="margin: 0">Email Outgoing Settings</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton4" runat="server" ToolTip="Update changes to Company SMTP" CommandName="Edit" CausesValidation="False"
@@ -199,32 +199,7 @@
 
                                     <table class="table-condensed">
                                         <tr>
-                                            <td>SMTP Server:
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="webEmailSMTPLabel" runat="server" Text='<%# Eval("webEmailSMTP")%>' ToolTip="Outgoing mail SMTP (smtp.company_domain.com)" />
-                                                <td>
-                                                    <asp:LinkButton ID="btnEmail" runat="server" ToolTip="Send Email to User to test SMTP setting" CommandName="SendTestEmail" CausesValidation="False"
-                                                        CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-envelope"></span> Test Email
-                                                </asp:LinkButton>
-                                                </td>
-                                                <td>
-                                                    <asp:LinkButton ID="btnSendGridEmail" runat="server" ToolTip="Send Email to User to test SendGrid setting" CommandName="SendSendGridEmail" CausesValidation="False"
-                                                        CssClass="btn btn-info" UseSubmitBehavior="false"  Visible='<%# lblEmployeeEmail.Text = "jcarlos@axzes.com" %>'>
-                                                        <span class="glyphicon glyphicon-envelope"></span> Test SendGrid Email
-                                                </asp:LinkButton>
-                                                </td>
-                                                <telerik:RadButton ID="btnHelp2" runat="server" Text="Help" ButtonType="LinkButton" AutoPostBack="false" Font-Bold="true"
-                                                    UseSubmitBehavior="false" CausesValidation="false" Target="_blank" NavigateUrl="http://blog.pasconcept.com/2015/04/company-profile-smtp.html">
-                                                    <Icon PrimaryIconCssClass="rbHelp"></Icon>
-                                                </telerik:RadButton>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <table class="table-condensed">
-                                        <tr>
-                                            <td>SMTP Username:
+                                            <td style="width:180px">Outgoing Email From:
                                             </td>
                                             <td>
                                                 <asp:Label ID="labelwebEmailUserNameTextBox" runat="server" Text='<%# Eval("webEmailUserName")%>' ToolTip="Outgoing account name (username@company_domain.com)"></asp:Label>
@@ -232,30 +207,42 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>SMTP TLS/SSL Required:
+                                            <td>
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox655" runat="server" Checked='<%# Eval("webEmailEnableSsl")%>' Enabled="false" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMTP Port:
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="labelBox4ff" runat="server" Text='<%# Eval("webEmailPort")%>'></asp:Label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMTP Use Default Credentials:
-                                            </td>
-                                            <td>
-                                                <asp:CheckBox ID="CheckBox13" runat="server" Checked='<%# Eval("webUseDefaultCredentials")%>' Enabled="false" />
-                                            </td>
-                                        </tr>
+                                                <asp:LinkButton ID="btnEmail" runat="server" ToolTip="Send Test Email" CommandName="SendTestEmail" CausesValidation="False"
+                                                        CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                                        <span class="glyphicon glyphicon-envelope"></span> Test Email
+                                                </asp:LinkButton>
 
-
+                                            </td>
+                                        </tr>
 
                                     </table>
+
+                                     <table style="width: 98%">
+                                        <tr>
+                                            <td colspan="2">
+                                                <h3 style="margin: 0">Storage Info</h3>
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                             <td style="width:180px">
+                                                 Number of Files:
+                                             </td>
+                                             <td>
+                                                 <%# Eval("StorageFiles")%>
+                                             </td>
+                                         </tr>
+                                         <tr>
+                                             <td>Storage Occupied:</td>
+                                             <td>
+                                                 <%# Eval("StoregeSize")%>
+                                             </td>
+                                         </tr>
+                                    </table>
+
+
                                 </telerik:RadWizardStep>
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepNotifications" Title="Notifications" ValidationGroup="Notifications" StepType="Step">
@@ -825,60 +812,11 @@
                                     </table>
                                     <table class="table-condensed">
                                         <tr>
-                                            <td>SMTP Server:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="webEmailSMTPTextBox" runat="server" Text='<%# Bind("webEmailSMTP")%>' ToolTip="Outgoing mail SMTP (smtp.company_domain.com)"></telerik:RadTextBox>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <telerik:RadButton ID="btnHelp" runat="server" Text="Help" ButtonType="LinkButton" AutoPostBack="false" Font-Bold="true"
-                                            UseSubmitBehavior="false" CausesValidation="false" Width="130px" Target="_blank" NavigateUrl="http://blog.pasconcept.com/2015/04/company-profile-smtp.html">
-                                            <Icon PrimaryIconCssClass="rbHelp" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                                        </telerik:RadButton>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="Pequena">If you do not fill the [SMTP Server] field, the app send emails with PASconcept default account!
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMTP Username:
+                                            <td>Outgoing Email From:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="webEmailUserNameTextBox" runat="server" Text='<%# Bind("webEmailUserName")%>' ToolTip="Outgoing account name (username@company_domain.com)"
                                                     Width="500px" EmptyMessage="Outgoing account name (username@company_domain.com)" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMTP Password:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="webEmailPasswordTextBox" runat="server" Text='<%# Bind("webEmailPassword")%>'
-                                                    TextMode="Password" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMTP TLS/SSL Required:
-                                            </td>
-                                            <td>
-                                                <asp:CheckBox ID="CheckBox6jj" runat="server" Checked='<%# Bind("webEmailEnableSsl")%>' />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMTP Port:
-                                            </td>
-                                            <td>
-                                                <telerik:RadNumericTextBox ID="RadTextBox4ff" runat="server" Text='<%# Bind("webEmailPort")%>' EmptyMessage="25">
-                                                    <NumberFormat DecimalDigits="0" />
-                                                </telerik:RadNumericTextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>SMTP Use Default Credentials:
-                                            </td>
-                                            <td>
-                                                <asp:CheckBox ID="CheckBox14" runat="server" Checked='<%# Bind("webUseDefaultCredentials")%>' />
                                             </td>
                                         </tr>
                                     </table>
@@ -1378,7 +1316,7 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CompanyProfile_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="CompanyProfile_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="CompanyProfile_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
@@ -1395,12 +1333,7 @@
             <asp:Parameter Name="Movile" Type="String" />
             <asp:Parameter Name="Fax" Type="String" />
             <asp:Parameter Name="Email" Type="String" />
-            <asp:Parameter Name="webEmailSMTP" Type="String" />
-            <asp:Parameter Name="webEmailEnableSsl" />
-            <asp:Parameter Name="webEmailPort" />
-            <asp:Parameter Name="webUseDefaultCredentials" />
             <asp:Parameter Name="webEmailUserName" Type="String" />
-            <asp:Parameter Name="webEmailPassword" Type="String" />
             <asp:Parameter Name="webEmailProfitWarningCC" Type="String" />
             <asp:Parameter Name="webEmailProfitWarningCCO" Type="String" />
             <asp:Parameter Name="web" Type="String" />
