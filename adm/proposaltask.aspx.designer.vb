@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class newproposaltask
+Partial Public Class proposaltask
     
     '''<summary>
     '''RadAjaxManager1 control.
@@ -30,6 +30,24 @@ Partial Public Class newproposaltask
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+    
+    '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lblTaskList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTaskList As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''pnlTemplate control.
@@ -75,15 +93,6 @@ Partial Public Class newproposaltask
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtName As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
-    '''RequiredFieldValidator2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''txtDescriptionPlus control.
@@ -138,6 +147,15 @@ Partial Public Class newproposaltask
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ValidationSummaryTaskUpdate As Global.System.Web.UI.WebControls.ValidationSummary
+    
+    '''<summary>
+    '''RequiredFieldValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''SqlDataSource1 control.
@@ -199,9 +217,9 @@ Partial Public Class newproposaltask
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

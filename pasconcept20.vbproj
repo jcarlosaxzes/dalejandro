@@ -404,7 +404,6 @@
     <Content Include="adm\newcontact.aspx" />
     <Content Include="adm\newemployee.aspx" />
     <Content Include="adm\newjob.aspx" />
-    <Content Include="adm\newproposaltask.aspx" />
     <Content Include="adm\newpropsalphase.aspx" />
     <Content Include="adm\newsubconsultant.aspx" />
     <Content Include="adm\newvendor.aspx" />
@@ -425,6 +424,7 @@
     <Content Include="adm\proposalphases.aspx" />
     <Content Include="adm\proposals.aspx" />
     <Content Include="adm\proposalschedule.aspx" />
+    <Content Include="adm\proposaltask.aspx" />
     <Content Include="adm\proposaltemplate.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
@@ -3294,13 +3294,6 @@
       <DependentUpon>newjob.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\newproposaltask.aspx.designer.vb">
-      <DependentUpon>newproposaltask.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\newproposaltask.aspx.vb">
-      <DependentUpon>newproposaltask.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="adm\newpropsalphase.aspx.designer.vb">
       <DependentUpon>newpropsalphase.aspx</DependentUpon>
     </Compile>
@@ -3439,6 +3432,13 @@
     </Compile>
     <Compile Include="adm\proposalschedule.aspx.vb">
       <DependentUpon>proposalschedule.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\proposaltask.aspx.designer.vb">
+      <DependentUpon>proposaltask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposaltask.aspx.vb">
+      <DependentUpon>proposaltask.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\proposaltemplate.aspx.designer.vb">
@@ -4318,7 +4318,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

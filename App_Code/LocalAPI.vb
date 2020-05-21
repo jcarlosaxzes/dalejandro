@@ -6009,7 +6009,7 @@ Public Class LocalAPI
         Try
             Dim sFullBody As New System.Text.StringBuilder
             Dim companyName As String = GetCompanyProperty(companyId, "Name")
-            sFullBody.Append("This is a test Email sent from Company Profile 'Email SMTP Outgoing Settings'.")
+            sFullBody.Append("This is a test Email sent from Company Profile 'Email Outgoing Settings'.")
             sFullBody.Append("<br />")
             sFullBody.Append("Company Name: " & companyName)
             sFullBody.Append("<br />")
