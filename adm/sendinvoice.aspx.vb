@@ -292,9 +292,13 @@ Public Class sendinvoice
     Protected Sub RadCloudUpload1_FileUploaded(sender As Object, e As Telerik.Web.UI.CloudFileUploadedEventArgs)
         Try
             If LocalAPI.IsAzureStorage(lblCompanyId.Text) Then
-
+                Dim tempName = e.FileInfo.KeyName
+                Dim fileExt = IO.Path.GetExtension(tempName)
+                Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
+                AzureStorageApi.CopyFile(tempName, newName)
+                AzureStorageApi.DeleteFile(tempName)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 10, e.FileInfo.OriginalFileName, e.FileInfo.KeyName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType)
+                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 10, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType)
                 If e.IsValid Then
                     RadGridLinks.DataBind()
                     InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
