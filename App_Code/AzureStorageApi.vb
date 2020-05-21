@@ -62,7 +62,7 @@ Public Class AzureStorageApi
         End Try
     End Function
 
-    Public Shared Function UploadFilesStream(fileName As String, file As Stream, directory As String, contentType As String) As String
+    Public Shared Function UploadFilesStream(file As Stream, KeyName As String, contentType As String, companyId As String) As String
         Try
 
             ' Create a BlobServiceClient object which will be used to create a container client
@@ -72,9 +72,7 @@ Public Class AzureStorageApi
             Dim container As CloudBlobContainer = blobClient.GetContainerReference("documents")
 
             'Generates Random Blob Name
-            Dim fileExt = Path.GetExtension(fileName)
-            Dim randomName = $"{Guid.NewGuid().ToString()}" & fileExt
-            Dim blockBlob = container.GetBlockBlobReference(randomName)
+            Dim blockBlob = container.GetBlockBlobReference(KeyName)
             'Sets the content type to image
             blockBlob.Properties.ContentType = contentType
 
@@ -102,6 +100,35 @@ Public Class AzureStorageApi
             destinationBlockBlob.StartCopy(sourceBlockBlob)
 
             Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+    Public Shared Function UploadBytesData(fileName As String, fileData As Byte(), directory As String, contentType As String) As String
+        Try
+
+            ' Create a BlobServiceClient object which will be used to create a container client
+            Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
+
+            Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
+            Dim container As CloudBlobContainer = blobClient.GetContainerReference("documents")
+
+            'Generates Random Blob Name
+            Dim fileExt = Path.GetExtension(fileName)
+            Dim randomName = $"{Guid.NewGuid().ToString()}" & fileExt
+            Dim blockBlob = container.GetBlockBlobReference(randomName)
+            'Sets the content type to image
+            blockBlob.Properties.ContentType = contentType
+
+            'Using File
+            '    File.Position = 0
+            '    blockBlob.UploadFromStream(File)
+            '    File.Close()
+            'End Using
+
+            Return blockBlob.Uri.AbsoluteUri
         Catch ex As Exception
             Throw ex
         End Try
