@@ -5,18 +5,26 @@ Imports System.Data
 Imports System.Net.Mail
 Imports System.IO
 Imports System.Web.Configuration
-Imports System.Net
 Imports System.Runtime.Remoting.Contexts
 Imports Telerik.Web.UI
 Imports System.Configuration
 Imports System.Threading.Tasks
 
 Imports System.Linq
-Imports System.Net.Http
 
 Imports Microsoft.AspNet.Identity.Owin
 Imports Microsoft.AspNet.Identity.EntityFramework
 Imports Microsoft.AspNetCore.Identity
+
+Imports System.Net
+Imports System.Net.Http
+Imports System.Net.Http.Headers
+Imports System.Runtime.CompilerServices
+Imports System.Text
+Imports System.Web.Script.Serialization
+Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Converters
+Imports Newtonsoft.Json.Linq
 
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
@@ -1220,7 +1228,7 @@ Public Class LocalAPI
             sBody = Replace(sBody, "[PASconcept_link]", sURLPASconceptUser)
             sBody = Replace(sBody, "[Guest_Link]", sURLGetst)
 
-            LocalAPI.SendMail(RFPObject("SubConsultanstEmail"), RFPObject("SenderEmail"), "", sSubject, sBody, RFPObject("companyId"), RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
+            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), RFPObject("SenderEmail"), "", sSubject, sBody, RFPObject("companyId"), RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
 
 
             Return True
@@ -1603,7 +1611,7 @@ Public Class LocalAPI
             Dim sBody As String = sMsg.ToString
             Dim sTo As String = GetHeadDepartmentEmailFromJob(jobId)
 
-            Task.Run(Function() SendMail(sTo, EmployeeEmail, "", sSubject, sBody, companyId))
+            Task.Run(Function() SendGrid.Email.SendMail(sTo, EmployeeEmail, "", sSubject, sBody, companyId))
 
             Dim recipientEmailSent As String = sTo & "," & EmployeeEmail
             OneSignalNotification.SendNotification(recipientEmailSent, "Job status changed", EmployeeName & " changed the status of job " & sJobName & " to " & statusName, "", companyId)
@@ -4870,7 +4878,7 @@ Public Class LocalAPI
 
                 Dim sBody As String = sMsg.ToString
 
-                SendMail(sClientMail, "", ConfigurationManager.AppSettings("webEmailProfitWarningCC"), sSubject, sBody, companyId)
+                SendGrid.Email.SendMail(sClientMail, "", ConfigurationManager.AppSettings("webEmailProfitWarningCC"), sSubject, sBody, companyId)
                 SendInvoiceToClient_obsoleto = True
             End If
         End If
@@ -5823,9 +5831,9 @@ Public Class LocalAPI
 
                     Try
                         If ConfigurationManager.AppSettings("Debug") = "1" Then
-                            SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
+                            SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
                         Else
-                            SendMail(rdr("Email").ToString, "", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
+                            SendGrid.Email.SendMail(rdr("Email").ToString, "", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
                         End If
                         EmployeeEmailCredentials = True
                     Finally
@@ -5898,9 +5906,9 @@ Public Class LocalAPI
 
                 Try
                     If ConfigurationManager.AppSettings("Debug") = "1" Then
-                        SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
+                        SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
                     Else
-                        SendMail(Email, "", "", ConfigurationManager.AppSettings("Titulo") & ". Reset Password", sFullBody.ToString, companyId)
+                        SendGrid.Email.SendMail(Email, "", "", ConfigurationManager.AppSettings("Titulo") & ". Reset Password", sFullBody.ToString, companyId)
                     End If
                     Return True
                 Finally
@@ -5936,9 +5944,9 @@ Public Class LocalAPI
             sFullBody.Append(GetCompanyProperty(companyId, "EmailSign2"))
 
             If ConfigurationManager.AppSettings("Debug") = "1" Then
-                SendMail("jcarlos@axzes.com", "", "", CompanyName & ". Employee Memory " & year, sFullBody.ToString, companyId)
+                SendGrid.Email.SendMail("jcarlos@axzes.com", "", "", CompanyName & ". Employee Memory " & year, sFullBody.ToString, companyId)
             Else
-                SendMail(EmployeeEmail, "", "", CompanyName & ". Employee Memory " & year, sFullBody.ToString, companyId)
+                SendGrid.Email.SendMail(EmployeeEmail, "", "", CompanyName & ". Employee Memory " & year, sFullBody.ToString, companyId)
             End If
             Return True
 
@@ -5984,9 +5992,9 @@ Public Class LocalAPI
 
             Try
                 If ConfigurationManager.AppSettings("Debug") = "1" Then
-                    SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
+                    SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
                 Else
-                    SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
+                    SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
                 End If
                 Return True
             Finally
@@ -6009,9 +6017,9 @@ Public Class LocalAPI
             sFullBody.Append("Thank you,")
             Try
                 If ConfigurationManager.AppSettings("Debug") = "1" Then
-                    SendMail("jcarlos@axzes.com", "", "", "PASconcept Email Notification Setup", sFullBody.ToString, companyId)
+                    SendGrid.Email.SendMail("jcarlos@axzes.com", "", "", "PASconcept Email Notification Setup", sFullBody.ToString, companyId)
                 Else
-                    SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & ". PASconcept test Email ", sFullBody.ToString, companyId)
+                    SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & ". PASconcept test Email ", sFullBody.ToString, companyId)
                 End If
 
                 OneSignalNotification.SendNotification(sUserEmail, "Test Notification", "This is a test Notification sent from Company Profile", "", companyId)
@@ -6050,7 +6058,7 @@ Public Class LocalAPI
             sMsg.Append("<br />")
             sMsg.Append("+1 (786) 626-1611")
 
-            LocalAPI.SendMail(CompanyObject("Email"), "", "jcarlos@axzes.com,matt@axzes.com", CompanyObject("Contact") & ". Help to Get Started with PASconcept", sMsg.ToString, -1, "matt@axzes.com", "Matt Mur", "matt@axzes.com", "Matt Mur")
+            SendGrid.Email.SendMail(CompanyObject("Email"), "", "jcarlos@axzes.com,matt@axzes.com", CompanyObject("Contact") & ". Help to Get Started with PASconcept", sMsg.ToString, -1, "matt@axzes.com", "Matt Mur", "matt@axzes.com", "Matt Mur")
             Return True
         Catch ex As Exception
 
@@ -6651,174 +6659,6 @@ Public Class LocalAPI
 
     End Function
 
-    Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer,
-                                    Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
-                                    Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
-        Try
-
-            Dim host As String
-            Dim fromAddr As String
-            Dim sUserName As String
-            Dim sPassword As String
-            Dim EnableSsl As Integer
-            Dim Port As Integer
-            Dim UseDefaultCredentials As Boolean
-
-            If companyId > 0 Then
-                ' Si existe credenciales de envio de email desde una company, se utilizan
-                host = GetCompanyProperty(companyId, "webEmailSMTP")
-                fromAddr = GetCompanyProperty(companyId, "webEmailUserName")
-                sUserName = GetCompanyProperty(companyId, "webEmailUserName")
-                sPassword = GetCompanyProperty(companyId, "webEmailPassword")
-                EnableSsl = GetCompanyProperty(companyId, "webEmailEnableSsl")
-                Port = GetCompanyProperty(companyId, "webEmailPort")
-                UseDefaultCredentials = GetCompanyProperty(companyId, "webUseDefaultCredentials")
-            End If
-
-            If Len(host) = 0 Then
-                ' Se usan las predeterminadas (info@pasconcept.com), si NO existe credenciales de envio de email desde una company
-                host = ConfigurationManager.AppSettings("SMTPPASconceptEmail")
-                fromAddr = ConfigurationManager.AppSettings("FromPASconceptEmail")
-                sUserName = ConfigurationManager.AppSettings("UserPASconceptEmail")
-                sPassword = ConfigurationManager.AppSettings("PasswordPASconceptEmail")
-                sFromMail = fromAddr
-                EnableSsl = ConfigurationManager.AppSettings("EnableSslPASconceptEmail")
-                Port = ConfigurationManager.AppSettings("PortPASconceptEmail")
-            End If
-
-            Dim smtp As New SmtpClient(host)
-            smtp.UseDefaultCredentials = UseDefaultCredentials
-            smtp.Credentials = New System.Net.NetworkCredential(sUserName, sPassword)
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network
-            smtp.EnableSsl = EnableSsl
-            smtp.Port = Port
-            'smtp.Timeout = 10000
-
-            Dim message As New MailMessage()
-            If ConfigurationManager.AppSettings("Debug") = "1" Then
-                message.To.Add("jcarlos@axzes.com")  ' fernando@easterneg.com
-            Else
-                'message.To.Add(sTo)
-                If Len(sTo) > 0 Then MessageAddEmailList(message, sTo, "To")
-                If Len(sCC) > 0 Then MessageAddEmailList(message, sCC, "CC")
-                If Len(sCCO) > 0 Then MessageAddEmailList(message, sCCO, "CCO")
-            End If
-
-            message.Subject = sSubtject
-            message.IsBodyHtml = True
-            message.Body = sBody
-
-            Dim sFrom As String = sFromMail
-            If sFrom.Length = 0 Then sFrom = fromAddr
-            Dim sDisplay As String = sFromDisplay
-            If sDisplay.Length = 0 Then sDisplay = IIf(companyId > 0, GetCompanyProperty(companyId, "Name"), "PASconcept")
-            message.From = New MailAddress(sFrom, sDisplay)
-
-            If Len(replyToMail) > 0 Then
-                ' Reply-to
-                message.ReplyToList.Add(New MailAddress(replyToMail, sReplyToDisplay))
-            End If
-
-            smtp.Send(message)
-
-            SendMail = True
-
-            If companyId > 0 Then
-                Dim sAdresses As String = sTo
-                If Len(sCC) > 0 And sTo <> sCC Then sAdresses = sAdresses & ";" & sCC
-                SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId)
-            End If
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-    'Public Shared Async Function SendGridMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer,
-    '                                Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
-    '                                Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Task
-    '    Try
-    '        Dim apiKey = ConfigurationManager.AppSettings("SENDGRID_APIKEY")
-
-    '        Dim client = New SendGridClient(apiKey)
-
-    '        Dim msg = New SendGridMessage() With {
-    '            .From = New EmailAddress("info@pasconcept.com", "PASconcept"),
-    '            .Subject = sSubtject,
-    '            .PlainTextContent = "",
-    '            .HtmlContent = sBody
-    '        }
-    '        msg.AddTo(New EmailAddress(sTo))
-    '        msg.AddCc(New EmailAddress(sCC))
-    '        msg.AddBcc(New EmailAddress(sCCO))
-
-    '        Dim response = Await client.SendEmailAsync(msg)
-
-    '        If companyId > 0 Then
-    '            Dim sAdresses As String = sTo
-    '            If Len(sCC) > 0 And sTo <> sCC Then sAdresses = sAdresses & ";" & sCC
-    '            SendMessage("info@pasconcept.com", sAdresses, sSubtject, sBody, "", False, companyId)
-    '        End If
-    '    Catch ex As Exception
-    '        Throw ex
-    '    End Try
-
-    'End Function
-    Public Shared Function SendMail40year(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String,
-                                    Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "") As Boolean
-        Try
-
-            Dim host As String
-            Dim fromAddr As String
-            Dim sUserName As String
-            Dim sPassword As String
-            Dim EnableSsl As Integer
-            Dim Port As Integer
-
-            ' Si existe credenciales de envio de email desde una company, se utilizan
-            host = "smtp.office365.com"
-            fromAddr = "admin@easterneg.com"
-            sUserName = "admin@easterneg.com"
-            sPassword = "ViejaLind@"
-            EnableSsl = "1"
-            Port = 587
-
-            Dim smtp As New SmtpClient(host)
-            smtp.UseDefaultCredentials = False
-            smtp.Credentials = New System.Net.NetworkCredential(sUserName, sPassword)
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network
-            smtp.EnableSsl = EnableSsl
-            smtp.Port = Port
-            'smtp.Timeout = 10000
-
-            Dim message As New MailMessage()
-            'message.To.Add(sTo)
-            If Len(sTo) > 0 Then MessageAddEmailList(message, sTo, "To")
-            If Len(sCC) > 0 Then MessageAddEmailList(message, sCC, "CC")
-            If Len(sCCO) > 0 Then MessageAddEmailList(message, sCCO, "CCO")
-
-            message.Subject = sSubtject
-            message.IsBodyHtml = True
-            message.Body = sBody
-
-            Dim sFrom As String = sFromMail
-            If sFrom.Length = 0 Then sFrom = fromAddr
-            message.From = New MailAddress(sFrom, "Eastern Engineering Group")
-
-            smtp.Send(message)
-
-
-            Dim sAdresses As String = sTo
-            If Len(sCC) > 0 And sTo <> sCC Then
-                sAdresses = sAdresses & ";" & sCC
-            End If
-            SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, 260962)
-
-
-            Return True
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
 
     Private Shared Function MessageAddEmailList(ByRef message As MailMessage, sListEmails As String, sType As String) As Boolean
         Dim i As Integer
@@ -8176,7 +8016,7 @@ Public Class LocalAPI
     Public Shared Function EmailToEmployee(ByVal nEmployee As Integer, ByVal sSubject As String, ByVal sBody As System.Text.StringBuilder, ByVal companyId As Integer) As Long
         Try
             Dim EmailTo As String = GetEmployeeEmail(nEmployee)
-            Task.Run(Function() SendMail(EmailTo, "", "", sSubject, sBody.ToString, companyId))
+            Task.Run(Function() SendGrid.Email.SendMail(EmailTo, "", "", sSubject, sBody.ToString, companyId))
         Catch ex As Exception
             Throw ex
         End Try
@@ -9325,7 +9165,7 @@ Public Class LocalAPI
             sFullBody.Append("<br />")
             sFullBody.Append(LocalAPI.GetPASSign())
             Try
-                SendMail(SunconsultantObject("Email").ToString, "", "", "PASconcept Private Portal", sFullBody.ToString, companyId, LocalAPI.GetCompanyProperty(companyId, "Email"), LocalAPI.GetCompanyProperty(companyId, "Name"))
+                SendGrid.Email.SendMail(SunconsultantObject("Email").ToString, "", "", "PASconcept Private Portal", sFullBody.ToString, companyId, LocalAPI.GetCompanyProperty(companyId, "Email"), LocalAPI.GetCompanyProperty(companyId, "Name"))
             Finally
             End Try
 
@@ -10547,7 +10387,7 @@ Public Class LocalAPI
                     sCCO = LocalAPI.GetCompanyProperty(companyId, "webEmailProfitWarningCCO")
                 End If
 
-                LocalAPI.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyId)
+                SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyId)
             End If
         Catch ex As Exception
             Throw ex
@@ -10574,7 +10414,7 @@ Public Class LocalAPI
                 sBody = Replace(sBody, "[Sign]", SenderDisplay)
             End If
 
-            Task.Run(Function() LocalAPI.SendMail(emailTo, "", "", sSubject, sBody, companyId,, SenderDisplay, ReplyEmail, SenderDisplay))
+            Task.Run(Function() SendGrid.Email.SendMail(emailTo, "", "", sSubject, sBody, companyId,, SenderDisplay, ReplyEmail, SenderDisplay))
 
             ActualizarEmittedInvoice(invoiceId, 0)
 
@@ -10684,7 +10524,7 @@ Public Class LocalAPI
                 If Len(sProjectManagerEmail) > 0 Then
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
                 End If
-                Task.Run(Function() LocalAPI.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 
 
                 Dim recipientEmailSent As String = sCC & IIf(Len(sCCO) > 0, "," & sCCO, "")
@@ -10766,7 +10606,7 @@ Public Class LocalAPI
                 If Len(sProjectManagerEmail) > 0 Then
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
                 End If
-                Task.Run(Function() LocalAPI.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+                Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 
                 Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
                 Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
@@ -10811,7 +10651,7 @@ Public Class LocalAPI
             If Len(sProjectManagerEmail) > 0 Then
                 sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
             End If
-            Task.Run(Function() LocalAPI.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+            Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 
             Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
             Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
@@ -10992,7 +10832,7 @@ Public Class LocalAPI
 
                 Dim sBody As String = sMsg.ToString
 
-                Task.Run(Function() LocalAPI.SendMail(sClientEmail, "", sEmployeeEmail, sSubject, sBody, companyId))
+                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, "", sEmployeeEmail, sSubject, sBody, companyId))
 
                 OneSignalNotification.SendNotification(sEmployeeEmail, "Project has been completed", sSubject, "", companyId)
 
@@ -11095,7 +10935,7 @@ Public Class LocalAPI
 
             Dim sBody As String = sMsg.ToString
 
-            Return LocalAPI.SendMail(sClientEmail, "", "", sSubject, sBody, companyid,,, replyEmail, replyDisplay)
+            Return SendGrid.Email.SendMail(sClientEmail, "", "", sSubject, sBody, companyid,,, replyEmail, replyDisplay)
 
         Catch ex As Exception
             Throw ex
@@ -11349,7 +11189,7 @@ Public Class LocalAPI
                 Case 0  ' Email directos
                     If Len(EmailTo) > 0 Then
                         FinalBody = Replace(Body, "[UserName]", "User Name Replaced")
-                        SendMail(EmailTo, "", "", Subject, FinalBody, 260973,, "Matt Mur", "matt@axzes.com")
+                        SendGrid.Email.SendMail(EmailTo, "", "", Subject, FinalBody, 260973,, "Matt Mur", "matt@axzes.com")
                         res = 1
                     End If
 
@@ -11378,7 +11218,7 @@ Public Class LocalAPI
                     If rdr.HasRows Then
                         Try
                             FinalBody = Replace(Body, "[UserName]", rdr("FullName"))
-                            SendMail(rdr("Email"), "", "", Subject, FinalBody, 260973, , "Matt Mur", "matt@axzes.com")
+                            SendGrid.Email.SendMail(rdr("Email"), "", "", Subject, FinalBody, 260973, , "Matt Mur", "matt@axzes.com")
                         Catch ex As Exception
                         End Try
                     End If
@@ -11895,7 +11735,7 @@ Public Class LocalAPI
                 sMsg.Append("<strong>" & GetCompanyProperty(companyId, "Name") & "</strong>")
                 sMsg.Append("<br />")
                 sMsg.Append(LocalAPI.GetPASShortSign())
-                SendMail(EmailTo, EmailCC, ConfigurationManager.AppSettings("webEmailProfitWarningCC"), sSubject, sMsg.ToString, companyId)
+                SendGrid.Email.SendMail(EmailTo, EmailCC, ConfigurationManager.AppSettings("webEmailProfitWarningCC"), sSubject, sMsg.ToString, companyId)
                 Return True
 
             End If
@@ -12000,7 +11840,7 @@ Public Class LocalAPI
 
                     emailBcc = IIf(rdr("Days") > 1, "yanaisy@easterneg.com", "")
 
-                    LocalAPI.SendMail(emailTo, "", emailBcc, Subject, Body, 260962)
+                    SendGrid.Email.SendMail(emailTo, "", emailBcc, Subject, Body, 260962)
 
                     OneSignalNotification.SendNotification(emailTo, "Not Emitted Proposal", Subject, "", 260962)
 
@@ -12065,7 +11905,7 @@ Public Class LocalAPI
                         Body = Replace(Body, "[enteredhours]", rdr("WeeklyHous"))
                         Body = Replace(Body, "[HRname]", GetCompanyHRname(rdr("companyId")))
                         Subject = Replace("[CompanyName] Timesheets Due: PASconcept Automated Message", "[CompanyName]", companyName)
-                        LocalAPI.SendMail(rdr("Email"), "", "", Subject, Body, 0)
+                        SendGrid.Email.SendMail(rdr("Email"), "", "", Subject, Body, 0)
 
                         OneSignalNotification.SendNotification(rdr("Email"), "Timesheets Alert!!!", "This is a reminder that timesheets are due today Friday " & FormatDateTime(GetDateTime(), DateFormat.ShortDate) & ". ", "", rdr("companyId"))
 
@@ -13068,7 +12908,7 @@ Public Class LocalAPI
 
             Dim SenderEmail As String = LocalAPI.GetEmployeeEmail(lId:=employeeId)
             Dim SenderDisplay As String = LocalAPI.GetEmployeeName(employeeId)
-            SendMail(NotificationClientEmail, SenderEmail, "", Subject, Body, companyId, SenderEmail, SenderDisplay, SenderEmail, SenderDisplay)
+            SendGrid.Email.SendMail(NotificationClientEmail, SenderEmail, "", Subject, Body, companyId, SenderEmail, SenderDisplay, SenderEmail, SenderDisplay)
 
             Return True
         Catch ex As Exception
@@ -13132,7 +12972,7 @@ Public Class LocalAPI
             Dim PMEmail As String = GetEmployeeEmail(lId:=LocalAPI.GetTicketProperty(ticketId, "employeeId"))
             Dim OtherEmplEmais As String = LocalAPI.GetTicketProperty(ticketId, "NotificationBCClientEmail")
 
-            SendMail(PMEmail, OtherEmplEmais, "jcarlos@axzes.com", Subject, Body, companyId)
+            SendGrid.Email.SendMail(PMEmail, OtherEmplEmais, "jcarlos@axzes.com", Subject, Body, companyId)
 
             Return True
         Catch ex As Exception

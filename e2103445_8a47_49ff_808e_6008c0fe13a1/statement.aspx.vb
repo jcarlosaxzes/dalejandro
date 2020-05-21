@@ -288,7 +288,7 @@ Public Class statement1
                 Dim sBody As String = sMsg.ToString
                 Dim sSubject As String = "PayHere to " & LocalAPI.GetCompanyName(lblCompanyId.Text) & " from PayPal, Statement: " & statementInfo("StatementNumber")
 
-                Return LocalAPI.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text)
+                Return SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text)
                 SqlDataSourceStatement.DataBind()
 
             End If
