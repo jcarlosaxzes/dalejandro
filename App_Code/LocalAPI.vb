@@ -8902,6 +8902,10 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function SetClientCollectionCloseOpen(ByVal clientcollectionId As Integer) As Boolean
+        Return ExecuteNonQuery(String.Format("update Clients_collection set DateOut = case when DateOut Is Null then dbo.CurrentTime() else Null end where Id={0}", clientcollectionId))
+    End Function
+
     Public Shared Function Clients_activities_INSERT(ByVal clientId As Integer, CRUD As String, SourceTable As String, sourceId As Integer, employeeId As Integer) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()

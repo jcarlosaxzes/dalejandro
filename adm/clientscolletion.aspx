@@ -55,7 +55,9 @@
                             </telerik:GridBoundColumn>
                             <telerik:GridTemplateColumn DataField="Name" HeaderText="Client Name" UniqueName="Name">
                                 <ItemTemplate>
-                                    <%# String.Concat(Eval("Name"), IIf(Len(Eval("Company")) > 0, ", ", ""), Eval("Company")) %>
+                                   <asp:LinkButton runat="server" ID="btnEdit" CommandName="Notification" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit Record">
+                                        <%# String.Concat(Eval("Name"), IIf(Len(Eval("Company")) > 0, ", ", ""), Eval("Company")) %>
+                                    </asp:LinkButton>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" UniqueName="Notes">
@@ -80,7 +82,7 @@
                                         <span class="glyphicon glyphicon-envelope"></span>
                                         </asp:LinkButton>
                                         &nbsp;
-                                        <asp:LinkButton runat="server" ID="btnClose" CommandName="Close" CommandArgument='<%# Eval("Id") %>' ToolTip="Close Expedient">
+                                        <asp:LinkButton runat="server" ID="btnClose" CommandName="Close" CommandArgument='<%# Eval("Id") %>' ToolTip="Close/Re-Open Expedient">
                                         <span class="glyphicon glyphicon-remove-circle"></span>
                                         </asp:LinkButton>
                                     </div>
@@ -104,6 +106,7 @@
         SelectCommand="Clients_collection_SELECT" SelectCommandType="StoredProcedure" DeleteCommand="delete from [Clients_collection] where Id=@Id">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboStatus" Name="StatusId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Filter" PropertyName="Text" Type="String" />
         </SelectParameters>
         <DeleteParameters>

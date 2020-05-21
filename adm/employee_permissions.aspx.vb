@@ -4,13 +4,12 @@ Public Class employee_permissions
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
-            lblCompanyId.Text = Session("companyId")
-            ' Si no tiene permiso, la dirijo a message
-
             If Not Master.IsMasterUser() Then
                 Response.RedirectPermanent("~/ADM/Default.aspx")
             End If
 
+            lblCompanyId.Text = Session("companyId")
+            ' Si no tiene permiso, la dirijo a message
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Employee Permissions"
             Master.PageTitle = "Employees/Employees Permissions"
         End If
@@ -69,8 +68,7 @@ Public Class employee_permissions
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "Permits"
-                sUrl = "~/ADM/Employee_Permissions_form.aspx?employeeId=" & e.CommandArgument & "&Entity=Employee"
-                CreateRadWindows(e.CommandName, sUrl, 960, 800, False)
+                Response.Redirect("~/ADM/Employee_Permissions_form.aspx?employeeId=" & e.CommandArgument & "&Entity=Employee")
         End Select
     End Sub
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, bRefreshOnClientClose As Boolean)
