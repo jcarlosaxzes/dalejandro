@@ -27,36 +27,16 @@ Module SendGrid
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
             Try
 
-                Dim host As String
+
                 Dim fromAddr As String
                 Dim sUserName As String
-                Dim sPassword As String
-                Dim EnableSsl As Integer
-                Dim Port As Integer
-                Dim UseDefaultCredentials As Boolean
+
 
                 If companyId > 0 Then
                     ' Si existe credenciales de envio de email desde una company, se utilizan
-                    host = LocalAPI.GetCompanyProperty(companyId, "webEmailSMTP")
                     fromAddr = LocalAPI.GetCompanyProperty(companyId, "webEmailUserName")
                     sUserName = LocalAPI.GetCompanyProperty(companyId, "webEmailUserName")
-                    sPassword = LocalAPI.GetCompanyProperty(companyId, "webEmailPassword")
-                    EnableSsl = LocalAPI.GetCompanyProperty(companyId, "webEmailEnableSsl")
-                    Port = LocalAPI.GetCompanyProperty(companyId, "webEmailPort")
-                    UseDefaultCredentials = LocalAPI.GetCompanyProperty(companyId, "webUseDefaultCredentials")
                 End If
-
-                If Len(host) = 0 Then
-                    ' Se usan las predeterminadas (info@pasconcept.com), si NO existe credenciales de envio de email desde una company
-                    host = ConfigurationManager.AppSettings("SMTPPASconceptEmail")
-                    fromAddr = ConfigurationManager.AppSettings("FromPASconceptEmail")
-                    sUserName = ConfigurationManager.AppSettings("UserPASconceptEmail")
-                    sPassword = ConfigurationManager.AppSettings("PasswordPASconceptEmail")
-                    sFromMail = fromAddr
-                    EnableSsl = ConfigurationManager.AppSettings("EnableSslPASconceptEmail")
-                    Port = ConfigurationManager.AppSettings("PortPASconceptEmail")
-                End If
-
 
                 Dim sFrom As String = sFromMail
                 If sFrom.Length = 0 Then sFrom = fromAddr
@@ -66,12 +46,30 @@ Module SendGrid
 
                 Dim mails As AppEmailBody = New AppEmailBody()
                 mails.From = New AppEmail() With {.Name = sDisplay, .Email = sFrom}
+                Dim sCCs As ArrayList = New ArrayList()
+
                 If ConfigurationManager.AppSettings("Debug") = "1" Then
                     mails.To = New AppEmail() With {.Name = "", .Email = "jcarlos@axzes.com"}
                 Else
                     mails.To = New AppEmail() With {.Name = "", .Email = sTo}
-                    If Len(sTo) > 0 Then mails.To = New AppEmail() With {.Name = "", .Email = sTo}
-                    If Len(sCC) > 0 Then mails.Ccs = New AppEmail() With {.Name = "", .Email = sCC}
+                    If Len(sCC) > 0 Then
+                        Dim sCCplit() As String = Split(sCC, ",")
+                        For Each cc In sCCplit
+                            If (LocalAPI.ValidEmail(cc)) Then
+                                sCCs.Add(New AppEmail() With {.Name = "", .Email = cc})
+                            End If
+                        Next
+                    End If
+                    If Len(sCCO) > 0 Then
+                        Dim sCCplit() As String = Split(sCCO, ",")
+                        For Each cc In sCCplit
+                            If (LocalAPI.ValidEmail(cc)) Then
+                                sCCs.Add(New AppEmail() With {.Name = "", .Email = cc})
+                            End If
+                        Next
+                    End If
+                    mails.Ccs = sCCs.Cast(Of AppEmail)
+
                 End If
                 mails.Subject = sSubtject
                 mails.HtmlContent = sBody
