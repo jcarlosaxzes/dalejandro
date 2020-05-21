@@ -1,8 +1,10 @@
 ﻿
 Imports System.IO
 Imports System.Threading.Tasks
-Imports Microsoft.WindowsAzure.Storage
-Imports Microsoft.WindowsAzure.Storage.Blob
+Imports Microsoft.Azure.Storage.DataMovement
+Imports Microsoft.Azure.Storage
+Imports Microsoft.Azure.Storage.Blob
+Imports Microsoft.Azure.Management.DataLake.Store
 
 Public Class AzureStorageApi
     Public Shared Function GetConexion() As String
@@ -11,11 +13,11 @@ Public Class AzureStorageApi
     Public Shared Function DeleteFile(ByVal KeyName As String) As Boolean
         Try
             Dim containerName As String = "documents"
-            'Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
-            'Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
-            'Dim container As CloudBlobContainer = blobClient.GetContainerReference(containerName)
-            'Dim blockBlob As CloudBlockBlob = container.GetBlockBlobReference(KeyName)
-            'blockBlob.DeleteIfExists()
+            Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
+            Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
+            Dim container As CloudBlobContainer = blobClient.GetContainerReference(containerName)
+            Dim blockBlob As CloudBlockBlob = container.GetBlockBlobReference(KeyName)
+            blockBlob.DeleteIfExists()
             Return True
         Catch ex As Exception
             Throw ex
@@ -32,10 +34,15 @@ Public Class AzureStorageApi
             Dim container As CloudBlobContainer = blobClient.GetContainerReference("documents")
 
             'Generates Random Blob Name
-            Dim randomName = $"{Guid.NewGuid().ToString()}.jpg"
+            Dim fileExt = Path.GetExtension(fileName)
+            Dim randomName = $"{Guid.NewGuid().ToString()}" & fileExt
             Dim blockBlob = container.GetBlockBlobReference(randomName)
             'Sets the content type to image
-            blockBlob.Properties.ContentType = "image/jpeg"
+            Dim mimeType = MimeMapping.GetMimeMapping(fileName)
+            If IsNothing(mimeType) Then
+                mimeType = "image/jpeg"
+            End If
+            blockBlob.Properties.ContentType = mimeType
 
 
             Dim localPath = "./data/"
@@ -55,7 +62,7 @@ Public Class AzureStorageApi
         End Try
     End Function
 
-    Public Shared Function UploadFilesStream(file As Stream, directory As String, contentType As String) As String
+    Public Shared Function UploadFilesStream(fileName As String, file As Stream, directory As String, contentType As String) As String
         Try
 
             ' Create a BlobServiceClient object which will be used to create a container client
@@ -65,7 +72,8 @@ Public Class AzureStorageApi
             Dim container As CloudBlobContainer = blobClient.GetContainerReference("documents")
 
             'Generates Random Blob Name
-            Dim randomName = $"{directory}{Guid.NewGuid().ToString()}.jpg"
+            Dim fileExt = Path.GetExtension(fileName)
+            Dim randomName = $"{Guid.NewGuid().ToString()}" & fileExt
             Dim blockBlob = container.GetBlockBlobReference(randomName)
             'Sets the content type to image
             blockBlob.Properties.ContentType = contentType
@@ -81,5 +89,23 @@ Public Class AzureStorageApi
             Throw ex
         End Try
     End Function
+
+    Public Shared Function CopyFile(SourceKeyName As String, DestinationKeyName As String) As Boolean
+        Try
+            Dim containerName As String = "documents"
+            Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
+            Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
+            Dim container As CloudBlobContainer = blobClient.GetContainerReference(containerName)
+            Dim sourceBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(SourceKeyName)
+            Dim destinationBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(DestinationKeyName)
+
+            destinationBlockBlob.StartCopy(sourceBlockBlob)
+
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 
 End Class

@@ -204,7 +204,7 @@ Public Class jobtickets
         lblBody.Text = Replace(lblBody.Text, "[Date/Time]", RadDatePickerDate.DbSelectedDate.ToString)
         Dim SenderEmail As String = LocalAPI.GetEmployeeEmail(lId:=lblEmployeeId.Text)
         Dim SenderDisplay As String = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
-        Task.Run(Function() LocalAPI.SendMail(txtTo.Text, txtBCC.Text, SenderEmail, txtSubject.Text, lblBody.Text, lblCompanyId.Text,, SenderDisplay, SenderEmail, SenderDisplay))
+        Task.Run(Function() SendGrid.Email.SendMail(txtTo.Text, txtBCC.Text, SenderEmail, txtSubject.Text, lblBody.Text, lblCompanyId.Text,, SenderDisplay, SenderEmail, SenderDisplay))
     End Sub
 
     Private Sub ReadTicketRecord()

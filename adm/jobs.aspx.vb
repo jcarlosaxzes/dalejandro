@@ -589,7 +589,7 @@ Public Class jobs
             Dim sTo As String = LocalAPI.GetEmployeeEmail(cboEmployeeShare.SelectedValue)
             Dim sBody As String = txtShareFilter.Text
 
-            LocalAPI.SendMail(sTo, lblEmployee.Text, "", "PASconcept. Share filter setting with you", sBody, lblCompanyId.Text,, LocalAPI.GetEmployeeFullName(lblEmployee.Text), lblEmployee.Text)
+            SendGrid.Email.SendMail(sTo, lblEmployee.Text, "", "PASconcept. Share filter setting with you", sBody, lblCompanyId.Text,, LocalAPI.GetEmployeeFullName(lblEmployee.Text), lblEmployee.Text)
             Master.InfoMessage("Filters shared with employee")
 
         Catch ex As Exception

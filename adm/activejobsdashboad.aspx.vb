@@ -259,7 +259,7 @@ Public Class activejobsdashboad
 
             Dim sSubject As String = "Request " & cboType.Text
 
-            Return LocalAPI.SendMail(sTo, "", "", sSubject, sBody, lblCompanyId.Text)
+            Return SendGrid.Email.SendMail(sTo, "", "", sSubject, sBody, lblCompanyId.Text)
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
