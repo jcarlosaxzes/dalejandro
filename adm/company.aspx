@@ -266,7 +266,7 @@
                                         <tr>
                                             <td>Storage Occupied:</td>
                                             <td>
-                                                <%# Eval("StoregeSize")%>
+                                                <%#  LocalAPI.FormatByteSize(Eval("StorageSize"))%>
                                             </td>
                                         </tr>
                                     </table>
