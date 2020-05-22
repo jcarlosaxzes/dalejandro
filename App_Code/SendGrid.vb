@@ -25,8 +25,19 @@ Module SendGrid
         Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer,
                                     Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
+            Dim host As String = ""
 
-            Return LocalAPI.SendMail(sTo, sCC, sCCO, sSubtject, sBody, companyId, sFromMail, sFromDisplay, replyToMail, sReplyToDisplay)
+            If companyId > 0 Then
+                host = LocalAPI.GetCompanyProperty(companyId, "webEmailSMTP")
+            End If
+
+            If Len(host) > 0 Then
+                ' SMTP defined for Company
+                Return LocalAPI.SendMail(sTo, sCC, sCCO, sSubtject, sBody, companyId, sFromMail, sFromDisplay, replyToMail, sReplyToDisplay)
+            Else
+                ' PASconcept notification or ' SMTP NOT defined for Company
+                Return SendMailSendGrid(sTo, sCC, sCCO, sSubtject, sBody, companyId, sFromMail, sFromDisplay, replyToMail, sReplyToDisplay)
+            End If
 
         End Function
 

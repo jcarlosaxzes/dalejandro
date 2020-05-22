@@ -8669,19 +8669,9 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function GetEmployeePermission(ByVal lId As Integer, sOpcion As String) As Boolean
+    Public Shared Function GetEmployeePermission(ByVal EmployeesId As Integer, sOpcion As String) As Boolean
         Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT ISNULL(" & sOpcion & ",0) FROM [Employees] WHERE [Id]=" & lId, cnn1)
-            Dim rdr As SqlDataReader
-            Dim Val As Boolean
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                Val = rdr(0)
-            End If
-            rdr.Close()
-            cnn1.Close()
+            Dim Val As Boolean = LocalAPI.GetNumericEscalar($"select isnull([{sOpcion}],0) from [Employees] where [Id]={EmployeesId}")
 
             If sOpcion.Contains("Deny_") Then
                 Return Not Val
