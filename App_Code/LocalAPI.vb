@@ -1059,6 +1059,17 @@ Public Class LocalAPI
         Return Trim(Name)
     End Function
 
+    Public Shared Function FormatByteSize(bytesSize As Int64) As String
+        Dim sizes As String() = {"B", "KB", "MB", "GB", "TB"}
+        Dim order As Integer = 0
+        While bytesSize >= 1024 AndAlso order < sizes.Length - 1
+            order += 1
+            bytesSize = bytesSize / 1024
+        End While
+        Dim result As String = String.Format("{0:0.##} {1}", bytesSize, sizes(order))
+        Return result
+    End Function
+
 #End Region
 
 #Region "RFP"
