@@ -168,7 +168,7 @@
                     <Content>
                         <%--<telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" EnableEmbeddedSkins="false" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">--%>
                         <div class="noprint" style="text-align: center">
-                            <telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" Width="100%" Skin="WebBlue">
+                            <telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" Width="100%" Skin="Silk">
                                 <Items>
 
                                     <%--Start menu--%>
