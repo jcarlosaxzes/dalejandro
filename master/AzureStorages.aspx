@@ -26,6 +26,18 @@
             <br />
 &nbsp;&nbsp;&nbsp;
             <br />
+            <br />
+
+             <asp:Button ID="Button3" runat="server" Text="Move Client Files" />&nbsp;&nbsp;  <asp:Label ID="lblCliet" runat="server" Text=""></asp:Label>
+            <br />
+&nbsp;&nbsp;&nbsp;
+            <br />
+            <br />
+
+             <asp:Button ID="Button4" runat="server" Text="Move RequestFroProporsal Files" />&nbsp;&nbsp;  <asp:Label ID="lblrfproporsal" runat="server" Text=""></asp:Label>
+            <br />
+&nbsp;&nbsp;&nbsp;
+            <br />
         </div>
     </form>
 </body>
