@@ -402,9 +402,9 @@
                                         <Items>
                                             <telerik:RadMenuItem runat="server" Text="Vendors List" NavigateUrl="~/adm/Vendors" Visible='<%# EmployeePermission("Deny_VendorsList") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/VendorTypes" Text="Vendor Types"
-                                                Visible='<%# EmployeePermission("DenyVendorTypes") %>'>
+                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/VendorTypes" Text="Vendor Types" Visible='<%# EmployeePermission("Deny_VendorTypes") %>'>
                                             </telerik:RadMenuItem>
+                                            <%----%>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-"></telerik:RadMenuItem>--%>
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/MonthlyExpenses" Text="Expenses" Visible='<%# EmployeePermission("Deny_CompanyProfile") And VersionCaracteristica(1101)%>'>
                                             </telerik:RadMenuItem>
