@@ -262,10 +262,11 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Select Id, Name from Company_Department where companyId=@companyId Order By Name">
+        SelectCommand="Select Id, Name from Company_Department where companyId=@companyId and Id<>@DepartmentId Order By Name">
         <SelectParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblDepartmentId" Name="DepartmentId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
 

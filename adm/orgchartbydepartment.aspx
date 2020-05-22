@@ -7,7 +7,7 @@
         <Rows>
             <telerik:LayoutRow>
                 <Content>
-                    <table style="width: 100%" cellpadding="4">
+                    <table class="table-condensed" style="width: 100%">
                         <tr>
                             <td style="width: 100px; text-align: right; vertical-align: bottom">
 
@@ -79,7 +79,11 @@
             <telerik:LayoutRow>
                 <Content>
                     <div class="foo" style="width:100%">
-                        <telerik:RadOrgChart ID="RadOrgChart1" runat="server" GroupColumnCount="2" EnableCollapsing="true" EnableGroupCollapsing="true" RenderMode="Lightweight" Width="100%">
+                        <telerik:RadOrgChart ID="RadOrgChart1" runat="server" 
+                            GroupColumnCount="2" 
+                            EnableCollapsing="true" 
+                            EnableGroupCollapsing="true" 
+                            RenderMode="Lightweight" Width="100%" Skin="Silk">
                             <GroupEnabledBinding>
                                 <NodeBindingSettings
                                     DataFieldID="Id"
