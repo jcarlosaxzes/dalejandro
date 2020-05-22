@@ -69,8 +69,8 @@ Public Class ADM_Main_Responsive
                 Response.RedirectPermanent("~/adm/useragree.aspx")
             Else
 
-                Dim Asunto As String
-                Dim MessId As Integer
+                'Dim Asunto As String
+                'Dim MessId As Integer
 
                 RadMenu2.DataBind()
                 'If LocalAPI.GetNotificationPending(Context.User.Identity.GetUserName(), Asunto, MessId) Then
@@ -91,17 +91,7 @@ Public Class ADM_Main_Responsive
 
     Public Function GetEmployeeImage(ByVal sEmail As String) As String
         Try
-
-            Dim sImageURL = LocalAPI.GetEmployeePhoto(sEmail)
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(Server.MapPath(sImageURL)) Then
-                    GetEmployeeImage = sImageURL
-                End If
-            End If
-            If Len(GetEmployeeImage) = 0 Then GetEmployeeImage = "~/Images/Employees/nophoto.jpg"
-
+            Return LocalAPI.GetEmployeePhotoURL(Email:=sEmail)
         Catch ex As Exception
         End Try
     End Function

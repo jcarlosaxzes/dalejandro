@@ -53,13 +53,13 @@
         End If
 
         ' Detactando si existe imagen
-        Dim i As Integer
-        For i = 0 To e.Node.GroupItems.Count - 1
-            ' Existe el archivo en disco?
-            If Not System.IO.File.Exists(Server.MapPath(e.Node.GroupItems(i).ImageUrl.ToString)) Then
-                e.Node.GroupItems(i).ImageUrl = "~/Images/Employees/nophoto.jpg"
-            End If
-        Next
+        'Dim i As Integer
+        'For i = 0 To e.Node.GroupItems.Count - 1
+        '    ' Existe el archivo en disco?
+        '    If Not System.IO.File.Exists(Server.MapPath(e.Node.GroupItems(i).ImageUrl.ToString)) Then
+        '        e.Node.GroupItems(i).ImageUrl = "~/Images/Employees/nophoto.jpg"
+        '    End If
+        'Next
 
 
 

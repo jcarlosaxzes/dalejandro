@@ -8237,9 +8237,16 @@ Public Class LocalAPI
 
     Public Shared Function GetEmployeePhotoURL(employeeId As Integer) As String
         Try
-            Dim email = GetEmployeeEmail(employeeId)
-            Dim sQuery = "SELECT PhotoURL FROM [dbo].[Employees_Photo] WHERE Email='" & email & "'"
-            Return GetStringEscalar(sQuery)
+            Dim email As String = GetEmployeeEmail(employeeId)
+            Return GetEmployeePhotoURL(Email:=email)
+        Catch ex As Exception
+        End Try
+    End Function
+    Public Shared Function GetEmployeePhotoURL(Email As String) As String
+        Try
+            Dim PhotoURL As String = GetStringEscalar($"SELECT isnull(PhotoURL,'') FROM [Employees_Photo] WHERE Email='{Email}'")
+
+            Return IIf(Len(PhotoURL) > 0, PhotoURL, "~/Images/Employees/nophoto.jpg")
         Catch ex As Exception
         End Try
     End Function
@@ -8690,24 +8697,6 @@ Public Class LocalAPI
                 Return Val
             End If
 
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Shared Function GetEmployeePhoto(ByVal sEmail As String) As String
-        Try
-            Dim sImageURL As String
-
-            If Len(sEmail) > 0 Then
-
-                Dim Id As Integer = GetNumericEscalar("SELECT top 1 Id FROM [Employees] WHERE [Email]='" & sEmail & "'")
-
-                If Id > 0 Then
-                    GetEmployeePhoto = "~/Images/Employees/" & Id & ".jpg"
-                End If
-
-            End If
         Catch ex As Exception
             Throw ex
         End Try

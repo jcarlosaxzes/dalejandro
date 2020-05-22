@@ -93,20 +93,6 @@ Public Class employees
         RadSchedulerLive.SelectedDate = CDate("01/01/" & cboYear2.SelectedValue)
     End Sub
 
-    Public Function GetEmployeePhotoURL(employeeId As Integer) As String
-        Try
-            Dim sImageURL = LocalAPI.GetEmployeePhotoURL(employeeId)
-
-            If IsNothing(sImageURL) Or Len(sImageURL) = 0 Then
-                Return "~/Images/Employees/NophotoForList.jpg"
-            End If
-
-            Return sImageURL
-
-        Catch ex As Exception
-        End Try
-    End Function
-
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName

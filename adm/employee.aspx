@@ -151,7 +151,7 @@
                             <table class="table-condensed" style="width: 100%">
                                 <tr>
                                     <td style="width: 180px;">
-                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(Eval("Id"))%>'
+                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>'
                                             runat="server" Width="45" Height="50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
                                     </td>
                                     <td>
