@@ -101,7 +101,7 @@ Public Class AzureStorageApi
 
             Return True
         Catch ex As Exception
-            Throw ex
+            Return False
         End Try
     End Function
 

@@ -2070,6 +2070,7 @@
     <Content Include="adm\subscribe\web.config" />
     <Content Include="jscript.min.js" />
     <Content Include="master\activeusers.aspx" />
+    <Content Include="master\AzureStorages.aspx" />
     <Content Include="master\billingplans.aspx" />
     <Content Include="master\company.aspx" />
     <Content Include="master\companylist.aspx" />
@@ -3804,7 +3805,9 @@
     <Compile Include="App_Code\eeg360.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="App_Code\LocalAPI.vb" />
+    <Compile Include="App_Code\LocalAPI.vb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="App_Code\OneSignalNotification.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -3998,6 +4001,13 @@
     <Compile Include="master\activeusers.aspx.vb">
       <DependentUpon>activeusers.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\AzureStorages.aspx.designer.vb">
+      <DependentUpon>AzureStorages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\AzureStorages.aspx.vb">
+      <DependentUpon>AzureStorages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="master\billingplans.aspx.designer.vb">
       <DependentUpon>billingplans.aspx</DependentUpon>
