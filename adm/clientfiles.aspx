@@ -46,7 +46,7 @@
 
                                     </td>
                                     <td style="width: 200px">
-                                         <telerik:RadTextBox ID="txtJob" runat="server" MaxLength="6" EmptyMessage="Job"></telerik:RadTextBox>
+                                         <telerik:RadTextBox ID="txtJob" runat="server" MaxLength="6" EmptyMessage="Job Code"></telerik:RadTextBox>
                                     </td>
                                     <td>
                                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
