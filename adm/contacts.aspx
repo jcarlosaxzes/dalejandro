@@ -100,7 +100,7 @@
                 </td>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Subconsultat
+                    <span class="glyphicon glyphicon-plus"></span> SubConsultant
                     </asp:LinkButton>
                 </td>
                 <td style="width: 80px">
