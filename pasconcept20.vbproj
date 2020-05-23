@@ -2068,6 +2068,7 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master" />
     <Content Include="adm\subscribe\web.config" />
+    <Content Include="Images\toolbar\orgchart-icon.png" />
     <Content Include="jscript.min.js" />
     <Content Include="master\activeusers.aspx" />
     <Content Include="master\AzureStorages.aspx" />
@@ -4328,7 +4329,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
