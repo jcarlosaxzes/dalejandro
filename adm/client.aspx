@@ -134,18 +134,19 @@
                     </div>
                     <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" DefaultMode="Edit">
                         <EditItemTemplate>
-                            <table class="table-condensed">
+                            <table class="table-condensed" style="width: 100%">
                                 <tr>
-                                    <td style="width: 220px">
+                                    <td style="width: 120px">
                                         <asp:Image ID="ImageClientPhoto" ImageUrl='<%# GetClientPhotoURL(Eval("Id"))%>'
                                             runat="server" Width="45" Height="50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
                                     </td>
-                                    <td>
+                                    <td style="width:10px">
                                         <telerik:RadButton ID="btnPhoto" runat="server" CommandName="Photo" Text="Client Photo" Visible="false">
                                             <Icon PrimaryIconCssClass=" rbUpload"></Icon>
                                         </telerik:RadButton>
                                     </td>
-                                        <asp:LinkButton ID="btnUpdateClient1" runat="server" CommandName="Update" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                                    <td style="text-align:center">
+                                        <asp:LinkButton ID="btnUpdateClient1" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                             Update Client
                                         </asp:LinkButton>
                                     <td>

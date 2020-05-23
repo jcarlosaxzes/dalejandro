@@ -174,12 +174,10 @@
                                                         CssClass="btn btn-default" UseSubmitBehavior="false" Visible="false">
                                                             <span class="glyphicon glyphicon-user"></span> Employee Photo
                                                     </asp:LinkButton>
-
-
                                                 </td>
-                                                <td style="text-align: right; padding-right: 25px">
+                                                <td style="text-align: center;">
                                                     <asp:LinkButton ID="btnUpdateEmployee1" runat="server" CommandName="Update" ToolTip="Upload Last Changes"
-                                                        CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                                        CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                                              Update Employee
                                                     </asp:LinkButton>
 
@@ -530,9 +528,9 @@
 
                                 <tr>
                                     <td></td>
-                                    <td style="text-align: right; padding-right: 25px">
+                                    <td style="text-align: center;">
                                         <asp:LinkButton ID="btnUpdate3" runat="server" CommandName="Update" ToolTip="Upload Last Changes"
-                                            CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                            CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                                     Update Employee
                                         </asp:LinkButton>
 
