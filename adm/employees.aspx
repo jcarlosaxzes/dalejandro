@@ -129,7 +129,7 @@
 
                                                 <asp:LinkButton ID="btnEditEmpl2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to Edit Employee Photo"
                                                     CommandName="EditPhoto" UseSubmitBehavior="false">
-                                                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# GetEmployeePhotoURL(Eval("Id"))%>' CssClass="photo"
+                                                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>' CssClass="photo"
                                                         runat="server" AlternateText=""></asp:Image>
                                                 </asp:LinkButton>
 

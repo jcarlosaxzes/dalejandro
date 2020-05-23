@@ -32,7 +32,7 @@
                     <Columns>
                         <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
                             <ItemTemplate>
-                                <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalApi.GetEmployeePhotoURL(Eval("EmployeeId"))%>'
+                                <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("EmployeeId"))%>'
                                     runat="server" Width="45" CssClass="img-thumbnail"></asp:Image>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
@@ -392,7 +392,7 @@
                             <Columns>
                                 <telerik:GridTemplateColumn HeaderText="Photo" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="70px" ReadOnly="true">
                                     <ItemTemplate>
-                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalApi.GetEmployeePhotoURL(Eval("EmployeeId"))%>'
+                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("EmployeeId"))%>'
                                             runat="server" Width="45" Height="50" AlternateText='<%# Eval("EmployeeName", "{0} photo") %>'></asp:Image>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>

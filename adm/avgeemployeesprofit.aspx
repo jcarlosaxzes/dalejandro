@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="Employees Efficiency Graphic" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="avgeemployeesprofit.aspx.vb" Inherits="pasconcept20.avgeemployeesprofit" %>
+
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style>
@@ -167,7 +169,7 @@
                         <Columns>
                             <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" ReadOnly="true">
                                 <ItemTemplate>
-                                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# GetEmployeePhotoURL(Eval("EmployeeId"))%>' CssClass="photo"
+                                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("EmployeeId"))%>' CssClass="photo"
                                                         runat="server" AlternateText=""></asp:Image>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>

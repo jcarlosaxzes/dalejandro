@@ -47,7 +47,7 @@
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEmployee" RenderOuterTable="false">
             <ItemTemplate>
                 <div class="col-md-2">
-                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# GetEmployeePhotoURL(Eval("Id")) %>'
+                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id")) %>'
                         runat="server" Width="150" Height="150" AlternateText="Employee Profile Picture"></asp:Image>
                 </div>
                 <div class="col-md-4">
