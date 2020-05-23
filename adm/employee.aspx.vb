@@ -1,4 +1,6 @@
-﻿Public Class employee
+﻿Imports Telerik.Web.UI
+
+Public Class employee
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -29,11 +31,26 @@
     Private Sub FormView1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormView1.ItemCommand
         Select Case e.CommandName
             Case "Photo"
-                'Response.Redirect("~/ADM/EditAvatar.aspx?Id=" & lblEmployeeId.Text & "&Entity=Employee")
-                Response.Redirect("~/ADM/UploadPhoto.aspx?Id=" & lblEmployeeId.Text & "&Entity=Employee")
+                CreateRadWindows(e.CommandName, "~/ADM/UploadPhoto.aspx?Id=" & lblEmployeeId.Text & "&Entity=Employee", 640, 480, True)
+
         End Select
     End Sub
 
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, bRefreshOnClientClose As Boolean)
+        RadWindowManager1.Windows.Clear()
+        Dim window1 As RadWindow = New RadWindow()
+        window1.NavigateUrl = sUrl
+        window1.VisibleOnPageLoad = True
+        window1.VisibleStatusbar = False
+        window1.ID = WindowsID
+        'window1.InitialBehaviors = WindowBehaviors.Maximize
+        window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize
+        window1.Width = Width
+        window1.Height = Height
+        window1.Modal = True
+        If bRefreshOnClientClose Then window1.OnClientClose = "OnClientClose"
+        RadWindowManager1.Windows.Add(window1)
+    End Sub
     Private Sub SqlDataSource1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Updated
         If lblInactive.Text <> e.Command.Parameters("@Inactive").Value Then
             If lblCompanyId.Text = 260962 Then
