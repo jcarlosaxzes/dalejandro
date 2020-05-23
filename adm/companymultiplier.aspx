@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Company Multiplier" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="companymultiplier.aspx.vb" Inherits="pasconcept20.companymultiplier" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style type="text/css">
@@ -299,7 +300,7 @@
                                             <Columns>
                                                 <telerik:GridTemplateColumn HeaderText="Photo" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                                                     <ItemTemplate>
-                                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# GetEmployeePhotoURL(Eval("employeeId"))%>' CssClass="photo"
+                                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("employeeId"))%>' CssClass="photo"
                                                             runat="server" AlternateText=""></asp:Image>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>

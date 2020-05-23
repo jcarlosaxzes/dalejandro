@@ -25,22 +25,6 @@
         btnView.DataBind()
     End Sub
 
-    Public Function GetEmployeePhotoURL(Id As Integer) As String
-        Try
-            Dim sImageURL = "~/Images/Employees/" & Id & ".jpg"
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(Server.MapPath(sImageURL)) Then
-                    GetEmployeePhotoURL = sImageURL
-                End If
-            End If
-            If Len(GetEmployeePhotoURL) = 0 Then GetEmployeePhotoURL = "http://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?s=235x235"
-
-        Catch ex As Exception
-        End Try
-    End Function
-
     Protected Sub btnMemory_Click(sender As Object, e As EventArgs) Handles btnMemory.Click
         LocalAPI.EmployeeEmailMemory(cboEmployees.SelectedValue, lblCompanyId.Text, cboYear.SelectedValue)
     End Sub
