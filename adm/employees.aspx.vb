@@ -101,7 +101,7 @@ Public Class employees
             Case "EditPhoto"
                 'sUrl = "~/ADM/EditAvatar.aspx?Id=" & e.CommandArgument & "&Entity=Employee"
                 sUrl = "~/ADM/UploadPhoto.aspx?Id=" & e.CommandArgument & "&Entity=Employee"
-                CreateRadWindows(e.CommandName, sUrl, 640, 400, True)
+                CreateRadWindows(e.CommandName, sUrl, 640, 480, True)
 
             Case "SendCredentials"
                 Dim sEmail As String = LocalAPI.GetEmployeeEmail(lId:=e.CommandArgument)

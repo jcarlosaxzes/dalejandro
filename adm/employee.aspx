@@ -58,6 +58,18 @@
             }
         </script>
     </telerik:RadCodeBlock>
+    <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+        <script type="text/javascript">
+            function OnClientClose(sender, args) {
+                var Photo = document.getElementById('<%=FormView1.FindControl("ImageEmployeePhoto").ClientID%>');
+                //var FormView = document.getElementById('<%= "Formview1.ClientID"%>');
+                Photo.reBind();
+            }
+        </script>
+    </telerik:RadCodeBlock>
+
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    </telerik:RadWindowManager>
 
     <div class="Formulario">
         <table class="table-condensed" style="width: 100%">
@@ -125,7 +137,7 @@
                                     <span class="DashboardFont2">Efficiency</span><br />
                                     <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("EmployeeEfficiency", "{0:P0}") %>'></asp:Label><br />
                                     <span class="DashboardFont3">Assigned/Worked Hours</span>
-                                    
+
                                 </td>
                             </tr>
                         </table>
@@ -159,7 +171,7 @@
                                             <tr>
                                                 <td>
                                                     <asp:LinkButton ID="btnPhoto" runat="server" CommandName="Photo" ToolTip="Upload Employee Photo"
-                                                        CssClass="btn btn-default" UseSubmitBehavior="false">
+                                                        CssClass="btn btn-default" UseSubmitBehavior="false" Visible="false">
                                                             <span class="glyphicon glyphicon-user"></span> Employee Photo
                                                     </asp:LinkButton>
 

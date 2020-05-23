@@ -44,9 +44,9 @@ Public Class uploadphoto
 
 
             Next
-            Label1.Text = "Photo has been uploaded successfully"
+            lblMessage.Text = "Photo has been uploaded successfully"
         Catch ex As Exception
-            Label1.Text = ex.Message
+            lblMessage.Text = ex.Message
         End Try
     End Sub
 End Class

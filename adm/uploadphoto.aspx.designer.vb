@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class uploadphoto
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class uploadphoto
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''RadScriptManager1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class uploadphoto
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+    
     '''<summary>
     '''RadAsyncUpload1 control.
     '''</summary>
@@ -39,7 +39,16 @@ Partial Public Class uploadphoto
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAsyncUpload1 As Global.Telerik.Web.UI.RadAsyncUpload
-
+    
+    '''<summary>
+    '''lblMessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
+    
     '''<summary>
     '''btnSave control.
     '''</summary>
@@ -48,16 +57,7 @@ Partial Public Class uploadphoto
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSave As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''Label1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class uploadphoto
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblCodeId control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class uploadphoto
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCodeId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblEntity control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class uploadphoto
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEntity As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblPath control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class uploadphoto
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPath As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblEmail control.
     '''</summary>

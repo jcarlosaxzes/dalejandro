@@ -141,7 +141,7 @@
                                             runat="server" Width="45" Height="50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
                                     </td>
                                     <td>
-                                        <telerik:RadButton ID="btnPhoto" runat="server" CommandName="Photo" Text="Client Photo">
+                                        <telerik:RadButton ID="btnPhoto" runat="server" CommandName="Photo" Text="Client Photo" Visible="false">
                                             <Icon PrimaryIconCssClass=" rbUpload"></Icon>
                                         </telerik:RadButton>
                                     </td>
