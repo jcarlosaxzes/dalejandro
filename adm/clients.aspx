@@ -135,7 +135,7 @@
                             </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column"
+                    <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column" HeaderStyle-Width="30%"
                         HeaderText="Contact info -- Customer Rep." SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <div>
@@ -148,11 +148,11 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter Type column"
-                        HeaderText="Client Type" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" ItemStyle-Font-Size="Small">
+                    <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter Type column" HeaderStyle-Width="25%"
+                        HeaderText="Type & NAICS Code" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small">
                         <ItemTemplate>
-                            <%# Eval("nType")%>
-                            <%# Eval("nSubtype")%>
+                            <%# Eval("nType")%> <br />
+                            <%# Eval("NAICSCodeAndTitle")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Activity" FilterControlAltText="Filter Activity column" ItemStyle-HorizontalAlign="Center"

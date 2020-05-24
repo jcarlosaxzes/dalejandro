@@ -95,4 +95,8 @@ Public Class client
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
     End Sub
+
+    Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
+        'Dim e1 As String = e.Command.Parameters("NAICS_code").Value
+    End Sub
 End Class
