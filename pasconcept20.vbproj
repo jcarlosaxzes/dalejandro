@@ -399,6 +399,7 @@
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
+    <Content Include="adm\naics_us_codes.aspx" />
     <Content Include="adm\newclient.aspx" />
     <Content Include="adm\newclientcollection.aspx" />
     <Content Include="adm\newcontact.aspx" />
@@ -3261,6 +3262,13 @@
       <DependentUpon>monthlyexpenses.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\naics_us_codes.aspx.designer.vb">
+      <DependentUpon>naics_us_codes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\naics_us_codes.aspx.vb">
+      <DependentUpon>naics_us_codes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\newclient.aspx.designer.vb">
       <DependentUpon>newclient.aspx</DependentUpon>
     </Compile>
@@ -4329,7 +4337,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

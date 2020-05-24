@@ -293,6 +293,15 @@ Partial Public Class client
     Protected WithEvents SqlDataSourceClientSources As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
+    '''SqlDataSourceNAICS control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceNAICS As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>

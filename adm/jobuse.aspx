@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="Use & Occupancy Classification" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="jobuse.aspx.vb" Inherits="pasconcept20.jobuse" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
          <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">

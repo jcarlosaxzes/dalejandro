@@ -182,6 +182,11 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/settingstatus" Text="Setting Status"
                                                 Visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
                                             </telerik:RadMenuItem>
+                                             <telerik:RadMenuItem runat="server" Text="Use & Occupancy Classification" NavigateUrl="~/adm/jobuse"
+                                                Visible='<%# EmployeePermission("Deny_UseClassification") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                            </telerik:RadMenuItem>
+                                             <telerik:RadMenuItem runat="server" Text="NAICS US Codes" NavigateUrl="~/adm/naics_us_codes">
+                                            </telerik:RadMenuItem>
                                         </Items>
                                     </telerik:RadMenuItem>
 
@@ -256,9 +261,7 @@
                                             </telerik:RadMenuItem>
                                             <%--<telerik:RadMenuItem runat="server" IsSeparator="True" Text="-" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:RadMenuItem>--%>
-                                            <telerik:RadMenuItem runat="server" Text="Use & Occupancy Classification" NavigateUrl="~/adm/JobUse"
-                                                Visible='<%# EmployeePermission("Deny_UseClassification") And VersionCaracteristica(206) And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
-                                            </telerik:RadMenuItem>
+                                           
                                         </Items>
                                     </telerik:RadMenuItem>
 
