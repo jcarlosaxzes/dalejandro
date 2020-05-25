@@ -741,7 +741,6 @@
             <asp:Parameter Name="StartingDate" Type="DateTime" />
             <asp:Parameter Name="Web" Type="String" />
             <asp:Parameter Name="Initials" Type="String" />
-            <asp:ControlParameter ControlID="lblClientId" Name="Id" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="Notes" Type="String" />
             <asp:Parameter Name="Email" />
             <asp:Parameter Name="Position" />
@@ -763,8 +762,10 @@
             <asp:Parameter Name="BillType" />
             <asp:Parameter Name="SalesRep1" />
             <asp:Parameter Name="SalesRep2" DefaultValue="0" />
-
+            <asp:Parameter Name="NAICS_code" />
+            
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblClientId" Name="Id" PropertyName="Text" Type="Int32" />
 
         </UpdateParameters>
     </asp:SqlDataSource>
