@@ -76,26 +76,14 @@
                         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" DefaultMode="Edit">
                             <EditItemTemplate>
                                 <div style="text-align:center">
-                                    <asp:LinkButton ID="btnUpdateSubconsultant1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false">
+                                    <asp:LinkButton ID="btnUpdateSubconsultant1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                         <span class="glyphicon glyphicon-save"></span> Update
                                     </asp:LinkButton>
 
                                 </div>
                                     <table class="table-condensed" style="width: 100%">
                                         <tr>
-                                            <td style="text-align:right;width: 200px" >Code:
-                                        <asp:Label ID="IdLabel1" runat="server" Text='<%# Eval("Id") %>' Visible="false" />
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="txtCode" runat="server" Text='<%# Bind("Code")%>' EmptyMessage="Up to 5 characters"
-                                                    MaxLength="5">
-                                                </telerik:RadTextBox>
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCode"
-                                                    ErrorMessage=" (*) Subconsultant code is required"></asp:RequiredFieldValidator>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align:right">Name:
+                                            <td style="text-align:right;width: 200px">Name:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="txtSubconsultantName" runat="server" Text='<%# Bind("Name") %>' MaxLength="80"
@@ -141,13 +129,29 @@
                                             </td>
                                             <td>
                                                 <telerik:RadComboBox ID="cboDiscipline" runat="server" ReadOnly="True" DataSourceID="SqlDataSourceDiscipline"
-                                                    DataTextField="Name" DataValueField="Id" Width="250px" SelectedValue='<%# Bind("disciplineId") %>' AppendDataBoundItems="true">
+                                                    DataTextField="Name" DataValueField="Id" Width="90%" SelectedValue='<%# Bind("disciplineId") %>' AppendDataBoundItems="true">
                                                     <Items>
                                                         <telerik:RadComboBoxItem Text="(Select discipline...)" Value="0" />
                                                     </Items>
                                                 </telerik:RadComboBox>
                                             </td>
                                         </tr>
+
+                                        <tr>
+                                            <td style="text-align: right"><a href="https://www.census.gov/eos/www/naics/" target="_blank">NAICS</a> US Code:
+                                            </td>
+                                            <td>
+                                                <telerik:RadComboBox ID="cboNAICS" runat="server" DataSourceID="SqlDataSourceNAICS"
+                                                    DataTextField="CodeAndTitle" DataValueField="Code" Width="90%" SelectedValue='<%# Bind("NAICS_code") %>'
+                                                    AppendDataBoundItems="true" MarkFirstMatch="True" Filter="Contains">
+                                                    <Items>
+                                                        <telerik:RadComboBoxItem runat="server" Text="(NAICS Code Not Defined...)" Value="0" />
+                                                    </Items>
+                                                </telerik:RadComboBox>
+
+                                            </td>
+                                        </tr>
+
                                         <tr>
                                             <td style="text-align:right" >Address Line 1:
                                             </td>
@@ -232,6 +236,15 @@
                                                 </telerik:RadTextBox>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="text-align:right" >Subconsultant Code:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="txtCode" runat="server" Text='<%# Bind("Code")%>' EmptyMessage="Up to 5 characters"
+                                                    MaxLength="5">
+                                                </telerik:RadTextBox>
+                                            </td>
+                                        </tr>
                                     </table>
                                     <h4>Billing Contact</h4>
                                     <table class="table-condensed" style="width: 100%">
@@ -273,7 +286,7 @@
                                     </table>
                                 
                                 <div style="text-align:center">
-                                    <asp:LinkButton ID="btnUpdateSubconsultant2" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                                    <asp:LinkButton ID="btnUpdateSubconsultant2" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                         <span class="glyphicon glyphicon-save"></span> Update
                                     </asp:LinkButton>
 
@@ -349,14 +362,13 @@
         </telerik:RadWizard>
     </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        UpdateCommand="SUBCONSULTAN_UPDATE" UpdateCommandType="StoredProcedure"
+        UpdateCommand="SUBCONSULTAN_v20_UPDATE" UpdateCommandType="StoredProcedure"
         SelectCommand="SUBCONSULTANT_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="lblSubconsultantId" Name="SubconsultantId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
             <asp:Parameter Name="Name" Type="String" />
             <asp:Parameter Name="disciplineId" Type="Int32" />
             <asp:Parameter Name="Organization" Type="String" />
@@ -377,7 +389,9 @@
             <asp:Parameter Name="Billing_Telephone" Type="String" />
             <asp:Parameter Name="Notification_acceptedrfp" Type="Boolean" />
             <asp:Parameter Name="Notification_declinedrfp" Type="Boolean" />
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:Parameter Name="NAICS_code" />
+
+            <asp:ControlParameter ControlID="lblSubconsultantId" Name="Id" PropertyName="Text" />
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDiscipline" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -400,8 +414,9 @@
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblSubconsultantId" Name="subconsultantId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
-
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceNAICS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="NAICS_US_Codes_FromCombobox_SELECT" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSubconsultantId" runat="server" Visible="False"></asp:Label>
