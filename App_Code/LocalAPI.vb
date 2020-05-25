@@ -3940,7 +3940,7 @@ Public Class LocalAPI
     ' Retorno: True si tuvo exito. 
     '          False en caso contrario 
     ' ................................................................................................................................
-    Public Shared Function NuevoCliente(ByVal sName As String, ByVal sEmail As String, ByVal sInitials As String,
+    Public Shared Function Client_INSERT(ByVal sName As String, ByVal sEmail As String, ByVal sInitials As String,
                                         ByVal companyId As Integer,
                                         Optional ByVal sCompany As String = "",
                                         Optional ByVal sAddress As String = "",
@@ -3961,14 +3961,16 @@ Public Class LocalAPI
                                         Optional ByVal Subtype As Integer = 0,
                                         Optional ByVal TAGs As String = "",
                                         Optional ByVal Billing_Email As String = "",
-                                        Optional ByVal Source As String = "") As Integer
+                                        Optional ByVal Source As String = "",
+                                        Optional ByVal NAICS_code As String = "",
+                                        Optional ByVal employeeId As Integer = 0) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' ClienteEmail
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "Client_INSERT"
+            cmd.CommandText = "Client_v20_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
 
             ' Set up the input parameter 
@@ -3996,6 +3998,8 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Subtype", Subtype)
             cmd.Parameters.AddWithValue("@TAGs", TAGs)
             cmd.Parameters.AddWithValue("@Source", Source)
+            cmd.Parameters.AddWithValue("@NAICS_code", NAICS_code)
+            cmd.Parameters.AddWithValue("@employeeId", employeeId)
 
             ' Execute the stored procedure.
             Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
@@ -9373,7 +9377,7 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-    Public Shared Function NewSubConsultant(ByVal sName As String, ByVal sEmail As String, ByVal sInitials As String,
+    Public Shared Function Subconsultant_INSERT(ByVal sName As String, ByVal sEmail As String, ByVal sInitials As String,
                                         ByVal companyId As Integer,
                                         Optional ByVal disciplineId As Integer = 0,
                                         Optional ByVal sOrganization As String = "",
@@ -9390,14 +9394,15 @@ Public Class LocalAPI
                                         Optional ByVal sPosition As String = "",
                                         Optional ByVal sBillingContact As String = "",
                                         Optional ByVal sBillingTelephone As String = "",
-                                        Optional ByVal sNotes As String = "") As Integer
+                                        Optional ByVal sNotes As String = "",
+                                        Optional ByVal NAICS_code As String = "") As Integer
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "Subconsultant_INSERT"
+            cmd.CommandText = "Subconsultant_v20_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
 
             ' Set up the input parameter 
@@ -9420,6 +9425,8 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Billing_contact", sBillingContact)
             cmd.Parameters.AddWithValue("@Billing_Telephone", sBillingTelephone)
             cmd.Parameters.AddWithValue("@Notes", sNotes)
+            cmd.Parameters.AddWithValue("@NAICS_code", NAICS_code)
+
             cmd.Parameters.AddWithValue("@companyId", companyId)
 
             ' Execute the stored procedure.

@@ -77,15 +77,6 @@ Partial Public Class newclient
     Protected WithEvents txtCompany As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''txtInitials control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtInitials As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
     '''txtEmail control.
     '''</summary>
     '''<remarks>
@@ -111,6 +102,15 @@ Partial Public Class newclient
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboSubtype As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboNAICS control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboNAICS As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''txtAdress control.
@@ -212,6 +212,15 @@ Partial Public Class newclient
     Protected WithEvents txtBillingEmail As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
+    '''txtInitials control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtInitials As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
     '''cboTags control.
     '''</summary>
     '''<remarks>
@@ -257,15 +266,6 @@ Partial Public Class newclient
     Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''RequiredFieldValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''Comparevalidator1 control.
     '''</summary>
     '''<remarks>
@@ -273,24 +273,6 @@ Partial Public Class newclient
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Comparevalidator1 As Global.System.Web.UI.WebControls.CompareValidator
-    
-    '''<summary>
-    '''lblCompanyId control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblEmployee control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblEmployee As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''SqlDataSourceSubtypes control.
@@ -336,6 +318,42 @@ Partial Public Class newclient
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClientSources As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceNAICS control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceNAICS As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''lblCompanyId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblEmployeeEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblEmployeeId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

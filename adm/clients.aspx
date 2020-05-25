@@ -148,7 +148,7 @@
                         <ItemTemplate>
                             <div>
                                 <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
-                                <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%>&nbsp;&nbsp;&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Cellular"))%>
+                                <%# String.Concat(LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")), " ", LocalAPI.PhoneHTML(Request.UserAgent, Eval("Cellular")))%>
                                 <a href='<%# Eval("Web")%>' target="_blank" title="View client web"><%#Eval("Web")%>
                            <div>
                             <small style="color:black"><%# Eval("SalesRep1")%></small>
