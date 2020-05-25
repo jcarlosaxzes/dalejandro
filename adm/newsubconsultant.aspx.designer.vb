@@ -68,15 +68,6 @@ Partial Public Class newsubconsultant
     Protected WithEvents txtCompany As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''txtInitials control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtInitials As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
     '''txtEmail control.
     '''</summary>
     '''<remarks>
@@ -84,6 +75,15 @@ Partial Public Class newsubconsultant
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtEmail As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''cboNAICS control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboNAICS As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''txtFullAddress control.
@@ -212,6 +212,15 @@ Partial Public Class newsubconsultant
     Protected WithEvents txtBillingTelephone As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
+    '''txtInitials control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtInitials As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
     '''txtNotes control.
     '''</summary>
     '''<remarks>
@@ -239,15 +248,6 @@ Partial Public Class newsubconsultant
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''RequiredFieldValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''RegularExpressionValidator1 control.
     '''</summary>
     '''<remarks>
@@ -273,6 +273,15 @@ Partial Public Class newsubconsultant
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDiscipline As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceNAICS control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceNAICS As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.

@@ -15,48 +15,24 @@
             txtName.Focus()
         End If
     End Sub
-    Private Function Validate() As Boolean
-        If Len(txtName.Text) = 0 Then
-            Master.ErrorMessage("Fill the name of subconsultant", 0)
-            txtName.Focus()
-        Else
-            If Len(txtEmail.Text) = 0 Then
-                Master.ErrorMessage("Fill the email of subconsultant", 0)
-                txtEmail.Focus()
-            Else
-                If Len(txtInitials.Text) = 0 Then
-                    Master.ErrorMessage("Fill the initials of subconsultant", 0)
-                    txtInitials.Focus()
-                Else
-                    Validate = True
-                End If
-            End If
-        End If
-    End Function
 
     Protected Sub btnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNew.Click
         Try
-            If Validate() Then
-                If Not LocalAPI.IsSubConsultanInitials(txtInitials.Text, lblCompanyId.Text) Then
-                    If Not LocalAPI.IsSubConsultanEmail(txtEmail.Text, lblCompanyId.Text) Then
-                        Dim subconsultantId As Integer = LocalAPI.NewSubConsultant(txtName.Text, txtEmail.Text, txtInitials.Text, lblCompanyId.Text, cboDiscipline.SelectedValue, txtCompany.Text,
-                                              txtAdress.Text, txtDireccion2.Text, txtCity.Text, txtState.Text, txtZipCode.Text, txtPhone.Text, txtCellular.Text,
-                                              txtFax.Text, txtWeb.Text, RadDatePickerStartingDate.SelectedDate, txtPosition.Text, txtBillingContact.Text, txtBillingTelephone.Text, txtNotes.Text)
-                        If subconsultantId > 0 Then
-                            Response.Redirect("~/adm/subconsultant.aspx?subconsultantId=" & subconsultantId)
-                        Else
-                            Master.ErrorMessage("Duplicate Subconsultant Email", 0)
-                            txtEmail.Focus()
-                        End If
-                    Else
-                        Master.ErrorMessage("Duplicate Subconsultant Email", 0)
-                        txtEmail.Focus()
-                    End If
+            If Not LocalAPI.IsSubConsultanEmail(txtEmail.Text, lblCompanyId.Text) Then
+                Dim subconsultantId As Integer = LocalAPI.Subconsultant_INSERT(txtName.Text, txtEmail.Text, txtInitials.Text, lblCompanyId.Text, cboDiscipline.SelectedValue, txtCompany.Text,
+                                      txtAdress.Text, txtDireccion2.Text, txtCity.Text, txtState.Text, txtZipCode.Text, txtPhone.Text, txtCellular.Text,
+                                      txtFax.Text, txtWeb.Text, RadDatePickerStartingDate.SelectedDate, txtPosition.Text, txtBillingContact.Text, txtBillingTelephone.Text, txtNotes.Text, cboNAICS.SelectedValue)
+                If subconsultantId > 0 Then
+                    Response.Redirect("~/adm/subconsultants.aspx")
                 Else
-                    Master.ErrorMessage("Duplicate Subconsultant code", 0)
-                    txtInitials.Focus()
+                    Master.ErrorMessage("Duplicate Subconsultant Email", 0)
+                    txtEmail.Focus()
                 End If
+            Else
+                Master.ErrorMessage("Duplicate Subconsultant Email", 0)
+                txtEmail.Focus()
             End If
+
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try

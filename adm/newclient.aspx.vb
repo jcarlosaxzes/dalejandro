@@ -17,31 +17,27 @@ Public Class newclient
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Client"
             Master.PageTitle = "Clients/New Client"
-            lblEmployee.Text = Master.UserEmail
+            lblEmployeeEmail.Text = Master.UserEmail
+            lblEmployeeId.Text = Master.UserId
             RadDatePickerStartingDate.MaxDate = Today.Date
             RadDatePickerStartingDate.SelectedDate = Today.Date
             cboSource.DataBind()
             cboSource.SelectedValue = 0
-            txtName.Focus()
+            cboSource.Focus()
         End If
     End Sub
     Protected Sub btnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNew.Click
         Try
-            If Not LocalAPI.IsClientInitials(txtInitials.Text, lblCompanyId.Text) Then
-                If Not LocalAPI.IsClientName(txtName.Text, lblCompanyId.Text) Then
-                    Dim clientId As Integer = LocalAPI.NuevoCliente(txtName.Text, txtEmail.Text, txtInitials.Text, lblCompanyId.Text, txtCompany.Text,
+            If Not LocalAPI.IsClientName(txtName.Text, lblCompanyId.Text) Then
+                Dim clientId As Integer = LocalAPI.Client_INSERT(txtName.Text, txtEmail.Text, txtInitials.Text, lblCompanyId.Text, txtCompany.Text,
                                           txtAdress.Text, txtDireccion2.Text, txtCity.Text, txtState.Text, txtZipCode.Text, txtPhone.Text, txtCellular.Text,
                                           "", txtWeb.Text, RadDatePickerStartingDate.SelectedDate, txtPosition.Text, txtBillingContact.Text, txtBillingTelephone.Text, "",
-                                          cboType.SelectedValue, cboSubtype.SelectedValue, cboTags.Text, txtBillingEmail.Text, cboSource.Text)
+                                          cboType.SelectedValue, cboSubtype.SelectedValue, cboTags.Text, txtBillingEmail.Text, cboSource.Text, cboNAICS.SelectedValue, lblEmployeeId.Text)
 
-                    Response.Redirect("~/ADM/client.aspx?clientId=" & clientId & "&FullPage=1")
-                Else
-                    Master.ErrorMessage("There is already an client with Name: " & txtName.Text)
-                    txtName.Focus()
-                End If
+                Response.Redirect("~/adm/clients.aspx")
             Else
-                Master.ErrorMessage("Duplicate client code", 0)
-                txtInitials.Focus()
+                Master.ErrorMessage("There is already an client with Name: " & txtName.Text)
+                txtName.Focus()
             End If
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

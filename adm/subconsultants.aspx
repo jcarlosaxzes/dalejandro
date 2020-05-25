@@ -96,10 +96,11 @@
                     <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column"
                         HeaderText="Contact info" SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <div><a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
-                                <%# String.Concat(Eval("Telephone"), " ", Eval("CellPhone"))%>
+                            <div>
+                                <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
+                                <%# String.Concat(LocalAPI.PhoneHTML(Request.UserAgent, Eval("Telephone")), " ", LocalAPI.PhoneHTML(Request.UserAgent, Eval("CellPhone")))%>
                             </div>
-                            <a class="lnkGrid" href='<%# Eval("WebPage")%>' target="_blank" title="View web"><%#Eval("WebPage")%>
+                            <a href='<%# Eval("WebPage")%>' target="_blank" title="View web"><%#Eval("WebPage")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn ReadOnly="True" HeaderText="Actions" UniqueName="credentials" HeaderTooltip="Actions"
