@@ -13,9 +13,14 @@ Public Class Global_asax
         Database.SetInitializer(Of ApplicationDbContext)(Nothing)
     End Sub
     Private Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
+
         Dim exc As Exception = Server.GetLastError()
-        InsertSysError(exc)
-        Server.Transfer("~/ErrorPage.aspx", True)
+        If TypeOf exc Is HttpUnhandledException Then
+            If exc.InnerException IsNot Nothing Then
+                InsertSysError(exc)
+                Server.Transfer("~/ErrorPage.aspx", True)
+            End If
+        End If
     End Sub
 
     Private Sub InsertSysError(objError As Exception)
