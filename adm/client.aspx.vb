@@ -9,7 +9,8 @@ Public Class client
                 lblCompanyId.Text = Session("companyId")
                 lblClientId.Text = Request.QueryString("clientId")
 
-                If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                'Not necessary, Client_Select include @companyId
+                'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
                 lblEmployee.Text = Master.UserEmail
                     lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
@@ -32,7 +33,7 @@ Public Class client
     End Sub
 
     Protected Sub FormView1_ItemUpdated(sender As Object, e As FormViewUpdatedEventArgs) Handles FormView1.ItemUpdated
-        lblStatus.Text = "Updated Client Details: <b>" & LocalAPI.GetClientName(CInt(lblClientId.Text)) & "</b>"
+        Master.InfoMessage("Updated Client Record")
 
         Try
             ' Update Latitude, Longitude
@@ -44,7 +45,6 @@ Public Class client
     End Sub
 
     Protected Sub FormView1_ItemUpdating(sender As Object, e As FormViewUpdateEventArgs) Handles FormView1.ItemUpdating
-        lblStatus.Text = ""
         e.NewValues("Subtype") = CType(FormView1.FindControl("cboSubtype"), RadComboBox).SelectedValue
         e.NewValues("TAGS") = CType(FormView1.FindControl("lblActualTAGS"), Label).Text + CType(FormView1.FindControl("cboTags"), RadAutoCompleteBox).Text
     End Sub
@@ -53,7 +53,7 @@ Public Class client
         Try
             SqlDataSource1.Update()
         Catch ex As Exception
-            lblStatus.Text = "Error. " & ex.Message
+            Master.ErrorMessage("Error. " & ex.Message)
 
         End Try
 

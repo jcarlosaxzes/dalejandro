@@ -14,22 +14,22 @@ Option Explicit On
 Partial Public Class newvendor
     
     '''<summary>
-    '''RequiredFieldValidator1 control.
+    '''btnBack control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''RequiredFieldValidator5 control.
+    '''vsClient control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents vsClient As Global.System.Web.UI.WebControls.ValidationSummary
     
     '''<summary>
     '''txtName control.
@@ -39,6 +39,15 @@ Partial Public Class newvendor
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtName As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''txtPosition control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPosition As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
     '''txtCompany control.
@@ -68,13 +77,13 @@ Partial Public Class newvendor
     Protected WithEvents cboSubtype As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''txtPosition control.
+    '''cboNAICS control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtPosition As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents cboNAICS As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''txtFullAddress control.
@@ -203,6 +212,24 @@ Partial Public Class newvendor
     Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''RequiredFieldValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''RequiredFieldValidator5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
@@ -230,6 +257,15 @@ Partial Public Class newvendor
     Protected WithEvents SqlDataSourceSubtypes As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
+    '''SqlDataSourceNAICS control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceNAICS As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -253,9 +289,9 @@ Partial Public Class newvendor
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

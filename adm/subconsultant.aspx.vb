@@ -25,6 +25,7 @@
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewSubconsultBalance.Visible = Not FormViewSubconsultBalance.Visible
     End Sub
+
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Response.Redirect("~/adm/subconsultants.aspx")
     End Sub

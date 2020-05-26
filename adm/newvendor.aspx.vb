@@ -46,6 +46,10 @@
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Dim vendorId As Integer = e.Command.Parameters("@Id_OUT").Value
-        Response.Redirect("~/ADM/Vendor.aspx?vendorId=" & vendorId)
+        Response.Redirect("~/ADM/Vendors.aspx")
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/ADM/Vendors.aspx")
     End Sub
 End Class

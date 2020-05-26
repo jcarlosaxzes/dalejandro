@@ -130,7 +130,12 @@
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Client Details" StepType="Step">
                     <div style="padding-left: 10px">
-                        <asp:Label ID="lblStatus" runat="server" Style="font-size: 10pt; color: forestgreen; font-family: Calibri, Verdana"></asp:Label>
+                        <div>
+                            <asp:ValidationSummary ID="vsClient" runat="server" ValidationGroup="UpdateClient" ForeColor="Red"
+                                HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+                                        There were this errors:"></asp:ValidationSummary>
+                        </div>
+
                     </div>
                     <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" DefaultMode="Edit">
                         <EditItemTemplate>
@@ -162,8 +167,6 @@
                                         <telerik:RadTextBox ID="txtClientName" runat="server" Text='<%# Bind("Name") %>' MaxLength="80"
                                             Width="90%" EmptyMessage="Required">
                                         </telerik:RadTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtClientName"
-                                            ErrorMessage="(*) Name is Required" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -172,12 +175,6 @@
                                     <td>
                                         <telerik:RadTextBox ID="txtEmail" runat="server" Text='<%# Bind("Email") %>' MaxLength="128" Width="90%" EmptyMessage="Required">
                                         </telerik:RadTextBox>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtEmail"
-                                            runat="server" ErrorMessage="(*) Enter a valid email address"
-                                            ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                                            Display="Dynamic"></asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmail"
-                                            ErrorMessage="(*) Email is Required" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -467,11 +464,21 @@
                             </table>
 
                             <div style="text-align: center">
-                                <asp:LinkButton ID="btnUpdateClient2" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
+                                <asp:LinkButton ID="btnUpdateClient2" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="UpdateClient">
                                      Update Client
                                 </asp:LinkButton>
                                 <br />
                                 <br />
+                            </div>
+                            <div>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtClientName" ValidationGroup="UpdateClient"
+                                    ErrorMessage="(*) Name is Required" Display="None"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtEmail" ValidationGroup="UpdateClient"
+                                    runat="server" ErrorMessage="(*) Enter a valid email address"
+                                    ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
+                                    Display="None"></asp:RegularExpressionValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmail" ValidationGroup="UpdateClient"
+                                    ErrorMessage="(*) Email is Required" Display="None"></asp:RequiredFieldValidator>
                             </div>
                         </EditItemTemplate>
 
@@ -763,7 +770,7 @@
             <asp:Parameter Name="SalesRep1" />
             <asp:Parameter Name="SalesRep2" DefaultValue="0" />
             <asp:Parameter Name="NAICS_code" />
-            
+
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblClientId" Name="Id" PropertyName="Text" Type="Int32" />
 

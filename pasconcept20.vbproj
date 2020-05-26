@@ -369,7 +369,6 @@
     <Content Include="adm\employee_permissions.aspx" />
     <Content Include="adm\employee_permissions_form.aspx" />
     <Content Include="adm\employee_status_form.aspx" />
-    <Content Include="adm\excelcalculator.aspx" />
     <Content Include="adm\expenseschart.aspx" />
     <Content Include="adm\exportclientscsv.aspx" />
     <Content Include="adm\historylog.aspx" />
@@ -3045,13 +3044,6 @@
       <DependentUpon>employee_status_form.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\excelcalculator.aspx.designer.vb">
-      <DependentUpon>excelcalculator.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\excelcalculator.aspx.vb">
-      <DependentUpon>excelcalculator.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="adm\expenseschart.aspx.designer.vb">
       <DependentUpon>expenseschart.aspx</DependentUpon>
     </Compile>
@@ -4337,7 +4329,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

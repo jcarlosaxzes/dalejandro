@@ -519,9 +519,6 @@
                                             <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/Position" Text="Employee's Positions"
                                                 Visible='<%# EmployeePermission("Deny_NewEmployee")%>'>
                                             </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/adm/ExcelCalculator" Target="_blank"
-                                                Text="Sheet Calculator">
-                                            </telerik:RadMenuItem>
                                         </Items>
                                     </telerik:RadMenuItem>
 
