@@ -10905,6 +10905,12 @@ Public Class LocalAPI
                                         "[PaymentText" & i + 1 & "]='" & sArrText(i) & "' " &
                                         "WHERE [Id]=" & proposalId
                                         )
+                    Else
+                        ExecuteNonQuery("UPDATE Proposal SET " &
+                                       "[PaymentSchedule" & i + 1 & "]=Null," &
+                                       "[PaymentText" & i + 1 & "]='" & sArrText(i) & "' " &
+                                       "WHERE [Id]=" & proposalId
+                                       )
                     End If
                 Next
             End If

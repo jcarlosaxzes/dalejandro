@@ -258,7 +258,7 @@
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     <h3 class="company-name m-t-1">Payments Schedule</h3>
-                                    <asp:Panel ID="PanelPS1" runat="server" Visible='<%# Eval("PaymentSchedule1") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS1" runat="server" Visible='<%# Len(Eval("PaymentText1")) > 0 %>' CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <thead>
                                                 <tr>
@@ -288,7 +288,7 @@
                                             </tbody>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS2" runat="server" Visible='<%# Eval("PaymentSchedule2") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS2" runat="server" Visible='<%# Len(Eval("PaymentText2")) > 0 %>' CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">
@@ -306,7 +306,7 @@
                                             </tr>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS3" runat="server" Visible='<%# Eval("PaymentSchedule3") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS3" runat="server" Visible='<%# Len(Eval("PaymentText3")) > 0 %>'  CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">
@@ -324,7 +324,7 @@
                                             </tr>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS4" runat="server" Visible='<%# Eval("PaymentSchedule4") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS4" runat="server" Visible='<%# Len(Eval("PaymentText4")) > 0 %>'  CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">
@@ -342,7 +342,7 @@
                                             </tr>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS5" runat="server" Visible='<%# Eval("PaymentSchedule5") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS5" runat="server"  Visible='<%# Len(Eval("PaymentText5")) > 0 %>'  CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">
@@ -360,7 +360,7 @@
                                             </tr>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS6" runat="server" Visible='<%# Eval("PaymentSchedule6") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS6" runat="server" Visible='<%# Len(Eval("PaymentText6")) > 0 %>' CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">
@@ -378,7 +378,7 @@
                                             </tr>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS7" runat="server" Visible='<%# Eval("PaymentSchedule7") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS7" runat="server"  Visible='<%# Len(Eval("PaymentText7")) > 0 %>'  CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">
@@ -396,7 +396,7 @@
                                             </tr>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS8" runat="server" Visible='<%# Eval("PaymentSchedule8") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS8" runat="server"  Visible='<%# Len(Eval("PaymentText8")) > 0 %>'  CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">
@@ -414,7 +414,7 @@
                                             </tr>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS9" runat="server" Visible='<%# Eval("PaymentSchedule9") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS9" runat="server"  Visible='<%# Len(Eval("PaymentText9")) > 0 %>'  CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">
@@ -432,7 +432,7 @@
                                             </tr>
                                         </table>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS10" runat="server" Visible='<%# Eval("PaymentSchedule10") > 0%>' CssClass="table-responsive">
+                                    <asp:Panel ID="PanelPS10" runat="server"  Visible='<%# Len(Eval("PaymentText10")) > 0 %>'  CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <tr>
                                                 <td style="text-align: center; width: 100px">

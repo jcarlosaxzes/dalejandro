@@ -392,6 +392,7 @@ Public Class proposalnewwizard
         cboPaymentSchedules.SelectedValue = -1
         divFormPS.Visible = False
         divBtnPS.Visible = True
+        FormViewPS.DataBind()
     End Sub
 
 #End Region
