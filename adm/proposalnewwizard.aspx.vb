@@ -404,8 +404,8 @@ Public Class proposalnewwizard
                 Dim tempName = e.FileInfo.KeyName
                 Dim fileExt = IO.Path.GetExtension(tempName)
                 Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
-                AzureStorageApi.CopyFile(tempName, newName)
-                AzureStorageApi.DeleteFile(tempName)
+                AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+                AzureStorageApi.DeleteFile(tempName, 0)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
                 e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType)
                 If e.IsValid Then
@@ -438,7 +438,7 @@ Public Class proposalnewwizard
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetClientProsalJobAzureFileKeyName(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Source").Value)
-        AzureStorageApi.DeleteFile(KeyName)
+        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
     End Sub
 
     Private Sub SqlDataSourceProposal_Step1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProposal_Step1.Updating

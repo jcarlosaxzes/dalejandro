@@ -10,13 +10,15 @@ Public Class AzureStorageApi
     Public Shared Function GetConexion() As String
         Return "DefaultEndpointsProtocol=https;AccountName=pasconceptstorage;AccountKey=hwAAeswB6wU9E6nF1f2s33k40vp1A4Vo4XeWrkA/eXIuULghBFjzjl0En8QMAf1g3ndTBktzpAnM5sXMBA4qdQ==;EndpointSuffix=core.windows.net"
     End Function
-    Public Shared Function DeleteFile(ByVal KeyName As String) As Boolean
+    Public Shared Function DeleteFile(ByVal KeyName As String, companyId As Integer) As Boolean
         Try
             Dim containerName As String = "documents"
             Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
             Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
             Dim container As CloudBlobContainer = blobClient.GetContainerReference(containerName)
             Dim blockBlob As CloudBlockBlob = container.GetBlockBlobReference(KeyName)
+            blockBlob.FetchAttributes()
+            LocalAPI.AzureStorage_RemoveCompanyUsedSpaces(companyId, blockBlob.Properties.Length)
             blockBlob.DeleteIfExists()
             Return True
         Catch ex As Exception
@@ -62,7 +64,7 @@ Public Class AzureStorageApi
         End Try
     End Function
 
-    Public Shared Function UploadFilesStream(file As Stream, KeyName As String, contentType As String, companyId As String) As String
+    Public Shared Function UploadFilesStream(file As Stream, KeyName As String, contentType As String, companyId As Integer) As String
         Try
 
             ' Create a BlobServiceClient object which will be used to create a container client
@@ -82,13 +84,15 @@ Public Class AzureStorageApi
                 file.Close()
             End Using
 
+            blockBlob.FetchAttributes()
+            LocalAPI.AzureStorage_AddCompanyUsedSpaces(companyId, blockBlob.Properties.Length)
             Return blockBlob.Uri.AbsoluteUri
         Catch ex As Exception
             Throw ex
         End Try
     End Function
 
-    Public Shared Function CopyFile(SourceKeyName As String, DestinationKeyName As String) As Boolean
+    Public Shared Function CopyFile(SourceKeyName As String, DestinationKeyName As String, companyId As Integer) As Boolean
         Try
             Dim containerName As String = "documents"
             Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
@@ -96,9 +100,10 @@ Public Class AzureStorageApi
             Dim container As CloudBlobContainer = blobClient.GetContainerReference(containerName)
             Dim sourceBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(SourceKeyName)
             Dim destinationBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(DestinationKeyName)
-
             destinationBlockBlob.StartCopy(sourceBlockBlob)
 
+            sourceBlockBlob.FetchAttributes()
+            LocalAPI.AzureStorage_AddCompanyUsedSpaces(companyId, sourceBlockBlob.Properties.Length)
             Return True
         Catch ex As Exception
             Return False
@@ -134,5 +139,23 @@ Public Class AzureStorageApi
         End Try
     End Function
 
+
+    Public Shared Function DeleteDirectory(directory As String) As Boolean
+        Try
+
+            Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
+            Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
+            Dim container As CloudBlobContainer = blobClient.GetContainerReference("documents")
+            For Each blob As IListBlobItem In container.GetDirectoryReference(directory).ListBlobs(True)
+                If TypeOf blob Is CloudBlob Then
+                    CType(blob, CloudBlob).DeleteIfExists()
+                End If
+            Next
+
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
 End Class

@@ -38,6 +38,14 @@
             <br />
 &nbsp;&nbsp;&nbsp;
             <br />
+            <br />
+            <br />
+
+             <asp:Button ID="Invoices_payment" runat="server" Text="Move Invoces payments Files" />&nbsp;&nbsp;  <asp:Label ID="lblInvoice_payment" runat="server" Text=""></asp:Label>
+            <br />
+&nbsp;&nbsp;&nbsp;
+            <br />
+
         </div>
     </form>
 </body>

@@ -88,8 +88,8 @@ Public Class Job_images_files
                 Dim tempName = e.FileInfo.KeyName
                 Dim fileExt = IO.Path.GetExtension(tempName)
                 Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
-                AzureStorageApi.CopyFile(tempName, newName)
-                AzureStorageApi.DeleteFile(tempName)
+                AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+                AzureStorageApi.DeleteFile(tempName, 0)
 
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
                 e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 9, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, "image/png")
