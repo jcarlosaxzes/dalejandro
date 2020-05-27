@@ -37,7 +37,7 @@
                     }
                 </script>
                         <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                            <Icon PrimaryIconCssClass=" rbPrint" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
+                            <Icon PrimaryIconCssClass="rbPrint"></Icon>
                         </telerik:RadButton>
                     </div>
                 </Content>
@@ -52,10 +52,10 @@
                             <PagerStyle Mode="Slider" AlwaysVisible="false" />
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                    HeaderText="Edit" HeaderStyle-Width="30px">
+                                    HeaderText="" HeaderStyle-Width="50px">
                                 </telerik:GridEditCommandColumn>
                                 <telerik:GridTemplateColumn DataField="Name"  ItemStyle-HorizontalAlign="Left"
-                                    FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                    FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
                                         <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
@@ -66,7 +66,7 @@
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
-                                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                 </telerik:GridButtonColumn>
                             </Columns>
                             <EditFormSettings>
@@ -86,7 +86,7 @@
     </telerik:RadPageLayout>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="DELETE FROM SubConsultans_disciplines WHERE (Id = @Id)"
+        DeleteCommand="SubConsultans_disciplines_DELETE" DeleteCommandType="StoredProcedure"
         InsertCommand="INSERT INTO SubConsultans_disciplines(companyId, Name) VALUES (@companyId, @Name)"
         SelectCommand="SELECT Id, Name FROM SubConsultans_disciplines WHERE (companyId = @companyId) ORDER BY Name"
         UpdateCommand="UPDATE SubConsultans_disciplines SET Name = @Name WHERE (Id = @Id)">
