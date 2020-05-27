@@ -137,8 +137,8 @@ Public Class Job_accounting
             Dim tempName = e.FileInfo.KeyName
             Dim fileExt = IO.Path.GetExtension(tempName)
             Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
-            AzureStorageApi.CopyFile(tempName, newName)
-            AzureStorageApi.DeleteFile(tempName)
+            AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+            AzureStorageApi.DeleteFile(tempName, 0)
 
             lblOriginalFileName.Text = e.FileInfo.OriginalFileName
             lblKeyName.Text = newName

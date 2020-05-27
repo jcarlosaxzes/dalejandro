@@ -192,8 +192,7 @@ Public Class invoices
             Dim tempName = e.FileInfo.KeyName
             Dim fileExt = IO.Path.GetExtension(tempName)
             Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
-            AzureStorageApi.CopyFile(tempName, newName)
-            AzureStorageApi.DeleteFile(tempName)
+            AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
 
             lblOriginalFileName.Text = e.FileInfo.OriginalFileName
             lblKeyName.Text = newName

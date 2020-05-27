@@ -24,9 +24,9 @@ Public Class AzureStorages
                 Dim Id = reader.GetInt32(0)
                 Dim DesName = "Companies/" & txtCompanyId.Text & "/" & IO.Path.GetFileName(Keyname)
                 If Keyname <> DesName Then
-                    If AzureStorageApi.CopyFile(Keyname, DesName) Then
+                    If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Jobs_azureuploads] set DesName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname)
+                        AzureStorageApi.DeleteFile(Keyname, txtCompanyId.Text)
                     Else
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Jobs_azureuploads] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                     End If
@@ -59,9 +59,9 @@ Public Class AzureStorages
                 Dim Id = reader.GetInt32(0)
                 Dim DesName = "Companies/" & txtCompanyId.Text & "/" & IO.Path.GetFileName(Keyname)
                 If Keyname <> DesName Then
-                    If AzureStorageApi.CopyFile(Keyname, DesName) Then
+                    If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Proposals_azureuploads] set DesName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname)
+                        AzureStorageApi.DeleteFile(Keyname, 0)
                     Else
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Proposals_azureuploads] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                     End If
@@ -94,9 +94,9 @@ Public Class AzureStorages
                 Dim Id = reader.GetInt32(0)
                 Dim DesName = "Companies/" & txtCompanyId.Text & "/" & IO.Path.GetFileName(Keyname)
                 If Keyname <> DesName Then
-                    If AzureStorageApi.CopyFile(Keyname, DesName) Then
+                    If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Clients_azureuploads] set DesName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname)
+                        AzureStorageApi.DeleteFile(Keyname, 0)
                     Else
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Clients_azureuploads] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                     End If
@@ -128,9 +128,9 @@ Public Class AzureStorages
                 Dim Id = reader.GetInt32(0)
                 Dim DesName = "Companies/" & txtCompanyId.Text & "/" & IO.Path.GetFileName(Keyname)
                 If Keyname <> DesName Then
-                    If AzureStorageApi.CopyFile(Keyname, DesName) Then
+                    If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[RequestForProposals_azureuploads] set DesName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname)
+                        AzureStorageApi.DeleteFile(Keyname, 0)
                     Else
                         LocalAPI.ExecuteNonQuery($"update [dbo].[RequestForProposals_azureuploads] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                     End If
