@@ -64,18 +64,6 @@
                                         <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="Description" FilterControlAltText="Filter Description column" HeaderText="Description"
-                                    SortExpression="Description" UniqueName="Description" HeaderStyle-HorizontalAlign="Center"  ItemStyle-HorizontalAlign="Left">
-                                    <EditItemTemplate>
-                                        <telerik:RadTextBox ID="DescriptionTextBox" runat="server" MaxLength="512" Width="600px" TextMode="MultiLine" Rows="4"
-                                            Text='<%# Bind("Description") %>'>
-                                        </telerik:RadTextBox>
-                                    </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:Label ID="DescriptionLabel" runat="server"
-                                            Text='<%# Eval("Description") %>'></asp:Label>
-                                    </ItemTemplate>
-                                </telerik:GridTemplateColumn>
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
@@ -99,9 +87,9 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM SubConsultans_disciplines WHERE (Id = @Id)"
-        InsertCommand="INSERT INTO SubConsultans_disciplines(companyId, Name, Description) VALUES (@companyId, @Name, @Description)"
-        SelectCommand="SELECT Id, Name, Description FROM SubConsultans_disciplines WHERE (companyId = @companyId) ORDER BY Name"
-        UpdateCommand="UPDATE SubConsultans_disciplines SET Name = @Name, Description = @Description WHERE (Id = @Id)">
+        InsertCommand="INSERT INTO SubConsultans_disciplines(companyId, Name) VALUES (@companyId, @Name)"
+        SelectCommand="SELECT Id, Name FROM SubConsultans_disciplines WHERE (companyId = @companyId) ORDER BY Name"
+        UpdateCommand="UPDATE SubConsultans_disciplines SET Name = @Name WHERE (Id = @Id)">
         <DeleteParameters>
             <asp:Parameter Name="Id" />
         </DeleteParameters>
@@ -110,13 +98,11 @@
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="Name" />
-            <asp:Parameter Name="Description" />
             <asp:Parameter Name="Id" />
         </UpdateParameters>
         <InsertParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:Parameter Name="Name" />
-            <asp:Parameter Name="Description" />
         </InsertParameters>
     </asp:SqlDataSource>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>

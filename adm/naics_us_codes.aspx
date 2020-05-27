@@ -8,11 +8,11 @@
                 <tr>
                     <td style="width: 80px; text-align: left">
                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" Width="40px"
-                            UseSubmitBehavior="false" ToolTip="View NAICS Table View">
+                            UseSubmitBehavior="false" ToolTip="View NAICS Table View" Visible="false">
                             <span class="glyphicon glyphicon-align-justify"></span>
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnTreePage" runat="server" CssClass="btn btn-info" Width="40px"
-                            UseSubmitBehavior="false" ToolTip="View NAICS Tree View" Visible="false">
+                            UseSubmitBehavior="false" ToolTip="View NAICS Tree View" Visible="true">
                            <span class="fas fa-stream"></span>
                         </asp:LinkButton>
                     </td>
@@ -46,7 +46,7 @@
     </div>
     <div>
         <telerik:RadTreeList ID="RadTreeListNaics" runat="server" DataSourceID="SqlDataSource1" Skin="Bootstrap"
-            AutoGenerateColumns="False" ParentDataKeyNames="rootCode" DataKeyNames="Code"
+            AutoGenerateColumns="False" ParentDataKeyNames="rootCode" DataKeyNames="Code" Visible="false"
             HeaderStyle-HorizontalAlign="Center">
             <Columns>
                 <telerik:TreeListTemplateColumn DataField="Code" HeaderText="Code" UniqueName="Code" HeaderStyle-Width="150px"  ItemStyle-Font-Bold="true" ItemStyle-Font-Size="20px">
@@ -65,7 +65,7 @@
             </Columns>
 
         </telerik:RadTreeList>
-        <telerik:RadGrid ID="RadGridNaics" runat="server" DataSourceID="SqlDataSource1" Skin="Bootstrap" Visible="false"
+        <telerik:RadGrid ID="RadGridNaics" runat="server" DataSourceID="SqlDataSource1" Skin="Bootstrap" Visible="true"
             AutoGenerateColumns="False" Culture="en-US" HeaderStyle-HorizontalAlign="Center" DataKeyNames="Code">
 
             <MasterTableView DataKeyNames="Code" DataSourceID="SqlDataSource1">
