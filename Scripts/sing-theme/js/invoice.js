@@ -16,6 +16,7 @@ $(document).ready(function () {
         e.preventDefault();
         window.print();
     });
-    // Super Hacky way to prevent 'Estandar' style to load
+
+    $('[href="../App_Themes/Estandar/Estandar.min.css"').remove();
     $('[href="../App_Themes/Estandar/Estandar.css"').remove();
 });
