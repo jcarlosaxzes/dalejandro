@@ -257,7 +257,9 @@
                             </div>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h3 class="company-name m-t-1">Payments Schedule</h3>
+                                    <asp:Panel ID="Panel1" runat="server" Visible='<%# Len(Eval("PaymentText1")) > 0 %>' >
+                                        <h3 class="company-name m-t-1">Payments Schedule</h3>
+                                    </asp:Panel>
                                     <asp:Panel ID="PanelPS1" runat="server" Visible='<%# Len(Eval("PaymentText1")) > 0 %>' CssClass="table-responsive">
                                         <table class="table no-margin-button">
                                             <thead>
