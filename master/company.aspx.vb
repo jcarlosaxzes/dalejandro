@@ -20,8 +20,8 @@
 
     Protected Sub RadToolBar1_ButtonClick(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadToolBarEventArgs) Handles RadToolBar1.ButtonClick
         Select Case e.Item.Text
-            Case "Users"
-                Response.RedirectPermanent("~/MASTER/Users.aspx?companyId=" & lblCompanyId.Text)
+            Case "Employees"
+                Response.RedirectPermanent("~/MASTER/employees.aspx?companyId=" & lblCompanyId.Text)
             Case "Billing"
                 Response.RedirectPermanent("~/MASTER/CompanyPayments.aspx?companyId=" & lblCompanyId.Text)
             Case "Analytics"
