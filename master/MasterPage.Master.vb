@@ -26,12 +26,6 @@ Public Class MasterPage
         End Set
     End Property
 
-    Public WriteOnly Property PageTitle() As String
-        Set(ByVal value As String)
-            lblPageTitle.Text = value
-        End Set
-    End Property
-
     Public Property UserId() As Integer
         Get
             UserId = lblEmployeeId.Text

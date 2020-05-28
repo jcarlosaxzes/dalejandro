@@ -3,7 +3,6 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
-            Master.PageTitle = "PAS Invoices"
             If Request.QueryString("StatusId") <> Nothing Then
                 cboStatus.DataBind()
                 cboStatus.SelectedValue = Request.QueryString("StatusId")
