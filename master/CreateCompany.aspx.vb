@@ -5,7 +5,6 @@ Public Class CreateCompany
     Inherits System.Web.UI.Page
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
-            Master.PageTitle = "Create Company Account"
             lblCompanyId.Text = "-1"
 
             SqlDataSourceVersion.DataBind()

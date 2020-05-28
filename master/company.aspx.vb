@@ -8,7 +8,6 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
-            Master.PageTitle = "Company Profile"
             If Request.QueryString("companyId") <> Nothing Then
                 lblCompanyId.Text = Request.QueryString("companyId")
             End If
