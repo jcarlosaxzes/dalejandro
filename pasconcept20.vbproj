@@ -355,6 +355,7 @@
     <Content Include="adm\dashboard.aspx" />
     <Content Include="adm\dashboardemployee.aspx" />
     <Content Include="adm\Default.aspx" />
+    <Content Include="adm\DefaultTestNewMaster.aspx" />
     <Content Include="adm\departmentbudgetbystatus.aspx" />
     <Content Include="adm\departmentreport.aspx" />
     <Content Include="adm\departmentslist.aspx" />
@@ -2089,6 +2090,7 @@
     <Content Include="master\MasterPage.Master" />
     <Content Include="help\eng\PASconcept_Help_EN.pdf" />
     <Content Include="help\esp\PASconcept_Help_ES.pdf" />
+    <Content Include="adm\NewTestMasterPage.Master" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -2947,6 +2949,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\DefaultTestNewMaster.aspx.designer.vb">
+      <DependentUpon>DefaultTestNewMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\DefaultTestNewMaster.aspx.vb">
+      <DependentUpon>DefaultTestNewMaster.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\departmentbudgetbystatus.aspx.designer.vb">
       <DependentUpon>departmentbudgetbystatus.aspx</DependentUpon>
     </Compile>
@@ -3310,6 +3319,13 @@
     <Compile Include="adm\newsubconsultant.aspx.vb">
       <DependentUpon>newsubconsultant.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\NewTestMasterPage.Master.designer.vb">
+      <DependentUpon>NewTestMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="adm\NewTestMasterPage.Master.vb">
+      <DependentUpon>NewTestMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\newvendor.aspx.designer.vb">
       <DependentUpon>newvendor.aspx</DependentUpon>
@@ -4337,7 +4353,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
