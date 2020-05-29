@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="A/E Discipline" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="discipline.aspx.vb" Inherits="pasconcept20.discipline" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
@@ -27,7 +28,7 @@
 
                         <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                             <span class="glyphicon glyphicon-plus"></span>&nbsp;Discipline
-                            </asp:LinkButton>
+                        </asp:LinkButton>
 
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -48,17 +49,19 @@
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                         AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
                         AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" CellSpacing="0">
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" EditMode="PopUp">
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                             <PagerStyle Mode="Slider" AlwaysVisible="false" />
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
                                     HeaderText="" HeaderStyle-Width="50px">
                                 </telerik:GridEditCommandColumn>
-                                <telerik:GridTemplateColumn DataField="Name"  ItemStyle-HorizontalAlign="Left"
+                                <telerik:GridTemplateColumn DataField="Name" ItemStyle-HorizontalAlign="Left"
                                     FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>

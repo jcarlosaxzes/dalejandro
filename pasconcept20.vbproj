@@ -468,6 +468,7 @@
     <Content Include="adm\titleblock.aspx" />
     <Content Include="adm\topten.aspx" />
     <Content Include="adm\transmittal.aspx" />
+    <Content Include="adm\transmittalpackagetypes.aspx" />
     <Content Include="adm\transmittals.aspx" />
     <Content Include="adm\uploadphoto.aspx" />
     <Content Include="adm\useragree.aspx" />
@@ -3754,6 +3755,13 @@
       <DependentUpon>transmittal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\transmittalpackagetypes.aspx.designer.vb">
+      <DependentUpon>transmittalpackagetypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\transmittalpackagetypes.aspx.vb">
+      <DependentUpon>transmittalpackagetypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\transmittals.aspx.designer.vb">
       <DependentUpon>transmittals.aspx</DependentUpon>
     </Compile>
@@ -4353,7 +4361,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
