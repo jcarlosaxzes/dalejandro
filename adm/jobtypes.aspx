@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Job Types" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="jobtypes.aspx.vb" Inherits="pasconcept20.jobtypes" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
@@ -52,8 +53,9 @@
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Job Type">
-                                    <span class="glyphicon glyphicon-plus"></span> Type
-                                </asp:LinkButton></td>
+                                    <span class="glyphicon glyphicon-plus"></span> Job Type
+                                </asp:LinkButton>
+                            </td>
                             <td>
                                 <script type="text/javascript">
                                     function PrintPage(sender, args) {
@@ -83,12 +85,13 @@
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="" HeaderStyle-Width="50px">
                                 </telerik:GridEditCommandColumn>
-                                <telerik:GridTemplateColumn DataField="Id" HeaderText="Job Type" SortExpression="Id"
-                                    UniqueName="Id" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                                <telerik:GridTemplateColumn DataField="Id" HeaderText="Code" SortExpression="Id" UniqueName="Id" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="IdTextBox" runat="server" Text='<%# Bind("Id")%>' Width="100px" MaxLength="3">
-                                        </telerik:RadTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="IdTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="IdTextBox" runat="server" Text='<%# Bind("Id")%>' Width="100px" MaxLength="3" ToolTip="Up to 3 alphanumeric characters">
+                                            </telerik:RadTextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="IdTextBox" CssClass="Error" Display="Dynamic" ErrorMessage="Code is mandatory. Up to 3 alphanumeric characters"></asp:RequiredFieldValidator>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="IdLabel" runat="server" Text='<%# Eval("Id")%>'></asp:Label>
@@ -97,10 +100,12 @@
                                 <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" ItemStyle-HorizontalAlign="Left"
                                     HeaderText="Description" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' Width="600px"
-                                            MaxLength="80">
-                                        </telerik:RadTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' Width="600px"
+                                                MaxLength="80">
+                                            </telerik:RadTextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage="Name is mandatory"></asp:RequiredFieldValidator>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
@@ -110,9 +115,11 @@
                                 <telerik:GridTemplateColumn DataField="FolderTemplate" FilterControlAltText="Filter FolderTemplate column" ItemStyle-HorizontalAlign="Left"
                                     HeaderText="Folder" SortExpression="FolderTemplate" UniqueName="FolderTemplate" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="FolderTemplateTextBox" runat="server" Text='<%# Bind("FolderTemplate") %>' Width="600px"
-                                            MaxLength="512" EmptyMessage="Optional...">
-                                        </telerik:RadTextBox>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="FolderTemplateTextBox" runat="server" Text='<%# Bind("FolderTemplate") %>' Width="600px"
+                                                MaxLength="512" EmptyMessage="Optional...">
+                                            </telerik:RadTextBox>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="FolderTemplateLabel0" runat="server" Text='<%# Eval("FolderTemplate") %>'></asp:Label>

@@ -29,33 +29,35 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
     <table width="100%" cellpading="3">
         <tr>
-            <td style="width:400px;" class="ToolButtom">
-            <telerik:RadButton ID="btnNew" runat="server" Text="Add New Type">
-                <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4"  PrimaryIconTop="4"></Icon>
-            </telerik:RadButton>
+            <td style="width: 400px;" class="ToolButtom">
+                <telerik:RadButton ID="btnNew" runat="server" Text="Add New Type">
+                    <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
+                </telerik:RadButton>
             </td>
-            <td style="padding-left:10px;padding-top:25px;padding-bottom:15px">
-            <telerik:RadButton ID="btnNewSubtype" runat="server" Text="Add New Subtype">
-                <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4"  PrimaryIconTop="4"></Icon>
-            </telerik:RadButton>
+            <td style="padding-left: 10px; padding-top: 25px; padding-bottom: 15px">
+                <telerik:RadButton ID="btnNewSubtype" runat="server" Text="Add New Subtype">
+                    <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
+                </telerik:RadButton>
             </td>
         </tr>
         <tr>
-            <td style="vertical-align:top;width:400px">
+            <td style="vertical-align: top; width: 400px">
                 <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                     AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                    AllowAutomaticUpdates="True" AllowPaging="True" AllowSorting="True" PageSize="25" >
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" EditMode="PopUp">
+                    AllowAutomaticUpdates="True" AllowPaging="True" AllowSorting="True" PageSize="25">
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                         <PagerStyle Mode="Slider" AlwaysVisible="false" />
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
                                 HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="30px">
                             </telerik:GridEditCommandColumn>
-                            <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Name" 
-                                SortExpression="Name" UniqueName="Name"  HeaderStyle-HorizontalAlign="Center">
+                            <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Name"
+                                SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                 <EditItemTemplate>
-                                    <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                    <div style="margin: 5px">
+                                        <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                    </div>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
@@ -63,7 +65,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                 CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText="Delete"
-                                HeaderStyle-HorizontalAlign="Center"  HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                                HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
                             </telerik:GridButtonColumn>
                         </Columns>
                         <EditFormSettings>
@@ -74,37 +76,43 @@
                     </MasterTableView>
                 </telerik:RadGrid>
             </td>
-            <td style="vertical-align:top;">
+            <td style="vertical-align: top;">
 
                 <telerik:RadGrid ID="RadGrid2" runat="server" DataSourceID="SqlDataSource2" GridLines="None"
                     AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
                     AllowAutomaticUpdates="True" AllowPaging="True" AllowSorting="True" PageSize="25">
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource2" EditMode="PopUp">
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource2">
                         <PagerStyle Mode="Slider" AlwaysVisible="false" />
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
                                 HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="30px">
                             </telerik:GridEditCommandColumn>
-                            <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Name" 
+                            <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Name"
                                 SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                 <EditItemTemplate>
-                                    <telerik:RadTextBox ID="subtypeNameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="subtypeNameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>                                </EditItemTemplate>
+                                    <div style="margin: 5px">
+                                        <telerik:RadTextBox ID="subtypeNameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="subtypeNameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                    </div>
+                                </EditItemTemplate>
+
                                 <ItemTemplate>
                                     <asp:Label ID="subtypeNameLabel" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="typeId" FilterControlAltText="Filter typeId column" HeaderText="Type" SortExpression="typeId" UniqueName="typeId" 
+                            <telerik:GridTemplateColumn DataField="typeId" FilterControlAltText="Filter typeId column" HeaderText="Type" SortExpression="typeId" UniqueName="typeId"
                                 HeaderStyle-Width="250px" HeaderStyle-HorizontalAlign="Center">
                                 <EditItemTemplate>
-                                    <telerik:RadComboBox ID="cbotypeId" runat="server" DataSourceID="SqlDataSource1"
-                                        DataTextField="Name" DataValueField="Id" SelectedValue='<%# Bind("typeId")%>' AppendDataBoundItems="true"
-                                        Width="300px" MarkFirstMatch="True" Filter="Contains"
-                                        Height="300px" >
-                                        <Items>
-                                            <telerik:RadComboBoxItem Text="(Type Not Defined...)" Value="0" />
-                                        </Items>
-                                    </telerik:RadComboBox>
+                                    <div style="margin: 5px">
+                                        <telerik:RadComboBox ID="cbotypeId" runat="server" DataSourceID="SqlDataSource1"
+                                            DataTextField="Name" DataValueField="Id" SelectedValue='<%# Bind("typeId")%>' AppendDataBoundItems="true"
+                                            Width="300px" MarkFirstMatch="True" Filter="Contains"
+                                            Height="300px">
+                                            <Items>
+                                                <telerik:RadComboBoxItem Text="(Type Not Defined...)" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </div>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="TypeNameLabel" runat="server" Text='<%# Eval("nType")%>'></asp:Label>
@@ -126,7 +134,7 @@
         </tr>
     </table>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="DELETE FROM Contact_types WHERE (Id = @Id)"  
+        DeleteCommand="DELETE FROM Contact_types WHERE (Id = @Id)"
         InsertCommand="INSERT INTO Contact_types(companyId, Name) VALUES (@companyId, @Name)"
         SelectCommand="SELECT Id, Name FROM Contact_types WHERE (companyId = @companyId) ORDER BY Name"
         UpdateCommand="UPDATE Contact_types SET Name = @Name WHERE (Id = @Id)">

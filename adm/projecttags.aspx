@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Project Tags" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="projecttags.aspx.vb" Inherits="pasconcept20.projecttags" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -101,10 +102,10 @@
                         AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
                         AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0" Height="700px">
                         <ClientSettings>
-                            <Scrolling AllowScroll="True" ></Scrolling>
+                            <Scrolling AllowScroll="True"></Scrolling>
                             <ClientEvents OnPopUpShowing="PopUpShowing" />
                         </ClientSettings>
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" EditMode="PopUp">
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                             <PagerStyle Mode="Slider" AlwaysVisible="false" />
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderStyle-HorizontalAlign="Center"
@@ -113,8 +114,10 @@
                                 <telerik:GridTemplateColumn DataField="Tag" ItemStyle-HorizontalAlign="Left"
                                     FilterControlAltText="Filter Tag column" HeaderText="Tag" SortExpression="Tag" UniqueName="Tag" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="250px">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="TagTextBox" runat="server" Text='<%# Bind("Tag") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TagTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="TagTextBox" runat="server" Text='<%# Bind("Tag") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TagTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="TagLabel0" runat="server" Text='<%# Eval("Tag") %>'></asp:Label>
@@ -123,9 +126,11 @@
                                 <telerik:GridTemplateColumn DataField="CategoryId" ItemStyle-HorizontalAlign="Center"
                                     FilterControlAltText="Filter CategoryId column" HeaderText="Department Category" SortExpression="CategoryName" UniqueName="CategoryName" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <telerik:RadComboBox ID="cboCategoryIn" runat="server" DataSourceID="SqlDataSourceCategoriesByDepartment"
-                                            DataTextField="Name" DataValueField="Id" Width="300px" SelectedValue='<%# Bind("CategoryId") %>' AppendDataBoundItems="true">
-                                        </telerik:RadComboBox>
+                                        <div style="margin: 5px">
+                                            <telerik:RadComboBox ID="cboCategoryIn" runat="server" DataSourceID="SqlDataSourceCategoriesByDepartment"
+                                                DataTextField="Name" DataValueField="Id" Width="300px" SelectedValue='<%# Bind("CategoryId") %>' AppendDataBoundItems="true">
+                                            </telerik:RadComboBox>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <%# Eval("CategoryName") %>
@@ -134,8 +139,9 @@
                                 <telerik:GridTemplateColumn DataField="Description" ItemStyle-HorizontalAlign="Left"
                                     FilterControlAltText="Filter Description column" HeaderText="Description" SortExpression="Description" UniqueName="Description" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="DescriptionTextBox" runat="server" Text='<%# Bind("Description") %>' MaxLength="128" Width="600px"></telerik:RadTextBox>
-
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="DescriptionTextBox" runat="server" Text='<%# Bind("Description") %>' MaxLength="128" Width="600px"></telerik:RadTextBox>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="DescriptionLabel0" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
@@ -144,7 +150,9 @@
                                 <telerik:GridTemplateColumn DataField="Reference" ItemStyle-HorizontalAlign="Left" Display="false"
                                     FilterControlAltText="Filter Reference column" HeaderText="Reference" SortExpression="Reference" UniqueName="Reference" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="ReferenceTextBox" runat="server" Text='<%# Bind("Reference") %>' MaxLength="255" Width="600px"></telerik:RadTextBox>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="ReferenceTextBox" runat="server" Text='<%# Bind("Reference") %>' MaxLength="255" Width="600px"></telerik:RadTextBox>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <%# Eval("Reference") %>
