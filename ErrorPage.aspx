@@ -50,13 +50,12 @@
                                 <h3 style="color: red;">An Error has Occurred</h3>
                                 <p>
                                     An unexcepted error has occurred on our webapp. The website administrator has been notified.<br />
-                                    Please, <a href="~/adm/Default.aspx">click here </a> to continue with PASconcept
+                                    Please, <a href="Default.aspx">click here </a> to continue with PASconcept
                                 </p>
                             </div>
 
                         </div>
                     </asp:Panel>
-
                 </div>
             </div>
             <div class="row">

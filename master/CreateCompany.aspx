@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/master/MasterPage.Master" CodeBehind="CreateCompany.aspx.vb" Inherits="pasconcept20.CreateCompany" Async="true" %>
 
-<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ MasterType VirtualPath="~/master/MasterPage.Master" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div>
@@ -268,7 +267,7 @@
         InsertCommand="Company_NEW_Extended" InsertCommandType="StoredProcedure" ProviderName="<%$ ConnectionStrings:cnnProjectsAccounting.ProviderName %>">
         <InsertParameters>
             <asp:ControlParameter ControlID="txtCompanyName" Name="Name" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="cboType" Name="Type" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboType" Name="Type" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="txtContact" Name="Contact" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="txtCellPhone" Name="Phone" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="txtEmail" Name="Email" PropertyName="Text" Type="String" />
