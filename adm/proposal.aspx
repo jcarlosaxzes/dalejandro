@@ -91,7 +91,7 @@
                     </asp:LinkButton>
                 </td>
                 <td>
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="false">
                        Back to List
                     </asp:LinkButton>
                 </td>

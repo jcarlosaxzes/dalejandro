@@ -1,6 +1,6 @@
-﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="proposalnewwizard.aspx.vb" Inherits="pasconcept20.proposalnewwizard" %>
+﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposalnewwizard.aspx.vb" Inherits="pasconcept20.proposalnewwizard" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
@@ -135,6 +135,21 @@
             margin-right: 5px !important;
         }
     </style>
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                       Cancel
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align: center">
+                    <h3 style="margin:0">New Job</h3>
+                </td>
+
+            </tr>
+        </table>
+    </div>
     <div class="pas-container">
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="700px" DisplayCancelButton="false"
             RenderMode="Lightweight" Skin="Material">

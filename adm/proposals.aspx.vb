@@ -55,9 +55,8 @@ Public Class proposals
 
     Private Sub Administradores_Proposals_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
         If lblProposalIdFromRfp.Text > 0 Then
-            Dim sUrl As String = "~/ADM/ProposalNewWizard.aspx?proposalId=" & lblProposalIdFromRfp.Text
             lblProposalIdFromRfp.Text = "0"
-            CreateRadWindows("RFP", sUrl, 970, 810, True)
+            Response.Redirect("~/ADM/ProposalNewWizard.aspx?proposalId=" & lblProposalIdFromRfp.Text)
         End If
 
     End Sub
@@ -95,8 +94,7 @@ Public Class proposals
                 Response.Redirect("~/ADM/Proposal.aspx?Id=" & e.CommandArgument)
 
             Case "EditWizard"
-                sUrl = "~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 970, 810, True)
+                Response.Redirect("~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
 
             Case "UploadFiles"
                 sUrl = "~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument & "&AttachmentsTab=1"
@@ -107,8 +105,7 @@ Public Class proposals
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 750, False)
+                Response.Redirect("~/ADM/Client.aspx?clientId=" & e.CommandArgument)
         End Select
     End Sub
 
