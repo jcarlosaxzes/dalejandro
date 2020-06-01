@@ -371,6 +371,9 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/rfps" Text="Requests for Proposals"
                                                 Visible='<%# EmployeePermission("Deny_RequestsProposalsList") %>'>
                                             </telerik:NavigationNode>
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Proposals" Text="Proposal List"
+                                                Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
+                                            </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/Jobs" Text="Jobs"
                                                 Visible='<%# EmployeePermission("Deny_JobsList") %>'>
                                             </telerik:NavigationNode>
@@ -392,7 +395,7 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/JobTickets" Text="Tickets"
                                                 Visible='<%# IsTicketsVisible() %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/activejobsdashboad" Text="My Jobs Times">
+                                            <telerik:NavigationNode NavigateUrl="~/adm/activejobsdashboad" Text="Job Times">
                                             </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
