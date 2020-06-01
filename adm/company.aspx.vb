@@ -4,52 +4,41 @@ Public Class company
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not IsPostBack() Then
-            ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_CompanyProfile") Then Response.RedirectPermanent("~/ADM/Default.aspx")
-            lblEmployeeEmail.Text = Master.UserEmail
+        Try
 
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Company Profile"
-            Master.PageTitle = "Company/Profile"
-            Master.Help = "http://blog.pasconcept.com/2012/08/others-company-information.html"
-            lblCompanyId.Text = Session("companyId")
-            lnkExp.NavigateUrl = "~/OPE/CompanyExperience.aspx?guId=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text)
+            If Not IsPostBack() Then
+                ' Si no tiene permiso, la dirijo a message
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_CompanyProfile") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                lblEmployeeEmail.Text = Master.UserEmail
 
-            'If lblCompanyId.Text = "260962" Or lblCompanyId.Text = "260965" Then
-            '    tokenTextBox.Text = LocalAPI.GetFacebookToken(lblCompanyId.Text)
-            '    FB_TokenSecretTextBox.Text = LocalAPI.GetFacebookTokenSecret(lblCompanyId.Text)
-            '    If Len(tokenTextBox.Text) > 0 Then
-            '        btnConectarFacebook.Text = "Connected to:/" & LocalAPI.GetCompanyProperty(lblCompanyId.Text, "FP_page")
-            '        btnConectarFacebook.Enabled = False
-            '        btnUnlinkFacebook.Visible = True
-            '    Else
-            '        btnConectarFacebook.Text = "Connect with Facebook"
-            '        btnConectarFacebook.Enabled = True
-            '        btnUnlinkFacebook.Visible = False
-            '    End If
-            'Else
-            '    div_FACEBOOK.Visible = False'
-            'End If
+                Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Company Profile"
+                Master.PageTitle = "Company/Profile"
+                Master.Help = "http://blog.pasconcept.com/2012/08/others-company-information.html"
+                lblCompanyId.Text = Session("companyId")
+                lnkExp.NavigateUrl = "~/OPE/CompanyExperience.aspx?guId=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text)
 
-            If Not Request.QueryString("Tab") Is Nothing Then
-                Select Case Request.QueryString("Tab")
-                    Case "1", "SMTP"
-                        CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 1
-                    Case "2", "Notifications"
-                        CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 2
-                    Case "3", "Paypal"
-                        CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 3
-                    Case "4", "Logo"
-                        CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
-                    Case "5"
-                        CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
-                End Select
+                If Not Request.QueryString("Tab") Is Nothing Then
+                    Select Case Request.QueryString("Tab")
+                        Case "1", "SMTP"
+                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 1
+                        Case "2", "Notifications"
+                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 2
+                        Case "3", "Paypal"
+                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 3
+                        Case "4", "Logo"
+                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
+                        Case "5"
+                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
+                    End Select
+                End If
+
+
+                txtExpensesYear.Value = Date.Today.Year
             End If
-
-
-            txtExpensesYear.Value = Date.Today.Year
-        End If
-        RadWindowManager1.EnableViewState = False
+            RadWindowManager1.EnableViewState = False
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
+        End Try
     End Sub
 
 

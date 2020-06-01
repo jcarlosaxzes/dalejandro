@@ -7,7 +7,7 @@ Public Class job_schedule
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Membership.GetUser().Email, lblCompanyId.Text)
+                lblEmployeeId.Text = Master.UserId
 
                 lblJobId.Text = Request.QueryString("JobId")
 

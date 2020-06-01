@@ -68,15 +68,6 @@ Partial Public Class department_form
     Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''RequiredFieldValidator554 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator554 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''NameTextBox control.
     '''</summary>
     '''<remarks>
@@ -84,15 +75,6 @@ Partial Public Class department_form
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NameTextBox As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
-    '''CodeTextBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CodeTextBox As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
     '''DescriptionTextBox control.
@@ -129,6 +111,15 @@ Partial Public Class department_form
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkProductive As Global.Telerik.Web.UI.RadCheckBox
+    
+    '''<summary>
+    '''CodeTextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CodeTextBox As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
     '''ProposalStatusTrackingEmailTextBox control.

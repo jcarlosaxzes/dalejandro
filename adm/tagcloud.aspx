@@ -11,7 +11,7 @@
                     </telerik:RadComboBox>
                 </td>
                 <td>
-                    <telerik:RadComboBox ID="cboMultiselectTagCONTAINS" runat="server" DataSourceID="SqlDataSourceTag" DataTextField="Tag" DataValueField="Id" Label="Tag CONTAINS"
+                    <telerik:RadComboBox ID="cboMultiselectTagCONTAINS" runat="server" DataSourceID="SqlDataSourceTag" DataTextField="Tag" DataValueField="Id" Label="Tag Contains"
                         Width="100%" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="false" MarkFirstMatch="True" Filter="Contains" EmptyMessage="(All Tags...)">
                         <Localization AllItemsCheckedString="All Items Checked" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
                     </telerik:RadComboBox>

@@ -445,4 +445,8 @@ Public Class proposalnewwizard
     Private Sub SqlDataSourceProposal_Step1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProposal_Step1.Updating
         Dim e1 As String = e.Command.Parameters("@ProjectSector").Value
     End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/proposals.aspx")
+    End Sub
 End Class
