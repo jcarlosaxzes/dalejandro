@@ -88,7 +88,7 @@
                 </td>
                 <td colspan="2">
                     <telerik:RadComboBox ID="cboGroups" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceGroups" ToolTip="Group of Reports"
-                        DataTextField="RPTGroup" DataValueField="RPTGroup" Width="100%" MarkFirstMatch="True" AppendDataBoundItems="True">
+                        DataTextField="RPTGroup" DataValueField="RPTGroup" Width="100%" MarkFirstMatch="True" AppendDataBoundItems="True" OnDataBound="cboGroups_DataBound">
                         <Items>
                             <telerik:RadComboBoxItem runat="server" Text="(Select Group...)" Value="-1" />
                         </Items>
