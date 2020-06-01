@@ -217,22 +217,22 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a runat="server" href="~/adm/Company" title="Company Profile">
+                                                    <a runat="server" href="~/adm/Company" title="Company Profile"  Visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
                                                        Company Profile
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a runat="server" href="~/adm/DepartmentsList" title="Departments">
+                                                    <a runat="server" href="~/adm/DepartmentsList" title="Departments" Visible='<%# EmployeePermission("Deny_DepartmentsList") And VersionCaracteristica(1101)%>'>
                                                        Departments
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a runat="server" href="~/adm/PaidDayList" title="Payroll">
+                                                    <a runat="server" href="~/adm/PaidDayList" title="Payroll" Visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
                                                        Payroll
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a runat="server" href="~/adm/MessagesTemplates" title="Messages Templates">
+                                                    <a runat="server" href="~/adm/MessagesTemplates" title="Messages Templates" Visible='<%# EmployeePermission("Deny_MessagesTemplates") %>'>
                                                        Messages Templates
                                                     </a>
                                                 </li>
@@ -246,27 +246,27 @@
 	                                        </a>
 	                                        <ul class="dropdown-menu">
 	                                            <li>
-		                                            <a runat="server" href="~/adm/Proposal_tasks" title="Proposal Tasks">
+		                                            <a runat="server" href="~/adm/Proposal_tasks" title="Proposal Tasks" Visible='<%# EmployeePermission("Deny_ProposalTasksList") %>'>
 		                                               Proposal Tasks
 		                                            </a>
 	                                            </li>
 	                                            <li>
-		                                            <a runat="server" href="~/adm/InvoicesTypes" title="Payment Schedules">
+		                                            <a runat="server" href="~/adm/InvoicesTypes" title="Payment Schedules" Visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>
 		                                               Payment Schedules
 		                                            </a>
 	                                            </li>
 	                                            <li>
-		                                            <a runat="server" href="~/adm/TandCtemplates" title="Terms &amp; Conditions">
+		                                            <a runat="server" href="~/adm/TandCtemplates" title="Terms &amp; Conditions" Visible='<%# EmployeePermission("Deny_ProposalTermsConditions")%>'>
 		                                               Terms &amp; Conditions
 		                                            </a>
 	                                            </li>
 	                                            <li>
-		                                            <a runat="server" href="~/adm/PhasesTemplate" title="Phases Templates">
+		                                            <a runat="server" href="~/adm/PhasesTemplate" title="Phases Templates" Visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
 		                                               Phases Templates
 		                                            </a>
 	                                            </li>
 	                                            <li>
-		                                            <a runat="server" href="~/adm/Proposal_types" title="Proposal Templates">
+		                                            <a runat="server" href="~/adm/Proposal_types" title="Proposal Templates" Visible='<%# EmployeePermission("Deny_ProposalTemplates") %>'>
 		                                               Proposal Templates
 		                                            </a>
 	                                            </li>     
@@ -280,27 +280,27 @@
 	                                        </a>
 	                                        <ul class="dropdown-menu">
 	                                            <li>
-		                                            <a runat="server" href="~/adm/JobTypes" title="Job Types">
+		                                            <a runat="server" href="~/adm/JobTypes" title="Job Types" Visible='<%# EmployeePermission("Deny_JobCodes")%>'>
 		                                               Job Types
 		                                            </a>
 	                                            </li>
 	                                            <li>
-		                                            <a runat="server" href="~/adm/ProjectTags" title="Project Tags">
+		                                            <a runat="server" href="~/adm/ProjectTags" title="Project Tags" Visible='<%# EmployeePermission("Deny_JobCodes") %>'>
 		                                               Project Tags
 		                                            </a>
 	                                            </li>
 	                                            <li>
-		                                            <a runat="server" href="~/adm/TransmittalPackageTypes" title="Transmittal Package Types">
+		                                            <a runat="server" href="~/adm/TransmittalPackageTypes" title="Transmittal Package Types" Visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16%>'>
 		                                               Transmittal Package Types
 		                                            </a>
 	                                            </li>
 	                                            <li>
-		                                            <a runat="server" href="~/adm/TimeCategory" title="Time Categories">
+		                                            <a runat="server" href="~/adm/TimeCategory" title="Time Categories" Visible='<%# EmployeePermission("Deny_TimeCategory") %>'>
 		                                               Time Categories
 		                                            </a>
 	                                            </li>
 	                                            <li>
-		                                            <a runat="server" href="~/adm/NoJobsTimeTypes" title="Miscellaneous Time Codes">
+		                                            <a runat="server" href="~/adm/NoJobsTimeTypes" title="Miscellaneous Time Codes" Visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>
 		                                               Miscellaneous Time Codes
 		                                            </a>
 	                                            </li>	
@@ -315,23 +315,23 @@
 	                                        <ul class="dropdown-menu">
 	                                           
 												<li>
-													<a runat="server" href="~/adm/ClientTypes" title="Client Types">
+													<a runat="server" href="~/adm/ClientTypes" title="Client Types" Visible='<%# EmployeePermission("Deny_ClientType") %>'>
 													   Client Types
 													</a>
 												</li>
 												<li>
-													<a runat="server" href="~/adm/Discipline" title="Subconsultants Discipline">
+													<a runat="server" href="~/adm/Discipline" title="Subconsultants Discipline" Visible='<%# EmployeePermission("Deny_DisciplinesList") %>'>
 													   Subconsultants Discipline
 													</a>
 												</li>
 												
 												<li>
-													<a runat="server" href="~/adm/Position" title="PayEmployee's Positionsroll">
-													   Employee's Positions
+													<a runat="server" href="~/adm/Position" title="PayEmployee's Positionsroll" Visible='<%# EmployeePermission("Deny_NewEmployee")%>'>
+													   Employee Positions
 													</a>
 												</li>
 												<li>
-													<a runat="server" href="~/adm/VendorTypes" title="Vendor Types">
+													<a runat="server" href="~/adm/VendorTypes" title="Vendor Types" Visible='<%# EmployeePermission("Deny_VendorTypes") %>'>
 													   Vendor Types
 													</a>
 												</li>
@@ -345,12 +345,12 @@
 	                                        </a>
 	                                        <ul class="dropdown-menu">
 	                                            <li>
-													<a runat="server" href="~/adm/Employee_Permissions" title="Employees Permissions">
+													<a runat="server" href="~/adm/Employee_Permissions" title="Employees Permissions" Visible="<%# IsMasterUser() %>">
 													   Employees Permissions
 													</a>
 												</li>
 												<li>
-													<a runat="server" href="~/adm/roles" title="Roles Permissions">
+													<a runat="server" href="~/adm/roles" title="Roles Permissions" Visible="<%# IsMasterUser() %>">
 													   Roles Permissions
 													</a>
 												</li>
