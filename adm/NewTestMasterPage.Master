@@ -87,6 +87,43 @@
         span.rnvMore.rnvRight::before{
             margin: 0 0 0 -0.5em !important;
         }
+
+
+        /*Submenu*/
+        .dropdown-submenu{ position: relative; }
+        .dropdown-submenu>.dropdown-menu{
+          top:0;
+          right:100%;
+          margin-top:-6px;
+          margin-left:-1px;
+          -webkit-border-radius:0 6px 6px 6px;
+          -moz-border-radius:0 6px 6px 6px;
+          border-radius:0 6px 6px 6px;
+        }
+        .dropdown-submenu>a:after{
+          display:block;
+          content:" ";
+          float:right;
+          width:0;
+          height:0;
+          border-color:transparent;
+          border-style:solid;
+          border-width:5px 0 5px 5px;
+          border-left-color:#cccccc;
+          margin-top:5px;margin-right:-10px;
+        }
+        .dropdown-submenu:hover>a:after{
+          border-left-color:#555;
+        }
+        .dropdown-submenu.pull-left{ float: none; }
+        .dropdown-submenu.pull-left>.dropdown-menu{
+          left: -100%;
+          margin-left: 10px;
+          -webkit-border-radius: 6px 0 6px 6px;
+          -moz-border-radius: 6px 0 6px 6px;
+          border-radius: 6px 0 6px 6px;
+        }
+
     </style>
     <form id="form1" runat="server">
         <telerik:RadScriptManager 
@@ -107,12 +144,12 @@
                 <telerik:LayoutRow runat="server"  StaticId="Header1" CssClass="noprint" ID="HeaderPanel">
 
                     <Columns>
-                        <telerik:LayoutColumn Span="4">
+                        <telerik:LayoutColumn Span="3">
                             <div style="padding-top: 3px">
                                 <img src="../App_Themes/Estandar/Images/header-pasconcept-logo.png" style="border-width: 0" />
                             </div>
                         </telerik:LayoutColumn>
-                        <telerik:LayoutColumn Span="8">
+                        <telerik:LayoutColumn Span="9">
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
                                     <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompanyLogo"
@@ -173,128 +210,152 @@
                                             <span class="glyphicon glyphicon-cog"></span>
                                         <span class="caret"></span>
                                     </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <h1 class="dropdown-header" style="font-size: 14px;color: black;font-weight: bold; margin-top;margin-top: 0;margin-bottom: 0;">Company</h1>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/Company" title="Company Profile">
-                                               Company Profile
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown dropdown-submenu">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">
+                                            Company
                                             </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/DepartmentsList" title="Departments">
-                                               Departments
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/PaidDayList" title="Payroll">
-                                               Payroll
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/MessagesTemplates" title="Messages Templates">
-                                               Messages Templates
-                                            </a>
-                                        </li>
-                                        <li class="divider" runat="server"></li>
-                                        <li>
-                                            <h1 class="dropdown-header" style="font-size: 14px;color: black;font-weight: bold; margin-top;margin-top: 0;margin-bottom: 0;">Proposal</h1>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/Proposal_tasks" title="Proposal Tasks">
-                                               Proposal Tasks
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/InvoicesTypes" title="Payment Schedules">
-                                               Payment Schedules
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/TandCtemplates" title="Terms &amp; Conditions">
-                                               Terms &amp; Conditions
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/PhasesTemplate" title="Phases Templates">
-                                               Phases Templates
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/Proposal_types" title="Proposal Templates">
-                                               Proposal Templates
-                                            </a>
-                                        </li>                                        
-                                        <li class="divider" runat="server"></li>
-                                        <li>
-                                            <h1 class="dropdown-header" style="font-size: 14px;color: black;font-weight: bold; margin-top;margin-top: 0;margin-bottom: 0;">Projects</h1>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/JobTypes" title="Job Types">
-                                               Job Types
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/ProjectTags" title="Project Tags">
-                                               Project Tags
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/TransmittalPackageTypes" title="Transmittal Package Types">
-                                               Transmittal Package Types
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/TimeCategory" title="Time Categories">
-                                               Time Categories
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/NoJobsTimeTypes" title="Miscellaneous Time Codes">
-                                               Miscellaneous Time Codes
-                                            </a>
-                                        </li>
-                                        <li class="divider" runat="server"></li>
-                                        <li>
-                                            <h1 class="dropdown-header" style="font-size: 14px;color: black;font-weight: bold; margin-top;margin-top: 0;margin-bottom: 0;">Contacts</h1>
-                                        </li>                                        
-                                        <li>
-                                            <a runat="server" href="~/adm/ClientTypes" title="Client Types">
-                                               Client Types
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/Discipline" title="Subconsultants Discipline">
-                                               Subconsultants Discipline
-                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a runat="server" href="~/adm/Company" title="Company Profile">
+                                                       Company Profile
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a runat="server" href="~/adm/DepartmentsList" title="Departments">
+                                                       Departments
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a runat="server" href="~/adm/PaidDayList" title="Payroll">
+                                                       Payroll
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a runat="server" href="~/adm/MessagesTemplates" title="Messages Templates">
+                                                       Messages Templates
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                          </li>
+
+                                        <%--Proposal--%>
+                                        <li class="dropdown dropdown-submenu">
+	                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">
+	                                        Proposal
+	                                        </a>
+	                                        <ul class="dropdown-menu">
+	                                            <li>
+		                                            <a runat="server" href="~/adm/Proposal_tasks" title="Proposal Tasks">
+		                                               Proposal Tasks
+		                                            </a>
+	                                            </li>
+	                                            <li>
+		                                            <a runat="server" href="~/adm/InvoicesTypes" title="Payment Schedules">
+		                                               Payment Schedules
+		                                            </a>
+	                                            </li>
+	                                            <li>
+		                                            <a runat="server" href="~/adm/TandCtemplates" title="Terms &amp; Conditions">
+		                                               Terms &amp; Conditions
+		                                            </a>
+	                                            </li>
+	                                            <li>
+		                                            <a runat="server" href="~/adm/PhasesTemplate" title="Phases Templates">
+		                                               Phases Templates
+		                                            </a>
+	                                            </li>
+	                                            <li>
+		                                            <a runat="server" href="~/adm/Proposal_types" title="Proposal Templates">
+		                                               Proposal Templates
+		                                            </a>
+	                                            </li>     
+	                                        </ul>
+                                        </li>                                 
+                                        
+                                        <%--Projects--%>
+                                        <li class="dropdown dropdown-submenu">
+	                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">
+	                                        Projects
+	                                        </a>
+	                                        <ul class="dropdown-menu">
+	                                            <li>
+		                                            <a runat="server" href="~/adm/JobTypes" title="Job Types">
+		                                               Job Types
+		                                            </a>
+	                                            </li>
+	                                            <li>
+		                                            <a runat="server" href="~/adm/ProjectTags" title="Project Tags">
+		                                               Project Tags
+		                                            </a>
+	                                            </li>
+	                                            <li>
+		                                            <a runat="server" href="~/adm/TransmittalPackageTypes" title="Transmittal Package Types">
+		                                               Transmittal Package Types
+		                                            </a>
+	                                            </li>
+	                                            <li>
+		                                            <a runat="server" href="~/adm/TimeCategory" title="Time Categories">
+		                                               Time Categories
+		                                            </a>
+	                                            </li>
+	                                            <li>
+		                                            <a runat="server" href="~/adm/NoJobsTimeTypes" title="Miscellaneous Time Codes">
+		                                               Miscellaneous Time Codes
+		                                            </a>
+	                                            </li>	
+	                                        </ul>
                                         </li>
                                         
-                                        <li>
-                                            <a runat="server" href="~/adm/Position" title="PayEmployee's Positionsroll">
-                                               Employee's Positions
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/VendorTypes" title="Vendor Types">
-                                               Vendor Types
-                                            </a>
-                                        </li>
-                                        <li class="divider" runat="server"></li>
-                                        <li>
-                                            <h1 class="dropdown-header" style="font-size: 14px;color: black;font-weight: bold; margin-top;margin-top: 0;margin-bottom: 0;">Security Settings</h1>
-                                        </li>                                        
-                                        <li>
-                                            <a runat="server" href="~/adm/Employee_Permissions" title="Employees Permissions">
-                                               Employees Permissions
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" href="~/adm/roles" title="Roles Permissions">
-                                               Roles Permissions
-                                            </a>
+                                        <%--Contacts--%>
+                                        <li class="dropdown dropdown-submenu">
+	                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">
+	                                        Contacts
+	                                        </a>
+	                                        <ul class="dropdown-menu">
+	                                           
+												<li>
+													<a runat="server" href="~/adm/ClientTypes" title="Client Types">
+													   Client Types
+													</a>
+												</li>
+												<li>
+													<a runat="server" href="~/adm/Discipline" title="Subconsultants Discipline">
+													   Subconsultants Discipline
+													</a>
+												</li>
+												
+												<li>
+													<a runat="server" href="~/adm/Position" title="PayEmployee's Positionsroll">
+													   Employee's Positions
+													</a>
+												</li>
+												<li>
+													<a runat="server" href="~/adm/VendorTypes" title="Vendor Types">
+													   Vendor Types
+													</a>
+												</li>
+	                                        </ul>
                                         </li>
                                         
+                                        <%--Security Settings--%>
+                                        <li class="dropdown dropdown-submenu">
+	                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">
+	                                        Security Settings
+	                                        </a>
+	                                        <ul class="dropdown-menu">
+	                                            <li>
+													<a runat="server" href="~/adm/Employee_Permissions" title="Employees Permissions">
+													   Employees Permissions
+													</a>
+												</li>
+												<li>
+													<a runat="server" href="~/adm/roles" title="Roles Permissions">
+													   Roles Permissions
+													</a>
+												</li>
+	                                        </ul>
+                                        </li>
                                     </ul>
                                 </li>
 
@@ -754,5 +815,21 @@
         <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
 
     </form>
+   
+
+<script type="text/javascript">
+
+(function($){
+	$(document).ready(function(){
+		$('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+			event.preventDefault(); 
+			event.stopPropagation(); 
+			$(this).parent().siblings().removeClass('open');
+			$(this).parent().toggleClass('open');
+		});
+	});
+    })(jQuery);
+
+</script>
 </body>
 </html>
