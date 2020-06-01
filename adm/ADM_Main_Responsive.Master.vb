@@ -4,6 +4,7 @@ Imports Microsoft.AspNet.Identity.Owin
 Public Class ADM_Main_Responsive
     Inherits System.Web.UI.MasterPage
 
+
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         Try
             ' Inicializando Controles y Properties de la Master Page
@@ -84,6 +85,8 @@ Public Class ADM_Main_Responsive
                 'End If
 
                 lblCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
+
+                LoginViewMenuSetting.DataBind()
             End If
         End If
 
@@ -124,7 +127,7 @@ Public Class ADM_Main_Responsive
         Set(ByVal value As String)
             lnkHelp.NavigateUrl = value
             lnkHelp.ToolTip = value
-            RadMenu2.FindItemByText("Help").NavigateUrl = value
+            RadMenu2.FindNodeByText("Help").NavigateUrl = value
         End Set
     End Property
 
@@ -178,6 +181,17 @@ Public Class ADM_Main_Responsive
         Return Session(sOpcion)
     End Function
 
+    Public Function EmployeePermissionHiden(sOpcion As String) As Integer
+        If Session(sOpcion) Is Nothing Then
+            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
+        End If
+        If Session(sOpcion) Then
+            Return 0
+        Else
+            Return 1
+        End If
+
+    End Function
     Private Sub btnSwitchCompany_Click(sender As Object, e As EventArgs) Handles btnSwitchCompany.Click
         RadToolTipSwitchCompany.Visible = True
         RadToolTipSwitchCompany.Show()
