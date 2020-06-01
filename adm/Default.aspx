@@ -178,7 +178,7 @@
                                                             <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
                                                             </LabelsAppearance>
                                                             <Appearance>
-                                                                <FillStyle BackgroundColor="#5184c4" />
+                                                                <FillStyle BackgroundColor="#214EA5" />
                                                             </Appearance>
                                                             <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
                                                         </telerik:AreaSeries>
@@ -186,7 +186,7 @@
                                                             <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
                                                             </LabelsAppearance>
                                                             <Appearance>
-                                                                <FillStyle BackgroundColor="OrangeRed" />
+                                                                <FillStyle BackgroundColor="#78A8F0" />
                                                             </Appearance>
                                                             <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
                                                         </telerik:AreaSeries>
@@ -204,7 +204,7 @@
                                                             <LabelsAppearance Visible="false" DataFormatString="{0:C0}">
                                                             </LabelsAppearance>
                                                             <Appearance>
-                                                                <FillStyle BackgroundColor="Green" />
+                                                                <FillStyle BackgroundColor="#7787A5" />
                                                             </Appearance>
                                                             <LineAppearance LineStyle="Smooth" Width="3" />
                                                             <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
