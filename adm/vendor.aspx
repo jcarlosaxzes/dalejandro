@@ -40,7 +40,7 @@
 
     <div class="Formulario">
 
-        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
         </asp:LinkButton>
     </div>
