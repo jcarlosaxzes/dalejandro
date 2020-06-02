@@ -23,7 +23,7 @@
             'lblYear.Text = 2019
 
             lblEmployeeEmail.Text = LocalAPI.GetEmployeeEmail(lId:=lblEmployeeId.Text)
-            lblEmployeeName.Text = LocalAPI.GetEmployeeFullName(lblEmployeeEmail.Text)
+            lblEmployeeName.Text = LocalAPI.GetEmployeeFullName(lblEmployeeEmail.Text, lblCompanyId.Text)
 
             ReadLastRecord()
         End If

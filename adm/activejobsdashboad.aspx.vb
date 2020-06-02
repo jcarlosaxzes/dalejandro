@@ -226,7 +226,7 @@ Public Class activejobsdashboad
             sMsg.Append("<br />")
             sMsg.Append("<br />")
 
-            sMsg.Append("This message is to notify you that " & LocalAPI.GetEmployeeFullName(lblUserEmail.Text) & " has requested " & cboType.Text)
+            sMsg.Append("This message is to notify you that " & LocalAPI.GetEmployeeFullName(lblUserEmail.Text, lblCompanyId.Text) & " has requested " & cboType.Text)
             sMsg.Append("<br />")
             sMsg.Append("Date Request: " & Date.Today)
             sMsg.Append("<br />")

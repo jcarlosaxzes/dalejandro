@@ -17,7 +17,7 @@
             lblCompanyId.Text = Session("companyId")
             lblEmployeeId.Text = Request.QueryString("employeeId")
             lblEmployeeEmail.Text = LocalAPI.GetEmployeeEmail(lId:=lblEmployeeId.Text)
-            lblEmployeeName.Text = LocalAPI.GetEmployeeFullName(lblEmployeeEmail.Text)
+            lblEmployeeName.Text = LocalAPI.GetEmployeeFullName(lblEmployeeEmail.Text, lblCompanyId.Text)
             RadDatePicker1.DbSelectedDate = Date.Today
             lblCurrentInactive.Text = IIf(LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "Inactive"), 1, 0)
             lblNewInactive.Text = IIf(lblCurrentInactive.Text, 0, 1)
