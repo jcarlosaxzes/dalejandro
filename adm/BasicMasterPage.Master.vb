@@ -10,7 +10,7 @@ Public Class BasicMasterPage
 
             UserId = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, Session("companyId"))
             Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
-            UserName = LocalAPI.GetEmployeeFullName(lblEmployeeEmail.Text)
+            UserName = LocalAPI.GetEmployeeFullName(lblEmployeeEmail.Text, Session("companyId"))
 
         Catch ex As Exception
 
@@ -30,7 +30,7 @@ Public Class BasicMasterPage
             UserEmail = lblEmployeeEmail.Text
             If Session("AdmLogin") Is Nothing Then
                 Session("AdmLogin") = UserEmail
-                LocalAPI.sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.AdminLogin, Session("companyId"), LocalAPI.GetEmployeeFullName(UserEmail))
+                LocalAPI.sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.AdminLogin, Session("companyId"), LocalAPI.GetEmployeeFullName(UserEmail, Session("companyId")))
             End If
         End Get
         Set(ByVal value As String)
