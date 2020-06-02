@@ -331,31 +331,30 @@
         </telerik:RadMultiPage>
     </div>
 
-    <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Delete Employee</b>">
-        <table width="400px" cellpadding="5px">
+    <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 500px">
+            <span class="label label-default center-block">Delete employee
+            </span>
+        </h2>
+        <table class="table-condensed" style="width: 450px">
             <tr>
                 <td class="Titulo4">&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label32" runat="server" Text="Action to remove the employee involved:"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td class="Normal">&nbsp;&nbsp;- Delete the Username and Password
+                <td>&nbsp;&nbsp;- Delete the Username and Password
                 </td>
             </tr>
             <tr>
-                <td class="Normal">&nbsp;&nbsp;- Delete the employee profile
+                <td>&nbsp;&nbsp;- Delete the employee profile
                 </td>
             </tr>
             <tr>
-                <td class="Normal">&nbsp;&nbsp;- Delete the employee time historial
+                <td>&nbsp;&nbsp;- Delete the employee time historial
                 </td>
             </tr>
             <tr>
-                <td class="Normal">&nbsp;&nbsp;- Update Multiplier and Department Monthly Target
-                </td>
-            </tr>
-            <tr>
-                <td class="Normal">&nbsp;
+                <td>&nbsp;&nbsp;- Update Multiplier and Department Monthly Target
                 </td>
             </tr>
             <tr>
@@ -369,13 +368,10 @@
             </tr>
             <tr>
                 <td align="center">
-                    <telerik:RadButton ID="btnConfirmDelete" runat="server" Text="Delete Employee" Width="125px">
-                        <Icon PrimaryIconCssClass="rbRemove" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                    </telerik:RadButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <telerik:RadButton ID="btnCancelDelete" runat="server" Text="Cancel" Width="125px" CausesValidation="False">
-                                        <Icon PrimaryIconCssClass="rbCancel" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                                    </telerik:RadButton>
+
+                    <asp:LinkButton runat="server" ID="btnConfirmDelete" CssClass="btn btn-danger btn-lg">
+                             Confirm Delete Employee
+                    </asp:LinkButton>
                 </td>
             </tr>
         </table>

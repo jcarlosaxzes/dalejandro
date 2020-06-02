@@ -371,6 +371,9 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/rfps" Text="Requests for Proposals"
                                                 Visible='<%# EmployeePermission("Deny_RequestsProposalsList") %>'>
                                             </telerik:NavigationNode>
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Proposals" Text="Proposal List"
+                                                Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
+                                            </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/Jobs" Text="Jobs"
                                                 Visible='<%# EmployeePermission("Deny_JobsList") %>'>
                                             </telerik:NavigationNode>
@@ -392,7 +395,7 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/JobTickets" Text="Tickets"
                                                 Visible='<%# IsTicketsVisible() %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/activejobsdashboad" Text="My Jobs Times">
+                                            <telerik:NavigationNode NavigateUrl="~/adm/activejobsdashboad" Text="Job Times">
                                             </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
@@ -646,32 +649,6 @@
                             </asp:ContentPlaceHolder>
                         </div>
                     </Content>
-                </telerik:LayoutRow>
-
-                <telerik:LayoutRow StaticId="Footer1" CssClass="Footer1_background_height noprint">
-                    <Columns>
-                        <telerik:LayoutColumn Span="4">
-                            <div style="padding-top: 2px">
-                            </div>
-                        </telerik:LayoutColumn>
-                        <telerik:LayoutColumn Span="5">
-                            <div class="Footer1_text_central">
-                                <asp:Label ID="lblVersion" runat="server" Text="Free"></asp:Label>
-                            </div>
-                        </telerik:LayoutColumn>
-                        <telerik:LayoutColumn Span="1">
-                            <div style="text-align: right; padding-top: 5px">
-                                <asp:Image ID="Image2" runat="server" Width="40px" ImageUrl="~/Images/Responsive.png" ToolTip="Responsive page" />
-                            </div>
-                        </telerik:LayoutColumn>
-                        <telerik:LayoutColumn Span="2">
-                            <div style="text-align: right; padding-right: 5px" title="Click to check: This Web site is secured with a GoDaddy.com Web Server Certificate. Transactions on the site are protected with up to 256-bit Secure Sockets Layer encryption.">
-                                <span id="siteseal">
-                                    <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=fx5biLCC3cLKJUHvcVIRpASihEa0DHQ4NtHKvPiGoK1XPPmlTy"></script>
-                                </span>
-                            </div>
-                        </telerik:LayoutColumn>
-                    </Columns>
                 </telerik:LayoutRow>
 
                 <telerik:LayoutRow StaticId="Footer2" CssClass="noprint">

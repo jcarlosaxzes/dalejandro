@@ -140,24 +140,6 @@ Partial Public Class ADM_Main_Responsive
     Protected WithEvents ContentPlaceHolder1 As Global.System.Web.UI.WebControls.ContentPlaceHolder
     
     '''<summary>
-    '''lblVersion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblVersion As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Image2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Image2 As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
     '''lnkHelp control.
     '''</summary>
     '''<remarks>
