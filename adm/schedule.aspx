@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="schedule.aspx.vb" Inherits="pasconcept20.schedule" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
@@ -43,9 +44,9 @@
                         <span class="glyphicon glyphicon-save-file"></span> Export to PDF
                     </asp:LinkButton>
                 </td>
-                <td style="padding-left:50px">
+                <td style="padding-left: 50px">
                     <small>
-                    <asp:Label runat="server" ID="AppointmentsCount"></asp:Label>
+                        <asp:Label runat="server" ID="AppointmentsCount"></asp:Label>
                     </small>
                 </td>
             </tr>
@@ -133,11 +134,13 @@
 
         </telerik:RadScheduler>
     </div>
-   
 
-    <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Proposal Task & Share Event</b>">
 
+    <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 650px">
+            <span class="label label-default center-block">Proposal Task & Share Event
+            </span>
+        </h2>
         <asp:Panel runat="server" ID="panelProposalTask">
             <table class="table-condensed" style="width: 650px">
 
@@ -178,9 +181,12 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipCRM" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>New Client Activity Record</b>">
-        <table width="600px">
+    <telerik:RadToolTip ID="RadToolTipCRM" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">New Client Activity Record
+            </span>
+        </h2>
+        <table class="table-condensed"style="width:600px">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceType" ZIndex="50001"

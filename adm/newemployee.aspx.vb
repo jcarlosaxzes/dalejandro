@@ -24,6 +24,10 @@ Public Class newemployee
             ' Si no tiene permiso, la dirijo a message
             If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewEmployee") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
+            If Not Request.QueryString("fromcontacts") Is Nothing Then
+                lblBackSource.Text = 1
+            End If
+
             Master.PageTitle = "Employees/New Employee"
             Title = ConfigurationManager.AppSettings("Titulo") & ". New Employee"
             RadDatePickerStartingDate.MaxDate = Today.Date
@@ -65,8 +69,8 @@ Public Class newemployee
                 Task.Run(Function() LocalAPI.RefrescarUsuarioVinculadoAsync(txtEmail.Text, "Empleados"))
 
                 ' Parasa a Edit....
-                Dim employeeId = LocalAPI.GetEmployeeId(txtEmail.Text, lblCompanyId.Text)
-                Response.RedirectPermanent("~/adm/Employee.aspx?employeeId=" & employeeId)
+                'Dim employeeId = LocalAPI.GetEmployeeId(txtEmail.Text, lblCompanyId.Text)
+                Back()
             Else
                 Master.ErrorMessage("There is already an employee with email: " & txtEmail.Text)
                 txtEmail.Focus()
@@ -126,7 +130,15 @@ Public Class newemployee
         'RadDatePickerDOB.SelectedDate = RadDatePickerDOB.MinDate
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/employees.aspx")
+        Back()
+    End Sub
+    Private Sub Back()
+        If lblBackSource.Text = 1 Then
+            Response.Redirect("~/adm/contacts.aspx")
+        Else
+            Response.Redirect("~/adm/employees.aspx")
+        End If
+
     End Sub
 
 End Class

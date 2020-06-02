@@ -12,21 +12,25 @@ Public Class client
                 'Not necessary, Client_Select include @companyId
                 'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
-                lblEmployee.Text = Master.UserEmail
-                    lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
-                    Master.PageTitle = "Client List/Edit Client: " & LocalAPI.GetClientName(CInt(lblClientId.Text))
-
-                    FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
-
-                    SqlDataSource1.DataBind()
-                    FormView1.DataBind()
-
-                    If Request.QueryString("FullPage") Is Nothing Then
-                        Master.HideMasterMenu()
-                        btnBack.Visible = False
-                    End If
+                If Not Request.QueryString("fromcontacts") Is Nothing Then
+                    lblBackSource.Text = 1
                 End If
-                RadWindowManager1.EnableViewState = False
+
+                lblEmployee.Text = Master.UserEmail
+                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
+                Master.PageTitle = "Client List/Edit Client: " & LocalAPI.GetClientName(CInt(lblClientId.Text))
+
+                FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
+
+                SqlDataSource1.DataBind()
+                FormView1.DataBind()
+
+                If Request.QueryString("FullPage") Is Nothing Then
+                    Master.HideMasterMenu()
+                    btnBack.Visible = False
+                End If
+            End If
+            RadWindowManager1.EnableViewState = False
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
@@ -73,7 +77,7 @@ Public Class client
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/clients.aspx")
+        Back()
     End Sub
 
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer)
@@ -96,7 +100,12 @@ Public Class client
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
     End Sub
 
-    Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
-        'Dim e1 As String = e.Command.Parameters("NAICS_code").Value
+    Private Sub Back()
+        If lblBackSource.Text = 1 Then
+            Response.Redirect("~/adm/contacts.aspx")
+        Else
+            Response.Redirect("~/adm/clients.aspx")
+        End If
+
     End Sub
 End Class

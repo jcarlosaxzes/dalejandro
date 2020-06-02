@@ -379,7 +379,6 @@
                                 Print
                         </button>
                     </div>--%>
-
                 </div>
             </div>
             <%-- End of Page 1 --%>
@@ -444,7 +443,11 @@
         <table class="table table-bordered" style="width: 600px">
             <tr>
                 <td>
-                    <h2>Reject Proposal</h2>
+                    <h2 style="margin: 0; text-align: center; width: 600px">
+                        <span class="label label-default center-block">Reject Proposal
+                        </span>
+                    </h2>
+
                 </td>
             </tr>
             <tr>

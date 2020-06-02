@@ -6,10 +6,10 @@
     <div class="container">
         <div class="row">
             <div class="form-group">
-            <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" 
-                CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
+                    CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-save-file"></span> Export
-            </asp:LinkButton>
+                </asp:LinkButton>
             </div>
         </div>
         <div class="row">
@@ -117,41 +117,45 @@
         </div>
     </div>
     <div style="height: 1px; overflow: auto">
-            <telerik:RadGrid ID="RadGridExportData" runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" PageSize="10">
-                <MasterTableView DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="Id">
-                    <Columns>
-                        <telerik:GridBoundColumn DataField="nEmployee" HeaderText="Employee" UniqueName="nEmployee">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="JobNumber" HeaderText="Job" UniqueName="JobNumber">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Fecha" HeaderText="Date of Work" UniqueName="Fecha" DataFormatString="{0:MM/dd/yy}">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Time" HeaderText="Time (Hrs.)" UniqueName="Time" Aggregate="Sum"
-                                DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Category" HeaderText="Category" UniqueName="Category">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="InvoiceNumber" HeaderText="InvoiceNumber" UniqueName="InvoiceNumber">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Amount" HeaderText="Amount" UniqueName="Amount" Aggregate="Sum"
-                                DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="AmountDue" HeaderText="Amount Due" UniqueName="AmountDue" Aggregate="Sum"
-                                DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Description" HeaderText="Description" UniqueName="Description">
-                        </telerik:GridBoundColumn>
-                    </Columns>
-                </MasterTableView>
-            </telerik:RadGrid>
-        </asp:Panel>
+        <telerik:RadGrid ID="RadGridExportData" runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" PageSize="10">
+            <MasterTableView DataSourceID="SqlDataSource1" AutoGenerateColumns="False" DataKeyNames="Id">
+                <Columns>
+                    <telerik:GridBoundColumn DataField="nEmployee" HeaderText="Employee" UniqueName="nEmployee">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="JobNumber" HeaderText="Job" UniqueName="JobNumber">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Fecha" HeaderText="Date of Work" UniqueName="Fecha" DataFormatString="{0:MM/dd/yy}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Time" HeaderText="Time (Hrs.)" UniqueName="Time" Aggregate="Sum"
+                        DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Category" HeaderText="Category" UniqueName="Category">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="InvoiceNumber" HeaderText="InvoiceNumber" UniqueName="InvoiceNumber">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Amount" HeaderText="Amount" UniqueName="Amount" Aggregate="Sum"
+                        DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="AmountDue" HeaderText="Amount Due" UniqueName="AmountDue" Aggregate="Sum"
+                        DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Description" HeaderText="Description" UniqueName="Description">
+                    </telerik:GridBoundColumn>
+                </Columns>
+            </MasterTableView>
+        </telerik:RadGrid>
     </div>
 
     <telerik:RadToolTip ID="RadToolTipConfirmInsert" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <table class="table-condensed" style="width: 800px">
             <tr>
                 <td colspan="2">
-                    <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
+                    <h2 style="margin: 0; text-align: center; width: 800px">
+                        <span class="label label-default center-block">
+                            <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
+                        </span>
+                    </h2>
+
                 </td>
             </tr>
             <tr>
@@ -203,7 +207,11 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <asp:Label ID="lblActionMesage2" runat="server"></asp:Label>
+                    <h2 style="margin: 0; text-align: center; width: 500px">
+                        <span class="label label-default center-block">
+                            <asp:Label ID="lblActionMesage2" runat="server"></asp:Label>
+                        </span>
+                    </h2>
                 </td>
             </tr>
             <tr>

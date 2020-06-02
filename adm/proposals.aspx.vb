@@ -97,8 +97,7 @@ Public Class proposals
                 Response.Redirect("~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
 
             Case "UploadFiles"
-                sUrl = "~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument & "&AttachmentsTab=1"
-                CreateRadWindows(e.CommandName, sUrl, 970, 810, True)
+                Response.Redirect("~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument & "&AttachmentsTab=1")
 
             Case "EditJob"
                 sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
@@ -197,6 +196,7 @@ Public Class proposals
     'End Sub
     Protected Sub btnNewWizard_Click(sender As Object, e As EventArgs) Handles btnNewWizard.Click
         CreateRadWindows("NewWizard", "~/ADM/ProposalNewWizard.aspx", 970, 810, True)
+        Response.Redirect("~/ADM/ProposalNewWizard.aspx")
     End Sub
 
 End Class

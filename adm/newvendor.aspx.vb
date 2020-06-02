@@ -6,6 +6,10 @@
             ' Si no tiene permiso, la dirijo a message
             If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewContact") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
+            If Not Request.QueryString("fromcontacts") Is Nothing Then
+                lblBackSource.Text = 1
+            End If
+
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Vendor"
             Master.PageTitle = "Contacts/New Vendor"
             lblEmployee.Text = Master.UserEmail
@@ -46,10 +50,20 @@
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Dim vendorId As Integer = e.Command.Parameters("@Id_OUT").Value
-        Response.Redirect("~/ADM/Vendors.aspx")
+        Back()
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/ADM/Vendors.aspx")
+        Back()
     End Sub
+
+    Private Sub Back()
+        If lblBackSource.Text = 1 Then
+            Response.Redirect("~/adm/contacts.aspx")
+        Else
+            Response.Redirect("~/adm/Vendors.aspx")
+        End If
+
+    End Sub
+
 End Class

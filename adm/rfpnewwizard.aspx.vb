@@ -14,7 +14,7 @@ Public Class rfpnewwizard
             Master.PageTitle = "Subconsultants/New Request for Proposals"
 
             ' Inicializar valores
-            txtSender.Text = LocalAPI.GetEmployeeFullName(Master.UserEmail)
+            txtSender.Text = LocalAPI.GetEmployeeFullName(Master.UserEmail, lblCompanyId.Text)
             txtSenderEmail.Text = Master.UserEmail
 
             RadDatePicker1.DbSelectedDate = Today

@@ -80,7 +80,8 @@
                                 <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%" EmptyMessage="Find...">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="text-align:right; width:100px"> <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                            <td style="text-align: right; width: 100px">
+                                <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                             <span class="glyphicon glyphicon-search"></span> Search
                                 </asp:LinkButton>
 
@@ -194,19 +195,19 @@
                                             <td style="width: 33%; text-align: center">
                                                 <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Statement information">
                                                     <span class="glyphicon glyphicon-envelope"></span>
-                                                 </asp:LinkButton>
+                                                </asp:LinkButton>
                                             </td>
                                             <td style="width: 33%; text-align: center">
-                                                <a class="glyphicon glyphicon-share" title="View Statement Page to share link" 
+                                                <a class="glyphicon glyphicon-share" title="View Statement Page to share link"
                                                     href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=55&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
 
                                             </td>
                                             <td style="text-align: center">
-                                                <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>' 
-                                                    ToolTip="Recive Payments" Visible='<%# Eval("AmountDue") > 0 %>' 
+                                                <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
+                                                    ToolTip="Recive Payments" Visible='<%# Eval("AmountDue") > 0 %>'
                                                     CssClass="label-success label">
                                                     <span class="glyphicon glyphicon-usd"></span>
-                                                 </asp:LinkButton>
+                                                </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
@@ -224,14 +225,14 @@
 
                                 <table class="table-condensed" style="width: 100%">
                                     <tr>
-                                        <td style="text-align:right;width:180px">Statement Number:
+                                        <td style="text-align: right; width: 180px">Statement Number:
                                         </td>
                                         <td>
                                             <%# Eval("Id") %>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align:right">Client Name [Company]:
+                                        <td style="text-align: right">Client Name [Company]:
                                         </td>
                                         <td>
                                             <telerik:RadComboBox ID="cboClient" runat="server" DataSourceID="SqlDataSourceClients"
@@ -244,7 +245,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align:right">Date Created:
+                                        <td style="text-align: right">Date Created:
                                         </td>
                                         <td>
                                             <telerik:RadDateInput ID="RadDatePicker1" runat="server" DbSelectedDate='<%# Bind("InvoiceDate", "{0:MM/dd/yy}")%>'>
@@ -253,7 +254,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align:right">Notes:
+                                        <td style="text-align: right">Notes:
                                         </td>
                                         <td>
                                             <telerik:RadTextBox ID="RadTextBox1" runat="server" EmptyMessage="Statement notes"
@@ -451,10 +452,12 @@
         </tr>
     </table>
 
-    <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<h2>Receive Statement Payments</h2>">
-
-        <table class="table table-bordered" style="width: 500px">
+    <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 500px">
+            <span class="label label-default center-block">Receive Statement Payments
+            </span>
+        </h2>
+        <table class="table-bordered" style="width: 500px">
             <tr>
                 <td style="width: 140px; text-align: right" class="Normal">Collected Date:
                 </td>

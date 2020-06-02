@@ -7,7 +7,7 @@
         <%--Header--%>
         <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompany" RenderOuterTable="false">
             <ItemTemplate>
-                <table class="table-condensed" style="width:100%">
+                <table class="table-condensed" style="width: 100%">
                     <tr>
                         <td style="text-align: left; width: 200px">
                             <a href='<%# Eval("web") %>' target="_blank">
@@ -344,8 +344,12 @@
                 </table>
             </EditItemTemplate>
         </asp:FormView>
-        <telerik:RadToolTip ID="RadToolTipMail" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-            Title="<b>Email to Client</b>">
+
+        <telerik:RadToolTip ID="RadToolTipMail" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+            <h2 style="margin: 0; text-align: center; width: 450px">
+                <span class="label label-default center-block">Email to Client
+                </span>
+            </h2>
             <table class="table-condensed" style="width: 450px">
                 <tr>
                     <td>
@@ -373,21 +377,19 @@
 
     <div>
         <%--Footeer--%>
-        <table class="table-condensed" style="width:100%">
+        <table class="table-condensed" style="width: 100%">
             <tr>
-                <td style="width:40%">
-                     <a href="https://pasconcept.com/" target="_blank">
-                                <asp:Image ID="Image1" runat="server" SkinID="headerpasconceptlogo" />
-                            </a>
+                <td style="width: 40%">
+                    <a href="https://pasconcept.com/" target="_blank">
+                        <asp:Image ID="Image1" runat="server" SkinID="headerpasconceptlogo" />
+                    </a>
                 </td>
                 <td>
-                    <p class="small" style="text-align:right">
-                                &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">AXZES LLC</a>
-                            </p>  
+                    <p class="small" style="text-align: right">
+                        &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">AXZES LLC</a>
+                    </p>
                 </td>
-                <td>
-
-                </td>
+                <td></td>
             </tr>
         </table>
     </div>

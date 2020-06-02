@@ -883,8 +883,8 @@
                                     <script type="text/javascript">
                                         function OnClientClose(sender, args) {
                                             var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-                                             masterTable.rebind();
-                                         }
+                                            masterTable.rebind();
+                                        }
                                     </script>
                                 </telerik:RadCodeBlock>
                                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
@@ -1366,23 +1366,18 @@
     </div>
 
 
-    <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Delete Proposal</b>">
-        <table align="center" width="400px">
+    <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 500px">
+            <span class="label label-default center-block">Delete Proposal
+            </span>
+        </h2>
+        <table class="table-condensed" style="width: 500px">
             <tr>
-                <td class="Titulo4">&nbsp;
+                <td>Are you sure you want to delete the active Proposal?
                 </td>
             </tr>
             <tr>
-                <td class="Titulo4" align="center">Are you sure you want to delete the active Proposal?
-                </td>
-            </tr>
-            <tr>
-                <td align="center">&nbsp;
-                </td>
-            </tr>
-            <tr>
-                <td align="center">
+                <td>
                     <asp:LinkButton ID="btnConfirmDelete" runat="server" CssClass="btn btn-danger" Width="125px" UseSubmitBehavior="false">
                              Delete Proposal
                     </asp:LinkButton>

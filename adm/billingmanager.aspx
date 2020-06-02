@@ -252,7 +252,7 @@
                 </div>
             </telerik:RadWizardStep>
             <telerik:RadWizardStep runat="server" Title="Invoices">
-                <table style="width:100%">
+                <table style="width: 100%">
                     <tr class="noprint">
                         <td style="width: 120px">
 
@@ -294,7 +294,7 @@
                                         <span class="glyphicon glyphicon-eye-open"></span> Unhide
                             </asp:LinkButton>
                         </td>
-                        <td style="text-align:right">
+                        <td style="text-align: right">
                             <asp:LinkButton ID="btnExportInvoices" runat="server" ToolTip="Export records to Excel" Width="100px"
                                 CssClass="btn btn-default btn" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-save-file"></span> Export
@@ -315,7 +315,7 @@
                             <Columns>
                                 <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Medium" >
+                                <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Medium">
                                 </telerik:GridClientSelectColumn>
                                 <telerik:GridTemplateColumn DataField="InvoiceNumber" Aggregate="Count" FooterAggregateFormatString="{0:N0}" FilterControlAltText="Filter InvoiceNumber column" HeaderText="Invoice<br/>PastDue" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber"
                                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="130px" ItemStyle-Font-Size="Small">
@@ -561,7 +561,7 @@
 
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                              <%--  <telerik:GridBoundColumn DataField="AmountBilled" FilterControlAltText="Filter AmountBilled column"
+                                <%--  <telerik:GridBoundColumn DataField="AmountBilled" FilterControlAltText="Filter AmountBilled column"
                                     HeaderText="Amount" SortExpression="AmountBilled" UniqueName="AmountBilled"
                                     ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center"
                                     FooterStyle-Width="80px" DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
@@ -575,7 +575,7 @@
                                         <div><%#Eval("LatestEmission","{0:MM/dd/yyyy}") %></div>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                               <%-- <telerik:GridBoundColumn DataField="AmountDue" FilterControlAltText="Filter AmountDue column"
+                                <%-- <telerik:GridBoundColumn DataField="AmountDue" FilterControlAltText="Filter AmountDue column"
                                     HeaderText="Amount Due" SortExpression="AmountDue" UniqueName="AmountDue"
                                     ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center"
                                     FooterStyle-Width="80px" DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
@@ -602,7 +602,11 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td>
-                    <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
+                    <h2 style="margin: 0; text-align: center; width: 500px">
+                        <span class="label label-default center-block">
+                            <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
+                        </span>
+                    </h2>
                 </td>
             </tr>
 
@@ -625,7 +629,12 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td>
-                    <asp:Label ID="lblActionMesageStatement" runat="server"></asp:Label>
+
+                    <h2 style="margin: 0; text-align: center; width: 500px">
+                        <span class="label label-default center-block">
+                            <asp:Label ID="lblActionMesageStatement" runat="server"></asp:Label>Switch Company
+                        </span>
+                    </h2>
                 </td>
             </tr>
 
@@ -644,9 +653,11 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipInvoicesPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<h2>Receive Invoice Payments</h2>">
-
+    <telerik:RadToolTip ID="RadToolTipInvoicesPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 500px">
+            <span class="label label-default center-block">Receive Invoice Payments
+            </span>
+        </h2>
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td style="width: 140px; text-align: right" class="Normal">Collected Date:
@@ -688,9 +699,11 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<h2>Receive Statement Payments</h2>">
-
+    <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 500px">
+            <span class="label label-default center-block">Receive Statement Payments
+            </span>
+        </h2>
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td style="width: 140px; text-align: right" class="Normal">Collected Date:
@@ -734,8 +747,10 @@
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0">Edit Invoice</h2>
-
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">Edit Invoice
+            </span>
+        </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEditInvoice" DefaultMode="Edit">
             <EditItemTemplate>
                 <table class="table table-bordered" style="width: 600px">
@@ -834,8 +849,10 @@
 
     <telerik:RadToolTip ID="RadToolTipInvoiceRemaider" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0">New Invoice Reminder</h2>
-
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">New Invoice Reminder
+            </span>
+        </h2>
         <asp:FormView ID="FormViewRemaider" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceRemaider">
             <ItemTemplate>
 
@@ -935,7 +952,10 @@
 
     <telerik:RadToolTip ID="RadToolTipStatementReminder" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0">New Statement Reminder</h2>
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">New Statement Reminder
+            </span>
+        </h2>
 
         <asp:FormView ID="FormViewStatementReminder" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceStatementReminder">
             <ItemTemplate>

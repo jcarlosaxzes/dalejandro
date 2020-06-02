@@ -401,6 +401,8 @@
         <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblNewEmployeeInsertedId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblBackSource" runat="server" Visible="False" Text="0"></asp:Label>
+
     </div>
 
 </asp:Content>

@@ -251,7 +251,7 @@ Public Class singproposalsign
                 sCC = sCC & LocalAPI.GetHeadDepartmentEmailFromProposal(lProposalId)
                 Dim sProjectManagerName As String = LocalAPI.GetProjectManagerEmailFromProposal(lProposalId)
                 If Len(sProjectManagerEmail) > 0 Then
-                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
+                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, lblCompanyId.Text)
                 End If
                 Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 
@@ -296,7 +296,7 @@ Public Class singproposalsign
 
             Dim sProjectManagerName As String = ""
             If Len(sProjectManagerEmail) > 0 Then
-                sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
+                sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
             End If
             Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 
@@ -369,7 +369,7 @@ Public Class singproposalsign
 
                 Dim sProjectManagerName As String = ""
                 If Len(sProjectManagerEmail) > 0 Then
-                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
+                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
                 End If
                 Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 

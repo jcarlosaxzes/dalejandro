@@ -5,44 +5,41 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <table class="table-condensed" style="width: 100%">
         <tr>
-            
         </tr>
         <tr>
-            <td style="width:150px">
+            <td style="width: 150px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Create New Company">
                     <span class="glyphicon glyphicon-plus"> Company</span>
                 </asp:LinkButton>
             </td>
-            <td style="width:120px;text-align:right">
-                Payment Status:
+            <td style="width: 120px; text-align: right">Payment Status:
             </td>
-            <td style="width:180px;">
-                <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true" >
+            <td style="width: 180px;">
+                <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true">
                     <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="Active" Value="0" Selected="true"/>
-                        <telerik:RadComboBoxItem runat="server" Text="Past Due" Value="1"  />
+                        <telerik:RadComboBoxItem runat="server" Text="Active" Value="0" Selected="true" />
+                        <telerik:RadComboBoxItem runat="server" Text="Past Due" Value="1" />
                         <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
                     </Items>
                 </telerik:RadComboBox>
             </td>
 
-            <td style="width:120px;text-align:right">
-                Binded to Axzes:
+            <td style="width: 120px; text-align: right">Binded to Axzes:
             </td>
-            <td style="width:180px;">
-                <telerik:RadComboBox ID="cboBinding" runat="server" Width="100%" AppendDataBoundItems="true" >
+            <td style="width: 180px;">
+                <telerik:RadComboBox ID="cboBinding" runat="server" Width="100%" AppendDataBoundItems="true">
                     <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" Selected="true"/>
-                        <telerik:RadComboBoxItem runat="server" Text="Already Binded" Value="0"  />
+                        <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" Selected="true" />
+                        <telerik:RadComboBoxItem runat="server" Text="Already Binded" Value="0" />
                         <telerik:RadComboBoxItem runat="server" Text="Pending Bind" Value="1" />
                     </Items>
                 </telerik:RadComboBox>
             </td>
 
-            <td style="text-align:center">
+            <td style="text-align: center">
                 <asp:Label ID="lblMsg" runat="server" Style="font-size: medium; color: #cc0000; font-family: Calibri, Verdana"></asp:Label>
             </td>
-            <td style="width:100px;text-align: right">
+            <td style="width: 100px; text-align: right">
                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-search"></span> Search
                 </asp:LinkButton>
@@ -134,14 +131,13 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                -- <span><%# Eval("GetStartedEmailDate", "{0:d}") %></span>
+                                            <td>-- <span><%# Eval("GetStartedEmailDate", "{0:d}") %></span>
 
                                             </td>
                                         </tr>
                                     </table>
                                 </ItemTemplate>
-                                
+
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
                                 HeaderStyle-Width="90px" ItemStyle-HorizontalAlign="Center">
@@ -185,12 +181,16 @@
         <table class="table table-bordered" style="width: 650px">
             <tr>
                 <td>
-                    <h2>Bind Company to Axzes Client & Job</h2>
+                    <h2 style="margin: 0; text-align: center; width: 650px">
+                        <span class="label label-default center-block">Bind Company to Axzes Client & Job
+                        </span>
+                    </h2>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h3><asp:Label ID="lblCompanyName" runat="server"></asp:Label></h3>
+                    <h3>
+                        <asp:Label ID="lblCompanyName" runat="server"></asp:Label></h3>
                 </td>
             </tr>
             <tr>
@@ -246,15 +246,14 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="cboStatus" Name="statusId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboBinding" Name="bindingstatusId" PropertyName="SelectedValue" Type="Int32" />
-            
+
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Company_types] ORDER BY [Name]"></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceClientes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Id], [Name]+' [' + isnull(Company,'...') + ']' As Name FROM Clients WHERE companyId=260973 ORDER BY Name">
-    </asp:SqlDataSource>
-    
+        SelectCommand="SELECT [Id], [Name]+' [' + isnull(Company,'...') + ']' As Name FROM Clients WHERE companyId=260973 ORDER BY Name"></asp:SqlDataSource>
+
     <asp:SqlDataSource ID="SqlDataSourceJobs" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], Code+'  '+Job Name FROM Jobs WHERE companyId=260973 and Client=@clientId and Status in(0,2) ORDER BY Code DESC">
         <SelectParameters>
