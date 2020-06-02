@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Times By Periods" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="timesbyperiords.aspx.vb" Inherits="pasconcept20.timesbyperiords" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <%--        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
@@ -43,63 +44,63 @@
 
     <div class="Formulario">
         <table class="table-condensed noprint" style="width: 100%">
-        <tr>
-            <td style="width: 120px">
-                <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="100%">
-                    <Items>
-                        <telerik:DropDownListItem Text="By Periods" Value="0" />
-                        <telerik:DropDownListItem Text="By Moths" Value="1" />
-                        <telerik:DropDownListItem Text="By Years" Value="2" />
-                    </Items>
-                </telerik:RadDropDownList>
-            </td>
-            <td style="width: 100px">
-                <telerik:RadDateInput ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Label="From:" LabelWidth="40px">
-                </telerik:RadDateInput>
-            </td>
-            <td style="width: 100px">
-                <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Label="To:" LabelWidth="25px">
-                </telerik:RadDateInput>
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
-                    DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains" AutoPostBack="true"
-                    Height="250px" MarkFirstMatch="True" Width="100%" DropDownAutoWidth="Enabled" EmptyMessage="(Select Department...)">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
-                    </Items>
-                </telerik:RadComboBox>
+            <tr>
+                <td style="width: 120px">
+                    <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="100%">
+                        <Items>
+                            <telerik:DropDownListItem Text="By Periods" Value="0" />
+                            <telerik:DropDownListItem Text="By Moths" Value="1" />
+                            <telerik:DropDownListItem Text="By Years" Value="2" />
+                        </Items>
+                    </telerik:RadDropDownList>
+                </td>
+                <td style="width: 100px">
+                    <telerik:RadDateInput ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Label="From:" LabelWidth="40px">
+                    </telerik:RadDateInput>
+                </td>
+                <td style="width: 100px">
+                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Label="To:" LabelWidth="25px">
+                    </telerik:RadDateInput>
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
+                        DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains" AutoPostBack="true"
+                        Height="250px" MarkFirstMatch="True" Width="100%" DropDownAutoWidth="Enabled" EmptyMessage="(Select Department...)">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
+                        </Items>
+                    </telerik:RadComboBox>
 
-            </td>
-            <td style="width: 100px">
-                <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
+                </td>
+                <td style="width: 100px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
                                     <span class="glyphicon glyphicon-backward"></span> Previous
-                </asp:LinkButton>
-            </td>
-            <td style="text-align: center">
-                <asp:Label ID="lblMesName" runat="server" Text="Septembre-Octuber" />
-            </td>
-            <td style="width: 100px">
-                <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align: center">
+                    <asp:Label ID="lblMesName" runat="server" Text="Septembre-Octuber" />
+                </td>
+                <td style="width: 100px">
+                    <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
                                     <span class="glyphicon glyphicon-forward"></span> Next
-                </asp:LinkButton>
-            </td>
-            <td style="text-align: right; width: 200px">
-                <script type="text/javascript">
-                    function PrintPage(sender, args) {
-                        window.print();
-                    }
-                </script>
-                <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                    <Icon PrimaryIconCssClass=" rbPrint" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                </telerik:RadButton>
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align: right; width: 200px">
+                    <script type="text/javascript">
+                        function PrintPage(sender, args) {
+                            window.print();
+                        }
+                    </script>
+                    <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
+                        <Icon PrimaryIconCssClass=" rbPrint" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
+                    </telerik:RadButton>
 
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
     </div>
 
-    
+
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1"
             GridLines="None" AutoGenerateColumns="False" AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0" ShowFooter="true">
@@ -216,8 +217,11 @@
     </div>
 
 
-    <telerik:RadToolTip ID="RadToolTipSalary" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default"
-        Title="<b>Salary</b>" OnClientHide="salaryDlgHide">
+    <telerik:RadToolTip ID="RadToolTipSalary" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default" OnClientHide="salaryDlgHide">
+        <h2 style="margin: 0; text-align: center; width: 550px">
+            <span class="label label-default center-block">Salary
+            </span>
+        </h2>
         <div style="width: 550px">
             <telerik:RadAjaxPanel ID="RadAjaxPanelSalary" runat="server">
                 <asp:CheckBox ID="chkAplyAllPayroll" runat="server" Text="Apply 'Insert parameters' to All Payroll days in the Salary Date year" />
@@ -261,8 +265,11 @@
         </div>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default"
-        Title="<b>New Miscellaneous Time</b>">
+    <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">New Miscellaneous Time
+            </span>
+        </h2>
         <table style="width: 600px" cellpadding="2px">
             <tr>
                 <td style="width: 150px; text-align: right" class="Normal">Category:

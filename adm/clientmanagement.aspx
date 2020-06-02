@@ -181,10 +181,10 @@
 
             </td>
             <td style="width: 100px">
-                <asp:LinkButton runat="server" ID="CSVButton" 
-                    CssClass="btn btn-default btn" 
-                    UseSubmitBehavior="false" 
-                    ToolTip="Export List to Comma-Separated Values format (.CSV)" 
+                <asp:LinkButton runat="server" ID="CSVButton"
+                    CssClass="btn btn-default btn"
+                    UseSubmitBehavior="false"
+                    ToolTip="Export List to Comma-Separated Values format (.CSV)"
                     CausesValidation="false">
                                         <span class="glyphicon glyphicon-download"></span> Export
                 </asp:LinkButton>
@@ -276,8 +276,11 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-    <telerik:RadToolTip ID="RadToolTipNewCampaign" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Create New Marketing Campaign</b>">
+    <telerik:RadToolTip ID="RadToolTipNewCampaign" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">Create New Marketing Campaign
+            </span>
+        </h2>
         <table class="table-condensed" style="width: 600px">
             <tr>
                 <td>
@@ -302,7 +305,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align:center"><b>Are you ready to create a New Campaign?</b>
+                <td style="text-align: center"><b>Are you ready to create a New Campaign?</b>
                 </td>
             </tr>
             <tr>
@@ -315,9 +318,11 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipAvailability" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<h2>Edit Job Status</h2>">
-
+    <telerik:RadToolTip ID="RadToolTipAvailability" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">Client Availability
+            </span>
+        </h2>
         <table class="table-condensed" style="width: 600px">
             <tr>
                 <td style="width: 140px; text-align: right" class="Normal">New Availability:
@@ -339,34 +344,34 @@
     </telerik:RadToolTip>
 
     <div style="height: 1px; overflow: auto">
-       <telerik:RadGrid ID="RadGridExportData" runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" PageSize="10">
-                <MasterTableView DataSourceID="SqlDataSource1" AutoGenerateColumns="False" >
-                    <Columns>
-                        <telerik:GridBoundColumn DataField="Name" HeaderText="Client Name" UniqueName="Name">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Organization" HeaderText="Organization" UniqueName="Organization">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="nStatus" HeaderText="nStatus" UniqueName="nStatus">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Availability" HeaderText="Availability" UniqueName="Availability">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Email" HeaderText="Email" UniqueName="Email">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Phone" HeaderText="Phone" UniqueName="Phone">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Cellular" HeaderText="Cellular" UniqueName="Cellular">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="ProposalAmount" HeaderText="#Prop" UniqueName="ProposalAmount">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="JobAmount" HeaderText="#Jobs" UniqueName="JobAmount">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="TotalBudget" HeaderText="Budget" UniqueName="TotalBudget" DataFormatString="{0:C2}">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="AmountDue" HeaderText="$Due" UniqueName="AmountDue" DataFormatString="{0:C2}">
-                        </telerik:GridBoundColumn>
-                    </Columns>
-                </MasterTableView>
-            </telerik:RadGrid>
+        <telerik:RadGrid ID="RadGridExportData" runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" PageSize="10">
+            <MasterTableView DataSourceID="SqlDataSource1" AutoGenerateColumns="False">
+                <Columns>
+                    <telerik:GridBoundColumn DataField="Name" HeaderText="Client Name" UniqueName="Name">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Organization" HeaderText="Organization" UniqueName="Organization">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="nStatus" HeaderText="nStatus" UniqueName="nStatus">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Availability" HeaderText="Availability" UniqueName="Availability">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Email" HeaderText="Email" UniqueName="Email">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Phone" HeaderText="Phone" UniqueName="Phone">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Cellular" HeaderText="Cellular" UniqueName="Cellular">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="ProposalAmount" HeaderText="#Prop" UniqueName="ProposalAmount">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="JobAmount" HeaderText="#Jobs" UniqueName="JobAmount">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="TotalBudget" HeaderText="Budget" UniqueName="TotalBudget" DataFormatString="{0:C2}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="AmountDue" HeaderText="$Due" UniqueName="AmountDue" DataFormatString="{0:C2}">
+                    </telerik:GridBoundColumn>
+                </Columns>
+            </MasterTableView>
+        </telerik:RadGrid>
     </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

@@ -210,7 +210,7 @@
                         </div>
                     </ItemTemplate>
                 </telerik:TreeListTemplateColumn>
-                <telerik:TreeListBoundColumn DataField="RFPsProjectCount" HeaderText="#" UniqueName="RFPsProjectCount" HeaderStyle-Width="40px" 
+                <telerik:TreeListBoundColumn DataField="RFPsProjectCount" HeaderText="#" UniqueName="RFPsProjectCount" HeaderStyle-Width="40px"
                     ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="X-Small" HeaderTooltip="Number of RFP for this Project">
                 </telerik:TreeListBoundColumn>
                 <telerik:TreeListBoundColumn DataField="DateCreated" HeaderText="Date" SortExpression="DateCreated"
@@ -245,21 +245,21 @@
                 <telerik:TreeListTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
                     ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                     <ItemTemplate>
-                        <table style="width: 100%; border:none !important;">
+                        <table style="width: 100%; border: none !important;">
                             <tr>
-                                <td style="text-align: center; width: 20%; border:none !important;">
+                                <td style="text-align: center; width: 20%; border: none !important;">
                                     <asp:LinkButton ID="btnNewRFP" runat="server" CommandName="NewRFPforProject" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("ParentID") = 0 %>'
                                         UseSubmitBehavior="false" ToolTip="Add RFP for this Project">
                                             <span style="font-size:small" class="glyphicon glyphicon-plus"></span>
                                     </asp:LinkButton>
                                 </td>
-                                <td style="text-align: center; width: 20%; border:none !important;">
+                                <td style="text-align: center; width: 20%; border: none !important;">
                                     <a href='<%# LocalAPI.GetSharedLink_URL(2002, Eval("Id"))%>' target="_blank" title="Subconsultant View of RFP">
                                         <span class="glyphicon glyphicon-share"></span>
                                     </a>
                                 </td>
 
-                                <td style="text-align: center; width: 20%; border:none !important;">
+                                <td style="text-align: center; width: 20%; border: none !important;">
                                     <asp:LinkButton ID="btnSendRFP" runat="server" CommandName="SendRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") <= 1, "true", "false")%>'
                                         ToolTip="Click to Send Proposal">
@@ -268,14 +268,14 @@
                                 </td>
 
 
-                                <td style="text-align: center; width: 20%; border:none !important;">
+                                <td style="text-align: center; width: 20%; border: none !important;">
                                     <asp:LinkButton ID="btnAceptRFP" runat="server" CommandName="AceptRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") = 2 Or Eval("StateId") = 3, "true", "false")%>'
                                         ToolTip="Click to Accept RFP">
                                                 <span style="color:green" class="glyphicon glyphicon-ok"></span>
                                     </asp:LinkButton>
                                 </td>
-                                <td style="text-align: center; border:none !important;">
+                                <td style="text-align: center; border: none !important;">
                                     <asp:LinkButton ID="btnDecline1" runat="server" CommandName="DeclineRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") = 2, "true", "false")%>'
                                         ToolTip="Click to Decline RFP">
@@ -304,7 +304,11 @@
                 <tr>
                     <td>
                         <h4>
-                            <asp:Label ID="lblRFPNumber" runat="server"></asp:Label></h4>
+                            <h2 style="margin: 0; text-align: center; width: 700px">
+                                <span class="label label-default center-block">
+                                    <asp:Label ID="lblRFPNumber" runat="server"></asp:Label>
+                                </span>
+                            </h2>
                     </td>
                 </tr>
                 <tr>
@@ -359,7 +363,11 @@
             <table class="table table-bordered" style="width: 500px">
                 <tr>
                     <td>
-                        <h4>Decline Selected Records </h4>
+                        <h2 style="margin: 0; text-align: center; width: 500px">
+                            <span class="label label-default center-block">Decline Selected Records
+                            </span>
+                        </h2>
+
                     </td>
                 </tr>
                 <tr>
@@ -396,8 +404,11 @@
         </telerik:RadToolTip>
     </div>
     <div>
-        <telerik:RadToolTip ID="RadToolTipNewRFPforProject" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-            Title="<b>New RFP for Project</b>">
+        <telerik:RadToolTip ID="RadToolTipNewRFPforProject" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+            <h2 style="margin: 0; text-align: center; width: 600px">
+                <span class="label label-default center-block">New RFP for Project
+                </span>
+            </h2>
             <table class="table-condensed" style="width: 600px">
                 <tr>
                     <td colspan="2">

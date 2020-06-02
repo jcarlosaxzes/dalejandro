@@ -333,7 +333,7 @@
                 </div>
             </telerik:RadWizardStep>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Other Times" StepType="Step">
-                                <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
+                <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSource2" GridLines="None" Width="100%" AllowPaging="True" PageSize="25"
                     AllowSorting="True">
                     <PagerStyle Mode="Slider" AlwaysVisible="false" />
@@ -451,7 +451,11 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
+                    <h2 style="margin: 0; text-align: center; width: 500px">
+                        <span class="label label-default center-block">
+                            <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
+                        </span>
+                    </h2>
                 </td>
             </tr>
             <tr>
@@ -503,7 +507,11 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <asp:Label ID="lblActionMesage2" runat="server"></asp:Label>
+                    <h2 style="margin: 0; text-align: center; width: 500px">
+                        <span class="label label-default center-block">
+                            <asp:Label ID="lblActionMesage2" runat="server"></asp:Label>
+                        </span>
+                    </h2>
                 </td>
             </tr>
             <tr>
@@ -585,13 +593,13 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-         DeleteCommand="DELETE FROM Employees_NonRegularHours WHERE (Id = @Id)"
-        SelectCommand="Employees_NonRegularHours_SELECT" SelectCommandType="StoredProcedure" 
+        DeleteCommand="DELETE FROM Employees_NonRegularHours WHERE (Id = @Id)"
+        SelectCommand="Employees_NonRegularHours_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Employees_NonRegularHours_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboEmployee" DefaultValue=" " Name="EmployeeId" PropertyName="SelectedValue" />
-            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime"  />
+            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
         </SelectParameters>
         <DeleteParameters>
@@ -606,7 +614,7 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
-     <asp:SqlDataSource ID="SqlDataSourceType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+    <asp:SqlDataSource ID="SqlDataSourceType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="MiscellaneousType_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
