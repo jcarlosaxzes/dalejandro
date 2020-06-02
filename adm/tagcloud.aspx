@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Tag Finder" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="tagcloud.aspx.vb" Inherits="pasconcept20.tagcloud" %>
+﻿<%@ Page Title="Projects Tag Search" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="tagcloud.aspx.vb" Inherits="pasconcept20.tagcloud" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="Formulario">

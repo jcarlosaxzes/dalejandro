@@ -537,14 +537,8 @@
     </asp:SqlDataSource>
 
 
-
-    <div style="font-size: xx-small; text-align: right">
-        Email:&nbsp;
-        <asp:TextBox ID="lblUserEmail" runat="server" Enabled="false"></asp:TextBox>
-    </div>
-
-
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    <asp:TextBox ID="lblUserEmail" runat="server" Visible="False"></asp:TextBox>
 
 </asp:Content>

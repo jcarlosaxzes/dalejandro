@@ -62,14 +62,14 @@
         <tr>
             <td style="text-align: right;vertical-align:top">Source File (csv):</td>
             <td>
-                <telerik:RadAsyncUpload ID="RadUpload1" runat="server" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true"
+                <telerik:RadAsyncUpload ID="RadUpload1" runat="server" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true" RenderMode="Classic"
                         AllowedFileExtensions="csv,txt">
                     </telerik:RadAsyncUpload>
             </td>
         </tr>
         <tr>
             <td style="text-align: right;padding-top:15px;padding-right:50px" colspan="2">
-                <telerik:RadPushButton ID="btnImport" runat="server" Text="Import Data" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
+                <telerik:RadPushButton ID="btnImport" runat="server" Text="Import Data" ToolTip="Import records from CSV files" UseSubmitBehavior="false" Primary="true">
                     <Icon CssClass="rbUpload"></Icon>
                 </telerik:RadPushButton>
             </td>
