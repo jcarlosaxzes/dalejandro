@@ -124,8 +124,8 @@ Public Class ADM_Main_Responsive
 
     Public WriteOnly Property Help() As String
         Set(ByVal value As String)
-            lnkHelp.NavigateUrl = value
-            lnkHelp.ToolTip = value
+            'lnkHelp.NavigateUrl = value
+            'lnkHelp.ToolTip = value
             RadMenu2.FindNodeByText("Help").NavigateUrl = value
         End Set
     End Property
