@@ -8657,10 +8657,10 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function GetEmployeeFullName(ByVal sEmail As String) As String
+    Public Shared Function GetEmployeeFullName(ByVal sEmail As String, scompanyId As String) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT [FullName] FROM [Employees] WHERE [Email]='" & sEmail & "'", cnn1)
+            Dim cmd As New SqlCommand($"SELECT [FullName] FROM [Employees] WHERE [Email]='{sEmail}' and companyId = {scompanyId}", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -10687,7 +10687,7 @@ Public Class LocalAPI
 
                 Dim sProjectManagerName As String = ""
                 If Len(sProjectManagerEmail) > 0 Then
-                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
+                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
                 End If
                 Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 
@@ -10769,7 +10769,7 @@ Public Class LocalAPI
                 sCC = sCC & LocalAPI.GetHeadDepartmentEmailFromProposal(lProposalId)
                 Dim sProjectManagerName As String = LocalAPI.GetProjectManagerEmailFromProposal(lProposalId)
                 If Len(sProjectManagerEmail) > 0 Then
-                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
+                    sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
                 End If
                 Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 
@@ -10814,7 +10814,7 @@ Public Class LocalAPI
 
             Dim sProjectManagerName As String = ""
             If Len(sProjectManagerEmail) > 0 Then
-                sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail)
+                sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
             End If
             Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
 

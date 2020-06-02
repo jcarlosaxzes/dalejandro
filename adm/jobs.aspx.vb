@@ -578,7 +578,7 @@ Public Class jobs
     End Sub
 
     Private Sub btnShare_Click(sender As Object, e As EventArgs) Handles btnShare.Click
-        txtShareFilter.Text = LocalAPI.GetEmployeeFullName(lblEmployee.Text) & " has Shared a filter setting with you. To apply click the 'Get' button from your Job List filter settings."
+        txtShareFilter.Text = LocalAPI.GetEmployeeFullName(lblEmployee.Text, lblCompanyId.Text) & " has Shared a filter setting with you. To apply click the 'Get' button from your Job List filter settings."
         RadToolTipShareFilter.Visible = True
         RadToolTipShareFilter.Show()
     End Sub
@@ -589,7 +589,7 @@ Public Class jobs
             Dim sTo As String = LocalAPI.GetEmployeeEmail(cboEmployeeShare.SelectedValue)
             Dim sBody As String = txtShareFilter.Text
 
-            SendGrid.Email.SendMail(sTo, lblEmployee.Text, "", "PASconcept. Share filter setting with you", sBody, lblCompanyId.Text,, LocalAPI.GetEmployeeFullName(lblEmployee.Text), lblEmployee.Text)
+            SendGrid.Email.SendMail(sTo, lblEmployee.Text, "", "PASconcept. Share filter setting with you", sBody, lblCompanyId.Text,, LocalAPI.GetEmployeeFullName(lblEmployee.Text, lblCompanyId.Text), lblEmployee.Text)
             Master.InfoMessage("Filters shared with employee")
 
         Catch ex As Exception

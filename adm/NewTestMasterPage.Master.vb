@@ -27,7 +27,7 @@ Public Class NewTestMasterPage
             Else
                 lblCompanyId.Text = Session("companyId")
                 UserId = LocalAPI.GetEmployeeId(UserEmail, lblCompanyId.Text)
-                UserName = LocalAPI.GetEmployeeFullName(UserEmail)
+                UserName = LocalAPI.GetEmployeeFullName(UserEmail, lblCompanyId.Text)
             End If
 
             If LocalAPI.IsFirewallViolation(UserId, Request.UserHostAddress()) Then
@@ -142,7 +142,7 @@ Public Class NewTestMasterPage
             If Session("AdmLogin") Is Nothing Then
                 Session("AdmLogin") = UserEmail
                 Try
-                    LocalAPI.sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.AdminLogin, cboCompany.SelectedValue, LocalAPI.GetEmployeeFullName(UserEmail))
+                    LocalAPI.sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.AdminLogin, cboCompany.SelectedValue, LocalAPI.GetEmployeeFullName(UserEmail, lblCompanyId.Text))
                 Catch ex As Exception
 
                 End Try
