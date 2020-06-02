@@ -4,8 +4,6 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style type="text/css">
-          
-       
         .MostInnerHeaderStyle {
             font-size: 12px !important;
         }
@@ -547,7 +545,10 @@
         <table class="table-condensed" style="width: 650px">
             <tr>
                 <td style="text-align: center">
-                    <h2>Hourly Wage for Selected Year</h2>
+                    <h2 style="margin: 0; text-align: center;">
+                        <span class="label label-default center-block">Hourly Wage for Selected Year
+                        </span>
+                    </h2>
                 </td>
             </tr>
             <tr>
@@ -585,7 +586,10 @@
         <table class="table-condensed" style="width: 650px">
             <tr>
                 <td style="text-align: center">
-                    <h2>Calculate Multiplier</h2>
+                    <h2 style="margin: 0; text-align: center;">
+                        <span class="label label-default center-block">Calculate Multiplier
+                        </span>
+                    </h2>
                 </td>
             </tr>
             <tr>

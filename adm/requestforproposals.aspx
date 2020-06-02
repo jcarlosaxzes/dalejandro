@@ -178,7 +178,7 @@
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceRFP" GridLines="None" AllowAutomaticUpdates="True"
             AllowAutomaticDeletes="True" AllowSorting="True" AllowPaging="True" PageSize="25" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center">
-            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True" 
+            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True"
                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                 <Columns>
@@ -307,8 +307,11 @@
             <table class="table table-bordered" style="width: 700px">
                 <tr>
                     <td>
-                        <h4>
-                            <asp:Label ID="lblRFPNumber" runat="server"></asp:Label></h4>
+                        <h2 style="margin: 0; text-align: center; width: 700px">
+                            <span class="label label-default center-block">
+                                <asp:Label ID="lblRFPNumber" runat="server"></asp:Label>
+                            </span>
+                        </h2>
                     </td>
                 </tr>
                 <tr>
@@ -363,7 +366,10 @@
             <table class="table table-bordered" style="width: 500px">
                 <tr>
                     <td>
-                        <h4>Decline Selected Records </h4>
+                        <h2 style="margin: 0; text-align: center; width: 500px">
+                            <span class="label label-default center-block">Decline Selected Records
+                            </span>
+                        </h2>
                     </td>
                 </tr>
                 <tr>
@@ -400,8 +406,11 @@
         </telerik:RadToolTip>
     </div>
     <div>
-        <telerik:RadToolTip ID="RadToolTipNewRFPforProject" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-            Title="<b>New RFP for Project</b>">
+        <telerik:RadToolTip ID="RadToolTipNewRFPforProject" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+            <h2 style="margin: 0; text-align: center; width: 600px">
+                <span class="label label-default center-block">New RFP for Project
+                </span>
+            </h2>
             <table class="table-condensed" style="width: 600px">
                 <tr>
                     <td colspan="2">

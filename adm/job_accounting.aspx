@@ -377,8 +377,11 @@
     </telerik:RadWindowManager>
 
 
-    <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Receive Payment</b>">
+    <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 500px">
+            <span class="label label-default center-block">Receive Payment
+            </span>
+        </h2>
         <table class="table table-condensed" style="width: 500px">
             <tr>
                 <td style="width: 140px; text-align: right">Collected Date:
@@ -442,10 +445,11 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Invoice</b>">
-
-
+    <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">Invoice
+            </span>
+        </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">
             <EditItemTemplate>
                 <table class="table table-condensed" style="width: 600px">
@@ -540,8 +544,11 @@
 
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Payment</b>">
+    <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">Payment
+            </span>
+        </h2>
         <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">
             <EditItemTemplate>
                 <table class="table table-condensed" style="width: 600px">
@@ -599,8 +606,11 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipInvoicesDiscount" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Apply Invoices Discount</b>">
+    <telerik:RadToolTip ID="RadToolTipInvoicesDiscount" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">Apply Invoices Discount
+            </span>
+        </h2>
         <p>
             Apply Discount Percent (%) or Discount Amount ($) to last Invoice scheduled and Job.Budget
         </p>

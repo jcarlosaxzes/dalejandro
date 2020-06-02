@@ -111,7 +111,7 @@
                                         <tr>
                                             <td style="width: 100%">
                                                 <asp:LinkButton ID="btnBindAxzes" runat="server" CommandName="BindAxzesInvoice" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
-                                                    ToolTip="Bind Company to Axzes Invoice" Visible='<%# Eval("AxzesJobId") > 0 %>' >
+                                                    ToolTip="Bind Company to Axzes Invoice" Visible='<%# Eval("AxzesJobId") > 0 %>'>
                                                     <span class="glyphicon glyphicon-credit-card"></span>
                                                 </asp:LinkButton>
                                             </td>
@@ -150,7 +150,11 @@
         <table class="table table-bordered" style="width: 650px">
             <tr>
                 <td>
-                    <h2>Bind PASconcept Invoice to Axzes Invoice</h2>
+                    <h2 style="margin: 0; text-align: center; width: 650px">
+                        <span class="label label-default center-block">Bind PASconcept Invoice to Axzes Invoice
+                        </span>
+                    </h2>
+
                     <p>
                         To link the invoices of PASconcept to those of Axzes, it is required that the Company and the Job have been previously linked from CompanyList.
                         <br />
@@ -160,7 +164,8 @@
             </tr>
             <tr>
                 <td>
-                    <h3><asp:Label ID="lblCompanyName" runat="server"></asp:Label></h3>
+                    <h3>
+                        <asp:Label ID="lblCompanyName" runat="server"></asp:Label></h3>
                 </td>
             </tr>
             <tr>
@@ -172,7 +177,7 @@
             </tr>
             <tr>
                 <td>
-                    <telerik:RadComboBox ID="cboAxzesInvoices" runat="server" DataSourceID="SqlDataSourceAxzesInvoices" 
+                    <telerik:RadComboBox ID="cboAxzesInvoices" runat="server" DataSourceID="SqlDataSourceAxzesInvoices"
                         DataTextField="InvoiceNumber" DataValueField="Id" Width="100%" AppendDataBoundItems="True" ZIndex="50001" Height="350px"
                         MarkFirstMatch="True" Filter="Contains">
                         <Items>
@@ -184,7 +189,7 @@
             </tr>
             <tr>
                 <td style="text-align: center">
-                    <asp:LinkButton ID="btnBindAxzesInvoice" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" >
+                    <asp:LinkButton ID="btnBindAxzesInvoice" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-ok"></span> Update
                     </asp:LinkButton>
                 </td>
@@ -220,14 +225,14 @@
     <asp:SqlDataSource ID="SqlDataSourcePaimentMethod" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Payment_methods]"></asp:SqlDataSource>
 
-     <asp:SqlDataSource ID="SqlDataSourceAxzesInvoices" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+    <asp:SqlDataSource ID="SqlDataSourceAxzesInvoices" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="select Id, InvoiceNumber=dbo.InvoiceNumber(Id) from Invoices where JobId=@AxzesJobId and Amount=(select Amount from [Company_Payments] where Id=@PASInvoiveId) order by id desc ">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="AxzesJobId" PropertyName="Text" />
             <asp:ControlParameter ControlID="lblSelectedInvoiceId" Name="PASInvoiveId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-    
+
 
     <asp:Label ID="lblSelectedInvoiceId" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblJobId" runat="server" Visible="False" Text="0"></asp:Label>

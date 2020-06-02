@@ -337,44 +337,44 @@
 
         <div class="collapse" id="collapseTotals">
             <div class="card card-body">
-                <table class="table-condensed" style="width:100%">
+                <table class="table-condensed" style="width: 100%">
                     <tr>
                         <td colspan="11">
-                            <hr style="margin:0" />
+                            <hr style="margin: 0" />
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="11" style="text-align:center">
-                            <h2  style="margin:0">Job Dashboard</h2>
+                        <td colspan="11" style="text-align: center">
+                            <h2 style="margin: 0">Job Dashboard</h2>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 14%;text-align:center;background-color: #039be5;">
+                        <td style="width: 14%; text-align: center; background-color: #039be5;">
                             <span class="DashboardFont2">Budget</span>
                             <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center;background-color: #546e7a;">
+                        <td style="width: 14%; text-align: center; background-color: #546e7a;">
                             <span class="DashboardFont2">Billed</span>
                             <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center;background-color: #43a047;">
+                        <td style="width: 14%; text-align: center; background-color: #43a047;">
                             <span class="DashboardFont2">Collected</span>
                             <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center;background-color: #e53935;">
+                        <td style="width: 14%; text-align: center; background-color: #e53935;">
                             <span class="DashboardFont2">Pending</span>
                             <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center;background-color: #43a047;">
+                        <td style="width: 14%; text-align: center; background-color: #43a047;">
                             <span class="DashboardFont2">Balance</span>
                             <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
                         <td></td>
-                        <td style="width: 14%;text-align:center;background-color: #e53935;">
+                        <td style="width: 14%; text-align: center; background-color: #e53935;">
                             <span class="DashboardFont2">SubContract</span>
                             <asp:Label ID="lblTotalSubContract" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                         </td>
@@ -742,7 +742,10 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <h2>Update Job Status</h2>
+                    <h2 style="margin: 0; text-align: center; width: 500px">
+                        <span class="label label-default center-block">Update Job Status
+                        </span>
+                    </h2>
                 </td>
             </tr>
             <tr>
@@ -770,7 +773,10 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipShareFilter" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h3>Share Copied Filters</h3>
+        <h2 style="margin: 0; text-align: center; width: 500px">
+            <span class="label label-default center-block">Share Copied Filters
+            </span>
+        </h2>
         <table class="table-condensed" style="width: 500px">
             <tr>
                 <td style="width: 80px">Employee To:
@@ -808,7 +814,7 @@
         DeleteCommand="JOB_DELETE" DeleteCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime"  />
+            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="cboEmployee" Name="Employee" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" DefaultValue="-1" />
