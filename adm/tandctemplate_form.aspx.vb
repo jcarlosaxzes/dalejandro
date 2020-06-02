@@ -43,7 +43,13 @@
     End Sub
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        lblTemplateId.Text = LocalAPI.GetProposal_TandCtemplatesId(NameTextBox.Text, lblCompanyId.Text)
+        Back()
+    End Sub
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Back()
+    End Sub
+    Private Sub Back()
+        Response.Redirect("~/adm/tandctemplates.aspx")
     End Sub
 
 

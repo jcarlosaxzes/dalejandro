@@ -12,7 +12,7 @@
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center">
-                    <h3 style="margin: 0">"Proposal Template</h3>
+                    <h3 style="margin: 0">Proposal Template</h3>
                 </td>
 
             </tr>
