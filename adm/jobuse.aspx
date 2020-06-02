@@ -9,8 +9,6 @@
                 <Content>
                     <telerik:RadGrid ID="RadGrid1" DataSourceID="SqlDataSource1" runat="server" AutoGenerateColumns="False" GridLines="none">
                     <MasterTableView DataSourceID="SqlDataSource1" ShowHeader="false">
-                        <ItemStyle CssClass="GridRow" />
-                        <AlternatingItemStyle CssClass="GridRow" />
                         <GroupByExpressions>
                             <telerik:GridGroupByExpression>
                                 <SelectFields>
@@ -23,7 +21,7 @@
                             </telerik:GridGroupByExpression>
                         </GroupByExpressions>
                         <Columns>
-                            <telerik:GridTemplateColumn UniqueName="GroupLevel2_Id" HeaderStyle-Width="40px">
+                            <telerik:GridTemplateColumn UniqueName="GroupLevel2_Id" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Bold="true" ItemStyle-Font-Size="Medium">
                                 <ItemTemplate>
                                     <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("GroupLevel2_Id")%>'></asp:Label>
                                 </ItemTemplate>
@@ -34,7 +32,6 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>
-                        <HeaderStyle BackColor="LightGray" />
                     </MasterTableView>
                 </telerik:RadGrid>
                 </Content>

@@ -1233,13 +1233,13 @@
                                                                 <Icon PrimaryIconCssClass="rbConfig"></Icon>
                                                             </telerik:RadButton>--%>
                                                                 <asp:LinkButton ID="btnUpdateTandCTemplate" runat="server" CommandName="UpdateTandC" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false">
-                                                                Set T&amp;C Template
+                                                                Apply
                                                                 </asp:LinkButton>
 
                                                             </td>
                                                             <td>
-                                                                <asp:LinkButton ID="btnUpdateTyC" runat="server" CommandName="Update" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false">
-                                                                Update T&amp;C
+                                                                <asp:LinkButton ID="btnUpdateTyC" runat="server" CommandName="Update" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false" Visible="false">
+                                                                Update
                                                                 </asp:LinkButton>
                                                                 &nbsp;
                                                             <asp:LinkButton ID="btnCancelTyC" runat="server" CommandName="Cancel" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="false">
@@ -1255,7 +1255,7 @@
 
                                                 <td colspan="2">
                                                     <telerik:RadEditor ID="radEditor_TandC" runat="server" Content='<%# Bind("Agreements") %>'
-                                                        Height="200px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design" RenderMode="Auto"
+                                                        Height="600px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design" RenderMode="Auto"
                                                         Width="98%">
                                                     </telerik:RadEditor>
                                                 </td>

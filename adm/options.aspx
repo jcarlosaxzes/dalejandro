@@ -118,11 +118,11 @@
                     </table>
                 </fieldset>
             </telerik:RadWizardStep>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Page Settingse" StepType="Step">
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Page Settings" StepType="Step">
                 <fieldset style="width: 800px; height: 520px;">
                     <legend>
                         <h3>
-                        Page Settings</h4></legend>
+                        Page Settings</h3></legend>
                     <div>
                         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" DefaultMode="Edit" Width="100%">
                             <EditItemTemplate>

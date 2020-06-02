@@ -359,7 +359,7 @@
                     <Content>
                         <%--<telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" EnableEmbeddedSkins="false" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">--%>
                         <div class="noprint" style="text-align: center">
-                            <telerik:RadNavigation ID="RadMenu2" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right">
+                            <telerik:RadNavigation ID="RadMenu2" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material" Font-Size="Medium" Font-Bold="true">
                                 <Nodes>
 
                                     <%--Projects menu--%>
@@ -604,27 +604,24 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/settingstatus" Text="First Steps"
                                                 Visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode Target="_blank" Text="Help"
-                                                NavigateUrl="http://blog.pasconcept.com/p/contents.html">
-                                            </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/calculator" Text="Calculator"
-                                                Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
+                                                Visible='<%# EmployeePermission("Deny_ProposalsList") And lblCompanyId.Text = 260962 %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/TagCloud" Text="Tag Finder"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/TagCloud" Text="Projects Tag Search"
                                                 Visible='<%# EmployeePermission("Deny_JobTagFinder") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/ProjectClasification" Text="Project Classification"
-                                                Visible='<%# EmployeePermission("Deny_ProjectClasification") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                            <telerik:NavigationNode NavigateUrl="~/adm/ProjectClasification" Text="Projects Classification Search"
+                                                Visible='<%# EmployeePermission("Deny_ProjectClasification") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 And lblCompanyId.Text = 260962 %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="NAICS Codes" NavigateUrl="~/adm/naics_us_codes">
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="Use & Occupancy Classification" NavigateUrl="~/adm/jobuse"
                                                 Visible='<%# EmployeePermission("Deny_UseClassification") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Messages" Text="Email Records"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/Messages" Text="Email History Log"
                                                 Visible='<%# VersionCaracteristica(802)%>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/HistoryLog" Text="History Log"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/HistoryLog" Text="User Activity History Log"
                                                 Visible='<%# EmployeePermission("Deny_HistoryLog") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/ImportData"

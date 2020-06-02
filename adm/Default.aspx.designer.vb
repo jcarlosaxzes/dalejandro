@@ -257,15 +257,6 @@ Partial Public Class _Default1
     Protected WithEvents SqlDataSourceJobsInProgressByEmployee As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''lblUserEmail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblUserEmail As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -282,6 +273,15 @@ Partial Public Class _Default1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUserEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUserEmail As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''Master property.

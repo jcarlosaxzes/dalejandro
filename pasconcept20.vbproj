@@ -2092,6 +2092,11 @@
     <Content Include="help\eng\PASconcept_Help_EN.pdf" />
     <Content Include="help\esp\PASconcept_Help_ES.pdf" />
     <Content Include="adm\NewTestMasterPage.Master" />
+    <Content Include="csv\Clients.xls" />
+    <Content Include="csv\Contacts.xls" />
+    <Content Include="csv\Employees.xls" />
+    <Content Include="csv\Subconsultants.xls" />
+    <Content Include="csv\SubconsultantTask.xls" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -4361,7 +4366,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
