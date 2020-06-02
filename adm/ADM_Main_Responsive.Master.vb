@@ -20,7 +20,6 @@ Public Class ADM_Main_Responsive
 
             Dim versionId As Integer = LocalAPI.sys_VersionId(Session("companyId"))
             Session("Version") = versionId
-            lblVersion.Text = LocalAPI.sys_VersionAndRevision(versionId)
 
             If LocalAPI.IsEmployeeInactive(UserEmail, Session("companyId")) Then
                 ' INACTIVE LogOut

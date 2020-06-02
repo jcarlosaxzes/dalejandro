@@ -69,12 +69,6 @@ Public Class employees
 
     End Sub
 
-    Protected Sub btnCancelDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDelete.Click
-        lblSelected.Text = ""
-        OcultarConfirmDelete()
-
-    End Sub
-
     Private Sub MostrarConfirmDelete()
         RadToolTipDelete.Visible = True
         RadToolTipDelete.Show()
