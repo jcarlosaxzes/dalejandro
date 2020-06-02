@@ -653,7 +653,7 @@
 
                 <telerik:LayoutRow StaticId="Footer2" CssClass="noprint">
                     <Content>
-                        <div style="text-align: center; padding-top: 2px" class="noprint">
+                        <div style="text-align: center; padding-top: 25px" class="noprint">
                             <hr style="margin:0" />
 <%--                            <asp:HyperLink ID="lnkHelp" runat="server" CssClass="enlacepie" ToolTip="Help" Target="_blank" NavigateUrl="http://blog.pasconcept.com/p/contents.html">Blog | 
                             </asp:HyperLink>
