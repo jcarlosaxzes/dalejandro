@@ -239,8 +239,11 @@
             <table class="table table-bordered" style="width: 800px">
                 <tr>
                     <td>
-                        <h4>
-                            <asp:Label ID="lblJob" runat="server"></asp:Label></h4>
+                        <h2 style="margin: 0; text-align: center; width: 800px">
+                            <span class="label label-default center-block">
+                                <asp:Label ID="lblJob" runat="server"></asp:Label>
+                            </span>
+                        </h2>
                     </td>
                 </tr>
                 <tr>

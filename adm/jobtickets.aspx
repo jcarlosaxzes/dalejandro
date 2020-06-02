@@ -183,7 +183,7 @@
                                         </asp:LinkButton>
                                     </td>
                                     <td style="width: 24px; text-align: right">
-                                        <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("Id")%>' 
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("Id")%>'
                                             Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>' ToolTip="Click to View Ticket Balance"
                                             CommandName="TicketBalance" UseSubmitBehavior="false">
                                                 <span style="font-size: 16px" aria-hidden="true" class="fas fa-chart-bar"></span>
@@ -228,7 +228,7 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="AppName" HeaderText="Application -- Module" UniqueName="AppName" HeaderStyle-Width="160px" ItemStyle-Font-Size="X-Small" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <%# Eval("AppName") %> 
+                            <%# Eval("AppName") %>
                             <br />
                             <%# Eval("LocationModule") %>
                         </ItemTemplate>
@@ -333,8 +333,7 @@
 
     <%--SendRequest Form--%>
     <div>
-        <telerik:RadToolTip ID="RadToolSendRequest" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-            Skin="Default">
+        <telerik:RadToolTip ID="RadToolSendRequest" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"Skin="Default">
             <h2 style="margin: 0">
                 <span class="label label-default center-block">Request Meeting
                 </span>
@@ -605,11 +604,11 @@
                     <td style="width: 330px">
                         <asp:CheckBox ID="chkNotifyClient" runat="server" ToolTip="Notifiy changes to client when Save?" Text="&nbsp;Notify client on Save?" />
                     </td>
-                    <td style="width:150px; text-align: right">Estimated Hours:</td>
+                    <td style="width: 150px; text-align: right">Estimated Hours:</td>
                     <td>
                         <telerik:RadTextBox ID="txtEstimatedHours" runat="server" Width="150px" ToolTip="Estimated Hours for Complete Ticket">
-                        </telerik:RadTextBox> 
-                        
+                        </telerik:RadTextBox>
+
                     </td>
                 </tr>
                 <tr>
@@ -619,7 +618,7 @@
                     </td>
                     <td></td>
                     <td>
-                       <asp:CheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
+                        <asp:CheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
                     </td>
                 </tr>
                 <tr>
@@ -628,7 +627,7 @@
                         <asp:CheckBox ID="chkIsPrivate" runat="server" ToolTip="Is Private?" Text="&nbsp;Is Private?" />
                     </td>
                     <td></td>
-                     <td style="text-align: center;">
+                    <td style="text-align: center;">
                         <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
                             <span class="glyphicon glyphicon-save"> Update</span>
                         </asp:LinkButton>
@@ -667,7 +666,10 @@
             <table class="table table-bordered" style="width: 600px">
                 <tr>
                     <td>
-                        <h3>Update Status of Selected Ticket(s)</h3>
+                        <h2 style="margin: 0; text-align: center; width: 600px">
+                            <span class="label label-default center-block">Update Status of Selected Ticket(s)
+                            </span>
+                        </h2>
                     </td>
                 </tr>
                 <tr>
@@ -713,8 +715,11 @@
     </div>
 
     <div>
-        <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Title="<b>Invoice</b>">
-
+        <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+            <h2 style="margin: 0; text-align: center; width: 600px">
+                    <span class="label label-default center-block">Invoice
+                    </span>
+                </h2>
             <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">
                 <EditItemTemplate>
                     <table class="table table-condensed" style="width: 600px">
@@ -858,7 +863,7 @@
             <asp:ControlParameter ControlID="chkIsBillable" Name="Billable" PropertyName="Checked" />
             <asp:ControlParameter ControlID="chkIsPrivate" Name="IsPrivate" PropertyName="Checked" />
 
-            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text"  />
+            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text" />
 
             <asp:ControlParameter ControlID="lblTicketId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>

@@ -43,7 +43,7 @@
 
     <div class="Formulario">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-            <table class="table-condensed" style="width:100%">
+            <table class="table-condensed" style="width: 100%">
                 <tr>
                     <td width="150px" align="left">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%">
@@ -70,7 +70,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width:250px">
+                    <td style="width: 250px">
                         <telerik:RadComboBox ID="cboStatement" runat="server" Width="100%" MarkFirstMatch="True">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="Invoices Out Statements" Value="0" Selected="true" />
@@ -80,7 +80,7 @@
                         </telerik:RadComboBox>
 
                     </td>
-                    <td style="width:250px">
+                    <td style="width: 250px">
                         <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments"
                             Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" AutoPostBack="true"
                             Height="300px" AppendDataBoundItems="true">
@@ -97,7 +97,7 @@
                     </td>
                 </tr>
             </table>
-            <table class="table-condensed" style="width:100%">
+            <table class="table-condensed" style="width: 100%">
                 <tr>
                     <td>
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
@@ -158,7 +158,7 @@
             </script>
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceInvoices" ShowFooter="True" AutoGenerateColumns="False" AllowSorting="True"
-            PageSize="100" AllowPaging="true"  AllowAutomaticDeletes="True"
+            PageSize="100" AllowPaging="true" AllowAutomaticDeletes="True"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small">
             <ClientSettings>
                 <ClientEvents OnPopUpShowing="PopUpShowing" />
@@ -265,7 +265,7 @@
                                 <tr>
                                     <td style="color: darkred">
                                         <asp:Label ID="lblAmountDue4" runat="server" Text='<%# Eval("AmountDue", "{0:N2}") %>' Font-Strikeout='<%# iif(Eval("BadDebt") = 0, False, True) %>'
-                                            tooltip='<%# iif(Eval("BadDebt") = 0, "Amount Due", "Bad Debt") %>'></asp:Label>
+                                            ToolTip='<%# iif(Eval("BadDebt") = 0, "Amount Due", "Bad Debt") %>'></asp:Label>
                                     </td>
                                 </tr>
                             </table>
@@ -314,8 +314,12 @@
 
     </div>
 
-    <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Receive Payment</b>">
+    <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+
+        <h2 style="margin: 0; text-align: center; width: 500px">
+            <span class="label label-default center-block">Receive Payment
+            </span>
+        </h2>
         <table class="table table-condensed" style="width: 500px">
             <tr>
                 <td style="width: 140px; text-align: right">Collected Date:
@@ -381,12 +385,16 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>Edit Invoice</b>">
+    <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">Edit Invoice
+            </span>
+        </h2>
+        
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">
             <EditItemTemplate>
                 <table class="table table-condensed" style="width: 600px">
-                    
+
                     <tr>
                         <td colspan="2">
                             <h4><%#IIf(Eval("InvoiceType") = 1, "Invoice Hourly Rate", "Invoice Simple Charge") %></h4>
@@ -397,11 +405,11 @@
                         <td style="width: 120px">Number:
                         </td>
                         <td>
-                            <h4 style="margin:0"><%# Eval("InvoiceNumber") %></h4>
+                            <h4 style="margin: 0"><%# Eval("InvoiceNumber") %></h4>
                         </td>
                     </tr>
                     <tr>
-                        <td >Created Date:
+                        <td>Created Date:
                         </td>
                         <td>
                             <telerik:RadDatePicker ID="RadDatePicker1" runat="server" ZIndex="50001" DbSelectedDate='<%# Bind("InvoiceDate") %>'>
@@ -409,7 +417,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td >Due Date:
+                        <td>Due Date:
                         </td>
                         <td>
                             <telerik:RadDatePicker ID="RadDatePickerMaturityDate" runat="server" ZIndex="50001" DbSelectedDate='<%# Bind("MaturityDate") %>'>
@@ -419,7 +427,7 @@
 
 
                     <tr>
-                        <td >Amount:
+                        <td>Amount:
                         </td>
                         <td>
                             <telerik:RadNumericTextBox ID="AmountRadNumericTextBoxInv" runat="server" DbValue='<%# Bind("Amount") %>'
@@ -485,18 +493,22 @@
 
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipNewInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Title="<b>New Invoice</b>">
+    <telerik:RadToolTip ID="RadToolTipNewInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="label label-default center-block">New Invoice
+            </span>
+        </h2>
+
         <table class="table table-condensed" style="width: 600px">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboJobNewInvoice" runat="server" DataSourceID="SqlDataSourceJobs" ZIndex="50001" Label="Job:"
-                            Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
-                            Height="300px" AppendDataBoundItems="true">
-                            <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="(All Jobs...)" Value="-1" Selected="true" />
-                            </Items>
-                        </telerik:RadComboBox>
+                        Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
+                        Height="300px" AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(All Jobs...)" Value="-1" Selected="true" />
+                        </Items>
+                    </telerik:RadComboBox>
                 </td>
             </tr>
             <tr>
