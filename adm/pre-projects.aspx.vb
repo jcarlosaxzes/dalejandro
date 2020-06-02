@@ -22,12 +22,10 @@ Public Class pre_projects
                 CreateRadWindows(e.CommandName, sUrl, 800, 610, False, True)
 
             Case "EditProposal"
-                sUrl = "~/ADM/Proposal.aspx?Id=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 970, 810, True, False)
+                Response.Redirect("~/ADM/Proposal.aspx?Id=" & e.CommandArgument)
 
             Case "NewProposal"
-                sUrl = "~/ADM/ProposalNewWizard.aspx?preprojectId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 970, 810, True, True)
+                Response.Redirect("~/ADM/ProposalNewWizard.aspx?preprojectId=" & e.CommandArgument)
 
             Case "AzureUpload"
                 Dim clientId As Integer = LocalAPI.GetPreProjectProperty(e.CommandArgument, "clientId")

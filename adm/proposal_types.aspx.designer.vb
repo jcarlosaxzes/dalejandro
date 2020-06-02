@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class proposal_types
     
     '''<summary>
-    '''RadCodeBlock control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
-    
-    '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
     '''<remarks>

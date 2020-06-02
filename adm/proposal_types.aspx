@@ -3,17 +3,6 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
-        <script type="text/javascript">
-
-            function OnClientClose(sender, args) {
-                var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-                masterTable.rebind();
-            }
-
-        </script>
-
-    </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 

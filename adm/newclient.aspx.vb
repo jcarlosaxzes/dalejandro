@@ -12,19 +12,24 @@ Public Class newclient
                 Response.RedirectPermanent("~/ADM/VersionFeatures.aspx?Feature=Client Quantity (" & CantidadPermitida & ")")
             End If
 
+            If Not Request.QueryString("fromcontacts") Is Nothing Then
+                lblBackSource.Text = 1
+            End If
+
+
             ' Si no tiene permiso, la dirijo a message
             If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Client"
-            Master.PageTitle = "Clients/New Client"
-            lblEmployeeEmail.Text = Master.UserEmail
-            lblEmployeeId.Text = Master.UserId
-            RadDatePickerStartingDate.MaxDate = Today.Date
-            RadDatePickerStartingDate.SelectedDate = Today.Date
-            cboSource.DataBind()
-            cboSource.SelectedValue = 0
-            cboSource.Focus()
-        End If
+                Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Client"
+                Master.PageTitle = "Clients/New Client"
+                lblEmployeeEmail.Text = Master.UserEmail
+                lblEmployeeId.Text = Master.UserId
+                RadDatePickerStartingDate.MaxDate = Today.Date
+                RadDatePickerStartingDate.SelectedDate = Today.Date
+                cboSource.DataBind()
+                cboSource.SelectedValue = 0
+                cboSource.Focus()
+            End If
     End Sub
     Protected Sub btnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNew.Click
         Try
@@ -34,7 +39,7 @@ Public Class newclient
                                           "", txtWeb.Text, RadDatePickerStartingDate.SelectedDate, txtPosition.Text, txtBillingContact.Text, txtBillingTelephone.Text, "",
                                           cboType.SelectedValue, cboSubtype.SelectedValue, cboTags.Text, txtBillingEmail.Text, cboSource.Text, cboNAICS.SelectedValue, lblEmployeeId.Text)
 
-                Response.Redirect("~/adm/clients.aspx")
+                Back()
             Else
                 Master.ErrorMessage("There is already an client with Name: " & txtName.Text)
                 txtName.Focus()
@@ -52,7 +57,15 @@ Public Class newclient
 
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/clients.aspx")
+        Back()
     End Sub
 
+    Private Sub Back()
+        If lblBackSource.Text = 1 Then
+            Response.Redirect("~/adm/contacts.aspx")
+        Else
+            Response.Redirect("~/adm/clients.aspx")
+        End If
+
+    End Sub
 End Class

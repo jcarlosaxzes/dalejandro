@@ -140,11 +140,11 @@
             <tr>
                 <td style="width: 120px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
-                       Cancel
+                       Back to List
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center">
-                    <h3 style="margin:0">New Job</h3>
+                    <h3 style="margin:0">Proposal</h3>
                 </td>
 
             </tr>

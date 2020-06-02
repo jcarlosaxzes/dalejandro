@@ -104,6 +104,15 @@ Partial Public Class vendor
     Protected WithEvents lblVendorId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblBackSource control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBackSource As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Master property.
     '''</summary>
     '''<remarks>

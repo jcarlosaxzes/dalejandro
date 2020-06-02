@@ -10,6 +10,9 @@
 
                 If LocalAPI.IsCompanyViolation(lblSubconsultantId.Text, "SubConsultans", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
+                If Not Request.QueryString("fromcontacts") Is Nothing Then
+                    lblBackSource.Text = 1
+                End If
                 Master.PageTitle = "Subconsultants/Edit Subconsultant: " & LocalAPI.GetSubConsultanName(lblSubconsultantId.Text)
 
             End If
@@ -27,7 +30,15 @@
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/subconsultants.aspx")
+        Back()
+    End Sub
+    Private Sub Back()
+        If lblBackSource.Text = 1 Then
+            Response.Redirect("~/adm/contacts.aspx")
+        Else
+            Response.Redirect("~/adm/subconsultants.aspx")
+        End If
+
     End Sub
 
 End Class

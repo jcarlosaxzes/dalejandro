@@ -7,7 +7,13 @@
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblVendorId.Text = Request.QueryString("VendorId")
+
                 If LocalAPI.IsCompanyViolation(lblVendorId.Text, "Vendors", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
+                If Not Request.QueryString("fromcontacts") Is Nothing Then
+                    lblBackSource.Text = 1
+                End If
+
                 Master.PageTitle = "Contacts/Edit Vendor"
             End If
 
@@ -17,10 +23,17 @@
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/vendors")
+        Back()
     End Sub
     Protected Sub FormView1_ItemUpdated(sender As Object, e As FormViewUpdatedEventArgs) Handles FormView1.ItemUpdated
         Master.InfoMessage("Updated Vendor Record")
     End Sub
+    Private Sub Back()
+        If lblBackSource.Text = 1 Then
+            Response.Redirect("~/adm/contacts.aspx")
+        Else
+            Response.Redirect("~/adm/vendors.aspx")
+        End If
 
+    End Sub
 End Class
