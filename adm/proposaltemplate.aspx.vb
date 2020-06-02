@@ -48,7 +48,7 @@
     End Sub
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        lblTemplateId.Text = LocalAPI.GetProposal_Proposal_typesId(NameTextBox.Text, lblCompanyId.Text)
+        Back()
     End Sub
 
     Private Sub btnAddTaskID_Click(sender As Object, e As EventArgs) Handles btnAddTaskID.Click
@@ -75,5 +75,12 @@
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
 
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Back()
+    End Sub
+    Private Sub Back()
+        Response.Redirect("~/adm/proposal_types.aspx")
     End Sub
 End Class

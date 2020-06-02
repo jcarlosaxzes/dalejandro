@@ -12,6 +12,9 @@ Public Class employee
 
                 If LocalAPI.IsCompanyViolation(lblEmployeeId.Text, "Employees", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
+                If Not Request.QueryString("fromcontacts") Is Nothing Then
+                    lblBackSource.Text = 1
+                End If
                 Master.PageTitle = "Employees/Edit Employee: " & LocalAPI.GetEmployeeName(lblEmployeeId.Text)
 
                 lblInactive.Text = IIf(LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "Inactive"), 1, 0)
@@ -63,10 +66,18 @@ Public Class employee
 
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/employees.aspx")
+        Back()
     End Sub
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewEmployeeBalance.Visible = Not FormViewEmployeeBalance.Visible
     End Sub
 
+    Private Sub Back()
+        If lblBackSource.Text = 1 Then
+            Response.Redirect("~/adm/contacts.aspx")
+        Else
+            Response.Redirect("~/adm/employees.aspx")
+        End If
+
+    End Sub
 End Class

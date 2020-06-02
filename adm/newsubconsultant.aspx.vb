@@ -6,6 +6,10 @@
             ' Si no tiene permiso, la dirijo a message
             If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewSubconsultant") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
+            If Not Request.QueryString("fromcontacts") Is Nothing Then
+                lblBackSource.Text = 1
+            End If
+
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Subconsultant"
             Master.PageTitle = "Subconsultants/New Subconsultant"
             lblEmployee.Text = Master.UserEmail
@@ -23,7 +27,7 @@
                                       txtAdress.Text, txtDireccion2.Text, txtCity.Text, txtState.Text, txtZipCode.Text, txtPhone.Text, txtCellular.Text,
                                       txtFax.Text, txtWeb.Text, RadDatePickerStartingDate.SelectedDate, txtPosition.Text, txtBillingContact.Text, txtBillingTelephone.Text, txtNotes.Text, cboNAICS.SelectedValue)
                 If subconsultantId > 0 Then
-                    Response.Redirect("~/adm/subconsultants.aspx")
+                    Back()
                 Else
                     Master.ErrorMessage("Duplicate Subconsultant Email", 0)
                     txtEmail.Focus()
@@ -61,7 +65,15 @@
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/subconsultants.aspx")
+        Back()
+    End Sub
+    Private Sub Back()
+        If lblBackSource.Text = 1 Then
+            Response.Redirect("~/adm/contacts.aspx")
+        Else
+            Response.Redirect("~/adm/subconsultants.aspx")
+        End If
+
     End Sub
 
 End Class

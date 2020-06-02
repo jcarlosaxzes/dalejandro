@@ -41,11 +41,13 @@ Public Class contacts
                 sUrl = "~/ADM/Contact.aspx?ContactId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 850, 700)
             Case "c"
-                Response.Redirect("~/ADM/Client.aspx?clientId=" & e.CommandArgument)
+                Response.Redirect("~/adm/client.aspx?clientId=" & e.CommandArgument & "&fromcontacts=1")
             Case "e"
-                Response.Redirect("~/ADM/Employee.aspx?employeeId=" & e.CommandArgument)
+                Response.Redirect("~/adm/employee.aspx?employeeId=" & e.CommandArgument & "&fromcontacts=1")
             Case "s"
-                Response.Redirect("~/adm/subconsultant.aspx?subconsultantId=" & e.CommandArgument)
+                Response.Redirect("~/adm/subconsultant.aspx?subconsultantId=" & e.CommandArgument & "&fromcontacts=1")
+            Case "v"
+                Response.Redirect("~/adm/vendor.aspx?vendorId=" & e.CommandArgument & "&fromcontacts=1")
         End Select
     End Sub
     Private Sub SqlDataSource1_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSource1.Selecting
@@ -185,17 +187,18 @@ Public Class contacts
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
     Protected Sub btnNewClient_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewClient.Click
-        CreateRadWindows("NewClient", "~/ADM/NewClient.aspx", 850, 600)
+        Response.Redirect("~/adm/newclient.aspx?fromcontacts=1")
     End Sub
     Protected Sub btnNewEmployee_Click(sender As Object, e As EventArgs) Handles btnNewEmployee.Click
-        CreateRadWindows("NewEmployee", "~/ADM/newemployee.aspx", 850, 700)
+        Response.Redirect("~/adm/newemployee.aspx?fromcontacts=1")
     End Sub
 
     Protected Sub btnNewSubconsultant_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewSubconsultant.Click
-        CreateRadWindows("NewSubconsultan", "~/ADM/NewSubConsultan.aspx", 850, 820)
+        Response.Redirect("~/adm/newsubconsultant.aspx?fromcontacts=1")
     End Sub
     Protected Sub btnNewVendor_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewVendor.Click
-        CreateRadWindows("NewVendor", "~/ADM/NewVendor.aspx", 850, 700)
+        Response.Redirect("~/adm/newvendor.aspx?fromcontacts=1")
+
     End Sub
 End Class
 
