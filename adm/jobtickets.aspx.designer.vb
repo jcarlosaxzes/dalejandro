@@ -212,6 +212,15 @@ Partial Public Class jobtickets
     Protected WithEvents RadGridToExport As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
+    '''RadToolSendRequest control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolSendRequest As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
     '''ValidationSummary1 control.
     '''</summary>
     '''<remarks>
