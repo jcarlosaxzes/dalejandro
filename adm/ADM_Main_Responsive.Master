@@ -371,7 +371,7 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/rfps" Text="Requests for Proposals"
                                                 Visible='<%# EmployeePermission("Deny_RequestsProposalsList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Proposals" Text="Proposal List"
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Proposals" Text="Proposals"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/Jobs" Text="Jobs"
