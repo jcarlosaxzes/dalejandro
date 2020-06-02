@@ -13,7 +13,7 @@
                     </asp:Panel>
                 </td>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="false">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -79,7 +79,6 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Department Details" StepType="Step">
                     <div>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" ErrorMessage=" Name is mandatory"></asp:RequiredFieldValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator554" runat="server" ControlToValidate="CodeTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
                     </div>
                     <table class="table-condensed" style="width: 100%">
                         <tr>
@@ -87,14 +86,6 @@
                             <td>
                                 <telerik:RadTextBox ID="NameTextBox" runat="server" MaxLength="80" Width="100%"></telerik:RadTextBox>
                                 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right">Code:
-                            </td>
-                            <td>
-                                <telerik:RadTextBox ID="CodeTextBox" runat="server" MaxLength="32" Width="50%"></telerik:RadTextBox>
-
                             </td>
                         </tr>
                         <tr>
@@ -134,6 +125,14 @@
                             </td>
                             <td>
                                 <telerik:RadCheckBox runat="server" ID="chkProductive"></telerik:RadCheckBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Code (optional):
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="CodeTextBox" runat="server" MaxLength="32" Width="25%"></telerik:RadTextBox>
+
                             </td>
                         </tr>
                         <tr>
@@ -262,10 +261,11 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Select Id, Name from Company_Department where companyId=@companyId Order By Name">
+        SelectCommand="Select Id, Name from Company_Department where companyId=@companyId and Id<>@DepartmentId Order By Name">
         <SelectParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblDepartmentId" Name="DepartmentId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
 

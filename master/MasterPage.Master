@@ -33,15 +33,12 @@
                     <Content>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
-                                <td>
-                                    <asp:Label ID="lblPageTitle" runat="server" Text="lblTitlePage"> </asp:Label>
-                                </td>
                                 <td style="text-align: right">
-                                    <asp:Label ID="lblUserName" runat="server" Text="lblUserName" ForeColor="White"></asp:Label>
+                                    <asp:Label ID="lblUserName" runat="server" Text="lblUserName" ></asp:Label>
                                 </td>
                                 <td style="width: 100px; text-align: right">
                                     <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="LogIn" LogoutAction="Redirect"
-                                        LogoutPageUrl="http://pasconcept.com/" ForeColor="Orange" />
+                                        LogoutPageUrl="http://app.pasconcept.com/" />
                                 </td>
                             </tr>
                         </table>
@@ -50,87 +47,82 @@
                 <telerik:LayoutRow>
                     <Content>
                         <div>
-                            <telerik:RadMenu ID="RadMenu1" runat="server" Style="z-index: 700" ClickToOpen="True" Skin="Metro" Width="100%">
-                                <Items>
-                                    <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Default.aspx" Text="Master Dashboard">
-                                    </telerik:RadMenuItem>
-                                    <telerik:RadMenuItem runat="server" Text="Company">
-                                        <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/CompanyList.aspx" Text="Company List">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/CompanyTypes.aspx" Text="Company Types &amp; Templates">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" IsSeparator="True" Text="-">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/CompanyPendingBills.aspx"
+                            <telerik:RadNavigation runat="server" ID="RadMenu1" >
+                                <Nodes>
+                                    <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Default.aspx" Text="Master Dashboard">
+                                    </telerik:NavigationNode >
+                                    <telerik:NavigationNode  runat="server" Text="Company">
+                                        <Nodes>
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/CompanyList.aspx" Text="Company List">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/CompanyTypes.aspx" Text="Company Types &amp; Templates">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" IsSeparator="True" >
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/CompanyPendingBills.aspx"
                                                 Text="Company Billing">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/HistoryLog.aspx"
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/HistoryLog.aspx"
                                                 Text="History Log">
-                                            </telerik:RadMenuItem>
-                                        </Items>
-                                    </telerik:RadMenuItem>
-                                    <telerik:RadMenuItem runat="server" Text="Billing">
-                                        <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Invoices.aspx" Text="PAS Invoices"></telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" Text="Plans" NavigateUrl="~/MASTER/BillingPlans.aspx"></telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" Text="SMS/Campaigns Billing" NavigateUrl="~/MASTER/SMS_Bill.aspx" Visible="false"></telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" Text="Company Activity" NavigateUrl="~/MASTER/ActiveUsers.aspx"></telerik:RadMenuItem>
-                                        </Items>
-                                    </telerik:RadMenuItem>
+                                            </telerik:NavigationNode >
+                                        </Nodes>
+                                    </telerik:NavigationNode >
+                                    <telerik:NavigationNode  runat="server" Text="Billing">
+                                        <Nodes>
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Invoices.aspx" Text="PAS Invoices"></telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" Text="Plans" NavigateUrl="~/MASTER/BillingPlans.aspx"></telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" Text="SMS/Campaigns Billing" NavigateUrl="~/MASTER/SMS_Bill.aspx" Visible="false"></telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" Text="Company Activity" NavigateUrl="~/MASTER/ActiveUsers.aspx"></telerik:NavigationNode >
+                                        </Nodes>
+                                    </telerik:NavigationNode >
 
-                                    <telerik:RadMenuItem runat="server" Text="Mass Communication" NavigateUrl="~/MASTER/MassCommunication.aspx">
-                                    </telerik:RadMenuItem>
+                                    <telerik:NavigationNode  runat="server" Text="Mass Communication" NavigateUrl="~/MASTER/MassCommunication.aspx">
+                                    </telerik:NavigationNode >
 
 
-                                    <telerik:RadMenuItem runat="server" Text="Templates">
-                                        <Items>
-                                            <telerik:RadMenuItem runat="server" Text="Proposal T &amp; C" NavigateUrl="~/MASTER/ProposalTandC.aspx"></telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/ProposalTask_TEMPLATE.aspx" Text="Proposal Task">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Disciplines.aspx" Text="Disciplines">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/MessagesTemplates.aspx" Text="Messages Templates">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/MiscellaneousTimeCodes.aspx" Text="Miscellaneous Time Codes">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Transmittals_package_types.aspx" Text="Transmittals Package Types">
-                                            </telerik:RadMenuItem>
-                                        </Items>
-                                    </telerik:RadMenuItem>
-                                    <telerik:RadMenuItem runat="server" Text="Term &amp; Conditions">
-                                        <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/TandCedit.aspx" Text="Term &amp; Conditions Pages">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/UsersAgreeList.aspx" Text="Users Agree List">
-                                            </telerik:RadMenuItem>
-                                        </Items>
-                                    </telerik:RadMenuItem>
-                                    <telerik:RadMenuItem runat="server" Text="Versiones">
-                                        <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Versiones.aspx" Text="Versiones List">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/Features.aspx" Text="Version Features">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/FeaturesCount.aspx" Text="Features Count">
-                                            </telerik:RadMenuItem>
-                                        </Items>
-                                    </telerik:RadMenuItem>
-                                    <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/DataTool.aspx" Text="Data Tools">
-                                    </telerik:RadMenuItem>
-                                    <telerik:RadMenuItem runat="server" Text="User">
-                                        <Items>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Admin Users">
-                                            </telerik:RadMenuItem>
-                                            <telerik:RadMenuItem runat="server" NavigateUrl="~/MASTER/PreUsers.aspx" Text="Pre-Users">
-                                            </telerik:RadMenuItem>
-                                        </Items>
-                                    </telerik:RadMenuItem>
-                                </Items>
-                                <WebServiceSettings>
-                                    <ODataSettings InitialContainerName=""></ODataSettings>
-                                </WebServiceSettings>
-                            </telerik:RadMenu>
+                                    <telerik:NavigationNode  runat="server" Text="Templates">
+                                        <Nodes>
+                                            <telerik:NavigationNode  runat="server" Text="Proposal T &amp; C" NavigateUrl="~/MASTER/ProposalTandC.aspx"></telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/ProposalTask_TEMPLATE.aspx" Text="Proposal Task">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Disciplines.aspx" Text="Disciplines">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/MessagesTemplates.aspx" Text="Messages Templates">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/MiscellaneousTimeCodes.aspx" Text="Miscellaneous Time Codes">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Transmittals_package_types.aspx" Text="Transmittals Package Types">
+                                            </telerik:NavigationNode >
+                                        </Nodes>
+                                    </telerik:NavigationNode >
+                                    <telerik:NavigationNode  runat="server" Text="Term &amp; Conditions">
+                                        <Nodes>
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/TandCedit.aspx" Text="Term &amp; Conditions Pages">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/UsersAgreeList.aspx" Text="Users Agree List">
+                                            </telerik:NavigationNode >
+                                        </Nodes>
+                                    </telerik:NavigationNode >
+                                    <telerik:NavigationNode  runat="server" Text="Versiones">
+                                        <Nodes>
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Versiones.aspx" Text="Versiones List">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Features.aspx" Text="Version Features">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/FeaturesCount.aspx" Text="Features Count">
+                                            </telerik:NavigationNode >
+                                        </Nodes>
+                                    </telerik:NavigationNode >
+                                    <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/DataTool.aspx" Text="Data Tools">
+                                    </telerik:NavigationNode >
+                                    <telerik:NavigationNode  runat="server" Text="User">
+                                        <Nodes>
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Admin Users">
+                                            </telerik:NavigationNode >
+                                        </Nodes>
+                                    </telerik:NavigationNode >
+                                </Nodes>
+                            </telerik:RadNavigation>
                         </div>
                     </Content>
                 </telerik:LayoutRow>

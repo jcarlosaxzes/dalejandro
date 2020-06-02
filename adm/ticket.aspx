@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="ticket.aspx.vb" Inherits="pasconcept20.ticket" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="ticket.aspx.vb" Inherits="pasconcept20.ticket" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
@@ -14,10 +14,31 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="BulletList"
-        HeaderText="Following error occurs:" ShowMessageBox="false" ShowSummary="true" CssClass="alert alert-danger alert-dismissable"
-        ValidationGroup="Ticket" />
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align: center">
+                    <h2 style="margin: 0">Ticket</h2>
+                </td>
 
+            </tr>
+        </table>
+    </div>
+
+
+    <div>
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="BulletList"
+            HeaderText="Following error occurs:" ShowMessageBox="false" ShowSummary="true" CssClass="alert alert-danger alert-dismissable"
+            ValidationGroup="Ticket" />
+
+    </div>
+
+    <div class="pas-container">
     <table class="table-condensed" style="width: 100%; text-align: left">
         <tr>
             <td style="width: 20%; text-align: right">Title:
@@ -207,7 +228,7 @@
             <td style="width: 30%">
                 <telerik:RadCheckBox ID="chkNotifyClient" runat="server" ToolTip="Notifiy changes to client when Save?" Text="&nbsp;Notify client on Save?" />
             </td>
-            <td style="width: 20%;text-align: right">Estimated Hours:</td>
+            <td style="width: 20%; text-align: right">Estimated Hours:</td>
             <td>
                 <telerik:RadTextBox ID="txtEstimatedHours" runat="server" Width="150px" ToolTip="Estimated Hours for Complete Ticket">
                 </telerik:RadTextBox>
@@ -220,7 +241,7 @@
             </td>
             <td></td>
             <td>
-                
+
                 <telerik:RadCheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
             </td>
         </tr>
@@ -237,7 +258,7 @@
             </td>
         </tr>
     </table>
-
+    </div>
     <div>
         <asp:CompareValidator runat="server" ID="Comparevalidator3" ForeColor="Red" Operator="NotEqual" SetFocusOnError="true" ValidationGroup="Ticket"
             ControlToValidate="cboLocationModuleEdit"
@@ -289,7 +310,7 @@
             <asp:ControlParameter ControlID="chkIsBillable" Name="Billable" PropertyName="Checked" />
             <asp:ControlParameter ControlID="chkIsPrivate" Name="IsPrivate" PropertyName="Checked" />
 
-            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text"  />
+            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text" />
 
         </InsertParameters>
         <UpdateParameters>
@@ -317,7 +338,7 @@
             <asp:ControlParameter ControlID="chkIsBillable" Name="Billable" PropertyName="Checked" />
             <asp:ControlParameter ControlID="chkIsPrivate" Name="IsPrivate" PropertyName="Checked" />
 
-            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text"  />
+            <asp:ControlParameter ControlID="txtEstimatedHours" Name="EstimatedHours" PropertyName="Text" />
 
             <asp:ControlParameter ControlID="lblTicketId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>

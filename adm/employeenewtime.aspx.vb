@@ -56,8 +56,6 @@ Public Class employeenewtime
 
     Private Sub InitDialog()
         Try
-
-            lblJobName.Text = LocalAPI.GetJobCodeName(lblSelectedJob.Text)
             opcDone.Checked = False
             opcHold.Checked = False
             txtDescription.Text = ""
@@ -86,14 +84,6 @@ Public Class employeenewtime
             End If
 
             cboCategory.SelectedValue = DefaultValuesObject("CategoryId")
-
-            Dim dValue As Double = LocalAPI.GetWeeklyHoursByEmp(lblEmployeeId.Text, lblCompanyId.Text)
-            lblTotalWeekHours.Text = FormatNumber(dValue, 1)
-            lblRemaining.Text = FormatNumber(40 - dValue, 1)
-
-            dValue = LocalAPI.GetWeeklyHoursByEmpExt(lblEmployeeId.Text, lblCompanyId.Text, DateAdd(DateInterval.Day, -7, Date.Today))
-            lblTotalBiWeekHours.Text = FormatNumber(dValue, 1)
-            lblRemaining2Week.Text = FormatNumber(40 - dValue, 1)
 
             If divProposalTask.Visible Then
                 cboTask.DataBind()
@@ -217,6 +207,9 @@ Public Class employeenewtime
                 Response.Redirect("~/adm/default.aspx")
         End Select
 
+    End Sub
+    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
+        FormViewTimeBalance.Visible = Not FormViewTimeBalance.Visible
     End Sub
 End Class
 

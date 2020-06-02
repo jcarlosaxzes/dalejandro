@@ -102,18 +102,6 @@ Public Class companymultiplier
                 CreateRadWindows(e.CommandName, "~/ADM/Employee_HourlyWageHistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose1")
         End Select
     End Sub
-    Public Function GetEmployeePhotoURL(employeeId As Integer) As String
-        Try
-            'Return "~/Images/Employees/" & employeeId.ToString & ".jpg"
-            Dim sImageURL = "~/Images/Employees/" & employeeId.ToString & ".jpg"
 
-            If System.IO.File.Exists(Server.MapPath(sImageURL)) Then
-                GetEmployeePhotoURL = sImageURL
-            End If
-            If Len(GetEmployeePhotoURL) = 0 Then GetEmployeePhotoURL = "~/Images/Employees/NophotoForList.jpg"
-
-        Catch ex As Exception
-        End Try
-    End Function
 
 End Class

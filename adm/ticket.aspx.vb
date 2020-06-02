@@ -11,7 +11,6 @@ Public Class ticket
 
                 lblJobId.Text = Request.QueryString("JobId")
 
-                Master.PageTitle = "Job/Tickets"
                 cboEmployee.DataBind()
                 If Not Request.QueryString("TicketId") Is Nothing Then
                     lblTicketId.Text = Request.QueryString("TicketId")
@@ -88,49 +87,6 @@ Public Class ticket
         End Try
 
     End Sub
-    Private Sub ReadTicketRecord_OLD()
-        Try
-            Dim ticketRecord = LocalAPI.GetRecord(lblTicketId.Text, "Jobs_ticket_SELECT")
-
-            If Len(ticketRecord("LocationModule")) > 0 Then cboLocationModuleEdit.SelectedText = ticketRecord("LocationModule")
-            If Len(ticketRecord("AppName")) > 0 Then cboAppNameEdit.SelectedText = ticketRecord("AppName")
-            txtTitle.Text = ticketRecord("Title")
-            txtTags.Text = ticketRecord("Tags")
-            txtClientDescription.Text = ticketRecord("ClientDescription")
-            txtCompanyDescription.Text = ticketRecord("CompanyDescription")
-            txtNotes.Text = ticketRecord("Notes")
-
-            cboTypeEdit.DataBind()
-            cboTypeEdit.SelectedText = ticketRecord("Type")
-            cboPriority.SelectedText = ticketRecord("Priority")
-            cboStatusEdit.SelectedText = ticketRecord("Status")
-
-            cboEmployee.SelectedValue = ticketRecord("employeeId")
-
-            txtNotificationClientName.Text = ticketRecord("NotificationClientName")
-            txtNotificationClientEmail.Text = ticketRecord("NotificationClientEmail")
-
-            txtNotificationClientName.Text = ticketRecord("NotificationClientName")
-            txtNotificationClientEmail.Text = ticketRecord("NotificationClientEmail")
-
-            RadDatePickerExpectedStartDate.SelectedDate = ticketRecord("ExpectedStartDate")
-
-            cboApprovedStatus.SelectedText = ticketRecord("ApprovedStatus")
-
-            RadDatePickerStagingDate.SelectedDate = ticketRecord("StagingDate")
-            RadDatePickerProductionDate.SelectedDate = ticketRecord("ProductionDate")
-
-
-            lblNotificationBCClientEmail.Text = ticketRecord("NotificationBCClientEmail")
-
-            txttrelloURL.Text = ticketRecord("trelloURL")
-            txtJiraURL.Text = ticketRecord("jiraURL")
-
-        Catch ex As Exception
-
-        End Try
-
-    End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If Val(lblTicketId.Text) = 0 Then
@@ -148,7 +104,7 @@ Public Class ticket
                 Task.Run(Function() LocalAPI.SendTicketNotificationToEmployee(lblJobId.Text, lblTicketId.Text, lblCompanyId.Text, "for " & Master.UserName))
             End If
 
-            Response.Redirect("~/ADM/Ticket.aspx?JobId=" & lblJobId.Text & "&TicketId=" & lblTicketId.Text)
+            Response.Redirect("~/ADM/jobtickets.aspx?JobId=" & lblJobId.Text)
         Else
             ' Update Action
             SqlDataSource1.Update()
@@ -183,6 +139,10 @@ Public Class ticket
             e.Item.Checked = False
         End If
 
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/jobtickets.aspx?JobId=" & lblJobId.Text)
     End Sub
 End Class
 

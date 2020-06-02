@@ -2,6 +2,8 @@
 Public Class reports
     Inherits System.Web.UI.Page
 
+    Dim QueryGropu As String
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
@@ -23,9 +25,12 @@ Public Class reports
             '    cboDepartment.SelectedValue = nDefaultDep
             '    cboDepartment.Enabled = False
             'End If
+            If Not Request.QueryString("group") Is Nothing Then
+                QueryGropu = Request.QueryString("group")
+            End If
 
             TimeFrame(3)
-        End If
+            End If
 
     End Sub
 
@@ -173,4 +178,16 @@ Public Class reports
 
     End Sub
 
+    Protected Sub cboGroups_DataBound(sender As Object, e As EventArgs)
+        If Not IsNothing(QueryGropu) Then
+            Dim cb As RadComboBox = CType(sender, RadComboBox)
+            Dim item = cboGroups.FindItemByText(QueryGropu)
+            If Not IsNothing(item) Then
+                item.Selected = True
+                InitNamesReports()
+            End If
+            QueryGropu = Nothing
+        End If
+
+    End Sub
 End Class

@@ -84,32 +84,23 @@
                                     </asp:LinkButton>
                                 </strong>
                             </div>
-                            <b><%# Eval("Organization")%></b> &nbsp;&nbsp;&nbsp;<%# Eval("Position") %>
+                            <b><%# Eval("Organization")%></b> &nbsp;&nbsp;&nbsp;<%# Eval("Discipline") %>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Code" FilterControlAltText="Filter Code column"
-                        HeaderText="SubC. Code" SortExpression="Code" UniqueName="Code" HeaderStyle-HorizontalAlign="Center" Display="false">
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="disciplineId" DataType="System.Int32" Display="False"
-                        FilterControlAltText="Filter disciplineId column" HeaderText="Discipline" SortExpression="disciplineId"
-                        UniqueName="disciplineId">
+                    <telerik:GridTemplateColumn HeaderText="NAICS Code" UniqueName="NAICS_US_Codes" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <asp:Label ID="disciplineIdLabel" runat="server" Text='<%# Eval("disciplineId") %>'></asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Address" FilterControlAltText="Filter Address column"
-                        HeaderText="Address" SortExpression="Address" UniqueName="Address" HeaderStyle-HorizontalAlign="Center">
-                        <ItemTemplate>
-                            <div><a class="lnkGrid" href="http://maps.google.com/?q=<%# Eval("Address")%> <%# Eval("Address2")%>,<%# Eval("City")%>,<%# Eval("State")%> <%# Eval("ZipCode")%>" target="_blank" title="view google subconsultant address"><%# Eval("Address")%> &nbsp;<%# Eval("Address2")%>,&nbsp;<%# Eval("City")%>,&nbsp;<%# Eval("State")%>&nbsp;<%# Eval("ZipCode")%></a></div>
-                            <%# String.Concat(Eval("Telephone"), " ", Eval("CellPhone"))%>
+                                <%# Eval("NAICSCodeAndTitle") %>    
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                    
                     <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column"
-                        HeaderText="Email & Web" SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="250px">
+                        HeaderText="Contact info" SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <div><a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a></div>
-                            <a class="lnkGrid" href='<%# Eval("WebPage")%>' target="_blank" title="View web"><%#Eval("WebPage")%>
+                            <div>
+                                <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
+                                <%# String.Concat(LocalAPI.PhoneHTML(Request.UserAgent, Eval("Telephone")), " ", LocalAPI.PhoneHTML(Request.UserAgent, Eval("CellPhone")))%>
+                            </div>
+                            <a href='<%# Eval("WebPage")%>' target="_blank" title="View web"><%#Eval("WebPage")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn ReadOnly="True" HeaderText="Actions" UniqueName="credentials" HeaderTooltip="Actions"

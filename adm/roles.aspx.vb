@@ -30,24 +30,8 @@ Public Class roles
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "Permits"
-                sUrl = "~/ADM/role_Permissions_form.aspx?roleId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 800, True)
+                Response.Redirect("~/ADM/role_Permissions_form.aspx?roleId=" & e.CommandArgument)
         End Select
-    End Sub
-    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, bRefreshOnClientClose As Boolean)
-        RadWindowManager1.Windows.Clear()
-        Dim window1 As RadWindow = New RadWindow()
-        window1.NavigateUrl = sUrl
-        window1.VisibleOnPageLoad = True
-        window1.VisibleStatusbar = False
-        window1.ID = WindowsID
-        'window1.InitialBehaviors = WindowBehaviors.Maximize
-        window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize
-        window1.Width = Width
-        window1.Height = Height
-        window1.Modal = True
-        If bRefreshOnClientClose Then window1.OnClientClose = "OnClientClose"
-        RadWindowManager1.Windows.Add(window1)
     End Sub
 
     Private Sub btnInitialize_Click(sender As Object, e As EventArgs) Handles btnInitialize.Click

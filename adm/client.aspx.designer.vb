@@ -77,13 +77,13 @@ Partial Public Class client
     Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
-    '''lblStatus control.
+    '''vsClient control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblStatus As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents vsClient As Global.System.Web.UI.WebControls.ValidationSummary
     
     '''<summary>
     '''FormView1 control.
@@ -291,6 +291,15 @@ Partial Public Class client
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClientSources As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceNAICS control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceNAICS As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.

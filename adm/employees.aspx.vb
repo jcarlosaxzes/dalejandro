@@ -69,12 +69,6 @@ Public Class employees
 
     End Sub
 
-    Protected Sub btnCancelDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDelete.Click
-        lblSelected.Text = ""
-        OcultarConfirmDelete()
-
-    End Sub
-
     Private Sub MostrarConfirmDelete()
         RadToolTipDelete.Visible = True
         RadToolTipDelete.Show()
@@ -93,20 +87,6 @@ Public Class employees
         RadSchedulerLive.SelectedDate = CDate("01/01/" & cboYear2.SelectedValue)
     End Sub
 
-    Public Function GetEmployeePhotoURL(employeeId As Integer) As String
-        Try
-            Dim sImageURL = LocalAPI.GetEmployeePhotoURL(employeeId)
-
-            If IsNothing(sImageURL) Or Len(sImageURL) = 0 Then
-                Return "~/Images/Employees/NophotoForList.jpg"
-            End If
-
-            Return sImageURL
-
-        Catch ex As Exception
-        End Try
-    End Function
-
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
@@ -115,7 +95,7 @@ Public Class employees
             Case "EditPhoto"
                 'sUrl = "~/ADM/EditAvatar.aspx?Id=" & e.CommandArgument & "&Entity=Employee"
                 sUrl = "~/ADM/UploadPhoto.aspx?Id=" & e.CommandArgument & "&Entity=Employee"
-                CreateRadWindows(e.CommandName, sUrl, 640, 400, True)
+                CreateRadWindows(e.CommandName, sUrl, 640, 480, True)
 
             Case "SendCredentials"
                 Dim sEmail As String = LocalAPI.GetEmployeeEmail(lId:=e.CommandArgument)

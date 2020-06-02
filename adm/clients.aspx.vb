@@ -83,7 +83,7 @@ Public Class clients
             Case "EditPhoto"
                 'sUrl = "~/ADM/EditAvatar.aspx?Id=" & e.CommandArgument & "&Entity=Client"
                 sUrl = "~/ADM/UploadPhoto.aspx?Id=" & e.CommandArgument & "&Entity=Client"
-                CreateRadWindows(e.CommandName, sUrl, 640, 400)
+                CreateRadWindows(e.CommandName, sUrl, 640, 480)
 
             Case "AzureUpload"
                 sUrl = "~/ADM/AzureStorage_client.aspx?clientId=" & e.CommandArgument

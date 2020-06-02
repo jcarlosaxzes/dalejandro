@@ -134,8 +134,14 @@ Public Class Job_accounting
 
     Protected Sub RadCloudUpload1_FileUploaded(sender As Object, e As Telerik.Web.UI.CloudFileUploadedEventArgs)
         Try
+            Dim tempName = e.FileInfo.KeyName
+            Dim fileExt = IO.Path.GetExtension(tempName)
+            Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
+            AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+            AzureStorageApi.DeleteFile(tempName, 0)
+
             lblOriginalFileName.Text = e.FileInfo.OriginalFileName
-            lblKeyName.Text = e.FileInfo.KeyName
+            lblKeyName.Text = newName
             lblContentBytes.Text = e.FileInfo.ContentLength
             lblContentType.Text = e.FileInfo.ContentType
         Catch ex As Exception

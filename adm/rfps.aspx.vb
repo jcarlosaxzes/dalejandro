@@ -227,7 +227,7 @@ Public Class rfps
                 'sCCO = LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCCO")
             End If
 
-            LocalAPI.SendMail(RFPObject("SubConsultanstEmail"), sCC, "", sSubject, sBody, lblCompanyId.Text, RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
+            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), sCC, "", sSubject, sBody, lblCompanyId.Text, RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
             Return True
         Catch ex As Exception
             'lblStatus.Text = ex.Message
@@ -282,7 +282,7 @@ Public Class rfps
                 'sCCO = LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCCO")
             End If
 
-            LocalAPI.SendMail(RFPObject("SubConsultanstEmail"), sCC, "", sSubject, sBody, lblCompanyId.Text, RFPObject("CompanyName"), RFPObject("SenderEmail"), RFPObject("Organization"))
+            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), sCC, "", sSubject, sBody, lblCompanyId.Text, RFPObject("CompanyName"), RFPObject("SenderEmail"), RFPObject("Organization"))
             Return True
 
         Catch ex As Exception

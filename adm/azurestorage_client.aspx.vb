@@ -26,9 +26,14 @@ Public Class azurestorage_client
     Protected Sub RadCloudUpload1_FileUploaded(sender As Object, e As Telerik.Web.UI.CloudFileUploadedEventArgs)
         Try
             If LocalAPI.IsAzureStorage(lblCompanyId.Text) Then
+                Dim tempName = e.FileInfo.KeyName
+                Dim fileExt = IO.Path.GetExtension(tempName)
+                Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
+                AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+                AzureStorageApi.DeleteFile(tempName, lblCompanyId.Text)
 
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.ClientAzureStorage_Insert(lblClientId.Text, cboPreProject.SelectedValue, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, e.FileInfo.KeyName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblEmployeeId.Text)
+                e.IsValid = LocalAPI.ClientAzureStorage_Insert(lblClientId.Text, cboPreProject.SelectedValue, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblEmployeeId.Text)
                 If e.IsValid Then
                     RadGridAzureFiles.DataBind()
                     Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
@@ -46,6 +51,6 @@ Public Class azurestorage_client
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetClientProsalJobAzureFileKeyName(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Source").Value)
-        AzureStorageApi.DeleteFile(KeyName)
+        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
     End Sub
 End Class

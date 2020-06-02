@@ -7,6 +7,9 @@
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblSubconsultantId.Text = Request.QueryString("SubconsultantId")
+
+                If LocalAPI.IsCompanyViolation(lblSubconsultantId.Text, "SubConsultans", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
                 Master.PageTitle = "Subconsultants/Edit Subconsultant: " & LocalAPI.GetSubConsultanName(lblSubconsultantId.Text)
 
             End If
@@ -22,6 +25,7 @@
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewSubconsultBalance.Visible = Not FormViewSubconsultBalance.Visible
     End Sub
+
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Response.Redirect("~/adm/subconsultants.aspx")
     End Sub

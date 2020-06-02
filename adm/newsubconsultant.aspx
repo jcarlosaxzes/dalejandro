@@ -26,7 +26,7 @@
 
     <div class="pas-container">
 
-        <table class="table-condensed" style="width:100%">
+        <table class="table-condensed" style="width: 100%">
             <tr>
                 <td style="text-align: right; width: 200px">(*) Full Name:
                 </td>
@@ -41,7 +41,10 @@
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboDiscipline" runat="server" DataSourceID="SqlDataSourceDiscipline"
-                        DataTextField="Name" DataValueField="Id" Width="250px">
+                        DataTextField="Name" DataValueField="Id" Width="90%"  AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="(Select discipline...)" Value="0" />
+                        </Items>
                     </telerik:RadComboBox>
                 </td>
             </tr>
@@ -62,20 +65,25 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">(*) Subconsultant Code:
-                </td>
-                <td>
-                    <telerik:RadTextBox ID="txtInitials" runat="server" MaxLength="5" Width="100px" EmptyMessage="Up to 5 characters">
-                    </telerik:RadTextBox>
-
-                </td>
-            </tr>
-            <tr>
                 <td style="text-align: right">(*) Email:
                 </td>
                 <td>
                     <telerik:RadTextBox ID="txtEmail" runat="server" MaxLength="80" Width="90%" EmptyMessage="Required">
                     </telerik:RadTextBox>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right"><a href="https://www.census.gov/eos/www/naics/" target="_blank">NAICS</a> US Code:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboNAICS" runat="server" DataSourceID="SqlDataSourceNAICS"
+                        DataTextField="CodeAndTitle" DataValueField="Code" Width="90%"
+                        AppendDataBoundItems="true" MarkFirstMatch="True" Filter="Contains">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(NAICS Code Not Defined...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
 
                 </td>
             </tr>
@@ -189,6 +197,15 @@
                 </td>
             </tr>
             <tr>
+                <td style="text-align: right">Subconsultant Code:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtInitials" runat="server" MaxLength="5" Width="150px" EmptyMessage="Up to 5 characters">
+                    </telerik:RadTextBox>
+
+                </td>
+            </tr>
+            <tr>
                 <td style="text-align: right">Notes:
                 </td>
                 <td>
@@ -209,8 +226,6 @@
         <div>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName" ValidationGroup="Subconsultant"
                 ErrorMessage="Name is Required" Display="None"></asp:RequiredFieldValidator>
-            &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtInitials" ValidationGroup="Subconsultant"
-                ErrorMessage="Subconsultant code is required" Display="None"></asp:RequiredFieldValidator>
             <br />
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtEmail" ValidationGroup="Subconsultant"
                 runat="server" ErrorMessage="(*) Enter an valid email address" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
@@ -227,6 +242,8 @@
                 Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceNAICS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="NAICS_US_Codes_FromCombobox_SELECT" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
 </asp:Content>

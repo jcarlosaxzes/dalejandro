@@ -85,9 +85,14 @@ Public Class Job_images_files
     Private Sub RadCloudUploadOthers_FileUploaded(sender As Object, e As CloudFileUploadedEventArgs) Handles RadCloudUploadOthers.FileUploaded
         Try
             If LocalAPI.IsAzureStorage(lblCompanyId.Text) Then
+                Dim tempName = e.FileInfo.KeyName
+                Dim fileExt = IO.Path.GetExtension(tempName)
+                Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
+                AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+                AzureStorageApi.DeleteFile(tempName, 0)
 
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 9, e.FileInfo.OriginalFileName, e.FileInfo.KeyName, True, e.FileInfo.ContentLength, "image/png")
+                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 9, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, "image/png")
                 If e.IsValid Then
                     RadListView1.DataBind()
                     Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")

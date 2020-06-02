@@ -91,7 +91,7 @@
                     </asp:LinkButton>
                 </td>
                 <td>
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="false">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -521,7 +521,7 @@
                                 <table class="table-condensed" style="width: 100%;">
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS1" runat="server" Visible='<%# Eval("PaymentSchedule1") > 0%>'>
+                                            <asp:Panel ID="PanelPS1" runat="server" Visible='<%# Len(Eval("PaymentText1")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -541,7 +541,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS2" runat="server" Visible='<%# Eval("PaymentSchedule2") > 0%>'>
+                                            <asp:Panel ID="PanelPS2" runat="server" Visible='<%# Len(Eval("PaymentText2")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -561,7 +561,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS3" runat="server" Visible='<%# Eval("PaymentSchedule3") > 0%>'>
+                                            <asp:Panel ID="PanelPS3" runat="server" Visible='<%# Len(Eval("PaymentText3")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -581,7 +581,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS4" runat="server" Visible='<%# Eval("PaymentSchedule4") > 0%>'>
+                                            <asp:Panel ID="PanelPS4" runat="server" Visible='<%# Len(Eval("PaymentText4")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -601,7 +601,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS5" runat="server" Visible='<%# Eval("PaymentSchedule5") > 0%>'>
+                                            <asp:Panel ID="PanelPS5" runat="server" Visible='<%# Len(Eval("PaymentText5")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -621,7 +621,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS6" runat="server" Visible='<%# Eval("PaymentSchedule6") > 0%>'>
+                                            <asp:Panel ID="PanelPS6" runat="server" Visible='<%# Len(Eval("PaymentText6")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -641,7 +641,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS7" runat="server" Visible='<%# Eval("PaymentSchedule7") > 0%>'>
+                                            <asp:Panel ID="PanelPS7" runat="server" Visible='<%# Len(Eval("PaymentText7")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -661,7 +661,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS8" runat="server" Visible='<%# Eval("PaymentSchedule8") > 0%>'>
+                                            <asp:Panel ID="PanelPS8" runat="server" Visible='<%# Len(Eval("PaymentText8")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -681,7 +681,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS9" runat="server" Visible='<%# Eval("PaymentSchedule9") > 0%>'>
+                                            <asp:Panel ID="PanelPS9" runat="server" Visible='<%# Len(Eval("PaymentText9")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -701,7 +701,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Panel ID="PanelPS10" runat="server" Visible='<%# Eval("PaymentSchedule10") > 0%>'>
+                                            <asp:Panel ID="PanelPS10" runat="server" Visible='<%# Len(Eval("PaymentText10")) > 0 %>'>
                                                 <table width="100%" cellpadding="0">
                                                     <tr>
                                                         <td width="100px">
@@ -881,16 +881,10 @@
                             <td style="padding-top: 10px; padding-bottom: 10px">
                                 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
                                     <script type="text/javascript">
-                                        var popUp;
-                                        function PopUpShowing(sender, eventArgs) {
-                                            popUp = eventArgs.get_popUp();
-                                            var gridWidth = sender.get_element().offsetWidth;
-                                            var gridHeight = sender.get_element().offsetHeight;
-                                            var popUpWidth = popUp.style.width.substr(0, popUp.style.width.indexOf("px"));
-                                            var popUpHeight = popUp.style.height.substr(0, popUp.style.height.indexOf("px"));
-                                            popUp.style.left = ((gridWidth - popUpWidth) / 2 + sender.get_element().offsetLeft).toString() + "px";
-                                            popUp.style.top = 25 + "px";
-                                        }
+                                        function OnClientClose(sender, args) {
+                                            var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+                                             masterTable.rebind();
+                                         }
                                     </script>
                                 </telerik:RadCodeBlock>
                                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"

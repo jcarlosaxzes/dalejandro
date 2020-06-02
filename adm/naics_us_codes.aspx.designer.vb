@@ -11,86 +11,107 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Usercrud
-
+Partial Public Class naics_us_codes
+    
     '''<summary>
-    '''RadStyleSheetManager1 control.
+    '''pnlFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadStyleSheetManager1 As Global.Telerik.Web.UI.RadStyleSheetManager
-
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
     '''<summary>
-    '''form1 control.
+    '''btnTablePage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    Protected WithEvents btnTablePage As Global.System.Web.UI.WebControls.LinkButton
+    
     '''<summary>
-    '''btnClients control.
+    '''btnTreePage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnClients As Global.System.Web.UI.WebControls.Button
-
+    Protected WithEvents btnTreePage As Global.System.Web.UI.WebControls.LinkButton
+    
     '''<summary>
-    '''RadScriptManager1 control.
+    '''cboLeves control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+    Protected WithEvents cboLeves As Global.Telerik.Web.UI.RadComboBox
+    
     '''<summary>
-    '''RadAjaxLoadingPanel1 control.
+    '''txtFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
+    
     '''<summary>
-    '''RadAjaxPanel1 control.
+    '''btnRefresh control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxPanel1 As Global.Telerik.Web.UI.RadAjaxPanel
-
+    Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
+    
     '''<summary>
-    '''RadGrid1 control.
+    '''RadTreeListNaics control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
+    Protected WithEvents RadTreeListNaics As Global.Telerik.Web.UI.RadTreeList
+    
     '''<summary>
-    '''RadWindowManager1 control.
+    '''RadGridNaics control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-
+    Protected WithEvents RadGridNaics As Global.Telerik.Web.UI.RadGrid
+    
     '''<summary>
-    '''DataSource1 control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''lblCompanyId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+        Get
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+        End Get
+    End Property
 End Class

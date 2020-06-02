@@ -53,7 +53,7 @@
         Try
             Dim SenderEmail As String = LocalAPI.GetEmployeeEmail(lId:=lblEmployeeId.Text)
             Dim SenderDisplay As String = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
-            LocalAPI.SendMail(txtTo.Text, txtBCC.Text, SenderEmail, txtSubject.Text, txtBody.Content, lblCompanyId.Text,, SenderDisplay, SenderEmail, SenderDisplay)
+            SendGrid.Email.SendMail(txtTo.Text, txtBCC.Text, SenderEmail, txtSubject.Text, txtBody.Content, lblCompanyId.Text,, SenderDisplay, SenderEmail, SenderDisplay)
 
         Catch ex As Exception
 

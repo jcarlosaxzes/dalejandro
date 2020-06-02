@@ -31,20 +31,22 @@ Public Class uploadphoto
 
 
                 If lblEntity.Text = "Client" Then
-                    Dim Url = AzureStorageApi.UploadFilesStream(f.InputStream, "2016/Clients/", "image/jpeg")
+                    Dim newName = "Companies/" & lblCompanyId.Text & $"/Clients/{Guid.NewGuid().ToString()}" & f.GetExtension()
+                    Dim Url = AzureStorageApi.UploadFilesStream(f.InputStream, newName, "image/jpeg", lblCompanyId.Text)
                     LocalAPI.ClientAddUpdatePhoto(Convert.ToInt32(lblCodeId.Text), Url, f.ContentType, DateTime.Now)
                 End If
                 If lblEntity.Text = "Employee" Then
-                    Dim Url = AzureStorageApi.UploadFilesStream(f.InputStream, "2016/Employess/", "image/jpeg")
+                    Dim newName = "Companies/" & lblCompanyId.Text & $"/Employess/{Guid.NewGuid().ToString()}" & f.GetExtension()
+                    Dim Url = AzureStorageApi.UploadFilesStream(f.InputStream, newName, "image/jpeg", lblCompanyId.Text)
                     Dim empEmail = LocalAPI.GetEmployeeEmail(Convert.ToInt32(lblCodeId.Text))
                     LocalAPI.EmployeeAddUpdatePhoto(empEmail, Url, f.ContentType, DateTime.Now)
                 End If
 
 
             Next
-            Label1.Text = "Photo has been uploaded successfully"
+            lblMessage.Text = "Photo has been uploaded successfully"
         Catch ex As Exception
-            Label1.Text = ex.Message
+            lblMessage.Text = ex.Message
         End Try
     End Sub
 End Class

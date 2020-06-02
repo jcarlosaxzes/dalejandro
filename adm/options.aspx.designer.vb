@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class options
-
+    
     '''<summary>
     '''RadWizard1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
-
+    
     '''<summary>
     '''RadWizardStep1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
-
+    
     '''<summary>
     '''Image1 control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
-
+    
     '''<summary>
     '''RadAsyncUpload1 control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadAsyncUpload1 As Global.Telerik.Web.UI.RadAsyncUpload
-
+    
     '''<summary>
     '''btnSubmit control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSubmit As Global.Telerik.Web.UI.RadButton
-
+    
     '''<summary>
     '''Label1 control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''txtOldPass control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtOldPass As Global.Telerik.Web.UI.RadTextBox
-
+    
     '''<summary>
     '''txtPass control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPass As Global.Telerik.Web.UI.RadTextBox
-
+    
     '''<summary>
     '''txtConPass control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtConPass As Global.Telerik.Web.UI.RadTextBox
-
+    
     '''<summary>
     '''btnOk control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnOk As Global.Telerik.Web.UI.RadButton
-
+    
     '''<summary>
     '''lblMsg control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMsg As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''RadWizardStep2 control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
-
+    
     '''<summary>
     '''FormView1 control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
-
+    
     '''<summary>
     '''RadWizardStep3 control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
-
+    
     '''<summary>
     '''RadGrid1 control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
+    
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceYears control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceYears As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceEmpl_activos control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEmpl_activos As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceDepartments control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceMobile control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceMobile As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''lblEmployeeId control.
     '''</summary>
@@ -201,7 +201,16 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-
+    
+    '''<summary>
+    '''lblEmployeeEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
+    
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -210,7 +219,7 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''Master property.
     '''</summary>
@@ -219,7 +228,7 @@ Partial Public Class options
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

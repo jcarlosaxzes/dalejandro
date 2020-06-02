@@ -281,9 +281,6 @@
         </WizardSteps>
     </telerik:RadWizard>
 
-
-
-
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="EmployyeOthersSettings_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="UPDATE Employees SET MyHomePage = @MyHomePage, FilterJob_Year = @FilterJob_Year, FilterJob_Month = @FilterJob_Month, FilterJob_Employee = @FilterJob_Employee, FilterJob_Department = @FilterJob_Department, FilterProposal_Year = @FilterProposal_Year, FilterProposal_Month = @FilterProposal_Month, FilterProposal_Department = @FilterProposal_Department WHERE (Id = @Id)">
@@ -319,8 +316,11 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceMobile" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Platform]=case when [Platform]=1 then 'iPhone' else 'Android' end ,[VersionNumber],[Url]  FROM [dbo].[MobileAppVersions] WHERE [Latest]=1"></asp:SqlDataSource>
+        SelectCommand="SELECT [Platform]=case when [Platform]=1 then 'iPhone' else 'Android' end ,[VersionNumber],[Url]  FROM [dbo].[MobileAppVersions] WHERE [Latest]=1">
+    </asp:SqlDataSource>
+
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Text="0" Visible="False"></asp:Label>
 
 </asp:Content>

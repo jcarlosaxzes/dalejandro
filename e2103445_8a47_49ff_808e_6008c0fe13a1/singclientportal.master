@@ -5,12 +5,10 @@
 <html lang="en">
 <head runat="server">
     <title>PASconcept -- Client Portal</title>
-    <link rel="stylesheet" href="~/Content/sing-theme/application.css" />
+    <link rel="stylesheet" href="~/Content/sing-theme/application.min.css" />
     <link rel="stylesheet" href="~/Content/sing-theme/telerik-form-fixes.css" />
     <link rel="stylesheet" href="~/Content/sing-theme/template-fixes.css" />
     <link rel="stylesheet" href="~/Content/sing-theme/print-page.css" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/fontawesome-free-5.1.1-web/css/all.css" rel="stylesheet" />
     <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
     <!--[if IE 9]>
         <link href="Content/application-ie9-part2.css" rel="stylesheet">
@@ -92,13 +90,16 @@
         <!-- common app js -->
         <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/settings.js") %>'></script>
         <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/app.js") %>'></script>
-        <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/invoice.js") %>'></script>
+        <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/invoice.js?q=SDF778UI") %>'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
         <script>
             $(document).ready(function () {
                 $('.phone').text(function (i, text) {
                     return text.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
                 });
+                // Super Hacky way to prevent 'Estandar' style to load
+                $('[href="../App_Themes/Estandar/Estandar.min.css"').remove();
+                $('[href="../App_Themes/Estandar/Estandar.css"').remove();
             });
         </script>
         <asp:ContentPlaceHolder ID="Scripts" runat="server"></asp:ContentPlaceHolder>

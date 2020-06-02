@@ -32,9 +32,9 @@ Public Class sendinvoice
                         lblInvoice.Text = "0"
                     End If
 
-                    If nInvoiceType = 0 Then
-                        ' Simple charge
-                        Select Case lblOrigen.Text
+                    'If nInvoiceType = 0 Then
+                    ' Simple charge
+                    Select Case lblOrigen.Text
                             Case 5, 6, 7   ' Desde Perfil Client, no hay opciones de Mail
                                 'PanelEmail.Visible = False
                                 PanelSMS.Visible = False
@@ -54,10 +54,10 @@ Public Class sendinvoice
                                 SMS_Init()
                         End Select
 
-                    Else
-                        ' Hourly rate
-                        Response.RedirectPermanent("~/ADMCLI/InvoiceHR_RDLC.aspx?InvoiceNo=" & lblInvoice.Text & "&Origen=" & lblOrigen.Text)
-                    End If
+                    'Else
+                    ' Hourly rate Page not exist in 2020
+                    'Response.RedirectPermanent("~/ADMCLI/InvoiceHR_RDLC.aspx?InvoiceNo=" & lblInvoice.Text & "&Origen=" & lblOrigen.Text)
+                    'End If
 
                     ' Tratamiento boton back
                     Select Case lblOrigen.Text
@@ -204,7 +204,7 @@ Public Class sendinvoice
                         sBCO = sBCO & "," & AccountantEmail
                     End If
 
-                    bSendEmail = LocalAPI.SendMail(sTo, txtCC.Text, sBCO, txtSubject.Text, txtBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
+                    bSendEmail = SendGrid.Email.SendMail(sTo, txtCC.Text, sBCO, txtSubject.Text, txtBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
 
                     LocalAPI.NewAutomaticInvoiceReminderFromEmitted(lblInvoice.Text, lblEmployeeId.Text, lblCompanyId.Text)
 
@@ -292,9 +292,13 @@ Public Class sendinvoice
     Protected Sub RadCloudUpload1_FileUploaded(sender As Object, e As Telerik.Web.UI.CloudFileUploadedEventArgs)
         Try
             If LocalAPI.IsAzureStorage(lblCompanyId.Text) Then
-
+                Dim tempName = e.FileInfo.KeyName
+                Dim fileExt = IO.Path.GetExtension(tempName)
+                Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
+                AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+                AzureStorageApi.DeleteFile(tempName, 0)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 10, e.FileInfo.OriginalFileName, e.FileInfo.KeyName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType)
+                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 10, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType)
                 If e.IsValid Then
                     RadGridLinks.DataBind()
                     InfoMessage(e.FileInfo.OriginalFileName & " uploaded")

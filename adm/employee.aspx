@@ -58,6 +58,18 @@
             }
         </script>
     </telerik:RadCodeBlock>
+    <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+        <script type="text/javascript">
+            function OnClientClose(sender, args) {
+                var Photo = document.getElementById('<%=FormView1.FindControl("ImageEmployeePhoto").ClientID%>');
+                //var FormView = document.getElementById('<%= "Formview1.ClientID"%>');
+                Photo.reBind();
+            }
+        </script>
+    </telerik:RadCodeBlock>
+
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    </telerik:RadWindowManager>
 
     <div class="Formulario">
         <table class="table-condensed" style="width: 100%">
@@ -68,7 +80,7 @@
                     </asp:LinkButton>
                 </td>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -125,7 +137,7 @@
                                     <span class="DashboardFont2">Efficiency</span><br />
                                     <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("EmployeeEfficiency", "{0:P0}") %>'></asp:Label><br />
                                     <span class="DashboardFont3">Assigned/Worked Hours</span>
-                                    
+
                                 </td>
                             </tr>
                         </table>
@@ -151,7 +163,7 @@
                             <table class="table-condensed" style="width: 100%">
                                 <tr>
                                     <td style="width: 180px;">
-                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(Eval("Id"))%>'
+                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>'
                                             runat="server" Width="45" Height="50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
                                     </td>
                                     <td>
@@ -159,15 +171,13 @@
                                             <tr>
                                                 <td>
                                                     <asp:LinkButton ID="btnPhoto" runat="server" CommandName="Photo" ToolTip="Upload Employee Photo"
-                                                        CssClass="btn btn-default" UseSubmitBehavior="false">
+                                                        CssClass="btn btn-default" UseSubmitBehavior="false" Visible="false">
                                                             <span class="glyphicon glyphicon-user"></span> Employee Photo
                                                     </asp:LinkButton>
-
-
                                                 </td>
-                                                <td style="text-align: right; padding-right: 25px">
+                                                <td style="text-align: center;">
                                                     <asp:LinkButton ID="btnUpdateEmployee1" runat="server" CommandName="Update" ToolTip="Upload Last Changes"
-                                                        CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                                        CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                                              Update Employee
                                                     </asp:LinkButton>
 
@@ -518,9 +528,9 @@
 
                                 <tr>
                                     <td></td>
-                                    <td style="text-align: right; padding-right: 25px">
+                                    <td style="text-align: center;">
                                         <asp:LinkButton ID="btnUpdate3" runat="server" CommandName="Update" ToolTip="Upload Last Changes"
-                                            CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                            CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                                     Update Employee
                                         </asp:LinkButton>
 

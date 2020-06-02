@@ -119,7 +119,7 @@ Public Class useradmin
 
                     Dim uploadFileStream = File.OpenRead(f)
 
-                    Dim Url = AzureStorageApi.UploadFilesStream(uploadFileStream, "2016/Employess/", "image/jpeg")
+                    Dim Url = AzureStorageApi.UploadFilesStream(uploadFileStream, "2016/Employess/", "image/jpeg", "0")
 
                     LocalAPI.EmployeeAddUpdatePhoto(empEmail, Url, "image/jpeg", DateTime.Now)
 
@@ -140,7 +140,7 @@ Public Class useradmin
 
                 Dim uploadFileStream = File.OpenRead(f)
 
-                Dim Url = AzureStorageApi.UploadFilesStream(uploadFileStream, "2016/Clients/", "image/jpeg")
+                Dim Url = AzureStorageApi.UploadFilesStream(uploadFileStream, "2016/Clients/", "image/jpeg", "0")
 
                 LocalAPI.ClientAddUpdatePhoto(Convert.ToInt32(name), Url, "image/jpeg", DateTime.Now)
 

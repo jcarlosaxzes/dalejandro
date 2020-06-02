@@ -16,6 +16,8 @@ Public Class Job_job
 
                 btnUpdate.Visible = LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_NewJob")
 
+                FormView1.DataBind()
+
                 lblTags.Text = LocalAPI.ConvertSpanTags(LocalAPI.GetJobsTagsList(lblJobId.Text))
             End If
 

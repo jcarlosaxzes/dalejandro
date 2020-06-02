@@ -354,9 +354,9 @@ Public Class pro
 
             Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
             If Len(AccountantEmail) > 0 Then
-                LocalAPI.SendMail(AccountantEmail, "", "jcarlos@axzes.com,matt@axzes.com", sSubject, sBody, lblCompanyId.Text)
+                SendGrid.Email.SendMail(AccountantEmail, "", "jcarlos@axzes.com,matt@axzes.com", sSubject, sBody, lblCompanyId.Text)
             Else
-                LocalAPI.SendMail("jcarlos@axzes.com", "", "matt@axzes.com", sSubject, sBody, lblCompanyId.Text)
+                SendGrid.Email.SendMail("jcarlos@axzes.com", "", "matt@axzes.com", sSubject, sBody, lblCompanyId.Text)
             End If
 
             Response.Redirect("~/ADM/subscribe/subscribesuccess.aspx")

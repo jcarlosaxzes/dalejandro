@@ -1,4 +1,5 @@
-﻿Imports Microsoft.AspNet.Identity.Owin
+﻿Imports System.Threading.Tasks
+Imports Microsoft.AspNet.Identity.Owin
 
 Public Class newemployee
     Inherits System.Web.UI.Page
@@ -55,12 +56,13 @@ Public Class newemployee
         End Try
     End Sub
 
-    Protected Async Sub btnNuevo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
+    Protected Sub btnNuevo_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNuevo.Click
         Try
             If Not LocalAPI.IsEmployeeEmail(txtEmail.Text, lblCompanyId.Text) Then
                 SqlDataSource1.Insert()
                 LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
-                Await LocalAPI.RefrescarUsuarioVinculadoAsync(txtEmail.Text, "Empleados")
+
+                Task.Run(Function() LocalAPI.RefrescarUsuarioVinculadoAsync(txtEmail.Text, "Empleados"))
 
                 ' Parasa a Edit....
                 Dim employeeId = LocalAPI.GetEmployeeId(txtEmail.Text, lblCompanyId.Text)

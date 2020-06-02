@@ -12,7 +12,7 @@
                 <td colspan="2">
                     <telerik:RadToolBar ID="RadToolBar1" runat="server">
                         <Items>
-                            <telerik:RadToolBarButton runat="server" Text="Users">
+                            <telerik:RadToolBarButton runat="server" Text="Employees">
                             </telerik:RadToolBarButton>
                             <telerik:RadToolBarButton runat="server" Text="Billing">
                             </telerik:RadToolBarButton>

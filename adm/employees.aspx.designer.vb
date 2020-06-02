@@ -236,16 +236,7 @@ Partial Public Class employees
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnConfirmDelete As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''btnCancelDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancelDelete As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnConfirmDelete As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''SqlDataSource1 control.

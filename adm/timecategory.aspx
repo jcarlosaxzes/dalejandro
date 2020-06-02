@@ -27,19 +27,27 @@
             </td>
         </tr>
         <tr>
-            <td >
-                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" 
+            <td>
+                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1"
                     GridLines="None" AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
                     AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0" AllowPaging="True" PageSize="25">
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" EditMode="PopUp">
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                         <PagerStyle Mode="Slider" AlwaysVisible="false" />
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
                                 HeaderText="" HeaderStyle-Width="50px">
                             </telerik:GridEditCommandColumn>
-                            <telerik:GridBoundColumn DataField="Name" HeaderText="Category Name" SortExpression="Name" HeaderStyle-HorizontalAlign="Center" 
-                                UniqueName="Name">
-                            </telerik:GridBoundColumn>
+                            <telerik:GridTemplateColumn DataField="Name" HeaderText="Category Name" SortExpression="Name" HeaderStyle-HorizontalAlign="Center" UniqueName="Name">
+                                <EditItemTemplate>
+                                    <div style="margin: 5px">
+                                        <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                    </div>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Code?" ConfirmTitle="Delete"
                                 ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
                                 HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px"

@@ -1,5 +1,5 @@
 ﻿Imports Telerik.Web.UI
-Public Class newproposaltask
+Public Class proposaltask
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -16,6 +16,7 @@ Public Class newproposaltask
                     ReadDetails()
                     ' Ocultar el panel de select new task template
                     pnlTemplate.Visible = False
+                    lblTaskList.Visible = False
                 Else
                     ' Insert
                     lbldetailId.Text = "0"
@@ -67,27 +68,22 @@ Public Class newproposaltask
         txtAmount.Text = LocalAPI.GetProposalDetailProperty(lbldetailId.Text, "Amount")
 
     End Sub
-    Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text)
-    End Sub
 
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If Val(lbldetailId.Text) > 0 Then
             ' Edit
             SqlDataSource1.Update()
+            Master.InfoMessage("Record updated!")
         Else
             ' Insert
             SqlDataSource1.Insert()
+            Master.InfoMessage("New Task inserted!")
         End If
 
+        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text)
+
     End Sub
 
-    Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text)
-    End Sub
-    Private Sub SqlDataSource1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Updated
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text)
-    End Sub
 
     Protected Sub cboPosition_SelectedIndexChanged(sender As Object, e As Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs) Handles cboPosition.SelectedIndexChanged
         If cboPosition.SelectedValue > 0 Then
@@ -107,4 +103,7 @@ Public Class newproposaltask
 
     End Sub
 
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/proposal.aspx?Id=" & lblproposalId.Text)
+    End Sub
 End Class

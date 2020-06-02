@@ -5,7 +5,6 @@ Public Class tandcedit
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
-            Master.PageTitle = "Term & Conditions"
             If Not Page.IsPostBack Then
                 RadEditor1.Content = ReadFile(Server.MapPath("~/Legal/ENG/Terms.html"))
             End If

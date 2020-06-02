@@ -8,28 +8,32 @@ Public Class client
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblClientId.Text = Request.QueryString("clientId")
+
+                'Not necessary, Client_Select include @companyId
+                'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
                 lblEmployee.Text = Master.UserEmail
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
-                Master.PageTitle = "Client List/Edit Client: " & LocalAPI.GetClientName(CInt(lblClientId.Text))
+                    lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
+                    Master.PageTitle = "Client List/Edit Client: " & LocalAPI.GetClientName(CInt(lblClientId.Text))
 
-                FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
+                    FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
 
-                SqlDataSource1.DataBind()
-                FormView1.DataBind()
+                    SqlDataSource1.DataBind()
+                    FormView1.DataBind()
 
-                If Request.QueryString("FullPage") Is Nothing Then
-                    Master.HideMasterMenu()
-                    btnBack.Visible = False
+                    If Request.QueryString("FullPage") Is Nothing Then
+                        Master.HideMasterMenu()
+                        btnBack.Visible = False
+                    End If
                 End If
-            End If
-            RadWindowManager1.EnableViewState = False
+                RadWindowManager1.EnableViewState = False
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
     End Sub
 
     Protected Sub FormView1_ItemUpdated(sender As Object, e As FormViewUpdatedEventArgs) Handles FormView1.ItemUpdated
-        lblStatus.Text = "Updated Client Details: <b>" & LocalAPI.GetClientName(CInt(lblClientId.Text)) & "</b>"
+        Master.InfoMessage("Updated Client Record")
 
         Try
             ' Update Latitude, Longitude
@@ -41,7 +45,6 @@ Public Class client
     End Sub
 
     Protected Sub FormView1_ItemUpdating(sender As Object, e As FormViewUpdateEventArgs) Handles FormView1.ItemUpdating
-        lblStatus.Text = ""
         e.NewValues("Subtype") = CType(FormView1.FindControl("cboSubtype"), RadComboBox).SelectedValue
         e.NewValues("TAGS") = CType(FormView1.FindControl("lblActualTAGS"), Label).Text + CType(FormView1.FindControl("cboTags"), RadAutoCompleteBox).Text
     End Sub
@@ -50,7 +53,7 @@ Public Class client
         Try
             SqlDataSource1.Update()
         Catch ex As Exception
-            lblStatus.Text = "Error. " & ex.Message
+            Master.ErrorMessage("Error. " & ex.Message)
 
         End Try
 
@@ -91,5 +94,9 @@ Public Class client
 
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
+    End Sub
+
+    Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
+        'Dim e1 As String = e.Command.Parameters("NAICS_code").Value
     End Sub
 End Class

@@ -392,6 +392,7 @@ Public Class proposalnewwizard
         cboPaymentSchedules.SelectedValue = -1
         divFormPS.Visible = False
         divBtnPS.Visible = True
+        FormViewPS.DataBind()
     End Sub
 
 #End Region
@@ -401,9 +402,13 @@ Public Class proposalnewwizard
     Protected Sub RadCloudUpload1_FileUploaded(sender As Object, e As Telerik.Web.UI.CloudFileUploadedEventArgs)
         Try
             If LocalAPI.IsAzureStorage(lblCompanyId.Text) Then
-
+                Dim tempName = e.FileInfo.KeyName
+                Dim fileExt = IO.Path.GetExtension(tempName)
+                Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
+                AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+                AzureStorageApi.DeleteFile(tempName, 0)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, e.FileInfo.KeyName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType)
+                e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType)
                 If e.IsValid Then
                     RadGridAzureuploads.DataBind()
                     Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
@@ -434,10 +439,14 @@ Public Class proposalnewwizard
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetClientProsalJobAzureFileKeyName(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Source").Value)
-        AzureStorageApi.DeleteFile(KeyName)
+        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
     End Sub
 
     Private Sub SqlDataSourceProposal_Step1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProposal_Step1.Updating
         Dim e1 As String = e.Command.Parameters("@ProjectSector").Value
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/proposals.aspx")
     End Sub
 End Class

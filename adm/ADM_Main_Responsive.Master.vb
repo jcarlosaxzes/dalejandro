@@ -4,6 +4,7 @@ Imports Microsoft.AspNet.Identity.Owin
 Public Class ADM_Main_Responsive
     Inherits System.Web.UI.MasterPage
 
+
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         Try
             ' Inicializando Controles y Properties de la Master Page
@@ -19,7 +20,6 @@ Public Class ADM_Main_Responsive
 
             Dim versionId As Integer = LocalAPI.sys_VersionId(Session("companyId"))
             Session("Version") = versionId
-            lblVersion.Text = LocalAPI.sys_VersionAndRevision(versionId)
 
             If LocalAPI.IsEmployeeInactive(UserEmail, Session("companyId")) Then
                 ' INACTIVE LogOut
@@ -69,8 +69,8 @@ Public Class ADM_Main_Responsive
                 Response.RedirectPermanent("~/adm/useragree.aspx")
             Else
 
-                Dim Asunto As String
-                Dim MessId As Integer
+                'Dim Asunto As String
+                'Dim MessId As Integer
 
                 RadMenu2.DataBind()
                 'If LocalAPI.GetNotificationPending(Context.User.Identity.GetUserName(), Asunto, MessId) Then
@@ -84,6 +84,8 @@ Public Class ADM_Main_Responsive
                 'End If
 
                 lblCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
+
+                LoginViewMenuSetting.DataBind()
             End If
         End If
 
@@ -91,17 +93,7 @@ Public Class ADM_Main_Responsive
 
     Public Function GetEmployeeImage(ByVal sEmail As String) As String
         Try
-
-            Dim sImageURL = LocalAPI.GetEmployeePhoto(sEmail)
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(Server.MapPath(sImageURL)) Then
-                    GetEmployeeImage = sImageURL
-                End If
-            End If
-            If Len(GetEmployeeImage) = 0 Then GetEmployeeImage = "~/Images/Employees/nophoto.jpg"
-
+            Return LocalAPI.GetEmployeePhotoURL(Email:=sEmail)
         Catch ex As Exception
         End Try
     End Function
@@ -134,7 +126,7 @@ Public Class ADM_Main_Responsive
         Set(ByVal value As String)
             lnkHelp.NavigateUrl = value
             lnkHelp.ToolTip = value
-            RadMenu2.FindItemByText("Help").NavigateUrl = value
+            RadMenu2.FindNodeByText("Help").NavigateUrl = value
         End Set
     End Property
 
@@ -188,6 +180,17 @@ Public Class ADM_Main_Responsive
         Return Session(sOpcion)
     End Function
 
+    Public Function EmployeePermissionHiden(sOpcion As String) As Integer
+        If Session(sOpcion) Is Nothing Then
+            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
+        End If
+        If Session(sOpcion) Then
+            Return 0
+        Else
+            Return 1
+        End If
+
+    End Function
     Private Sub btnSwitchCompany_Click(sender As Object, e As EventArgs) Handles btnSwitchCompany.Click
         RadToolTipSwitchCompany.Visible = True
         RadToolTipSwitchCompany.Show()

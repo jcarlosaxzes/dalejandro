@@ -17,9 +17,11 @@ Public Class options
             If Not IsPostBack Then
                 Master.PageTitle = "Company/Account Options"
                 lblCompanyId.Text = Session("companyId")
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+                lblEmployeeId.Text = Master.UserId
+                lblEmployeeEmail.Text = Master.UserEmail
+
                 Master.Help = "http://blog.pasconcept.com/2015/08/othersmy-account.html"
-                Image1.ImageUrl = GetEmployeePhotoURL(lblEmployeeId.Text)
+                Image1.ImageUrl = LocalAPI.GetEmployeePhotoURL(Email:=lblEmployeeEmail.Text)
             End If
 
         Catch ex As Exception
@@ -31,11 +33,10 @@ Public Class options
         Try
 
             Dim manager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
-            Dim email = Context.User.Identity.GetUserName()
-            Dim user As pasconcept20.ApplicationUser = Await manager.FindByEmailAsync(email)
+            Dim user As pasconcept20.ApplicationUser = Await manager.FindByEmailAsync(lblEmployeeEmail.Text)
 
             Dim signinManager = Context.GetOwinContext().GetUserManager(Of ApplicationSignInManager)()
-            Dim result = signinManager.PasswordSignIn(email, txtOldPass.Text, False, shouldLockout:=False)
+            Dim result = signinManager.PasswordSignIn(lblEmployeeEmail.Text, txtOldPass.Text, False, shouldLockout:=False)
 
             If result = SignInStatus.Success Then
                 If Me.txtPass.Text = Me.txtConPass.Text Then
@@ -69,20 +70,4 @@ Public Class options
         End Try
     End Sub
 
-    Private Function GetEmployeePhotoURL(employeeId As Integer) As String
-        Try
-
-            Dim sImageURL = "~/Images/Employees/" & employeeId.ToString & ".jpg"
-
-            If Len(sImageURL) > 0 Then
-                ' Existe el archivo en disco?
-                If System.IO.File.Exists(Server.MapPath(sImageURL)) Then
-                    GetEmployeePhotoURL = sImageURL
-                End If
-            End If
-            If Len(GetEmployeePhotoURL) = 0 Then GetEmployeePhotoURL = "~/Images/Employees/nophoto.jpg"
-
-        Catch ex As Exception
-        End Try
-    End Function
 End Class

@@ -58,8 +58,20 @@
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Azure.KeyVault.Core.2.0.4\lib\net45\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Azure.Management.DataLake.Store, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Azure.Management.DataLake.Store.2.2.1\lib\net452\Microsoft.Azure.Management.DataLake.Store.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Storage.Blob, Version=11.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Azure.Storage.Blob.11.1.2\lib\net452\Microsoft.Azure.Storage.Blob.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Azure.Storage.Common, Version=11.1.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Azure.Storage.Common.11.1.3\lib\net452\Microsoft.Azure.Storage.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Storage.DataMovement, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Azure.Storage.DataMovement.1.3.0\lib\net452\Microsoft.Azure.Storage.DataMovement.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Storage.File, Version=11.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Azure.Storage.File.11.1.2\lib\net452\Microsoft.Azure.Storage.File.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -76,6 +88,12 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Rest.ClientRuntime.2.3.8\lib\net452\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime.Azure, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Rest.ClientRuntime.Azure.3.3.7\lib\net452\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
@@ -84,6 +102,9 @@
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\WindowsAzure.Storage.9.2.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
@@ -108,14 +129,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net.Http.Extensions, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives, Version=4.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Net.Http.2.2.22\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
       <Private>True</Private>
@@ -317,6 +342,7 @@
     <Content Include="adm\clientmanagement.aspx" />
     <Content Include="adm\clients.aspx" />
     <Content Include="adm\clientsbalance.aspx" />
+    <Content Include="adm\clientscolletion.aspx" />
     <Content Include="adm\clientsmap.aspx" />
     <Content Include="adm\clientsmarketing.aspx" />
     <Content Include="adm\clients_monthlytimeandcosts.aspx" />
@@ -329,6 +355,7 @@
     <Content Include="adm\dashboard.aspx" />
     <Content Include="adm\dashboardemployee.aspx" />
     <Content Include="adm\Default.aspx" />
+    <Content Include="adm\DefaultTestNewMaster.aspx" />
     <Content Include="adm\departmentbudgetbystatus.aspx" />
     <Content Include="adm\departmentreport.aspx" />
     <Content Include="adm\departmentslist.aspx" />
@@ -343,7 +370,6 @@
     <Content Include="adm\employee_permissions.aspx" />
     <Content Include="adm\employee_permissions_form.aspx" />
     <Content Include="adm\employee_status_form.aspx" />
-    <Content Include="adm\excelcalculator.aspx" />
     <Content Include="adm\expenseschart.aspx" />
     <Content Include="adm\exportclientscsv.aspx" />
     <Content Include="adm\historylog.aspx" />
@@ -373,11 +399,12 @@
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
+    <Content Include="adm\naics_us_codes.aspx" />
     <Content Include="adm\newclient.aspx" />
+    <Content Include="adm\newclientcollection.aspx" />
     <Content Include="adm\newcontact.aspx" />
     <Content Include="adm\newemployee.aspx" />
     <Content Include="adm\newjob.aspx" />
-    <Content Include="adm\newproposaltask.aspx" />
     <Content Include="adm\newpropsalphase.aspx" />
     <Content Include="adm\newsubconsultant.aspx" />
     <Content Include="adm\newvendor.aspx" />
@@ -398,6 +425,7 @@
     <Content Include="adm\proposalphases.aspx" />
     <Content Include="adm\proposals.aspx" />
     <Content Include="adm\proposalschedule.aspx" />
+    <Content Include="adm\proposaltask.aspx" />
     <Content Include="adm\proposaltemplate.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
@@ -440,13 +468,16 @@
     <Content Include="adm\titleblock.aspx" />
     <Content Include="adm\topten.aspx" />
     <Content Include="adm\transmittal.aspx" />
+    <Content Include="adm\transmittalpackagetypes.aspx" />
     <Content Include="adm\transmittals.aspx" />
     <Content Include="adm\uploadphoto.aspx" />
     <Content Include="adm\useragree.aspx" />
     <Content Include="adm\vendor.aspx" />
     <Content Include="adm\vendors.aspx" />
     <Content Include="adm\vendortypes.aspx" />
-    <Content Include="adm\usercrud.aspx" />
+    <Content Include="api\paypal\webhooks\payment.aspx" />
+    <Content Include="api\paypal\webhooks\plan.aspx" />
+    <Content Include="api\paypal\webhooks\subscription.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
     <Content Include="App_Data\RadCaptcha\2.wav" />
@@ -1892,6 +1923,7 @@
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\transmittal.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\signature.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\singproposalsign.aspx" />
+    <Content Include="ErrorPage.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2038,8 +2070,10 @@
     <Content Include="Content\sing-theme\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\SubconsultantMasterPage.Master" />
     <Content Include="adm\subscribe\web.config" />
+    <Content Include="Images\toolbar\orgchart-icon.png" />
     <Content Include="jscript.min.js" />
     <Content Include="master\activeusers.aspx" />
+    <Content Include="master\AzureStorages.aspx" />
     <Content Include="master\billingplans.aspx" />
     <Content Include="master\company.aspx" />
     <Content Include="master\companylist.aspx" />
@@ -2048,6 +2082,7 @@
     <Content Include="master\CreateCompany.aspx" />
     <Content Include="master\Default.aspx" />
     <Content Include="master\disciplines.aspx" />
+    <Content Include="master\employees.aspx" />
     <Content Include="master\features.aspx" />
     <Content Include="master\featurescount.aspx" />
     <Content Include="master\historylog.aspx" />
@@ -2056,6 +2091,7 @@
     <Content Include="master\MasterPage.Master" />
     <Content Include="help\eng\PASconcept_Help_EN.pdf" />
     <Content Include="help\esp\PASconcept_Help_ES.pdf" />
+    <Content Include="adm\NewTestMasterPage.Master" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -2823,6 +2859,13 @@
       <DependentUpon>clientsbalance.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\clientscolletion.aspx.designer.vb">
+      <DependentUpon>clientscolletion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\clientscolletion.aspx.vb">
+      <DependentUpon>clientscolletion.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\clientsmap.aspx.designer.vb">
       <DependentUpon>clientsmap.aspx</DependentUpon>
     </Compile>
@@ -2905,6 +2948,13 @@
     </Compile>
     <Compile Include="adm\Default.aspx.vb">
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\DefaultTestNewMaster.aspx.designer.vb">
+      <DependentUpon>DefaultTestNewMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\DefaultTestNewMaster.aspx.vb">
+      <DependentUpon>DefaultTestNewMaster.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\departmentbudgetbystatus.aspx.designer.vb">
@@ -3003,13 +3053,6 @@
     </Compile>
     <Compile Include="adm\employee_status_form.aspx.vb">
       <DependentUpon>employee_status_form.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="adm\excelcalculator.aspx.designer.vb">
-      <DependentUpon>excelcalculator.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\excelcalculator.aspx.vb">
-      <DependentUpon>excelcalculator.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\expenseschart.aspx.designer.vb">
@@ -3222,11 +3265,25 @@
       <DependentUpon>monthlyexpenses.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\naics_us_codes.aspx.designer.vb">
+      <DependentUpon>naics_us_codes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\naics_us_codes.aspx.vb">
+      <DependentUpon>naics_us_codes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\newclient.aspx.designer.vb">
       <DependentUpon>newclient.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\newclient.aspx.vb">
       <DependentUpon>newclient.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\newclientcollection.aspx.designer.vb">
+      <DependentUpon>newclientcollection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\newclientcollection.aspx.vb">
+      <DependentUpon>newclientcollection.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\newcontact.aspx.designer.vb">
@@ -3250,13 +3307,6 @@
       <DependentUpon>newjob.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\newproposaltask.aspx.designer.vb">
-      <DependentUpon>newproposaltask.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\newproposaltask.aspx.vb">
-      <DependentUpon>newproposaltask.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="adm\newpropsalphase.aspx.designer.vb">
       <DependentUpon>newpropsalphase.aspx</DependentUpon>
     </Compile>
@@ -3270,6 +3320,13 @@
     <Compile Include="adm\newsubconsultant.aspx.vb">
       <DependentUpon>newsubconsultant.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\NewTestMasterPage.Master.designer.vb">
+      <DependentUpon>NewTestMasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="adm\NewTestMasterPage.Master.vb">
+      <DependentUpon>NewTestMasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\newvendor.aspx.designer.vb">
       <DependentUpon>newvendor.aspx</DependentUpon>
@@ -3397,6 +3454,13 @@
       <DependentUpon>proposalschedule.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\proposaltask.aspx.designer.vb">
+      <DependentUpon>proposaltask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposaltask.aspx.vb">
+      <DependentUpon>proposaltask.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\proposaltemplate.aspx.designer.vb">
       <DependentUpon>proposaltemplate.aspx</DependentUpon>
     </Compile>
@@ -3481,18 +3545,18 @@
       <DependentUpon>roles.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\saveproposalas.aspx.designer.vb">
-      <DependentUpon>saveproposalas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\saveproposalas.aspx.vb">
-      <DependentUpon>saveproposalas.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="adm\role_permissions_form.aspx.designer.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\role_permissions_form.aspx.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\saveproposalas.aspx.designer.vb">
+      <DependentUpon>saveproposalas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\saveproposalas.aspx.vb">
+      <DependentUpon>saveproposalas.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
@@ -3691,6 +3755,13 @@
       <DependentUpon>transmittal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\transmittalpackagetypes.aspx.designer.vb">
+      <DependentUpon>transmittalpackagetypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\transmittalpackagetypes.aspx.vb">
+      <DependentUpon>transmittalpackagetypes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\transmittals.aspx.designer.vb">
       <DependentUpon>transmittals.aspx</DependentUpon>
     </Compile>
@@ -3733,20 +3804,36 @@
       <DependentUpon>vendortypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="adm\usercrud.aspx.designer.vb">
-      <DependentUpon>usercrud.aspx</DependentUpon>
+    <Compile Include="api\paypal\webhooks\payment.aspx.designer.vb">
+      <DependentUpon>payment.aspx</DependentUpon>
     </Compile>
-    <Compile Include="adm\usercrud.aspx.vb">
-      <DependentUpon>usercrud.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="api\paypal\webhooks\payment.aspx.vb">
+      <DependentUpon>payment.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="App_Code\azurestorage.vb">
+    <Compile Include="api\paypal\webhooks\plan.aspx.designer.vb">
+      <DependentUpon>plan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\plan.aspx.vb">
+      <DependentUpon>plan.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\subscription.aspx.designer.vb">
+      <DependentUpon>subscription.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\paypal\webhooks\subscription.aspx.vb">
+      <DependentUpon>subscription.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\AzureStorageApi.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="App_Code\eeg360.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="App_Code\LocalAPI.vb" />
+    <Compile Include="App_Code\LocalAPI.vb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="App_Code\OneSignalNotification.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -3763,6 +3850,9 @@
     <Compile Include="App_Code\PayPalUtils\Webhooks\PasConceptPlanWebhook.vb" />
     <Compile Include="App_Code\PayPalUtils\Webhooks\PasConceptSubscriptionWebhook.vb" />
     <Compile Include="App_Code\PayPalUtils\Webhooks\PasConceptWebhook.vb" />
+    <Compile Include="App_Code\SendGrid.vb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="App_Code\SMS.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -3921,6 +4011,13 @@
       <DependentUpon>singproposalsign.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ErrorPage.aspx.designer.vb">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.vb">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3930,6 +4027,13 @@
     <Compile Include="master\activeusers.aspx.vb">
       <DependentUpon>activeusers.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\AzureStorages.aspx.designer.vb">
+      <DependentUpon>AzureStorages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\AzureStorages.aspx.vb">
+      <DependentUpon>AzureStorages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="master\billingplans.aspx.designer.vb">
       <DependentUpon>billingplans.aspx</DependentUpon>
@@ -3985,6 +4089,13 @@
     </Compile>
     <Compile Include="master\disciplines.aspx.vb">
       <DependentUpon>disciplines.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\employees.aspx.designer.vb">
+      <DependentUpon>employees.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\employees.aspx.vb">
+      <DependentUpon>employees.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="master\features.aspx.designer.vb">

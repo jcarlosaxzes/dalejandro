@@ -15,7 +15,6 @@ Public Class vendors
             lblEmployee.Text = Master.UserEmail
             lblCompanyId.Text = Session("companyId")
         End If
-        RadWindowManager1.EnableViewState = False
 
     End Sub
 
@@ -23,27 +22,11 @@ Public Class vendors
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditVendor"
-                sUrl = "~/ADM/Vendor.aspx?vendorId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 820)
+                Response.Redirect("~/ADM/Vendor.aspx?vendorId=" & e.CommandArgument)
         End Select
-    End Sub
-    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer)
-        RadWindowManager1.Windows.Clear()
-        Dim window1 As RadWindow = New RadWindow()
-        window1.NavigateUrl = sUrl
-        window1.VisibleOnPageLoad = True
-        window1.VisibleStatusbar = False
-        window1.ID = WindowsID
-        'window1.InitialBehaviors = WindowBehaviors.Maximize
-        window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize
-        window1.Width = Width
-        window1.Height = Height
-        window1.Modal = True
-        window1.OnClientClose = "OnClientClose"
-        RadWindowManager1.Windows.Add(window1)
     End Sub
 
     Protected Sub btnNewVendor_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewVendor.Click
-        CreateRadWindows("NewVendor", "~/ADM/NewVendor.aspx", 850, 700)
+        Response.Redirect("~/ADM/NewVendor.aspx")
     End Sub
 End Class

@@ -116,14 +116,6 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">(*) Client Code:
-                </td>
-                <td>
-                    <telerik:RadTextBox ID="txtInitials" runat="server" MaxLength="7" Width="100px" EmptyMessage="Up to 7 characters">
-                    </telerik:RadTextBox>
-                </td>
-            </tr>
-            <tr>
                 <td style="text-align: right" class="auto-style2">(*) Email:
                 </td>
                 <td class="auto-style2">
@@ -149,6 +141,22 @@
                 </telerik:RadComboBox>
                 </td>
             </tr>
+
+            <tr>
+                <td style="text-align: right"><a href="https://www.census.gov/eos/www/naics/" target="_blank">NAICS</a> US Code:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboNAICS" runat="server" DataSourceID="SqlDataSourceNAICS"
+                        DataTextField="CodeAndTitle" DataValueField="Code" Width="90%"
+                        AppendDataBoundItems="true" MarkFirstMatch="True" Filter="Contains">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(NAICS Code Not Defined...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+
+                </td>
+            </tr>
+
             <tr>
                 <td style="text-align: right">Address Line 1:
                 </td>
@@ -212,6 +220,14 @@
                 </td>
             </tr>
             <tr>
+                <td style="text-align: right">Client Code:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtInitials" runat="server" MaxLength="7" Width="150px" EmptyMessage="Up to 7 characters">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
                 <td style="text-align: right">TAGs:
                 </td>
                 <td>
@@ -242,8 +258,6 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmail" ValidationGroup="UpdateClient"
             ErrorMessage="(*) Email is Required" Display="None"></asp:RequiredFieldValidator>
         <br />
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtInitials" ValidationGroup="UpdateClient"
-            ErrorMessage=" (*) Client code is required" Display="None"></asp:RequiredFieldValidator>
         <br />
         <asp:CompareValidator runat="server" ID="Comparevalidator1" Operator="NotEqual" ValidationGroup="UpdateClient"
             ControlToValidate="cboSource"
@@ -253,8 +267,6 @@
         </asp:CompareValidator>
 
     </div>
-    <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
     <asp:SqlDataSource ID="SqlDataSourceSubtypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Clients_Subtypes] Where typeId=@typeId ORDER BY Name">
         <SelectParameters>
@@ -263,10 +275,6 @@
     </asp:SqlDataSource>
     <telerik:RadDatePicker ID="RadDatePickerStartingDate" runat="server" Culture="English (United States)" Visible="false"
         MaxDate="2029-12-31" MinDate="1960-01-01">
-        <DateInput DateFormat="MM/dd/yyyy" DisplayDateFormat="MM/dd/yyyy">
-        </DateInput>
-        <Calendar>
-        </Calendar>
         <DatePopupButton></DatePopupButton>
     </telerik:RadDatePicker>
     <asp:SqlDataSource ID="SqlDataSourceTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -283,5 +291,11 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceClientSources" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Clients_sources] ORDER BY [Id]"></asp:SqlDataSource>
+    
+    <asp:SqlDataSource ID="SqlDataSourceNAICS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="NAICS_US_Codes_FromCombobox_SELECT" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
 
+    <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
 </asp:Content>

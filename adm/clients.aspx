@@ -118,8 +118,8 @@
 
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn Aggregate="Count" DataField="Name" FilterControlAltText="Filter Name column"
-                        FooterAggregateFormatString="{0:N0}" HeaderText="Name & Company" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
+                    <telerik:GridTemplateColumn Aggregate="Count" DataField="Name" FilterControlAltText="Filter Name column" HeaderStyle-Width="250px"
+                        FooterAggregateFormatString="{0:N0}" HeaderText="Name -- Company" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
                         UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <div>
@@ -130,17 +130,25 @@
 
                             </div>
                             <div>
-                                <%# Eval("Company")%>
                                 <span class="badge badge-important" title="Uploaded files"><%# LocalAPI.ClientFilesCount(Eval("Id"))  %></span>
+                                <%# Eval("Company")%>
                             </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column"
+                    <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter Type column" 
+                        HeaderText="Type -- NAICS Code" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small">
+                        <ItemTemplate>
+                            <%# Eval("nType")%> <br />
+                            <%# Eval("NAICSCodeAndTitle")%>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+
+                    <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column" 
                         HeaderText="Contact info -- Customer Rep." SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <div>
                                 <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
-                                <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%>&nbsp;&nbsp;&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Cellular"))%>
+                                <%# String.Concat(LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")), " ", LocalAPI.PhoneHTML(Request.UserAgent, Eval("Cellular")))%>
                                 <a href='<%# Eval("Web")%>' target="_blank" title="View client web"><%#Eval("Web")%>
                            <div>
                             <small style="color:black"><%# Eval("SalesRep1")%></small>
@@ -148,13 +156,6 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter Type column"
-                        HeaderText="Client Type" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" ItemStyle-Font-Size="Small">
-                        <ItemTemplate>
-                            <%# Eval("nType")%>
-                            <%# Eval("nSubtype")%>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Activity" FilterControlAltText="Filter Activity column" ItemStyle-HorizontalAlign="Center"
                         HeaderText="Activity" SortExpression="Activity" UniqueName="Activity" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="90px" ItemStyle-Font-Size="Small">
                         <ItemTemplate>

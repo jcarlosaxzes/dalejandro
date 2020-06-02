@@ -23,7 +23,7 @@
         <Rows>
             <telerik:LayoutRow>
                 <Content>
-<table class="table-condensed noprint">
+                    <table class="table-condensed noprint">
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Schedule">
@@ -49,7 +49,7 @@
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                         AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" HeaderStyle-HorizontalAlign="Center"
                         Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="25"
-                        AllowSorting="True" 
+                        AllowSorting="True"
                         HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                         <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id">
                             <PagerStyle Mode="Slider" AlwaysVisible="false" />
@@ -57,61 +57,69 @@
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="" HeaderStyle-Width="50px">
                                 </telerik:GridEditCommandColumn>
                                 <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column"
-                                    HeaderText="Schedule Name" SortExpression="Name" UniqueName="Name" >
+                                    HeaderText="Schedule Name" SortExpression="Name" UniqueName="Name">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' Width="800px"
-                                            MaxLength="80" EmptyMessage="Insert billing name; e.g. 30%, 60%, 10%">
-                                        </telerik:RadTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' Width="800px"
+                                                MaxLength="80" EmptyMessage="Insert billing name; e.g. 30%, 60%, 10%">
+                                            </telerik:RadTextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn DataField="BillingFrequency" FilterControlAltText="Filter BillingFrequency column"
-                                    HeaderText="Billing Frequency" UniqueName="BillingFrequency"  HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
+                                    HeaderText="Billing Frequency" UniqueName="BillingFrequency" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
-                                        <telerik:RadComboBox ID="cboBillingFrequency" runat="server" Width="400px" SelectedValue='<%# Bind("BillingFrequency") %>'>
-                                            <Items>
-                                                <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="" />
-                                                <telerik:RadComboBoxItem runat="server" Text="Month" Value="month" />
-                                                <telerik:RadComboBoxItem runat="server" Text="Quarter" Value="quarter" />
-                                                <telerik:RadComboBoxItem runat="server" Text="Week" Value="week" />
-                                                <telerik:RadComboBoxItem runat="server" Text="Day" Value="day" />
-                                            </Items>
-                                        </telerik:RadComboBox>
+                                        <div style="margin: 5px">
+                                            <telerik:RadComboBox ID="cboBillingFrequency" runat="server" Width="400px" SelectedValue='<%# Bind("BillingFrequency") %>'>
+                                                <Items>
+                                                    <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Month" Value="month" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Quarter" Value="quarter" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Week" Value="week" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Day" Value="day" />
+                                                </Items>
+                                            </telerik:RadComboBox>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="BillingFrequencyLabel0" runat="server" Text='<%# Eval("BillingFrequency") %>'></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn DataField="PaymentsScheduleList" FilterControlAltText="Filter PaymentsScheduleList column" Display="false"
-                                    HeaderText="Values(comma-separated) List" SortExpression="PaymentsScheduleList" UniqueName="PaymentsScheduleList"  HeaderStyle-Width="190px">
+                                    HeaderText="Values(comma-separated) List" SortExpression="PaymentsScheduleList" UniqueName="PaymentsScheduleList" HeaderStyle-Width="190px">
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="PaymentsScheduleListTextBox" runat="server" Text='<%# Bind("PaymentsScheduleList") %>' ToolTip="Insert billing percentages separated by commas(,)"
-                                            Width="800px" MaxLength="255" EmptyMessage="Insert billing percentages separated by commas(,) e.g. 30,60,10">
-                                        </telerik:RadTextBox>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="PaymentsScheduleListTextBox" runat="server" Text='<%# Bind("PaymentsScheduleList") %>' ToolTip="Insert billing percentages separated by commas(,)"
+                                                Width="800px" MaxLength="255" EmptyMessage="Insert billing percentages separated by commas(,) e.g. 30,60,10">
+                                            </telerik:RadTextBox>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="PaymentsScheduleListLabel" runat="server" Text='<%# Eval("PaymentsScheduleList") %>'></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="PaymentsTextList" HeaderText="Descriptions(comma-separated) List" SortExpression="PaymentsTextList" 
-                                    UniqueName="PaymentsTextList"  Display="false">
+                                <telerik:GridTemplateColumn DataField="PaymentsTextList" HeaderText="Descriptions(comma-separated) List" SortExpression="PaymentsTextList"
+                                    UniqueName="PaymentsTextList" Display="false">
                                     <ItemTemplate>
                                         <asp:Label ID="PaymentsTextListLabel" runat="server" Text='<%# Eval("PaymentsTextList") %>'></asp:Label>
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <telerik:RadTextBox ID="PaymentsTextListTextBox" runat="server" Text='<%# Bind("PaymentsTextList") %>'
-                                            Width="800px" TextMode="MultiLine" MaxLength="512" Rows="6" EmptyMessage="Insert descriptions of percentages separated by commas; e.g. Due at time of signed contract,Due at time of project submittal,Due at time of project approval"
-                                            ToolTip="Insert descriptions of percentages separated by commas(,) e.g. Due at time of signed contract,Due at time of project submittal,Due at time of project approval">
-                                        </telerik:RadTextBox>
+                                        <div style="margin: 5px">
+                                            <telerik:RadTextBox ID="PaymentsTextListTextBox" runat="server" Text='<%# Bind("PaymentsTextList") %>'
+                                                Width="800px" TextMode="MultiLine" MaxLength="512" Rows="6" EmptyMessage="Insert descriptions of percentages separated by commas; e.g. Due at time of signed contract,Due at time of project submittal,Due at time of project approval"
+                                                ToolTip="Insert descriptions of percentages separated by commas(,) e.g. Due at time of signed contract,Due at time of project submittal,Due at time of project approval">
+                                            </telerik:RadTextBox>
+                                        </div>
                                     </EditItemTemplate>
                                     <ItemStyle HorizontalAlign="Left" />
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
-                                     ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                                    ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                     <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </telerik:GridButtonColumn>

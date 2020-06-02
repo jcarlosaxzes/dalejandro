@@ -297,7 +297,7 @@ Public Class invoice
                 Dim sBody As String = sMsg.ToString
                 Dim sSubject As String = "PayHere to " & LocalAPI.GetCompanyName(lblCompanyId.Text) & " from PayPal, Invoice: " & invoiceInfo("InvoiceNumber")
 
-                LocalAPI.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text)
+                SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text)
                 SqlDataSourceInvoice.DataBind()
 
             End If
