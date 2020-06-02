@@ -26,7 +26,7 @@
     </div>
     <div class="pas-container">
         <h4 style="text-align: center">Templates are used as a predefined Structure to create a new Proposal</h4>
-        <table class="table-condensed" style="width: 95%">
+        <table class="table-condensed" style="width: 98%">
             <tr>
                 <td style="width: 220px; text-align: right">Name:
                 </td>
@@ -40,63 +40,56 @@
                 <td style="text-align: right">Related Task ID:
                 </td>
                 <td>
-                    <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
-                        <table class="table-condensed" style="width: 100%">
-                            <tr>
-                                <td colspan="3" class="Pequena">To find out the 'task id' codes, show 'Task List'
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 240px; vertical-align: top">
-                                    <telerik:RadTextBox ID="TaskIdListTextBox" runat="server" EmptyMessage="Insert 'task id' separated by commas; e.g. 201,202,203"
-                                        MaxLength="255" TextMode="MultiLine" Width="100%">
-                                    </telerik:RadTextBox>
-                                </td>
-                                <td style="vertical-align: top">
-                                    <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceTask" DataTextField="Description"
-                                        DataValueField="taskcode" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Select Task ID...)" Value="-1" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                </td>
-                                <td style="width: 120px; vertical-align: top">
-                                    <asp:LinkButton ID="btnAddTaskID" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" Width="120px">
-                                Add Task ID
-                                    </asp:LinkButton>
+                    <table class="table-condensed" style="width: 100%">
+                        <tr>
+                            <td style="vertical-align: top">
+                                <telerik:RadComboBox ID="cboTask" runat="server" Height="350px" ToolTip="To find out the 'task id' codes, show 'Task List'"
+                                    DataSourceID="SqlDataSourceTask" DataTextField="Description" DataValueField="taskcode" EmptyMessage="Select Task and Add to List..."
+                                    Width="100%" CheckBoxes="true" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
+                                    <Localization AllItemsCheckedString="All Task Checked" CheckAllString="Check All..." ItemsCheckedString="task checked"></Localization>
+                                </telerik:RadComboBox>
+                            </td>
+                            <td style="width: 10%; vertical-align: middle; text-align: center">
+                                <asp:LinkButton ID="btnAddTaskID" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
+                                        Add Selected ->
+                                </asp:LinkButton>
 
+                            </td>
+                            <td style="width: 45%; vertical-align: top">
 
-                                </td>
-                            </tr>
-                        </table>
-                    </telerik:RadDockLayout>
+                                <telerik:RadTextBox ID="TaskIdListTextBox" runat="server" EmptyMessage="Insert 'task id' separated by commas; e.g. 201,202,203"
+                                    MaxLength="255" Width="100%">
+                                </telerik:RadTextBox>
+
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
 
             <tr>
+                <td></td>
+                <td style="text-align:right">
+                    <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules"
+                        DataTextField="Name" DataValueField="Id" Width="400px" MarkFirstMatch="True" AppendDataBoundItems="true"
+                        Filter="Contains" ToolTip="Select Payment Schedules to define first time or modify the current">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Payment Schedules...)" Value="-1" />
+                        </Items>
+                    </telerik:RadComboBox>
+                    &nbsp;
+                    <asp:LinkButton ID="btnGeneratePaymentSchedules" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" Width="120px">
+                                Generate
+                    </asp:LinkButton>
+                </td>
+            </tr>
+            <tr>
                 <td style="text-align: right">Payment Schedule(%):
                 </td>
                 <td>
-                    <div style="text-align: right; padding-right: 5px; padding-bottom: 5px; padding-top: 5px; vertical-align: middle">
-                        <b>To change, select Payment Schedules:</b>&nbsp;
-                                        <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules"
-                                            DataTextField="Name" DataValueField="Id" Width="280px" MarkFirstMatch="True" AppendDataBoundItems="true"
-                                            Filter="Contains" ToolTip="Select Payment Schedules to define first time or modify the current">
-                                            <Items>
-                                                <telerik:RadComboBoxItem runat="server" Text="(Select Payment Schedules...)" Value="-1" />
-                                            </Items>
-                                        </telerik:RadComboBox>
-                        <asp:LinkButton ID="btnGeneratePaymentSchedules" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" Width="120px">
-                                Generate
-                        </asp:LinkButton>
-
-                    </div>
-                    <div>
-                        <telerik:RadTextBox ID="PaymentsScheduleListTextBox" runat="server"
-                            MaxLength="50" Width="100%" EmptyMessage="Insert payments percentages separated by commas; e.g. 50,50">
-                        </telerik:RadTextBox>
-                    </div>
-
+                    <telerik:RadTextBox ID="PaymentsScheduleListTextBox" runat="server"
+                        MaxLength="50" Width="100%" EmptyMessage="Insert payments percentages separated by commas; e.g. 50,50">
+                    </telerik:RadTextBox>
                 </td>
             </tr>
             <tr>
@@ -104,13 +97,13 @@
                 </td>
                 <td>
                     <telerik:RadTextBox ID="PaymentsTextListTextBox" runat="server"
-                        TextMode="MultiLine" Width="100%" Rows="3" MaxLength="512"
+                         Width="100%" Rows="3" MaxLength="512"
                         EmptyMessage="Insert descriptions of payments separated by commas; e.g. Due at Time of Signed Contract Agreement,50% Due at 100% Submittal">
                     </telerik:RadTextBox>
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Introductory Text:
+                <td style="text-align: right">Proposal Introductory Text:
                 </td>
                 <td>
                     <telerik:RadTextBox ID="TextBeginTextBox" runat="server" EmptyMessage="Proposal Introductory Text"
@@ -121,7 +114,7 @@
             </tr>
 
             <tr>
-                <td style="text-align: right">Concluding Text:
+                <td style="text-align: right">Proposal Concluding Text:
                 </td>
                 <td>
                     <telerik:RadTextBox ID="TextEndTextBox" runat="server"
