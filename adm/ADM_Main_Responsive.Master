@@ -654,18 +654,19 @@
                 <telerik:LayoutRow StaticId="Footer2" CssClass="noprint">
                     <Content>
                         <div style="text-align: center; padding-top: 2px" class="noprint">
-                            <asp:HyperLink ID="lnkHelp" runat="server" CssClass="enlacepie" ToolTip="Help" Target="_blank" NavigateUrl="http://blog.pasconcept.com/p/contents.html">Blog | 
+                            <hr style="margin:0" />
+<%--                            <asp:HyperLink ID="lnkHelp" runat="server" CssClass="enlacepie" ToolTip="Help" Target="_blank" NavigateUrl="http://blog.pasconcept.com/p/contents.html">Blog | 
                             </asp:HyperLink>
                             <asp:HyperLink ID="lnkAyuda" runat="server" CssClass="pieayuda" ToolTip="User Manual (PDF)" Target="_blank" NavigateUrl="~/help/eng/PASconcept_Help_EN.pdf">Help (ENG)  
                             </asp:HyperLink>
                             <asp:Label ID="Label11" runat="server" class="enlacepie" Text=" |"></asp:Label>
                             <asp:HyperLink ID="HyperLink1" runat="server" CssClass="pieayuda" ToolTip="Documentación de PASconcept en Español (PDF)" Target="_blank" NavigateUrl="~/help/esp/PASconcept_Help_ES.pdf">Ayuda (ESP)  
                             </asp:HyperLink>
-                            <asp:Label ID="Label1" runat="server" class="enlacepie" Text=" |"></asp:Label>
-                            <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Privacy | </a>
-                            <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Terms & Condition | </a>
-                            <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Security | </a>
-                            <a href="https://axzes.zendesk.com/hc/en-us/requests" target="_blank" class="enlacepie">Support</a>
+                            <asp:Label ID="Label1" runat="server" class="enlacepie" Text=" |"></asp:Label>--%>
+                            <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Privacy | </a>
+                            <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Terms & Condition | </a>
+                            <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Security | </a>
+                            <a href="https://pasconcept.com/#contact" target="_blank" class="enlacepie">Support</a>
                         </div>
                     </Content>
                 </telerik:LayoutRow>
@@ -673,7 +674,7 @@
                 <telerik:LayoutRow StaticId="Footer3" CssClass="noprint">
                     <Content>
                         <div style="text-align: center" class="enlacepie noprint ">
-                            &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">AXZES LLC</a>
+                            &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">Axzes LLC</a>
                             <br />
 
                         </div>
