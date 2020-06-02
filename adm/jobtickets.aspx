@@ -333,7 +333,7 @@
 
     <%--SendRequest Form--%>
     <div>
-        <telerik:RadToolTip ID="RadToolSendRequest" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"Skin="Default">
+        <telerik:RadToolTip ID="RadToolSendRequest" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
             <h2 style="margin: 0">
                 <span class="label label-default center-block">Request Meeting
                 </span>
