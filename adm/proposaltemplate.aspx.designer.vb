@@ -41,24 +41,6 @@ Partial Public Class proposaltemplate
     Protected WithEvents NameTextBox As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''RadDockLayout1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadDockLayout1 As Global.Telerik.Web.UI.RadDockLayout
-    
-    '''<summary>
-    '''TaskIdListTextBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TaskIdListTextBox As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
     '''cboTask control.
     '''</summary>
     '''<remarks>
@@ -75,6 +57,15 @@ Partial Public Class proposaltemplate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAddTaskID As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''TaskIdListTextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TaskIdListTextBox As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
     '''cboPaymentSchedules control.

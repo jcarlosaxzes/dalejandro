@@ -1,4 +1,6 @@
-﻿Public Class proposaltemplate
+﻿Imports Telerik.Web.UI
+
+Public Class proposaltemplate
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -53,14 +55,19 @@
 
     Private Sub btnAddTaskID_Click(sender As Object, e As EventArgs) Handles btnAddTaskID.Click
         Try
-            If cboTask.SelectedValue <> "-1" Then
-                TaskIdListTextBox.Text = TaskIdListTextBox.Text & IIf(Len(TaskIdListTextBox.Text) > 0, ",", "") & cboTask.SelectedValue
-                cboTask.SelectedValue = -1
+            TaskIdListTextBox.Text = ""
+            Dim collection2 As IList(Of RadComboBoxItem) = cboTask.CheckedItems
+            If (collection2.Count <> 0) Then
+
+                For Each item As RadComboBoxItem In collection2
+                    TaskIdListTextBox.Text = TaskIdListTextBox.Text + item.Value + ","
+                Next
+                ' Quitar la ultima coma
+                TaskIdListTextBox.Text = Left(TaskIdListTextBox.Text, Len(TaskIdListTextBox.Text) - 1)
             End If
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
-
     End Sub
 
     Private Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs) Handles btnGeneratePaymentSchedules.Click
