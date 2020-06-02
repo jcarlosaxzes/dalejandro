@@ -216,7 +216,7 @@
 
                                         <li class="dropdown">
                                             <a runat="server" class="dropdown-toggle" data-toggle="dropdown">
-                                            <span class="glyphicon glyphicon-cog"></span>
+                                                <span class="glyphicon glyphicon-cog"></span>
                                                 <span class="caret"></span>
                                             </a>
 
@@ -359,7 +359,7 @@
                     <Content>
                         <%--<telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" EnableEmbeddedSkins="false" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">--%>
                         <div class="noprint" style="text-align: center">
-                            <telerik:RadNavigation ID="RadMenu2" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" >
+                            <telerik:RadNavigation ID="RadMenu2" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right">
                                 <Nodes>
 
                                     <%--Projects menu--%>
@@ -429,6 +429,9 @@
                                             <%--Clients Submenu--%>
                                             <telerik:NavigationNode Text="Clients">
                                                 <Nodes>
+                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Clients" Text="Client"
+                                                        Visible='<%# EmployeePermission("Deny_ClientsList") %>'>
+                                                    </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/ClientManagement" Text="Client Management"
                                                         Visible='<%# EmployeePermission("Deny_ClientManagement") %>'>
                                                     </telerik:NavigationNode>
