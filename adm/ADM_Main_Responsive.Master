@@ -359,7 +359,7 @@
                     <Content>
                         <%--<telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" EnableEmbeddedSkins="false" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">--%>
                         <div class="noprint" style="text-align: center">
-                            <telerik:RadNavigation ID="RadMenu2" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material" Font-Size="Medium" Font-Bold="true">
+                            <telerik:RadNavigation ID="RadMenu2" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material" Font-Size="Medium">
                                 <Nodes>
 
                                     <%--Projects menu--%>
