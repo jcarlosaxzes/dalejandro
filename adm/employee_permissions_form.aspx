@@ -1070,11 +1070,6 @@
                                     </tr>
 
 
-
-
-
-
-
                                      <%--Company Permits--%>
                                     <tr>
                                         <td colspan="2" style="text-align: center">
