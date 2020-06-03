@@ -473,8 +473,6 @@
                                                     <telerik:NavigationNode NavigateUrl="~/adm/ProjectSchedule" Text="Project Schedule"
                                                         Visible='<%# EmployeePermission("Deny_AnalyticCharts") %>'>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/ReportJobs" Text="Jobs Report">
-                                                    </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/TopTen" Text="Top Ten Charts"
                                                         Visible='<%# EmployeePermission("Deny_AnalyticCharts") %>'>
                                                     </telerik:NavigationNode>
