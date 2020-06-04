@@ -5412,7 +5412,7 @@ Public Class LocalAPI
                 Return GetStringEscalar("SELECT FullName FROM Employees WHERE Id=(select top 1 EmployeeAprovedId from Proposal where Id=" & proposalId & ") ")
 
             Case "ClientId", "Type", "EmployeeAprovedId", "JobId", "StatusId", "Unit", "ProjectSector", "ProjectEntity", "ProjectConstructionType", "ProjectConstructionSubType", "DepartmentId", "Measure", "Workdays", "ProjectManagerId", "companyId",
-                 "PaymentSchedule1", "PaymentSchedule2", "PaymentSchedule3", "PaymentSchedule4", "PaymentSchedule5", "PaymentSchedule6", "PaymentSchedule7", "PaymentSchedule8", "PaymentSchedule9", "PaymentSchedule1o"
+                 "PaymentSchedule1", "PaymentSchedule2", "PaymentSchedule3", "PaymentSchedule4", "PaymentSchedule5", "PaymentSchedule6", "PaymentSchedule7", "PaymentSchedule8", "PaymentSchedule9", "PaymentSchedule1o", "paymentscheduleId"
 
                 ' Valores Integer
                 Return GetNumericEscalar("SELECT TOP 1 isnull([" & sProperty & "],0) FROM Proposal where Id=" & proposalId)
@@ -10186,31 +10186,32 @@ Public Class LocalAPI
         Return Bcc
     End Function
 
-    Public Shared Function ProposalStatus2Acept(ByVal lProposalId As Long, ByVal companyId As Integer) As Integer
+    Public Shared Function ProposalStatus2Acept(ByVal proposalId As Long, ByVal companyId As Integer) As Integer
         Dim jobId As Integer = 0
         Try
 
-            If GetProposalProperty(lProposalId, "StatusId") < 2 Then
+            If GetProposalProperty(proposalId, "StatusId") < 2 Then
 
-                ' Pasarlo a statusId=2 para que no vuelva por esta rama
-                'ExecuteNonQuery("UPDATE [Proposal] Set AceptedDate = dbo.CurrentTime(), [StatusId] = 2 WHERE Id=" & lProposalId.ToString)
-                ProposalStatus2Accepted(lProposalId)
+                '1.- Pasarlo a statusId=2 para que no vuelva por esta rama
+                ProposalStatus2Accepted(proposalId)
 
                 '0.- Es un primer Proposal o es un Change Order (ya tiene JobId)
-                Dim dProposalTotal As String = GetProposalTotal(lProposalId)
+                Dim dProposalTotal As String = GetProposalTotal(proposalId)
                 Dim sProposalTotal As String = FormatearNumero2Tsql(dProposalTotal)
 
-                jobId = GetProposalProperty(lProposalId, "JobId")
-                Dim statusId As Integer = GetProposalProperty(lProposalId, "StatusId")
+                jobId = GetProposalProperty(proposalId, "JobId")
+                Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
+                Dim bRetainer As Boolean
 
                 If jobId = 0 Then
+                    '2.1 -  Crear job Asociado
                     ' No Aceptado y sin JobId creado
 
                     ' Leer Otros datos para el Job
-                    Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "PROPOSAL_FOR_Aceptance_SELECT")
+                    Dim ProposalObject = LocalAPI.GetRecord(proposalId, "PROPOSAL_FOR_Aceptance_SELECT")
 
                     '.....................................Aceprtar Proposal inicial, (No tiene Job asignado, hay que crearlo.....................)
-                    ' 1.- Obtener datos del Proposal
+                    '2.2 - Obtener datos del Proposal
                     Dim sJobCode As String = GetNextJobCode(Right(Year(GetDateTime()), 2), companyId)
 
                     If Len(sJobCode) > 0 Then
@@ -10228,10 +10229,11 @@ Public Class LocalAPI
                         Dim sProposalType As String = ProposalObject("Type")
                         Dim nWorkingDays As Integer = ProposalObject("Workdays")
                         Dim DeadLine As DateTime = ProposalObject("Deadline")
-                        Dim bRetainer As Boolean = ProposalObject("Retainer")
                         Dim StartDay As DateTime
 
-                        ' 2.- Nuevo Job
+                        bRetainer = ProposalObject("Retainer")
+
+                        '2.3 -.- Get Job Code
                         ' Verificar que no existe el Nombre
                         jobId = GetJobId(sJobName, companyId)
                         Dim i As Integer = 0
@@ -10241,15 +10243,16 @@ Public Class LocalAPI
                             jobId = GetJobId(sJobName, companyId)
                         End While
 
-                        ' Crear Job asociado
+                        '2.4 - Crear Job asociado
                         jobId = NuevoJob(sJobCode, sJobName, GetDateTime(), sClientId, sProposalTotal, sProposalType, sJobType, ProjectManagerId, sProjLocation, sProjArea, nJobSector, sJobUse, sJobUse2, Dpto, sOwner, 0, 0, companyId)
 
-                        ' Update parametros del Proposal
-                        ExecuteNonQuery("UPDATE [Proposal] Set JobId=" & jobId & " WHERE Id=" & lProposalId.ToString)
+                        '2.5 - Update parametros del Proposal
+                        ExecuteNonQuery($"UPDATE [Proposal] Set JobId={jobId} WHERE Id={proposalId}")
 
-                        NewJobNote(jobId, "Log: Job created by the acceptance of the Proposal " & ProposalNumber(lProposalId), 0)
+                        '2.6 - New Job Note acceptande
+                        NewJobNote(jobId, "Log: Job created by the acceptance of the Proposal " & ProposalNumber(proposalId), 0)
 
-                        ' Setting Dates attributes of Job
+                        '2.7 - Setting Dates attributes of Job
                         If Year(DeadLine) = 1980 Then
                             ' Fecha de fin sin definir, se calcula a partir de los WorkinDays
                             If nWorkingDays = 0 Then
@@ -10260,9 +10263,8 @@ Public Class LocalAPI
                         End If
                         StartDay = AddWorkDays(GetDateTime(), 1)
                         ExecuteNonQuery("UPDATE [Jobs] set [StartDay]=" & GetFecha_102(StartDay) & ", [EndDay]=" & GetFecha_102(DeadLine) & ", Workdays=" & nWorkingDays & " WHERE Id=" & jobId)
-
                         ' Otros atributos del Proposal->Job
-                        ExecuteNonQuery("UPDATE [Jobs] set [Unit]=(select Unit from Proposal where Id=" & lProposalId.ToString & "), [Measure]=(select Measure from Proposal where Id=" & lProposalId.ToString & ") WHERE Id=" & jobId)
+                        ExecuteNonQuery($"UPDATE [Jobs] set [Unit]=(select Unit from Proposal where Id={proposalId}), [Measure]=(select Measure from Proposal where Id={proposalId}) WHERE Id={jobId}")
 
                         If Len(sProjLocation) > 2 Then
                             Dim Latitude As String = ""
@@ -10271,44 +10273,48 @@ Public Class LocalAPI
                             LocalAPI.SetJobLatitudeLongitude(jobId, Latitude, Longitude)
                         End If
 
-                        ' Reproduce PaymentSchedule
-                        If jobId > 0 And dProposalTotal > 0 Then CreateInvoicesFromPaymentSchedule(lProposalId, jobId, dProposalTotal, bRetainer, companyId)
-
-                        ' Copiar los Files Uploads al Proposal hasta el Job
-                        'ExecuteNonQuery("INSERT INTO [dbo].[Jobs_azureuploads] ([jobId],[Type],[Name],[OriginalFileName],[KeyName],[ContentBytes],[ContentType],[Public],[Deleted]) select " & jobId & " as JobId,[Type],[Name],OriginalFileName,KeyName,ContentBytes,ContentType,[Public],0 from Proposals_azureuploads where ProposalId=" & lProposalId & " and [Deleted] = 0")
-
                     End If
                 Else
-                    '..............Proposal Change Order............................................................................................
+                    '2.1 -Proposal Change Order
                     ' Ya existe JobId, es un Aditional change.......................................................................................
                     If dProposalTotal <> 0 Then
                         '1.- Incrementar el Jobs.Budget=+Proposal.Total)
-                        ExecuteNonQuery("UPDATE [Jobs] SET Budget=Budget+" & sProposalTotal & " WHERE Id=" & jobId)
-                        NewJobNote(jobId, "Log: job Budget modified (+" & sProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(lProposalId), 0)
-
-                        '2.- Nuevo Invoice por ese importe
-                        Dim invoiceId As Integer = NuevoInvoiceSimpleCharge(jobId, GetDateTime(), dProposalTotal, "Proposal (Additional Charge): " & ProposalNumber(lProposalId))
-                        ' Se emite el Invoice por 100% al client
-                        InvoiceAutomatictToClient(invoiceId, companyId)
-
-                        NewJobNote(jobId, "Log: New Invoice (+" & sProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(lProposalId), 0)
+                        ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{sProposalTotal} WHERE Id={jobId}")
+                        NewJobNote(jobId, "$Log: job Budget modified (+" & sProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
+                        ' Simple Charge, mandatory Retainer
+                        bRetainer = True
                     End If
-                    ' Update parametros del Proposal
-                    ExecuteNonQuery("UPDATE [Proposal] SET AceptedDate=" & GetFecha_102(Today.Date) & ", [StatusId]=2 WHERE Id=" & lProposalId.ToString)
+
+                    '2.2 - Update parametros del Proposal
+                    ExecuteNonQuery("UPDATE [Proposal] SET AceptedDate=" & GetFecha_102(Today.Date) & ", [StatusId]=2 WHERE Id=" & proposalId.ToString)
                 End If
 
-                ' TAGuear al cliente en Agile
+                '3. - Invoices from PaymentSchedule
+                If jobId > 0 And dProposalTotal > 0 Then CreateInvoicesFromPaymentSchedule(proposalId, jobId)
+
+                '4. -' Retainer..............
+                If jobId > 0 And bRetainer Then
+                    ' Se emite el Invoice por 100% al client
+                    Dim invoiceId As Integer = GetNumericEscalar($"select top 1 Id from Invoices where JobId={jobId} and [Emitted]=0 order by Number")
+                    If invoiceId > 0 Then
+                        InvoiceAutomatictToClient(invoiceId, companyId)
+                        NewJobNote(jobId, "Log: New Automatic Invoice for Reatiner by the acceptance of the Proposal : " & ProposalNumber(proposalId), 0)
+                    End If
+                End If
+
+                '5. - TAGuear al cliente en Agile
                 If companyId = 260962 Then
-                    Task.Run(Function() ProposalTAGAgile(lProposalId, companyId, "Accepted"))
+                    Task.Run(Function() ProposalTAGAgile(proposalId, companyId, "Accepted"))
                 End If
 
-                ProposalStatus2Acept = jobId
+                '6. - Log................... End
+                LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.AceptProposal, companyId, proposalId)
 
-                LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.AceptProposal, companyId, lProposalId)
+                Return jobId
             End If
 
         Catch ex As Exception
-            ProposalStatus2Acept = jobId
+            Return jobId
             Throw ex
         End Try
     End Function
@@ -10422,7 +10428,7 @@ Public Class LocalAPI
                         ExecuteNonQuery("UPDATE [Proposal] Set JobId=" & lJobId & ", AceptedDate = " & GetFecha_102(Today.Date) & ", [StatusId] = 2 WHERE Id=" & lProposalId.ToString)
 
                         ' Reproduce PaymentSchedule
-                        If lJobId > 0 And dProposalTotal > 0 Then CreateInvoicesFromPaymentSchedule(lProposalId, lJobId, dProposalTotal, bRetainer, companyId)
+                        If lJobId > 0 And dProposalTotal > 0 Then CreateInvoicesFromPaymentSchedule_old(lProposalId, lJobId, dProposalTotal, bRetainer, companyId)
 
                         ' Copiar los Files Uploads al Proposal hasta el Job
                         'ExecuteNonQuery("INSERT INTO [dbo].[Jobs_azureuploads] ([jobId],[Type],[Name],[OriginalFileName],[KeyName],[ContentBytes],[ContentType],[Public],[Deleted]) select " & lJobId & " as JobId,[Type],[Name],OriginalFileName,KeyName,ContentBytes,ContentType,[Public],0 from Proposals_azureuploads where ProposalId=" & lProposalId & " and [Deleted] = 0")
@@ -10471,7 +10477,29 @@ Public Class LocalAPI
 
 
 
-    Private Shared Function CreateInvoicesFromPaymentSchedule(ByVal proposalId As Integer, jobId As Integer, dTotal As Double, bRetainer As Boolean, companyId As Integer) As Boolean
+    Private Shared Function CreateInvoicesFromPaymentSchedule(ByVal proposalId As Integer, jobId As Integer) As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+            cmd.CommandText = "InvoicesFromProposalPS_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            'cmd.Parameters.AddWithValue("@ID", ContactObject.ID)
+            cmd.Parameters.AddWithValue("@ProposalId", proposalId)
+            cmd.Parameters.AddWithValue("@JobId", jobId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+            Return 1
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Private Shared Function CreateInvoicesFromPaymentSchedule_old(ByVal proposalId As Integer, jobId As Integer, dTotal As Double, bRetainer As Boolean, companyId As Integer) As Boolean
         Try
 
             Dim i As Integer
@@ -13241,5 +13269,14 @@ Public Class LocalAPI
 
 #End Region
 
+#Region "Propsal Payment Sschedule"
+    Public Shared Function IsGeneralPS(ByVal ProposalId As Integer) As Boolean
+        Dim Value = GetNumericEscalar($"select count(*) from Proposal_details where ProposalId={ProposalId} and isnull(paymentscheduleId,0)>0")
+
+        Return IIf(Value = 0, True, False)
+
+    End Function
+
+#End Region
 End Class
 

@@ -48,7 +48,7 @@ Public Class job_proposals
             Case "EditProposal"
                 ' Codigo sapx anterior
                 '<asp:HyperLink ID="hlkProposalEdit" runat="server" Text='<%# Eval("ProposalNumber")%>' NavigateUrl='<%# Eval("Id", "~/ADM/Proposal.aspx?Id={0}")%>' ToolTip="Click to edit proposal in new tab" Target="_blank"></asp:HyperLink>
-                sUrl = "~/ADM/Proposal.aspx?Id=" & e.CommandArgument
+                sUrl = "~/ADM/Proposal.aspx?Id=" & e.CommandArgument & "&HideMasterMenu=1"
                 CreateRadWindows(e.CommandName, sUrl, -1, 810, False, "OnClientCloseProposals")
             Case "Delete"
         End Select
