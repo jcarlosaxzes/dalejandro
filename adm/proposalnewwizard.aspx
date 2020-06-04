@@ -564,34 +564,6 @@
                                     </ColumnsCollection>
                                 </telerik:RadMultiColumnComboBox>
 
-                                <%-- <telerik:RadComboBox ID="cboTaskTemplate" runat="server" DataSourceID="SqlDataSourceInsertFee" DataTextField="Description" DataValueField="Id" Width="600px" MarkFirstMatch="True"
-                                    Filter="Contains" Height="250px" AppendDataBoundItems="true" AutoPostBack="true" CausesValidation="false">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(Select Task...)" Value="0" />
-                                    </Items>
-
-                                    <HeaderTemplate>
-                                        <table>
-                                            <tr>
-                                                <td style="width: 400px; text-align: center">Name</td>
-                                                <td style="width: 100px; text-align: center">Hours</td>
-                                                <td style="width: 100px; text-align: center">Rates</td>
-                                            </tr>
-                                        </table>
-                                    </HeaderTemplate>
-                                    <ItemTemplate>
-                                        <table>
-                                            <tr>
-                                                <td style="width: 400px; text-align: left"><%# DataBinder.Eval(Container.DataItem, "Description")%></td>
-                                                <td style="width: 100px; text-align: right"><%# DataBinder.Eval(Container.DataItem, "Hours")%></td>
-                                                <td style="width: 100px; text-align: right"><%# DataBinder.Eval(Container.DataItem, "Rates")%></td>
-                                            </tr>
-                                        </table>
-                                    </ItemTemplate>
-                                </telerik:RadComboBox>
-                                <asp:CompareValidator runat="server" ID="Comparevalidator3" ValueToCompare="(Select Task...)"
-                                    Operator="NotEqual" ControlToValidate="cboTaskTemplate" CssClass="Error" ValidationGroup="TaskUpdate" Text="*" ErrorMessage="Select Task">
-                                </asp:CompareValidator>--%>
 
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
@@ -655,7 +627,7 @@
                                     <telerik:GridTemplateColumn DataField="Description" FilterControlAltText="Filter Description column"
                                         HeaderText="Name" SortExpression="Description" UniqueName="Description" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblDescrip" runat="server" Text='<%# Eval("Description") %>'> </asp:Label>
+                                            <%# Eval("Description") %>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridTemplateColumn DataField="Amount" DataType="System.Double" HeaderText="Quantity"
@@ -684,6 +656,14 @@
                                         FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
                                         HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
                                     </telerik:GridBoundColumn>
+
+                                    <telerik:GridTemplateColumn DataField="Paymentschedule" FilterControlAltText="Filter Paymentschedule column" ItemStyle-HorizontalAlign="Center"
+                                        HeaderText="Payments Shedule" SortExpression="Paymentschedule" UniqueName="Paymentschedule" HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <%# Eval("Paymentschedule") %>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
                                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?"
                                         ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
                                         UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
@@ -691,11 +671,13 @@
                                     </telerik:GridButtonColumn>
                                 </Columns>
                                 <EditFormSettings EditFormType="Template" PopUpSettings-ZIndex="7001" CaptionFormatString="Task {0}" CaptionDataField="taskcode">
-                                    <PopUpSettings Modal="true" Width="900px" Height="580px" />
+                                    <PopUpSettings Modal="true" Width="900px" Height="650px" />
                                     <FormTemplate>
                                         <table class="table-condensed">
                                             <tr>
-                                                <td colspan="6">
+                                                 <td style="width: 180px; text-align: right; vertical-align: middle">Name:
+                                                </td>
+                                                <td colspan="5">
                                                     <telerik:RadTextBox ID="DescriptionTextBox" runat="server" MaxLength="80" Text='<%# Bind("Description") %>' Width="100%">
                                                     </telerik:RadTextBox>
                                                 </td>
@@ -709,7 +691,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 90px; text-align: right; vertical-align: middle">Amount:
+                                                <td style="text-align: right; vertical-align: middle">Amount:
                                                 </td>
                                                 <td>
                                                     <telerik:RadNumericTextBox ID="txtAmount" runat="server" Text='<%# Bind("Amount") %>' Width="200px">
@@ -727,6 +709,19 @@
                                                     <telerik:RadNumericTextBox ID="RatesTextBox" runat="server" Text='<%# Bind("Rates") %>' Width="200px">
                                                         <NumberFormat DecimalDigits="2" />
                                                     </telerik:RadNumericTextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                 <td style="text-align: right; vertical-align: middle">Payment Schedule:
+                                                </td>
+                                                <td colspan="5">
+                                                    <telerik:RadComboBox ID="cboPaymentSchedulesEdit" runat="server" DataSourceID="SqlDataSourcePaymentSchedules" SelectedValue='<%# Bind("paymentscheduleId") %>'
+                                                        DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true" ZIndex="50001"
+                                                        ToolTip="Select Payment Schedules for individual Task">
+                                                        <Items>
+                                                            <telerik:RadComboBoxItem runat="server" Text="(Select Payment Schedules...)" Value="0" />
+                                                        </Items>
+                                                    </telerik:RadComboBox>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1299,7 +1294,7 @@
     <asp:SqlDataSource ID="SqlDataSourceServiceFees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="PROPOSAL_details_DELETE" DeleteCommandType="StoredProcedure"
         SelectCommand="PROPOSAL_details_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL_details3_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="PROPOSAL_details_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="String" />
         </DeleteParameters>
@@ -1309,6 +1304,7 @@
             <asp:Parameter Name="Amount" />
             <asp:Parameter Name="Hours" Type="Double" />
             <asp:Parameter Name="Rates" Type="Double" />
+            <asp:Parameter Name="paymentscheduleId" Type="Int32" />
             <asp:Parameter Name="Id" Type="String" />
         </UpdateParameters>
         <SelectParameters>
