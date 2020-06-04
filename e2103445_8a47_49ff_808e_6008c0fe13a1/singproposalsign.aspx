@@ -244,7 +244,7 @@
                                                     ItemStyle-CssClass="GridColumn hidden-sm-down" HeaderStyle-CssClass="hidden-sm-down">
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridTemplateColumn DataField="TotalRow" HeaderText="TOTAL" UniqueName="TotalRow"
-                                                    HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="Sum"
+                                                    HeaderStyle-Width="200px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="Sum"
                                                     FooterAggregateFormatString="{0:C}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true" ItemStyle-CssClass="GridColumn">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblTotal2" runat="server" ForeColor='<%# IIf(Eval("TotalRow") = 0,System.Drawing.Color.White,System.Drawing.Color.Black )%>' Text='<%# Eval("TotalRow","{0:C2}")%>' />
@@ -279,12 +279,6 @@
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>
 
-                                                    <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL" 
-                                                        SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right"
-                                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
-                                                        FooterStyle-HorizontalAlign="Right"
-                                                        ItemStyle-CssClass="GridColumn">
-                                                    </telerik:GridBoundColumn>
                                                     <telerik:GridTemplateColumn DataField="InvoiceNumberEmitted" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center"
                                                         HeaderText="" SortExpression="InvoiceNumberEmitted" UniqueName="InvoiceNumberEmitted"
                                                         ItemStyle-CssClass="GridColumn">
@@ -294,6 +288,12 @@
                                                             </a>
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
+                                                    <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL" 
+                                                        SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right"
+                                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
+                                                        FooterStyle-HorizontalAlign="Right"
+                                                        ItemStyle-CssClass="GridColumn">
+                                                    </telerik:GridBoundColumn>
                                                 </Columns>
                                             </MasterTableView>
                                         </telerik:RadGrid>
