@@ -53,7 +53,8 @@ Public Class proposalnewwizard
                     cboPaymentSchedules.SelectedValue = LocalAPI.GetProposalProperty(lblProposalId.Text, "paymentscheduleId")
                     RadGridPS.DataBind()
 
-                    btnEditPS.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+                    cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+                    btnUpdatePS.Visible = cboPaymentSchedules.Visible
 
                     ProposalItemsDataBind()
 
@@ -186,7 +187,6 @@ Public Class proposalnewwizard
                 RadGridAzureuploads.DataBind()
 
             Case "Payment"
-                HidePStoolbar()
                 RadGridPS.DataBind()
 
             Case "RadWizardStepAttachments"
@@ -336,7 +336,8 @@ Public Class proposalnewwizard
     End Sub
     Private Sub SqlDataSourceServiceFees_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceServiceFees.Updated
         RadGridPS.DataBind()
-        btnEditPS.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+        cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+        btnUpdatePS.Visible = cboPaymentSchedules.Visible
     End Sub
 
 
