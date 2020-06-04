@@ -35,11 +35,16 @@ Public Class proposals
                 cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(employeeId, "FilterProposal_Month")
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
+                If Not Request.QueryString("restoreFilter") Is Nothing Then
+                    RestoreFilter()
+                End If
+
                 RefreshRecordset()
 
                 If Not Request.QueryString("rfpGUID") Is Nothing Then
                     lblProposalIdFromRfp.Text = LocalAPI.CreateProposalFromRFP(Request.QueryString("rfpGUID"), employeeId, lblCompanyId.Text)
                 End If
+
             End If
 
             'RadWindowManager1.EnableViewState = False
@@ -165,6 +170,25 @@ Public Class proposals
 
     Protected Sub btnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
         RefreshRecordset()
+        SaveFilter()
+    End Sub
+
+    Private Sub SaveFilter()
+        Session("Filter_Proposals_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
+        Session("Filter_Proposals_RadDatePickerTo") = RadDatePickerTo.SelectedDate
+        Session("Filter_Proposals_cboClients") = cboClients.SelectedValue
+        Session("Filter_Proposals_cboStatus") = cboStatus.SelectedValue
+        Session("Filter_Proposals_cboDepartments") = cboDepartments.SelectedValue
+        Session("Filter_Proposals_txtFind") = txtFind.Text
+    End Sub
+
+    Private Sub RestoreFilter()
+        RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerFrom"))
+        RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerTo"))
+        cboClients.SelectedValue = Session("Filter_Proposals_cboClients")
+        cboStatus.SelectedValue = Session("Filter_Proposals_cboStatus")
+        cboDepartments.SelectedValue = Session("Filter_Proposals_cboDepartments")
+        txtFind.Text = Session("Filter_Proposals_txtFind")
     End Sub
 
     Private tot As Double
