@@ -53,7 +53,8 @@ Public Class proposalnewwizard
                     cboPaymentSchedules.SelectedValue = LocalAPI.GetProposalProperty(lblProposalId.Text, "paymentscheduleId")
                     RadGridPS.DataBind()
 
-                    btnEditPS.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+                    cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+                    btnUpdatePS.Visible = cboPaymentSchedules.Visible
 
                     ProposalItemsDataBind()
 
@@ -186,7 +187,6 @@ Public Class proposalnewwizard
                 RadGridAzureuploads.DataBind()
 
             Case "Payment"
-                HidePStoolbar()
                 RadGridPS.DataBind()
 
             Case "RadWizardStepAttachments"
@@ -310,19 +310,12 @@ Public Class proposalnewwizard
 
 #Region "Fees_Step2"
 
-    Protected Sub btnNewFee_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFee.Click
-        divBtnFee.Visible = False
-        divFormFee.Visible = True
-    End Sub
-    Protected Sub btnNewFeeOk_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFeeOk.Click
-        SqlDataSourceInsertFee.Insert()
-        RadGridFees.DataBind()
-    End Sub
-    Protected Sub btnNewFeeClose_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFeeClose.Click
-        'cboTaskTemplate.SelectedValue = 0
-        cboMulticolumnTask.Value = 0
-        divFormFee.Visible = False
-        divBtnFee.Visible = True
+    Private Sub btnNewFeeOk_Click(sender As Object, e As EventArgs) Handles btnNewFeeOk.Click
+        If cboMulticolumnTask.Value > 0 Then
+            SqlDataSourceInsertFee.Insert()
+            RadGridFees.DataBind()
+            cboMulticolumnTask.Value = 0
+        End If
     End Sub
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
@@ -343,7 +336,8 @@ Public Class proposalnewwizard
     End Sub
     Private Sub SqlDataSourceServiceFees_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceServiceFees.Updated
         RadGridPS.DataBind()
-        btnEditPS.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+        cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+        btnUpdatePS.Visible = cboPaymentSchedules.Visible
     End Sub
 
 
@@ -385,29 +379,10 @@ Public Class proposalnewwizard
         End If
     End Sub
 
-    Protected Sub btnEditPS_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditPS.Click
-        divBtnPS.Visible = False
-        divFormPS.Visible = True
-    End Sub
-
-    Protected Sub btnClosePS_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnClosePS.Click
-        HidePStoolbar()
-    End Sub
-
-    Private Sub cboPaymentSchedules_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboPaymentSchedules.SelectedIndexChanged
-        If cboPaymentSchedules.SelectedValue > 0 Then
-            ' obsolete 6-3-2020 LocalAPI.Proposal_GeneratePaymentSchedules(lblProposalId.Text, cboPaymentSchedules.SelectedValue)
-            HidePStoolbar()
-
-            ' New code 6-3-2020
-            SqlDataSourcePS.Update()
-            RadGridPS.DataBind()
-        End If
-    End Sub
-
-    Private Sub HidePStoolbar()
-        divFormPS.Visible = False
-        divBtnPS.Visible = True
+    Private Sub btnUpdatePS_Click(sender As Object, e As EventArgs) Handles btnUpdatePS.Click
+        ' New code 6-3-2020
+        SqlDataSourcePS.Update()
+        RadGridPS.DataBind()
     End Sub
 
 #End Region
