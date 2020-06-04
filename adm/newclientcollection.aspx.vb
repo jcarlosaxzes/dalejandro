@@ -104,7 +104,7 @@ Public Class newclientcollection
         End Try
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/clientscolletion.aspx")
+        Response.Redirect("~/adm/clientscolletion.aspx?restoreFilter=true")
     End Sub
 
     Protected Sub RadWizard1_NextButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.NextButtonClick
