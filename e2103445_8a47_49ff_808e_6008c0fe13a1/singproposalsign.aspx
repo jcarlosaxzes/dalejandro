@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/singclientportal.master" CodeBehind="singproposalsign.aspx.vb" Inherits="pasconcept20.singproposalsign" %>
+
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/SingClientPortal.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link rel="stylesheet" href='<%= ResolveUrl("~/Content/sing-theme/quote-fullview.css") %>' />
@@ -93,14 +94,13 @@
     <asp:Panel ID="pnlSideTools" runat="server">
         <div class="fixed-action-btns hidden-print">
             <div class="btn-group quote-popover">
-                <table style="width: 100%" >
+                <table style="width: 100%">
                     <tr>
-                        <td colspan="2" style="text-align:center">
-                            Sign on your mobile device
+                        <td colspan="2" style="text-align: center">Sign on your mobile device
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="text-align:center">
+                        <td colspan="2" style="text-align: center">
                             <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Text="" Height="140px" Width="140px" OutputType="EmbeddedPNG" ToolTip="Sign on your mobile device">
                                 <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />
                             </telerik:RadBarcode>
@@ -212,7 +212,8 @@
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     <h3 class="company-name m-t-1">Service Fee(s)</h3>
-                                    <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails" ShowFooter="true" RenderMode="Lightweight" Width="100%" Skin="" GridLines="None" CssClass="table-responsive">
+                                    <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails" ShowFooter="true" Width="100%" 
+                                        RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
                                             <FooterStyle BorderStyle="None" />
 
@@ -255,203 +256,49 @@
                                     </telerik:RadGrid>
                                 </section>
                             </div>
+                             <%--Payments Schedule                                                           --%>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <asp:Panel ID="Panel1" runat="server" Visible='<%# Len(Eval("PaymentText1")) > 0 %>' >
+                                    <asp:Panel ID="Panel1" runat="server" Visible='<%# Eval("IsPaymentSchedule") %>' width="100%">
                                         <h3 class="company-name m-t-1">Payments Schedule</h3>
+                                        <telerik:RadGrid ID="RadGridPS" runat="server" 
+                                            AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center" Width="100%"
+                                            RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
+                                            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePS" ShowFooter="true" CssClass="table">
+                                                <FooterStyle BorderStyle="None" />
+                                                <Columns>
+                                                    <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
+                                                    </telerik:GridBoundColumn>
+
+                                                    <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center"
+                                                        HeaderText="SCHEDULE" SortExpression="Percentage" UniqueName="Percentage" 
+                                                        ItemStyle-CssClass="GridColumn">
+                                                    </telerik:GridBoundColumn>
+                                                    <telerik:GridBoundColumn DataField="Description"
+                                                        HeaderText="DESCRIPTION" SortExpression="Description" UniqueName="Description"
+                                                        ItemStyle-CssClass="GridColumn">
+                                                    </telerik:GridBoundColumn>
+
+                                                    <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL" 
+                                                        SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right"
+                                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
+                                                        FooterStyle-HorizontalAlign="Right"
+                                                        ItemStyle-CssClass="GridColumn">
+                                                    </telerik:GridBoundColumn>
+                                                    <telerik:GridTemplateColumn DataField="InvoiceNumberEmitted" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center"
+                                                        HeaderText="" SortExpression="InvoiceNumberEmitted" UniqueName="InvoiceNumberEmitted"
+                                                        ItemStyle-CssClass="GridColumn">
+                                                        <ItemTemplate>
+                                                            <a title="View Invoice Page" href='<%# Eval("invoiceId", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true">
+                                                                <%# Eval("InvoiceNumberEmitted") %>
+                                                            </a>
+                                                        </ItemTemplate>
+                                                    </telerik:GridTemplateColumn>
+                                                </Columns>
+                                            </MasterTableView>
+                                        </telerik:RadGrid>
                                     </asp:Panel>
-                                    <asp:Panel ID="PanelPS1" runat="server" Visible='<%# Len(Eval("PaymentText1")) > 0 %>' CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center; width: 100px"><b>SCHEDULE</b>
-                                                    </th>
-                                                    <th style="text-align: center"><b>DESCRIPTION</b>
-                                                    </th>
-                                                    <th style="text-align: center; width: 100px"><b>TOTAL</b>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td style="text-align: center; width: 100px">
-                                                        <asp:Label ID="TextBox8" runat="server" Text='<%# Eval("PaymentSchedule1") %>'>
-                                                        </asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:Label ID="TextBox4" runat="server" Text='<%# Eval("PaymentText1") %>'>
-                                                        </asp:Label>
-                                                    </td>
-                                                    <td style="text-align: right; width: 100px">
-                                                        <asp:Label ID="Label12" runat="server" Text='<%# Eval("PSImport1", "{0:C}")%>'>
-                                                        </asp:Label>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS2" runat="server" Visible='<%# Len(Eval("PaymentText2")) > 0 %>' CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox2" runat="server" Text='<%# Eval("PaymentSchedule2") %>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox1" runat="server" Text='<%# Eval("PaymentText2")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label13" runat="server" Text='<%# Eval("PSImport2", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS3" runat="server" Visible='<%# Len(Eval("PaymentText3")) > 0 %>'  CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox3" runat="server" Text='<%# Eval("PaymentSchedule3") %>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox5" runat="server" Text='<%# Eval("PaymentText3")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label14" runat="server" Text='<%# Eval("PSImport3", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS4" runat="server" Visible='<%# Len(Eval("PaymentText4")) > 0 %>'  CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox4" runat="server" Text='<%# Eval("PaymentSchedule4") %>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox6" runat="server" Text='<%# Eval("PaymentText4")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label15" runat="server" Text='<%# Eval("PSImport4", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS5" runat="server"  Visible='<%# Len(Eval("PaymentText5")) > 0 %>'  CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox7" runat="server" Text='<%# Eval("PaymentSchedule5")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox8" runat="server" Text='<%# Eval("PaymentText5")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label16" runat="server" Text='<%# Eval("PSImport5", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS6" runat="server" Visible='<%# Len(Eval("PaymentText6")) > 0 %>' CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox9" runat="server" Text='<%# Eval("PaymentSchedule6") %>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox10" runat="server" Text='<%# Eval("PaymentText6")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label17" runat="server" Text='<%# Eval("PSImport6", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS7" runat="server"  Visible='<%# Len(Eval("PaymentText7")) > 0 %>'  CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox11" runat="server" Text='<%# Eval("PaymentSchedule7") %>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox12" runat="server" Text='<%# Eval("PaymentText7")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label18" runat="server" Text='<%# Eval("PSImport7", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS8" runat="server"  Visible='<%# Len(Eval("PaymentText8")) > 0 %>'  CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox13" runat="server" Text='<%# Eval("PaymentSchedule8") %>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox181" runat="server" Text='<%# Eval("PaymentText8")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label19" runat="server" Text='<%# Eval("PSImport8", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS9" runat="server"  Visible='<%# Len(Eval("PaymentText9")) > 0 %>'  CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox15" runat="server" Text='<%# Eval("PaymentSchedule9") %>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox16" runat="server" Text='<%# Eval("PaymentText9")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label20" runat="server" Text='<%# Eval("PSImport9", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
-                                    <asp:Panel ID="PanelPS10" runat="server"  Visible='<%# Len(Eval("PaymentText10")) > 0 %>'  CssClass="table-responsive">
-                                        <table class="table no-margin-button">
-                                            <tr>
-                                                <td style="text-align: center; width: 100px">
-                                                    <asp:Label ID="RadTextBox17" runat="server" Text='<%# Eval("PaymentSchedule10") %>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td>
-                                                    <asp:Label ID="RadTextBox18" runat="server" Text='<%# Eval("PaymentText10")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                                <td style="text-align: right; width: 100px">
-                                                    <asp:Label ID="Label21" runat="server" Text='<%# Eval("PSImport10", "{0:C}")%>'>
-                                                    </asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
+
                                 </section>
                             </div>
                             <div class="row">
@@ -598,7 +445,7 @@
                                     </div>
                                 </section>
                             </asp:Panel>
-                             <div class="row-mb-lg">
+                            <div class="row-mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     <div class="row">
                                         <div class="col-md-12 col-print-12">
@@ -641,7 +488,7 @@
 
     <%-- SqlDataSources --%>
     <asp:SqlDataSource ID="SqlDataSourceProp1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="PROPOSAL_Page_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="PROPOSAL_Page_v20_Select" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
@@ -675,6 +522,15 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourcePS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Proposal_PaymentSchedule_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+
     <%-- End of SqlDataSources --%>
     <%-- Hidden Labels --%>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
