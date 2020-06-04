@@ -157,7 +157,7 @@
                         <telerik:LayoutColumn Span="3">
                             <div style="padding-top: 3px">
                                 <%--<img src="../App_Themes/Estandar/Images/header-pasconcept-logo.png" style="border-width: 0" />--%>
-                                <img src="../Images/pas_horizontal_logo.png" style="border-width: 0" height="42" />
+                                <img src="../Images/logo/pas_horizontal_logo.png" style="border-width: 0" height="42" />
                             </div>
                         </telerik:LayoutColumn>
                         <telerik:LayoutColumn Span="9">
