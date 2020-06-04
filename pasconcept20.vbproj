@@ -1943,6 +1943,7 @@
     <Content Include="Images\.DS_Store" />
     <Content Include="Images\clients\Nophoto.jpg" />
     <Content Include="Images\employees\Nophoto.jpg" />
+    <Content Include="Images\logo\horizontal logo on light bg.png" />
     <Content Include="Images\logo\horizontal logo on light bg.svg" />
     <Content Include="Images\logo\vertical logo on light bg.svg" />
     <Content Include="Images\markerimages\blackmarker.png" />
@@ -4352,7 +4353,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
