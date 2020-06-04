@@ -424,7 +424,7 @@ Public Class proposalnewwizard
 
 #End Region
     Protected Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
-        Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&Origen=15")
+        Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&fromwizard=1")
     End Sub
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
