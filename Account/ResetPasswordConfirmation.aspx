@@ -43,7 +43,7 @@
                             <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton">
                                 <div class="well">
 
-                                    <%--<img class="img-thumbnail" src="/images/logopasconcept-index.png"  />--%>
+                                    
                                     <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logopasconcept-index.png" Width="100%" />
 
                                     <form>
