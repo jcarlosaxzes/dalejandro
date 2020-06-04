@@ -833,13 +833,13 @@ Partial Public Class proposalnewwizard
     Protected WithEvents btnClosePS As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''FormViewPS control.
+    '''RadGridPS control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormViewPS As Global.System.Web.UI.WebControls.FormView
+    Protected WithEvents RadGridPS As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
     '''RadWizardStepAttachments control.

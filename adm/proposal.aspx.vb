@@ -54,10 +54,17 @@ Public Class proposal
 
                 RadBinaryImageAceptanceSignature.DataValue = LocalAPI.GetSignProposal(lblId.Text)
 
+                If Not Request.QueryString("HideMasterMenu") Is Nothing Then
+                    Master.HideMasterMenu()
+                    btnBack.Visible = False
+                End If
+
+
+
             End If
-            'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblId.Text
-            'RadWindowManager2.EnableViewState = False
-            RadWindowManager1.EnableViewState = False
+                'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblId.Text
+                'RadWindowManager2.EnableViewState = False
+                RadWindowManager1.EnableViewState = False
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
@@ -158,16 +165,16 @@ Public Class proposal
 
     End Sub
 
-    Protected Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs)
-        If CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue > 0 Then
-            GuardarProposal(False)
-            LocalAPI.Proposal_GeneratePaymentSchedules(lblId.Text, CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue)
-            FormViewProp1.DataBind()
-            CType(sender.NamingContainer.FindControl("RadWizardStepPaymentSchedules"), RadWizardStep).Active = True
-            'CType(sender.NamingContainer.FindControl("RadMultiPage0"), RadMultiPage).SelectedIndex = 1
-            Master.InfoMessage("Proposal Payment Schedules Successfully Updated")
-        End If
-    End Sub
+    'Protected Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs)
+    '    If CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue > 0 Then
+    '        GuardarProposal(False)
+    '        LocalAPI.Proposal_GeneratePaymentSchedules(lblId.Text, CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue)
+    '        FormViewProp1.DataBind()
+    '        CType(sender.NamingContainer.FindControl("RadWizardStepPaymentSchedules"), RadWizardStep).Active = True
+    '        'CType(sender.NamingContainer.FindControl("RadMultiPage0"), RadMultiPage).SelectedIndex = 1
+    '        Master.InfoMessage("Proposal Payment Schedules Successfully Updated")
+    '    End If
+    'End Sub
 
     Protected Sub cboProposalType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboProposalType.SelectedIndexChanged
         btnModifyType.Enabled = (cboProposalType.SelectedValue <> lblOriginalType.Text)
