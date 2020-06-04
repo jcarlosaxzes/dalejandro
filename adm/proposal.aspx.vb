@@ -156,9 +156,7 @@ Public Class proposal
 
     Protected Sub btnPrintProposal_Click(sender As Object, e As EventArgs) Handles btnPrintProposal.Click
         If LocalAPI.GetProposalProperty(lblId.Text, "ClientId") > 0 Then
-            'Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12")
-            CreateRadWindows("Form", "~/adm/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12", 1024, 768, True, "")
-
+            Response.Redirect("~/adm/SendProposal.aspx?ProposalId=" & lblId.Text & "&fromproposal=1")
         Else
             Master.InfoMessage("You Must Specify the Client and Update Proposal")
         End If

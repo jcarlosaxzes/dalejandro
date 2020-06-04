@@ -35,7 +35,7 @@ Public Class job_proposals
         Select Case e.CommandName
             Case "EmailPrint"
                 'sUrl = "~/ADMCLI/ProposalRDLC.aspx?ProposalId=" & e.CommandArgument & "&Origen=52"
-                sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Origen=152"
+                'sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Origen=152"
                 'CreateRadWindows(e.CommandName, sUrl, 980, 890, False, "OnClientCloseProposals")
                 Response.Redirect(sUrl)
             Case "AceptProposal"
