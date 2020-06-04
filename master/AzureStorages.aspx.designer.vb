@@ -149,6 +149,24 @@ Partial Public Class AzureStorages
     Protected WithEvents lblInvoice_payment As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''move2016 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents move2016 As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''lblmove control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblmove As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Button5 control.
     '''</summary>
     '''<remarks>

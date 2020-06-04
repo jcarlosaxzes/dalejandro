@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports Microsoft.Azure.Storage
+Imports Microsoft.Azure.Storage.Blob
 
 Public Class AzureStorages
     Inherits System.Web.UI.Page
@@ -206,5 +208,37 @@ Public Class AzureStorages
         reader.Close()
         Dim EndTime = DateTime.Now()
         lblInvoice_payment.Text = "Start: " & startTime.ToLongTimeString() & "   End: " & EndTime.ToLongTimeString() & "  Totla:" & totla
+    End Sub
+
+    Protected Sub move2016_Click(sender As Object, e As EventArgs) Handles move2016.Click
+
+        Dim containerName As String = "documents"
+        Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(AzureStorageApi.GetConexion())
+        Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
+        Dim container As CloudBlobContainer = blobClient.GetContainerReference(containerName)
+
+        Dim startTime = DateTime.Now
+        Dim count As Integer = 0
+        Dim blobDirectory As CloudBlobDirectory = container.GetDirectoryReference("2016")
+        Dim blobList As IEnumerable(Of IListBlobItem) = blobDirectory.ListBlobs()
+        For Each blobItem As IListBlobItem In blobList
+            If blobItem.GetType() = GetType(CloudBlockBlob) Then
+                Dim blob As CloudBlockBlob = DirectCast(blobItem, CloudBlockBlob)
+                Dim DesName = "old_2016/" & IO.Path.GetFileName(blob.Name)
+                Dim destinationBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(DesName)
+                destinationBlockBlob.StartCopy(blob)
+                blob.DeleteIfExists()
+                count += 1
+                If count > CType(txtCount.Text, Integer) Then
+                    Return
+                End If
+            End If
+
+        Next
+        Dim EndTime = DateTime.Now()
+        lblmove.Text = "Start: " & startTime.ToLongTimeString() & "   End: " & EndTime.ToLongTimeString() & "  Totla:" & count
+        'Dim sourceBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(SourceKeyName)
+        'Dim destinationBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(DestinationKeyName)
+        'destinationBlockBlob.StartCopy(sourceBlockBlob)
     End Sub
 End Class

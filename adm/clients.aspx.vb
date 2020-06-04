@@ -15,6 +15,10 @@ Public Class clients
             lblEmployee.Text = Master.UserEmail
             lblCompanyId.Text = Session("companyId")
 
+            If Not Request.QueryString("restoreFilter") Is Nothing Then
+                RestoreFilter()
+            End If
+
             '!!!! temporal
             'lblEmployee.Text = "carlos@allservicedesign.com"
             'lblCompanyId.Text = 260986
@@ -29,6 +33,15 @@ Public Class clients
 
     End Sub
 
+    Private Sub SaveFilter()
+        Session("Filter_Clients_cboStatus") = cboStatus.SelectedValue
+        Session("Filter_Clients_txtFind") = txtFind.Text
+    End Sub
+
+    Private Sub RestoreFilter()
+        cboStatus.SelectedValue = Session("Filter_Clients_cboStatus")
+        txtFind.Text = Session("Filter_Clients_txtFind")
+    End Sub
     'Protected Sub btnCredentials_Click(ByVal sender As Object, ByVal e As System.EventArgs)
     '    Try
     '        Dim id As String = CType(sender, ImageButton).CommandArgument
@@ -71,6 +84,7 @@ Public Class clients
     End Sub
 
     Protected Sub btnFind_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnFind.Click
+        SaveFilter()
         RadGrid1.DataBind()
     End Sub
 
