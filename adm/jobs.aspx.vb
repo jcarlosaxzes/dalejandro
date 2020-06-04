@@ -50,6 +50,10 @@ Public Class jobs
 
                 ShowCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
 
+                If Not Request.QueryString("restoreFilter") Is Nothing Then
+                    RestoreFilter()
+                End If
+
                 SqlDataSourceJobs.DataBind()
 
                 If Not Request.QueryString("JobIdInput") Is Nothing Then
@@ -149,6 +153,7 @@ Public Class jobs
     End Sub
 
     Protected Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        SaveFilter()
         Refresh()
     End Sub
 
@@ -168,6 +173,34 @@ Public Class jobs
 
     End Sub
 
+    Private Sub SaveFilter()
+        Session("Filter_Jpbs_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
+        Session("Filter_Jpbs_RadDatePickerTo") = RadDatePickerTo.SelectedDate
+        Session("Filter_Jpbs_cboEmployee") = cboEmployee.SelectedValue
+        Session("Filter_Jpbs_cboStatus") = cboStatus.SelectedValue
+        Session("Filter_Jpbs_cboClients") = cboClients.SelectedValue
+        Session("Filter_Jpbs_lblDepartmentIdIN_List") = lblDepartmentIdIN_List.Text
+        Session("Filter_Jpbs_cboJobType") = cboJobType.SelectedValue
+        Session("Filter_Jpbs_lblExcludeClientId_List") = lblExcludeClientId_List.Text
+        Session("Filter_Jpbs_cboBalanceStatus") = cboBalanceStatus.SelectedValue
+        Session("Filter_Jpbs_lblTagIN_List") = lblTagIN_List.Text
+        Session("Filter_Jpbs_txtFind") = txtFind.Text
+    End Sub
+
+    Private Sub RestoreFilter()
+        RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
+        RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
+        cboEmployee.SelectedValue = Session("Filter_Jpbs_cboEmployee")
+        cboStatus.SelectedValue = Session("Filter_Jpbs_cboStatus")
+        cboClients.SelectedValue = Session("Filter_Jpbs_cboClients")
+        lblDepartmentIdIN_List.Text = Session("Filter_Jpbs_lblDepartmentIdIN_List")
+        cboJobType.SelectedValue = Session("Filter_Jpbs_cboJobType")
+        lblExcludeClientId_List.Text = Session("Filter_Jpbs_lblExcludeClientId_List")
+        cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
+        lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
+        txtFind.Text = Session("Filter_Jpbs_txtFind")
+
+    End Sub
     'Protected Sub RadGrid1_BatchEditCommand(sender As Object, e As Telerik.Web.UI.GridBatchEditingEventArgs) Handles RadGrid1.BatchEditCommand
     '    For Each command As GridBatchEditingCommand In e.Commands
     '        If command.Type = GridBatchEditingCommandType.Update Then
