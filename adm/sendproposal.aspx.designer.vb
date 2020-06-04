@@ -32,6 +32,15 @@ Partial Public Class sendproposal
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''RadWizard1 control.
     '''</summary>
     '''<remarks>
@@ -320,13 +329,13 @@ Partial Public Class sendproposal
     Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblOrigen control.
+    '''lblBackSource control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblOrigen As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblBackSource As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.
@@ -334,9 +343,9 @@ Partial Public Class sendproposal
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

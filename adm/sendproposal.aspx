@@ -1,7 +1,7 @@
-﻿<%@ Page Title="Send Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="sendproposal.aspx.vb" Inherits="pasconcept20.sendproposal" %>
+﻿<%@ Page Title="Send Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="sendproposal.aspx.vb" Inherits="pasconcept20.sendproposal" %>
 
 <%@ Import Namespace="pasconcept20" %>
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
@@ -16,7 +16,21 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                       Back to List
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align: center">
+                    <h3 style="margin:0">Send Proposal to Client</h3>
+                </td>
 
+            </tr>
+        </table>
+    </div>
     <div class="pas-container">
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="680px" DisplayProgressBar="false"
             RenderMode="Lightweight" Skin="Material" Localization-Cancel="Back" Localization-Finish="Send">
@@ -294,7 +308,6 @@
         </telerik:RadWizard>
     </div>
 
-
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
         <ContentTemplate>
             <telerik:RadNotification ID="RadNotificationWarning" runat="server" RenderMode="Lightweight" Skin="Material"
@@ -329,5 +342,5 @@
     <asp:Label ID="lblClientId" runat="server" Visible="False"></asp:Label>
 
     <asp:Label ID="lblJobId" runat="server" Visible="False" Text="0"></asp:Label>
-    <asp:Label ID="lblOrigen" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblBackSource" runat="server" Visible="False" Text="0"></asp:Label>
 </asp:Content>

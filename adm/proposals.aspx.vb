@@ -89,9 +89,8 @@ Public Class proposals
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EmailPrint"
-                'sUrl = "~/ADMCLI/ProposalRDLC.aspx?ProposalId=" & e.CommandArgument & "&Origen=2"
-                sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&Origen=2"
-                CreateRadWindows(e.CommandName, sUrl, 980, 740, False)
+                Response.Redirect("~/adm/sendproposal.aspx?ProposalId=" & e.CommandArgument)
+
             Case "GetSharedLink"
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)

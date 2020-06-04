@@ -25,26 +25,21 @@
         .borderCssClass div {
             border: 1px solid red;
         }
-
         .badge {
             background-color: red !important;
             color: white;
         }
-
         #wrap {
             /*width: 600px;*/
             /*height: 390px;*/
             padding: 0;
             overflow: hidden;
         }
-
-
         #frame {
             zoom: 0.75;
             -moz-transform: scale(0.75);
             -moz-transform-origin: 0 0;
         }
-
         .borderless table {
             border-top-style: none;
             border-left-style: none;

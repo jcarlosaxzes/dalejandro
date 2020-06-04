@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Login
-
+    
     '''<summary>
     '''Head1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''RadScriptManager1 control.
     '''</summary>
@@ -39,7 +39,16 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+    
+    '''<summary>
+    '''vsConfirmation control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents vsConfirmation As Global.System.Web.UI.WebControls.ValidationSummary
+    
     '''<summary>
     '''pnlLogin control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlLogin As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''UserName control.
     '''</summary>
@@ -57,16 +66,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UserName As Global.Telerik.Web.UI.RadTextBox
-
-    '''<summary>
-    '''UserNameRequired control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UserNameRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    
     '''<summary>
     '''Password control.
     '''</summary>
@@ -75,16 +75,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Password As Global.Telerik.Web.UI.RadTextBox
-
-    '''<summary>
-    '''PasswordRequired control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PasswordRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
+    
     '''<summary>
     '''RememberMe control.
     '''</summary>
@@ -93,7 +84,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RememberMe As Global.Telerik.Web.UI.RadCheckBox
-
+    
     '''<summary>
     '''LoginButton control.
     '''</summary>
@@ -102,7 +93,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LoginButton As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''FailureText control.
     '''</summary>
@@ -111,7 +102,7 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FailureText As Global.System.Web.UI.WebControls.Literal
-
+    
     '''<summary>
     '''lblError control.
     '''</summary>
@@ -120,4 +111,22 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''UserNameRequired control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UserNameRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''PasswordRequired control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PasswordRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
 End Class
