@@ -17,11 +17,16 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <table class="table-condensed" width="100%">
+    <table class="table-condensed" style="width:100%">
+        <tr>
+            <td>
+                <h2>Productive Time Categories</h2>
+            </td>
+        </tr>
         <tr>
             <td class="ToolButtom noprint">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Time Category">
-                    <span class="glyphicon glyphicon-plus"></span>&nbsp;Category
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp;Productive Time Category
                 </asp:LinkButton>
 
             </td>

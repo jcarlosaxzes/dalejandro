@@ -18,22 +18,23 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
-        <Rows>
-            <telerik:LayoutRow>
-                <Content>
-                    <div style="margin-top:5px;margin-bottom:5px" class="noprint">
-                        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Non Job Time Code">
-                                   <span class="glyphicon glyphicon-plus"></span> Time Code
-                        </asp:LinkButton>
+    <table class="table-condensed" style="width: 100%">
+        <tr>
+            <td>
+                <h2>Non-Productive Time Categories</h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="ToolButtom noprint">
+                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Non Job Time Code">
+                                   <span class="glyphicon glyphicon-plus"></span> Non-Productive Time Category
+                </asp:LinkButton>
 
-                    </div>
-                </Content>
-            </telerik:LayoutRow>
-
-            <telerik:LayoutRow>
-                <Content>
-                    <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1"
                     GridLines="None" AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
                     AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0" AllowPaging="True" PageSize="25">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
@@ -42,10 +43,10 @@
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
                                 HeaderText="" HeaderStyle-Width="50px">
                             </telerik:GridEditCommandColumn>
-                            <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id"  HeaderStyle-Width="80px"
+                            <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" HeaderStyle-Width="80px"
                                 HeaderStyle-HorizontalAlign="Center" Display="false" ReadOnly="true">
                             </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="Name" HeaderText="Code Name" SortExpression="Name" HeaderStyle-HorizontalAlign="Center"  ItemStyle-HorizontalAlign="Left"
+                            <telerik:GridTemplateColumn DataField="Name" HeaderText="Code Name" SortExpression="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left"
                                 UniqueName="Name">
                                 <EditItemTemplate>
                                     <div style="margin: 5px">
@@ -71,10 +72,10 @@
                         </EditFormSettings>
                     </MasterTableView>
                 </telerik:RadGrid>
-                </Content>
-            </telerik:LayoutRow>
-        </Rows>
-    </telerik:RadPageLayout>
+            </td>
+        </tr>
+    </table>
+
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [NonRegularHours_types] WHERE companyId=@companyId AND [Id] = @Id"
         InsertCommand="NonRegularHours_types_INSERT" InsertCommandType="StoredProcedure"

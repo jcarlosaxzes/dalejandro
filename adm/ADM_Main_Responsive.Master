@@ -156,8 +156,7 @@
                     <Columns>
                         <telerik:LayoutColumn Span="3">
                             <div style="padding-top: 3px">
-                                <%--<img src="../App_Themes/Estandar/Images/header-pasconcept-logo.png" style="border-width: 0" />--%>
-                                <img src="../Images/pas_horizontal_logo.png" style="border-width: 0" height="42" />
+                                <img src="../Images/logo/pas_horizontal_logo.png" style="border-width: 0" height="42" />
                             </div>
                         </telerik:LayoutColumn>
                         <telerik:LayoutColumn Span="9">
@@ -293,11 +292,11 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a runat="server" href="~/adm/TimeCategory" title="Time Categories" visible='<%# EmployeePermission("Deny_TimeCategory") %>'>Time Categories
+                                                            <a runat="server" href="~/adm/TimeCategory" title="Productive Time Categories" visible='<%# EmployeePermission("Deny_TimeCategory") %>'>Productive Time Categories
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a runat="server" href="~/adm/NoJobsTimeTypes" title="Miscellaneous Time Codes" visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>Miscellaneous Time Codes
+                                                            <a runat="server" href="~/adm/NoJobsTimeTypes" title="Non-Productive Time Categories" visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>Non-Productive Time Categories
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -395,7 +394,7 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/JobTickets" Text="Tickets"
                                                 Visible='<%# IsTicketsVisible() %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/activejobsdashboad" Text="Job Times">
+                                            <telerik:NavigationNode NavigateUrl="~/adm/activejobsdashboad" Text="Time Activity">
                                             </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
@@ -455,7 +454,7 @@
                                     </telerik:NavigationNode>
 
                                     <%--Dashboard menu--%>
-                                    <telerik:NavigationNode Text="Dashboard" Visible='<%# EmployeePermission("Deny_Analytics") %>'>
+                                    <telerik:NavigationNode Text="Dashboards" Visible='<%# EmployeePermission("Deny_Analytics") %>'>
                                         <Nodes>
                                             <telerik:NavigationNode Text="Company Overview" NavigateUrl="~/adm/Default"
                                                 Visible='<%# EmployeePermission("Deny_Analytics") %>'>
@@ -665,7 +664,7 @@
                             </asp:HyperLink>
                             <asp:Label ID="Label1" runat="server" class="enlacepie" Text=" |"></asp:Label>--%>
                             <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Privacy | </a>
-                            <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Terms & Condition | </a>
+                            <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Terms & Conditions | </a>
                             <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Security | </a>
                             <a href="https://pasconcept.com/#contact" target="_blank" class="enlacepie">Support</a>
                         </div>
