@@ -44,7 +44,6 @@ Public Class activejobsdashboad
         End If
 
         RadListView1.DataBind()
-        RadListViewFooter.DataBind()
         RadGridFooter.DataBind()
         Dim dValue As Double = LocalAPI.GetWeeklyHoursByEmp(lblEmployeeId.Text, lblCompanyId.Text)
         lblTotalWeekHours.Text = FormatNumber(dValue, 1)

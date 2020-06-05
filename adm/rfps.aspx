@@ -226,8 +226,7 @@
                 </telerik:TreeListBoundColumn>
 
                 <telerik:TreeListTemplateColumn DataField="jobId" HeaderText="Job" SortExpression="jobId"
-                    UniqueName="jobId" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center"
-                    HeaderStyle-Width="80px">
+                    UniqueName="jobId" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                     <ItemTemplate>
                         <asp:LinkButton ID="btnViewJob" runat="server" CommandName="ViewJobPage" CommandArgument='<%# Eval("jobId") %>'
                             ToolTip="View Job page">
@@ -243,7 +242,7 @@
                 </telerik:TreeListTemplateColumn>
 
                 <telerik:TreeListTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
-                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
+                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                     <ItemTemplate>
                         <table style="width: 100%; border: none !important;">
                             <tr>
@@ -291,7 +290,7 @@
                 <telerik:TreeListButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this RequestForProposals?" ConfirmTitle="Delete"
                     ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
                     HeaderText=""
-                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                 </telerik:TreeListButtonColumn>
             </Columns>
         </telerik:RadTreeList>
