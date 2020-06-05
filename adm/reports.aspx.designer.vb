@@ -32,6 +32,15 @@ Partial Public Class reports
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
+    '''cboGroups control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboGroups As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''cboTimeFrame control.
     '''</summary>
     '''<remarks>
@@ -68,15 +77,6 @@ Partial Public Class reports
     Protected WithEvents cboDepartment As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''cboGroups control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboGroups As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
     '''cboNames control.
     '''</summary>
     '''<remarks>
@@ -84,6 +84,15 @@ Partial Public Class reports
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboNames As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''txtCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCode As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
     '''btnRefresh control.

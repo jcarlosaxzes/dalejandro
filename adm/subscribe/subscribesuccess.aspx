@@ -45,7 +45,7 @@
                                 <div class="well">
 
                                     <%--<img class="img-thumbnail" src="/images/logopasconcept-index.png"  />--%>
-                                    <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logopasconcept-index.png" Width="100%" />
+                                    <asp:Image runat="server" class="img-thumbnail" ImageUrl="~/Images/logo/pas_horizontal_logo_big.png" Width="100%" />
 
                                     <form>
                                         <div class="form-group" style="margin-top: 1em">
@@ -62,7 +62,7 @@
                 <div class="col-md-3 col-lg-offset-5 ">
                     <a href="http://blog.pasconcept.com" target="_blank">Help</a>
                     &nbsp;|&nbsp;
-                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank">Terms & Condition</a>
+                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank">Terms & Conditions</a>
                 </div>
             </div>
             

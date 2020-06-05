@@ -15,7 +15,9 @@
                        Back to List
                     </asp:LinkButton>
                 </td>
-                <td></td>
+                <td style="text-align:center">
+                    <h2 style="margin:0"><asp:Label ID="lblJobName" runat="server" Visible="false"></asp:Label></h2>
+                </td>
             </tr>
         </table>
         <div id="collapseTotals">
@@ -47,20 +49,20 @@
                                 </td>
                                 <td></td>
                                 <td style='<%# iif(Eval("OverDue")=1,"width: 19%; text-align: center; background-color: #43a047","width: 19%; text-align: center; background-color: #e53935") %>' >
-                                    <span class="DashboardFont2">Hour Used</span>
+                                    <span class="DashboardFont2">Hour Used</span><br />
                                     <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("PercentUsed", "{0:P0}") %>'></asp:Label><br />
                                     <span class="DashboardFont3">This Job</span>
                                 </td>
                                 <td></td>
                                 <td style="width: 19%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Hours Submitted</span>
+                                    <span class="DashboardFont2">Hours Submitted</span><br />
                                     <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("TotalWeekHours", "{0:N0}") %>'></asp:Label><br />
                                     <span class="DashboardFont3">This Week</span>
                                 </td>
                                 <td></td>
                                 <td style="width: 19%; text-align: center; background-color: #e53935">
-                                    <span class="DashboardFont2">Hours Remaining</span>
-                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("TotalWeekHoursRemaining", "{0:N0}") %>'></asp:Label>
+                                    <span class="DashboardFont2">Hours Remaining</span><br />
+                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("TotalWeekHoursRemaining", "{0:N0}") %>'></asp:Label><br />
                                     <span class="DashboardFont3">This Week</span>
                                 </td>
                             </tr>
@@ -74,6 +76,11 @@
 
     <div class="pas-container">
         <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td colspan="2" style="text-align:center">
+                    <h2>Productive Time</h2>
+                </td>
+            </tr>
             <tr>
                 <td style="width:250px; text-align: right">Time Worked (in hours 0.25-24):
                 </td>
@@ -101,7 +108,7 @@
                     <td style="text-align: right; width: 250px">Proposal Task:
                     </td>
                     <td style="text-align: left">
-                        <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="400px" Sort="Descending"
+                        <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="90%" Sort="Descending"
                             DataTextField="Description" DataValueField="Id" CausesValidation="false">
                         </telerik:RadComboBox>
                     </td>
@@ -114,7 +121,7 @@
                     <td style="text-align: right; width: 250px">Ticket:
                     </td>
                     <td style="text-align: left">
-                        <telerik:RadComboBox ID="cboActiveTickets" runat="server" DataSourceID="SqlDataSourceActiveTickets" Width="400px" AutoPostBack="true"
+                        <telerik:RadComboBox ID="cboActiveTickets" runat="server" DataSourceID="SqlDataSourceActiveTickets" Width="90%" AutoPostBack="true"
                             DataTextField="Title" DataValueField="Id" CausesValidation="false" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Select Ticket...)" Value="0" />
@@ -131,7 +138,7 @@
                 </td>
                 <td style="text-align: left">
                     <telerik:RadComboBox ID="cboCategory" runat="server" DataSourceID="SqlDataSourceCategory" ValidationGroup="time_insert"
-                        DataTextField="Name" DataValueField="Id" Width="400px" AppendDataBoundItems="true" CausesValidation="false">
+                        DataTextField="Name" DataValueField="Id" Width="90%" AppendDataBoundItems="true" CausesValidation="false">
                         <Items>
                             <telerik:RadComboBoxItem Text="(Select Time Sheet Category...)" Value="0" />
                         </Items>
@@ -164,7 +171,7 @@
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;
                 <asp:LinkButton ID="btnInsertTimeAndInvoice" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="time_insert" Width="200px">
-                        <span class="glyphicon glyphicon-usd"></span> Billable Time
+                        <span class="glyphicon glyphicon-usd"></span> Billable (/hr)
                 </asp:LinkButton>
                 </td>
             </tr>

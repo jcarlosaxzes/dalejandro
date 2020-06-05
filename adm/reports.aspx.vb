@@ -93,16 +93,16 @@ Public Class reports
                     boundColumn.DataFormatString = "{0:N2}"
                     boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Sum
                     boundColumn.FooterStyle.HorizontalAlign = HorizontalAlign.Right
-                    boundColumn.HeaderStyle.Width = "100"
+                    boundColumn.HeaderStyle.Width = "120"
                 Case "System.Int32"
                     boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Right
                     boundColumn.DataFormatString = "{0:N0}"
-                    boundColumn.HeaderStyle.Width = "90"
+                    boundColumn.HeaderStyle.Width = "100"
                     'boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Sum
                 Case "System.DateTime"
                     boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Right
                     boundColumn.DataFormatString = "{0:d}"
-                    boundColumn.HeaderStyle.Width = "90"
+                    boundColumn.HeaderStyle.Width = "100"
 
                 Case Else
                     'boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Left
@@ -131,17 +131,19 @@ Public Class reports
                     'Case "JOBNAME", "PROJECTNAME", "EMPLOYEE", "NAME", "CONCEPT", "CLIENTNAME", "PM"
                     'boundColumn.AllowFiltering = True
                     'boundColumn.HeaderStyle.Width = "180"
+                Case "JOB", "NAME", "COMPANY", "JOBNAME", "PROJECTNAME", "EMPLOYEE", "CONCEPT", "CLIENTNAME"
+                    boundColumn.HeaderStyle.Width = "280"
             End Select
 
             ' Ajustar el ancho del filtro
-            If boundColumn.AllowFiltering Then
-                Select Case UCase(boundColumn.DataField)
-                    Case "STATUS"
-                        boundColumn.FilterControlWidth = "100"
-                    Case "JOBNAME", "PROJECTNAME", "EMPLOYEE", "NAME", "CONCEPT", "CLIENTNAME"
-                        boundColumn.FilterControlWidth = "200"
-                End Select
-            End If
+            'If boundColumn.AllowFiltering Then
+            '    Select Case UCase(boundColumn.DataField)
+            '        Case "STATUS"
+            '            boundColumn.FilterControlWidth = "100"
+            '        Case "JOBNAME", "PROJECTNAME", "EMPLOYEE", "NAME", "CONCEPT", "CLIENTNAME"
+            '            boundColumn.FilterControlWidth = "200"
+            '    End Select
+            'End If
 
 
 

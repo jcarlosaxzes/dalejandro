@@ -1943,8 +1943,7 @@
     <Content Include="Images\.DS_Store" />
     <Content Include="Images\clients\Nophoto.jpg" />
     <Content Include="Images\employees\Nophoto.jpg" />
-    <Content Include="Images\logo\horizontal logo on light bg.png" />
-    <Content Include="Images\logo\horizontal logo on light bg.svg" />
+    <Content Include="Images\logo\pas_horizontal_logo.png" />
     <Content Include="Images\logo\vertical logo on light bg.svg" />
     <Content Include="Images\markerimages\blackmarker.png" />
     <Content Include="Images\markerimages\bluemarker.png" />
@@ -2098,6 +2097,9 @@
     <Content Include="csv\Employees.xls" />
     <Content Include="csv\Subconsultants.xls" />
     <Content Include="csv\SubconsultantTask.xls" />
+    <None Include="My Project\PublishProfiles\pasconcept-staging - FTP.pubxml" />
+    <None Include="My Project\PublishProfiles\pasconcept-staging - ReadOnly - FTP.pubxml" />
+    <None Include="My Project\PublishProfiles\pasconcept-staging - Web Deploy.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
@@ -4353,7 +4355,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -103,7 +103,7 @@
                 <div class="row">
                     <div class="col-md-4 col-lg-offset-4 ">
                     
-                        <a href="http://blog.pasconcept.com" target="_blank">Help</a> &nbsp;|&nbsp; <a href="../Legal/ENG/Terms.html" target="_blank">Terms & Condition</a>
+                        <a href="http://blog.pasconcept.com" target="_blank">Help</a> &nbsp;|&nbsp; <a href="../Legal/ENG/Terms.html" target="_blank">Terms & Conditions</a>
                     </div>
                     <div>
                         <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>

@@ -26,12 +26,12 @@
                 var masterTable2 = $find("<%= RadListViewFooter.ClientID %>").get_masterTableView();
                 masterTable2.rebind();
             }--%>
-            function OnClientClose(sender, args) {
+            <%--function OnClientClose(sender, args) {
                 var masterTable = $find("<%= RadGridFooter.ClientID %>").get_masterTableView();
                 masterTable.rebind();
 
 
-            }
+            }--%>
 
         </script>
     </telerik:RadCodeBlock>
@@ -68,7 +68,7 @@
                 </td>
                 <td>
                     <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Miscellaneous Time">
-                    <span class="glyphicon glyphicon-plus"></span> Miscellaneous Time
+                    <span class="glyphicon glyphicon-plus"></span> Non-Productive Time
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: right">You have submitted <strong>
@@ -235,8 +235,9 @@
 
     <%--Body--%>
     <div class="Formulario">
-        <span>To <span class="label label-primary">Add Time</span>, Click on the specific job </span>
-
+        <div style="text-align:center">
+            <span>To <span class="label label-primary">Add Productive Time</span>, Click on the specific job </span>
+        </div>
         <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobs" DataKeyNames="Id" ItemPlaceholderID="Container1"
             BorderStyle="Solid">
             <LayoutTemplate>
@@ -313,27 +314,19 @@
     </div>
 
     <%--Footer--%>
-    <telerik:RadListView ID="RadListViewFooter" runat="server" DataSourceID="SqlDataSourceDateHours" DataKeyNames="Date" ItemPlaceholderID="Container1"
-        BorderStyle="Solid">
-        <LayoutTemplate>
-            <div style="text-align: left">
-                <b>Status Legend: </b>
+    <div style="text-align: left">
+        <b>Status Legend: </b>
 
-                <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(0) %>">Not in Progress</span>
+        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(0) %>">Not in Progress</span>
 
-                <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(2) %>">In Progress</span>
+        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(2) %>">In Progress</span>
 
-                <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(3) %>">On Hold</span>
+        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(3) %>">On Hold</span>
 
-                <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(4) %>">Submitted</span>
+        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(4) %>">Submitted</span>
 
-                <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(5) %>">Under Revision</span>
-            </div>
-            <fieldset style="width: 100%">
-                <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
-            </fieldset>
-        </LayoutTemplate>
-    </telerik:RadListView>
+        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(5) %>">Under Revision</span>
+    </div>
     <div class="Formulario">
         <telerik:RadGrid ID="RadGridFooter" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDateWORKHOURS" Width="100%" ShowHeader="false">
             <MasterTableView DataSourceID="SqlDataSourceDateWORKHOURS" ShowFooter="True" CommandItemDisplay="None">
@@ -467,7 +460,7 @@
 
 
         <h2 style="margin: 0; text-align: center; width: 100%">
-            <span class="label label-default center-block">New Miscellaneous Time
+            <span class="label label-default center-block">Non-Productive Time
             </span>
         </h2>
 
@@ -760,12 +753,6 @@
 
     <asp:SqlDataSource ID="SqlDataSourceDateWORKHOURS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="WORKHOURS_SELECT" SelectCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceDateHours" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="WORKHOURS_EMP_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
         </SelectParameters>
