@@ -63,7 +63,7 @@ Module SendGrid
                 Dim sDisplay As String = sFromDisplay
                 If sDisplay.Length = 0 Then sDisplay = IIf(companyId > 0, LocalAPI.GetCompanyProperty(companyId, "Name"), "PASconcept")
 
-
+                If sFrom.Length = 0 Then sFrom = "info@pasconcept.com"
                 Dim mails As AppEmailBody = New AppEmailBody()
                 mails.From = New AppEmail() With {.Name = sDisplay, .Email = sFrom}
                 Dim sCCs As ArrayList = New ArrayList()
