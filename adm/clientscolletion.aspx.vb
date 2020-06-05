@@ -11,7 +11,9 @@ Public Class clientscolletion
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Clients Collection"
             Master.PageTitle = "Clients Collection"
             lblCompanyId.Text = Session("companyId")
-
+            If Not Request.QueryString("restoreFilter") Is Nothing Then
+                RestoreFilter()
+            End If
         End If
     End Sub
 
@@ -28,5 +30,20 @@ Public Class clientscolletion
                 RadGrid1.DataBind()
                 Master.InfoMessage("The record has changed its status!")
         End Select
+    End Sub
+
+    Protected Sub btnFind_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnFind.Click
+        SaveFilter()
+        RadGrid1.DataBind()
+    End Sub
+
+    Private Sub SaveFilter()
+        Session("Filter_Collect_cboStatus") = cboStatus.SelectedValue
+        Session("Filter_Collect_txtFind") = txtFind.Text
+    End Sub
+
+    Private Sub RestoreFilter()
+        cboStatus.SelectedValue = Session("Filter_Collect_cboStatus")
+        txtFind.Text = Session("Filter_Collect_txtFind")
     End Sub
 End Class

@@ -1944,6 +1944,7 @@
     <Content Include="Images\clients\Nophoto.jpg" />
     <Content Include="Images\employees\Nophoto.jpg" />
     <Content Include="Images\logo\pas_horizontal_logo.png" />
+    <Content Include="Images\logo\pas_horizontal_logo_big.png" />
     <Content Include="Images\logo\vertical logo on light bg.svg" />
     <Content Include="Images\markerimages\blackmarker.png" />
     <Content Include="Images\markerimages\bluemarker.png" />

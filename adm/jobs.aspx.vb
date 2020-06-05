@@ -199,7 +199,6 @@ Public Class jobs
         cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
         lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
         txtFind.Text = Session("Filter_Jpbs_txtFind")
-
     End Sub
     'Protected Sub RadGrid1_BatchEditCommand(sender As Object, e As Telerik.Web.UI.GridBatchEditingEventArgs) Handles RadGrid1.BatchEditCommand
     '    For Each command As GridBatchEditingCommand In e.Commands

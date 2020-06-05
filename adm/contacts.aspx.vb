@@ -24,6 +24,9 @@ Public Class contacts
             btnNewSubconsultant.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewSubconsultant")
             btnNewVendor.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewVendor")
 
+            If Not Request.QueryString("restoreFilter") Is Nothing Then
+                RestoreFilter()
+            End If
 
         End If
         RadWindowManager1.EnableViewState = False
@@ -31,6 +34,7 @@ Public Class contacts
     End Sub
 
     Protected Sub btnFind_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnFind.Click
+        SaveFilter()
         RadGrid1.DataBind()
     End Sub
 
@@ -92,6 +96,24 @@ Public Class contacts
 
     Protected Sub btnNewContact_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewContact.Click
         CreateRadWindows("NewContact", "~/ADM/NewContact.aspx", 850, 700)
+    End Sub
+
+    Private Sub SaveFilter()
+        Session("Filter_Contacts_IncludeContacts") = cboContactType.CheckedItems(0).Checked
+        Session("Filter_Contacts_IncludeClients") = cboContactType.CheckedItems(1).Checked
+        Session("Filter_Contacts_IncludeEmployees") = cboContactType.CheckedItems(2).Checked
+        Session("Filter_Contacts_IncludeSubConsultants") = cboContactType.CheckedItems(3).Checked
+        Session("Filter_Contacts_IncludeVendors") = cboContactType.CheckedItems(4).Checked
+        Session("Filter_Contacts_txtFind") = txtFind.Text
+    End Sub
+
+    Private Sub RestoreFilter()
+        cboContactType.CheckedItems(0).Checked = Session("Filter_Contacts_IncludeContacts")
+        cboContactType.CheckedItems(1).Checked = Session("Filter_Contacts_IncludeClients")
+        cboContactType.CheckedItems(2).Checked = Session("Filter_Contacts_IncludeEmployees")
+        cboContactType.CheckedItems(3).Checked = Session("Filter_Contacts_IncludeSubConsultants")
+        cboContactType.CheckedItems(4).Checked = Session("Filter_Contacts_IncludeVendors")
+        txtFind.Text = Session("Filter_Contacts_txtFind")
     End Sub
 
     'Protected Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
