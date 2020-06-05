@@ -26,12 +26,12 @@
                 var masterTable2 = $find("<%= RadListViewFooter.ClientID %>").get_masterTableView();
                 masterTable2.rebind();
             }--%>
-            function OnClientClose(sender, args) {
+            <%--function OnClientClose(sender, args) {
                 var masterTable = $find("<%= RadGridFooter.ClientID %>").get_masterTableView();
                 masterTable.rebind();
 
 
-            }
+            }--%>
 
         </script>
     </telerik:RadCodeBlock>
