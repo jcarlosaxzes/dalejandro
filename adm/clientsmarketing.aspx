@@ -193,7 +193,7 @@
 
     </telerik:RadWizard>
 
-    </div>
+
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Clients_MarketingCampaign_details_SELECT" SelectCommandType="StoredProcedure"

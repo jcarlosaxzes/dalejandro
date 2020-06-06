@@ -82,7 +82,7 @@
                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Project & RFPs
                     </asp:LinkButton>
                 </td>
-                <td>
+                <td style="width: 100px">
                     <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Table view Page">
                        <span class="glyphicon glyphicon-align-justify"> Table</span>
                     </asp:LinkButton>
@@ -96,6 +96,11 @@
                     <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
                         <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                     </telerik:RadButton>
+                </td>
+                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Request for Proposals (tree view)
+                    </h3>
                 </td>
             </tr>
         </table>

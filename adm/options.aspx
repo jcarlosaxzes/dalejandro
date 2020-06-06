@@ -17,8 +17,8 @@
         }
     </style>
 
-    <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayCancelButton="false"
-        RenderMode="Lightweight" Skin="Material" DisplayNavigationButtons="false">
+    <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayCancelButton="false" 
+        RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false">
         <WizardSteps>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Employee Profile" StepType="Step">
                 <fieldset style="width: 800px; height: 280px;">

@@ -19,17 +19,17 @@
     <style type="text/css">
         .RadMap .k-marker.k-i-marker-active:before {
             color: green;
-            font-size:25px;
+            font-size:14px;
         }
 
         .RadMap .k-marker.k-i-marker-inactive:before {
             color: red;
-            font-size:25px;
+            font-size:14px;
         }
 
         .RadMap .k-marker.k-i-marker-potencial:before {
             color: blue;
-            font-size:25px;
+            font-size:14px;
         }
     </style>
 
@@ -57,7 +57,13 @@
                 <td style="width: 120px">
                     <telerik:RadButton runat="server" OnClientClicked="exportContent" Text="Export PDF" AutoPostBack="false" UseSubmitBehavior="false"></telerik:RadButton>
                 </td>
-                <td style="text-align: right">
+                                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Clients Map
+                    </h3>
+                </td>
+
+                <td style="text-align: right; width:400px">
                     <b>Status:</b>
                     &nbsp;&nbsp;&nbsp;
                                     <asp:Image ID="Image4" runat="server" ImageUrl="~/Images/MarkerImages/redmarker.png" />&nbsp;Inactive
@@ -117,9 +123,8 @@
                             <PdfSettings FileName="ProjectMap.pdf" />
                         </telerik:RadClientExportManager>
     </div>
-    <div>
-        <telerik:RadMap runat="server" ID="RadMap1" Zoom="12" DataSourceID="SqlDataSource1"
-            Height="700px" Width="100%" BorderStyle="Solid" BorderColor="Gray" BorderWidth="1">
+    <div class="pas-container">
+        <telerik:RadMap runat="server" ID="RadMap1" Zoom="10" DataSourceID="SqlDataSource1" Skin="Default" Height="800px" Width="100%">
             <ControlsSettings Attribution="false">
                 <NavigatorSettings Position="BottomLeft" />
             </ControlsSettings>

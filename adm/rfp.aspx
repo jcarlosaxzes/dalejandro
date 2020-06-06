@@ -16,7 +16,7 @@
                     <tr>
                         <td>
                             <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" Height="720px" BorderStyle="Solid" BorderColor="LightGray"
-                                DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Material">
+                                DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
                                 <WizardSteps>
                                     <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Project Information" StepType="Step">
                                         <table style="width: 100%" class="table-condensed">

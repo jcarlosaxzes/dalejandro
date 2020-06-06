@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Time Sheet" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="timesheet.aspx.vb" Inherits="pasconcept20.timesheet" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
@@ -52,9 +53,9 @@
                         ReadOnly="True">
                     </telerik:RadDateInput>
                 </td>
-                <td style="width: 100px">Employee:
+                <td style="width: 80px; text-align: right">Employee:
                 </td>
-                <td style="width: 400px">
+                <td style="width:250px">
                     <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" Height="400px"
                         Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
                         AutoPostBack="True">
@@ -71,7 +72,11 @@
                                     <span class="glyphicon glyphicon-forward"></span> Next
                     </asp:LinkButton>
                 </td>
-                <td></td>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Time Sheet
+                    </h3>
+                </td>
+
             </tr>
         </table>
     </div>

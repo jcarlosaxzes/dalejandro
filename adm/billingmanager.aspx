@@ -3,56 +3,7 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="RadGridInvoices">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridInvoices" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadToolBillAction" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnEmail">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridInvoices" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadToolBillAction" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnBadDebt">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridInvoices" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadToolBillAction" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
 
-            <telerik:AjaxSetting AjaxControlID="btnStatement">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridInvoices" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadToolBillAction" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-
-            <telerik:AjaxSetting AjaxControlID="btnReceivePayment">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridInvoices" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadToolTipInvoicesPayment" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-
-            <telerik:AjaxSetting AjaxControlID="RadToolBillAction">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridInvoices" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnOk">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridInvoices" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadGridStatements" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
     <style>
         span.glyphicon-blue {
             color: blue;
@@ -78,27 +29,28 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <table style="width: 100%">
-        <tr>
-            <td class="PanelFilter">
-                <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh" CssClass="noprint">
-                    <div>
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td class="PanelFilter">
+                    <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh" CssClass="noprint">
+                        <div>
 
-                        <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
-                            DataTextField="Name" DataValueField="Id" Filter="Contains" Height="250px" MarkFirstMatch="True" Width="200px" DropDownAutoWidth="Enabled">
-                            <Items>
-                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
-                            </Items>
-                        </telerik:RadComboBox>
+                            <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
+                                DataTextField="Name" DataValueField="Id" Filter="Contains" Height="250px" MarkFirstMatch="True" Width="200px" DropDownAutoWidth="Enabled">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
+                                </Items>
+                            </telerik:RadComboBox>
 
-                        &nbsp;
+                            &nbsp;
 
                                 <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" ToolTip="Departments"
                                     Width="250px" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains" EmptyMessage="(All Departments...)">
                                     <Localization AllItemsCheckedString="All Items Checked" CheckAllString="Check All..." ItemsCheckedString="departments checked"></Localization>
                                 </telerik:RadComboBox>
 
-                        &nbsp;
+                            &nbsp;
 
                                 <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceJobStatus" DataTextField="Name" DataValueField="Id"
                                     Width="150px" AppendDataBoundItems="true" ToolTip="Job Status">
@@ -107,7 +59,7 @@
                                     </Items>
                                 </telerik:RadComboBox>
 
-                        &nbsp;
+                            &nbsp;
                                 <telerik:RadComboBox ID="cboPasDueStatus" runat="server" ToolTip="Past Due Status"
                                     Width="250px" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
                                     <Localization AllItemsCheckedString="All Past Due Checked" CheckAllString="Check All..." ItemsCheckedString="PastDue status checked"></Localization>
@@ -121,7 +73,7 @@
                                     </Items>
                                 </telerik:RadComboBox>
 
-                        &nbsp;
+                            &nbsp;
 
                                 <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Search for Invoice Number, Job Name, Client Name, ..."
                                     Width="250px" x-webkit-speech="x-webkit-speech">
@@ -129,24 +81,36 @@
 
 
 
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-search"></span> Search
-                        </asp:LinkButton>
+                            </asp:LinkButton>
 
-                    </div>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
+                        </div>
+                    </asp:Panel>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Billing Assistant
+                    </h3>
+                </td>
+            </tr>
+        </table>
 
-    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="800px" RenderMode="Lightweight" Skin="Material"
+    </div>
+
+    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="800px" RenderMode="Lightweight" Skin="Silk"
         DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false">
         <WizardSteps>
             <telerik:RadWizardStep runat="server" Title="Reminders">
                 <table>
                     <tr>
                         <td>
-                            <asp:CheckBox ID="chkEmployeeRemaindersOnly" runat="server" Checked="true" Text="Show only my reminders" />
+                            <asp:CheckBox ID="chkEmployeeRemaindersOnly" runat="server" Checked="true" Text="&nbsp;Show only my reminders" />
                         </td>
                     </tr>
                 </table>

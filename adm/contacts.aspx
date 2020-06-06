@@ -115,7 +115,12 @@
                     </asp:LinkButton>
 
                 </td>
-                <td></td>
+                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Contacts
+                    </h3>
+                </td>
+
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
                                         <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;Import

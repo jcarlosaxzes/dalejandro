@@ -113,15 +113,15 @@
             </td>
         </tr>
         <tr>
-            <td class="ToolButtom noprint" style="width: 100%">
-                <table class="table-condensed">
+            <td>
+                <table class="table-condensed" style="width: 100%">
                     <tr>
-                        <td>
+                        <td style="width: 90px">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                             <span class="glyphicon glyphicon-plus"></span>&nbsp;Transmittal
                             </asp:LinkButton>
                         </td>
-                        <td>
+                        <td style="width: 90px">
                             <script type="text/javascript">
                                 function PrintPage(sender, args) {
                                     window.print();
@@ -131,21 +131,16 @@
                                 <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                             </telerik:RadButton>
                         </td>
-                        <td style="width: 150px"></td>
-                        <td>
-                            <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Enabled="false" DatePopupButton-Visible="false" ToolTip="Date From of the filter">
-                            </telerik:RadDatePicker>
-                        </td>
-                        <td>
-                            <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Enabled="false" DatePopupButton-Visible="false" ToolTip="Date To of the filter">
-                            </telerik:RadDatePicker>
+                        <td style="text-align: center">
+                            <h3 style="margin: 0">Transmittals
+                            </h3>
                         </td>
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
-            <td style="width: 100%">
+            <td>
                 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
                     <script type="text/javascript">
                         function OnClientClose(sender, args) {
@@ -259,14 +254,14 @@
                             <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="column" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px"
                                 ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <table style="width:100%">
+                                    <table style="width: 100%">
                                         <tr>
-                                            <td  style="width:50%;text-align:center">
+                                            <td style="width: 50%; text-align: center">
                                                 <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
                                                     <span class="glyphicon glyphicon-share"></span></a>
                                                 </a>
                                             </td>
-                                            <td  style="text-align:center">
+                                            <td style="text-align: center">
                                                 <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="Email" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
                                                     UseSubmitBehavior="false" Enabled='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
                                                                 <span aria-hidden="true" class="glyphicon glyphicon-envelope"></span>
@@ -379,7 +374,10 @@
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeName" runat="server" Visible="False"></asp:Label>
-
+    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Visible="false">
+    </telerik:RadDatePicker>
+    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Visible="false">
+    </telerik:RadDatePicker>
 
 </asp:Content>
 

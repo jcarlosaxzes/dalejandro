@@ -31,7 +31,7 @@
             </Items>
         </telerik:RadComboBox>
     </div>
-    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="730px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false">
+    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="730px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false" Skin="Silk">
         <WizardSteps>
             <telerik:RadWizardStep Title="Monthly Expenses">
                 <div class="form-group">

@@ -15,7 +15,6 @@ Public Class company
                 Master.PageTitle = "Company/Profile"
                 Master.Help = "http://blog.pasconcept.com/2012/08/others-company-information.html"
                 lblCompanyId.Text = Session("companyId")
-                lnkExp.NavigateUrl = "~/OPE/CompanyExperience.aspx?guId=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text)
 
                 If Not Request.QueryString("Tab") Is Nothing Then
                     Select Case Request.QueryString("Tab")
@@ -148,17 +147,6 @@ Public Class company
             End If
         Catch ex As Exception
 
-        End Try
-
-    End Sub
-
-    Private Sub btnNotification_Click(sender As Object, e As EventArgs) Handles btnNotification.Click
-        Try
-            If LocalAPI.AdminNotificationTest(Master.UserEmail, lblCompanyId.Text) Then
-                Master.InfoMessage("The Notification TEST was sent")
-            End If
-        Catch ex As Exception
-            Master.ErrorMessage("Error. " & ex.Message)
         End Try
 
     End Sub
