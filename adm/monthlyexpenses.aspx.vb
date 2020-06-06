@@ -31,4 +31,8 @@ Public Class monthlyexpenses
         RadHtmlChartYearly.Visible = Not RadHtmlChartMonthly.Visible
         FloatedTilesListView.DataBind()
     End Sub
+
+    Private Sub SqlDataSource1_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSource1.Selecting
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
 End Class
