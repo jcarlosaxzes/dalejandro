@@ -150,7 +150,7 @@
         </telerik:RadStyleSheetManager>
 
         <%-- class=container 12 columns--%>
-        <div class="container-fluid" style="padding-left:100px;padding-right:100px">
+        <div class="container-fluid" style="padding-left:75px;padding-right:75px">
             <%--Menu.........................................................................................................................................--%>
             <asp:Panel runat="server" ID="PanelHeader">
                 <table class="table-condensed" style="width: 100%">
