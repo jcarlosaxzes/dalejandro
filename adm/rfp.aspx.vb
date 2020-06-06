@@ -14,6 +14,10 @@ Public Class rfp
                 lblRFPId.Text = Request.QueryString("rfpId")
                 lblGuiId.Text = LocalAPI.GetRFPProperty(lblRFPId.Text, "guid")
 
+                If Not Request.QueryString("fromtree") Is Nothing Then
+                    lblBackSource.Text = 1
+                End If
+
             End If
 
         Catch ex As Exception
@@ -98,4 +102,14 @@ Public Class rfp
 
 
 #End Region
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Select Case lblBackSource.Text
+            Case 1
+                Response.Redirect("~/adm/rfps.aspx")
+            Case 2
+                Response.Redirect("~/adm/requestforproposals.aspx")
+
+        End Select
+    End Sub
 End Class

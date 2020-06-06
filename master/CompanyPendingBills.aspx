@@ -20,7 +20,7 @@
         </tr>
     </table>
     <telerik:RadGrid ID="RadGridPayments" GridLines="None" runat="server" AllowPaging="True"
-        AutoGenerateColumns="False" DataSourceID="SqlDataSourcePayment" Height="700px" PageSize="100">
+        AutoGenerateColumns="False" DataSourceID="SqlDataSourcePayment" Height="1000px" PageSize="100">
         <ClientSettings>
             <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
         </ClientSettings>

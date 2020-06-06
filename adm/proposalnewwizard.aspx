@@ -149,7 +149,7 @@
         </table>
     </div>
     <div class="pas-container">
-        <telerik:RadWizard ID="RadWizard1" runat="server" Height="700px" DisplayCancelButton="false"
+        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false"
             RenderMode="Lightweight" Skin="Material">
             <WizardSteps>
 

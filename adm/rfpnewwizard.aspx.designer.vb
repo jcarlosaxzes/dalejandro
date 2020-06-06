@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class rfpnewwizard
     
     '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''lblMsg control.
     '''</summary>
     '''<remarks>
@@ -797,14 +806,23 @@ Partial Public Class rfpnewwizard
     Protected WithEvents lblParentId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblBackSource control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBackSource As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Master property.
     '''</summary>
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

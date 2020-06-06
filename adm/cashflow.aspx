@@ -22,15 +22,29 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <div class="Formulario">
-        <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"
-            DataTextField="nYear" DataValueField="Year" Width="200px" AppendDataBoundItems="True" AutoPostBack="true">
-        </telerik:RadComboBox>
-    </div>
+    <table class="table-condensed Formulario" style="width: 100%">
+        <tr>
+            <td style="width: 200px">
+                <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"
+                    DataTextField="nYear" DataValueField="Year" Width="200px" AppendDataBoundItems="True" AutoPostBack="true">
+                </telerik:RadComboBox>
+
+            </td>
+            <td style="text-align: center">
+                <h3 style="margin: 0">Cash Flow
+                </h3>
+            </td>
+
+        </tr>
+    </table>
+
     <div class="row">
         <div class="col-md-5">
+            <br />
+            <br />
             <telerik:RadGrid ID="RadGrid1" runat="server" CellSpacing="0" Culture="en-US" DataSourceID="SqlDataSourceMonth" GridLines="None">
-                <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonth" ShowFooter="true">
+                <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonth" ShowFooter="true"
+                            ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small">
                     <Columns>
                         <telerik:GridBoundColumn DataField="colMonth" FilterControlAltText="Filter colMonth column" HeaderText="Month" SortExpression="colMonth" UniqueName="colMonth"
                             HeaderStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
@@ -46,7 +60,7 @@
                         </telerik:GridBoundColumn>
                         <telerik:GridBoundColumn DataField="Balance" DataType="System.Double" FilterControlAltText="Filter Balance column" HeaderText="Balance" SortExpression="Balance" UniqueName="Balance"
                             ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
-                             Aggregate="Sum" DataFormatString="{0:N0}" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Right">
+                            Aggregate="Sum" DataFormatString="{0:N0}" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
                         <telerik:GridBoundColumn DataField="Accumulated" DataType="System.Double" FilterControlAltText="Filter Accumulated column" HeaderText="Accumulated" SortExpression="Accumulated" UniqueName="Accumulated"
                             ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
@@ -130,6 +144,5 @@
         SelectCommand="SELECT * FROM [Years] ORDER BY [Year] DESC "></asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-
 </asp:Content>
 

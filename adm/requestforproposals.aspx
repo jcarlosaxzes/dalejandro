@@ -241,7 +241,7 @@
                     <telerik:GridTemplateColumn DataField="State" HeaderText="Status" UniqueName="State"
                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("State")) %>'><%# Eval("State") %></span>
+                            <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'><%# Eval("State") %></span>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 

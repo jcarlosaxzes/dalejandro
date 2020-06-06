@@ -107,7 +107,7 @@
                             AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" HeaderStyle-Font-Size="Small"
                             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                             Width="100%" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" AllowMultiRowSelection="True"
-                            CellSpacing="0" PageSize="250" Height="700px">
+                            CellSpacing="0" PageSize="250" Height="1000px">
                             <ClientSettings>
                                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                                 <Selecting AllowRowSelect="true" />

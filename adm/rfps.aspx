@@ -193,8 +193,7 @@
         </telerik:RadCodeBlock>
         <telerik:RadTreeList ID="RadTreeList1" runat="server" DataSourceID="SqlDataSourceRFP" Skin="Bootstrap"
             AutoGenerateColumns="False" Culture="en-US" HeaderStyle-HorizontalAlign="Center" AlternatingItemStyle-HorizontalAlign="Center" CommandItemDisplay="Top"
-            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" ShowFooter="true"
-            ParentDataKeyNames="ParentId" DataKeyNames="Id">
+            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" ParentDataKeyNames="ParentId" DataKeyNames="Id">
             <CommandItemSettings />
             <Columns>
                 <telerik:TreeListTemplateColumn HeaderText="Number" UniqueName="Number" SortExpression="Number" ItemStyle-HorizontalAlign="Center"
@@ -205,7 +204,7 @@
                     </ItemTemplate>
                 </telerik:TreeListTemplateColumn>
 
-                <telerik:TreeListTemplateColumn DataField="ProjectName" HeaderText="ProjectName" UniqueName="ProjectName" ItemStyle-HorizontalAlign="Left" ItemStyle-Font-Size="Small"
+                <telerik:TreeListTemplateColumn DataField="ProjectName" HeaderText="Project Name" UniqueName="ProjectName" ItemStyle-HorizontalAlign="Left" ItemStyle-Font-Size="Small"
                     Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                     <ItemTemplate>
                         <asp:Label runat="server" Text='<%# Eval("ProjectName") %>' Visible='<%# Eval("ParentID") = 0 %>' Font-Size="Medium" Font-Bold="true" ForeColor="DarkBlue"></asp:Label>
@@ -242,61 +241,45 @@
                 <telerik:TreeListTemplateColumn DataField="State" HeaderText="Status" UniqueName="State"
                     ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
                     <ItemTemplate>
-                        <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("State")) %>'><%# Eval("State") %></span>
+                        <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'><%# Eval("State") %></span>
                     </ItemTemplate>
                 </telerik:TreeListTemplateColumn>
 
                 <telerik:TreeListTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
                     ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                     <ItemTemplate>
-                        <table style="width: 100%; border: none !important;">
-                            <tr>
-                                <td style="text-align: center; width: 20%; border: none !important;">
                                     <asp:LinkButton ID="btnNewRFP" runat="server" CommandName="NewRFPforProject" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("ParentID") = 0 %>'
                                         UseSubmitBehavior="false" ToolTip="Add RFP for this Project">
                                             <span style="font-size:small" class="glyphicon glyphicon-plus"></span>
                                     </asp:LinkButton>
-                                </td>
-                                <td style="text-align: center; width: 20%; border: none !important;">
+                            &nbsp;&nbsp;
                                     <a href='<%# LocalAPI.GetSharedLink_URL(2002, Eval("Id"))%>' target="_blank" title="Subconsultant View of RFP">
                                         <span class="glyphicon glyphicon-share"></span>
                                     </a>
-                                </td>
-
-                                <td style="text-align: center; width: 20%; border: none !important;">
+                            &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnSendRFP" runat="server" CommandName="SendRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") <= 1, "true", "false")%>'
                                         ToolTip="Click to Send Proposal">
                                                 <span style="color:darkgray" class="glyphicon glyphicon-envelope"></span>
                                     </asp:LinkButton>
-                                </td>
-
-
-                                <td style="text-align: center; width: 20%; border: none !important;">
+                           &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnAceptRFP" runat="server" CommandName="AceptRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") = 2 Or Eval("StateId") = 3, "true", "false")%>'
                                         ToolTip="Click to Accept RFP">
                                                 <span style="color:green" class="glyphicon glyphicon-ok"></span>
                                     </asp:LinkButton>
-                                </td>
-                                <td style="text-align: center; border: none !important;">
+                           &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnDecline1" runat="server" CommandName="DeclineRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") = 2, "true", "false")%>'
                                         ToolTip="Click to Decline RFP">
                                                 <span style="color:red" class="glyphicon glyphicon-remove-circle"></span>
                                     </asp:LinkButton>
 
-                                </td>
-                            </tr>
-                        </table>
                     </ItemTemplate>
                 </telerik:TreeListTemplateColumn>
 
-                <telerik:TreeListButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this RequestForProposals?" ConfirmTitle="Delete"
-                    ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
-                    HeaderText=""
-                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
-                </telerik:TreeListButtonColumn>
+                <telerik:TreeListButtonColumn UniqueName="DeleteCommandColumn" HeaderStyle-Width="50px" Text="Delete" CommandName="Delete" ButtonType="FontIconButton"
+                    ConfirmDialogType="RadWindow" ConfirmText="Delete this RequestForProposals?"></telerik:TreeListButtonColumn>
             </Columns>
         </telerik:RadTreeList>
     </div>

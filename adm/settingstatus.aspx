@@ -67,7 +67,7 @@
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" AllowAutomaticDeletes="true"
-            DataSourceID="SqlDataSource1" Height="700px" HeaderStyle-HorizontalAlign="Center"
+            DataSourceID="SqlDataSource1" Height="1000px" HeaderStyle-HorizontalAlign="Center"
             CellSpacing="0" AllowSorting="True">
             <ClientSettings>
                 <Scrolling AllowScroll="True"></Scrolling>

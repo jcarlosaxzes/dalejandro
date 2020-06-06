@@ -228,7 +228,7 @@
                 </asp:Panel>
                 <div style="padding-top: 10px">
                     <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AllowSorting="True" DataSourceID="SqlDataSource1"
-                        GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="700px"
+                        GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="1000px"
                         HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                         <ClientSettings>
                             <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -399,7 +399,7 @@
 
 
                 <%--<telerik:RadGrid ID="RadGrid2222" runat="server" AllowSorting="True" DataSourceID="SqlDataSource2" AllowAutomaticDeletes="true"
-                    GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="700px">
+                    GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="1000px">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                     </ClientSettings>

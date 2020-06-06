@@ -17,7 +17,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <div class="row">
+    <div class="row Formulario">
         <div class="col-md-12">
             <table class="table-condensed" style="width: 100%">
                 <tr>
@@ -56,13 +56,19 @@
             </table>
         </div>
     </div>
+        <div style="text-align: center">
+        <h3>Clients Balance Report
+        </h3>
+
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                 AllowSorting="True" AllowPaging="True" PageSize="50" Skin="Bootstrap"
                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                 HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right"
-                CellSpacing="0" AutoGenerateColumns="False" Height="700px">
+                CellSpacing="0" AutoGenerateColumns="False" Height="1000px">
                 <ClientSettings>
                     <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                 </ClientSettings>

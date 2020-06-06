@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="rfpnewwizard.aspx.vb" Inherits="pasconcept20.rfpnewwizard" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="rfpnewwizard.aspx.vb" Inherits="pasconcept20.rfpnewwizard" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <script type="text/javascript">
@@ -55,9 +55,24 @@
             margin-right: 5px !important;
         }
     </style>
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                       Back to List
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Request for Proposal</h3>
+                </td>
+
+            </tr>
+        </table>
+    </div>
     <div class="pas-container">
         <asp:Label ID="lblMsg" runat="server" CssClass="Error"></asp:Label>
-        <telerik:RadWizard ID="RadWizard1" runat="server" Height="700px" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material">
+        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material">
             <WizardSteps>
                 <%-- Subconsultants 0--%>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepsSubconsultants" Title="Subconsultants" ValidationGroup="Subconsultants" StepType="Start">
@@ -551,51 +566,51 @@
                             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
                     </div>
-                    
-                        <table style="width: 100%" class="table-condensed">
-                            <tr>
-                                <td style="width: 150px; text-align: right">Subject:	
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtSubject" runat="server" Width="100%" MaxLength="80" SelectionOnFocus="SelectAll">
-                                    </telerik:RadTextBox>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right; vertical-align: top">Body:
-                                </td>
-                                <td>
-                                    <telerik:RadEditor ID="txtBody" runat="server" RenderMode="Auto"
-                                        Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design"
-                                        Width="100%">
-                                    </telerik:RadEditor>
 
-                                </td>
-                            </tr>
+                    <table style="width: 100%" class="table-condensed">
+                        <tr>
+                            <td style="width: 150px; text-align: right">Subject:	
+                            </td>
+                            <td>
+                                <telerik:RadTextBox ID="txtSubject" runat="server" Width="100%" MaxLength="80" SelectionOnFocus="SelectAll">
+                                </telerik:RadTextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; vertical-align: top">Body:
+                            </td>
+                            <td>
+                                <telerik:RadEditor ID="txtBody" runat="server" RenderMode="Auto"
+                                    Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design"
+                                    Width="100%">
+                                </telerik:RadEditor>
 
-                            <tr>
-                                <td colspan="2" style="text-align:center">
-                                    <h4>Send this notice to each Subconsultants selected by discipline?</h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <table style="width: 100%">
-                                        <tr>
-                                            <td style="text-align: center; width: 50%">
-                                                <telerik:RadRadioButton runat="server" ID="opcUpdate" Text="Save Changes" Font-Size="Large" AutoPostBack="false" />
-                                            </td>
-                                            <td style="text-align: center">
-                                                <telerik:RadRadioButton runat="server" ID="opcUpdateAndSubmit" Text="Save Changes And Submit" Font-Size="Large" AutoPostBack="false" />
-                                            </td>
+                            </td>
+                        </tr>
 
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                        </table>
-                    
+                        <tr>
+                            <td colspan="2" style="text-align: center">
+                                <h4>Send this notice to each Subconsultants selected by discipline?</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td style="text-align: center; width: 50%">
+                                            <telerik:RadRadioButton runat="server" ID="opcUpdate" Text="Save Changes" Font-Size="Large" AutoPostBack="false" />
+                                        </td>
+                                        <td style="text-align: center">
+                                            <telerik:RadRadioButton runat="server" ID="opcUpdateAndSubmit" Text="Save Changes And Submit" Font-Size="Large" AutoPostBack="false" />
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
                 </telerik:RadWizardStep>
 
                 <%--Complete 6--%>
@@ -717,6 +732,8 @@
     <asp:Label ID="lblAzureGuiId" runat="server" Visible="False" Text="e2103445-8a47-49ff-808e-6008c0fe13a1"></asp:Label>
 
     <asp:Label ID="lblParentId" runat="server" Visible="False" Text="0"></asp:Label>
+
+    <asp:Label ID="lblBackSource" runat="server" Visible="False" Text="0"></asp:Label>
 
 </asp:Content>
 

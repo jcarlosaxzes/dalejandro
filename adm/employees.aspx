@@ -247,7 +247,7 @@
                                         </telerik:GridButtonColumn>
                                     </Columns>
                                     <EditFormSettings>
-                                        <PopUpSettings Modal="true" Width="650px" Height="700px" />
+                                        <PopUpSettings Modal="true" Width="650px" Height="1000px" />
                                         <FormMainTableStyle GridLines="None" CellSpacing="0" CellPadding="3" Width="100%" />
                                         <FormTableStyle CellSpacing="3" CellPadding="3" BackColor="White" Width="100%" />
                                         <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
