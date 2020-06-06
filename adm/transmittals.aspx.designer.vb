@@ -131,24 +131,6 @@ Partial Public Class transmittals
     Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
     
     '''<summary>
-    '''RadDatePickerFrom control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadDatePickerFrom As Global.Telerik.Web.UI.RadDatePicker
-    
-    '''<summary>
-    '''RadDatePickerTo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
-    
-    '''<summary>
     '''RadCodeBlock1 control.
     '''</summary>
     '''<remarks>
@@ -264,6 +246,24 @@ Partial Public Class transmittals
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''RadDatePickerFrom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerFrom As Global.Telerik.Web.UI.RadDatePicker
+    
+    '''<summary>
+    '''RadDatePickerTo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
     
     '''<summary>
     '''Master property.

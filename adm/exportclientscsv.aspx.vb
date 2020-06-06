@@ -6,12 +6,9 @@
             Master.PageTitle = "Export Clients"
             Master.Help = "http://blog.pasconcept.com/2015/04/clientsexport-client-list.html"
         End If
-
-
-
     End Sub
 
-    Protected Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
+    Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         LocalAPI.ExportClients(HttpContext.Current, txtFileName.Text, cboSep.SelectedValue)
     End Sub
 End Class

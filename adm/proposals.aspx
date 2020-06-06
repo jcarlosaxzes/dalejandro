@@ -72,7 +72,11 @@
                     <span class="glyphicon glyphicon-plus"></span> Proposal
                     </asp:LinkButton>
                 </td>
-                <td></td>
+                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Proposals
+                    </h3>
+                </td>
                 <td style="width: 200px; text-align: right">
                     <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" class="checkbox-inline" ToolTip="Private/Public Mode">
                          <input data-toggle="toggle" data-size="mini" type="checkbox" />

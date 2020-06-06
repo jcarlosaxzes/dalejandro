@@ -44,27 +44,32 @@
         </script>
     </telerik:RadCodeBlock>
     <div class="Formulario">
-        <table class="table-condensed">
+        <table class="table-condensed" style="width:100%">
             <tr>
-                <td>
+                <td style="width:90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
                     </button>
                 </td>
-                <td>
+                <td style="width:90px">
                     <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <span class="glyphicon glyphicon-plus"></span> Client
                     </asp:LinkButton>
                 </td>
-                <td>
+                <td style="width:140px">
                     <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
                         <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                     </telerik:RadButton>
                 </td>
-                <td>
+                <td style="width:140px">
                     <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=Clients" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
                         <Icon CssClass="rbUpload"></Icon>
                     </telerik:RadLinkButton>
+                </td>
+                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Clients
+                    </h3>
                 </td>
             </tr>
         </table>

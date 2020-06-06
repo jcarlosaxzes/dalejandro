@@ -74,9 +74,9 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <div class="Formulario">
-        <div class="collapse" id="collapseFilter">
-            <div class="card card-body">
+    <div class="collapse" id="collapseFilter">
+        <div class="card card-body">
+            <div class="Formulario">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
                     <table class="table-condensed" style="width: 100%">
                         <tr>
@@ -152,15 +152,15 @@
         </div>
     </div>
 
-    <table class="table-condensed noprint" style="width: 100%">
+    <table class="table-condensed noprint Formulario" style="width: 100%">
         <tr>
-            <td style="width: 100px; text-align: left">
+            <td style="width: 80px; text-align: left">
                 <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                     <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
                 </button>
             </td>
             <td></td>
-            <td style="width: 100px">
+            <td style="width: 90px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Campaign">
                     <span class="glyphicon glyphicon-plus"></span> Campaign
                 </asp:LinkButton>
@@ -180,6 +180,11 @@
                 </asp:LinkButton>
 
             </td>
+            <td style="text-align: center">
+                <h3 style="margin: 0">Clients Management
+                </h3>
+            </td>
+
             <td style="width: 100px">
                 <asp:LinkButton runat="server" ID="CSVButton"
                     CssClass="btn btn-default btn"

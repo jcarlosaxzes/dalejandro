@@ -24,31 +24,32 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
+
     <div class="Formulario">
-        <table class="table-condensed">
+        <table class="table-condensed" style="width: 100%">
             <tr>
-                <td>
+                <td style="width: 90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
                     </button>
                 </td>
-                <td>
+                <td style="width: 90px">
                     <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <span class="glyphicon glyphicon-plus"></span> Vendor
                     </asp:LinkButton>
                 </td>
-                <td>
-                    <telerik:RadButton ID="btnprint" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                    </telerik:RadButton>
-                </td>
-                <td>
+                <td style="width: 140px">
                     <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=Clients" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
                         <Icon CssClass="rbUpload"></Icon>
                     </telerik:RadLinkButton>
                 </td>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Vendors
+                    </h3>
+                </td>
             </tr>
         </table>
+
     </div>
 
     <div class="collapse" id="collapseFilter">
@@ -56,7 +57,7 @@
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
                 <table class="table-condensed">
                     <tr>
-                        <td >
+                        <td>
                             <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="600px"
                                 EmptyMessage="Search for Name, Company... ">
                             </telerik:RadTextBox>
@@ -107,21 +108,17 @@
                     <telerik:GridTemplateColumn DataField="VendorType" FilterControlAltText="Filter VendorType column" HeaderText="Type -- NAICS Code" SortExpression="VendorType" UniqueName="VendorType">
                         <ItemTemplate>
                             <%# Eval("VendorType") %><br />
-                            <%# Eval("NAICSCodeAndTitle") %> 
-
+                            <%# Eval("NAICSCodeAndTitle") %>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column"
-                        HeaderText="Contact info" SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center" >
+                        HeaderText="Contact info" SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <div>
                                 <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
                                 <%# String.Concat(LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")), " ", LocalAPI.PhoneHTML(Request.UserAgent, Eval("Cellular")))%>
                             </div>
                             <a href='<%# Eval("Web")%>' target="_blank" title="View web"><%#Eval("Web")%>
-
-
-
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Vendor?" ConfirmTitle="Delete"
@@ -139,7 +136,7 @@
         </telerik:RadGrid>
     </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Vendors_SELECT" SelectCommandType="StoredProcedure" 
+        SelectCommand="Vendors_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="Vendor_DELETE" DeleteCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />

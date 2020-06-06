@@ -71,7 +71,17 @@
             </td>
         </tr>
     </table>
+     <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Payments
+                    </h3>
+                </td>
+            </tr>
+        </table>
 
+    </div>
     <div>
         <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true"
             AllowAutomaticDeletes="True"

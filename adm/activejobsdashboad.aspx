@@ -33,7 +33,7 @@
 
             }--%>
 
-        </script>
+</script>
     </telerik:RadCodeBlock>
 
     <%--Tools--%>
@@ -235,9 +235,17 @@
 
     <%--Body--%>
     <div class="Formulario">
-        <div style="text-align:center">
-            <span>To <span class="label label-primary">Add Productive Time</span>, Click on the specific job </span>
-        </div>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 300px; text-align: left">
+                    <span>To <span class="label label-primary">Add Productive Time</span>, Click on the specific job </span>
+                </td>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Time Activity
+                    </h3>
+                </td>
+            </tr>
+        </table>
         <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobs" DataKeyNames="Id" ItemPlaceholderID="Container1"
             BorderStyle="Solid">
             <LayoutTemplate>

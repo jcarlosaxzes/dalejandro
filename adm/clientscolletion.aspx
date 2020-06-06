@@ -36,71 +36,78 @@
                 </div>
             </td>
         </tr>
+    </table>
+
+    <table class="table-condensed" style="width: 100%">
         <tr>
-            <td>
+            <td style="width: 150px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Proposal Template">
                                     <span class="glyphicon glyphicon-plus"></span> Client to Collection
                 </asp:LinkButton>
             </td>
-        </tr>
-        <tr>
-            <td>
-                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False"
-                    AllowPaging="True" AllowSorting="True" PageSize="25" HeaderStyle-HorizontalAlign="Center"
-                    ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" AllowAutomaticDeletes="true">
-                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                    <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id">
-                        <Columns>
-                            <telerik:GridBoundColumn DataField="Id" HeaderText="Id" SortExpression="Id" UniqueName="Id" Display="false">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="Name" HeaderText="Client Name" UniqueName="Name">
-                                <ItemTemplate>
-                                   <asp:LinkButton runat="server" ID="btnEdit" CommandName="Notification" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit Record">
-                                        <%# String.Concat(Eval("Name"), IIf(Len(Eval("Company")) > 0, ", ", ""), Eval("Company")) %>
-                                    </asp:LinkButton>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" UniqueName="Notes">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="AttorneyFirm" HeaderText="Attorney Firm" UniqueName="AttorneyFirm">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="DateIn" HeaderText="Date In" UniqueName="DateIn" DataFormatString="{0:d}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="DateOut" HeaderText="Date Out" UniqueName="DateOut" DataFormatString="{0:d}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" UniqueName="Status" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <span class="<%# LocalAPI.GetCollectionStatusLabelCSS(Eval("Status")) %>"><%# Eval("Status") %></span>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" AllowFiltering="False"
-                                HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
-                                <ItemTemplate>
-                                    <div style="text-align:center;width:100%">
-                                        <asp:LinkButton runat="server" ID="btnNotification" CommandName="Notification" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Notifications">
-                                        <span class="glyphicon glyphicon-envelope"></span>
-                                        </asp:LinkButton>
-                                        &nbsp;
-                                        <asp:LinkButton runat="server" ID="btnClose" CommandName="Close" CommandArgument='<%# Eval("Id") %>' ToolTip="Close/Re-Open Expedient">
-                                        <span class="glyphicon glyphicon-remove-circle"></span>
-                                        </asp:LinkButton>
-                                    </div>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="It may be better to 'Close' record and leave a trace instead of deleting. Are you sure to Delete this record?"
-                                ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
-                            </telerik:GridButtonColumn>
-
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
+            <td style="text-align: center">
+                <h3 style="margin: 0">Clients Colletion
+                </h3>
             </td>
         </tr>
     </table>
 
+
+
+    <div>
+        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False"
+            AllowPaging="True" AllowSorting="True" PageSize="25" HeaderStyle-HorizontalAlign="Center"
+            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" AllowAutomaticDeletes="true">
+            <PagerStyle Mode="Slider" AlwaysVisible="false" />
+            <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id">
+                <Columns>
+                    <telerik:GridBoundColumn DataField="Id" HeaderText="Id" SortExpression="Id" UniqueName="Id" Display="false">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridTemplateColumn DataField="Name" HeaderText="Client Name" UniqueName="Name">
+                        <ItemTemplate>
+                            <asp:LinkButton runat="server" ID="btnEdit" CommandName="Notification" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit Record">
+                                        <%# String.Concat(Eval("Name"), IIf(Len(Eval("Company")) > 0, ", ", ""), Eval("Company")) %>
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" UniqueName="Notes">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="AttorneyFirm" HeaderText="Attorney Firm" UniqueName="AttorneyFirm">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="DateIn" HeaderText="Date In" UniqueName="DateIn" DataFormatString="{0:d}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="DateOut" HeaderText="Date Out" UniqueName="DateOut" DataFormatString="{0:d}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" UniqueName="Status" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                        <ItemTemplate>
+                            <span class="<%# LocalAPI.GetCollectionStatusLabelCSS(Eval("Status")) %>"><%# Eval("Status") %></span>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+
+                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" AllowFiltering="False"
+                        HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
+                        <ItemTemplate>
+                            <div style="text-align: center; width: 100%">
+                                <asp:LinkButton runat="server" ID="btnNotification" CommandName="Notification" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Notifications">
+                                        <span class="glyphicon glyphicon-envelope"></span>
+                                </asp:LinkButton>
+                                &nbsp;
+                                        <asp:LinkButton runat="server" ID="btnClose" CommandName="Close" CommandArgument='<%# Eval("Id") %>' ToolTip="Close/Re-Open Expedient">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        </asp:LinkButton>
+                            </div>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="It may be better to 'Close' record and leave a trace instead of deleting. Are you sure to Delete this record?"
+                        ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                        UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                    </telerik:GridButtonColumn>
+
+                </Columns>
+            </MasterTableView>
+        </telerik:RadGrid>
+    </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Clients_collection_SELECT" SelectCommandType="StoredProcedure" DeleteCommand="delete from [Clients_collection] where Id=@Id">

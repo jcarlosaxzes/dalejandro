@@ -49,6 +49,10 @@
             </td>
         </tr>
     </table>
+                    <div style="text-align: center">
+                    <h3 style="margin: 0">Departments Budget Status
+                    </h3>
+                </div>
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"

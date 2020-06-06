@@ -45,19 +45,12 @@
             display: inline-block;
         }
     </style>
-
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Silk">
     </telerik:RadWindowManager>
-    <div class="PanelFilter">
-        <telerik:RadTabStrip runat="server" ID="RadTabStrip1" MultiPageID="RadMultiPage1" SelectedIndex="0">
-            <Tabs>
-                <telerik:RadTab Text="Employee List" Width="200px"></telerik:RadTab>
-                <telerik:RadTab Text="Vacation Schedule" Width="200px"></telerik:RadTab>
-                <telerik:RadTab Text="Employee Live" Width="200px"></telerik:RadTab>
-            </Tabs>
-        </telerik:RadTabStrip>
-        <telerik:RadMultiPage runat="server" ID="RadMultiPage1" SelectedIndex="0">
-            <telerik:RadPageView runat="server" ID="RadPageView1">
+
+    <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
+        <WizardSteps>
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Employees" StepType="Step">
                 <table class="table-condensed" style="width: 100%">
                     <tr>
                         <td class="PanelFilter">
@@ -151,7 +144,7 @@
                                                 <div style="vertical-align: top">
                                                     <%--<asp:Image ID="imgQBconncetd" ImageUrl="~/Images/qb_connected_grid.png" ToolTip="Connected to QuickBook"
                                                         runat="server" Visible='<%# LocalAPI.IsQBEmployeeConnected(Eval("Id"))%>'></asp:Image>--%>
-                                                    <a href='<%# string.Concat("mailto:",Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
+                                                    <a href='<%# string.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
                                                 </div>
                                             </ItemTemplate>
                                         </telerik:GridTemplateColumn>
@@ -265,8 +258,8 @@
                         </td>
                     </tr>
                 </table>
-            </telerik:RadPageView>
-            <telerik:RadPageView runat="server" ID="RadPageView2">
+            </telerik:RadWizardStep>
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Vacation Schedule" StepType="Step">
                 <table width="100%">
                     <tr>
                         <td class="PanelFilter">&nbsp;&nbsp;&nbsp;Year:&nbsp;
@@ -296,8 +289,8 @@
                         </td>
                     </tr>
                 </table>
-            </telerik:RadPageView>
-            <telerik:RadPageView runat="server" ID="RadPageView3">
+            </telerik:RadWizardStep>
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Employee Live" StepType="Step">
                 <table width="100%">
                     <tr>
                         <td class="PanelFilter">&nbsp;&nbsp;&nbsp;Year:&nbsp;
@@ -327,9 +320,10 @@
                         </td>
                     </tr>
                 </table>
-            </telerik:RadPageView>
-        </telerik:RadMultiPage>
-    </div>
+            </telerik:RadWizardStep>
+        </WizardSteps>
+    </telerik:RadWizard>
+
 
     <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; width: 500px">

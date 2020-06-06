@@ -171,7 +171,11 @@
                                         <span class="glyphicon glyphicon-plus"></span>&nbsp;Job
                     </asp:LinkButton>
                 </td>
-                <td></td>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Jobs
+                    </h3>
+                </td>
+
                 <td style="width: 180px">
                     <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ZIndex="50001" ToolTip="Update Job Status to selected records"
                         Width="100%" DropDownAutoWidth="Enabled" DataTextField="Name" DataValueField="Id" Height="300px"

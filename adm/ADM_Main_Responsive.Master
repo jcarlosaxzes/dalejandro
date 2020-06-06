@@ -365,7 +365,7 @@
                                     <%--Projects menu--%>
                                     <telerik:NavigationNode Text="Projects">
                                         <Nodes>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Pre-Projects" Text="Pre-Proposal"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/Pre-Projects" Text="Pre-Proposals"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/rfps" Text="Requests for Proposals"

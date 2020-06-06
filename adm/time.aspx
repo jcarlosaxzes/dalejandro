@@ -48,9 +48,9 @@
                     </telerik:RadButton>
                 </td>
                 <td style="text-align:center">
-                    <h2 style="margin:0">
+                    <h3 style="margin:0">
                         Time Entries
-                    </h2>
+                    </h3>
                 </td>
             </tr>
         </table>
@@ -353,20 +353,21 @@
                             <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Category"
                                 SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                 <EditItemTemplate>
-                                    <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" Width="100%"
-                                        DataValueField="Id" AppendDataBoundItems="True" Height="300px" SelectedValue='<%# Bind("Type") %>'>
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Select Category...)" Value="0"></telerik:RadComboBoxItem>
-                                        </Items>
-                                    </telerik:RadComboBox>
+                                    <div style="margin:5px">
+                                        <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" Width="100%"
+                                            DataValueField="Id" AppendDataBoundItems="True" Height="300px" SelectedValue='<%# Bind("Type") %>'>
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(Select Category...)" Value="0"></telerik:RadComboBoxItem>
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </div>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <div style="margin:5px"></div>
-                                    <%# Eval("Name") %>
+                                        <%# Eval("Name") %>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From"
+                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From" 
                                 SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" ItemStyle-Width="60px"
                                 ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
                             </telerik:GridBoundColumn>
@@ -379,9 +380,9 @@
                                 SortExpression="Hours" UniqueName="Hours" ItemStyle-Width="40px" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Right">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
+                            <telerik:GridTemplateColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
                                 UniqueName="Notes" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
-                            </telerik:GridBoundColumn>
+                            </telerik:GridTemplateColumn>
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                 CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                                 HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
