@@ -92,7 +92,7 @@
                 <asp:Label ID="lblJob" runat="server"></asp:Label></span>
         </h2>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="100%"
-            PageSize="50" AllowPaging="true" Height="700px" RenderMode="Auto" Skin="Bootstrap" AllowAutomaticDeletes="true"
+            PageSize="50" AllowPaging="true" Height="1000px" RenderMode="Auto" Skin="Bootstrap" AllowAutomaticDeletes="true"
             HeaderStyle-HorizontalAlign="Center"
             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>

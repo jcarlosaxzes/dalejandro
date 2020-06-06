@@ -44,13 +44,18 @@
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Content>
-                    <hr />
+                    <div style="text-align: center">
+                        <h3>Bill vs Collected
+                        </h3>
+
+                    </div>
                 </Content>
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Columns>
                     <telerik:LayoutColumn Span="4" SpanXs="12" SpanSm="12">
-                        <telerik:RadGrid ID="RadGrid1" runat="server" CellSpacing="0" Culture="en-US" DataSourceID="SqlDataSourceMonth" GridLines="None">
+                        <telerik:RadGrid ID="RadGrid1" runat="server" CellSpacing="0" Culture="en-US" DataSourceID="SqlDataSourceMonth" GridLines="None"
+                            ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small">
                             <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonth" ShowFooter="true">
                                 <Columns>
                                     <telerik:GridBoundColumn DataField="colMonth" FilterControlAltText="Filter colMonth column" HeaderText="Month" ReadOnly="True" SortExpression="colMonth" UniqueName="colMonth"
@@ -65,7 +70,7 @@
                                         ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
                                         Aggregate="Sum" DataFormatString="{0:N0}" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Right">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="AmountDue" DataType="System.Double" FilterControlAltText="Filter AmountDue column" HeaderText="AmountDue" ReadOnly="True" SortExpression="AmountDue" UniqueName="AmountDue"
+                                    <telerik:GridBoundColumn DataField="AmountDue" DataType="System.Double" FilterControlAltText="Filter AmountDue column" HeaderText="A. Due" ReadOnly="True" SortExpression="AmountDue" UniqueName="AmountDue"
                                         ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
                                         DataFormatString="{0:N0}">
                                     </telerik:GridBoundColumn>

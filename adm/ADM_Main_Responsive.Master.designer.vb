@@ -50,31 +50,22 @@ Partial Public Class ADM_Main_Responsive
     Protected WithEvents RadStyleSheetManager1 As Global.Telerik.Web.UI.RadStyleSheetManager
     
     '''<summary>
-    '''RadPageLayout1 control.
+    '''PanelHeader control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
+    Protected WithEvents PanelHeader As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''HeaderPanel control.
+    '''RadNavigation1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents HeaderPanel As Global.Telerik.Web.UI.LayoutRow
-    
-    '''<summary>
-    '''FormViewCompany control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FormViewCompany As Global.System.Web.UI.WebControls.FormView
+    Protected WithEvents RadNavigation1 As Global.Telerik.Web.UI.RadNavigation
     
     '''<summary>
     '''lblCompanyName control.
@@ -113,15 +104,6 @@ Partial Public Class ADM_Main_Responsive
     Protected WithEvents LoginViewMenuSetting As Global.System.Web.UI.WebControls.LoginView
     
     '''<summary>
-    '''RadMenu2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadMenu2 As Global.Telerik.Web.UI.RadNavigation
-    
-    '''<summary>
     '''btnAvoidEnterKey control.
     '''</summary>
     '''<remarks>
@@ -140,13 +122,13 @@ Partial Public Class ADM_Main_Responsive
     Protected WithEvents ContentPlaceHolder1 As Global.System.Web.UI.WebControls.ContentPlaceHolder
     
     '''<summary>
-    '''lblPageTitle control.
+    '''PanelFotter control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblPageTitle As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents PanelFotter As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''RadToolTipSwitchCompany control.
@@ -192,15 +174,6 @@ Partial Public Class ADM_Main_Responsive
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceCompany As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceCompanyLogo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceCompanyLogo As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.
@@ -255,4 +228,13 @@ Partial Public Class ADM_Main_Responsive
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblPageTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblPageTitle As Global.System.Web.UI.WebControls.Label
 End Class

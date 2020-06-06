@@ -150,7 +150,7 @@
                     </script>
                 </telerik:RadCodeBlock>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceTransmittals" Width="100%"
-                    AllowAutomaticInserts="True" AllowAutomaticDeletes="true" AllowPaging="True" PageSize="250" Height="700px" HeaderStyle-Font-Size="X-Small"
+                    AllowAutomaticInserts="True" AllowAutomaticDeletes="true" AllowPaging="True" PageSize="250" Height="1000px" HeaderStyle-Font-Size="X-Small"
                     ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>

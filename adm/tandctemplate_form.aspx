@@ -45,7 +45,7 @@
             </tr>
             <tr>
                 <td colspan="2" style="margin-left:15px">
-                    <telerik:RadEditor ID="gridEditor" runat="server" Height="700px" AllowScripts="True" Width="100%"
+                    <telerik:RadEditor ID="gridEditor" runat="server" Height="800px" AllowScripts="True" Width="100%"
                         ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
                     </telerik:RadEditor>
                 </td>

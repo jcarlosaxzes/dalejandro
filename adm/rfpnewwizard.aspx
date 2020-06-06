@@ -57,7 +57,7 @@
     </style>
     <div class="pas-container">
         <asp:Label ID="lblMsg" runat="server" CssClass="Error"></asp:Label>
-        <telerik:RadWizard ID="RadWizard1" runat="server" Height="700px" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material">
+        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material">
             <WizardSteps>
                 <%-- Subconsultants 0--%>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepsSubconsultants" Title="Subconsultants" ValidationGroup="Subconsultants" StepType="Start">

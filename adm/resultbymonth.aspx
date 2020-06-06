@@ -12,7 +12,7 @@
 
                 </td>
                 <td style="vertical-align: top; text-align: center" rowspan="2">
-                    <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="700px" Width="100%">
+                    <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="750px" Width="100%">
                         <ChartTitle Text="Results by Month">
                             <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
                         </ChartTitle>

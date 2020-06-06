@@ -27,7 +27,7 @@
         </tr>
     </table>
 
-    <telerik:RadWizard ID="RadWizard1" runat="server" Height="700px" Width="100%" DisplayCancelButton="false" DisplayProgressBar="false" Localization-Finish="Run Campaign"
+    <telerik:RadWizard ID="RadWizard1" runat="server" Height="1000px" Width="100%" DisplayCancelButton="false" DisplayProgressBar="false" Localization-Finish="Run Campaign"
         RenderMode="Lightweight" Skin="Material">
         <WizardSteps>
             <telerik:RadWizardStep Title="Email Template" runat="server" StepType="Start">

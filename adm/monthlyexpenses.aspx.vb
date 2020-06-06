@@ -29,5 +29,6 @@ Public Class monthlyexpenses
             RadHtmlChartMonthly.Visible = False
         End If
         RadHtmlChartYearly.Visible = Not RadHtmlChartMonthly.Visible
+        FloatedTilesListView.DataBind()
     End Sub
 End Class

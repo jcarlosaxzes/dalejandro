@@ -98,7 +98,12 @@
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Content>
-                    <hr />
+                                        <div style="text-align: center">
+                        <h3>Bill vs Collected by Employee
+                        </h3>
+
+                    </div>
+
                 </Content>
             </telerik:LayoutRow>
 
@@ -158,8 +163,8 @@
                         <Legend>
                             <Appearance Visible="True" Position="Top"></Appearance>
                         </Legend>
-                        <ChartTitle Text="Bill vs Collected by Employee">
-                            <Appearance Visible="true"></Appearance>
+                        <ChartTitle >
+                            <Appearance Visible="false"></Appearance>
                         </ChartTitle>
                     </telerik:RadHtmlChart>
                 </Content>
