@@ -20,7 +20,7 @@ Public Class billingmanager
 
                 cboClients.DataBind()
 
-                Dim bBillingModule As Boolean = LocalAPI.IsBillingModule(lblCompanyId.Text)
+                Dim bBillingModule As Boolean = True    'LocalAPI.IsBillingModule(lblCompanyId.Text)
                 btnEmail.Enabled = bBillingModule
                 btnSchedule.Enabled = bBillingModule
 

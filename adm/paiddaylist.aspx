@@ -92,7 +92,7 @@
     </table>
 
 
-    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="800px"
+    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="800px" Skin="Silk"
         DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false">
         <WizardSteps>
 

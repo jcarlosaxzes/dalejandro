@@ -196,7 +196,7 @@
         <asp:FormView ID="FormViewProp1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSourceProp1" Width="100%" EnableViewState="false">
             <EditItemTemplate>
 
-                <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" Height="580px" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Material">
+                <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" Height="580px" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
                     <WizardSteps>
                         <%--Proposal Details--%>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Proposal Details" StepType="Step">
@@ -684,7 +684,7 @@
     </div>
     <div class="pas-container" style="width: 100%">
 
-        <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Material">
+        <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Task Compensation" StepType="Step">
                     <table class="table-condensed" style="width: 100%;">

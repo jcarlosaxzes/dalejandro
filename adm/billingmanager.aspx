@@ -139,7 +139,7 @@
         </tr>
     </table>
 
-    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="800px" RenderMode="Lightweight" Skin="Material"
+    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="800px" RenderMode="Lightweight" Skin="Silk"
         DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false">
         <WizardSteps>
             <telerik:RadWizardStep runat="server" Title="Reminders">
