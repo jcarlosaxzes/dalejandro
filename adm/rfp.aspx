@@ -1,6 +1,6 @@
-﻿<%@ Page Title="Request for Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="rfp.aspx.vb" Inherits="pasconcept20.rfp" %>
+﻿<%@ Page Title="Request for Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="rfp.aspx.vb" Inherits="pasconcept20.rfp" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
  <script type="text/javascript">
@@ -9,6 +9,21 @@
         }
 
     </script>
+    <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                       Back to List
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Request for Proposal</h3>
+                </td>
+
+            </tr>
+        </table>
+    </div>
     <div class="pas-container">
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" DefaultMode="Edit" Width="100%">
             <EditItemTemplate>
@@ -118,9 +133,9 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: right; padding-right: 25px">
-                                                    <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false"
+                                                    <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
                                                         CommandName="Update" CausesValidation="true">
-                                        Update
+                                                            Update
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>
@@ -350,7 +365,7 @@
                                         <table style="width: 100%" class="table-condensed">
                                             <tr>
                                                 <td style="text-align: right; padding-right: 25px">
-                                                    <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false"
+                                                    <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
                                                         CommandName="Update" CausesValidation="true">
                                         Update
                                                     </asp:LinkButton>
@@ -390,7 +405,7 @@
                                         <table style="width: 100%" class="table-condensed">
                                             <tr>
                                                 <td style="text-align: right; padding-right: 25px">
-                                                    <asp:LinkButton ID="LinkButton3" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false"
+                                                    <asp:LinkButton ID="LinkButton3" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
                                                         CommandName="Update" CausesValidation="true">
                                         Update
                                                     </asp:LinkButton>
@@ -622,5 +637,6 @@
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
 
+    <asp:Label ID="lblBackSource" runat="server" Visible="False" Text="0"></asp:Label>
 </asp:Content>
 

@@ -149,7 +149,7 @@
                                 ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="110px"
                                 HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <span title="Clic to edit Job Status" class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("Status")) %>'><%# Eval("Status") %></span>
+                                    <span title="Clic to edit Job Status" class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'><%# Eval("Status") %></span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>
