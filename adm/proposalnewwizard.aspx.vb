@@ -58,21 +58,24 @@ Public Class proposalnewwizard
 
                     ProposalItemsDataBind()
 
-                    RadWizard1.WizardSteps(1).Enabled = True
-                    RadWizard1.WizardSteps(2).Enabled = True
-                    RadWizard1.WizardSteps(3).Enabled = True
-                    RadWizard1.WizardSteps(4).Enabled = True
-                    RadWizard1.WizardSteps(5).Enabled = True
-                    RadWizard1.WizardSteps(6).Enabled = True
-
+                    For i = 1 To RadWizard1.WizardSteps.Count - 1
+                        RadWizard1.WizardSteps(i).Enabled = True
+                    Next
 
                     ' AttachmentsTab ?
                     If Not Request.QueryString("AttachmentsTab") Is Nothing Then
                         RadWizardStepAttachments.Active = True
                     Else
-                        ' Edit Proposal
-                        RadWizardStepProposal.Active = True '(lblClientId.Text > 0)
+                        RadWizardStepFees.Active = True '(lblClientId.Text > 0)
+                        '' Fees ?
+                        'If Not Request.QueryString("FeesTab") Is Nothing Then
+                        '    Fees.Active = True
+                        'Else
+                        '    ' Edit Proposal
+                        '    RadWizardStepProposal.Active = True '(lblClientId.Text > 0)
+                        'End If
                     End If
+
 
                 End If
 
@@ -320,6 +323,8 @@ Public Class proposalnewwizard
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
         Select Case e.CommandName
+            Case "EditTask"
+                Response.Redirect("~/adm/proposaltask.aspx?Id=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
             Case "OrderDown"
                 LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
                 RadGridFees.DataBind()
