@@ -243,7 +243,6 @@ Public Class proposal
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Select Case e.CommandName
             Case "EditTask"
-                'CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument, 1024, 768, False, "OnClientClose")
                 Response.Redirect("~/adm/proposaltask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument)
             Case "DetailDuplicate"
                 lblDetailSelectedId.Text = e.CommandArgument

@@ -140,6 +140,69 @@ Partial Public Class proposaltask
     Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''btnUpdateAndBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpdateAndBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''PanelEstimator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelEstimator As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''cboPositionForEstimator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboPositionForEstimator As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''txtHoursForEstimate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHoursForEstimate As Global.Telerik.Web.UI.RadNumericTextBox
+    
+    '''<summary>
+    '''btnNewEstimator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNewEstimator As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''Comparevalidator3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator3 As Global.System.Web.UI.WebControls.CompareValidator
+    
+    '''<summary>
+    '''RadGridEstaimator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridEstaimator As Global.Telerik.Web.UI.RadGrid
+    
+    '''<summary>
     '''ValidationSummaryTaskUpdate control.
     '''</summary>
     '''<remarks>
@@ -185,6 +248,15 @@ Partial Public Class proposaltask
     Protected WithEvents SqlDataSourcePositions As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
+    '''SqlDataSourceEstimator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceEstimator As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -210,6 +282,15 @@ Partial Public Class proposaltask
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbldetailId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblBackSource control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBackSource As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

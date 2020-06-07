@@ -324,7 +324,7 @@
                                             <tr>
                                                 <td style="text-align: right;">Remaining Balance:</td>
                                                 <td>
-                                                    <b><%# Eval("Balance","{0:C2}") %></b>
+                                                    <b><%# Eval("Balance", "{0:C2}") %></b>
                                                 </td>
                                             </tr>
                                         </table>
@@ -543,9 +543,9 @@
                 </telerik:RadWizardStep>
 
                 <%-- Service Fee(s) --%>
-                <telerik:RadWizardStep runat="server" ID="Fees" Title="Fees & Scope" Enabled="false" StepType="Step">
-                    <fieldset>
-                        <legend>Service Fee(s)</legend>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepFees" Title="Fees & Scope" Enabled="false" StepType="Step">
+                    
+                        <h3>Service Fee(s)</h3>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
                                 <td style="width: 600px">
@@ -569,28 +569,9 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
-                                        <script type="text/javascript">
-                                            var popUp;
-                                            function PopUpShowing(sender, eventArgs) {
-                                                popUp = eventArgs.get_popUp();
-                                                var gridWidth = sender.get_element().offsetWidth;
-                                                var gridHeight = sender.get_element().offsetHeight;
-                                                var popUpWidth = popUp.style.width.substr(0, popUp.style.width.indexOf("px"));
-                                                var popUpHeight = popUp.style.height.substr(0, popUp.style.height.indexOf("px"));
-                                                popUp.style.left = ((gridWidth - popUpWidth) / 2 + sender.get_element().offsetLeft).toString() + "px";
-                                                popUp.style.top = 10 + "px";
-                                            }
-                                            function OnClientClose(sender, args) {
-                                                var masterTable = $find("<%= RadGridFees.ClientID %>").get_masterTableView();
-                                                masterTable.rebind();
-                                            }
-                                        </script>
-                                    </telerik:RadCodeBlock>
-                                    <telerik:RadGrid ID="RadGridFees" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-                                        AutoGenerateColumns="False" DataSourceID="SqlDataSourceServiceFees"
-                                        CellSpacing="0" Width="100%">
-                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceServiceFees" ShowFooter="true" CommandItemDisplay="None" EditMode="PopUp">
+                                    <telerik:RadGrid ID="RadGridFees" runat="server" AllowAutomaticDeletes="True" 
+                                        AutoGenerateColumns="False" DataSourceID="SqlDataSourceServiceFees" CellSpacing="0" Width="100%">
+                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceServiceFees" ShowFooter="true">
                                             <Columns>
                                                 <telerik:GridBoundColumn DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
                                                 </telerik:GridBoundColumn>
@@ -598,21 +579,21 @@
                                                 <telerik:GridTemplateColumn DataField="taskcode" HeaderText="Task" ReadOnly="True" SortExpression="taskcode"
                                                     UniqueName="taskcode" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="160px" HeaderStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="lnkDetailId" runat="server" CommandName="Edit" CommandArgument='<%# Eval("Id") %>'
+                                                        <asp:LinkButton ID="btnEditDetail" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Edit detail">
-                                                <%# Eval("taskcode")%>
+                                                                <%# Eval("taskcode")%>
                                                         </asp:LinkButton>
-                                                        <asp:LinkButton ID="btnOrderDown" runat="server" CommandName="OrderDown" CommandArgument='<%# Eval("Id") %>'
+                                                        <asp:LinkButton ID="btnOrderDown" runat="server" CommandName="OrderDown" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Order Down">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-arrow-down"></span>
+                                                                <span aria-hidden="true" class="glyphicon glyphicon-arrow-down"></span>
                                                         </asp:LinkButton>
-                                                        <asp:LinkButton ID="btnOrderUp" runat="server" CommandName="OrderUp" CommandArgument='<%# Eval("Id") %>'
+                                                        <asp:LinkButton ID="btnOrderUp" runat="server" CommandName="OrderUp" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Order Up">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-arrow-up"></span>
+                                                                <span aria-hidden="true" class="glyphicon glyphicon-arrow-up"></span>
                                                         </asp:LinkButton>
-                                                        <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
+                                                        <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false" CausesValidation="false"
                                                             ToolTip="Click to duplicate record">
-                                                    <span class="glyphicon glyphicon-duplicate"></span>
+                                                                <span class="glyphicon glyphicon-duplicate"></span>
                                                         </asp:LinkButton>
 
                                                     </ItemTemplate>
@@ -624,14 +605,14 @@
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn DataField="Amount" DataType="System.Double" HeaderText="Quantity"
-                                                    SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="60px" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
                                                     HeaderStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Amount", "{0:N2}") %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn DataField="Hours" DataType="System.Double" HeaderText="Hours"
-                                                    SortExpression="Hours" UniqueName="Hours" HeaderStyle-Width="60px" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="Hours" UniqueName="Hours" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
                                                     HeaderStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblHours" runat="server" Text='<%# Eval("Hours", "{0:N2}") %>'></asp:Label>
@@ -644,12 +625,16 @@
                                                         <asp:Label ID="lblRates" runat="server" Text='<%# Eval("Rates", "{0:N2}")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
-                                                <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True"
-                                                    SortExpression="TotalRow" DataFormatString="{0:N2}" UniqueName="TotalRow" Aggregate="Sum"
-                                                    FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
+                                                <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimator" ReadOnly="True"
+                                                    SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimator" Aggregate="Sum"
+                                                    FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
                                                     HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridBoundColumn>
-
+                                                <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True"
+                                                    SortExpression="TotalRow" DataFormatString="{0:N2}" UniqueName="TotalRow" Aggregate="Sum"
+                                                    FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
+                                                    HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                                </telerik:GridBoundColumn>
                                                 <telerik:GridTemplateColumn DataField="Paymentschedule" FilterControlAltText="Filter Paymentschedule column" ItemStyle-HorizontalAlign="Center"
                                                     HeaderText="Payment Shedule" SortExpression="Paymentschedule" UniqueName="Paymentschedule" HeaderStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
@@ -657,88 +642,20 @@
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
-                                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?"
+                                                <telerik:GridButtonColumn ConfirmDialogType="Classic" ConfirmText="Delete this row?"
                                                     ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
                                                     UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
                                                     HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                                 </telerik:GridButtonColumn>
                                             </Columns>
-                                            <EditFormSettings EditFormType="Template" PopUpSettings-ZIndex="7001" CaptionFormatString="Task {0}" CaptionDataField="taskcode">
-                                                <PopUpSettings Modal="true" Width="900px" Height="650px" />
-                                                <FormTemplate>
-                                                    <table class="table-condensed">
-                                                        <tr>
-                                                            <td style="width: 180px; text-align: right; vertical-align: middle">Name:
-                                                            </td>
-                                                            <td colspan="5">
-                                                                <telerik:RadTextBox ID="DescriptionTextBox" runat="server" MaxLength="80" Text='<%# Bind("Description") %>' Width="100%">
-                                                                </telerik:RadTextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="6">
-                                                                <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="350px"
-                                                                    AllowScripts="True" Width="100%" RenderMode="Lightweight"
-                                                                    ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="Design">
-                                                                </telerik:RadEditor>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text-align: right; vertical-align: middle">Amount:
-                                                            </td>
-                                                            <td>
-                                                                <telerik:RadNumericTextBox ID="txtAmount" runat="server" Text='<%# Bind("Amount") %>' Width="200px">
-                                                                    <NumberFormat DecimalDigits="2" />
-                                                                </telerik:RadNumericTextBox>
-                                                            </td>
-                                                            <td style="width: 80px; text-align: right; vertical-align: middle">Hours:</td>
-                                                            <td>
-                                                                <telerik:RadNumericTextBox ID="txtTimeSel" runat="server" MaxLength="5" Text='<%# Bind("Hours") %>' Width="200px">
-                                                                    <NumberFormat DecimalDigits="2" />
-                                                                </telerik:RadNumericTextBox>
-                                                            </td>
-                                                            <td style="width: 80px; text-align: right; vertical-align: middle">x Rate</td>
-                                                            <td>
-                                                                <telerik:RadNumericTextBox ID="RatesTextBox" runat="server" Text='<%# Bind("Rates") %>' Width="200px">
-                                                                    <NumberFormat DecimalDigits="2" />
-                                                                </telerik:RadNumericTextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td style="text-align: right; vertical-align: middle">Payment Schedule:
-                                                            </td>
-                                                            <td colspan="5">
-                                                                <telerik:RadComboBox ID="cboPaymentSchedulesEdit" runat="server" DataSourceID="SqlDataSourcePaymentSchedules" SelectedValue='<%# Bind("paymentscheduleId") %>'
-                                                                    DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true" ZIndex="50001"
-                                                                    ToolTip="Select Payment Schedules for individual Task">
-                                                                    <Items>
-                                                                        <telerik:RadComboBoxItem runat="server" Text="(Select Payment Schedules...)" Value="0" />
-                                                                    </Items>
-                                                                </telerik:RadComboBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="6" style="text-align: right; padding-right: 15px">
-                                                                <br />
-                                                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn-success btn-lg" UseSubmitBehavior="false"
-                                                                    CommandName="Update"> Update
-                                                                </asp:LinkButton>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </FormTemplate>
-                                            </EditFormSettings>
+                                            
                                         </MasterTableView>
-                                        <ClientSettings>
-                                            <ClientEvents OnPopUpShowing="PopUpShowing" />
-                                        </ClientSettings>
                                     </telerik:RadGrid>
-
                                 </td>
                             </tr>
                         </table>
 
-                    </fieldset>
+                    
 
                 </telerik:RadWizardStep>
 
@@ -939,7 +856,7 @@
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
                                         </EditItemTemplate>
                                         <ItemTemplate>
-                                            <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " (",Eval("ContentType"),")")%></a>
+                                            <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " (", Eval("ContentType"), ")")%></a>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridTemplateColumn DataField="Date" FilterControlAltText="Filter Date column" HeaderText="Date" SortExpression="Date" UniqueName="Date"
