@@ -498,6 +498,10 @@
                                                             </a>
                                                         </li>
                                                         <li>
+                                                            <a runat="server" href="~/adm/companymultiplier" title="Company Multiplier" visible='<%# EmployeePermission("Deny_Multiplier") %>'>Company Multiplier
+                                                            </a>
+                                                        </li>
+                                                        <li>
                                                             <a runat="server" href="~/adm/DepartmentsList" title="Departments" visible='<%# EmployeePermission("Deny_DepartmentsList") %>'>Departments
                                                             </a>
                                                         </li>

@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGridMonthly">
                 <UpdatedControls>
@@ -21,7 +21,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
     <style>
         .RadListView .rlvFloated {
             display: block;
@@ -69,6 +69,7 @@
 
         </tr>
     </table>
+
     <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="730px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false" Skin="Silk">
         <WizardSteps>
             <telerik:RadWizardStep Title="Monthly Expenses">
@@ -173,32 +174,32 @@
                             </h4>
 
                             <h5 style="margin: 0; text-align: right; padding-right: 5px; font-weight: bold"><%# Eval("Tot","{0:C2}")%></h4>
-                <telerik:RadHtmlChart ID="RainfallChart" runat="server" Width="100%" Height="160px" DataSourceID="SqlDataSourceItemAlternating">
-                    <Legend>
-                        <Appearance Visible="false">
-                        </Appearance>
-                    </Legend>
-                    <PlotArea>
-                        <CommonTooltipsAppearance Color="White" />
-                        <Series>
-                            <telerik:ColumnSeries DataFieldY="Amount" Name="Amount">
-                                <Appearance FillStyle-BackgroundColor="DodgerBlue"></Appearance>
-                                <LabelsAppearance Visible="false"></LabelsAppearance>
-                                <TooltipsAppearance DataFormatString="{0:C2}"></TooltipsAppearance>
-                            </telerik:ColumnSeries>
-                        </Series>
-                        <XAxis DataLabelsField="MonthCode">
-                            <MajorGridLines Visible="false" />
-                            <MinorGridLines Visible="false" />
-                        </XAxis>
-                        <YAxis>
-                            <MajorGridLines Visible="true" />
-                            <MajorGridLines Color="#EFEFEF" Width="1"></MajorGridLines>
-                            <MinorGridLines Visible="false" />
-                        </YAxis>
+                            <telerik:RadHtmlChart ID="RainfallChart" runat="server" Width="100%" Height="160px" DataSourceID="SqlDataSourceItemAlternating">
+                                <Legend>
+                                    <Appearance Visible="false">
+                                    </Appearance>
+                                </Legend>
+                                <PlotArea>
+                                    <CommonTooltipsAppearance Color="White" />
+                                    <Series>
+                                        <telerik:ColumnSeries DataFieldY="Amount" Name="Amount">
+                                            <Appearance FillStyle-BackgroundColor="DodgerBlue"></Appearance>
+                                            <LabelsAppearance Visible="false"></LabelsAppearance>
+                                            <TooltipsAppearance DataFormatString="{0:C2}"></TooltipsAppearance>
+                                        </telerik:ColumnSeries>
+                                    </Series>
+                                    <XAxis DataLabelsField="MonthCode">
+                                        <MajorGridLines Visible="false" />
+                                        <MinorGridLines Visible="false" />
+                                    </XAxis>
+                                    <YAxis>
+                                        <MajorGridLines Visible="true" />
+                                        <MajorGridLines Color="#EFEFEF" Width="1"></MajorGridLines>
+                                        <MinorGridLines Visible="false" />
+                                    </YAxis>
+                                </PlotArea>
+                            </telerik:RadHtmlChart>
 
-                    </PlotArea>
-                </telerik:RadHtmlChart>
                                 <asp:SqlDataSource ID="SqlDataSourceItemAlternating" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
                                     SelectCommand="YearStadistic_ExpensesItem_Chart" SelectCommandType="StoredProcedure">
                                     <SelectParameters>
@@ -274,6 +275,7 @@
                         </div>
                     </LayoutTemplate>
                 </telerik:RadListView>
+
             </telerik:RadWizardStep>
         </WizardSteps>
     </telerik:RadWizard>
@@ -327,7 +329,6 @@
 
         </SelectParameters>
     </asp:SqlDataSource>
-
     <asp:SqlDataSource ID="SqlDataSourceYear" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT * FROM [Years] ORDER BY [Year] DESC "></asp:SqlDataSource>
 
