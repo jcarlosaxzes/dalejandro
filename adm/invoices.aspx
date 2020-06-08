@@ -135,6 +135,11 @@
                     <span class="glyphicon glyphicon-plus"></span> Simple Charge
                     </asp:LinkButton>
                 </td>
+                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Invoices
+                    </h3>
+                </td>
                 <td style="text-align: right; padding-right: 50px">
                     <asp:Label ID="lblStatus" runat="server"></asp:Label>
                 </td>

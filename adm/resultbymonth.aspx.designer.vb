@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class resultbymonth
     
     '''<summary>
-    '''lblEmployee control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblEmployee As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''cboYear control.
     '''</summary>
     '''<remarks>
@@ -32,15 +23,6 @@ Partial Public Class resultbymonth
     Protected WithEvents cboYear As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''RadGrid2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGrid2 As Global.Telerik.Web.UI.RadGrid
-    
-    '''<summary>
     '''RadHtmlChart1 control.
     '''</summary>
     '''<remarks>
@@ -48,6 +30,15 @@ Partial Public Class resultbymonth
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
+    
+    '''<summary>
+    '''RadGrid2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGrid2 As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
     '''SqlDataSource1 control.
@@ -75,6 +66,15 @@ Partial Public Class resultbymonth
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployee As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

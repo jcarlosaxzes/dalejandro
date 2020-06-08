@@ -220,7 +220,7 @@ Public Class sendproposal
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Select Case lblBackSource.Text
             Case "1"  ' fromproposal
-                Response.RedirectPermanent("~/adm/proposal.aspx?Id=" & lblProposalId.Text)
+                Response.RedirectPermanent("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
             Case Else
                 Response.RedirectPermanent("~/adm/proposals.aspx")
         End Select

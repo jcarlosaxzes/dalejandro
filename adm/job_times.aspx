@@ -15,7 +15,7 @@
         <div class="row">
             <div class="form-group">
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AllowSorting="True" DataSourceID="SqlDataSource1"
-                    Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="700px"
+                    Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="1000px"
                     ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>

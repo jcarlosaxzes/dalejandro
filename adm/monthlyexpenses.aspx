@@ -2,36 +2,75 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGridMonthly">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGridMonthly" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly"/>
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly"/>
+                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly" />
+                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboYear">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGridMonthly" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly"/>
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly"/>
+                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly" />
+                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly" />
+                    <telerik:AjaxUpdatedControl ControlID="FloatedTilesListView" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
+    <style>
+        .RadListView .rlvFloated {
+            display: block;
+        }
 
-    <div class="Formulario">
-        <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"
-            DataTextField="nYear" DataValueField="Year" Width="200px" AppendDataBoundItems="True" AutoPostBack="true">
-            <Items>
-                <telerik:RadComboBoxItem Selected="True" runat="server" Text="(All Years... )"
-                    Value="-1" />
-            </Items>
-        </telerik:RadComboBox>
-    </div>
-    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="730px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false">
+        .RadListView .rlvAutoScroll .rlvI, .RadListView .rlvAutoScroll .rlvA, .RadListView .rlvAutoScroll .rlvISel, .RadListView .rlvAutoScroll .rlvIEmpty, .RadListView .rlvAutoScroll .rlvIEdit {
+            overflow: auto;
+        }
+
+        .RadListView .rlvFloated .rlvI, .RadListView .rlvFloated .rlvA, .RadListView .rlvFloated .rlvISel, .RadListView .rlvFloated .rlvIEmpty, .RadListView .rlvFloated .rlvIEdit {
+            float: left;
+            display: inline;
+            border: 1px solid;
+        }
+
+        .RadListView div.rlvI, .RadListView div.rlvA, .RadListView div.rlvISel, .RadListView div.rlvIEmpty, .RadListView div.rlvIEdit {
+            border-bottom: 1px solid;
+            padding-top: 5px;
+            padding-bottom: 4px;
+        }
+
+        .productItemWrapper {
+            height: 220px;
+            width: 310px;
+            margin: 5px;
+            padding-left: 15px;
+        }
+    </style>
+    <table class="table-condensed Formulario" style="width: 100%">
+        <tr>
+            <td style="width: 200px">
+                <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"
+                    DataTextField="nYear" DataValueField="Year" Width="100%" AppendDataBoundItems="True" AutoPostBack="true">
+                    <Items>
+                        <telerik:RadComboBoxItem Selected="True" runat="server" Text="(All Years... )"
+                            Value="-1" />
+                    </Items>
+                </telerik:RadComboBox>
+
+            </td>
+            <td style="text-align: center">
+                <h3 style="margin: 0">Expenses
+                </h3>
+            </td>
+
+        </tr>
+    </table>
+
+    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="730px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false" Skin="Silk">
         <WizardSteps>
             <telerik:RadWizardStep Title="Monthly Expenses">
                 <div class="form-group">
@@ -43,7 +82,7 @@
                 <div class="row">
                     <div class="col-md-5">
                         <telerik:RadGrid ID="RadGridMonthly" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-                            AllowAutomaticInserts="true" ShowFooter="true"
+                            AllowAutomaticInserts="true" ShowFooter="true" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small"
                             AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonthly" AllowPaging="true" PageSize="12"
                             HeaderStyle-HorizontalAlign="Center">
                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceMonthly">
@@ -124,7 +163,119 @@
 
             </telerik:RadWizardStep>
 
-            <telerik:RadWizardStep Title="Daily Expenses">
+            <telerik:RadWizardStep Title="Expenses (Other) by Category">
+                <telerik:RadListView runat="server" ID="FloatedTilesListView" RenderMode="Lightweight" AllowPaging="True"
+                    DataKeyNames="Category" DataSourceID="SqlDataSource1">
+                    <AlternatingItemTemplate>
+
+                        <div class="rlvA productItemWrapper">
+                            <h4 style="margin: 0; text-align: center">
+                                <asp:Label ID="lblAlternatingCategory" runat="server" Font-Bold="true" Text='<%# Eval("Category") %>'></asp:Label>
+                            </h4>
+
+                            <h5 style="margin: 0; text-align: right; padding-right: 5px; font-weight: bold"><%# Eval("Tot","{0:C2}")%></h4>
+                            <telerik:RadHtmlChart ID="RainfallChart" runat="server" Width="100%" Height="160px" DataSourceID="SqlDataSourceItemAlternating">
+                                <Legend>
+                                    <Appearance Visible="false">
+                                    </Appearance>
+                                </Legend>
+                                <PlotArea>
+                                    <CommonTooltipsAppearance Color="White" />
+                                    <Series>
+                                        <telerik:ColumnSeries DataFieldY="Amount" Name="Amount">
+                                            <Appearance FillStyle-BackgroundColor="DodgerBlue"></Appearance>
+                                            <LabelsAppearance Visible="false"></LabelsAppearance>
+                                            <TooltipsAppearance DataFormatString="{0:C2}"></TooltipsAppearance>
+                                        </telerik:ColumnSeries>
+                                    </Series>
+                                    <XAxis DataLabelsField="MonthCode">
+                                        <MajorGridLines Visible="false" />
+                                        <MinorGridLines Visible="false" />
+                                    </XAxis>
+                                    <YAxis>
+                                        <MajorGridLines Visible="true" />
+                                        <MajorGridLines Color="#EFEFEF" Width="1"></MajorGridLines>
+                                        <MinorGridLines Visible="false" />
+                                    </YAxis>
+                                </PlotArea>
+                            </telerik:RadHtmlChart>
+
+                                <asp:SqlDataSource ID="SqlDataSourceItemAlternating" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+                                    SelectCommand="YearStadistic_ExpensesItem_Chart" SelectCommandType="StoredProcedure">
+                                    <SelectParameters>
+                                        <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+                                        <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+                                        <asp:ControlParameter ControlID="lblAlternatingCategory" Name="category" PropertyName="Text" />
+
+                                    </SelectParameters>
+                                </asp:SqlDataSource>
+                        </div>
+                    </AlternatingItemTemplate>
+                    <ItemTemplate>
+                        <div class="rlvI productItemWrapper">
+                            <h4 style="margin: 0; text-align: center">
+                                <asp:Label ID="lblItemCategory" runat="server" Font-Bold="true" Text='<%# Eval("Category") %>'></asp:Label>
+                            </h4>
+                            <h5 style="margin: 0; text-align: right; padding-right: 5px; font-weight: bold"><%# Eval("Tot","{0:C2}")%></h5>
+                            <telerik:RadHtmlChart ID="SunshineChart" runat="server" Width="100%" Height="160px" DataSourceID="SqlDataSourceItem">
+                                <Legend>
+                                    <Appearance Visible="false">
+                                    </Appearance>
+                                </Legend>
+                                <PlotArea>
+                                    <CommonTooltipsAppearance Color="White" />
+                                    <Series>
+                                        <telerik:ColumnSeries DataFieldY="Amount" Name="Amount">
+                                            <Appearance FillStyle-BackgroundColor="OrangeRed"></Appearance>
+                                            <LabelsAppearance Visible="false"></LabelsAppearance>
+                                            <TooltipsAppearance DataFormatString="{0:C2}"></TooltipsAppearance>
+                                        </telerik:ColumnSeries>
+                                    </Series>
+                                    <XAxis DataLabelsField="MonthCode">
+                                        <MajorGridLines Visible="false" />
+                                        <MinorGridLines Visible="false" />
+                                    </XAxis>
+                                    <YAxis>
+                                        <MajorGridLines Visible="true" />
+                                        <MajorGridLines Color="#EFEFEF" Width="1"></MajorGridLines>
+                                        <MinorGridLines Visible="false" />
+                                    </YAxis>
+                                </PlotArea>
+                            </telerik:RadHtmlChart>
+
+                            <asp:SqlDataSource ID="SqlDataSourceItem" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+                                SelectCommand="YearStadistic_ExpensesItem_Chart" SelectCommandType="StoredProcedure">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+                                    <asp:ControlParameter ControlID="lblItemCategory" Name="category" PropertyName="Text" />
+
+                                </SelectParameters>
+                            </asp:SqlDataSource>
+                        </div>
+                    </ItemTemplate>
+                    <EmptyDataTemplate>
+                        <div class="RadListView RadListView_<%# Container.Skin %>">
+                            <div class="rlvEmpty">
+                                There are no items to be displayed.
+                            </div>
+                        </div>
+                    </EmptyDataTemplate>
+                    <LayoutTemplate>
+                        <div class="RadListView RadListViewFloated ">
+                            <div class="rlvFloated rlvAutoScroll">
+                                <div id="itemPlaceholder" runat="server">
+                                </div>
+                            </div>
+                            <telerik:RadDataPager RenderMode="Lightweight" ID="RadDataPager1" runat="server" PageSize="60">
+                                <Fields>
+                                    <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
+                                </Fields>
+                            </telerik:RadDataPager>
+                        </div>
+                    </LayoutTemplate>
+                </telerik:RadListView>
+
             </telerik:RadWizardStep>
         </WizardSteps>
     </telerik:RadWizard>
@@ -169,6 +320,15 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_Expenses_Chart" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:Parameter Name="category" DefaultValue="" Type="String" />
+
+        </SelectParameters>
+    </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceYear" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT * FROM [Years] ORDER BY [Year] DESC "></asp:SqlDataSource>
 

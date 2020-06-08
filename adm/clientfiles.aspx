@@ -62,14 +62,19 @@
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Content>
-                    <table class="table-condensed">
+                    <table class="table-condensed"  style="width:100%">
                         <tr>
-                            <td>
+                            <td style="width:90px">
                                 <asp:LinkButton ID="btnDeleteSelected" runat="server"
                                     CssClass="btn btn-danger btn" UseSubmitBehavior="false">
                                      Delete selected!
                                 </asp:LinkButton>
                             </td>
+                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Client Files
+                    </h3>
+                </td>
                         </tr>
                     </table>
 

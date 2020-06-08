@@ -119,7 +119,7 @@
                                 Proposal by: <span><%# Eval("Sender") %></span>
                             </div>
                             <div class="text-muted">
-                                Status: <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("Status")) %>'><%# Eval("Status") %></span>
+                                Status: <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'><%# Eval("Status") %></span>
                             </div>
                             <div class="text-muted">
                                 Sent Date: <span><%# Eval("DateSended", "{0:d}") %></span>

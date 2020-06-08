@@ -91,7 +91,7 @@
                                             <td style="text-align: right; width: 450px; vertical-align: top; margin: 6px">
 
 
-                                                <a class="btn btn-danger noprint" href="rfps.aspx" title="My Request for Proposals" role="button">My RFP</a>
+                                                <a class="btn btn-danger noprint" href="rfps.aspx" title="My Request for Proposals" role="button">My Proposals</a>
                                                 &nbsp;&nbsp;
                                                 <script type="text/javascript">
                                                     function PrintPage(sender, args) {

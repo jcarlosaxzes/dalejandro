@@ -14,24 +14,6 @@ Option Explicit On
 Partial Public Class monthlyexpenses
     
     '''<summary>
-    '''RadAjaxManager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
-    
-    '''<summary>
-    '''RadAjaxLoadingPanel1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-    
-    '''<summary>
     '''cboYear control.
     '''</summary>
     '''<remarks>
@@ -86,6 +68,15 @@ Partial Public Class monthlyexpenses
     Protected WithEvents RadHtmlChartYearly As Global.Telerik.Web.UI.RadHtmlChart
     
     '''<summary>
+    '''FloatedTilesListView control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FloatedTilesListView As Global.Telerik.Web.UI.RadListView
+    
+    '''<summary>
     '''SqlDataSourceMonthly control.
     '''</summary>
     '''<remarks>
@@ -111,6 +102,15 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceChartByYear As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSource1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''SqlDataSourceYear control.

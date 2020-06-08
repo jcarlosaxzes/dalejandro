@@ -65,11 +65,10 @@ Public Class requestforproposals
         Try
             Select Case e.CommandName
                 Case "NewRFPforProject"
-                    CreateRadWindows("New", "~/ADM/RFPNewWizard.aspx?ParentId=" & e.CommandArgument, 960, 700, True)
+                    Response.Redirect("~/ADM/RFPNewWizard.aspx?ParentId=" & e.CommandArgument & "&fromtable=1")
 
                 Case "EditForm"
-                    sUrl = "~/ADM/rfp.aspx?rfpId=" & e.CommandArgument
-                    CreateRadWindows("Edit", sUrl, 960, 700, True)
+                    Response.Redirect("~/adm/rfp.aspx?rfpId=" & e.CommandArgument & "&fromtable=1")
 
                 Case "SendRFP"
                     lblRFPSelected.Text = e.CommandArgument
@@ -86,20 +85,13 @@ Public Class requestforproposals
 
 
                 Case "AceptRFP"
-                    'Dim stateId As Integer = LocalAPI.GetRFPProperty(e.CommandArgument, "StateId")
-                    'sUrl = IIf(stateId = 2, "~/ADM/AcceptRFP.aspx?rfpId=", "~/ADM/EmittRFP.aspx?rfpId=") & e.CommandArgument
-                    'CreateRadWindows(e.CommandName, sUrl, 960, 700)
                     lblRFPSelected.Text = e.CommandArgument
                     lblRFPNumber.Text = "Accept/Define Job Request for Proposal: " & LocalAPI.RFPNumber(lblRFPSelected.Text)
                     RadToolTipAccept.Visible = True
                     RadToolTipAccept.Show()
 
-                Case "RFPPrint"
-                    sUrl = "~/ADMCLI/RequestForProposal.aspx?rfpId=" & e.CommandArgument & "&Origen=2"
-                    CreateRadWindows(e.CommandName, sUrl, 960, 700, False)
-
                 Case "ViewJobPage"
-                    sUrl = "~/ADM/Job_rfps.aspx?JobId=" & e.CommandArgument
+                    sUrl = "~/adm/Job_rfps.aspx?JobId=" & e.CommandArgument
                     CreateRadWindows(e.CommandName, sUrl, 960, 820, False)
 
 
@@ -127,8 +119,7 @@ Public Class requestforproposals
     End Sub
 
     Protected Sub btnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNew.Click
-        ' 1/16/2020 Response.RedirectPermanent("~/ADM/NewRFP.aspx")
-        CreateRadWindows("New", "~/ADM/RFPNewWizard.aspx", 960, 700, True)
+        Response.Redirect("~/ADM/RFPNewWizard.aspx?fromtable=1")
     End Sub
 
     Protected Sub btnNewFileLink_Click(sender As Object, e As EventArgs)

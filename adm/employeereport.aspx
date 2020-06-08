@@ -3,7 +3,7 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="row" style="padding-top: 5px; padding-bottom: 10px; background-color: darkgray">
+    <div class="row Formulario">
         <div class="col-md-5" style="text-align: right">
             <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees"
                 DataTextField="Name" DataValueField="Id" Height="300px" Width="100%">

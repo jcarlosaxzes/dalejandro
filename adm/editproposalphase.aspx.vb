@@ -36,6 +36,6 @@
 
     Private Sub SqlDataSource1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Updated
         Dim proposalId As Integer = LocalAPI.GetProposalPhaseProperty(lblphaseId.Text, "proposalId")
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & proposalId)
+        Response.Redirect("~/adm/proposal.aspx?proposalId=" & proposalId)
     End Sub
 End Class

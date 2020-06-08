@@ -115,7 +115,7 @@
     </div>
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" DataSourceID="SqlDataSource1" Skin="" RenderMode="Lightweight"
-            AllowPaging="True" PageSize="250" Height="700px" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+            AllowPaging="True" PageSize="250" Height="1000px" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
             </ClientSettings>

@@ -22,33 +22,39 @@
     </telerik:RadAjaxLoadingPanel>
 
     <div class="Formulario">
-        <table class="table-condensed">
+        <table class="table-condensed" style="width: 100%">
             <tr>
-                <td>
+                <td style="width:90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
                     </button>
                 </td>
-                <td>
+                <td style="width:90px">
                     <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
                         <span class="glyphicon glyphicon-plus"></span> Activity
                     </asp:LinkButton>
                 </td>
-                <td>
+                <td style="width:150px">
                     <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <span class="glyphicon glyphicon-calendar"></span> Export to Outlook
                     </asp:LinkButton>
                 </td>
-                <td>
+                <td style="width:150px">
                     <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <span class="glyphicon glyphicon-save-file"></span> Export to PDF
                     </asp:LinkButton>
                 </td>
-                <td style="padding-left: 50px">
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Calendar
+                    </h3>
+                </td>
+
+                <td style="padding-left: 50px; text-align:right;width:150px">
                     <small>
                         <asp:Label runat="server" ID="AppointmentsCount"></asp:Label>
                     </small>
                 </td>
+
             </tr>
         </table>
     </div>
@@ -186,7 +192,7 @@
             <span class="label label-default center-block">New Client Activity Record
             </span>
         </h2>
-        <table class="table-condensed"style="width:600px">
+        <table class="table-condensed" style="width: 600px">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceType" ZIndex="50001"

@@ -149,223 +149,23 @@
             <CdnSettings TelerikCdn="Enabled" CombinedResource="Enabled" />
         </telerik:RadStyleSheetManager>
 
-        <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
-            <Rows>
-                <telerik:LayoutRow runat="server" StaticId="Header1" CssClass="noprint" ID="HeaderPanel">
-
-                    <Columns>
-                        <telerik:LayoutColumn Span="3">
-                            <div style="padding-top: 3px">
-                                <img src="../Images/logo/pas_horizontal_logo.png" style="border-width: 0" height="42" />
-                            </div>
-                        </telerik:LayoutColumn>
-                        <telerik:LayoutColumn Span="9">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompanyLogo"
-                                        RenderOuterTable="false">
-                                        <ItemTemplate>
-                                            <div style="padding: 3px">
-                                                <telerik:RadBinaryImage ID="RadBinaryImage1" runat="server" AlternateText="Logo" CssClass="img-responsive"
-                                                    Style="width: auto; height: 42px;"
-                                                    DataValue='<%# IIf(Eval("Logo") Is DBNull.Value, Nothing, Eval("Logo"))%>'></telerik:RadBinaryImage>
-                                            </div>
-                                        </ItemTemplate>
-                                    </asp:FormView>
-                                </li>
-                                <li class="dropdown">
-                                    <a runat="server" class="dropdown-toggle" data-toggle="dropdown" style="padding-right: 0px;">
-                                        <asp:Label ID="lblCompanyName" runat="server" ForeColor="Black" Font-Bold="true"></asp:Label>
-                                        &nbsp;|&nbsp;
-                                            <asp:Label ID="lblUserName" runat="server" ForeColor="Black" Font-Bold="true"></asp:Label>
-                                        &nbsp;&nbsp;
-                                            <span class="glyphicon glyphicon-user"></span>
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a runat="server" href="~/adm/Options" title="User profile">
-                                                <i class="fas fa-user-edit"></i>
-                                                &nbsp;My Account
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a runat="server" role="menuitem" href="https://video.spike.chat/?" title="Video Chat Meeting" target="_blank">
-                                                <i class="fas fa-video"></i>
-                                                &nbsp;Video Chat
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false">
-                                                <i class="fas fa-exchange-alt"></i>        
-                                                &nbsp;Switch Company
-                                            </asp:LinkButton>
-                                        </li>
-                                        <li class="divider" runat="server"></li>
-                                        <li>
-                                            <asp:LoginStatus runat="server" LogoutAction="Redirect"
-                                                ToolTip="Logout"
-                                                LogoutText="Log out &lt;i aria-hidden=&quot;true&quot; class=&quot;fas fa-sign-out-alt&quot;&gt;&lt;/i&gt;"
-                                                LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <asp:LoginView runat="server" ViewStateMode="Disabled" ID="LoginViewMenuSetting" Visible='<%# EmployeePermission("Deny_CompanyMenu") %>'>
-                                    <LoggedInTemplate>
-
-                                        <li class="dropdown">
-                                            <a runat="server" class="dropdown-toggle" data-toggle="dropdown">
-                                                <span class="glyphicon glyphicon-cog"></span>
-                                                <span class="caret"></span>
-                                            </a>
-
-                                            <ul class="dropdown-menu">
-                                                <li class="dropdown dropdown-submenu">
-
-                                                    <%--Company--%>
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Company
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a runat="server" href="~/adm/Company" title="Company Profile" visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>Company Profile
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/DepartmentsList" title="Departments" visible='<%# EmployeePermission("Deny_DepartmentsList") %>'>Departments
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/PaidDayList" title="Payroll" visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>Payroll
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/MessagesTemplates" title="Messages Templates" visible='<%# EmployeePermission("Deny_MessagesTemplates") %>'>Messages Templates
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                                <%--Proposal--%>
-                                                <li class="dropdown dropdown-submenu">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Proposal
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a runat="server" href="~/adm/Proposal_tasks" title="Proposal Tasks" visible='<%# EmployeePermission("Deny_ProposalTasksList") %>'>Proposal Tasks
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/InvoicesTypes" title="Payment Schedules" visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>Payment Schedules
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/TandCtemplates" title="Terms &amp; Conditions" visible='<%# EmployeePermission("Deny_ProposalTermsConditions")%>'>Terms &amp; Conditions
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/PhasesTemplate" title="Phases Templates" visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>Phases Templates
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/Proposal_types" title="Proposal Templates" visible='<%# EmployeePermission("Deny_ProposalTemplates") %>'>Proposal Templates
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                                <%--Projects--%>
-                                                <li class="dropdown dropdown-submenu">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Projects
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a runat="server" href="~/adm/JobTypes" title="Job Types" visible='<%# EmployeePermission("Deny_JobCodes")%>'>Job Types
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/ProjectTags" title="Project Tags" visible='<%# EmployeePermission("Deny_JobCodes") %>'>Project Tags
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/TransmittalPackageTypes" title="Transmittal Package Types" visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16%>'>Transmittal Package Types
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/TimeCategory" title="Productive Time Categories" visible='<%# EmployeePermission("Deny_TimeCategory") %>'>Productive Time Categories
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/NoJobsTimeTypes" title="Non-Productive Time Categories" visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>Non-Productive Time Categories
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                                <%--Contacts--%>
-                                                <li class="dropdown dropdown-submenu">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Contacts
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-
-                                                        <li>
-                                                            <a runat="server" href="~/adm/ClientTypes" title="Client Types" visible='<%# EmployeePermission("Deny_ClientType") %>'>Client Types
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/Discipline" title="Subconsultants Discipline" visible='<%# EmployeePermission("Deny_DisciplinesList") %>'>Subconsultants Discipline
-                                                            </a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a runat="server" href="~/adm/Position" title="PayEmployee's Positionsroll" visible='<%# EmployeePermission("Deny_NewEmployee")%>'>Employee Positions
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/VendorTypes" title="Vendor Types" visible='<%# EmployeePermission("Deny_VendorTypes") %>'>Vendor Types
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                                <%--Security Settings--%>
-                                                <li class="dropdown dropdown-submenu">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Security Settings
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a runat="server" href="~/adm/Employee_Permissions" title="Employees Permissions" visible="<%# IsMasterUser() %>">Employees Permissions
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a runat="server" href="~/adm/roles" title="Roles Permissions" visible="<%# IsMasterUser() %>">Roles Permissions
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-
-                                            </ul>
-
-                                        </li>
-                                    </LoggedInTemplate>
-                                </asp:LoginView>
-
-
-                            </ul>
-                        </telerik:LayoutColumn>
-                    </Columns>
-                </telerik:LayoutRow>
-                <telerik:LayoutRow StaticId="Menu">
-                    <Content>
-                        <%--<telerik:RadMenu ID="RadMenu2" runat="server" ClickToOpen="True" Style="z-index: 700" EnableEmbeddedSkins="false" CssClass="RadMenu_PASMenuBlackMetroTouch" Width="100%">--%>
-                        <div class="noprint" style="text-align: center">
-                            <telerik:RadNavigation ID="RadMenu2" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material" Font-Size="Medium">
+        <%-- class=container 12 columns--%>
+        <div class="container-fluid" style="padding-left:75px;padding-right:75px">
+            <%--Menu.........................................................................................................................................--%>
+            <asp:Panel runat="server" ID="PanelHeader">
+                <table class="table-condensed" style="width: 100%">
+                    <tr>
+                        <td class="noprint" style="width: 150px">
+                            <img src="../Images/logo/pas_horizontal_logo.png" style="border-width: 0" height="42" />
+                        </td>
+                        <td style="text-align:center">
+                            <telerik:RadNavigation ID="RadNavigation1" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material" Font-Size="Medium" >
                                 <Nodes>
 
                                     <%--Projects menu--%>
                                     <telerik:NavigationNode Text="Projects">
                                         <Nodes>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Pre-Projects" Text="Pre-Proposal"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/Pre-Projects" Text="Pre-Proposals"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/rfps" Text="Requests for Proposals"
@@ -533,10 +333,10 @@
                                                         Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/BillingAgingReport"
-                                                        Text="Client Aging Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") %>'>
+                                                        Text="Clients Aging Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") %>'>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/ClientsBalance"
-                                                        Text="Client Balance Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") %>'>
+                                                        Text="Clients Balance Report" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") %>'>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/BILLvsCOLLECTED"
                                                         Text="Bill vs Collected" Visible='<%# EmployeePermission("Deny_ClientAccountsReport") %>'>
@@ -637,23 +437,211 @@
 
                                 </Nodes>
                             </telerik:RadNavigation>
-                        </div>
-                    </Content>
-                </telerik:LayoutRow>
+                        </td>
+                        <td class="noprint" style="width: 400px">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li></li>
+                                <li class="dropdown">
+                                    <a runat="server" class="dropdown-toggle" data-toggle="dropdown" style="padding-right: 0px;">
+                                        <asp:Label ID="lblCompanyName" runat="server" ForeColor="Black" Font-Bold="true"></asp:Label>
+                                            &nbsp;|&nbsp;
+                                            <asp:Label ID="lblUserName" runat="server" ForeColor="Black" Font-Bold="true"></asp:Label>
+                                            <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a runat="server" href="~/adm/Options" title="User profile">
+                                                <i class="fas fa-user-edit"></i>
+                                                &nbsp;My Account
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a runat="server" role="menuitem" href="https://video.spike.chat/?" title="Video Chat Meeting" target="_blank">
+                                                <i class="fas fa-video"></i>
+                                                &nbsp;Video Chat
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false">
+                                                <i class="fas fa-exchange-alt"></i>        
+                                                &nbsp;Switch Company
+                                            </asp:LinkButton>
+                                        </li>
+                                        <li class="divider" runat="server"></li>
+                                        <li>
+                                            <asp:LoginStatus runat="server" LogoutAction="Redirect"
+                                                ToolTip="Logout"
+                                                LogoutText="Log out &lt;i aria-hidden=&quot;true&quot; class=&quot;fas fa-sign-out-alt&quot;&gt;&lt;/i&gt;"
+                                                LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                        </li>
+                                    </ul>
+                                </li>
 
-                <telerik:LayoutRow StaticId="Content">
-                    <Content>
-                        <div style="padding-top: 2px; padding-bottom: 2px">
-                            <asp:Button ID="btnAvoidEnterKey" runat="server" Text="" Style="display: none;" OnClientClick="return false;" />
-                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                            </asp:ContentPlaceHolder>
-                        </div>
-                    </Content>
-                </telerik:LayoutRow>
+                                <asp:LoginView runat="server" ViewStateMode="Disabled" ID="LoginViewMenuSetting" Visible='<%# EmployeePermission("Deny_CompanyMenu") %>'>
+                                    <LoggedInTemplate>
 
-                <telerik:LayoutRow StaticId="Footer2" CssClass="noprint">
-                    <Content>
-                        <div style="text-align: center; padding-top: 25px" class="noprint">
+                                        <li class="dropdown">
+                                            <a runat="server" class="dropdown-toggle" data-toggle="dropdown">
+                                                <span class="glyphicon glyphicon-cog"></span>
+                                                <span class="caret"></span>
+                                            </a>
+
+                                            <ul class="dropdown-menu">
+                                                <li class="dropdown dropdown-submenu">
+
+                                                    <%--Company--%>
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Company
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a runat="server" href="~/adm/Company" title="Company Profile" visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>Company Profile
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/companymultiplier" title="Company Multiplier" visible='<%# EmployeePermission("Deny_Multiplier") %>'>Company Multiplier
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/DepartmentsList" title="Departments" visible='<%# EmployeePermission("Deny_DepartmentsList") %>'>Departments
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/PaidDayList" title="Payroll" visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>Payroll
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/MessagesTemplates" title="Messages Templates" visible='<%# EmployeePermission("Deny_MessagesTemplates") %>'>Messages Templates
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                                <%--Proposal--%>
+                                                <li class="dropdown dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Proposal
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a runat="server" href="~/adm/Proposal_tasks" title="Proposal Tasks" visible='<%# EmployeePermission("Deny_ProposalTasksList") %>'>Proposal Tasks
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/InvoicesTypes" title="Payment Schedules" visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>Payment Schedules
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/TandCtemplates" title="Terms &amp; Conditions" visible='<%# EmployeePermission("Deny_ProposalTermsConditions")%>'>Terms &amp; Conditions
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/PhasesTemplate" title="Phases Templates" visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>Phases Templates
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/Proposal_types" title="Proposal Templates" visible='<%# EmployeePermission("Deny_ProposalTemplates") %>'>Proposal Templates
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                                <%--Projects--%>
+                                                <li class="dropdown dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Projects
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a runat="server" href="~/adm/JobTypes" title="Job Types" visible='<%# EmployeePermission("Deny_JobCodes")%>'>Job Types
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/ProjectTags" title="Project Tags" visible='<%# EmployeePermission("Deny_JobCodes") %>'>Project Tags
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/TransmittalPackageTypes" title="Transmittal Package Types" visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16%>'>Transmittal Package Types
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/TimeCategory" title="Productive Time Categories" visible='<%# EmployeePermission("Deny_TimeCategory") %>'>Productive Time Categories
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/NoJobsTimeTypes" title="Non-Productive Time Categories" visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>Non-Productive Time Categories
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                                <%--Contacts--%>
+                                                <li class="dropdown dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Contacts
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+
+                                                        <li>
+                                                            <a runat="server" href="~/adm/ClientTypes" title="Client Types" visible='<%# EmployeePermission("Deny_ClientType") %>'>Client Types
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/Discipline" title="Subconsultants Discipline" visible='<%# EmployeePermission("Deny_DisciplinesList") %>'>Subconsultants Discipline
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a runat="server" href="~/adm/Position" title="PayEmployee's Positionsroll" visible='<%# EmployeePermission("Deny_NewEmployee")%>'>Employee Positions
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/VendorTypes" title="Vendor Types" visible='<%# EmployeePermission("Deny_VendorTypes") %>'>Vendor Types
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                                <%--Security Settings--%>
+                                                <li class="dropdown dropdown-submenu">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-weight: bold; font-size: 14px;">Security Settings
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a runat="server" href="~/adm/Employee_Permissions" title="Employees Permissions" visible="<%# IsMasterUser() %>">Employees Permissions
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a runat="server" href="~/adm/roles" title="Roles Permissions" visible="<%# IsMasterUser() %>">Roles Permissions
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+
+                                            </ul>
+
+                                        </li>
+                                    </LoggedInTemplate>
+                                </asp:LoginView>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+
+            <%--Child Page.........................................................................................................................................--%>
+            <table class="table-condensed" style="width: 100%">
+                <tr>
+                    <td>
+                        <asp:Button ID="btnAvoidEnterKey" runat="server" Text="" Style="display: none;" OnClientClick="return false;" />
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+            </table>
+
+
+            <%--Footer.........................................................................................................................................--%>
+            <asp:Panel runat="server" ID="PanelFotter">
+                <table class="table-condensed" style="width: 100%">
+                    <tr>
+                        <td style="text-align: center; padding-top: 25px" class="noprint">
                             <hr style="margin: 0" />
                             <%--                            <asp:HyperLink ID="lnkHelp" runat="server" CssClass="enlacepie" ToolTip="Help" Target="_blank" NavigateUrl="http://blog.pasconcept.com/p/contents.html">Blog | 
                             </asp:HyperLink>
@@ -667,36 +655,18 @@
                             <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Terms & Conditions | </a>
                             <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Security | </a>
                             <a href="https://pasconcept.com/#contact" target="_blank" class="enlacepie">Support</a>
-                        </div>
-                    </Content>
-                </telerik:LayoutRow>
-
-                <telerik:LayoutRow StaticId="Footer3" CssClass="noprint">
-                    <Content>
-                        <div style="text-align: center" class="enlacepie noprint ">
-                            &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">Axzes LLC</a>
-                            <br />
-
-                        </div>
-                    </Content>
-                </telerik:LayoutRow>
-                <telerik:LayoutRow StaticId="Footer3" CssClass="noprint">
-                    <Content>
-                        <table>
-                            <tr>
-
-                                <td style="text-align: right">
-                                    <asp:Label ID="lblPageTitle" runat="server" Visible="false"></asp:Label></td>
-                            </tr>
-                        </table>
-                    </Content>
-                </telerik:LayoutRow>
-
-            </Rows>
-        </telerik:RadPageLayout>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center" class="enlacepie noprint ">&copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">Axzes LLC</a>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </div>
 
 
-        <%--EditTicket Form--%>
+        <%--Switch Company Form--%>
         <div>
             <telerik:RadToolTip ID="RadToolTipSwitchCompany" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
                 <div>
@@ -704,7 +674,7 @@
                         <span class="label label-default center-block">Switch Company
                         </span>
                     </h2>
-                    <table class="table-condensed" style="width: 800px" >
+                    <table class="table-condensed" style="width: 800px">
                         <tr>
                             <td style="width: 40%" rowspan="2">
 
@@ -760,12 +730,6 @@
                 <asp:ControlParameter ControlID="cboCompany" Name="companyId" PropertyName="SelectedValue" />
             </UpdateParameters>
         </asp:SqlDataSource>
-        <asp:SqlDataSource ID="SqlDataSourceCompanyLogo" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="CompanyLogo_SELECT" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-            </SelectParameters>
-        </asp:SqlDataSource>
 
         <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
@@ -784,7 +748,7 @@
         <br />
         <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
-
+        <asp:Label ID="lblPageTitle" runat="server" Visible="false"></asp:Label>
     </form>
 
 

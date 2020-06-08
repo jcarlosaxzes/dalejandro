@@ -16,6 +16,7 @@
         }
     </style>
 
+    
     <table style="width: 100%" class="table-condensed Formulario">
         <tr>
             <td style="width: 150px;">
@@ -49,10 +50,13 @@
             </td>
         </tr>
     </table>
-    <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material" DisplayNavigationButtons="false" DisplayProgressBar="false">
+
+    
+    <div class="pas-container">
+    <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Average Chart" StepType="Step">
-                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="850px">
+                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
                         <ChartTitle Text="Average Budget Used(%) by Employee">
                             <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
                         </ChartTitle>
@@ -114,7 +118,7 @@
                     </telerik:RadHtmlChart>
             </telerik:RadWizardStep>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Profit Chart" StepType="Step">
-                <telerik:RadHtmlChart ID="RadHtmlChart2" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="850px">
+                <telerik:RadHtmlChart ID="RadHtmlChart2" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
                         <ChartTitle Text="Profit Chart by Employee">
                             <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
                         </ChartTitle>
@@ -240,7 +244,7 @@
             </telerik:RadWizardStep>
         </WizardSteps>
     </telerik:RadWizard>
-
+</div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="YearStadistic_EMPLOYES_PROFIT3" SelectCommandType="StoredProcedure">
         <SelectParameters>

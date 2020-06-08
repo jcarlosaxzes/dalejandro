@@ -6,7 +6,7 @@
         <Rows>
             <telerik:LayoutRow>
                 <Content>
-                    <table class="Formulario" style="width:100%">
+                    <table class="Formulario" style="width: 100%">
                         <tr>
                             <td>
                                 <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="110px" Culture="en-US">
@@ -51,7 +51,7 @@
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
-                            <td style="text-align:right;width:120px">
+                            <td style="text-align: right; width: 120px">
                                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-search"></span> Search
                                 </asp:LinkButton>
@@ -66,8 +66,13 @@
 
             <telerik:LayoutRow>
                 <Content>
-                    <telerik:RadGantt ID="RadGantt1" runat="server" ReadOnly="true" Height="750px" AutoGenerateColumns="false"
-                        SelectedView="MonthView" DayView-UserSelectable ="false" Skin="Simple"
+                    <div style="text-align: center">
+                        <h3 style="margin: 0">Projects Schedule
+                        </h3>
+                    </div>
+
+                    <telerik:RadGantt ID="RadGantt1" runat="server" ReadOnly="true" Height="800px" AutoGenerateColumns="false"
+                        SelectedView="MonthView" DayView-UserSelectable="false" Skin="Silk"
                         OnNavigationCommand="RadGantt1_NavigationCommand"
                         ShowFullWeek="false"
                         DataSourceID="SqlDataSourceGrantt"
@@ -80,14 +85,14 @@
                             <telerik:GanttBoundColumn DataField="PercentComplete" Width="80px" HeaderText="Time Used"></telerik:GanttBoundColumn>
                         </Columns>
                         <DataBindings>
-                            <TasksDataBindings 
-                                    IdField="ID" 
-                                    TitleField="Title" 
-                                    StartField="StartDay" 
-                                    EndField="EndDay"
-                                    ParentIdField="ParentID" 
-                                    SummaryField="Summary" 
-                                    PercentCompleteField="PercentComplete" ExpandedField="Expanded" />
+                            <TasksDataBindings
+                                IdField="ID"
+                                TitleField="Title"
+                                StartField="StartDay"
+                                EndField="EndDay"
+                                ParentIdField="ParentID"
+                                SummaryField="Summary"
+                                PercentCompleteField="PercentComplete" ExpandedField="Expanded" />
                         </DataBindings>
                     </telerik:RadGantt>
                 </Content>

@@ -590,22 +590,13 @@ Partial Public Class proposalnewwizard
     Protected WithEvents cboProjectManagerId As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''Fees control.
+    '''RadWizardStepFees control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Fees As Global.Telerik.Web.UI.RadWizardStep
-    
-    '''<summary>
-    '''cboMulticolumnTask control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboMulticolumnTask As Global.Telerik.Web.UI.RadMultiColumnComboBox
+    Protected WithEvents RadWizardStepFees As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''btnNewFeeOk control.
@@ -615,15 +606,6 @@ Partial Public Class proposalnewwizard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNewFeeOk As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''RadCodeBlock1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
     
     '''<summary>
     '''RadGridFees control.

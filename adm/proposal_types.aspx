@@ -58,7 +58,7 @@
                 <Content>
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                         AllowAutomaticDeletes="True" Width="100%" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True"
-                        PageSize="250" Height="700px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                        PageSize="250" Height="1000px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                         <ClientSettings>
                             <Scrolling AllowScroll="True"></Scrolling>
                         </ClientSettings>

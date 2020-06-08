@@ -95,7 +95,7 @@ Public Class proposals
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
-                Response.Redirect("~/ADM/Proposal.aspx?Id=" & e.CommandArgument)
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument)
 
             Case "EditWizard"
                 Response.Redirect("~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
