@@ -335,12 +335,6 @@ Public Class proposalnewwizard
         End Select
 
     End Sub
-    Private Sub SqlDataSourceServiceFees_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceServiceFees.Updated
-        RadGridPS.DataBind()
-        cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
-        btnUpdatePS.Visible = cboPaymentSchedules.Visible
-    End Sub
-
 
 #End Region
 

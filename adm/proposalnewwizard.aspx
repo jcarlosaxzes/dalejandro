@@ -1030,20 +1030,10 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceServiceFees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="PROPOSAL_details_DELETE" DeleteCommandType="StoredProcedure"
-        SelectCommand="PROPOSAL_details_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL_details_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        SelectCommand="PROPOSAL_details_SELECT" SelectCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="String" />
         </DeleteParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="DescriptionPlus" Type="String" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="Hours" Type="Double" />
-            <asp:Parameter Name="Rates" Type="Double" />
-            <asp:Parameter Name="paymentscheduleId" Type="Int32" />
-            <asp:Parameter Name="Id" Type="String" />
-        </UpdateParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
         </SelectParameters>

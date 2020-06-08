@@ -215,11 +215,6 @@ Public Class proposal
         End Try
     End Sub
 
-    Protected Sub SqlDataSourceProposalDetails_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProposalDetails.Inserting
-        Dim e1 As String = e.Command.Parameters(0).Value
-
-    End Sub
-
     Protected Sub btnModifyJob_Click(sender As Object, e As EventArgs) Handles btnModifyJob.Click
         lblSelectedJobId.Text = cboJobs.SelectedValue
         'PanelJobAsociado()
