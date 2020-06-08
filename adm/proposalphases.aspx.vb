@@ -13,7 +13,7 @@
         End Try
     End Sub
     Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text & "&Tab2=1")
+        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&Tab2=1")
     End Sub
 
     Protected Sub btnExcel_Click(sender As Object, e As EventArgs) Handles btnExcel.Click

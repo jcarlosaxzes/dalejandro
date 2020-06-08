@@ -671,13 +671,13 @@ Partial Public Class proposal
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblId control.
+    '''lblProposalId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblId As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblProposalId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblOriginalStatus control.

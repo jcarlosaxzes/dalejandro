@@ -95,7 +95,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-condensed" style="width: 95%">
                         <tr>
 
                             <td style="text-align: right; width: 180px">Quantity (optional):
@@ -119,7 +119,9 @@
                                     <NumberFormat DecimalDigits="2" />
                                 </telerik:RadNumericTextBox>
                             </td>
-                            <td></td>
+                            <td style="text-align:right">
+                                <asp:Label ID="lblTotalLine" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
+                            </td>
                         </tr>
                         <tr>
                             <td style="text-align: right;">
@@ -129,7 +131,7 @@
                                 <small>Total = [Quantity] * [Hours] * [Rates]</small><br />
                                 <small>if [Quantity] or [Hours] 'is blank' then Total = [1] * [1] * [Rates]</small>
                             </td>
-                            <td colspan="2" style="text-align: center">
+                            <td colspan="2" style="text-align: right">
                                 <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
                                 </asp:LinkButton>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -244,13 +246,12 @@
 
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="PROPOSAL_details2_INSERT" InsertCommandType="StoredProcedure"
+        InsertCommand="PROPOSAL_details_v20_INSERT" InsertCommandType="StoredProcedure"
         UpdateCommand="PROPOSAL_details_UPDATE" UpdateCommandType="StoredProcedure"
         SelectCommand="SELECT [Id], [taskcode], [Description], [Hours], [Rates] FROM [Proposal_tasks] WHERE (companyId = @companyId) ORDER BY taskcode">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="cboPhase" Name="phaseId" PropertyName="SelectedValue" Type="Int32" />
-            <%--<asp:ControlParameter ControlID="cboTaskTemplate" Name="TaskId" PropertyName="SelectedValue" Type="Int32" />--%>
             <asp:ControlParameter ControlID="cboMulticolumnTask" Name="TaskId" PropertyName="Value" Type="Int32" />
             <asp:ControlParameter ControlID="txtName" Name="Description" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="txtDescriptionPlus" Name="DescriptionPlus" PropertyName="Content" Type="String" />
@@ -259,6 +260,8 @@
             <asp:ControlParameter ControlID="txtRates" Name="Rates" PropertyName="Text" Type="Double" />
             <asp:ControlParameter ControlID="cboPosition" Name="positionId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblproposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" />
+            <asp:Parameter Direction="InputOutput" Name="Id_OUT" Type="Int32" />
         </InsertParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" />

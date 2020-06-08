@@ -548,27 +548,14 @@
                         <h3>Service Fee(s)</h3>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
-                                <td style="width: 600px">
-                                    <telerik:RadMultiColumnComboBox ID="cboMulticolumnTask" runat="server" DataSourceID="SqlDataSourceInsertFee" DataTextField="Description" DataValueField="Id"
-                                        Width="100%" DropDownWidth="600" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
-                                        FilterFields="taskcode, Description" Placeholder="(Select Task...)">
-                                        <ColumnsCollection>
-                                            <telerik:MultiColumnComboBoxColumn Field="taskcode" Title="Code" Width="100px" />
-                                            <telerik:MultiColumnComboBoxColumn Field="Description" Title="Description" />
-                                            <telerik:MultiColumnComboBoxColumn Field="Hours" Title="Hours" Width="100px" />
-                                            <telerik:MultiColumnComboBoxColumn Field="Rates" Title="Rates" Width="100px" />
-                                        </ColumnsCollection>
-                                    </telerik:RadMultiColumnComboBox>
-                                </td>
                                 <td>
                                     <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" CausesValidation="false">
                                         <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Fee
                                     </asp:LinkButton>
-
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td >
                                     <telerik:RadGrid ID="RadGridFees" runat="server" AllowAutomaticDeletes="True" 
                                         AutoGenerateColumns="False" DataSourceID="SqlDataSourceServiceFees" CellSpacing="0" Width="100%">
                                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceServiceFees" ShowFooter="true">

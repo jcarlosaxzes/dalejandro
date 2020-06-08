@@ -76,7 +76,7 @@
     <telerik:RadWindowManager ID="RadWindowManager2" runat="server">
         <Windows>
             <telerik:RadWindow ID="RadWindowDataProcessing"
-                VisibleOnPageLoad="false" Behaviors="Close, Move" Modal="true" Top="10" Left="50" Height="750px" Width="850px" runat="server" VisibleStatusbar="false" DestroyOnClose="true" NavigateUrl="~/ADM/DataProcessing.aspx?ProposalId=<%=lblId.Text%>">
+                VisibleOnPageLoad="false" Behaviors="Close, Move" Modal="true" Top="10" Left="50" Height="750px" Width="850px" runat="server" VisibleStatusbar="false" DestroyOnClose="true" NavigateUrl="~/ADM/DataProcessing.aspx?ProposalId=<%=lblProposalId.Text%>">
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>
@@ -1260,7 +1260,7 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="Id" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
@@ -1282,10 +1282,10 @@
             <asp:Parameter Name="Id" Type="String" />
         </UpdateParameters>
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="ProposalId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
         </SelectParameters>
         <InsertParameters>
-            <asp:ControlParameter ControlID="lblId" Name="ProposalId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
             <asp:Parameter Name="TaskId" />
             <asp:Parameter Name="Description" Type="String" />
             <asp:Parameter Name="DescriptionPlus" Type="String" />
@@ -1306,7 +1306,7 @@
         SelectCommand="SELECT Id, Agreements FROM Proposal WHERE (Id = @Id)"
         UpdateCommand="Proposal_TC_Ext_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="Id" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="Agreements" Type="String" />
@@ -1316,7 +1316,7 @@
     <asp:SqlDataSource ID="SqlDataSourceJob" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="PROPOSAL_cboJobs_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
         </SelectParameters>
@@ -1324,7 +1324,7 @@
     <asp:SqlDataSource ID="SqlDataSourcePrint" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id] FROM [Proposal] WHERE ([Id] = @Id)">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="Id" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceTask" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -1387,14 +1387,14 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcePhasesSchedule" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], Task=(select count(*) from Proposal_details where Proposal_details.phaseId=Proposal_phases.Id), Code+' '+[Name] As Name, DateFrom, DateTo  FROM [Proposal_phases] WHERE proposalId=@proposalId ORDER BY [nOrder]"
         UpdateCommand="UPDATE Proposal_phases SET DateFrom=@DateFrom, DateTo=@DateTo WHERE Id=@Id">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="Id" Type="Int32" />
@@ -1429,7 +1429,7 @@
         UpdateCommand="ClientProsalJob_azureuploads_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblClientId" Name="clientId" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="lblId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="JobId" DefaultValue="0" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
@@ -1465,16 +1465,16 @@
         SelectCommand="Proposal_PaymentSchedule_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Proposal_PS_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="ProposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:ControlParameter ControlID="cboPaymentSchedules" Name="paymentscheduleId" PropertyName="SelectedValue" />
-            <asp:ControlParameter ControlID="lblId" Name="Id" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblId" runat="server" Visible="false"></asp:Label>
+    <asp:Label ID="lblProposalId" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblOriginalStatus" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblOriginalType" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblSelectedJobId" runat="server" Visible="false"></asp:Label>

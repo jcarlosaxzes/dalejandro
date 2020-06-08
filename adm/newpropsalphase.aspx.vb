@@ -14,7 +14,7 @@
     End Sub
 
     Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text & "&Tab2=1")
+        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&Tab2=1")
     End Sub
     Protected Sub cboPhaseTemplate_SelectedIndexChanged(sender As Object, e As Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs) Handles cboPhaseTemplate.SelectedIndexChanged
         If cboPhaseTemplate.SelectedValue > 0 Then
@@ -28,6 +28,6 @@
     End Sub
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblproposalId.Text & "&Tab2=1")
+        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&Tab2=1")
     End Sub
 End Class
