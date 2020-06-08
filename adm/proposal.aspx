@@ -698,16 +698,7 @@
                         </tr>
                         <tr>
                             <td style="padding-top: 10px; padding-bottom: 10px">
-                                <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
-                                    <script type="text/javascript">
-                                        function OnClientClose(sender, args) {
-                                            var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-                                            masterTable.rebind();
-                                        }
-                                    </script>
-                                </telerik:RadCodeBlock>
-                                <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-                                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposalDetails"
+                                <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposalDetails"
                                     CellSpacing="0" ValidationGroup="Proposal"
                                     ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceProposalDetails" ShowFooter="true" CommandItemDisplay="None">
@@ -809,6 +800,11 @@
                                                     </telerik:RadNumericTextBox>
                                                 </EditItemTemplate>
                                             </telerik:GridTemplateColumn>
+                                            <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimator" ReadOnly="True"
+                                                SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimator" Aggregate="Sum"
+                                                FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
+                                                HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                            </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True"
                                                 SortExpression="TotalRow" DataFormatString="{0:N2}" UniqueName="TotalRow" Aggregate="Sum"
                                                 FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
@@ -1266,33 +1262,13 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceProposalDetails" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="PROPOSAL_details_DELETE" DeleteCommandType="StoredProcedure"
-        InsertCommand="PROPOSAL_details_INSERT" InsertCommandType="StoredProcedure"
-        SelectCommand="PROPOSAL_details_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL_details2_UPDATE" UpdateCommandType="StoredProcedure">
+        SelectCommand="PROPOSAL_details_SELECT" SelectCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="String" />
         </DeleteParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="Hours" Type="Double" />
-            <asp:Parameter Name="Rates" Type="Double" />
-            <asp:Parameter Name="phaseId" Type="Int32" />
-            <asp:Parameter Name="positionId" Type="Int32" />
-            <asp:Parameter Name="Id" Type="String" />
-        </UpdateParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
         </SelectParameters>
-        <InsertParameters>
-            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
-            <asp:Parameter Name="TaskId" />
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="DescriptionPlus" Type="String" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="Hours" Type="Double" />
-            <asp:Parameter Name="Rates" Type="Double" />
-        </InsertParameters>
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceProposaldDetailDuplicate" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
