@@ -2,7 +2,7 @@
 <%----------CONTROLES GENERALES A TODAS LAS PAGINAS---------%>
 <%----------------------------------------------------------%>
 
-<asp:Image SkinID="headerpasconceptlogo" runat="server" ImageUrl="Images/header-pasconcept-logo.png" />
+<asp:Image SkinID="headerpasconceptlogo" runat="server" ImageUrl="Images/logo/pas_horizontal_logo.png" />
 <asp:Image SkinID="roleIcon" runat="server" ImageAlign="Middle" ImageUrl="Images/administrator.png" />
 
 
