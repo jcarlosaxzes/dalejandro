@@ -12,7 +12,7 @@
             //alert(Id);
             console.log(<%=RadWindow1.ClientID%>);
             var oWnd = $find("<%=RadWindow1.ClientID%>");
-            var url = '../OPE/project.aspx?guId=a454d8ed-d27d-2609-1962-426a02615e1a&Id=' + Id;
+            var url = '../ope/ope_project.aspx?guId=a454d8ed-d27d-2609-1962-426a02615e1a&Id=' + Id;
             oWnd.setUrl(url);
             oWnd.show();
         }

@@ -9873,7 +9873,7 @@ Public Class LocalAPI
                         ' Tratamiento especifico de Job(Projects) para paginas publicas
                         Dim companyId As Integer = GetJobProperty(objId, "companyId")
                         Dim guId As String = LocalAPI.GetCompanyGUID(companyId)
-                        url = LocalAPI.GetHostAppSite() & "/OPE/project.aspx?guId=" & guId & "&Id=" & objId
+                        url = LocalAPI.GetHostAppSite() & "/ope/ope_project.aspx?guId=" & guId & "&Id=" & objId
                     Case 3
                         'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/RequestForProposal.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/RequestForProposal.aspx?GuiId=" & LocalAPI.GetRFPProperty(objId, "guid")

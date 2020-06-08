@@ -2104,6 +2104,7 @@
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-webapp-staging - Web Deploy.pubxml" />
+    <Content Include="ope\OPE_Master_Pages.Master" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\Admin Account Edit Proposal  .JPG" />
     <Content Include="Images\Admin Account Job Details.JPG" />
@@ -2191,6 +2192,7 @@
     <Content Include="master\useradmin.aspx" />
     <Content Include="master\usersagreelist.aspx" />
     <Content Include="master\versiones.aspx" />
+    <Content Include="ope\ope_project.aspx" />
     <Content Include="RadEditorDialogs\About.ascx" />
     <Content Include="RadEditorDialogs\AccessibleTable.ascx" />
     <Content Include="RadEditorDialogs\Border.ascx" />
@@ -4217,6 +4219,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ope\OPE_Master_Pages.Master.designer.vb">
+      <DependentUpon>OPE_Master_Pages.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ope\OPE_Master_Pages.Master.vb">
+      <DependentUpon>OPE_Master_Pages.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ope\ope_project.aspx.designer.vb">
+      <DependentUpon>ope_project.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ope\ope_project.aspx.vb">
+      <DependentUpon>ope_project.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="register.aspx.designer.vb">
       <DependentUpon>register.aspx</DependentUpon>

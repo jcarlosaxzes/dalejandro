@@ -1,0 +1,63 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="OPE_Master_Pages.master.vb" Inherits="pasconcept20.OPE_Master_Pages" %>
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="DESCRIPTION" content="" />
+    <meta name="KEYWORDS" content="pasconcept,saas,online project administration,architectural app,engineering app,project app,time sheet,proposals online,job online,civil app,mechanical app,structural app,
+          electrical app,request for proposal, rfp,subconsultant,
+          engineering Software,cloud accounting software,billing system,engineering services,A/E online app,A/E online services,Rational Engineering, Lifecycle Manager, engineering data, engineering lifecycle,
+          systems engineering, lifecycle data, open architecture,architectural firm,A/E online administration,proposal for architectural,budget for architectural,budeget for engineering,proposal for engineering,
+          proposal for A/E,budget for A/E,agreement for architectural, agreement for engineering,contract for engineering,contract for architectural,agreement for engineering,invoice for engineering,
+          invoice for architectural,invoice service, invoice online,time sheet for architectural,time sheet for engineering,rfp for architectural,rfp for engineering,rfp for subconsultant" />
+    <meta name="google-site-verification" content="-YpSUSprv2srj8BMkivDa3xokq246v05MmoAXtqSF38" />
+    <meta name="AUTHOR" content="Axzes, LLC" />
+    <meta name="COPYRIGHT" content="Copyright (c) 2005-2016 PASconcept" />
+    <meta name="RESOURCE-TYPE" content="DOCUMENT" />
+    <meta name="DISTRIBUTION" content="GLOBAL" />
+    <meta name="AUTHOR" content="Axzes, LLC" />
+    <meta name="ROBOTS" content="INDEX, FOLLOW" />
+    <meta name="REVISIT-AFTER" content="1 DAYS" />
+    <meta name="RATING" content="GENERAL" />
+    <meta name="image" content="https://pasconcept.com/Images/logopasconcept-index.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PASconcept</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+        </telerik:RadScriptManager>
+        <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
+            <Rows>
+                <telerik:LayoutRow>
+                    <Content>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </Content>
+                </telerik:LayoutRow>
+                <telerik:LayoutRow CssClass="noprint">
+                    <Columns>
+                        <telerik:LayoutColumn Span="4">
+                            <a href="https://pasconcept.com/" target="_blank">
+                                <asp:Image ID="Image1" runat="server" SkinID="headerpasconceptlogo" />
+                            </a>
+                        </telerik:LayoutColumn>
+                        <telerik:LayoutColumn Span="8">
+                            <p class="small" style="text-align: right">
+                                <br />
+                                &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="https://www.axzes.com/" target="_blank">Axzes llc</a>
+                            </p>
+                        </telerik:LayoutColumn>
+                    </Columns>
+                </telerik:LayoutRow>
+            </Rows>
+        </telerik:RadPageLayout>
+    </form>
+</body>
+</html>

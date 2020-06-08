@@ -426,7 +426,7 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <telerik:RadSocialShare RenderMode="Lightweight" ID="RadSocialShare1" runat="server" Skin="Telerik"
-                                                                        UrlToShare='<%# String.Concat("https://pasconcept.com/OPE/project.aspx?guId=", Eval("guid"), "&Id=", Eval("id"))%>'
+                                                                        UrlToShare='<%# String.Concat(LocalAPI.GetHostAppSite() & "/ope/ope_project.aspx?guId=", Eval("guid"), "&Id=", Eval("id"))%>'
                                                                         TitleToShare='<%# Eval("Job")%>'>
                                                                         <MainButtons>
                                                                             <telerik:RadSocialButton SocialNetType="ShareOnFacebook"></telerik:RadSocialButton>
@@ -440,7 +440,7 @@
                                                             <tr>
                                                                 <td>
                                                                     <telerik:RadTextBox ID="txtURL" SelectionOnFocus="SelectAll" runat="server" Width="100%"
-                                                                        Text='<%# String.Concat("https://pasconcept.com/OPE/project.aspx?guId=", Eval("guid"),"&Id=",Eval("id"))%>'>
+                                                                        Text='<%# String.Concat(LocalAPI.GetHostAppSite() & "/ope/ope_project.aspx?guId=", Eval("guid"), "&Id=", Eval("id"))%>'>
                                                                     </telerik:RadTextBox>
                                                                 </td>
                                                             </tr>
