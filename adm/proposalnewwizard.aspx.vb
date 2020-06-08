@@ -62,20 +62,16 @@ Public Class proposalnewwizard
                         RadWizard1.WizardSteps(i).Enabled = True
                     Next
 
-                    ' AttachmentsTab ?
+                    ' Active Tab?
+                    If Not Request.QueryString("ProposalTab") Is Nothing Then
+                        RadWizardStepProposal.Active = True
+                    End If
+                    If Not Request.QueryString("FeesTab") Is Nothing Then
+                        RadWizardStepFees.Active = True
+                    End If
                     If Not Request.QueryString("AttachmentsTab") Is Nothing Then
                         RadWizardStepAttachments.Active = True
-                    Else
-                        RadWizardStepFees.Active = True '(lblClientId.Text > 0)
-                        '' Fees ?
-                        'If Not Request.QueryString("FeesTab") Is Nothing Then
-                        '    Fees.Active = True
-                        'Else
-                        '    ' Edit Proposal
-                        '    RadWizardStepProposal.Active = True '(lblClientId.Text > 0)
-                        'End If
                     End If
-
 
                 End If
 

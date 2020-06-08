@@ -246,22 +246,22 @@
                     <telerik:GridBoundColumn DataField="nSubtype" HeaderText="Subtype" Display="False"
                         SortExpression="nSubtype" UniqueName="nSubtype" FilterControlAltText="Filter nSubtype column">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="ProposalAmount" HeaderText="#Prop." HeaderTooltip="Number of Proposals"
-                        SortExpression="ProposalAmount" UniqueName="ProposalAmount" ItemStyle-HorizontalAlign="Right"
-                        HeaderStyle-Width="70px"
+                    <telerik:GridBoundColumn DataField="ProposalAmount" HeaderText="Submitted Proposals" HeaderTooltip="Number of Proposals"
+                        SortExpression="ProposalAmount" UniqueName="ProposalAmount" ItemStyle-HorizontalAlign="Center"
+                        HeaderStyle-Width="100px"
                         Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="center">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="JobAmount" HeaderText="#Jobs" FilterControlAltText="Filter JobAmount column"
+                    <telerik:GridBoundColumn DataField="JobAmount" HeaderText="Accepted Jobs" FilterControlAltText="Filter JobAmount column"
                         SortExpression="JobAmount" UniqueName="JobAmount" ItemStyle-HorizontalAlign="center"
-                        HeaderStyle-Width="70px"
+                        HeaderStyle-Width="100px"
                         Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="TotalBudget" FilterControlAltText="Filter TotalBudget column" HeaderText="Budget" SortExpression="TotalBudget" UniqueName="TotalBudget"
-                        HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}"
+                    <telerik:GridBoundColumn DataField="TotalBudget" FilterControlAltText="Filter TotalBudget column" HeaderText="Total Budget" SortExpression="TotalBudget" UniqueName="TotalBudget"
+                        HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}"
                         Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="AmountDue" DataType="System.Double" FilterControlAltText="Filter AmountDue column" HeaderText="$Due" SortExpression="AmountDue" UniqueName="AmountDue"
-                        HeaderStyle-Width="70px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}"
+                    <telerik:GridBoundColumn DataField="AmountDue" DataType="System.Double" FilterControlAltText="Filter AmountDue column" HeaderText="Amount Due" SortExpression="AmountDue" UniqueName="AmountDue"
+                        HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}"
                         Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Amount Due ($)">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Email" FilterControlAltText="Filter Email column" HeaderText="Email" SortExpression="Email" UniqueName="Email" ItemStyle-Font-Size="X-Small">
