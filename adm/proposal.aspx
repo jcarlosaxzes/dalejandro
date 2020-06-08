@@ -800,7 +800,7 @@
                                                     </telerik:RadNumericTextBox>
                                                 </EditItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimator" ReadOnly="True"
+                                            <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True"
                                                 SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimator" Aggregate="Sum"
                                                 FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
                                                 HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
