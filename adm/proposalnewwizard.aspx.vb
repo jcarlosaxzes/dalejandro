@@ -225,7 +225,7 @@ Public Class proposalnewwizard
 
     Private Sub RadWizard1_FinishButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.FinishButtonClick
         If lblProposalId.Text > 0 Then
-            Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblProposalId.Text)
+            Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
         End If
 
     End Sub
@@ -314,17 +314,13 @@ Public Class proposalnewwizard
 #Region "Fees_Step2"
 
     Private Sub btnNewFeeOk_Click(sender As Object, e As EventArgs) Handles btnNewFeeOk.Click
-        If cboMulticolumnTask.Value > 0 Then
-            SqlDataSourceInsertFee.Insert()
-            RadGridFees.DataBind()
-            cboMulticolumnTask.Value = 0
-        End If
+        Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&fromwizard=1")
     End Sub
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
         Select Case e.CommandName
             Case "EditTask"
-                Response.Redirect("~/adm/proposaltask.aspx?Id=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
+                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
             Case "OrderDown"
                 LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
                 RadGridFees.DataBind()

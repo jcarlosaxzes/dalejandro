@@ -131,6 +131,15 @@ Partial Public Class proposaltask
     Protected WithEvents txtRates As Global.Telerik.Web.UI.RadNumericTextBox
     
     '''<summary>
+    '''lblTotalLine control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalLine As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''btnUpdate control.
     '''</summary>
     '''<remarks>

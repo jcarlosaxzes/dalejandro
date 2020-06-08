@@ -34,8 +34,8 @@ Public Class saveproposalas
     Protected Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Dim Id As String = e.Command.Parameters("@ProposalId").Value
         If Val(Id) > 0 Then
-            'Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/proposal.aspx?Id=" & Id & "';</script>")
-            Response.Redirect("~/adm/proposal.aspx?Id=" & Id)
+            'Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/proposal.aspx?proposalId=" & Id & "';</script>")
+            Response.Redirect("~/adm/proposal.aspx?proposalId=" & Id)
         End If
     End Sub
 
@@ -48,6 +48,6 @@ Public Class saveproposalas
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Response.Redirect("~/adm/proposal.aspx?Id=" & lblProposalId.Text)
+        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
     End Sub
 End Class

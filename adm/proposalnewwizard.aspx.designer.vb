@@ -599,15 +599,6 @@ Partial Public Class proposalnewwizard
     Protected WithEvents RadWizardStepFees As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
-    '''cboMulticolumnTask control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboMulticolumnTask As Global.Telerik.Web.UI.RadMultiColumnComboBox
-    
-    '''<summary>
     '''btnNewFeeOk control.
     '''</summary>
     '''<remarks>
