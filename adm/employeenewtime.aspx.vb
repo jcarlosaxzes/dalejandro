@@ -10,6 +10,7 @@ Public Class employeenewtime
                 lblCompanyId.Text = Session("companyId")
                 lblEmployeeId.Text = Master.UserId
                 lblSelectedJob.Text = Request.QueryString("JobId")
+                lblJobName.Text = LocalAPI.GetJobName(lblSelectedJob.Text)
 
                 Dim clientId As Integer = LocalAPI.GetJobProperty(lblSelectedJob.Text, "Client")
 
@@ -210,6 +211,7 @@ Public Class employeenewtime
     End Sub
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewTimeBalance.Visible = Not FormViewTimeBalance.Visible
+        lblJobName.Visible = Not FormViewTimeBalance.Visible
     End Sub
 End Class
 

@@ -35,11 +35,16 @@ Public Class proposals
                 cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(employeeId, "FilterProposal_Month")
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
+                If Not Request.QueryString("restoreFilter") Is Nothing Then
+                    RestoreFilter()
+                End If
+
                 RefreshRecordset()
 
                 If Not Request.QueryString("rfpGUID") Is Nothing Then
                     lblProposalIdFromRfp.Text = LocalAPI.CreateProposalFromRFP(Request.QueryString("rfpGUID"), employeeId, lblCompanyId.Text)
                 End If
+
             End If
 
             'RadWindowManager1.EnableViewState = False
@@ -84,14 +89,13 @@ Public Class proposals
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EmailPrint"
-                'sUrl = "~/ADMCLI/ProposalRDLC.aspx?ProposalId=" & e.CommandArgument & "&Origen=2"
-                sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&Origen=2"
-                CreateRadWindows(e.CommandName, sUrl, 980, 740, False)
+                Response.Redirect("~/adm/sendproposal.aspx?ProposalId=" & e.CommandArgument)
+
             Case "GetSharedLink"
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
-                Response.Redirect("~/ADM/Proposal.aspx?Id=" & e.CommandArgument)
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument)
 
             Case "EditWizard"
                 Response.Redirect("~/ADM/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
@@ -165,6 +169,25 @@ Public Class proposals
 
     Protected Sub btnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
         RefreshRecordset()
+        SaveFilter()
+    End Sub
+
+    Private Sub SaveFilter()
+        Session("Filter_Proposals_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
+        Session("Filter_Proposals_RadDatePickerTo") = RadDatePickerTo.SelectedDate
+        Session("Filter_Proposals_cboClients") = cboClients.SelectedValue
+        Session("Filter_Proposals_cboStatus") = cboStatus.SelectedValue
+        Session("Filter_Proposals_cboDepartments") = cboDepartments.SelectedValue
+        Session("Filter_Proposals_txtFind") = txtFind.Text
+    End Sub
+
+    Private Sub RestoreFilter()
+        RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerFrom"))
+        RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerTo"))
+        cboClients.SelectedValue = Session("Filter_Proposals_cboClients")
+        cboStatus.SelectedValue = Session("Filter_Proposals_cboStatus")
+        cboDepartments.SelectedValue = Session("Filter_Proposals_cboDepartments")
+        txtFind.Text = Session("Filter_Proposals_txtFind")
     End Sub
 
     Private tot As Double

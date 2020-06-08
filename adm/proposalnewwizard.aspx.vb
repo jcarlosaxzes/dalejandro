@@ -3,76 +3,91 @@ Public Class proposalnewwizard
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If (Not Page.IsPostBack) Then
+        Try
 
-            lblCompanyId.Text = Session("companyId")
-            lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
-            ' Analisis de Cantidad en esta Caracteristica¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
-            Dim CantidadPermitida As Double, CantidadActual As Double
-            If LocalAPI.sys_CaracteristicaCantidad(lblCompanyId.Text, 202, Session("Version"), CantidadPermitida, CantidadActual) Then
-                Response.RedirectPermanent("~/ADM/VersionFeatures.aspx?Feature=Amount of Proposal per year(" & CantidadPermitida & ")")
-            End If
+            If (Not Page.IsPostBack) Then
 
-            cboClients.DataBind()
-            cboEmployee.DataBind()
-            cboSector.DataBind()
-
-
-            If Request.QueryString("proposalId") Is Nothing Then
-                ' New Proposal.....................
-                SqlDataSourceClient.DataBind()
-
-                SqlDataSourceEmployees.DataBind()
-
-                cboEmployee.SelectedValue = Master.UserId
-
-                LocalAPI.FirstDeparment(lblCompanyId.Text)
-                SqlDataSourceDepartments.DataBind()
-                cboDepartment.DataBind()
-
-                ' No quieren predefinirlo....cboDepartment.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "DepartmentId")
-
-                ' From Pre-Project?
-                If Not Request.QueryString("preprojectId") Is Nothing Then
-                    lblPreProjectId.Text = Request.QueryString("preprojectId")
-                    cboProjectManagerId.DataBind()
-
-                    ReadPreProject(lblPreProjectId.Text)
-                    RadWizard1.WizardSteps(1).Enabled = True
-                    RadWizardStepProposal.Active = True
+                lblCompanyId.Text = Session("companyId")
+                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+                ' Analisis de Cantidad en esta Caracteristica¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
+                Dim CantidadPermitida As Double, CantidadActual As Double
+                If LocalAPI.sys_CaracteristicaCantidad(lblCompanyId.Text, 202, Session("Version"), CantidadPermitida, CantidadActual) Then
+                    Response.RedirectPermanent("~/ADM/VersionFeatures.aspx?Feature=Amount of Proposal per year(" & CantidadPermitida & ")")
                 End If
 
-            Else
-                ' Edit Proposal....................
-                lblProposalId.Text = Request.QueryString("proposalId")
-                lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
-
-                ProposalItemsDataBind()
-
-                RadWizard1.WizardSteps(1).Enabled = True
-                RadWizard1.WizardSteps(2).Enabled = True
-                RadWizard1.WizardSteps(3).Enabled = True
-                RadWizard1.WizardSteps(4).Enabled = True
-                RadWizard1.WizardSteps(5).Enabled = True
-                RadWizard1.WizardSteps(6).Enabled = True
+                cboClients.DataBind()
+                cboEmployee.DataBind()
+                cboSector.DataBind()
 
 
-                ' AttachmentsTab ?
-                If Not Request.QueryString("AttachmentsTab") Is Nothing Then
-                    RadWizardStepAttachments.Active = True
+                If Request.QueryString("proposalId") Is Nothing Then
+                    ' New Proposal.....................
+                    SqlDataSourceClient.DataBind()
+
+                    SqlDataSourceEmployees.DataBind()
+
+                    cboEmployee.SelectedValue = Master.UserId
+
+                    LocalAPI.FirstDeparment(lblCompanyId.Text)
+                    SqlDataSourceDepartments.DataBind()
+                    cboDepartment.DataBind()
+
+                    ' No quieren predefinirlo....cboDepartment.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "DepartmentId")
+
+                    ' From Pre-Project?
+                    If Not Request.QueryString("preprojectId") Is Nothing Then
+                        lblPreProjectId.Text = Request.QueryString("preprojectId")
+                        cboProjectManagerId.DataBind()
+
+                        ReadPreProject(lblPreProjectId.Text)
+                        RadWizard1.WizardSteps(1).Enabled = True
+                        RadWizardStepProposal.Active = True
+                    End If
+
                 Else
-                    ' Edit Proposal
-                    RadWizardStepProposal.Active = True '(lblClientId.Text > 0)
+                    ' Edit Proposal....................
+                    lblProposalId.Text = Request.QueryString("proposalId")
+                    lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
+
+                    cboPaymentSchedules.DataBind()
+                    cboPaymentSchedules.SelectedValue = LocalAPI.GetProposalProperty(lblProposalId.Text, "paymentscheduleId")
+                    RadGridPS.DataBind()
+
+                    cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+                    btnUpdatePS.Visible = cboPaymentSchedules.Visible
+
+                    ProposalItemsDataBind()
+
+                    For i = 1 To RadWizard1.WizardSteps.Count - 1
+                        RadWizard1.WizardSteps(i).Enabled = True
+                    Next
+
+                    ' AttachmentsTab ?
+                    If Not Request.QueryString("AttachmentsTab") Is Nothing Then
+                        RadWizardStepAttachments.Active = True
+                    Else
+                        RadWizardStepFees.Active = True '(lblClientId.Text > 0)
+                        '' Fees ?
+                        'If Not Request.QueryString("FeesTab") Is Nothing Then
+                        '    Fees.Active = True
+                        'Else
+                        '    ' Edit Proposal
+                        '    RadWizardStepProposal.Active = True '(lblClientId.Text > 0)
+                        'End If
+                    End If
+
+
                 End If
+
+                Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Proposal"
+                Master.PageTitle = "Proposals/New Proposal"
+                'Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html"
 
             End If
 
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Proposal"
-            Master.PageTitle = "Proposals/New Proposal"
-            'Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html"
-
-        End If
-
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Sub
 
     Private Sub ReadPreProject(preprojectId As Integer)
@@ -102,7 +117,7 @@ Public Class proposalnewwizard
 
             FormViewTC.DataBind()
 
-            FormViewPS.DataBind()
+            RadGridPS.DataBind()
 
             RadGridAzureuploads.DataBind()
 
@@ -175,8 +190,7 @@ Public Class proposalnewwizard
                 RadGridAzureuploads.DataBind()
 
             Case "Payment"
-                HidePStoolbar()
-                FormViewPS.DataBind()
+                RadGridPS.DataBind()
 
             Case "RadWizardStepAttachments"
                 RadGridAzureuploads.DataBind()
@@ -200,7 +214,7 @@ Public Class proposalnewwizard
                 FormViewTC.DataBind()
 
             Case "RadWizardStepAttachments"
-                FormViewPS.DataBind()
+                RadGridPS.DataBind()
 
             Case "Preview"
                 RadGridAzureuploads.DataBind()
@@ -211,7 +225,7 @@ Public Class proposalnewwizard
 
     Private Sub RadWizard1_FinishButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.FinishButtonClick
         If lblProposalId.Text > 0 Then
-            Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblProposalId.Text)
+            Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
         End If
 
     End Sub
@@ -299,23 +313,14 @@ Public Class proposalnewwizard
 
 #Region "Fees_Step2"
 
-    Protected Sub btnNewFee_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFee.Click
-        divBtnFee.Visible = False
-        divFormFee.Visible = True
-    End Sub
-    Protected Sub btnNewFeeOk_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFeeOk.Click
-        SqlDataSourceInsertFee.Insert()
-        RadGridFees.DataBind()
-    End Sub
-    Protected Sub btnNewFeeClose_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFeeClose.Click
-        'cboTaskTemplate.SelectedValue = 0
-        cboMulticolumnTask.Value = 0
-        divFormFee.Visible = False
-        divBtnFee.Visible = True
+    Private Sub btnNewFeeOk_Click(sender As Object, e As EventArgs) Handles btnNewFeeOk.Click
+        Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&fromwizard=1")
     End Sub
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
         Select Case e.CommandName
+            Case "EditTask"
+                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
             Case "OrderDown"
                 LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
                 RadGridFees.DataBind()
@@ -329,6 +334,11 @@ Public Class proposalnewwizard
                 RadGridFees.DataBind()
         End Select
 
+    End Sub
+    Private Sub SqlDataSourceServiceFees_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceServiceFees.Updated
+        RadGridPS.DataBind()
+        cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+        btnUpdatePS.Visible = cboPaymentSchedules.Visible
     End Sub
 
 
@@ -370,29 +380,10 @@ Public Class proposalnewwizard
         End If
     End Sub
 
-    Protected Sub btnEditPS_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEditPS.Click
-        divBtnPS.Visible = False
-        divFormPS.Visible = True
-    End Sub
-
-    Protected Sub btnClosePS_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnClosePS.Click
-        HidePStoolbar()
-    End Sub
-
-    Private Sub cboPaymentSchedules_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboPaymentSchedules.SelectedIndexChanged
-        If cboPaymentSchedules.SelectedValue > 0 Then
-            LocalAPI.Proposal_GeneratePaymentSchedules(lblProposalId.Text, cboPaymentSchedules.SelectedValue)
-            HidePStoolbar()
-            FormViewPS.DataBind()
-        End If
-    End Sub
-
-    Private Sub HidePStoolbar()
-        FormViewPS.ChangeMode(FormViewMode.ReadOnly)
-        cboPaymentSchedules.SelectedValue = -1
-        divFormPS.Visible = False
-        divBtnPS.Visible = True
-        FormViewPS.DataBind()
+    Private Sub btnUpdatePS_Click(sender As Object, e As EventArgs) Handles btnUpdatePS.Click
+        ' New code 6-3-2020
+        SqlDataSourcePS.Update()
+        RadGridPS.DataBind()
     End Sub
 
 #End Region
@@ -434,7 +425,7 @@ Public Class proposalnewwizard
 
 #End Region
     Protected Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
-        Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&Origen=15")
+        Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&fromwizard=1")
     End Sub
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
@@ -449,4 +440,10 @@ Public Class proposalnewwizard
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Response.Redirect("~/adm/proposals.aspx")
     End Sub
+
+    Private Sub SqlDataSourcePS_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourcePS.Updating
+        'cboPaymentSchedules.SelectedValue
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
+
 End Class

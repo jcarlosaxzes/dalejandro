@@ -61,7 +61,7 @@
                         <span class="glyphicon remove-circle"> Decline</span>
                     </asp:LinkButton>
                 </td>
-                <td>
+                <td style="width: 100px">
                     <asp:LinkButton ID="btnTreePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Tree view Page">
                        <span class="fas fa-stream"> Tree</span>
                     </asp:LinkButton>
@@ -77,6 +77,12 @@
                         <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                     </telerik:RadButton>
                 </td>
+                <td style="text-align:center">
+                    <h2 style="margin:0">
+                        Request for Proposals (table view)
+                    </h2>
+                </td>
+
             </tr>
         </table>
     </div>
@@ -235,7 +241,7 @@
                     <telerik:GridTemplateColumn DataField="State" HeaderText="Status" UniqueName="State"
                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("State")) %>'><%# Eval("State") %></span>
+                            <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'><%# Eval("State") %></span>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 

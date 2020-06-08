@@ -25,19 +25,19 @@
     </telerik:RadWindowManager>
 
     <div class="Formulario">
-        <table class="table-condensed">
+        <table class="table-condensed" style="width:100%">
             <tr>
-                <td>
+                <td style="width:90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
                     </button>
                 </td>
-                <td>
+                <td style="width:90px">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Time
                     </asp:LinkButton>
                 </td>
-                <td>
+                <td style="width:140px">
                     <script type="text/javascript">
                         function PrintPage(sender, args) {
                             window.print();
@@ -46,6 +46,11 @@
                     <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
                         <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                     </telerik:RadButton>
+                </td>
+                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Time Entries
+                    </h3>
                 </td>
             </tr>
         </table>
@@ -127,14 +132,14 @@
             </asp:Panel>
         </div>
     </div>
-    <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material" DisplayNavigationButtons="false" DisplayProgressBar="false">
+    <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Job Times" StepType="Step">
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Productive Time" StepType="Step">
                 <asp:Panel ID="PanelAssignedEmployees" runat="server" class="noprint">
                     <asp:Label ID="lblPanelAssignedEmployees" runat="server" Text="Job's Assigned Employees"></asp:Label>
                     <telerik:RadGrid ID="RadGridAssignedEmployees" runat="server" DataSourceID="SqlDataSourceAssignedEmployees" GridLines="None" AllowAutomaticInserts="true"
                         AllowAutomaticUpdates="True" CellSpacing="0" ShowFooter="true">
-                        <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceAssignedEmployees" CommandItemDisplay="Top" EditMode="Batch">
+                        <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceAssignedEmployees">
                             <BatchEditingSettings EditType="Cell" />
                             <CommandItemSettings AddNewRecordText="New Employee" ShowRefreshButton="true" />
                             <Columns>
@@ -223,7 +228,7 @@
                 </asp:Panel>
                 <div style="padding-top: 10px">
                     <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AllowSorting="True" DataSourceID="SqlDataSource1"
-                        GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="700px"
+                        GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="1000px"
                         HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                         <ClientSettings>
                             <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -332,7 +337,7 @@
                     </telerik:RadGrid>
                 </div>
             </telerik:RadWizardStep>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Other Times" StepType="Step">
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Non-Productive Time" StepType="Step">
                 <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSource2" GridLines="None" Width="100%" AllowPaging="True" PageSize="25"
                     AllowSorting="True">
@@ -343,24 +348,26 @@
                                 HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="30px">
                             </telerik:GridEditCommandColumn>
                             <telerik:GridBoundColumn AllowFiltering="False" DataField="nEmployee" HeaderText="Employee" ReadOnly="True"
-                                SortExpression="nEmployee" UniqueName="nEmployee" HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center">
+                                SortExpression="nEmployee" UniqueName="nEmployee" HeaderStyle-Width="250px" HeaderStyle-HorizontalAlign="Center">
                             </telerik:GridBoundColumn>
                             <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Category"
                                 SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                 <EditItemTemplate>
-                                    <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" Width="100%"
-                                        DataValueField="Id" AppendDataBoundItems="True" Height="300px" SelectedValue='<%# Bind("Type") %>'>
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Select Category...)" Value="0"></telerik:RadComboBoxItem>
-                                        </Items>
-                                    </telerik:RadComboBox>
+                                    <div style="margin:5px">
+                                        <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" Width="100%"
+                                            DataValueField="Id" AppendDataBoundItems="True" Height="300px" SelectedValue='<%# Bind("Type") %>'>
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(Select Category...)" Value="0"></telerik:RadComboBoxItem>
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </div>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                    <%# Eval("Name") %>
+                                        <%# Eval("Name") %>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From"
+                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From" 
                                 SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" ItemStyle-Width="60px"
                                 ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
                             </telerik:GridBoundColumn>
@@ -373,9 +380,9 @@
                                 SortExpression="Hours" UniqueName="Hours" ItemStyle-Width="40px" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Right">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
+                            <telerik:GridTemplateColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
                                 UniqueName="Notes" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
-                            </telerik:GridBoundColumn>
+                            </telerik:GridTemplateColumn>
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                 CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                                 HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
@@ -392,7 +399,7 @@
 
 
                 <%--<telerik:RadGrid ID="RadGrid2222" runat="server" AllowSorting="True" DataSourceID="SqlDataSource2" AllowAutomaticDeletes="true"
-                    GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="700px">
+                    GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="1000px">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                     </ClientSettings>

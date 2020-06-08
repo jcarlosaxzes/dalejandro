@@ -35,7 +35,7 @@ Public Class job_proposals
         Select Case e.CommandName
             Case "EmailPrint"
                 'sUrl = "~/ADMCLI/ProposalRDLC.aspx?ProposalId=" & e.CommandArgument & "&Origen=52"
-                sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Origen=152"
+                'sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Origen=152"
                 'CreateRadWindows(e.CommandName, sUrl, 980, 890, False, "OnClientCloseProposals")
                 Response.Redirect(sUrl)
             Case "AceptProposal"
@@ -47,8 +47,8 @@ Public Class job_proposals
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False, "OnClientCloseProposals")
             Case "EditProposal"
                 ' Codigo sapx anterior
-                '<asp:HyperLink ID="hlkProposalEdit" runat="server" Text='<%# Eval("ProposalNumber")%>' NavigateUrl='<%# Eval("Id", "~/ADM/Proposal.aspx?Id={0}")%>' ToolTip="Click to edit proposal in new tab" Target="_blank"></asp:HyperLink>
-                sUrl = "~/ADM/Proposal.aspx?Id=" & e.CommandArgument
+                '<asp:HyperLink ID="hlkProposalEdit" runat="server" Text='<%# Eval("ProposalNumber")%>' NavigateUrl='<%# Eval("Id", "~/adm/proposal.aspx?proposalId={0}")%>' ToolTip="Click to edit proposal in new tab" Target="_blank"></asp:HyperLink>
+                sUrl = "~/adm/proposal.aspx?proposalId=" & e.CommandArgument & "&HideMasterMenu=1"
                 CreateRadWindows(e.CommandName, sUrl, -1, 810, False, "OnClientCloseProposals")
             Case "Delete"
         End Select

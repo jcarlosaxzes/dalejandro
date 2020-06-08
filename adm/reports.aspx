@@ -33,8 +33,13 @@
     <div style="text-align: left" class="PanelFilter noprint">
         <table style="width: 100%" class="Formulario">
             <tr>
-                <td style="width: 80px; text-align: right">Period:</td>
-                <td style="width: 180px; text-align: right">
+                <td style="width: 300px">
+                    <telerik:RadComboBox ID="cboGroups" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceGroups" ToolTip="Group of Reports"
+                        DataTextField="RPTGroup" DataValueField="RPTGroup" Width="100%" MarkFirstMatch="True" AppendDataBoundItems="True" OnDataBound="cboGroups_DataBound">
+                    </telerik:RadComboBox>
+
+                </td>
+                <td style="width: 180px">
                     <telerik:RadComboBox ID="cboTimeFrame" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" AutoPostBack="true" ToolTip="Select Timeframe">
                         <Items>
                             <telerik:RadComboBoxItem Text="All Years" Value="1" />
@@ -65,14 +70,11 @@
                     <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US" MinDate="01/01/1930">
                     </telerik:RadDatePicker>
                 </td>
-                <td style="width: 60px; text-align: right">To:
-                </td>
                 <td style="width: 120px">
                     <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US" MinDate="01/01/1930">
                     </telerik:RadDatePicker>
                 </td>
-                <td style="width: 90px; text-align: right">Department:</td>
-                <td style="width: 380px">
+                <td>
                     <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments"
                         DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true">
                         <Items>
@@ -84,19 +86,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td style="text-align: right">Group:
-                </td>
                 <td colspan="2">
-                    <telerik:RadComboBox ID="cboGroups" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceGroups" ToolTip="Group of Reports"
-                        DataTextField="RPTGroup" DataValueField="RPTGroup" Width="100%" MarkFirstMatch="True" AppendDataBoundItems="True" OnDataBound="cboGroups_DataBound">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(Select Group...)" Value="-1" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-                <td style="text-align: right">Report:
-                </td>
-                <td colspan="3">
                     <telerik:RadComboBox ID="cboNames" runat="server" DataSourceID="SqlDataSourceName" ToolTip="Report Name"
                         DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" AppendDataBoundItems="True">
                         <Items>
@@ -104,11 +94,17 @@
                         </Items>
                     </telerik:RadComboBox>
                 </td>
+                <td colspan="2">
+                    <telerik:RadTextBox ID="txtCode" runat="server" EmptyMessage="Comma separated list of Codes" Width="100%" MaxLength="80">
+                    </telerik:RadTextBox>
+                </td>
                 <td style="text-align: right">
                     <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                          <span class="glyphicon glyphicon-refresh"></span> Refresh
                     </asp:LinkButton>
-                    &nbsp;&nbsp;&nbsp;
+
+                </td>
+                <td style="text-align: right;width:100px">
                     <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" Width="80px" ToolTip="Export Report to Excel file format (.CSV)">
                         <span class="glyphicon glyphicon-export"></span> Export
                     </asp:LinkButton>
@@ -118,16 +114,14 @@
         </table>
     </div>
     <div>
-        <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" DataSourceID="SqlDataSource1" Skin="Bootstrap"
-            AllowPaging="True" PageSize="250" Height="650px" AllowFilteringByColumn="True" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+        <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" DataSourceID="SqlDataSource1" Skin="" RenderMode="Lightweight"
+            AllowPaging="True" PageSize="250" Height="1000px" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>
-                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+                <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
             </ClientSettings>
-            <MasterTableView DataSourceID="SqlDataSource1" ShowFooter="True">
+            <MasterTableView DataSourceID="SqlDataSource1" ShowFooter="True" CssClass="table-condensed">
+                <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
             </MasterTableView>
-            <ExportSettings SuppressColumnDataFormatStrings="false">
-                <Excel Format="Biff"></Excel>
-            </ExportSettings>
         </telerik:RadGrid>
     </div>
 
@@ -136,20 +130,20 @@
     <asp:SqlDataSource ID="SqlDataSourceName" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, [Name] FROM [Reports] WHERE ([RPTGroup] = @RPTGroup) ORDER BY [Name]">
         <SelectParameters>
-            <asp:ControlParameter ControlID="cboGroups" Name="RPTGroup" PropertyName="SelectedValue"
-                Type="String" />
+            <asp:ControlParameter ControlID="cboGroups" Name="RPTGroup" PropertyName="SelectedValue" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceYear" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT * FROM [Years] ORDER BY [Year] DESC "></asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Report_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="Report_v20_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboNames" Name="ReportId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboDepartment" Name="departmentId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="txtCode" ConvertEmptyStringToNull="False" Name="Code" PropertyName="Text" Type="String" />
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>

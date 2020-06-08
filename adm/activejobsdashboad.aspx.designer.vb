@@ -131,15 +131,6 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
     
     '''<summary>
-    '''RadListViewFooter control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadListViewFooter As Global.Telerik.Web.UI.RadListView
-    
-    '''<summary>
     '''RadGridFooter control.
     '''</summary>
     '''<remarks>
@@ -507,15 +498,6 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDateWORKHOURS As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceDateHours control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceDateHours As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''SqlDataSourceTimeSheet control.

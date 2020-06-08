@@ -66,7 +66,7 @@
                     <asp:HyperLink ID="lnkHelp" runat="server" CssClass="EnlaceGrisSmall" NavigateUrl="http://blog.pasconcept.com"
                         Target="_blank" meta:resourcekey="lnkHelpResource1">Help</asp:HyperLink>
                     &nbsp;&nbsp;&nbsp; |&nbsp;&nbsp;&nbsp; <asp:HyperLink ID="HyperLink2" runat="server" CssClass="EnlaceGrisSmall"
-                        NavigateUrl="https://pasconcept.com/Legal/ENG/Terms.html" Target="_blank" meta:resourcekey="HyperLink2Resource1">Terms & Condition</asp:HyperLink>
+                        NavigateUrl="https://pasconcept.com/Legal/ENG/Terms.html" Target="_blank" meta:resourcekey="HyperLink2Resource1">Terms & Conditions</asp:HyperLink>
                     &nbsp;</td>
             </tr>
         </table>

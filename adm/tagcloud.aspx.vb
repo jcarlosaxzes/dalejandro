@@ -10,8 +10,8 @@
             lblCompanyId.Text = Session("companyId")
             lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
 
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ".Tag Finder"
-            Master.PageTitle = "Jobs/Tag Finder"
+            Me.Title = ConfigurationManager.AppSettings("Titulo") & ".Projects Tag Search"
+            Master.PageTitle = "Projects Tag Search"
             Master.Help = "http://blog.pasconcept.com/2015/03/dashboard.html"
 
 

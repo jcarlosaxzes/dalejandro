@@ -81,8 +81,14 @@
             </tr>
         </table>
     </div>
-    <div>
-        <telerik:RadHtmlChart runat="server" Width="100%" Height="500px" ID="RadChartRemainderStadistic" Transitions="true"
+
+     <div style="text-align: center">
+                    <h3>Billing Activity Chart
+                    </h3>
+         
+                </div>
+    <div class="pas-container">
+        <telerik:RadHtmlChart runat="server" Width="100%" Height="600px" ID="RadChartRemainderStadistic" Transitions="true"
             DataSourceID="SqlDataSourceRemainderStadistic">
             <PlotArea>
                 <Series>
@@ -149,7 +155,7 @@
 
             </PlotArea>
             <Legend>
-                <Appearance Visible="true" Position="Bottom">
+                <Appearance Visible="true" Position="Top">
                 </Appearance>
             </Legend>
         </telerik:RadHtmlChart>

@@ -41,31 +41,22 @@ Partial Public Class employees
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''RadTabStrip1 control.
+    '''RadWizard1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadTabStrip1 As Global.Telerik.Web.UI.RadTabStrip
+    Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
     
     '''<summary>
-    '''RadMultiPage1 control.
+    '''RadWizardStep1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadMultiPage1 As Global.Telerik.Web.UI.RadMultiPage
-    
-    '''<summary>
-    '''RadPageView1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadPageView1 As Global.Telerik.Web.UI.RadPageView
+    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''pnlFind control.
@@ -149,13 +140,13 @@ Partial Public Class employees
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
-    '''RadPageView2 control.
+    '''RadWizardStep2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageView2 As Global.Telerik.Web.UI.RadPageView
+    Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''cboYear control.
@@ -176,13 +167,13 @@ Partial Public Class employees
     Protected WithEvents RadSchedulerVacation As Global.Telerik.Web.UI.RadScheduler
     
     '''<summary>
-    '''RadPageView3 control.
+    '''RadWizardStep3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageView3 As Global.Telerik.Web.UI.RadPageView
+    Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''cboYear2 control.

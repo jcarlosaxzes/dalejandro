@@ -10,7 +10,7 @@
     </telerik:RadDropDownList>
 
 
-    <telerik:RadWizard ID="RadWizard1" runat="server" Height="650px" Width="100%" BorderColor="LightBlue" BorderStyle="Solid" RenderMode="Lightweight" Skin="Material"
+    <telerik:RadWizard ID="RadWizard1" runat="server" Height="1000px" Width="100%" BorderColor="LightBlue" BorderStyle="Solid" RenderMode="Lightweight" Skin="Silk"
         DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
             <telerik:RadWizardStep ID="RadWizardStep1" Title="PASconcept" runat="server" StepType="Start" CausesValidation="true">

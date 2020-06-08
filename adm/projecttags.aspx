@@ -100,7 +100,7 @@
                     </telerik:RadCodeBlock>
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                         AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                        AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0" Height="700px">
+                        AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0" Height="1000px">
                         <ClientSettings>
                             <Scrolling AllowScroll="True"></Scrolling>
                             <ClientEvents OnPopUpShowing="PopUpShowing" />

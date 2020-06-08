@@ -115,7 +115,12 @@
                     </asp:LinkButton>
 
                 </td>
-                <td></td>
+                <td style="text-align:center">
+                    <h3 style="margin:0">
+                        Contacts
+                    </h3>
+                </td>
+
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
                                         <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;Import
@@ -200,7 +205,7 @@
                                             <span class="glyphicon glyphicon-phone "></span></a>
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Cellular"))%>
                                 <div>
-                                    <a class="lnkGrid" href='<%# Eval("Web")%>' target="_blank" title="View client web"><%#Eval("Web")%>
+                                    <a class="lnkGrid" href='http://<%# Eval("Web")%>' target="_blank" title="View client web"><%#Eval("Web")%></a>
                                 </div>
                             </div>
                         </ItemTemplate>

@@ -30,9 +30,20 @@
             }
     </style>
 
+     <div class="Formulario">
+        <table class="table-condensed" style="width: 100%">
+            <tr>
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Company Overview
+                    </h3>
+                </td>
+            </tr>
+        </table>
+
+    </div>
     <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
 
-        <table style="width: 100%">
+        <table class="table-condensed" style="width:100%">
 
             <tr>
                 <td>
@@ -537,14 +548,8 @@
     </asp:SqlDataSource>
 
 
-
-    <div style="font-size: xx-small; text-align: right">
-        Email:&nbsp;
-        <asp:TextBox ID="lblUserEmail" runat="server" Enabled="false"></asp:TextBox>
-    </div>
-
-
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    <asp:TextBox ID="lblUserEmail" runat="server" Visible="False"></asp:TextBox>
 
 </asp:Content>

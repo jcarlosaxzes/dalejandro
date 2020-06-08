@@ -71,7 +71,10 @@
             </td>
         </tr>
     </table>
-
+    <div style="text-align: center">
+        <h3 style="margin: 0">Payments
+        </h3>
+    </div>
     <div>
         <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true"
             AllowAutomaticDeletes="True"

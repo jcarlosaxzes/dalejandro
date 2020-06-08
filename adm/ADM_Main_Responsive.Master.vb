@@ -72,7 +72,7 @@ Public Class ADM_Main_Responsive
                 'Dim Asunto As String
                 'Dim MessId As Integer
 
-                RadMenu2.DataBind()
+                RadNavigation1.DataBind()
                 'If LocalAPI.GetNotificationPending(Context.User.Identity.GetUserName(), Asunto, MessId) Then
                 '    InfoMessage(Asunto)
                 'End If
@@ -126,7 +126,7 @@ Public Class ADM_Main_Responsive
         Set(ByVal value As String)
             'lnkHelp.NavigateUrl = value
             'lnkHelp.ToolTip = value
-            RadMenu2.FindNodeByText("Help").NavigateUrl = value
+            'RadMenu2.FindNodeByText("Help").NavigateUrl = value
         End Set
     End Property
 
@@ -210,7 +210,6 @@ Public Class ADM_Main_Responsive
 
         Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
         lblCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
-        FormViewCompany.DataBind()
 
         ' Navegate Default Page
         Response.RedirectPermanent("~/ADM/Start.aspx")
@@ -227,8 +226,8 @@ Public Class ADM_Main_Responsive
     End Sub
 
     Public Function HideMasterMenu() As Boolean
-        RadMenu2.Visible = False
-        HeaderPanel.Visible = False
+        PanelHeader.Visible = False
+        PanelFotter.Visible = False
     End Function
 
 End Class

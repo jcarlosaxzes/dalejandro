@@ -39,10 +39,16 @@
             </tr>
         </table>
     </div>
+    <div style="text-align: center">
+        <h3>Clients Aging Report
+        </h3>
+
+    </div>
+
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
             AllowSorting="True" AllowPaging="True" PageSize="50" Skin="Bootstrap" HeaderStyle-HorizontalAlign="Center"
-            CellSpacing="0" AutoGenerateColumns="False" Height="650px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right">
+            CellSpacing="0" AutoGenerateColumns="False" Height="1000px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>

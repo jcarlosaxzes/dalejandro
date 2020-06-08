@@ -25,7 +25,12 @@ Public Class rfpnewwizard
 
             If Not Request.QueryString("ParentId") Is Nothing Then
                 lblParentId.Text = Request.QueryString("ParentId")
+                If LocalAPI.IsCompanyViolation(lblParentId.Text, "RequestForProposals", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
                 ReadMasterRFP()
+            End If
+
+            If Not Request.QueryString("fromtree") Is Nothing Then
+                lblBackSource.Text = 1
             End If
 
 
@@ -283,6 +288,18 @@ Public Class rfpnewwizard
 
     End Sub
 
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Select Case lblBackSource.Text
+            Case 1
+                Response.Redirect("~/adm/rfps.aspx")
+            Case 2
+                Response.Redirect("~/adm/requestforproposals.aspx")
+
+        End Select
+    End Sub
+
 #End Region
+
+
 End Class
 

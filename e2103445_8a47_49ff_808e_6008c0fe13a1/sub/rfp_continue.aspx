@@ -45,7 +45,7 @@
         </telerik:RadCodeBlock>
 
         <div class="container pas-container">
-            <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="true" RenderMode="Lightweight" Skin="Material" Height="700px">
+            <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="true" RenderMode="Lightweight" Skin="Material" Height="800px">
                 <WizardSteps>
 
                     <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Task & Fee(s)" StepType="Start">

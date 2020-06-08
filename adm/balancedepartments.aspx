@@ -12,38 +12,39 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <table width="100%">
+    <table class="table-condensed Formulario" style="width: 100%">
         <tr>
-            <td>
-                <table width="100%">
-                    <tr>
-                        <td style="width: 60px; text-align: right" class="Normal">Year:</td>
-                        <td style="width: 100px">
-                            <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYears" DataTextField="nYear" DataValueField="Year" Width="80px">
-                            </telerik:RadComboBox>
-                        </td>
-                        <td style="width: 110px">
-                            <script type="text/javascript">
-                                function PrintPage(sender, args) {
-                                    window.print();
-                                }
-                            </script>
-                            <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                                <Icon PrimaryIconCssClass=" rbPrint" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                            </telerik:RadButton>
-                        </td>
-                        <td style="width: 80px">
-                            <asp:ImageButton ID="ExcelButton" ImageUrl="~/Images/Toolbar/Excel-icon.png" runat="server" ToolTip="Export List to Excel file format (.XSLS)" />
-                        </td>
-                        <td class="Normal" colspan="2">
-                            <b>Bud</b>: Department Budget by Month&nbsp;&nbsp;&nbsp;&nbsp; <b>Exec</b>: Executed by Month&nbsp;&nbsp;&nbsp;&nbsp; <b>Bal</b>: Balance by Month&nbsp;&nbsp;&nbsp;&nbsp;  <b>Acc</b>: Accumulated Balance
-                        </td>
-                    </tr>
-                </table>
+            <td style="width: 60px; text-align: right" class="Normal">Year:</td>
+            <td style="width: 100px">
+                <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYears" DataTextField="nYear" DataValueField="Year" Width="80px">
+                </telerik:RadComboBox>
+            </td>
+            <td style="width: 110px">
+                <script type="text/javascript">
+                    function PrintPage(sender, args) {
+                        window.print();
+                    }
+                </script>
+                <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
+                    <Icon PrimaryIconCssClass=" rbPrint"></Icon>
+                </telerik:RadButton>
+            </td>
+            <td style="width: 80px">
+                <asp:ImageButton ID="ExcelButton" ImageUrl="~/Images/Toolbar/Excel-icon.png" runat="server" ToolTip="Export List to Excel file format (.XSLS)" />
+            </td>
+            <td class="Normal" colspan="2">
+                <b>Bud</b>: Department Budget by Month&nbsp;&nbsp;&nbsp;&nbsp; <b>Exec</b>: Executed by Month&nbsp;&nbsp;&nbsp;&nbsp; <b>Bal</b>: Balance by Month&nbsp;&nbsp;&nbsp;&nbsp;  <b>Acc</b>: Accumulated Balance
             </td>
         </tr>
     </table>
-    <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" Width="100%" Height="750px"
+
+    <div style="text-align: center">
+        <h3 style="margin: 0">Departments Balance
+        </h3>
+    </div>
+
+    <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" Width="100%" Height="750px" 
+        ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" Font-Size="X-Small"
         AutoGenerateColumns="False" AllowPaging="True" PageSize="100" AllowSorting="True" ShowFooter="true">
         <ExportSettings>
             <Excel Format="BIFF" />

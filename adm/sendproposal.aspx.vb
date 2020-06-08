@@ -17,25 +17,19 @@ Public Class sendproposal
             End If
 
             If lblProposalId.Text > 0 Then
-                lblOrigen.Text = "" & Request.QueryString("Origen")
+                If Not Request.QueryString("fromproposal") Is Nothing Then
+                    lblBackSource.Text = 1
+                End If
+
                 lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "clientId")
-                If Len(lblOrigen.Text) = 0 Then lblOrigen.Text = "1"
-                Select Case lblOrigen.Text
-                    Case "1"  ' Desde Client
-                        PanelEmail.Visible = False
-                        PanelSMS.Visible = False
-                    Case Else
-                        ' Desde Admin 
-                        PanelEmail.Visible = True
-                        PanelSMS.Visible = True
-                        txtTo.Text = LocalAPI.GetClientEmailFromProposal(lblProposalId.Text)
-                        txtCC.Text = Master.UserEmail
-                        LeerProposalTemplate()
-                        SMS_Init()
-                        Dim clientId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
-                End Select
-                'btnBack.Visible = (lblOrigen.Text = "12" Or lblOrigen.Text = "15" Or lblOrigen.Text = "152")
-                RadWizard1.DisplayCancelButton = (lblOrigen.Text = "15" Or lblOrigen.Text = "152")
+
+                PanelEmail.Visible = True
+                PanelSMS.Visible = True
+                txtTo.Text = LocalAPI.GetClientEmailFromProposal(lblProposalId.Text)
+                txtCC.Text = Master.UserEmail
+                LeerProposalTemplate()
+                SMS_Init()
+                Dim clientId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
 
                 If (lblCompanyId.Text = 260962) Then
                     cboAgile.Visible = True
@@ -81,17 +75,6 @@ Public Class sendproposal
 
     Private Sub RadWizard1_FinishButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.FinishButtonClick
         SendNotification()
-    End Sub
-    Private Sub RadWizard1_CancelButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.CancelButtonClick
-        Select Case lblOrigen.Text
-            Case "12"  ' Desde Admin / edicion
-                Response.RedirectPermanent("~/ADM/Proposal.aspx?Id=" & lblProposalId.Text)
-            Case "15"  ' Desde ProposalNewWizard
-                Response.RedirectPermanent("~/ADM/ProposalNewWizard.aspx?proposalId=" & lblProposalId.Text)
-
-            Case "152"  ' Desde Job Edit Multipage
-                Response.RedirectPermanent("~/ADM/Job_proposals.aspx?JoblId=" & lblJobId.Text)
-        End Select
     End Sub
 
 #End Region
@@ -234,5 +217,13 @@ Public Class sendproposal
         End If
     End Sub
 
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Select Case lblBackSource.Text
+            Case "1"  ' fromproposal
+                Response.RedirectPermanent("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
+            Case Else
+                Response.RedirectPermanent("~/adm/proposals.aspx")
+        End Select
+    End Sub
 End Class
 

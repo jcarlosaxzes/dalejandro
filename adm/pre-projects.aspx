@@ -89,22 +89,30 @@
 
             <telerik:LayoutRow>
                 <Content>
-                    <div style="text-align: left" class="ToolButtom noprint">
 
-                        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Pre-Project
-                        </asp:LinkButton>
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <script type="text/javascript">
-                    function PrintPage(sender, args) {
-                        window.print();
-                    }
-                </script>
-                        <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                            <Icon PrimaryIconCssClass=" rbPrint" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                        </telerik:RadButton>
-                    </div>
+                    <table class="table-condensed noprint" style="width: 100%">
+                        <tr>
+                            <td style="width: 100px">
+                                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Pre-Project
+                                </asp:LinkButton>
+                            </td>
+                            <td style="width: 130px">
+                                <script type="text/javascript">
+                                    function PrintPage(sender, args) {
+                                        window.print();
+                                    }
+                                </script>
+                                <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
+                                    <Icon PrimaryIconCssClass=" rbPrint"></Icon>
+                                </telerik:RadButton>
+                            </td>
+                            <td style="text-align: center">
+                                <h3 style="margin: 0">Pre-Proposals
+                                </h3>
+                            </td>
+                        </tr>
+                    </table>
                 </Content>
             </telerik:LayoutRow>
 

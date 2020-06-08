@@ -38,7 +38,7 @@ Partial Public Class exportclientscsv
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOk As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnOk As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''Master property.

@@ -43,9 +43,9 @@ Public Class activejobsdashboad
             lblStatusIdIN_List.Text = Left(lblStatusIdIN_List.Text, Len(lblStatusIdIN_List.Text) - 1)
         End If
 
-        SqlDataSourceJobs.DataBind()
         RadListView1.DataBind()
-        RadListViewFooter.DataBind()
+
+        RadGridFooter.DataBind()
         Dim dValue As Double = LocalAPI.GetWeeklyHoursByEmp(lblEmployeeId.Text, lblCompanyId.Text)
         lblTotalWeekHours.Text = FormatNumber(dValue, 1)
         lblRemaining.Text = FormatNumber(40 - dValue, 1)

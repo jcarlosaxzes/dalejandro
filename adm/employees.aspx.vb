@@ -20,11 +20,11 @@ Public Class employees
             RadSchedulerLive.SelectedDate = CDate("01/01/" & Date.Today.Year)
 
         End If
-        'RadWindowManager1.EnableViewState = False
-        If RadWindowManager1.Windows.Count > 0 Then
-            RadWindowManager1.Windows.Clear()
-            RadGrid1.DataBind()
-        End If
+        RadWindowManager1.EnableViewState = False
+        'If RadWindowManager1.Windows.Count > 0 Then
+        '    RadWindowManager1.Windows.Clear()
+        '    RadGrid1.DataBind()
+        'End If
 
     End Sub
 

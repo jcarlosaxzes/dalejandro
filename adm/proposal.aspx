@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposal.aspx.vb" Inherits="pasconcept20.proposal" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
+<%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
@@ -14,8 +15,6 @@
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLuxW5zYQh_ClJfDEBpTLlT_tf8JVcxf0&libraries=places&callback=initAutocomplete"
             async defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
         <script>
             // Autocompletes all address inputs using google maps js api
@@ -77,7 +76,7 @@
     <telerik:RadWindowManager ID="RadWindowManager2" runat="server">
         <Windows>
             <telerik:RadWindow ID="RadWindowDataProcessing"
-                VisibleOnPageLoad="false" Behaviors="Close, Move" Modal="true" Top="10" Left="50" Height="750px" Width="850px" runat="server" VisibleStatusbar="false" DestroyOnClose="true" NavigateUrl="~/ADM/DataProcessing.aspx?ProposalId=<%=lblId.Text%>">
+                VisibleOnPageLoad="false" Behaviors="Close, Move" Modal="true" Top="10" Left="50" Height="750px" Width="850px" runat="server" VisibleStatusbar="false" DestroyOnClose="true" NavigateUrl="~/ADM/DataProcessing.aspx?ProposalId=<%=lblProposalId.Text%>">
             </telerik:RadWindow>
         </Windows>
     </telerik:RadWindowManager>
@@ -197,7 +196,7 @@
         <asp:FormView ID="FormViewProp1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSourceProp1" Width="100%" EnableViewState="false">
             <EditItemTemplate>
 
-                <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" Height="580px" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Material">
+                <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" Height="580px" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
                     <WizardSteps>
                         <%--Proposal Details--%>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Proposal Details" StepType="Step">
@@ -492,235 +491,55 @@
                             <table class="table-condensed" style="width: 100%;">
                                 <tr>
                                     <td style="text-align: right; width: 15px"></td>
-                                    <td style="width: 360px">
-                                        <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules"
+                                    <td style="width: 400px">
+                                        <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules" SelectedValue='<%# Bind("paymentscheduleId")%>' 
                                             DataTextField="Name" DataValueField="Id" Width="400px" MarkFirstMatch="True" AppendDataBoundItems="true"
-                                            Filter="Contains" OnClientKeyPressing="(function(sender, e){ if (!sender.get_dropDownVisible()) sender.showDropDown(); })"
-                                            ToolTip="Select Payment Schedules to define first time or modify the current">
+                                            Filter="Contains"
+                                            ToolTip="Select Payment Schedules to define first time or modify the current"
+                                            Visible='<%# LocalAPI.IsGeneralPS(Eval("Id")) %>'>
                                             <Items>
-                                                <telerik:RadComboBoxItem runat="server" Text="(Select other Payment Schedules...)" Value="-1" />
+                                                <telerik:RadComboBoxItem runat="server" Text="(Select other Payment Schedules...)" Value="0" />
                                             </Items>
                                         </telerik:RadComboBox>
                                     </td>
                                     <td>
-                                        <asp:LinkButton ID="btnGeneratePaymentSchedules" runat="server" OnClick="btnGeneratePaymentSchedules_Click" CssClass="btn btn-success" UseSubmitBehavior="false" ToolTip="Define Payment Schedules" CausesValidation="false">
-                                        Generate
+                                        <asp:LinkButton ID="btnGeneratePaymentSchedules" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" 
+                                            ToolTip="Define Payment Schedules"
+                                            CausesValidation="false" CommandName="Update"
+                                            Visible='<%# LocalAPI.IsGeneralPS(Eval("Id")) %>'>
+                                        Update
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
                             </table>
-                            <div style="padding-left: 15px; padding-top: 10px; padding-bottom: 50px">
-                                <table class="table-condensed" style="width: 100%;">
-                                    <tr>
-                                        <td style="text-align: center; vertical-align: middle; width: 100px; padding-top: 5px; padding-bottom: 5px" class="NormalNegrita">Schedule
-                                        </td>
-                                        <td style="text-align: center; vertical-align: middle; padding-top: 5px; padding-bottom: 5px" class="NormalNegrita">Description
-                                        </td>
-                                    </tr>
-                                </table>
-                                <table class="table-condensed" style="width: 100%;">
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS1" runat="server" Visible='<%# Len(Eval("PaymentText1")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="TextBox8" runat="server" Text='<%# Bind("PaymentSchedule1") %>' Width="100px"
-                                                                Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="TextBox4" runat="server" Text='<%# Bind("PaymentText1") %>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS2" runat="server" Visible='<%# Len(Eval("PaymentText2")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox2" runat="server" Text='<%# Bind("PaymentSchedule2") %>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox1" runat="server" Text='<%# Bind("PaymentText2")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS3" runat="server" Visible='<%# Len(Eval("PaymentText3")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox3" runat="server" Text='<%# Bind("PaymentSchedule3") %>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox5" runat="server" Text='<%# Bind("PaymentText3")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS4" runat="server" Visible='<%# Len(Eval("PaymentText4")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("PaymentSchedule4") %>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox6" runat="server" Text='<%# Bind("PaymentText4")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS5" runat="server" Visible='<%# Len(Eval("PaymentText5")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox7" runat="server" Text='<%# Bind("PaymentSchedule5")%>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox8" runat="server" Text='<%# Bind("PaymentText5")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS6" runat="server" Visible='<%# Len(Eval("PaymentText6")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox9" runat="server" Text='<%# Bind("PaymentSchedule6") %>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox10" runat="server" Text='<%# Bind("PaymentText6")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS7" runat="server" Visible='<%# Len(Eval("PaymentText7")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox11" runat="server" Text='<%# Bind("PaymentSchedule7") %>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox12" runat="server" Text='<%# Bind("PaymentText7")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS8" runat="server" Visible='<%# Len(Eval("PaymentText8")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox13" runat="server" Text='<%# Bind("PaymentSchedule8") %>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox181" runat="server" Text='<%# Bind("PaymentText8")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS9" runat="server" Visible='<%# Len(Eval("PaymentText9")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox15" runat="server" Text='<%# Bind("PaymentSchedule9") %>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox16" runat="server" Text='<%# Bind("PaymentText9")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:Panel ID="PanelPS10" runat="server" Visible='<%# Len(Eval("PaymentText10")) > 0 %>'>
-                                                <table width="100%" cellpadding="0">
-                                                    <tr>
-                                                        <td width="100px">
-                                                            <telerik:RadNumericTextBox ID="RadTextBox17" runat="server" Text='<%# Bind("PaymentSchedule10") %>'
-                                                                Width="100px" Type="Percent" MinValue="0" MaxValue="100" EnabledStyle-CssClass="Centro">
-                                                                <NumberFormat DecimalDigits="0" />
-                                                            </telerik:RadNumericTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <telerik:RadTextBox ID="RadTextBox18" runat="server" Text='<%# Bind("PaymentText10")%>' Width="100%">
-                                                            </telerik:RadTextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+
+                            <telerik:RadGrid ID="RadGridPS" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
+                                AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center"
+                                CellSpacing="0" Width="100%">
+                                <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePS" ShowFooter="true">
+                                    <Columns>
+                                        <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
+                                        </telerik:GridBoundColumn>
+
+                                        <telerik:GridBoundColumn DataField="Order" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderText="Order" SortExpression="Order" UniqueName="Order">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderText="(%)" SortExpression="Percentage" UniqueName="Percentage">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Description"
+                                            HeaderText="Description" SortExpression="Description" UniqueName="Description">
+                                        </telerik:GridBoundColumn>
+
+                                        <telerik:GridBoundColumn DataField="Amount" HeaderText="Total" ReadOnly="True"
+                                            SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum"
+                                            FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
+                                            HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                        </telerik:GridBoundColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+
                         </telerik:RadWizardStep>
 
                         <%--Begin and Concluding Text--%>
@@ -865,7 +684,7 @@
     </div>
     <div class="pas-container" style="width: 100%">
 
-        <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Material">
+        <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Task Compensation" StepType="Step">
                     <table class="table-condensed" style="width: 100%;">
@@ -1233,13 +1052,13 @@
                                                                 <Icon PrimaryIconCssClass="rbConfig"></Icon>
                                                             </telerik:RadButton>--%>
                                                                 <asp:LinkButton ID="btnUpdateTandCTemplate" runat="server" CommandName="UpdateTandC" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false">
-                                                                Set T&amp;C Template
+                                                                Apply
                                                                 </asp:LinkButton>
 
                                                             </td>
                                                             <td>
                                                                 <asp:LinkButton ID="btnUpdateTyC" runat="server" CommandName="Update" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false">
-                                                                Update T&amp;C
+                                                                Update
                                                                 </asp:LinkButton>
                                                                 &nbsp;
                                                             <asp:LinkButton ID="btnCancelTyC" runat="server" CommandName="Cancel" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="false">
@@ -1255,7 +1074,7 @@
 
                                                 <td colspan="2">
                                                     <telerik:RadEditor ID="radEditor_TandC" runat="server" Content='<%# Bind("Agreements") %>'
-                                                        Height="200px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design" RenderMode="Auto"
+                                                        Height="600px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design" RenderMode="Auto"
                                                         Width="98%">
                                                     </telerik:RadEditor>
                                                 </td>
@@ -1392,7 +1211,7 @@
 
     <asp:SqlDataSource ID="SqlDataSourceProp1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="PROPOSAL_SIN_TC_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL4_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="PROPOSAL_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <UpdateParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:Parameter Name="ClientId" Type="Int32" />
@@ -1437,10 +1256,11 @@
             <asp:Parameter Name="SharePublicLinks" Type="Boolean" />
             <asp:Parameter Name="ProjectManagerId" Type="Int32" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
+            <asp:Parameter Name="paymentscheduleId" Type="Int32" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="Id" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
@@ -1462,10 +1282,10 @@
             <asp:Parameter Name="Id" Type="String" />
         </UpdateParameters>
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="ProposalId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
         </SelectParameters>
         <InsertParameters>
-            <asp:ControlParameter ControlID="lblId" Name="ProposalId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
             <asp:Parameter Name="TaskId" />
             <asp:Parameter Name="Description" Type="String" />
             <asp:Parameter Name="DescriptionPlus" Type="String" />
@@ -1486,7 +1306,7 @@
         SelectCommand="SELECT Id, Agreements FROM Proposal WHERE (Id = @Id)"
         UpdateCommand="Proposal_TC_Ext_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="Id" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="Agreements" Type="String" />
@@ -1496,7 +1316,7 @@
     <asp:SqlDataSource ID="SqlDataSourceJob" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="PROPOSAL_cboJobs_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
         </SelectParameters>
@@ -1504,7 +1324,7 @@
     <asp:SqlDataSource ID="SqlDataSourcePrint" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id] FROM [Proposal] WHERE ([Id] = @Id)">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="Id" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceTask" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -1567,14 +1387,14 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcePhasesSchedule" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], Task=(select count(*) from Proposal_details where Proposal_details.phaseId=Proposal_phases.Id), Code+' '+[Name] As Name, DateFrom, DateTo  FROM [Proposal_phases] WHERE proposalId=@proposalId ORDER BY [nOrder]"
         UpdateCommand="UPDATE Proposal_phases SET DateFrom=@DateFrom, DateTo=@DateTo WHERE Id=@Id">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="Id" Type="Int32" />
@@ -1609,7 +1429,7 @@
         UpdateCommand="ClientProsalJob_azureuploads_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblClientId" Name="clientId" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="lblId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="JobId" DefaultValue="0" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
@@ -1641,9 +1461,20 @@
         </SelectParameters>
 
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourcePS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Proposal_PaymentSchedule_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="Proposal_PS_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+        <UpdateParameters>
+            <asp:ControlParameter ControlID="cboPaymentSchedules" Name="paymentscheduleId" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
+        </UpdateParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblId" runat="server" Visible="false"></asp:Label>
+    <asp:Label ID="lblProposalId" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblOriginalStatus" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblOriginalType" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblSelectedJobId" runat="server" Visible="false"></asp:Label>

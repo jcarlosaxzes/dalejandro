@@ -74,9 +74,9 @@ Public Class employee
 
     Private Sub Back()
         If lblBackSource.Text = 1 Then
-            Response.Redirect("~/adm/contacts.aspx")
+            Response.Redirect("~/adm/contacts.aspx?restoreFilter=true")
         Else
-            Response.Redirect("~/adm/employees.aspx")
+            Response.Redirect("~/adm/employees.aspx?restoreFilter=true")
         End If
 
     End Sub

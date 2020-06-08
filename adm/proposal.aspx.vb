@@ -8,54 +8,63 @@ Public Class proposal
         '    ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Visible='<%# Len(Eval("ProjectLocation")) > 0%>' Target="_blank"></asp:HyperLink>
         Try
 
-            Dim lId As Integer = -1
             If (Not Page.IsPostBack) Then
+
+                lblProposalId.Text = Me.Request.QueryString("proposalId")
+
                 ' Si no tiene permiso, la dirijo a message
                 If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
                 lblCompanyId.Text = Session("companyId")
-                lId = Me.Request.QueryString("Id")
 
-                If LocalAPI.IsCompanyViolation(lId, "Proposal", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+
+                If LocalAPI.IsCompanyViolation(lblProposalId.Text, "Proposal", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
                 If Val(lblCompanyId.Text) = 0 Then
                     ' Link externo de EEG
                     lblCompanyId.Text = 260962
                 End If
-                InitProposal(lId)
-                lblClientId.Text = LocalAPI.GetProposalProperty(lId, "ClientId")
+                InitProposal()
+                lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
 
-                Me.Title = "Edit Proposal " & LocalAPI.ProposalNumber(lId)
+                Me.Title = "Edit Proposal " & LocalAPI.ProposalNumber(lblProposalId.Text)
                 Master.PageTitle = Me.Title
 
                 'Master.PageTitle = "Edit Proposal"
                 'Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html"
 
                 ' Panel izquierdo
-                lblOriginalStatus.Text = LocalAPI.GetProposalData(lId, "statusId")
+                lblOriginalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
                 cboStatus.SelectedValue = lblOriginalStatus.Text
 
                 EnabledProposal()
 
                 ' Panel de informacion superior derecho
-                lblEmployeeName.Text = LocalAPI.GetProposalProperty(lblId.Text, "EmployeeName")
-                lblEmailDate.Text = Left(LocalAPI.GetProposalProperty(lblId.Text, "EmailDate"), 16)
-                lblSelectedJobId.Text = LocalAPI.GetProposalProperty(lblId.Text, "JobId")
+                lblEmployeeName.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "EmployeeName")
+                lblEmailDate.Text = Left(LocalAPI.GetProposalProperty(lblProposalId.Text, "EmailDate"), 16)
+                lblSelectedJobId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
                 If Val(lblSelectedJobId.Text) = 0 Then lblSelectedJobId.Text = -1
 
                 ' Datos de Acceptance
-                Dim sFirmado As String = LocalAPI.GetProposalProperty(lblId.Text, "AceptanceName")
+                Dim sFirmado As String = LocalAPI.GetProposalProperty(lblProposalId.Text, "AceptanceName")
                 If Len(sFirmado) > 0 Then
                     lblAceptanceName.Text = "By: " & sFirmado
                 Else
                     lblAceptanceName.Text = "Unsigned"
                 End If
 
-                RadBinaryImageAceptanceSignature.DataValue = LocalAPI.GetSignProposal(lblId.Text)
+                RadBinaryImageAceptanceSignature.DataValue = LocalAPI.GetSignProposal(lblProposalId.Text)
+
+                If Not Request.QueryString("HideMasterMenu") Is Nothing Then
+                    Master.HideMasterMenu()
+                    btnBack.Visible = False
+                End If
+
+
 
             End If
-            'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblId.Text
+            'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblProposalId.Text
             'RadWindowManager2.EnableViewState = False
             RadWindowManager1.EnableViewState = False
 
@@ -89,9 +98,8 @@ Public Class proposal
 
     End Sub
 
-    Private Sub InitProposal(ByVal lId As Integer)
-        lblId.Text = lId
-        lblOriginalType.Text = LocalAPI.GetProposalData(lId, "Proposal.Type")
+    Private Sub InitProposal()
+        lblOriginalType.Text = LocalAPI.GetProposalData(lblProposalId.Text, "Proposal.Type")
         SqlDataSourceProposalType.DataBind()
         cboProposalType.DataBind()
         cboProposalType.SelectedValue = lblOriginalType.Text
@@ -109,7 +117,7 @@ Public Class proposal
     End Sub
 
     Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
-        LocalAPI.EliminarProposal(lblId.Text)
+        LocalAPI.EliminarProposal(lblProposalId.Text)
         Response.Redirect("~/adm/proposals.aspx")
     End Sub
 
@@ -148,26 +156,24 @@ Public Class proposal
     End Sub
 
     Protected Sub btnPrintProposal_Click(sender As Object, e As EventArgs) Handles btnPrintProposal.Click
-        If LocalAPI.GetProposalProperty(lblId.Text, "ClientId") > 0 Then
-            'Response.RedirectPermanent("~/ADM/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12")
-            CreateRadWindows("Form", "~/adm/SendProposal.aspx?ProposalId=" & lblId.Text & "&Origen=12", 1024, 768, True, "")
-
+        If LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId") > 0 Then
+            Response.Redirect("~/adm/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&fromproposal=1")
         Else
             Master.InfoMessage("You Must Specify the Client and Update Proposal")
         End If
 
     End Sub
 
-    Protected Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs)
-        If CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue > 0 Then
-            GuardarProposal(False)
-            LocalAPI.Proposal_GeneratePaymentSchedules(lblId.Text, CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue)
-            FormViewProp1.DataBind()
-            CType(sender.NamingContainer.FindControl("RadWizardStepPaymentSchedules"), RadWizardStep).Active = True
-            'CType(sender.NamingContainer.FindControl("RadMultiPage0"), RadMultiPage).SelectedIndex = 1
-            Master.InfoMessage("Proposal Payment Schedules Successfully Updated")
-        End If
-    End Sub
+    'Protected Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs)
+    '    If CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue > 0 Then
+    '        GuardarProposal(False)
+    '        LocalAPI.Proposal_GeneratePaymentSchedules(lblId.Text, CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue)
+    '        FormViewProp1.DataBind()
+    '        CType(sender.NamingContainer.FindControl("RadWizardStepPaymentSchedules"), RadWizardStep).Active = True
+    '        'CType(sender.NamingContainer.FindControl("RadMultiPage0"), RadMultiPage).SelectedIndex = 1
+    '        Master.InfoMessage("Proposal Payment Schedules Successfully Updated")
+    '    End If
+    'End Sub
 
     Protected Sub cboProposalType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboProposalType.SelectedIndexChanged
         btnModifyType.Enabled = (cboProposalType.SelectedValue <> lblOriginalType.Text)
@@ -175,22 +181,22 @@ Public Class proposal
 
     Protected Sub btnModifyType_Click(sender As Object, e As EventArgs) Handles btnModifyType.Click
         lblOriginalType.Text = cboProposalType.SelectedValue
-        LocalAPI.ModifyProposalType(lblId.Text, cboProposalType.SelectedValue, lblCompanyId.Text)
-        Response.Redirect("~/ADM/Proposal.aspx?Id=" & lblId.Text)
+        LocalAPI.ModifyProposalType(lblProposalId.Text, cboProposalType.SelectedValue, lblCompanyId.Text)
+        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
     End Sub
 
     Protected Sub SqlDataSourceProp1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProp1.Updating
         If Val(lblSelectedJobId.Text) > 0 Then
             e.Command.Parameters("@JobId").Value = lblSelectedJobId.Text
         Else
-            If Val("" & LocalAPI.GetProposalData(lblId.Text, "JobId")) > 0 Then
-                e.Command.Parameters("@JobId").Value = LocalAPI.GetProposalData(lblId.Text, "JobId")
+            If Val("" & LocalAPI.GetProposalData(lblProposalId.Text, "JobId")) > 0 Then
+                e.Command.Parameters("@JobId").Value = LocalAPI.GetProposalData(lblProposalId.Text, "JobId")
             End If
         End If
     End Sub
 
     Protected Sub SqlDataSourceProp1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceProp1.Updated
-        lblOriginalStatus.Text = LocalAPI.GetProposalData(lblId.Text, "statusId")
+        lblOriginalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         cboStatus.SelectedValue = lblOriginalStatus.Text
     End Sub
 
@@ -225,21 +231,20 @@ Public Class proposal
         GuardarProposal(False)
     End Sub
     Protected Sub btnNewPhase_Click(sender As Object, e As EventArgs) Handles btnNewPhase.Click
-        Response.Redirect("~/adm/newpropsalphase.aspx?Id=" & lblId.Text)
+        Response.Redirect("~/adm/newpropsalphase.aspx?Id=" & lblProposalId.Text)
     End Sub
     Protected Sub btnPivotPhases_Click(sender As Object, e As EventArgs) Handles btnPivotPhases.Click
-        Response.Redirect("~/adm/proposalphases.aspx?Id=" & lblId.Text)
+        Response.Redirect("~/adm/proposalphases.aspx?Id=" & lblProposalId.Text)
     End Sub
 
     Protected Sub btnSchedule_Click(sender As Object, e As EventArgs) Handles btnSchedule.Click
-        Response.Redirect("~/adm/proposalschedule.aspx?Id=" & lblId.Text)
+        Response.Redirect("~/adm/proposalschedule.aspx?Id=" & lblProposalId.Text)
     End Sub
 
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Select Case e.CommandName
             Case "EditTask"
-                'CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument, 1024, 768, False, "OnClientClose")
-                Response.Redirect("~/adm/proposaltask.aspx?Id=" & lblId.Text & "&detailId=" & e.CommandArgument)
+                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument)
             Case "DetailDuplicate"
                 lblDetailSelectedId.Text = e.CommandArgument
                 SqlDataSourceProposaldDetailDuplicate.Insert()
@@ -277,7 +282,7 @@ Public Class proposal
                 AzureStorageApi.DeleteFile(tempName, 0)
 
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblId.Text, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType)
+                e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType)
                 If e.IsValid Then
                     CType(sender.NamingContainer.FindControl("RadGridAzureFiles"), RadGrid).DataBind()
                     Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
@@ -310,16 +315,16 @@ Public Class proposal
     End Sub
 
     Protected Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
-        Response.Redirect("~/adm/saveproposalas.aspx?ProposalId=" & lblId.Text)
+        Response.Redirect("~/adm/saveproposalas.aspx?ProposalId=" & lblProposalId.Text)
     End Sub
     Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
-        Response.Redirect("~/adm/saveproposalastemplate.aspx?ProposalId=" & lblId.Text)
+        Response.Redirect("~/adm/saveproposalastemplate.aspx?ProposalId=" & lblProposalId.Text)
     End Sub
     Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
         Try
             GuardarProposal(False)
-            'CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblId.Text, 1024, 768, False, "OnClientClose")
-            Response.Redirect("~/adm/proposaltask.aspx?Id=" & lblId.Text)
+            'CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblProposalId.Text, 1024, 768, False, "OnClientClose")
+            Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text)
         Catch ex As Exception
         End Try
     End Sub
@@ -333,21 +338,21 @@ Public Class proposal
             Select Case cboStatus.SelectedValue
 
                 Case 0, 1 ' Not Emitted and Pending
-                    LocalAPI.SetProposalStatus(lblId.Text, cboStatus.SelectedValue)
+                    LocalAPI.SetProposalStatus(lblProposalId.Text, cboStatus.SelectedValue)
                     lblOriginalStatus.Text = cboStatus.SelectedValue
 
                 Case 2  ' Acepted
                     If (lblOriginalStatus.Text = 0 Or lblOriginalStatus.Text = 1) Then
-                        LocalAPI.ProposalStatus2Acept(lblId.Text, lblCompanyId.Text)
+                        LocalAPI.ProposalStatus2Acept(lblProposalId.Text, lblCompanyId.Text)
                         lblOriginalStatus.Text = cboStatus.SelectedValue
                     End If
 
                 Case 3, 31, 32  ' Declined
-                    LocalAPI.ProposalStatus2Declined(lblId.Text, lblCompanyId.Text, cboStatus.SelectedValue)
+                    LocalAPI.ProposalStatus2Declined(lblProposalId.Text, lblCompanyId.Text, cboStatus.SelectedValue)
                     lblOriginalStatus.Text = cboStatus.SelectedValue
 
                 Case 4  ' Hold
-                    LocalAPI.ProposalStatus2Hold(lblId.Text)
+                    LocalAPI.ProposalStatus2Hold(lblProposalId.Text)
                     lblOriginalStatus.Text = cboStatus.SelectedValue
 
             End Select
@@ -364,11 +369,11 @@ Public Class proposal
     End Sub
 
     Private Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
-        RadGrid1.MasterTableView.GetColumn("phaseId").Display = IIf(LocalAPI.GetProposalPhasesCount(lblId.Text) = 0, False, True)
+        RadGrid1.MasterTableView.GetColumn("phaseId").Display = IIf(LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0, False, True)
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/proposals.aspx")
+        Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
     End Sub
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
