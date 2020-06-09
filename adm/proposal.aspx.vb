@@ -373,5 +373,13 @@ Public Class proposal
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
     End Sub
+    Private Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
+        If lblCompanyId.Text = 260962 Then
+            ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
+            RadGrid1.MasterTableView.GetColumn("Estimated").Visible = False
+        End If
+
+    End Sub
+
 End Class
 
