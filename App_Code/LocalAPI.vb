@@ -11704,9 +11704,10 @@ Public Class LocalAPI
         Return ret
     End Function
 
-    Private Shared Function GetClientAzureFileKeyName(Id As Integer) As String
-        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM [Clients_azureuploads] where Id=" & Id)
+    Public Shared Function GetAzureFileKeyName(Id As Integer) As String
+        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM [Azure_Uploads] where Id=" & Id)
     End Function
+
     Private Shared Function GetProposalAzureFileKeyName(Id As Integer) As String
         Return GetStringEscalar("SELECT isnull([KeyName],'') FROM Proposals_azureuploads where Id=" & Id)
     End Function
@@ -11862,16 +11863,18 @@ Public Class LocalAPI
         Return ExecuteNonQuery(String.Format("DELETE FROM [RequestForProposals_azureuploads] WHERE [guid]='{0}' and requestforproposalId=0", GUID))
     End Function
     Private Shared Function ExistClientAzureFile(clientId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from [Clients_azureuploads] where [clientId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", clientId, FileName, ContentBytes)
+        Dim sQuery As String = String.Format("select count(*) from [Azure_Uploads] where [EntityId]={0} and EntityType='Clients' and [OriginalFileName]='{1}' and [ContentBytes]={2} ", clientId, FileName, ContentBytes)
         Return IIf(GetNumericEscalar(sQuery) = 0, False, True)
     End Function
 
-    Public Shared Function ClientAzureStorage_Insert(ClientId As Integer, preprojectId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, employeeId As Integer) As Boolean
+    Public Shared Function ClientAzureStorage_Insert(ClientId As Integer, preprojectId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, employeeId As Integer, companyId As Integer) As Boolean
         Try
             If Not ExistClientAzureFile(ClientId, FileName, ContentBytes) Then
                 ' statusId = actionId para Paid y Complete
-                Dim sQuery As String = String.Format("insert into [Clients_azureuploads] ([ClientId], [preprojectId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date]) " &
-                            "values({0}, {1}, {2}, '{3}', '{3}', '{4}', {5}, 0, {6}, '{7}', dbo.CurrentTime())", ClientId, preprojectId, Type, FileName, KeyName, IIf(bPublic, 1, 0), ContentBytes, ContentType)
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+                Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId],[preprojectId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
+                                $"values({ClientId}, {preprojectId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic} , {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
                 ExecuteNonQuery(sQuery)
                 Clients_activities_INSERT(ClientId, "C", "Clients_azureuploads", 0, employeeId)
                 Return True

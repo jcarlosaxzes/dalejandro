@@ -33,7 +33,7 @@ Public Class azurestorage_client
                 AzureStorageApi.DeleteFile(tempName, lblCompanyId.Text)
 
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.ClientAzureStorage_Insert(lblClientId.Text, cboPreProject.SelectedValue, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblEmployeeId.Text)
+                e.IsValid = LocalAPI.ClientAzureStorage_Insert(lblClientId.Text, cboPreProject.SelectedValue, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblEmployeeId.Text, lblCompanyId.Text)
                 If e.IsValid Then
                     RadGridAzureFiles.DataBind()
                     Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
@@ -50,7 +50,8 @@ Public Class azurestorage_client
     End Sub
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
-        Dim KeyName As String = LocalAPI.GetClientProsalJobAzureFileKeyName(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Source").Value)
+        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
         AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
     End Sub
+
 End Class
