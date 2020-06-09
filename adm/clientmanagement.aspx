@@ -348,7 +348,7 @@
         </table>
     </telerik:RadToolTip>
 
-    <div style="height: 1px; overflow: auto">
+    <div class="container"  style="height: 1px; overflow: auto">
         <telerik:RadGrid ID="RadGridExportData" runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" PageSize="10">
             <MasterTableView DataSourceID="SqlDataSource1" AutoGenerateColumns="False">
                 <Columns>

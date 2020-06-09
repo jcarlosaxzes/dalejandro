@@ -272,7 +272,7 @@
     </div>
 
     <%--Export RadGrid--%>
-    <div style="height: 1px; overflow: auto">
+    <div class="container" style="height: 1px; overflow: auto">
         <asp:Panel ID="ExportPanel" runat="server" Height="1px">
             <telerik:RadGrid ID="RadGridToExport" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False"
                 AllowPaging="True" Height="5px">

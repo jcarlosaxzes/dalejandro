@@ -119,7 +119,7 @@
                                     <NumberFormat DecimalDigits="2" />
                                 </telerik:RadNumericTextBox>
                             </td>
-                            <td style="text-align:right">
+                            <td style="text-align: right">
                                 <asp:Label ID="lblTotalLine" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
                             </td>
                         </tr>
@@ -127,21 +127,39 @@
                             <td style="text-align: right;">
                                 <b>Expression</b>:
                             </td>
-                            <td colspan="4">
+                            <td colspan="6">
                                 <small>Total = [Quantity] * [Hours] * [Rates]</small><br />
                                 <small>if [Quantity] or [Hours] 'is blank' then Total = [1] * [1] * [Rates]</small>
-                            </td>
-                            <td colspan="2" style="text-align: right">
-                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
-                                </asp:LinkButton>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <asp:LinkButton ID="btnUpdateAndBack" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
-                                </asp:LinkButton>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
+
+            <tr>
+                <td style="text-align: right;">Payment Schedule:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboPaymentSchedulesEdit" runat="server" DataSourceID="SqlDataSourcePaymentSchedules" 
+                        DataTextField="Name" DataValueField="Id" Width="95%" AppendDataBoundItems="true" 
+                        ToolTip="Select Payment Schedules for individual Task">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Payment Schedules...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right">
+                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
+                    </asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                <asp:LinkButton ID="btnUpdateAndBack" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
+                                </asp:LinkButton>
+                </td>
+
+            </tr>
+
         </table>
         <asp:Panel runat="server" ID="PanelEstimator">
 
@@ -247,7 +265,7 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         InsertCommand="PROPOSAL_details_v20_INSERT" InsertCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL_details_UPDATE" UpdateCommandType="StoredProcedure"
+        UpdateCommand="PROPOSAL_details_v20_UPDATE" UpdateCommandType="StoredProcedure"
         SelectCommand="SELECT [Id], [taskcode], [Description], [Hours], [Rates] FROM [Proposal_tasks] WHERE (companyId = @companyId) ORDER BY taskcode">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
@@ -261,6 +279,7 @@
             <asp:ControlParameter ControlID="cboPosition" Name="positionId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblproposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboPaymentSchedulesEdit" Name="paymentscheduleId" PropertyName="SelectedValue" Type="Int32" />
             <asp:Parameter Direction="InputOutput" Name="Id_OUT" Type="Int32" />
         </InsertParameters>
         <SelectParameters>
@@ -268,15 +287,17 @@
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="cboPhase" Name="phaseId" PropertyName="SelectedValue" Type="Int32" />
-            <%--<asp:ControlParameter ControlID="cboTaskTemplate" Name="TaskId" PropertyName="SelectedValue" Type="Int32" />--%>
-            <asp:ControlParameter ControlID="cboMulticolumnTask" Name="TaskId" PropertyName="Value" Type="Int32" />
             <asp:ControlParameter ControlID="txtName" Name="Description" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="txtDescriptionPlus" Name="DescriptionPlus" PropertyName="Content" Type="String" />
             <asp:ControlParameter ControlID="txtAmount" Name="Amount" PropertyName="Text" Type="Double" />
             <asp:ControlParameter ControlID="txtTimeSel" Name="Hours" PropertyName="Text" Type="Double" />
             <asp:ControlParameter ControlID="txtRates" Name="Rates" PropertyName="Text" Type="Double" />
+
+            <asp:ControlParameter ControlID="cboPaymentSchedulesEdit" Name="paymentscheduleId" PropertyName="SelectedValue" Type="Int32" />
+
+            <asp:ControlParameter ControlID="cboPhase" Name="phaseId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboPosition" Name="positionId" PropertyName="SelectedValue" Type="Int32" />
+
             <asp:ControlParameter ControlID="lbldetailId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
@@ -314,6 +335,12 @@
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" />
             <asp:Parameter Name="Id" />
         </UpdateParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourcePaymentSchedules" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT Id, Name FROM Invoices_types WHERE (companyId = @companyId) ORDER BY Id">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
     </asp:SqlDataSource>
 
 

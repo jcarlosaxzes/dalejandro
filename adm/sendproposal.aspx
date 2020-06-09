@@ -130,7 +130,7 @@
                             <td>
                                 <telerik:RadComboBox ID="cboProjectManagerId" runat="server" ValidationGroup="Confirmation"
                                     DataSourceID="SqlDataSourceEmployees2" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
-                                    Width="350px" Height="350px" AppendDataBoundItems="True">
+                                    Width="400px" Height="350px" AppendDataBoundItems="True">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="?" Value="0" />
                                     </Items>
@@ -189,6 +189,36 @@
                                         <telerik:RadComboBoxItem Text="No" Value="0" />
                                     </Items>
                                 </telerik:RadComboBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Totals:
+                            </td>
+                            <td>
+                                <table style="width:400px">
+                                    <tr>
+                                        <td style="text-align:center;width:50%">
+                                            Proposal Total
+                                        </td>
+                                        <td style="text-align:center;">
+                                            Payment Schedule Total
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center">
+                                            <asp:Label ID="lblProposalTotal" runat="server"></asp:Label>
+                                        </td>
+                                        <td style="text-align:center">
+                                            <asp:Label ID="lblScheduleTotal" runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align:center">
+                                            <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"  ></asp:Label>
+                                        </td>
+                                    </tr>
+
+                                </table>
                             </td>
                         </tr>
 

@@ -1717,7 +1717,7 @@ Public Class LocalAPI
                                         ByRef sJob As String,
                                         ByRef sOpen_date As DateTime,
                                         ByRef lClient As Integer,
-                                        ByRef mBudget As String,
+                                        ByRef dBudget As Double,
                                         ByVal ProposalTemplate As Integer,
                                         ByVal sType As String,
                                         ByVal nEmployee As Integer,
@@ -1752,7 +1752,7 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@JobName", sJob)
             cmd.Parameters.AddWithValue("@Open_date", sOpen_date)
             cmd.Parameters.AddWithValue("@ClientId", lClient)
-            cmd.Parameters.AddWithValue("@Budget", IIf(Len(mBudget) > 0, FormatearNumero2Tsql(mBudget), 0))
+            cmd.Parameters.AddWithValue("@Budget", dBudget)
             cmd.Parameters.AddWithValue("@ProposalType", ProposalTemplate)
             cmd.Parameters.AddWithValue("@Type", sType)
             cmd.Parameters.AddWithValue("@EmployeeId", nEmployee)
@@ -5545,18 +5545,16 @@ Public Class LocalAPI
     ' Retorno: True si tuvo exito. 
     '          False en caso contrario 
     ' ................................................................................................................................
-    Public Shared Function GetProposalTotal(ByVal lId As Long) As String
+    Public Shared Function GetProposalTotal(ByVal propsalId As Integer) As Double
         Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT SUM(ISNULL(TotalRow,0)) AS Expr1 FROM  Proposal_details WHERE ProposalId =" & lId, cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                GetProposalTotal = rdr(0).ToString
-            End If
-            rdr.Close()
-            cnn1.Close()
+            Return GetNumericEscalar($"SELECT dbo.ProposalTotal({propsalId})")
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    Public Shared Function GetProposalPSTotal(ByVal propsalId As Integer) As Double
+        Try
+            Return GetNumericEscalar($"SELECT dbo.ProposalPSTotal({propsalId})")
         Catch ex As Exception
             Throw ex
         End Try
@@ -5643,14 +5641,14 @@ Public Class LocalAPI
             rdr.Close()
 
             ' 3.- Obtener el nuevo Total del Proposal
-            Dim dProposalTotal As String = FormatearNumero2Tsql(GetProposalTotal(lProposalId))
+            Dim dProposalTotal As Double = GetProposalTotal(lProposalId)
 
             ' 4.- Obtener el Job asociado
             Dim lJobId As String = GetProposalData(lProposalId, "JobId")
 
             ' 5.- Actualizar el Budget del Job
             If Val(lJobId) > 0 Then
-                cmd.CommandText = "UPDATE [Jobs] SET [Budget]=" & dProposalTotal & " WHERE Id=" & lJobId
+                cmd.CommandText = $"UPDATE [Jobs] SET [Budget]={dProposalTotal} WHERE Id={lJobId}"
                 cmd.ExecuteNonQuery()
             End If
 
@@ -10264,8 +10262,7 @@ Public Class LocalAPI
                 ProposalStatus2Accepted(proposalId)
 
                 '0.- Es un primer Proposal o es un Change Order (ya tiene JobId)
-                Dim dProposalTotal As String = GetProposalTotal(proposalId)
-                Dim sProposalTotal As String = FormatearNumero2Tsql(dProposalTotal)
+                Dim dProposalTotal As Double = GetProposalTotal(proposalId)
 
                 jobId = GetProposalProperty(proposalId, "JobId")
                 Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
@@ -10312,7 +10309,7 @@ Public Class LocalAPI
                         End While
 
                         '2.4 - Crear Job asociado
-                        jobId = NuevoJob(sJobCode, sJobName, GetDateTime(), sClientId, sProposalTotal, sProposalType, sJobType, ProjectManagerId, sProjLocation, sProjArea, nJobSector, sJobUse, sJobUse2, Dpto, sOwner, 0, 0, companyId)
+                        jobId = NuevoJob(sJobCode, sJobName, GetDateTime(), sClientId, dProposalTotal, sProposalType, sJobType, ProjectManagerId, sProjLocation, sProjArea, nJobSector, sJobUse, sJobUse2, Dpto, sOwner, 0, 0, companyId)
 
                         '2.5 - Update parametros del Proposal
                         ExecuteNonQuery($"UPDATE [Proposal] Set JobId={jobId} WHERE Id={proposalId}")
@@ -10347,8 +10344,8 @@ Public Class LocalAPI
                     ' Ya existe JobId, es un Aditional change.......................................................................................
                     If dProposalTotal <> 0 Then
                         '1.- Incrementar el Jobs.Budget=+Proposal.Total)
-                        ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{sProposalTotal} WHERE Id={jobId}")
-                        NewJobNote(jobId, "$Log: job Budget modified (+" & sProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
+                        ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{dProposalTotal} WHERE Id={jobId}")
+                        NewJobNote(jobId, "$Log: job Budget modified (+" & dProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
                         ' Simple Charge, mandatory Retainer
                         bRetainer = True
                     End If

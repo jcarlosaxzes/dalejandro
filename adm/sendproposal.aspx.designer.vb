@@ -122,6 +122,33 @@ Partial Public Class sendproposal
     Protected WithEvents cboAgile As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
+    '''lblProposalTotal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblProposalTotal As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblScheduleTotal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblScheduleTotal As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblTotalAlert control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalAlert As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Comparevalidator5 control.
     '''</summary>
     '''<remarks>
