@@ -374,7 +374,7 @@
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
-                    <div style="height: 1px; overflow: auto">
+                    <div class="container" style="height: 1px; overflow: auto">
                         <asp:Panel ID="ExportPanel" runat="server" Height="1px">
                             <telerik:RadGrid ID="RadGridInvoiceExport" runat="server" DataSourceID="SqlDataSourceMainInvoice" AutoGenerateColumns="False"
                                 AllowPaging="True" Height="5px">

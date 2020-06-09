@@ -78,6 +78,8 @@ Public Class proposaltask
             'txtAmount.Text = "" & LocalAPI.GetProposalDetailProperty(lbldetailId.Text, "Amount")
             txtAmount.Text = "" & detailObject("Amount")
 
+            cboPaymentSchedulesEdit.SelectedValue = detailObject("paymentscheduleId")
+
             lblTotalLine.Text = FormatCurrency(detailObject("TotalRow"))
         Catch ex As Exception
 

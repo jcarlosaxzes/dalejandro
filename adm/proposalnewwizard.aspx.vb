@@ -63,16 +63,14 @@ Public Class proposalnewwizard
                     Next
 
                     ' Active Tab?
-                    If Not Request.QueryString("ProposalTab") Is Nothing Then
-                        RadWizardStepProposal.Active = True
-                    End If
-                    If Not Request.QueryString("FeesTab") Is Nothing Then
-                        RadWizardStepFees.Active = True
-                    End If
                     If Not Request.QueryString("AttachmentsTab") Is Nothing Then
                         RadWizardStepAttachments.Active = True
+                    ElseIf Not Request.QueryString("ProposalTab") Is Nothing Then
+                        RadWizardStepProposal.Active = True
+                    Else
+                        'FeesTab
+                        RadWizardStepFees.Active = True
                     End If
-
                 End If
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Proposal"
