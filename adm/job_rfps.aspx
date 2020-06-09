@@ -97,7 +97,7 @@
                                             <td style="width: 150px; text-align: right">Subconsultant:
                                             </td>
                                             <td>
-                                                <telerik:RadComboBox ID="cboSubconsultant" runat="server" DataSourceID="SqlDataSourceSubconsultant" SelectedValue='<%# Bind("subconsultanId")%>'
+                                                <telerik:RadComboBox ID="cboSubconsultant" runat="server" DataSourceID="SqlDataSourceSubconsultant" Height="300px" SelectedValue='<%# Bind("subconsultanId")%>'
                                                     DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="400px" AppendDataBoundItems="true"
                                                     Style="z-index: 7003">
                                                     <Items>
