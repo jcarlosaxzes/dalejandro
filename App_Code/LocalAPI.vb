@@ -11686,17 +11686,17 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetAzureFilesCountInProposal(proposalId As Integer) As Integer
-        Return GetNumericEscalar("SELECT count(*) FROM Proposals_azureuploads where proposalId=" & proposalId)
+        Return GetNumericEscalar("SELECT count(*) FROM [Azure_Uploads] where EntityType= 'Proposal' and EntityId=" & proposalId)
     End Function
 
     Private Shared Function ExistJobAzureFile(jobId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from [Jobs_azureuploads] where [jobId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
+        Dim sQuery As String = String.Format("select count(*) from  [Azure_Uploads] where EntityId ={0} and EntityType= 'Jobs' and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
         Dim ret As Boolean = IIf(GetNumericEscalar(sQuery) = 0, False, True)
         If Not ret Then
             ' Busco en proposal
             Dim proposalId As Integer = GetProposalIdFromJob(jobId)
             If proposalId > 0 Then
-                sQuery = String.Format("select count(*) from [Proposals_azureuploads] where [ProposalId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", proposalId, FileName, ContentBytes)
+                sQuery = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Proposal' and EntityId={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", proposalId, FileName, ContentBytes)
                 ret = IIf(GetNumericEscalar(sQuery) = 0, False, True)
             End If
         End If
@@ -11708,31 +11708,8 @@ Public Class LocalAPI
         Return GetStringEscalar("SELECT isnull([KeyName],'') FROM [Azure_Uploads] where Id=" & Id)
     End Function
 
-    Private Shared Function GetProposalAzureFileKeyName(Id As Integer) As String
-        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM Proposals_azureuploads where Id=" & Id)
-    End Function
 
-    Private Shared Function GetJobAzureFileKeyName(Id As Integer) As String
-        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM Jobs_azureuploads where Id=" & Id)
-    End Function
-
-    Public Shared Function GetRequestForProposalsAzureFileKeyName(Id As Integer) As String
-        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM RequestForProposals_azureuploads where Id=" & Id)
-    End Function
-
-    Public Shared Function GetClientProsalJobAzureFileKeyName(Id As Integer, Source As String) As String
-        Select Case Source
-            Case "1.- Clients"
-                Return GetClientAzureFileKeyName(Id)
-            Case "2.- Proposals"
-                Return GetProposalAzureFileKeyName(Id)
-            Case "3.- Jobs"
-                Return GetJobAzureFileKeyName(Id)
-        End Select
-
-    End Function
-
-    Public Shared Function JobAzureStorage_Insert(jobId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String) As Boolean
+    Public Shared Function JobAzureStorage_Insert(jobId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
         Try
             If Not ExistJobAzureFile(jobId, FileName, ContentBytes) Then
 
@@ -11743,8 +11720,11 @@ Public Class LocalAPI
                 End If
 
                 ' statusId = actionId para Paid y Complete
-                Dim sQuery As String = String.Format("insert into [Jobs_azureuploads] ([jobId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date]) " &
-                            "values({0}, {1}, '{2}', '{2}', '{3}', {4}, 0, {5}, '{6}', dbo.CurrentTime())", jobId, Type, FileName, KeyName, IIf(bPublic, 1, 0), ContentBytes, ContentType)
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+                Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
+                                $"values({jobId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic} , {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
+
                 Return ExecuteNonQuery(sQuery)
             Else
                 Return False
@@ -11756,14 +11736,14 @@ Public Class LocalAPI
     End Function
 
     Private Shared Function ExistProposalAzureFile(ProposalId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from [Proposals_azureuploads] where [ProposalId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", ProposalId, FileName, ContentBytes)
+        Dim sQuery As String = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Proposal' and [EntityId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", ProposalId, FileName, ContentBytes)
         Dim ret As Boolean = IIf(GetNumericEscalar(sQuery) = 0, False, True)
 
         If Not ret Then
             ' Busco en job
             Dim jobId As Integer = GetProposalProperty(ProposalId, "JobId")
             If jobId > 0 Then
-                sQuery = String.Format("select count(*) from [Jobs_azureuploads] where [jobId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
+                sQuery = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Jobs' and [EntityId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
                 ret = IIf(GetNumericEscalar(sQuery) = 0, False, True)
             End If
         End If
@@ -11771,7 +11751,7 @@ Public Class LocalAPI
         Return ret
     End Function
 
-    Public Shared Function ProposalAzureStorage_Insert(ProposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String) As Boolean
+    Public Shared Function ProposalAzureStorage_Insert(ProposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
         Try
             If Not ExistProposalAzureFile(ProposalId, FileName, ContentBytes) Then
 
@@ -11781,9 +11761,11 @@ Public Class LocalAPI
                     Type = 9
                 End If
 
-                ' statusId = actionId para Paid y Complete
-                Dim sQuery As String = String.Format("insert into [Proposals_azureuploads] ([ProposalId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date]) " &
-                            "values({0}, {1}, '{2}', '{2}', '{3}', {4}, 0, {5}, '{6}', dbo.CurrentTime())", ProposalId, Type, FileName, KeyName, IIf(bPublic, 1, 0), ContentBytes, ContentType)
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+                Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
+                                $"values({ProposalId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic} , {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
+
                 Return ExecuteNonQuery(sQuery)
             Else
                 Return False
@@ -11794,7 +11776,7 @@ Public Class LocalAPI
         End Try
     End Function
     Private Shared Function ExistRequestForProposalsAzureFile(ProposalId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from [RequestForProposals_azureuploads] where [requestforproposalId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", ProposalId, FileName, ContentBytes)
+        Dim sQuery As String = $"select count(*) from [Azure_Uploads] where [EntityId]={ProposalId} and [OriginalFileName]='{FileName}' and [ContentBytes]={ContentBytes} and EntityType = 'Request_For_Proposal'"
         Return IIf(GetNumericEscalar(sQuery) = 0, False, True)
     End Function
     Public Shared Function RequestForProposalsAzureStorage_Insert(requestforproposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, GUID As String) As Boolean
@@ -11811,7 +11793,7 @@ Public Class LocalAPI
                 Dim cmd As SqlCommand = cnn1.CreateCommand()
 
                 ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "RequestForProposals_azureuploads_INSERT"
+                cmd.CommandText = "RequestForProposals_azureuploads_v20_INSERT"
                 cmd.CommandType = CommandType.StoredProcedure
 
                 cmd.Parameters.AddWithValue("@requestforproposalId", requestforproposalId)
@@ -11860,7 +11842,7 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function RequestForProposals_azureuploads_DELETE(GUID As String) As Boolean
-        Return ExecuteNonQuery(String.Format("DELETE FROM [RequestForProposals_azureuploads] WHERE [guid]='{0}' and requestforproposalId=0", GUID))
+        Return ExecuteNonQuery(String.Format("DELETE FROM [Azure_Uploads] WHERE [guid]='{0}' and EntityId=0", GUID))
     End Function
     Private Shared Function ExistClientAzureFile(clientId As Integer, FileName As String, ContentBytes As Integer) As Boolean
         Dim sQuery As String = String.Format("select count(*) from [Azure_Uploads] where [EntityId]={0} and EntityType='Clients' and [OriginalFileName]='{1}' and [ContentBytes]={2} ", clientId, FileName, ContentBytes)
@@ -11896,7 +11878,7 @@ Public Class LocalAPI
             Dim nDocs As Integer
             Dim TypeDoc As String = ""
             sMsg.Append("<strong>Documents of " & JobName & "</strong>")
-            Dim cmd As New SqlCommand("SELECT Jobs_azureuploads.Name, 'https://pasconcept.blob.core.windows.net/documents/'+[KeyName] as url, Jobs_azureuploads_types.Name as nType FROM [Jobs_azureuploads] LEFT OUTER JOIN Jobs_azureuploads_types ON Jobs_azureuploads.type = Jobs_azureuploads_types.Id where Jobs_azureuploads.JobId=" & jobId & "and [Public]=1 Order By [Type], Name", cnn1)
+            Dim cmd As New SqlCommand("SELECT [Azure_Uploads].Name, 'https://pasconcept.blob.core.windows.net/documents/'+[KeyName] as url, Jobs_azureuploads_types.Name as nType FROM [Azure_Uploads] LEFT OUTER JOIN Jobs_azureuploads_types ON [Azure_Uploads].type = Jobs_azureuploads_types.Id where [Azure_Uploads].EntityId=" & jobId & " and EntityType= 'Jobs'  and [Public]=1 Order By [Type], Name", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             Do While rdr.Read()

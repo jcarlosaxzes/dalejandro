@@ -95,11 +95,6 @@ Public Class rfp
         End Try
     End Sub
 
-    Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
-        Dim KeyName As String = LocalAPI.GetRequestForProposalsAzureFileKeyName(e.Command.Parameters("@Id").Value)
-        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
-    End Sub
-
 
 #End Region
 
@@ -111,5 +106,10 @@ Public Class rfp
                 Response.Redirect("~/adm/requestforproposals.aspx")
 
         End Select
+    End Sub
+
+    Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
+        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
+        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
     End Sub
 End Class

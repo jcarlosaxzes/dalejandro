@@ -588,9 +588,9 @@
     </asp:SqlDataSource>
 
  <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="RequestForProposals_azureuploads_SELECT" SelectCommandType="StoredProcedure"
-        DeleteCommand="RequestForProposals_azureuploads_DELETE" DeleteCommandType="StoredProcedure"
-        UpdateCommand="RequestForProposals_azureuploads_UPDATE" UpdateCommandType="StoredProcedure">
+        SelectCommand="RequestForProposals_azureuploads_v20_SELECT" SelectCommandType="StoredProcedure"
+        DeleteCommand="RequestForProposals_azureuploads_v20_DELETE" DeleteCommandType="StoredProcedure"
+        UpdateCommand="RequestForProposals_azureuploads_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblRFPId" Name="requestforproposalId" PropertyName="Text" />
         </SelectParameters>

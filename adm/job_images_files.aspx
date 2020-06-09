@@ -104,8 +104,8 @@
     </div>
     <br />
     <asp:SqlDataSource ID="SqlDataSourceFotos" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="JOB_Photos_SELECT" SelectCommandType="StoredProcedure"
-        DeleteCommand="UPDATE Jobs_azureuploads SET Deleted=1 WHERE (Id = @Id)">
+        SelectCommand="JOB_Photos_v20_SELECT" SelectCommandType="StoredProcedure"
+        DeleteCommand="delete from Azure_Uploads WHERE Id=@Id">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" DefaultValue="0" Name="JobId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
