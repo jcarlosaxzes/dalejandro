@@ -205,7 +205,7 @@ Public Class rfpnewwizard
                     lblRFPLastId.Text = LocalAPI.RFP_INSERT(cboDiscipline.SelectedValue, lblSubconsultaActiveId.Text, txtProjectName.Text, txtProjectLocation.Text, txtProjectArea.Text, txtProjectDescription.Text, txtValue1.Text, txtText1.Text, txtValue2.Text, txtText2.Text, txtValue3.Text, txtText3.Text, txtValue4.Text, txtText4.Text, txtValue5.Text, txtText5.Text, txtValue6.Text, txtText6.Text, txtValue7.Text, txtText7.Text, txtValue8.Text, txtText8.Text, txtValue9.Text, txtText9.Text, txtValue10.Text, txtText10.Text, radEditor_TandC.Content, txtSender.Text, txtSenderEmail.Text, txtIntroductoryText.Text, RadDatePicker1.SelectedDate, lblParentId.Text, lblCompanyId.Text)
 
                     If i = 0 And lblParentId.Text = "0" Then
-                        lblParentId.Text = rfpId
+                        lblParentId.Text = lblRFPLastId.Text
                     End If
 
 
