@@ -365,6 +365,10 @@ Public Class proposal
 
     Private Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
         RadGrid1.MasterTableView.GetColumn("phaseId").Display = IIf(LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0, False, True)
+        If lblCompanyId.Text = 260962 Then
+            ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
+            RadGrid1.MasterTableView.GetColumn("Estimated").Visible = False
+        End If
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
@@ -372,13 +376,6 @@ Public Class proposal
     End Sub
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
-    End Sub
-    Private Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
-        If lblCompanyId.Text = 260962 Then
-            ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
-            RadGrid1.MasterTableView.GetColumn("Estimated").Visible = False
-        End If
-
     End Sub
 
 End Class
