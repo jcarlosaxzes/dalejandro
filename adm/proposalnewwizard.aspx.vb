@@ -434,4 +434,11 @@ Public Class proposalnewwizard
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
 
+    Private Sub RadGridFees_PreRender(sender As Object, e As EventArgs) Handles RadGridFees.PreRender
+        If lblCompanyId.Text = 260962 Then
+            ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
+            RadGridFees.MasterTableView.GetColumn("Estimated").Visible = False
+        End If
+
+    End Sub
 End Class

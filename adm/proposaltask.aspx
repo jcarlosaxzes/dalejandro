@@ -162,7 +162,6 @@
 
         </table>
         <asp:Panel runat="server" ID="PanelEstimator">
-
             <h3 style="margin-left: 100px">Estimator
             </h3>
             <table class="table-condensed" style="width: 100%">
