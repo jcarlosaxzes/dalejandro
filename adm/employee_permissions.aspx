@@ -8,7 +8,7 @@
             padding: 5px 0px;
         }
     </style>
-    <table class="table-condensed Formulario" style="width:100%">
+    <table class="table-condensed Formulario" style="width: 100%">
         <tr>
             <td class="ToolButtom noprint Normal" style="width: 200px">
                 <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true" Label="Status" AutoPostBack="true">
@@ -51,87 +51,89 @@
         </tr>
 
     </table>
-    <div>
-        <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
-            <script type="text/javascript">
-                function OnClientClose(sender, args) {
-                    var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+    <div class="row">
+        <div class="col-md-12">
+            <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+                <script type="text/javascript">
+                    function OnClientClose(sender, args) {
+                        var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
                     masterTable.rebind();
                     $find("<%= cboSourceRole.ClientID %>").rebind();
-                }
-            </script>
-        </telerik:RadCodeBlock>
-        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AllowMultiRowSelection="True" ShowFooter="true"
-            Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" AllowSorting="True" GroupPanelPosition="Top" HeaderStyle-Font-Size="X-Small">
-            <ClientSettings EnableRowHoverStyle="true">
-                <ClientEvents OnGridCreated="isRowSelected" OnRowSelected="isRowSelected" OnRowDeselected="isRowSelected"></ClientEvents>
-                <Selecting AllowRowSelect="True"></Selecting>
-            </ClientSettings>
-            <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id" ClientDataKeyNames="Id" EditMode="PopUp">
-                <Columns>
-                    <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridClientSelectColumn>
-                    <telerik:GridBoundColumn DataField="Id" ReadOnly="True" HeaderText="Id" UniqueName="Id" Display="false">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="Name" ReadOnly="True" FilterControlAltText="Filter Name column" Aggregate="Count" FooterAggregateFormatString="{0:N0}"
-                        HeaderText="Employee Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small">
-                        <ItemTemplate>
-                            <asp:LinkButton runat="server" ID="btnPermits" CommandName="Permits" CommandArgument='<%# Eval("Id") %>'
-                                ToolTip="Employee Permits"><%# Eval("Name")%>
+                    }
+                </script>
+            </telerik:RadCodeBlock>
+            <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AllowMultiRowSelection="True" ShowFooter="true"
+                Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" AllowSorting="True" GroupPanelPosition="Top" HeaderStyle-Font-Size="X-Small">
+                <ClientSettings EnableRowHoverStyle="true">
+                    <ClientEvents OnGridCreated="isRowSelected" OnRowSelected="isRowSelected" OnRowDeselected="isRowSelected"></ClientEvents>
+                    <Selecting AllowRowSelect="True"></Selecting>
+                </ClientSettings>
+                <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id" ClientDataKeyNames="Id">
+                    <Columns>
+                        <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center">
+                        </telerik:GridClientSelectColumn>
+                        <telerik:GridBoundColumn DataField="Id" ReadOnly="True" HeaderText="Id" UniqueName="Id" Display="false">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridTemplateColumn DataField="Name" ReadOnly="True" FilterControlAltText="Filter Name column" Aggregate="Count" FooterAggregateFormatString="{0:N0}"
+                            HeaderText="Employee Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small">
+                            <ItemTemplate>
+                                <asp:LinkButton runat="server" ID="btnPermits" CommandName="Permits" CommandArgument='<%# Eval("Id") %>'
+                                    ToolTip="Employee Permits"><%# Eval("Name")%>
                                                 <span class="glyphicon glyphicon-cog"></span>
-                            </asp:LinkButton>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridBoundColumn DataField="Role" FilterControlAltText="Filter Role column" HeaderText="Role" SortExpression="Role" UniqueName="Role" ReadOnly="True"
-                        HeaderStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="URLFirewall" FilterControlAltText="Filter URLFirewall column" HeaderText="IP v4 Firewall" SortExpression="URLFirewall" UniqueName="URLFirewall" ReadOnly="True"
-                        HeaderStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridCheckBoxColumn DataField="Allow_EmployeesPermissions" DataType="System.Boolean" EditFormColumnIndex="0"
-                        FilterControlAltText="Filter Allow_EmployeesPermissions column" HeaderText="Allow Empl Perm"
-                        SortExpression="Allow_EmployeesPermissions" UniqueName="Allow_EmployeesPermissions"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridCheckBoxColumn>
-                    <telerik:GridCheckBoxColumn DataField="Allow_EditAcceptedProposal" DataType="System.Boolean" EditFormColumnIndex="0"
-                        FilterControlAltText="Filter Allow_EditAcceptedProposal column" HeaderText="Allow Edit Accepted Prop"
-                        SortExpression="Allow_EditAcceptedProposal" UniqueName="Allow_EditAcceptedProposal"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridCheckBoxColumn>
-                    <telerik:GridCheckBoxColumn DataField="Allow_InactivateJob" DataType="System.Boolean" EditFormColumnIndex="0"
-                        FilterControlAltText="Filter Allow_InactivateJob column" HeaderText="Allow Inact Jobs"
-                        SortExpression="Allow_InactivateJob" UniqueName="Allow_InactivateJob"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridCheckBoxColumn>
-                    <telerik:GridCheckBoxColumn DataField="Allow_DepartmentReport" DataType="System.Boolean" EditFormColumnIndex="0"
-                        FilterControlAltText="Filter Allow_DepartmentReport column" HeaderText="Allow Dep/Emp Report"
-                        SortExpression="Allow_DepartmentReport" UniqueName="Allow_DepartmentReport"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridCheckBoxColumn>
-                    <telerik:GridCheckBoxColumn DataField="Allow_BadDebt" DataType="System.Boolean" EditFormColumnIndex="0"
-                        FilterControlAltText="Filter Allow_BadDebt column" HeaderText="Allow Inv BadDebt"
-                        SortExpression="Allow_BadDebt" UniqueName="Allow_BadDebt"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridCheckBoxColumn>
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
+                        <telerik:GridBoundColumn DataField="Role" FilterControlAltText="Filter Role column" HeaderText="Role" SortExpression="Role" UniqueName="Role" ReadOnly="True"
+                            HeaderStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="URLFirewall" FilterControlAltText="Filter URLFirewall column" HeaderText="IP v4 Firewall" SortExpression="URLFirewall" UniqueName="URLFirewall" ReadOnly="True"
+                            HeaderStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridCheckBoxColumn DataField="Allow_EmployeesPermissions" DataType="System.Boolean" EditFormColumnIndex="0"
+                            FilterControlAltText="Filter Allow_EmployeesPermissions column" HeaderText="Allow Empl Perm"
+                            SortExpression="Allow_EmployeesPermissions" UniqueName="Allow_EmployeesPermissions"
+                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
+                        </telerik:GridCheckBoxColumn>
+                        <telerik:GridCheckBoxColumn DataField="Allow_EditAcceptedProposal" DataType="System.Boolean" EditFormColumnIndex="0"
+                            FilterControlAltText="Filter Allow_EditAcceptedProposal column" HeaderText="Allow Edit Accepted Prop"
+                            SortExpression="Allow_EditAcceptedProposal" UniqueName="Allow_EditAcceptedProposal"
+                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
+                        </telerik:GridCheckBoxColumn>
+                        <telerik:GridCheckBoxColumn DataField="Allow_InactivateJob" DataType="System.Boolean" EditFormColumnIndex="0"
+                            FilterControlAltText="Filter Allow_InactivateJob column" HeaderText="Allow Inact Jobs"
+                            SortExpression="Allow_InactivateJob" UniqueName="Allow_InactivateJob"
+                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
+                        </telerik:GridCheckBoxColumn>
+                        <telerik:GridCheckBoxColumn DataField="Allow_DepartmentReport" DataType="System.Boolean" EditFormColumnIndex="0"
+                            FilterControlAltText="Filter Allow_DepartmentReport column" HeaderText="Allow Dep/Emp Report"
+                            SortExpression="Allow_DepartmentReport" UniqueName="Allow_DepartmentReport"
+                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
+                        </telerik:GridCheckBoxColumn>
+                        <telerik:GridCheckBoxColumn DataField="Allow_BadDebt" DataType="System.Boolean" EditFormColumnIndex="0"
+                            FilterControlAltText="Filter Allow_BadDebt column" HeaderText="Allow Inv BadDebt"
+                            SortExpression="Allow_BadDebt" UniqueName="Allow_BadDebt"
+                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
+                        </telerik:GridCheckBoxColumn>
 
 
-                </Columns>
-                <EditFormSettings ColumnNumber="4" CaptionDataField="Name" CaptionFormatString="Edit Permissions of <b>{0}</b>" FormCaptionStyle-ForeColor="#ff8c00">
-                    <PopUpSettings Modal="true" Width="800px" />
-                    <FormTableItemStyle Wrap="False"></FormTableItemStyle>
-                    <FormCaptionStyle CssClass="EditFormHeader"></FormCaptionStyle>
-                    <FormMainTableStyle GridLines="None" CellSpacing="0" CellPadding="3" Width="100%" />
-                    <FormTableStyle GridLines="Horizontal" CellSpacing="0" CellPadding="2" BackColor="White"
-                        Width="100%" />
-                    <FormTableAlternatingItemStyle Wrap="False"></FormTableAlternatingItemStyle>
-                    <FormStyle Width="100%" BackColor="#eef2ea"></FormStyle>
-                    <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1"
-                        CancelText="Cancel">
-                    </EditColumn>
-                    <FormTableButtonRowStyle HorizontalAlign="Left" CssClass="EditFormButtonRow"></FormTableButtonRowStyle>
-                </EditFormSettings>
-            </MasterTableView>
-        </telerik:RadGrid>
+                    </Columns>
+                    <EditFormSettings ColumnNumber="4" CaptionDataField="Name" CaptionFormatString="Edit Permissions of <b>{0}</b>" FormCaptionStyle-ForeColor="#ff8c00">
+                        <PopUpSettings Modal="true" Width="800px" />
+                        <FormTableItemStyle Wrap="False"></FormTableItemStyle>
+                        <FormCaptionStyle CssClass="EditFormHeader"></FormCaptionStyle>
+                        <FormMainTableStyle GridLines="None" CellSpacing="0" CellPadding="3" Width="100%" />
+                        <FormTableStyle GridLines="Horizontal" CellSpacing="0" CellPadding="2" BackColor="White"
+                            Width="100%" />
+                        <FormTableAlternatingItemStyle Wrap="False"></FormTableAlternatingItemStyle>
+                        <FormStyle Width="100%" BackColor="#eef2ea"></FormStyle>
+                        <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1"
+                            CancelText="Cancel">
+                        </EditColumn>
+                        <FormTableButtonRowStyle HorizontalAlign="Left" CssClass="EditFormButtonRow"></FormTableButtonRowStyle>
+                    </EditFormSettings>
+                </MasterTableView>
+            </telerik:RadGrid>
+        </div>
     </div>
     <div style="height: 1px; overflow: auto">
         <asp:Panel ID="ExportPanel" runat="server" Height="1px">
@@ -272,13 +274,13 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceRoles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Select Id, Name from Employees_roles where companyId=@companyId order by Name" 
+        SelectCommand="Select Id, Name from Employees_roles where companyId=@companyId order by Name"
         UpdateCommand="Employee_IPv4_byRole_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
-            <asp:ControlParameter ControlID="txtIPv4" DefaultValue="" Name="IPv4" PropertyName="Text"  />
+            <asp:ControlParameter ControlID="txtIPv4" DefaultValue="" Name="IPv4" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboSourceRole" Name="Role" PropertyName="Text" />
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
