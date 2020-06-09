@@ -1138,6 +1138,74 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function RFP_INSERT(disciplineId As Integer, subconsultanId As Integer, ProjectName As String, ProjectLocation As String, ProjectArea As String, ProjectDescription As String,
+                                      PaymentSchedule1 As Double, PaymentText1 As String, PaymentSchedule2 As Double, PaymentText2 As String, PaymentSchedule3 As Double, PaymentText3 As String,
+                                      PaymentSchedule4 As Double, PaymentText4 As String, PaymentSchedule5 As Double, PaymentText5 As String, PaymentSchedule6 As Double, PaymentText6 As String,
+                                      PaymentSchedule7 As Double, PaymentText7 As String, PaymentSchedule8 As Double, PaymentText8 As String, PaymentSchedule9 As Double, PaymentText9 As String,
+                                      PaymentSchedule10 As Double, PaymentText10 As String, MyAgreements As String, Sender As String, SenderEmail As String, IntroductoryText As String,
+                                      DateSended As DateTime, ParentID As Integer, companyId As Integer
+                                      ) As Integer
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+            Dim rfpId As Integer = 0
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "RFP_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@disciplineId", disciplineId)
+            cmd.Parameters.AddWithValue("@subconsultanId", subconsultanId)
+            cmd.Parameters.AddWithValue("@ProjectName", ProjectName)
+            cmd.Parameters.AddWithValue("@ProjectLocation", ProjectLocation)
+            cmd.Parameters.AddWithValue("@ProjectArea", ProjectArea)
+            cmd.Parameters.AddWithValue("@ProjectDescription", ProjectDescription)
+            cmd.Parameters.AddWithValue("@PaymentSchedule1", PaymentSchedule1)
+            cmd.Parameters.AddWithValue("@PaymentText1", PaymentText1)
+            cmd.Parameters.AddWithValue("@PaymentSchedule2", PaymentSchedule2)
+            cmd.Parameters.AddWithValue("@PaymentText2", PaymentText2)
+            cmd.Parameters.AddWithValue("@PaymentSchedule3", PaymentSchedule3)
+            cmd.Parameters.AddWithValue("@PaymentText3", PaymentText3)
+            cmd.Parameters.AddWithValue("@PaymentSchedule4", PaymentSchedule4)
+            cmd.Parameters.AddWithValue("@PaymentText4", PaymentText4)
+            cmd.Parameters.AddWithValue("@PaymentSchedule5", PaymentSchedule5)
+            cmd.Parameters.AddWithValue("@PaymentText5", PaymentText5)
+            cmd.Parameters.AddWithValue("@PaymentSchedule6", PaymentSchedule6)
+            cmd.Parameters.AddWithValue("@PaymentText6", PaymentText6)
+            cmd.Parameters.AddWithValue("@PaymentSchedule7", PaymentSchedule7)
+            cmd.Parameters.AddWithValue("@PaymentText7", PaymentText7)
+            cmd.Parameters.AddWithValue("@PaymentSchedule8", PaymentSchedule8)
+            cmd.Parameters.AddWithValue("@PaymentText8", PaymentText8)
+            cmd.Parameters.AddWithValue("@PaymentSchedule9", PaymentSchedule9)
+            cmd.Parameters.AddWithValue("@PaymentText9", PaymentText9)
+            cmd.Parameters.AddWithValue("@PaymentSchedule10", PaymentSchedule10)
+            cmd.Parameters.AddWithValue("@PaymentText10", PaymentText10)
+
+            cmd.Parameters.AddWithValue("@MyAgreements", MyAgreements)
+            cmd.Parameters.AddWithValue("@Sender", Sender)
+            cmd.Parameters.AddWithValue("@SenderEmail", SenderEmail)
+            cmd.Parameters.AddWithValue("@DateSended", DateSended)
+            cmd.Parameters.AddWithValue("@IntroductoryText", IntroductoryText)
+            cmd.Parameters.AddWithValue("@guiId", Guid.NewGuid.ToString())
+            cmd.Parameters.AddWithValue("ParentID", ParentID)
+            cmd.Parameters.AddWithValue("companyId", companyId)
+
+            ' Set up the output parameter 
+            Dim parId As SqlParameter = New SqlParameter("@rfpId_OUT", SqlDbType.Int)
+            parId.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            rfpId = parId.Value
+            cnn1.Close()
+
+            Return rfpId
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
     Public Shared Function GetRFPProperty(ByVal lId As Long, ByRef sProperty As String) As String
         Try
 
