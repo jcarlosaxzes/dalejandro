@@ -79,7 +79,7 @@ Public Class rfp
                 AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
                 AzureStorageApi.DeleteFile(tempName, 0)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.RequestForProposalsAzureStorage_Insert(lblRFPId.Text, 0, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblGuiId.Text)
+                e.IsValid = LocalAPI.RequestForProposalsAzureStorage_Insert(lblRFPId.Text, 0, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblGuiId.Text, lblCompanyId.Text)
                 SqlDataSourceAzureFiles.DataBind()
                 Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
                 Try

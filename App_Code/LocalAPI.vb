@@ -11844,7 +11844,7 @@ Public Class LocalAPI
         Dim sQuery As String = $"select count(*) from [Azure_Uploads] where [EntityId]={ProposalId} and [OriginalFileName]='{FileName}' and [ContentBytes]={ContentBytes} and EntityType = 'Request_For_Proposal'"
         Return IIf(GetNumericEscalar(sQuery) = 0, False, True)
     End Function
-    Public Shared Function RequestForProposalsAzureStorage_Insert(requestforproposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, GUID As String) As Boolean
+    Public Shared Function RequestForProposalsAzureStorage_Insert(requestforproposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, GUID As String, companyId As Integer) As Boolean
         Try
             If Not ExistRequestForProposalsAzureFile(requestforproposalId, FileName, ContentBytes) Then
 
@@ -11869,6 +11869,7 @@ Public Class LocalAPI
                 cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
                 cmd.Parameters.AddWithValue("@ContentType", ContentType)
                 cmd.Parameters.AddWithValue("@Public", bPublic)
+                cmd.Parameters.AddWithValue("@companyId", companyId)
                 cmd.Parameters.AddWithValue("@guid", GUID)
 
                 cmd.ExecuteNonQuery()
