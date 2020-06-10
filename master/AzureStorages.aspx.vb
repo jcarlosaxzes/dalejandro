@@ -248,4 +248,44 @@ Public Class AzureStorages
         'Dim destinationBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(DestinationKeyName)
         'destinationBlockBlob.StartCopy(sourceBlockBlob)
     End Sub
+
+    Protected Sub buton6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+
+        Dim connection = LocalAPI.GetConnection()
+
+        Dim query As String = "SELECT  TOP (" & txtCount.Text & ")  [Job] FROM [dbo].[Jobs_photos] where Photo is not null"
+
+        Dim command As SqlCommand = New SqlCommand(query, connection)
+        Dim reader As SqlDataReader = command.ExecuteReader()
+        Dim totla = 0
+        Dim startTime = DateTime.Now
+        If reader.HasRows Then
+            While reader.Read()
+                Try
+                    Dim jobId = reader.GetInt32(0)
+                    Dim bitesImages As Byte() = LocalAPI.JobGetImage(jobId)
+                    Dim companyid = LocalAPI.GetJobProperty(jobId, "companyId")
+
+                    Dim newName = "Companies/" & companyid & $"/{Guid.NewGuid().ToString()}.jpg"
+                    AzureStorageApi.UploadBytesData(newName, bitesImages, "image/jpg")
+
+                    LocalAPI.JobAzureStorage_Insert(jobId, 0, "Job_photo.jpg", newName, False, bitesImages.Length, "Image/jpg", companyid)
+
+                    LocalAPI.JobDeleteImages(jobId)
+
+
+                    totla += 1
+                Catch ex As Exception
+                End Try
+
+            End While
+        Else
+        End If
+        reader.Close()
+        Dim EndTime = DateTime.Now()
+        lblInvoice_payment.Text = "Start: " & startTime.ToLongTimeString() & "   End: " & EndTime.ToLongTimeString() & "  Totla:" & totla
+
+
+    End Sub
 End Class

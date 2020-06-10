@@ -11996,24 +11996,6 @@ Public Class LocalAPI
 
     End Function
 
-    Public Shared Function AzureStorage_AddCompanyUsedSpaces(companyId As Integer, fileSize As Integer) As Boolean
-        Try
-            Dim sQuery As String = $"update [dbo].[Company] set [StorageFiles] = ISNULL([StorageFiles], 0 ) + 1, [StorageSize] = ISNULL([StorageSize], 0 ) + {fileSize}  where [companyId] = {companyId}"
-            ExecuteNonQuery(sQuery)
-            Return True
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-    Public Shared Function AzureStorage_RemoveCompanyUsedSpaces(companyId As Integer, fileSize As Integer) As Boolean
-        Try
-            Dim sQuery As String = $"update [dbo].[Company] set [StorageFiles] = ISNULL([StorageFiles], 0 ) - 1, [StorageSize] = ISNULL([StorageSize], 0 ) - {fileSize}  where [companyId] = {companyId}"
-            ExecuteNonQuery(sQuery)
-            Return True
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
 
 #End Region
 
