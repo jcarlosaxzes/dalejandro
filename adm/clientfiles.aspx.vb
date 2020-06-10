@@ -40,10 +40,6 @@ Public Class clientfiles
             txtJob.Text = ""
         End If
     End Sub
-    Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
-        Dim KeyName As String = LocalAPI.GetClientProsalJobAzureFileKeyName(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Source").Value)
-        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
-    End Sub
 
     Private Sub btnDeleteSelected_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
         Try
@@ -67,5 +63,10 @@ Public Class clientfiles
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
+        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
+        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
     End Sub
 End Class

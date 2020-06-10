@@ -240,7 +240,7 @@ Public Class rfpnewwizard
                 AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
                 AzureStorageApi.DeleteFile(tempName, 0)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.RequestForProposalsAzureStorage_Insert(0, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblAzureGuiId.Text)
+                e.IsValid = LocalAPI.RequestForProposalsAzureStorage_Insert(0, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblAzureGuiId.Text, lblCompanyId.Text)
                 RadGridAzureuploads.DataBind()
                 Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else
@@ -253,7 +253,7 @@ Public Class rfpnewwizard
     End Sub
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
-        Dim KeyName As String = LocalAPI.GetRequestForProposalsAzureFileKeyName(e.Command.Parameters("@Id").Value)
+        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
         AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
     End Sub
 

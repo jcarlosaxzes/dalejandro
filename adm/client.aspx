@@ -879,8 +879,8 @@
 
     <asp:SqlDataSource ID="SqlDataSourceAzureuploads" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Client_azureuploads_SELECT" SelectCommandType="StoredProcedure"
-        DeleteCommand="UPDATE Clients_azureuploads SET Deleted=1 WHERE Id=@Id"
-        UpdateCommand="UPDATE Clients_azureuploads SET preprojectId=@preprojectId, Name=@Name, [Type]=@Type, [Public]=@Public WHERE Id=@Id">
+        DeleteCommand="delete from Azure_Uploads WHERE Id=@Id"
+        UpdateCommand="UPDATE Azure_Uploads SET preprojectId=@preprojectId, Name=@Name, [Type]=@Type, [Public]=@Public WHERE Id=@Id">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblClientId" Name="clientId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />

@@ -502,7 +502,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceAzureuploads" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="RequestForProposals_azureuploads_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="RequestForProposals_azureuploads_v20_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblRFPId" Name="requestforproposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>

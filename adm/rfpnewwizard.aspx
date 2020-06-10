@@ -707,9 +707,9 @@
         SelectCommand="SELECT [Id], [Name] FROM [Jobs_azureuploads_types] ORDER BY [Id]"></asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="RequestForProposalsGUID_azureuploads_SELECT" SelectCommandType="StoredProcedure"
-        DeleteCommand="RequestForProposals_azureuploads_DELETE" DeleteCommandType="StoredProcedure"
-        UpdateCommand="RequestForProposals_azureuploads_UPDATE" UpdateCommandType="StoredProcedure">
+        SelectCommand="RequestForProposalsGUID_azureuploads_v20_SELECT" SelectCommandType="StoredProcedure"
+        DeleteCommand="RequestForProposals_azureuploads_v20_DELETE" DeleteCommandType="StoredProcedure"
+        UpdateCommand="RequestForProposals_azureuploads_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblAzureGuiId" Name="guid" PropertyName="Text" />
         </SelectParameters>

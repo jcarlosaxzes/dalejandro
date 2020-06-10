@@ -109,7 +109,7 @@
         </div>
 
         <asp:SqlDataSource ID="SqlDataSourceCompany" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="Select [companyId] ,[Name] from [Company] " SelectCommandType="Text"
+            SelectCommand="Select [companyId] ,[Name] from [Company] where billingExpirationDate >= dbo.CurrentTime() " SelectCommandType="Text"
             >
         </asp:SqlDataSource>
 
