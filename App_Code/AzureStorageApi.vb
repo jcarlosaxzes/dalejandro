@@ -18,7 +18,6 @@ Public Class AzureStorageApi
             Dim container As CloudBlobContainer = blobClient.GetContainerReference(containerName)
             Dim blockBlob As CloudBlockBlob = container.GetBlockBlobReference(KeyName)
             blockBlob.FetchAttributes()
-            LocalAPI.AzureStorage_RemoveCompanyUsedSpaces(companyId, blockBlob.Properties.Length)
             blockBlob.DeleteIfExists()
             Return True
         Catch ex As Exception
@@ -85,7 +84,6 @@ Public Class AzureStorageApi
             End Using
 
             blockBlob.FetchAttributes()
-            LocalAPI.AzureStorage_AddCompanyUsedSpaces(companyId, blockBlob.Properties.Length)
             Return blockBlob.Uri.AbsoluteUri
         Catch ex As Exception
             Throw ex
@@ -103,7 +101,6 @@ Public Class AzureStorageApi
             destinationBlockBlob.StartCopy(sourceBlockBlob)
 
             sourceBlockBlob.FetchAttributes()
-            LocalAPI.AzureStorage_AddCompanyUsedSpaces(companyId, sourceBlockBlob.Properties.Length)
             Return True
         Catch ex As Exception
             Return False
@@ -111,7 +108,7 @@ Public Class AzureStorageApi
     End Function
 
 
-    Public Shared Function UploadBytesData(fileName As String, fileData As Byte(), directory As String, contentType As String) As String
+    Public Shared Function UploadBytesData(fileName As String, fileData As Byte(), contentType As String) As String
         Try
 
             ' Create a BlobServiceClient object which will be used to create a container client
@@ -120,19 +117,10 @@ Public Class AzureStorageApi
             Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
             Dim container As CloudBlobContainer = blobClient.GetContainerReference("documents")
 
-            'Generates Random Blob Name
-            Dim fileExt = Path.GetExtension(fileName)
-            Dim randomName = $"{Guid.NewGuid().ToString()}" & fileExt
-            Dim blockBlob = container.GetBlockBlobReference(randomName)
+            Dim blockBlob = container.GetBlockBlobReference(fileName)
             'Sets the content type to image
             blockBlob.Properties.ContentType = contentType
-
-            'Using File
-            '    File.Position = 0
-            '    blockBlob.UploadFromStream(File)
-            '    File.Close()
-            'End Using
-
+            blockBlob.UploadFromByteArray(fileData, 0, fileData.LongLength)
             Return blockBlob.Uri.AbsoluteUri
         Catch ex As Exception
             Throw ex

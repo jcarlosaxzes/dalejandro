@@ -105,6 +105,14 @@
 
              <asp:Button ID="Button5" runat="server" Text="Detete Files" />&nbsp;&nbsp;  <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
             <br />
+             <br /><br />
+&nbsp;&nbsp;&nbsp;
+            <br />            
+            <br />
+            <br />
+
+             <asp:Button ID="Button6" runat="server" Text="Jobs Photos From DB to Azure" />&nbsp;&nbsp;  <asp:Label ID="blbjobphotos" runat="server" Text=""></asp:Label>
+            <br />
 
         </div>
 
