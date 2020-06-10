@@ -201,7 +201,14 @@ Public Class rfpnewwizard
                 'RadListBoxResult.Items.Add(New RadListBoxItem("Subconsultants................."))
                 For i = 0 To RadListBoxDestinationSubContrator.Items.Count - 1
                     lblSubconsultaActiveId.Text = RadListBoxDestinationSubContrator.Items(i).Value
-                    SqlDataSourceRFP.Insert()
+
+                    lblRFPLastId.Text = LocalAPI.RFP_INSERT(cboDiscipline.SelectedValue, lblSubconsultaActiveId.Text, txtProjectName.Text, txtProjectLocation.Text, txtProjectArea.Text, txtProjectDescription.Text, txtValue1.Text, txtText1.Text, txtValue2.Text, txtText2.Text, txtValue3.Text, txtText3.Text, txtValue4.Text, txtText4.Text, txtValue5.Text, txtText5.Text, txtValue6.Text, txtText6.Text, txtValue7.Text, txtText7.Text, txtValue8.Text, txtText8.Text, txtValue9.Text, txtText9.Text, txtValue10.Text, txtText10.Text, radEditor_TandC.Content, txtSender.Text, txtSenderEmail.Text, txtIntroductoryText.Text, RadDatePicker1.SelectedDate, lblParentId.Text, lblCompanyId.Text)
+
+                    If i = 0 And lblParentId.Text = "0" Then
+                        lblParentId.Text = lblRFPLastId.Text
+                    End If
+
+
                     If opcUpdateAndSubmit.Checked Then
                         LocalAPI.NotificarRFP(lblRFPLastId.Text)
                         LocalAPI.SetRFPStatus(lblRFPLastId.Text, LocalAPI.RFPStatus_ENUM.Sent)
@@ -222,10 +229,6 @@ Public Class rfpnewwizard
         End Try
     End Sub
 
-    Private Sub SqlDataSourceRFP_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceRFP.Inserting
-        e.Command.Parameters("@Sender").Value = txtSender.Text
-        e.Command.Parameters("@SenderEmail").Value = txtSenderEmail.Text
-    End Sub
 
 #Region "Attachment_Step7"
     Protected Sub RadCloudUpload1_FileUploaded(sender As Object, e As Telerik.Web.UI.CloudFileUploadedEventArgs)

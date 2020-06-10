@@ -46,11 +46,27 @@ Public Class sendproposal
                     cboRetainer.SelectedValue = 1
                 End If
 
+                TotalsAnalisis()
 
             End If
         End If
     End Sub
+    Private Sub TotalsAnalisis()
+        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+        lblProposalTotal.Text = FormatCurrency(bTotal)
+        lblScheduleTotal.Text = FormatCurrency(bPSTotal)
+        If bTotal = 0 Then
+            lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
+            RadWizard1.DisplayNavigationButtons = False
+        Else
+            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
+                lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+                RadWizard1.DisplayNavigationButtons = False
+            End If
+        End If
 
+    End Sub
 #Region "RadWizard Step Buttons"
     Private Sub RadWizard1_NextButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.NextButtonClick
         Select Case e.CurrentStep.ID

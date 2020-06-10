@@ -203,15 +203,6 @@ Partial Public Class proposal
     Protected WithEvents btnNewTask As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''RadCodeBlock1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
-    
-    '''<summary>
     '''RadGrid1 control.
     '''</summary>
     '''<remarks>

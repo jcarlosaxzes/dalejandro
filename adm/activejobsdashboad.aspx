@@ -67,7 +67,7 @@
                     </asp:LinkButton>
                 </td>
                 <td>
-                    <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Miscellaneous Time">
+                    <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Non-Productive Time">
                     <span class="glyphicon glyphicon-plus"></span> Non-Productive Time
                     </asp:LinkButton>
                 </td>
@@ -464,7 +464,7 @@
 
 
     <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Skin="Default" Width="400px">
+        Skin="Default" Width="600px">
 
 
         <h2 style="margin: 0; text-align: center; width: 100%">
@@ -472,97 +472,109 @@
             </span>
         </h2>
 
-        <div class="panel panel-default">
-            <div class="panel-heading">Category:</div>
-            <div class="panel-body text-center">
-                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name" ZIndex="50001"
-                    DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
-                </telerik:RadComboBox>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">Time/day (in hours for each day):</div>
-            <div class="panel-body text-center">
-                <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
-                    MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours for each day"
-                    Value="1" Width="100%" MaxValue="24">
-                    <NumberFormat DecimalDigits="2" />
-                    <IncrementSettings Step="1" />
-                </telerik:RadNumericTextBox>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">Date From:</div>
-            <div class="panel-body text-center">
-                <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server"
-                    DateFormat="MM/dd/yyyy"
-                    Culture="en-US"
-                    ZIndex="50001"
-                    Width="100%">
-                </telerik:RadDatePicker>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">Date To:</div>
-            <div class="panel-body text-center">
-                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server"
-                    DateFormat="MM/dd/yyyy"
-                    Culture="en-US"
-                    ZIndex="50001"
-                    Width="100%">
-                </telerik:RadDatePicker>
-            </div>
-        </div>
+        <div style="font-size: medium">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Notes:
-            </div>
-            <div class="panel-body text-center">
-                <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="2" Width="100%"
-                    MaxLength="256">
-                </telerik:RadTextBox>
-            </div>
-        </div>
-        <div>
-            <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddRecord" Width="380px">
+            <table class="table-condensed" style="width: 600px">
+                <tr>
+                    <td style="width: 120px; text-align: right">Category:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name" ZIndex="50001"
+                            DataValueField="Id" Width="90%" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Time (hrs per day):
+                    </td>
+                    <td>
+                        <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
+                            MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours for each day"
+                            Value="1" Width="150px" MaxValue="24">
+                            <NumberFormat DecimalDigits="2" />
+                            <IncrementSettings Step="1" />
+                        </telerik:RadNumericTextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Date From:
+                    </td>
+                    <td>
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server"
+                            DateFormat="MM/dd/yyyy"
+                            Culture="en-US"
+                            ZIndex="50001"
+                            Width="150px">
+                        </telerik:RadDatePicker>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Date To:
+                    </td>
+                    <td>
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server"
+                            DateFormat="MM/dd/yyyy"
+                            Culture="en-US"
+                            ZIndex="50001"
+                            Width="150px">
+                        </telerik:RadDatePicker>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Notes:
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="2" Width="90%"
+                            MaxLength="256">
+                        </telerik:RadTextBox>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddNonRecord" Width="180px" CausesValidation="true">
                         Add Time
-            </asp:LinkButton>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+
+            </table>
+
+            <div>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtNotes" Text="* Notes is required" ForeColor="Red"
+                    SetFocusOnError="true" ValidationGroup="AddNonRecord" Display="Dynamic">
+                </asp:RequiredFieldValidator>
+            </div>
+
+            <table style="width: 100%; border: 1px solid #aeaeaf;">
+                <tr>
+                    <td style="width: 25%; padding-left: 10px"><b>Benefits</b></td>
+                    <td style="width: 25%; text-align: center"><b>Assigned</b></td>
+                    <td style="width: 25%; text-align: center"><b>Used</b></td>
+                    <td style="width: 25%; text-align: center"><b>Balance</b></td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 10px">Vacations</td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblVac1" runat="server" Text="0"></asp:Label></td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblVac2" runat="server" Text="0"></asp:Label></td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblVac3" runat="server" Text="0"></asp:Label></td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 10px">Personal/Sick</td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblPer1" runat="server" Text="0"></asp:Label></td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblPer2" runat="server" Text="0"></asp:Label></td>
+                    <td style="text-align: center">
+                        <asp:Label ID="lblPer3" runat="server" Text="0"></asp:Label></td>
+
+                </tr>
+            </table>
         </div>
-
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtNotes" Text="* Notes can not be empty"
-            SetFocusOnError="true" ValidationGroup="AddRecord">
-        </asp:RequiredFieldValidator>
-
-
-        <table style="width: 100%; border: 1px solid #aeaeaf;">
-            <tr>
-                <td style="width: 25%"><b>Benefits</b></td>
-                <td style="width: 25%; text-align: center"><b>Assigned</b></td>
-                <td style="width: 25%; text-align: center"><b>Used</b></td>
-                <td style="width: 25%; text-align: center"><b>Balance</b></td>
-            </tr>
-            <tr>
-                <td>Vacations</td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblVac1" runat="server" Text="0"></asp:Label></td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblVac2" runat="server" Text="0"></asp:Label></td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblVac3" runat="server" Text="0"></asp:Label></td>
-            </tr>
-            <tr>
-                <td>Personal/Sick</td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblPer1" runat="server" Text="0"></asp:Label></td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblPer2" runat="server" Text="0"></asp:Label></td>
-                <td style="text-align: center">
-                    <asp:Label ID="lblPer3" runat="server" Text="0"></asp:Label></td>
-
-            </tr>
-        </table>
-
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipReview" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"

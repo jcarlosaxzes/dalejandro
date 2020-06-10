@@ -62,21 +62,15 @@ Public Class proposalnewwizard
                         RadWizard1.WizardSteps(i).Enabled = True
                     Next
 
-                    ' AttachmentsTab ?
+                    ' Active Tab?
                     If Not Request.QueryString("AttachmentsTab") Is Nothing Then
                         RadWizardStepAttachments.Active = True
+                    ElseIf Not Request.QueryString("ProposalTab") Is Nothing Then
+                        RadWizardStepProposal.Active = True
                     Else
-                        RadWizardStepFees.Active = True '(lblClientId.Text > 0)
-                        '' Fees ?
-                        'If Not Request.QueryString("FeesTab") Is Nothing Then
-                        '    Fees.Active = True
-                        'Else
-                        '    ' Edit Proposal
-                        '    RadWizardStepProposal.Active = True '(lblClientId.Text > 0)
-                        'End If
+                        'FeesTab
+                        RadWizardStepFees.Active = True
                     End If
-
-
                 End If
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Proposal"
@@ -335,12 +329,6 @@ Public Class proposalnewwizard
         End Select
 
     End Sub
-    Private Sub SqlDataSourceServiceFees_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceServiceFees.Updated
-        RadGridPS.DataBind()
-        cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
-        btnUpdatePS.Visible = cboPaymentSchedules.Visible
-    End Sub
-
 
 #End Region
 
@@ -446,4 +434,11 @@ Public Class proposalnewwizard
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
 
+    Private Sub RadGridFees_PreRender(sender As Object, e As EventArgs) Handles RadGridFees.PreRender
+        If lblCompanyId.Text = 260962 Then
+            ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
+            RadGridFees.MasterTableView.GetColumn("Estimated").Visible = False
+        End If
+
+    End Sub
 End Class

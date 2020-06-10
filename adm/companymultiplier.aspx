@@ -63,8 +63,6 @@
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Company Multiplier" StepType="Step">
                     <div>
-
-                        <h3>Multiplier Data</h3>
                         <table class="table-condensed" style="width: 100%">
                             <tr>
                                 <td>
@@ -79,9 +77,9 @@
                                 </td>
                                 <td>
                                     <small>
-                                        <b>Calculate:</b> Estimate Salary and Productive Salary from Employees->Payroll, Calculate Multiplier=[Total Estimated Expenses] * [Desired Profit] / [Estimate Productive Salary] of selected year
+                                        <b>Calculate:</b> Estimate Salary and Productive Salary from Employees Profile Information, Calculate Multiplier=[Total Estimated Expenses] * [Desired Profit] / [Estimate Productive Salary] for selected year
                                         <br />
-                                        <b>Estiated Income:</b> [Total Estimated Expenses] + [$ Desired Profit]
+                                        <b>Estimated Income:</b> [Total Estimated Expenses] + [$ Desired Profit]
                                         <br />
                                         <b>Actual Income:</b> [Colleted invoices] of Year(Jobs Date)
                                     </small>

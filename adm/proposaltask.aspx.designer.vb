@@ -140,6 +140,15 @@ Partial Public Class proposaltask
     Protected WithEvents lblTotalLine As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''cboPaymentSchedulesEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboPaymentSchedulesEdit As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''btnUpdate control.
     '''</summary>
     '''<remarks>
@@ -264,6 +273,15 @@ Partial Public Class proposaltask
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEstimator As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourcePaymentSchedules control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourcePaymentSchedules As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.

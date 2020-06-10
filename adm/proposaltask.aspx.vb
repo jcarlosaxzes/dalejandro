@@ -19,7 +19,7 @@ Public Class proposaltask
                     pnlTemplate.Visible = False
                     lblTaskList.Visible = False
 
-                    PanelEstimator.Visible = True
+                    PanelEstimatorVisible()
                 Else
                     ' Insert
                     lbldetailId.Text = "0"
@@ -41,6 +41,16 @@ Public Class proposaltask
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub PanelEstimatorVisible()
+        If lblCompanyId.Text = 260962 Then
+            ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
+            PanelEstimator.Visible = False
+        Else
+            PanelEstimator.Visible = True
+        End If
+
     End Sub
 
     Private Function EnabledProposal() As Boolean
@@ -78,6 +88,8 @@ Public Class proposaltask
             'txtAmount.Text = "" & LocalAPI.GetProposalDetailProperty(lbldetailId.Text, "Amount")
             txtAmount.Text = "" & detailObject("Amount")
 
+            cboPaymentSchedulesEdit.SelectedValue = detailObject("paymentscheduleId")
+
             lblTotalLine.Text = FormatCurrency(detailObject("TotalRow"))
         Catch ex As Exception
 
@@ -96,7 +108,7 @@ Public Class proposaltask
             btnUpdateAndBack.Text = "Update and Back"
             Master.InfoMessage("New Task inserted!")
         End If
-        PanelEstimator.Visible = True
+        PanelEstimatorVisible()
 
     End Sub
     Private Sub btnUpdateAndBack_Click(sender As Object, e As EventArgs) Handles btnUpdateAndBack.Click

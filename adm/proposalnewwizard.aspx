@@ -612,8 +612,8 @@
                                                         <asp:Label ID="lblRates" runat="server" Text='<%# Eval("Rates", "{0:N2}")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
-                                                <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimator" ReadOnly="True"
-                                                    SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimator" Aggregate="Sum"
+                                                <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True"
+                                                    SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimated" Aggregate="Sum"
                                                     FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
                                                     HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridBoundColumn>
@@ -1030,20 +1030,10 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceServiceFees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="PROPOSAL_details_DELETE" DeleteCommandType="StoredProcedure"
-        SelectCommand="PROPOSAL_details_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL_details_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        SelectCommand="PROPOSAL_details_SELECT" SelectCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="String" />
         </DeleteParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="DescriptionPlus" Type="String" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="Hours" Type="Double" />
-            <asp:Parameter Name="Rates" Type="Double" />
-            <asp:Parameter Name="paymentscheduleId" Type="Int32" />
-            <asp:Parameter Name="Id" Type="String" />
-        </UpdateParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
         </SelectParameters>

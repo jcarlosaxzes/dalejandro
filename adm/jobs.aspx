@@ -574,7 +574,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Status" HeaderText="PM & Employees</br>Status" SortExpression="nStatus"
-                                UniqueName="Status" HeaderStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="200px">
+                                UniqueName="Status" HeaderStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="250px">
                                 <ItemTemplate>
                                     <table style="width: 100%">
                                         <tr>
