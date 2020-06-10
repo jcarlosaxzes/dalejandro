@@ -161,6 +161,7 @@ Public Class proposaltask
         RadGridEstaimator.DataBind()
         cboPositionForEstimator.SelectedValue = 0
         txtHoursForEstimate.Value = 0
+        cboPositionForEstimator.Focus()
     End Sub
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted

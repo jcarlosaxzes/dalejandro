@@ -169,7 +169,7 @@
                     <td style="text-align: right; width: 180px">Position:
                     </td>
                     <td style="width: 300px">
-                        <telerik:RadComboBox runat="server" ID="cboPositionForEstimator" DataValueField="Id" Width="100%" Height="250px" AutoPostBack="true" CausesValidation="false"
+                        <telerik:RadComboBox runat="server" ID="cboPositionForEstimator" DataValueField="Id" Width="100%" Height="250px" CausesValidation="false"
                             DataTextField="Name" DataSourceID="SqlDataSourcePositions" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Select position...)" Value="0" />
