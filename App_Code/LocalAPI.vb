@@ -11788,7 +11788,7 @@ Public Class LocalAPI
                 Dim splublic = IIf(bPublic, 1, 0)
                 Dim fileType = System.IO.Path.GetExtension(FileName)
                 Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                                $"values({jobId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0 , {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
+                                $"values({jobId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0 , {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Jobs', {companyId}, '{fileType}' )"
 
                 Return ExecuteNonQuery(sQuery)
             Else
@@ -11829,7 +11829,7 @@ Public Class LocalAPI
                 Dim splublic = IIf(bPublic, 1, 0)
                 Dim fileType = System.IO.Path.GetExtension(FileName)
                 Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                                $"values({ProposalId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
+                                $"values({ProposalId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Proposal', {companyId}, '{fileType}' )"
 
                 Return ExecuteNonQuery(sQuery)
             Else
