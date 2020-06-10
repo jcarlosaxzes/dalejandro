@@ -169,7 +169,7 @@
                     <td style="text-align: right; width: 180px">Position:
                     </td>
                     <td style="width: 300px">
-                        <telerik:RadComboBox runat="server" ID="cboPositionForEstimator" DataValueField="Id" Width="100%" Height="250px" AutoPostBack="true" CausesValidation="false"
+                        <telerik:RadComboBox runat="server" ID="cboPositionForEstimator" DataValueField="Id" Width="100%" Height="250px" CausesValidation="false"
                             DataTextField="Name" DataSourceID="SqlDataSourcePositions" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Select position...)" Value="0" />
@@ -199,7 +199,8 @@
             </table>
             <div style="padding-left: 180px; width: 90%">
                 <telerik:RadGrid ID="RadGridEstaimator" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceEstimator" CellSpacing="0" Width="100%" HeaderStyle-HorizontalAlign="Center">
+                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceEstimator" CellSpacing="0" Width="100%" 
+                    HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceEstimator" ShowFooter="true">
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="" HeaderStyle-Width="50px">

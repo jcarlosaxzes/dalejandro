@@ -125,7 +125,7 @@
                     <hr style="margin:0" />
                     <table class="table-condensed" style="width: 100%">
                         <tr>
-                            <td style="width: 270px">Proposal By:
+                            <td style="width: 270px;text-align:right">Proposal By:
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboProjectManagerId" runat="server" ValidationGroup="Confirmation"
@@ -138,7 +138,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Notification Type:
+                            <td style="text-align:right">Notification Type:
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboNotification" runat="server" Width="150px" ValidationGroup="Confirmation">
@@ -152,7 +152,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Automatic Retainer (Yes or No):
+                            <td style="text-align:right">Automatic Retainer (Yes or No):
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboRetainer" runat="server" Width="150px" ValidationGroup="Confirmation">
@@ -164,7 +164,7 @@
                                 </telerik:RadComboBox>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="text-align:right">
                             <td>Share Attached Documents (Yes or No):
                             </td>
                             <td>
@@ -178,7 +178,7 @@
 
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="text-align:right">
                             <td>Sent to Agile Campaign (Yes or No):
                             </td>
                             <td>
@@ -191,7 +191,7 @@
                                 </telerik:RadComboBox>
                             </td>
                         </tr>
-                        <tr>
+                        <tr style="text-align:right">
                             <td>Totals:
                             </td>
                             <td>
