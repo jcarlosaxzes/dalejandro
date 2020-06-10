@@ -108,4 +108,9 @@ Public Class client
         End If
 
     End Sub
+
+    Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureuploads.Deleting
+        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
+        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
+    End Sub
 End Class

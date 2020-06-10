@@ -23,7 +23,7 @@
 
     <meta name='url' content='https://pasconcept.com/' />
     <meta name='identifier-URL' content='https://pasconcept.com/' />
-    <meta name="image" content="https://pasconcept.com/images/header-pasconcept-logo.png" />
+    <meta name="image" content="https://pasconcept.com/images/logo/pas_horizontal_logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>PASconcept. Your complete online platform of Project </title>

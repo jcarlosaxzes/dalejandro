@@ -144,9 +144,9 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Client_azureuploads_SELECT" SelectCommandType="StoredProcedure"
-        DeleteCommand="ClientProsalJob_azureuploads_DELETE" DeleteCommandType="StoredProcedure"
-        UpdateCommand="ClientProsalJob_azureuploads_UPDATE" UpdateCommandType="StoredProcedure">
+        SelectCommand="Client_azureuploads_v20_SELECT" SelectCommandType="StoredProcedure"
+        DeleteCommand="ClientProsalJob_azureuploads_v20_DELETE" DeleteCommandType="StoredProcedure"
+        UpdateCommand="ClientProsalJob_azureuploads_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblClientId" Name="clientId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
@@ -160,7 +160,6 @@
             <asp:Parameter Name="Name" />
             <asp:Parameter Name="Type" />
             <asp:Parameter Name="Public" DbType="Boolean" />
-            <asp:Parameter Name="Source" />
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDocTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
