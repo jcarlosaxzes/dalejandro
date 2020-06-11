@@ -10,7 +10,8 @@ Public Class MasterJOB
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
-
+            lblJobId.Text = Request.QueryString("jobId")
+            If LocalAPI.IsCompanyViolation(lblJobId.Text, "Jobs", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
         End If
         Refresh()
     End Sub
@@ -32,7 +33,6 @@ Public Class MasterJOB
         End Set
     End Property
     Private Sub Refresh()
-        lblJobId.Text = Request.QueryString("jobId")
         Dim sPage = Mid(Request.Url.GetLeftPart(UriPartial.Path), InStr(LCase(Request.Url.GetLeftPart(UriPartial.Path)), "/job_") + 1)
         Select Case LCase(sPage)
             Case "job_job"
