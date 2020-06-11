@@ -1,4 +1,5 @@
-﻿Imports Telerik.Web.UI
+﻿Imports System.Drawing
+Imports Telerik.Web.UI
 Public Class reports
     Inherits System.Web.UI.Page
 
@@ -30,7 +31,7 @@ Public Class reports
             End If
 
             TimeFrame(3)
-            End If
+        End If
 
     End Sub
 
@@ -151,6 +152,28 @@ Public Class reports
         End Try
     End Sub
 
+    Protected Sub RadGrid1_ItemDataBound(ByVal sender As Object, ByVal e As Telerik.Web.UI.GridItemEventArgs) Handles RadGrid1.ItemDataBound
+        'Is it a GridDataItem
+        If (TypeOf (e.Item) Is GridDataItem And cboNames.SelectedValue = 253) Then
+            'Get the instance of the right type
+            Try
+                Dim dataBoundItem As GridDataItem = e.Item
+                'Check the formatting condition
+                Dim ProfitPercent = Decimal.Parse(dataBoundItem("ProfitPercent").Text)
+                If (ProfitPercent >= 30) Then
+                    dataBoundItem("ProfitPercent").BackColor = Color.Green
+                End If
+                If (ProfitPercent < 30 And ProfitPercent >= 20) Then
+                    dataBoundItem("ProfitPercent").BackColor = Color.Yellow
+                End If
+                If (ProfitPercent < 20) Then
+                    dataBoundItem("ProfitPercent").BackColor = Color.Red
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
     Protected Sub cboGroups_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboGroups.SelectedIndexChanged
         InitNamesReports()
     End Sub
@@ -159,7 +182,7 @@ Public Class reports
         cboNames.Items.Insert(0, New RadComboBoxItem("(Select Report...)", -1))
         SqlDataSourceName.DataBind()
         cboNames.DataBind()
-        cboDepartment.Enabled = (cboGroups.SelectedValue = "Jobs" Or cboGroups.SelectedValue = "Employees" Or cboGroups.SelectedValue = "Marketing")
+        cboDepartment.Enabled = (cboGroups.SelectedValue = "Jobs" Or cboGroups.SelectedValue = "Employees" Or cboGroups.SelectedValue = "Marketing" Or cboGroups.SelectedValue = "Expenses")
     End Sub
 
     Private Sub ConfigureExport()
