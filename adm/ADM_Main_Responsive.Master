@@ -162,7 +162,9 @@
                 <table class="table-condensed" style="width: 100%">
                     <tr>
                         <td class="noprint" style="width: 150px">
-                            <img src="../Images/logo/pas_horizontal_logo.png" style="border-width: 0" height="42" />
+                            <a href="/">
+                                <img src="../Images/logo/pas_horizontal_logo.png" style="border-width: 0" height="42" />
+                            </a>
                         </td>
                         <td style="text-align:center">
                             <telerik:RadNavigation ID="RadNavigation1" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material" Font-Size="Medium" >
