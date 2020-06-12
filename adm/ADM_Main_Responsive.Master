@@ -50,9 +50,11 @@
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
     <%-- <style>
-        div.RadMenu_BlackMetroTouch .rmGroup .rmText,
-        div.RadMenu_BlackMetroTouch .rmGroup .rmText:hover {
-            background-color: #25a0da;
+        boostrap 4.x!!!!!!!!!!!!!!!!!!!!
+        .container {
+            max-width: 1800px;
+            padding-left:75px;
+            padding-right:75px;
         }
     </style>--%>
 </head>
