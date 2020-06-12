@@ -16,6 +16,12 @@
     <link href="~/css/Menu.PASMenuBlackMetroTouch.min.css" rel="stylesheet" />
     <link href="~/Content/pasconcept.min.css" rel="stylesheet" />
 
+    <%-- Favicons and the like --%>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Content/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="~/Content/favicons/site.webmanifest" />
+
     <meta name="DESCRIPTION" content="A web-based application conceived and designed to provide an all-inclusive management tool for architectural and engineering firms who wish to integrate the interaction." />
     <meta name="KEYWORDS" content="pasconcept,saas,online project administration,architectural app,engineering app,project app,time sheet,proposals online,job online,civil app,mechanical app,structural app,
           electrical app,request for proposal, rfp,subconsultant,
@@ -158,7 +164,9 @@
                 <table class="table-condensed" style="width: 100%">
                     <tr>
                         <td class="noprint" style="width: 150px">
-                            <img src="../Images/logo/pas_horizontal_logo.png" style="border-width: 0" height="42" />
+                            <a href="/">
+                                <img src="../Images/logo/pas_horizontal_logo.png" style="border-width: 0" height="42" />
+                            </a>
                         </td>
                         <td style="text-align:center">
                             <telerik:RadNavigation ID="RadNavigation1" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material" Font-Size="Medium" >
