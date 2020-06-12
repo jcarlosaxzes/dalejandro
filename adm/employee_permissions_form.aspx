@@ -123,7 +123,7 @@
                                             <asp:CheckBox ID="Deny_NewProposalCheckBox" runat="server" Checked='<%# Bind("Deny_NewProposal") %>' /></td>
                                     </tr>                                    
                                     <tr>
-                                        <td>Deny Request for Proposals:</td>
+                                        <td>Deny Requests for Proposals:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_RequestsProposalsListCheckBox" runat="server" Checked='<%# Bind("Deny_RequestsProposalsList") %>' /></td>
                                     </tr>
@@ -154,7 +154,7 @@
                                             <asp:CheckBox ID="Deny_JobCodesCheckBox" runat="server" Checked='<%# Bind("Deny_JobCodes") %>' /></td>
                                     </tr>
                                     <tr>
-                                        <td>Deny Timesheet:</td>
+                                        <td>Deny Time Sheet:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_TimesheetCheckBox" runat="server" Checked='<%# Bind("Deny_Timesheet") %>' /></td>
                                     </tr>                                    
@@ -169,7 +169,7 @@
                                             <asp:CheckBox ID="CheckBox39" runat="server" Checked='<%# Bind("Deny_TimesbyPeriods") %>' /></td>
                                     </tr>
                                     <tr>
-                                        <td>Deny Transmittal:
+                                        <td>Deny Transmittals:
                                         </td>
 
                                         <td>
@@ -212,9 +212,14 @@
                                             <asp:CheckBox ID="Deny_BillingSchedulesCheckBox" runat="server" Checked='<%# Bind("Deny_BillingSchedules") %>' /></td>
                                     </tr>
                                     <tr>
-                                        <td>Deny Billing Manager:</td>
+                                        <td>Deny Payments:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_BillingManagerCheckBox" runat="server" Checked='<%# Bind("Deny_BillingManager") %>' /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Deny Client Collection:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox13" runat="server" Checked='<%# Bind("Deny_ClientsColletion") %>' /></td>
                                     </tr>
                                     <tr>
                                         <td>Deny Client Balance Report:</td>
@@ -236,7 +241,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Deny Contacts:</td>
+                                        <td>Deny All Contacts:</td>
                                         <td>
                                             <asp:CheckBox ID="CheckBox7" runat="server" Checked='<%# Bind("Deny_ContactsList") %>' /></td>
                                     </tr>
@@ -248,7 +253,7 @@
                                     <tr>
                                         <td>Deny Clients Menu:</td>
                                         <td>
-                                            <telerik:RadCheckBox ID="Deny_ClientsListCheckBox" runat="server" Checked='<%# Bind("Deny_ClientsMenu") %>' />
+                                            <telerik:CheckBox ID="Deny_ClientsListCheckBox" runat="server" Checked='<%# Bind("Deny_ClientsMenu") %>' />
                                         </td>
                                     </tr>
                                     <tr>
@@ -266,16 +271,11 @@
                                         <td>Deny Client Management:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_ClientManagementCheckBox" runat="server" Checked='<%# Bind("Deny_ClientManagement") %>' /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Deny Clients Colletion:</td>
-                                        <td>
-                                            <asp:CheckBox ID="CheckBox41" runat="server" Checked='<%# Bind("Deny_ClientsColletion") %>' /></td>
-                                    </tr>                                    
+                                    </tr>                                   
                                     <tr>
                                         <td>Deny Employees Menu:</td>
                                         <td>
-                                            <telerik:RadCheckBox ID="RadCheckBox7" runat="server" Checked='<%# Bind("Deny_EmployeesMenu") %>' />
+                                            <telerik:CheckBox ID="RadCheckBox7" runat="server" Checked='<%# Bind("Deny_EmployeesMenu") %>' />
                                         </td>
                                     </tr>
                                     <tr>
@@ -291,7 +291,7 @@
                                     <tr>
                                         <td>Deny Subconsultants Menu:</td>
                                         <td>
-                                            <telerik:RadCheckBox ID="RadCheckBox6" runat="server" Checked='<%# Bind("Deny_SubconsultantsMenu") %>' />
+                                            <telerik:CheckBox ID="RadCheckBox6" runat="server" Checked='<%# Bind("Deny_SubconsultantsMenu") %>' />
                                         </td>
                                     </tr>
                                     <tr>
@@ -315,12 +315,6 @@
                                             <asp:CheckBox ID="CheckBox20" runat="server" Checked='<%# Bind("Deny_NewVendor") %>' /></td>
                                     </tr>
                                     
-
-                                    
-                                    
-
-                                   
-
                                 </table>
                             </td>
                             <td style="vertical-align: top">
@@ -388,22 +382,18 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Deny Dashboard:</td>
+                                        <td>Deny Company Insights:</td>
                                         <td>
                                             <asp:CheckBox ID="CheckBox4" runat="server" Checked='<%# Bind("Deny_Dashboard") %>' /></td>
                                     </tr>
+                                    
                                     <tr>
-                                        <td>Deny Budget(show/hide buttom):</td>
-                                        <td>
-                                            <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("Deny_Budget") %>' /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Deny Projectmap:</td>
+                                        <td>Deny Projects Map:</td>
                                         <td>
                                             <asp:CheckBox ID="CheckBox2" runat="server" Checked='<%# Bind("Deny_Projectmap") %>' /></td>
                                     </tr>
                                     <tr>
-                                        <td>Deny Clientmap:</td>
+                                        <td>Deny Clients Map:</td>
                                         <td>
                                             <asp:CheckBox ID="CheckBox3" runat="server" Checked='<%# Bind("Deny_Clientmap") %>' /></td>
                                     </tr>
@@ -428,33 +418,23 @@
                                         <td>
                                             <asp:CheckBox ID="Deny_OrganizationChartCheckBox" runat="server" Checked='<%# Bind("Deny_OrganizationChart") %>' /></td>
                                     </tr>
-                                    <tr>
-                                        <td>Deny Timesheet Report:</td>
-                                        <td>
-                                            <asp:CheckBox ID="Deny_TimesheetReportCheckBox" runat="server" Checked='<%# Bind("Deny_TimesheetReport") %>' /></td>
-                                    </tr>
+                                    
                                     <tr>
                                         <td>Deny Department Balance:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_DepartmentBalanceCheckBox" runat="server" Checked='<%# Bind("Deny_DepartmentBalance") %>' /></td>
                                     </tr>
                                     <tr>
-                                        <td>Deny Department Chart:</td>
+                                        <td>Deny Current vs Target Chart:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_DepartmentChartCheckBox" runat="server" Checked='<%# Bind("Deny_DepartmentChart") %>' /></td>
-                                    </tr>                                      
-                                    <tr>
-                                        <td>Deny History Log:</td>
-                                        <td>
-                                            <asp:CheckBox ID="CheckBox49" runat="server" Checked='<%# Bind("Deny_HistoryLog") %>' /></td>
-                                    </tr>
+                                    </tr>   
                                     <tr>
                                         <td>Deny Expenses Menu:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="RadCheckBox11" runat="server" Checked='<%# Bind("Deny_ExpensesMenu") %>' />
                                         </td>
-                                    </tr>
-                                    
+                                    </tr>                                    
                                     
                                     <tr>
                                         <td>Deny Expenses:</td>
@@ -474,10 +454,6 @@
 
 
 
-
-
-
-
                                      <%--Company Permits--%>
                                     <tr>
                                         <td colspan="2" style="text-align: center">
@@ -494,7 +470,12 @@
                                         <td>Deny Company Profile:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_CompanyProfileCheckBox" runat="server" Checked='<%# Bind("Deny_CompanyProfile") %>' /></td>
-                                    </tr>                                                                      
+                                    </tr>      
+                                    <tr>
+                                        <td>Deny Multiplier:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox29" runat="server" Checked='<%# Bind("Deny_Multiplier") %>' /></td>
+                                    </tr>
                                     <tr>
                                         <td>Deny Payroll:</td>
                                         <td>
@@ -543,6 +524,11 @@
                                             <asp:CheckBox ID="Deny_DepartmentsListCheckBox" runat="server" Checked='<%# Bind("Deny_DepartmentsList") %>' /></td>
                                     </tr>
                                     <tr>
+                                        <td>Deny Budget by Status:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("Deny_Budget") %>' /></td>
+                                    </tr>
+                                    <tr>
                                         <td>Deny Monthly Budget:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_MonthlyBudgetCheckBox" runat="server" Checked='<%# Bind("Deny_MonthlyBudget") %>' /></td>
@@ -568,22 +554,24 @@
                                         <td>
                                             <asp:CheckBox ID="Deny_ProposalTermsConditionsCheckBox" runat="server" Checked='<%# Bind("Deny_ProposalTermsConditions") %>' /></td>
                                     </tr>
-                                    <tr>
-                                        <td>Deny Multiplier:</td>
-                                        <td>
-                                            <asp:CheckBox ID="CheckBox29" runat="server" Checked='<%# Bind("Deny_Multiplier") %>' /></td>
-                                    </tr>
+                                    
                                     <tr>
                                         <td>Deny Users:</td>
                                         <td>
                                             <asp:CheckBox ID="Deny_PASconceptUsersCheckBox" runat="server" Checked='<%# Bind("Deny_PASconceptUsers") %>' /></td>
                                     </tr>
 
+
                                      <%--Resource Deny Permits--%>
                                     <tr>
                                         <td colspan="2" style="text-align: center">
                                             <h4 style="margin-bottom: 0">Resources Deny Permits</h4>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Deny Email History Log:</td>
+                                        <td>
+                                            <asp:CheckBox ID="CheckBox49" runat="server" Checked='<%# Bind("Deny_HistoryLog") %>' /></td>
                                     </tr>
                                     <tr>
                                         <td>Deny Use & Occupancy Classification:

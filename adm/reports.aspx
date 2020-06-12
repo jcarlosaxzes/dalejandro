@@ -95,7 +95,7 @@
                     </telerik:RadComboBox>
                 </td>
                 <td colspan="2">
-                    <telerik:RadTextBox ID="txtCode" runat="server" EmptyMessage="Comma separated list of Codes" Width="100%" MaxLength="80">
+                    <telerik:RadTextBox ID="txtCode" runat="server" EmptyMessage="Project Code" Width="100%" MaxLength="80">
                     </telerik:RadTextBox>
                 </td>
                 <td style="text-align: right">

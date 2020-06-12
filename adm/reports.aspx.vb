@@ -154,7 +154,7 @@ Public Class reports
 
     Protected Sub RadGrid1_ItemDataBound(ByVal sender As Object, ByVal e As Telerik.Web.UI.GridItemEventArgs) Handles RadGrid1.ItemDataBound
         'Is it a GridDataItem
-        If (TypeOf (e.Item) Is GridDataItem And cboNames.SelectedValue = 253) Then
+        If (TypeOf (e.Item) Is GridDataItem And (cboNames.SelectedValue = 253 Or cboNames.SelectedValue = 254 Or cboNames.SelectedValue = 255)) Then
             'Get the instance of the right type
             Try
                 Dim dataBoundItem As GridDataItem = e.Item
