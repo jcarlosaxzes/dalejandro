@@ -253,7 +253,7 @@
                                     <tr>
                                         <td>Deny Clients Menu:</td>
                                         <td>
-                                            <telerik:CheckBox ID="Deny_ClientsListCheckBox" runat="server" Checked='<%# Bind("Deny_ClientsMenu") %>' />
+                                            <CheckBox ID="Deny_ClientsListCheckBox" runat="server" Checked='<%# Bind("Deny_ClientsMenu") %>' />
                                         </td>
                                     </tr>
                                     <tr>
@@ -275,7 +275,7 @@
                                     <tr>
                                         <td>Deny Employees Menu:</td>
                                         <td>
-                                            <telerik:CheckBox ID="RadCheckBox7" runat="server" Checked='<%# Bind("Deny_EmployeesMenu") %>' />
+                                            <CheckBox ID="RadCheckBox7" runat="server" Checked='<%# Bind("Deny_EmployeesMenu") %>' />
                                         </td>
                                     </tr>
                                     <tr>
@@ -291,7 +291,7 @@
                                     <tr>
                                         <td>Deny Subconsultants Menu:</td>
                                         <td>
-                                            <telerik:CheckBox ID="RadCheckBox6" runat="server" Checked='<%# Bind("Deny_SubconsultantsMenu") %>' />
+                                            <CheckBox ID="RadCheckBox6" runat="server" Checked='<%# Bind("Deny_SubconsultantsMenu") %>' />
                                         </td>
                                     </tr>
                                     <tr>
