@@ -54,8 +54,11 @@
     <style>
         .container {
             max-width: 1800px;
-            padding-left: 75px;
-            padding-right: 75px;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+        .body {
+            font-size:16px !important;
         }
     </style>
 </head>
@@ -135,6 +138,9 @@
                     -webkit-border-radius: 6px 0 6px 6px;
                     -moz-border-radius: 6px 0 6px 6px;
                     border-radius: 6px 0 6px 6px;
+                }
+                .rnvLink .rnvText {
+                    font-size:16px !important;
                 }
     </style>
     <form id="form1" runat="server">
@@ -532,7 +538,7 @@
                                             <telerik:NavigationNode Text="Video Chat" NavigateUrl="https://video.spike.chat/?" Target="_blank"></telerik:NavigationNode>
                                             <telerik:NavigationNode ID="SwitchCompany">
                                                 <NodeTemplate>
-                                                    <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click">
+                                                    <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px">
                                                             Switch Company
                                                     </asp:LinkButton>
                                                 </NodeTemplate>
@@ -541,6 +547,7 @@
                                                 <NodeTemplate>
                                                     <asp:LoginStatus runat="server" LogoutAction="Redirect" CssClass="dropdown-item"
                                                         ToolTip="Logout"
+                                                        Font-Size="16px"
                                                         LogoutText="Log out"
                                                         LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                                 </NodeTemplate>
