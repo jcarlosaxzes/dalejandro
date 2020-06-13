@@ -379,13 +379,13 @@ Public Class jobtickets
         Dim StagingDate As Date = LocalAPI.GetDateTimeEscalar("select StagingDate=case when StagingDate Is Null then '1/1/2019' else StagingDate end from Jobs_tickets where Id=" & Id)
         Select Case StagingDate
             Case < LocalAPI.GetDateTime()
-                Return "label label-danger"
+                Return "label badge-danger"
             Case LocalAPI.GetDateTime()
-                Return "label label-warning"
+                Return "badge badge-warning"
             Case > LocalAPI.GetDateTime()
-                Return "label label-success"
+                Return "label badge-success"
             Case Else
-                Return "label label-default"
+                Return "badge badge-secondary"
         End Select
     End Function
 End Class

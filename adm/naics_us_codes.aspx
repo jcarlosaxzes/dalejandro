@@ -56,7 +56,7 @@
                 </telerik:TreeListTemplateColumn>
                 <telerik:TreeListTemplateColumn DataField="Title" HeaderText="Title" UniqueName="Title" ItemStyle-HorizontalAlign="Left">
                     <ItemTemplate>
-                        <span class="label label-primary"><%# Eval("Level") %></span>
+                        <span class="label badge-primary"><%# Eval("Level") %></span>
                          &nbsp;
                         <span style='<%# Eval("fontstyle") %>'><%# Eval("Title") %></span>
                     </ItemTemplate>
@@ -78,7 +78,7 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Title" HeaderText="Title" UniqueName="Title">
                         <ItemTemplate>
-                            <span style="font-size:16px" class="label label-default"><%# Eval("Level") %></span>
+                            <span style="font-size:16px" class="badge badge-secondary"><%# Eval("Level") %></span>
                             &nbsp;
                             <span style='<%# Eval("fontstyle") %>'><%# Eval("Title") %></span>
                         </ItemTemplate>

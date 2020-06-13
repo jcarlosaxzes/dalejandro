@@ -77,31 +77,22 @@ Partial Public Class ADM_Main_Responsive
     Protected WithEvents lblCompanyName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblUserName control.
+    '''RadNavigation2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents RadNavigation2 As Global.Telerik.Web.UI.RadNavigation
     
     '''<summary>
-    '''btnSwitchCompany control.
+    '''SwitchCompany control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSwitchCompany As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''LoginViewMenuSetting control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LoginViewMenuSetting As Global.System.Web.UI.WebControls.LoginView
+    Protected WithEvents SwitchCompany As Global.Telerik.Web.UI.NavigationNode
     
     '''<summary>
     '''btnAvoidEnterKey control.
@@ -237,4 +228,13 @@ Partial Public Class ADM_Main_Responsive
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPageTitle As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblUserName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
 End Class

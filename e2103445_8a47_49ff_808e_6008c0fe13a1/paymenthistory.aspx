@@ -31,7 +31,7 @@
                     <table class="table-condensed" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 33%">
-                                <h2 style="margin: 0"><span class="label label-default center-block">Client</span></h2>
+                                <h2 style="margin: 0"><span class="navbar bg-dark">Client</span></h2>
                                 <table style="width: 100%">
                                     <tr>
                                         <td>
@@ -56,7 +56,7 @@
                                 </table>
                             </td>
                             <td style="width: 33%; text-align: center; vertical-align: top">
-                                <h2 style="margin: 0"><span class="label label-default center-block">Projects</span></h2>
+                                <h2 style="margin: 0"><span class="navbar bg-dark">Projects</span></h2>
                                 <table style="width: 85%">
                                     <tr>
                                         <td style="text-align: right"># Pending Proposals:</td>
@@ -79,7 +79,7 @@
                                 </table>
                             </td>
                             <td style="text-align: right; vertical-align: top">
-                                <h2 style="margin: 0"><span class="label label-default center-block">Balance</span></h2>
+                                <h2 style="margin: 0"><span class="navbar bg-dark">Balance</span></h2>
                                 <table style="width: 85%">
                                     <tr>
                                         <td style="text-align: right;">Amount Paid:</td>
@@ -102,7 +102,7 @@
                 </ItemTemplate>
             </asp:FormView>
             <br />
-            <h2><span class="label label-default center-block">Invoices</span></h2>
+            <h2><span class="navbar bg-dark">Invoices</span></h2>
             <telerik:RadGrid ID="RadGridInvoices" runat="server" DataSourceID="SqlDataSourceInvoicesPayments" ShowFooter="true" Width="100%" Skin="Bootstrap">
                 <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoicesPayments">
                     <FooterStyle BorderStyle="None" />
@@ -128,7 +128,7 @@
                         <telerik:GridTemplateColumn DataField="PaidInfo" HeaderText="Payment Info" UniqueName="PaidInfo" HeaderStyle-Width="230px"
                             HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" ItemStyle-HorizontalAlign="Left">
                             <ItemTemplate>
-                                <span title='<%# Eval("PastDueStatusTitle") %>' class="label label-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %></span>
+                                <span title='<%# Eval("PastDueStatusTitle") %>' class="label badge-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %></span>
                                 <%# Eval("PaidInfo","{0:C}") %>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
@@ -144,7 +144,7 @@
                             <ItemTemplate>
                                 <%# Eval("AmountDue","{0:C}") %>
                                 <%--<br />
-                                <span title='<%# Eval("Status") %>' class="label label-<%# IIf(Eval("Status") = "PAID", "default", "primary") %>"><%# Eval("Status") %>--%>
+                                <span title='<%# Eval("Status") %>' class="label badge-<%# IIf(Eval("Status") = "PAID", "default", "primary") %>"><%# Eval("Status") %>--%>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
 
@@ -152,7 +152,7 @@
                 </MasterTableView>
             </telerik:RadGrid>
 
-            <h2><span class="label label-default center-block">Statements</span></h2>
+            <h2><span class="navbar bg-dark">Statements</span></h2>
             <telerik:RadGrid ID="RadGridStatements" runat="server" DataSourceID="SqlDataSourceStatements" ShowFooter="true" Width="100%" Skin="Bootstrap">
                 <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceStatements">
                     <FooterStyle BorderStyle="None" />
@@ -178,7 +178,7 @@
                         <telerik:GridTemplateColumn DataField="PaidInfo" HeaderText="Payment Info" UniqueName="PaidInfo" HeaderStyle-Width="150px"
                             HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" ItemStyle-HorizontalAlign="Left">
                             <ItemTemplate>
-                                <span title='<%# Eval("PastDueStatusTitle") %>' class="label label-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %></span>
+                                <span title='<%# Eval("PastDueStatusTitle") %>' class="label badge-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %></span>
 
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>

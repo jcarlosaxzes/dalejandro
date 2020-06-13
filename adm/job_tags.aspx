@@ -31,7 +31,7 @@
                 <table class="table-condensed" style="width: 100%">
                     <tr>
                         <td style="width: 33%">
-                            <asp:Label ID="lblCategory0" runat="server" Text="Category 0" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory0" runat="server" Text="Category 0" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat0" runat="server" DataSourceID="SqlDataSourceTagCat0" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>
@@ -40,7 +40,7 @@
                             </telerik:RadComboBox>
                         </td>
                         <td style="width: 33%">
-                            <asp:Label ID="lblCategory1" runat="server" Text="Category 1" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory1" runat="server" Text="Category 1" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat1" runat="server" DataSourceID="SqlDataSourceTagCat1" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>
@@ -50,7 +50,7 @@
 
                         </td>
                         <td>
-                            <asp:Label ID="lblCategory2" runat="server" Text="Category 2" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory2" runat="server" Text="Category 2" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat2" runat="server" DataSourceID="SqlDataSourceTagCat2" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>
@@ -62,7 +62,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label ID="lblCategory3" runat="server" Text="Category 3" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory3" runat="server" Text="Category 3" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat3" runat="server" DataSourceID="SqlDataSourceTagCat3" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>
@@ -72,7 +72,7 @@
 
                         </td>
                         <td>
-                            <asp:Label ID="lblCategory4" runat="server" Text="Category 4" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory4" runat="server" Text="Category 4" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat4" runat="server" DataSourceID="SqlDataSourceTagCat4" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>
@@ -82,7 +82,7 @@
 
                         </td>
                         <td>
-                            <asp:Label ID="lblCategory5" runat="server" Text="Category 5" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory5" runat="server" Text="Category 5" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat5" runat="server" DataSourceID="SqlDataSourceTagCat5" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>
@@ -95,7 +95,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label ID="lblCategory6" runat="server" Text="Category 6" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory6" runat="server" Text="Category 6" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat6" runat="server" DataSourceID="SqlDataSourceTagCat6" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>
@@ -105,7 +105,7 @@
 
                         </td>
                         <td>
-                            <asp:Label ID="lblCategory7" runat="server" Text="Category 7" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory7" runat="server" Text="Category 7" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat7" runat="server" DataSourceID="SqlDataSourceTagCat7" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>
@@ -115,7 +115,7 @@
 
                         </td>
                         <td>
-                            <asp:Label ID="lblCategory8" runat="server" Text="Category 8" CssClass="label label-default"></asp:Label>
+                            <asp:Label ID="lblCategory8" runat="server" Text="Category 8" CssClass="badge badge-secondary"></asp:Label>
                             <telerik:RadComboBox ID="cboTagCat8" runat="server" DataSourceID="SqlDataSourceTagCat8" DataTextField="Tag" DataValueField="Id" Width="90%" AppendDataBoundItems="true"
                                 MarkFirstMatch="True" Filter="Contains" Height="250px">
                                 <Items>

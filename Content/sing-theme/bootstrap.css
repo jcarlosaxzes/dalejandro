@@ -4832,57 +4832,57 @@ textarea.input-group-sm > .input-group-btn > .btn {
   display: none;
 }
 
-.label-default {
+.badge-secondary {
   background-color: #999999;
 }
 
-.label-default[href]:hover,
-.label-default[href]:focus {
+.badge-secondary[href]:hover,
+.badge-secondary[href]:focus {
   background-color: #808080;
 }
 
-.label-primary {
+.badge-primary {
   background-color: #428bca;
 }
 
-.label-primary[href]:hover,
-.label-primary[href]:focus {
+.badge-primary[href]:hover,
+.badge-primary[href]:focus {
   background-color: #3071a9;
 }
 
-.label-success {
+.badge-success {
   background-color: #5cb85c;
 }
 
-.label-success[href]:hover,
-.label-success[href]:focus {
+.badge-success[href]:hover,
+.badge-success[href]:focus {
   background-color: #449d44;
 }
 
-.label-info {
+.badge-info {
   background-color: #5bc0de;
 }
 
-.label-info[href]:hover,
-.label-info[href]:focus {
+.badge-info[href]:hover,
+.badge-info[href]:focus {
   background-color: #31b0d5;
 }
 
-.label-warning {
+.badge-warning {
   background-color: #f0ad4e;
 }
 
-.label-warning[href]:hover,
-.label-warning[href]:focus {
+.badge-warning[href]:hover,
+.badge-warning[href]:focus {
   background-color: #ec971f;
 }
 
-.label-danger {
+.badge-danger {
   background-color: #d9534f;
 }
 
-.label-danger[href]:hover,
-.label-danger[href]:focus {
+.badge-danger[href]:hover,
+.badge-danger[href]:focus {
   background-color: #c9302c;
 }
 

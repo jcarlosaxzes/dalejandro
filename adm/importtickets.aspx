@@ -2,8 +2,8 @@
 
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <h2 style="margin: 0; text-align: center; width: 100%">
-        <span class="label label-default center-block">
+    <h2 style="margin: 0; text-align: center; color:white; width: 100%">
+        <span class="navbar bg-dark">
             <asp:Label ID="lblJob" runat="server"></asp:Label>
         </span>
     </h2>

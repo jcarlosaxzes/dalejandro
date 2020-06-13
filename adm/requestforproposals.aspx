@@ -209,7 +209,7 @@
                             <asp:Label runat="server" Text='<%# Eval("ProjectName") %>' Visible='<%# Eval("ParentID") > 0 %>'></asp:Label>
                             <div>
                                 <%# Eval("SubconsultanName") %>
-                                <span title="Emitted count" class="badge" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'><%#Eval("Emitted")%></span>
+                                <span title="Emitted count" class="badge badge-pill badge-danger" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'><%#Eval("Emitted")%></span>
                                 <span style="font-style: italic; color: gray"><%# Eval("Discipline") %></span>
                             </div>
                         </ItemTemplate>
@@ -313,8 +313,8 @@
             <table class="table table-bordered" style="width: 700px">
                 <tr>
                     <td>
-                        <h2 style="margin: 0; text-align: center; width: 700px">
-                            <span class="label label-default center-block">
+                        <h2 style="margin: 0; text-align: center; color:white; width: 700px">
+                            <span class="navbar bg-dark">
                                 <asp:Label ID="lblRFPNumber" runat="server"></asp:Label>
                             </span>
                         </h2>
@@ -372,8 +372,8 @@
             <table class="table table-bordered" style="width: 500px">
                 <tr>
                     <td>
-                        <h2 style="margin: 0; text-align: center; width: 500px">
-                            <span class="label label-default center-block">Decline Selected Records
+                        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                            <span class="navbar bg-dark">Decline Selected Records
                             </span>
                         </h2>
                     </td>
@@ -413,8 +413,8 @@
     </div>
     <div>
         <telerik:RadToolTip ID="RadToolTipNewRFPforProject" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; width: 600px">
-                <span class="label label-default center-block">New RFP for Project
+            <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+                <span class="navbar bg-dark">New RFP for Project
                 </span>
             </h2>
             <table class="table-condensed" style="width: 600px">

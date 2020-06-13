@@ -14,7 +14,7 @@
         <table>
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center">
+                    <h2 style="margin: 0; text-align: center; color:white">
                         <asp:Label ID="lblJob" runat="server"></asp:Label>
                     </h2>
                 </td>

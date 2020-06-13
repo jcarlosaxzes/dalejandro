@@ -443,8 +443,8 @@
         <table class="table table-bordered" style="width: 600px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; width: 600px">
-                        <span class="label label-default center-block">Reject Proposal
+                    <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+                        <span class="navbar bg-dark">Reject Proposal
                         </span>
                     </h2>
 

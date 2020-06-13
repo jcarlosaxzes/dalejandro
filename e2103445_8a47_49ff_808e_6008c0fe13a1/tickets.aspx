@@ -88,7 +88,7 @@
         </div>
 
         <h2 style="margin: 0">
-            <span class="label label-default center-block">
+            <span class="navbar bg-dark">
                 <asp:Label ID="lblJob" runat="server"></asp:Label></span>
         </h2>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="100%"
@@ -148,7 +148,7 @@
         <telerik:RadToolTip ID="RadToolTipEditTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
             <h2 style="margin: 0">
-                <span class="label label-default center-block">View/Edit Ticket
+                <span class="navbar bg-dark">View/Edit Ticket
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server"
@@ -277,7 +277,7 @@
         <telerik:RadToolTip ID="RadToolTipInsertTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
             <h2 style="margin: 0">
-                <span class="label label-default center-block">Insert New Ticket
+                <span class="navbar bg-dark">Insert New Ticket
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary2" runat="server"

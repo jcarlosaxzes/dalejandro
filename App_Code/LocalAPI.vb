@@ -1080,22 +1080,22 @@ Public Class LocalAPI
     Public Shared Function GetRFPStatusLabelCSS(ByVal status As String) As String
         Select Case status
             Case "0", "Not Emitted"
-                Return "label label-default"
+                Return "badge badge-secondary"
 
             Case "1", "Pending", "Sent"  'In Progress
-                Return "label label-info"
+                Return "badge badge-info"
 
             Case "2", "Responded", "Submitted"
-                Return "label label-warning"
+                Return "badge badge-warning"
 
             Case "3", "Accepted"
-                Return "label label-success"
+                Return "badge badge-success"
 
             Case "4", "Rejected", "5", "Declined"
-                Return "label label-danger"
+                Return "badge badge-danger"
 
             Case "6", "Closed"
-                Return "label label-primary"
+                Return "badge badge-primary"
         End Select
     End Function
 
@@ -1590,13 +1590,13 @@ Public Class LocalAPI
     Public Shared Function GetSettingStatusCSS(ByVal status As String) As String
         Select Case status
             Case "poor"
-                Return "label label-danger"
+                Return "badge badge-danger"
             Case "fair"
-                Return "label label-warning"
+                Return "badge badge-warning"
             Case "excellent"
-                Return "label label-success"
+                Return "badge badge-success"
             Case Else
-                Return "label label-default"
+                Return "badge badge-secondary"
         End Select
     End Function
 
@@ -1615,30 +1615,30 @@ Public Class LocalAPI
         '        7   Done			"primary"
         Select Case statusId
             Case 0, 1  'Not in Progress, Inactive
-                Return "label-default"
+                Return "badge badge-secondary"
             Case 2  'In Progress
-                Return "label-success"
+                Return "badge badge-success"
             Case 3  'On Hold,
-                Return "label-danger"
+                Return "badge badge-danger"
             Case 4  'Submitted
-                Return "label-warning"
+                Return "badge badge-warning"
             Case 5    ' Under Revision
-                Return "label-info"
+                Return "badge badge-info"
             Case 6, 7  ''Approved, Done
-                Return "label-primary"
+                Return "badge badge-primary"
         End Select
     End Function
 
     Public Shared Function GetInvoicePastDueLabelCSS(ByVal pastdue_status As String) As String
         Select Case pastdue_status
             Case "90D+"
-                Return "label label-danger"
+                Return "badge badge-danger"
             Case "61 to 90D"
-                Return "label label-warning"
+                Return "badge badge-warning"
             Case "31 to 60D"
-                Return "label label-info"
+                Return "badge badge-info"
             Case "1 to 30D"
-                Return "label label-success"
+                Return "badge badge-success"
             Case Else
                 Return ""
         End Select
@@ -1652,7 +1652,7 @@ Public Class LocalAPI
             sRet = "<table><tr><td>" & Value
 
             ' Dentro del Tag
-            sRet = Replace(sRet, "[", "<span class='label label-default'>")
+            sRet = Replace(sRet, "[", "<span class='badge badge-secondary'>")
             sRet = Replace(sRet, "]", "</span>")
 
             ' Entre cada Tag
@@ -10081,6 +10081,21 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetProposalStatusLabelCSS(ByVal statusId As Integer) As String
+        Select Case statusId
+            Case 0  'Not Emitted
+                Return "badge badge-secondary"
+            Case 1  'Emitted
+                Return "badge badge-warning"
+            Case 2  'Accepted
+                Return "badge badge-success"
+            Case Else
+                Return "badge badge-danger"
+        End Select
+
+    End Function
+
+
     Public Shared Function ProposalStatus2Emitted(ByVal proposald As Integer) As Boolean
         'Return ExecuteNonQuery("UPDATE [Proposal] SET Emitted=ISNULL(Emitted,0)+1, EmailDate=" & GetDateUTHlocal() & ", [StatusId]=1 WHERE Id=" & lId.ToString & " AND ISNULL([StatusId],0) in(0,1,4)")
 
@@ -11258,15 +11273,15 @@ Public Class LocalAPI
     Public Shared Function GetContactClassLabelCSS(ByVal contactTypeName As String) As String
         Select Case contactTypeName
             Case "SubConsultant"
-                Return "label label-default"
+                Return "badge badge-secondary"
             Case "Employee"
-                Return "label label-info"
+                Return "badge badge-info"
             Case "Contact"
-                Return "label label-primary"
+                Return "badge badge-primary"
             Case "Client"
-                Return "label label-success"
+                Return "badge badge-success"
             Case "Vendor"
-                Return "label label-danger"
+                Return "badge badge-danger"
         End Select
     End Function
 
@@ -12867,9 +12882,9 @@ Public Class LocalAPI
         '        1   Processed		"default"
         Select Case statusId
             Case 0  'Pending
-                Return "label-warning"
+                Return "badge-warning"
             Case 1  'Processed
-                Return "label-default"
+                Return "badge-secondary"
         End Select
     End Function
 
@@ -13072,59 +13087,59 @@ Public Class LocalAPI
     Public Shared Function GetTickectTypeLabelCSS(ByVal TypeValue As String) As String
         Select Case TypeValue
             Case "Question"
-                Return "label label-info"
+                Return "badge badge-info"
             Case "Enhancement"
-                Return "label label-success"
+                Return "badge badge-success"
             Case "Defect"
-                Return "label label-danger"
+                Return "badge badge-danger"
             Case "Change Order"
-                Return "label label-warning"
+                Return "badge badge-warning"
             Case "Epic"
-                Return "label label-primary"
+                Return "badge badge-primary"
             Case Else
-                Return "label label-default"
+                Return "badge badge-secondary"
         End Select
     End Function
 
     Public Shared Function GetCollectionStatusLabelCSS(ByVal StatusValue As String) As String
         Select Case StatusValue
             Case "Active"
-                Return "label label-danger"
+                Return "badge badge-danger"
             Case "Closed"
-                Return "label label-default"
+                Return "badge badge-secondary"
         End Select
     End Function
 
     Public Shared Function GetTickectStatusLabelCSS(ByVal StatusValue As String) As String
         Select Case StatusValue
             Case "Pending Approval"
-                Return "label label-warning"
+                Return "badge badge-warning"
             Case "Blocked", "Dismissed"
-                Return "label label-danger"
+                Return "badge badge-danger"
 
             Case "Ready for Development"
-                Return "label label-info"
+                Return "badge badge-info"
             Case "In Progress"
-                Return "label label-success"
+                Return "badge badge-success"
             Case "Ready for Staging"
-                Return "label label-primary"
+                Return "badge badge-primary"
             Case "Closed", "In Staging", "In Production"
-                Return "label label-default"
+                Return "badge badge-secondary"
             Case Else
-                Return "label label-default"
+                Return "badge badge-secondary"
         End Select
     End Function
 
     Public Shared Function GetTickectApprovedStatusLabelCSS(ByVal ApprovedStatus As String) As String
         Select Case ApprovedStatus
             Case "Approved"
-                Return "label label-success"
+                Return "badge badge-success"
             Case "Rejected"
-                Return "label label-danger"
+                Return "badge badge-danger"
             Case "Pending"
-                Return "label label-warning"
+                Return "badge badge-warning"
             Case Else
-                Return "label label-default"
+                Return "badge badge-secondary"
         End Select
     End Function
 

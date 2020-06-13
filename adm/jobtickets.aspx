@@ -335,7 +335,7 @@
     <div>
         <telerik:RadToolTip ID="RadToolSendRequest" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
             <h2 style="margin: 0">
-                <span class="label label-default center-block">Request Meeting
+                <span class="navbar bg-dark">Request Meeting
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server"
@@ -405,8 +405,8 @@
     <div>
         <telerik:RadToolTip ID="RadToolTipEditTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
-            <h2 style="margin: 0; text-align: center; width: 960px">
-                <span class="label label-default center-block">View/Edit Ticket #
+            <h2 style="margin: 0; text-align: center; color:white; width: 960px">
+                <span class="navbar bg-dark">View/Edit Ticket #
                     <asp:Label ID="lblTicketId" runat="server"></asp:Label>
                 </span>
             </h2>
@@ -666,8 +666,8 @@
             <table class="table table-bordered" style="width: 600px">
                 <tr>
                     <td>
-                        <h2 style="margin: 0; text-align: center; width: 600px">
-                            <span class="label label-default center-block">Update Status of Selected Ticket(s)
+                        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+                            <span class="navbar bg-dark">Update Status of Selected Ticket(s)
                             </span>
                         </h2>
                     </td>
@@ -716,8 +716,8 @@
 
     <div>
         <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; width: 600px">
-                    <span class="label label-default center-block">Invoice
+            <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+                    <span class="navbar bg-dark">Invoice
                     </span>
                 </h2>
             <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">

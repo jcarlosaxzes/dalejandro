@@ -150,8 +150,8 @@
         <table class="table table-bordered" style="width: 650px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; width: 650px">
-                        <span class="label label-default center-block">Bind PASconcept Invoice to Axzes Invoice
+                    <h2 style="margin: 0; text-align: center; color:white; width: 650px">
+                        <span class="navbar bg-dark">Bind PASconcept Invoice to Axzes Invoice
                         </span>
                     </h2>
 

@@ -181,8 +181,8 @@
         <table class="table table-bordered" style="width: 650px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; width: 650px">
-                        <span class="label label-default center-block">Bind Company to Axzes Client & Job
+                    <h2 style="margin: 0; text-align: center; color:white; width: 650px">
+                        <span class="navbar bg-dark">Bind Company to Axzes Client & Job
                         </span>
                     </h2>
                 </td>

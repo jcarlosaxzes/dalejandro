@@ -34,7 +34,7 @@
                                     <asp:LinkButton ID="btnEditTransmittal" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Transmittal"
                                         CommandName="EditTransmittal" Text='<%# Eval("TransmittalID")%>'>
                                     </asp:LinkButton>
-                                    <span title="Number of Packages" class="badge" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
+                                    <span title="Number of Packages" class="badge badge-pill badge-danger" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
                                         <%#Eval("PackageContent")%>
                                     </span>
                                     <a class="glyphicon glyphicon-share" title="Preview Trasmittal " href='<%# LocalAPI.GetSharedLink_URL(6,Eval("Id")) %>' target="_blank" aria-hidden="true"></a>

@@ -290,7 +290,7 @@
                             <table class="table-condensed" style="width: 100%">
                                 <tr>
                                     <td style="width: 50%; text-align: center; vertical-align: top">
-                                        <h3 style="margin: 0"><span class="label label-info center-block">Projects</span></h2>
+                                        <h3 style="margin: 0"><span class="badge badge-info center-block">Projects</span></h2>
                                         <table class="table-condensed" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right"># Pending Proposals:</td>
@@ -313,7 +313,7 @@
                                         </table>
                                     </td>
                                     <td style="text-align: right; vertical-align: top">
-                                        <h3 style="margin: 0"><span class="label label-info center-block">Balance</span></h2>
+                                        <h3 style="margin: 0"><span class="badge badge-info center-block">Balance</span></h2>
                                         <table class="table-condensed" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right;">Amount Paid:</td>

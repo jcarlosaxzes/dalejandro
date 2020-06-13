@@ -54,37 +54,37 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 250px"><span class="label label-danger">Allow Employees Permissions</span>:</td>
+                                        <td style="width: 250px"><span class="label badge-danger">Allow Employees Permissions</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_EmployeesPermissionsCheckBox" runat="server" Checked='<%# Bind("Allow_EmployeesPermissions") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Edit Accepted Proposal</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Edit Accepted Proposal</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_EditAcceptedProposalCheckBox" runat="server" Checked='<%# Bind("Allow_EditAcceptedProposal") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Inactivate Job</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Inactivate Job</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_InactivateJobCheckBox" runat="server" Checked='<%# Bind("Allow_InactivateJob") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Other Employee Jobs</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Other Employee Jobs</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_OtherEmployeeJobsCheckBox" runat="server" Checked='<%# Bind("Allow_OtherEmployeeJobs") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Department Report</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Department Report</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_DepartmentReportCheckBox" runat="server" Checked='<%# Bind("Allow_DepartmentReport") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Bad Debt</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Bad Debt</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_BadDebtCheckBox" runat="server" Checked='<%# Bind("Allow_BadDebt") %>' />
                                         </td>
@@ -326,7 +326,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 250px"><span class="label label-danger">Mobile Role</span>:</td>
+                                        <td style="width: 250px"><span class="label badge-danger">Mobile Role</span>:</td>
                                         <td>
                                             <telerik:RadComboBox ID="cboMobileRole" runat="server" SelectedValue='<%# Bind("MobileRole") %>' Width="100%">
                                                 <Items>
@@ -338,31 +338,31 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Dashboard</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Dashboard</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox10" runat="server" Checked='<%# Bind("Allow_MobileApp_Dashboard") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Contacts</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Contacts</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox23" runat="server" Checked='<%# Bind("Allow_MobileApp_Contacts") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Clientmap</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Clientmap</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox9" runat="server" Checked='<%# Bind("Allow_MobileApp_Clientmap") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Projectmap</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Projectmap</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox11" runat="server" Checked='<%# Bind("Allow_MobileApp_Projectmap") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Appointments</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Appointments</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox12" runat="server" Checked='<%# Bind("Allow_MobileApp_Appointments") %>' />
                                         </td>
@@ -646,37 +646,37 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 250px"><span class="label label-danger">Allow Employees Permissions</span>:</td>
+                                        <td style="width: 250px"><span class="label badge-danger">Allow Employees Permissions</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_EmployeesPermissionsCheckBox" runat="server" Checked='<%# Bind("Allow_EmployeesPermissions") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Edit Accepted Proposal</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Edit Accepted Proposal</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_EditAcceptedProposalCheckBox" runat="server" Checked='<%# Bind("Allow_EditAcceptedProposal") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Inactivate Job</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Inactivate Job</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_InactivateJobCheckBox" runat="server" Checked='<%# Bind("Allow_InactivateJob") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Other Employee Jobs</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Other Employee Jobs</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_OtherEmployeeJobsCheckBox" runat="server" Checked='<%# Bind("Allow_OtherEmployeeJobs") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Department Report</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Department Report</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_DepartmentReportCheckBox" runat="server" Checked='<%# Bind("Allow_DepartmentReport") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow Bad Debt</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Bad Debt</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_BadDebtCheckBox" runat="server" Checked='<%# Bind("Allow_BadDebt") %>'  Enabled="false"/>
                                         </td>
@@ -924,36 +924,36 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 250px"><span class="label label-danger">Mobile Role</span>:</td>
+                                        <td style="width: 250px"><span class="label badge-danger">Mobile Role</span>:</td>
                                         <td>
                                             <%# Eval("MobileRoleName") %></td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Dashboard</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Dashboard</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox10" runat="server" Checked='<%# Bind("Allow_MobileApp_Dashboard") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Contacts</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Contacts</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox23" runat="server" Checked='<%# Bind("Allow_MobileApp_Contacts") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Clientmap</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Clientmap</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox9" runat="server" Checked='<%# Bind("Allow_MobileApp_Clientmap") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Projectmap</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Projectmap</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox11" runat="server" Checked='<%# Bind("Allow_MobileApp_Projectmap") %>'  Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="label label-default">Allow MobileApp Appointments</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow MobileApp Appointments</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="CheckBox12" runat="server" Checked='<%# Bind("Allow_MobileApp_Appointments") %>'  Enabled="false"/>
                                         </td>

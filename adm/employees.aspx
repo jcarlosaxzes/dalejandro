@@ -326,8 +326,8 @@
 
 
     <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Delete employee
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Delete employee
             </span>
         </h2>
         <table class="table-condensed" style="width: 450px">

@@ -311,7 +311,7 @@
                                                             CommandName="EditHourlyWage"
                                                             Text='<%# Eval("Employee")%>' UseSubmitBehavior="false"
                                                             ForeColor='<%#IIf(Eval("Inactive"), System.Drawing.Color.LightGray, System.Drawing.Color.DarkBlue) %>'>
-                                                                <span style="font-size:x-small" class="badge" title="weeks this year"><%# Eval("weekthisyear", "{0:N1}") %></span>
+                                                                <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear", "{0:N1}") %></span>
                                                         </asp:LinkButton>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
@@ -330,7 +330,7 @@
                                                     HeaderTooltip="Hourly Wage Rate">
                                                     <ItemTemplate>
                                                         <%# Eval("Amount", "{0:C2}") %>
-                                                        <span style="font-size: x-small" class="badge" title="# Increase"><%# Eval("NumberOfRecords") %></span>
+                                                        <span style="font-size: x-small" class="badge badge-pill badge-danger" title="# Increase"><%# Eval("NumberOfRecords") %></span>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
@@ -343,7 +343,7 @@
                                                     HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
                                                     <ItemTemplate>
                                                         <%# Eval("ProductiveSalary", "{0:N0}") %>
-                                                        <span style="font-size: x-small" class="badge" title="productive weeks this year"><%# Eval("productiveweekthisyear", "{0:N1}") %></span>
+                                                        <span style="font-size: x-small" class="badge badge-pill badge-danger" title="productive weeks this year"><%# Eval("productiveweekthisyear", "{0:N1}") %></span>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                             </Columns>
@@ -543,8 +543,8 @@
         <table class="table-condensed" style="width: 650px">
             <tr>
                 <td style="text-align: center">
-                    <h2 style="margin: 0; text-align: center;">
-                        <span class="label label-default center-block">Hourly Wage for Selected Year
+                    <h2 style="margin: 0; text-align: center; color:white;">
+                        <span class="navbar bg-dark">Hourly Wage for Selected Year
                         </span>
                     </h2>
                 </td>
@@ -584,8 +584,8 @@
         <table class="table-condensed" style="width: 650px">
             <tr>
                 <td style="text-align: center">
-                    <h2 style="margin: 0; text-align: center;">
-                        <span class="label label-default center-block">Calculate Multiplier
+                    <h2 style="margin: 0; text-align: center; color:white;">
+                        <span class="navbar bg-dark">Calculate Multiplier
                         </span>
                     </h2>
                 </td>

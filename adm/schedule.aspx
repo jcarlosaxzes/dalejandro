@@ -143,8 +143,8 @@
 
 
     <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 650px">
-            <span class="label label-default center-block">Proposal Task & Share Event
+        <h2 style="margin: 0; text-align: center; color:white; width: 650px">
+            <span class="navbar bg-dark">Proposal Task & Share Event
             </span>
         </h2>
         <asp:Panel runat="server" ID="panelProposalTask">
@@ -188,8 +188,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipCRM" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">New Client Activity Record
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">New Client Activity Record
             </span>
         </h2>
         <table class="table-condensed" style="width: 600px">

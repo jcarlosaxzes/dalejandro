@@ -21,7 +21,7 @@
                     <table class="table-condensed" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 33%">
-                                <h3 style="margin: 0"><span class="label label-info center-block">Client</span></h2>
+                                <h3 style="margin: 0"><span class="badge badge-info center-block">Client</span></h2>
 
                                         <table style="width: 100%">
                                             <tr>
@@ -47,7 +47,7 @@
                                         </table>
                             </td>
                             <td style="width: 33%; text-align: center; vertical-align: top">
-                                <h3 style="margin: 0"><span class="label label-info center-block">Projects</span></h2>
+                                <h3 style="margin: 0"><span class="badge badge-info center-block">Projects</span></h2>
                                         <table class="table-condensed" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right"># Pending Proposals:</td>
@@ -70,7 +70,7 @@
                                         </table>
                             </td>
                             <td style="text-align: right; vertical-align: top">
-                                <h3 style="margin: 0"><span class="label label-info center-block">Balance</span></h2>
+                                <h3 style="margin: 0"><span class="badge badge-info center-block">Balance</span></h2>
                                         <table class="table-condensed" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right;">Amount Paid:</td>
@@ -276,12 +276,12 @@
                                                         </asp:LinkButton>
 
                                 &nbsp;
-                                                        <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="label-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
+                                                        <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                                             ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                                             <span class="glyphicon glyphicon-usd"></span>
                                                         </asp:LinkButton>
                                 &nbsp;
-                                                        <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="label-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt")=0%>'
+                                                        <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt")=0%>'
                                                             ToolTip="Mark Invoice as BadDept" CausesValidation="false">
                                                             B
                                                         </asp:LinkButton>
@@ -378,8 +378,8 @@
 
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Receive Payment
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Receive Payment
             </span>
         </h2>
         <table class="table table-condensed" style="width: 500px">
@@ -446,8 +446,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Invoice
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Invoice
             </span>
         </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">
@@ -545,8 +545,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Payment
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Payment
             </span>
         </h2>
         <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">
@@ -607,8 +607,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipInvoicesDiscount" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Apply Invoices Discount
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Apply Invoices Discount
             </span>
         </h2>
         <p>

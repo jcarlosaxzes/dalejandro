@@ -417,7 +417,7 @@
                                                     <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job"
                                                         CommandName="EditJob" UseSubmitBehavior="false" ForeColor="Black">
                                             <%#Eval("Code")%> 
-                                            <span title="Number of files uploaded" class="badge" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
+                                            <span title="Number of files uploaded" class="badge badge-pill badge-danger" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                                 <%#Eval("JobUploadFiles")%>
                                             </span>
                                                     </asp:LinkButton>
@@ -524,7 +524,7 @@
                                                     <td colspan="2">
                                                         <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Client") %>'
                                                             CommandName="EditClient" Text='<%# Eval("Name")%>' UseSubmitBehavior="false" Font-Size="Medium"
-                                                            CssClass="label label-info ">
+                                                            CssClass="badge badge-info ">
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
@@ -582,7 +582,7 @@
                                                 <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="SetEmployee" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
                                                     <%# Eval("EmployeeName")%>
                                                     <span aria-hidden="true" class="glyphicon glyphicon-user"  style='<%# IIf(Eval("employeeNumbers")=0,"color:red","color:#23527c")%>'></span>
-                                                    <span class="badge" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal")%>'>
+                                                    <span class="badge badge-pill badge-danger" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal")%>'>
                                                         <%#Eval("employeeNumbers")%>
                                                     </span>
                                                 </asp:LinkButton>
@@ -592,7 +592,7 @@
                                         <tr>
                                             <td>
                                                 <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditStatus" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Job Status">
-                                                    <span title="Clic to edit Job Status" class="label  <%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>"><%# Eval("nStatus") %></span>
+                                                    <span title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>'><%# Eval("nStatus") %></span>
                                                 </asp:LinkButton>
                                                 <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
                                                     <span class="glyphicon glyphicon-cloud-download"></span>
@@ -746,8 +746,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; width: 500px">
-                        <span class="label label-default center-block">Update Job Status
+                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                        <span class="navbar bg-dark">Update Job Status
                         </span>
                     </h2>
                 </td>
@@ -777,8 +777,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipShareFilter" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Share Copied Filters
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Share Copied Filters
             </span>
         </h2>
         <table class="table-condensed" style="width: 500px">

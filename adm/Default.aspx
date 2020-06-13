@@ -56,7 +56,7 @@
                                     <tr>
                                         <td style='<%# iif(LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16,"width:250px;text-align: center; vertical-align: top","width:0px") %>'>
                                             <asp:Panel ID="panelCompany16" runat="server" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>' Width="250px">
-                                                <span class="label label-info center-block">"In Progress" Jobs </span>
+                                                <span class="badge badge-info center-block">"In Progress" Jobs </span>
                                                 <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobsInProgressByEmployee" DataKeyNames="Id"
                                                     ItemPlaceholderID="Container1"
                                                     BorderStyle="Solid" Height="380px" Width="100%"
@@ -80,7 +80,7 @@
 
                                                                         <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job"
                                                                             CommandName="EditJob" UseSubmitBehavior="false">                                                                                                                                                       
-                                                                                <h4 style="margin: 0"><span class="center-block label label-success"><%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%></span></h4>
+                                                                                <h4 style="margin: 0"><span class="center-block label badge-success"><%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%></span></h4>
                                                                         </asp:LinkButton>
                                                                     </td>
                                                                 </tr>
@@ -88,7 +88,7 @@
                                                                     <td>
                                                                         <asp:LinkButton ID="btnClient" runat="server" CommandArgument='<%# Eval("clientId")%>' ToolTip="Click to View/Edit Client"
                                                                             CommandName="EditClient" UseSubmitBehavior="false">                                                                                                                                                       
-                                                                            <span class="center-block label label-warning"><%# Eval("ClientNameAndCompany")%></span>     
+                                                                            <span class="center-block badge badge-warning"><%# Eval("ClientNameAndCompany")%></span>     
                                                                         </asp:LinkButton>
 
                                                                     </td>
@@ -465,7 +465,7 @@
 
     <asp:Panel runat="server" ID="panelEmployeePortal" Visible="false">
 
-        <span class="label label-default center-block">
+        <span class="navbar bg-dark">
             <h2>PASconcept Application Home Page</h2>
         </span>
         <h3>PASconcept is your complete online platform for Project Administration Services</h3>

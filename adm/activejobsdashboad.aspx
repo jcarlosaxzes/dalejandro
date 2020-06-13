@@ -238,7 +238,7 @@
         <table style="width: 100%">
             <tr>
                 <td style="width: 300px; text-align: left">
-                    <span>To <span class="label label-primary">Add Productive Time</span>, Click on the specific job </span>
+                    <span>To <span class="label badge-primary">Add Productive Time</span>, Click on the specific job </span>
                 </td>
                 <td style="text-align: center">
                     <h3 style="margin: 0">Time Activity
@@ -306,7 +306,7 @@
                                 <td>
                                     <asp:LinkButton ID="btnEditReviews" runat="server" UseSubmitBehavior="false" ToolTip='<%# GetViewEditRevisionToolTip() %>'
                                         CommandName="EditReviews" CommandArgument='<%# Eval("Id")%>'>
-                                                    <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge"> <%#Eval("ReviewsCount")%></span>
+                                                    <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge badge-pill badge-danger"> <%#Eval("ReviewsCount")%></span>
                                     </asp:LinkButton>
                                 </td>
                                 <td>
@@ -467,8 +467,8 @@
         Skin="Default" Width="600px">
 
 
-        <h2 style="margin: 0; text-align: center; width: 100%">
-            <span class="label label-default center-block">Non-Productive Time
+        <h2 style="margin: 0; text-align: center; color:white; width: 100%">
+            <span class="navbar bg-dark">Non-Productive Time
             </span>
         </h2>
 
@@ -580,8 +580,8 @@
     <telerik:RadToolTip ID="RadToolTipReview" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
         Skin="Default">
 
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Add Revision
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Add Revision
             </span>
         </h2>
 

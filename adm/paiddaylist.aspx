@@ -138,7 +138,7 @@
                                             <asp:LinkButton runat="server" ID="lblName" CommandName="Edit"
                                                 ForeColor='<%# iif(Eval("Status")="Inactive",System.Drawing.Color.LightGray,System.Drawing.Color.DarkBlue) %>'> 
                                                 <%# Eval("Employee") %>
-                                                <span style="font-size:x-small" class="badge" title="weeks this year"><%# Eval("weekthisyear") %></span>
+                                                <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear") %></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                         <EditItemTemplate>
@@ -225,7 +225,7 @@
                                         HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
                                         <ItemTemplate>
                                             <%# Eval("ProductiveSalary","{0:N0}") %>
-                                            <span style="font-size: x-small" class="badge" title="productive weeks this year"><%# Eval("productiveweekthisyear","{0:N0}") %></span>
+                                            <span style="font-size: x-small" class="badge badge-pill badge-danger" title="productive weeks this year"><%# Eval("productiveweekthisyear","{0:N0}") %></span>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 

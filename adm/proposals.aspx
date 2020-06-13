@@ -178,7 +178,7 @@
                             <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Proposal"
                                 CommandName="EditProposal">
                                 <%# Eval("ProposalNumber")%>
-                                 <span title="Number of files uploaded" class="badge" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
+                                 <span title="Number of files uploaded" class="badge badge-pill badge-danger" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
                                                 <%#Eval("ProposalUploadFiles")%>
                                             </span>
                             </asp:LinkButton>
@@ -285,10 +285,7 @@
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                         <ItemTemplate>
                             <div>
-                                <span class="label label-<%# IIf(Eval("StatusId") = 0, "default", 
-                                                                        IIf(Eval("StatusId") = 1, "warning",
-                                                                        IIf(Eval("StatusId") = 2, "success", "danger"
-                                                                            ))) %>"><%# Eval("Status") %></span>
+                                <span class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'><%# Eval("Status") %></span>
                             </div>
                             <div>
                                 <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("JobId") %>' ToolTip="Click to View/Edit Job"
@@ -306,7 +303,7 @@
                                     </asp:LinkButton>
                             </div>
                             <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("EmailDate", "{0:d}") %>' Font-Size="X-Small" ToolTip="Emitted Date"></asp:Label>
-                            <span title="Number of times sent" class="badge" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                            <span title="Number of times sent" class="badge badge-pill badge-danger" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
                                                 <%#Eval("Emitted")%>
                                             </span>
                         </ItemTemplate>

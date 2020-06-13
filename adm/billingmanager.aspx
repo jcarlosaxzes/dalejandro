@@ -289,7 +289,7 @@
                                         </asp:LinkButton>--%>
                                         <a href='<%# LocalAPI.GetSharedLink_URL(4,Eval("Id"))%>' target="_blank" title="view invoice"><%# Eval("InvoiceNumber")%></a>
                                         <br />
-                                        <span title='<%# Eval("PastDueStatusTitle") %>' class="label label-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %>
+                                        <span title='<%# Eval("PastDueStatusTitle") %>' class="label badge-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
 
@@ -303,7 +303,7 @@
                                             <%# Eval("JobName") %>
                                         </div>
                                         <div>
-                                            <span class="label label-warning"><%#Eval("nStatus")%></span>
+                                            <span class="badge badge-warning"><%#Eval("nStatus")%></span>
                                             <%#Eval("ProjectManager") %>
                                         </div>
                                     </ItemTemplate>
@@ -484,7 +484,7 @@
                                     <ItemTemplate>
                                         <a href='<%# LocalAPI.GetSharedLink_URL(5,Eval("Id"))%>' target="_blank" title="view statement"><%# Eval("Number")%></a>
                                         <br />
-                                        <span title='<%# Eval("PastDueStatusTitle") %>' class="label label-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %>
+                                        <span title='<%# Eval("PastDueStatusTitle") %>' class="label badge-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn DataField="InvoiceDate" DataType="System.DateTime" FilterControlAltText="Filter InvoiceDate column"
@@ -566,8 +566,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; width: 500px">
-                        <span class="label label-default center-block">
+                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                        <span class="navbar bg-dark">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -594,8 +594,8 @@
             <tr>
                 <td>
 
-                    <h2 style="margin: 0; text-align: center; width: 500px">
-                        <span class="label label-default center-block">
+                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                        <span class="navbar bg-dark">
                             <asp:Label ID="lblActionMesageStatement" runat="server"></asp:Label>Switch Company
                         </span>
                     </h2>
@@ -618,8 +618,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipInvoicesPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Receive Invoice Payments
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Receive Invoice Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -664,8 +664,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Receive Statement Payments
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Receive Statement Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -711,8 +711,8 @@
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Edit Invoice
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Edit Invoice
             </span>
         </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEditInvoice" DefaultMode="Edit">
@@ -813,8 +813,8 @@
 
     <telerik:RadToolTip ID="RadToolTipInvoiceRemaider" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">New Invoice Reminder
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">New Invoice Reminder
             </span>
         </h2>
         <asp:FormView ID="FormViewRemaider" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceRemaider">
@@ -916,8 +916,8 @@
 
     <telerik:RadToolTip ID="RadToolTipStatementReminder" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">New Statement Reminder
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">New Statement Reminder
             </span>
         </h2>
 

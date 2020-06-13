@@ -346,8 +346,8 @@
         </asp:FormView>
 
         <telerik:RadToolTip ID="RadToolTipMail" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; width: 450px">
-                <span class="label label-default center-block">Email to Client
+            <h2 style="margin: 0; text-align: center; color:white; width: 450px">
+                <span class="navbar bg-dark">Email to Client
                 </span>
             </h2>
             <table class="table-condensed" style="width: 450px">

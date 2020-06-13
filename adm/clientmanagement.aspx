@@ -235,7 +235,7 @@
                         HeaderStyle-Width="100px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditAvailability" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Availability">
-                                <span title="Clic to edit Availability" class="label label-<%# IIf(Eval("AvailabilityId") = 0, "success", IIf(Eval("AvailabilityId") = 1, "danger", "default")) %>"><%# Eval("Availability") %>
+                                <span title="Clic to edit Availability" class="label badge-<%# IIf(Eval("AvailabilityId") = 0, "success", IIf(Eval("AvailabilityId") = 1, "danger", "default")) %>"><%# Eval("Availability") %>
                             </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
@@ -282,8 +282,8 @@
     </telerik:RadWindowManager>
 
     <telerik:RadToolTip ID="RadToolTipNewCampaign" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Create New Marketing Campaign
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Create New Marketing Campaign
             </span>
         </h2>
         <table class="table-condensed" style="width: 600px">
@@ -324,8 +324,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipAvailability" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Client Availability
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Client Availability
             </span>
         </h2>
         <table class="table-condensed" style="width: 600px">

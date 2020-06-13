@@ -86,7 +86,7 @@
                                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderText="Status"
                                     SortExpression="Status" UniqueName="statusId" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <span class="label label-<%# IIf(Eval("statusId") = 0, "warning", IIf(Eval("statusId") = 1, "success", "danger")) %>"><%# Eval("Status") %>
+                                        <span class="label badge-<%# IIf(Eval("statusId") = 0, "warning", IIf(Eval("statusId") = 1, "success", "danger")) %>"><%# Eval("Status") %>
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <telerik:RadComboBox ID="cboPlanReview_status2" runat="server" DataSourceID="SqlDataSourcePlanReview_status" DataTextField="Name" DataValueField="Id"

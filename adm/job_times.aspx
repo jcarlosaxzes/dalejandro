@@ -150,8 +150,8 @@
         <table class="table-condensed" style="width: 800px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; width: 800px">
-                        <span class="label label-default center-block">
+                    <h2 style="margin: 0; text-align: center; color:white; width: 800px">
+                        <span class="navbar bg-dark">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -207,8 +207,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; width: 500px">
-                        <span class="label label-default center-block">
+                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                        <span class="navbar bg-dark">
                             <asp:Label ID="lblActionMesage2" runat="server"></asp:Label>
                         </span>
                     </h2>
