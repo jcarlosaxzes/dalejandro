@@ -70,7 +70,7 @@
             </table>
             <div style="text-align:center">
                  <asp:LinkButton runat="server" ID="btnSent" CssClass="btn btn-info" ToolTip="Send Email" CausesValidation="true" ValidationGroup="Send">
-                      <span class="glyphicon glyphicon-envelope"> Send</span>
+                      <i class="far fa-envelope"></i> Send
                 </asp:LinkButton>
             </div>
         </asp:Panel>

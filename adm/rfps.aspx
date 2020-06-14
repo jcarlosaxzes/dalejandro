@@ -74,17 +74,17 @@
             <tr>
                 <td style="width: 80px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add new Project and RFP for selected Subconsultants">
-                       <span class="glyphicon glyphicon-plus"></span>&nbsp;Project & RFPs
+                       <i class="fas fa-plus"></i>&nbsp;Project & RFPs
                     </asp:LinkButton>
                 </td>
                 <td style="width: 100px">
                     <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Table view Page">
-                       <span class="glyphicon glyphicon-align-justify"> Table</span>
+                       <i class="fas fa-align-justify"></i>Table
                     </asp:LinkButton>
                 </td>
                 <td style="width: 100px; text-align: right">
@@ -172,7 +172,7 @@
                         </td>
                         <td style="padding-left: 50px">
                             <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
 
                         </td>
@@ -250,29 +250,29 @@
                     <ItemTemplate>
                                     <asp:LinkButton ID="btnNewRFP" runat="server" CommandName="NewRFPforProject" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("ParentID") = 0 %>'
                                         UseSubmitBehavior="false" ToolTip="Add RFP for this Project">
-                                            <span style="font-size:small" class="glyphicon glyphicon-plus"></span>
+                                            <span style="font-size:small" class="fas fa-plus"></span>
                                     </asp:LinkButton>
                             &nbsp;&nbsp;
                                     <a href='<%# LocalAPI.GetSharedLink_URL(2002, Eval("Id"))%>' target="_blank" title="Subconsultant View of RFP">
-                                        <span class="glyphicon glyphicon-share"></span>
+                                        <i class="far fa-share-square"></i>
                                     </a>
                             &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnSendRFP" runat="server" CommandName="SendRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") <= 1, "true", "false")%>'
                                         ToolTip="Click to Send Proposal">
-                                                <span style="color:darkgray" class="glyphicon glyphicon-envelope"></span>
+                                                <i class="far fa-envelope"></i>
                                     </asp:LinkButton>
                            &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnAceptRFP" runat="server" CommandName="AceptRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") = 2 Or Eval("StateId") = 3, "true", "false")%>'
                                         ToolTip="Click to Accept RFP">
-                                                <span style="color:green" class="glyphicon glyphicon-ok"></span>
+                                                <span style="color:green" class="fas fa-check"></span>
                                     </asp:LinkButton>
                            &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnDecline1" runat="server" CommandName="DeclineRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") = 2, "true", "false")%>'
                                         ToolTip="Click to Decline RFP">
-                                                <span style="color:red" class="glyphicon glyphicon-remove-circle"></span>
+                                                <i class="fas fa-minus-circle"></i>
                                     </asp:LinkButton>
 
                     </ItemTemplate>
@@ -330,7 +330,7 @@
                         <br />
                         <asp:LinkButton ID="btnAcceptConfirm" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false"
                             CausesValidation="true" ValidationGroup="AcceptStatus">
-                                    <span class="glyphicon glyphicon-ok"></span> Accept
+                                    <i class="fas fa-check"></i> Accept
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -374,7 +374,7 @@
                         <br />
                         <br />
                         <asp:LinkButton ID="btnDeclineConfirm" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" ValidationGroup="Deline">
-                                    <span class="glyphicon glyphicon-ok"></span> Decline
+                                    <i class="fas fa-check"></i> Decline
                         </asp:LinkButton>
                     </td>
                 </tr>

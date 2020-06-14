@@ -67,7 +67,7 @@
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
-                                        <span class="glyphicon glyphicon-plus"></span> Year
+                                        <i class="fas fa-plus"></i> Year
                                     </asp:LinkButton>
                                 </td>
                                 <td>

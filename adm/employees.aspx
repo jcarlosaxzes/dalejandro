@@ -73,7 +73,7 @@
                                         </td>
                                         <td>
                                             <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                <span class="glyphicon glyphicon-search"></span> Search
+                                                <i class="fas fa-search"></i> Search
                                             </asp:LinkButton>
                                         </td>
                                     </tr>
@@ -84,7 +84,7 @@
                     <tr>
                         <td class="ToolButtom noprint">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Employee
+                                            <i class="fas fa-plus"></i>&nbsp;Employee
                             </asp:LinkButton>
 
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -226,13 +226,13 @@
                                                         <td style="width: 50%; text-align: center">
                                                             <asp:LinkButton runat="server" ID="btnCredentials" CommandName="SendCredentials" CommandArgument='<%# Eval("Id") %>'
                                                                 ToolTip="Send Email with login credentials">
-                                                                <span class="glyphicon glyphicon-envelope"></span>
+                                                                <i class="far fa-envelope"></i>
                                                             </asp:LinkButton>
                                                         </td>
                                                         <td style="text-align: center">
                                                             <asp:LinkButton runat="server" ID="btnPermits" CommandName="Permits" CommandArgument='<%# Eval("Id") %>'
                                                                 ToolTip="Employee Permits">
-                                                                <span class="glyphicon glyphicon-cog"></span>
+                                                                <i class="fas fa-cog"></i>
                                                             </asp:LinkButton>
                                                         </td>
                                                     </tr>

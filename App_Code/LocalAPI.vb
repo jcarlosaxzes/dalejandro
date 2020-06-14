@@ -228,7 +228,7 @@ Public Class LocalAPI
         ' - Proposal.Retainer, al Aceptar un Proposal, se crea Job, se crea Invoice y se emite al cliente
         ' 4.5.0 (Sep 15, 2016)
         ' - All pages with responsive masterpage
-        ' - Bootstrap glyphicon, badge class
+        '  class=far fa-xxxxxxx
         ' - Contacts
         ' - Jobs/Proposal. Private Mode
         ' - Jobs Time/ Assign Employee by multiple employee

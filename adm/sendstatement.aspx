@@ -54,7 +54,7 @@
                             &nbsp;&nbsp;&nbsp;
                             <asp:LinkButton ID="btnEnviar" runat="server" ToolTip="Send Email with Statement information"
                                 CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-envelope"></span> Send
+                                    <i class="far fa-envelope"></i> Send
                             </asp:LinkButton>
                         </td>
                         <td style="text-align:right">

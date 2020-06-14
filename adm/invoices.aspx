@@ -119,7 +119,7 @@
                     </td>
                     <td style="width: 100px; text-align: right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -132,7 +132,7 @@
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false" ToolTip="Add New Invoice">
-                    <span class="glyphicon glyphicon-plus"></span> Simple Charge
+                    <i class="fas fa-plus"></i> Simple Charge
                     </asp:LinkButton>
                 </td>
                 <td style="text-align:center">
@@ -285,14 +285,14 @@
                         <ItemTemplate>
                             <asp:LinkButton ID="btnInvoiceInv44" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id") %>'
                                 ToolTip="Send Email with Invoice information" CausesValidation="false">
-                                        <span class="glyphicon glyphicon-envelope"></span>
+                                        <i class="far fa-envelope"></i>
                             </asp:LinkButton>
                             &nbsp;
-                                    <a class="glyphicon glyphicon-share" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                    <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
                             &nbsp;
                                     <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                         ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
-                                        <span class="glyphicon glyphicon-usd"></span>
+                                        <i class="fas fa-dollar-sign"></i>
                                     </asp:LinkButton>
                             &nbsp;
                                     <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'

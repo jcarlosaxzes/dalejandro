@@ -27,7 +27,7 @@
         <tr>
             <td class="ToolButtom noprint">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Non Job Time Code">
-                                   <span class="glyphicon glyphicon-plus"></span> Non-Productive Time Category
+                                   <i class="fas fa-plus"></i> Non-Productive Time Category
                 </asp:LinkButton>
 
             </td>

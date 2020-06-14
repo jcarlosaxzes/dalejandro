@@ -74,7 +74,7 @@
                 </td>
                 <td style="width: 100px">
                     <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                     </asp:LinkButton>
                 </td>
             </tr>
@@ -86,7 +86,7 @@
         <tr>
             <td style="width: 100px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Pre-Project
+                                                        <i class="fas fa-plus"></i>&nbsp;Pre-Project
                 </asp:LinkButton>
             </td>
             <td style="width: 130px">
@@ -128,11 +128,11 @@
                         </div>
                         <div>
                             <asp:LinkButton runat="server" ID="btnAzureStorage" CommandName="AzureUpload" CommandArgument='<%# Eval("Id") %>' ToolTip="Upload Files">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-cloud-upload"></span>
+                                                <i class="fas fa-cloud-upload-alt"></i>
                             </asp:LinkButton>
                             &nbsp;&nbsp;
-                                            <asp:LinkButton ID="btnNewProposal" runat="server" CommandName="NewProposal" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("statusId") = 0 %>'>
-                                                    <span title="Create new Proposal" class="glyphicon glyphicon-export"></span>
+                                            <asp:LinkButton ID="btnNewProposal" runat="server" CommandName="NewProposal" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("statusId") = 0 %>' ToolTip="Create new Proposal">
+                                                <i class="fas fa-file-export"></i>
                                             </asp:LinkButton>
                             <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("proposalId") %>' ToolTip="Click to View/Edit Proposal" Font-Size="X-Small"
                                 CommandName="EditProposal" Text='<%# Eval("ProposalNumber")%>' Visible='<%# Eval("statusId") = 1 And Eval("proposalId") > 0 %>'>

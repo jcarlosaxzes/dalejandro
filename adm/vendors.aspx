@@ -30,12 +30,12 @@
             <tr>
                 <td style="width: 90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td style="width: 90px">
                     <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Vendor
+                    <i class="fas fa-plus"></i> Vendor
                     </asp:LinkButton>
                 </td>
                 <td style="width: 140px">
@@ -64,7 +64,7 @@
                         </td>
                         <td>
                             <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>

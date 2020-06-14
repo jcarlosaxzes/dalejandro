@@ -75,7 +75,7 @@
             <telerik:RadWizardStep Title="Monthly Expenses">
                 <div class="form-group">
                     <asp:LinkButton ID="btnMonthlyNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                <span class="glyphicon glyphicon-plus"></span> Expense
+                                <i class="fas fa-plus"></i> Expense
                     </asp:LinkButton>
                 </div>
 

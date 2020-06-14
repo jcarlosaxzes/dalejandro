@@ -37,7 +37,7 @@
                                     </td>
                                     <td>
                                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
@@ -53,7 +53,7 @@
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Job Type">
-                                    <span class="glyphicon glyphicon-plus"></span> Job Type
+                                    <i class="fas fa-plus"></i> Job Type
                                 </asp:LinkButton>
                             </td>
                             <td>

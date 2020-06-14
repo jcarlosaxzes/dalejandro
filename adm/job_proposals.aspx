@@ -21,7 +21,7 @@
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNewPropsal" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                            <span class="glyphicon glyphicon-plus"></span> Proposal (Change Order)
+                                                            <i class="fas fa-plus"></i> Proposal (Change Order)
                     </asp:LinkButton>
                 </td>
             </tr>

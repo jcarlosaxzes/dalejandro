@@ -35,12 +35,12 @@
             <tr>
                 <td>
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td>
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilterSample" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Sample panel">
-                        <span class="glyphicon glyphicon-list"></span>&nbsp;Sample
+                        <i class="fas fa-list"></i>&nbsp;Sample
                     </button>
                 </td>
                 <td style="text-align:right">
@@ -154,7 +154,7 @@
                         </td>
                         <td style="text-align: right">
                             <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -387,7 +387,7 @@
                                             <td style="width: 24px">
                                                 <asp:LinkButton ID="btnExclude" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Exclude record"
                                                     CommandName="Exclude" UseSubmitBehavior="false">
-                                                    <span aria-hidden="true" class="glyphicon glyphicon-minus"></span>
+                                                    <i class="fas fa-list"></i>
                                                 </asp:LinkButton>
                                             </td>
                                             <td style="text-align: right">

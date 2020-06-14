@@ -112,12 +112,12 @@
                         </td>
                         <td style="width: 120px">
                             <asp:LinkButton ID="btnInvoice" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <span class="glyphicon glyphicon-plus"></span> Schedules (%)
+                                                                     <i class="fas fa-plus"></i> Schedules (%)
                             </asp:LinkButton>
                         </td>
                         <td style="width: 130px">
                             <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <span class="glyphicon glyphicon-plus"></span> Simple Charge
+                                                                     <i class="fas fa-plus"></i> Simple Charge
                             </asp:LinkButton>
                         </td>
                         <td>
@@ -264,24 +264,24 @@
 
                                     <asp:LinkButton ID="btnInvoiceInv44" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id") %>'
                                         ToolTip="Send Email with Invoice" CausesValidation="false">
-                                                            <span class="glyphicon glyphicon-envelope"></span>
+                                                            <i class="far fa-envelope"></i>
                                     </asp:LinkButton>
                                     &nbsp;
                                                         <asp:LinkButton ID="btnShareLink" runat="server" UseSubmitBehavior="false" CommandName="GetSharedLink" CommandArgument='<%# Eval("Id") %>'
                                                             ToolTip="Get a link to copy and paste in an email or browser" CausesValidation="false">
-                                                            <span class="glyphicon glyphicon-share"></span>
+                                                            <i class="far fa-share-square"></i>
                                                         </asp:LinkButton>
 
                                     &nbsp;
                                                         <asp:LinkButton ID="btnClone" runat="server" UseSubmitBehavior="false" ToolTip="Duplicate Invoice"
                                                             CommandName="Duplicate" CommandArgument='<%# Eval("Id")%>'>
-                                                                <span class="glyphicon glyphicon-duplicate"></span></a>
+                                                                <i class="far fa-clone"></i></a>
                                                         </asp:LinkButton>
 
                                     &nbsp;
                                                         <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                                             ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
-                                                            <span class="glyphicon glyphicon-usd"></span>
+                                                            <i class="fas fa-dollar-sign"></i>
                                                         </asp:LinkButton>
                                     &nbsp;
                                                         <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt")=0%>'
@@ -351,7 +351,7 @@
                                             </td>
                                             <td>
                                                 <asp:Panel ID="PanelUpload" runat="server" Visible='<%# len(Eval("Download_url"))>0 %>'>
-                                                    &nbsp;<a class="glyphicon glyphicon-download-alt" href='<%# Eval("Download_url")%>' target="_blank"></a>
+                                                    &nbsp;<a class="fas fa-cloud-download-alt" href='<%# Eval("Download_url")%>' target="_blank"></a>
                                                 </asp:Panel>
                                             </td>
                                         </tr>

@@ -43,7 +43,7 @@
 
             <td style="text-align: right">
                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                 </asp:LinkButton>
             </td>
         </tr>
@@ -190,7 +190,7 @@
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnBindAxzesInvoice" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-ok"></span> Update
+                                    <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                 </td>
             </tr>

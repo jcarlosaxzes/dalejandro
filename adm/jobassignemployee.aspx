@@ -221,7 +221,7 @@
                 <td style="text-align: right; padding-right: 10px; width: 180px">
                     <asp:LinkButton ID="btnDefineEmployee" runat="server" ToolTip="Assign New Employee & Time"
                         CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-plus"></span> Assign Employee
+                                    <i class="fas fa-plus"></i> Assign Employee
                     </asp:LinkButton>
                 </td>
             </tr>

@@ -45,7 +45,7 @@
             </td>
             <td style="width: 100px">
                 <asp:LinkButton ID="btnExport" runat="server" UseSubmitBehavior="false" class="btn btn-default">
-                   <span class="glyphicon glyphicon-save"> Export</span>
+                    Export</span>
                 </asp:LinkButton>
             </td>
         </tr>
@@ -79,7 +79,7 @@
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="btnPermits" CommandName="Permits" CommandArgument='<%# Eval("Id") %>'
                                     ToolTip="Employee Permits"><%# Eval("Name")%>
-                                                <span class="glyphicon glyphicon-cog"></span>
+                                                <i class="fas fa-cog"></i>
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>

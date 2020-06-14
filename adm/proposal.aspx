@@ -594,7 +594,7 @@
                                         </td>
                                         <td style="text-align: right;">
                                             <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
-                                        <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;&nbsp;Upload
+                                        <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
                                             </asp:LinkButton>
                                         </td>
                                     </tr>
@@ -691,7 +691,7 @@
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNewTask" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ValidationGroup="Proposal">
-                                   <span class="glyphicon glyphicon-plus"></span> Task
+                                   <i class="fas fa-plus"></i> Task
                                 </asp:LinkButton>
 
                             </td>
@@ -748,7 +748,7 @@
 
                                                     <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
                                                         ToolTip="Click to duplicate record">
-                                                    <span class="glyphicon glyphicon-duplicate"></span>
+                                                    <i class="far fa-clone"></i>
                                                     </asp:LinkButton>
 
                                                 </ItemTemplate>
@@ -829,12 +829,12 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep22" Title="Phases" StepType="Step">
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
                         <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Phase">
-                                   <span class="glyphicon glyphicon-plus"></span> Phase
+                                   <i class="fas fa-plus"></i> Phase
                         </asp:LinkButton>
 
                         &nbsp;&nbsp;&nbsp;
                         <asp:LinkButton ID="btnPivotPhases" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Add New Phase">
-                                   <span class="glyphicon glyphicon-plus"></span> Project Phases
+                                   <i class="fas fa-plus"></i> Project Phases
                         </asp:LinkButton>
                     </div>
                     <div style="padding-top: 12px; padding-left: 18px; padding-bottom: 10px">

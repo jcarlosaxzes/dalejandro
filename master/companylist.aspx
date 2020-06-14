@@ -9,7 +9,7 @@
         <tr>
             <td style="width: 150px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Create New Company">
-                    <span class="glyphicon glyphicon-plus"> Company</span>
+                    <span class="fas fa-plus"> Company</span>
                 </asp:LinkButton>
             </td>
             <td style="width: 120px; text-align: right">Payment Status:
@@ -41,7 +41,7 @@
             </td>
             <td style="width: 100px; text-align: right">
                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                 </asp:LinkButton>
             </td>
         </tr>
@@ -147,13 +147,13 @@
                                             <td style="width: 30px">
                                                 <asp:LinkButton ID="btnSentContactAgain" runat="server" CommandName="GetStartedEmail" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
                                                     ToolTip="Send Email with Help to Get Started with PASconcept!">
-                                                    <span class="glyphicon glyphicon-envelope"></span>
+                                                    <i class="far fa-envelope"></i>
                                                 </asp:LinkButton>
                                             </td>
                                             <td style="width: 30px">
                                                 <asp:LinkButton ID="btnBindAxzesClient" runat="server" CommandName="BindAxzesClient" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
                                                     ToolTip="Bind Company to Axzes Client">
-                                                    <span class="glyphicon glyphicon-user"></span>
+                                                    <i class="fas fa-user"></i>
                                                 </asp:LinkButton>
                                             </td>
                                             <td>
@@ -234,7 +234,7 @@
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnBindAxzesClient" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" ValidationGroup="BindAxzesClient">
-                                    <span class="glyphicon glyphicon-ok"></span> Bind Company<-->Axzes
+                                    <i class="fas fa-check"></i> Bind Company<-->Axzes
                     </asp:LinkButton>
                 </td>
             </tr>

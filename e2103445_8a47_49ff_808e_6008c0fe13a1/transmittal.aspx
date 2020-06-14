@@ -137,7 +137,7 @@
                     <td></td>
                     <td style="text-align: center">
                         <asp:LinkButton ID="btnSignature" runat="server" CssClass="btn btn-success  btn-lg noprint" Visible='<%# Eval("Status") = 1 %>' UseSubmitBehavior="false" OnClick="btnPickUp_Click">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Sign to Pick Up
+                            <i class="fas fa-pen"></i>&nbsp;&nbsp;Sign to Pick Up
                         </asp:LinkButton>
                     </td>
                     <td></td>

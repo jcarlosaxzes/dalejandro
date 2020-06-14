@@ -97,17 +97,17 @@
                                                                     <td style="padding-top: 5px; background-color: whitesmoke">
                                                                         <asp:LinkButton ID="btnEdit" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Job"
                                                                             CommandName="EditJob" UseSubmitBehavior="false" >
-                                                                            <span aria-hidden="true" class="glyphicon glyphicon-pencil"></span>
+                                                                            <i class="fas fa-pen"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
                                                                         <asp:LinkButton ID="btnAccounting" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Accounting"
                                                                             CommandName="Accounting" UseSubmitBehavior="false" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>'>
-                                                                            <span aria-hidden="true" class="glyphicon glyphicon-usd"></span>
+                                                                            <i class="fas fa-dollar-sign"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
                                                                         <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
                                                                             CommandName="NewTime" UseSubmitBehavior="false">
-                                                                            <span aria-hidden="true" class="glyphicon glyphicon-time"></span>
+                                                                            <span aria-hidden="true" <i class="fas fa-user-clock"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
                                                                         <asp:LinkButton ID="btnTickets" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Tickets"
@@ -487,7 +487,7 @@
         </p>
         <asp:LinkButton ID="btnEmployeePortal" runat="server" CssClass="btn btn-info btn-lg"
             UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2">
-                                                                        <span class="glyphicon glyphicon-time"></span>&nbsp;Go to Employee Portal
+                                                                        <i class="fas fa-user-clock"></i>&nbsp;Go to Employee Portal
         </asp:LinkButton>
     </asp:Panel>
 

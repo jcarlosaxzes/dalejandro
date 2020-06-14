@@ -40,14 +40,14 @@
                         <td style="width: 120px; text-align: right">
                             <asp:LinkButton ID="btnPAS" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" ToolTip="If you are PASconcept client, you can Respond using Proposal to clients"
                                 Visible='<%# IsButtonFeesVisible(Eval("statusId")) %>' CommandName="ContinuePAS">
-                                                    <span class="glyphicon glyphicon-log-in"></span>&nbsp;Continue with PASconcept
+                                                    <i class="fas fa-sign-in-alt"></i>&nbsp;Continue with PASconcept
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px; text-align: right">
                             <asp:LinkButton ID="btnContinue" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
                                 Visible='<%# IsButtonFeesVisible(Eval("statusId")) %>' CommandName="Continue">
                                                     Continue
-                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                    <i class="fas fa-pen"></i>
                             </asp:LinkButton>
                             <td style="width: 120px; text-align: left">
                                 <asp:LinkButton ID="btnReject" runat="server" CssClass="btn btn-danger  btn-lg" UseSubmitBehavior="false"

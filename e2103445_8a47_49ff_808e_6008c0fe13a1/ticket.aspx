@@ -19,7 +19,7 @@
                     </h2>
                 </td>
                 <td style="text-align: center;width:100px">
-                    <a runat="server" id="urlPublicLink" class="glyphicon glyphicon-share" title="Click to View Ticket List" href='<%# GetJobGUID() %>'
+                    <a runat="server" id="urlPublicLink" class="far fa-share-square" title="Click to View Ticket List" href='<%# GetJobGUID() %>'
                         target="_blank" aria-hidden="true"></a>
                 </td>
             </tr>

@@ -32,13 +32,13 @@
         <tr>
             <td style="width: 400px;">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Client Type
+                    <i class="fas fa-plus"></i> Client Type
                 </asp:LinkButton>
 
             </td>
             <td>
                 <asp:LinkButton ID="btnNewSubtype" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Client Subtype
+                    <i class="fas fa-plus"></i> Client Subtype
                 </asp:LinkButton>
 
             </td>

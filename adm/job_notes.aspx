@@ -7,7 +7,7 @@
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                            <span class="glyphicon glyphicon-plus"></span> Note
+                            <i class="fas fa-plus"></i> Note
                     </asp:LinkButton>
                 </td>
             </tr>

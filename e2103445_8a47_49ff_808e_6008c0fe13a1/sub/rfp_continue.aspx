@@ -54,7 +54,7 @@
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Service Fee
+                                        <i class="fas fa-plus"></i>&nbsp;Service Fee
                                     </asp:LinkButton>
                                 </td>
                             </tr>

@@ -8,7 +8,7 @@
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-             <span class="glyphicon glyphicon-plus"></span> Transmittal
+             <i class="fas fa-plus"></i> Transmittal
                     </asp:LinkButton>
                 </td>
             </tr>
@@ -38,7 +38,7 @@
                                         <span title="Number of Packages" class="badge badge-pill badge-danger" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
                                             <%#Eval("PackageContent")%>
                                         </span>
-                                        <a class="glyphicon glyphicon-share" title="Preview Trasmittal " href='<%# LocalAPI.GetSharedLink_URL(6,Eval("Id")) %>' target="_blank" aria-hidden="true"></a>
+                                        <a class="far fa-share-square" title="Preview Trasmittal " href='<%# LocalAPI.GetSharedLink_URL(6,Eval("Id")) %>' target="_blank" aria-hidden="true"></a>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridBoundColumn DataField="TransmittalDate" DataFormatString="{0:MM/dd/yyyy}" DataType="System.DateTime" ReadOnly="true"
@@ -68,7 +68,7 @@
                                             CommandArgument='<%# Eval("Id") %>'
                                             ToolTip="Send Email to Client with Ready For Pick Up Notification"
                                             CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-envelope"></span>
+                                        <i class="far fa-envelope"></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>

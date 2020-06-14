@@ -34,7 +34,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Update changes to Company Profile" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -191,7 +191,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton4" runat="server" ToolTip="Update changes to Company SMTP" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -242,7 +242,7 @@
                                             <td>
                                                 <asp:LinkButton ID="btnEmail" runat="server" ToolTip="Send Test Email" CommandName="SendTestEmail" CausesValidation="False"
                                                     CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-envelope"></span> Test Email
+                                                        <i class="far fa-envelope"></i> Test Email
                                                 </asp:LinkButton>
 
                                             </td>
@@ -283,7 +283,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton5" runat="server" ToolTip="Update changes to Company Alerts" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -370,7 +370,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton6" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -397,7 +397,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton13" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -666,7 +666,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton2" runat="server" ToolTip="Update changes to Company Profile" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton3" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -829,7 +829,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton7" runat="server" ToolTip="Update changes to Company Email SMTP Settings" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton8" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -908,7 +908,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton9" runat="server" ToolTip="Update changes to Company Notification Alerts" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton10" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -1004,7 +1004,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton11" runat="server" ToolTip="Update changes to Company <h3></h3>" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton12" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -1064,7 +1064,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton14" runat="server" ToolTip="Update changes to Company" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton15" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -1253,7 +1253,7 @@
 
                                     <asp:LinkButton ID="btnExpensesImport" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
                                         CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-upload"></span> Import
+                                     Update Import
                                     </asp:LinkButton>
                                 </td>
                             </tr>

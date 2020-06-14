@@ -112,7 +112,7 @@
                         <td>
                             <button type="button" title="Accept proposal" id="btn-accept" class="btn btn-success mb-xs" data-toggle="modal" data-target="#modal-accept">
                                 Accept&nbsp;
-                                <span class="circle bg-white"><i class="glyphicon glyphicon-ok"></i></span>
+                                <span class="circle bg-white"><i class="fas fa-check"></i></span>
                             </button>
                         </td>
                         <td>

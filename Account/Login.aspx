@@ -96,7 +96,7 @@
                         <td style="text-align: right; vertical-align: bottom">
                             <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
                                 UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
-                                <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Sign in
+                                <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Sign in
                             </asp:LinkButton>
                             <div style="text-align: center;margin-top:10px">
                                 <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, you agree to our Terms & Conditions</a>

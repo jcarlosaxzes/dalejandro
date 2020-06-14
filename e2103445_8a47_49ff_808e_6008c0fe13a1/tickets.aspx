@@ -11,17 +11,17 @@
                 <tr>
                     <td style="width: 100px">
                         <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                            <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                            <i class="fas fa-filter"></i>&nbsp;Filter
                         </button>
                     </td>
                     <td style="width: 100px">
                         <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="New Ticket">
-                        <span class="glyphicon glyphicon-plus"></span> Ticket
+                        <i class="fas fa-plus"></i> Ticket
                         </asp:LinkButton>
                     </td>
                     <td style="text-align: right">
                         <asp:LinkButton ID="btnRefreshGrid" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Refresh List">
-                        <span class="glyphicon glyphicon-refresh"></span> Refresh
+                        <i class="fas fa-redo"></i> Refresh
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -76,7 +76,7 @@
 
                                 <td>
                                     <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                                     </asp:LinkButton>
                                 </td>
                             </tr>

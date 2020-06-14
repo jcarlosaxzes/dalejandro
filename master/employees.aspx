@@ -64,7 +64,7 @@
         <tr>
             <td colspan="2" style="text-align: center">
                 <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="NewEmployee">
-                                    <span class="glyphicon glyphicon-plus"></span> Insert Employee
+                                    <i class="fas fa-plus"></i> Insert Employee
                 </asp:LinkButton>
             </td>
         </tr>

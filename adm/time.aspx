@@ -11,11 +11,6 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <style>
-        span.glyphicon-small {
-            font-size: x-small;
-        }
-    </style>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
         <Windows>
             <telerik:RadWindow ID="RadWindow1"
@@ -29,12 +24,12 @@
             <tr>
                 <td style="width:90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td style="width:90px">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                       <span class="glyphicon glyphicon-plus"></span>&nbsp;Time
+                       <i class="fas fa-plus"></i>&nbsp;Time
                     </asp:LinkButton>
                 </td>
                 <td style="width:140px">
@@ -122,7 +117,7 @@
                         <td></td>
                         <td style="width: 120px; text-align: right">
                             <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -290,11 +285,11 @@
                                         <div>
                                             <asp:LinkButton ID="btnNewInvoice" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Insert Invoice (hr)"
                                                 CommandName="NewHrInvoice" UseSubmitBehavior="false" Visible='<%#IIf(Eval("invoiceId") = 0, True, False) %>'>
-                                                <span aria-hidden="true" class="glyphicon glyphicon-plus glyphicon-small"></span>
+                                                    <i class="far fa-plus"></i>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="btnDeleteInvoice" runat="server" CommandArgument='<%# Eval("invoiceId")%>' ToolTip="Click to delete Invoice (hr)"
                                                 CommandName="DeleteHrInvoice" UseSubmitBehavior="false" Visible='<%#IIf(Eval("invoiceId") > 0, True, False) %>'>
-                                                <span aria-hidden="true" class="glyphicon glyphicon-trash glyphicon-small"></span>
+                                                <i class="far fa-trash-alt"></i>
                                             </asp:LinkButton>
                                             <a href='<%# LocalAPI.GetSharedLink_URL(4, Eval("invoiceId"))%>' target="_blank" title="view invoice"><%# Eval("InvoiceNumber")%></a>
                                         </div>
@@ -497,7 +492,7 @@
             <tr>
                 <td style="text-align: center" colspan="2">
                     <asp:LinkButton ID="btnOk" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Ok
+                                    <i class="fas fa-check"></i> Ok
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -524,7 +519,7 @@
             <tr>
                 <td style="text-align: center" colspan="2">
                     <asp:LinkButton ID="btnOk2" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Ok
+                                    <i class="fas fa-check"></i> Ok
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;

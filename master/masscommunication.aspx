@@ -64,7 +64,7 @@
                     <td colspan="2" style="text-align: right; padding-right: 50px">
                         <asp:LinkButton ID="btnSend" runat="server" ToolTip="Send aass Email Communication" CausesValidation="true" ValidationGroup="Send"
                             CssClass="btn btn-info btn-lg" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-envelope"></span> Send
+                                    <i class="far fa-envelope"></i> Send
                         </asp:LinkButton>
 
                     </td>

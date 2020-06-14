@@ -27,7 +27,7 @@
                     <div style="text-align: left" class="ToolButtom noprint">
 
                         <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Discipline
+                                            <i class="fas fa-plus"></i>&nbsp;Discipline
                         </asp:LinkButton>
 
 
