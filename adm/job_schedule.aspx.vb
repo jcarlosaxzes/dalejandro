@@ -14,7 +14,7 @@ Public Class job_schedule
 
                 Dim ViewMode As Integer = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "RadScheduler_JobEdit_View")
                 RadScheduler1.SelectedView = IIf(ViewMode = -1, 1, ViewMode)
-
+                Master.ActiveTab(8)
             End If
 
 

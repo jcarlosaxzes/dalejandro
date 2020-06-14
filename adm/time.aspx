@@ -121,7 +121,7 @@
                         </td>
                         <td></td>
                         <td style="width: 120px; text-align: right">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-search"></span> Search
                             </asp:LinkButton>
                         </td>

@@ -9,7 +9,7 @@
         <table class="table-condensed" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>

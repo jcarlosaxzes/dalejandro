@@ -11,7 +11,7 @@ Public Class job_notes
                 lblJobId.Text = Request.QueryString("JobId")
 
                 lblEmployeeId.Text = Master.UserId
-
+                Master.ActiveTab(5)
             End If
 
 

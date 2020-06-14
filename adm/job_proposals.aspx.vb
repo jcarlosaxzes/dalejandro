@@ -12,7 +12,7 @@ Public Class job_proposals
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
                 lblJobId.Text = Request.QueryString("JobId")
-
+                Master.ActiveTab(3)
             End If
 
             RadWindowManager1.EnableViewState = False

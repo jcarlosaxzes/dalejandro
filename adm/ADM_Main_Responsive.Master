@@ -545,10 +545,11 @@
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode>
                                                 <NodeTemplate>
-                                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" CssClass="dropdown-item"
+                                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" CssClass="rnvText"
                                                         ToolTip="Logout"
                                                         Font-Size="16px"
                                                         LogoutText="Log out"
+                                                       
                                                         LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>

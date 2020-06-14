@@ -10,6 +10,7 @@
                 lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
 
                 lblproposalId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "proposalId")
+                Master.ActiveTab(7)
             End If
 
             RadWindowManager2.EnableViewState = False

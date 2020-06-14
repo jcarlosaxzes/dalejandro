@@ -78,7 +78,7 @@
                     </asp:LinkButton>
                 </td>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>

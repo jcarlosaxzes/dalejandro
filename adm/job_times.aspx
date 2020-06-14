@@ -4,18 +4,19 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-        <div class="row">
-            <div class="form-group">
-                <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
+        <table class="table" style="width: 100%">
+            <tr>
+                <td>
+                     <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-save-file"></span> Export
                 </asp:LinkButton>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AllowSorting="True" DataSourceID="SqlDataSource1"
-                    Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="1000px"
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AllowSorting="True" DataSourceID="SqlDataSource1"
+                    Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="600px"
                     ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -66,7 +67,7 @@
                                 <ItemTemplate>
                                     <div>
                                         <asp:LinkButton ID="btnNewInvoice" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Insert Invoice (hr)"
-                                            CommandName="NewHrInvoice" UseSubmitBehavior="false" Visible='<%# iif(Eval("invoiceId")=0,True,False) %>'>
+                                            CommandName="NewHrInvoice" UseSubmitBehavior="false" Visible='<%#IIf(Eval("invoiceId") = 0, True, False) %>'>
                                                 <span aria-hidden="true" class="glyphicon glyphicon-plus glyphicon-small"></span>
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnDeleteInvoice" runat="server" CommandArgument='<%# Eval("invoiceId")%>' ToolTip="Click to delete Invoice (hr)"
@@ -112,9 +113,11 @@
                     </MasterTableView>
                     <PagerStyle AlwaysVisible="false" />
                 </telerik:RadGrid>
-            </div>
-
-        </div>
+                </td>
+            </tr>
+           
+        </table>
+      
     </div>
     <div class="container" style="height: 1px; overflow: auto">
         <telerik:RadGrid ID="RadGridExportData" runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" PageSize="10">

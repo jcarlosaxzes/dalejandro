@@ -19,6 +19,7 @@ Public Class job_tags
 
                 SqlDataSourceCRUD.DataBind()
 
+                Master.ActiveTab(10)
             End If
 
 

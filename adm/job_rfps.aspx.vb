@@ -9,6 +9,7 @@ Public Class job_rfps
                 lblJobId.Text = Request.QueryString("JobId")
                 lblCompanyId.Text = Session("companyId")
                 lblJob.Text = LocalAPI.GetJobCodeName(lblJobId.Text)
+                Master.ActiveTab(4)
             End If
 
 

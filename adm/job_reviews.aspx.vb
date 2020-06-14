@@ -17,7 +17,7 @@
                 End If
 
                 PanelNo16Type.Visible = Not Panel16Type.Visible
-
+                Master.ActiveTab(9)
             End If
 
 

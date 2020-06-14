@@ -1095,7 +1095,7 @@ Public Class LocalAPI
                 Return "badge badge-danger"
 
             Case "6", "Closed"
-                Return "badge badge-primary"
+                Return "badge badge-dark"
         End Select
     End Function
 
@@ -1614,8 +1614,10 @@ Public Class LocalAPI
         '        6   Approved		"info"
         '        7   Done			"primary"
         Select Case statusId
-            Case 0, 1  'Not in Progress, Inactive
+            Case 0  'Not in Progress
                 Return "badge badge-secondary"
+            Case 1  'Inactive
+                Return "badge badge-light"
             Case 2  'In Progress
                 Return "badge badge-success"
             Case 3  'On Hold,
@@ -1624,8 +1626,10 @@ Public Class LocalAPI
                 Return "badge badge-warning"
             Case 5    ' Under Revision
                 Return "badge badge-info"
-            Case 6, 7  ''Approved, Done
+            Case 6  ''Approved
                 Return "badge badge-primary"
+            Case 7  ' Done
+                Return "badge badge-dark"
         End Select
     End Function
 
@@ -11273,11 +11277,11 @@ Public Class LocalAPI
     Public Shared Function GetContactClassLabelCSS(ByVal contactTypeName As String) As String
         Select Case contactTypeName
             Case "SubConsultant"
-                Return "badge badge-secondary"
+                Return "badge badge-dark"
             Case "Employee"
                 Return "badge badge-info"
             Case "Contact"
-                Return "badge badge-primary"
+                Return "badge badge-light"
             Case "Client"
                 Return "badge badge-success"
             Case "Vendor"
@@ -12882,9 +12886,9 @@ Public Class LocalAPI
         '        1   Processed		"default"
         Select Case statusId
             Case 0  'Pending
-                Return "badge-warning"
+                Return "badge badge-warning"
             Case 1  'Processed
-                Return "badge-secondary"
+                Return "badge badge-dark"
         End Select
     End Function
 
@@ -13123,10 +13127,12 @@ Public Class LocalAPI
                 Return "badge badge-success"
             Case "Ready for Staging"
                 Return "badge badge-primary"
-            Case "Closed", "In Staging", "In Production"
+            Case "In Staging", "In Production"
                 Return "badge badge-secondary"
+            Case "Closed"
+                Return "badge badge-dark"
             Case Else
-                Return "badge badge-secondary"
+                Return "badge badge-light"
         End Select
     End Function
 
