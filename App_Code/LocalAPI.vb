@@ -1633,6 +1633,35 @@ Public Class LocalAPI
         End Select
     End Function
 
+    Public Shared Function GetJobStatusButonCSS(ByVal statusId As Integer) As String
+        '        0   Not in Progress		"default"
+        '        1   Inactive		"default"
+        '        2   In Progress		"success"
+        '        3   On Hold			"danger"
+        '        4   Submitted		"warning"
+        '        5   Under Revision		"danger"
+        '        6   Approved		"info"
+        '        7   Done			"primary"
+        Select Case statusId
+            Case 0  'Not in Progress
+                Return "btn btn-secondary"
+            Case 1  'Inactive
+                Return "btn btn-light"
+            Case 2  'In Progress
+                Return "btn btn-success"
+            Case 3  'On Hold,
+                Return "btn btn-danger"
+            Case 4  'Submitted
+                Return "btn btn-warning"
+            Case 5    ' Under Revision
+                Return "btn btn-info"
+            Case 6  ''Approved
+                Return "btn btn-primary"
+            Case 7  ' Done
+                Return "btn btn-dark"
+        End Select
+    End Function
+
     Public Shared Function GetInvoicePastDueLabelCSS(ByVal pastdue_status As String) As String
         Select Case pastdue_status
             Case "90D+"

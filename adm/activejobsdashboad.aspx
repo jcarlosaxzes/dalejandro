@@ -237,85 +237,58 @@
     <div class="Formulario">
         <table style="width: 100%">
             <tr>
-                <td style="width: 300px; text-align: left">
-                    <span>To <span class="label badge-primary">Add Productive Time</span>, Click on the specific job </span>
-                </td>
                 <td style="text-align: center">
                     <h3 style="margin: 0">Time Activity
                     </h3>
                 </td>
             </tr>
         </table>
-        <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobs" DataKeyNames="Id" ItemPlaceholderID="Container1"
-            BorderStyle="Solid">
+        <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobs" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderStyle="Solid">
             <LayoutTemplate>
-                <fieldset style="width: 100%">
+                <fieldset style="width: 100%; text-align: center">
                     <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
                 </fieldset>
 
             </LayoutTemplate>
             <ItemTemplate>
-                <fieldset style="float: left; width: 250px; margin: 2px">
-                    <fieldset class="thumbnail" style="margin: 0; width: 100%">
-                        <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
-                            CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
-                                 <table style="width: 100%">
-                                <tr>
-                                    <td>
-                                        <h4 style="margin: 0"><span class="center-block label  <%# LocalAPI.GetJobStatusLabelCSS(Eval("statusId")) %>"><%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%></span></h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <table style="width:100%">
-                                            <tr>
-                                                <td style="width: 24px">
-                                                    <small><span class="fas fa-plus" title="Add New Job Time"></small>
-                                                </td>
-                                                <td>
-                                                    <small style="color: black">
-                                                        <%# Eval("ClientCompany")%></small>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span style="margin:0;color: black"><b><%# Eval("ClientName")%></b></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <small style="color: black"><%# Eval("LastTime", "{0:d}")%> --<mark><%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%></mark> -- <%# Eval("PM")%> </small>
-                                    </td>
-                                </tr>
-                            </table>
-                        </asp:LinkButton>
 
-                    </fieldset>
-                    <fieldset class="thumbnail" style="margin: 0; width: 100%">
-                        <table style="width: 100%">
-                            <tr>
-                                <td>
-                                    <asp:LinkButton ID="btnAddReview" runat="server" UseSubmitBehavior="false" ToolTip='<% GetAddRevisionToolTip() %>'
-                                        CommandName="AddReview" CommandArgument='<%# Eval("Id")%>'>
+                <div class="card" style="float: left; width: 330px">
+                    <div class="card-header">
+                        <h5 style="margin: 0">
+                            <%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="margin: 0">
+                            <b><%# Eval("ClientCompany")%></b>
+                        </h5>
+                        <p class="card-text">
+                            <%# Eval("ClientName")%><br />
+                            <%# Eval("LastTime", "{0:d}")%> --<mark><%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%></mark> -- <%# Eval("PM")%>
+                            <br />
+                            <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>' CssClass='<%# LocalAPI.GetJobStatusButonCSS(Eval("statusId")) %>'
+                                CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
+                            <i title="Add New Job Time" class="fas fa-user-clock"></i>&nbsp;&nbsp; Productive Time
+                            </asp:LinkButton>
+                        </p>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        <asp:LinkButton ID="btnAddReview" runat="server" UseSubmitBehavior="false" ToolTip='<% GetAddRevisionToolTip() %>'
+                            CommandName="AddReview" CommandArgument='<%# Eval("Id")%>'>
                                                 <small><span class="fas fa-plus"></small>
-                                    </asp:LinkButton>
-                                </td>
-                                <td>
-                                    <asp:LinkButton ID="btnEditReviews" runat="server" UseSubmitBehavior="false" ToolTip='<%# GetViewEditRevisionToolTip() %>'
-                                        CommandName="EditReviews" CommandArgument='<%# Eval("Id")%>'>
+                        </asp:LinkButton>
+                        &nbsp;&nbsp;
+                        <asp:LinkButton ID="btnEditReviews" runat="server" UseSubmitBehavior="false" ToolTip='<%# GetViewEditRevisionToolTip() %>'
+                            CommandName="EditReviews" CommandArgument='<%# Eval("Id")%>'>
                                                     <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge badge-pill badge-danger"> <%#Eval("ReviewsCount")%></span>
-                                    </asp:LinkButton>
-                                </td>
-                                <td>
-                                    <a class="far fa-share-square" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-                </fieldset>
+                        </asp:LinkButton>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="far fa-share-square" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
+
+                    </div>
+                </div>
+
             </ItemTemplate>
 
         </telerik:RadListView>
@@ -467,7 +440,7 @@
         Skin="Default" Width="600px">
 
 
-        <h2 style="margin: 0; text-align: center; color:white; width: 100%">
+        <h2 style="margin: 0; text-align: center; color: white; width: 100%">
             <span class="navbar bg-dark">Non-Productive Time
             </span>
         </h2>
@@ -580,7 +553,7 @@
     <telerik:RadToolTip ID="RadToolTipReview" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
         Skin="Default">
 
-        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
             <span class="navbar bg-dark">Add Revision
             </span>
         </h2>
@@ -683,7 +656,7 @@
         <table style="width: 100%">
             <tr>
                 <td style="text-align: center">
-                    <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="review_insert" Width="120px">
+                    <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="review_insert">
                         Add Rewiew
                     </asp:LinkButton>
                 </td>
