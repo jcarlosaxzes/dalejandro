@@ -329,7 +329,7 @@
                                 </telerik:RadTextBox>
                             </td>
                             <td style="text-align: right">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-search"></span> Search
                                 </asp:LinkButton>
                             </td>
@@ -473,7 +473,7 @@
                                                 <td>
                                                     <asp:LinkButton ID="btnImages" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Images"
                                                         CommandName="Images" UseSubmitBehavior="false" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>'>
-                                                <span aria-hidden="true" class="glyphicon glyphicon-picture"></span>
+                                                <span style="color:darkred" aria-hidden="true" class="glyphicon glyphicon-picture"></span>
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td>
@@ -485,7 +485,7 @@
                                                 <td>
                                                     <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
                                                         CommandName="NewTime" UseSubmitBehavior="false">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-time"></span>
+                                                <span style="color:darkblue" aria-hidden="true" class="glyphicon glyphicon-time"></span>
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>
@@ -582,7 +582,7 @@
                                                 <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="SetEmployee" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
                                                     <%# Eval("EmployeeName")%>
                                                     <span aria-hidden="true" class="glyphicon glyphicon-user"  style='<%# IIf(Eval("employeeNumbers")=0,"color:red","color:#23527c")%>'></span>
-                                                    <span class="badge badge-pill badge-danger" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal")%>'>
+                                                    <span class="badge badge-pill badge-light" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal;font-size:x-small")%>'>
                                                         <%#Eval("employeeNumbers")%>
                                                     </span>
                                                 </asp:LinkButton>
@@ -605,7 +605,7 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected (%)<br/>Budget Used (%)" SortExpression="Profit"
-                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right"
+                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Size="X-Small"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
                                 HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                                 <ItemTemplate>
@@ -657,16 +657,16 @@
 
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Date - Budget<br/>Budget Used ($%)" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
+                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
                                 HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                                 <ItemTemplate>
                                     <table style="width: 100%">
                                         <tr>
                                             <td style="text-align: center">
-                                                <asp:Label ID="lblDate1" runat="server" Text='<%# Eval("Open_date","{0:MM/dd/yyyy}")%>'></asp:Label>
+                                                <%# Eval("Open_date","{0:MM/dd/yyyy}")%>
                                             </td>
                                             <td style="width: 60px; text-align: right">
-                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:N0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
+                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:N0}")%>' Font-Bold="true" Font-Size="16px" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>

@@ -10,6 +10,7 @@ Public Class Job_images_files
                 lblJobId.Text = Request.QueryString("JobId")
                 imgGoogleStreetview.DataBind()
                 '!!!RadBinaryImageJob.DataValue = LocalAPI.JobGetImage(lblJobId.Text)
+                Master.ActiveTab(12)
             End If
 
 

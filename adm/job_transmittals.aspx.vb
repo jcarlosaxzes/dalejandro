@@ -11,7 +11,7 @@ Public Class job_transmittals
 
 
                 lblEmployeeEmail.Text = Master.UserEmail
-
+                Master.ActiveTab(11)
             End If
 
             RadWindowManager1.EnableViewState = False

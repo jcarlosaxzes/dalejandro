@@ -19,6 +19,7 @@ Public Class Job_job
                 FormView1.DataBind()
 
                 lblTags.Text = LocalAPI.ConvertSpanTags(LocalAPI.GetJobsTagsList(lblJobId.Text))
+                Master.ActiveTab(0)
             End If
 
         Catch ex As Exception

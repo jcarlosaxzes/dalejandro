@@ -40,7 +40,7 @@
                 <asp:Label ID="lblMsg" runat="server" Style="font-size: medium; color: #cc0000; font-family: Calibri, Verdana"></asp:Label>
             </td>
             <td style="width: 100px; text-align: right">
-                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <span class="glyphicon glyphicon-search"></span> Search
                 </asp:LinkButton>
             </td>

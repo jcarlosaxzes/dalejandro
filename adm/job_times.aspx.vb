@@ -8,6 +8,7 @@ Public Class Job_times
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblJobId.Text = Request.QueryString("JobId")
+                Master.ActiveTab(6)
             End If
 
 

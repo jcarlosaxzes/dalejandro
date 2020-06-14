@@ -177,7 +177,7 @@
                 <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status"
                     UniqueName="Status" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="80px">
                     <ItemTemplate>
-                        <span class="label  <%# LocalAPI.GetPre_ProjectsStatusLabelCSS(Eval("statusId")) %>"><%# Eval("Status") %></span>
+                        <span class='<%# LocalAPI.GetPre_ProjectsStatusLabelCSS(Eval("statusId")) %>'><%# Eval("Status") %></span>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
 
