@@ -64,12 +64,12 @@
                 </td>
                 <td style="width: 100px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
-                                    <span class="glyphicon glyphicon-backward"></span> Previous
+                                    <i class="fas fa-backward"></i> Previous
                     </asp:LinkButton>
                 </td>
                 <td style="width: 100px">
                     <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
-                                    <span class="glyphicon glyphicon-forward"></span> Next
+                                    <i class="fas fa-forward"></i> Next
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center">

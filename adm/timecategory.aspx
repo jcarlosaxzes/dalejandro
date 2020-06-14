@@ -26,7 +26,7 @@
         <tr>
             <td class="ToolButtom noprint">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Time Category">
-                    <span class="glyphicon glyphicon-plus"></span>&nbsp;Productive Time Category
+                    <i class="fas fa-plus"></i>&nbsp;Productive Time Category
                 </asp:LinkButton>
 
             </td>

@@ -8,7 +8,7 @@
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNewSubconsultantFee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Insert Subconsultant Fee">
-                    <span class="glyphicon glyphicon-plus"></span> Subconsultant Fee
+                    <i class="fas fa-plus"></i> Subconsultant Fee
                     </asp:LinkButton>
 
                     <asp:LinkButton ID="btnSelectRFP" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Select Existing RFP">
@@ -68,7 +68,7 @@
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnRFPPayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="PayBill" CommandArgument='<%# Eval("Id") %>'
                                             ToolTip="Add New Payments bill" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
-                                                            <span class="glyphicon glyphicon-usd"></span>
+                                                            <i class="fas fa-dollar-sign"></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
@@ -78,7 +78,7 @@
                                     <ItemTemplate>
 
                                         <a href='<%# LocalAPI.GetSharedLink_URL(2002, Eval("Id"))%>' target="_blank" title="Subconsultant View of RFP">
-                                            <span class="glyphicon glyphicon-share"></span></a>
+                                            <i class="far fa-share-square"></i></a>
                                         </a>
 
                                     </ItemTemplate>
@@ -126,7 +126,7 @@
                                                     <asp:LinkButton ID="btnInsertRFP" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false"
                                                         ValidationGroup="InsertFee" CausesValidation="true"
                                                         CommandName='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "PerformInsert", "Update")%>'>
-                                                        <span class="glyphicon glyphicon-plus"></span> <%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "Insert", "Update")%>
+                                                        <i class="fas fa-plus"></i> <%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "Insert", "Update")%>
                                                     </asp:LinkButton>
                                                     &nbsp;&nbsp;
                                                     <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel">
@@ -276,7 +276,7 @@
                         <br />
                         <asp:LinkButton ID="btnAcceptConfirm" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false"
                             CausesValidation="true" ValidationGroup="SelectRFP">
-                                    <span class="glyphicon glyphicon-ok"></span> Accept
+                                    <i class="fas fa-check"></i> Accept
                         </asp:LinkButton>
                     </td>
                 </tr>

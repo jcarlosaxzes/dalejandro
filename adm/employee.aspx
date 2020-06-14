@@ -170,7 +170,7 @@
                                                 <td>
                                                     <asp:LinkButton ID="btnPhoto" runat="server" CommandName="Photo" ToolTip="Upload Employee Photo"
                                                         CssClass="btn btn-default" UseSubmitBehavior="false" Visible="false">
-                                                            <span class="glyphicon glyphicon-user"></span> Employee Photo
+                                                            <i class="fas fa-user"></i> Employee Photo
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td style="text-align: center;">

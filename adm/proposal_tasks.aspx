@@ -47,7 +47,7 @@
                                     </td>
                                     <td style="width: 120px">
                                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
@@ -63,7 +63,7 @@
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Task">
-                                    <span class="glyphicon glyphicon-plus"></span> Task
+                                    <i class="fas fa-plus"></i> Task
                                 </asp:LinkButton></td>
                             <td>
                                 <script type="text/javascript">

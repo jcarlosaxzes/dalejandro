@@ -78,7 +78,7 @@
 
                                         <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
                                              OnClick="Reset_Click" ValidationGroup="Login2">
-                                                                        <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Reset Password
+                                                                        <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Reset Password
                                         </asp:LinkButton>
 
                                         <div>

@@ -33,7 +33,7 @@
             <td colspan="2" style="text-align: center">
                 <br /><br />
                 <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-success btn-lg" ToolTip="Import records from CSV file" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-import"></span>    
+                    <i class="fas fa-upload"></i>    
                     Import
                 </asp:LinkButton>
             </td>

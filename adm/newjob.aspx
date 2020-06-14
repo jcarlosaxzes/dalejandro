@@ -231,7 +231,7 @@
         <hr />
         <div style="text-align: center">
             <asp:LinkButton ID="btnCreateJob" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="JobUpdate">
-                       <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Job
+                       <i class="fas fa-plus"></i>&nbsp;Create Job
             </asp:LinkButton>
         </div>
         <br />

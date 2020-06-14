@@ -81,7 +81,7 @@
 
                             <td style="text-align: right;">
                                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -105,7 +105,7 @@
 
                                     <asp:LinkButton ID="btnAddHourlyWage" runat="server" ToolTip="Add Hourly Wage Record "
                                         CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-add"></span> New Record
+                                    <i class="fas fa-plus"></i></span> New Record
                                     </asp:LinkButton>
 
                                 </td>
@@ -274,7 +274,7 @@
                                 </td>
                                 <td>
                                     <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-plus"></span> Insert
+                                    <i class="fas fa-plus"></i> Insert
                                     </asp:LinkButton>
                                 </td>
                                 <td>
@@ -347,7 +347,7 @@
 
                                     <asp:LinkButton ID="btnImport" runat="server" ToolTip="Import Payroll CSV file('Check Date,Name,Net Amount,Total Hours,Gross Amount')"
                                         CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-upload"></span> Import
+                                     Update Import
                                     </asp:LinkButton>
 
                                 </td>

@@ -50,7 +50,7 @@
                                     </td>
                                     <td>
                                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                                         </asp:LinkButton>
                                     </td>
                                 </tr>

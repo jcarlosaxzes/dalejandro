@@ -55,7 +55,7 @@
                 <div style="text-align: center">
                     <br />
                     <asp:LinkButton ID="btnUpdateVendor1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="UpdateVendor">
-                    <span class="glyphicon glyphicon-save"></span> Update
+                     Update
                     </asp:LinkButton>
                     <hr style="margin: 0" />
                 </div>
@@ -229,7 +229,7 @@
                 <div style="text-align: center">
                     <hr style="margin: 0" />
                     <asp:LinkButton ID="btnUpdateVendor2" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="UpdateVendor">
-                    <span class="glyphicon glyphicon-save"></span> Update
+                     Update
                     </asp:LinkButton>
                 </div>
 

@@ -43,12 +43,12 @@
             <tr>
                 <td>
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td>
                     <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart" title="Show/Hide Chart panel">
-                        <span class="glyphicon glyphicon-stats"></span>&nbsp;Chart
+                        <i class="fas fa-chart-bar"></i>&nbsp;Chart
                     </button>
                 </td>
                 <td style="text-align: right; width: 400px">
@@ -63,12 +63,12 @@
                 <td style="text-align: left">
 
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Job to My List
+                    <i class="fas fa-plus"></i> Job to My List
                     </asp:LinkButton>
                 </td>
                 <td>
                     <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Non-Productive Time">
-                    <span class="glyphicon glyphicon-plus"></span> Non-Productive Time
+                    <i class="fas fa-plus"></i> Non-Productive Time
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: right">You have submitted <strong>
@@ -101,7 +101,7 @@
                     </td>
                     <td style="text-align: left">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                         </asp:LinkButton>
 
                     </td>
@@ -270,7 +270,7 @@
                                         <table style="width:100%">
                                             <tr>
                                                 <td style="width: 24px">
-                                                    <small><span class="glyphicon glyphicon-plus" title="Add New Job Time"></small>
+                                                    <small><span class="fas fa-plus" title="Add New Job Time"></small>
                                                 </td>
                                                 <td>
                                                     <small style="color: black">
@@ -300,7 +300,7 @@
                                 <td>
                                     <asp:LinkButton ID="btnAddReview" runat="server" UseSubmitBehavior="false" ToolTip='<% GetAddRevisionToolTip() %>'
                                         CommandName="AddReview" CommandArgument='<%# Eval("Id")%>'>
-                                                <small><span class="glyphicon glyphicon-plus"></small>
+                                                <small><span class="fas fa-plus"></small>
                                     </asp:LinkButton>
                                 </td>
                                 <td>
@@ -310,7 +310,7 @@
                                     </asp:LinkButton>
                                 </td>
                                 <td>
-                                    <a class="glyphicon glyphicon-share" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
+                                    <a class="far fa-share-square" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
                                 </td>
                             </tr>
                         </table>

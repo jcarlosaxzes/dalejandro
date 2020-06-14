@@ -256,7 +256,7 @@
                                 </td>
                                 <td style="text-align: right;">
                                     <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
-                                    <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;&nbsp;Upload
+                                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
                                     </asp:LinkButton>
                                 </td>
                             </tr>

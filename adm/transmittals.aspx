@@ -103,7 +103,7 @@
                             </td>
                             <td>
                                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
 
                             </td>
@@ -118,7 +118,7 @@
                     <tr>
                         <td style="width: 90px">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Transmittal
+                                            <i class="fas fa-plus"></i>&nbsp;Transmittal
                             </asp:LinkButton>
                         </td>
                         <td style="width: 90px">
@@ -258,13 +258,13 @@
                                         <tr>
                                             <td style="width: 50%; text-align: center">
                                                 <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
-                                                    <span class="glyphicon glyphicon-share"></span></a>
+                                                    <i class="far fa-share-square"></i></a>
                                                 </a>
                                             </td>
                                             <td style="text-align: center">
                                                 <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="Email" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
                                                     UseSubmitBehavior="false" Enabled='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
-                                                                <span aria-hidden="true" class="glyphicon glyphicon-envelope"></span>
+                                                                <i class="far fa-envelope"></i>
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -302,11 +302,11 @@
                                     <tr>
                                         <td style="text-align: right; padding-top: 20px; padding-bottom: 10px; width: 100%">
                                             <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CommandName="PerformInsert">
-                                                <span class="glyphicon glyphicon-plus"></span>&nbsp;Insert
+                                                <i class="fas fa-plus"></i>&nbsp;Insert
                                             </asp:LinkButton>
                                             &nbsp;&nbsp;&nbsp;
                                             <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
-                                                <span class="glyphicon glyphicon-plus"></span>&nbsp;Cancel
+                                                <i class="fas fa-plus"></i>&nbsp;Cancel
                                             </asp:LinkButton>
                                         </td>
                                     </tr>

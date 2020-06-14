@@ -32,7 +32,7 @@
             <div style="text-align: center; padding-top: 20px">
                 <asp:LinkButton ID="btnSave" runat="server" CommandName="Photo" ToolTip="Upload and Save photo"
                     CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
-                <span class="glyphicon glyphicon-user"></span> Upload Photo
+                <i class="fas fa-user"></i> Upload Photo
                 </asp:LinkButton>
 
 

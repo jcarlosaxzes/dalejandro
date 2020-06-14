@@ -9,7 +9,7 @@
                     <asp:Panel runat="server" ID="PanelNo16Type">
 
                         <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <span class="glyphicon glyphicon-plus"></span> Revision
+                                                                     <i class="fas fa-plus"></i> Revision
                         </asp:LinkButton>
 
 
@@ -156,7 +156,7 @@
                     <asp:Panel runat="server" ID="Panel16Type">
 
                         <asp:LinkButton ID="btnAddAppName" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <span class="glyphicon glyphicon-plus"></span> Application
+                                                                     <i class="fas fa-plus"></i> Application
                         </asp:LinkButton>
 
 
@@ -192,7 +192,7 @@
 
 
                         <asp:LinkButton ID="btnAddModule" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <span class="glyphicon glyphicon-plus"></span> Module
+                                                                     <i class="fas fa-plus"></i> Module
                         </asp:LinkButton>
 
 

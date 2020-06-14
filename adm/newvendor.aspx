@@ -185,7 +185,7 @@
                 </td>
                 <td style="text-align: right">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Vendor">
-                    <span class="glyphicon glyphicon-plus"></span> Vendor
+                    <i class="fas fa-plus"></i> Vendor
                     </asp:LinkButton>
                 </td>
             </tr>

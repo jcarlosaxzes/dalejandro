@@ -100,13 +100,13 @@
                 </td>
                 <td style="text-align: right">
                     <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                         <span class="glyphicon glyphicon-refresh"></span> Refresh
+                         <i class="fas fa-redo"></i> Refresh
                     </asp:LinkButton>
 
                 </td>
                 <td style="text-align: right;width:100px">
                     <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" Width="80px" ToolTip="Export Report to Excel file format (.CSV)">
-                        <span class="glyphicon glyphicon-export"></span> Export
+                        <i class="fas fa-cloud-download-alt"></i> Export
                     </asp:LinkButton>
 
                 </td>

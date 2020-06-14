@@ -142,7 +142,7 @@
                             </td>
                             <td style="text-align: right">
                                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -156,13 +156,13 @@
         <tr>
             <td style="width: 80px; text-align: left">
                 <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                    <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                    <i class="fas fa-filter"></i>&nbsp;Filter
                 </button>
             </td>
             <td></td>
             <td style="width: 90px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Campaign">
-                    <span class="glyphicon glyphicon-plus"></span> Campaign
+                    <i class="fas fa-plus"></i> Campaign
                 </asp:LinkButton>
             </td>
             <td style="width: 400px">
@@ -176,7 +176,7 @@
             </td>
             <td style="width: 100px">
                 <asp:LinkButton ID="btnExecuteCampaign" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Run Campaign" Visible="false">
-                    <span class="glyphicon glyphicon-envelope"></span> Run
+                    <i class="far fa-envelope"></i> Run
                 </asp:LinkButton>
 
             </td>
@@ -191,12 +191,12 @@
                     UseSubmitBehavior="false"
                     ToolTip="Export List to Comma-Separated Values format (.CSV)"
                     CausesValidation="false">
-                                        <span class="glyphicon glyphicon-download"></span> Export
+                                        <i class="fas fa-cloud-download-alt"></i> Export
                 </asp:LinkButton>
             </td>
             <td style="width: 100px">
                 <asp:LinkButton ID="btnDeleteCampaign" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false" ToolTip="Delete Campaign" Visible="false">
-                    <span class="glyphicon glyphicon-trash"></span> Delete
+                    <i class="far fa-trash-alt"></i> Delete
                 </asp:LinkButton>
             </td>
         </tr>
@@ -341,7 +341,7 @@
             <tr>
                 <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnUpdateAvailability" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Update
+                                    <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                 </td>
             </tr>

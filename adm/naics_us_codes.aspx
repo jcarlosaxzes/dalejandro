@@ -9,7 +9,7 @@
                     <td style="width: 80px; text-align: left">
                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" Width="40px"
                             UseSubmitBehavior="false" ToolTip="View NAICS Table View" Visible="false">
-                            <span class="glyphicon glyphicon-align-justify"></span>
+                            <i class="fas fa-align-justify"></i>
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnTreePage" runat="server" CssClass="btn btn-info" Width="40px"
                             UseSubmitBehavior="false" ToolTip="View NAICS Tree View" Visible="true">
@@ -36,7 +36,7 @@
                     </td>
                     <td style="width: 150px; text-align: right">
                         <asp:LinkButton runat="server" ID="btnRefresh" CssClass="btn btn-success">
-                            <span class="glyphicon glyphicon-refresh"></span> 
+                            <i class="fas fa-redo"></i> 
                              Refresh
                         </asp:LinkButton>
                     </td>

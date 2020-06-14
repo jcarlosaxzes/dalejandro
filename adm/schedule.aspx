@@ -26,22 +26,22 @@
             <tr>
                 <td style="width:90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td style="width:90px">
                     <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
-                        <span class="glyphicon glyphicon-plus"></span> Activity
+                        <i class="fas fa-plus"></i> Activity
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
                     <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
-                        <span class="glyphicon glyphicon-calendar"></span> Export to Outlook
+                        <i class="far fa-calendar-alt"></i></span> Export to Outlook
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
                     <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
-                        <span class="glyphicon glyphicon-save-file"></span> Export to PDF
+                        <i class="fas fa-download"></i> Export to PDF
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center">
@@ -85,7 +85,7 @@
                         </td>
                         <td style="text-align: right; width: 120px">
                             <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>

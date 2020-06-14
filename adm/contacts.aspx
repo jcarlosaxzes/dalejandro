@@ -74,7 +74,7 @@
                             </td>
                             <td style="width: 150px">
                                 <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-search"></span> Search
+                                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -88,30 +88,30 @@
             <tr>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Client
+                    <i class="fas fa-plus"></i> Client
                     </asp:LinkButton>
 
                 </td>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnNewEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Employee
+                                            <i class="fas fa-plus"></i>&nbsp;Employee
                     </asp:LinkButton>
 
                 </td>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> SubConsultant
+                    <i class="fas fa-plus"></i> SubConsultant
                     </asp:LinkButton>
                 </td>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Vendor
+                    <i class="fas fa-plus"></i> Vendor
                     </asp:LinkButton>
 
                 </td>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnNewContact" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Other
+                                        <i class="fas fa-plus"></i>&nbsp;Other
                     </asp:LinkButton>
 
                 </td>
@@ -123,12 +123,12 @@
 
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
-                                        <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;Import
+                                        <i class="fas fa-cloud-upload-alt"></i>&nbsp;Import
                     </asp:LinkButton>
                 </td>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Update records from CSV files">
-                                        <span class="glyphicon glyphicon-saved"></span>&nbsp;Update
+                                        Update
                     </asp:LinkButton>
                 </td>
             </tr>
@@ -199,10 +199,10 @@
                             <div><a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a></div>
                             <div>
 
-                                <span class="glyphicon glyphicon-phone-alt "></span></a>
+                                <i class="fas fa-phone"></i></a>
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%>
                                             &nbsp;
-                                            <span class="glyphicon glyphicon-phone "></span></a>
+                                            <i class="fas fa-mobile-alt"></i></a>
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Cellular"))%>
                                 <div>
                                     <a class="lnkGrid" href='http://<%# Eval("Web")%>' target="_blank" title="View client web"><%#Eval("Web")%></a>

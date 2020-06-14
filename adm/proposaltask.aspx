@@ -186,7 +186,7 @@
                     </td>
                     <td style="width: 120px">
                         <asp:LinkButton ID="btnNewEstimator" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Estimator">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Position
+                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;Position
                         </asp:LinkButton>
                     </td>
                     <td>

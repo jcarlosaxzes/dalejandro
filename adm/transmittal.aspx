@@ -26,11 +26,11 @@
                             </script>
                             <button type="button" class="btn btn-default noprint" onclick="PrintPage()">Print</button>
                             <h3 style="margin: 5px"><%# Eval("Name") %></h3>
-                            <span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%# Eval("Address") %><br>
+                            <i class="fas fa-map-marker-alt"></i>&nbsp;<%# Eval("Address") %><br>
                             <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
-                            <span class="glyphicon glyphicon-earphone"></span>&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br>
-                            <span class="glyphicon glyphicon-envelope"></span>&nbsp;<%# Eval("Email") %><br>
-                            <span class="glyphicon glyphicon-globe"></span>&nbsp;<a href='<%# Eval("web") %>' target="_blank"><%# Eval("web") %></a>
+                            <i class="fas fa-phone"></i>&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br>
+                            <i class="far fa-envelope"></i>&nbsp;<%# Eval("Email") %><br>
+                            <i class="fas fa-globe"></i>&nbsp;<a href='<%# Eval("web") %>' target="_blank"><%# Eval("web") %></a>
                         </td>
                     </tr>
 
@@ -55,7 +55,7 @@
                         </td>
                         <td class="noprint" style="width: 100px">
                             <asp:LinkButton ID="btnPickUp" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" OnClick="btnPickUp_Click">
-                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;Pick Up
+                                <i class="far fa-envelope"></i>&nbsp;Pick Up
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -116,7 +116,7 @@
                                         &nbsp;&nbsp;
                                         <asp:LinkButton ID="btnMailReadyToSign" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false"
                                             OnClick="btnMailReadyToSign_Click" Visible="false">
-                                            <span class="glyphicon glyphicon-envelope"></span>&nbsp;Ready to Pick Up Notification
+                                            <i class="far fa-envelope"></i>&nbsp;Ready to Pick Up Notification
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
@@ -267,7 +267,7 @@
                     <tr>
                         <td style="text-align: left">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" OnClick="btnNew_Click" CausesValidation="false">
-                            <span class="glyphicon glyphicon-plus"></span> Package
+                            <i class="fas fa-plus"></i> Package
                             </asp:LinkButton>
 
                         </td>
@@ -363,7 +363,7 @@
                 <tr>
                     <td align="center">
                         <asp:LinkButton ID="btnConfirmMail" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;Send Email
+                                <i class="far fa-envelope"></i>&nbsp;Send Email
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                          <asp:LinkButton ID="btnCancelMail" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="false">

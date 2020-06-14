@@ -53,7 +53,7 @@
             <tr>
                 <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="TandC">
-                                                <span class="glyphicon glyphicon-save"></span>&nbsp;Update
+                                                Update
                     </asp:LinkButton>
 
                 </td>

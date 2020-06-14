@@ -167,11 +167,11 @@
                 <td colspan="2" style="text-align:center">
 
                     <asp:LinkButton ID="btnInsertTime" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="time_insert" Width="200px">
-                        <span class="glyphicon glyphicon-plus"></span> Time
+                        <i class="fas fa-plus"></i> Time
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;
                 <asp:LinkButton ID="btnInsertTimeAndInvoice" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="time_insert" Width="200px">
-                        <span class="glyphicon glyphicon-usd"></span> Billable (/hr)
+                        <i class="fas fa-dollar-sign"></i> Billable (/hr)
                 </asp:LinkButton>
                 </td>
             </tr>

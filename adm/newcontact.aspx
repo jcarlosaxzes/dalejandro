@@ -194,7 +194,7 @@
             </td>
             <td>
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-plus"></span> Contact
+                                        <i class="fas fa-plus"></i> Contact
                 </asp:LinkButton>
             </td>
         </tr>

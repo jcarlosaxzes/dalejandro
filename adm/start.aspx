@@ -72,7 +72,7 @@
         <tr>
             <td style="padding-left: 550px;">
                 <asp:LinkButton ID="btnSettingStatus" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-share"></span>&nbsp;Go Setting Status
+                                        <i class="far fa-share-square"></i>&nbsp;Go Setting Status
                     </asp:LinkButton>
             </td>
         </tr>

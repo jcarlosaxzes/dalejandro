@@ -55,7 +55,7 @@
                         </td>
                         <td style="text-align: right">
                             <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
 
                         </td>
@@ -85,7 +85,7 @@
                                     </td>
                                     <td style="width: 24px; text-align: center">
                                         <a href='<%# Eval("URL")%>' target="_blank" title="View Page">
-                                            <span class="glyphicon glyphicon-share"></span></a>
+                                            <i class="far fa-share-square"></i></a>
                                         </a>
                                     </td>
                                 </tr>

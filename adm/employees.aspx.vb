@@ -164,10 +164,10 @@ Public Class employees
     Public Function ActiveInactiveIcon(Inactive As Boolean) As String
         If Inactive Then
             ' Inactive
-            Return "glyphicon glyphicon-remove-circle"
+            Return "fas fa-minus-circle"
         Else
             'Active
-            Return "glyphicon glyphicon-ok-circle"
+            Return "far fa-check-circle"
         End If
     End Function
     Public Function GetStatusColor(Inactive As Boolean) As System.Drawing.Color

@@ -27,7 +27,7 @@
                                 </td>
                                 <td style="width: 120px">
                                     <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                                     </asp:LinkButton>
                                 </td>
                             </tr>
@@ -42,7 +42,7 @@
         <tr>
             <td style="width: 150px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Proposal Template">
-                                    <span class="glyphicon glyphicon-plus"></span> Client to Collection
+                                    <i class="fas fa-plus"></i> Client to Collection
                 </asp:LinkButton>
             </td>
             <td style="text-align: center">
@@ -89,11 +89,11 @@
                         <ItemTemplate>
                             <div style="text-align: center; width: 100%">
                                 <asp:LinkButton runat="server" ID="btnNotification" CommandName="Notification" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Notifications">
-                                        <span class="glyphicon glyphicon-envelope"></span>
+                                        <i class="far fa-envelope"></i>
                                 </asp:LinkButton>
                                 &nbsp;
                                         <asp:LinkButton runat="server" ID="btnClose" CommandName="Close" CommandArgument='<%# Eval("Id") %>' ToolTip="Close/Re-Open Expedient">
-                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        <i class="fas fa-folder-minus"></i>
                                         </asp:LinkButton>
                             </div>
                         </ItemTemplate>

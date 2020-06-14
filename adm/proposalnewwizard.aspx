@@ -550,7 +550,7 @@
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" CausesValidation="false">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Fee
+                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;Fee
                                     </asp:LinkButton>
                                 </td>
                             </tr>
@@ -572,15 +572,15 @@
                                                         </asp:LinkButton>
                                                         <asp:LinkButton ID="btnOrderDown" runat="server" CommandName="OrderDown" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Order Down">
-                                                                <span aria-hidden="true" class="glyphicon glyphicon-arrow-down"></span>
+                                                                <i class="fas fa-arrow-down"></i>
                                                         </asp:LinkButton>
                                                         <asp:LinkButton ID="btnOrderUp" runat="server" CommandName="OrderUp" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Order Up">
-                                                                <span aria-hidden="true" class="glyphicon glyphicon-arrow-up"></span>
+                                                                <i class="fas fa-arrow-up"></i>
                                                         </asp:LinkButton>
                                                         <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false" CausesValidation="false"
                                                             ToolTip="Click to duplicate record">
-                                                                <span class="glyphicon glyphicon-duplicate"></span>
+                                                                <i class="far fa-clone"></i>
                                                         </asp:LinkButton>
 
                                                     </ItemTemplate>
@@ -652,7 +652,7 @@
                         <legend>Term & Conditions</legend>
                         <div id="divBtnTC" runat="server" class="divBtnTC">
                             <asp:LinkButton ID="btnEditTC" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                            <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
+                            <i class="far fa-edit"></i>&nbsp;&nbsp;Edit
                             </asp:LinkButton>
                         </div>
                         <div id="divFormTC" runat="server" class="divFormTC" visible="false">
@@ -669,7 +669,7 @@
                                     </td>
                                     <td style="text-align: right">
                                         <asp:LinkButton ID="btnTCUpdate" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Save
+                                            <i class="fas fa-check"></i>&nbsp;&nbsp;Save
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnCloseTC" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false">
                                             Close
@@ -816,7 +816,7 @@
                             </td>
                             <td style="text-align: right;">
                                 <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
-                                    <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;&nbsp;Upload
+                                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -895,7 +895,7 @@
                 <telerik:RadWizardStep runat="server" Title="Preview" ID="Preview" Enabled="false" StepType="Finish">
                     <div style="text-align: right; margin: 10px">
                         <asp:LinkButton ID="btnSend" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Send Proposal to Client">
-                                    <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;Send
+                                    <i class="far fa-envelope"></i>&nbsp;&nbsp;Send
                         </asp:LinkButton>
                     </div>
                     <div>

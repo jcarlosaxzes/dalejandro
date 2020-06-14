@@ -49,7 +49,7 @@
                             </td>
                             <td style="text-align: right">
                                 <asp:LinkButton ID="btnSave" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
-                    <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;&nbsp;Upload
+                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -140,7 +140,7 @@
                         <tr>
                             <td style="padding-left: 15px">
                                 <asp:LinkButton ID="btnNewFileLink" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Attached uploaded file">
-                                        <span class="glyphicon glyphicon-plus"></span> Hyperlink
+                                        <i class="fas fa-plus"></i> Hyperlink
                                 </asp:LinkButton>
                                 &nbsp;&nbsp;&nbsp;
 
