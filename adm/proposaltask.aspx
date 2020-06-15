@@ -11,6 +11,7 @@
                     <telerik:AjaxUpdatedControl ControlID="txtDescriptionPlus" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="txtTimeSel" />
                     <telerik:AjaxUpdatedControl ControlID="txtRates" />
+                    <telerik:AjaxUpdatedControl ControlID="cboBillType" />
 
                 </UpdatedControls>
             </telerik:AjaxSetting>
@@ -42,13 +43,14 @@
                 <td>
                     <asp:Panel ID="pnlTemplate" runat="server">
                         <telerik:RadMultiColumnComboBox ID="cboMulticolumnTask" runat="server" DataSourceID="SqlDataSource1" DataTextField="Description" DataValueField="Id" AutoPostBack="true"
-                            Width="95%" DropDownWidth="800" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
+                            Width="800px" DropDownWidth="800" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
                             FilterFields="taskcode, Description">
                             <ColumnsCollection>
                                 <telerik:MultiColumnComboBoxColumn Field="taskcode" Title="Code" Width="100px" />
                                 <telerik:MultiColumnComboBoxColumn Field="Description" Title="Description" />
                                 <telerik:MultiColumnComboBoxColumn Field="Hours" Title="Hours" Width="100px" />
                                 <telerik:MultiColumnComboBoxColumn Field="Rates" Title="Rates" Width="150px" />
+                                <telerik:MultiColumnComboBoxColumn Field="HourRatesService" Title="HR Service" Width="100px" />
                             </ColumnsCollection>
                         </telerik:RadMultiColumnComboBox>
                     </asp:Panel>
@@ -98,27 +100,39 @@
                     <table class="table-sm" style="width: 95%">
                         <tr>
 
-                            <td style="text-align: right; width: 180px">Quantity (optional):
+                            <td style="text-align: right; width: 180px">Quantity:
                             </td>
-                            <td style="width: 100px">
-                                <telerik:RadNumericTextBox ID="txtAmount" runat="server">
+                            <td style="width: 120px">
+                                <telerik:RadNumericTextBox ID="txtAmount" runat="server" Width="100%" EmptyMessage="Optional">
                                     <NumberFormat DecimalDigits="2" />
                                 </telerik:RadNumericTextBox>
                             </td>
-                            <td style="text-align: right; width: 180px">Hours (optional):
+                            <td style="text-align: right; width: 100px">Hours:
                             </td>
-                            <td style="width: 100px">
-                                <telerik:RadNumericTextBox ID="txtTimeSel" runat="server" MaxLength="5">
+                            <td style="width: 120px">
+                                <telerik:RadNumericTextBox ID="txtTimeSel" runat="server" MaxLength="5"  Width="100%" EmptyMessage="Optional">
                                     <NumberFormat DecimalDigits="2" />
                                 </telerik:RadNumericTextBox>
                             </td>
-                            <td style="text-align: right; width: 180px">Rates (optional):
+                            <td style="text-align: right; width: 100px">Rates:
                             </td>
-                            <td>
-                                <telerik:RadNumericTextBox ID="txtRates" runat="server">
+                            <td style="width: 120px">
+                                <telerik:RadNumericTextBox ID="txtRates" runat="server"  Width="100%" EmptyMessage="Optional">
                                     <NumberFormat DecimalDigits="2" />
                                 </telerik:RadNumericTextBox>
                             </td>
+                            <td style="text-align: right; width: 100px">Bill Type:
+                            </td>
+                            <td style="width: 180px">
+                                    <telerik:RadComboBox ID="cboBillType" runat="server" Width="100%">
+                                                    <Items>
+                                                        <telerik:RadComboBoxItem runat="server" Text="Defined Per Time" Value="0" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Lump Sum" Value="1" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Hourly" Value="2" />
+                                                    </Items>
+                                                </telerik:RadComboBox>
+                            </td>
+
                             <td style="text-align: right">
                                 <asp:Label ID="lblTotalLine" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
                             </td>
@@ -266,7 +280,7 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         InsertCommand="PROPOSAL_details_v20_INSERT" InsertCommandType="StoredProcedure"
         UpdateCommand="PROPOSAL_details_v20_UPDATE" UpdateCommandType="StoredProcedure"
-        SelectCommand="SELECT [Id], [taskcode], [Description], [Hours], [Rates] FROM [Proposal_tasks] WHERE (companyId = @companyId) ORDER BY taskcode">
+        SelectCommand="SELECT [Id], [taskcode], [Description], [Hours], [Rates], isnull(HourRatesService,0) AS HourRatesService FROM [Proposal_tasks] WHERE (companyId = @companyId) ORDER BY taskcode">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="cboPhase" Name="phaseId" PropertyName="SelectedValue" Type="Int32" />
@@ -280,6 +294,7 @@
             <asp:ControlParameter ControlID="lblproposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboPaymentSchedulesEdit" Name="paymentscheduleId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboBillType" Name="BillType" PropertyName="SelectedValue" Type="Int32" />
             <asp:Parameter Direction="InputOutput" Name="Id_OUT" Type="Int32" />
         </InsertParameters>
         <SelectParameters>
@@ -298,6 +313,7 @@
             <asp:ControlParameter ControlID="cboPhase" Name="phaseId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboPosition" Name="positionId" PropertyName="SelectedValue" Type="Int32" />
 
+            <asp:ControlParameter ControlID="cboBillType" Name="BillType" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lbldetailId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>

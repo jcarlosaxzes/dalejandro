@@ -90,6 +90,8 @@ Public Class proposaltask
 
             cboPaymentSchedulesEdit.SelectedValue = detailObject("paymentscheduleId")
 
+            cboBillType.SelectedValue = detailObject("BillType")
+
             lblTotalLine.Text = FormatCurrency(detailObject("TotalRow"))
         Catch ex As Exception
 
@@ -142,6 +144,7 @@ Public Class proposaltask
             txtDescriptionPlus.Content = LocalAPI.GetTaskProperty(taskId, "DescriptionPlus")
             txtTimeSel.Text = LocalAPI.GetTaskProperty(taskId, "Hours")
             txtRates.Text = LocalAPI.GetTaskProperty(taskId, "Rates")
+            cboBillType.SelectedValue = IIf(LocalAPI.GetTaskProperty(taskId, "HourRatesService") = 0, 1, 2)
         End If
 
     End Sub

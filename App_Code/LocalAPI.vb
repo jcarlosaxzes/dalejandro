@@ -7696,7 +7696,7 @@ Public Class LocalAPI
     Public Shared Function GetTaskProperty(ByVal taskId As Integer, ByVal sProperty As String) As String
 
         Select Case sProperty
-            Case "Hours", "Rates", "disciplineId"
+            Case "Hours", "Rates", "disciplineId", "HourRatesService"
                 ' Valores Numeric
                 Return GetNumericEscalar("SELECT top 1 ISNULL([" & sProperty & "],0) FROM [Proposal_tasks] WHERE Id=" & taskId)
             Case Else
