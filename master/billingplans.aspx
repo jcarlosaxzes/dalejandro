@@ -39,7 +39,7 @@
                                     <telerik:RadNumericTextBox ID="RadNumericTextBox1" runat="server" DbValue='<%# Bind("billing_baseprice")%>'
                                         Width="150px">
                                     </telerik:RadNumericTextBox>
-                                    <small class="label label-info"> Base Price per Period</small>
+                                    <small class="badge badge-info"> Base Price per Period</small>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <%# Eval("billing_baseprice")%>
@@ -52,7 +52,7 @@
                                     <telerik:RadNumericTextBox ID="billing_baseusersTextBox" runat="server" DbValue='<%# Bind("billing_baseusers")%>'
                                         Width="150px" Style="text-align: right">
                                     </telerik:RadNumericTextBox>
-                                    <small class="label label-info"> Maximum number of employees users ($/Period)</small>
+                                    <small class="badge badge-info"> Maximum number of employees users ($/Period)</small>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <%# Eval("billing_baseusers")%>
@@ -65,7 +65,7 @@
                                     <telerik:RadNumericTextBox ID="billing_otheruserTextBox" runat="server" DbValue='<%# Bind("billing_otheruser") %>'
                                         Width="150px" Style="text-align: right">
                                     </telerik:RadNumericTextBox>
-                                    <small class="label label-info"> Maximum number of others users ($/Period)</small>
+                                    <small class="badge badge-info"> Maximum number of others users ($/Period)</small>
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <%# Eval("billing_otheruser") %>

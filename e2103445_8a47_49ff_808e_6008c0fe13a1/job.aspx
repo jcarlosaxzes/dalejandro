@@ -35,11 +35,11 @@
                                 </td>
                                 <td style="text-align: right; vertical-align: top">
                                     <h3 style="margin: 5px"><%# Eval("Name") %></h3>
-                                    <span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%# Eval("Address") %><br>
+                                    <i class="fas fa-map-marker-alt"></i>&nbsp;<%# Eval("Address") %><br>
                                     <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
-                                    <span class="glyphicon glyphicon-earphone"></span>&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br>
-                                    <span class="glyphicon glyphicon-envelope"></span>&nbsp;<%# Eval("Email") %><br>
-                                    <span class="glyphicon glyphicon-globe"></span>&nbsp;<a href='<%# Eval("web") %>' target="_blank"><%# Eval("web") %></a>
+                                    <i class="fas fa-phone"></i>&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br>
+                                    <i class="far fa-envelope"></i>&nbsp;<%# Eval("Email") %><br>
+                                    <i class="fas fa-globe"></i>&nbsp;<a href='<%# Eval("web") %>' target="_blank"><%# Eval("web") %></a>
                                 </td>
                             </tr>
 
@@ -197,7 +197,7 @@
                         </LayoutTemplate>
                         <ItemTemplate>
                             <fieldset style="float: left; width: 270px;">
-                                <table class="table-condensed">
+                                <table class="table-sm">
                                     <tr>
                                         <td style="text-align: center; width: 265px">
 

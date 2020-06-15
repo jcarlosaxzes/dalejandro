@@ -3,16 +3,17 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-        <div class="row">
-            <div class="form-group">
-                <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-             <span class="glyphicon glyphicon-plus"></span> Note
-                </asp:LinkButton>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <telerik:RadGrid ID="RadGridNotes" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowAutomaticInserts="true"
+        <table class="table-sm" style="width: 100%">
+            <tr>
+                <td>
+                    <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
+                            <i class="fas fa-plus"></i> Note
+                    </asp:LinkButton>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <telerik:RadGrid ID="RadGridNotes" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowAutomaticInserts="true"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSourceNotes" GridLines="None">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes"
                         ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" EditMode="PopUp">
@@ -53,8 +54,12 @@
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>
-            </div>
-        </div>
+                </td>
+            </tr>
+           
+        </table>
+
+    
     </div>
     <asp:SqlDataSource ID="SqlDataSourceNotes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [Jobs_notes] WHERE [Id] = @Id"

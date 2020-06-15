@@ -9,7 +9,7 @@
             <div class="card card-body">
 
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 250px">
                                 <telerik:RadComboBox ID="cboType" runat="server"
@@ -71,8 +71,8 @@
                             </td>
 
                             <td>
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -86,13 +86,13 @@
             <tr>
                 <td style="width: 100px; text-align: left">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
 
                 <td style="width: 100px; text-align: left">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="New Ticket">
-                    <span class="glyphicon glyphicon-plus"></span> Ticket
+                    <i class="fas fa-plus"></i> Ticket
                     </asp:LinkButton>
                 </td>
                 <td>
@@ -102,37 +102,37 @@
                 </td>
                 <td style="text-align: center; width: 32px">
                     <asp:LinkButton ID="btnStatusUpdate" runat="server" UseSubmitBehavior="false" ToolTip="Update Status on selected tickets" CausesValidation="false">
-                                        <span style="color:green" class="glyphicon glyphicon-ok"></span>
+                                        <span style="color:green" class="fas fa-check"></span>
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center; width: 32px">
                     <asp:LinkButton ID="btnDelete" runat="server" UseSubmitBehavior="false" ToolTip="Delete 'Pending Approval' selected tickets" CausesValidation="false">
-                                        <span style="color:red" class="glyphicon glyphicon-trash"></span>
+                                        <i class="far fa-trash-alt"></i>
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center; width: 32px">
                     <asp:LinkButton ID="btnMeetingRequest" runat="server" UseSubmitBehavior="false" ToolTip="Send Email with Meeting Request on selected tickets" CausesValidation="false">
-                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <i class="far fa-calendar-alt"></i>
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center; width: 32px">
                     <asp:LinkButton ID="btnURLClientNotification" runat="server" UseSubmitBehavior="false" ToolTip="Send Client Email with url Page of Tickets" CausesValidation="false">
-                                        <span class="glyphicon glyphicon-envelope"></span>
+                                        <i class="far fa-envelope"></i>
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center; width: 32px">
-                    <a runat="server" id="urlPublicLink" class="glyphicon glyphicon-share" title="Click to View Public View" href='<%# GetJobGUID() %>' target="_blank" aria-hidden="true"></a>
+                    <a runat="server" id="urlPublicLink" class="far fa-share-square" title="Click to View Public View" href='<%# GetJobGUID() %>' target="_blank" aria-hidden="true"></a>
                 </td>
                 <td style="text-align: center; width: 100px">
                     <asp:LinkButton ID="btnImport" runat="server" ToolTip="Import records from CSV File" Width="100px"
                         CssClass="btn btn-default btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-import"></span> Import
+                                    <i class="fas fa-upload"></i> Import
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center; width: 100px">
                     <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Width="100px"
                         CssClass="btn btn-default btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-save-file"></span> Export
+                                    <i class="fas fa-download"></i> Export
                     </asp:LinkButton>
                 </td>
             </tr>
@@ -179,7 +179,7 @@
                                     <td style="width: 24px; text-align: right">
                                         <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
                                             CommandName="NewTime" UseSubmitBehavior="false">
-                                                <span style="font-size: 16px" aria-hidden="true" class="glyphicon glyphicon-time"></span>
+                                                <i class="fas fa-user-clock"></i>
                                         </asp:LinkButton>
                                     </td>
                                     <td style="width: 24px; text-align: right">
@@ -193,7 +193,7 @@
                                         <asp:LinkButton ID="btnInvoice" runat="server" CommandArgument='<%# Eval("Id")%>' ForeColor='<%# GetInvoiceColor(Eval("InvoiceId")) %>'
                                             Visible='<%#IIf(Eval("Billable") = 0, False, LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList")) %>' ToolTip="Click to Add/View Invoice"
                                             CommandName="Invoice" UseSubmitBehavior="false">
-                                                <span style="font-size: 16px" aria-hidden="true" class="glyphicon glyphicon-usd"></span>
+                                                <i class="fas fa-file-invoice-dollar"></i>
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
@@ -210,12 +210,12 @@
                                     </td>
                                     <td style="width: 20px; text-align: center">
                                         <asp:Panel runat="server" Visible='<%# IIf(Len(Eval("trelloURL")) > 0, True, False) %>'>
-                                            <a runat="server" class="glyphicon glyphicon-link" style="color: saddlebrown;" title="Click to view the related Trello card" href='<%# Eval("trelloURL") %>' target="_blank" aria-hidden="true"></a>
+                                            <a runat="server" class="fas fa-link" style="color: saddlebrown;" title="Click to view the related Trello card" href='<%# Eval("trelloURL") %>' target="_blank" aria-hidden="true"></a>
                                         </asp:Panel>
                                     </td>
                                     <td style="width: 20px; text-align: center">
                                         <asp:Panel runat="server" Visible='<%# IIf(Len(Eval("jiraURL")) > 0, True, False) %>'>
-                                            <a runat="server" class="glyphicon glyphicon-link" title="Click to view the related Jira card" href='<%# Eval("jiraURL") %>' target="_blank" aria-hidden="true"></a>
+                                            <a runat="server" class="fas fa-link" title="Click to view the related Jira card" href='<%# Eval("jiraURL") %>' target="_blank" aria-hidden="true"></a>
                                         </asp:Panel>
                                     </td>
                                 </tr>
@@ -335,14 +335,14 @@
     <div>
         <telerik:RadToolTip ID="RadToolSendRequest" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
             <h2 style="margin: 0">
-                <span class="label label-default center-block">Request Meeting
+                <span class="navbar bg-dark">Request Meeting
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server"
                 Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true"
                 ValidationGroup="EditTicket" />
 
-            <table class="table-condensed" style="width: 960px; text-align: left">
+            <table class="table-sm" style="width: 960px; text-align: left">
                 <tr>
                     <td style="width: 150px">To:
                     </td>
@@ -385,7 +385,7 @@
             </table>
             <div style="text-align: center; padding-top: 10px">
                 <asp:LinkButton runat="server" ID="btnSent" CssClass="btn btn-info" ToolTip="Send Email" CausesValidation="true" ValidationGroup="SendRequest">
-                      <span class="glyphicon glyphicon-calendar"> Send</span>
+                      <i class="far fa-calendar-alt"> Send</i>
                 </asp:LinkButton>
             </div>
 
@@ -405,8 +405,8 @@
     <div>
         <telerik:RadToolTip ID="RadToolTipEditTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
-            <h2 style="margin: 0; text-align: center; width: 960px">
-                <span class="label label-default center-block">View/Edit Ticket #
+            <h2 style="margin: 0; text-align: center; color:white; width: 960px">
+                <span class="navbar bg-dark">View/Edit Ticket #
                     <asp:Label ID="lblTicketId" runat="server"></asp:Label>
                 </span>
             </h2>
@@ -414,7 +414,7 @@
                 HeaderText="Following error occurs:" ShowMessageBox="false" ShowSummary="true" CssClass="alert alert-danger alert-dismissable"
                 ValidationGroup="Ticket" />
 
-            <table class="table-condensed" style="width: 960px; text-align: left">
+            <table class="table-sm" style="width: 960px; text-align: left">
                 <tr>
                     <td style="width: 150px; text-align: right">Title:
                     </td>
@@ -598,7 +598,7 @@
                 </tr>
 
             </table>
-            <table class="table-condensed" style="width: 960px">
+            <table class="table-sm" style="width: 960px">
                 <tr>
                     <td style="width: 150px"></td>
                     <td style="width: 330px">
@@ -629,7 +629,7 @@
                     <td></td>
                     <td style="text-align: center;">
                         <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
-                            <span class="glyphicon glyphicon-save"> Update</span>
+                            Update
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -666,8 +666,8 @@
             <table class="table table-bordered" style="width: 600px">
                 <tr>
                     <td>
-                        <h2 style="margin: 0; text-align: center; width: 600px">
-                            <span class="label label-default center-block">Update Status of Selected Ticket(s)
+                        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+                            <span class="navbar bg-dark">Update Status of Selected Ticket(s)
                             </span>
                         </h2>
                     </td>
@@ -698,7 +698,7 @@
                 <tr>
                     <td style="text-align: center">
                         <asp:LinkButton ID="btnStatusUpdateConfirm" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" ValidationGroup="TicketStatus">
-                                    <span class="glyphicon glyphicon-ok"></span> Update
+                                    <i class="fas fa-check"></i> Update
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -716,8 +716,8 @@
 
     <div>
         <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; width: 600px">
-                    <span class="label label-default center-block">Invoice
+            <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+                    <span class="navbar bg-dark">Invoice
                     </span>
                 </h2>
             <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">

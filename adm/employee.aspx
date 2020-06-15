@@ -70,7 +70,7 @@
     </telerik:RadWindowManager>
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
@@ -78,7 +78,7 @@
                     </asp:LinkButton>
                 </td>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -89,7 +89,7 @@
             <div class="card card-body">
                 <asp:FormView ID="FormViewEmployeeBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEmployeeBalance" Width="100%">
                     <ItemTemplate>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td colspan="11">
                                     <hr style="margin: 0" />
@@ -158,7 +158,7 @@
                                     ValidationGroup="Employee" />
 
                             </div>
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="width: 180px;">
                                         <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>'
@@ -170,7 +170,7 @@
                                                 <td>
                                                     <asp:LinkButton ID="btnPhoto" runat="server" CommandName="Photo" ToolTip="Upload Employee Photo"
                                                         CssClass="btn btn-default" UseSubmitBehavior="false" Visible="false">
-                                                            <span class="glyphicon glyphicon-user"></span> Employee Photo
+                                                            <i class="fas fa-user"></i> Employee Photo
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td style="text-align: center;">

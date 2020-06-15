@@ -10,10 +10,10 @@
         
     </p>
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 80px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -40,7 +40,7 @@
 
 
     </div>
-    <table class="table-condensed" style="width: 800px">
+    <table class="table-sm" style="width: 800px">
         <tr>
             <td style="text-align: right; width: 180px">Role:
             </td>
@@ -64,7 +64,7 @@
         <tr>
             <td colspan="2" style="text-align: center">
                 <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="NewEmployee">
-                                    <span class="glyphicon glyphicon-plus"></span> Insert Employee
+                                    <i class="fas fa-plus"></i> Insert Employee
                 </asp:LinkButton>
             </td>
         </tr>

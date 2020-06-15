@@ -14,7 +14,7 @@
                     <table style="width: 100%; background-color: white; margin-top: 20px">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 45%">
-                                <h2><span class="label label-default center-block">Client Info</span></h2>
+                                <h2><span class="navbar bg-dark">Client Info</span></h2>
 
                                 <h3 style="margin: 0"><%# Eval("ClientName")%></h3>
                                 <%# Eval("ClientCompany") %><br />
@@ -23,7 +23,7 @@
                             </td>
                             <td style="width: 10%"></td>
                             <td style="text-align: right; vertical-align: top">
-                                <h2><span class="label label-default center-block">Balance</span></h2>
+                                <h2><span class="navbar bg-dark">Balance</span></h2>
                                 <table style="width: 100%">
                                     <tr>
                                         <td style="text-align: right;">Contract Amount:</td>
@@ -57,8 +57,8 @@
 
         </div>
         <div class="col-md-2">
-            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
             </asp:LinkButton>
         </div>
     </div>

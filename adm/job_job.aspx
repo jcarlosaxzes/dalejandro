@@ -39,15 +39,15 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <div class="pas-container">
+    <div>
         <asp:ValidationSummary ID="ValidationSummaryJobUpdate" runat="server"
             Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="JobUpdate" />
         <div class="row">
-            <div class="form-group">
+            <div class="col-12" style="padding-top:15px">
 
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceJob" DefaultMode="Edit" Width="98%">
                     <EditItemTemplate>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="width: 150px; text-align: right">
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCode" ValidationGroup="JobUpdate"
@@ -219,7 +219,7 @@
                                     </telerik:RadTextBox>
                                 </td>
                                 <td colspan="2">
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td style="text-align: right; width: 150px">Construction Cost:</td>
                                             <td>
@@ -323,7 +323,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group" style="text-align: right">
+            <div class="col-12">
                 <table style="width:98%">
                     <tr>
                         <td style="width: 150px; text-align: right;vertical-align:top">
@@ -339,7 +339,7 @@
                         </td>
                     </tr>
                 </table>
-               
+               <br /><br /><br />
             </div>
         </div>
     </div>

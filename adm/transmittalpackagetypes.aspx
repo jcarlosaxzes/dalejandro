@@ -21,7 +21,7 @@
         <tr>
             <td class="ToolButtom noprint">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Package Type">
-                     <span class="glyphicon glyphicon-plus"></span> Package Type
+                     <i class="fas fa-plus"></i> Package Type
                 </asp:LinkButton>
             </td>
         </tr>

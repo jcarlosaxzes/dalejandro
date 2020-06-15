@@ -43,7 +43,7 @@
 
     <div class="Formulario">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td width="150px" align="left">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%">
@@ -97,7 +97,7 @@
                     </td>
                 </tr>
             </table>
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td>
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
@@ -118,8 +118,8 @@
                         </telerik:RadComboBox>
                     </td>
                     <td style="width: 100px; text-align: right">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -128,11 +128,11 @@
 
     </div>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false" ToolTip="Add New Invoice">
-                    <span class="glyphicon glyphicon-plus"></span> Simple Charge
+                    <i class="fas fa-plus"></i> Simple Charge
                     </asp:LinkButton>
                 </td>
                 <td style="text-align:center">
@@ -285,17 +285,17 @@
                         <ItemTemplate>
                             <asp:LinkButton ID="btnInvoiceInv44" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id") %>'
                                 ToolTip="Send Email with Invoice information" CausesValidation="false">
-                                        <span class="glyphicon glyphicon-envelope"></span>
+                                        <i class="far fa-envelope"></i>
                             </asp:LinkButton>
                             &nbsp;
-                                    <a class="glyphicon glyphicon-share" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                    <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
                             &nbsp;
-                                    <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="label-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
+                                    <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                         ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
-                                        <span class="glyphicon glyphicon-usd"></span>
+                                        <i class="fas fa-dollar-sign"></i>
                                     </asp:LinkButton>
                             &nbsp;
-                                    <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="label-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
+                                    <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
                                         ToolTip="Mark Invoice as BadDept" CausesValidation="false">
                                         B
                                     </asp:LinkButton>
@@ -321,8 +321,8 @@
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Receive Payment
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Receive Payment
             </span>
         </h2>
         <table class="table table-condensed" style="width: 500px">
@@ -391,8 +391,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Edit Invoice
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Edit Invoice
             </span>
         </h2>
         
@@ -499,8 +499,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipNewInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">New Invoice
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">New Invoice
             </span>
         </h2>
 

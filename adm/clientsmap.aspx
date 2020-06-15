@@ -43,11 +43,11 @@
 
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td style="width: 100px">
@@ -79,7 +79,7 @@
     <div class="collapse" id="collapseFilter">
         <div class="card card-body">
             <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 280px">
                             <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="True" DataTextField="Name" DataValueField="Id" DataSourceID="SqlDataSourceClientStatus">
@@ -109,8 +109,8 @@
                             </telerik:RadTextBox>
                         </td>
                         <td style="text-align: right;width:100px">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>

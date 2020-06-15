@@ -16,6 +16,8 @@ Public Class Job_accounting
                 lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
 
                 FormViewStatus.Enabled = LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Allow_InactivateJob")
+
+                Master.ActiveTab(1)
             End If
             RadWindowManager1.EnableViewState = False
 

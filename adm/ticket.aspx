@@ -15,10 +15,10 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="pas-container">
-    <table class="table-condensed" style="width: 100%; text-align: left">
+    <table class="table-sm" style="width: 100%; text-align: left">
         <tr>
             <td style="width: 20%; text-align: right">Title:
             </td>
@@ -222,7 +222,7 @@
         </tr>
 
     </table>
-    <table class="table-condensed" style="width: 100%;">
+    <table class="table-sm" style="width: 100%;">
         <tr>
             <td style="width: 20%"></td>
             <td style="width: 30%">
@@ -253,7 +253,7 @@
             <td></td>
             <td style="text-align: center;">
                 <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
-                            <span class="glyphicon glyphicon-save"> Update</span>
+                             Update
                 </asp:LinkButton>
             </td>
         </tr>

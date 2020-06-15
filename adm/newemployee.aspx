@@ -55,10 +55,10 @@
         </script>
     </telerik:RadCodeBlock>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Cancel
                     </asp:LinkButton>
                 </td>
@@ -77,7 +77,7 @@
     </div>
     <div class="pas-container">
 
-        <table style="width: 90%" class="table-condensed">
+        <table style="width: 90%" class="table-sm">
             <tr>
                 <td style="text-align: right; width: 200px">Email/User Name:
                 </td>

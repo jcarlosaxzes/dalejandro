@@ -5,7 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <h2>Company Billing</h2>
 
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td>
         <telerik:RadComboBox ID="cboStatus" runat="server" Width="450px" Label="Payment Status:" AutoPostBack="true">

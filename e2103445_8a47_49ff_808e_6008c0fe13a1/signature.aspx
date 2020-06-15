@@ -8,7 +8,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>PASconcept Signature 3</title>
     <script src="../Scripts/signature-pad/signature_pad132.js" type="text/javascript"></script>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <%--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
     <link href="~/Content/Site.css" rel="stylesheet" />
     <style>
         .signature-div {

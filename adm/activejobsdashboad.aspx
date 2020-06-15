@@ -39,16 +39,16 @@
     <%--Tools--%>
     <div class="Formulario">
 
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td>
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td>
                     <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart" title="Show/Hide Chart panel">
-                        <span class="glyphicon glyphicon-stats"></span>&nbsp;Chart
+                        <i class="fas fa-chart-bar"></i>&nbsp;Chart
                     </button>
                 </td>
                 <td style="text-align: right; width: 400px">
@@ -63,12 +63,12 @@
                 <td style="text-align: left">
 
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Job to My List
+                    <i class="fas fa-plus"></i> Job to My List
                     </asp:LinkButton>
                 </td>
                 <td>
                     <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Non-Productive Time">
-                    <span class="glyphicon glyphicon-plus"></span> Non-Productive Time
+                    <i class="fas fa-plus"></i> Non-Productive Time
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: right">You have submitted <strong>
@@ -85,7 +85,7 @@
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="width: 250px">
                         <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceJobActiveStatus" DataTextField="Name" DataValueField="Id"
@@ -100,8 +100,8 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="text-align: left">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                         </asp:LinkButton>
 
                     </td>
@@ -113,7 +113,7 @@
 
     <%--Chart--%>
     <div class="collapse Formulario" id="collapseChart">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 50%">
                     <h4 style="text-align: center; margin: 0">Time Sheet Daily</h4>
@@ -237,85 +237,58 @@
     <div class="Formulario">
         <table style="width: 100%">
             <tr>
-                <td style="width: 300px; text-align: left">
-                    <span>To <span class="label label-primary">Add Productive Time</span>, Click on the specific job </span>
-                </td>
                 <td style="text-align: center">
                     <h3 style="margin: 0">Time Activity
                     </h3>
                 </td>
             </tr>
         </table>
-        <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobs" DataKeyNames="Id" ItemPlaceholderID="Container1"
-            BorderStyle="Solid">
+        <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobs" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderStyle="Solid">
             <LayoutTemplate>
-                <fieldset style="width: 100%">
+                <fieldset style="width: 100%; text-align: center">
                     <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
                 </fieldset>
 
             </LayoutTemplate>
             <ItemTemplate>
-                <fieldset style="float: left; width: 250px; margin: 2px">
-                    <fieldset class="thumbnail" style="margin: 0; width: 100%">
-                        <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
-                            CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
-                                 <table style="width: 100%">
-                                <tr>
-                                    <td>
-                                        <h4 style="margin: 0"><span class="center-block label  <%# LocalAPI.GetJobStatusLabelCSS(Eval("statusId")) %>"><%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%></span></h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <table style="width:100%">
-                                            <tr>
-                                                <td style="width: 24px">
-                                                    <small><span class="glyphicon glyphicon-plus" title="Add New Job Time"></small>
-                                                </td>
-                                                <td>
-                                                    <small style="color: black">
-                                                        <%# Eval("ClientCompany")%></small>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span style="margin:0;color: black"><b><%# Eval("ClientName")%></b></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <small style="color: black"><%# Eval("LastTime", "{0:d}")%> --<mark><%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%></mark> -- <%# Eval("PM")%> </small>
-                                    </td>
-                                </tr>
-                            </table>
-                        </asp:LinkButton>
 
-                    </fieldset>
-                    <fieldset class="thumbnail" style="margin: 0; width: 100%">
-                        <table style="width: 100%">
-                            <tr>
-                                <td>
-                                    <asp:LinkButton ID="btnAddReview" runat="server" UseSubmitBehavior="false" ToolTip='<% GetAddRevisionToolTip() %>'
-                                        CommandName="AddReview" CommandArgument='<%# Eval("Id")%>'>
-                                                <small><span class="glyphicon glyphicon-plus"></small>
-                                    </asp:LinkButton>
-                                </td>
-                                <td>
-                                    <asp:LinkButton ID="btnEditReviews" runat="server" UseSubmitBehavior="false" ToolTip='<%# GetViewEditRevisionToolTip() %>'
-                                        CommandName="EditReviews" CommandArgument='<%# Eval("Id")%>'>
-                                                    <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge"> <%#Eval("ReviewsCount")%></span>
-                                    </asp:LinkButton>
-                                </td>
-                                <td>
-                                    <a class="glyphicon glyphicon-share" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-                </fieldset>
+                <div class="card" style="float: left; width: 330px">
+                    <div class="card-header">
+                        <h5 style="margin: 0">
+                            <%# Eval("itemName")%>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title" style="margin: 0">
+                            <b><%# Eval("ClientCompany")%></b>
+                        </h5>
+                        <p class="card-text">
+                            <%# Eval("ClientName")%><br />
+                            <%# Eval("LastTime", "{0:d}")%> --<mark><%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%></mark> -- <%# Eval("PM")%>
+                            <br />
+                            <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>' CssClass='<%# LocalAPI.GetJobStatusButonCSS(Eval("statusId")) %>'
+                                CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
+                            <i title="Add New Productive Time" class="fas fa-user-clock"></i>&nbsp;&nbsp; <%# Eval("Code")%>
+                            </asp:LinkButton>
+                        </p>
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        <asp:LinkButton ID="btnAddReview" runat="server" UseSubmitBehavior="false" ToolTip='<% GetAddRevisionToolTip() %>'
+                            CommandName="AddReview" CommandArgument='<%# Eval("Id")%>'>
+                                                <small><span class="fas fa-plus"></small>
+                        </asp:LinkButton>
+                        &nbsp;&nbsp;
+                        <asp:LinkButton ID="btnEditReviews" runat="server" UseSubmitBehavior="false" ToolTip='<%# GetViewEditRevisionToolTip() %>'
+                            CommandName="EditReviews" CommandArgument='<%# Eval("Id")%>'>
+                                                    <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge badge-pill badge-danger"> <%#Eval("ReviewsCount")%></span>
+                        </asp:LinkButton>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="far fa-share-square" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
+
+                    </div>
+                </div>
+
             </ItemTemplate>
 
         </telerik:RadListView>
@@ -344,7 +317,7 @@
 
 
                             <div>
-                                <table class="table-condensed" style="width: 100%; border-color: gainsboro" border="1">
+                                <table class="table-sm" style="width: 100%; border-color: gainsboro" border="1">
                                     <tr>
                                         <td style='<%# GetDateOfWeekStyle(Eval("Date9"))%>'>
                                             <%# String.Concat(Eval("weekOFday9"), ":", Eval("Date9", "{0:d}")) %>
@@ -467,14 +440,14 @@
         Skin="Default" Width="600px">
 
 
-        <h2 style="margin: 0; text-align: center; width: 100%">
-            <span class="label label-default center-block">Non-Productive Time
+        <h2 style="margin: 0; text-align: center; color: white; width: 100%">
+            <span class="navbar bg-dark">Non-Productive Time
             </span>
         </h2>
 
         <div style="font-size: medium">
 
-            <table class="table-condensed" style="width: 600px">
+            <table class="table-sm" style="width: 600px">
                 <tr>
                     <td style="width: 120px; text-align: right">Category:
                     </td>
@@ -580,15 +553,15 @@
     <telerik:RadToolTip ID="RadToolTipReview" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
         Skin="Default">
 
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Add Revision
+        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+            <span class="navbar bg-dark">Add Revision
             </span>
         </h2>
 
         <asp:ValidationSummary ID="ValidationSummaryJobUpdate" runat="server"
             Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="review_insert" />
 
-        <table class="table-condensed" style="width: 500px">
+        <table class="table-sm" style="width: 500px">
             <tr>
                 <td style="text-align: right; width: 150px">Process Number:</td>
                 <td>
@@ -683,7 +656,7 @@
         <table style="width: 100%">
             <tr>
                 <td style="text-align: center">
-                    <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="review_insert" Width="120px">
+                    <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="review_insert">
                         Add Rewiew
                     </asp:LinkButton>
                 </td>

@@ -24,7 +24,7 @@
                 <Content>
                     <div style="text-align: left" class="ToolButtom noprint">
                         <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Position">
-                                   <span class="glyphicon glyphicon-plus"></span> Position
+                                   <i class="fas fa-plus"></i> Position
                         </asp:LinkButton>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

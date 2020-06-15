@@ -6,8 +6,11 @@
 <head runat="server">
     <title>Companies Move Azure Store</title>
     <%--Bootstrap reference begin--%>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <%--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />--%>
     <%--Bootstrap reference end--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
     <link href="~/Content/fontawesome-free-5.1.1-web/css/all.min.css" rel="stylesheet" />
     <link href="~/css/Menu.PASMenuBlackMetroTouch.min.css" rel="stylesheet" />
     <link href="~/Content/pasconcept.min.css" rel="stylesheet" />
@@ -32,8 +35,8 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
     <%-- CSS And JS Toogle Nutton --%>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet" />

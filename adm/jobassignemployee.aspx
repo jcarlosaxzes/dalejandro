@@ -84,7 +84,7 @@
             </script>
         </telerik:RadCodeBlock>--%>
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     <h3 style="margin: 5px">
@@ -98,12 +98,12 @@
             </tr>
         </table>
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 60%; vertical-align: top">
 
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 130px; text-align: right">Department:</td>
                             <td>
@@ -213,7 +213,7 @@
 
         <hr />
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     
@@ -221,7 +221,7 @@
                 <td style="text-align: right; padding-right: 10px; width: 180px">
                     <asp:LinkButton ID="btnDefineEmployee" runat="server" ToolTip="Assign New Employee & Time"
                         CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-plus"></span> Assign Employee
+                                    <i class="fas fa-plus"></i> Assign Employee
                     </asp:LinkButton>
                 </td>
             </tr>

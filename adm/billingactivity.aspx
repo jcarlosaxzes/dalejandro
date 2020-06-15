@@ -2,7 +2,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="Formulario" >
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td style="width: 280px">
                     <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="120px">
@@ -41,14 +41,14 @@
 
                 </td>
                 <td>
-                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                     </asp:LinkButton>
 
                 </td>
             </tr>
         </table>
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td style="text-align: center; width:150px">Hour
                     <br />

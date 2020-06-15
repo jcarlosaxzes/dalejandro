@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 100px; text-align: right">Client:
                 </td>
@@ -28,8 +28,8 @@
                     </telerik:RadComboBox>
                 </td>
                 <td style="width: 150px; text-align: right">
-                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: right; padding-top: 10px">

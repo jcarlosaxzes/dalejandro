@@ -165,10 +165,10 @@
             <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" Width="100%">
                 <ItemTemplate>
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 48%">
-                                <h3><span class="label label-default center-block">Bill To</span></h3>
+                                <h3><span class="navbar bg-dark">Bill To</span></h3>
 
                                 <h4 style="margin: 0"><%# Eval("ClientName")%></h4>
                                 <%# Eval("ClientCompany") %><br />
@@ -179,7 +179,7 @@
                             <td style="width: 5%"></td>
                             <td style="text-align: left; vertical-align: top">
 
-                                <h3><span class="label label-default center-block">Project Information</span></h3>
+                                <h3><span class="navbar bg-dark">Project Information</span></h3>
 
                                 <h4 style="margin: 0"><%# Eval("ProjectName") %></h4>
                                 Contract Amount:&nbsp;<span style="margin: 3px; font-weight: bold"><%# Eval("Budget", "{0:C2}") %></span>
@@ -189,10 +189,10 @@
                             </td>
                         </tr>
                     </table>
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top">
-                                <h2><span class="label label-default center-block">Invoice <%# Eval("InvoiceNumber") %></span></h2>
+                                <h2><span class="navbar bg-dark">Invoice <%# Eval("InvoiceNumber") %></span></h2>
                                 <h4>Invoice Description:</h4>
                                 <%# Eval("Notes") %>
                             </td>
@@ -202,7 +202,7 @@
                         <tr>
                             <td></td>
                             <td style="width:300px">
-                                <table class="table-condensed" style="width: 100%" border="1">
+                                <table class="table-sm" style="width: 100%" border="1">
                                     <tr>
                                         <td style="width: 150px; text-align: right; padding-right: 15px">Date Emitted</td>
                                         <td>
@@ -234,7 +234,7 @@
 
             <asp:Panel runat="server" ID="pnlPayments">
                 <br />
-                <h2><span class="label label-default center-block">Payments</span></h2>
+                <h2><span class="navbar bg-dark">Payments</span></h2>
                 <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSourceInvoicesPayments" ShowFooter="true" Width="100%" Skin="Bootstrap">
 
                     <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoicesPayments">
@@ -262,7 +262,7 @@
                             <telerik:GridTemplateColumn DataField="PaidInfo" HeaderText="Payment Info" UniqueName="PaidInfo" HeaderStyle-Width="230px"
                                 HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" ItemStyle-HorizontalAlign="Left">
                                 <ItemTemplate>
-                                    <span title='<%# Eval("PastDueStatusTitle") %>' class="label label-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %></span>
+                                    <span title='<%# Eval("PastDueStatusTitle") %>' class="label badge-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %></span>
                                     <%# Eval("PaidInfo","{0:C}") %>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
@@ -284,7 +284,7 @@
                 <div class="col-lg-12" style="margin-top: 10px">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-6">
-                            <h2><span class="label label-default center-block">Payment method</span></h2>
+                            <h2><span class="navbar bg-dark">Payment method</span></h2>
                         </div>
                     </div>
                     <div class="row">

@@ -25,7 +25,7 @@
                         </LayoutTemplate>
                         <ItemTemplate>
                             <fieldset style="float: left; width: 220px;">
-                                <table class="table-condensed">
+                                <table class="table-sm">
                                     <tr>
                                         <td style="text-align: center; width: 200px">
 
@@ -72,7 +72,7 @@
         <div class="row">
             <div class="form-group">
 
-                <table class="table-condensed">
+                <table class="table-sm">
                     <tr>
                         <td>
                             <telerik:RadCloudUpload ID="RadCloudUploadOthers" runat="server" MultipleFileSelection="Automatic" CssClass="BorderZone"

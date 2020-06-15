@@ -18,7 +18,7 @@
         <div class="col-md-3" style="text-align: right">
             <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
                 ToolTip="Refresh data" CausesValidation="false">
-                            <span class="glyphicon glyphicon-refresh"></span> Refresh
+                            <i class="fas fa-redo"></i> Refresh
             </asp:LinkButton>
         </div>
     </div>

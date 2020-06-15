@@ -14,7 +14,7 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td>
                 <telerik:RadTextBox ID="txtCampaignName" runat="server" MaxLength="80" Width="90%"></telerik:RadTextBox>
@@ -38,7 +38,7 @@
                     }
                 </script>
                 <asp:Panel ID="PanelEmail" runat="server" Width="100%">
-                    <table class="table-condensed">
+                    <table class="table-sm">
                         <tr>
                             <td colspan="7">Available Information/Ecconomic Client Fiels</td>
                         </tr>

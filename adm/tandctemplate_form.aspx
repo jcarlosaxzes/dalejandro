@@ -4,10 +4,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -25,7 +25,7 @@
     </div>
     <div class="pas-container">
 
-        <table style="width: 99%" class="table-condensed">
+        <table style="width: 99%" class="table-sm">
 
             <tr>
                 <td style="width: 150px; text-align: right">Name:
@@ -53,7 +53,7 @@
             <tr>
                 <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="TandC">
-                                                <span class="glyphicon glyphicon-save"></span>&nbsp;Update
+                                                Update
                     </asp:LinkButton>
 
                 </td>

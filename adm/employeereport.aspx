@@ -18,7 +18,7 @@
         <div class="col-md-2">
             <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
                 ToolTip="Refresh data" CausesValidation="false">
-                            <span class="glyphicon glyphicon-refresh"></span> Refresh
+                            <i class="fas fa-redo"></i> Refresh
             </asp:LinkButton>
         </div>
         <div class="col-md-1" style="text-align: right">
@@ -26,13 +26,13 @@
             <asp:HyperLink ID="btnView" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false"
                 NavigateUrl='<%# GetMemoryUrl() %>' Target="_blank"
                 ToolTip="View page of employee year memory" CausesValidation="false">
-                            <span class="glyphicon glyphicon-eye-open"></span> View
+                            <i class="far fa-eye"></i>View
             </asp:HyperLink>
         </div>
         <div class="col-md-1" style="text-align: right">
             <asp:LinkButton ID="btnMemory" runat="server" CssClass="btn btn-warning btn" UseSubmitBehavior="false"
                 ToolTip="Send year memory link to employee" CausesValidation="false">
-                            <span class="glyphicon glyphicon-envelope"></span> Send
+                            <i class="far fa-envelope"></i> Send
             </asp:LinkButton>
         </div>
     </div>

@@ -60,16 +60,16 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
     <div class="Formulario">
-        <table class="table-condensed" style="width:100%">
+        <table class="table-sm" style="width:100%">
             <tr>
-                <td style="width: 80px">
+                <td style="width: 100px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
-                <td style="width: 100px">
+                <td style="width: 120px">
                     <asp:LinkButton ID="btnNewWizard" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Proposal
+                    <i class="fas fa-plus"></i> Proposal
                     </asp:LinkButton>
                 </td>
                 <td style="text-align:center">
@@ -91,7 +91,7 @@
     <div class="collapse" id="collapseFilter">
         <div class="card card-body">
             <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 200px">
                             <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
@@ -152,8 +152,8 @@
                             </telerik:RadTextBox>
                         </td>
                         <td style="text-align: right;">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -178,23 +178,23 @@
                             <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Proposal"
                                 CommandName="EditProposal">
                                 <%# Eval("ProposalNumber")%>
-                                 <span title="Number of files uploaded" class="badge" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
+                                 <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
                                                 <%#Eval("ProposalUploadFiles")%>
                                             </span>
                             </asp:LinkButton>
                             <div style="text-align: center">
                                 <asp:LinkButton ID="btnEditWizard" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Wizard"
                                     CommandName="EditWizard" UseSubmitBehavior="false">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-edit"></span>
+                                                <i class="far fa-edit"></i>
                                 </asp:LinkButton>
 
                                 &nbsp;
 
-                                        <a class="glyphicon glyphicon-share" title="Preview Proposal " href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=111&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                        <a class="far fa-share-square" title="Preview Proposal " href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=111&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
                                 &nbsp;
                                 <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Upload Files"
                                     CommandName="UploadFiles" UseSubmitBehavior="false">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-cloud-upload"></span>
+                                                <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
                                 </asp:LinkButton>
 
                             </div>
@@ -285,10 +285,7 @@
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                         <ItemTemplate>
                             <div>
-                                <span class="label label-<%# IIf(Eval("StatusId") = 0, "default", 
-                                                                        IIf(Eval("StatusId") = 1, "warning",
-                                                                        IIf(Eval("StatusId") = 2, "success", "danger"
-                                                                            ))) %>"><%# Eval("Status") %></span>
+                                <span class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'><%# Eval("Status") %></span>
                             </div>
                             <div>
                                 <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("JobId") %>' ToolTip="Click to View/Edit Job"
@@ -302,11 +299,11 @@
                         <ItemTemplate>
                             <div style="vertical-align: top; padding-top: 5px">
                                 <asp:LinkButton runat="server" ID="btnSendProposal" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Proposal information">
-                                    <span class="glyphicon glyphicon-envelope"></span>
+                                    <i class="far fa-envelope"></i>
                                     </asp:LinkButton>
                             </div>
                             <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("EmailDate", "{0:d}") %>' Font-Size="X-Small" ToolTip="Emitted Date"></asp:Label>
-                            <span title="Number of times sent" class="badge" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                            <span title="Number of times sent" class="badge badge-pill badge-light" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
                                                 <%#Eval("Emitted")%>
                                             </span>
                         </ItemTemplate>

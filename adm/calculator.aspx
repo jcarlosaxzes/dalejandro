@@ -31,16 +31,16 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
     <div class="Formulario">
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td>
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td>
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilterSample" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Sample panel">
-                        <span class="glyphicon glyphicon-list"></span>&nbsp;Sample
+                        <i class="fas fa-list"></i>&nbsp;Sample
                     </button>
                 </td>
                 <td style="text-align:right">
@@ -154,7 +154,7 @@
                         </td>
                         <td style="text-align: right">
                             <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -293,7 +293,7 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtEstimatedUnit" ValidationGroup="Calculate"
             Text="(*) Define Estimated Unit!" ErrorMessage="Define Estimated Unit!" SetFocusOnError="true"></asp:RequiredFieldValidator>
     </div>
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td>
                 <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="300px" Width="100%">
@@ -387,7 +387,7 @@
                                             <td style="width: 24px">
                                                 <asp:LinkButton ID="btnExclude" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Exclude record"
                                                     CommandName="Exclude" UseSubmitBehavior="false">
-                                                    <span aria-hidden="true" class="glyphicon glyphicon-minus"></span>
+                                                    <i class="fas fa-list"></i>
                                                 </asp:LinkButton>
                                             </td>
                                             <td style="text-align: right">

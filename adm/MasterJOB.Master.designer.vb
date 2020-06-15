@@ -32,13 +32,121 @@ Partial Public Class MasterJOB
     Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
     
     '''<summary>
-    '''LoginViewMenuApp control.
+    '''RadNavigationJob control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LoginViewMenuApp As Global.System.Web.UI.WebControls.LoginView
+    Protected WithEvents RadNavigationJob As Global.Telerik.Web.UI.RadNavigation
+    
+    '''<summary>
+    '''NavigationNodejob_job control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_job As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_accounting control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_accounting As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_employees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_employees As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_proposals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_proposals As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_rfps control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_rfps As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_notes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_notes As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_times control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_times As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_links control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_links As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_schedule control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_schedule As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_reviews control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_reviews As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_tags control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_tags As Global.Telerik.Web.UI.NavigationNode
+    
+    '''<summary>
+    '''NavigationNodejob_trasmittals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodejob_trasmittals As Global.Telerik.Web.UI.NavigationNode
     
     '''<summary>
     '''MainContent control.
@@ -93,15 +201,6 @@ Partial Public Class MasterJOB
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblActiveTab control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblActiveTab As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblEmployeeId control.

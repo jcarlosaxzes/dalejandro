@@ -19,7 +19,7 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
     <div class="row Formulario">
         <div class="col-md-12">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="width: 180px; text-align: right">Client Account Status:
                     </td>
@@ -45,8 +45,8 @@
 
                     </td>
                     <td style="width: 150px; text-align: right">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                         </asp:LinkButton>
                     </td>
                     <td style="text-align: right;padding-top:10px">

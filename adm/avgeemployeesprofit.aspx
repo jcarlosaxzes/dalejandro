@@ -44,8 +44,8 @@
                 </telerik:RadComboBox>
             </td>
             <td style="text-align:right">
-                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                 </asp:LinkButton>
             </td>
         </tr>

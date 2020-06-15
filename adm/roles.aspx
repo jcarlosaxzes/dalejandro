@@ -5,7 +5,7 @@
         <tr>
             <td style="width:100px">
                 <asp:LinkButton ID="btnNewRole" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Role
+                    <i class="fas fa-plus"></i> Role
                 </asp:LinkButton>
             </td>
             <td style="width:100px">
@@ -37,7 +37,7 @@
                             <ItemTemplate>
                                 <asp:LinkButton runat="server" ID="btnPermits" CommandName="Permits" CommandArgument='<%# Eval("Id") %>'
                                     ToolTip="Employee Permits">
-                                                <span class="glyphicon glyphicon-cog"></span>
+                                                <i class="fas fa-cog"></i>
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>

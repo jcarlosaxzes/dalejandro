@@ -31,7 +31,7 @@
     </telerik:RadWindowManager>
 
     <div class="Formulario">
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYears"
@@ -63,11 +63,11 @@
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Company Multiplier" StepType="Step">
                     <div>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
-                                        <span class="glyphicon glyphicon-plus"></span> Year
+                                        <i class="fas fa-plus"></i> Year
                                     </asp:LinkButton>
                                 </td>
                                 <td>
@@ -87,7 +87,7 @@
 
                             </tr>
                         </table>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <telerik:RadGrid ID="RadGridMultiplier" GridLines="None" runat="server" AllowAutomaticDeletes="True"
@@ -269,7 +269,7 @@
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Employee Hourly Wage" StepType="Step">
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td>
                                 <h3>Employee Hourly Wage</h3>
@@ -311,7 +311,7 @@
                                                             CommandName="EditHourlyWage"
                                                             Text='<%# Eval("Employee")%>' UseSubmitBehavior="false"
                                                             ForeColor='<%#IIf(Eval("Inactive"), System.Drawing.Color.LightGray, System.Drawing.Color.DarkBlue) %>'>
-                                                                <span style="font-size:x-small" class="badge" title="weeks this year"><%# Eval("weekthisyear", "{0:N1}") %></span>
+                                                                <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear", "{0:N1}") %></span>
                                                         </asp:LinkButton>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
@@ -330,7 +330,7 @@
                                                     HeaderTooltip="Hourly Wage Rate">
                                                     <ItemTemplate>
                                                         <%# Eval("Amount", "{0:C2}") %>
-                                                        <span style="font-size: x-small" class="badge" title="# Increase"><%# Eval("NumberOfRecords") %></span>
+                                                        <span style="font-size: x-small" class="badge badge-pill badge-danger" title="# Increase"><%# Eval("NumberOfRecords") %></span>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
@@ -343,7 +343,7 @@
                                                     HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
                                                     <ItemTemplate>
                                                         <%# Eval("ProductiveSalary", "{0:N0}") %>
-                                                        <span style="font-size: x-small" class="badge" title="productive weeks this year"><%# Eval("productiveweekthisyear", "{0:N1}") %></span>
+                                                        <span style="font-size: x-small" class="badge badge-pill badge-danger" title="productive weeks this year"><%# Eval("productiveweekthisyear", "{0:N1}") %></span>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                             </Columns>
@@ -357,7 +357,7 @@
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Monthly Salary Calculation" StepType="Step">
                     <div>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <h3>Monthly Salary Calculation</h3>
@@ -540,11 +540,11 @@
 
     </div>
     <telerik:RadToolTip ID="RadToolTipInitialize" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-condensed" style="width: 650px">
+        <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="text-align: center">
-                    <h2 style="margin: 0; text-align: center;">
-                        <span class="label label-default center-block">Hourly Wage for Selected Year
+                    <h2 style="margin: 0; text-align: center; color:white;">
+                        <span class="navbar bg-dark">Hourly Wage for Selected Year
                         </span>
                     </h2>
                 </td>
@@ -581,11 +581,11 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipCalculateMultiplier" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-condensed" style="width: 650px">
+        <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="text-align: center">
-                    <h2 style="margin: 0; text-align: center;">
-                        <span class="label label-default center-block">Calculate Multiplier
+                    <h2 style="margin: 0; text-align: center; color:white;">
+                        <span class="navbar bg-dark">Calculate Multiplier
                         </span>
                     </h2>
                 </td>

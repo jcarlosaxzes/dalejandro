@@ -11,7 +11,7 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
@@ -45,7 +45,7 @@
                             </td>
                             <td style="text-align: right; width: 100px">
                                 <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
 
                             </td>
@@ -57,11 +57,11 @@
     </table>
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 90px">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                <span class="glyphicon glyphicon-plus"></span> Statement
+                <i class="fas fa-plus"></i> Statement
                     </asp:LinkButton>
                 </td>
                 <td style="width: 140px">
@@ -170,19 +170,19 @@
                                 <tr>
                                     <td style="width: 33%; text-align: center">
                                         <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Statement information">
-                                                    <span class="glyphicon glyphicon-envelope"></span>
+                                                    <i class="far fa-envelope"></i>
                                         </asp:LinkButton>
                                     </td>
                                     <td style="width: 33%; text-align: center">
-                                        <a class="glyphicon glyphicon-share" title="View Statement Page to share link"
+                                        <a class="far fa-share-square" title="View Statement Page to share link"
                                             href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=55&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
 
                                     </td>
                                     <td style="text-align: center">
                                         <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                             ToolTip="Recive Payments" Visible='<%# Eval("AmountDue") > 0 %>'
-                                            CssClass="label-success label">
-                                                    <span class="glyphicon glyphicon-usd"></span>
+                                            CssClass="badge-success label">
+                                                    <i class="fas fa-dollar-sign"></i>
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
@@ -199,7 +199,7 @@
                     <PopUpSettings Modal="true" Width="960px" />
                     <FormTemplate>
 
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: right; width: 180px">Statement Number:
                                 </td>
@@ -242,7 +242,7 @@
 
 
                         <fieldset style="width: 920px; padding-left: 10px;" id="PanelInvoices" runat="server" visible='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "False", "True") %>'>
-                            <table class="table-condensed" width="100%">
+                            <table class="table-sm" width="100%">
                                 <tr>
                                     <td>
                                         <h4>Invoices Selected</h4>
@@ -327,7 +327,7 @@
                                                             </telerik:RadButton>--%>
                                                     <asp:LinkButton ID="btnNewSelectedInvoices" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
                                                         CommandName="AddInvoices" CommandArgument='<%# Eval("Id") %>' OnClick="btnNewSelectedInvoices_Click">
-                                                            <span class="glyphicon glyphicon-plus"></span> Add Selected Invoices
+                                                            <i class="fas fa-plus"></i> Add Selected Invoices
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>
@@ -402,7 +402,7 @@
                             </asp:SqlDataSource>
                         </fieldset>
                         <%--<div style="text-align: right; padding-right: 50px; height: 40px; padding-top: 15px">--%>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: right; padding-right: 15px">
                                     <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success"
@@ -428,8 +428,8 @@
     </div>
     <div>
         <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; width: 500px">
-                <span class="label label-default center-block">Receive Statement Payments
+            <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                <span class="navbar bg-dark">Receive Statement Payments
                 </span>
             </h2>
             <table class="table-bordered" style="width: 500px">
@@ -461,7 +461,7 @@
                 <tr>
                     <td colspan="2" style="text-align: center">
                         <asp:LinkButton ID="btnInsertStatementPayments" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Insert
+                                    <i class="fas fa-check"></i> Insert
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">

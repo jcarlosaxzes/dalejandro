@@ -31,7 +31,7 @@
     </style>
 
      <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="text-align: center">
                     <h3 style="margin: 0">Company Overview
@@ -43,7 +43,7 @@
     </div>
     <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
 
-        <table class="table-condensed" style="width:100%">
+        <table class="table-sm" style="width:100%">
 
             <tr>
                 <td>
@@ -52,11 +52,11 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockProposalsJobsRates" runat="server" Title="Proposal/Jobs Hit Rate" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <table runat="server" id="tableCompany16" class="table-condensed" style="width: 100%">
+                                <table runat="server" id="tableCompany16" class="table-sm" style="width: 100%">
                                     <tr>
                                         <td style='<%# iif(LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16,"width:250px;text-align: center; vertical-align: top","width:0px") %>'>
                                             <asp:Panel ID="panelCompany16" runat="server" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>' Width="250px">
-                                                <span class="label label-info center-block">"In Progress" Jobs </span>
+                                                <span class="badge badge-info center-block">"In Progress" Jobs </span>
                                                 <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobsInProgressByEmployee" DataKeyNames="Id"
                                                     ItemPlaceholderID="Container1"
                                                     BorderStyle="Solid" Height="380px" Width="100%"
@@ -80,7 +80,7 @@
 
                                                                         <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job"
                                                                             CommandName="EditJob" UseSubmitBehavior="false">                                                                                                                                                       
-                                                                                <h4 style="margin: 0"><span class="center-block label label-success"><%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%></span></h4>
+                                                                                <h4 style="margin: 0"><span class="center-block label badge-success"><%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%></span></h4>
                                                                         </asp:LinkButton>
                                                                     </td>
                                                                 </tr>
@@ -88,7 +88,7 @@
                                                                     <td>
                                                                         <asp:LinkButton ID="btnClient" runat="server" CommandArgument='<%# Eval("clientId")%>' ToolTip="Click to View/Edit Client"
                                                                             CommandName="EditClient" UseSubmitBehavior="false">                                                                                                                                                       
-                                                                            <span class="center-block label label-warning"><%# Eval("ClientNameAndCompany")%></span>     
+                                                                            <span class="center-block badge badge-warning"><%# Eval("ClientNameAndCompany")%></span>     
                                                                         </asp:LinkButton>
 
                                                                     </td>
@@ -97,17 +97,17 @@
                                                                     <td style="padding-top: 5px; background-color: whitesmoke">
                                                                         <asp:LinkButton ID="btnEdit" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Job"
                                                                             CommandName="EditJob" UseSubmitBehavior="false" >
-                                                                            <span aria-hidden="true" class="glyphicon glyphicon-pencil"></span>
+                                                                            <i class="fas fa-pen"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
                                                                         <asp:LinkButton ID="btnAccounting" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Accounting"
                                                                             CommandName="Accounting" UseSubmitBehavior="false" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>'>
-                                                                            <span aria-hidden="true" class="glyphicon glyphicon-usd"></span>
+                                                                            <i class="fas fa-dollar-sign"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
                                                                         <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
                                                                             CommandName="NewTime" UseSubmitBehavior="false">
-                                                                            <span aria-hidden="true" class="glyphicon glyphicon-time"></span>
+                                                                            <span aria-hidden="true" <i class="fas fa-user-clock"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
                                                                         <asp:LinkButton ID="btnTickets" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Tickets"
@@ -465,7 +465,7 @@
 
     <asp:Panel runat="server" ID="panelEmployeePortal" Visible="false">
 
-        <span class="label label-default center-block">
+        <span class="navbar bg-dark">
             <h2>PASconcept Application Home Page</h2>
         </span>
         <h3>PASconcept is your complete online platform for Project Administration Services</h3>
@@ -487,7 +487,7 @@
         </p>
         <asp:LinkButton ID="btnEmployeePortal" runat="server" CssClass="btn btn-info btn-lg"
             UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2">
-                                                                        <span class="glyphicon glyphicon-time"></span>&nbsp;Go to Employee Portal
+                                                                        <i class="fas fa-user-clock"></i>&nbsp;Go to Employee Portal
         </asp:LinkButton>
     </asp:Panel>
 

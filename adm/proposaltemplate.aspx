@@ -4,10 +4,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -26,7 +26,7 @@
     </div>
     <div class="pas-container">
         <h4 style="text-align: center">Templates are used as a predefined Structure to create a new Proposal</h4>
-        <table class="table-condensed" style="width: 98%">
+        <table class="table-sm" style="width: 98%">
             <tr>
                 <td style="width: 220px; text-align: right">Name:
                 </td>
@@ -40,7 +40,7 @@
                 <td style="text-align: right">Related Task ID:
                 </td>
                 <td>
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="vertical-align: top">
                                 <telerik:RadComboBox ID="cboTask" runat="server" Height="350px" ToolTip="To find out the 'task id' codes, show 'Task List'"

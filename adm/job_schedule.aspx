@@ -3,9 +3,11 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-        <div class="row">
-            <div class="form-group">
-                <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" ToolTip="Press 'Double-Click' to insert/edit job's appointment"
+
+        <table class="table-sm" style="width: 100%">
+            <tr>
+                <td>
+                    <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" ToolTip="Press 'Double-Click' to insert/edit job's appointment"
                     Height="400px"
                     SelectedView="WeekView"
                     ShowFooter="false"
@@ -44,9 +46,9 @@
                         <telerik:ResourceStyleMapping Type="Activity Type" Text="Vacation" ApplyCssClass="rsCategoryRed"></telerik:ResourceStyleMapping>
                     </ResourceStyles>
                 </telerik:RadScheduler>
-            </div>
-
-        </div>
+                </td>
+            </tr>
+        </table>
        
     </div>
     <br />

@@ -44,16 +44,16 @@
         </script>
     </telerik:RadCodeBlock>
     <div class="Formulario">
-        <table class="table-condensed" style="width:100%">
+        <table class="table-sm" style="width:100%">
             <tr>
                 <td style="width:90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td style="width:90px">
                     <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-plus"></span> Client
+                    <i class="fas fa-plus"></i> Client
                     </asp:LinkButton>
                 </td>
                 <td style="width:140px">
@@ -78,7 +78,7 @@
     <div class="collapse" id="collapseFilter">
         <div class="card card-body">
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 180px">
                             <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="True"
@@ -97,7 +97,7 @@
                         </td>
                         <td>
                             <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -178,17 +178,17 @@
                                     <td>
                                         <asp:LinkButton ID="btnClone" runat="server" UseSubmitBehavior="false" ToolTip="Duplicate Client"
                                             CommandName="Duplicate" CommandArgument='<%# Eval("Id")%>'>
-                                                <span class="glyphicon glyphicon-duplicate"></span></a>
+                                                <i class="far fa-clone"></i></a>
                                         </asp:LinkButton>
                                     </td>
                                     <td>
                                         <a href='<%# LocalAPI.GetSharedLink_URL(91, Eval("Id"))%>' target="_blank" title="View Client Portal">
-                                            <span class="glyphicon glyphicon-share"></span></a>
+                                            <i class="far fa-share-square"></i></a>
                                         </a>
                                     </td>
                                     <td>
                                         <asp:LinkButton runat="server" ID="btnAzureStorage" CommandName="AzureUpload" CommandArgument='<%# Eval("Id") %>' ToolTip="Upload Files">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-cloud-upload"></span>                                                
+                                                <i class="fas fa-cloud-upload-alt"></i>                                                
                                         </asp:LinkButton>
 
                                     </td>

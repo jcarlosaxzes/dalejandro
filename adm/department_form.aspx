@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 80px">
                     <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
@@ -24,7 +24,7 @@
             <div class="card card-body">
                 <asp:FormView ID="FormViewDepartmentBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceDepartmentBalance" Width="100%">
                     <ItemTemplate>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td colspan="9">
                                     <hr style="margin: 0" />
@@ -80,7 +80,7 @@
                     <div>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" ErrorMessage=" Name is mandatory"></asp:RequiredFieldValidator>
                     </div>
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 180px; text-align: right">Name:</td>
                             <td>
@@ -161,7 +161,7 @@
                         <tr>
                             <td colspan="2" style="text-align: center">
                                 <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" CausesValidation="true">
-                                                <span class="glyphicon glyphicon-save"></span>&nbsp;Update
+                                                Update
                                 </asp:LinkButton>
 
                             </td>

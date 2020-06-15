@@ -6,10 +6,10 @@
 
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -36,7 +36,7 @@
                                         There were errors on this step:"></asp:ValidationSummary>
                     </div>
                     <h4>Client to Collection</h4>
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 180px; text-align: right">Client:
                             </td>
@@ -161,7 +161,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Client Email</h4>
-                            <table style="width: 100%" class="table-condensed">
+                            <table style="width: 100%" class="table-sm">
                                 <tr>
                                     <td>Client To:
                                     </td>
@@ -205,7 +205,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Attorney Email</h4>
-                            <table style="width: 100%" class="table-condensed">
+                            <table style="width: 100%" class="table-sm">
                                 <tr>
                                     <td>Attorney To:
                                     </td>

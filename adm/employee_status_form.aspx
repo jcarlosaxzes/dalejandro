@@ -5,7 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Employee Status</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <%--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <form id="form1" runat="server">
@@ -18,7 +21,7 @@
             </h3>
             <h4>With the change of status of an employee:
             </h4>
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td colspan="2" style="padding-left: 15px">1.- PASconcept permissions is updated (Active - Permit,  Inactive - Deny )
                     </td>
@@ -60,7 +63,7 @@
                 </tr>
             </table>
             <asp:Panel runat="server" ID="panelActive">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 180px;">Hourly Rate ($/hour):
                         </td>
@@ -100,7 +103,7 @@
                 </table>
             </asp:Panel>
 
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="padding-left: 50px">
                         <telerik:RadCheckBox runat="server" ID="chkConfirm" Text="I read the information and confirm that I will change the status"></telerik:RadCheckBox>

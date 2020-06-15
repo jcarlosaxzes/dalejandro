@@ -50,7 +50,7 @@
                                     </td>
                                     <td>
                                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-search"></span> Search
+                                            <i class="fas fa-search"></i> Search
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
@@ -62,7 +62,7 @@
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Content>
-                    <table class="table-condensed"  style="width:100%">
+                    <table class="table-sm"  style="width:100%">
                         <tr>
                             <td style="width:90px">
                                 <asp:LinkButton ID="btnDeleteSelected" runat="server"

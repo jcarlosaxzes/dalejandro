@@ -25,7 +25,7 @@
                 <Content>
                     <div style="text-align: left" class="Formulario noprint">
                         <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Department">
-                            <span class="glyphicon glyphicon-plus"></span> Department
+                            <i class="fas fa-plus"></i> Department
                         </asp:LinkButton>
 
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

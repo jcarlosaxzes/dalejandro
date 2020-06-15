@@ -19,10 +19,10 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back
                     </asp:LinkButton>
                 </td>
@@ -34,7 +34,7 @@
         </table>
     </div>
     <div class="pas-container">
-        <table class="table-condensed" style="width: 95%; margin-left: 25px">
+        <table class="table-sm" style="width: 95%; margin-left: 25px">
             <tr>
                 <td style="text-align: right; width: 180px">
                     <asp:Label ID="lblTaskList" runat="server" Text="Select Task from List:"></asp:Label>
@@ -95,7 +95,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <table class="table-condensed" style="width: 95%">
+                    <table class="table-sm" style="width: 95%">
                         <tr>
 
                             <td style="text-align: right; width: 180px">Quantity (optional):
@@ -164,7 +164,7 @@
         <asp:Panel runat="server" ID="PanelEstimator">
             <h3 style="margin-left: 100px">Estimator
             </h3>
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="text-align: right; width: 180px">Position:
                     </td>
@@ -186,7 +186,7 @@
                     </td>
                     <td style="width: 120px">
                         <asp:LinkButton ID="btnNewEstimator" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Estimator">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Position
+                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;Position
                         </asp:LinkButton>
                     </td>
                     <td>

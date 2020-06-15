@@ -37,8 +37,12 @@
     <link href="~/App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/pasconcept.css" rel="stylesheet" />
     <%--Bootstrap reference begin--%>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <%--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />--%>
     <%--Bootstrap reference end--%>
+        <%--bootstrap/4.5.0--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 <body title="Welcome to PASconcept. Project Administration Services" style="background-color: white">
     <form id="form1" runat="server">
@@ -51,8 +55,8 @@
                         HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on Login:"></asp:ValidationSummary>
                 </div>
-                <div class="col-md-9 col-md-offset-1">
-                    <table class="table-condensed well" style="width: 100%">
+                <div class="col-md-9 offset-md-2"></div>
+                    <table class="table-sm well" style="width: 100%">
                     <tr>
                         <td style="width: 40%" rowspan="2">
 
@@ -65,7 +69,7 @@
                             </asp:Panel>
 
 
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td>
                                         <label for="email" class="control-label" style="font-size: large">User Email</label>
@@ -96,7 +100,7 @@
                         <td style="text-align: right; vertical-align: bottom">
                             <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
                                 UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
-                                <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Sign in
+                                <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Sign in
                             </asp:LinkButton>
                             <div style="text-align: center;margin-top:10px">
                                 <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, you agree to our Terms & Conditions</a>
@@ -107,7 +111,7 @@
                 </table>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-lg-offset-4 ">
+                    <div class="col-lg-4 offset-lg-4 "></div>
                     
                         <a href="http://blog.pasconcept.com" target="_blank">Help</a> &nbsp;|&nbsp; <a href="../Legal/ENG/Terms.html" target="_blank">Terms & Conditions</a>
                     </div>

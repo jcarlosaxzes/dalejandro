@@ -50,11 +50,11 @@
 
                     <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Task & Fee(s)" StepType="Start">
                         <h3 style="margin: 0">Task & Fees</h3>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Service Fee
+                                        <i class="fas fa-plus"></i>&nbsp;Service Fee
                                     </asp:LinkButton>
                                 </td>
                             </tr>
@@ -111,7 +111,7 @@
                                             <EditFormSettings EditFormType="Template">
                                                 <PopUpSettings ScrollBars="Auto" Modal="true" Width="960px" />
                                                 <FormTemplate>
-                                                    <table style="width: 100%" class="table-condensed">
+                                                    <table style="width: 100%" class="table-sm">
 
                                                         <tr>
                                                             <td style="text-align: right; width: 180px">Task ID:
@@ -188,7 +188,7 @@
                     </telerik:RadWizardStep>
                     <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="My Term & Conditions" StepType="Step">
                         <h3 style="margin: 0">My Term & Conditions</h3>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td>
                                     <telerik:RadEditor ID="txtSubconsultaTandC" runat="server" RenderMode="Auto"
@@ -205,7 +205,7 @@
                         <asp:FormView ID="FormViewReview" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceRFPReview">
                             <ItemTemplate>
 
-                                <table style="width: 400px" class="table-condensed">
+                                <table style="width: 400px" class="table-sm">
                                     <tr>
                                         <td style="text-align: right">Prime (sender) Name:
                                         </td>
@@ -238,7 +238,7 @@
                             </ItemTemplate>
                         </asp:FormView>
 
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td><b>Additional Notes (optional):</b>
                                 </td>
@@ -250,7 +250,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td colspan="2">
                                     <hr />
@@ -278,7 +278,7 @@
                         <br />
                         <br />
 
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td>
                                     <div class="alert alert-success" role="alert">

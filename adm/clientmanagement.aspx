@@ -78,7 +78,7 @@
         <div class="card card-body">
             <div class="Formulario">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 150px; text-align: right">Type:
                             </td>
@@ -141,8 +141,8 @@
                                 </telerik:RadTextBox>
                             </td>
                             <td style="text-align: right">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -156,13 +156,13 @@
         <tr>
             <td style="width: 80px; text-align: left">
                 <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                    <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                    <i class="fas fa-filter"></i>&nbsp;Filter
                 </button>
             </td>
             <td></td>
             <td style="width: 90px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Campaign">
-                    <span class="glyphicon glyphicon-plus"></span> Campaign
+                    <i class="fas fa-plus"></i> Campaign
                 </asp:LinkButton>
             </td>
             <td style="width: 400px">
@@ -176,7 +176,7 @@
             </td>
             <td style="width: 100px">
                 <asp:LinkButton ID="btnExecuteCampaign" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Run Campaign" Visible="false">
-                    <span class="glyphicon glyphicon-envelope"></span> Run
+                    <i class="far fa-envelope"></i> Run
                 </asp:LinkButton>
 
             </td>
@@ -191,12 +191,12 @@
                     UseSubmitBehavior="false"
                     ToolTip="Export List to Comma-Separated Values format (.CSV)"
                     CausesValidation="false">
-                                        <span class="glyphicon glyphicon-download"></span> Export
+                                        <i class="fas fa-cloud-download-alt"></i> Export
                 </asp:LinkButton>
             </td>
             <td style="width: 100px">
                 <asp:LinkButton ID="btnDeleteCampaign" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false" ToolTip="Delete Campaign" Visible="false">
-                    <span class="glyphicon glyphicon-trash"></span> Delete
+                    <i class="far fa-trash-alt"></i> Delete
                 </asp:LinkButton>
             </td>
         </tr>
@@ -235,7 +235,7 @@
                         HeaderStyle-Width="100px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditAvailability" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Availability">
-                                <span title="Clic to edit Availability" class="label label-<%# IIf(Eval("AvailabilityId") = 0, "success", IIf(Eval("AvailabilityId") = 1, "danger", "default")) %>"><%# Eval("Availability") %>
+                                <span title="Clic to edit Availability" class="label badge-<%# IIf(Eval("AvailabilityId") = 0, "success", IIf(Eval("AvailabilityId") = 1, "danger", "default")) %>"><%# Eval("Availability") %>
                             </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
@@ -282,11 +282,11 @@
     </telerik:RadWindowManager>
 
     <telerik:RadToolTip ID="RadToolTipNewCampaign" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Create New Marketing Campaign
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Create New Marketing Campaign
             </span>
         </h2>
-        <table class="table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td>
                     <h3>Actions to create new marketing campaign</h3>
@@ -324,11 +324,11 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipAvailability" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Client Availability
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Client Availability
             </span>
         </h2>
-        <table class="table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td style="width: 140px; text-align: right" class="Normal">New Availability:
                 </td>
@@ -341,7 +341,7 @@
             <tr>
                 <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnUpdateAvailability" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Update
+                                    <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                 </td>
             </tr>

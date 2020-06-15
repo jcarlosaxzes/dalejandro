@@ -7,7 +7,7 @@
         <%--Header--%>
         <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompany" RenderOuterTable="false">
             <ItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: left; width: 200px">
                             <a href='<%# Eval("web") %>' target="_blank">
@@ -26,11 +26,11 @@
                             </script>
                             <button type="button" class="btn btn-default noprint" onclick="PrintPage()">Print</button>
                             <h3 style="margin: 5px"><%# Eval("Name") %></h3>
-                            <span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%# Eval("Address") %><br>
+                            <i class="fas fa-map-marker-alt"></i>&nbsp;<%# Eval("Address") %><br>
                             <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
-                            <span class="glyphicon glyphicon-earphone"></span>&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br>
-                            <span class="glyphicon glyphicon-envelope"></span>&nbsp;<%# Eval("Email") %><br>
-                            <span class="glyphicon glyphicon-globe"></span>&nbsp;<a href='<%# Eval("web") %>' target="_blank"><%# Eval("web") %></a>
+                            <i class="fas fa-phone"></i>&nbsp;<%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br>
+                            <i class="far fa-envelope"></i>&nbsp;<%# Eval("Email") %><br>
+                            <i class="fas fa-globe"></i>&nbsp;<a href='<%# Eval("web") %>' target="_blank"><%# Eval("web") %></a>
                         </td>
                     </tr>
 
@@ -43,7 +43,7 @@
     <div>
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
             <ItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td>
                             <h1>TRANSMITTAL LETTER</h1>
@@ -55,7 +55,7 @@
                         </td>
                         <td class="noprint" style="width: 100px">
                             <asp:LinkButton ID="btnPickUp" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" OnClick="btnPickUp_Click">
-                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;Pick Up
+                                <i class="far fa-envelope"></i>&nbsp;Pick Up
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -64,10 +64,10 @@
 
                 <div style="text-align: center; padding-top: 10px; background-color: white">
                 </div>
-                <table class="table-condensed" style="width: 100%; background-color: white">
+                <table class="table-sm" style="width: 100%; background-color: white">
                     <tr>
                         <td style="width: 65%; vertical-align: top">
-                            <table class="table-condensed" style="width: 100%; background-color: white">
+                            <table class="table-sm" style="width: 100%; background-color: white">
                                 <tr>
                                     <td style="text-align: right; width: 150px"><b>Transmittal ID:</b>
                                     </td>
@@ -116,7 +116,7 @@
                                         &nbsp;&nbsp;
                                         <asp:LinkButton ID="btnMailReadyToSign" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false"
                                             OnClick="btnMailReadyToSign_Click" Visible="false">
-                                            <span class="glyphicon glyphicon-envelope"></span>&nbsp;Ready to Pick Up Notification
+                                            <i class="far fa-envelope"></i>&nbsp;Ready to Pick Up Notification
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
@@ -139,7 +139,7 @@
                     </tr>
                 </table>
 
-                <table class="table-condensed" style="width: 100%; background-color: white">
+                <table class="table-sm" style="width: 100%; background-color: white">
                     <tr>
                         <td colspan="2">
                             <telerik:RadGrid ID="RadGridDetails" RenderMode="Lightweight" runat="server" DataSourceID="SqlDataSourceDetails" Skin="" Width="100%" CssClass="RemoveBorders" AutoGenerateColumns="False" GridLines="Both">
@@ -207,7 +207,7 @@
                 </p>
             </ItemTemplate>
             <EditItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: center;">
                             <h1 style="margin: 0">EDIT TRANSMITTAL LETTER</h1>
@@ -225,7 +225,7 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: right;"><b>A/E of Record:</b></td>
                         <td style="text-align: left">
@@ -263,11 +263,11 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: left">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" OnClick="btnNew_Click" CausesValidation="false">
-                            <span class="glyphicon glyphicon-plus"></span> Package
+                            <i class="fas fa-plus"></i> Package
                             </asp:LinkButton>
 
                         </td>
@@ -346,11 +346,11 @@
         </asp:FormView>
 
         <telerik:RadToolTip ID="RadToolTipMail" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; width: 450px">
-                <span class="label label-default center-block">Email to Client
+            <h2 style="margin: 0; text-align: center; color:white; width: 450px">
+                <span class="navbar bg-dark">Email to Client
                 </span>
             </h2>
-            <table class="table-condensed" style="width: 450px">
+            <table class="table-sm" style="width: 450px">
                 <tr>
                     <td>
                         <h3>Action to sent email</h3>
@@ -363,7 +363,7 @@
                 <tr>
                     <td align="center">
                         <asp:LinkButton ID="btnConfirmMail" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                <span class="glyphicon glyphicon-envelope"></span>&nbsp;Send Email
+                                <i class="far fa-envelope"></i>&nbsp;Send Email
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                          <asp:LinkButton ID="btnCancelMail" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="false">
@@ -377,7 +377,7 @@
 
     <div>
         <%--Footeer--%>
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 40%">
                     <a href="https://pasconcept.com/" target="_blank">

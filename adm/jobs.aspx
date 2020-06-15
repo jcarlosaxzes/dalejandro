@@ -150,15 +150,16 @@
 
         <table class="noprint table-condensed" style="width: 100%">
             <tr>
-                <td style="width: 80px; text-align: center">
+                <td style="width: 100px; text-align: center">
                     <button class="btn btn-warning" type="button" data-toggle="collapse"
                         data-target="#collapseFilter"
                         aria-expanded="false"
                         aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>                        
+                        &nbsp;Filter
                     </button>
                 </td>
-                <td style="width: 80px; text-align: center">
+                <td style="width: 120px; text-align: center">
                     <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
                         <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
                             $ Dashboard
@@ -166,9 +167,9 @@
                     </asp:Panel>
 
                 </td>
-                <td style="width: 70px; text-align: center">
+                <td style="width: 100px; text-align: center">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Job
+                                        <i class="fas fa-plus"></i>&nbsp;Job
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center">
@@ -187,27 +188,27 @@
                 </td>
                 <td style="width: 24px; text-align: center">
                     <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
-                                            <span style="width:20px;color:black" class="glyphicon glyphicon-print"></span>
+                                            <i class="fas fa-print"></i>
                     </asp:LinkButton>
                 </td>
                 <td style="width: 24px; text-align: center">
                     <asp:LinkButton ID="btnUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Show all hidden clients">
-                                        <span style="width:20px;color:black" class="glyphicon glyphicon-eye-open"></span> 
+                                        <i class="far fa-eye"></i>
                     </asp:LinkButton>
                 </td>
                 <td style="width: 24px; text-align: center">
                     <asp:LinkButton ID="btnCopyF" runat="server" UseSubmitBehavior="false" ToolTip="Copy/Save Filter combinations">
-                                        <span style="width:20px;color:black" class="glyphicon glyphicon-copy"></span> 
+                                        <i class="far fa-copy"></i> 
                     </asp:LinkButton>
                 </td>
                 <td style="width: 24px; text-align: center">
                     <asp:LinkButton ID="btnPasteF" runat="server" UseSubmitBehavior="false" ToolTip="Get Paste/Shared Filter combinations">
-                                        <span style="width:20px;color:black" class="glyphicon glyphicon-paste"></span>
+                                        <i class="fas fa-paste"></i>
                     </asp:LinkButton>
                 </td>
                 <td style="width: 24px; text-align: center">
                     <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
-                                        <span style="width:20px;color:black" class="glyphicon glyphicon-share"></span> 
+                                        <span style="width:20px;color:black" class="far fa-share-square"></span> 
                     </asp:LinkButton>
                 </td>
 
@@ -223,7 +224,7 @@
         <div class="collapse" id="collapseFilter">
             <div class="card card-body">
                 <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 200px">
                                 <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
@@ -329,8 +330,8 @@
                                 </telerik:RadTextBox>
                             </td>
                             <td style="text-align: right">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -341,7 +342,7 @@
 
         <div class="collapse" id="collapseTotals">
             <div class="card card-body">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td colspan="11">
                             <hr style="margin: 0" />
@@ -389,7 +390,7 @@
         </div>
     </div>
 
-    <table class="table-condensed" style="width: 100%;">
+    <table class="table-sm" style="width: 100%;">
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
@@ -417,13 +418,13 @@
                                                     <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job"
                                                         CommandName="EditJob" UseSubmitBehavior="false" ForeColor="Black">
                                             <%#Eval("Code")%> 
-                                            <span title="Number of files uploaded" class="badge" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
+                                            <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                                 <%#Eval("JobUploadFiles")%>
                                             </span>
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td style="width: 16px; text-align: right">
-                                                    <asp:Label ID="lblShare" runat="server"> <span class="glyphicon glyphicon-share-alt"></asp:Label>
+                                                    <asp:Label ID="lblShare" runat="server"> <i class="fas fa-share"></i></asp:Label>
                                                     <telerik:RadToolTip RenderMode="Lightweight" ID="RadToolTipShareJob" runat="server" TargetControlID="lblShare" Width="300px"
                                                         RelativeTo="Element" Position="MiddleLeft" HideEvent="ManualClose">
                                                         <table style="width: 100%">
@@ -464,28 +465,29 @@
                                                 <td>
                                                     <asp:LinkButton ID="btnAccounting" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Accounting"
                                                         CommandName="Accounting" UseSubmitBehavior="false" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>'>
-                                                <span aria-hidden="true" class="glyphicon glyphicon-usd"></span>
+                                                <i class="fas fa-dollar-sign"></i>
+                                                        
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td>
-                                                    <a class="glyphicon glyphicon-share" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
+                                                    <a class="far fa-share-square" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
                                                 </td>
                                                 <td>
                                                     <asp:LinkButton ID="btnImages" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Images"
                                                         CommandName="Images" UseSubmitBehavior="false" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>'>
-                                                <span aria-hidden="true" class="glyphicon glyphicon-picture"></span>
+                                                        <i class="far fa-image"></i>
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td>
                                                     <asp:LinkButton ID="btnNotes" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Notes"
                                                         CommandName="Notes" UseSubmitBehavior="false">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-edit"></span>
+                                                <i class="far fa-edit"></i>
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td>
                                                     <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
                                                         CommandName="NewTime" UseSubmitBehavior="false">
-                                                <span aria-hidden="true" class="glyphicon glyphicon-time"></span>
+                                                <i class="fas fa-user-clock"></i>
                                                     </asp:LinkButton>
                                                 </td>
                                             </tr>
@@ -499,7 +501,7 @@
                                     <div>
                                         <asp:LinkButton ID="btnAzureStorage" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Upload files"
                                             CommandName="AzureUpload" UseSubmitBehavior="false">
-                                                    <span aria-hidden="true" class="glyphicon glyphicon-cloud-upload"></span>
+                                                    <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
                                         </asp:LinkButton>
 
                                         <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' CssClass="lnkGrid"
@@ -510,21 +512,21 @@
                                     <div>
                                         <asp:LinkButton ID="btnHideClient" runat="server" CommandArgument='<%# Eval("Client")%>' ToolTip="Hide client from list"
                                             CommandName="HideClient" UseSubmitBehavior="false">
-                                                    <span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span>
+                                                    <i class="fas fa-eye-slash"></i>
                                         </asp:LinkButton>
                                         <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
-                                            <span class="glyphicon glyphicon glyphicon-th-list"></span>
+                                            <i class="fas fa-th-list"></i>
                                         </a>
                                         <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name")," - ",Eval("Company"))%>' CssClass="lnkGrid"></asp:Label>
                                         <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
                                             Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
                                             HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
-                                            <table class="table-condensed">
+                                            <table class="table-sm">
                                                 <tr>
                                                     <td colspan="2">
                                                         <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Client") %>'
                                                             CommandName="EditClient" Text='<%# Eval("Name")%>' UseSubmitBehavior="false" Font-Size="Medium"
-                                                            CssClass="label label-info ">
+                                                            CssClass="badge badge-info ">
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
@@ -561,11 +563,11 @@
 
                                         <%-- Representacion previa de Tags en forma de <span.../>
                                             <asp:LinkButton ID="lnkViewTag1" runat="server" CommandName="JobTags" CommandArgument='<%# Eval("Id") %>' ToolTip="View/Edit Job TAGs">
-                                            <span aria-hidden="true" class="glyphicon glyphicon-tags" style='<%# IIf(len(Eval("Tags"))>0,"display:none","display:normal")%>'></span>
+                                            <span aria-hidden="true" class="fas fa-tag" style='<%# IIf(len(Eval("Tags"))>0,"display:none","display:normal")%>'></span>
                                              <%# LocalAPI.ConvertSpanTags(Eval("Tags")) %>
                                         </asp:LinkButton>--%>
                                         <asp:LinkButton ID="lnkViewTag1" runat="server" CommandName="JobTags" CommandArgument='<%# Eval("Id") %>' ToolTip="View/Edit Job TAGs">
-                                            <span aria-hidden="true" class="glyphicon glyphicon-tags"></span>
+                                            <i class="fas fa-tag"></i>
                                              <%# IIf(Eval("Tags") > 0, String.Concat(" (", Eval("Tags"), ")"), "") %>
                                         </asp:LinkButton>
 
@@ -581,8 +583,8 @@
                                             <td>
                                                 <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="SetEmployee" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
                                                     <%# Eval("EmployeeName")%>
-                                                    <span aria-hidden="true" class="glyphicon glyphicon-user"  style='<%# IIf(Eval("employeeNumbers")=0,"color:red","color:#23527c")%>'></span>
-                                                    <span class="badge" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal")%>'>
+                                                    <span aria-hidden="true" class="fas fa-user"  style='<%# IIf(Eval("employeeNumbers")=0,"color:red","color:#23527c")%>'></span>
+                                                    <span class="badge badge-pill badge-light" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal;font-size:x-small")%>'>
                                                         <%#Eval("employeeNumbers")%>
                                                     </span>
                                                 </asp:LinkButton>
@@ -592,10 +594,10 @@
                                         <tr>
                                             <td>
                                                 <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditStatus" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Job Status">
-                                                    <span title="Clic to edit Job Status" class="label  <%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>"><%# Eval("nStatus") %></span>
+                                                    <span title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>'><%# Eval("nStatus") %></span>
                                                 </asp:LinkButton>
                                                 <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
-                                                    <span class="glyphicon glyphicon-cloud-download"></span>
+                                                    <i class="fas fa-cloud-download-alt"></i>
                                                 </a>
                                             </td>
 
@@ -605,7 +607,7 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected (%)<br/>Budget Used (%)" SortExpression="Profit"
-                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right"
+                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Size="X-Small"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
                                 HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                                 <ItemTemplate>
@@ -657,16 +659,16 @@
 
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Date - Budget<br/>Budget Used ($%)" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
+                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
                                 HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                                 <ItemTemplate>
                                     <table style="width: 100%">
                                         <tr>
                                             <td style="text-align: center">
-                                                <asp:Label ID="lblDate1" runat="server" Text='<%# Eval("Open_date","{0:MM/dd/yyyy}")%>'></asp:Label>
+                                                <%# Eval("Open_date","{0:MM/dd/yyyy}")%>
                                             </td>
                                             <td style="width: 60px; text-align: right">
-                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:N0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
+                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:N0}")%>' Font-Bold="true" Font-Size="16px" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
@@ -746,8 +748,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; width: 500px">
-                        <span class="label label-default center-block">Update Job Status
+                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                        <span class="navbar bg-dark">Update Job Status
                         </span>
                     </h2>
                 </td>
@@ -764,7 +766,7 @@
             <tr>
                 <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnUpdateJobStatus" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Update
+                                    <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:LinkButton ID="btnCanceUpdateJobStatus" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
@@ -777,11 +779,11 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipShareFilter" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Share Copied Filters
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Share Copied Filters
             </span>
         </h2>
-        <table class="table-condensed" style="width: 500px">
+        <table class="table-sm" style="width: 500px">
             <tr>
                 <td style="width: 80px">Employee To:
                 </td>
@@ -806,7 +808,7 @@
             <tr>
                 <td colspan="2" style="padding-top: 50px; padding-bottom: 10px; text-align: right; padding-right: 15px">
                     <asp:LinkButton ID="btnShareF" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" ToolTip="Share Filters with other Employee">
-                                        <span class="glyphicon glyphicon-share"></span>&nbsp;Share
+                                        <i class="far fa-share-square"></i>&nbsp;Share
                     </asp:LinkButton>
                 </td>
             </tr>

@@ -80,8 +80,8 @@
 
 
                             <td style="text-align: right;">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -99,13 +99,13 @@
             <telerik:RadWizardStep runat="server" Title="Employee Hourly Wage">
                 <div class="container" style="width: 100% !important">
                     <div class="row">
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="width: 140px;">
 
                                     <asp:LinkButton ID="btnAddHourlyWage" runat="server" ToolTip="Add Hourly Wage Record "
                                         CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-add"></span> New Record
+                                    <i class="fas fa-plus"></i></span> New Record
                                     </asp:LinkButton>
 
                                 </td>
@@ -138,7 +138,7 @@
                                             <asp:LinkButton runat="server" ID="lblName" CommandName="Edit"
                                                 ForeColor='<%# iif(Eval("Status")="Inactive",System.Drawing.Color.LightGray,System.Drawing.Color.DarkBlue) %>'> 
                                                 <%# Eval("Employee") %>
-                                                <span style="font-size:x-small" class="badge" title="weeks this year"><%# Eval("weekthisyear") %></span>
+                                                <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear") %></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                         <EditItemTemplate>
@@ -225,7 +225,7 @@
                                         HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
                                         <ItemTemplate>
                                             <%# Eval("ProductiveSalary","{0:N0}") %>
-                                            <span style="font-size: x-small" class="badge" title="productive weeks this year"><%# Eval("productiveweekthisyear","{0:N0}") %></span>
+                                            <span style="font-size: x-small" class="badge badge-pill badge-danger" title="productive weeks this year"><%# Eval("productiveweekthisyear","{0:N0}") %></span>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
@@ -265,7 +265,7 @@
             <telerik:RadWizardStep runat="server" Title="Payroll Calendar">
                 <div class="container" style="width: 100% !important">
                     <div class="row">
-                        <table class="table-condensed">
+                        <table class="table-sm">
                             <tr>
                                 <td>
                                     <telerik:RadDatePicker ID="RadDatePicker1" runat="server" Culture="en-US" DateInput-Label="Closing" Width="100%">
@@ -274,7 +274,7 @@
                                 </td>
                                 <td>
                                     <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-plus"></span> Insert
+                                    <i class="fas fa-plus"></i> Insert
                                     </asp:LinkButton>
                                 </td>
                                 <td>
@@ -287,7 +287,7 @@
                         </table>
                     </div>
                     <div class="row">
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="width: 200px">
                                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource5" GridLines="None"
@@ -347,7 +347,7 @@
 
                                     <asp:LinkButton ID="btnImport" runat="server" ToolTip="Import Payroll CSV file('Check Date,Name,Net Amount,Total Hours,Gross Amount')"
                                         CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-upload"></span> Import
+                                     Update Import
                                     </asp:LinkButton>
 
                                 </td>

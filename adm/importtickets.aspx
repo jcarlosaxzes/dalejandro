@@ -2,13 +2,13 @@
 
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <h2 style="margin: 0; text-align: center; width: 100%">
-        <span class="label label-default center-block">
+    <h2 style="margin: 0; text-align: center; color:white; width: 100%">
+        <span class="navbar bg-dark">
             <asp:Label ID="lblJob" runat="server"></asp:Label>
         </span>
     </h2>
     <br /><br /><br />
-    <table class="table-condensed" style="width: 100%; text-align: left">
+    <table class="table-sm" style="width: 100%; text-align: left">
         <tr>
             <td style="width: 150px; text-align: right">Source:
             </td>
@@ -33,7 +33,7 @@
             <td colspan="2" style="text-align: center">
                 <br /><br />
                 <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-success btn-lg" ToolTip="Import records from CSV file" UseSubmitBehavior="false">
-                    <span class="glyphicon glyphicon-import"></span>    
+                    <i class="fas fa-upload"></i>    
                     Import
                 </asp:LinkButton>
             </td>

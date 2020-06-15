@@ -17,7 +17,7 @@
 
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
-    <table class="table-condensed" style="padding-left: 50px; padding-top: 10px">
+    <table class="table-sm" style="padding-left: 50px; padding-top: 10px">
         <tr>
             <td>
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSource1" Width="100%">
@@ -34,13 +34,13 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Update changes to Company Profile" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
 
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td width="160px">Company ID:
                                             </td>
@@ -191,13 +191,13 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton4" runat="server" ToolTip="Update changes to Company SMTP" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
 
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td style="width: 180px">Outgoing Email From:
                                             </td>
@@ -242,7 +242,7 @@
                                             <td>
                                                 <asp:LinkButton ID="btnEmail" runat="server" ToolTip="Send Test Email" CommandName="SendTestEmail" CausesValidation="False"
                                                     CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-envelope"></span> Test Email
+                                                        <i class="far fa-envelope"></i> Test Email
                                                 </asp:LinkButton>
 
                                             </td>
@@ -283,12 +283,12 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton5" runat="server" ToolTip="Update changes to Company Alerts" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td width="160px">Job Profit:
                                             </td>
@@ -348,7 +348,7 @@
                                     </table>
                                     <fieldset style="width: 250px;">
                                         <legend class="TituloDeFieldset">&nbsp;SMS Notification Service&nbsp;</legend>
-                                        <table class="table-condensed">
+                                        <table class="table-sm">
                                             <tr>
                                                 <td width="160px">Activate SMS:
                                                 </td>
@@ -370,7 +370,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton6" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -397,7 +397,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton13" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                                                        <i class="fas fa-pen"></i> Edit
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -405,7 +405,7 @@
                                     <p>
                                         Profile of the law firm that processes client files that go into debt collection status and temporarily lock their accounts.
                                     </p>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td style="width: 160px">Attorney Firm :
                                             </td>
@@ -440,7 +440,7 @@
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepLogo" Title="Logo & Signature" StepType="Step">
                                     <h3 style="margin: 0">Logo & Signature Setting</h3>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td>Picture quality recommended for company letter head: 1700 x 225 pixels, 200 dpi resolution equivalent to 8,5" x 1,5"
                                             </td>
@@ -506,7 +506,7 @@
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="QuickBooks" ValidationGroup="QuickBooks" StepType="Step" CssClass="wizardStepHidden">
                                     <div class="Formulario">
-                                        <table class="table-condensed">
+                                        <table class="table-sm">
                                             <tr>
                                                 <td colspan="2">
                                                     <h3 style="padding-left: 50px; margin: 3px">Sign In to authorize PASconcept to connect to Intuit</h3>
@@ -666,7 +666,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton2" runat="server" ToolTip="Update changes to Company Profile" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton3" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -676,7 +676,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td>Company ID:
                                             </td>
@@ -829,7 +829,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton7" runat="server" ToolTip="Update changes to Company Email SMTP Settings" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton8" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -839,7 +839,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td style="width: 220px">Outgoing Email From:
                                             </td>
@@ -908,7 +908,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton9" runat="server" ToolTip="Update changes to Company Notification Alerts" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton10" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -918,7 +918,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td width="180px">Job Profit:
                                             </td>
@@ -1004,7 +1004,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton11" runat="server" ToolTip="Update changes to Company <h3></h3>" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton12" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -1014,7 +1014,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed" style="width: 100%">
+                                    <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td width="180px">Activate PayPal Module:
                                             </td>
@@ -1064,7 +1064,7 @@
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton14" runat="server" ToolTip="Update changes to Company" CommandName="Update" CausesValidation="True"
                                                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <span class="glyphicon glyphicon-save"></span> Update
+                                                     Update
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton15" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
@@ -1074,7 +1074,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed" style="width: 100%">
+                                    <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td width="180px">Attorney Firm:
                                             </td>
@@ -1109,7 +1109,7 @@
 
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepQuickBooks2" Title="QuickBooks" ValidationGroup="QuickBooks" StepType="Step" CssClass="wizardStepHidden">
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td colspan="2">
                                                 <h3 style="padding-left: 50px; margin: 3px">Intuit Quick Book Company Settings</h3>
@@ -1232,7 +1232,7 @@
                                     </telerik:RadGrid>
                         </telerik:RadWizardStep>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Expenses (Other)" StepType="Step" >
-                                                    <table class="table-condensed">
+                                                    <table class="table-sm">
                             <tr>
                                 <td style="text-align: center; width: 80px">
                                     <telerik:RadNumericTextBox ID="txtExpensesYear" ToolTip="Year" runat="server" Width="100px"
@@ -1253,7 +1253,7 @@
 
                                     <asp:LinkButton ID="btnExpensesImport" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
                                         CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-upload"></span> Import
+                                     Update Import
                                     </asp:LinkButton>
                                 </td>
                             </tr>
@@ -1265,7 +1265,7 @@
                                 <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
                             </ClientSettings>
                             <MasterTableView CommandItemDisplay="Top" DataKeyNames="Id"
-                                DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" CssClass="table-condensed">
+                                DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" Cssclass="table-sm">
                                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                                 <CommandItemSettings AddNewRecordText="Expense" />
                                 <Columns>

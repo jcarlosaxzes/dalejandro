@@ -3,15 +3,15 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 80px">
+                <td style="width: 120px">
                     <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
                        $ Dashboard
                     </asp:LinkButton>
                 </td>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -24,7 +24,7 @@
             <div class="card card-body">
                 <asp:FormView ID="FormViewTimeBalance" runat="server" DataSourceID="SqlDataSourceTimeBalance" Width="100%">
                     <ItemTemplate>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td colspan="9">
                                     <hr style="margin: 0" />
@@ -75,7 +75,7 @@
     </div>
 
     <div class="pas-container">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td colspan="2" style="text-align:center">
                     <h2>Productive Time</h2>
@@ -103,7 +103,7 @@
             </tr>
         </table>
         <div id="divProposalTask" runat="server">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="text-align: right; width: 250px">Proposal Task:
                     </td>
@@ -116,7 +116,7 @@
             </table>
         </div>
         <div id="divTickets" runat="server">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="text-align: right; width: 250px">Ticket:
                     </td>
@@ -132,7 +132,7 @@
                 </tr>
             </table>
         </div>
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="text-align: right; width: 250px">Category:
                 </td>
@@ -167,11 +167,11 @@
                 <td colspan="2" style="text-align:center">
 
                     <asp:LinkButton ID="btnInsertTime" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="time_insert" Width="200px">
-                        <span class="glyphicon glyphicon-plus"></span> Time
+                        <i class="fas fa-plus"></i> Time
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;
                 <asp:LinkButton ID="btnInsertTimeAndInvoice" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="time_insert" Width="200px">
-                        <span class="glyphicon glyphicon-usd"></span> Billable (/hr)
+                        <i class="fas fa-dollar-sign"></i> Billable (/hr)
                 </asp:LinkButton>
                 </td>
             </tr>

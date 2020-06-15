@@ -9,7 +9,7 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td colspan="4">
                 <asp:Panel runat="server" class="DropZoneClient">
@@ -48,7 +48,7 @@
             </td>
             <td style="text-align: right">
                 <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
-                    <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;&nbsp;Upload
+                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
                 </asp:LinkButton>
             </td>
         </tr>

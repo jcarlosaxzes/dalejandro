@@ -22,26 +22,26 @@
     </telerik:RadAjaxLoadingPanel>
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width:90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                        <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
                 <td style="width:90px">
                     <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
-                        <span class="glyphicon glyphicon-plus"></span> Activity
+                        <i class="fas fa-plus"></i> Activity
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
                     <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
-                        <span class="glyphicon glyphicon-calendar"></span> Export to Outlook
+                        <i class="far fa-calendar-alt"></i></span> Export to Outlook
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
                     <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
-                        <span class="glyphicon glyphicon-save-file"></span> Export to PDF
+                        <i class="fas fa-download"></i> Export to PDF
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center">
@@ -64,7 +64,7 @@
             <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
 
 
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td>
                             <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJob" DropDownAutoWidth="Enabled"
@@ -84,8 +84,8 @@
 
                         </td>
                         <td style="text-align: right; width: 120px">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -143,12 +143,12 @@
 
 
     <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 650px">
-            <span class="label label-default center-block">Proposal Task & Share Event
+        <h2 style="margin: 0; text-align: center; color:white; width: 650px">
+            <span class="navbar bg-dark">Proposal Task & Share Event
             </span>
         </h2>
         <asp:Panel runat="server" ID="panelProposalTask">
-            <table class="table-condensed" style="width: 650px">
+            <table class="table-sm" style="width: 650px">
 
                 <tr>
                     <td style="width: 180px">Proposal Task:
@@ -162,7 +162,7 @@
             </table>
         </asp:Panel>
 
-        <table class="table-condensed" style="width: 650px">
+        <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="width: 180px">Employees for notify this event:
                 </td>
@@ -188,11 +188,11 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipCRM" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">New Client Activity Record
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">New Client Activity Record
             </span>
         </h2>
-        <table class="table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceType" ZIndex="50001"

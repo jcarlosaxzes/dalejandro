@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2>AXZES Mass Email Communication</h2>
-            <table style="width: 100%" class="table-condensed">
+            <table style="width: 100%" class="table-sm">
                 <tr>
                     <td style="width: 150px; text-align: right">To:
                     </td>
@@ -64,7 +64,7 @@
                     <td colspan="2" style="text-align: right; padding-right: 50px">
                         <asp:LinkButton ID="btnSend" runat="server" ToolTip="Send aass Email Communication" CausesValidation="true" ValidationGroup="Send"
                             CssClass="btn btn-info btn-lg" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-envelope"></span> Send
+                                    <i class="far fa-envelope"></i> Send
                         </asp:LinkButton>
 
                     </td>

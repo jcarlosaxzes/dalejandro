@@ -74,7 +74,7 @@
                 </td>
                 <td style="width: 100px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
-                                    <span class="glyphicon glyphicon-backward"></span> Previous
+                                    <i class="fas fa-backward"></i> Previous
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center">
@@ -82,7 +82,7 @@
                 </td>
                 <td style="width: 100px">
                     <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
-                                    <span class="glyphicon glyphicon-forward"></span> Next
+                                    <i class="fas fa-forward"></i> Next
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: right; width: 200px">
@@ -218,8 +218,8 @@
 
 
     <telerik:RadToolTip ID="RadToolTipSalary" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default" OnClientHide="salaryDlgHide">
-        <h2 style="margin: 0; text-align: center; width: 550px">
-            <span class="label label-default center-block">Salary
+        <h2 style="margin: 0; text-align: center; color:white; width: 550px">
+            <span class="navbar bg-dark">Salary
             </span>
         </h2>
         <div style="width: 550px">
@@ -266,8 +266,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">New Miscellaneous Time
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">New Miscellaneous Time
             </span>
         </h2>
         <table style="width: 600px" cellpadding="2px">

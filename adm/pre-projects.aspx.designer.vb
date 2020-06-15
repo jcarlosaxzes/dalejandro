@@ -50,15 +50,6 @@ Partial Public Class pre_projects
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''RadPageLayout1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
-    
-    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>

@@ -4,12 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="Formulario">
         <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="width: 80px; text-align: left">
                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" Width="40px"
                             UseSubmitBehavior="false" ToolTip="View NAICS Table View" Visible="false">
-                            <span class="glyphicon glyphicon-align-justify"></span>
+                            <i class="fas fa-align-justify"></i>
                         </asp:LinkButton>
                         <asp:LinkButton ID="btnTreePage" runat="server" CssClass="btn btn-info" Width="40px"
                             UseSubmitBehavior="false" ToolTip="View NAICS Tree View" Visible="true">
@@ -36,7 +36,7 @@
                     </td>
                     <td style="width: 150px; text-align: right">
                         <asp:LinkButton runat="server" ID="btnRefresh" CssClass="btn btn-success">
-                            <span class="glyphicon glyphicon-refresh"></span> 
+                            <i class="fas fa-redo"></i> 
                              Refresh
                         </asp:LinkButton>
                     </td>
@@ -56,7 +56,7 @@
                 </telerik:TreeListTemplateColumn>
                 <telerik:TreeListTemplateColumn DataField="Title" HeaderText="Title" UniqueName="Title" ItemStyle-HorizontalAlign="Left">
                     <ItemTemplate>
-                        <span class="label label-primary"><%# Eval("Level") %></span>
+                        <span class="label badge-primary"><%# Eval("Level") %></span>
                          &nbsp;
                         <span style='<%# Eval("fontstyle") %>'><%# Eval("Title") %></span>
                     </ItemTemplate>
@@ -78,7 +78,7 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Title" HeaderText="Title" UniqueName="Title">
                         <ItemTemplate>
-                            <span style="font-size:16px" class="label label-default"><%# Eval("Level") %></span>
+                            <span style="font-size:16px" class="badge badge-secondary"><%# Eval("Level") %></span>
                             &nbsp;
                             <span style='<%# Eval("fontstyle") %>'><%# Eval("Title") %></span>
                         </ItemTemplate>

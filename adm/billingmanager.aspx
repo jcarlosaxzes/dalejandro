@@ -5,14 +5,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <style>
-        span.glyphicon-blue {
-            color: blue;
-        }
-
-        span.glyphicon-magenta {
-            color: darkmagenta;
-        }
-
         @media print {
             a[href]:after {
                 content: none !important
@@ -30,7 +22,7 @@
         </script>
     </telerik:RadCodeBlock>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td class="PanelFilter">
                     <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh" CssClass="noprint">
@@ -81,8 +73,8 @@
 
 
 
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                             </asp:LinkButton>
 
                         </div>
@@ -92,7 +84,7 @@
         </table>
     </div>
     <div>
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="text-align: center">
                     <h3 style="margin: 0">Billing Assistant
@@ -136,7 +128,7 @@
 
                                         <asp:LinkButton ID="btnEditRemaider" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Remainder"
                                             CommandName="Edit" UseSubmitBehavior="false">
-                                             <span class="glyphicon glyphicon-pencil "></span>
+                                             <i class="fas fa-pen"></i>
                                         </asp:LinkButton>
                                         <%# Eval("ClientContactName")%>
                                         <br />
@@ -197,7 +189,7 @@
                                             <td style="text-align: right" colspan="3">
                                                 <asp:LinkButton ID="btnSendRemaiderAgain" runat="server" CommandName="Update" CommandArgument='<%# Eval("Id") %>' ToolTip="Update changes and Send Email to client with Notes"
                                                     CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                                        <span class="glyphicon glyphicon-envelope"></span> Update & Send
+                                                        <i class="far fa-envelope"></i> Update & Send
                                                 </asp:LinkButton>
 
 
@@ -222,26 +214,26 @@
 
                             <asp:LinkButton ID="btnEmail" runat="server" ToolTip="Send Email with Invoice information to selected records" Width="100px"
                                 CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-envelope"></span> Email
+                                    <i class="far fa-envelope"></i> Email
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px">
 
                             <asp:LinkButton ID="btnBadDebt" runat="server" ToolTip="Mark selected records like BadDebt" Width="100px"
                                 CssClass="btn btn-danger btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-thumbs-down"></span> BadDebt
+                                    <i class="far fa-thumbs-down"></i> BadDebt
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px">
                             <asp:LinkButton ID="btnReceivePayment" runat="server" ToolTip="Receive Payment to selected records" Width="100px"
                                 CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-usd"></span> Payment
+                                    <i class="fas fa-dollar-sign"></i> Payment
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px">
                             <asp:LinkButton ID="btnStatement" runat="server" ToolTip="Convert to Statement the selected records" Width="100px"
                                 CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-list-alt"></span> Statement
+                                    <i class="far fa-list-alt"></i> Statement
                             </asp:LinkButton>
                         </td>
                         <td style="width: 180px">
@@ -250,18 +242,18 @@
                             </telerik:RadNumericTextBox>
                             <asp:LinkButton ID="btnSchedule" runat="server" ToolTip="Create recuring invoice emmisions every period (days)" Width="100px"
                                 CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-calendar"></span> Schedule
+                                    <i class="far fa-calendar-alt"></i></span> Schedule
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px">
                             <asp:LinkButton ID="btnClientInvoicesUnhide" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
-                                        <span class="glyphicon glyphicon-eye-open"></span> Unhide
+                                        <i class="far fa-eye"></i>Unhide
                             </asp:LinkButton>
                         </td>
                         <td style="text-align: right">
                             <asp:LinkButton ID="btnExportInvoices" runat="server" ToolTip="Export records to Excel" Width="100px"
                                 CssClass="btn btn-default btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-save-file"></span> Export
+                                    <i class="fas fa-download"></i> Export
                             </asp:LinkButton>
                         </td>
 
@@ -289,7 +281,7 @@
                                         </asp:LinkButton>--%>
                                         <a href='<%# LocalAPI.GetSharedLink_URL(4,Eval("Id"))%>' target="_blank" title="view invoice"><%# Eval("InvoiceNumber")%></a>
                                         <br />
-                                        <span title='<%# Eval("PastDueStatusTitle") %>' class="label label-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %>
+                                        <span title='<%# Eval("PastDueStatusTitle") %>' class="label badge-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
 
@@ -303,7 +295,7 @@
                                             <%# Eval("JobName") %>
                                         </div>
                                         <div>
-                                            <span class="label label-warning"><%#Eval("nStatus")%></span>
+                                            <span class="badge badge-warning"><%#Eval("nStatus")%></span>
                                             <%#Eval("ProjectManager") %>
                                         </div>
                                     </ItemTemplate>
@@ -315,24 +307,24 @@
                                         <div>
                                             <asp:LinkButton ID="btnNewRemainder" runat="server" UseSubmitBehavior="false" ToolTip="Schedule a new reminder"
                                                 CommandName="NewInvoiceRemaider" CommandArgument='<%# Eval("Id")%>'>
-                                                <span class="glyphicon glyphicon-calendar glyphicon-blue"></span>
+                                                <i class="far fa-calendar-alt"></i>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="btnNewInvoiceEmail" runat="server" UseSubmitBehavior="false" ToolTip="Individual Email to Client"
                                                 CommandName="NewInvoiceEmail" CommandArgument='<%# Eval("Id")%>'>
-                                                <span class="glyphicon glyphicon-envelope glyphicon-magenta"></span>
+                                                <i class="far fa-envelope"></i>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="btnHideInvoiceClient" runat="server" CommandArgument='<%# Eval("ClientId")%>' ToolTip="Hide client from list"
                                                 CommandName="HideInvoiceClient" UseSubmitBehavior="false">
-                                                    <span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span>
+                                                    <i class="fas fa-eye-slash"></i>
                                             </asp:LinkButton>
 
                                             <telerik:RadLabel runat="server" ID="RadLabel4" Text='<%# Eval("ClientName") %>' ToolTip='<%#Eval("ClientCompany")%>'></telerik:RadLabel>
                                         </div>
                                         <div>
-                                            <span class="glyphicon glyphicon-phone-alt "></span></a>
+                                            <i class="fas fa-phone"></i></a>
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("ClientPhone"))%>
                                             &nbsp;
-                                            <span class="glyphicon glyphicon-phone "></span></a>
+                                            <i class="fas fa-mobile-alt"></i></a>
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("ClientCellular"))%>
                                         </div>
                                     </ItemTemplate>
@@ -444,18 +436,18 @@
 
                             <asp:LinkButton ID="btnSendStatement" runat="server" ToolTip="Send Email with Statement information to selected records" Width="100px"
                                 CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-envelope"></span> Email
+                                    <i class="far fa-envelope"></i> Email
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px">
                             <asp:LinkButton ID="btnReceivePaymentStatement" runat="server" ToolTip="Receive Payment to selected records" Width="100px"
                                 CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-usd"></span> Payment
+                                    <i class="fas fa-dollar-sign"></i> Payment
                             </asp:LinkButton>
                         </td>
                         <td>
                             <asp:LinkButton ID="btnClientStatementsUnhide" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
-                                        <span class="glyphicon glyphicon-eye-open"></span> Unhide
+                                        <i class="far fa-eye"></i>Unhide
                             </asp:LinkButton>
 
                         </td>
@@ -484,7 +476,7 @@
                                     <ItemTemplate>
                                         <a href='<%# LocalAPI.GetSharedLink_URL(5,Eval("Id"))%>' target="_blank" title="view statement"><%# Eval("Number")%></a>
                                         <br />
-                                        <span title='<%# Eval("PastDueStatusTitle") %>' class="label label-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %>
+                                        <span title='<%# Eval("PastDueStatusTitle") %>' class="label badge-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn DataField="InvoiceDate" DataType="System.DateTime" FilterControlAltText="Filter InvoiceDate column"
@@ -500,26 +492,26 @@
                                         <div>
                                             <asp:LinkButton ID="btnNewStatementRemainder" runat="server" UseSubmitBehavior="false" ToolTip="Schedule a new reminder"
                                                 CommandName="NewStatementReminder" CommandArgument='<%# Eval("Id")%>'>
-                                                <span class="glyphicon glyphicon-calendar glyphicon-blue"></span></a>
+                                                <i class="far fa-calendar-alt"></i></a>
                                             </asp:LinkButton>
 
                                             <asp:LinkButton ID="btnNewStatementEmail" runat="server" UseSubmitBehavior="false" ToolTip="Individual Email to Client"
                                                 CommandName="NewStatementEmail" CommandArgument='<%# Eval("Id")%>'>
-                                                <span class="glyphicon glyphicon-envelope glyphicon-magenta"></span></a>
+                                                <i class="far fa-envelope"></i></a>
                                             </asp:LinkButton>
                                             <asp:LinkButton ID="btnHideStatementClient" runat="server" CommandArgument='<%# Eval("clientId")%>' ToolTip="Hide client from list"
                                                 CommandName="HideStatementClient" UseSubmitBehavior="false">
-                                                    <span aria-hidden="true" class="glyphicon glyphicon-eye-close"></span>
+                                                    <i class="fas fa-eye-slash"></i>
                                             </asp:LinkButton>
 
 
                                             <telerik:RadLabel runat="server" ID="RadLabel4" Text='<%# Eval("ClientName") %>' ToolTip='<%#Eval("ClientCompany")%>'></telerik:RadLabel>
                                         </div>
                                         <div>
-                                            <span class="glyphicon glyphicon-phone-alt "></span></a>
+                                            <i class="fas fa-phone"></i></a>
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("ClientPhone"))%>
                                             &nbsp;
-                                            <span class="glyphicon glyphicon-phone "></span></a>
+                                            <i class="fas fa-mobile-alt"></i></a>
                                             <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("ClientCellular"))%>
                                         </div>
 
@@ -566,8 +558,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; width: 500px">
-                        <span class="label label-default center-block">
+                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                        <span class="navbar bg-dark">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -577,7 +569,7 @@
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnOk" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Ok
+                                    <i class="fas fa-check"></i> Ok
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -594,8 +586,8 @@
             <tr>
                 <td>
 
-                    <h2 style="margin: 0; text-align: center; width: 500px">
-                        <span class="label label-default center-block">
+                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                        <span class="navbar bg-dark">
                             <asp:Label ID="lblActionMesageStatement" runat="server"></asp:Label>Switch Company
                         </span>
                     </h2>
@@ -605,7 +597,7 @@
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnOkStatement" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-list-alt"></span> Ok
+                                    <i class="far fa-list-alt"></i> Ok
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -618,8 +610,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipInvoicesPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Receive Invoice Payments
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Receive Invoice Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -651,7 +643,7 @@
             <tr>
                 <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnInsertPayment" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Insert
+                                    <i class="fas fa-check"></i> Insert
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
@@ -664,8 +656,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Receive Statement Payments
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Receive Statement Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -697,7 +689,7 @@
             <tr>
                 <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnInsertStatementPayments" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Insert
+                                    <i class="fas fa-check"></i> Insert
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
@@ -711,8 +703,8 @@
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Edit Invoice
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Edit Invoice
             </span>
         </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEditInvoice" DefaultMode="Edit">
@@ -800,7 +792,7 @@
 
         <div style="text-align: center; padding-top: 25px">
             <asp:LinkButton ID="btnUpdateInvoice" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CommandName="Update" Width="120px">
-                                    <span class="glyphicon glyphicon-ok"></span> Update
+                                    <i class="fas fa-check"></i> Update
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
@@ -813,8 +805,8 @@
 
     <telerik:RadToolTip ID="RadToolTipInvoiceRemaider" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">New Invoice Reminder
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">New Invoice Reminder
             </span>
         </h2>
         <asp:FormView ID="FormViewRemaider" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceRemaider">
@@ -904,7 +896,7 @@
 
         <div style="text-align: center; padding-top: 25px">
             <asp:LinkButton ID="btnInsertRemaider" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="120px">
-                                    <span class="glyphicon glyphicon-ok"></span> Insert Remainder
+                                    <i class="fas fa-check"></i> Insert Remainder
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:LinkButton ID="btnCancelRemaider" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
@@ -916,8 +908,8 @@
 
     <telerik:RadToolTip ID="RadToolTipStatementReminder" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">New Statement Reminder
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">New Statement Reminder
             </span>
         </h2>
 
@@ -1001,7 +993,7 @@
 
         <div style="text-align: center; padding-top: 25px">
             <asp:LinkButton ID="btnInsertStatementReminder" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="120px">
-                                    <span class="glyphicon glyphicon-ok"></span> Insert Remainder
+                                    <i class="fas fa-check"></i> Insert Remainder
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:LinkButton ID="btnCancelStatementReminder" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">

@@ -61,8 +61,8 @@
 
                             </td>
                             <td style="text-align: right; width: 110px">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -99,7 +99,7 @@
                                     </td>
                                     <td style="padding-left: 3px">
                                         <asp:Panel runat="server" Visible='<%# Eval("statementId")>0 %>'>
-                                            <a class="glyphicon glyphicon-share" title="View Invoice"
+                                            <a class="far fa-share-square" title="View Invoice"
                                                 href='<%# LocalAPI.GetSharedLink_URL(55,Eval("statementId"))%>'
                                                 target="_blank" aria-hidden="true"></a>
                                         </asp:Panel>
@@ -121,7 +121,7 @@
                                     </td>
                                     <td style="padding-left: 3px">
                                         <asp:Panel runat="server" Visible='<%# Eval("InvoicesId")>0 %>'>
-                                            <a class="glyphicon glyphicon-share" title="View Invoice"
+                                            <a class="far fa-share-square" title="View Invoice"
                                                 href='<%# LocalAPI.GetSharedLink_URL(4,Eval("InvoicesId"))%>'
                                                 target="_blank" aria-hidden="true"></a>
                                         </asp:Panel>
@@ -173,7 +173,7 @@
                                     </td>
                                     <td style="width: 40px; text-align: right">
                                         <asp:Panel ID="PanelUpload" runat="server" Visible='<%# len(Eval("Download_url"))>0 %>'>
-                                            &nbsp;<a class="glyphicon glyphicon-download-alt" href='<%# Eval("Download_url")%>' target="_blank"></a>
+                                            &nbsp;<a class="fas fa-cloud-download-alt" href='<%# Eval("Download_url")%>' target="_blank"></a>
                                         </asp:Panel>
                                     </td>
                                 </tr>
@@ -208,8 +208,8 @@
 
 
     <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="label label-default center-block">Payment
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+            <span class="navbar bg-dark">Payment
             </span>
         </h2>
         <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">

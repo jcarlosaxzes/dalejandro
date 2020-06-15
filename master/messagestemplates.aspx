@@ -52,7 +52,7 @@
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnApply" runat="server" CommandName="ApplyToAllCompanies" CommandArgument='<%# Eval("Type") %>'
                                         ToolTip="Apply to all existing companies">
-                                                <span style="color:red" class="glyphicon glyphicon-ok"></span>
+                                                <span style="color:red" class="fas fa-check"></span>
                                     </asp:LinkButton>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>

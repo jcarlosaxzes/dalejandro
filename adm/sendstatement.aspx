@@ -18,7 +18,7 @@
         <div class="col-md-12">
 
             <asp:Panel ID="PanelEmail" runat="server">
-                <table style="width: 100%" class="table-condensed" >
+                <table style="width: 100%" class="table-sm" >
                     <tr>
                         <td colspan="4" style="text-align:right">
                             <telerik:RadComboBox ID="cboEmittingStatement" runat="server" Label="(*) Are you emitting this statement to the client?" Width="500px">
@@ -54,7 +54,7 @@
                             &nbsp;&nbsp;&nbsp;
                             <asp:LinkButton ID="btnEnviar" runat="server" ToolTip="Send Email with Statement information"
                                 CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-envelope"></span> Send
+                                    <i class="far fa-envelope"></i> Send
                             </asp:LinkButton>
                         </td>
                         <td style="text-align:right">

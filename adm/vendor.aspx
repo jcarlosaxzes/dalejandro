@@ -40,7 +40,7 @@
 
     <div class="Formulario">
 
-        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
+        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
         </asp:LinkButton>
     </div>
@@ -55,11 +55,11 @@
                 <div style="text-align: center">
                     <br />
                     <asp:LinkButton ID="btnUpdateVendor1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="UpdateVendor">
-                    <span class="glyphicon glyphicon-save"></span> Update
+                     Update
                     </asp:LinkButton>
                     <hr style="margin: 0" />
                 </div>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: right; width: 180px">Name:
                         </td>
@@ -229,7 +229,7 @@
                 <div style="text-align: center">
                     <hr style="margin: 0" />
                     <asp:LinkButton ID="btnUpdateVendor2" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="UpdateVendor">
-                    <span class="glyphicon glyphicon-save"></span> Update
+                     Update
                     </asp:LinkButton>
                 </div>
 

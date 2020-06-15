@@ -5,7 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 80px">
                     <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
@@ -13,7 +13,7 @@
                     </asp:LinkButton>
                 </td>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="False">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -24,7 +24,7 @@
             <div class="card card-body">
                 <asp:FormView ID="FormViewSubconsultBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceSubconsultantBalance" Width="100%">
                     <ItemTemplate>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td colspan="7">
                                     <hr style="margin: 0" />
@@ -76,11 +76,11 @@
                             <EditItemTemplate>
                                 <div style="text-align:center">
                                     <asp:LinkButton ID="btnUpdateSubconsultant1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-save"></span> Update
+                                         Update
                                     </asp:LinkButton>
 
                                 </div>
-                                    <table class="table-condensed" style="width: 100%">
+                                    <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td style="text-align:right;width: 200px">Name:
                                             </td>
@@ -246,7 +246,7 @@
                                         </tr>
                                     </table>
                                     <h4>Billing Contact</h4>
-                                    <table class="table-condensed" style="width: 100%">
+                                    <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td style="width:200px;text-align:right" >Name:
                                             </td>
@@ -267,7 +267,7 @@
                                         </tr>
                                     </table>
                                 <h4>Notification</h4>
-                                    <table class="table-condensed" style="width: 100%">
+                                    <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td style="width:200px;text-align:right" >R.F.Proposal Accepted:
                                             </td>
@@ -286,7 +286,7 @@
                                 
                                 <div style="text-align:center">
                                     <asp:LinkButton ID="btnUpdateSubconsultant2" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
-                                        <span class="glyphicon glyphicon-save"></span> Update
+                                         Update
                                     </asp:LinkButton>
 
                                 </div>

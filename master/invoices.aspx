@@ -3,7 +3,7 @@
 
 <%@ MasterType VirtualPath="~/master/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td style="width: 80px">Company:
             </td>
@@ -42,13 +42,13 @@
             </td>
 
             <td style="text-align: right">
-                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                 </asp:LinkButton>
             </td>
         </tr>
     </table>
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowSorting="True" AutoGenerateColumns="False"
@@ -150,8 +150,8 @@
         <table class="table table-bordered" style="width: 650px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; width: 650px">
-                        <span class="label label-default center-block">Bind PASconcept Invoice to Axzes Invoice
+                    <h2 style="margin: 0; text-align: center; color:white; width: 650px">
+                        <span class="navbar bg-dark">Bind PASconcept Invoice to Axzes Invoice
                         </span>
                     </h2>
 
@@ -190,7 +190,7 @@
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnBindAxzesInvoice" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-ok"></span> Update
+                                    <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                 </td>
             </tr>

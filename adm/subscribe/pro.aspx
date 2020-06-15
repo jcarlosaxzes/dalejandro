@@ -13,7 +13,7 @@
                 <asp:LinkButton ID="btnHome" runat="server" title="Home" data-toggle="tooltip" class="btn btn-success width-100 btn-lg" PostBackUrl="~/ADM/Default.aspx">
                       Return&nbsp;<span class="circle bg-white"></span>
                 </asp:LinkButton>
-                <h5><span class="label label-default center-block"></span>No outstanding payments</h5>
+                <h5><span class="navbar bg-dark"></span>No outstanding payments</h5>
             </asp:Panel>
         </div>
     </div>
@@ -51,7 +51,7 @@
                         Width="100%">
                         <ItemTemplate>
 
-                            <table class="table-condensed">
+                            <table class="table-sm">
                                 <tr>
                                     <td style="text-align: right;width:160px">
                                         <label for="inputdefault">Price/Period:</label>
@@ -92,7 +92,7 @@
         <div class="col-lg-12" style="margin-top: 10px">
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-6">
-                    <h2><span class="label label-default center-block">Payment method</span></h2>
+                    <h2><span class="navbar bg-dark">Payment method</span></h2>
                 </div>
             </div>
             <div class="row">

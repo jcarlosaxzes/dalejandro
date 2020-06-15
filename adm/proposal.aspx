@@ -82,7 +82,7 @@
     </telerik:RadWindowManager>
 
     <asp:Panel ID="panelToolbar" runat="server" CssClass="pas-container">
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td>
                     <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
@@ -142,7 +142,7 @@
             <div class="card card-body">
                 <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" Visible="false">
                     <ItemTemplate>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td colspan="9">
                                     <hr style="margin: 0" />
@@ -200,7 +200,7 @@
                     <WizardSteps>
                         <%--Proposal Details--%>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Proposal Details" StepType="Step">
-                            <table class="table-condensed" style="width: 100%;">
+                            <table class="table-sm" style="width: 100%;">
 
                                 <tr>
                                     <td style="text-align: right; width: 100px">Number:
@@ -488,7 +488,7 @@
 
                         <%--Payment Schedules--%>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStepPaymentSchedules" Title="Payment Schedules" StepType="Step">
-                            <table class="table-condensed" style="width: 100%;">
+                            <table class="table-sm" style="width: 100%;">
                                 <tr>
                                     <td style="text-align: right; width: 15px"></td>
                                     <td style="width: 400px">
@@ -544,7 +544,7 @@
 
                         <%--Begin and Concluding Text--%>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Begin and Concluding Text" StepType="Step">
-                            <table class="table-condensed" style="width: 100%;">
+                            <table class="table-sm" style="width: 100%;">
                                 <tr>
                                     <td>
                                         <h4>Introductory Text:</h4>
@@ -571,7 +571,7 @@
 
                         <%--Documents--%>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Documents" StepType="Step">
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td colspan="3">
                                         <asp:Panel runat="server" class="DropZoneClient">
@@ -594,7 +594,7 @@
                                         </td>
                                         <td style="text-align: right;">
                                             <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
-                                        <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;&nbsp;Upload
+                                        <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
                                             </asp:LinkButton>
                                         </td>
                                     </tr>
@@ -687,11 +687,11 @@
         <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Task Compensation" StepType="Step">
-                    <table class="table-condensed" style="width: 100%;">
+                    <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNewTask" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ValidationGroup="Proposal">
-                                   <span class="glyphicon glyphicon-plus"></span> Task
+                                   <i class="fas fa-plus"></i> Task
                                 </asp:LinkButton>
 
                             </td>
@@ -748,7 +748,7 @@
 
                                                     <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
                                                         ToolTip="Click to duplicate record">
-                                                    <span class="glyphicon glyphicon-duplicate"></span>
+                                                    <i class="far fa-clone"></i>
                                                     </asp:LinkButton>
 
                                                 </ItemTemplate>
@@ -829,12 +829,12 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep22" Title="Phases" StepType="Step">
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
                         <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Phase">
-                                   <span class="glyphicon glyphicon-plus"></span> Phase
+                                   <i class="fas fa-plus"></i> Phase
                         </asp:LinkButton>
 
                         &nbsp;&nbsp;&nbsp;
                         <asp:LinkButton ID="btnPivotPhases" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Add New Phase">
-                                   <span class="glyphicon glyphicon-plus"></span> Project Phases
+                                   <i class="fas fa-plus"></i> Project Phases
                         </asp:LinkButton>
                     </div>
                     <div style="padding-top: 12px; padding-left: 18px; padding-bottom: 10px">
@@ -919,7 +919,7 @@
                                 </Columns>
                                 <EditFormSettings EditFormType="Template">
                                     <FormTemplate>
-                                        <table class="table-condensed" style="width: 100%;">
+                                        <table class="table-sm" style="width: 100%;">
                                             <tr>
                                                 <td style="width: 150px">Phase Date From
                                                 </td>
@@ -1010,7 +1010,7 @@
 
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep24" Title="Term & Conditions" StepType="Step">
-                    <table class="table-condensed" style="width: 100%;">
+                    <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td>
                                 <asp:FormView ID="FormViewTC" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePropTC" Width="100%" EnableViewState="false">
@@ -1026,10 +1026,10 @@
                                         </div>
                                     </ItemTemplate>
                                     <EditItemTemplate>
-                                        <table class="table-condensed" style="width: 100%;">
+                                        <table class="table-sm" style="width: 100%;">
                                             <tr>
                                                 <td colspan="2">
-                                                    <table class="table-condensed" style="width: 100%;">
+                                                    <table class="table-sm" style="width: 100%;">
                                                         <tr>
                                                             <td colspan="3" class="Pequena">To modify T&C, you can select a template from the dropdown menu. You can also modify the text manually or copy and paste from the clipboard. Press Update to save chances</td>
                                                         </tr>
@@ -1086,7 +1086,7 @@
                     <div style="width: 100%; padding-left: 15px; padding-top: 5px">
                         <h4 style="margin: 0">Other Actions</h4>
                     </div>
-                    <table class="table-condensed" style="width: 100%;">
+                    <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td style="text-align: right;">Change Status:</td>
                             <td>
@@ -1142,7 +1142,7 @@
                     <div style="width: 100%; padding-left: 15px; padding-top: 5px">
                         <h4 style="margin: 0">Aditional Info</h4>
                     </div>
-                    <table class="table-condensed" style="width: 100%;">
+                    <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td style="text-align: right; width: 150px">Prepared by:</td>
                             <td style="width: 350px">
@@ -1182,11 +1182,11 @@
 
 
     <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 500px">
-            <span class="label label-default center-block">Delete Proposal
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+            <span class="navbar bg-dark">Delete Proposal
             </span>
         </h2>
-        <table class="table-condensed" style="width: 500px">
+        <table class="table-sm" style="width: 500px">
             <tr>
                 <td>Are you sure you want to delete the active Proposal?
                 </td>

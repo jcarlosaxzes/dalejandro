@@ -134,10 +134,10 @@
         }
     </style>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -175,7 +175,7 @@
                         </legend>
                     </fieldset>
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 50px; text-align: right">
                                 <asp:RequiredFieldValidator ID="rfvFirstName"
@@ -287,11 +287,11 @@
                     <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
                         <ItemTemplate>
 
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="width: 50%; text-align: center; vertical-align: top">
-                                        <h3 style="margin: 0"><span class="label label-info center-block">Projects</span></h2>
-                                        <table class="table-condensed" style="width: 100%">
+                                        <h3 style="margin: 0"><span class="badge badge-info center-block">Projects</span></h2>
+                                        <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right"># Pending Proposals:</td>
                                                 <td style="width: 120px; text-align: right">
@@ -313,8 +313,8 @@
                                         </table>
                                     </td>
                                     <td style="text-align: right; vertical-align: top">
-                                        <h3 style="margin: 0"><span class="label label-info center-block">Balance</span></h2>
-                                        <table class="table-condensed" style="width: 100%">
+                                        <h3 style="margin: 0"><span class="badge badge-info center-block">Balance</span></h2>
+                                        <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right;">Amount Paid:</td>
                                                 <td>
@@ -349,7 +349,7 @@
 
                     <fieldset>
                         <legend>Proposal Info</legend>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td style="width: 16px; text-align: right">
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtProposalName"
@@ -546,11 +546,11 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepFees" Title="Fees & Scope" Enabled="false" StepType="Step">
                     
                         <h3>Service Fee(s)</h3>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" CausesValidation="false">
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Fee
+                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;Fee
                                     </asp:LinkButton>
                                 </td>
                             </tr>
@@ -572,15 +572,15 @@
                                                         </asp:LinkButton>
                                                         <asp:LinkButton ID="btnOrderDown" runat="server" CommandName="OrderDown" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Order Down">
-                                                                <span aria-hidden="true" class="glyphicon glyphicon-arrow-down"></span>
+                                                                <i class="fas fa-arrow-down"></i>
                                                         </asp:LinkButton>
                                                         <asp:LinkButton ID="btnOrderUp" runat="server" CommandName="OrderUp" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Order Up">
-                                                                <span aria-hidden="true" class="glyphicon glyphicon-arrow-up"></span>
+                                                                <i class="fas fa-arrow-up"></i>
                                                         </asp:LinkButton>
                                                         <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false" CausesValidation="false"
                                                             ToolTip="Click to duplicate record">
-                                                                <span class="glyphicon glyphicon-duplicate"></span>
+                                                                <i class="far fa-clone"></i>
                                                         </asp:LinkButton>
 
                                                     </ItemTemplate>
@@ -652,11 +652,11 @@
                         <legend>Term & Conditions</legend>
                         <div id="divBtnTC" runat="server" class="divBtnTC">
                             <asp:LinkButton ID="btnEditTC" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                            <span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit
+                            <i class="far fa-edit"></i>&nbsp;&nbsp;Edit
                             </asp:LinkButton>
                         </div>
                         <div id="divFormTC" runat="server" class="divFormTC" visible="false">
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="width: 50%">
                                         <telerik:RadComboBox ID="cboTandCtemplates" runat="server" DataSourceID="SqlDataSourceTandCtemplates"
@@ -669,7 +669,7 @@
                                     </td>
                                     <td style="text-align: right">
                                         <asp:LinkButton ID="btnTCUpdate" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Save
+                                            <i class="fas fa-check"></i>&nbsp;&nbsp;Save
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnCloseTC" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false">
                                             Close
@@ -706,7 +706,7 @@
                                 HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
                         </div>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td></td>
 
@@ -724,7 +724,7 @@
                         </table>
 
 
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="width: 350px">
                                     <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules"
@@ -792,7 +792,7 @@
 
                 <%-- Attachments --%>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepAttachments" Title="Attachments" Enabled="false" StepType="Step">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td colspan="3">
                                 <asp:Panel runat="server" class="DropZoneClient">
@@ -816,7 +816,7 @@
                             </td>
                             <td style="text-align: right;">
                                 <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
-                                    <span class="glyphicon glyphicon-cloud-upload"></span>&nbsp;&nbsp;Upload
+                                    <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -895,7 +895,7 @@
                 <telerik:RadWizardStep runat="server" Title="Preview" ID="Preview" Enabled="false" StepType="Finish">
                     <div style="text-align: right; margin: 10px">
                         <asp:LinkButton ID="btnSend" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Send Proposal to Client">
-                                    <span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;Send
+                                    <i class="far fa-envelope"></i>&nbsp;&nbsp;Send
                         </asp:LinkButton>
                     </div>
                     <div>

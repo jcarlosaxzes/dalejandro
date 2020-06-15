@@ -3,10 +3,10 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Cancel
                     </asp:LinkButton>
                 </td>
@@ -23,7 +23,7 @@
                                         There were this errors:"></asp:ValidationSummary>
     </div>
     <div class="pas-container">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 200px; text-align: right">Project Year:
                 </td>
@@ -43,7 +43,7 @@
                 </td>
             </tr>
         </table>
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 200px; text-align: right">Opening Date:
                 </td>
@@ -157,7 +157,7 @@
             </tr>
         </table>
         <%--Engeniering companies--%>
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 200px; text-align: right">Budget:</td>
                 <td style="width: 180px;">
@@ -231,7 +231,7 @@
         <hr />
         <div style="text-align: center">
             <asp:LinkButton ID="btnCreateJob" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="JobUpdate">
-                       <span class="glyphicon glyphicon-plus"></span>&nbsp;Create Job
+                       <i class="fas fa-plus"></i>&nbsp;Create Job
             </asp:LinkButton>
         </div>
         <br />

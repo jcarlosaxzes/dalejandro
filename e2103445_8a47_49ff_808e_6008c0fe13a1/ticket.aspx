@@ -14,12 +14,12 @@
         <table>
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center">
+                    <h2 style="margin: 0; text-align: center; color:white">
                         <asp:Label ID="lblJob" runat="server"></asp:Label>
                     </h2>
                 </td>
                 <td style="text-align: center;width:100px">
-                    <a runat="server" id="urlPublicLink" class="glyphicon glyphicon-share" title="Click to View Ticket List" href='<%# GetJobGUID() %>'
+                    <a runat="server" id="urlPublicLink" class="far fa-share-square" title="Click to View Ticket List" href='<%# GetJobGUID() %>'
                         target="_blank" aria-hidden="true"></a>
                 </td>
             </tr>
@@ -30,7 +30,7 @@
 
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
             <ItemTemplate>
-                <table class="table-condensed" style="width: 100%; text-align: left">
+                <table class="table-sm" style="width: 100%; text-align: left">
                     <tr>
                         <td style="width: 180px">Ticket #:
                         </td>
@@ -181,7 +181,7 @@
                     ValidationGroup="EditTicket" />
 
 
-                <table class="table-condensed" style="width: 100%; text-align: left">
+                <table class="table-sm" style="width: 100%; text-align: left">
 
                     <tr>
                         <td style="text-align: right">Priority:

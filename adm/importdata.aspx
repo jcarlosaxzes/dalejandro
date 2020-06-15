@@ -20,7 +20,7 @@
         </ol>
     </div>
     
-    <table class="table-condensed" style="width: 800px" >
+    <table class="table-sm" style="width: 800px" >
         <tr>
             <td colspan="2">
                 <hr />

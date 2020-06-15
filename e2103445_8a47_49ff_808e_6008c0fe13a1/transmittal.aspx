@@ -11,10 +11,10 @@
                 <h1>TRANSMITTAL LETTER</h1>
             </div>
 
-            <table class="table-condensed" style="width: 100%;" >
+            <table class="table-sm" style="width: 100%;" >
                 <tr>
                     <td style="vertical-align: top">
-                        <table class="table-condensed" style="width: 100%;">
+                        <table class="table-sm" style="width: 100%;">
                             <tr>
                                 <td style="text-align: right; width: 150px"><b>Transmittal ID:</b>
                                 </td>
@@ -107,7 +107,7 @@
                 </tr>
             </table>
 
-            <table class="table-condensed" style="width: 100%;">
+            <table class="table-sm" style="width: 100%;">
                 <tr>
                     <td style="text-align: right; width: 150px;">
                         <b>Notes:</b>
@@ -137,7 +137,7 @@
                     <td></td>
                     <td style="text-align: center">
                         <asp:LinkButton ID="btnSignature" runat="server" CssClass="btn btn-success  btn-lg noprint" Visible='<%# Eval("Status") = 1 %>' UseSubmitBehavior="false" OnClick="btnPickUp_Click">
-                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Sign to Pick Up
+                            <i class="fas fa-pen"></i>&nbsp;&nbsp;Sign to Pick Up
                         </asp:LinkButton>
                     </td>
                     <td></td>

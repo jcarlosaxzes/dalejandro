@@ -26,7 +26,7 @@
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Phase">
-                                    <span class="glyphicon glyphicon-plus"></span> Phase
+                                    <i class="fas fa-plus"></i> Phase
                                 </asp:LinkButton></td>
                             <td>
                                 <script type="text/javascript">

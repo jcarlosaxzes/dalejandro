@@ -8,7 +8,7 @@ Public Class job_employees
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblJobId.Text = Request.QueryString("JobId")
-
+                Master.ActiveTab(2)
             End If
 
             RadWindowManager1.EnableViewState = False

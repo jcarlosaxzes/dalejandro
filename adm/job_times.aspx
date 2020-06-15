@@ -4,18 +4,19 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-        <div class="row">
-            <div class="form-group">
-                <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
+        <table class="table-sm" style="width: 100%">
+            <tr>
+                <td>
+                     <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
                     CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-save-file"></span> Export
+                                    <i class="fas fa-download"></i> Export
                 </asp:LinkButton>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group">
-                <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AllowSorting="True" DataSourceID="SqlDataSource1"
-                    Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="1000px"
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AllowSorting="True" DataSourceID="SqlDataSource1"
+                    Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="600px"
                     ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -66,12 +67,12 @@
                                 <ItemTemplate>
                                     <div>
                                         <asp:LinkButton ID="btnNewInvoice" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Insert Invoice (hr)"
-                                            CommandName="NewHrInvoice" UseSubmitBehavior="false" Visible='<%# iif(Eval("invoiceId")=0,True,False) %>'>
-                                                <span aria-hidden="true" class="glyphicon glyphicon-plus glyphicon-small"></span>
+                                            CommandName="NewHrInvoice" UseSubmitBehavior="false" Visible='<%#IIf(Eval("invoiceId") = 0, True, False) %>'>
+                                                <i class="fas fa-plus"></i>
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnDeleteInvoice" runat="server" CommandArgument='<%# Eval("invoiceId")%>' ToolTip="Click to delete Invoice (hr)"
                                             CommandName="DeleteHrInvoice" UseSubmitBehavior="false" Visible='<%# iif(Eval("invoiceId")>0,True,False) %>'>
-                                                <span aria-hidden="true" class="glyphicon glyphicon-trash glyphicon-small"></span>
+                                                <i class="far fa-trash-alt"></i>
                                         </asp:LinkButton>
                                         <a href='<%# LocalAPI.GetSharedLink_URL(4,Eval("invoiceId"))%>' target="_blank" title="view invoice"><%# Eval("InvoiceNumber")%></a>
                                     </div>
@@ -112,9 +113,11 @@
                     </MasterTableView>
                     <PagerStyle AlwaysVisible="false" />
                 </telerik:RadGrid>
-            </div>
-
-        </div>
+                </td>
+            </tr>
+           
+        </table>
+      
     </div>
     <div class="container" style="height: 1px; overflow: auto">
         <telerik:RadGrid ID="RadGridExportData" runat="server" DataSourceID="SqlDataSource1" AllowPaging="True" PageSize="10">
@@ -147,11 +150,11 @@
     </div>
 
     <telerik:RadToolTip ID="RadToolTipConfirmInsert" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-condensed" style="width: 800px">
+        <table class="table-sm" style="width: 800px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; width: 800px">
-                        <span class="label label-default center-block">
+                    <h2 style="margin: 0; text-align: center; color:white; width: 800px">
+                        <span class="navbar bg-dark">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -190,7 +193,7 @@
             <tr>
                 <td style="text-align: center; padding-top: 25px" colspan="2">
                     <asp:LinkButton ID="btnOk" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Ok
+                                    <i class="fas fa-check"></i> Ok
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -207,8 +210,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; width: 500px">
-                        <span class="label label-default center-block">
+                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+                        <span class="navbar bg-dark">
                             <asp:Label ID="lblActionMesage2" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -217,7 +220,7 @@
             <tr>
                 <td style="text-align: center" colspan="2">
                     <asp:LinkButton ID="btnOk2" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
-                                    <span class="glyphicon glyphicon-ok"></span> Ok
+                                    <i class="fas fa-check"></i> Ok
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;

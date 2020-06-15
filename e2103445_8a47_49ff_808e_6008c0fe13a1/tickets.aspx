@@ -11,17 +11,17 @@
                 <tr>
                     <td style="width: 100px">
                         <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                            <span class="glyphicon glyphicon-filter"></span>&nbsp;Filter
+                            <i class="fas fa-filter"></i>&nbsp;Filter
                         </button>
                     </td>
                     <td style="width: 100px">
                         <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="New Ticket">
-                        <span class="glyphicon glyphicon-plus"></span> Ticket
+                        <i class="fas fa-plus"></i> Ticket
                         </asp:LinkButton>
                     </td>
                     <td style="text-align: right">
                         <asp:LinkButton ID="btnRefreshGrid" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Refresh List">
-                        <span class="glyphicon glyphicon-refresh"></span> Refresh
+                        <i class="fas fa-redo"></i> Refresh
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -30,7 +30,7 @@
                 <div class="card card-body">
 
                     <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="width: 300px">
                                     <telerik:RadComboBox ID="cboType" runat="server"
@@ -75,8 +75,8 @@
                                 </td>
 
                                 <td>
-                                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                                     </asp:LinkButton>
                                 </td>
                             </tr>
@@ -88,7 +88,7 @@
         </div>
 
         <h2 style="margin: 0">
-            <span class="label label-default center-block">
+            <span class="navbar bg-dark">
                 <asp:Label ID="lblJob" runat="server"></asp:Label></span>
         </h2>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="100%"
@@ -148,14 +148,14 @@
         <telerik:RadToolTip ID="RadToolTipEditTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
             <h2 style="margin: 0">
-                <span class="label label-default center-block">View/Edit Ticket
+                <span class="navbar bg-dark">View/Edit Ticket
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server"
                 Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true"
                 ValidationGroup="EditTicket" />
 
-            <table class="table-condensed" style="width: 800px; text-align: left">
+            <table class="table-sm" style="width: 800px; text-align: left">
                 <tr>
                     <td style="text-align: right; width: 180px">Ticket #:</td>
                     <td>
@@ -277,14 +277,14 @@
         <telerik:RadToolTip ID="RadToolTipInsertTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
             <h2 style="margin: 0">
-                <span class="label label-default center-block">Insert New Ticket
+                <span class="navbar bg-dark">Insert New Ticket
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary2" runat="server"
                 Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true"
                 ValidationGroup="InsertTicket" />
 
-            <table class="table-condensed" style="width: 800px; text-align: left">
+            <table class="table-sm" style="width: 800px; text-align: left">
 
 
                 <tr>

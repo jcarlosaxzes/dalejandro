@@ -29,8 +29,11 @@
 
     <link href="~/App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
     <%--Bootstrap reference begin--%>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <%--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />--%>
     <%--Bootstrap reference end--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 <body title="Welcome to PASconcept. Project Administration Services" style="background-color: white">
     <form id="form1" runat="server">
@@ -78,7 +81,7 @@
 
                                         <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
                                              OnClick="Reset_Click" ValidationGroup="Login2">
-                                                                        <span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;&nbsp;Reset Password
+                                                                        <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Reset Password
                                         </asp:LinkButton>
 
                                         <div>

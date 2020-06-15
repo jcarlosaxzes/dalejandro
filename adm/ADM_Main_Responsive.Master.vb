@@ -69,23 +69,12 @@ Public Class ADM_Main_Responsive
                 Response.RedirectPermanent("~/adm/useragree.aspx")
             Else
 
-                'Dim Asunto As String
-                'Dim MessId As Integer
 
-                RadNavigation1.DataBind()
-                'If LocalAPI.GetNotificationPending(Context.User.Identity.GetUserName(), Asunto, MessId) Then
-                '    InfoMessage(Asunto)
-                'End If
-
-                ' Device detection
-                'Dim screenSize As DeviceScreenSize = Detector.GetScreenSize(Request.UserAgent)
-                'If screenSize = DeviceScreenSize.ExtraLarge Then
-                '    RadMenu2.RenderMode = Telerik.Web.UI.RenderMode.Classic
-                'End If
+                'RadNavigation1.DataBind()
+                'RadNavigation2.DataBind()
 
                 lblCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
 
-                LoginViewMenuSetting.DataBind()
             End If
         End If
 
@@ -160,6 +149,7 @@ Public Class ADM_Main_Responsive
     Public Property UserName() As String
         Get
             UserName = lblUserName.Text
+
         End Get
         Set(ByVal value As String)
             lblUserName.Text = value.ToString
@@ -191,7 +181,7 @@ Public Class ADM_Main_Responsive
         End If
 
     End Function
-    Private Sub btnSwitchCompany_Click(sender As Object, e As EventArgs) Handles btnSwitchCompany.Click
+    Public Sub btnSwitchCompany_Click(sender As Object, e As EventArgs)
         RadToolTipSwitchCompany.Visible = True
         RadToolTipSwitchCompany.Show()
     End Sub

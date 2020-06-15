@@ -57,7 +57,7 @@
             <Columns>
                 <telerik:GridTemplateColumn DataField="To" HeaderText="From/To/Date/Subject" SortExpression="To" UniqueName="To" HeaderStyle-Width="350px" ItemStyle-Width="150px" ItemStyle-Wrap="true" ItemStyle-VerticalAlign="Top">
                     <ItemTemplate>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <b>From:</b> <%# Eval("From")%>

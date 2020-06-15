@@ -35,7 +35,7 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
-    <table class="table-condensed" style="width: 100%;">
+    <table class="table-sm" style="width: 100%;">
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
@@ -102,8 +102,8 @@
                                 </telerik:RadTextBox>
                             </td>
                             <td>
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                                 </asp:LinkButton>
 
                             </td>
@@ -114,11 +114,11 @@
         </tr>
         <tr>
             <td>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 90px">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                            <span class="glyphicon glyphicon-plus"></span>&nbsp;Transmittal
+                                            <i class="fas fa-plus"></i>&nbsp;Transmittal
                             </asp:LinkButton>
                         </td>
                         <td style="width: 90px">
@@ -258,13 +258,13 @@
                                         <tr>
                                             <td style="width: 50%; text-align: center">
                                                 <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
-                                                    <span class="glyphicon glyphicon-share"></span></a>
+                                                    <i class="far fa-share-square"></i></a>
                                                 </a>
                                             </td>
                                             <td style="text-align: center">
                                                 <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="Email" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
                                                     UseSubmitBehavior="false" Enabled='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
-                                                                <span aria-hidden="true" class="glyphicon glyphicon-envelope"></span>
+                                                                <i class="far fa-envelope"></i>
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -282,7 +282,7 @@
                             <EditColumn ButtonType="PushButton">
                             </EditColumn>
                             <FormTemplate>
-                                <table class="table-condensed" style="width: 650px">
+                                <table class="table-sm" style="width: 650px">
                                     <tr>
                                         <td style="padding-top: 30px">Job status should be: <b>Done</b>
                                         </td>
@@ -302,11 +302,11 @@
                                     <tr>
                                         <td style="text-align: right; padding-top: 20px; padding-bottom: 10px; width: 100%">
                                             <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CommandName="PerformInsert">
-                                                <span class="glyphicon glyphicon-plus"></span>&nbsp;Insert
+                                                <i class="fas fa-plus"></i>&nbsp;Insert
                                             </asp:LinkButton>
                                             &nbsp;&nbsp;&nbsp;
                                             <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
-                                                <span class="glyphicon glyphicon-plus"></span>&nbsp;Cancel
+                                                <i class="fas fa-plus"></i>&nbsp;Cancel
                                             </asp:LinkButton>
                                         </td>
                                     </tr>

@@ -3,13 +3,13 @@
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <%@ MasterType VirtualPath="~/master/MasterPage.Master" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
         </tr>
         <tr>
             <td style="width: 150px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Create New Company">
-                    <span class="glyphicon glyphicon-plus"> Company</span>
+                    <span class="fas fa-plus"> Company</span>
                 </asp:LinkButton>
             </td>
             <td style="width: 120px; text-align: right">Payment Status:
@@ -40,13 +40,13 @@
                 <asp:Label ID="lblMsg" runat="server" Style="font-size: medium; color: #cc0000; font-family: Calibri, Verdana"></asp:Label>
             </td>
             <td style="width: 100px; text-align: right">
-                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <span class="glyphicon glyphicon-search"></span> Search
+                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
                 </asp:LinkButton>
             </td>
         </tr>
     </table>
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" CellSpacing="0" DataSourceID="SqlDataSource1" AllowAutomaticUpdates="false" AllowAutomaticDeletes="false" ShowFooter="true"
@@ -147,13 +147,13 @@
                                             <td style="width: 30px">
                                                 <asp:LinkButton ID="btnSentContactAgain" runat="server" CommandName="GetStartedEmail" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
                                                     ToolTip="Send Email with Help to Get Started with PASconcept!">
-                                                    <span class="glyphicon glyphicon-envelope"></span>
+                                                    <i class="far fa-envelope"></i>
                                                 </asp:LinkButton>
                                             </td>
                                             <td style="width: 30px">
                                                 <asp:LinkButton ID="btnBindAxzesClient" runat="server" CommandName="BindAxzesClient" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
                                                     ToolTip="Bind Company to Axzes Client">
-                                                    <span class="glyphicon glyphicon-user"></span>
+                                                    <i class="fas fa-user"></i>
                                                 </asp:LinkButton>
                                             </td>
                                             <td>
@@ -181,8 +181,8 @@
         <table class="table table-bordered" style="width: 650px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; width: 650px">
-                        <span class="label label-default center-block">Bind Company to Axzes Client & Job
+                    <h2 style="margin: 0; text-align: center; color:white; width: 650px">
+                        <span class="navbar bg-dark">Bind Company to Axzes Client & Job
                         </span>
                     </h2>
                 </td>
@@ -234,7 +234,7 @@
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnBindAxzesClient" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" ValidationGroup="BindAxzesClient">
-                                    <span class="glyphicon glyphicon-ok"></span> Bind Company<-->Axzes
+                                    <i class="fas fa-check"></i> Bind Company<-->Axzes
                     </asp:LinkButton>
                 </td>
             </tr>
