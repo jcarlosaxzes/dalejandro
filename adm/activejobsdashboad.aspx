@@ -298,15 +298,15 @@
     <div style="text-align: left">
         <b>Status Legend: </b>
 
-        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(0) %>">Not in Progress</span>
+        <span class='<%# LocalAPI.GetJobStatusLabelCSS(0) %>'>Not in Progress</span>
 
-        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(2) %>">In Progress</span>
+        <span class='<%# LocalAPI.GetJobStatusLabelCSS(2) %>'>In Progress</span>
 
-        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(3) %>">On Hold</span>
+        <span class='<%# LocalAPI.GetJobStatusLabelCSS(3) %>'>On Hold</span>
 
-        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(4) %>">Submitted</span>
+        <span class='<%# LocalAPI.GetJobStatusLabelCSS(4) %>'>Submitted</span>
 
-        <span class="label  <%# LocalAPI.GetJobStatusLabelCSS(5) %>">Under Revision</span>
+        <span class='<%# LocalAPI.GetJobStatusLabelCSS(5) %>'>Under Revision</span>
     </div>
     <div class="Formulario">
         <telerik:RadGrid ID="RadGridFooter" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDateWORKHOURS" Width="100%" ShowHeader="false">
