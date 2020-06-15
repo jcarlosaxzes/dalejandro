@@ -29,7 +29,7 @@
                 <Content>
                     <div style="text-align: left" class="PanelFilter noprint">
                         <asp:Panel ID="pnlFind" runat="server">
-                            <table style="width: 100%" class="table-condensed Formulario">
+                            <table style="width: 100%" class="table-sm Formulario">
                                 <tr>
                                     <td style="width: 100px">Discipline:
                                     </td>
@@ -59,7 +59,7 @@
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Content>
-                    <table class="table-condensed noprint">
+                    <table class="table-sm noprint">
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Task">

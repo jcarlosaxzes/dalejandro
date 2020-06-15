@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <table class="table-condensed noprint" style="width: 100%">
+        <table class="table-sm noprint" style="width: 100%">
             <tr>
                 <td style="width: 100px; text-align: left">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -125,13 +125,13 @@
                 </td>
                 <td style="text-align: center; width: 100px">
                     <asp:LinkButton ID="btnImport" runat="server" ToolTip="Import records from CSV File" Width="100px"
-                        CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                        CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-upload"></i> Import
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center; width: 100px">
                     <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Width="100px"
-                        CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                        CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-download"></i> Export
                     </asp:LinkButton>
                 </td>
@@ -804,7 +804,7 @@
                             CommandName="Update"> Update
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" Text=""
+                    <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" Text=""
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
                     </td>

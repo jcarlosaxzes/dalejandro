@@ -108,9 +108,20 @@
                     <td style="text-align: right; width: 250px">Proposal Task:
                     </td>
                     <td style="text-align: left">
-                        <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="90%" Sort="Descending"
+<%--                        <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="90%" Sort="Descending"
                             DataTextField="Description" DataValueField="Id" CausesValidation="false">
-                        </telerik:RadComboBox>
+                        </telerik:RadComboBox>--%>
+                        <telerik:RadMultiColumnComboBox ID="cboMulticolumnTask" runat="server" DataSourceID="SqlDataSourceProposalTask" DataTextField="Description" DataValueField="Id" AutoPostBack="true" Height="300px"
+                            Width="90%" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
+                            FilterFields="Description">
+                            <ColumnsCollection>
+                                <telerik:MultiColumnComboBoxColumn Field="ProposalNumber" Title="Proposal Number" Width="150px" />
+                                <telerik:MultiColumnComboBoxColumn Field="Description" Title="Description" />
+                                <telerik:MultiColumnComboBoxColumn Field="BillType" Title="Bill Type" Width="200px" />
+                                <telerik:MultiColumnComboBoxColumn Field="Hours" Title="Hours" Width="100px" />
+                            </ColumnsCollection>
+                        </telerik:RadMultiColumnComboBox>
+
                     </td>
                 </tr>
             </table>
@@ -121,7 +132,7 @@
                     <td style="text-align: right; width: 250px">Ticket:
                     </td>
                     <td style="text-align: left">
-                        <telerik:RadComboBox ID="cboActiveTickets" runat="server" DataSourceID="SqlDataSourceActiveTickets" Width="90%" AutoPostBack="true"
+                        <telerik:RadComboBox ID="cboActiveTickets" runat="server" DataSourceID="SqlDataSourceActiveTickets" Width="90%" AutoPostBack="true" Height="300px"
                             DataTextField="Title" DataValueField="Id" CausesValidation="false" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Select Ticket...)" Value="0" />
@@ -137,7 +148,7 @@
                 <td style="text-align: right; width: 250px">Category:
                 </td>
                 <td style="text-align: left">
-                    <telerik:RadComboBox ID="cboCategory" runat="server" DataSourceID="SqlDataSourceCategory" ValidationGroup="time_insert"
+                    <telerik:RadComboBox ID="cboCategory" runat="server" DataSourceID="SqlDataSourceCategory" ValidationGroup="time_insert" Height="300px"
                         DataTextField="Name" DataValueField="Id" Width="90%" AppendDataBoundItems="true" CausesValidation="false">
                         <Items>
                             <telerik:RadComboBoxItem Text="(Select Time Sheet Category...)" Value="0" />
@@ -178,7 +189,7 @@
         </table>
 
         <div style="margin-left:10px;margin-right:10px">
-        <h3>Last Time Records of this Job</h3>
+        <h3>Last Time Records for this Job</h3>
         <telerik:RadGrid ID="RadGridTimes" runat="server" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true" AllowSorting="True" DataSourceID="SqlDataSourceTimes"
             Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="500px"
             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
@@ -307,6 +318,7 @@
     </asp:SqlDataSource>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblClientId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedJob" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedTicket" runat="server" Visible="False" Text="0"></asp:Label>

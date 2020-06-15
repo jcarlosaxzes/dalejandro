@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Roles" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="roles.aspx.vb" Inherits="pasconcept20.roles" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <table class="table-condensed Formulario" style="width:100%">
+    <table class="table-sm Formulario" style="width:100%">
         <tr>
             <td style="width:100px">
                 <asp:LinkButton ID="btnNewRole" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">

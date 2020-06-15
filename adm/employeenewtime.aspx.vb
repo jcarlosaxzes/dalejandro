@@ -12,31 +12,13 @@ Public Class employeenewtime
                 lblSelectedJob.Text = Request.QueryString("JobId")
                 lblJobName.Text = LocalAPI.GetJobName(lblSelectedJob.Text)
 
-                Dim clientId As Integer = LocalAPI.GetJobProperty(lblSelectedJob.Text, "Client")
+                lblClientId.Text = LocalAPI.GetJobProperty(lblSelectedJob.Text, "Client")
 
                 cboCategory.DataBind()
 
                 If Not Request.QueryString("JobTicketId") Is Nothing Then
                     lblSelectedTicket.Text = Request.QueryString("JobTicketId")
                 End If
-
-                ' Botones Time & TimeAndInvoices Visible????
-                Dim type As Integer = LocalAPI.GetClientProperty(clientId, "BillType")
-                Select Case type
-                    Case 1  ' Solo Time
-                        btnInsertTimeAndInvoice.Visible = False
-                    Case 2  ' Solo Time+Invoices
-                        btnInsertTime.Visible = False
-                    Case Else
-                        ' Mismo analisis para el Job
-                        type = LocalAPI.GetJobProperty(lblSelectedJob.Text, "BillType")
-                        Select Case type
-                            Case 1  ' Solo Time
-                                btnInsertTimeAndInvoice.Visible = False
-                            Case 2  ' Solo Time+Invoices
-                                btnInsertTime.Visible = False
-                        End Select
-                End Select
 
                 If Not Request.QueryString("Dialog") Is Nothing Then
                     Master.HideMasterMenu()
@@ -87,13 +69,20 @@ Public Class employeenewtime
             cboCategory.SelectedValue = DefaultValuesObject("CategoryId")
 
             If divProposalTask.Visible Then
-                cboTask.DataBind()
-                cboTask.SelectedValue = DefaultValuesObject("ProposalTaskId")
+                'cboTask.DataBind()
+                'cboTask.SelectedValue = DefaultValuesObject("ProposalTaskId")
+                cboMulticolumnTask.DataBind()
+                cboMulticolumnTask.Value = DefaultValuesObject("ProposalTaskId")
+                cboMulticolumnTask.Focus()
+            Else
+                txtDescription.Focus()
             End If
 
-            txtDescription.Focus()
 
             RadGridTimes.DataBind()
+
+            BotonesVisibles()
+
         Catch ex As Exception
 
         End Try
@@ -137,8 +126,10 @@ Public Class employeenewtime
     End Sub
     Protected Sub LocalNewInvoice(TimeId As Integer)
         Dim dRate As Double = 0
-        If Val(cboTask.SelectedValue) > 0 Then
-            dRate = LocalAPI.GetProposalTaskRate(cboTask.SelectedValue)
+        'If Val(cboTask.SelectedValue) > 0 Then
+        'dRate = LocalAPI.GetProposalTaskRate(cboTask.SelectedValue)
+        If Val(cboMulticolumnTask.Value) > 0 Then
+            dRate = LocalAPI.GetProposalTaskRate(cboMulticolumnTask.Value)
         Else
             ' Parche para Axzes a $35/Hour
             If lblCompanyId.Text = 260973 Then
@@ -157,8 +148,11 @@ Public Class employeenewtime
             Dim taskId As Integer = 0
             Dim JobTicketId As Integer = 0
             If divProposalTask.Visible Then
-                If cboTask.SelectedValue > 0 Then
-                    taskId = cboTask.SelectedValue
+                'If cboTask.SelectedValue > 0 Then
+                '    taskId = cboTask.SelectedValue
+                If cboMulticolumnTask.Value > 0 Then
+                    taskId = cboMulticolumnTask.Value
+
                 End If
             End If
             If divTickets.Visible Then
@@ -213,5 +207,46 @@ Public Class employeenewtime
         FormViewTimeBalance.Visible = Not FormViewTimeBalance.Visible
         lblJobName.Visible = Not FormViewTimeBalance.Visible
     End Sub
+
+    Private Sub BotonesVisibles()
+        ' Botones Time & TimeAndInvoices Visible????
+
+        ' Case 1: FROM CLIENT BillType
+        Dim type As Integer = LocalAPI.GetClientProperty(lblClientId.Text, "BillType")
+        Select Case type
+            Case 1  ' Solo Time
+                btnInsertTimeAndInvoice.Visible = False
+            Case 2  ' Solo Time+Invoices
+                btnInsertTime.Visible = False
+            Case Else
+
+                ' Case 2: FROM JOB BillType
+                type = LocalAPI.GetJobProperty(lblSelectedJob.Text, "BillType")
+                Select Case type
+                    Case 1  ' Solo Time
+                        btnInsertTimeAndInvoice.Visible = False
+                    Case 2  ' Solo Time+Invoices
+                        btnInsertTime.Visible = False
+                    Case Else
+                        If divProposalTask.Visible Then
+                            If cboMulticolumnTask.Value > 0 Then
+                                ' Case 3: FROM Proposal_detail BillType
+                                type = LocalAPI.GetProposalDetailProperty(cboMulticolumnTask.Value, "BillType")
+                                Select Case type
+                                    Case 1  ' Solo Time
+                                        btnInsertTimeAndInvoice.Visible = False
+                                    Case 2  ' Solo Time+Invoices
+                                        btnInsertTime.Visible = False
+                                End Select
+                            End If
+                        End If
+                End Select
+        End Select
+
+    End Sub
+    Private Sub cboMulticolumnTask_SelectedIndexChanged(sender As Object, e As RadMultiColumnComboBoxSelectedIndexChangedEventArgs) Handles cboMulticolumnTask.SelectedIndexChanged
+        BotonesVisibles()
+    End Sub
+
 End Class
 

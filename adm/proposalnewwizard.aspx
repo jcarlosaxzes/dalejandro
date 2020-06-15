@@ -612,6 +612,8 @@
                                                         <asp:Label ID="lblRates" runat="server" Text='<%# Eval("Rates", "{0:N2}")%>'></asp:Label>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
+                                                <telerik:GridBoundColumn DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" UniqueName="BillType"  HeaderStyle-Width="180px" >
+                                                </telerik:GridBoundColumn>
                                                 <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True"
                                                     SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimated" Aggregate="Sum"
                                                     FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
@@ -671,7 +673,7 @@
                                         <asp:LinkButton ID="btnTCUpdate" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                             <i class="fas fa-check"></i>&nbsp;&nbsp;Save
                                         </asp:LinkButton>
-                                        <asp:LinkButton ID="btnCloseTC" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                        <asp:LinkButton ID="btnCloseTC" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                             Close
                                         </asp:LinkButton>
                                     </td>
@@ -1075,18 +1077,6 @@
         </DeleteParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceInsertFee" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="PROPOSAL_Fee_INSERT" InsertCommandType="StoredProcedure"
-        SelectCommand="SELECT [Id], [taskcode], [Description], [Hours], [Rates] FROM [Proposal_tasks] WHERE (companyId = @companyId) ORDER BY taskcode">
-        <InsertParameters>
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="cboMulticolumnTask" Name="TaskId" PropertyName="Value" Type="Int32" />
-            <asp:ControlParameter ControlID="lblproposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
-        </InsertParameters>
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcePropTC" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

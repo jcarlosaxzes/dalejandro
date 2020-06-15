@@ -464,7 +464,7 @@
                                     <i class="fas fa-check"></i> Insert
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                      Cancel
                     </asp:LinkButton>
 

@@ -274,7 +274,7 @@
                         CommandName="Update"> Update
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelUpdatePayment" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false"
+                    <asp:LinkButton ID="btnCancelUpdatePayment" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
                 </td>

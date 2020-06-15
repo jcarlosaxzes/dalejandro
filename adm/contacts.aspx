@@ -52,7 +52,7 @@
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                    <table class="table-condensed Formulario" style="width: 100%">
+                    <table class="table-sm Formulario" style="width: 100%">
                         <tr>
                             <td style="width: 100px">Contact Type:</td>
                             <td style="width: 400px">
@@ -86,30 +86,30 @@
     <div>
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 80px">
+                <td style="width: 120px">
                     <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Client
                     </asp:LinkButton>
 
                 </td>
-                <td style="width: 80px">
+                <td style="width: 120px">
                     <asp:LinkButton ID="btnNewEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                             <i class="fas fa-plus"></i>&nbsp;Employee
                     </asp:LinkButton>
 
                 </td>
-                <td style="width: 80px">
+                <td style="width: 120px">
                     <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> SubConsultant
                     </asp:LinkButton>
                 </td>
-                <td style="width: 80px">
+                <td style="width: 120px">
                     <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Vendor
                     </asp:LinkButton>
 
                 </td>
-                <td style="width: 80px">
+                <td style="width: 120px">
                     <asp:LinkButton ID="btnNewContact" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                         <i class="fas fa-plus"></i>&nbsp;Other
                     </asp:LinkButton>
@@ -121,13 +121,13 @@
                     </h3>
                 </td>
 
-                <td style="width: 80px">
-                    <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
                                         <i class="fas fa-cloud-upload-alt"></i>&nbsp;Import
                     </asp:LinkButton>
                 </td>
-                <td style="width: 80px">
-                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" ToolTip="Update records from CSV files">
+                <td style="width: 120px">
+                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Update records from CSV files">
                                         Update
                     </asp:LinkButton>
                 </td>

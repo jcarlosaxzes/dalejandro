@@ -152,7 +152,7 @@
         </div>
     </div>
 
-    <table class="table-condensed noprint Formulario" style="width: 100%">
+    <table class="table-sm noprint Formulario" style="width: 100%">
         <tr>
             <td style="width: 80px; text-align: left">
                 <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -187,7 +187,7 @@
 
             <td style="width: 100px">
                 <asp:LinkButton runat="server" ID="CSVButton"
-                    CssClass="btn btn-default btn"
+                    CssClass="btn btn-secondary btn"
                     UseSubmitBehavior="false"
                     ToolTip="Export List to Comma-Separated Values format (.CSV)"
                     CausesValidation="false">

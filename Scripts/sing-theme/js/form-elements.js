@@ -27,7 +27,7 @@ $(function(){
                 "<label class='checkbox'> <input type='checkbox' class='bootstrap-wysihtml5-insert-link-target' checked>" + locale.link.target + "</label>" +
                 "</div>" +
                 "<div class='modal-footer'>" +
-                "<button class='btn btn-default' data-dismiss='modal'>" + locale.link.cancel + "</button>" +
+                "<button class='btn btn-secondary' data-dismiss='modal'>" + locale.link.cancel + "</button>" +
                 "<button href='#' class='btn btn-primary' data-dismiss='modal'>" + locale.link.insert + "</button>" +
                 "</div>" +
                 "</div>" +

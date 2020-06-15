@@ -496,7 +496,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
                 </td>
@@ -523,7 +523,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancel2" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancel2" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
                 </td>

@@ -17,7 +17,7 @@
     </style>
 
     
-    <table style="width: 100%" class="table-condensed Formulario">
+    <table style="width: 100%" class="table-sm Formulario">
         <tr>
             <td style="width: 150px;">
                 <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear"

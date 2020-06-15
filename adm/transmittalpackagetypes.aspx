@@ -17,7 +17,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <table class="table-condensed noprint" style="width:100%">
+    <table class="table-sm noprint" style="width:100%">
         <tr>
             <td class="ToolButtom noprint">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Package Type">

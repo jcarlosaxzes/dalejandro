@@ -36,6 +36,7 @@
 
     <link href="~/App_Themes/Estandar/Estandar.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/pasconcept.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.1.1-web/css/all.min.css" rel="stylesheet" />
     <%--Bootstrap reference begin--%>
     <%--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />--%>
     <%--Bootstrap reference end--%>

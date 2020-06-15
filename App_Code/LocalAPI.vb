@@ -3299,7 +3299,7 @@ Public Class LocalAPI
 
 
     Public Shared Function IsProposalTaskForJob(ByVal jobId As Integer) As Boolean
-        Return GetNumericEscalar("SELECT Count(Proposal_details.Id) FROM Proposal_tasks INNER JOIN Proposal INNER JOIN Jobs ON Proposal.JobId = Jobs.Id INNER JOIN Proposal_details ON Proposal.Id = Proposal_details.ProposalId ON Proposal_tasks.Id = Proposal_details.TaskId WHERE Jobs.Id=" & jobId & " and Proposal_tasks.HourRatesService=1")
+        Return GetNumericEscalar($"SELECT Count(*) FROM Proposal_details inner join Proposal on Proposal_details.ProposalId=Proposal.Id  WHERE Proposal.JobId={jobId}")
     End Function
 
     Public Shared Function IsEmployeeId(ByVal lId As Integer) As Boolean
@@ -4628,7 +4628,7 @@ Public Class LocalAPI
     Public Shared Function GetProposalDetailProperty(ByVal detailId As Integer, sProperty As String) As String
         Try
             Select Case sProperty
-                Case "Amount", "Hours", "Rates", "phaseId", "positionId", "TaskId"
+                Case "Amount", "Hours", "Rates", "phaseId", "positionId", "TaskId", "BillType"
                     ' Numeric values
                     Return GetNumericEscalar("SELECT ISNULL([" & sProperty & "],0) FROM Proposal_details WHERE Id=" & detailId)
 

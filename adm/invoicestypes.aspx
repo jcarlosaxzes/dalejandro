@@ -23,7 +23,7 @@
         <Rows>
             <telerik:LayoutRow>
                 <Content>
-                    <table class="table-condensed noprint">
+                    <table class="table-sm noprint">
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Schedule">

@@ -17,7 +17,7 @@
     <div class="card card-body">
         <asp:Panel ID="Panel1" runat="server" DefaultButton="btnFind">
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-condensed Formulario" style="width: 100%">
+                <table class="table-sm Formulario" style="width: 100%">
                     <tr>
                         <td style="text-align: right; width: 100px">Group:
                         </td>

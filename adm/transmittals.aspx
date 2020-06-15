@@ -305,7 +305,7 @@
                                                 <i class="fas fa-plus"></i>&nbsp;Insert
                                             </asp:LinkButton>
                                             &nbsp;&nbsp;&nbsp;
-                                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
+                                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
                                                 <i class="fas fa-plus"></i>&nbsp;Cancel
                                             </asp:LinkButton>
                                         </td>

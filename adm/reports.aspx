@@ -105,7 +105,7 @@
 
                 </td>
                 <td style="text-align: right;width:100px">
-                    <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" Width="80px" ToolTip="Export Report to Excel file format (.CSV)">
+                    <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" Width="80px" ToolTip="Export Report to Excel file format (.CSV)">
                         <i class="fas fa-cloud-download-alt"></i> Export
                     </asp:LinkButton>
 

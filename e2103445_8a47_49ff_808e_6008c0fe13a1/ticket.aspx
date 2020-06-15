@@ -263,7 +263,7 @@
                             </asp:LinkButton>
 
                             &nbsp;&nbsp;&nbsp;
-                             <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default btn-lg" UseSubmitBehavior="false" Width="150px" CommandName="Cancel" CausesValidation="false">
+                             <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" Width="150px" CommandName="Cancel" CausesValidation="false">
                                 Cancel
                              </asp:LinkButton>
                         </td>

@@ -39,21 +39,21 @@
     <div class="Formulario">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 50px">From:
+                <td style="width: 100px; text-align:right">From:
                 </td>
                 <td style="width: 130px">
-                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Width="120px" AutoPostBack="true"
+                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Width="100%" AutoPostBack="true"
                         DateFormat="MM/dd/yyyy">
                     </telerik:RadDatePicker>
                 </td>
-                <td style="width: 30px">To:
+                <td style="width: 50px; text-align:right">To:
                 </td>
-                <td style="width: 100px">
-                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" Width="100px" DateFormat="MM/dd/yyyy" ToolTip="Payroll Closing Date"
+                <td style="width: 130px">
+                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" Width="100%" DateFormat="MM/dd/yyyy" ToolTip="Payroll Closing Date"
                         ReadOnly="True">
                     </telerik:RadDateInput>
                 </td>
-                <td style="width: 80px; text-align: right">Employee:
+                <td style="width: 100px; text-align:right">Employee:
                 </td>
                 <td style="width:250px">
                     <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" Height="400px"
@@ -62,12 +62,12 @@
                         <CollapseAnimation Type="OutQuint" Duration="200"></CollapseAnimation>
                     </telerik:RadComboBox>
                 </td>
-                <td style="width: 100px">
+                <td style="width: 130px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
                                     <i class="fas fa-backward"></i> Previous
                     </asp:LinkButton>
                 </td>
-                <td style="width: 100px">
+                <td style="width: 130px">
                     <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
                                     <i class="fas fa-forward"></i> Next
                     </asp:LinkButton>

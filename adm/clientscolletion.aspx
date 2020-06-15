@@ -9,7 +9,7 @@
             <td>
                 <div class="PanelFilter">
                     <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                        <table style="width: 100%" class="table-condensed Formulario">
+                        <table style="width: 100%" class="table-sm Formulario">
                             <tr>
                                 <td style="width: 300px">
                                     <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="true" Width="100%" Label="Collection Status:">

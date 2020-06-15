@@ -7,7 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="main-content">
         <div class="Formulario">
-            <table class="table-condensed noprint" style="width: 100%">
+            <table class="table-sm noprint" style="width: 100%">
                 <tr>
                     <td style="width: 100px">
                         <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -20,7 +20,7 @@
                         </asp:LinkButton>
                     </td>
                     <td style="text-align: right">
-                        <asp:LinkButton ID="btnRefreshGrid" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Refresh List">
+                        <asp:LinkButton ID="btnRefreshGrid" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Refresh List">
                         <i class="fas fa-redo"></i> Refresh
                         </asp:LinkButton>
                     </td>

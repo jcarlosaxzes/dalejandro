@@ -35,12 +35,12 @@
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
-                    <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+                    <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="far fa-calendar-alt"></i></span> Export to Outlook
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
-                    <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+                    <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="fas fa-download"></i> Export to PDF
                     </asp:LinkButton>
                 </td>
@@ -178,7 +178,7 @@
                         Accept
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                     <asp:LinkButton ID="btnCancelSendCalendar" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" CausesValidation="false">
+                     <asp:LinkButton ID="btnCancelSendCalendar" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" CausesValidation="false">
                                      Cancel
                      </asp:LinkButton>
                 </td>

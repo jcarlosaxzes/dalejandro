@@ -38,23 +38,19 @@ Public Class job_proposals
                 'sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Origen=152"
                 'CreateRadWindows(e.CommandName, sUrl, 980, 890, False, "OnClientCloseProposals")
                 Response.Redirect(sUrl)
-            Case "AceptProposal"
-                sUrl = "~/ADMCLI/AceptProposal.aspx?ProposalId=" & e.CommandArgument
-                'Response.RedirectPermanent(sUrl)
-                CreateRadWindows(e.CommandName, sUrl, 960, 810, False, "OnClientCloseProposals")
             Case "GetSharedLink"
-                sUrl = "~/ADMCLI/ShareLink.aspx?ObjType=11&ObjId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 520, 400, False, "OnClientCloseProposals")
+                sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
                 ' Codigo sapx anterior
                 '<asp:HyperLink ID="hlkProposalEdit" runat="server" Text='<%# Eval("ProposalNumber")%>' NavigateUrl='<%# Eval("Id", "~/adm/proposal.aspx?proposalId={0}")%>' ToolTip="Click to edit proposal in new tab" Target="_blank"></asp:HyperLink>
                 sUrl = "~/adm/proposal.aspx?proposalId=" & e.CommandArgument & "&HideMasterMenu=1"
-                CreateRadWindows(e.CommandName, sUrl, -1, 810, False, "OnClientCloseProposals")
+                CreateRadWindows(e.CommandName, sUrl, -1, 810, False)
             Case "Delete"
         End Select
     End Sub
 
-    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean, OnClientCloseFn As String)
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
         RadWindowManager1.Windows.Clear()
         Dim window1 As RadWindow = New RadWindow()
         window1.NavigateUrl = sUrl
@@ -71,7 +67,7 @@ Public Class job_proposals
             window1.Height = Height
         End If
         window1.Modal = True
-        window1.OnClientClose = OnClientCloseFn
+        window1.OnClientClose = "OnClientClose"
         RadWindowManager1.Windows.Add(window1)
     End Sub
     Public Function ProposalStatusEnabled(proposalId As Integer, ByVal Status As Object) As Boolean

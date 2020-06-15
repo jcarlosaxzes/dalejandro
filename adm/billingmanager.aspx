@@ -246,13 +246,13 @@
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px">
-                            <asp:LinkButton ID="btnClientInvoicesUnhide" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
+                            <asp:LinkButton ID="btnClientInvoicesUnhide" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
                                         <i class="far fa-eye"></i>Unhide
                             </asp:LinkButton>
                         </td>
                         <td style="text-align: right">
                             <asp:LinkButton ID="btnExportInvoices" runat="server" ToolTip="Export records to Excel" Width="100px"
-                                CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-download"></i> Export
                             </asp:LinkButton>
                         </td>
@@ -446,7 +446,7 @@
                             </asp:LinkButton>
                         </td>
                         <td>
-                            <asp:LinkButton ID="btnClientStatementsUnhide" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
+                            <asp:LinkButton ID="btnClientStatementsUnhide" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
                                         <i class="far fa-eye"></i>Unhide
                             </asp:LinkButton>
 
@@ -573,7 +573,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
                 </td>
@@ -601,7 +601,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelStatementDlg" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancelStatementDlg" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
                 </td>
@@ -646,7 +646,7 @@
                                     <i class="fas fa-check"></i> Insert
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                      Cancel
                     </asp:LinkButton>
 
@@ -692,7 +692,7 @@
                                     <i class="fas fa-check"></i> Insert
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                      Cancel
                     </asp:LinkButton>
 
@@ -795,7 +795,7 @@
                                     <i class="fas fa-check"></i> Update
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
+            <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>
 
@@ -899,7 +899,7 @@
                                     <i class="fas fa-check"></i> Insert Remainder
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="btnCancelRemaider" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
+            <asp:LinkButton ID="btnCancelRemaider" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>
 
@@ -996,7 +996,7 @@
                                     <i class="fas fa-check"></i> Insert Remainder
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="btnCancelStatementReminder" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
+            <asp:LinkButton ID="btnCancelStatementReminder" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>
 

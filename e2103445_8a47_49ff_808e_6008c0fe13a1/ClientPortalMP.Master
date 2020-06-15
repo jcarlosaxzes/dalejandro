@@ -100,7 +100,7 @@
                                                         window.print();
                                                     }
                                                 </script>
-                                                <button type="button" class="btn btn-default noprint" onclick="PrintPage()">Print</button>
+                                                <button type="button" class="btn btn-secondary noprint" onclick="PrintPage()">Print</button>
                                                 <h3 style="margin: 5px"><%# Eval("Name") %></h3>
                                                 <i class="fas fa-map-marker-alt"></i>&nbsp;<%# Eval("Address") %><br>
                                                 <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
