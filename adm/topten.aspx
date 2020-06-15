@@ -5,7 +5,7 @@
 
     <div class="pas-container">
         <div class="Formulario">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="width: 60px; text-align: right">Year:
                     </td>

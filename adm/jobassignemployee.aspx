@@ -84,7 +84,7 @@
             </script>
         </telerik:RadCodeBlock>--%>
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     <h3 style="margin: 5px">
@@ -98,12 +98,12 @@
             </tr>
         </table>
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 60%; vertical-align: top">
 
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 130px; text-align: right">Department:</td>
                             <td>
@@ -213,7 +213,7 @@
 
         <hr />
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     

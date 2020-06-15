@@ -142,7 +142,7 @@
             <div class="card card-body">
                 <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" Visible="false">
                     <ItemTemplate>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td colspan="9">
                                     <hr style="margin: 0" />
@@ -571,7 +571,7 @@
 
                         <%--Documents--%>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Documents" StepType="Step">
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td colspan="3">
                                         <asp:Panel runat="server" class="DropZoneClient">

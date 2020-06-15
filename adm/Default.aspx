@@ -31,7 +31,7 @@
     </style>
 
      <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="text-align: center">
                     <h3 style="margin: 0">Company Overview

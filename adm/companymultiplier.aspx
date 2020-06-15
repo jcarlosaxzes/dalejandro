@@ -63,7 +63,7 @@
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Company Multiplier" StepType="Step">
                     <div>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
@@ -87,7 +87,7 @@
 
                             </tr>
                         </table>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <telerik:RadGrid ID="RadGridMultiplier" GridLines="None" runat="server" AllowAutomaticDeletes="True"
@@ -269,7 +269,7 @@
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Employee Hourly Wage" StepType="Step">
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td>
                                 <h3>Employee Hourly Wage</h3>
@@ -357,7 +357,7 @@
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Monthly Salary Calculation" StepType="Step">
                     <div>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <h3>Monthly Salary Calculation</h3>

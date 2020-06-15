@@ -1014,7 +1014,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed" style="width: 100%">
+                                    <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td width="180px">Activate PayPal Module:
                                             </td>
@@ -1074,7 +1074,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed" style="width: 100%">
+                                    <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td width="180px">Attorney Firm:
                                             </td>

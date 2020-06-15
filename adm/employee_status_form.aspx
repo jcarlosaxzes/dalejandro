@@ -18,7 +18,7 @@
             </h3>
             <h4>With the change of status of an employee:
             </h4>
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td colspan="2" style="padding-left: 15px">1.- PASconcept permissions is updated (Active - Permit,  Inactive - Deny )
                     </td>
@@ -60,7 +60,7 @@
                 </tr>
             </table>
             <asp:Panel runat="server" ID="panelActive">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 180px;">Hourly Rate ($/hour):
                         </td>
@@ -100,7 +100,7 @@
                 </table>
             </asp:Panel>
 
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="padding-left: 50px">
                         <telerik:RadCheckBox runat="server" ID="chkConfirm" Text="I read the information and confirm that I will change the status"></telerik:RadCheckBox>

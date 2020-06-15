@@ -7,7 +7,7 @@
         <%--Header--%>
         <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompany" RenderOuterTable="false">
             <ItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: left; width: 200px">
                             <a href='<%# Eval("web") %>' target="_blank">
@@ -43,7 +43,7 @@
     <div>
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
             <ItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td>
                             <h1>TRANSMITTAL LETTER</h1>
@@ -207,7 +207,7 @@
                 </p>
             </ItemTemplate>
             <EditItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: center;">
                             <h1 style="margin: 0">EDIT TRANSMITTAL LETTER</h1>
@@ -225,7 +225,7 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: right;"><b>A/E of Record:</b></td>
                         <td style="text-align: left">
@@ -263,7 +263,7 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: left">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" OnClick="btnNew_Click" CausesValidation="false">
@@ -377,7 +377,7 @@
 
     <div>
         <%--Footeer--%>
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 40%">
                     <a href="https://pasconcept.com/" target="_blank">

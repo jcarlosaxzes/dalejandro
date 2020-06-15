@@ -78,7 +78,7 @@
         <div class="card card-body">
             <div class="Formulario">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 150px; text-align: right">Type:
                             </td>

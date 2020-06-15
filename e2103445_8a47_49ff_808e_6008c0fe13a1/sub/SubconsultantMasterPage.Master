@@ -134,7 +134,7 @@
                 <telerik:LayoutRow CssClass="noprint">
                     <Content>
                         <asp:Panel ID="pnl_reviews" runat="server" Visible="false">
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="text-align: center" colspan="3">
                                         <small>

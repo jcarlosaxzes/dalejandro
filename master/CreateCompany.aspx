@@ -10,7 +10,7 @@
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="650px" Width="100%" BorderColor="LightBlue" BorderStyle="Solid" RenderMode="Lightweight" Skin="Material">
             <WizardSteps>
                 <telerik:RadWizardStep ID="RadWizardStep1" Title="Identification" runat="server" StepType="Start" ValidationGroup="accountInfo" CausesValidation="true">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 180px; text-align: right">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtCompanyName" EnableClientScript="true" ValidationGroup="accountInfo" ErrorMessage="Name is required" Text="*" ForeColor="Red" SetFocusOnError="true"></asp:RequiredFieldValidator>
@@ -127,7 +127,7 @@
                 </telerik:RadWizardStep>
 
                 <telerik:RadWizardStep Title="Billing Plan" runat="server" StepType="Step" ValidationGroup="billingInfo" CausesValidation="true">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: right; width: 180px">Select Billing Plan:
                             </td>
@@ -142,7 +142,7 @@
                         Width="100%">
                         <ItemTemplate>
 
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="text-align: right; width: 180px">
                                         Price/Period:

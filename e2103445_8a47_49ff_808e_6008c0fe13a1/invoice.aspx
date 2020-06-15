@@ -165,7 +165,7 @@
             <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" Width="100%">
                 <ItemTemplate>
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 48%">
                                 <h3><span class="navbar bg-dark">Bill To</span></h3>
@@ -189,7 +189,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top">
                                 <h2><span class="navbar bg-dark">Invoice <%# Eval("InvoiceNumber") %></span></h2>

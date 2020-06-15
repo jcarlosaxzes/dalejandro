@@ -10,7 +10,7 @@
 
     </script>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
@@ -417,7 +417,7 @@
                                     <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="References" StepType="Step">
                                         <fieldset>
                                             <legend>Uploaded files (JPG, PDF, DOC, XLS, ...) </legend>
-                                            <table class="table-condensed" style="width: 100%">
+                                            <table class="table-sm" style="width: 100%">
                                                 <tr>
                                                     <td colspan="3">
                                                         <asp:Panel runat="server" class="DropZoneClient">

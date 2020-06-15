@@ -26,7 +26,7 @@
                         <h3>Employee Photo</h3>
                     </legend>
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td>You can define your personal avatar. 
                                     Please select a .jpg file to upload
@@ -60,7 +60,7 @@
                     <legend>
                         <h3>Change Password</h3>
                     </legend>
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td>You can change the password to access your PASconcept account. Please bear in mind that the new password must comply with the following specifications:
                             </td>
@@ -76,7 +76,7 @@
 
                         <tr>
                             <td align="left">
-                                <table class="table-condensed" style="width: 100%">
+                                <table class="table-sm" style="width: 100%">
                                     <tr>
                                         <td align="right" width="150px" class="Normal">Old Password:
                                         </td>
@@ -128,7 +128,7 @@
                             <EditItemTemplate>
 
 
-                                <table class="table-condensed" style="width: 100%">
+                                <table class="table-sm" style="width: 100%">
                                     <tr>
                                         <td colspan="2" style="padding-left: 50px" class="NormalNegrita">You can define your favorite home page to begin PASconcept:
                                         </td>

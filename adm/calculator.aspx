@@ -293,7 +293,7 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtEstimatedUnit" ValidationGroup="Calculate"
             Text="(*) Define Estimated Unit!" ErrorMessage="Define Estimated Unit!" SetFocusOnError="true"></asp:RequiredFieldValidator>
     </div>
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td>
                 <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="300px" Width="100%">

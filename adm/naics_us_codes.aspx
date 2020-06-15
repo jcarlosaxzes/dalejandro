@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="Formulario">
         <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="width: 80px; text-align: left">
                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" Width="40px"

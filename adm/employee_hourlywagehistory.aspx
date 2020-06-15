@@ -13,7 +13,7 @@
         </telerik:RadScriptManager>
 
         <div class="container">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="text-align: center">
                         <h3>
@@ -80,7 +80,7 @@
                     <br />
                     <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
                         <ItemTemplate>
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="width: 180px">Date From:
                                     </td>
@@ -163,7 +163,7 @@
                 </telerik:RadPageView>
                 <telerik:RadPageView runat="server" ID="RadPageView2">
                     <br />
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 180px">Date From:
                             </td>
@@ -234,7 +234,7 @@
                         </tr>
                     </table>
                     <br />
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: center">
                                 <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" Text="Insert" ToolTip="Insert New Record" ValidationGroup="Insert">

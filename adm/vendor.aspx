@@ -59,7 +59,7 @@
                     </asp:LinkButton>
                     <hr style="margin: 0" />
                 </div>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: right; width: 180px">Name:
                         </td>
