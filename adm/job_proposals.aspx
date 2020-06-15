@@ -55,7 +55,7 @@
                                     ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
                                     HeaderStyle-HorizontalAlign="Center" AllowFiltering="False">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnAcept3" Text='<%# Eval("Status") %>' CommandName="AceptProposal" Width="100%" CssClass="btn btn-default btn-sm"
+                                        <asp:LinkButton ID="btnAcept3" Text='<%# Eval("Status") %>' CommandName="AceptProposal" Width="100%" CssClass="btn btn-secondary btn-sm"
                                             CommandArgument='<%# Eval("Id") %>' runat="server" Enabled='<%# ProposalStatusEnabled(Eval("Id"), Eval("Status"))%>'>
                                         </asp:LinkButton>
                                     </ItemTemplate>
@@ -72,10 +72,10 @@
                                 <telerik:GridTemplateColumn HeaderText="Share" UniqueName="Share"
                                     HeaderStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <telerik:RadButton ID="btnShareLink" runat="server" CommandName="GetSharedLink" CommandArgument='<%# Eval("Id") %>' Width="36px"
-                                            ToolTip="Get a link to copy and paste in an email or browser" ButtonType="LinkButton">
-                                            <Icon PrimaryIconUrl="../Images/Toolbar/share_16x16.png" />
-                                        </telerik:RadButton>
+                                        <asp:LinkButton ID="btnShareLink" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Get a link to copy and paste in an email or browser" Width="36px"
+                                            CommandName="GetSharedLink" UseSubmitBehavior="false">
+                                                <span aria-hidden="true" class="far fa-share-square"></span>
+                                        </asp:LinkButton>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridBoundColumn DataField="AceptedDate" DataFormatString="{0:MM/dd/yyyy}" DataType="System.DateTime"

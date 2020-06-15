@@ -1004,15 +1004,6 @@ Partial Public Class proposalnewwizard
     Protected WithEvents SqlDataSourcePhases As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''SqlDataSourceInsertFee control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceInsertFee As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
     '''SqlDataSourcePropTC control.
     '''</summary>
     '''<remarks>

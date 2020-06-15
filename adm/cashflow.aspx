@@ -22,7 +22,7 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <table class="table-condensed Formulario" style="width: 100%">
+    <table class="table-sm Formulario" style="width: 100%">
         <tr>
             <td style="width: 200px">
                 <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"

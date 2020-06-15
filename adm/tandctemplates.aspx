@@ -11,7 +11,7 @@
             <td>
                 <div class="PanelFilter">
                     <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                        <table style="width: 100%" class="table-condensed Formulario">
+                        <table style="width: 100%" class="table-sm Formulario">
                             <tr>
                                 <td style="width: 100px">Find:
                                 </td>

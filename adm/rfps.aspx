@@ -292,7 +292,7 @@
                     <td>
                         <h4>
                             <h2 style="margin: 0; text-align: center; color:white; width: 700px">
-                                <span class="navbar bg-dark">
+                                <span class="navbar navbar-expand-md bg-light">
                                     <asp:Label ID="lblRFPNumber" runat="server"></asp:Label>
                                 </span>
                             </h2>
@@ -351,7 +351,7 @@
                 <tr>
                     <td>
                         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                            <span class="navbar bg-dark">Decline Selected Records
+                            <span class="navbar navbar-expand-md bg-light">Decline Selected Records
                             </span>
                         </h2>
 
@@ -393,7 +393,7 @@
     <div>
         <telerik:RadToolTip ID="RadToolTipNewRFPforProject" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
             <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-                <span class="navbar bg-dark">New RFP for Project
+                <span class="navbar navbar-expand-md bg-light">New RFP for Project
                 </span>
             </h2>
             <table class="table-sm" style="width: 600px">

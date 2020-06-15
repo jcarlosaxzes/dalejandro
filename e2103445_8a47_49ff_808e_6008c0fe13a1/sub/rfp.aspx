@@ -444,7 +444,7 @@
             <tr>
                 <td>
                     <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-                        <span class="navbar bg-dark">Reject Proposal
+                        <span class="navbar navbar-expand-md bg-light">Reject Proposal
                         </span>
                     </h2>
 
@@ -478,7 +478,7 @@
                     &nbsp;
                     &nbsp;
                     &nbsp;
-                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default btn-lg" UseSubmitBehavior="false" Width="120px" CausesValidation="false">
+                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" Width="120px" CausesValidation="false">
                                      Cancel
                     </asp:LinkButton>
                 </td>

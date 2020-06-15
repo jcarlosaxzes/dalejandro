@@ -144,7 +144,7 @@
                                 </asp:LinkButton>
                                 &nbsp;&nbsp;&nbsp;
 
-                            <asp:LinkButton ID="btnDropbox" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Upload or attached file" Visible="false"
+                            <asp:LinkButton ID="btnDropbox" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Upload or attached file" Visible="false"
                                 OnClientClick="CallDropbox">
                                            Dropbox
                             </asp:LinkButton>

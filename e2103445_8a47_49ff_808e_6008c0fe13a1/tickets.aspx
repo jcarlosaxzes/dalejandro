@@ -7,7 +7,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="main-content">
         <div class="Formulario">
-            <table class="table-condensed noprint" style="width: 100%">
+            <table class="table-sm noprint" style="width: 100%">
                 <tr>
                     <td style="width: 100px">
                         <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -20,7 +20,7 @@
                         </asp:LinkButton>
                     </td>
                     <td style="text-align: right">
-                        <asp:LinkButton ID="btnRefreshGrid" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Refresh List">
+                        <asp:LinkButton ID="btnRefreshGrid" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Refresh List">
                         <i class="fas fa-redo"></i> Refresh
                         </asp:LinkButton>
                     </td>
@@ -88,7 +88,7 @@
         </div>
 
         <h2 style="margin: 0">
-            <span class="navbar bg-dark">
+            <span class="navbar navbar-expand-md bg-light">
                 <asp:Label ID="lblJob" runat="server"></asp:Label></span>
         </h2>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="100%"
@@ -148,7 +148,7 @@
         <telerik:RadToolTip ID="RadToolTipEditTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
             <h2 style="margin: 0">
-                <span class="navbar bg-dark">View/Edit Ticket
+                <span class="navbar navbar-expand-md bg-light">View/Edit Ticket
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server"
@@ -277,7 +277,7 @@
         <telerik:RadToolTip ID="RadToolTipInsertTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
             <h2 style="margin: 0">
-                <span class="navbar bg-dark">Insert New Ticket
+                <span class="navbar navbar-expand-md bg-light">Insert New Ticket
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary2" runat="server"

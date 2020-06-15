@@ -152,7 +152,7 @@
         </div>
     </div>
 
-    <table class="table-condensed noprint Formulario" style="width: 100%">
+    <table class="table-sm noprint Formulario" style="width: 100%">
         <tr>
             <td style="width: 80px; text-align: left">
                 <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -187,7 +187,7 @@
 
             <td style="width: 100px">
                 <asp:LinkButton runat="server" ID="CSVButton"
-                    CssClass="btn btn-default btn"
+                    CssClass="btn btn-secondary btn"
                     UseSubmitBehavior="false"
                     ToolTip="Export List to Comma-Separated Values format (.CSV)"
                     CausesValidation="false">
@@ -283,7 +283,7 @@
 
     <telerik:RadToolTip ID="RadToolTipNewCampaign" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">Create New Marketing Campaign
+            <span class="navbar navbar-expand-md bg-light">Create New Marketing Campaign
             </span>
         </h2>
         <table class="table-sm" style="width: 600px">
@@ -325,7 +325,7 @@
 
     <telerik:RadToolTip ID="RadToolTipAvailability" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">Client Availability
+            <span class="navbar navbar-expand-md bg-light">Client Availability
             </span>
         </h2>
         <table class="table-sm" style="width: 600px">

@@ -169,7 +169,7 @@
                                             <tr>
                                                 <td>
                                                     <asp:LinkButton ID="btnPhoto" runat="server" CommandName="Photo" ToolTip="Upload Employee Photo"
-                                                        CssClass="btn btn-default" UseSubmitBehavior="false" Visible="false">
+                                                        CssClass="btn btn-secondary" UseSubmitBehavior="false" Visible="false">
                                                             <i class="fas fa-user"></i> Employee Photo
                                                     </asp:LinkButton>
                                                 </td>

@@ -246,13 +246,13 @@
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px">
-                            <asp:LinkButton ID="btnClientInvoicesUnhide" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
+                            <asp:LinkButton ID="btnClientInvoicesUnhide" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
                                         <i class="far fa-eye"></i>Unhide
                             </asp:LinkButton>
                         </td>
                         <td style="text-align: right">
                             <asp:LinkButton ID="btnExportInvoices" runat="server" ToolTip="Export records to Excel" Width="100px"
-                                CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-download"></i> Export
                             </asp:LinkButton>
                         </td>
@@ -446,7 +446,7 @@
                             </asp:LinkButton>
                         </td>
                         <td>
-                            <asp:LinkButton ID="btnClientStatementsUnhide" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
+                            <asp:LinkButton ID="btnClientStatementsUnhide" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Show all hidden clients " Width="80px">
                                         <i class="far fa-eye"></i>Unhide
                             </asp:LinkButton>
 
@@ -559,7 +559,7 @@
             <tr>
                 <td>
                     <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                        <span class="navbar bg-dark">
+                        <span class="navbar navbar-expand-md bg-light">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -573,7 +573,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
                 </td>
@@ -587,7 +587,7 @@
                 <td>
 
                     <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                        <span class="navbar bg-dark">
+                        <span class="navbar navbar-expand-md bg-light">
                             <asp:Label ID="lblActionMesageStatement" runat="server"></asp:Label>Switch Company
                         </span>
                     </h2>
@@ -601,7 +601,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelStatementDlg" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancelStatementDlg" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
                 </td>
@@ -611,7 +611,7 @@
 
     <telerik:RadToolTip ID="RadToolTipInvoicesPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-            <span class="navbar bg-dark">Receive Invoice Payments
+            <span class="navbar navbar-expand-md bg-light">Receive Invoice Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -646,7 +646,7 @@
                                     <i class="fas fa-check"></i> Insert
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                      Cancel
                     </asp:LinkButton>
 
@@ -657,7 +657,7 @@
 
     <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-            <span class="navbar bg-dark">Receive Statement Payments
+            <span class="navbar navbar-expand-md bg-light">Receive Statement Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -692,7 +692,7 @@
                                     <i class="fas fa-check"></i> Insert
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancelStatementPayments" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                      Cancel
                     </asp:LinkButton>
 
@@ -704,7 +704,7 @@
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">Edit Invoice
+            <span class="navbar navbar-expand-md bg-light">Edit Invoice
             </span>
         </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEditInvoice" DefaultMode="Edit">
@@ -795,7 +795,7 @@
                                     <i class="fas fa-check"></i> Update
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
+            <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>
 
@@ -806,7 +806,7 @@
     <telerik:RadToolTip ID="RadToolTipInvoiceRemaider" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">New Invoice Reminder
+            <span class="navbar navbar-expand-md bg-light">New Invoice Reminder
             </span>
         </h2>
         <asp:FormView ID="FormViewRemaider" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceRemaider">
@@ -899,7 +899,7 @@
                                     <i class="fas fa-check"></i> Insert Remainder
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="btnCancelRemaider" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
+            <asp:LinkButton ID="btnCancelRemaider" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>
 
@@ -909,7 +909,7 @@
     <telerik:RadToolTip ID="RadToolTipStatementReminder" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">New Statement Reminder
+            <span class="navbar navbar-expand-md bg-light">New Statement Reminder
             </span>
         </h2>
 
@@ -996,7 +996,7 @@
                                     <i class="fas fa-check"></i> Insert Remainder
             </asp:LinkButton>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="btnCancelStatementReminder" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
+            <asp:LinkButton ID="btnCancelStatementReminder" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                             Cancel
             </asp:LinkButton>
 

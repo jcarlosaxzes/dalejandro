@@ -140,6 +140,15 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadGridFooter As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
+    '''PanelLegend control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelLegend As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''RadToolTipMiscellaneous control.
     '''</summary>
     '''<remarks>
@@ -417,24 +426,6 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobActiveStatus As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceProposalTask control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceProposalTask As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceCategory control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceCategory As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''SqlDataSourceMiscellaneousType control.

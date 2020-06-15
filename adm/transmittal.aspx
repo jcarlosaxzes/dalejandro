@@ -24,7 +24,7 @@
                                     window.print();
                                 }
                             </script>
-                            <button type="button" class="btn btn-default noprint" onclick="PrintPage()">Print</button>
+                            <button type="button" class="btn btn-secondary noprint" onclick="PrintPage()">Print</button>
                             <h3 style="margin: 5px"><%# Eval("Name") %></h3>
                             <i class="fas fa-map-marker-alt"></i>&nbsp;<%# Eval("Address") %><br>
                             <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
@@ -219,7 +219,7 @@
 
                         </td>
                         <td style="width: 90px">
-                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="false" CommandName="Cancel">
+                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="false" CommandName="Cancel">
                                 Cancel
                             </asp:LinkButton>
                         </td>
@@ -347,7 +347,7 @@
 
         <telerik:RadToolTip ID="RadToolTipMail" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
             <h2 style="margin: 0; text-align: center; color:white; width: 450px">
-                <span class="navbar bg-dark">Email to Client
+                <span class="navbar navbar-expand-md bg-light">Email to Client
                 </span>
             </h2>
             <table class="table-sm" style="width: 450px">
@@ -366,7 +366,7 @@
                                 <i class="far fa-envelope"></i>&nbsp;Send Email
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                         <asp:LinkButton ID="btnCancelMail" runat="server" CssClass="btn btn-default" UseSubmitBehavior="false" CausesValidation="false">
+                         <asp:LinkButton ID="btnCancelMail" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="false">
                                 Cancel
                          </asp:LinkButton>
                     </td>

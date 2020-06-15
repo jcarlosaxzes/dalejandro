@@ -161,7 +161,7 @@
                                                                 &nbsp;
                                                                 &nbsp;
                                                                 <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False"
-                                                                    CssClass="btn btn-default"
+                                                                    CssClass="btn btn-secondary"
                                                                     CommandName="Cancel">
                                                                 </asp:LinkButton>
                                                             </td>

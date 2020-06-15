@@ -294,22 +294,8 @@
         </telerik:RadListView>
     </div>
 
-    <%--Footer--%>
-    <div style="text-align: left">
-        <b>Status Legend: </b>
-
-        <span class='<%# LocalAPI.GetJobStatusLabelCSS(0) %>'>Not in Progress</span>
-
-        <span class='<%# LocalAPI.GetJobStatusLabelCSS(2) %>'>In Progress</span>
-
-        <span class='<%# LocalAPI.GetJobStatusLabelCSS(3) %>'>On Hold</span>
-
-        <span class='<%# LocalAPI.GetJobStatusLabelCSS(4) %>'>Submitted</span>
-
-        <span class='<%# LocalAPI.GetJobStatusLabelCSS(5) %>'>Under Revision</span>
-    </div>
     <div class="Formulario">
-        <telerik:RadGrid ID="RadGridFooter" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDateWORKHOURS" Width="100%" ShowHeader="false">
+        <telerik:RadGrid ID="RadGridFooter" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDateWORKHOURS" Width="100%" ShowHeader="false" ShowFooter="false">
             <MasterTableView DataSourceID="SqlDataSourceDateWORKHOURS" ShowFooter="True" CommandItemDisplay="None">
                 <Columns>
                     <telerik:GridTemplateColumn UniqueName="Column1" ItemStyle-Font-Size="Small">
@@ -434,6 +420,22 @@
         </telerik:RadGrid>
 
     </div>
+    <%--Legend--%>
+    <asp:Panel runat="server" ID="PanelLegend">
+        <div style="text-align: left">
+            <b>Status Legend: </b>
+
+            <span class='<%# LocalAPI.GetJobStatusLabelCSS(0) %>'>Not in Progress</span>
+
+            <span class='<%# LocalAPI.GetJobStatusLabelCSS(2) %>'>In Progress</span>
+
+            <span class='<%# LocalAPI.GetJobStatusLabelCSS(3) %>'>On Hold</span>
+
+            <span class='<%# LocalAPI.GetJobStatusLabelCSS(4) %>'>Submitted</span>
+
+            <span class='<%# LocalAPI.GetJobStatusLabelCSS(5) %>'>Under Revision</span>
+        </div>
+    </asp:Panel>
 
 
     <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
@@ -441,7 +443,7 @@
 
 
         <h2 style="margin: 0; text-align: center; color: white; width: 100%">
-            <span class="navbar bg-dark">Non-Productive Time
+            <span class="navbar navbar-expand-md bg-light">Non-Productive Time
             </span>
         </h2>
 
@@ -554,7 +556,7 @@
         Skin="Default">
 
         <h2 style="margin: 0; text-align: center; color: white; width: 500px">
-            <span class="navbar bg-dark">Add Revision
+            <span class="navbar navbar-expand-md bg-light">Add Revision
             </span>
         </h2>
 
@@ -696,19 +698,6 @@
     <asp:SqlDataSource ID="SqlDataSourceJobActiveStatus" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Jobs_status] WHERE Id in(0,2,3,4,5,7) ORDER BY [OrderBy]"></asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceProposalTask" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="ProposalTaskNewTime_SELECT" SelectCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourceCategory" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Id], [Name] FROM [Employees_time_categories] WHERE companyId=@companyId ORDER BY [Name]">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceMiscellaneousType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="MiscellaneousType_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>

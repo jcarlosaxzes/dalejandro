@@ -68,15 +68,6 @@ Partial Public Class timesbyperiords
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblMesName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblMesName As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''btnNext control.
     '''</summary>
     '''<remarks>
@@ -318,6 +309,15 @@ Partial Public Class timesbyperiords
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''lblMesName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMesName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblCompanyId control.

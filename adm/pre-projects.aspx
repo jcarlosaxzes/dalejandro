@@ -82,7 +82,7 @@
     </asp:Panel>
 
 
-    <table class="table-condensed noprint" style="width: 100%">
+    <table class="table-sm noprint" style="width: 100%">
         <tr>
             <td style="width: 100px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">

@@ -77,13 +77,13 @@ Partial Public Class employeenewtime
     Protected WithEvents divProposalTask As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''cboTask control.
+    '''cboMulticolumnTask control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboTask As Global.Telerik.Web.UI.RadComboBox
+    Protected WithEvents cboMulticolumnTask As Global.Telerik.Web.UI.RadMultiColumnComboBox
     
     '''<summary>
     '''divTickets control.
@@ -237,6 +237,15 @@ Partial Public Class employeenewtime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblClientId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblClientId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblCompanyId control.

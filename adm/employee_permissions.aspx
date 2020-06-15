@@ -8,7 +8,7 @@
             padding: 5px 0px;
         }
     </style>
-    <table class="table-condensed Formulario" style="width: 100%">
+    <table class="table-sm Formulario" style="width: 100%">
         <tr>
             <td class="ToolButtom noprint Normal" style="width: 200px">
                 <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true" Label="Status" AutoPostBack="true">
@@ -44,7 +44,7 @@
                 </asp:LinkButton>
             </td>
             <td style="width: 100px">
-                <asp:LinkButton ID="btnExport" runat="server" UseSubmitBehavior="false" class="btn btn-default">
+                <asp:LinkButton ID="btnExport" runat="server" UseSubmitBehavior="false" class="btn btn-secondary">
                     Export</span>
                 </asp:LinkButton>
             </td>

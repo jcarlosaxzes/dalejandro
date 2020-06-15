@@ -188,7 +188,7 @@
                             <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" Text="Insert">
                             </asp:LinkButton></td>
                         <td>
-                            <asp:LinkButton ID="btnUpload" runat="server" CssClass="btn btn-default btn-lg" UseSubmitBehavior="false" Text="Upload File(s)">
+                            <asp:LinkButton ID="btnUpload" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" Text="Upload File(s)">
                             </asp:LinkButton>
                         </td>
                     </tr>

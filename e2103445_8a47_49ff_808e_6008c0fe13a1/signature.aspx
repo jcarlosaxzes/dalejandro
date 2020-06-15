@@ -131,7 +131,7 @@
 
                                 <span id="btnSave" runat="server" class="btn btn-primary btn-lg signature-save">
                                     Accept</span>
-                                <span id="btnClear" runat="server" class="btn btn-default btn-lg signature-clear">Clear</span>
+                                <span id="btnClear" runat="server" class="btn btn-secondary btn-lg signature-clear">Clear</span>
                             </div>
                         </div>
                         <p>
