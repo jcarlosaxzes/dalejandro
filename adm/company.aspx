@@ -17,7 +17,7 @@
 
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
-    <table class="table-condensed" style="padding-left: 50px; padding-top: 10px">
+    <table class="table-sm" style="padding-left: 50px; padding-top: 10px">
         <tr>
             <td>
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSource1" Width="100%">
@@ -40,7 +40,7 @@
                                         </tr>
                                     </table>
 
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td width="160px">Company ID:
                                             </td>
@@ -197,7 +197,7 @@
                                         </tr>
                                     </table>
 
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td style="width: 180px">Outgoing Email From:
                                             </td>
@@ -288,7 +288,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td width="160px">Job Profit:
                                             </td>
@@ -348,7 +348,7 @@
                                     </table>
                                     <fieldset style="width: 250px;">
                                         <legend class="TituloDeFieldset">&nbsp;SMS Notification Service&nbsp;</legend>
-                                        <table class="table-condensed">
+                                        <table class="table-sm">
                                             <tr>
                                                 <td width="160px">Activate SMS:
                                                 </td>
@@ -405,7 +405,7 @@
                                     <p>
                                         Profile of the law firm that processes client files that go into debt collection status and temporarily lock their accounts.
                                     </p>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td style="width: 160px">Attorney Firm :
                                             </td>
@@ -440,7 +440,7 @@
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepLogo" Title="Logo & Signature" StepType="Step">
                                     <h3 style="margin: 0">Logo & Signature Setting</h3>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td>Picture quality recommended for company letter head: 1700 x 225 pixels, 200 dpi resolution equivalent to 8,5" x 1,5"
                                             </td>
@@ -506,7 +506,7 @@
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="QuickBooks" ValidationGroup="QuickBooks" StepType="Step" CssClass="wizardStepHidden">
                                     <div class="Formulario">
-                                        <table class="table-condensed">
+                                        <table class="table-sm">
                                             <tr>
                                                 <td colspan="2">
                                                     <h3 style="padding-left: 50px; margin: 3px">Sign In to authorize PASconcept to connect to Intuit</h3>
@@ -676,7 +676,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td>Company ID:
                                             </td>
@@ -839,7 +839,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td style="width: 220px">Outgoing Email From:
                                             </td>
@@ -918,7 +918,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td width="180px">Job Profit:
                                             </td>
@@ -1109,7 +1109,7 @@
 
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepQuickBooks2" Title="QuickBooks" ValidationGroup="QuickBooks" StepType="Step" CssClass="wizardStepHidden">
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td colspan="2">
                                                 <h3 style="padding-left: 50px; margin: 3px">Intuit Quick Book Company Settings</h3>
@@ -1232,7 +1232,7 @@
                                     </telerik:RadGrid>
                         </telerik:RadWizardStep>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Expenses (Other)" StepType="Step" >
-                                                    <table class="table-condensed">
+                                                    <table class="table-sm">
                             <tr>
                                 <td style="text-align: center; width: 80px">
                                     <telerik:RadNumericTextBox ID="txtExpensesYear" ToolTip="Year" runat="server" Width="100px"
@@ -1265,7 +1265,7 @@
                                 <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
                             </ClientSettings>
                             <MasterTableView CommandItemDisplay="Top" DataKeyNames="Id"
-                                DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" CssClass="table-condensed">
+                                DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" Cssclass="table-sm">
                                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                                 <CommandItemSettings AddNewRecordText="Expense" />
                                 <Columns>

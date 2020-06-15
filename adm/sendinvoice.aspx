@@ -208,7 +208,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Panel ID="PanelEmail" runat="server">
-                                <table style="width: 100%" class="table-condensed">
+                                <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td >To:
                                         </td>
@@ -251,7 +251,7 @@
                             </asp:Panel>
 
                             <asp:Panel ID="PanelUpload" runat="server">
-                                <table style="width: 100%" class="table-condensed">
+                                <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td colspan="2">
                                             <p style="font-size: x-small">Upload your files</p>
@@ -314,7 +314,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Panel ID="PanelSMS" runat="server">
-                                <table style="width: 100%" class="table-condensed">
+                                <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td width="50px">To:
                                         </td>

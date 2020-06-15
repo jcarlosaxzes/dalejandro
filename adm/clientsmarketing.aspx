@@ -38,7 +38,7 @@
                     }
                 </script>
                 <asp:Panel ID="PanelEmail" runat="server" Width="100%">
-                    <table class="table-condensed">
+                    <table class="table-sm">
                         <tr>
                             <td colspan="7">Available Information/Ecconomic Client Fiels</td>
                         </tr>

@@ -77,7 +77,7 @@
     </div>
     <div class="pas-container">
 
-        <table style="width: 90%" class="table-condensed">
+        <table style="width: 90%" class="table-sm">
             <tr>
                 <td style="text-align: right; width: 200px">Email/User Name:
                 </td>

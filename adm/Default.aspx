@@ -43,7 +43,7 @@
     </div>
     <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
 
-        <table class="table-condensed" style="width:100%">
+        <table class="table-sm" style="width:100%">
 
             <tr>
                 <td>
@@ -52,7 +52,7 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockProposalsJobsRates" runat="server" Title="Proposal/Jobs Hit Rate" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <table runat="server" id="tableCompany16" class="table-condensed" style="width: 100%">
+                                <table runat="server" id="tableCompany16" class="table-sm" style="width: 100%">
                                     <tr>
                                         <td style='<%# iif(LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16,"width:250px;text-align: center; vertical-align: top","width:0px") %>'>
                                             <asp:Panel ID="panelCompany16" runat="server" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>' Width="250px">

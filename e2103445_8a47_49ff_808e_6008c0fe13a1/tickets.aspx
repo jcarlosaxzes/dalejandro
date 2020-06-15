@@ -155,7 +155,7 @@
                 Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true"
                 ValidationGroup="EditTicket" />
 
-            <table class="table-condensed" style="width: 800px; text-align: left">
+            <table class="table-sm" style="width: 800px; text-align: left">
                 <tr>
                     <td style="text-align: right; width: 180px">Ticket #:</td>
                     <td>
@@ -284,7 +284,7 @@
                 Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true"
                 ValidationGroup="InsertTicket" />
 
-            <table class="table-condensed" style="width: 800px; text-align: left">
+            <table class="table-sm" style="width: 800px; text-align: left">
 
 
                 <tr>

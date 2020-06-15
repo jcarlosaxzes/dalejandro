@@ -29,7 +29,7 @@
             <asp:Label ID="lblJob" runat="server"></asp:Label>
         </h3>
         <asp:Panel ID="PanelEmail" runat="server">
-            <table style="width: 100%" class="table-condensed">
+            <table style="width: 100%" class="table-sm">
                 <tr>
                     <td>To:
                     </td>

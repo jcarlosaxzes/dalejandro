@@ -159,7 +159,7 @@
         <div class="container">
             <%--Menu.........................................................................................................................................--%>
             <asp:Panel runat="server" ID="PanelHeader">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td class="noprint" style="width: 125px">
                             <a href="/">
@@ -562,7 +562,7 @@
             </asp:Panel>
 
             <%--Child Page.........................................................................................................................................--%>
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td>
                         <asp:Button ID="btnAvoidEnterKey" runat="server" Text="" Style="display: none;" OnClientClick="return false;" />
@@ -575,7 +575,7 @@
 
             <%--Footer.........................................................................................................................................--%>
             <asp:Panel runat="server" ID="PanelFotter">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: center; padding-top: 25px" class="noprint">
                             <hr style="margin: 0" />
@@ -609,7 +609,7 @@
                         <span class="navbar bg-dark">Switch Company
                         </span>
                     </h2>
-                    <table class="table-condensed" style="width: 800px">
+                    <table class="table-sm" style="width: 800px">
                         <tr>
                             <td style="width: 40%" rowspan="2">
 
@@ -617,7 +617,7 @@
 
                             </td>
                             <td style="vertical-align: top">
-                                <table class="table-condensed" style="width: 100%">
+                                <table class="table-sm" style="width: 100%">
                                     <tr>
                                         <td style="font-size: large; font-weight: bold">Select Company:
                                         </td>

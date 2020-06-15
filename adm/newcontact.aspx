@@ -56,7 +56,7 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <table style="width: 100%" class="table-condensed">
+    <table style="width: 100%" class="table-sm">
         <tr>
             <td style="text-align: center; padding-top: 15px; padding-bottom: 15px; width: 125px">
                 <asp:Image ID="Image8" runat="server"
@@ -77,7 +77,7 @@
             </td>
         </tr>
     </table>
-    <table style="width: 100%" class="table-condensed">
+    <table style="width: 100%" class="table-sm">
         <tr>
             <td class="Normal" style="width: 140px; text-align: right">(*) Full Name:
             </td>

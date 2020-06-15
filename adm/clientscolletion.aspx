@@ -4,7 +4,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <table style="width: 100%" class="table-condensed">
+    <table style="width: 100%" class="table-sm">
         <tr>
             <td>
                 <div class="PanelFilter">

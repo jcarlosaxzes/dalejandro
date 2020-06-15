@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2>AXZES Mass Email Communication</h2>
-            <table style="width: 100%" class="table-condensed">
+            <table style="width: 100%" class="table-sm">
                 <tr>
                     <td style="width: 150px; text-align: right">To:
                     </td>

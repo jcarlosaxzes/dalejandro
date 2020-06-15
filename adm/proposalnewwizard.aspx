@@ -349,7 +349,7 @@
 
                     <fieldset>
                         <legend>Proposal Info</legend>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td style="width: 16px; text-align: right">
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtProposalName"

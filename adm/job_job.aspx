@@ -219,7 +219,7 @@
                                     </telerik:RadTextBox>
                                 </td>
                                 <td colspan="2">
-                                    <table class="table-condensed">
+                                    <table class="table-sm">
                                         <tr>
                                             <td style="text-align: right; width: 150px">Construction Cost:</td>
                                             <td>

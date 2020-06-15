@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="pas-container">
-        <table class="table-condensed" style="width: 100%" >
+        <table class="table-sm" style="width: 100%" >
             <tr>
                 <td style="width:300px;padding-top:85px;vertical-align:top">
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None" 

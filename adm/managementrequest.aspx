@@ -32,7 +32,7 @@
                                 </telerik:LayoutColumn>
                                 <telerik:LayoutColumn Span="6">
                                     <div>
-                                        <table class="table-condensed" style="width:100%">
+                                        <table class="table-sm" style="width:100%">
                                             <tr>
                                                 <td style="width:25%;text-align:center"><b>Benfits</b></td>
                                                 <td style="width:25%;text-align:center"><b>Assined</b></td>

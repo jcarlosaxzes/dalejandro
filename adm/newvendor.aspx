@@ -22,7 +22,7 @@
                                         There were this errors:"></asp:ValidationSummary>
     </div>
     <div class="pas-container" >
-        <table class="table-condensed" style="width:95%">
+        <table class="table-sm" style="width:95%">
             <tr>
                 <td style="text-align: right; width: 180px">(*) Full Name:
                 </td>

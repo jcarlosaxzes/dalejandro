@@ -40,7 +40,7 @@
 
 
     </div>
-    <table class="table-condensed" style="width: 800px">
+    <table class="table-sm" style="width: 800px">
         <tr>
             <td style="text-align: right; width: 180px">Role:
             </td>

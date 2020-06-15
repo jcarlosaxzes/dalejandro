@@ -148,7 +148,7 @@
             </span>
         </h2>
         <asp:Panel runat="server" ID="panelProposalTask">
-            <table class="table-condensed" style="width: 650px">
+            <table class="table-sm" style="width: 650px">
 
                 <tr>
                     <td style="width: 180px">Proposal Task:
@@ -162,7 +162,7 @@
             </table>
         </asp:Panel>
 
-        <table class="table-condensed" style="width: 650px">
+        <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="width: 180px">Employees for notify this event:
                 </td>
@@ -192,7 +192,7 @@
             <span class="navbar bg-dark">New Client Activity Record
             </span>
         </h2>
-        <table class="table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceType" ZIndex="50001"

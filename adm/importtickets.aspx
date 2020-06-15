@@ -8,7 +8,7 @@
         </span>
     </h2>
     <br /><br /><br />
-    <table class="table-condensed" style="width: 100%; text-align: left">
+    <table class="table-sm" style="width: 100%; text-align: left">
         <tr>
             <td style="width: 150px; text-align: right">Source:
             </td>

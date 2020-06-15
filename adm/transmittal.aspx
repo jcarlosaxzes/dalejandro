@@ -64,10 +64,10 @@
 
                 <div style="text-align: center; padding-top: 10px; background-color: white">
                 </div>
-                <table class="table-condensed" style="width: 100%; background-color: white">
+                <table class="table-sm" style="width: 100%; background-color: white">
                     <tr>
                         <td style="width: 65%; vertical-align: top">
-                            <table class="table-condensed" style="width: 100%; background-color: white">
+                            <table class="table-sm" style="width: 100%; background-color: white">
                                 <tr>
                                     <td style="text-align: right; width: 150px"><b>Transmittal ID:</b>
                                     </td>
@@ -139,7 +139,7 @@
                     </tr>
                 </table>
 
-                <table class="table-condensed" style="width: 100%; background-color: white">
+                <table class="table-sm" style="width: 100%; background-color: white">
                     <tr>
                         <td colspan="2">
                             <telerik:RadGrid ID="RadGridDetails" RenderMode="Lightweight" runat="server" DataSourceID="SqlDataSourceDetails" Skin="" Width="100%" CssClass="RemoveBorders" AutoGenerateColumns="False" GridLines="Both">
@@ -350,7 +350,7 @@
                 <span class="navbar bg-dark">Email to Client
                 </span>
             </h2>
-            <table class="table-condensed" style="width: 450px">
+            <table class="table-sm" style="width: 450px">
                 <tr>
                     <td>
                         <h3>Action to sent email</h3>

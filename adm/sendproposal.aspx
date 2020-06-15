@@ -251,7 +251,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Panel ID="PanelEmail" runat="server">
-                                <table style="width: 100%" class="table-condensed">
+                                <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td>To:
                                         </td>
@@ -295,7 +295,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Panel ID="PanelSMS" runat="server">
-                                <table style="width: 100%" class="table-condensed">
+                                <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td width="50px">To:
                                         </td>

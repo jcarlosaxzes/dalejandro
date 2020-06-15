@@ -73,7 +73,7 @@
                         <div style="margin-top: 3px">
                             <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompany" RenderOuterTable="false">
                                 <ItemTemplate>
-                                    <table class="table-condensed" style="width: 100%;">
+                                    <table class="table-sm" style="width: 100%;">
                                         <tr>
                                             <td style="text-align: left; width: 250px">
                                                 <a href='<%# Eval("web") %>' target="_blank">

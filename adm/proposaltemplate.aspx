@@ -26,7 +26,7 @@
     </div>
     <div class="pas-container">
         <h4 style="text-align: center">Templates are used as a predefined Structure to create a new Proposal</h4>
-        <table class="table-condensed" style="width: 98%">
+        <table class="table-sm" style="width: 98%">
             <tr>
                 <td style="width: 220px; text-align: right">Name:
                 </td>

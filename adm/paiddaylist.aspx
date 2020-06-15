@@ -265,7 +265,7 @@
             <telerik:RadWizardStep runat="server" Title="Payroll Calendar">
                 <div class="container" style="width: 100% !important">
                     <div class="row">
-                        <table class="table-condensed">
+                        <table class="table-sm">
                             <tr>
                                 <td>
                                     <telerik:RadDatePicker ID="RadDatePicker1" runat="server" Culture="en-US" DateInput-Label="Closing" Width="100%">

@@ -417,7 +417,7 @@
                 <span class="navbar bg-dark">New RFP for Project
                 </span>
             </h2>
-            <table class="table-condensed" style="width: 600px">
+            <table class="table-sm" style="width: 600px">
                 <tr>
                     <td colspan="2">
                         <h4>

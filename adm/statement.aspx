@@ -242,7 +242,7 @@
 
 
                         <fieldset style="width: 920px; padding-left: 10px;" id="PanelInvoices" runat="server" visible='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "False", "True") %>'>
-                            <table class="table-condensed" width="100%">
+                            <table class="table-sm" width="100%">
                                 <tr>
                                     <td>
                                         <h4>Invoices Selected</h4>

@@ -75,7 +75,7 @@
                                         There were this errors:"></asp:ValidationSummary>
     </div>
     <div class="pas-container">
-        <table style="width: 100%" class="table-condensed">
+        <table style="width: 100%" class="table-sm">
             <tr>
                 <td style="width: 200px; text-align: right">Source:
                 </td>

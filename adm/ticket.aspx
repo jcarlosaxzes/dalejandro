@@ -39,7 +39,7 @@
     </div>
 
     <div class="pas-container">
-    <table class="table-condensed" style="width: 100%; text-align: left">
+    <table class="table-sm" style="width: 100%; text-align: left">
         <tr>
             <td style="width: 20%; text-align: right">Title:
             </td>
@@ -222,7 +222,7 @@
         </tr>
 
     </table>
-    <table class="table-condensed" style="width: 100%;">
+    <table class="table-sm" style="width: 100%;">
         <tr>
             <td style="width: 20%"></td>
             <td style="width: 30%">

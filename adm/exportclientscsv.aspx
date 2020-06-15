@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div class="pas-container">
-        <table class="table-condensed" style="width: 100%; margin-left: 50px">
+        <table class="table-sm" style="width: 100%; margin-left: 50px">
             <tr>
                 <td colspan="2">
                     <h3 style="margin: 0">Export Clients

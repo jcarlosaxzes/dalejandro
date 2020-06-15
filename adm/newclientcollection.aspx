@@ -161,7 +161,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Client Email</h4>
-                            <table style="width: 100%" class="table-condensed">
+                            <table style="width: 100%" class="table-sm">
                                 <tr>
                                     <td>Client To:
                                     </td>
@@ -205,7 +205,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h4>Attorney Email</h4>
-                            <table style="width: 100%" class="table-condensed">
+                            <table style="width: 100%" class="table-sm">
                                 <tr>
                                     <td>Attorney To:
                                     </td>

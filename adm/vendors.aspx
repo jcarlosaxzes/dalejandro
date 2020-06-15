@@ -55,7 +55,7 @@
     <div class="collapse" id="collapseFilter">
         <div class="card card-body">
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-condensed">
+                <table class="table-sm">
                     <tr>
                         <td>
                             <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="600px"

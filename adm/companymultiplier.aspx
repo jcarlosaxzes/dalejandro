@@ -31,7 +31,7 @@
     </telerik:RadWindowManager>
 
     <div class="Formulario">
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYears"
@@ -540,7 +540,7 @@
 
     </div>
     <telerik:RadToolTip ID="RadToolTipInitialize" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-condensed" style="width: 650px">
+        <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="text-align: center">
                     <h2 style="margin: 0; text-align: center; color:white;">
@@ -581,7 +581,7 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipCalculateMultiplier" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-condensed" style="width: 650px">
+        <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="text-align: center">
                     <h2 style="margin: 0; text-align: center; color:white;">

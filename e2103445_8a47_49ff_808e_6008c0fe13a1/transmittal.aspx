@@ -11,10 +11,10 @@
                 <h1>TRANSMITTAL LETTER</h1>
             </div>
 
-            <table class="table-condensed" style="width: 100%;" >
+            <table class="table-sm" style="width: 100%;" >
                 <tr>
                     <td style="vertical-align: top">
-                        <table class="table-condensed" style="width: 100%;">
+                        <table class="table-sm" style="width: 100%;">
                             <tr>
                                 <td style="text-align: right; width: 150px"><b>Transmittal ID:</b>
                                 </td>
@@ -107,7 +107,7 @@
                 </tr>
             </table>
 
-            <table class="table-condensed" style="width: 100%;">
+            <table class="table-sm" style="width: 100%;">
                 <tr>
                     <td style="text-align: right; width: 150px;">
                         <b>Notes:</b>

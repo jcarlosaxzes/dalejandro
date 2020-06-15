@@ -330,7 +330,7 @@
             <span class="navbar bg-dark">Delete employee
             </span>
         </h2>
-        <table class="table-condensed" style="width: 450px">
+        <table class="table-sm" style="width: 450px">
             <tr>
                 <td class="Titulo4">&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label32" runat="server" Text="Action to remove the employee involved:"></asp:Label>
                 </td>

@@ -86,7 +86,7 @@
                         <fieldset>
                             <legend>Discipline and Subconsultants</legend>
 
-                            <table style="width: 100%" class="table-condensed">
+                            <table style="width: 100%" class="table-sm">
                                 <tr>
                                     <td style="text-align: center">Select One Discipline to view the list of related Subconsultants below.
                                     </td>
@@ -129,7 +129,7 @@
                     </div>
                     <fieldset>
                         <legend>Project Information </legend>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
 
 
                             <tr>
@@ -338,7 +338,7 @@
                     <fieldset>
                         <legend>Payment Schedules</legend>
 
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td style="text-align: right">Select Payment Schedules Template:
                                 </td>
@@ -359,7 +359,7 @@
                                 Style="color: red" ValidationGroup="PaymentSchedules"></asp:RequiredFieldValidator>
 
                         </div>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td style="padding-left: 15px;">
                                     <asp:Panel ID="PanelPS1" runat="server">
@@ -525,7 +525,7 @@
                         <legend>Term & Conditions</legend>
 
 
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                             </tr>
                             <tr>
@@ -541,7 +541,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td>
                                     <telerik:RadEditor ID="radEditor_TandC" runat="server" RenderMode="Auto"
@@ -567,7 +567,7 @@
                                         There were errors on this step:"></asp:ValidationSummary>
                     </div>
 
-                    <table style="width: 100%" class="table-condensed">
+                    <table style="width: 100%" class="table-sm">
                         <tr>
                             <td style="width: 150px; text-align: right">Subject:	
                             </td>

@@ -202,7 +202,7 @@
                         <tr>
                             <td></td>
                             <td style="width:300px">
-                                <table class="table-condensed" style="width: 100%" border="1">
+                                <table class="table-sm" style="width: 100%" border="1">
                                     <tr>
                                         <td style="width: 150px; text-align: right; padding-right: 15px">Date Emitted</td>
                                         <td>

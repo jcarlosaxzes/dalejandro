@@ -34,7 +34,7 @@
         </table>
     </div>
     <div class="pas-container">
-        <table class="table-condensed" style="width: 95%; margin-left: 25px">
+        <table class="table-sm" style="width: 95%; margin-left: 25px">
             <tr>
                 <td style="text-align: right; width: 180px">
                     <asp:Label ID="lblTaskList" runat="server" Text="Select Task from List:"></asp:Label>
@@ -95,7 +95,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <table class="table-condensed" style="width: 95%">
+                    <table class="table-sm" style="width: 95%">
                         <tr>
 
                             <td style="text-align: right; width: 180px">Quantity (optional):

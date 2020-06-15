@@ -25,7 +25,7 @@
     </div>
     <div class="pas-container">
 
-        <table style="width: 99%" class="table-condensed">
+        <table style="width: 99%" class="table-sm">
 
             <tr>
                 <td style="width: 150px; text-align: right">Name:

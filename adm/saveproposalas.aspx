@@ -2,7 +2,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pas-container" style="padding-left: 50px">
         <h2>Save Proposal As</h2>
-        <table class="table-condensed" style="width: 800px">
+        <table class="table-sm" style="width: 800px">
             <tr>
                 <td>Proposal Number:&nbsp;<asp:Label ID="lblProposalNumber" CssClass="Titulo4Negrita" runat="server" Width="250px"></asp:Label>
                 </td>
