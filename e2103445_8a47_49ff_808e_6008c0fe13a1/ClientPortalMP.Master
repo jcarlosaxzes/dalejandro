@@ -15,8 +15,14 @@
     <link rel="manifest" href="~/Content/favicons/site.webmanifest" />
 
     <%--Bootstrap reference begin--%>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <%--<link href="~/Content/bootstrap.css" rel="stylesheet" />--%>
     <%--Bootstrap reference end--%>
+    <link href="~/Content/fontawesome-free-5.1.1-web/css/all.min.css" rel="stylesheet" />
+    <%--bootstrap/4.5.0--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
 
     <meta name="DESCRIPTION" content="A web-based application conceived and designed to provide an all-inclusive management tool for architectural and engineering firms who wish to integrate the interaction." />
     <meta name="KEYWORDS" content="pasconcept,saas,online project administration,architectural app,engineering app,project app,time sheet,proposals online,job online,civil app,mechanical app,structural app,

@@ -381,7 +381,7 @@
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 500px">
-            <span class="navbar bg-dark">Receive Payment
+            <span class="navbar navbar-expand-md bg-light">Receive Payment
             </span>
         </h2>
         <table class="table table-condensed" style="width: 500px">
@@ -449,7 +449,7 @@
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar bg-dark">Invoice
+            <span class="navbar navbar-expand-md bg-light">Invoice
             </span>
         </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">
@@ -548,7 +548,7 @@
 
     <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar bg-dark">Payment
+            <span class="navbar navbar-expand-md bg-light">Payment
             </span>
         </h2>
         <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">
@@ -610,7 +610,7 @@
 
     <telerik:RadToolTip ID="RadToolTipInvoicesDiscount" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar bg-dark">Apply Invoices Discount
+            <span class="navbar navbar-expand-md bg-light">Apply Invoices Discount
             </span>
         </h2>
         <p>

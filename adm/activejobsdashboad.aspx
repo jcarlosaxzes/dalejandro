@@ -443,7 +443,7 @@
 
 
         <h2 style="margin: 0; text-align: center; color: white; width: 100%">
-            <span class="navbar bg-dark">Non-Productive Time
+            <span class="navbar navbar-expand-md bg-light">Non-Productive Time
             </span>
         </h2>
 
@@ -556,7 +556,7 @@
         Skin="Default">
 
         <h2 style="margin: 0; text-align: center; color: white; width: 500px">
-            <span class="navbar bg-dark">Add Revision
+            <span class="navbar navbar-expand-md bg-light">Add Revision
             </span>
         </h2>
 

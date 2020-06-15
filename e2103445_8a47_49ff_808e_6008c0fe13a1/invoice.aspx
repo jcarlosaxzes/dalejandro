@@ -168,7 +168,7 @@
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 48%">
-                                <h3><span class="navbar bg-dark">Bill To</span></h3>
+                                <h3><span class="navbar navbar-expand-md bg-light">Bill To</span></h3>
 
                                 <h4 style="margin: 0"><%# Eval("ClientName")%></h4>
                                 <%# Eval("ClientCompany") %><br />
@@ -179,7 +179,7 @@
                             <td style="width: 5%"></td>
                             <td style="text-align: left; vertical-align: top">
 
-                                <h3><span class="navbar bg-dark">Project Information</span></h3>
+                                <h3><span class="navbar navbar-expand-md bg-light">Project Information</span></h3>
 
                                 <h4 style="margin: 0"><%# Eval("ProjectName") %></h4>
                                 Contract Amount:&nbsp;<span style="margin: 3px; font-weight: bold"><%# Eval("Budget", "{0:C2}") %></span>
@@ -192,7 +192,7 @@
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top">
-                                <h2><span class="navbar bg-dark">Invoice <%# Eval("InvoiceNumber") %></span></h2>
+                                <h2><span class="navbar navbar-expand-md bg-light">Invoice <%# Eval("InvoiceNumber") %></span></h2>
                                 <h4>Invoice Description:</h4>
                                 <%# Eval("Notes") %>
                             </td>
@@ -234,7 +234,7 @@
 
             <asp:Panel runat="server" ID="pnlPayments">
                 <br />
-                <h2><span class="navbar bg-dark">Payments</span></h2>
+                <h2><span class="navbar navbar-expand-md bg-light">Payments</span></h2>
                 <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSourceInvoicesPayments" ShowFooter="true" Width="100%" Skin="Bootstrap">
 
                     <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoicesPayments">
@@ -284,7 +284,7 @@
                 <div class="col-lg-12" style="margin-top: 10px">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-6">
-                            <h2><span class="navbar bg-dark">Payment method</span></h2>
+                            <h2><span class="navbar navbar-expand-md bg-light">Payment method</span></h2>
                         </div>
                     </div>
                     <div class="row">

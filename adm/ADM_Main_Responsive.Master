@@ -606,7 +606,7 @@
             <telerik:RadToolTip ID="RadToolTipSwitchCompany" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
                 <div>
                     <h2 style="margin: 0; text-align: center; color:white;">
-                        <span class="navbar bg-dark">Switch Company
+                        <span class="navbar navbar-expand-md bg-light">Switch Company
                         </span>
                     </h2>
                     <table class="table-sm" style="width: 800px">

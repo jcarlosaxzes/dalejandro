@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <h2 style="margin: 0; text-align: center; color:white; width: 100%">
-        <span class="navbar bg-dark">
+        <span class="navbar navbar-expand-md bg-light">
             <asp:Label ID="lblJob" runat="server"></asp:Label>
         </span>
     </h2>

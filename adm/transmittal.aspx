@@ -347,7 +347,7 @@
 
         <telerik:RadToolTip ID="RadToolTipMail" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
             <h2 style="margin: 0; text-align: center; color:white; width: 450px">
-                <span class="navbar bg-dark">Email to Client
+                <span class="navbar navbar-expand-md bg-light">Email to Client
                 </span>
             </h2>
             <table class="table-sm" style="width: 450px">
