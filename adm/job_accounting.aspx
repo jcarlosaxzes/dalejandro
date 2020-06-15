@@ -23,7 +23,7 @@
                         <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: left; vertical-align: top; width: 33%">
-                                    <h3 style="margin: 0"><span class="badge badge-info center-block">Client</span></h2>
+                                    <h3 style="margin: 0"><span class="badge badge-pill badge-info mx-auto"></span>Client</span></h2>
 
                                         <table style="width: 100%">
                                             <tr>
@@ -110,18 +110,18 @@
                                 </Items>
                             </telerik:RadComboBox>
                         </td>
-                        <td style="width: 120px">
-                            <asp:LinkButton ID="btnInvoice" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
+                        <td style="width: 150px">
+                            <asp:LinkButton ID="btnInvoice" runat="server" CssClass="btn btn-info btn-sm" UseSubmitBehavior="false" CausesValidation="false">
                                                                      <i class="fas fa-plus"></i> Schedules (%)
                             </asp:LinkButton>
                         </td>
-                        <td style="width: 130px">
-                            <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
+                        <td style="width: 150px">
+                            <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-info btn-sm" UseSubmitBehavior="false" CausesValidation="false">
                                                                      <i class="fas fa-plus"></i> Simple Charge
                             </asp:LinkButton>
                         </td>
                         <td>
-                            <asp:LinkButton ID="btnDiscount" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false" CausesValidation="false">
+                            <asp:LinkButton ID="btnDiscount" runat="server" CssClass="btn btn-danger btn-sm" UseSubmitBehavior="false" CausesValidation="false">
                                 Apply Discount
                             </asp:LinkButton>
                         </td>
@@ -152,7 +152,7 @@
                                 <td>
                                     <h4>Invoices(s)</h4>
                                 </td>
-                                <td style="width: 150px">
+                                <td style="width: 180px">
                                     <telerik:RadNumericTextBox ID="txtBudgest" runat="server" DbValue='<%# Bind("Budget") %>' Width="100%" Label="Budget:">
                                     </telerik:RadNumericTextBox>
                                 </td>
@@ -372,7 +372,7 @@
                     </FilterMenu>
                 </telerik:RadGrid>
             </div>
-
+            <br /><br />
         </div>
     </div>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
