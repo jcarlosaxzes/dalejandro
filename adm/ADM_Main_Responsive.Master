@@ -449,7 +449,7 @@
                         <td style="text-align:right">
                             <asp:Label runat="server" ID="lblCompanyName" Font-Bold="true" Font-Size="Medium" ForeColor="DarkBlue"></asp:Label>
                         </td>
-                        <td class="noprint" style="width: 200px; text-align: right">
+                        <td class="noprint" style="width: 150px; text-align: right">
                             <telerik:RadNavigation ID="RadNavigation2" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material">
                                 <Nodes>
                                     <telerik:NavigationNode Text="Setting">

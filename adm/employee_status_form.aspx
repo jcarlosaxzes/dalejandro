@@ -5,7 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Employee Status</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <%--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <form id="form1" runat="server">

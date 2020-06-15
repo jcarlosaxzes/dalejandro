@@ -255,7 +255,7 @@
                 <div class="card" style="float: left; width: 330px">
                     <div class="card-header">
                         <h5 style="margin: 0">
-                            <%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%>
+                            <%# Eval("itemName")%>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -268,7 +268,7 @@
                             <br />
                             <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>' CssClass='<%# LocalAPI.GetJobStatusButonCSS(Eval("statusId")) %>'
                                 CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
-                            <i title="Add New Job Time" class="fas fa-user-clock"></i>&nbsp;&nbsp; Productive Time
+                            <i title="Add New Productive Time" class="fas fa-user-clock"></i>&nbsp;&nbsp; <%# Eval("Code")%>
                             </asp:LinkButton>
                         </p>
 
