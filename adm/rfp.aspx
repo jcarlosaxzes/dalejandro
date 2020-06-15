@@ -10,7 +10,7 @@
 
     </script>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
@@ -27,14 +27,14 @@
     <div class="pas-container">
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" DefaultMode="Edit" Width="100%">
             <EditItemTemplate>
-                <table style="width: 100%" class="table-condensed">
+                <table style="width: 100%" class="table-sm">
                     <tr>
                         <td>
                             <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" Height="720px" BorderStyle="Solid" BorderColor="LightGray"
                                 DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
                                 <WizardSteps>
                                     <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Project Information" StepType="Step">
-                                        <table style="width: 100%" class="table-condensed">
+                                        <table style="width: 100%" class="table-sm">
                                             <tr>
                                                 <td style="width: 150px; text-align: right">Date Created:</td>
                                                 <td>
@@ -105,7 +105,7 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <table style="width: 100%" class="table-condensed">
+                                        <table style="width: 100%" class="table-sm">
 
                                             <tr>
                                                 <td style="width: 150px; text-align: right">Accepted Date:</td>
@@ -124,7 +124,7 @@
 
 
                                         </table>
-                                        <table style="width: 100%" class="table-condensed">
+                                        <table style="width: 100%" class="table-sm">
                                             <tr>
                                                 <td>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtProjectName"
@@ -143,7 +143,7 @@
                                     </telerik:RadWizardStep>
                                     <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Payment Schedules" StepType="Step">
                                         <div>
-                                            <table style="width: 100%" class="table-condensed">
+                                            <table style="width: 100%" class="table-sm">
                                                 <tr>
                                                     <td style="text-align: right; width: 350px">To change, select Payment Schedules and Apply:
                                                     </td>
@@ -159,7 +159,7 @@
                                                 </tr>
 
                                             </table>
-                                            <table style="width: 100%" class="table-condensed">
+                                            <table style="width: 100%" class="table-sm">
                                                 <tr>
                                                     <td>
                                                         <asp:Panel ID="PanelPS1" runat="server" Visible='<%# Eval("PaymentSchedule1") > 0%>'>
@@ -362,7 +362,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <table style="width: 100%" class="table-condensed">
+                                        <table style="width: 100%" class="table-sm">
                                             <tr>
                                                 <td style="text-align: right; padding-right: 25px">
                                                     <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
@@ -376,7 +376,7 @@
                                     </telerik:RadWizardStep>
                                     <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Term & Conditions" StepType="Step">
 
-                                        <table style="width: 100%" class="table-condensed">
+                                        <table style="width: 100%" class="table-sm">
                                             <tr>
                                                 <td style="text-align: right; width: 300px">To change, Select Template and Apply:
                                                 </td>
@@ -393,7 +393,7 @@
                                             </tr>
 
                                         </table>
-                                        <table style="width: 100%" class="table-condensed">
+                                        <table style="width: 100%" class="table-sm">
                                             <tr>
                                                 <td>
                                                     <telerik:RadEditor ID="radEditor_TandC" runat="server" AllowScripts="True" Content='<%# Bind("MyAgreements")%>'
@@ -402,7 +402,7 @@
                                                 </td>
                                             </tr>
                                         </table>
-                                        <table style="width: 100%" class="table-condensed">
+                                        <table style="width: 100%" class="table-sm">
                                             <tr>
                                                 <td style="text-align: right; padding-right: 25px">
                                                     <asp:LinkButton ID="LinkButton3" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
@@ -417,7 +417,7 @@
                                     <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="References" StepType="Step">
                                         <fieldset>
                                             <legend>Uploaded files (JPG, PDF, DOC, XLS, ...) </legend>
-                                            <table class="table-condensed" style="width: 100%">
+                                            <table class="table-sm" style="width: 100%">
                                                 <tr>
                                                     <td colspan="3">
                                                         <asp:Panel runat="server" class="DropZoneClient">
@@ -503,7 +503,7 @@
                                         </fieldset>
                                     </telerik:RadWizardStep>
                                     <telerik:RadWizardStep runat="server" ID="Fees" Title="Task & Fee(s)" StepType="Step">
-                                        <table style="width: 100%" class="table-condensed">
+                                        <table style="width: 100%" class="table-sm">
                                             <tr>
                                                 <td>
                                                     <telerik:RadGrid ID="RadGridRFPDet" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceRFPdetalles" ShowFooter="true"

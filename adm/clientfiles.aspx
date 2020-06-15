@@ -62,7 +62,7 @@
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Content>
-                    <table class="table-condensed"  style="width:100%">
+                    <table class="table-sm"  style="width:100%">
                         <tr>
                             <td style="width:90px">
                                 <asp:LinkButton ID="btnDeleteSelected" runat="server"

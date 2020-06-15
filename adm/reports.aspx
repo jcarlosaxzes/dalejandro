@@ -119,7 +119,7 @@
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
             </ClientSettings>
-            <MasterTableView DataSourceID="SqlDataSource1" ShowFooter="True" CssClass="table-condensed">
+            <MasterTableView DataSourceID="SqlDataSource1" ShowFooter="True" Cssclass="table-sm">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
             </MasterTableView>
         </telerik:RadGrid>

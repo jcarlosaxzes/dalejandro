@@ -31,7 +31,7 @@
     </telerik:RadWindowManager>
 
     <div class="Formulario">
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYears"
@@ -63,7 +63,7 @@
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Company Multiplier" StepType="Step">
                     <div>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
@@ -87,7 +87,7 @@
 
                             </tr>
                         </table>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <telerik:RadGrid ID="RadGridMultiplier" GridLines="None" runat="server" AllowAutomaticDeletes="True"
@@ -269,7 +269,7 @@
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Employee Hourly Wage" StepType="Step">
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td>
                                 <h3>Employee Hourly Wage</h3>
@@ -357,7 +357,7 @@
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Monthly Salary Calculation" StepType="Step">
                     <div>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <h3>Monthly Salary Calculation</h3>
@@ -540,7 +540,7 @@
 
     </div>
     <telerik:RadToolTip ID="RadToolTipInitialize" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-condensed" style="width: 650px">
+        <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="text-align: center">
                     <h2 style="margin: 0; text-align: center; color:white;">
@@ -581,7 +581,7 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipCalculateMultiplier" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-condensed" style="width: 650px">
+        <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="text-align: center">
                     <h2 style="margin: 0; text-align: center; color:white;">

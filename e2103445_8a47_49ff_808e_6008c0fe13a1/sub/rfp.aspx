@@ -34,7 +34,7 @@
         <ItemTemplate>
             <div class="row page" style="text-align: left">
 
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td></td>
                         <td style="width: 120px; text-align: right">

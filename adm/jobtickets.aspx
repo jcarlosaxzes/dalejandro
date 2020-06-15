@@ -9,7 +9,7 @@
             <div class="card card-body">
 
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 250px">
                                 <telerik:RadComboBox ID="cboType" runat="server"
@@ -342,7 +342,7 @@
                 Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true"
                 ValidationGroup="EditTicket" />
 
-            <table class="table-condensed" style="width: 960px; text-align: left">
+            <table class="table-sm" style="width: 960px; text-align: left">
                 <tr>
                     <td style="width: 150px">To:
                     </td>
@@ -414,7 +414,7 @@
                 HeaderText="Following error occurs:" ShowMessageBox="false" ShowSummary="true" CssClass="alert alert-danger alert-dismissable"
                 ValidationGroup="Ticket" />
 
-            <table class="table-condensed" style="width: 960px; text-align: left">
+            <table class="table-sm" style="width: 960px; text-align: left">
                 <tr>
                     <td style="width: 150px; text-align: right">Title:
                     </td>
@@ -598,7 +598,7 @@
                 </tr>
 
             </table>
-            <table class="table-condensed" style="width: 960px">
+            <table class="table-sm" style="width: 960px">
                 <tr>
                     <td style="width: 150px"></td>
                     <td style="width: 330px">

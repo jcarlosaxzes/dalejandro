@@ -4,7 +4,7 @@
 
     <telerik:RadFormDecorator ID="FormDecorator1" runat="server" DecoratedControls="all" DecorationZoneID="starttbl"></telerik:RadFormDecorator>
 
-    <table id="starttbl" class="table-condensed" style="width: 100%">
+    <table id="starttbl" class="table-sm" style="width: 100%">
         <tr>
             <td><h4>Getting started with PASconcept is Simple</h4>
             </td>
@@ -14,7 +14,7 @@
                 <fieldset style="width: 700px; padding-left: 50px">
                     <legend class="TituloDeFieldset">&nbsp;To-do list&nbsp;</legend>
 
-                    <table class="table-condensed">
+                    <table class="table-sm">
                         <tr>
                             <td style="width: 50px">
                                 <asp:CheckBox ID="chkCompanyInfo" runat="server" Enabled="false" Checked="false" />

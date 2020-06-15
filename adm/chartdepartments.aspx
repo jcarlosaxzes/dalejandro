@@ -29,7 +29,7 @@
     <br />
     <div class="pas-container">
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 80%;vertical-align:top">
                     <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="600px" Width="100%">

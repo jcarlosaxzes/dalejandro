@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="row">
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td colspan="2">
                     <telerik:RadToolBar ID="RadToolBar1" runat="server">
@@ -42,7 +42,7 @@
 
     <div class="row">
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td></td>
             </tr>
@@ -55,7 +55,7 @@
                     <asp:FormView ID="FormView1" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSource1"
                         Width="100%">
                         <EditItemTemplate>
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="width=200px">Company ID:
                                     </td>
@@ -265,10 +265,10 @@
                             <asp:Button ID="Button1" runat="server" CausesValidation="False" CommandName="Edit"
                                 Text="Edit Company Properties" />
                             <br />
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td width="800px" valign="top">
-                                        <table class="table-condensed" style="width: 100%">
+                                        <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="width: 200px">Company ID:
                                                 </td>

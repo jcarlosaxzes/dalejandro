@@ -7,7 +7,7 @@
         <%--Header--%>
         <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompany" RenderOuterTable="false">
             <ItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: left; width: 200px">
                             <a href='<%# Eval("web") %>' target="_blank">
@@ -43,7 +43,7 @@
     <div>
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
             <ItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td>
                             <h1>TRANSMITTAL LETTER</h1>
@@ -64,10 +64,10 @@
 
                 <div style="text-align: center; padding-top: 10px; background-color: white">
                 </div>
-                <table class="table-condensed" style="width: 100%; background-color: white">
+                <table class="table-sm" style="width: 100%; background-color: white">
                     <tr>
                         <td style="width: 65%; vertical-align: top">
-                            <table class="table-condensed" style="width: 100%; background-color: white">
+                            <table class="table-sm" style="width: 100%; background-color: white">
                                 <tr>
                                     <td style="text-align: right; width: 150px"><b>Transmittal ID:</b>
                                     </td>
@@ -139,7 +139,7 @@
                     </tr>
                 </table>
 
-                <table class="table-condensed" style="width: 100%; background-color: white">
+                <table class="table-sm" style="width: 100%; background-color: white">
                     <tr>
                         <td colspan="2">
                             <telerik:RadGrid ID="RadGridDetails" RenderMode="Lightweight" runat="server" DataSourceID="SqlDataSourceDetails" Skin="" Width="100%" CssClass="RemoveBorders" AutoGenerateColumns="False" GridLines="Both">
@@ -207,7 +207,7 @@
                 </p>
             </ItemTemplate>
             <EditItemTemplate>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: center;">
                             <h1 style="margin: 0">EDIT TRANSMITTAL LETTER</h1>
@@ -225,7 +225,7 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: right;"><b>A/E of Record:</b></td>
                         <td style="text-align: left">
@@ -263,7 +263,7 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: left">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" OnClick="btnNew_Click" CausesValidation="false">
@@ -350,7 +350,7 @@
                 <span class="navbar bg-dark">Email to Client
                 </span>
             </h2>
-            <table class="table-condensed" style="width: 450px">
+            <table class="table-sm" style="width: 450px">
                 <tr>
                     <td>
                         <h3>Action to sent email</h3>
@@ -377,7 +377,7 @@
 
     <div>
         <%--Footeer--%>
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 40%">
                     <a href="https://pasconcept.com/" target="_blank">

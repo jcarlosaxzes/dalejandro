@@ -6,7 +6,7 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-    <table style="width: 100%" class="table-condensed">
+    <table style="width: 100%" class="table-sm">
         <tr>
             <td>
                 <div class="PanelFilter">

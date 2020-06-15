@@ -35,7 +35,7 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
-    <table class="table-condensed" style="width: 100%;">
+    <table class="table-sm" style="width: 100%;">
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
@@ -114,7 +114,7 @@
         </tr>
         <tr>
             <td>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 90px">
                             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
@@ -282,7 +282,7 @@
                             <EditColumn ButtonType="PushButton">
                             </EditColumn>
                             <FormTemplate>
-                                <table class="table-condensed" style="width: 650px">
+                                <table class="table-sm" style="width: 650px">
                                     <tr>
                                         <td style="padding-top: 30px">Job status should be: <b>Done</b>
                                         </td>

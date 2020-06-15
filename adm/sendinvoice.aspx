@@ -42,7 +42,7 @@
                      <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
                         <ItemTemplate>
 
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="text-align: left; vertical-align: top; width: 33%">
                                         <h3 style="margin: 0"><span class="badge badge-info center-block">Client</span></h2>
@@ -72,7 +72,7 @@
                                     </td>
                                     <td style="width: 33%; text-align: center; vertical-align: top">
                                         <h3 style="margin: 0"><span class="badge badge-info center-block">Projects</span></h2>
-                                        <table class="table-condensed" style="width: 100%">
+                                        <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right"># Pending Proposals:</td>
                                                 <td style="width: 120px; text-align: right">
@@ -95,7 +95,7 @@
                                     </td>
                                     <td style="text-align: right; vertical-align: top">
                                         <h3 style="margin: 0"><span class="badge badge-info center-block">Balance</span></h2>
-                                        <table class="table-condensed" style="width: 100%">
+                                        <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right;">Amount Paid:</td>
                                                 <td>
@@ -117,7 +117,7 @@
                         </ItemTemplate>
                     </asp:FormView>
                     <hr style="margin:0" />
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 33%">
 
@@ -133,7 +133,7 @@
                         </tr>
                     </table>
                     <hr style="margin:0" />
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 270px">Client Notification Type:
                             </td>
@@ -208,7 +208,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Panel ID="PanelEmail" runat="server">
-                                <table style="width: 100%" class="table-condensed">
+                                <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td >To:
                                         </td>
@@ -251,7 +251,7 @@
                             </asp:Panel>
 
                             <asp:Panel ID="PanelUpload" runat="server">
-                                <table style="width: 100%" class="table-condensed">
+                                <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td colspan="2">
                                             <p style="font-size: x-small">Upload your files</p>
@@ -314,7 +314,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Panel ID="PanelSMS" runat="server">
-                                <table style="width: 100%" class="table-condensed">
+                                <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td width="50px">To:
                                         </td>

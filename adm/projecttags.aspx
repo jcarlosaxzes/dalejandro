@@ -58,7 +58,7 @@
         <Rows>
             <telerik:LayoutRow>
                 <Content>
-                    <table class="table-condensed">
+                    <table class="table-sm">
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Tag">

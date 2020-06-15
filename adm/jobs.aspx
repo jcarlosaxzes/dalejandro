@@ -224,7 +224,7 @@
         <div class="collapse" id="collapseFilter">
             <div class="card card-body">
                 <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 200px">
                                 <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
@@ -342,7 +342,7 @@
 
         <div class="collapse" id="collapseTotals">
             <div class="card card-body">
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td colspan="11">
                             <hr style="margin: 0" />
@@ -390,7 +390,7 @@
         </div>
     </div>
 
-    <table class="table-condensed" style="width: 100%;">
+    <table class="table-sm" style="width: 100%;">
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
@@ -521,7 +521,7 @@
                                         <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
                                             Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
                                             HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
-                                            <table class="table-condensed">
+                                            <table class="table-sm">
                                                 <tr>
                                                     <td colspan="2">
                                                         <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Client") %>'
@@ -783,7 +783,7 @@
             <span class="navbar bg-dark">Share Copied Filters
             </span>
         </h2>
-        <table class="table-condensed" style="width: 500px">
+        <table class="table-sm" style="width: 500px">
             <tr>
                 <td style="width: 80px">Employee To:
                 </td>

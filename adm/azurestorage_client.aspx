@@ -9,7 +9,7 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td colspan="4">
                 <asp:Panel runat="server" class="DropZoneClient">

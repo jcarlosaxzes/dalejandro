@@ -22,7 +22,7 @@
         </script>
     </telerik:RadCodeBlock>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td class="PanelFilter">
                     <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh" CssClass="noprint">
@@ -84,7 +84,7 @@
         </table>
     </div>
     <div>
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="text-align: center">
                     <h3 style="margin: 0">Billing Assistant

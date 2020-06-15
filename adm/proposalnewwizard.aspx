@@ -134,7 +134,7 @@
         }
     </style>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
@@ -175,7 +175,7 @@
                         </legend>
                     </fieldset>
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 50px; text-align: right">
                                 <asp:RequiredFieldValidator ID="rfvFirstName"
@@ -287,11 +287,11 @@
                     <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
                         <ItemTemplate>
 
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="width: 50%; text-align: center; vertical-align: top">
                                         <h3 style="margin: 0"><span class="badge badge-info center-block">Projects</span></h2>
-                                        <table class="table-condensed" style="width: 100%">
+                                        <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right"># Pending Proposals:</td>
                                                 <td style="width: 120px; text-align: right">
@@ -314,7 +314,7 @@
                                     </td>
                                     <td style="text-align: right; vertical-align: top">
                                         <h3 style="margin: 0"><span class="badge badge-info center-block">Balance</span></h2>
-                                        <table class="table-condensed" style="width: 100%">
+                                        <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right;">Amount Paid:</td>
                                                 <td>
@@ -349,7 +349,7 @@
 
                     <fieldset>
                         <legend>Proposal Info</legend>
-                        <table style="width: 100%" class="table-condensed">
+                        <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td style="width: 16px; text-align: right">
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtProposalName"
@@ -546,7 +546,7 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepFees" Title="Fees & Scope" Enabled="false" StepType="Step">
                     
                         <h3>Service Fee(s)</h3>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
                                     <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" CausesValidation="false">
@@ -656,7 +656,7 @@
                             </asp:LinkButton>
                         </div>
                         <div id="divFormTC" runat="server" class="divFormTC" visible="false">
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="width: 50%">
                                         <telerik:RadComboBox ID="cboTandCtemplates" runat="server" DataSourceID="SqlDataSourceTandCtemplates"
@@ -706,7 +706,7 @@
                                 HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
                         </div>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td></td>
 
@@ -724,7 +724,7 @@
                         </table>
 
 
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="width: 350px">
                                     <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules"
@@ -792,7 +792,7 @@
 
                 <%-- Attachments --%>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepAttachments" Title="Attachments" Enabled="false" StepType="Step">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td colspan="3">
                                 <asp:Panel runat="server" class="DropZoneClient">

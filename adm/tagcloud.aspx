@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="Formulario">
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 450px">
                     <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" AutoPostBack="true"
@@ -26,7 +26,7 @@
     </div>
     <div class="Formulario">
 
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="text-align: right">
                     <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Visible="false">

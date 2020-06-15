@@ -16,10 +16,10 @@
     </telerik:RadCodeBlock>
 
     <div class="container">
-        <table class="table" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td colspan="3">
                                 <asp:Panel runat="server" class="DropZoneClient">
@@ -136,7 +136,7 @@
             <tr>
                 <td>
                     <h3>Job Links</h3>
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="padding-left: 15px">
                                 <asp:LinkButton ID="btnNewFileLink" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Attached uploaded file">

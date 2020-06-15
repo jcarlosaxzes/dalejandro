@@ -51,7 +51,7 @@
                         Width="100%">
                         <ItemTemplate>
 
-                            <table class="table-condensed">
+                            <table class="table-sm">
                                 <tr>
                                     <td style="text-align: right;width:160px">
                                         <label for="inputdefault">Price/Period:</label>

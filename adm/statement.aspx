@@ -11,7 +11,7 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
@@ -57,7 +57,7 @@
     </table>
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 90px">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
@@ -199,7 +199,7 @@
                     <PopUpSettings Modal="true" Width="960px" />
                     <FormTemplate>
 
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: right; width: 180px">Statement Number:
                                 </td>
@@ -242,7 +242,7 @@
 
 
                         <fieldset style="width: 920px; padding-left: 10px;" id="PanelInvoices" runat="server" visible='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "False", "True") %>'>
-                            <table class="table-condensed" width="100%">
+                            <table class="table-sm" width="100%">
                                 <tr>
                                     <td>
                                         <h4>Invoices Selected</h4>
@@ -402,7 +402,7 @@
                             </asp:SqlDataSource>
                         </fieldset>
                         <%--<div style="text-align: right; padding-right: 50px; height: 40px; padding-top: 15px">--%>
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: right; padding-right: 15px">
                                     <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success"

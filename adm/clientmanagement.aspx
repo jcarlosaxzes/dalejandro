@@ -78,7 +78,7 @@
         <div class="card card-body">
             <div class="Formulario">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 150px; text-align: right">Type:
                             </td>
@@ -286,7 +286,7 @@
             <span class="navbar bg-dark">Create New Marketing Campaign
             </span>
         </h2>
-        <table class="table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td>
                     <h3>Actions to create new marketing campaign</h3>
@@ -328,7 +328,7 @@
             <span class="navbar bg-dark">Client Availability
             </span>
         </h2>
-        <table class="table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td style="width: 140px; text-align: right" class="Normal">New Availability:
                 </td>

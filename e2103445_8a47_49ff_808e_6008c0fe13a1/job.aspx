@@ -197,7 +197,7 @@
                         </LayoutTemplate>
                         <ItemTemplate>
                             <fieldset style="float: left; width: 270px;">
-                                <table class="table-condensed">
+                                <table class="table-sm">
                                     <tr>
                                         <td style="text-align: center; width: 265px">
 

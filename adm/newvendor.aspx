@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
@@ -22,7 +22,7 @@
                                         There were this errors:"></asp:ValidationSummary>
     </div>
     <div class="pas-container" >
-        <table class="table-condensed" style="width:95%">
+        <table class="table-sm" style="width:95%">
             <tr>
                 <td style="text-align: right; width: 180px">(*) Full Name:
                 </td>

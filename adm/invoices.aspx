@@ -43,7 +43,7 @@
 
     <div class="Formulario">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td width="150px" align="left">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%">
@@ -97,7 +97,7 @@
                     </td>
                 </tr>
             </table>
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td>
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
@@ -128,7 +128,7 @@
 
     </div>
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false" ToolTip="Add New Invoice">

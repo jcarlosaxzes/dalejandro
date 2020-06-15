@@ -17,7 +17,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <table class="table-condensed" style="width:100%">
+    <table class="table-sm" style="width:100%">
         <tr>
             <td>
                 <h2>Productive Time Categories</h2>

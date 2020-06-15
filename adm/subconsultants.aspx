@@ -8,7 +8,7 @@
     </telerik:RadWindowManager>
 
     <div class="Formulario">
-        <table class="table-condensed"  style="width:100%">
+        <table class="table-sm"  style="width:100%">
             <tr>
                 <td style="width:90px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -43,7 +43,7 @@
     <div class="collapse" id="collapseFilter">
         <div class="card card-body">
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-condensed" style="width:100%">
+                <table class="table-sm" style="width:100%">
                     <tr>
                         <td>
                             <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="600px"

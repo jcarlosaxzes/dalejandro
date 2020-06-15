@@ -99,7 +99,7 @@
             <telerik:RadWizardStep runat="server" Title="Employee Hourly Wage">
                 <div class="container" style="width: 100% !important">
                     <div class="row">
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="width: 140px;">
 
@@ -265,7 +265,7 @@
             <telerik:RadWizardStep runat="server" Title="Payroll Calendar">
                 <div class="container" style="width: 100% !important">
                     <div class="row">
-                        <table class="table-condensed">
+                        <table class="table-sm">
                             <tr>
                                 <td>
                                     <telerik:RadDatePicker ID="RadDatePicker1" runat="server" Culture="en-US" DateInput-Label="Closing" Width="100%">
@@ -287,7 +287,7 @@
                         </table>
                     </div>
                     <div class="row">
-                        <table class="table-condensed" style="width: 100%">
+                        <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="width: 200px">
                                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource5" GridLines="None"

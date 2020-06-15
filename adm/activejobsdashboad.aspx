@@ -39,7 +39,7 @@
     <%--Tools--%>
     <div class="Formulario">
 
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td>
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -85,7 +85,7 @@
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-            <table class="table-condensed" style="width: 100%">
+            <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="width: 250px">
                         <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceJobActiveStatus" DataTextField="Name" DataValueField="Id"
@@ -113,7 +113,7 @@
 
     <%--Chart--%>
     <div class="collapse Formulario" id="collapseChart">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 50%">
                     <h4 style="text-align: center; margin: 0">Time Sheet Daily</h4>
@@ -255,7 +255,7 @@
                 <div class="card" style="float: left; width: 330px">
                     <div class="card-header">
                         <h5 style="margin: 0">
-                            <%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%>
+                            <%# Eval("itemName")%>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -268,7 +268,7 @@
                             <br />
                             <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>' CssClass='<%# LocalAPI.GetJobStatusButonCSS(Eval("statusId")) %>'
                                 CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
-                            <i title="Add New Job Time" class="fas fa-user-clock"></i>&nbsp;&nbsp; Productive Time
+                            <i title="Add New Productive Time" class="fas fa-user-clock"></i>&nbsp;&nbsp; <%# Eval("Code")%>
                             </asp:LinkButton>
                         </p>
 
@@ -317,7 +317,7 @@
 
 
                             <div>
-                                <table class="table-condensed" style="width: 100%; border-color: gainsboro" border="1">
+                                <table class="table-sm" style="width: 100%; border-color: gainsboro" border="1">
                                     <tr>
                                         <td style='<%# GetDateOfWeekStyle(Eval("Date9"))%>'>
                                             <%# String.Concat(Eval("weekOFday9"), ":", Eval("Date9", "{0:d}")) %>
@@ -447,7 +447,7 @@
 
         <div style="font-size: medium">
 
-            <table class="table-condensed" style="width: 600px">
+            <table class="table-sm" style="width: 600px">
                 <tr>
                     <td style="width: 120px; text-align: right">Category:
                     </td>
@@ -561,7 +561,7 @@
         <asp:ValidationSummary ID="ValidationSummaryJobUpdate" runat="server"
             Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="review_insert" />
 
-        <table class="table-condensed" style="width: 500px">
+        <table class="table-sm" style="width: 500px">
             <tr>
                 <td style="text-align: right; width: 150px">Process Number:</td>
                 <td>

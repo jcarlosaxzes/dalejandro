@@ -29,7 +29,7 @@
             <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceSubconsultantBalance" Width="100%">
                 <ItemTemplate>
 
-                    <table class="table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 33%">
                                 <h2 style="margin: 0"><span class="navbar bg-dark">Subconsultant</span></h2>

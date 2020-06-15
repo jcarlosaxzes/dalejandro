@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div class="Formulario">
-        <table class="table-condensed" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
@@ -25,7 +25,7 @@
     </div>
     <div class="pas-container">
 
-        <table style="width: 99%" class="table-condensed">
+        <table style="width: 99%" class="table-sm">
 
             <tr>
                 <td style="width: 150px; text-align: right">Name:

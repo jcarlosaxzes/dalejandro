@@ -3,7 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pas-container" style="padding-left: 50px">
         <h2>Save Proposal As Template</h2>
-        <table class="table-condensed" style="width: 800px">
+        <table class="table-sm" style="width: 800px">
             <tr>
                 <td style="text-align: center;">You can save the Proposal as a Template (Proposal Type) for later use when creating New Proposal
                         <br />

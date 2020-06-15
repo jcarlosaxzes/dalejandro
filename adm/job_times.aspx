@@ -4,7 +4,7 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-        <table class="table" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                      <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
@@ -150,7 +150,7 @@
     </div>
 
     <telerik:RadToolTip ID="RadToolTipConfirmInsert" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-condensed" style="width: 800px">
+        <table class="table-sm" style="width: 800px">
             <tr>
                 <td colspan="2">
                     <h2 style="margin: 0; text-align: center; color:white; width: 800px">

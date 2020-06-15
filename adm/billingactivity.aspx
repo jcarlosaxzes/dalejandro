@@ -2,7 +2,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="Formulario" >
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td style="width: 280px">
                     <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="120px">
@@ -48,7 +48,7 @@
                 </td>
             </tr>
         </table>
-        <table class="table-condensed">
+        <table class="table-sm">
             <tr>
                 <td style="text-align: center; width:150px">Hour
                     <br />

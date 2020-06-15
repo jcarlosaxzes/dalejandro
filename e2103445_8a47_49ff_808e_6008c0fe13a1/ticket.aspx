@@ -30,7 +30,7 @@
 
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
             <ItemTemplate>
-                <table class="table-condensed" style="width: 100%; text-align: left">
+                <table class="table-sm" style="width: 100%; text-align: left">
                     <tr>
                         <td style="width: 180px">Ticket #:
                         </td>
@@ -181,7 +181,7 @@
                     ValidationGroup="EditTicket" />
 
 
-                <table class="table-condensed" style="width: 100%; text-align: left">
+                <table class="table-sm" style="width: 100%; text-align: left">
 
                     <tr>
                         <td style="text-align: right">Priority:

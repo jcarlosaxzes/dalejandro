@@ -4,7 +4,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <table style="width: 100%" class="table-condensed">
+    <table style="width: 100%" class="table-sm">
         <tr>
             <td>
                 <div class="PanelFilter">
@@ -38,7 +38,7 @@
         </tr>
     </table>
 
-    <table class="table-condensed" style="width: 100%">
+    <table class="table-sm" style="width: 100%">
         <tr>
             <td style="width: 150px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Proposal Template">

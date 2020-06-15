@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div>
-                <table class="table-condensed" style="width: 100%">
+                <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 33%">
                             <asp:Label ID="lblCategory0" runat="server" Text="Category 0" CssClass="badge badge-secondary"></asp:Label>
