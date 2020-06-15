@@ -4,7 +4,7 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-        <table class="table" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNewSubconsultantFee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Insert Subconsultant Fee">

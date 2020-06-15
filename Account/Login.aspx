@@ -55,7 +55,7 @@
                         HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on Login:"></asp:ValidationSummary>
                 </div>
-                <div class="col-md-9 offset-md-1"></div>
+                <div class="col-md-9 offset-md-2"></div>
                     <table class="table-sm well" style="width: 100%">
                     <tr>
                         <td style="width: 40%" rowspan="2">
@@ -69,7 +69,7 @@
                             </asp:Panel>
 
 
-                            <table class="table-condensed" style="width: 100%">
+                            <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td>
                                         <label for="email" class="control-label" style="font-size: large">User Email</label>

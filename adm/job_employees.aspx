@@ -11,7 +11,7 @@
         </script>
     </telerik:RadCodeBlock>
     <div class="container">
-        <table class="table" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     <asp:LinkButton ID="btnSetEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Assin Employees">

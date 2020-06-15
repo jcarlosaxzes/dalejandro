@@ -16,7 +16,7 @@
     </telerik:RadCodeBlock>
 
     <div class="container">
-        <table class="table" style="width: 100%">
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
                     <table class="table-sm" style="width: 100%">
