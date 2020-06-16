@@ -544,7 +544,7 @@
             <tr>
                 <td style="text-align: center">
                     <h2 style="margin: 0; text-align: center; color:white;">
-                        <span class="navbar navbar-expand-md bg-dark text-white">Hourly Wage for Selected Year
+                       <span class="card bg-danger text-white">Hourly Wage for Selected Year
                         </span>
                     </h2>
                 </td>
@@ -585,7 +585,7 @@
             <tr>
                 <td style="text-align: center">
                     <h2 style="margin: 0; text-align: center; color:white;">
-                        <span class="navbar navbar-expand-md bg-dark text-white">Calculate Multiplier
+                       <span class="card bg-danger text-white">Calculate Multiplier
                         </span>
                     </h2>
                 </td>

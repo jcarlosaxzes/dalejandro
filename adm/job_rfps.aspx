@@ -66,7 +66,7 @@
                                     HeaderText="Pay Bill" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px"
                                     UniqueName="PayBill" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnRFPPayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="PayBill" CommandArgument='<%# Eval("Id") %>'
+                                        <asp:LinkButton ID="btnRFPPayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="PayBill" CommandArgument='<%# Eval("Id") %>'
                                             ToolTip="Add New Payments bill" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                                             <i class="fas fa-dollar-sign"></i>
                                         </asp:LinkButton>
@@ -240,7 +240,7 @@
                 <tr>
                     <td>
                         <h2 style="margin: 0; text-align: center; color: white; width: 800px">
-                            <span class="navbar navbar-expand-md bg-dark text-white">
+                           <span class="card bg-danger text-white">
                                 <asp:Label ID="lblJob" runat="server"></asp:Label>
                             </span>
                         </h2>

@@ -72,19 +72,19 @@
     <div class="Formulario">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 80px">
+                <td style="width: 100px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
-                <td style="width: 80px">
+                <td style="width: 150px">
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add new Project and RFP for selected Subconsultants">
                        <i class="fas fa-plus"></i>&nbsp;Project & RFPs
                     </asp:LinkButton>
                 </td>
                 <td style="width: 100px">
                     <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Table view Page">
-                       <i class="fas fa-align-justify"></i>Table
+                       <i class="fas fa-align-justify"></i> Table
                     </asp:LinkButton>
                 </td>
                 <td style="width: 100px; text-align: right">
@@ -292,7 +292,7 @@
                     <td>
                         <h4>
                             <h2 style="margin: 0; text-align: center; color:white; width: 700px">
-                                <span class="navbar navbar-expand-md bg-dark text-white">
+                               <span class="card bg-danger text-white">
                                     <asp:Label ID="lblRFPNumber" runat="server"></asp:Label>
                                 </span>
                             </h2>
@@ -351,7 +351,7 @@
                 <tr>
                     <td>
                         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                            <span class="navbar navbar-expand-md bg-dark text-white">Decline Selected Records
+                           <span class="card bg-danger text-white">Decline Selected Records
                             </span>
                         </h2>
 
@@ -393,7 +393,7 @@
     <div>
         <telerik:RadToolTip ID="RadToolTipNewRFPforProject" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
             <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-                <span class="navbar navbar-expand-md bg-dark text-white">New RFP for Project
+               <span class="card bg-danger text-white">New RFP for Project
                 </span>
             </h2>
             <table class="table-sm" style="width: 600px">

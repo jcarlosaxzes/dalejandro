@@ -32,7 +32,7 @@
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 33%">
-                                <h2 style="margin: 0"><span class="navbar navbar-expand-md bg-dark text-white">Subconsultant</span></h2>
+                                <h2 style="margin: 0">class="card bg-danger text-white"Subconsultant</span></h2>
                                 <table style="width: 100%">
                                     <tr>
                                         <td>
@@ -57,7 +57,7 @@
                                 </table>
                             </td>
                             <td style="width: 33%; text-align: center; vertical-align: top">
-                                <h2 style="margin: 0"><span class="navbar navbar-expand-md bg-dark text-white">Projects</span></h2>
+                                <h2 style="margin: 0">class="card bg-danger text-white"Projects</span></h2>
                                 <table style="width: 85%">
                                     <tr>
                                         <td style="text-align: right"># Pending Proposals:</td>
@@ -74,7 +74,7 @@
                                 </table>
                             </td>
                             <td style="text-align: right; vertical-align: top">
-                                <h2 style="margin: 0"><span class="navbar navbar-expand-md bg-dark text-white">Balance</span></h2>
+                                <h2 style="margin: 0">class="card bg-danger text-white"Balance</span></h2>
                                 <table style="width: 85%">
                                     <tr>
                                         <td style="text-align: right;">Amount Paid:</td>
@@ -97,7 +97,7 @@
                 </ItemTemplate>
             </asp:FormView>
             <br />
-            <h2><span class="navbar navbar-expand-md bg-dark text-white">Request for Proposals History</span></h2>
+            <h2>class="card bg-danger text-white"Request for Proposals History</span></h2>
             <telerik:RadGrid ID="RadGridRFPs" runat="server" DataSourceID="SqlDataSourceRFP" AutoGenerateColumns="False" AllowSorting="True"
                         PageSize="10" AllowPaging="true"
                         ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small">

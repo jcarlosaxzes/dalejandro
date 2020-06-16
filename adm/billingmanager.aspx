@@ -164,7 +164,7 @@
                             </Columns>
                             <EditFormSettings EditFormType="Template">
                                 <FormTemplate>
-                                    <table class="table-sm" style="width: 100%">
+                                    <table class="table table-condensed" style="width: 100%">
                                         <tr>
                                             <td style="width: 150px; text-align: right">Notes
                                             </td>
@@ -559,7 +559,7 @@
             <tr>
                 <td>
                     <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                        <span class="navbar navbar-expand-md bg-dark text-white">
+                       <span class="card bg-dark text-white">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -587,7 +587,7 @@
                 <td>
 
                     <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                        <span class="navbar navbar-expand-md bg-dark text-white">
+                       <span class="card bg-dark text-white">
                             <asp:Label ID="lblActionMesageStatement" runat="server"></asp:Label>Switch Company
                         </span>
                     </h2>
@@ -611,7 +611,7 @@
 
     <telerik:RadToolTip ID="RadToolTipInvoicesPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Receive Invoice Payments
+           <span class="card bg-dark text-white">Receive Invoice Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -657,7 +657,7 @@
 
     <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Receive Statement Payments
+           <span class="card bg-dark text-white">Receive Statement Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -704,7 +704,7 @@
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Edit Invoice
+           <span class="card bg-dark text-white">Edit Invoice
             </span>
         </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEditInvoice" DefaultMode="Edit">
@@ -806,7 +806,7 @@
     <telerik:RadToolTip ID="RadToolTipInvoiceRemaider" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">New Invoice Reminder
+           <span class="card bg-dark text-white">New Invoice Reminder
             </span>
         </h2>
         <asp:FormView ID="FormViewRemaider" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceRemaider">
@@ -847,7 +847,7 @@
 
 
         </asp:FormView>
-        <table class="table-sm" style="width: 600px">
+        <table class="table table-condensed" style="width: 600px">
             <tr>
                 <td style="text-align: right" class="Normal">Reminder
                 </td>
@@ -909,7 +909,7 @@
     <telerik:RadToolTip ID="RadToolTipStatementReminder" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">New Statement Reminder
+           <span class="card bg-dark text-white">New Statement Reminder
             </span>
         </h2>
 
@@ -944,7 +944,7 @@
 
 
         </asp:FormView>
-        <table class="table-sm" style="width: 600px">
+        <table class="table table-condensed" style="width: 600px">
             <tr>
                 <td style="text-align: right" class="Normal">Reminder
                 </td>

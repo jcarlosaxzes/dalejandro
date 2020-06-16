@@ -131,7 +131,7 @@
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
-                    <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Invoice">
+                    <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice">
                     <i class="fas fa-plus"></i> Simple Charge
                     </asp:LinkButton>
                 </td>
@@ -318,8 +318,8 @@
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Receive Payment
+        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
+           <span class="card bg-danger text-white">Receive Payment
             </span>
         </h2>
         <table class="table-sm" style="width: 500px">
@@ -388,8 +388,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Edit Invoice
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+           <span class="card bg-danger text-white">Edit Invoice
             </span>
         </h2>
 
@@ -496,8 +496,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipNewInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">New Invoice
+        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
+           <span class="card bg-danger text-white">New Invoice
             </span>
         </h2>
 

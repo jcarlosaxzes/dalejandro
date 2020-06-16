@@ -58,9 +58,12 @@ Public Class proposal
 
                 If Not Request.QueryString("HideMasterMenu") Is Nothing Then
                     Master.HideMasterMenu()
-                    btnBack.Visible = False
                 End If
 
+
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    lblBackSource.Text = Request.QueryString("backpage")
+                End If
 
 
             End If
@@ -157,7 +160,7 @@ Public Class proposal
 
     Protected Sub btnPrintProposal_Click(sender As Object, e As EventArgs) Handles btnPrintProposal.Click
         If LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId") > 0 Then
-            Response.Redirect("~/adm/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&fromproposal=1")
+            Response.Redirect("~/adm/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&backpage=proposal&HideMasterMenu=1")
         Else
             Master.InfoMessage("You Must Specify the Client and Update Proposal")
         End If
@@ -372,7 +375,13 @@ Public Class proposal
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
+        Select Case lblBackSource.Text
+            Case "job_proposals"
+                Response.Redirect("~/adm/job_proposals.aspx?jobId=" & lblSelectedJobId.Text)
+            Case Else
+                Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
+        End Select
+
     End Sub
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible

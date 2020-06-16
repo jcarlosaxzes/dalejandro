@@ -4628,7 +4628,7 @@ Public Class LocalAPI
     Public Shared Function GetProposalDetailProperty(ByVal detailId As Integer, sProperty As String) As String
         Try
             Select Case sProperty
-                Case "Amount", "Hours", "Rates", "phaseId", "positionId", "TaskId", "BillType"
+                Case "Amount", "Hours", "Rates", "phaseId", "positionId", "TaskId", "BillType", "TotalRow"
                     ' Numeric values
                     Return GetNumericEscalar("SELECT ISNULL([" & sProperty & "],0) FROM Proposal_details WHERE Id=" & detailId)
 

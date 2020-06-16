@@ -34,18 +34,12 @@ Public Class job_proposals
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EmailPrint"
-                'sUrl = "~/ADMCLI/ProposalRDLC.aspx?ProposalId=" & e.CommandArgument & "&Origen=52"
-                'sUrl = "~/ADM/SendProposal.aspx?ProposalId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Origen=152"
-                'CreateRadWindows(e.CommandName, sUrl, 980, 890, False, "OnClientCloseProposals")
-                Response.Redirect(sUrl)
+                Response.Redirect("~/adm/sendproposal.aspx?proposalId=" & e.CommandArgument & "&backpage=job_proposals&HideMasterMenu=1")
             Case "GetSharedLink"
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
-                ' Codigo sapx anterior
-                '<asp:HyperLink ID="hlkProposalEdit" runat="server" Text='<%# Eval("ProposalNumber")%>' NavigateUrl='<%# Eval("Id", "~/adm/proposal.aspx?proposalId={0}")%>' ToolTip="Click to edit proposal in new tab" Target="_blank"></asp:HyperLink>
-                sUrl = "~/adm/proposal.aspx?proposalId=" & e.CommandArgument & "&HideMasterMenu=1"
-                CreateRadWindows(e.CommandName, sUrl, -1, 810, False)
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument & "&backpage=job_proposals&HideMasterMenu=1")
             Case "Delete"
         End Select
     End Sub
@@ -67,7 +61,6 @@ Public Class job_proposals
             window1.Height = Height
         End If
         window1.Modal = True
-        window1.OnClientClose = "OnClientClose"
         RadWindowManager1.Windows.Add(window1)
     End Sub
     Public Function ProposalStatusEnabled(proposalId As Integer, ByVal Status As Object) As Boolean

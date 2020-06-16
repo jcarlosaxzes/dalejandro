@@ -84,12 +84,12 @@
 
     <table class="table-sm noprint" style="width: 100%">
         <tr>
-            <td style="width: 100px">
+            <td style="width: 150px">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                                         <i class="fas fa-plus"></i>&nbsp;Pre-Project
                 </asp:LinkButton>
             </td>
-            <td style="width: 130px">
+            <td style="width: 150px">
                 <script type="text/javascript">
                     function PrintPage(sender, args) {
                         window.print();
