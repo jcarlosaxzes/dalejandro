@@ -749,8 +749,8 @@
             <tr>
                 <td colspan="2">
                     <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                        <span class="navbar navbar-expand-md bg-light">Update Job Status
-                        </span>
+                       <span class="card bg-dark text-white">Update Job Status</span>
+                        </>
                     </h2>
                 </td>
             </tr>
@@ -780,7 +780,7 @@
 
     <telerik:RadToolTip ID="RadToolTipShareFilter" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-            <span class="navbar navbar-expand-md bg-light">Share Copied Filters
+           <span class="card bg-dark text-white">Share Copied Filters
             </span>
         </h2>
         <table class="table-sm" style="width: 500px">

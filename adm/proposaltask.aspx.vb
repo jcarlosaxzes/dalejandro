@@ -110,15 +110,15 @@ Public Class proposaltask
             btnUpdateAndBack.Text = "Update and Back"
             Master.InfoMessage("New Task inserted!")
         End If
+        lblTotalLine.Text = FormatCurrency(LocalAPI.GetProposalDetailProperty(lbldetailId.Text, "TotalRow"))
         PanelEstimatorVisible()
 
     End Sub
     Private Sub btnUpdateAndBack_Click(sender As Object, e As EventArgs) Handles btnUpdateAndBack.Click
         If Val(lbldetailId.Text) > 0 Then
-            ' Edit
+            ' Update and Back
             SqlDataSource1.Update()
             Master.InfoMessage("Record updated!")
-            btnUpdate.Text = "Update"
         Else
             ' Insert
             SqlDataSource1.Insert()

@@ -283,7 +283,7 @@
 
     <telerik:RadToolTip ID="RadToolTipNewCampaign" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">Create New Marketing Campaign
+           <span class="card bg-dark text-white">Create New Marketing Campaign
             </span>
         </h2>
         <table class="table-sm" style="width: 600px">
@@ -325,7 +325,7 @@
 
     <telerik:RadToolTip ID="RadToolTipAvailability" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">Client Availability
+           <span class="card bg-dark text-white">Client Availability
             </span>
         </h2>
         <table class="table-sm" style="width: 600px">

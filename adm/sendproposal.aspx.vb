@@ -12,14 +12,7 @@ Public Class sendproposal
             cboProjectManagerId.DataBind()
             cboProjectManagerId.SelectedValue = LocalAPI.GetProposalData(lblProposalId.Text, "ProjectManagerId")
 
-            If Not Request.QueryString("JobId") Is Nothing Then
-                lblJobId.Text = Request.QueryString("JobId")
-            End If
-
             If lblProposalId.Text > 0 Then
-                If Not Request.QueryString("fromproposal") Is Nothing Then
-                    lblBackSource.Text = 1
-                End If
 
                 lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "clientId")
 
@@ -47,6 +40,14 @@ Public Class sendproposal
                 End If
 
                 TotalsAnalisis()
+
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    lblBackSource.Text = Request.QueryString("backpage")
+                End If
+                If Not Request.QueryString("HideMasterMenu") Is Nothing Then
+                    Master.HideMasterMenu()
+                End If
+
 
             End If
         End If
@@ -235,10 +236,15 @@ Public Class sendproposal
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Select Case lblBackSource.Text
-            Case "1"  ' fromproposal
+            Case "proposal"
                 Response.RedirectPermanent("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
+            Case "job_proposals"
+                Dim jobId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
+                Response.Redirect("~/adm/job_proposals.aspx?jobId=" & jobId)
+            Case "proposalnewwizard"
+                Response.RedirectPermanent("~/adm/proposals.aspx?restoreFilter=true")
             Case Else
-                Response.RedirectPermanent("~/adm/proposals.aspx")
+                Response.RedirectPermanent("~/adm/proposals.aspx?restoreFilter=true")
         End Select
     End Sub
 End Class

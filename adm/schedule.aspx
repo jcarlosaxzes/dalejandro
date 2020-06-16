@@ -24,19 +24,19 @@
     <div class="Formulario">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width:90px">
+                <td style="width:100px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
-                <td style="width:90px">
+                <td style="width:120px">
                     <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
                         <i class="fas fa-plus"></i> Activity
                     </asp:LinkButton>
                 </td>
-                <td style="width:150px">
+                <td style="width:180px">
                     <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
-                        <i class="far fa-calendar-alt"></i></span> Export to Outlook
+                        <i class="far fa-calendar-alt"></i> Export to Outlook
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
@@ -144,7 +144,7 @@
 
     <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 650px">
-            <span class="navbar navbar-expand-md bg-light">Proposal Task & Share Event
+           <span class="card bg-danger text-white">Proposal Task & Share Event
             </span>
         </h2>
         <asp:Panel runat="server" ID="panelProposalTask">
@@ -189,7 +189,7 @@
 
     <telerik:RadToolTip ID="RadToolTipCRM" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">New Client Activity Record
+           <span class="card bg-danger text-white">New Client Activity Record
             </span>
         </h2>
         <table class="table-sm" style="width: 600px">

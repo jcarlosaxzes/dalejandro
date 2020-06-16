@@ -444,7 +444,7 @@
             <tr>
                 <td>
                     <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-                        <span class="navbar navbar-expand-md bg-light">Reject Proposal
+                       <span class="card bg-danger text-white">Reject Proposal
                         </span>
                     </h2>
 

@@ -169,7 +169,7 @@
                     <table style="width: 100%; background-color: white; margin-top: 20px">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 45%">
-                                <h2><span class="navbar navbar-expand-md bg-light">Bill To</span></h2>
+                                <h2>class="card bg-danger text-white"Bill To</span></h2>
                                 <h3 style="margin: 0"><%# Eval("ClientName")%></h3>
                                 <%# Eval("ClientCompany") %><br />
                                 <%# Eval("ClientFullAddress")%><br />
@@ -177,7 +177,7 @@
                             </td>
                             <td style="width: 10%"></td>
                             <td style="text-align: left; vertical-align: top">
-                                <h2><span class="navbar navbar-expand-md bg-light">Statement</span></h2>
+                                <h2>class="card bg-danger text-white"Statement</span></h2>
                                 <table style="width: 100%">
                                     <tr>
                                         <td style="width: 180px; text-align: right; padding-right: 15px">Statement Number</td>
@@ -266,7 +266,7 @@
                 <div class="col-lg-12" style="margin-top: 10px">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-6">
-                            <h2><span class="navbar navbar-expand-md bg-light">Payment method</span></h2>
+                            <h2>class="card bg-danger text-white"Payment method</span></h2>
                         </div>
                     </div>
                     <div class="row">

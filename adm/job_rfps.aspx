@@ -240,7 +240,7 @@
                 <tr>
                     <td>
                         <h2 style="margin: 0; text-align: center; color: white; width: 800px">
-                            <span class="navbar navbar-expand-md bg-light">
+                           <span class="card bg-danger text-white">
                                 <asp:Label ID="lblJob" runat="server"></asp:Label>
                             </span>
                         </h2>

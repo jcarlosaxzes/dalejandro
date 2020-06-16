@@ -2,19 +2,6 @@
 
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-    <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
-        <script type="text/javascript">
-            function OnClientCloseProposals(sender, args) {
-                var masterTable = $find("<%= RadGridProposals.ClientID%>").get_masterTableView();
-                masterTable.rebind();
-            }
-        </script>
-        <style>
-            .RadTabStrip .rtsLI, .RadTabStripVertical .rtsLI {
-                line-height: 10px;
-            }
-        </style>
-    </telerik:RadCodeBlock>
     <div class="container">
 
         <table class="table-sm" style="width: 100%">
@@ -63,10 +50,9 @@
                                 <telerik:GridTemplateColumn HeaderText="Email Print" UniqueName="columnEmail" AllowFiltering="False"
                                     HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
                                     <ItemTemplate>
-                                        <telerik:RadButton ID="btnProposal" runat="server" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' Width="36px"
-                                            ToolTip="Send Email with Proposal information" ButtonType="LinkButton">
-                                            <Icon PrimaryIconCssClass="rbMail"></Icon>
-                                        </telerik:RadButton>
+                                        <asp:LinkButton runat="server" ID="btnSendProposal" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Proposal information">
+                                            <i class="far fa-envelope"></i>
+                                        </asp:LinkButton>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn HeaderText="Share" UniqueName="Share"
@@ -96,9 +82,10 @@
             </tr>
         </table>
 
+        <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+        </telerik:RadWindowManager>
+
     </div>
-    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
-    </telerik:RadWindowManager>
 
 
     <asp:SqlDataSource ID="SqlDataSourceProposals" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

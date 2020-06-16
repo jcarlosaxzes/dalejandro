@@ -429,7 +429,7 @@
     <div>
         <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
             <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                <span class="navbar navbar-expand-md bg-light">Receive Statement Payments
+               <span class="card bg-danger text-white">Receive Statement Payments
                 </span>
             </h2>
             <table class="table-bordered" style="width: 500px">

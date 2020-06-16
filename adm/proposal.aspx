@@ -90,7 +90,7 @@
                     </asp:LinkButton>
                 </td>
                 <td>
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="false">
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false" CausesValidation="false">
                        Back to List
                     </asp:LinkButton>
                 </td>
@@ -1168,7 +1168,7 @@
 
     <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-            <span class="navbar navbar-expand-md bg-light">Delete Proposal
+           <span class="card bg-danger text-white">Delete Proposal
             </span>
         </h2>
         <table class="table-sm" style="width: 500px">
@@ -1443,6 +1443,9 @@
     <asp:Label ID="lblDetailSelectedId" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblClientId" runat="server" Visible="false" Text="0"></asp:Label>
+
+    <asp:Label ID="lblBackSource" runat="server" Visible="False" Text="0"></asp:Label>
+
 </asp:Content>
 
 
