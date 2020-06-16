@@ -140,6 +140,24 @@ Partial Public Class invoices
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
+    '''RadToolTipContact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipContact As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
+    '''RadToolTipEmitted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipEmitted As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
     '''RadToolTipInsertPayment control.
     '''</summary>
     '''<remarks>

@@ -279,12 +279,12 @@
                                                         </asp:LinkButton>
 
                                     &nbsp;
-                                                        <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
+                                                        <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                                             ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                                             <i class="fas fa-dollar-sign"></i>
                                                         </asp:LinkButton>
                                     &nbsp;
-                                                        <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt")=0%>'
+                                                        <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger badge" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt")=0%>'
                                                             ToolTip="Mark Invoice as BadDept" CausesValidation="false">
                                                             B
                                                         </asp:LinkButton>
@@ -381,10 +381,10 @@
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 500px">
-            <span class="navbar navbar-expand-md bg-light">Receive Payment
+            <span class="navbar navbar-expand-md bg-dark text-white">Receive Payment
             </span>
         </h2>
-        <table class="table table-condensed" style="width: 500px">
+        <table class="table-sm" style="width: 500px">
             <tr>
                 <td style="width: 140px; text-align: right">Collected Date:
                 </td>
@@ -449,12 +449,12 @@
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">Invoice
+            <span class="navbar navbar-expand-md bg-dark text-white">Invoice
             </span>
         </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">
             <EditItemTemplate>
-                <table class="table table-condensed" style="width: 600px">
+                <table class="table-sm" style="width: 600px">
                     <tr>
                         <td colspan="2">
                             <h4><%# iif(Eval("InvoiceType")=1,"Invoice Hourly Rate","Invoice Simple Charge") %></h4>
@@ -490,7 +490,7 @@
                     </tr>
                 </table>
                 <asp:Panel runat="server" ID="Panel1" Visible='<%# iif(Eval("InvoiceType")=1,"true","false") %>'>
-                    <table class="table table-condensed" style="width: 600px">
+                    <table class="table-sm" style="width: 600px">
                         <tr>
                             <td style="width: 120px">Hours:</td>
                             <td>
@@ -508,7 +508,7 @@
                         </tr>
                     </table>
                 </asp:Panel>
-                <table class="table table-condensed" style="width: 600px">
+                <table class="table-sm" style="width: 600px">
                     <tr>
                         <td style="width: 120px">Notes</td>
                         <td>
@@ -529,7 +529,7 @@
                 </table>
             </EditItemTemplate>
         </asp:FormView>
-        <table class="table table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnUpdateInvoice" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
@@ -548,12 +548,12 @@
 
     <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">Payment
+            <span class="navbar navbar-expand-md bg-dark text-white">Payment
             </span>
         </h2>
         <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">
             <EditItemTemplate>
-                <table class="table table-condensed" style="width: 600px">
+                <table class="table-sm" style="width: 600px">
                     <tr>
                         <td style="width: 140px; text-align: right">Collected Date:
                         </td>
@@ -593,7 +593,7 @@
                 </table>
             </EditItemTemplate>
         </asp:FormView>
-        <table class="table table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnUpdatePayment" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
@@ -610,13 +610,13 @@
 
     <telerik:RadToolTip ID="RadToolTipInvoicesDiscount" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">Apply Invoices Discount
+            <span class="navbar navbar-expand-md bg-dark text-white">Apply Invoices Discount
             </span>
         </h2>
         <p>
             Apply Discount Percent (%) or Discount Amount ($) to last Invoice scheduled and Job.Budget
         </p>
-        <table class="table table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
 
             <tr>
                 <td style="width: 120px">Discount Percent (%):

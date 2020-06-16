@@ -179,7 +179,7 @@
 
                 <telerik:RadWizardStep runat="server" StepType="Finish" Title="Finish">
 
-                    <table class="table table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td>
                                 <h3>Send Emails with PASconcept Notifications? </h3>
@@ -204,7 +204,7 @@
                     <asp:Label ID="lblCredentials" runat="server"></asp:Label><br />
                     <asp:Label ID="lblGetStartedEmail" runat="server"></asp:Label><br />
 
-                    <table class="table table-condensed" style="width: 100%">
+                    <table class="table-sm" style="width: 100%">
                         <tr>
                             <td>
                                 <h4>2.- Bind Company to Axzes Client</h4>

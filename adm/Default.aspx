@@ -465,7 +465,7 @@
 
     <asp:Panel runat="server" ID="panelEmployeePortal" Visible="false">
 
-        <span class="navbar navbar-expand-md bg-light">
+        <span class="navbar navbar-expand-md bg-dark text-white">
             <h2>PASconcept Application Home Page</h2>
         </span>
         <h3>PASconcept is your complete online platform for Project Administration Services</h3>

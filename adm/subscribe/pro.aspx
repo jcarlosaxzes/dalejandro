@@ -13,7 +13,7 @@
                 <asp:LinkButton ID="btnHome" runat="server" title="Home" data-toggle="tooltip" class="btn btn-success width-100 btn-lg" PostBackUrl="~/ADM/Default.aspx">
                       Return&nbsp;<span class="circle bg-white"></span>
                 </asp:LinkButton>
-                <h5><span class="navbar navbar-expand-md bg-light"></span>No outstanding payments</h5>
+                <h5><span class="navbar navbar-expand-md bg-dark text-white"></span>No outstanding payments</h5>
             </asp:Panel>
         </div>
     </div>
@@ -92,7 +92,7 @@
         <div class="col-lg-12" style="margin-top: 10px">
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-6">
-                    <h2><span class="navbar navbar-expand-md bg-light">Payment method</span></h2>
+                    <h2><span class="navbar navbar-expand-md bg-dark text-white">Payment method</span></h2>
                 </div>
             </div>
             <div class="row">

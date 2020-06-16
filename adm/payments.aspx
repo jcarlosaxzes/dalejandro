@@ -209,12 +209,12 @@
 
     <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">Payment
+            <span class="navbar navbar-expand-md bg-dark text-white">Payment
             </span>
         </h2>
         <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">
             <EditItemTemplate>
-                <table class="table table-condensed" style="width: 600px">
+                <table class="table-sm" style="width: 600px">
                     <tr>
                         <td style="width: 140px; text-align: right" class="Normal">Collected Date:
                         </td>
@@ -254,7 +254,7 @@
                 </table>
             </EditItemTemplate>
         </asp:FormView>
-        <table class="table table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td>
                     <asp:Panel ID="PanelUpload" runat="server" class="DropZone1">
