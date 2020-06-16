@@ -12,7 +12,7 @@
                 <Content>
                     <div style="text-align: left" class="PanelFilter noprint">
                         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                            <table style="width: 100%" class="table-condensed Formulario">
+                            <table style="width: 100%" class="table-sm Formulario">
                                 <tr>
                                     <td align="right" class="Normal" width="80px">Find:
                                     </td>
@@ -33,7 +33,7 @@
             </telerik:LayoutRow>
             <telerik:LayoutRow>
                 <Content>
-                    <table class="table-condensed noprint">
+                    <table class="table-sm noprint">
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Template">

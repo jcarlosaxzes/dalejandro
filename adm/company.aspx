@@ -670,7 +670,7 @@
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton3" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
-                                                    CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                                    CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                                     Cancel
                                                 </asp:LinkButton>
                                             </td>
@@ -833,7 +833,7 @@
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton8" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
-                                                    CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                                    CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                                     Cancel
                                                 </asp:LinkButton>
                                             </td>
@@ -912,7 +912,7 @@
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton10" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
-                                                    CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                                    CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                                     Cancel
                                                 </asp:LinkButton>
                                             </td>
@@ -1008,7 +1008,7 @@
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton12" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
-                                                    CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                                    CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                                     Cancel
                                                 </asp:LinkButton>
                                             </td>
@@ -1068,7 +1068,7 @@
                                                 </asp:LinkButton>
                                                 &nbsp;&nbsp;&nbsp;
                                                 <asp:LinkButton ID="LinkButton15" runat="server" ToolTip="Cancel changes" CommandName="Cancel" CausesValidation="False"
-                                                    CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                                                    CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                                     Cancel
                                                 </asp:LinkButton>
                                             </td>

@@ -43,7 +43,7 @@
                 <td>
                     <asp:Panel ID="pnlTemplate" runat="server">
                         <telerik:RadMultiColumnComboBox ID="cboMulticolumnTask" runat="server" DataSourceID="SqlDataSource1" DataTextField="Description" DataValueField="Id" AutoPostBack="true"
-                            Width="800px" DropDownWidth="800" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
+                            Width="800px" DropDownWidth="800" MarkFirstMatch="True" Filter="Contains" AutoFilter="True" Height="300px"
                             FilterFields="taskcode, Description">
                             <ColumnsCollection>
                                 <telerik:MultiColumnComboBoxColumn Field="taskcode" Title="Code" Width="100px" />

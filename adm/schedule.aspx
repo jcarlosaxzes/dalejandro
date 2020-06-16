@@ -35,12 +35,12 @@
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
-                    <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+                    <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="far fa-calendar-alt"></i></span> Export to Outlook
                     </asp:LinkButton>
                 </td>
                 <td style="width:150px">
-                    <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+                    <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="fas fa-download"></i> Export to PDF
                     </asp:LinkButton>
                 </td>
@@ -144,7 +144,7 @@
 
     <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 650px">
-            <span class="navbar bg-dark">Proposal Task & Share Event
+            <span class="navbar navbar-expand-md bg-light">Proposal Task & Share Event
             </span>
         </h2>
         <asp:Panel runat="server" ID="panelProposalTask">
@@ -178,7 +178,7 @@
                         Accept
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                     <asp:LinkButton ID="btnCancelSendCalendar" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" CausesValidation="false">
+                     <asp:LinkButton ID="btnCancelSendCalendar" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" CausesValidation="false">
                                      Cancel
                      </asp:LinkButton>
                 </td>
@@ -189,7 +189,7 @@
 
     <telerik:RadToolTip ID="RadToolTipCRM" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">New Client Activity Record
+            <span class="navbar navbar-expand-md bg-light">New Client Activity Record
             </span>
         </h2>
         <table class="table-sm" style="width: 600px">

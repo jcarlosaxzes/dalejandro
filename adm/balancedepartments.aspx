@@ -12,7 +12,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <table class="table-condensed Formulario" style="width: 100%">
+    <table class="table-sm Formulario" style="width: 100%">
         <tr>
             <td style="width: 60px; text-align: right" class="Normal">Year:</td>
             <td style="width: 100px">

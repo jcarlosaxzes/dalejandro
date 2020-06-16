@@ -209,7 +209,7 @@
 
     <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">Payment
+            <span class="navbar navbar-expand-md bg-light">Payment
             </span>
         </h2>
         <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">
@@ -274,7 +274,7 @@
                         CommandName="Update"> Update
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelUpdatePayment" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false"
+                    <asp:LinkButton ID="btnCancelUpdatePayment" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
                 </td>

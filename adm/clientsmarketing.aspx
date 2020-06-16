@@ -66,7 +66,7 @@
                             </td>
                         </tr>
                     </table>
-                    <table style="width: 100%" class="table-condensed Formulario">
+                    <table style="width: 100%" class="table-sm Formulario">
                         <tr>
                             <td width="50px" class="Normal">Subject:
                             </td>
@@ -90,7 +90,7 @@
             </telerik:RadWizardStep>
             <telerik:RadWizardStep Title="SMS Template" runat="server" StepType="Start">
                 <asp:Panel ID="PanelSMS" runat="server" Width="100%">
-                    <table style="width: 100%" class="table-condensed Formulario">
+                    <table style="width: 100%" class="table-sm Formulario">
                         <tr>
                             <td width="50px" class="Normal" valign="top">SMS Message:
                             </td>

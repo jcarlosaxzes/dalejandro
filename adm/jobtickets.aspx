@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <table class="table-condensed noprint" style="width: 100%">
+        <table class="table-sm noprint" style="width: 100%">
             <tr>
                 <td style="width: 100px; text-align: left">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -125,13 +125,13 @@
                 </td>
                 <td style="text-align: center; width: 100px">
                     <asp:LinkButton ID="btnImport" runat="server" ToolTip="Import records from CSV File" Width="100px"
-                        CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                        CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-upload"></i> Import
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: center; width: 100px">
                     <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Width="100px"
-                        CssClass="btn btn-default btn" UseSubmitBehavior="false">
+                        CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-download"></i> Export
                     </asp:LinkButton>
                 </td>
@@ -335,7 +335,7 @@
     <div>
         <telerik:RadToolTip ID="RadToolSendRequest" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
             <h2 style="margin: 0">
-                <span class="navbar bg-dark">Request Meeting
+                <span class="navbar navbar-expand-md bg-light">Request Meeting
                 </span>
             </h2>
             <asp:ValidationSummary ID="ValidationSummary1" runat="server"
@@ -406,7 +406,7 @@
         <telerik:RadToolTip ID="RadToolTipEditTicket" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
             Skin="Default">
             <h2 style="margin: 0; text-align: center; color:white; width: 960px">
-                <span class="navbar bg-dark">View/Edit Ticket #
+                <span class="navbar navbar-expand-md bg-light">View/Edit Ticket #
                     <asp:Label ID="lblTicketId" runat="server"></asp:Label>
                 </span>
             </h2>
@@ -667,7 +667,7 @@
                 <tr>
                     <td>
                         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-                            <span class="navbar bg-dark">Update Status of Selected Ticket(s)
+                            <span class="navbar navbar-expand-md bg-light">Update Status of Selected Ticket(s)
                             </span>
                         </h2>
                     </td>
@@ -717,7 +717,7 @@
     <div>
         <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
             <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-                    <span class="navbar bg-dark">Invoice
+                    <span class="navbar navbar-expand-md bg-light">Invoice
                     </span>
                 </h2>
             <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">
@@ -804,7 +804,7 @@
                             CommandName="Update"> Update
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" Text=""
+                    <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" Text=""
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
                     </td>

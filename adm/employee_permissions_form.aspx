@@ -29,7 +29,7 @@
                                         Update
                         </asp:LinkButton>
                         &nbsp;&nbsp;
-                                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-default btn-lg" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
+                                <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
                                     Cancel
                                 </asp:LinkButton>
                     </div>
@@ -619,7 +619,7 @@
                              Update
                         </asp:LinkButton>
                         &nbsp;&nbsp;
-                    <asp:LinkButton ID="UpdateCancelButton" runat="server" CssClass="btn btn-default btn-lg" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
+                    <asp:LinkButton ID="UpdateCancelButton" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
                              Cancel
                     </asp:LinkButton>
                     </div>

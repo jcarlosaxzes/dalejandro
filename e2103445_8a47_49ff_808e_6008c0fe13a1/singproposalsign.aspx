@@ -78,7 +78,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
                     &nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-default" data-action="clear">Clear</button>
+                    <button type="button" class="btn btn-secondary" data-action="clear">Clear</button>
                     &nbsp;&nbsp;&nbsp;
                     <button id="btnSign" type="button" runat="server" data-action="save" class="btn btn-success" style="width: 100px">Sign</button>
                 </div>

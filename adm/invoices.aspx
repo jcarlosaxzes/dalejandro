@@ -322,7 +322,7 @@
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-            <span class="navbar bg-dark">Receive Payment
+            <span class="navbar navbar-expand-md bg-light">Receive Payment
             </span>
         </h2>
         <table class="table table-condensed" style="width: 500px">
@@ -382,7 +382,7 @@
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false"
+                    <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
                 </td>
@@ -392,7 +392,7 @@
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">Edit Invoice
+            <span class="navbar navbar-expand-md bg-light">Edit Invoice
             </span>
         </h2>
         
@@ -486,7 +486,7 @@
                                 CommandName="Update"> Update
                             </asp:LinkButton>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-default btn" UseSubmitBehavior="false" Text=""
+                            <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" Text=""
                                 CommandName="Cancel"> Cancel
                             </asp:LinkButton>
                         </td>
@@ -500,7 +500,7 @@
 
     <telerik:RadToolTip ID="RadToolTipNewInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar bg-dark">New Invoice
+            <span class="navbar navbar-expand-md bg-light">New Invoice
             </span>
         </h2>
 

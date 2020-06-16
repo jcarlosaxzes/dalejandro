@@ -454,7 +454,7 @@
             <tr>
                 <td colspan="2">
                     <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                        <span class="navbar bg-dark">
+                        <span class="navbar navbar-expand-md bg-light">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -496,7 +496,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
                 </td>
@@ -510,7 +510,7 @@
             <tr>
                 <td colspan="2">
                     <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                        <span class="navbar bg-dark">
+                        <span class="navbar navbar-expand-md bg-light">
                             <asp:Label ID="lblActionMesage2" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -523,7 +523,7 @@
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancel2" runat="server" CssClass="btn btn-default btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCancel2" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
                                     Cancel
                     </asp:LinkButton>
                 </td>
