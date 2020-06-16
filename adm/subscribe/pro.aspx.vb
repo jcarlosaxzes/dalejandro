@@ -5,6 +5,8 @@ Imports PayPal.Api
 Public Class pro
     Inherits System.Web.UI.Page
 
+    Private axzesCompanyId As Integer = 260973
+
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
 
@@ -54,7 +56,7 @@ Public Class pro
                 SqlDataSourcePayment.DataBind()
 
                 ' PayPal....................................................................................
-                Dim axzesCompanyId As Integer = 260973
+
                 If LocalAPI.IsPayPalModule(axzesCompanyId) Then
                     If LocalAPI.GetCompanybillingExpirationDate(lblCompanyId.Text) <= Date.Today Then
 
@@ -78,14 +80,10 @@ Public Class pro
                             Dim apiContext = Configuration.GetAPIContext("", clientId, clientSecret)
 
                             If String.IsNullOrEmpty(payerId) Then
-                                Dim g = Guid.NewGuid().ToString()
-                                Dim createdPayment = CreatePayment(apiContext, lblCompanyPaymentsPendingId.Text, g)
-                                lblPayPalPaymentId.Text = createdPayment.id
-                                Dim payLink = createdPayment.GetApprovalUrl()
+                                CreatePaymentPaypalLink()
                                 'lblPayPalPaymentId.Text = g
                                 'Dim payLink = "https://localhost:44308/ADM/subscribe/pro.aspx?payment_guid=" & g & "&paymentId=PAY-1FS744526K867052KLDRGZHI" & "&token=EC-5YB58532HX951702N" & "&PayerID=RLBGQWGB5R24Q"
-                                btnPay.Attributes.Add("href", payLink)
-                                Session.Add(g, createdPayment.id)
+
                                 'Session.Add(g, "123456")
                             Else
                                 ' Return sample
@@ -139,8 +137,36 @@ Public Class pro
     Protected Sub cboPlans_SelectedIndexChanged(ByVal sender As Object, ByVal e As Telerik.Web.UI.RadComboBoxSelectedIndexChangedEventArgs) Handles cboPlans.SelectedIndexChanged
         Dim plan = cboPlans.SelectedValue
         LocalAPI.SetCompanyPaymentsPlan(plan, lblCompanyId.Text)
+        CreatePaymentPaypalLink()
         ' Refreco FormView
         RadGridPayments.Rebind()
+    End Sub
+
+    Protected Sub CreatePaymentPaypalLink()
+        Try
+            ' Get PayPalClientId
+            Dim clientId = LocalAPI.GetCompanyProperty(axzesCompanyId, "PayPalClientId")
+            ' Get PayPalClientSecret
+            Dim clientSecret = LocalAPI.GetCompanyProperty(axzesCompanyId, "PayPalClientSecret")
+            ' ### Api Context
+            ' Pass in a `APIContext` object to authenticate 
+            ' the call and to send a unique request id 
+            ' (that ensures idempotency). The SDK generates
+            ' a request id if you do not pass one explicitly. 
+            Dim apiContext = Configuration.GetAPIContext("", clientId, clientSecret)
+
+            Dim g = Guid.NewGuid().ToString()
+            Dim createdPayment = CreatePayment(apiContext, lblCompanyPaymentsPendingId.Text, g)
+            lblPayPalPaymentId.Text = createdPayment.id
+            Dim payLink = createdPayment.GetApprovalUrl()
+            'lblPayPalPaymentId.Text = g
+            'Dim payLink = "https://localhost:44308/ADM/subscribe/pro.aspx?payment_guid=" & g & "&paymentId=PAY-1FS744526K867052KLDRGZHI" & "&token=EC-5YB58532HX951702N" & "&PayerID=RLBGQWGB5R24Q"
+            btnPay.Attributes.Add("href", payLink)
+            Session.Add(g, createdPayment.id)
+        Catch ex As Exception
+            lblError.Visible = True
+            lblError.Text = ex.Message '& ex.InnerException.Message & ex.HResult
+        End Try
     End Sub
 
     Protected Sub btnAgreeCreditCard_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAgreeCreditCard.Click
