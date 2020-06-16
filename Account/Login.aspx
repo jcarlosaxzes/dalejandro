@@ -40,7 +40,7 @@
     <%--Bootstrap reference begin--%>
     <%--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />--%>
     <%--Bootstrap reference end--%>
-        <%--bootstrap/4.5.0--%>
+    <%--bootstrap/4.5.0--%>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
@@ -51,91 +51,95 @@
         <div class="container">
 
             <div class="row " style="margin-top: 12em">
-                <div style="margin-left:150px">
+                <div style="margin-left: 150px">
                     <asp:ValidationSummary ID="vsConfirmation" runat="server" ValidationGroup="Login2" ForeColor="Red"
                         HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on Login:"></asp:ValidationSummary>
                 </div>
-                <div class="col-md-9 offset-md-2"></div>
-                    <table class="table-sm well" style="width: 100%">
-                    <tr>
-                        <td style="width: 40%" rowspan="2">
+                <div class="col-md-9 offset-md-2">
+                    <table class="table-sm card" style="width: 90%">
+                        <tr>
+                            <td style="width: 50%; vertical-align: top" rowspan="4">
 
-                            <asp:Image runat="server" CssClass="img-thumbnail" ImageUrl="~/Images/logo/vertical logo on light bg.svg" Width="100%" />
+                                <asp:Image runat="server" CssClass="img-thumbnail" ImageUrl="~/Images/logo/vertical logo on light bg.svg" Width="100%" />
 
-                        </td>
-                        <td style="vertical-align: middle">
+                            </td>
+                            <td style="vertical-align: middle">
 
-                            <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton">
-                            </asp:Panel>
+                                <asp:Panel ID="pnlLogin" runat="server" DefaultButton="LoginButton" Width="100%">
+                                    <table class="table-sm" style="width: 100%" >
+                                        <tr>
+                                            <td>
+                                                <label for="email" class="control-label" style="font-size: large">User Email</label>
+                                                <telerik:RadTextBox ID="UserName" runat="server" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label for="password" class="control-label" style="font-size: large">Password</label>
+                                                <telerik:RadTextBox ID="Password" runat="server" TextMode="Password" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <telerik:RadCheckBox runat="server" ID="RememberMe" class="RememberMe" TextAlign="Left" Text="Remember me?" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="ResetPassword.aspx">Forgot password?</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </asp:Panel>
 
-                            <table class="table-sm" style="width: 100%">
-                                <tr>
-                                    <td>
-                                        <label for="email" class="control-label" style="font-size: large">User Email</label>
-                                        <telerik:RadTextBox ID="UserName" runat="server" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label for="password" class="control-label" style="font-size: large">Password</label>
-                                        <telerik:RadTextBox ID="Password" runat="server" TextMode="Password" Width="100%" Skin="MetroTouch" Font-Size="Large"></telerik:RadTextBox>
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <telerik:RadCheckBox runat="server" ID="RememberMe" class="RememberMe" TextAlign="Left" Text="Remember me?" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="ResetPassword.aspx">Forgot password?</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; vertical-align: bottom">
-                            <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
-                                UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right; vertical-align: bottom">
+                                <asp:LinkButton ID="LoginButton" runat="server" CssClass="btn btn-success btn-block btn-lg"
+                                    UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2" OnClick="OnClickHandler">
                                 <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;&nbsp;Sign in
-                            </asp:LinkButton>
-                            <div style="text-align: center;margin-top:10px">
-                                <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, you agree to our Terms & Conditions</a>
-                            </div>
+                                </asp:LinkButton>
+                                <div style="text-align: center; margin-top: 10px">
+                                    <a href="../Legal/ENG/Terms.html" target="_blank">By clicking Sign In, you agree to our Terms & Conditions</a>
+                                </div>
 
-                        </td>
-                    </tr>
-                </table>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 offset-lg-4 "></div>
-                    
-                        <a href="http://blog.pasconcept.com" target="_blank">Help</a> &nbsp;|&nbsp; <a href="../Legal/ENG/Terms.html" target="_blank">Terms & Conditions</a>
-                    </div>
-                    <div>
-                        <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
-                    </div>
+                            </td>
+                        </tr>
+                        <tr>
 
+                            <td style="text-align: center">
+                                <a href="http://blog.pasconcept.com" target="_blank">Help</a> &nbsp;|&nbsp; <a href="../Legal/ENG/Terms.html" target="_blank">Terms & Conditions</a>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:Literal ID="FailureText" runat="server" EnableViewState="False"></asp:Literal>
+                                <asp:Label runat="server" ID="lblError"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <asp:Label runat="server" ID="lblError"></asp:Label>
             </div>
 
-            <div>
-                <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" Display="None"
-                    ErrorMessage="User Name is required." ValidationGroup="Login2"></asp:RequiredFieldValidator>
-
-                <asp:RequiredFieldValidator ID="PasswordRequired" runat="server"
-                    ControlToValidate="Password" ErrorMessage="Password is required."
-                    Font-Bold="False" Font-Size="Small" ForeColor="#00A8E4"
-                    ToolTip="Password is required." ValidationGroup="Login2">*</asp:RequiredFieldValidator>
-
-            </div>
 
         </div>
+
+        <div>
+            <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" Display="None"
+                ErrorMessage="User Name is required." ValidationGroup="Login2"></asp:RequiredFieldValidator>
+
+            <asp:RequiredFieldValidator ID="PasswordRequired" runat="server"
+                ControlToValidate="Password" ErrorMessage="Password is required."
+                Font-Bold="False" Font-Size="Small" ForeColor="#00A8E4"
+                ToolTip="Password is required." ValidationGroup="Login2">*</asp:RequiredFieldValidator>
+
+        </div>
+
+
     </form>
 </body>
 </html>
