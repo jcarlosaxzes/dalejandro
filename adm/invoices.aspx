@@ -131,13 +131,12 @@
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
-                    <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false" ToolTip="Add New Invoice">
+                    <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Invoice">
                     <i class="fas fa-plus"></i> Simple Charge
                     </asp:LinkButton>
                 </td>
-                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Invoices
+                <td style="text-align: center">
+                    <h3 style="margin: 0">Invoices
                     </h3>
                 </td>
                 <td style="text-align: right; padding-right: 50px">
@@ -164,7 +163,7 @@
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceInvoices" ShowFooter="True" AutoGenerateColumns="False" AllowSorting="True"
             PageSize="100" AllowPaging="true" AllowAutomaticDeletes="True"
-            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small">
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>
                 <ClientEvents OnPopUpShowing="PopUpShowing" />
             </ClientSettings>
@@ -191,29 +190,7 @@
                             <table>
                                 <tr>
                                     <td>
-
                                         <asp:Label ID="lblBillingContact" runat="server" Text='<%# Eval("ClientName") %>' CssClass="lnkGrid"></asp:Label>
-                                        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
-                                            Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Billing Contact Information</b>" ShowEvent="OnClick"
-                                            HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
-                                            <table>
-                                                <tr>
-                                                    <td>Billing Contact:&nbsp;<b><%# Eval("BillingContact")%></b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Client Name:&nbsp;<b><%# Eval("ClientName")%></b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Phone:&nbsp;<b><%# Eval("Phone")%></b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cellular:&nbsp;<b><%# Eval("Cellular")%></b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Email:&nbsp;<b><%# Eval("Email")%></b></td>
-                                                </tr>
-                                            </table>
-                                        </telerik:RadToolTip>
                                     </td>
                                 </tr>
                                 <tr>
@@ -225,28 +202,12 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Emitted<br/>Past Due"
-                        SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                        SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <table>
                                 <tr>
                                     <td>
                                         <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>' CssClass="lnkGrid"></asp:Label>
-                                        <telerik:RadToolTip ID="RadToolTipEmitted" runat="server" TargetControlID="lblEmitted" RelativeTo="Element"
-                                            Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Emitted Information</b>" ShowEvent="OnClick"
-                                            HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
-                                            <table>
-                                                <tr>
-                                                    <td>Emitted:&nbsp;<b><%# Eval("Emitted")%></b>&nbsp;time(s)
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>First time:&nbsp;<b><%# Eval("FirstEmission", "{0:d}")%></b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Last time:&nbsp;<b><%# Eval("LatestEmission", "{0:d}")%></b></td>
-                                                </tr>
-                                            </table>
-                                        </telerik:RadToolTip>
                                     </td>
                                 </tr>
                                 <tr>
@@ -277,7 +238,7 @@
                         </ItemTemplate>
 
                     </telerik:GridTemplateColumn>
-                    <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Invoice Description" SortExpression="InvoiceNotes"
+                    <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Invoice Description" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"
                         UniqueName="InvoiceNotes">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="column"
@@ -290,12 +251,12 @@
                             &nbsp;
                                     <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
                             &nbsp;
-                                    <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
+                                    <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                         ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                         <i class="fas fa-dollar-sign"></i>
                                     </asp:LinkButton>
                             &nbsp;
-                                    <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger label" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
+                                    <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger badge" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
                                         ToolTip="Mark Invoice as BadDept" CausesValidation="false">
                                         B
                                     </asp:LinkButton>
@@ -316,16 +277,52 @@
                 <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="680px" />
             </ClientSettings>
         </telerik:RadGrid>
-
+        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
+            Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Billing Contact Information</b>" ShowEvent="OnClick"
+            HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
+            <table>
+                <tr>
+                    <td>Billing Contact:&nbsp;<b><%# Eval("BillingContact")%></b></td>
+                </tr>
+                <tr>
+                    <td>Client Name:&nbsp;<b><%# Eval("ClientName")%></b></td>
+                </tr>
+                <tr>
+                    <td>Phone:&nbsp;<b><%# Eval("Phone")%></b></td>
+                </tr>
+                <tr>
+                    <td>Cellular:&nbsp;<b><%# Eval("Cellular")%></b></td>
+                </tr>
+                <tr>
+                    <td>Email:&nbsp;<b><%# Eval("Email")%></b></td>
+                </tr>
+            </table>
+        </telerik:RadToolTip>
+        <telerik:RadToolTip ID="RadToolTipEmitted" runat="server" TargetControlID="lblEmitted" RelativeTo="Element"
+            Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Emitted Information</b>" ShowEvent="OnClick"
+            HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
+            <table>
+                <tr>
+                    <td>Emitted:&nbsp;<b><%# Eval("Emitted")%></b>&nbsp;time(s)
+                    </td>
+                </tr>
+                <tr>
+                    <td>First time:&nbsp;<b><%# Eval("FirstEmission", "{0:d}")%></b></td>
+                </tr>
+                <tr>
+                    <td>Last time:&nbsp;<b><%# Eval("LatestEmission", "{0:d}")%></b></td>
+                </tr>
+            </table>
+        </telerik:RadToolTip>
     </div>
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-            <span class="navbar navbar-expand-md bg-light">Receive Payment
+        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Receive Payment
             </span>
         </h2>
-        <table class="table table-condensed" style="width: 500px">
+        <table class="table-sm" style="width: 500px">
             <tr>
                 <td style="width: 140px; text-align: right">Collected Date:
                 </td>
@@ -376,13 +373,13 @@
             <tr>
                 <td colspan="2" style="text-align: center">
 
-                    <asp:LinkButton ID="btnInsertPayment" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
+                    <asp:LinkButton ID="btnInsertPayment" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
                         CommandName="Update"> Insert
                     </asp:LinkButton>
 
                     &nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
+                    <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false"
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
                 </td>
@@ -391,14 +388,14 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">Edit Invoice
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Edit Invoice
             </span>
         </h2>
-        
+
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" DefaultMode="Edit">
             <EditItemTemplate>
-                <table class="table table-condensed" style="width: 600px">
+                <table class="table-sm" style="width: 600px">
 
                     <tr>
                         <td colspan="2">
@@ -442,7 +439,7 @@
                     </tr>
                 </table>
                 <asp:Panel runat="server" ID="Panel1" Visible='<%#IIf(Eval("InvoiceType") = 1, "true", "false") %>'>
-                    <table class="table table-condensed" style="width: 600px">
+                    <table class="table-sm" style="width: 600px">
                         <tr>
                             <td style="width: 120px">Hours:</td>
                             <td>
@@ -460,7 +457,7 @@
                         </tr>
                     </table>
                 </asp:Panel>
-                <table class="table table-condensed" style="width: 600px">
+                <table class="table-sm" style="width: 600px">
                     <tr>
                         <td style="width: 120px">Notes</td>
                         <td>
@@ -479,14 +476,14 @@
                         </td>
                     </tr>
                 </table>
-                <table class="table table-condensed" style="width: 600px">
+                <table class="table-sm" style="width: 600px">
                     <tr>
                         <td style="text-align: center">
                             <asp:LinkButton ID="btnUpdateInvoice" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
                                 CommandName="Update"> Update
                             </asp:LinkButton>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" Text=""
+                            <asp:LinkButton ID="btnCancelInvoice" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
                                 CommandName="Cancel"> Cancel
                             </asp:LinkButton>
                         </td>
@@ -499,12 +496,12 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipNewInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-            <span class="navbar navbar-expand-md bg-light">New Invoice
+        <h2 style="margin: 0; text-align: center; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">New Invoice
             </span>
         </h2>
 
-        <table class="table table-condensed" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td>
                     <telerik:RadComboBox ID="cboJobNewInvoice" runat="server" DataSourceID="SqlDataSourceJobs" ZIndex="50001" Label="Job:"
@@ -522,7 +519,7 @@
                     <br />
                     <br />
                     <br />
-                    <asp:LinkButton ID="btnNewSimpleChargeInvoice" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
+                    <asp:LinkButton ID="btnNewSimpleChargeInvoice" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
                         CommandName="Update"> Insert
                     </asp:LinkButton>
                 </td>
