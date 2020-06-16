@@ -62,7 +62,7 @@
                 <Content>
                     <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" DefaultMode="Edit">
                         <EditItemTemplate>
-                            <table width="740px" class="table table-condensed">
+                            <table width="740px" class="table-sm">
                                 <tr>
                                     <td style="width: 180px;"></td>
                                     <td style="text-align: right; padding-right: 25px">
