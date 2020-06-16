@@ -126,9 +126,9 @@
                             <td style="width: 180px">
                                     <telerik:RadComboBox ID="cboBillType" runat="server" Width="100%">
                                                     <Items>
-                                                        <telerik:RadComboBoxItem runat="server" Text="Defined Per Time" Value="0" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Lump Sum" Value="1" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Hourly" Value="2" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Undefined" Value="0" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Flat Rate" Value="1" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Hourly Rate" Value="2" />
                                                     </Items>
                                                 </telerik:RadComboBox>
                             </td>

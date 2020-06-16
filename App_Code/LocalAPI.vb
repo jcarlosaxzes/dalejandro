@@ -11310,11 +11310,11 @@ Public Class LocalAPI
             Case "Employee"
                 Return "badge badge-info"
             Case "Contact"
-                Return "badge badge-light"
+                Return "badge badge-secondary"
             Case "Client"
                 Return "badge badge-success"
             Case "Vendor"
-                Return "badge badge-danger"
+                Return "badge badge-warning"
         End Select
     End Function
 

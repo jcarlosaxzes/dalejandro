@@ -97,10 +97,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-6">
-                    <a id="btnModalCard" runat="server" title="Credit Card" data-toggle="tooltip" href="#" class="btn btn-primary width-100 btn-lg btn-modal-card" style="display: none;">Credit Card&nbsp;<span class="circle bg-white"><i class="fa fa-credit-card" aria-hidden="true"></i></span></a>
+                    <a id="btnModalCard" runat="server" title="Credit Card" data-toggle="tooltip" href="#" class="btn btn-primary width-100 btn-lg btn-modal-card" style="display: none;">Credit Card&nbsp;<i class="far fa-credit-card"></i></a>
                     <asp:LinkButton ID="btnPay" runat="server" title="PayPal" data-toggle="tooltip" class="btn btn-success width-100 btn-lg">
                                         Pay Here&nbsp;
-                                        <span class="circle bg-white"><i class="fa credit-card" aria-hidden="true"></i></span>
+                                        <i class="far fa-credit-card"></i>
                     </asp:LinkButton>
                     <asp:LinkButton ID="btnAdminPay" runat="server" title="Check Pay" data-toggle="tooltip" class="btn btn-warning width-100 btn-lg" Visible="false">
                                         Pay (Admin)&nbsp;
