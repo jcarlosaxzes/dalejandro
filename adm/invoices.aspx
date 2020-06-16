@@ -131,7 +131,7 @@
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
-                    <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Invoice">
+                    <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice">
                     <i class="fas fa-plus"></i> Simple Charge
                     </asp:LinkButton>
                 </td>
