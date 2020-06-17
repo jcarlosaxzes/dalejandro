@@ -14,7 +14,7 @@
                     <table style="width: 100%; background-color: white; margin-top: 20px">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 45%">
-                                <h2>class="card bg-danger text-white"Client Info</span></h2>
+                                <h2>class="navbar navbar-expand-md bg-dark text-white"Client Info</span></h2>
 
                                 <h3 style="margin: 0"><%# Eval("ClientName")%></h3>
                                 <%# Eval("ClientCompany") %><br />
@@ -23,7 +23,7 @@
                             </td>
                             <td style="width: 10%"></td>
                             <td style="text-align: right; vertical-align: top">
-                                <h2>class="card bg-danger text-white"Balance</span></h2>
+                                <h2>class="navbar navbar-expand-md bg-dark text-white"Balance</span></h2>
                                 <table style="width: 100%">
                                     <tr>
                                         <td style="text-align: right;">Contract Amount:</td>
