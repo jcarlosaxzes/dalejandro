@@ -23,9 +23,10 @@
                         <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: left; vertical-align: top; width: 33%">
-                                    <h3 style="margin: 0"><span class="badge badge-pill badge-info mx-auto"></span>Client</span></h2>
-
-                                        <table style="width: 100%">
+                                    <h3 style="margin: 0; text-align: center">
+                                        <span class="navbar navbar-expand-md bg-dark text-white">Client</span>
+                                    </h3>
+                                        <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td>
                                                     <h4 style="margin: 3px"><%# Eval("ClientName")%></h4>
@@ -49,7 +50,8 @@
                                         </table>
                                 </td>
                                 <td style="width: 33%; text-align: center; vertical-align: top">
-                                    <h3 style="margin: 0"><span class="badge badge-info center-block">Projects</span></h2>
+                                    <h3 style="margin: 0; text-align: center"><span class="navbar navbar-expand-md bg-dark text-white">Projects</span></h3>
+                                    </h3>
                                         <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right"># Pending Proposals:</td>
@@ -72,7 +74,7 @@
                                         </table>
                                 </td>
                                 <td style="text-align: right; vertical-align: top">
-                                    <h3 style="margin: 0"><span class="badge badge-info center-block">Balance</span></h2>
+                                    <h3 style="margin: 0; text-align: center"><span class="navbar navbar-expand-md bg-dark text-white">Balance</span></h3>
                                         <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: right;">Amount Paid:</td>
@@ -162,7 +164,7 @@
                                         ToolTip="Automatically update the Budget when Invoices are inserted or updated. Budget=SUM(Invoices.Amount)" />
                                 </td>
 
-                                <td style="width: 220px; text-align: right">
+                                <td style="width: 280px; text-align: right">
                                     <telerik:RadComboBox ID="cboStatus" runat="server" SelectedValue='<%# Bind("Status") %>' Label="Status"
                                         DataSourceID="SqlDataSourceJobStatus" DataTextField="Name" DataValueField="Id" Width="90%">
                                     </telerik:RadComboBox>
