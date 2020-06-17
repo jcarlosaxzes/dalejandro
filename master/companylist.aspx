@@ -182,7 +182,7 @@
             <tr>
                 <td>
                     <h2 style="margin: 0; text-align: center; color:white; width: 650px">
-                       <span class="card bg-danger text-white">Bind Company to Axzes Client & Job
+                       <span class="navbar navbar-expand-md bg-dark text-white">Bind Company to Axzes Client & Job
                         </span>
                     </h2>
                 </td>

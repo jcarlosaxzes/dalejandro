@@ -319,7 +319,7 @@
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
         <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-           <span class="card bg-danger text-white">Receive Payment
+           <span class="navbar navbar-expand-md bg-dark text-white">Receive Payment
             </span>
         </h2>
         <table class="table-sm" style="width: 500px">
@@ -389,7 +389,7 @@
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="card bg-danger text-white">Edit Invoice
+           <span class="navbar navbar-expand-md bg-dark text-white">Edit Invoice
             </span>
         </h2>
 
@@ -497,7 +497,7 @@
 
     <telerik:RadToolTip ID="RadToolTipNewInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="card bg-danger text-white">New Invoice
+           <span class="navbar navbar-expand-md bg-dark text-white">New Invoice
             </span>
         </h2>
 
