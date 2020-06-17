@@ -92,7 +92,7 @@
         <div class="col-lg-12" style="margin-top: 10px">
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-6">
-                    <h2>class="navbar navbar-expand-md bg-dark text-white"Payment method</span></h2>
+                    <h2><span class="navbar navbar-expand-md bg-dark text-white">Payment method</span></h2>
                 </div>
             </div>
             <div class="row">
