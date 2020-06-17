@@ -32,14 +32,14 @@
         </table>
     </div>
     <div class="pas-container">
-        <telerik:RadWizard ID="RadWizard1" runat="server" Height="680px" DisplayProgressBar="false"
+        <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayProgressBar="false"
             RenderMode="Lightweight" Skin="Material" Localization-Cancel="Back" Localization-Finish="Send">
             <WizardSteps>
 
                 <%-- Contact Information --%>
                 <telerik:RadWizardStep runat="server" ID="Confirmation" Title="Confirmation" ValidationGroup="Confirmation" StepType="Start">
                     <div>
-                        <asp:ValidationSummary ID="vsConfirmation" runat="server" ValidationGroup="Confirmation"
+                        <asp:ValidationSummary ID="vsConfirmation" runat="server" ValidationGroup="Confirmation" ForeColor="Red"
                             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
                     </div>
@@ -125,7 +125,7 @@
                     <hr style="margin:0" />
                     <table class="table-sm" style="width: 100%">
                         <tr>
-                            <td style="width: 270px;text-align:right">Proposal By:
+                            <td style="width: 300px;text-align:right">Proposal By:
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboProjectManagerId" runat="server" ValidationGroup="Confirmation"
@@ -164,8 +164,8 @@
                                 </telerik:RadComboBox>
                             </td>
                         </tr>
-                        <tr style="text-align:right">
-                            <td>Share Attached Documents (Yes or No):
+                        <tr>
+                            <td style="text-align:right">Share Attached Documents (Yes or No):
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboAttached" runat="server" Width="150px" ValidationGroup="Confirmation">
@@ -178,8 +178,8 @@
 
                             </td>
                         </tr>
-                        <tr style="text-align:right">
-                            <td>Sent to Agile Campaign (Yes or No):
+                        <tr>
+                            <td  style="text-align:right">Sent to Agile Campaign (Yes or No):
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboAgile" runat="server" Width="150px" ValidationGroup="Confirmation">
@@ -225,23 +225,23 @@
                     </table>
                     <div>
                         <asp:CompareValidator runat="server" ID="Comparevalidator5" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboRetainer" Text="*"
+                            ControlToValidate="cboRetainer" Display="None" ForeColor="Red"
                             ErrorMessage="Define Automatic Retainer (Yes or No)">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboAttached" Text="*"
+                            ControlToValidate="cboAttached"  Display="None" ForeColor="Red"
                             ErrorMessage="Define Share Attached Documents (Yes or No)">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboAgile" Text="*"
+                            ControlToValidate="cboAgile"  Display="None" ForeColor="Red"
                             ErrorMessage="Define Sent to Agile Campaign (Yes or No)">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator3" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboProjectManagerId" Text="*"
+                            ControlToValidate="cboProjectManagerId"  Display="None" ForeColor="Red"
                             ErrorMessage="Define Proposal By">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator4" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboNotification" Text="*"
+                            ControlToValidate="cboNotification"  Display="None" ForeColor="Red"
                             ErrorMessage="Define Notification Type">
                         </asp:CompareValidator>
                     </div>

@@ -97,7 +97,7 @@
                 </ItemTemplate>
             </asp:FormView>
             <br />
-            <h2>class="navbar navbar-expand-md bg-dark text-white"Request for Proposals History</span></h2>
+            <h2><span class="navbar navbar-expand-md bg-dark text-white">Request for Proposals History</span></h2>
             <telerik:RadGrid ID="RadGridRFPs" runat="server" DataSourceID="SqlDataSourceRFP" AutoGenerateColumns="False" AllowSorting="True"
                         PageSize="10" AllowPaging="true"
                         ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small">

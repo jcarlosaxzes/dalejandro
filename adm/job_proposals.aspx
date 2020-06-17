@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Proposals" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterJOB.Master" CodeBehind="job_proposals.aspx.vb" Inherits="pasconcept20.job_proposals" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
@@ -38,13 +39,12 @@
                                     UniqueName="Total" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
                                     FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}" FooterStyle-Width="100px">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridTemplateColumn DataField="Id" HeaderText="Status" UniqueName="Status"
-                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
-                                    HeaderStyle-HorizontalAlign="Center" AllowFiltering="False">
+                                <telerik:GridTemplateColumn DataField="Id" HeaderText="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" AllowFiltering="False">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnAcept3" Text='<%# Eval("Status") %>' CommandName="AceptProposal" Width="100%" CssClass="btn btn-secondary btn-sm"
+                                       <%-- <asp:LinkButton ID="btnAcept3" Text='<%# Eval("Status") %>' CommandName="AceptProposal" Width="100%" CssClass="btn btn-secondary btn-sm"
                                             CommandArgument='<%# Eval("Id") %>' runat="server" Enabled='<%# ProposalStatusEnabled(Eval("Id"), Eval("Status"))%>'>
-                                        </asp:LinkButton>
+                                        </asp:LinkButton>--%>
+                                        <span class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'><%# Eval("Status") %></span>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn HeaderText="Email Print" UniqueName="columnEmail" AllowFiltering="False"

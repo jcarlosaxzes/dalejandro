@@ -22,11 +22,11 @@ Public Class job_proposals
         End Try
     End Sub
     Protected Sub btnNewPropsal_Click(sender As Object, e As EventArgs) Handles btnNewPropsal.Click
-        If btnNewPropsal.Text = "New Proposal (Change Order)" Then
-            SqlDataSourceProposals.InsertCommand = "ProposalNew_ChangeOrder"
-        Else
-            SqlDataSourceProposals.InsertCommand = "ProposalNew_From_Job"
-        End If
+        'If btnNewPropsal.Text = "New Proposal (Change Order)" Then
+        'SqlDataSourceProposals.InsertCommand = "ProposalNew_ChangeOrder"
+        'Else
+        '    SqlDataSourceProposals.InsertCommand = "ProposalNew_From_Job"
+        'End If
         SqlDataSourceProposals.Insert()
         RadGridProposals.DataBind()
     End Sub
