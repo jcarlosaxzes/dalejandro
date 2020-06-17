@@ -10391,10 +10391,14 @@ Public Class LocalAPI
                     '2.1 -Proposal Change Order
                     ' Ya existe JobId, es un Aditional change.......................................................................................
                     If dProposalTotal <> 0 Then
-                        '1.- Incrementar el Jobs.Budget=+Proposal.Total)
+                        '2.2.- Incrementar el Jobs.Budget=+Proposal.Total)
                         ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{dProposalTotal} WHERE Id={jobId}")
                         NewJobNote(jobId, "$Log: job Budget modified (+" & dProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
-                        ' Simple Charge, mandatory Retainer
+
+                        '2.3 Simple Charge, and ...
+                        NuevoInvoiceSimpleCharge(jobId, GetDateTime(), dProposalTotal, "Proposal (Additional Charge): " & ProposalNumber(proposalId))
+
+                        '2.4 Mandatory Retainer
                         bRetainer = True
                     End If
 

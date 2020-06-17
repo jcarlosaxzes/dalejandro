@@ -62,7 +62,7 @@ Public Class proposal
 
 
                 If Not Request.QueryString("backpage") Is Nothing Then
-                    lblBackSource.Text = Request.QueryString("backpage")
+                    Session("propsalbackpage") = Request.QueryString("backpage")
                 End If
 
 
@@ -375,7 +375,7 @@ Public Class proposal
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Select Case lblBackSource.Text
+        Select Case Session("propsalbackpage")
             Case "job_proposals"
                 Response.Redirect("~/adm/job_proposals.aspx?jobId=" & lblSelectedJobId.Text)
             Case Else
