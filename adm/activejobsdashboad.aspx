@@ -258,7 +258,7 @@
                         <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: left">
-                                    <h2 style="margin: 0"><%# Eval("Code")%></h2>
+                                    <h1 style="margin: 0"><%# Eval("Code")%></h1>
                                 </td>
                                 <td style="width: 32px; text-align: right; font-size: 24px;">
                                     <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
@@ -273,70 +273,74 @@
                         </table>
                     </div>
                     <div class="card-body">
-                        <table class="table-sm card-text" style="width: 100%">
-                            <tr>
-                                <td>
-                                    <h4 style="margin: 0"><b><%# Eval("itemName")%></b></h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 20px">
-                                    <%# Eval("ClientCompany")%>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 20px">
-                                    <%# Eval("ClientName")%>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 22px">PM: <%# Eval("PM")%>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <br />
-                                    <table style="width:100%">
-                                        <tr>
-                                            <td style="width:100px;font-size:20px;text-align:right">
-                                                <%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%>
-                                            </td>
-                                            <td>
-                                                <telerik:RadProgressBar ID="RadProgressBar1" runat="server"
-                                                    RenderMode="Lightweight"
-                                                    Height="18px" ShowLabel="false"
-                                                    BarType="Value"
-                                                    Skin="Metro"
-                                                    MaxValue='<%# Eval("HoursAssigned")%>'
-                                                    Value='<%# Eval("HoursUsed")%>'
-                                                    Width="100%"
-                                                    Visible='<%# Eval("HoursUsed") > 0%>'>
-                                                    <AnimationSettings Duration="0" />
-                                                </telerik:RadProgressBar>
+                        <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black">
+                            <table class="table-sm card-text" style="width: 100%;flex-wrap:nowrap;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+                                <tr>
+                                    <td>
+                                        <h4><b><%# Eval("itemName")%></b></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h4 style="margin: 0"><%# Eval("ClientCompany")%></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h4 style="margin: 0"><%# Eval("ClientName")%></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top:15px">
+                                        <h4>PM: <%# Eval("PM")%></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td style="width: 100px; text-align: right">
+                                                    <%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%>
+                                                </td>
+                                                <td>
+                                                    <telerik:RadProgressBar ID="RadProgressBar1" runat="server"
+                                                        RenderMode="Lightweight"
+                                                        Height="18px" ShowLabel="false"
+                                                        BarType="Value"
+                                                        Skin="Metro"
+                                                        MaxValue='<%# Eval("HoursAssigned")%>'
+                                                        Value='<%# Eval("HoursUsed")%>'
+                                                        Width="100%"
+                                                        Visible='<%# Eval("HoursUsed") > 0%>'>
+                                                        <AnimationSettings Duration="0" />
+                                                    </telerik:RadProgressBar>
 
-                                            </td>
-                                            <td style="width:100px;font-size:20px;text-align:left">
-                                                <%# Eval("HourUsedPercent", "{0:N0}")%> %
-                                            </td>
+                                                </td>
+                                                <td style="width: 100px; text-align: left">
+                                                    <%# Eval("HourUsedPercent", "{0:N0}")%> %
+                                                </td>
 
-                                        </tr>
-                                    </table>
+                                            </tr>
+                                        </table>
 
-                                </td>
-                            </tr>
-                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:LinkButton>
+
                     </div>
                     <div runat="server" class="card-footer text-muted" visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>'>
                         <asp:LinkButton ID="btnAddReview" runat="server" UseSubmitBehavior="false" ToolTip='<% GetAddRevisionToolTip() %>'
                             CommandName="AddReview" CommandArgument='<%# Eval("Id")%>'>
                                                 <small><span class="fas fa-plus"></small>
                         </asp:LinkButton>
-                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:LinkButton ID="btnEditReviews" runat="server" UseSubmitBehavior="false" ToolTip='<%# GetViewEditRevisionToolTip() %>'
                             CommandName="EditReviews" CommandArgument='<%# Eval("Id")%>'>
                                                     <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge badge-pill badge-danger"> <%#Eval("ReviewsCount")%></span>
                         </asp:LinkButton>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
                         
 
                     </div>
