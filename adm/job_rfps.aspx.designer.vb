@@ -50,6 +50,15 @@ Partial Public Class job_rfps
     Protected WithEvents RadGridRFPpayments As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
+    '''RadGridReport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridReport As Global.Telerik.Web.UI.RadGrid
+    
+    '''<summary>
     '''RadToolTipSelectExistinRFP control.
     '''</summary>
     '''<remarks>
@@ -138,6 +147,15 @@ Partial Public Class job_rfps
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceSelectRFP As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceJobsExpenses control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceJobsExpenses As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblJobId control.

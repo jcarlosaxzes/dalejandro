@@ -35,9 +35,9 @@
         </table>
     </div>
     <div class="pas-container">
-        <table class="table-sm" style="width: 95%; margin-left: 25px">
+        <table class="table-sm" style="width: 99%;" >
             <tr>
-                <td style="text-align: right; width: 180px">
+                <td style="text-align: right; width: 200px">
                     <asp:Label ID="lblTaskList" runat="server" Text="Select Task from List:"></asp:Label>
                 </td>
                 <td>
@@ -69,7 +69,8 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Position (optional):</td>
+                <td style="text-align: right">Position (optional):
+                </td>
                 <td>
                     <telerik:RadComboBox runat="server" ID="cboPosition" DataValueField="Id" Width="95%" Height="250px" AutoPostBack="true" CausesValidation="false"
                         DataTextField="Name" DataSourceID="SqlDataSourcePositions" AppendDataBoundItems="true">
@@ -80,28 +81,28 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Task Name:</td>
+                <td style="text-align: right">Task Name:
+                </td>
                 <td>
                     <telerik:RadTextBox ID="txtName" runat="server" MaxLength="80" Width="95%" EmptyMessage="Task Name"></telerik:RadTextBox>
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Description:</td>
+                <td style="text-align: right; vertical-align: top">Description:
+                </td>
                 <td>
                     <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="250px"
                         AllowScripts="True" Width="95%"
                         ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
                     </telerik:RadEditor>
-
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <table class="table-sm" style="width: 95%">
+                <td style="text-align: right">Quantity:
+                </td>
+                <td>
+                    <table class="table-sm" style="width: 95%" >
                         <tr>
-
-                            <td style="text-align: right; width: 180px">Quantity:
-                            </td>
                             <td style="width: 120px">
                                 <telerik:RadNumericTextBox ID="txtAmount" runat="server" Width="100%" EmptyMessage="Optional">
                                     <NumberFormat DecimalDigits="2" />
@@ -110,72 +111,74 @@
                             <td style="text-align: right; width: 100px">Hours:
                             </td>
                             <td style="width: 120px">
-                                <telerik:RadNumericTextBox ID="txtTimeSel" runat="server" MaxLength="5"  Width="100%" EmptyMessage="Optional">
+                                <telerik:RadNumericTextBox ID="txtTimeSel" runat="server" MaxLength="5" Width="100%" EmptyMessage="Optional">
                                     <NumberFormat DecimalDigits="2" />
                                 </telerik:RadNumericTextBox>
                             </td>
                             <td style="text-align: right; width: 100px">Rates:
                             </td>
                             <td style="width: 120px">
-                                <telerik:RadNumericTextBox ID="txtRates" runat="server"  Width="100%" EmptyMessage="Optional">
+                                <telerik:RadNumericTextBox ID="txtRates" runat="server" Width="100%" EmptyMessage="Optional">
                                     <NumberFormat DecimalDigits="2" />
                                 </telerik:RadNumericTextBox>
                             </td>
                             <td style="text-align: right; width: 100px">Bill Type:
                             </td>
                             <td style="width: 180px">
-                                    <telerik:RadComboBox ID="cboBillType" runat="server" Width="100%">
-                                                    <Items>
-                                                        <telerik:RadComboBoxItem runat="server" Text="Undefined" Value="0" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Flat Rate" Value="1" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Hourly Rate" Value="2" />
-                                                    </Items>
-                                                </telerik:RadComboBox>
+                                <telerik:RadComboBox ID="cboBillType" runat="server" Width="100%">
+                                    <Items>
+                                        <telerik:RadComboBoxItem runat="server" Text="Undefined" Value="0" />
+                                        <telerik:RadComboBoxItem runat="server" Text="Flat Rate" Value="1" />
+                                        <telerik:RadComboBoxItem runat="server" Text="Hourly Rate" Value="2" />
+                                    </Items>
+                                </telerik:RadComboBox>
                             </td>
 
                             <td style="text-align: right">
                                 <asp:Label ID="lblTotalLine" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
                             </td>
                         </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">
+                    <b>Expression</b>:
+                </td>
+                <td>
+                     <small>Total = [Quantity] * [Hours] * [Rates]</small>     <small>if [Quantity] or [Hours] 'is blank' then Total = [1] * [1] * [Rates]</small>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">
+                    Payment Schedule:
+                </td>
+                <td>
+                    <table style="width: 100%">
                         <tr>
-                            <td style="text-align: right;">
-                                <b>Expression</b>:
+                            <td style="width: 500px">
+                                <telerik:RadComboBox ID="cboPaymentSchedulesEdit" runat="server" DataSourceID="SqlDataSourcePaymentSchedules"
+                                    DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true"
+                                    ToolTip="Select Payment Schedules for individual Task">
+                                    <Items>
+                                        <telerik:RadComboBoxItem runat="server" Text="(Select Payment Schedules...)" Value="0" />
+                                    </Items>
+                                </telerik:RadComboBox>
                             </td>
-                            <td colspan="6">
-                                <small>Total = [Quantity] * [Hours] * [Rates]</small><br />
-                                <small>if [Quantity] or [Hours] 'is blank' then Total = [1] * [1] * [Rates]</small>
+                            <td style="text-align: right;padding-right:5%">
+                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
+                                </asp:LinkButton>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <asp:LinkButton ID="btnUpdateAndBack" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
+                                </asp:LinkButton>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
-
-            <tr>
-                <td style="text-align: right;">Payment Schedule:
-                </td>
-                <td>
-                    <telerik:RadComboBox ID="cboPaymentSchedulesEdit" runat="server" DataSourceID="SqlDataSourcePaymentSchedules" 
-                        DataTextField="Name" DataValueField="Id" Width="95%" AppendDataBoundItems="true" 
-                        ToolTip="Select Payment Schedules for individual Task">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(Select Payment Schedules...)" Value="0" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: right">
-                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
-                    </asp:LinkButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                <asp:LinkButton ID="btnUpdateAndBack" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
-                                </asp:LinkButton>
-                </td>
-
-            </tr>
-
         </table>
         <asp:Panel runat="server" ID="PanelEstimator">
+            <hr style="margin:0" />
             <h3 style="margin-left: 100px">Estimator
             </h3>
             <table class="table-sm" style="width: 100%">
@@ -213,7 +216,7 @@
             </table>
             <div style="padding-left: 180px; width: 90%">
                 <telerik:RadGrid ID="RadGridEstaimator" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceEstimator" CellSpacing="0" Width="100%" 
+                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceEstimator" CellSpacing="0" Width="100%"
                     HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceEstimator" ShowFooter="true">
                         <Columns>

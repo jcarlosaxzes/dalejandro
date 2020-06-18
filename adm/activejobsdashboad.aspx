@@ -51,6 +51,11 @@
                         <i class="fas fa-chart-bar"></i>&nbsp;Chart
                     </button>
                 </td>
+                <td style="width: 300px">
+                    <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" MarkFirstMatch="True" ToolTip="Select active Employye"
+                        Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AutoPostBack="true">
+                    </telerik:RadComboBox>
+                </td>
                 <td style="text-align: right; width: 400px">
                     <telerik:RadComboBox ID="cboJobs" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceActiveJob" AutoPostBack="true"
                         DataTextField="Code" DataValueField="Id"
@@ -63,19 +68,15 @@
                 <td style="text-align: left">
 
                     <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> Job to My List
+                    <i class="fas fa-plus"></i> Job to Employee
                     </asp:LinkButton>
                 </td>
-                <td>
+                <td style="padding-left: 50px">
                     <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Non-Productive Time">
                     <i class="fas fa-plus"></i> Non-Productive Time
                     </asp:LinkButton>
                 </td>
-                <td style="text-align: right">You have submitted <strong>
-                    <asp:Label ID="lblTotalWeekHours" Text="0" runat="server"></asp:Label></strong> hours this week. Remaining hours: 
-                                <strong>
-                                    <asp:Label ID="lblRemaining" Text="0" runat="server"></asp:Label></strong>
-                </td>
+                <td style="text-align: right"></td>
             </tr>
         </table>
 
@@ -99,7 +100,7 @@
                             Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="text-align: left">
+                    <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Search
                         </asp:LinkButton>
@@ -252,28 +253,80 @@
             </LayoutTemplate>
             <ItemTemplate>
 
-                <div class="card" style="float: left; width: 330px">
+                <div class="card" style="float: left; width: 400px; margin: 5px">
                     <div class="card-header">
-                        <h5 style="margin: 0">
-                            <%# Eval("itemName")%>
-                        </h5>
+                        <table class="table-sm" style="width: 100%">
+                            <tr>
+                                <td style="text-align: left">
+                                    <h2 style="margin: 0"><%# Eval("Code")%></h2>
+                                </td>
+                                <td style="width: 32px; text-align: right; font-size: 24px;">
+                                    <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
+                                        CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
+                                            <i title="Add New Productive Time" class="fas fa-user-clock" style='<%# LocalAPI.GetJobStatusColorCSS(Eval("statusId")) %>'></i>
+                                    </asp:LinkButton>
+                                </td>
+                                <td style="width: 40px; text-align: right">
+                                    <a class="far fa-share-square" style="font-size: 24px; color: black" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title" style="margin: 0">
-                            <b><%# Eval("ClientCompany")%></b>
-                        </h5>
-                        <p class="card-text">
-                            <%# Eval("ClientName")%><br />
-                            <%# Eval("LastTime", "{0:d}")%> --<mark><%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%></mark> -- <%# Eval("PM")%>
-                            <br />
-                            <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>' CssClass='<%# LocalAPI.GetJobStatusButonCSS(Eval("statusId")) %>'
-                                CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
-                            <i title="Add New Productive Time" class="fas fa-user-clock"></i>&nbsp;&nbsp; <%# Eval("Code")%>
-                            </asp:LinkButton>
-                        </p>
+                        <table class="table-sm card-text" style="width: 100%">
+                            <tr>
+                                <td>
+                                    <h4 style="margin: 0"><b><%# Eval("itemName")%></b></h4>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 20px">
+                                    <%# Eval("ClientCompany")%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 20px">
+                                    <%# Eval("ClientName")%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 22px">PM: <%# Eval("PM")%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br />
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td style="width:100px;font-size:20px;text-align:right">
+                                                <%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%>
+                                            </td>
+                                            <td>
+                                                <telerik:RadProgressBar ID="RadProgressBar1" runat="server"
+                                                    RenderMode="Lightweight"
+                                                    Height="18px" ShowLabel="false"
+                                                    BarType="Value"
+                                                    Skin="Metro"
+                                                    MaxValue='<%# Eval("HoursAssigned")%>'
+                                                    Value='<%# Eval("HoursUsed")%>'
+                                                    Width="100%"
+                                                    Visible='<%# Eval("HoursUsed") > 0%>'>
+                                                    <AnimationSettings Duration="0" />
+                                                </telerik:RadProgressBar>
 
+                                            </td>
+                                            <td style="width:100px;font-size:20px;text-align:left">
+                                                <%# Eval("HourUsedPercent", "{0:N0}")%> %
+                                            </td>
+
+                                        </tr>
+                                    </table>
+
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="card-footer text-muted">
+                    <div runat="server" class="card-footer text-muted" visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>'>
                         <asp:LinkButton ID="btnAddReview" runat="server" UseSubmitBehavior="false" ToolTip='<% GetAddRevisionToolTip() %>'
                             CommandName="AddReview" CommandArgument='<%# Eval("Id")%>'>
                                                 <small><span class="fas fa-plus"></small>
@@ -284,7 +337,7 @@
                                                     <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge badge-pill badge-danger"> <%#Eval("ReviewsCount")%></span>
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="far fa-share-square" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
+                        
 
                     </div>
                 </div>
@@ -436,14 +489,18 @@
             <span class='<%# LocalAPI.GetJobStatusLabelCSS(5) %>'>Under Revision</span>
         </div>
     </asp:Panel>
-
+    <div>
+        You have submitted <strong>
+            <asp:Label ID="lblTotalWeekHours" Text="0" runat="server"></asp:Label></strong> hours this week. Remaining hours: 
+                                <asp:Label ID="lblRemaining" Text="0" Font-Bold="true" runat="server"></asp:Label>
+    </div>
 
     <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
         Skin="Default" Width="600px">
 
 
         <h2 style="margin: 0; text-align: center; color: white; width: 100%">
-           <span class="navbar navbar-expand-md bg-dark text-white">Non-Productive Time
+            <span class="navbar navbar-expand-md bg-dark text-white">Non-Productive Time
             </span>
         </h2>
 
@@ -556,7 +613,7 @@
         Skin="Default">
 
         <h2 style="margin: 0; text-align: center; color: white; width: 500px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Add Revision
+            <span class="navbar navbar-expand-md bg-dark text-white">Add Revision
             </span>
         </h2>
 
@@ -680,7 +737,7 @@
         SelectCommand="TIME4_EMP_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="Employee" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="cboEmployee" Name="Employee" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblStatusIdIN_List" ConvertEmptyStringToNull="False" Name="StatusIdIN_List" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
@@ -689,7 +746,7 @@
     <asp:SqlDataSource ID="SqlDataSourceActiveJob" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="JOBS_EMP_non_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="Employee" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="cboEmployee" Name="Employee" PropertyName="SelectedValue" Type="Int32" />
             <asp:Parameter Name="Status" DefaultValue="-1" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
@@ -736,14 +793,14 @@
     <asp:SqlDataSource ID="SqlDataSourceDateWORKHOURS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="WORKHOURS_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboEmployee" Name="employeeId" PropertyName="SelectedValue" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceTimeSheet" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="JOBS_ResultByTimeSheet" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboEmployee" Name="employeeId" PropertyName="SelectedValue" />
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
         </SelectParameters>
     </asp:SqlDataSource>
@@ -751,13 +808,19 @@
         SelectCommand="JOBS_ResultByTimeUsed" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboEmployee" Name="employeeId" PropertyName="SelectedValue" />
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceEmpl_activos" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT Id, FullName as Name FROM Employees WHERE companyId=@companyId and isnull(Inactive,0)=0 ORDER BY Name">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
 
     <asp:Label ID="lblStatusIdIN_List" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblLogedEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedJob" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblUserEmail" runat="server" Visible="False"></asp:Label>

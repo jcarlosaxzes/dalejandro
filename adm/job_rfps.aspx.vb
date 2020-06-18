@@ -9,11 +9,16 @@ Public Class job_rfps
                 lblJobId.Text = Request.QueryString("JobId")
                 lblCompanyId.Text = Session("companyId")
                 lblJob.Text = LocalAPI.GetJobCodeName(lblJobId.Text)
+
+                RadGridReport.DataBind()
+
                 Master.ActiveTab(4)
+
             End If
 
 
         Catch ex As Exception
+            Throw ex
         End Try
     End Sub
     Protected Sub btnNewSubconsultantFee_Click(sender As Object, e As EventArgs) Handles btnNewSubconsultantFee.Click
@@ -58,5 +63,11 @@ Public Class job_rfps
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub SqlDataSourceJobsExpenses_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceJobsExpenses.Selecting
+        e.Command.Parameters("@code").Value = LocalAPI.GetJobProperty(lblJobId.Text, "Code")
+        e.Command.Parameters("@DateFrom").Value = LocalAPI.GetJobProperty(lblJobId.Text, "Open_date")
+        e.Command.Parameters("@DateTo").Value = DateAdd(DateInterval.Year, 1, Date.Today)
     End Sub
 End Class
