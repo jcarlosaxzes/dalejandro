@@ -23,6 +23,15 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
     
     '''<summary>
+    '''cboEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboEmployee As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''cboJobs control.
     '''</summary>
     '''<remarks>
@@ -48,24 +57,6 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNewMiscellaneousTime As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''lblTotalWeekHours control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblTotalWeekHours As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblRemaining control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblRemaining As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''pnlFind control.
@@ -147,6 +138,24 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PanelLegend As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''lblTotalWeekHours control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalWeekHours As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblRemaining control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblRemaining As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''RadToolTipMiscellaneous control.
@@ -509,6 +518,15 @@ Partial Public Class activejobsdashboad
     Protected WithEvents SqlDataSourceTimeUsed As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
+    '''SqlDataSourceEmpl_activos control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceEmpl_activos As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''lblStatusIdIN_List control.
     '''</summary>
     '''<remarks>
@@ -518,13 +536,13 @@ Partial Public Class activejobsdashboad
     Protected WithEvents lblStatusIdIN_List As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblEmployeeId control.
+    '''lblLogedEmployeeId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblLogedEmployeeId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblCompanyId control.

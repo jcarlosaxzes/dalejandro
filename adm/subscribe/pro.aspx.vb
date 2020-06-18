@@ -356,7 +356,7 @@ Public Class pro
             Dim AxzesInvoiceNumber As String = LocalAPI.InvoiceNumber(AxzesInvoiceId)
             Dim sMsg As New System.Text.StringBuilder
 
-            sMsg.Append("This message is to notify a invoice payment of PASconcept subscription using PayHere from PayPal")
+            sMsg.Append("This message is to notify an invoice payment of PASconcept subscription using PayHere from PayPal")
             sMsg.Append("<br />")
             sMsg.Append("<br />")
             sMsg.Append("Company Name: " & LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Name"))

@@ -20,7 +20,7 @@
                 <td>
                     <telerik:RadGrid ID="RadGridRFP" runat="server" DataSourceID="SqlDataSourceRFP" GridLines="None"
                         ShowFooter="True" AutoGenerateColumns="False" CellSpacing="0" AllowAutomaticInserts="true" AllowAutomaticDeletes="true" AllowAutomaticUpdates="true">
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True"
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True" FooterStyle-Font-Size="Small"
                             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                             <Columns>
                                 <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" FilterControlAltText="Filter Id column"
@@ -166,7 +166,7 @@
                     <h4>Payment(s) Bill(s)</h4>
                     <telerik:RadGrid ID="RadGridRFPpayments" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                         AutoGenerateColumns="False" DataSourceID="SqlDataSourceRFPpayments" GridLines="None" ShowFooter="True"
-                        ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
+                        ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" FooterStyle-Font-Size="Small">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFPpayments">
                             <CommandItemSettings ExportToPdfText="Export to PDF" />
                             <Columns>
@@ -227,6 +227,19 @@
                         <PagerStyle PageSizeControlType="RadComboBox" />
                         <FilterMenu EnableImageSprites="False">
                         </FilterMenu>
+                    </telerik:RadGrid>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <h4>Expenses Report</h4>
+                    <telerik:RadGrid ID="RadGridReport" runat="server" AutoGenerateColumns="true" DataSourceID="SqlDataSourceJobsExpenses"
+                        ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center"
+                        Skin="" RenderMode="Lightweight" AllowPaging="True" ItemStyle-HorizontalAlign="Center" AlternatingItemStyle-HorizontalAlign="Center">
+                        <MasterTableView DataSourceID="SqlDataSourceJobsExpenses" CommandItemDisplay="Top">
+                            <CommandItemSettings ShowExportToCsvButton="true" ShowAddNewRecordButton="false" ShowRefreshButton="true" ExportToCsvText="" RefreshText="" />
+                        </MasterTableView>
                     </telerik:RadGrid>
                 </td>
             </tr>
@@ -360,6 +373,16 @@
             <asp:ControlParameter ControlID="lblJobId" Name="JobId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="cboRFP" Name="RFPId" PropertyName="Value" />
         </UpdateParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceJobsExpenses" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="JobsExpenses_3" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:Parameter Name="code" />
+            <asp:Parameter Name="departmentId" DefaultValue="0"/>
+            <asp:Parameter Name="DateFrom" />
+            <asp:Parameter Name="DateTo" />
+        </SelectParameters>
     </asp:SqlDataSource>
 
     <asp:Label ID="lblJobId" runat="server" Visible="false" Text="0"></asp:Label>

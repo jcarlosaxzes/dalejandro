@@ -279,7 +279,7 @@ Public Class invoice
                 Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoice.Text)
                 Dim sMsg As New System.Text.StringBuilder
 
-                sMsg.Append("This message is to notify a invoice payment using PayHere from PayPal")
+                sMsg.Append("This message is to notify an invoice payment using PayHere from PayPal")
                 sMsg.Append("<br />")
                 sMsg.Append("<br />")
                 sMsg.Append("Job: " & invoiceInfo("ProjectName"))

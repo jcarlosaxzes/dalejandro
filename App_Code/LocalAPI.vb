@@ -1633,6 +1633,35 @@ Public Class LocalAPI
         End Select
     End Function
 
+    Public Shared Function GetJobStatusColorCSS(ByVal statusId As Integer) As String
+        '        0   Not in Progress		"default"
+        '        1   Inactive		"default"
+        '        2   In Progress		"success"
+        '        3   On Hold			"danger"
+        '        4   Submitted		"warning"
+        '        5   Under Revision		"danger"
+        '        6   Approved		"info"
+        '        7   Done			"primary"
+        Select Case statusId
+            Case 0  'Not in Progress
+                Return "color:#6c757d"
+            Case 1  'Inactive
+                Return "badge badge-light"
+            Case 2  'In Progress
+                Return "color:#28a745"
+            Case 3  'On Hold,
+                Return "color:#dc3545"
+            Case 4  'Submitted
+                Return "color:#d39e00"
+            Case 5    ' Under Revision
+                Return "color:#17a2b8"
+            Case 6  ''Approved
+                Return "color:#007bff"
+            Case 7  ' Done
+                Return "color:#343a40"
+        End Select
+    End Function
+
     Public Shared Function GetJobStatusButonCSS(ByVal statusId As Integer) As String
         '        0   Not in Progress		"default"
         '        1   Inactive		"default"
@@ -8962,16 +8991,6 @@ Public Class LocalAPI
             '************COSTE POR HORA DEL EMPLOYEE x MULTIPLIER ************************
             Return GetNumericEscalar(String.Format("select dbo.EmployeeHourRate({0})", employeeId))
 
-            'Dim Amount As Double
-            'Amount = GetNumericEscalar("select top 1 Amount FROM Employee_HourlyWageHistory WHERE [employeeId]=" & employeeId & " order by [Date] desc")
-            'If Amount > 0 Then
-            '    ' Afectarlo por el Multiplier
-            '    Amount = Amount * GetCompanyMultiplier(GetEmployeeProperty(employeeId, "companyId"), GetDateTime().Year)
-            'Else
-            '    Amount = GetNumericEscalar("SELECT ISNULL(HourRate,0) FROM [Employees] WHERE [Id]=" & employeeId)
-            'End If
-
-            'Return Amount
         Catch ex As Exception
 
         End Try

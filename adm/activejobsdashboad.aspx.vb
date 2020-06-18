@@ -8,14 +8,14 @@ Public Class activejobsdashboad
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Home"
             Master.PageTitle = "Home"
             If Not IsPostBack Then
-                lblEmployeeId.Text = Master.UserId
+                lblLogedEmployeeId.Text = Master.UserId
                 lblUserEmail.Text = Master.UserEmail
 
-                '!!!! pending
-                'Dim jobAlertId As Integer = LocalAPI.IsAlertJobEndDay(lblEmployeeId.Text)
-                'If jobAlertId > 0 Then
-                '    Response.Redirect("~/ADM/jobalert.aspx?jobId=" & jobAlertId)
-                'End If
+                If Session("employeefortime") Is Nothing Then
+                    Session("employeefortime") = lblLogedEmployeeId.Text
+                End If
+                cboEmployee.DataBind()
+                cboEmployee.SelectedValue = Session("employeefortime")
 
                 lblCompanyId.Text = Session("companyId")
                 cboStatus.DataBind()
@@ -30,6 +30,9 @@ Public Class activejobsdashboad
 
     Protected Sub cboStatus_ItemDataBound(sender As Object, e As RadComboBoxItemEventArgs) Handles cboStatus.ItemDataBound
         e.Item.Checked = IIf(e.Item.Value = 0 Or e.Item.Value = 2, True, False)
+    End Sub
+    Private Sub cboEmployee_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboEmployee.SelectedIndexChanged
+        RefrescarDatos()
     End Sub
 
     Private Sub RefrescarDatos()
@@ -47,11 +50,13 @@ Public Class activejobsdashboad
 
         RadGridFooter.DataBind()
         PanelLegend.DataBind()
-        Dim dValue As Double = LocalAPI.GetWeeklyHoursByEmp(lblEmployeeId.Text, lblCompanyId.Text)
+        Dim dValue As Double = LocalAPI.GetWeeklyHoursByEmp(cboEmployee.SelectedValue, lblCompanyId.Text)
         lblTotalWeekHours.Text = FormatNumber(dValue, 1)
         lblRemaining.Text = FormatNumber(40 - dValue, 1)
 
         '----------------------------------
+        Session("employeefortime") = cboEmployee.SelectedValue
+
     End Sub
 
     Protected Sub cboJobs_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboJobs.SelectedIndexChanged
@@ -61,7 +66,7 @@ Public Class activejobsdashboad
     Protected Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         Try
             ' Anadir Employee al Job
-            LocalAPI.Jobs_Employees_assigned_INSERT(cboJobs.SelectedValue, lblEmployeeId.Text)
+            LocalAPI.Jobs_Employees_assigned_INSERT(cboJobs.SelectedValue, cboEmployee.SelectedValue)
             RadListView1.DataBind()
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
@@ -117,9 +122,9 @@ Public Class activejobsdashboad
         Dim dPermited As Double
         Dim dHours As Double
         ' Benefits_vacations
-        dHours = LocalAPI.GetEmployeeNonRegularHours_count(lblEmployeeId.Text, 7, dFrom, dTo)
+        dHours = LocalAPI.GetEmployeeNonRegularHours_count(cboEmployee.SelectedValue, 7, dFrom, dTo)
         lblVac2.Text = dHours
-        dPermited = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "Benefits_vacations")
+        dPermited = LocalAPI.GetEmployeeProperty(cboEmployee.SelectedValue, "Benefits_vacations")
         If dPermited >= 0 Then
             lblVac1.Text = dPermited
             lblVac3.Text = dPermited - dHours
@@ -129,10 +134,10 @@ Public Class activejobsdashboad
         End If
 
         ' Benefits_personals Se suman 5 y 6 
-        dHours = LocalAPI.GetEmployeeNonRegularHours_count(lblEmployeeId.Text, 5, dFrom, dTo)
-        dHours = dHours + LocalAPI.GetEmployeeNonRegularHours_count(lblEmployeeId.Text, 6, dFrom, dTo)
+        dHours = LocalAPI.GetEmployeeNonRegularHours_count(cboEmployee.SelectedValue, 5, dFrom, dTo)
+        dHours = dHours + LocalAPI.GetEmployeeNonRegularHours_count(cboEmployee.SelectedValue, 6, dFrom, dTo)
         lblPer2.Text = dHours
-        dPermited = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "Benefits_personals")
+        dPermited = LocalAPI.GetEmployeeProperty(cboEmployee.SelectedValue, "Benefits_personals")
         If dPermited >= 0 Then
             lblPer1.Text = dPermited
             lblPer3.Text = dPermited - dHours
@@ -166,14 +171,14 @@ Public Class activejobsdashboad
             If AnalisisDeBenefits() Then
                 Select Case cboType.SelectedValue
                     Case 5, 6, 7
-                        Dim requestId As Integer = LocalAPI.NewNonJobTime_Request(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerTo.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, lblCompanyId.Text)
+                        Dim requestId As Integer = LocalAPI.NewNonJobTime_Request(cboEmployee.SelectedValue, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerTo.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, lblCompanyId.Text)
                         If requestId > 0 Then
                             bRet = True
                             MessageRequest(requestId)
                             Master.InfoMessage("Your request for " & cboType.Text & " has been sended to HR Manager and is currently in progress. Thank you for your patience as your request is reviewed for approval", 10)
                         End If
                     Case Else
-                        bRet = LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerTo.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text)
+                        bRet = LocalAPI.NewNonJobTime(cboEmployee.SelectedValue, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerTo.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text)
                         If bRet Then Master.InfoMessage(cboType.Text & " time inserted")
 
                 End Select
@@ -359,6 +364,7 @@ Public Class activejobsdashboad
             Return "View/Edit Revisions List"
         End If
     End Function
+
 
 #End Region
 
