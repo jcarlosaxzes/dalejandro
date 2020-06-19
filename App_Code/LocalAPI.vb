@@ -6076,7 +6076,7 @@ Public Class LocalAPI
 
             sFullBody.Append("<br />")
             sFullBody.Append("<br />")
-            sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/EMP/memory.aspx?companyId=" & companyId & "&year=" & year & "&employeeId=" & EmployeeId & """" & ">Click here </a>")
+            sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/adm/memory.aspx?companyId=" & companyId & "&year=" & year & "&employeeId=" & EmployeeId & """" & ">Click here </a>")
             sFullBody.Append(" to view the summary page of your job as employee of " & CompanyName & " in " & year)
             sFullBody.Append("<br />")
             sFullBody.Append("<br />")

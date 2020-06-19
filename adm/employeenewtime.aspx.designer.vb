@@ -32,6 +32,15 @@ Partial Public Class employeenewtime
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''lblEmployeeName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblJobName control.
     '''</summary>
     '''<remarks>
@@ -239,6 +248,15 @@ Partial Public Class employeenewtime
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblLogedEmployeeId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblLogedEmployeeId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblClientId control.
     '''</summary>
     '''<remarks>
@@ -273,15 +291,6 @@ Partial Public Class employeenewtime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectedTicket As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblBackId control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblBackId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

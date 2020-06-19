@@ -414,6 +414,9 @@ Public Class jobs
                 RadToolTipJobStatus.Show()
 
             Case "NewTime"
+                If cboEmployee.SelectedValue > 0 Then
+                    Session("employeefortime") = cboEmployee.SelectedValue
+                End If
                 sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & e.CommandArgument & "&Dialog=1"
                 CreateRadWindows(e.CommandName, sUrl, 1024, 820, True, False)
 

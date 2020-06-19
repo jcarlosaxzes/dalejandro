@@ -301,7 +301,7 @@
                                         <table style="width: 100%">
                                             <tr>
                                                 <td style="width: 100px; text-align: right">
-                                                    <%# Eval("HoursUsed")%>/<%# Eval("HoursAssigned")%>
+                                                    <%# Eval("HoursUsed", "{0:N1}")%>/<%# Eval("HoursAssigned", "{0:N0}")%>
                                                 </td>
                                                 <td>
                                                     <telerik:RadProgressBar ID="RadProgressBar1" runat="server"
