@@ -1,94 +1,33 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/singclientportal.master" CodeBehind="singproposalsign.aspx.vb" Inherits="pasconcept20.singproposalsign" Async="true" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="SingProposalSignPrint.aspx.vb" Inherits="pasconcept20.SingProposalSignPrint" %>
 
-<%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/SingClientPortal.master" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
-    <link rel="stylesheet" href='<%= ResolveUrl("~/Content/sing-theme/quote-fullview.css") %>' />
-    <link rel="stylesheet" href='<%= ResolveUrl("~/Content/sing-theme/signature-pad.css") %>' />
-    <style>
-        hr {
-            margin-top: 2px !important;
-            margin-bottom: 2px !important;
-        }
+<%@ Import Namespace="pasconcept20" %>
+<!DOCTYPE html>
 
-        .img-signature {
-            width: 192px !important;
-            height: 120px !important;
-        }
+<html lang="en">
+<head runat="server">
+    <title>PASconcept -- Client Portal</title>
+    
 
-        deny
+    <%-- Favicons and the like --%>
+    <link rel="apple-touch-icon" sizes="180x180" href="<%@ LocalAPI.GetHostAppSite()%>/Content/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<%# LocalAPI.GetHostAppSite()%>/Content/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<%# LocalAPI.GetHostAppSite()%>/Content/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="<%# LocalAPI.GetHostAppSite()%>/Content/favicons/site.webmanifest" />
 
-        .no-margin-button {
-            margin-bottom: 0 !important;
-        }
-    </style>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <%-- Modals and the like --%>
-    <!-- DenyModal -->
-    <div id="modal-deny" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h5 class="modal-title text-xl-center fw-bold mt" id="modal-deny-header">Warning</h5>
-                </div>
-                <div class="modal-body">
-                    <p class="text-xl-center text-muted mt-sm fs-mini">
-                        <strong>Are you sure you want to deny this proposal?</strong>
-                    </p>
-                </div>
-                <!-- End of Modal body -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
-                    <asp:LinkButton ID="btnDenyProposal" runat="server" CssClass="btn btn-danger" Text="Deny" OnClick="btnDenyProposal_Click"></asp:LinkButton>
-                </div>
-                <!-- End of Modal Footer -->
-            </div>
-            <!-- End of Modal content -->
-        </div>
-        <!-- End of Modal dialog -->
-    </div>
-    <!-- End of DenyModal -->
-    <!-- AcceptModal -->
-    <div id="modal-accept" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h5 class="modal-title text-xl-center fw-bold mt" id="modal-deny-accept">Accept by signing below</h5>
-                </div>
-                <div class="modal-body">
-                    <fieldset>
-                        <div class="form-group row">
-                            <label class="col-sm-4 form-control-label">Name</label>
-                            <div class="col-sm-7">
-                                <asp:TextBox ID="txtSignName" runat="server" CssClass="form-control sign-name"></asp:TextBox>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-                <div class="modal-body">
-                    <div id="signature-pad" class="m-signature-pad">
-                        <div class="m-signature-pad--body">
-                            <canvas></canvas>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Modal body -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
-                    &nbsp;&nbsp;&nbsp;
-                    <button type="button" class="btn btn-secondary" data-action="clear">Clear</button>
-                    &nbsp;&nbsp;&nbsp;
-                    <button id="btnSign" type="button" runat="server" data-action="save" class="btn btn-success" style="width: 100px">Sign</button>
-                </div>
-                <!-- End of Modal Footer -->
-            </div>
-            <!-- End of Modal content -->
-        </div>
-        <!-- End of Modal dialog -->
-    </div>
-    <!-- End of Accept -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="DESCRIPTION" content="A web-based application conceived and designed to provide an all-inclusive management tool for architectural and engineering firms who wish to integrate the interaction." />
+    <meta name="AUTHOR" content="AXZES, LLC" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">    
+</head>
+<body class="nav-collapsed">
+    <form runat="server" class="main-form">
+        <asp:ScriptManager runat="server">
+        </asp:ScriptManager>
+
+        <div class="content-wrap no-sidebar">
+            <main id="content" class="content" role="main">
+
     <%-- End Modals and the like --%>
     <%-- Fixed Btns --%>
     <asp:Panel ID="pnlSideTools" runat="server">
@@ -112,13 +51,13 @@
                         <td>
                             <button type="button" title="Accept proposal" id="btn-accept" class="btn btn-success mb-xs" data-toggle="modal" data-target="#modal-accept">
                                 Accept&nbsp;
-                                <i class="fas fa-check-circle"></i>
+                                <span class="circle bg-white"><i class="fas fa-check"></i></span>
                             </button>
                         </td>
                         <td>
-                            <button type="button" title="Deny proposal" id="btn-deny" class="btn btn-dark mb-xs" data-toggle="modal" data-target="#modal-deny">
+                            <button type="button" title="Deny proposal" id="btn-deny" class="btn btn-inverse mb-xs" data-toggle="modal" data-target="#modal-deny">
                                 Deny&nbsp;
-                                <i class="far fa-times-circle"></i>
+                                <span class="circle bg-white"><i class="glyphicon glyphicon-remove"></i></span>
                             </button>
                         </td>
                     </tr>
@@ -128,8 +67,7 @@
     </asp:Panel>
     <%-- End of Fixed Btns --%>
     <%-- Main Content --%>
-    <asp:FormView ID="mainProposalFormView" runat="server" RenderOuterTable="false" DataSourceID="SqlDataSourceProp1" DefaultMode="ReadOnly" DataKeyNames="Id">
-        <ItemTemplate>
+
             <%-- Hidden Fields --%>
             <input type="hidden" id="hdn-clientname" value='<%# Eval("ClientName") %>' />
             <%-- First Page --%>
@@ -308,17 +246,14 @@
                                     </small>
                                 </div>
                             </div>
-                            <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print" runat="server" onserverclick="btnPrint_Click">
-                                    <i class="fa fa-print"></i>
-                                    &nbsp;&nbsp;
-                                Print
-                                </button>
-                            </div>
                         </div>
                     </section>
                 </div>
             </div>
+            <p>
+                <br></br>
+                <br></br>
+            </p>
             <%-- End of First Page --%>
             <%-- Second Page --%>
             <div class="row page">
@@ -377,17 +312,15 @@
                                     </asp:Repeater>
                                 </section>
                             </div>
-                            <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print"  runat="server" onserverclick="btnPrint_Click">
-                                    <i class="fa fa-print"></i>
-                                    &nbsp;&nbsp;
-                                Print
-                                </button>
-                            </div>
+                            
                         </div>
                     </section>
                 </div>
-            </div>
+            </div>            
+            <p>
+                <br></br>
+                <br></br>
+            </p>
             <%-- End of Second Page --%>
             <%-- Final Page --%>
             <div class="row page">
@@ -470,20 +403,16 @@
                                     </div>
                                 </section>
                             </div>
-                            <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print"  runat="server" onserverclick="btnPrint_Click">
-                                    <i class="fa fa-print"></i>
-                                    &nbsp;&nbsp;
-                                Print
-                                </button>
-                            </div>
                         </div>
                     </section>
                 </div>
             </div>
+            
+            <p>
+                <br></br>
+                <br></br>
+            </p>
             <%-- End of Final Page --%>
-        </ItemTemplate>
-    </asp:FormView>
     <%-- End of Main Content --%>
 
     <%-- SqlDataSources --%>
@@ -537,54 +466,13 @@
     <asp:Label ID="lblGuiId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblProposalId" runat="server" Visible="False"></asp:Label>
     <%-- End of Hidden Labels --%>
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="Scripts" runat="Server">
-    <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/dist/popover.js") %>'></script>
-    <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/dist/modal.js") %>'></script>
-    <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/ui-components.js") %>'></script>
-    <script src='<%= ResolveUrl("~/Scripts/signature-pad/signature_pad.js") %>'></script>
-    <script src='<%= ResolveUrl("~/Scripts/signature-pad/app.js") %>'></script>
-    <script>
-        var wrapper = document.getElementById("signature-pad"),
-            $clearButton = $("[data-action=clear]"),
-            $saveButton = $("[data-action=save]"),
-            canvas = wrapper.querySelector("canvas"),
-            signaturePad;
+    
 
-        // Adjust canvas coordinate space taking into account pixel ratio,
-        // to make it look crisp on mobile devices.
-        // This also causes canvas to be cleared.
-        function resizeCanvas() {
-            // When zoomed out to less than 100%, for some very strange reason,
-            // some browsers report devicePixelRatio as less than 1
-            // and only part of the canvas is cleared then.
-            var ratio = Math.max(window.devicePixelRatio || 1, 1);
-            canvas.width = canvas.offsetWidth * ratio;
-            canvas.height = canvas.offsetHeight * ratio;
-            canvas.getContext("2d").scale(ratio, ratio);
-        }
+        </main>
+        </div>
+        </form>
 
-        window.onresize = resizeCanvas;
-
-        signaturePad = new SignaturePad(canvas);
-
-        $clearButton.click(function (e) {
-            signaturePad.clear();
-        });
-
-        $saveButton.click(function (e) {
-            if (signaturePad.isEmpty()) {
-                alert("Please provide signature first.");
-            } else {
-                $('#modal-accept').modal('hide'); // Force the modal to hide
-                __doPostBack("btnSign", signaturePad.toDataURL()); // Finally do the AJAX sign action
-            }
-        });
-        var clientName = $("#hdn-clientname").val();
-        $('.sign-name').attr('value', clientName);
-        $('#modal-accept').on('shown.bs.modal', function () {
-            resizeCanvas();
-        });
-    </script>
-</asp:Content>
-
+  
+  
+</body>
+</html>

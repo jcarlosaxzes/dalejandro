@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposal.aspx.vb" Inherits="pasconcept20.proposal" %>
+﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposal.aspx.vb" Inherits="pasconcept20.proposal" Async="true" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
@@ -123,6 +123,12 @@
                     <asp:LinkButton ID="btnPrintProposal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
                         ToolTip="Print/Send Email with Proposal Information">
                              View/Send
+                    </asp:LinkButton>
+                </td>
+                <td>
+                    <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
+                        ToolTip="Export PDF">
+                             Export PDF
                     </asp:LinkButton>
                 </td>
                 <td>

@@ -127,6 +127,30 @@ Public Class AzureStorageApi
         End Try
     End Function
 
+    Public Shared Function UploadBytesData(fileName As String, fileData As Byte(), contentType As String, companyId As String, EntityId As Integer, EntityType As String) As String
+        Try
+
+            ' Create a BlobServiceClient object which will be used to create a container client
+            Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
+
+            Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
+            Dim container As CloudBlobContainer = blobClient.GetContainerReference("documents")
+
+            Dim blockBlob = container.GetBlockBlobReference(fileName)
+            'Sets the content type to image
+            blockBlob.Properties.ContentType = contentType
+            blockBlob.UploadFromByteArray(fileData, 0, fileData.LongLength)
+
+            blockBlob.FetchAttributes()
+            LocalAPI.AzureStorage_Insert(EntityId, 0, IO.Path.GetFileName(fileName), fileName, False, fileData.LongLength, contentType, companyId, EntityType)
+
+
+            Return blockBlob.Uri.AbsoluteUri
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 
     Public Shared Function DeleteDirectory(directory As String) As Boolean
         Try
