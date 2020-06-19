@@ -167,6 +167,18 @@ Public Class proposal
 
     End Sub
 
+    Protected Async Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
+        Dim pdf As PdfApi = New PdfApi()
+        Dim pdfBytes = Await pdf.CreateProposalPdfBytes(lblProposalId.Text)
+        Dim response As HttpResponse = HttpContext.Current.Response
+        response.ContentType = "application/pdf"
+        response.AddHeader("Content-Disposition", "attachment; filename=file.pdf")
+        response.ClearContent()
+        response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+        response.Flush()
+
+    End Sub
+
     'Protected Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs)
     '    If CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue > 0 Then
     '        GuardarProposal(False)

@@ -170,11 +170,17 @@ Public Class singproposalsign
             ' Sign Proposal
             LocalAPI.SignProposal(proposalId, clientName, img)
 
+            Dim pdf As PdfApi = New PdfApi()
+            Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
+            Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
+            Dim pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
+
             If JobId > 0 Then
-                NewJobEmail(proposalId, JobId, companyId)
+                NewJobEmail(proposalId, JobId, companyId, pdfUrl)
             Else
-                NoJobEmail(proposalId, companyId)
+                NoJobEmail(proposalId, companyId, pdfUrl)
             End If
+
 
 
             Master.DisplayMsg("The Proposal has been Accepted", "A notification has been sent to our employee in charge. Thank you")
@@ -185,7 +191,7 @@ Public Class singproposalsign
         End Try
     End Sub
 
-    Private Function NewJobEmail(lProposalId As Integer, ByVal JobId As Integer, ByVal companyid As Integer) As Boolean
+    Private Function NewJobEmail(lProposalId As Integer, ByVal JobId As Integer, ByVal companyid As Integer, ProposalPdfURL As String) As Boolean
         Try
             Dim sCC As String = ""
             Dim nClientId As Integer = LocalAPI.GetProposalData(lProposalId, "ClientId")
@@ -237,6 +243,10 @@ Public Class singproposalsign
             End If
 
             sMsg.Append("<br />")
+            sMsg.Append("<a href=" & """" & ProposalPdfURL & """" & "> Download PDF File</a>")
+            sMsg.Append("<br />")
+
+            sMsg.Append("<br />")
             sMsg.Append("Thank you.")
             sMsg.Append("<br />")
             sMsg.Append("<br />")
@@ -266,7 +276,7 @@ Public Class singproposalsign
 
     End Function
 
-    Private Function NoJobEmail(lProposalId As Integer, ByVal companyid As Integer) As Boolean
+    Private Function NoJobEmail(lProposalId As Integer, ByVal companyid As Integer, ProposalPdfURL As String) As Boolean
         Try
             '
             Dim sAceptedDate As String = LocalAPI.GetProposalData(lProposalId, "AceptedDate")
@@ -282,6 +292,11 @@ Public Class singproposalsign
             sMsg.Append("<br />")
             sMsg.Append("Date: " & sAceptedDate)
             sMsg.Append("<br />")
+
+            sMsg.Append("<br />")
+            sMsg.Append("<a href=" & """" & ProposalPdfURL & """" & "> Download PDF File</a>")
+            sMsg.Append("<br />")
+
             sMsg.Append("<br />")
             sMsg.Append("<br />")
             sMsg.Append("Thank you.")
@@ -475,4 +490,15 @@ Public Class singproposalsign
         Response.Redirect(url)
     End Sub
 
+    Protected Async Sub btnPrint_Click(sender As Object, e As EventArgs)
+        Dim pdf As PdfApi = New PdfApi()
+        Dim pdfBytes = Await pdf.CreateProposalPdfBytes(lblProposalId.Text)
+        Dim response As HttpResponse = HttpContext.Current.Response
+        response.ContentType = "application/pdf"
+        response.AddHeader("Content-Disposition", "attachment; filename=file.pdf")
+        response.ClearContent()
+        response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+        response.Flush()
+
+    End Sub
 End Class

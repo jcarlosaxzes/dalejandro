@@ -117,6 +117,8 @@
     <Reference Include="PayPal, Version=1.8.0.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
       <HintPath>packages\PayPal.1.8.0\lib\net451\PayPal.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
@@ -151,6 +153,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
       <Private>True</Private>
@@ -175,6 +178,7 @@
       <HintPath>packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -230,6 +234,7 @@
     <Reference Include="Microsoft.AspNet.FriendlyUrls">
       <HintPath>packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -1922,6 +1927,8 @@
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\job.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\jobprogressrollup.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\PrintPDF.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\SingProposalSignPrint.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\statement.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx" />
@@ -3949,6 +3956,9 @@
     <Compile Include="App_Code\PayPalUtils\Webhooks\PasConceptPlanWebhook.vb" />
     <Compile Include="App_Code\PayPalUtils\Webhooks\PasConceptSubscriptionWebhook.vb" />
     <Compile Include="App_Code\PayPalUtils\Webhooks\PasConceptWebhook.vb" />
+    <Compile Include="App_Code\PdfApi.vb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="App_Code\SendGrid.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -4024,6 +4034,20 @@
     </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx.vb">
       <DependentUpon>paymenthistory.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\PrintPDF.aspx.designer.vb">
+      <DependentUpon>PrintPDF.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\PrintPDF.aspx.vb">
+      <DependentUpon>PrintPDF.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\SingProposalSignPrint.aspx.designer.vb">
+      <DependentUpon>SingProposalSignPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\SingProposalSignPrint.aspx.vb">
+      <DependentUpon>SingProposalSignPrint.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\statement.aspx.designer.vb">
