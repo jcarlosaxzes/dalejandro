@@ -81,7 +81,7 @@ Public Class activejobsdashboad
         Select Case e.CommandName
 
             Case "AddNewTime"
-                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & e.CommandArgument & "&employeenewbackpage=activejobsdashboad")
+                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & e.CommandArgument & "&backpage=activejobsdashboad")
 
             Case "AddReview"
                 lblSelectedJob.Text = e.CommandArgument
