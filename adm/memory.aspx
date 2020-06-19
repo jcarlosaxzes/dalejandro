@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="memory.aspx.vb" Inherits="pasconcept20.memory" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
