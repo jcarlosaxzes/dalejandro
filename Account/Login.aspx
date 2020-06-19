@@ -111,7 +111,7 @@
                         <tr>
 
                             <td style="text-align: center">
-                                <a href="http://blog.pasconcept.com" target="_blank">Help</a> &nbsp;|&nbsp; <a href="../Legal/ENG/Terms.html" target="_blank">Terms & Conditions</a>
+                                <a href="https://pasconcept.com/help/" target="_blank">Support</a> &nbsp;|&nbsp; <a href="https://pasconcept.com/terms/" target="_blank">Terms & Conditions</a>
 
                             </td>
                         </tr>
