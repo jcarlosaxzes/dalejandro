@@ -309,7 +309,7 @@
                                 </div>
                             </div>
                             <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print" runat="server" onserverclick="btnPrint_Click">
+                                <button class="btn btn-inverse" runat="server" onserverclick="btnPrint_Click">
                                     <i class="fa fa-print"></i>
                                     &nbsp;&nbsp;
                                 Print
@@ -378,7 +378,7 @@
                                 </section>
                             </div>
                             <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print"  runat="server" onserverclick="btnPrint_Click">
+                                <button class="btn btn-inverse"  runat="server" onserverclick="btnPrint_Click">
                                     <i class="fa fa-print"></i>
                                     &nbsp;&nbsp;
                                 Print
@@ -471,7 +471,7 @@
                                 </section>
                             </div>
                             <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print"  runat="server" onserverclick="btnPrint_Click">
+                                <button class="btn btn-inverse"  runat="server" onserverclick="btnPrint_Click">
                                     <i class="fa fa-print"></i>
                                     &nbsp;&nbsp;
                                 Print
