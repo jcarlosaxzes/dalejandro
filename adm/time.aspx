@@ -56,7 +56,7 @@
             <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
                 <table class="table-sm" style="width: 100%">
                     <tr>
-                        <td style="width: 160px">
+                        <td style="width: 180px">
                             <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
                                 <Items>
                                     <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" Selected="true" />
@@ -70,15 +70,15 @@
                                 </Items>
                             </telerik:RadComboBox>
                         </td>
-                        <td style="width: 120px">
+                        <td style="width: 130px">
                             <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
                             </telerik:RadDatePicker>
                         </td>
-                        <td style="width: 120px">
+                        <td style="width: 130px">
                             <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter">
                             </telerik:RadDatePicker>
                         </td>
-                        <td style="width: 380px">
+                        <td style="width: 450px">
                             <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJobs"
                                 DataTextField="Job" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="260px"
                                 AppendDataBoundItems="true">
@@ -97,7 +97,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                             <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="100%">
                                 <Items>
                                     <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
@@ -105,7 +105,7 @@
                             </telerik:RadComboBox>
 
                         </td>
-                        <td colspan="2">
+                        <td>
                             <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmployee" AppendDataBoundItems="true"
                                 DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
                                 <Items>

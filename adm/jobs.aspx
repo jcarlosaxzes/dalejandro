@@ -159,7 +159,7 @@
                         &nbsp;Filter
                     </button>
                 </td>
-                <td style="width: 120px; text-align: center">
+                <td style="width: 130px; text-align: center">
                     <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
                         <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
                             $ Dashboard

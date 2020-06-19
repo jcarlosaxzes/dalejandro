@@ -216,12 +216,17 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="Total" DataFormatString="{0:N2}"
                         Groupable="False" HeaderText="Total" SortExpression="Total" UniqueName="Total"
-                        HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
+                        HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
                         FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="TotalPayments" DataFormatString="{0:N2}"
                         Groupable="False" HeaderText="Payments" SortExpression="TotalPayments" UniqueName="TotalPayments"
-                        HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
+                        HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
+                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Balance" DataFormatString="{0:N2}"
+                        Groupable="False" HeaderText="Balance" SortExpression="Balance" UniqueName="Balance"
+                        HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
                         FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="DateCreated" DataFormatString="{0:MM/dd/yy}"

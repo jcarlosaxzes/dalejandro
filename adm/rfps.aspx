@@ -218,19 +218,22 @@
                     ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="X-Small" HeaderTooltip="Number of RFP for this Project">
                 </telerik:TreeListBoundColumn>
                 <telerik:TreeListBoundColumn DataField="DateCreated" HeaderText="Date" SortExpression="DateCreated"
-                    UniqueName="DateCreated" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:d}">
+                    UniqueName="DateCreated" HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Right" DataFormatString="{0:d}">
                 </telerik:TreeListBoundColumn>
-                <telerik:TreeListBoundColumn DataField="Total" HeaderText="Total" UniqueName="Total" HeaderStyle-Width="80px" DataFormatString="{0:C2}"
+                <telerik:TreeListBoundColumn DataField="Total" HeaderText="Total" UniqueName="Total" HeaderStyle-Width="100px"  DataFormatString="{0:C2}"
                     ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                 </telerik:TreeListBoundColumn>
 
                 <telerik:TreeListBoundColumn DataField="TotalPayments" DataFormatString="{0:N2}"
                     HeaderText="Payments" SortExpression="TotalPayments" UniqueName="TotalPayments"
-                    HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
+                    HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
+                </telerik:TreeListBoundColumn>
+                <telerik:TreeListBoundColumn DataField="Balance" HeaderText="Balance" UniqueName="Balance" HeaderStyle-Width="100px"  DataFormatString="{0:C2}"
+                    ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                 </telerik:TreeListBoundColumn>
 
                 <telerik:TreeListTemplateColumn DataField="jobId" HeaderText="Job" SortExpression="jobId"
-                    UniqueName="jobId" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
+                    UniqueName="jobId" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" >
                     <ItemTemplate>
                         <asp:LinkButton ID="btnViewJob" runat="server" CommandName="ViewJobPage" CommandArgument='<%# Eval("jobId") %>'
                             ToolTip="View Job page">

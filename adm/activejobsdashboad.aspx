@@ -273,7 +273,7 @@
                         </table>
                     </div>
                     <div class="card-body">
-                        <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black">
+                        <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
                             <table class="table-sm card-text" style="width: 100%;flex-wrap:nowrap;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
                                 <tr>
                                     <td>
