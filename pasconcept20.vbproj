@@ -402,6 +402,7 @@
     <Content Include="adm\job_times.aspx" />
     <Content Include="adm\job_transmittals.aspx" />
     <Content Include="adm\managementrequest.aspx" />
+    <Content Include="adm\memory.aspx" />
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
@@ -3349,6 +3350,13 @@
       <DependentUpon>MasterJOB.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\memory.aspx.designer.vb">
+      <DependentUpon>memory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\memory.aspx.vb">
+      <DependentUpon>memory.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\messages.aspx.designer.vb">
       <DependentUpon>messages.aspx</DependentUpon>
     </Compile>
@@ -4506,7 +4514,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

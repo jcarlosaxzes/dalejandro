@@ -397,7 +397,7 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/Reports?group=Marketing" Text="Marketing"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Reports?group=MobilApp" Text="MobilApp"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/Reports?group=Mobile App" Text="Mobile App"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/Reports?group=Proposal" Text="Proposal"
