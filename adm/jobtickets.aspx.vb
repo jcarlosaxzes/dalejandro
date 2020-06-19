@@ -40,6 +40,10 @@ Public Class jobtickets
             Case "NewTime"
                 lblTicketId.Text = e.CommandArgument
                 lblJobId.Text = LocalAPI.GetTicketProperty(lblTicketId.Text, "jobId")
+
+                If cboFilterEmployee.SelectedValue > 0 Then
+                    Session("employeefortime") = cboEmployee.SelectedValue
+                End If
                 CreateRadWindows(e.CommandName, "~/ADM/EmployeeNewTime.aspx?JobTicketId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Dialog=1", 1024, 820, True)
                 Response.Redirect("~/ADM/EmployeeNewTime.aspx?JobTicketId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Dialog=1")
 

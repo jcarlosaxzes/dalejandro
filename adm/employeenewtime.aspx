@@ -15,8 +15,14 @@
                        Back to List
                     </asp:LinkButton>
                 </td>
-                <td style="text-align:center">
-                    <h2 style="margin:0"><asp:Label ID="lblJobName" runat="server" Visible="false"></asp:Label></h2>
+                <td style="text-align:right;padding-right:10px">
+                    <h2 style="margin:0;">New Productive Time</h2>
+                </td>
+                <td style="text-align:left">
+                    <asp:Label ID="lblEmployeeName" runat="server" CssClass="badge badge-dark"></asp:Label>
+                </td>
+                <td style="text-align:left">
+                    <h3 style="margin:0"><asp:Label ID="lblJobName" runat="server" Visible="false"></asp:Label></h3>
                 </td>
             </tr>
         </table>
@@ -69,7 +75,6 @@
                         </table>
                     </ItemTemplate>
                 </asp:FormView>
-
             </div>
         </div>
     </div>
@@ -318,10 +323,12 @@
     </asp:SqlDataSource>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblLogedEmployeeId" runat="server" Visible="False"></asp:Label>
+    
     <asp:Label ID="lblClientId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedJob" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedTicket" runat="server" Visible="False" Text="0"></asp:Label>
-    <asp:Label ID="lblBackId" runat="server" Visible="False" Text="1"></asp:Label>
+    
 
 </asp:Content>

@@ -181,7 +181,7 @@
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridTemplateColumn DataField="Rates" DataType="System.Double" FilterControlAltText="Filter Rates column"
-                                        HeaderText="UnitPrice (Hours Rates)" SortExpression="Rates" UniqueName="Rates"
+                                        HeaderText="Unit Price (Default Rate)" SortExpression="Rates" UniqueName="Rates"
                                         HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                         <EditItemTemplate>
                                             <div style="margin: 5px">

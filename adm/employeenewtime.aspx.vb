@@ -8,9 +8,17 @@ Public Class employeenewtime
             Master.PageTitle = "Employee New Time"
             If Not IsPostBack Then
                 lblCompanyId.Text = Session("companyId")
-                lblEmployeeId.Text = Master.UserId
+                lblLogedEmployeeId.text = Master.UserId
+
+                If Not Session("employeefortime") Is Nothing Then
+                    lblEmployeeId.Text = Session("employeefortime")
+                Else
+                    lblEmployeeId.Text = lblLogedEmployeeId.Text
+                End If
+
                 lblSelectedJob.Text = Request.QueryString("JobId")
                 lblJobName.Text = LocalAPI.GetJobName(lblSelectedJob.Text)
+                lblEmployeeName.Text = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FullName")
 
                 lblClientId.Text = LocalAPI.GetJobProperty(lblSelectedJob.Text, "Client")
 
@@ -24,9 +32,13 @@ Public Class employeenewtime
                     Master.HideMasterMenu()
                     btnBack.Visible = False
                 End If
-                If Not Request.QueryString("back") Is Nothing Then
-                    lblBackId.Text = Request.QueryString("back")
+
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    Session("employeenewbackpage") = Request.QueryString("backpage")
+                Else
+                    Session("employeenewbackpage") = ""
                 End If
+
 
 
                 InitDialog()
@@ -163,7 +175,7 @@ Public Class employeenewtime
 
                 ' Actualizar el status del Job
                 If opcDone.Checked Then
-                    LocalAPI.SetJobStatus(lblSelectedJob.Text, 7, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text)
+                    LocalAPI.SetJobStatus(lblSelectedJob.Text, 7, lblEmployeeId.Text, lblCompanyId.Text, lblLogedEmployeeId.Text)
                     opcDone.Checked = False
 
                 ElseIf opcHold.Checked Then
@@ -193,15 +205,6 @@ Public Class employeenewtime
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         BackPage()
-    End Sub
-    Private Sub BackPage()
-        Select Case lblBackId.Text
-            Case 1
-                Response.Redirect("~/adm/activejobsdashboad.aspx")
-            Case 2
-                Response.Redirect("~/adm/default.aspx")
-        End Select
-
     End Sub
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewTimeBalance.Visible = Not FormViewTimeBalance.Visible
@@ -248,5 +251,16 @@ Public Class employeenewtime
         BotonesVisibles()
     End Sub
 
+    Private Sub BackPage()
+        Select Case Session("employeenewbackpage")
+            Case "activejobsdashboad"
+                Response.Redirect("~/adm/activejobsdashboad.aspx")
+            Case "time"
+                Response.Redirect("~/adm/time.aspx")
+            Case Else
+                Response.Redirect("~/adm/default.aspx")
+        End Select
+
+    End Sub
 End Class
 

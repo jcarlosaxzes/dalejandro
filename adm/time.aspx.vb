@@ -77,6 +77,7 @@ Public Class time
     End Sub
     Private Sub RefrescarDatos()
         Try
+            btnNew.Visible = (cboJob.SelectedValue > 0)
 
             RadGrid1.DataBind()
             RadGrid2.DataBind()
@@ -206,5 +207,14 @@ Public Class time
 
     Private Sub RadGrid2_PreRender(sender As Object, e As EventArgs) Handles RadGrid2.PreRender
         RadGrid2.MasterTableView.GetColumn("DeleteColumn").Visible = LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_PayrollCalendar")
+    End Sub
+
+    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+        If cboJob.SelectedValue > 0 Then
+            If cboEmployee.SelectedValue > 0 Then
+                Session("employeefortime") = cboEmployee.SelectedValue
+            End If
+            Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & cboJob.SelectedValue & "&employeenewbackpage=time")
+        End If
     End Sub
 End Class
