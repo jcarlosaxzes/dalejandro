@@ -214,7 +214,7 @@ Public Class time
             If cboEmployee.SelectedValue > 0 Then
                 Session("employeefortime") = cboEmployee.SelectedValue
             End If
-            Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & cboJob.SelectedValue & "&employeenewbackpage=time")
+            Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & cboJob.SelectedValue & "&backpage=time")
         End If
     End Sub
 End Class

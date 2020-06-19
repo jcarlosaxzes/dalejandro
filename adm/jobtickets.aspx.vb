@@ -45,7 +45,6 @@ Public Class jobtickets
                     Session("employeefortime") = cboEmployee.SelectedValue
                 End If
                 CreateRadWindows(e.CommandName, "~/ADM/EmployeeNewTime.aspx?JobTicketId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Dialog=1", 1024, 820, True)
-                Response.Redirect("~/ADM/EmployeeNewTime.aspx?JobTicketId=" & e.CommandArgument & "&JobId=" & lblJobId.Text & "&Dialog=1")
 
             Case "TicketBalance"
                 lblTicketId.Text = e.CommandArgument

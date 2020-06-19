@@ -15,13 +15,7 @@
                        Back to List
                     </asp:LinkButton>
                 </td>
-                <td style="text-align:right;padding-right:10px">
-                    <h2 style="margin:0;">New Productive Time</h2>
-                </td>
-                <td style="text-align:left">
-                    <asp:Label ID="lblEmployeeName" runat="server" CssClass="badge badge-dark"></asp:Label>
-                </td>
-                <td style="text-align:left">
+                <td style="text-align:center">
                     <h3 style="margin:0"><asp:Label ID="lblJobName" runat="server" Visible="false"></asp:Label></h3>
                 </td>
             </tr>
@@ -38,7 +32,7 @@
                             </tr>
                             <tr>
                                 <td colspan="9" style="text-align: center">
-                                    <h2 style="margin: 0"><%# Eval("JobName")%></h2>
+                                    <h3 style="margin: 0"><%# Eval("JobName")%></h3>
                                 </td>
                             </tr>
                             <tr>
@@ -82,10 +76,15 @@
     <div class="pas-container">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td colspan="2" style="text-align:center">
+                <td style="text-align:right; text-align:right;width:50%">
                     <h2>Productive Time</h2>
                 </td>
+                <td>
+                    <asp:Label ID="lblEmployeeName" runat="server" CssClass="badge badge-dark" Font-Size="Large"></asp:Label>
+                </td>
             </tr>
+        </table>
+        <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width:250px; text-align: right">Time Worked (in hours 0.25-24):
                 </td>

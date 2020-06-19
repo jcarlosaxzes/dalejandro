@@ -32,15 +32,6 @@ Partial Public Class employeenewtime
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblEmployeeName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblEmployeeName As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''lblJobName control.
     '''</summary>
     '''<remarks>
@@ -57,6 +48,15 @@ Partial Public Class employeenewtime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewTimeBalance As Global.System.Web.UI.WebControls.FormView
+    
+    '''<summary>
+    '''lblEmployeeName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtTimeSel control.
