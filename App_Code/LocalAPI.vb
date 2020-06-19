@@ -11825,6 +11825,32 @@ Public Class LocalAPI
         Return GetNumericEscalar("SELECT count(*) FROM [Azure_Uploads] where EntityType= 'Proposal' and EntityId=" & proposalId)
     End Function
 
+    Public Shared Function AzureStorage_Insert(EntityId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, EntityType As String) As Boolean
+        Try
+            If Not ExistProposalAzureFile(EntityId, FileName, ContentBytes) Then
+
+                ' Analisis de type en funcion del ContentType 
+                'Type = 9  Images
+                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
+                    Type = 9
+                End If
+
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+                Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
+                                $"values({EntityId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), '{EntityType}', {companyId}, '{fileType}' )"
+
+                Return ExecuteNonQuery(sQuery)
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
     Private Shared Function ExistJobAzureFile(jobId As Integer, FileName As String, ContentBytes As Integer) As Boolean
         Dim sQuery As String = String.Format("select count(*) from  [Azure_Uploads] where EntityId ={0} and EntityType= 'Jobs' and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
         Dim ret As Boolean = IIf(GetNumericEscalar(sQuery) = 0, False, True)
