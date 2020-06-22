@@ -36,11 +36,11 @@ Public Class PdfApi
     '     Public Sub CreateProposalSignedPdf(guid As String, fileName As String)
     ' After:
     '     Public Sub CreateProposalSignedPdfAsync(guid As String, fileName As String)
-    Public Async Function CreateProposalSignedPdfAsync(ProposalId As String, fileName As String) As Task
+    Public Async Function CreateProposalSignedPdfAsync(ProposalId As String, Keyname As String) As Task
         'Dim ProposalId As String = LocalAPI.GetSharedLink_Id(11, Guid)
         Dim CompanyId As String = LocalAPI.GetCompanyIdFromProposal(ProposalId)
         Dim bytePDF As Byte() = Await CreateProposalPdfBytes(ProposalId)
-        Dim Url = AzureStorageApi.UploadBytesData(fileName, bytePDF, "application/pdf", CompanyId, ProposalId, "Signed Proposal")
+        Dim Url = AzureStorageApi.UploadBytesData("Proposal_Signed_" & DateTime.Now.Month & "_" & DateTime.Now.Day & "_" & DateTime.Now.Year & ".pdf", Keyname, bytePDF, "application/pdf", CompanyId, ProposalId, "Proposal")
     End Function
 
     Public Async Function CreateProposalPdfBytes(ProposalId As String) As Task(Of Byte())
