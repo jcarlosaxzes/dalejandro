@@ -36,45 +36,44 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
+    <div class="pasconcept-bar">
+        <table class="table-sm">
             <tr>
-                <td style="width: 100px; text-align:right">From:
+                <td>From:
                 </td>
-                <td style="width: 130px">
-                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Width="100%" AutoPostBack="true"
+                <td>
+                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" AutoPostBack="true" Width="130px"
                         DateFormat="MM/dd/yyyy">
                     </telerik:RadDatePicker>
                 </td>
-                <td style="width: 50px; text-align:right">To:
+                <td>To:
                 </td>
-                <td style="width: 130px">
-                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" Width="100%" DateFormat="MM/dd/yyyy" ToolTip="Payroll Closing Date"
-                        ReadOnly="True">
+                <td>
+                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ToolTip="Payroll Closing Date" Width="120px"
+                        ReadOnly="True" >
                     </telerik:RadDateInput>
                 </td>
-                <td style="width: 100px; text-align:right">Employee:
+                <td>Employee:
                 </td>
-                <td style="width:250px">
+                <td>
                     <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" Height="400px"
-                        Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
+                        Width="250px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
                         AutoPostBack="True">
                         <CollapseAnimation Type="OutQuint" Duration="200"></CollapseAnimation>
                     </telerik:RadComboBox>
                 </td>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
+                <td>
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <i class="fas fa-backward"></i> Previous
                     </asp:LinkButton>
                 </td>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
+                <td>
+                    <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <i class="fas fa-forward"></i> Next
                     </asp:LinkButton>
                 </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Time Sheet
-                    </h3>
+                <td>
+                    <span class="pasconcept-pagetitle" style="padding-left:50px">Time Sheet</span>
                 </td>
 
             </tr>

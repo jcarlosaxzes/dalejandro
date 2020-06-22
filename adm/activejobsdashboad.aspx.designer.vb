@@ -113,15 +113,6 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadHtmlChartTimeUsed As Global.Telerik.Web.UI.RadHtmlChart
     
     '''<summary>
-    '''RadListView1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
-    
-    '''<summary>
     '''RadGridFooter control.
     '''</summary>
     '''<remarks>
@@ -129,6 +120,15 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridFooter As Global.Telerik.Web.UI.RadGrid
+    
+    '''<summary>
+    '''RadListView1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
     
     '''<summary>
     '''PanelLegend control.

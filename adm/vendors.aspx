@@ -25,40 +25,31 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
 
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 90px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-                </td>
-                <td style="width: 90px">
-                    <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+    <div class="pasconcept-bar noprint">
+
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+            <i class="fas fa-filter"></i>&nbsp;Filter
+        </button>
+
+        <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Vendor
-                    </asp:LinkButton>
-                </td>
-                <td style="width: 140px">
-                    <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=Clients" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
-                        <Icon CssClass="rbUpload"></Icon>
-                    </telerik:RadLinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Vendors
-                    </h3>
-                </td>
-            </tr>
-        </table>
+        </asp:LinkButton>
+
+        <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=Clients" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
+            <Icon CssClass="rbUpload"></Icon>
+        </telerik:RadLinkButton>
+
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Vendors</span>
 
     </div>
 
     <div class="collapse" id="collapseFilter">
-        <div class="card card-body">
+        
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-sm">
+                <table class="table-sm pasconcept-bar">
                     <tr>
-                        <td>
-                            <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="600px"
+                        <td style="width:600px">
+                            <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%"
                                 EmptyMessage="Search for Name, Company... ">
                             </telerik:RadTextBox>
                         </td>
@@ -70,7 +61,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-        </div>
+        
     </div>
 
     <div>

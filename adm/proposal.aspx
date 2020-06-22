@@ -81,117 +81,83 @@
         </Windows>
     </telerik:RadWindowManager>
 
-    <asp:Panel ID="panelToolbar" runat="server" CssClass="pas-container">
-        <table class="table-sm">
-            <tr>
-                <td>
-                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
+    <div class="pasconcept-bar">
+        <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
                        $ Dashboard
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false" CausesValidation="false">
+        </asp:LinkButton>
+        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false" CausesValidation="false">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
+        </asp:LinkButton>
+        <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
                              Update
-                    </asp:LinkButton>
-
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnDeleteProposal" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false" ToolTip="Delete" CausesValidation="false">
+        </asp:LinkButton>
+        <asp:LinkButton ID="btnDeleteProposal" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false" ToolTip="Delete" CausesValidation="false">
                              Delete
-                    </asp:LinkButton>
-
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnSaveAs" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As New Propsal"
-                        CausesValidation="true" ValidationGroup="Proposal">
+        </asp:LinkButton>
+        <asp:LinkButton ID="btnSaveAs" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As New Propsal"
+            CausesValidation="true" ValidationGroup="Proposal">
                              Save As
-                    </asp:LinkButton>
-
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnSaveAsTemplate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As Proposal Template "
-                        CausesValidation="true" ValidationGroup="Proposal">
+        </asp:LinkButton>
+        <asp:LinkButton ID="btnSaveAsTemplate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As Proposal Template "
+            CausesValidation="true" ValidationGroup="Proposal">
                              Save Template
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnPrintProposal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
-                        ToolTip="Print/Send Email with Proposal Information">
+        </asp:LinkButton>
+        <asp:LinkButton ID="btnPrintProposal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
+            ToolTip="Print/Send Email with Proposal Information">
                              View/Send
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
-                        ToolTip="Export PDF">
+        </asp:LinkButton>
+        <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
+            ToolTip="Export PDF">
                              Export PDF
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <telerik:RadButton ID="btnDataProcecing" runat="server" Text="Processing" OnClientClicked="DataProcessing" AutoPostBack="false" UseSubmitBehavior="false" CausesValidation="false" Width="120px" Visible="false">
-                        <Icon PrimaryIconCssClass="rbRefresh"></Icon>
-                    </telerik:RadButton>
-                </td>
-                <td>
-                    <telerik:RadButton ID="btnHelp" runat="server" Text="Help" ButtonType="LinkButton" AutoPostBack="false" Font-Bold="true" CausesValidation="false" Visible="false"
-                        UseSubmitBehavior="false" Width="100px" Target="_blank" NavigateUrl="http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html">
-                        <Icon PrimaryIconCssClass="rbHelp"></Icon>
-                    </telerik:RadButton>
-                </td>
-            </tr>
-        </table>
-        <div id="collapseTotals">
-            <div class="card card-body">
-                <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" Visible="false">
-                    <ItemTemplate>
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td colspan="9">
-                                    <hr style="margin: 0" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="9" style="text-align: center">
-                                    <h2 style="margin: 0"><%# Eval("ClientName")%>, <%# Eval("ClientCompany") %></h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 19%; text-align: center; background-color: #039be5">
-                                    <span class="DashboardFont2"># Pending Props.</span><br />
-                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
-                                </td>
-                                <td></td>
-                                <td style="width: 19%; text-align: center; background-color: #546e7a">
-                                    <span class="DashboardFont2">Acepted Props.</span><br />
-                                    <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
-                                </td>
-                                <td></td>
-                                <td style="width: 19%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Jobs Budget</span><br />
-                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
-                                </td>
-                                <td></td>
-                                <td style="width: 19%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Amount Paid</span><br />
-                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
-                                </td>
-                                <td></td>
-                                <td style="width: 19%; text-align: center; background-color: #e53935">
-                                    <span class="DashboardFont2">Remaining Balance</span><br />
-                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
-                                </td>
-                            </tr>
-                        </table>
-                    </ItemTemplate>
-                </asp:FormView>
+        </asp:LinkButton>
+        <telerik:RadButton ID="btnDataProcecing" runat="server" Text="Processing" OnClientClicked="DataProcessing" AutoPostBack="false" UseSubmitBehavior="false" CausesValidation="false" Width="120px" Visible="false">
+            <Icon PrimaryIconCssClass="rbRefresh"></Icon>
+        </telerik:RadButton>
+        <telerik:RadButton ID="btnHelp" runat="server" Text="Help" ButtonType="LinkButton" AutoPostBack="false" Font-Bold="true" CausesValidation="false" Visible="false"
+            UseSubmitBehavior="false" Width="100px" Target="_blank" NavigateUrl="http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html">
+            <Icon PrimaryIconCssClass="rbHelp"></Icon>
+        </telerik:RadButton>
+    </div>
+    <div id="collapseTotals">
+        <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" Visible="false">
+            <ItemTemplate>
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td colspan="9" style="text-align: center">
+                            <h2 style="margin: 0"><%# Eval("ClientName")%>, <%# Eval("ClientCompany") %></h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 19%; text-align: center; background-color: #039be5">
+                            <span class="DashboardFont2"># Pending Props.</span><br />
+                            <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #546e7a">
+                            <span class="DashboardFont2">Acepted Props.</span><br />
+                            <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">Jobs Budget</span><br />
+                            <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">Amount Paid</span><br />
+                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #e53935">
+                            <span class="DashboardFont2">Remaining Balance</span><br />
+                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+    </div>
 
-            </div>
-        </div>
-    </asp:Panel>
     <div>
         <asp:ValidationSummary ID="ValidationSummary1" runat="server"
             Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="Proposal" />
@@ -498,7 +464,7 @@
                                 <tr>
                                     <td style="text-align: right; width: 15px"></td>
                                     <td style="width: 400px">
-                                        <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules" SelectedValue='<%# Bind("paymentscheduleId")%>' 
+                                        <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules" SelectedValue='<%# Bind("paymentscheduleId")%>'
                                             DataTextField="Name" DataValueField="Id" Width="400px" MarkFirstMatch="True" AppendDataBoundItems="true"
                                             Filter="Contains"
                                             ToolTip="Select Payment Schedules to define first time or modify the current"
@@ -509,7 +475,7 @@
                                         </telerik:RadComboBox>
                                     </td>
                                     <td>
-                                        <asp:LinkButton ID="btnGeneratePaymentSchedules" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" 
+                                        <asp:LinkButton ID="btnGeneratePaymentSchedules" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false"
                                             ToolTip="Define Payment Schedules"
                                             CausesValidation="false" CommandName="Update"
                                             Visible='<%# LocalAPI.IsGeneralPS(Eval("Id")) %>'>
@@ -688,8 +654,8 @@
             </EditItemTemplate>
         </asp:FormView>
     </div>
-    <div class="pas-container" style="width: 100%">
 
+    <div class="pas-container" style="width: 100%">
         <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Task Compensation" StepType="Step">
@@ -713,7 +679,7 @@
                                             <telerik:GridBoundColumn DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
                                             </telerik:GridBoundColumn>
                                             <telerik:GridTemplateColumn DataField="phaseId" FilterControlAltText="Filter PhaseCode column"
-                                                HeaderText="Phase" SortExpression="PhaseCode" UniqueName="phaseId"  HeaderStyle-Width="80px">
+                                                HeaderText="Phase" SortExpression="PhaseCode" UniqueName="phaseId" HeaderStyle-Width="80px">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblphaseId" runat="server" Text='<%# Eval("PhaseCode") %>' ToolTip='<%# Eval("PhaseName") %>'></asp:Label>
                                                 </ItemTemplate>
@@ -730,7 +696,7 @@
                                             </telerik:GridTemplateColumn>
 
                                             <telerik:GridTemplateColumn DataField="positionId" FilterControlAltText="Filter positionCode column" Display="false"
-                                                HeaderText="Position" SortExpression="positionCode" UniqueName="positionId"  HeaderStyle-Width="100px">
+                                                HeaderText="Position" SortExpression="positionCode" UniqueName="positionId" HeaderStyle-Width="100px">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblpositionId" runat="server" Text='<%# Eval("Position") %>'></asp:Label>
                                                 </ItemTemplate>
@@ -747,7 +713,7 @@
                                             </telerik:GridTemplateColumn>
 
                                             <telerik:GridTemplateColumn DataField="taskcode" HeaderText="Task" ReadOnly="True" SortExpression="taskcode"
-                                                UniqueName="taskcode" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" >
+                                                UniqueName="taskcode" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lnkDetailId" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' ValidationGroup="Proposal" UseSubmitBehavior="false"
                                                         Text='<%# Eval("taskcode")%>' ToolTip="Click to Edit detail"></asp:LinkButton>
@@ -761,49 +727,46 @@
 
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Description" FilterControlAltText="Filter Description column"
-                                                HeaderText="Name" SortExpression="Description" UniqueName="Description"  ItemStyle-HorizontalAlign="Left">
+                                                HeaderText="Name" SortExpression="Description" UniqueName="Description" ItemStyle-HorizontalAlign="Left">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblDescrip" runat="server" Text='<%# Eval("Description") %>' ToolTip='<%# Eval("DescriptionPlus") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Amount" DataType="System.Double" HeaderText="Qty"
-                                                SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
-                                                >
+                                                SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Amount", "{0:N2}") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Hours" DataType="System.Double" HeaderText="Hours"
-                                                SortExpression="Hours" UniqueName="Hours" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
-                                                >
+                                                SortExpression="Hours" UniqueName="Hours" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblHours" runat="server" Text='<%# Eval("Hours", "{0:N2}") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Rates" DataType="System.Double" HeaderText="Rates"
-                                                SortExpression="Rates" UniqueName="Rates" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
-                                                >
+                                                SortExpression="Rates" UniqueName="Rates" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblRates" runat="server" Text='<%# Eval("Rates", "{0:N2}")%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
 
-                                            <telerik:GridBoundColumn DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" UniqueName="BillType"  HeaderStyle-Width="180px" >
+                                            <telerik:GridBoundColumn DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" UniqueName="BillType" HeaderStyle-Width="180px">
                                             </telerik:GridBoundColumn>
 
                                             <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True"
                                                 SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimated" Aggregate="Sum"
                                                 FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
-                                                 FooterStyle-HorizontalAlign="Right">
+                                                FooterStyle-HorizontalAlign="Right">
                                             </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True"
                                                 SortExpression="TotalRow" DataFormatString="{0:N2}" UniqueName="TotalRow" Aggregate="Sum"
                                                 FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
-                                                 FooterStyle-HorizontalAlign="Right">
+                                                FooterStyle-HorizontalAlign="Right">
                                             </telerik:GridBoundColumn>
                                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?"
                                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                                UniqueName="DeleteColumn" HeaderText="" 
+                                                UniqueName="DeleteColumn" HeaderText=""
                                                 HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                             </telerik:GridButtonColumn>
                                         </Columns>
@@ -1173,8 +1136,8 @@
 
 
     <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Delete Proposal
+        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Delete Proposal
             </span>
         </h2>
         <table class="table-sm" style="width: 500px">

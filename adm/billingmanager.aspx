@@ -21,7 +21,7 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <div class="Formulario">
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td class="PanelFilter">
@@ -83,15 +83,9 @@
             </tr>
         </table>
     </div>
-    <div>
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Billing Assistant
-                    </h3>
-                </td>
-            </tr>
-        </table>
+    <div class="pasconcept-bar noprint">
+
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Billing Assistant</span>
 
     </div>
 
@@ -109,7 +103,7 @@
                 <div style="padding-top: 5px">
                     <telerik:RadGrid ID="RadGridRemainders" runat="server" Skin="Bootstrap" AutoGenerateColumns="False" Height="650px"
                         DataSourceID="SqlDataSourceRemainders" AllowSorting="True" AllowAutomaticDeletes="true" AllowAutomaticUpdates="true"
-                        PageSize="100" AllowPaging="true" AllowMultiRowSelection="true">
+                        PageSize="100" AllowPaging="true" AllowMultiRowSelection="true" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                         <ClientSettings Selecting-AllowRowSelect="true">
                             <Scrolling AllowScroll="True"></Scrolling>
                         </ClientSettings>
@@ -558,8 +552,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                       <span class="navbar navbar-expand-md bg-dark text-white">
+                    <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -586,8 +580,8 @@
             <tr>
                 <td>
 
-                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                       <span class="navbar navbar-expand-md bg-dark text-white">
+                    <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">
                             <asp:Label ID="lblActionMesageStatement" runat="server"></asp:Label>Switch Company
                         </span>
                     </h2>
@@ -610,8 +604,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipInvoicesPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Receive Invoice Payments
+        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Receive Invoice Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -656,8 +650,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Receive Statement Payments
+        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Receive Statement Payments
             </span>
         </h2>
         <table class="table table-bordered" style="width: 500px">
@@ -703,8 +697,8 @@
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Edit Invoice
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Edit Invoice
             </span>
         </h2>
         <asp:FormView ID="FormViewInvoice" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEditInvoice" DefaultMode="Edit">
@@ -805,8 +799,8 @@
 
     <telerik:RadToolTip ID="RadToolTipInvoiceRemaider" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="navbar navbar-expand-md bg-dark text-white">New Invoice Reminder
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">New Invoice Reminder
             </span>
         </h2>
         <asp:FormView ID="FormViewRemaider" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceRemaider">
@@ -908,8 +902,8 @@
 
     <telerik:RadToolTip ID="RadToolTipStatementReminder" runat="server" Position="Center" RelativeTo="BrowserWindow"
         Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="navbar navbar-expand-md bg-dark text-white">New Statement Reminder
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">New Statement Reminder
             </span>
         </h2>
 

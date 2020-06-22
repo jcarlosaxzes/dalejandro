@@ -6,14 +6,14 @@
         <div class="row">
             <div class="form-group">
                 <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" Enabled="false"
-                    DataValueField="Id" Width="40%" AppendDataBoundItems="true" AutoPostBack="true" Label="Department:">
+                    DataValueField="Id" Width="450px" AppendDataBoundItems="true" AutoPostBack="true" Label="Department:">
                 </telerik:RadComboBox>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group">
-                <telerik:RadComboBox ID="cboPreExistingTags" runat="server" DataSourceID="SqlDataSourceDepartment_USED_tags" DataTextField="Tag" DataValueField="Tag" Width="90%" AppendDataBoundItems="true"
+                <telerik:RadComboBox ID="cboPreExistingTags" runat="server" DataSourceID="SqlDataSourceDepartment_USED_tags" DataTextField="Tag" DataValueField="Tag" Width="450px" AppendDataBoundItems="true"
                     MarkFirstMatch="True" Filter="Contains" Height="450px" AutoPostBack ="true" Label="Pre-Existing Tag:">
                     <Items>
                         <telerik:RadComboBoxItem runat="server" Text="(Select Pre-Existing Tag...)" Value="-1" Selected="true" />

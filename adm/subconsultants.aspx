@@ -7,45 +7,33 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-    <div class="Formulario">
-        <table class="table-sm"  style="width:100%">
-            <tr>
-                <td style="width:90px">
+    <div class="pasconcept-bar noprint">
+        
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
-                </td>
-                <td style="width:100px">
+                
                     <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Subconsultant
                     </asp:LinkButton>
-                </td>
-                <td style="width:140px">
+                
                     <telerik:RadButton ID="btnprint" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
                         <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                     </telerik:RadButton>
-                </td>
-                <td style="width:140px">
+                
                     <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=subconsultants" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
                         <Icon CssClass="rbUpload"></Icon>
                     </telerik:RadLinkButton>
-                </td>
-                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Subconsultants
-                    </h3>
-                </td>
-
-            </tr>
-        </table>
+                
+                    <span class="pasconcept-pagetitle" style="padding-left: 250px;">Subconsultants</span>
     </div>
 
     <div class="collapse" id="collapseFilter">
-        <div class="card card-body">
+        
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-sm" style="width:100%">
+                <table class="table-sm pasconcept-bar noprint" style="width:100%">
                     <tr>
-                        <td>
+                        <td style="width:600px">
                             <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="600px"
                                 EmptyMessage="Search for Name, Organization... ">
                             </telerik:RadTextBox>
@@ -58,7 +46,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-        </div>
+        
     </div>
 
     <div>
