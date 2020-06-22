@@ -43,7 +43,10 @@ Public Class clientscolletion
     End Sub
 
     Private Sub RestoreFilter()
-        cboStatus.SelectedValue = Session("Filter_Collect_cboStatus")
-        txtFind.Text = Session("Filter_Collect_txtFind")
+        Try
+            cboStatus.SelectedValue = Session("Filter_Collect_cboStatus")
+            txtFind.Text = Session("Filter_Collect_txtFind")
+        Catch ex As Exception
+        End Try
     End Sub
 End Class

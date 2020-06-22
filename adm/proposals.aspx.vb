@@ -182,12 +182,15 @@ Public Class proposals
     End Sub
 
     Private Sub RestoreFilter()
-        RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerFrom"))
-        RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerTo"))
-        cboClients.SelectedValue = Session("Filter_Proposals_cboClients")
-        cboStatus.SelectedValue = Session("Filter_Proposals_cboStatus")
-        cboDepartments.SelectedValue = Session("Filter_Proposals_cboDepartments")
-        txtFind.Text = Session("Filter_Proposals_txtFind")
+        Try
+            RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerFrom"))
+            RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerTo"))
+            cboClients.SelectedValue = Session("Filter_Proposals_cboClients")
+            cboStatus.SelectedValue = Session("Filter_Proposals_cboStatus")
+            cboDepartments.SelectedValue = Session("Filter_Proposals_cboDepartments")
+            txtFind.Text = Session("Filter_Proposals_txtFind")
+        Catch ex As Exception
+        End Try
     End Sub
 
     Private tot As Double

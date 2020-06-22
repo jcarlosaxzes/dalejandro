@@ -188,17 +188,20 @@ Public Class jobs
     End Sub
 
     Private Sub RestoreFilter()
-        RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
-        RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
-        cboEmployee.SelectedValue = Session("Filter_Jpbs_cboEmployee")
-        cboStatus.SelectedValue = Session("Filter_Jpbs_cboStatus")
-        cboClients.SelectedValue = Session("Filter_Jpbs_cboClients")
-        lblDepartmentIdIN_List.Text = Session("Filter_Jpbs_lblDepartmentIdIN_List")
-        cboJobType.SelectedValue = Session("Filter_Jpbs_cboJobType")
-        lblExcludeClientId_List.Text = Session("Filter_Jpbs_lblExcludeClientId_List")
-        cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
-        lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
-        txtFind.Text = Session("Filter_Jpbs_txtFind")
+        Try
+            RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
+            RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
+            cboEmployee.SelectedValue = Session("Filter_Jpbs_cboEmployee")
+            cboStatus.SelectedValue = Session("Filter_Jpbs_cboStatus")
+            cboClients.SelectedValue = Session("Filter_Jpbs_cboClients")
+            lblDepartmentIdIN_List.Text = Session("Filter_Jpbs_lblDepartmentIdIN_List")
+            cboJobType.SelectedValue = Session("Filter_Jpbs_cboJobType")
+            lblExcludeClientId_List.Text = Session("Filter_Jpbs_lblExcludeClientId_List")
+            cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
+            lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
+            txtFind.Text = Session("Filter_Jpbs_txtFind")
+        Catch ex As Exception
+        End Try
     End Sub
     'Protected Sub RadGrid1_BatchEditCommand(sender As Object, e As Telerik.Web.UI.GridBatchEditingEventArgs) Handles RadGrid1.BatchEditCommand
     '    For Each command As GridBatchEditingCommand In e.Commands

@@ -254,9 +254,9 @@ Public Class employeenewtime
     Private Sub BackPage()
         Select Case Session("employeenewbackpage")
             Case "activejobsdashboad"
-                Response.Redirect("~/adm/activejobsdashboad.aspx")
+                Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
             Case "time"
-                Response.Redirect("~/adm/time.aspx")
+                Response.Redirect("~/adm/time.aspx?restoreFilter=true")
             Case Else
                 Response.Redirect("~/adm/default.aspx")
         End Select

@@ -19,10 +19,12 @@ Public Class activejobsdashboad
 
                 lblCompanyId.Text = Session("companyId")
                 cboStatus.DataBind()
+                If Not Request.QueryString("restoreFilter") Is Nothing Then
+                    RestoreFilter()
+                End If
                 RefrescarDatos()
             End If
             RadWindowManager1.EnableViewState = False
-
         Catch ex As Exception
             Beep()
         End Try
@@ -74,6 +76,7 @@ Public Class activejobsdashboad
     End Sub
 
     Protected Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        SaveFilter()
         RefrescarDatos()
     End Sub
 
@@ -368,6 +371,37 @@ Public Class activejobsdashboad
 
 #End Region
 
+    Private Sub SaveFilter()
+        Session("Filter_ActiveJobs_Employee") = cboEmployee.SelectedValue
+        Session("Filter_ActiveJobs_StatusIdIN_List") = lblStatusIdIN_List.Text
+        Session("Filter_ActiveJobs_companyId") = lblCompanyId.Text
+        Session("Filter_ActiveJobs_Find") = txtFind.Text
+
+        Session("Filter_ActiveJobs_Status_0") = cboStatus.Items(0).Checked
+        Session("Filter_ActiveJobs_Status_1") = cboStatus.Items(1).Checked
+        Session("Filter_ActiveJobs_Status_2") = cboStatus.Items(2).Checked
+        Session("Filter_ActiveJobs_Status_3") = cboStatus.Items(3).Checked
+        Session("Filter_ActiveJobs_Status_4") = cboStatus.Items(4).Checked
+        Session("Filter_ActiveJobs_Status_5") = cboStatus.Items(5).Checked
+
+    End Sub
+
+    Private Sub RestoreFilter()
+        Try
+            cboEmployee.SelectedValue = Session("Filter_ActiveJobs_Employee")
+            lblStatusIdIN_List.Text = Session("Filter_ActiveJobs_StatusIdIN_List")
+            lblCompanyId.Text = Session("Filter_ActiveJobs_companyId")
+            txtFind.Text = Session("Filter_ActiveJobs_Find")
+
+            cboStatus.Items(0).Checked = Session("Filter_ActiveJobs_Status_0")
+            cboStatus.Items(1).Checked = Session("Filter_ActiveJobs_Status_1")
+            cboStatus.Items(2).Checked = Session("Filter_ActiveJobs_Status_2")
+            cboStatus.Items(3).Checked = Session("Filter_ActiveJobs_Status_3")
+            cboStatus.Items(4).Checked = Session("Filter_ActiveJobs_Status_4")
+            cboStatus.Items(5).Checked = Session("Filter_ActiveJobs_Status_5")
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class
 
 
