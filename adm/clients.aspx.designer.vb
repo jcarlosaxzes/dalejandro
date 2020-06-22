@@ -68,15 +68,6 @@ Partial Public Class clients
     Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
     
     '''<summary>
-    '''btnImport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnImport As Global.Telerik.Web.UI.RadLinkButton
-    
-    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>

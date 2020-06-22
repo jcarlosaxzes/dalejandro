@@ -37,55 +37,35 @@
     </telerik:RadCodeBlock>
 
     <%--Tools--%>
-    <div class="Formulario">
-
-        <table class="table-sm">
-            <tr>
-                <td>
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart" title="Show/Hide Chart panel">
-                        <i class="fas fa-chart-bar"></i>&nbsp;Chart
-                    </button>
-                </td>
-                <td style="width: 300px">
-                    <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" MarkFirstMatch="True" ToolTip="Select active Employye"
-                        Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AutoPostBack="true">
-                    </telerik:RadComboBox>
-                </td>
-                <td style="text-align: right; width: 400px">
-                    <telerik:RadComboBox ID="cboJobs" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceActiveJob" AutoPostBack="true"
-                        DataTextField="Code" DataValueField="Id"
-                        Width="100%" MarkFirstMatch="True" Filter="Contains" Height="400px">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Other Active Jobs...)" Value="-1" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-                <td style="text-align: left">
-
-                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
+    <div class="pasconcept-bar">
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+            <i class="fas fa-filter"></i>&nbsp;Filter
+        </button>
+        <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart" title="Show/Hide Chart panel">
+            <i class="fas fa-chart-bar"></i>&nbsp;Chart
+        </button>
+        <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" MarkFirstMatch="True" ToolTip="Select active Employye"
+            Width="300px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AutoPostBack="true">
+        </telerik:RadComboBox>
+        <telerik:RadComboBox ID="cboJobs" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceActiveJob" AutoPostBack="true"
+            DataTextField="Code" DataValueField="Id"
+            Width="400px" MarkFirstMatch="True" Filter="Contains" Height="400px">
+            <Items>
+                <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Other Active Jobs...)" Value="-1" />
+            </Items>
+        </telerik:RadComboBox>
+        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Job to Employee
-                    </asp:LinkButton>
-                </td>
-                <td style="padding-left: 50px">
-                    <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Non-Productive Time">
+        </asp:LinkButton>
+        <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Non-Productive Time">
                     <i class="fas fa-plus"></i> Non-Productive Time
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: right"></td>
-            </tr>
-        </table>
-
+        </asp:LinkButton>
     </div>
 
     <%--Filter--%>
     <div class="collapse" id="collapseFilter">
 
-        <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+        <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="width: 250px">
@@ -113,7 +93,7 @@
     </div>
 
     <%--Chart--%>
-    <div class="collapse Formulario" id="collapseChart">
+    <div class="collapse pasconcept-bar" id="collapseChart">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 50%">
@@ -235,7 +215,7 @@
     </div>
 
     <%--Body--%>
-    <div class="Formulario">
+    <div class="pasconcept-bar">
         <table style="width: 100%">
             <tr>
                 <td style="text-align: center">
@@ -243,7 +223,131 @@
                     </h3>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <telerik:RadGrid ID="RadGridFooter" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDateWORKHOURS" Width="100%" ShowHeader="false" ShowFooter="false">
+                        <MasterTableView DataSourceID="SqlDataSourceDateWORKHOURS" ShowFooter="false" CommandItemDisplay="None">
+                            <Columns>
+                                <telerik:GridTemplateColumn UniqueName="Column1" ItemStyle-Font-Size="X-Small">
+                                    <ItemTemplate>
+                                        <div>
+                                            <table class="table-sm" style="width: 100%;text-align:center">
+                                                <tr>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date9"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday9"), ":", Eval("Date9", "{0:d}")) %>
+                                                    </td>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date8"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday8"), ":", Eval("Date8", "{0:d}")) %>
+                                                    </td>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date7"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday7"), ":", Eval("Date7", "{0:d}")) %>
+                                                    </td>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date6"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday6"), ":", Eval("Date6", "{0:d}")) %>
+                                                    </td>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date5"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday5"), ":", Eval("Date5", "{0:d}")) %>
+                                                    </td>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date4"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday4"), ":", Eval("Date4", "{0:d}")) %>
+                                                    </td>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date3"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday3"), ":", Eval("Date3", "{0:d}")) %>
+                                                    </td>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date2"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday2"), ":", Eval("Date2", "{0:d}")) %>
+                                                    </td>
+                                                    <td style='<%# GetDateOfWeekStyle(Eval("Date1"))%>'>
+                                                        <%# String.Concat(Eval("weekOFday1"), ":", Eval("Date1", "{0:d}")) %>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage9")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage9") %>%;'>
+                                                                <%# Eval("Hours9")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage8")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage8") %>%;'>
+                                                                <%# Eval("Hours8")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage7")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage7") %>%;'>
+                                                                <%# Eval("Hours7")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage6")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage6") %>%;'>
+                                                                <%# Eval("Hours6")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage5")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage5") %>%;'>
+                                                                <%# Eval("Hours5")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage4")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage4") %>%;'>
+                                                                <%# Eval("Hours4")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage3")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage3") %>%;'>
+                                                                <%# Eval("Hours3")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage2")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage2") %>%;'>
+                                                                <%# Eval("Hours2")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress" style="margin-bottom: 0;">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage1")  %>' aria-valuemin="0" aria-valuemax="100"
+                                                                style='width: <%# Eval("HoursPercentage1") %>%;'>
+                                                                <%# Eval("Hours1")%> Hrs
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
+                </td>
+            </tr>
         </table>
+
+
         <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobs" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderStyle="Solid">
             <LayoutTemplate>
                 <fieldset style="width: 100%; text-align: center">
@@ -274,7 +378,7 @@
                     </div>
                     <div class="card-body">
                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
-                            <table class="table-sm card-text" style="width: 100%;flex-wrap:nowrap;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+                            <table class="table-sm card-text" style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                 <tr>
                                     <td>
                                         <h4><b><%# Eval("itemName")%></b></h4>
@@ -291,7 +395,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="padding-top:15px">
+                                    <td style="padding-top: 15px">
                                         <h4>PM: <%# Eval("PM")%></h4>
                                     </td>
                                 </tr>
@@ -340,8 +444,8 @@
                             CommandName="EditReviews" CommandArgument='<%# Eval("Id")%>'>
                                                     <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge badge-pill badge-danger"> <%#Eval("ReviewsCount")%></span>
                         </asp:LinkButton>
-                        
-                        
+
+
 
                     </div>
                 </div>
@@ -351,132 +455,6 @@
         </telerik:RadListView>
     </div>
 
-    <div class="Formulario">
-        <telerik:RadGrid ID="RadGridFooter" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDateWORKHOURS" Width="100%" ShowHeader="false" ShowFooter="false">
-            <MasterTableView DataSourceID="SqlDataSourceDateWORKHOURS" ShowFooter="True" CommandItemDisplay="None">
-                <Columns>
-                    <telerik:GridTemplateColumn UniqueName="Column1" ItemStyle-Font-Size="Small">
-                        <ItemTemplate>
-
-
-                            <div>
-                                <table class="table-sm" style="width: 100%; border-color: gainsboro" border="1">
-                                    <tr>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date9"))%>'>
-                                            <%# String.Concat(Eval("weekOFday9"), ":", Eval("Date9", "{0:d}")) %>
-                                        </td>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date8"))%>'>
-                                            <%# String.Concat(Eval("weekOFday8"), ":", Eval("Date8", "{0:d}")) %>
-                                        </td>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date7"))%>'>
-                                            <%# String.Concat(Eval("weekOFday7"), ":", Eval("Date7", "{0:d}")) %>
-                                        </td>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date6"))%>'>
-                                            <%# String.Concat(Eval("weekOFday6"), ":", Eval("Date6", "{0:d}")) %>
-                                        </td>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date5"))%>'>
-                                            <%# String.Concat(Eval("weekOFday5"), ":", Eval("Date5", "{0:d}")) %>
-                                        </td>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date4"))%>'>
-                                            <%# String.Concat(Eval("weekOFday4"), ":", Eval("Date4", "{0:d}")) %>
-                                        </td>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date3"))%>'>
-                                            <%# String.Concat(Eval("weekOFday3"), ":", Eval("Date3", "{0:d}")) %>
-                                        </td>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date2"))%>'>
-                                            <%# String.Concat(Eval("weekOFday2"), ":", Eval("Date2", "{0:d}")) %>
-                                        </td>
-                                        <td style='<%# GetDateOfWeekStyle(Eval("Date1"))%>'>
-                                            <%# String.Concat(Eval("weekOFday1"), ":", Eval("Date1", "{0:d}")) %>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage9")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage9") %>%;'>
-                                                    <%# Eval("Hours9")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage8")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage8") %>%;'>
-                                                    <%# Eval("Hours8")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage7")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage7") %>%;'>
-                                                    <%# Eval("Hours7")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage6")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage6") %>%;'>
-                                                    <%# Eval("Hours6")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage5")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage5") %>%;'>
-                                                    <%# Eval("Hours5")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage4")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage4") %>%;'>
-                                                    <%# Eval("Hours4")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage3")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage3") %>%;'>
-                                                    <%# Eval("Hours3")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage2")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage2") %>%;'>
-                                                    <%# Eval("Hours2")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="progress" style="margin-bottom: 0;">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage1")  %>' aria-valuemin="0" aria-valuemax="100"
-                                                    style='width: <%# Eval("HoursPercentage1") %>%;'>
-                                                    <%# Eval("Hours1")%> Hrs
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                </table>
-                            </div>
-
-
-
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                </Columns>
-            </MasterTableView>
-        </telerik:RadGrid>
-
-    </div>
     <%--Legend--%>
     <asp:Panel runat="server" ID="PanelLegend">
         <div style="text-align: left">

@@ -39,7 +39,7 @@
 
 
     <asp:Panel CssClass="PanelFilter noprint" ID="pnlFind" runat="server">
-        <table class=" table-condensed Formulario" style="width: 100%">
+        <table class=" table-condensed pasconcept-bar" style="width: 100%">
             <tr>
                 <td style="width: 150px">
                     <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true">
@@ -81,31 +81,21 @@
         </table>
     </asp:Panel>
 
-
-    <table class="table-sm noprint" style="width: 100%">
-        <tr>
-            <td style="width: 150px">
-                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+    <div class="pasconcept-bar noprint">
+        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                                         <i class="fas fa-plus"></i>&nbsp;Pre-Project
                 </asp:LinkButton>
-            </td>
-            <td style="width: 150px">
-                <script type="text/javascript">
-                    function PrintPage(sender, args) {
-                        window.print();
-                    }
+        <script type="text/javascript">
+            function PrintPage(sender, args) {
+                window.print();
+            }
                 </script>
                 <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
                     <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                 </telerik:RadButton>
-            </td>
-            <td style="text-align: center">
-                <h3 style="margin: 0">Pre-Proposals
-                </h3>
-            </td>
-        </tr>
-    </table>
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Pre-Proposals</span>
 
+    </div>
 
     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None" HeaderStyle-Font-Size="Small"
         AutoGenerateColumns="False" AllowAutomaticDeletes="True"
