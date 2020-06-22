@@ -75,7 +75,7 @@ Module SendGrid
                     If Len(sCC) > 0 Then
                         Dim sCCplit() As String = Split(sCC, ",")
                         For Each cc In sCCplit
-                            If (LocalAPI.ValidEmail(cc)) Then
+                            If (LocalAPI.ValidEmail(cc) And cc <> sTo) Then
                                 sCCs.Add(New AppEmail() With {.Name = "", .Email = cc})
                             End If
                         Next
@@ -83,7 +83,7 @@ Module SendGrid
                     If Len(sCCO) > 0 Then
                         Dim sCCplit() As String = Split(sCCO, ",")
                         For Each cc In sCCplit
-                            If (LocalAPI.ValidEmail(cc)) Then
+                            If (LocalAPI.ValidEmail(cc) And cc <> sTo) Then
                                 sCCs.Add(New AppEmail() With {.Name = "", .Email = cc})
                             End If
                         Next
