@@ -181,7 +181,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lblBillingContact" runat="server" Text='<%# Eval("ClientName") %>' CssClass="lnkGrid"></asp:Label>
+                                        <asp:Label ID="lblBillingContact" runat="server" Text='<%# Eval("ClientName") %>' ></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -198,7 +198,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>' CssClass="lnkGrid"></asp:Label>
+                                        <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>' ></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>

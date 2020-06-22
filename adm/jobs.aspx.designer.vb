@@ -59,15 +59,6 @@ Partial Public Class jobs
     Protected WithEvents RadWindowManagerPrint As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''btnClientUnhide control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnClientUnhide As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnTotals control.
     '''</summary>
     '''<remarks>
@@ -120,6 +111,15 @@ Partial Public Class jobs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnPrint As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnClientUnhide control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnClientUnhide As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnCopyF control.
