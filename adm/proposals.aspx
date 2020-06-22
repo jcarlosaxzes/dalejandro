@@ -194,7 +194,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:HyperLink ID="hlkProjectName" runat="server" Text='<%# Eval("ProjectName")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' CssClass="lnkGrid"
+                                        <asp:HyperLink ID="hlkProjectName" runat="server" Text='<%# Eval("ProjectName")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' 
                                             ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
                                     </td>
                                 </tr>
@@ -216,7 +216,7 @@
                                 <%# String.Concat(Eval("ProposalBy"), " - ", Eval("PreparedBy")) %>
                             </div>
                             <div>
-                                <asp:Label ID="ClientNameLabel" runat="server" Text='<%# Eval("ClientName")%>' CssClass="lnkGrid"></asp:Label>
+                                <asp:Label ID="ClientNameLabel" runat="server" Text='<%# Eval("ClientName")%>' ></asp:Label>
                                 <%# String.Concat(" - ",Eval("Company")) %>
                                 <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="ClientNameLabel" RelativeTo="Element"
                                     Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"

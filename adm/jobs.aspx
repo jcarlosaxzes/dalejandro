@@ -40,15 +40,9 @@
                     <telerik:AjaxUpdatedControl ControlID="lblTotalSubContract" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnClientUnhide">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnHideClient">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="btnClientUnhide" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnNew">
@@ -141,9 +135,6 @@
 
 
 
-    <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Share">
-            <i class="fas fa-eye"></i>
-    </asp:LinkButton>
 
     <div class="pasconcept-bar">
         <button class="btn btn-warning" type="button" data-toggle="collapse"
@@ -179,9 +170,15 @@
         </asp:LinkButton>
 
         <span style="padding-left: 50px">
+
             <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
                                             <i class="fas fa-print"></i>
             </asp:LinkButton>
+
+            <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Share">
+            <i class="fas fa-eye"></i>
+            </asp:LinkButton>
+
 
             <asp:LinkButton ID="btnCopyF" runat="server" UseSubmitBehavior="false" ToolTip="Copy/Save Filter combinations">
                                         <i class="far fa-copy"></i> 
@@ -472,7 +469,7 @@
                                                     <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
                                         </asp:LinkButton>
 
-                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' CssClass="lnkGrid"
+                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
                                             ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
 
                                         <%# String.Concat(" - ",Eval("TypeName")) %>
@@ -485,7 +482,7 @@
                                         <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
                                             <i class="fas fa-th-list"></i>
                                         </a>
-                                        <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name")," - ",Eval("Company"))%>' CssClass="lnkGrid"></asp:Label>
+                                        <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name")," - ",Eval("Company"))%>'></asp:Label>
                                         <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
                                             Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
                                             HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">

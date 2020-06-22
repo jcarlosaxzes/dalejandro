@@ -171,7 +171,7 @@
                     <telerik:GridTemplateColumn DataField="ClientCode" HeaderText="Client Code" SortExpression="ClientCode" UniqueName="ClientCode"
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" ReadOnly="true">
                         <ItemTemplate>
-                            <asp:Label ID="ClientCodeLabel" runat="server" Text='<%# Eval("ClientCode")%>' CssClass="lnkGrid"></asp:Label>
+                            <asp:Label ID="ClientCodeLabel" runat="server" Text='<%# Eval("ClientCode")%>' ></asp:Label>
                             <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="ClientCodeLabel" RelativeTo="Element"
                                 Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Name")%>' ShowEvent="OnClick"
                                 HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">

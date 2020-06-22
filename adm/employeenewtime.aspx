@@ -26,11 +26,6 @@
                     <ItemTemplate>
                         <table class="table-sm" style="width: 100%">
                             <tr>
-                                <td colspan="9">
-                                    <hr style="margin: 0" />
-                                </td>
-                            </tr>
-                            <tr>
                                 <td colspan="9" style="text-align: center">
                                     <h3 style="margin: 0"><%# Eval("JobName")%></h3>
                                 </td>
