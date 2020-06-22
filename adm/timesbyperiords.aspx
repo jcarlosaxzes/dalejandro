@@ -42,11 +42,11 @@
     </telerik:RadAjaxManager>--%>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <div class="Formulario">
-        <table class="table-sm noprint" style="width: 100%">
+    <div class="pasconcept-bar">
+        <table class="table-sm noprint">
             <tr>
-                <td style="width: 150px;padding-left:50px">
-                    <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="100%">
+                <td>
+                    <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="150px">
                         <Items>
                             <telerik:DropDownListItem Text="By Periods" Value="0" />
                             <telerik:DropDownListItem Text="By Moths" Value="1" />
@@ -54,38 +54,38 @@
                         </Items>
                     </telerik:RadDropDownList>
                 </td>
-                <td style="width: 80px; text-align: right">From:
+                <td>From:
                 </td>
-                <td style="width: 100px">
-                    <telerik:RadDateInput ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True">
+                <td>
+                    <telerik:RadDateInput ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Width="120px">
                     </telerik:RadDateInput>
                 </td>
-                <td style="width: 50px; text-align: right">To:
+                <td>To:
                 </td>
-                <td style="width: 100px">
-                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True">
+                <td>
+                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Width="120px">
                     </telerik:RadDateInput>
                 </td>
-                <td style="width: 350px">
+                <td>
                     <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
                         DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains" AutoPostBack="true"
-                        Height="250px" MarkFirstMatch="True" Width="100%" DropDownAutoWidth="Enabled" EmptyMessage="(Select Department...)">
+                        Height="250px" MarkFirstMatch="True" Width="350px" DropDownAutoWidth="Enabled" EmptyMessage="(Select Department...)">
                         <Items>
                             <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
                         </Items>
                     </telerik:RadComboBox>
                 </td>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
+                <td>
+                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <i class="fas fa-backward"></i> Previous
                     </asp:LinkButton>
                 </td>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="100%">
+                <td>
+                    <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                                     <i class="fas fa-forward"></i> Next
                     </asp:LinkButton>
                 </td>
-                <td style="text-align: right; width: 130px">
+                <td>
                     <script type="text/javascript">
                         function PrintPage(sender, args) {
                             window.print();
@@ -96,7 +96,10 @@
                     </telerik:RadButton>
 
                 </td>
-                <td></td>
+                <td>
+                    <span class="pasconcept-pagetitle" style="padding-left: 50px">Time By Periods</span>
+                </td>
+
             </tr>
         </table>
     </div>
@@ -220,7 +223,7 @@
 
     <telerik:RadToolTip ID="RadToolTipSalary" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default" OnClientHide="salaryDlgHide">
         <h2 style="margin: 0; text-align: center; color: white; width: 550px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Salary
+            <span class="navbar navbar-expand-md bg-dark text-white">Salary
             </span>
         </h2>
         <div style="width: 550px">
@@ -268,7 +271,7 @@
 
     <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-           <span class="navbar navbar-expand-md bg-dark text-white">New Miscellaneous Time
+            <span class="navbar navbar-expand-md bg-dark text-white">New Miscellaneous Time
             </span>
         </h2>
         <table style="width: 600px" cellpadding="2px">

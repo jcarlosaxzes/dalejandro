@@ -41,7 +41,7 @@
     </telerik:RadWindowManager>
 
 
-    <div class="Formulario">
+    <div class="pasconcept-bar">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
@@ -127,24 +127,15 @@
         </asp:Panel>
 
     </div>
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td>
+    <div class="pasconcept-bar noprint">
+        
                     <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice">
                     <i class="fas fa-plus"></i> Simple Charge
                     </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Invoices
-                    </h3>
-                </td>
-                <td style="text-align: right; padding-right: 50px">
-                    <asp:Label ID="lblStatus" runat="server"></asp:Label>
-                </td>
-
-            </tr>
-        </table>
+                
+                <span class="pasconcept-pagetitle" style="padding-left: 250px;">Invoices</span>
+                    
+                
     </div>
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
@@ -632,5 +623,5 @@
     <asp:Label ID="lblKeyName" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblContentBytes" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblContentType" runat="server" Visible="False"></asp:Label>
-
+<asp:Label ID="lblStatus" runat="server" Visible="False"></asp:Label>
 </asp:Content>

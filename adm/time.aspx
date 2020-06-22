@@ -19,44 +19,34 @@
         </Windows>
     </telerik:RadWindowManager>
 
-    <div class="Formulario">
-        <table class="table-sm" style="width:100%">
-            <tr>
-                <td style="width:90px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-                </td>
-                <td style="width:90px">
-                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+    <div class="pasconcept-bar">
+
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+            <i class="fas fa-filter"></i>&nbsp;Filter
+        </button>
+
+        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                        <i class="fas fa-user-clock"></i>&nbsp;Time
-                    </asp:LinkButton>
-                </td>
-                <td style="width:140px">
-                    <script type="text/javascript">
-                        function PrintPage(sender, args) {
-                            window.print();
-                        }
-                    </script>
-                    <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                    </telerik:RadButton>
-                </td>
-                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Time Entries
-                    </h3>
-                </td>
-            </tr>
-        </table>
+        </asp:LinkButton>
+
+        <script type="text/javascript">
+            function PrintPage(sender, args) {
+                window.print();
+            }
+        </script>
+        <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
+            <Icon PrimaryIconCssClass=" rbPrint"></Icon>
+        </telerik:RadButton>
+
+        <span class="pasconcept-pagetitle" style="padding-left: 250px">Time Entries</span>
 
     </div>
     <div class="collapse" id="collapseFilter">
-        <div class="card card-body">
-            <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+        
+            <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
                 <table class="table-sm" style="width: 100%">
                     <tr>
-                        <td style="width: 160px">
+                        <td style="width: 180px">
                             <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
                                 <Items>
                                     <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" Selected="true" />
@@ -70,15 +60,15 @@
                                 </Items>
                             </telerik:RadComboBox>
                         </td>
-                        <td style="width: 120px">
+                        <td style="width: 130px">
                             <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
                             </telerik:RadDatePicker>
                         </td>
-                        <td style="width: 120px">
+                        <td style="width: 130px">
                             <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter">
                             </telerik:RadDatePicker>
                         </td>
-                        <td style="width: 380px">
+                        <td style="width: 450px">
                             <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJobs"
                                 DataTextField="Job" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="260px"
                                 AppendDataBoundItems="true">
@@ -97,7 +87,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                             <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="100%">
                                 <Items>
                                     <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
@@ -105,7 +95,7 @@
                             </telerik:RadComboBox>
 
                         </td>
-                        <td colspan="2">
+                        <td>
                             <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmployee" AppendDataBoundItems="true"
                                 DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
                                 <Items>
@@ -125,7 +115,7 @@
 
                 </table>
             </asp:Panel>
-        </div>
+        
     </div>
     <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
@@ -348,7 +338,7 @@
                             <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Category"
                                 SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                 <EditItemTemplate>
-                                    <div style="margin:5px">
+                                    <div style="margin: 5px">
                                         <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" Width="100%"
                                             DataValueField="Id" AppendDataBoundItems="True" Height="300px" SelectedValue='<%# Bind("Type") %>'>
                                             <Items>
@@ -358,11 +348,11 @@
                                     </div>
                                 </EditItemTemplate>
                                 <ItemTemplate>
-                                        <%# Eval("Name") %>
+                                    <%# Eval("Name") %>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From" 
+                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From"
                                 SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" ItemStyle-Width="60px"
                                 ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
                             </telerik:GridBoundColumn>
@@ -453,8 +443,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                       <span class="navbar navbar-expand-md bg-dark text-white">
+                    <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">
                             <asp:Label ID="lblActionMesage" runat="server"></asp:Label>
                         </span>
                     </h2>
@@ -509,8 +499,8 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                       <span class="navbar navbar-expand-md bg-dark text-white">
+                    <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">
                             <asp:Label ID="lblActionMesage2" runat="server"></asp:Label>
                         </span>
                     </h2>

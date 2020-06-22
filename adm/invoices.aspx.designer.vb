@@ -113,15 +113,6 @@ Partial Public Class invoices
     Protected WithEvents btnNewInvoice As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblStatus As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''RadCodeBlock1 control.
     '''</summary>
     '''<remarks>
@@ -417,6 +408,15 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblContentType As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblStatus As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

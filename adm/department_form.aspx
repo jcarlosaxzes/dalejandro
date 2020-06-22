@@ -5,14 +5,14 @@
     <div class="Formulario">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 80px">
+                <td style="width: 130px">
                     <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
                         <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
                             $ Dashboard
                         </button>
                     </asp:Panel>
                 </td>
-                <td style="width: 120px">
+                <td style="width: 130px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="false">
                        Back to List
                     </asp:LinkButton>

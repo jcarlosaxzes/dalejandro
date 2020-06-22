@@ -11,11 +11,13 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <table class="table-sm" style="width: 100%">
+
+
+    <table class="table-sm pasconcept-bar" style="width: 100%">
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                    <table width="100%" class="Formulario">
+                    <table>
                         <tr>
                             <td width="80px" align="right" class="Normal">Period:
                             </td>
@@ -56,34 +58,16 @@
         </tr>
     </table>
 
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 90px">
-                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+
+    <div class="pasconcept-bar">
+        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                 <i class="fas fa-plus"></i> Statement
-                    </asp:LinkButton>
-                </td>
-                <td style="width: 140px">
-                    <script type="text/javascript">
-                        function PrintPage(sender, args) {
-                            window.print();
-                        }
-                    </script>
-                    <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                    </telerik:RadButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Statements
-                    </h3>
-                </td>
-            </tr>
-        </table>
+        </asp:LinkButton>
+        
+        <span class="pasconcept-pagetitle" style="padding-left:250px;">Statements</span>
+        
 
     </div>
-
-
 
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
@@ -428,8 +412,8 @@
     </div>
     <div>
         <telerik:RadToolTip ID="RadToolTipStatementsPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-               <span class="navbar navbar-expand-md bg-dark text-white">Receive Statement Payments
+            <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+                <span class="navbar navbar-expand-md bg-dark text-white">Receive Statement Payments
                 </span>
             </h2>
             <table class="table-bordered" style="width: 500px">

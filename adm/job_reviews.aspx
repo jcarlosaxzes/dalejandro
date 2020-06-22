@@ -8,12 +8,11 @@
                 <td>
                     <asp:Panel runat="server" ID="PanelNo16Type">
 
-                        <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
+                        <div style="padding-bottom:10px">
+                            <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
                                                                      <i class="fas fa-plus"></i> Revision
-                        </asp:LinkButton>
-
-
-
+                            </asp:LinkButton>
+                        </div>
                         <telerik:RadGrid ID="RadGridReviewsPermits" runat="server" DataSourceID="SqlDataSourceReviewsPermits"
                             AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="True" Width="100%" ZIndex="50000">
                             <MasterTableView AutoGenerateColumns="False" CommandItemDisplay="None" DataKeyNames="Id" DataSourceID="SqlDataSourceReviewsPermits"
@@ -159,74 +158,74 @@
                                                                      <i class="fas fa-plus"></i> Application
                         </asp:LinkButton>
 
+                        <div style="padding-top:10px;padding-bottom:10px">
+                            <telerik:RadGrid ID="RadGridAppName" runat="server" DataSourceID="SqlDataSourceAppName" AllowAutomaticInserts="true"
+                                AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="True" Width="100%" ZIndex="50000">
+                                <MasterTableView AutoGenerateColumns="False" CommandItemDisplay="None" DataKeyNames="Id" DataSourceID="SqlDataSourceAppName">
+                                    <Columns>
+                                        <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column"
+                                            HeaderStyle-HorizontalAlign="Center" HeaderText=" Application Name" SortExpression="Name" UniqueName="Name">
+                                            <ItemTemplate>
 
-                        <telerik:RadGrid ID="RadGridAppName" runat="server" DataSourceID="SqlDataSourceAppName" AllowAutomaticInserts="true"
-                            AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="True" Width="100%" ZIndex="50000">
-                            <MasterTableView AutoGenerateColumns="False" CommandItemDisplay="None" DataKeyNames="Id" DataSourceID="SqlDataSourceAppName">
-                                <Columns>
-                                    <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column"
-                                        HeaderStyle-HorizontalAlign="Center" HeaderText=" Application Name" SortExpression="Name" UniqueName="Name">
-                                        <ItemTemplate>
-
-                                            <asp:LinkButton ID="btnEditApp" runat="server" UseSubmitBehavior="false" ToolTip="Edit App Name" CommandName="Edit">
+                                                <asp:LinkButton ID="btnEditApp" runat="server" UseSubmitBehavior="false" ToolTip="Edit App Name" CommandName="Edit">
                                             <%# Eval("Name") %>
-                                            </asp:LinkButton>
-                                        </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <telerik:RadTextBox ID="txtName" runat="server" Text='<%# Bind("Name") %>' Width="100%" MaxLength="32">
-                                            </telerik:RadTextBox>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?"
-                                        ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                        UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
-                                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
-                                    </telerik:GridButtonColumn>
-                                </Columns>
-                                <EditFormSettings>
-                                    <EditColumn ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column" UniqueName="EditCommandColumn1">
-                                    </EditColumn>
-                                </EditFormSettings>
-                            </MasterTableView>
-                        </telerik:RadGrid>
-
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <telerik:RadTextBox ID="txtName" runat="server" Text='<%# Bind("Name") %>' Width="100%" MaxLength="32">
+                                                </telerik:RadTextBox>
+                                            </EditItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?"
+                                            ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                                            UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                                        </telerik:GridButtonColumn>
+                                    </Columns>
+                                    <EditFormSettings>
+                                        <EditColumn ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column" UniqueName="EditCommandColumn1">
+                                        </EditColumn>
+                                    </EditFormSettings>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </div>
 
                         <asp:LinkButton ID="btnAddModule" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
                                                                      <i class="fas fa-plus"></i> Module
                         </asp:LinkButton>
 
+                        <div style="padding-top:10px">
+                            <telerik:RadGrid ID="RadGridLocationModule" runat="server" DataSourceID="SqlDataSourceLocationModule" AllowAutomaticInserts="true"
+                                AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="True" Width="100%" ZIndex="50000">
+                                <MasterTableView AutoGenerateColumns="False" CommandItemDisplay="None" DataKeyNames="Id" DataSourceID="SqlDataSourceLocationModule"
+                                    HeaderStyle-Font-Size="Small">
+                                    <Columns>
+                                        <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column"
+                                            HeaderStyle-HorizontalAlign="Center" HeaderText=" Location/Module " SortExpression="Name" UniqueName="Name">
+                                            <ItemTemplate>
 
-                        <telerik:RadGrid ID="RadGridLocationModule" runat="server" DataSourceID="SqlDataSourceLocationModule" AllowAutomaticInserts="true"
-                            AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="True" Width="100%" ZIndex="50000">
-                            <MasterTableView AutoGenerateColumns="False" CommandItemDisplay="None" DataKeyNames="Id" DataSourceID="SqlDataSourceLocationModule"
-                                HeaderStyle-Font-Size="Small">
-                                <Columns>
-                                    <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column"
-                                        HeaderStyle-HorizontalAlign="Center" HeaderText=" Location/Module " SortExpression="Name" UniqueName="Name">
-                                        <ItemTemplate>
-
-                                            <asp:LinkButton ID="btnEditLocationModule" runat="server" UseSubmitBehavior="false" ToolTip="Edit Location Module" CommandName="Edit">
+                                                <asp:LinkButton ID="btnEditLocationModule" runat="server" UseSubmitBehavior="false" ToolTip="Edit Location Module" CommandName="Edit">
                                             <%# Eval("Name") %>
-                                            </asp:LinkButton>
-                                        </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <telerik:RadTextBox ID="txtName" runat="server" Text='<%# Bind("Name") %>' Width="100%" MaxLength="32">
-                                            </telerik:RadTextBox>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?"
-                                        ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                        UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
-                                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
-                                    </telerik:GridButtonColumn>
-                                </Columns>
-                                <EditFormSettings>
-                                    <EditColumn ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column" UniqueName="EditCommandColumn1">
-                                    </EditColumn>
-                                </EditFormSettings>
-                            </MasterTableView>
-                        </telerik:RadGrid>
-
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <telerik:RadTextBox ID="txtName" runat="server" Text='<%# Bind("Name") %>' Width="100%" MaxLength="32">
+                                                </telerik:RadTextBox>
+                                            </EditItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?"
+                                            ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                                            UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                                        </telerik:GridButtonColumn>
+                                    </Columns>
+                                    <EditFormSettings>
+                                        <EditColumn ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column" UniqueName="EditCommandColumn1">
+                                        </EditColumn>
+                                    </EditFormSettings>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </div>
                     </asp:Panel>
                 </td>
             </tr>

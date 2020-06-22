@@ -41,3 +41,26 @@ DashboardBackcolorRED {
     font-size: x-small;
     margin-bottom: 0;
 }
+
+.pasconcept-bar {
+    padding: .5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: .2rem;
+    position: relative;
+    /*margin: 1rem -15px 0;*/
+    border: solid #f7f7f9;
+}
+
+    .pasconcept-bar::after {
+        display: block;
+        clear: both;
+        content: "";
+    }
+
+.pasconcept-pagetitle {
+    font-size: 1.50rem;
+    margin: 0;
+    vertical-align: middle;
+    font-weight: 500;
+}

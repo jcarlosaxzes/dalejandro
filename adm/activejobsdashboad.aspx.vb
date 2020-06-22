@@ -326,9 +326,9 @@ Public Class activejobsdashboad
         Select Case Date1.DayOfWeek
             Case 1, 2, 3, 4, 5 ' Monday to Friday
                 If DateTime.Compare(Date1.Date, Date.Today.Date) = 0 Then
-                    Return "font-style:normal;color:black;font-weight:bold;font-size:Small"
+                    Return "font-style:normal;color:black;font-weight:bold;"
                 Else
-                    Return "font-style:normal;color:black;font-size:Small"
+                    Return "font-style:normal;color:black;"
                 End If
 
             Case Else ' Saturday, Sunday

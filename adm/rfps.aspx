@@ -69,46 +69,31 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 100px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+    <div class="pasconcept-bar noprint">
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
-                </td>
-                <td style="width: 150px">
-                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add new Project and RFP for selected Subconsultants">
+        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add new Project and RFP for selected Subconsultants">
                        <i class="fas fa-plus"></i>&nbsp;Project & RFPs
                     </asp:LinkButton>
-                </td>
-                <td style="width: 100px">
-                    <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Table view Page">
+        <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Table view Page">
                        <i class="fas fa-align-justify"></i> Table
                     </asp:LinkButton>
-                </td>
-                <td style="width: 100px; text-align: right">
-                    <script type="text/javascript">
-                        function PrintPage(sender, args) {
-                            window.print();
-                        }
+        <script type="text/javascript">
+            function PrintPage(sender, args) {
+                window.print();
+            }
                     </script>
                     <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
                         <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                     </telerik:RadButton>
-                </td>
-                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Request for Proposals (tree view)
-                    </h3>
-                </td>
-            </tr>
-        </table>
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Request for Proposals (tree view)</span>
+
     </div>
 
     <div class="collapse" id="collapseFilter">
-        <div class="card card-body">
-            <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+        
+            <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar noprint" DefaultButton="btnRefresh">
                 <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 200px">
@@ -179,7 +164,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-        </div>
+        
     </div>
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
@@ -218,19 +203,22 @@
                     ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="X-Small" HeaderTooltip="Number of RFP for this Project">
                 </telerik:TreeListBoundColumn>
                 <telerik:TreeListBoundColumn DataField="DateCreated" HeaderText="Date" SortExpression="DateCreated"
-                    UniqueName="DateCreated" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:d}">
+                    UniqueName="DateCreated" HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Right" DataFormatString="{0:d}">
                 </telerik:TreeListBoundColumn>
-                <telerik:TreeListBoundColumn DataField="Total" HeaderText="Total" UniqueName="Total" HeaderStyle-Width="80px" DataFormatString="{0:C2}"
+                <telerik:TreeListBoundColumn DataField="Total" HeaderText="Total" UniqueName="Total" HeaderStyle-Width="100px"  DataFormatString="{0:C2}"
                     ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                 </telerik:TreeListBoundColumn>
 
                 <telerik:TreeListBoundColumn DataField="TotalPayments" DataFormatString="{0:N2}"
                     HeaderText="Payments" SortExpression="TotalPayments" UniqueName="TotalPayments"
-                    HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
+                    HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
+                </telerik:TreeListBoundColumn>
+                <telerik:TreeListBoundColumn DataField="Balance" HeaderText="Balance" UniqueName="Balance" HeaderStyle-Width="100px"  DataFormatString="{0:C2}"
+                    ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                 </telerik:TreeListBoundColumn>
 
                 <telerik:TreeListTemplateColumn DataField="jobId" HeaderText="Job" SortExpression="jobId"
-                    UniqueName="jobId" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
+                    UniqueName="jobId" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" >
                     <ItemTemplate>
                         <asp:LinkButton ID="btnViewJob" runat="server" CommandName="ViewJobPage" CommandArgument='<%# Eval("jobId") %>'
                             ToolTip="View Job page">

@@ -59,38 +59,26 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
-    <div class="Formulario">
-        <table class="table-sm" style="width:100%">
-            <tr>
-                <td style="width: 100px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+
+    <div class="pasconcept-bar noprint">
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
-                </td>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnNewWizard" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+        <asp:LinkButton ID="btnNewWizard" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Proposal
                     </asp:LinkButton>
-                </td>
-                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Proposals
-                    </h3>
-                </td>
-                <td style="width: 200px; text-align: right">
-                    <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" class="checkbox-inline" ToolTip="Private/Public Mode">
-                         <input data-toggle="toggle" data-size="mini" type="checkbox" />
-                    </asp:LinkButton>
-                </td>
+        <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false"  ToolTip="Private/Public Mode" Font-Underline="false">
+                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-style="ios"/>
+        </asp:LinkButton>
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Proposals</span>
 
-            </tr>
-        </table>
+
     </div>
 
 
     <div class="collapse" id="collapseFilter">
         <div class="card card-body">
-            <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+            <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
                 <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 200px">

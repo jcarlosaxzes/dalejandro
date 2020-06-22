@@ -170,12 +170,12 @@
                             <tr>
                                 <td align="center">
                                     <a href="http://blog.pasconcept.com" target="_blank" class="enlacepie">Help | </a>
-                                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Privacy | </a>
-                                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Terms & Condition | </a>
-                                    <a href="https://pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Security | </a>
-                                    <a href="https://axzes.zendesk.com/hc/en-us/requests" target="_blank" class="enlacepie">Support</a>
+                                    <a href="https://pasconcept.com/privacy-policy/" target="_blank" class="enlacepie">Privacy | </a>
+                                    <a href="https://pasconcept.com/terms/" target="_blank" class="enlacepie">Terms & Condition | </a>
+                                    <a href="https://pasconcept.com/security/" target="_blank" class="enlacepie">Security | </a>
+                                    <a href="https://pasconcept.com/help/" target="_blank" class="enlacepie">Support</a>
                                     <br />
-                                    <asp:Label ID="Label31" runat="server" class="enlacepie" Text="&copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <b>AXZes</b>"></asp:Label>
+                                    <asp:Label ID="Label31" runat="server" class="enlacepie" Text="&copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <b>Axzes</b>"></asp:Label>
                                     <br />
                                 </td>
                             </tr>

@@ -46,9 +46,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-    <%-- CSS And JS Toogle Nutton --%>
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet" />
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <%--bootstrap4-toggle--%>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 
     <style>
         .container {
@@ -235,7 +236,7 @@
                                             <%--Clients Submenu--%>
                                             <telerik:NavigationNode Text="Clients">
                                                 <Nodes>
-                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Clients" Text="Client"
+                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Clients" Text="Clients"
                                                         Visible='<%# EmployeePermission("Deny_ClientsList") %>'>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/ClientManagement" Text="Client Management"
@@ -476,9 +477,9 @@
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/InvoicesTypes" Text="Payment Schedules" visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/TandCtemplates" Text="" visible='<%# EmployeePermission("Deny_ProposalTermsConditions") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/TandCtemplates" Text="Terms & Conditions" visible='<%# EmployeePermission("Deny_ProposalTermsConditions") %>'>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/PhasesTemplate" Text="Terms & Conditions" visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/PhasesTemplate" Text="Phases Template" visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/Proposal_types" Text="Proposal Templates" visible='<%# EmployeePermission("Deny_ProposalTemplates") %>'>
                                                     </telerik:NavigationNode>
@@ -586,10 +587,10 @@
                             <asp:HyperLink ID="HyperLink1" runat="server" CssClass="pieayuda" ToolTip="Documentación de PASconcept en Español (PDF)" Target="_blank" NavigateUrl="~/help/esp/PASconcept_Help_ES.pdf">Ayuda (ESP)  
                             </asp:HyperLink>
                             <asp:Label ID="Label1" runat="server" class="enlacepie" Text=" |"></asp:Label>--%>
-                            <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Privacy | </a>
-                            <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Terms & Conditions | </a>
-                            <a href="https://app.pasconcept.com/Legal/ENG/Terms.html" target="_blank" class="enlacepie">Security | </a>
-                            <a href="https://pasconcept.com/#contact" target="_blank" class="enlacepie">Support</a>
+                            <a href="https://pasconcept.com/privacy-policy/" target="_blank" class="enlacepie">Privacy | </a>
+                            <a href="https://pasconcept.com/terms/" target="_blank" class="enlacepie">Terms & Conditions | </a>
+                            <a href="https://pasconcept.com/security/" target="_blank" class="enlacepie">Security | </a>
+                            <a href="https://pasconcept.com/help/" target="_blank" class="enlacepie">Support</a>
                         </td>
                     </tr>
                     <tr>

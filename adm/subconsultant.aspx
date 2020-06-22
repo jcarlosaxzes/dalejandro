@@ -7,12 +7,12 @@
     <div class="Formulario">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 80px">
+                <td style="width: 130px">
                     <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
                        $ Dashboard
                     </asp:LinkButton>
                 </td>
-                <td style="width: 120px">
+                <td style="width: 130px">
                     <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
                     </asp:LinkButton>
