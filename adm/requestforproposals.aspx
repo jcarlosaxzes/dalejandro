@@ -42,54 +42,35 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 100px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+    <div class="pasconcept-bar noprint">
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
-                </td>
-                <td style="width: 150px">
-                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add new Project and RFP for selected Subconsultants">
+        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add new Project and RFP for selected Subconsultants">
                        <i class="fas fa-plus"></i>&nbsp;Project & RFPs
                     </asp:LinkButton>
-                </td>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnDecline" runat="server" UseSubmitBehavior="false" ToolTip="Decline on selected records"
+        <asp:LinkButton ID="btnDecline" runat="server" UseSubmitBehavior="false" ToolTip="Decline on selected records"
                         CausesValidation="false" CssClass="btn btn-danger">
                         <i class="fas fa-cloud-download-alt"></i> Decline
                     </asp:LinkButton>
-                </td>
-                <td style="width: 100px">
-                    <asp:LinkButton ID="btnTreePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Tree view Page">
+        <asp:LinkButton ID="btnTreePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Tree view Page">
                        <span class="fas fa-stream"> Tree</span>
                     </asp:LinkButton>
-
-                </td>
-                <td style="width: 100px; text-align: right">
-                    <script type="text/javascript">
-                        function PrintPage(sender, args) {
-                            window.print();
-                        }
+        <script type="text/javascript">
+            function PrintPage(sender, args) {
+                window.print();
+            }
                     </script>
                     <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
                         <Icon PrimaryIconCssClass=" rbPrint"></Icon>
                     </telerik:RadButton>
-                </td>
-                <td style="text-align:center">
-                    <h2 style="margin:0">
-                        Request for Proposals (table view)
-                    </h2>
-                </td>
 
-            </tr>
-        </table>
+            <span class="pasconcept-pagetitle" style="padding-left: 250px;">Request for Proposals (table view)</span>
     </div>
 
+
     <div class="collapse" id="collapseFilter">
-        <div class="card card-body">
-            <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+            <asp:Panel ID="pnlFind" runat="server" class="pasconcept" DefaultButton="btnRefresh">
                 <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="width: 200px">
@@ -160,7 +141,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-        </div>
+        
     </div>
 
     <div>
@@ -319,9 +300,8 @@
                 <tr>
                     <td>
                         <h2 style="margin: 0; text-align: center; color:white; width: 700px">
-                            <span<span class="navbar navbar-expand-md bg-dark text-white">
+                            <span class="navbar navbar-expand-md bg-dark text-white"></span>
                                 <asp:Label ID="lblRFPNumber" runat="server"></asp:Label>
-                            </span>
                         </h2>
                     </td>
                 </tr>

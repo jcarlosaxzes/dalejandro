@@ -503,7 +503,7 @@
                                 <telerik:GridTemplateColumn DataField="ProjectName" FilterControlAltText="Filter ProjectName column" HeaderText="Project Name"
                                     SortExpression="ProjectName" UniqueName="ProjectName" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("ProjectName")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' CssClass="lnkGrid"
+                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("ProjectName")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' 
                                             ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
@@ -542,14 +542,14 @@
                                     SortExpression="Code" UniqueName="Code" ItemStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px"
                                     FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}" ReadOnly="true">
                                     <ItemTemplate>
-                                        <asp:HyperLink ID="hlkJobedit" runat="server" Text='<%# Eval("Code")%>' NavigateUrl='<%# Eval("Id", "~/ADM/Job_job.aspx?JobId={0}")%>' CssClass="lnkGrid"
+                                        <asp:HyperLink ID="hlkJobedit" runat="server" Text='<%# Eval("Code")%>' NavigateUrl='<%# Eval("Id", "~/ADM/Job_job.aspx?JobId={0}")%>' 
                                             ToolTip="Click to edit job in new tab" Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Name" SortExpression="Job" UniqueName="Job" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
                                     <ItemTemplate>
                                         <asp:Label ID="lblJobCompleto" runat="server" CssClass="PequenaNegrita" Visible='<%# LocalAPI.IsJobComplete(Eval("Id"))%>' Text="*" ToolTip="This Job is complete"></asp:Label>
-                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' CssClass="lnkGrid"
+                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' 
                                             ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>

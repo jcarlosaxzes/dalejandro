@@ -52,9 +52,9 @@
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                    <table class="table-sm Formulario" style="width: 100%">
+                    <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                         <tr>
-                            <td style="width: 100px">Contact Type:</td>
+                            <td style="width: 150px">Contact Type:</td>
                             <td style="width: 400px">
                                 <telerik:RadComboBox ID="cboContactType" runat="server" ToolTip="Select Contact types"
                                     Width="100%" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
@@ -83,56 +83,42 @@
             </td>
         </tr>
     </table>
-    <div>
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 100px">
+    <div class="pasconcept-bar noprint">
+        
                     <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Client
                     </asp:LinkButton>
 
-                </td>
-                <td style="width: 120px">
+                
                     <asp:LinkButton ID="btnNewEmployee" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                             <i class="fas fa-plus"></i>&nbsp;Employee
                     </asp:LinkButton>
 
-                </td>
-                <td style="width: 150px">
+               
                     <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> SubConsultant
                     </asp:LinkButton>
-                </td>
-                <td style="width: 110px">
+                
                     <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-warning btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Vendor
                     </asp:LinkButton>
 
-                </td>
-                <td style="width: 120px">
+               
                     <asp:LinkButton ID="btnNewContact" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                                         <i class="fas fa-plus"></i>&nbsp;Other
                     </asp:LinkButton>
 
-                </td>
-                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Contacts
-                    </h3>
-                </td>
-
-                <td style="width: 120px">
+                <span class="pasconcept-pagetitle" style="padding-left: 150px;padding-right:150px">Contacts</span>
+                        
+                    
                     <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
                                         <i class="fas fa-cloud-upload-alt"></i>&nbsp;Import
                     </asp:LinkButton>
-                </td>
-                <td style="width: 120px">
+               
                     <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Update records from CSV files">
-                                        Update
+                                        <i class="fas fa-cloud-upload-alt"></i>&nbsp;Update
                     </asp:LinkButton>
-                </td>
-            </tr>
-        </table>
+                
     </div>
 
     <div>

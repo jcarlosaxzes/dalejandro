@@ -14,7 +14,7 @@ Public Class jobs
                 btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewJob")
 
                 btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Budget")
-                panelTotals.Visible = btnPrivate.Visible
+                btnTotals.Visible = btnPrivate.Visible
 
                 Master.PageTitle = "Jobs/Jobs List"
                 Master.Help = "http://blog.pasconcept.com/2012/04/jobs-jobs-listhome-page.html"
@@ -108,24 +108,6 @@ Public Class jobs
         cboPeriod.SelectedValue = nPeriodo
     End Sub
 
-    Protected Sub cboStatusLotes_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboStatusLotes.SelectedIndexChanged
-        If RadGrid1.SelectedItems.Count > 0 And cboStatusLotes.SelectedValue >= 0 Then
-            Dim nSelecteds As Integer = RadGrid1.SelectedItems.Count
-            For Each dataItem As GridDataItem In RadGrid1.SelectedItems
-
-                If dataItem.Selected Then
-                    lblSelectedJobId.Text = dataItem("Id").Text
-                    dataItem.Selected = False
-                    LocalAPI.SetJobStatus(lblSelectedJobId.Text, cboStatusLotes.SelectedValue, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text, False)
-                End If
-            Next
-            cboStatusLotes.SelectedValue = -1
-            Master.InfoMessage(cboStatusLotes.SelectedItem.Text & " status was assigned to " & nSelecteds & " selected Jobs")
-            Refresh()
-        Else
-            Master.ErrorMessage("You must to select records previously!")
-        End If
-    End Sub
     Public Function GetBudgetUsedImageUrl(ByVal dValue As Double) As String
         Try
 
@@ -400,7 +382,7 @@ Public Class jobs
                 Dim ClientId As Integer = e.CommandArgument
                 If ClientId > 0 Then
                     lblExcludeClientId_List.Text = lblExcludeClientId_List.Text & IIf(Len(lblExcludeClientId_List.Text) > 0, ",", "") & ClientId
-                    btnUnhide.Visible = True
+                    btnClientUnhide.Visible = True
                     Refresh()
                 End If
 
@@ -531,7 +513,7 @@ Public Class jobs
     '        Dim ClientId As Integer = CType(sender, ImageButton).CommandArgument
     '        If ClientId > 0 Then
     '            lblExcludeClientId_List.Text = lblExcludeClientId_List.Text & IIf(Len(lblExcludeClientId_List.Text) > 0, ",", "") & ClientId
-    '            btnUnhide.Visible = True
+    '            btnClientUnhide.Visible = True
     '            Refresh()
     '        End If
     '    Catch ex As Exception
@@ -539,7 +521,7 @@ Public Class jobs
     '    End Try
     'End Sub
 
-    Protected Sub btnUnhide_Click(sender As Object, e As EventArgs) Handles btnUnhide.Click
+    Protected Sub btnClientUnhide_Click(sender As Object, e As EventArgs) Handles btnClientUnhide.Click
         lblExcludeClientId_List.Text = ""
         Refresh()
     End Sub
@@ -635,4 +617,27 @@ Public Class jobs
         End Try
     End Sub
 
+    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
+        panelTotals.Visible = Not panelTotals.Visible
+    End Sub
+
+    Private Sub btnApplyStatus_Click(sender As Object, e As EventArgs) Handles btnApplyStatus.Click
+        If RadGrid1.SelectedItems.Count > 0 And cboStatusLotes.SelectedValue >= 0 Then
+            Dim nSelecteds As Integer = RadGrid1.SelectedItems.Count
+            For Each dataItem As GridDataItem In RadGrid1.SelectedItems
+
+                If dataItem.Selected Then
+                    lblSelectedJobId.Text = dataItem("Id").Text
+                    dataItem.Selected = False
+                    LocalAPI.SetJobStatus(lblSelectedJobId.Text, cboStatusLotes.SelectedValue, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text, False)
+                End If
+            Next
+            cboStatusLotes.SelectedValue = -1
+            Master.InfoMessage(cboStatusLotes.SelectedItem.Text & " status was assigned to " & nSelecteds & " selected Jobs")
+            Refresh()
+        Else
+            Master.ErrorMessage("You must to select records previously!")
+        End If
+
+    End Sub
 End Class

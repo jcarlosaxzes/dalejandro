@@ -43,36 +43,23 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <div class="Formulario">
-        <table class="table-sm" style="width:100%">
-            <tr>
-                <td style="width:90px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-                </td>
-                <td style="width:90px">
-                    <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+
+    <div class="pasconcept-bar noprint">
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+            <i class="fas fa-filter"></i>&nbsp;Filter
+        </button>
+
+        <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Client
-                    </asp:LinkButton>
-                </td>
-                <td style="width:140px">
-                    <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                    </telerik:RadButton>
-                </td>
-                <td style="width:140px">
-                    <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=Clients" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
-                        <Icon CssClass="rbUpload"></Icon>
-                    </telerik:RadLinkButton>
-                </td>
-                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Clients
-                    </h3>
-                </td>
-            </tr>
-        </table>
+        </asp:LinkButton>
+
+        <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
+            <Icon PrimaryIconCssClass=" rbPrint"></Icon>
+        </telerik:RadButton>
+
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Clients</span>
+
+
     </div>
 
     <div class="collapse" id="collapseFilter">
@@ -140,24 +127,24 @@
                             </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter Type column" 
+                    <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter Type column"
                         HeaderText="Type -- NAICS Code" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small">
                         <ItemTemplate>
-                            <%# Eval("nType")%> <br />
+                            <%# Eval("nType")%>
+                            <br />
                             <%# Eval("NAICSCodeAndTitle")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column" 
+                    <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column"
                         HeaderText="Contact info -- Customer Rep." SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <div>
                                 <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
                                 <%# String.Concat(LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")), " ", LocalAPI.PhoneHTML(Request.UserAgent, Eval("Cellular")))%>
                                 <a href='<%# Eval("Web")%>' target="_blank" title="View client web"><%#Eval("Web")%>
-                           <div>
-                            <small style="color:black"><%# Eval("SalesRep1")%></small>
-                            
+                                    <div>
+                                        <small style="color: black"><%# Eval("SalesRep1")%></small>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 

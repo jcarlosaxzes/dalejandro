@@ -13,13 +13,13 @@
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="Formulario" style="width: 100%">
+                    <table class="pasconcept-bar" style="width: 100%">
                         <tr>
                             <td>From:
-                                <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="110px" Culture="en-US" ToolTip="Date From of the filter">
+                                <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US" ToolTip="Date From of the filter">
                                 </telerik:RadDatePicker>
                                 &nbsp;To:
-                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="110px" Culture="en-US">
+                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
                                 </telerik:RadDatePicker>
 
                                 &nbsp;
@@ -56,7 +56,7 @@
                                 &nbsp;
 
                                 <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Search for Invoice/Statement, Job/Client, Notes..."
-                                    Width="250px" x-webkit-speech="x-webkit-speech">
+                                    Width="350px" x-webkit-speech="x-webkit-speech">
                                 </telerik:RadTextBox>
 
                             </td>
@@ -71,9 +71,8 @@
             </td>
         </tr>
     </table>
-    <div style="text-align: center">
-        <h3 style="margin: 0">Payments
-        </h3>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Payments</span>
     </div>
     <div>
         <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true"
@@ -208,8 +207,8 @@
 
 
     <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Payment
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Payment
             </span>
         </h2>
         <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">

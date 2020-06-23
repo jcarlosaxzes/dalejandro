@@ -77,15 +77,6 @@ Partial Public Class statement
     Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''printbutton control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
     '''RadCodeBlock1 control.
     '''</summary>
     '''<remarks>

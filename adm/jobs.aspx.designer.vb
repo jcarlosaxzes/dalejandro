@@ -59,13 +59,13 @@ Partial Public Class jobs
     Protected WithEvents RadWindowManagerPrint As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''panelTotals control.
+    '''btnTotals control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents panelTotals As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnNew control.
@@ -77,6 +77,15 @@ Partial Public Class jobs
     Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''btnPrivate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnPrivate As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''cboStatusLotes control.
     '''</summary>
     '''<remarks>
@@ -84,6 +93,15 @@ Partial Public Class jobs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboStatusLotes As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''btnApplyStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnApplyStatus As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnPrint control.
@@ -95,13 +113,13 @@ Partial Public Class jobs
     Protected WithEvents btnPrint As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnUnhide control.
+    '''btnClientUnhide control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUnhide As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnClientUnhide As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnCopyF control.
@@ -129,15 +147,6 @@ Partial Public Class jobs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShare As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnPrivate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnPrivate As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.
@@ -255,6 +264,15 @@ Partial Public Class jobs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''panelTotals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents panelTotals As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''lblTotalBudget control.

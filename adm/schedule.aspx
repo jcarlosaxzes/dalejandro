@@ -7,7 +7,6 @@
             <telerik:AjaxSetting AjaxControlID="RadScheduler1">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="AppointmentsCount"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipSend"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
@@ -21,47 +20,27 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
     </telerik:RadAjaxLoadingPanel>
 
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width:100px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+    <div class="pasconcept-bar">
+        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
-                </td>
-                <td style="width:120px">
-                    <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
+        <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
                         <i class="fas fa-plus"></i> Activity
                     </asp:LinkButton>
-                </td>
-                <td style="width:180px">
-                    <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+        <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="far fa-calendar-alt"></i> Export to Outlook
                     </asp:LinkButton>
-                </td>
-                <td style="width:150px">
-                    <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+        <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="fas fa-download"></i> Export to PDF
                     </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Calendar
-                    </h3>
-                </td>
 
-                <td style="padding-left: 50px; text-align:right;width:150px">
-                    <small>
-                        <asp:Label runat="server" ID="AppointmentsCount"></asp:Label>
-                    </small>
-                </td>
-
-            </tr>
-        </table>
+        <span class="pasconcept-pagetitle" style="padding-left: 150px;">Calendar</span>
+        <span class="pasconcept-pagetitle" style="padding-left: 150px;"><asp:Label runat="server" ID="AppointmentsCount" Font-Size="Small"></asp:Label></span>
     </div>
 
     <div class="collapse" id="collapseFilter">
-        <div class="card card-body">
-            <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+
+            <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
 
 
                 <table class="table-sm" style="width: 100%">
@@ -92,7 +71,7 @@
                 </table>
 
             </asp:Panel>
-        </div>
+        
     </div>
 
     <div>

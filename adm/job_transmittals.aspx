@@ -73,7 +73,7 @@
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
-                                    CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText="Delete"
+                                    CommandName="Delete" Text="" UniqueName="DeleteColumn" HeaderText=""
                                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                 </telerik:GridButtonColumn>
                             </Columns>

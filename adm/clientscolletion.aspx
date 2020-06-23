@@ -9,7 +9,7 @@
             <td>
                 <div class="PanelFilter">
                     <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                        <table style="width: 100%" class="table-sm Formulario">
+                        <table style="width: 100%" class="table-sm pasconcept-bar">
                             <tr>
                                 <td style="width: 300px">
                                     <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="true" Width="100%" Label="Collection Status:">
@@ -37,22 +37,13 @@
             </td>
         </tr>
     </table>
-
-    <table class="table-sm" style="width: 100%">
-        <tr>
-            <td style="width: 150px">
-                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Proposal Template">
+    <div class="pasconcept-bar">
+        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Record">
                                     <i class="fas fa-plus"></i> Client to Collection
-                </asp:LinkButton>
-            </td>
-            <td style="text-align: center">
-                <h3 style="margin: 0">Clients Colletion
-                </h3>
-            </td>
-        </tr>
-    </table>
+        </asp:LinkButton>
 
-
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Clients Colletion</span>
+    </div>
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False"
