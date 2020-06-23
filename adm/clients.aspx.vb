@@ -39,8 +39,11 @@ Public Class clients
     End Sub
 
     Private Sub RestoreFilter()
-        cboStatus.SelectedValue = Session("Filter_Clients_cboStatus")
-        txtFind.Text = Session("Filter_Clients_txtFind")
+        Try
+            cboStatus.SelectedValue = Session("Filter_Clients_cboStatus")
+            txtFind.Text = Session("Filter_Clients_txtFind")
+        Catch ex As Exception
+        End Try
     End Sub
     'Protected Sub btnCredentials_Click(ByVal sender As Object, ByVal e As System.EventArgs)
     '    Try

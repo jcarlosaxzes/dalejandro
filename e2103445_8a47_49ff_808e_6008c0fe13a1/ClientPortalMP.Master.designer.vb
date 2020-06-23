@@ -120,4 +120,22 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblGuid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblGuid As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblType As Global.System.Web.UI.WebControls.Label
 End Class

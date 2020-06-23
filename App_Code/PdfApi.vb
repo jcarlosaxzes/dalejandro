@@ -31,16 +31,11 @@ Public Class PdfApi
     End Function
 
 
-    ' Unmerged change from project '1_App_Code' 
-    ' Before:
-    '     Public Sub CreateProposalSignedPdf(guid As String, fileName As String)
-    ' After:
-    '     Public Sub CreateProposalSignedPdfAsync(guid As String, fileName As String)
-    Public Async Function CreateProposalSignedPdfAsync(ProposalId As String, fileName As String) As Task
+    Public Async Function CreateProposalSignedPdfAsync(ProposalId As String, Keyname As String) As Task
         'Dim ProposalId As String = LocalAPI.GetSharedLink_Id(11, Guid)
         Dim CompanyId As String = LocalAPI.GetCompanyIdFromProposal(ProposalId)
         Dim bytePDF As Byte() = Await CreateProposalPdfBytes(ProposalId)
-        Dim Url = AzureStorageApi.UploadBytesData(fileName, bytePDF, "application/pdf", CompanyId, ProposalId, "Signed Proposal")
+        Dim Url = AzureStorageApi.UploadBytesData("Proposal_Signed_" & DateTime.Now.Month & "_" & DateTime.Now.Day & "_" & DateTime.Now.Year & ".pdf", Keyname, bytePDF, "application/pdf", CompanyId, ProposalId, "Proposal")
     End Function
 
     Public Async Function CreateProposalPdfBytes(ProposalId As String) As Task(Of Byte())
@@ -50,6 +45,23 @@ Public Class PdfApi
         Dim jsonObj = loadJson(CompanyId, ProposalId)
         Dim json As String = jsonObj.ToString()
         Dim base64 As String = Await GetBase64Document("117735", json)
+        Dim bytePDF As Byte() = Convert.FromBase64String(base64)
+        Return bytePDF
+    End Function
+
+    Public Async Function CreateInvoicePdfBytes(companyId As String, InvoiceId As String) As Task(Of Byte())
+        Dim jsonObj = loadInvoiceJson(companyId, InvoiceId)
+        Dim json As String = jsonObj.ToString()
+        Dim base64 As String = Await GetBase64Document("120636", json)
+        Dim bytePDF As Byte() = Convert.FromBase64String(base64)
+        Return bytePDF
+    End Function
+
+
+    Public Async Function CreateStatementsPdfBytes(companyId As String, StatementId As String) As Task(Of Byte())
+        Dim jsonObj = loadStatementsJson(companyId, StatementId)
+        Dim json As String = jsonObj.ToString()
+        Dim base64 As String = Await GetBase64Document("120662", json)
         Dim bytePDF As Byte() = Convert.FromBase64String(base64)
         Return bytePDF
     End Function
@@ -86,7 +98,7 @@ Public Class PdfApi
         'Proposal Data
         Try
             Dim jsonProposal As JObject = New JObject()
-            Dim reader = ExecProsedure("PROPOSAL_Page_v20_Select", ProposalId)
+            Dim reader = ExecProsedure("PROPOSAL_Page_v20_Select", "@ProposalId", ProposalId)
             While reader.Read()
                 If reader.HasRows Then
 
@@ -165,7 +177,7 @@ Public Class PdfApi
         'Services Feeds
         Try
             Dim jsonTaskArray As JArray = New JArray()
-            Dim reader = ExecProsedure("PROPOSAL_Details_Page_Select", ProposalId)
+            Dim reader = ExecProsedure("PROPOSAL_Details_Page_Select", "@ProposalId", ProposalId)
             Dim TaskTotal As Decimal = 0
             While reader.Read()
                 If reader.HasRows Then
@@ -188,7 +200,7 @@ Public Class PdfApi
         'Payment Schedules
         Try
             Dim jsonPaymentArray As JArray = New JArray()
-            Dim reader = ExecProsedure("Proposal_PaymentSchedule_SELECT", ProposalId)
+            Dim reader = ExecProsedure("Proposal_PaymentSchedule_SELECT", "@ProposalId", ProposalId)
             Dim PaymentTotal As Decimal = 0
             While reader.Read()
                 If reader.HasRows Then
@@ -209,7 +221,7 @@ Public Class PdfApi
 
         'Scope Work
         Try
-            Dim reader = ExecProsedure("PROPOSAL_Details_Page_Select", ProposalId)
+            Dim reader = ExecProsedure("PROPOSAL_Details_Page_Select", "@ProposalId", ProposalId)
             Dim jsonScopeWorkArray As JArray = New JArray()
             While reader.Read()
                 If reader.HasRows Then
@@ -227,7 +239,7 @@ Public Class PdfApi
         'Phases
         Try
             Dim jsonPhaseArray As JArray = New JArray()
-            Dim reader = ExecProsedure("PROPOSAL_phases_SELECT", ProposalId)
+            Dim reader = ExecProsedure("PROPOSAL_phases_SELECT", "@ProposalId", ProposalId)
             While reader.Read()
                 If reader.HasRows Then
                     Dim jsonPhases As JObject = New JObject()
@@ -252,12 +264,263 @@ Public Class PdfApi
     End Function
 
 
-    Public Function ExecProsedure(ProcedureName As String, ProposalId As String) As SqlDataReader
+    Public Function loadInvoiceJson(CompanyId As String, InvoidceId As String) As JObject
+        Dim jsonObj As JObject = New JObject()
+        Try
+            'Company Data
+            jsonObj.Add("CompanyId", CompanyId)
+            jsonObj.Add("CompanyName", LocalAPI.GetCompanyProperty(CompanyId, "Name"))
+            jsonObj.Add("CompanyAddress", LocalAPI.GetCompanyProperty(CompanyId, "Address"))
+            jsonObj.Add("CompanyCity", LocalAPI.GetCompanyProperty(CompanyId, "City"))
+            jsonObj.Add("CompanyState", LocalAPI.GetCompanyProperty(CompanyId, "State"))
+            jsonObj.Add("CompanyZipCode", LocalAPI.GetCompanyProperty(CompanyId, "ZipCode"))
+            jsonObj.Add("CompanyPhone", LocalAPI.GetCompanyProperty(CompanyId, "Phone"))
+            jsonObj.Add("CompanyEmail", LocalAPI.GetCompanyProperty(CompanyId, "Email"))
+            jsonObj.Add("CompanyWebLink", LocalAPI.GetCompanyProperty(CompanyId, "web"))
+            Dim Base64StringCompanyLogo = LocalAPI.GetCompanyLogo(CompanyId)
+            If (Base64StringCompanyLogo IsNot Nothing) Then
+                jsonObj.Add("Base64StringCompanyLogo", Convert.ToBase64String(Base64StringCompanyLogo))
+            Else
+                jsonObj.Add("Base64StringCompanyLogo", "")
+            End If
+            Dim Base64StringCompanyLetterHead = LocalAPI.GetCompanyLetterHead(CompanyId)
+            If (Base64StringCompanyLetterHead IsNot Nothing) Then
+                jsonObj.Add("Base64StringCompanyLetterHead", Convert.ToBase64String(Base64StringCompanyLetterHead))
+            Else
+                jsonObj.Add("Base64StringCompanyLetterHead", "")
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message())
+        End Try
+
+        'Invoice
+        Try
+            Dim jsonInvoices As JObject = New JObject()
+            Dim reader = ExecProsedure("INVOICE3_Adapter", "@InvoiceId", InvoidceId)
+            While reader.Read()
+                If reader.HasRows Then
+
+                    jsonInvoices.Add("InvoiceId", reader("Id").ToString())
+                    jsonInvoices.Add("InvoiceNumber", reader("InvoiceNumber").ToString())
+                    Dim InvoicePaid = reader("InvoicePaid").ToString()
+                    If InvoicePaid IsNot Nothing And InvoicePaid.Length > 0 Then
+                        Dim paid = Decimal.Parse(InvoicePaid)
+                        jsonInvoices.Add("InvoicePaid", FormatCurrency(paid, 2))
+                    Else
+                        jsonInvoices.Add("InvoicePaid", "0.00")
+                    End If
+
+                    Dim AmountDue = reader("AmountDue").ToString()
+                    If AmountDue IsNot Nothing And AmountDue.Length > 0 Then
+                        Dim paid = Decimal.Parse(AmountDue)
+                        jsonInvoices.Add("AmountDue", FormatCurrency(paid, 2))
+                    Else
+                        jsonInvoices.Add("AmountDue", "0.00")
+                    End If
+
+                    jsonInvoices.Add("Billing", reader("Billing").ToString())
+                    jsonInvoices.Add("Notes", reader("Notes").ToString())
+                    jsonInvoices.Add("ProjectName", reader("ProjectName").ToString())
+                    jsonInvoices.Add("ClientName", reader("ClientName").ToString())
+                    jsonInvoices.Add("ClientCompany", reader("ClientCompany").ToString())
+                    jsonInvoices.Add("ClientFullAddress", reader("ClientFullAddress").ToString())
+                    jsonInvoices.Add("Phone", reader("Phone").ToString())
+                    jsonInvoices.Add("Cellular", reader("Cellular").ToString())
+                    jsonInvoices.Add("Fax", reader("Fax").ToString())
+                    jsonInvoices.Add("Email", reader("Email").ToString())
+                    Dim Budget = reader("Budget").ToString()
+                    If Budget IsNot Nothing And Budget.Length > 0 Then
+                        Dim paid = Decimal.Parse(Budget)
+                        jsonInvoices.Add("Budget", FormatCurrency(paid, 2))
+                    Else
+                        jsonInvoices.Add("Budget", "0.00")
+                    End If
+                    jsonInvoices.Add("TotalPaid", reader("TotalPaid").ToString())
+                    jsonInvoices.Add("Balance", reader("Balance").ToString())
+                    jsonInvoices.Add("BillingContact", reader("BillingContact").ToString())
+                    Dim LatestEmission = reader("LatestEmission").ToString()
+                    If LatestEmission IsNot Nothing And LatestEmission.Length > 0 Then
+                        Dim Date2 = DateTime.Parse(LatestEmission)
+                        jsonInvoices.Add("LatestEmission", Date2.ToShortDateString())
+                    Else
+                        jsonInvoices.Add("LatestEmission", "")
+                    End If
+                    Dim MaturityDate = reader("MaturityDate").ToString()
+                    If MaturityDate IsNot Nothing And MaturityDate.Length > 0 Then
+                        Dim Date2 = DateTime.Parse(MaturityDate)
+                        jsonInvoices.Add("MaturityDate", Date2.ToShortDateString())
+                    Else
+                        jsonInvoices.Add("MaturityDate", "")
+                    End If
+
+                    jsonInvoices.Add("ProjectLocation", reader("ProjectLocation").ToString())
+                    jsonInvoices.Add("InvoiceType", reader("InvoiceType").ToString())
+                    jsonInvoices.Add("Time", reader("Time").ToString())
+                    jsonInvoices.Add("Rate", reader("Rate").ToString())
+                    Dim FirstEmission = reader("FirstEmission").ToString()
+                    If MaturityDate IsNot Nothing And MaturityDate.Length > 0 Then
+                        Dim Date2 = DateTime.Parse(FirstEmission)
+                        jsonInvoices.Add("FirstEmission", Date2.ToShortDateString())
+                    Else
+                        jsonInvoices.Add("FirstEmission", "")
+                    End If
+                End If
+            End While
+            jsonObj.Add("Invoices", jsonInvoices)
+        Catch ex As Exception
+            Console.WriteLine(ex.Message())
+        End Try
+
+
+        Return jsonObj
+
+    End Function
+
+
+    Public Function loadStatementsJson(CompanyId As String, StatementId As String) As JObject
+        Dim jsonObj As JObject = New JObject()
+        Try
+            'Company Data
+            jsonObj.Add("CompanyId", CompanyId)
+            jsonObj.Add("CompanyName", LocalAPI.GetCompanyProperty(CompanyId, "Name"))
+            jsonObj.Add("CompanyAddress", LocalAPI.GetCompanyProperty(CompanyId, "Address"))
+            jsonObj.Add("CompanyCity", LocalAPI.GetCompanyProperty(CompanyId, "City"))
+            jsonObj.Add("CompanyState", LocalAPI.GetCompanyProperty(CompanyId, "State"))
+            jsonObj.Add("CompanyZipCode", LocalAPI.GetCompanyProperty(CompanyId, "ZipCode"))
+            jsonObj.Add("CompanyPhone", LocalAPI.GetCompanyProperty(CompanyId, "Phone"))
+            jsonObj.Add("CompanyEmail", LocalAPI.GetCompanyProperty(CompanyId, "Email"))
+            jsonObj.Add("CompanyWebLink", LocalAPI.GetCompanyProperty(CompanyId, "web"))
+            Dim Base64StringCompanyLogo = LocalAPI.GetCompanyLogo(CompanyId)
+            If (Base64StringCompanyLogo IsNot Nothing) Then
+                jsonObj.Add("Base64StringCompanyLogo", Convert.ToBase64String(Base64StringCompanyLogo))
+            Else
+                jsonObj.Add("Base64StringCompanyLogo", "")
+            End If
+            Dim Base64StringCompanyLetterHead = LocalAPI.GetCompanyLetterHead(CompanyId)
+            If (Base64StringCompanyLetterHead IsNot Nothing) Then
+                jsonObj.Add("Base64StringCompanyLetterHead", Convert.ToBase64String(Base64StringCompanyLetterHead))
+            Else
+                jsonObj.Add("Base64StringCompanyLetterHead", "")
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message())
+        End Try
+
+        'Invoice
+        Try
+            Dim jsonStatements As JObject = New JObject()
+            Dim reader = ExecProsedure("STATEMENT2_Adapter", "@statementId", StatementId)
+            While reader.Read()
+                If reader.HasRows Then
+
+                    jsonStatements.Add("Id", reader("Id").ToString())
+                    jsonStatements.Add("StatementNumber", reader("StatementNumber").ToString())
+                    Dim InvoiceDate = reader("InvoiceDate").ToString()
+                    If InvoiceDate IsNot Nothing And InvoiceDate.Length > 0 Then
+                        Dim Date2 = DateTime.Parse(InvoiceDate)
+                        jsonStatements.Add("InvoiceDate", Date2.ToShortDateString())
+                    Else
+                        jsonStatements.Add("InvoiceDate", "")
+                    End If
+                    jsonStatements.Add("clientId", reader("clientId").ToString())
+                    jsonStatements.Add("ClientName", reader("ClientName").ToString())
+                    jsonStatements.Add("ClientCompany", reader("ClientCompany").ToString())
+                    jsonStatements.Add("ClientFullAddress", reader("ClientFullAddress").ToString())
+                    jsonStatements.Add("Phone", reader("Phone").ToString())
+                    jsonStatements.Add("Cellular", reader("Cellular").ToString())
+                    jsonStatements.Add("Fax", reader("Fax").ToString())
+                    jsonStatements.Add("Email", reader("Email").ToString())
+                    jsonStatements.Add("InvoiceNotes", reader("InvoiceNotes").ToString())
+                    jsonStatements.Add("Emitted", reader("Emitted").ToString())
+                    Dim FirstEmission = reader("FirstEmission").ToString()
+                    If FirstEmission IsNot Nothing And FirstEmission.Length > 0 Then
+                        Dim Date2 = DateTime.Parse(FirstEmission)
+                        jsonStatements.Add("FirstEmission", Date2.ToShortDateString())
+                    Else
+                        jsonStatements.Add("FirstEmission", "")
+                    End If
+                    Dim LatestEmission = reader("LatestEmission").ToString()
+                    If LatestEmission IsNot Nothing And LatestEmission.Length > 0 Then
+                        Dim Date2 = DateTime.Parse(LatestEmission)
+                        jsonStatements.Add("LatestEmission", Date2.ToShortDateString())
+                    Else
+                        jsonStatements.Add("LatestEmission", "")
+                    End If
+                    Dim AmountPaid = reader("AmountPaid").ToString()
+                    If AmountPaid IsNot Nothing And AmountPaid.Length > 0 Then
+                        Dim paid = Decimal.Parse(AmountPaid)
+                        jsonStatements.Add("AmountPaid", FormatCurrency(paid, 2))
+                    Else
+                        jsonStatements.Add("AmountPaid", "0.00")
+                    End If
+                    Dim AmountBilled = reader("AmountBilled").ToString()
+                    If AmountBilled IsNot Nothing And AmountBilled.Length > 0 Then
+                        Dim paid = Decimal.Parse(AmountBilled)
+                        jsonStatements.Add("AmountBilled", FormatCurrency(paid, 2))
+                    Else
+                        jsonStatements.Add("AmountBilled", "0.00")
+                    End If
+                    Dim AmountDue = reader("AmountDue").ToString()
+                    If AmountDue IsNot Nothing And AmountDue.Length > 0 Then
+                        Dim paid = Decimal.Parse(AmountDue)
+                        jsonStatements.Add("AmountDue", FormatCurrency(paid, 2))
+                    Else
+                        jsonStatements.Add("AmountDue", "0.00")
+                    End If
+
+
+
+                End If
+            End While
+            jsonObj.Add("Statement", jsonStatements)
+        Catch ex As Exception
+            Console.WriteLine(ex.Message())
+        End Try
+
+        'invoices
+        Try
+            Dim jsonInvoicesArray As JArray = New JArray()
+            Dim reader = ExecProsedure("STATEMENT2_invoices_Adapter", "@statementId", StatementId)
+            While reader.Read()
+                If reader.HasRows Then
+                    Dim jsonInvoice As JObject = New JObject()
+                    jsonInvoice.Add("Id", reader("Id").ToString())
+                    jsonInvoice.Add("InvoiceNumber", reader("InvoiceNumber").ToString())
+                    jsonInvoice.Add("InvoiceDate", reader("InvoiceDate").ToString())
+                    jsonInvoice.Add("InvoicePaid", reader("InvoicePaid").ToString())
+                    jsonInvoice.Add("AmountDue", reader("AmountDue").ToString())
+                    jsonInvoice.Add("PaidToDate", reader("PaidToDate").ToString())
+                    jsonInvoice.Add("Notes", reader("Notes").ToString())
+                    jsonInvoice.Add("JobName", reader("JobName").ToString())
+                    jsonInvoice.Add("Balance", reader("Balance").ToString())
+                    jsonInvoice.Add("Emitted", reader("Emitted").ToString())
+                    jsonInvoice.Add("LatestEmission", reader("LatestEmission").ToString())
+                    jsonInvoice.Add("MaturityDate", reader("MaturityDate").ToString())
+                    jsonInvoice.Add("Time", reader("Time").ToString())
+                    jsonInvoice.Add("Rate", reader("Rate").ToString())
+                    jsonInvoice.Add("FirstEmission", reader("FirstEmission").ToString())
+
+                    jsonInvoicesArray.Add(jsonInvoice)
+                End If
+            End While
+            jsonObj.Add("Invoices", jsonInvoicesArray)
+
+        Catch ex As Exception
+            Console.WriteLine(ex.Message())
+        End Try
+        Dim jstr = jsonObj.ToString()
+        Return jsonObj
+
+    End Function
+
+
+
+    Public Function ExecProsedure(ProcedureName As String, ParamName As String, ProposalId As String) As SqlDataReader
         Dim cnn1 As SqlConnection = LocalAPI.GetConnection()
         Dim cmd As SqlCommand = cnn1.CreateCommand()
         cmd.CommandText = ProcedureName
         cmd.CommandType = System.Data.CommandType.StoredProcedure
-        cmd.Parameters.AddWithValue("@ProposalId", ProposalId)
+        cmd.Parameters.AddWithValue(ParamName, ProposalId)
         Dim reader = cmd.ExecuteReader()
         Return reader
     End Function

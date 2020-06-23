@@ -14,6 +14,8 @@ Public Class statement1
                 lblStatementId.Text = statementId
                 lblCompanyId.Text = companyId
                 Master.Company = companyId
+                Master.Guid = guiId
+                Master.Type = "Statement"
 
                 lblStatementGuid.Text = guiId
 
