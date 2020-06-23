@@ -30,12 +30,11 @@
             }
     </style>
 
-     <div class="Formulario">
+    <div class="Formulario">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="text-align: center">
-                    <h3 style="margin: 0">Company Overview
-                    </h3>
+                    <span class="pasconcept-bar">Company Overview</span>
                 </td>
             </tr>
         </table>
@@ -43,7 +42,7 @@
     </div>
     <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
 
-        <table class="table-sm" style="width:100%">
+        <table class="table-sm" style="width: 100%">
 
             <tr>
                 <td>
@@ -56,47 +55,48 @@
                                     <tr>
                                         <td style='<%# iif(LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16,"width:250px;text-align: center; vertical-align: top","width:0px") %>'>
                                             <asp:Panel ID="panelCompany16" runat="server" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>' Width="250px">
-                                                <span class="badge badge-info center-block">"In Progress" Jobs </span>
+                                                <span class="navbar navbar-expand-md bg-secondary center-block text-white">Jobs "In Progress" </span>
                                                 <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobsInProgressByEmployee" DataKeyNames="Id"
                                                     ItemPlaceholderID="Container1"
-                                                    BorderStyle="Solid" Height="380px" Width="100%"
+                                                    BorderStyle="Solid" Height="250px" Width="100%"
                                                     AllowPaging="true">
                                                     <LayoutTemplate>
-                                                        <fieldset style="width: 100%">
-                                                            <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
-                                                        </fieldset>
-
-                                                        <telerik:RadDataPager RenderMode="Lightweight" ID="RadDataPager1" runat="server" PageSize="4">
+                                                        <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
+                                                        <telerik:RadDataPager RenderMode="Lightweight" ID="RadDataPager1" runat="server" PageSize="3">
                                                             <Fields>
                                                                 <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
                                                             </Fields>
                                                         </telerik:RadDataPager>
                                                     </LayoutTemplate>
                                                     <ItemTemplate>
-                                                        <fieldset class="thumbnail" style="float: left; width: 250px; margin: 1px">
-                                                            <table style="width: 100%">
-                                                                <tr>
-                                                                    <td>
-
-                                                                        <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job"
-                                                                            CommandName="EditJob" UseSubmitBehavior="false">                                                                                                                                                       
-                                                                                <h4 style="margin: 0"><span class="center-block label badge-success"><%# String.Concat(Eval("Code"), "  ", Eval("itemName"))%></span></h4>
-                                                                        </asp:LinkButton>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <asp:LinkButton ID="btnClient" runat="server" CommandArgument='<%# Eval("clientId")%>' ToolTip="Click to View/Edit Client"
-                                                                            CommandName="EditClient" UseSubmitBehavior="false">                                                                                                                                                       
-                                                                            <span class="center-block badge badge-warning"><%# Eval("ClientNameAndCompany")%></span>     
-                                                                        </asp:LinkButton>
-
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="padding-top: 5px; background-color: whitesmoke">
-                                                                        <asp:LinkButton ID="btnEdit" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Job"
-                                                                            CommandName="EditJob" UseSubmitBehavior="false" >
+                                                        <div class="card" style="float: left; width: 250px; margin: 1px">
+                                                            <div class="card-body">
+                                                                <h4 style="margin: 0"><%# Eval("Code")%></h4>
+                                                                <table class="table-sm card-text" style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                                                    <tr>
+                                                                        <td>
+                                                                            <b><%# Eval("itemName")%></b>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%# Eval("ClientCompany")%>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <%# Eval("ClientName")%>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            PM: <%# Eval("PM")%>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <asp:LinkButton ID="btnEdit" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Job"
+                                                                            CommandName="EditJob" UseSubmitBehavior="false">
                                                                             <i class="fas fa-pen"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
@@ -114,28 +114,12 @@
                                                                             CommandName="Tickets" UseSubmitBehavior="false">
                                                                                 <i class="fa fa-clipboard-check"></i>
                                                                         </asp:LinkButton>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="background-color: whitesmoke">
-                                                                        <table style="width: 100%">
-                                                                            <tr>
-                                                                                <td style="text-align: right; font-size: small; width: 20%">Job:&nbsp;
-                                                                                </td>
-                                                                                <td style="text-align: left; font-weight: bold; width: 30%">
-                                                                                    <small title="[Job Balance] = JobInvoiceAmount - JobCollected - JobBadDebt"><%# Eval("JobBalance", "{0:C0}")%></small>
-                                                                                </td>
-                                                                                <td style="text-align: right; font-size: small; width: 20%">Client:&nbsp;
-                                                                                </td>
-                                                                                <td style="text-align: left; font-weight: bold">
-                                                                                    <small title="[Client Balance] = ClientEmittedTotal - ClientPaymentTotal - ClientBadDebtTotal"><%# Eval("ClientBalance", "{0:C0}")%></small>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </fieldset>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+
+                                                            </div>
+                                                        </div>
                                                     </ItemTemplate>
 
                                                 </telerik:RadListView>
@@ -465,7 +449,7 @@
 
     <asp:Panel runat="server" ID="panelEmployeePortal" Visible="false">
 
-       <span class="navbar navbar-expand-md bg-dark text-white">
+        <span class="navbar navbar-expand-md bg-dark text-white">
             <h2>PASconcept Application Home Page</h2>
         </span>
         <h3>PASconcept is your complete online platform for Project Administration Services</h3>
