@@ -101,12 +101,8 @@
                                                 &nbsp;&nbsp;
                                                 <a class="btn btn-danger noprint" href="CP_jobs.aspx" role="button">My Jobs</a>
                                                 &nbsp;&nbsp;
-                                                <script type="text/javascript">
-                                                    function PrintPage(sender, args) {
-                                                        window.print();
-                                                    }
-                                                </script>
-                                                <button type="button" class="btn btn-secondary noprint" onclick="PrintPage()">Print</button>
+                                                
+                                                <button type="button" class="btn btn-secondary noprint"  runat="server" onserverclick="Print_ServerClick">Print</button>
                                                 <h3 style="margin: 5px"><%# Eval("Name") %></h3>
                                                 <i class="fas fa-map-marker-alt"></i>&nbsp;<%# Eval("Address") %><br>
                                                 <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
@@ -203,6 +199,8 @@
             </SelectParameters>
         </asp:SqlDataSource>
         <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblGuid" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblType" runat="server" Visible="False"></asp:Label>
 
 
     </form>

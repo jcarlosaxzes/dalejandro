@@ -18,7 +18,8 @@ Public Class invoice
                 lblCompanyId.Text = companyId
                 Master.Company = companyId
                 lblInvoiceGuid.Text = guiId
-
+                Master.Guid = guiId
+                Master.Type = "Invoice"
                 Title = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "InvoiceNumber")
 
                 ' Para navegar en CLIENT PORTAL.....................................
@@ -305,7 +306,8 @@ Public Class invoice
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
-
+        Return True
     End Function
+
 
 End Class
