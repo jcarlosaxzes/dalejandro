@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="invoice.aspx.vb" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" Inherits="pasconcept20.invoice" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="invoice.aspx.vb" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" Inherits="pasconcept20.invoice"  Async="true"%>
 
 <%@ Import Namespace="pasconcept20" %>
 

@@ -10446,6 +10446,11 @@ Public Class LocalAPI
                 '6. - Log................... End
                 LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.AceptProposal, companyId, proposalId)
 
+                '7. Create Signed PDF
+                'Dim pdf As PdfApi = New PdfApi()
+                'Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
+                'Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
+                'pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
                 Return jobId
             End If
 

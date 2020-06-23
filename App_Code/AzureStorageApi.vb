@@ -127,7 +127,7 @@ Public Class AzureStorageApi
         End Try
     End Function
 
-    Public Shared Function UploadBytesData(fileName As String, fileData As Byte(), contentType As String, companyId As String, EntityId As Integer, EntityType As String) As String
+    Public Shared Function UploadBytesData(fileName As String, keyName As String, fileData As Byte(), contentType As String, companyId As String, EntityId As Integer, EntityType As String) As String
         Try
 
             ' Create a BlobServiceClient object which will be used to create a container client
@@ -136,13 +136,13 @@ Public Class AzureStorageApi
             Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
             Dim container As CloudBlobContainer = blobClient.GetContainerReference("documents")
 
-            Dim blockBlob = container.GetBlockBlobReference(fileName)
+            Dim blockBlob = container.GetBlockBlobReference(keyName)
             'Sets the content type to image
             blockBlob.Properties.ContentType = contentType
             blockBlob.UploadFromByteArray(fileData, 0, fileData.LongLength)
 
             blockBlob.FetchAttributes()
-            LocalAPI.AzureStorage_Insert(EntityId, 0, IO.Path.GetFileName(fileName), fileName, False, fileData.LongLength, contentType, companyId, EntityType)
+            LocalAPI.AzureStorage_Insert(EntityId, 0, fileName, keyName, False, fileData.LongLength, contentType, companyId, EntityType)
 
 
             Return blockBlob.Uri.AbsoluteUri

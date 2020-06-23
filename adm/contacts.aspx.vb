@@ -99,22 +99,24 @@ Public Class contacts
     End Sub
 
     Private Sub SaveFilter()
-        Session("Filter_Contacts_IncludeContacts") = cboContactType.CheckedItems(0).Checked
-        Session("Filter_Contacts_IncludeClients") = cboContactType.CheckedItems(1).Checked
-        Session("Filter_Contacts_IncludeEmployees") = cboContactType.CheckedItems(2).Checked
-        Session("Filter_Contacts_IncludeSubConsultants") = cboContactType.CheckedItems(3).Checked
-        Session("Filter_Contacts_IncludeVendors") = cboContactType.CheckedItems(4).Checked
+        Session("Filter_Contacts_IncludeContacts") = cboContactType.Items(0).Checked
+        Session("Filter_Contacts_IncludeClients") = cboContactType.Items(1).Checked
+        Session("Filter_Contacts_IncludeEmployees") = cboContactType.Items(2).Checked
+        Session("Filter_Contacts_IncludeSubConsultants") = cboContactType.Items(3).Checked
+        Session("Filter_Contacts_IncludeVendors") = cboContactType.Items(4).Checked
         Session("Filter_Contacts_txtFind") = txtFind.Text
     End Sub
 
     Private Sub RestoreFilter()
-
-        cboContactType.Items(0).Checked = If(Session("Filter_Contacts_IncludeContacts") IsNot Nothing, Session("Filter_Contacts_IncludeContacts"), cboContactType.Items(0).Checked)
-        cboContactType.Items(1).Checked = If(Session("Filter_Contacts_IncludeClients") IsNot Nothing, Session("Filter_Contacts_IncludeClients"), cboContactType.Items(1).Checked)
-        cboContactType.Items(2).Checked = If(Session("Filter_Contacts_IncludeEmployees") IsNot Nothing, Session("Filter_Contacts_IncludeEmployees"), cboContactType.Items(2).Checked)
-        cboContactType.Items(3).Checked = If(Session("Filter_Contacts_IncludeSubConsultants") IsNot Nothing, Session("Filter_Contacts_IncludeSubConsultants"), cboContactType.Items(3).Checked)
-        cboContactType.Items(4).Checked = If(Session("Filter_Contacts_IncludeVendors") IsNot Nothing, Session("Filter_Contacts_IncludeVendors"), cboContactType.Items(4).Checked)
-        txtFind.Text = Session("Filter_Contacts_txtFind")
+        Try
+            cboContactType.Items(0).Checked = If(Session("Filter_Contacts_IncludeContacts") IsNot Nothing, Session("Filter_Contacts_IncludeContacts"), cboContactType.Items(0).Checked)
+            cboContactType.Items(1).Checked = If(Session("Filter_Contacts_IncludeClients") IsNot Nothing, Session("Filter_Contacts_IncludeClients"), cboContactType.Items(1).Checked)
+            cboContactType.Items(2).Checked = If(Session("Filter_Contacts_IncludeEmployees") IsNot Nothing, Session("Filter_Contacts_IncludeEmployees"), cboContactType.Items(2).Checked)
+            cboContactType.Items(3).Checked = If(Session("Filter_Contacts_IncludeSubConsultants") IsNot Nothing, Session("Filter_Contacts_IncludeSubConsultants"), cboContactType.Items(3).Checked)
+            cboContactType.Items(4).Checked = If(Session("Filter_Contacts_IncludeVendors") IsNot Nothing, Session("Filter_Contacts_IncludeVendors"), cboContactType.Items(4).Checked)
+            txtFind.Text = Session("Filter_Contacts_txtFind")
+        Catch ex As Exception
+        End Try
     End Sub
 
     'Protected Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click

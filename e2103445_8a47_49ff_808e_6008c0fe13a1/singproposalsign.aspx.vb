@@ -158,11 +158,10 @@ Public Class singproposalsign
         End If
     End Sub
 
-    Private Sub SignProposal(proposalId As Integer, companyId As Integer, clientName As String, img As String)
+    Private Async Sub SignProposal(proposalId As Integer, companyId As Integer, clientName As String, img As String)
         Try
             pnlSideTools.Visible = False
-            ' Accept Email
-            ProposalAcceptedEmail(proposalId, companyId)
+
 
             ' Confirm proposal acceptance
             Dim JobId As Integer
@@ -172,8 +171,11 @@ Public Class singproposalsign
 
             Dim pdf As PdfApi = New PdfApi()
             Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
-            Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
             Dim pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
+
+            ' Accept Email
+            ProposalAcceptedEmail(proposalId, companyId, pdfUrl)
+            Await pdf.CreateProposalSignedPdfAsync(proposalId, newName)
 
             If JobId > 0 Then
                 NewJobEmail(proposalId, JobId, companyId, pdfUrl)
@@ -243,7 +245,7 @@ Public Class singproposalsign
             End If
 
             sMsg.Append("<br />")
-            sMsg.Append("<a href=" & """" & ProposalPdfURL & """" & "> Download PDF File</a>")
+            sMsg.Append("<a href=""" & ProposalPdfURL & """> Download PDF </a>")
             sMsg.Append("<br />")
 
             sMsg.Append("<br />")
@@ -263,7 +265,7 @@ Public Class singproposalsign
                 If Len(sProjectManagerEmail) > 0 Then
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, lblCompanyId.Text)
                 End If
-                Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+                SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName)
 
                 Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
                 Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
@@ -294,7 +296,7 @@ Public Class singproposalsign
             sMsg.Append("<br />")
 
             sMsg.Append("<br />")
-            sMsg.Append("<a href=" & """" & ProposalPdfURL & """" & "> Download PDF File</a>")
+            sMsg.Append("<a href=""" & ProposalPdfURL & """> Download PDF</a>")
             sMsg.Append("<br />")
 
             sMsg.Append("<br />")
@@ -313,7 +315,8 @@ Public Class singproposalsign
             If Len(sProjectManagerEmail) > 0 Then
                 sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
             End If
-            Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+
+            SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName)
 
             Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
             Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
@@ -339,7 +342,7 @@ Public Class singproposalsign
         End Try
     End Sub
 
-    Private Function ProposalAcceptedEmail(ByVal lProposalId As Integer, ByVal companyid As Integer) As Boolean
+    Private Function ProposalAcceptedEmail(ByVal lProposalId As Integer, ByVal companyid As Integer, PrposalpdfUrl As String) As Boolean
         Try
             Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
             Dim sClientEmail As String = ProposalObject("ClientEmail")
@@ -360,6 +363,8 @@ Public Class singproposalsign
                 sBody = Replace(sBody, "[ProposalBy]", ProposalObject("ProposalBy"))
                 sBody = Replace(sBody, "[ProposalByEmail]", ProposalObject("ProposalByEmail"))
                 sBody = Replace(sBody, "[CompamyPhone]", LocalAPI.GetCompanyProperty(companyid, "Phone"))
+
+                sBody = sBody & " <br /> <a href=""" & PrposalpdfUrl & """ > Download PDF</a><br />"
 
                 Dim sCC As String = ""
                 Dim sProjectManagerEmail As String = ""
@@ -386,7 +391,7 @@ Public Class singproposalsign
                 If Len(sProjectManagerEmail) > 0 Then
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
                 End If
-                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+                SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName)
 
 
                 Dim recipientEmailSent As String = sCC & IIf(Len(sCCO) > 0, "," & sCCO, "")
@@ -487,7 +492,7 @@ Public Class singproposalsign
         If Len(url) = 0 Then
             url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/thank-you-proposal.aspx?GuiId=" & lblGuiId.Text
         End If
-        Response.Redirect(url)
+        Response.Redirect(url, False)
     End Sub
 
     Protected Async Sub btnPrint_Click(sender As Object, e As EventArgs)

@@ -33,6 +33,12 @@ Public Class time
                 SqlDataSourceClients.DataBind()
                 cboClient.DataBind()
 
+                SqlDataSourceJobs.DataBind()
+                cboJob.DataBind()
+
+                SqlDataSourceDepartments.DataBind()
+                cboDepartments.DataBind()
+
                 If Not Request.QueryString("JobId") Is Nothing Then
                     SqlDataSourceJobs.DataBind()
                     cboJob.DataBind()
@@ -43,12 +49,17 @@ Public Class time
                     cboEmployee.SelectedValue = lblEmployeeId.Text
                 End If
 
+                If Not Request.QueryString("restoreFilter") Is Nothing Then
+                    RestoreFilter()
+                End If
                 RefrescarDatos()
 
                 RadGrid2.AllowAutomaticDeletes = LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_PayrollCalendar")
 
                 Master.PageTitle = "Employees/Time Entries"
                 Master.Help = "http://blog.pasconcept.com/2012/07/employees-project-time-entries.html"
+
+
             End If
             'RadWindow1.NavigateUrl = "~/RPT/rptTimesList.aspx?Empleado=" & Val("" & cboEmployee.SelectedValue) & "&Job=" & cboJob.SelectedValue & "&Client=" & cboClient.SelectedValue &
             '    "&Year=" & cboYear.SelectedValue & "&Mes=" & cboMes.SelectedValue & "&CategoryId=-1"
@@ -90,6 +101,7 @@ Public Class time
     End Sub
 
     Protected Sub btnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
+        SaveFilter()
         RefrescarDatos()
     End Sub
 
@@ -216,5 +228,27 @@ Public Class time
             End If
             Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & cboJob.SelectedValue & "&backpage=time")
         End If
+    End Sub
+
+
+    Private Sub SaveFilter()
+        Session("Filter_Time_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
+        Session("Filter_Time_RadDatePickerTo") = RadDatePickerTo.SelectedDate
+        Session("Filter_Time_cboEmployee") = cboEmployee.SelectedValue
+        Session("Filter_Time_Job") = cboJob.SelectedValue
+        Session("Filter_Time_cboClient") = cboClient.SelectedValue
+        Session("Filter_Time_cboDepartments") = cboDepartments.SelectedValue
+    End Sub
+
+    Private Sub RestoreFilter()
+        Try
+            RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Time_RadDatePickerFrom"))
+            RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Time_RadDatePickerTo"))
+            cboEmployee.SelectedValue = Session("Filter_Time_cboEmployee")
+            cboJob.SelectedValue = Session("Filter_Time_Job")
+            cboClient.SelectedValue = Session("Filter_Time_cboClient")
+            cboDepartments.SelectedValue = Session("Filter_Time_cboDepartments")
+        Catch ex As Exception
+        End Try
     End Sub
 End Class
