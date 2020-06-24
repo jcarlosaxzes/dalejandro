@@ -81,15 +81,32 @@ Public Class PrintPDF
 
             '---------------------------------------------------------------------------
             'Statements
-            Dim statementId = LocalAPI.GetSharedLink_Id(5, txtGuID.Text)
-            Dim companyId = LocalAPI.GetCompanyIdFromStatement(statementId)
-            Dim pdfBytes = Await pdf.CreateStatementsPdfBytes(companyId, statementId)
+            'Dim statementId = LocalAPI.GetSharedLink_Id(5, txtGuID.Text)
+            'Dim companyId = LocalAPI.GetCompanyIdFromStatement(statementId)
+            'Dim pdfBytes = Await pdf.CreateStatementsPdfBytes(companyId, statementId)
+            'Dim response As HttpResponse = HttpContext.Current.Response
+            'response.ContentType = "application/pdf"
+            'response.AddHeader("Content-Disposition", "attachment; filename=statement.pdf")
+            'response.ClearContent()
+            'response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+            'response.Flush()
+
+
+            '---------------------------------------------------------------------------
+            'Scope Of Work
+            Dim JobId = LocalAPI.GetJobIdFromGUID(txtGuID.Text)
+            Dim companyId = LocalAPI.GetJobProperty(JobId, "companyId")
+            'Dim json = pdf.loadJobScopeJson(companyId, JobId)
+            'Dim js = json.ToString()
+
+            Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, JobId)
             Dim response As HttpResponse = HttpContext.Current.Response
             response.ContentType = "application/pdf"
-            response.AddHeader("Content-Disposition", "attachment; filename=statement.pdf")
+            response.AddHeader("Content-Disposition", "attachment; filename=WorkScope.pdf")
             response.ClearContent()
             response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
             response.Flush()
+
 
         Catch ex As Exception
             Console.WriteLine(ex.Message())
