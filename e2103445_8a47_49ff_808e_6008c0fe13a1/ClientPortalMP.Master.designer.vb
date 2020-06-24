@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class ClientPortalMP1
-
+    
     '''<summary>
     '''form1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
+    
     '''<summary>
     '''RadScriptManager1 control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
-
+    
     '''<summary>
     '''RadPageLayout1 control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
-
+    
     '''<summary>
     '''FormViewCompany control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewCompany As Global.System.Web.UI.WebControls.FormView
-
+    
     '''<summary>
     '''ContentPlaceHolder1 control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ContentPlaceHolder1 As Global.System.Web.UI.WebControls.ContentPlaceHolder
-
+    
     '''<summary>
     '''pnl_reviews control.
     '''</summary>
@@ -66,16 +66,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnl_reviews As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''Image1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
-
+    
     '''<summary>
     '''UpdatePanel1 control.
     '''</summary>
@@ -84,7 +75,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
-
+    
     '''<summary>
     '''RadNotificationWarning control.
     '''</summary>
@@ -93,7 +84,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadNotificationWarning As Global.Telerik.Web.UI.RadNotification
-
+    
     '''<summary>
     '''RadNotificationError control.
     '''</summary>
@@ -102,7 +93,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadNotificationError As Global.Telerik.Web.UI.RadNotification
-
+    
     '''<summary>
     '''SqlDataSourceCompany control.
     '''</summary>
@@ -111,7 +102,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceCompany As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -120,7 +111,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblGuid control.
     '''</summary>
@@ -129,7 +120,7 @@ Partial Public Class ClientPortalMP1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblGuid As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblType control.
     '''</summary>

@@ -269,14 +269,15 @@
                                                             <i class="far fa-envelope"></i>
                                     </asp:LinkButton>
                                     &nbsp;
-                                                        <asp:LinkButton ID="btnShareLink" runat="server" UseSubmitBehavior="false" CommandName="GetSharedLink" CommandArgument='<%# Eval("Id") %>'
-                                                            ToolTip="Get a link to copy and paste in an email or browser" CausesValidation="false">
-                                                            <i class="far fa-share-square"></i>
-                                                        </asp:LinkButton>
-                                    &nbsp;
                                                         <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
                                                             CommandName="PDF" CommandArgument='<%# Eval("Id")%>'>
                                                                <i class="far fa-file-pdf"></i></a>
+                                                        </asp:LinkButton>
+
+                                    &nbsp;
+                                                        <asp:LinkButton ID="btnShareLink" runat="server" UseSubmitBehavior="false" CommandName="GetSharedLink" CommandArgument='<%# Eval("Id") %>'
+                                                            ToolTip="Get a link to copy and paste in an email or browser" CausesValidation="false">
+                                                            <i class="far fa-share-square"></i>
                                                         </asp:LinkButton>
                                     &nbsp;
                                                         <asp:LinkButton ID="btnClone" runat="server" UseSubmitBehavior="false" ToolTip="Duplicate Invoice"
