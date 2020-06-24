@@ -19,12 +19,27 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
 
+    <style>
+        .card-body {
+            padding: 0.25rem;
+        }
 
+        .card-header {
+            padding: 0 .50rem;
+        }
+
+        img {
+            max-height: 96px;
+            max-width: 200px;
+            height: auto;
+            width: auto;
+        }
+    </style>
     <div class="PanelFilter noprint">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
             <table onclick="table-sm pasconcept-bar noprint" width="100%">
                 <tr>
-                    <td style="width: 400px">
+                    <td style="width: 500px">
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" AutoPostBack="true"
                             DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="100%" Height="300px"
                             AppendDataBoundItems="true">
@@ -79,34 +94,29 @@
             </LayoutTemplate>
             <ItemTemplate>
 
-                <div class="card" style="float: left; width: 400px; margin: 5px">
+                <div class="card" style="float: left; width: 230px; margin: 2px">
                     <div class="card-header">
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td style="text-align: left;padding-bottom: 0;padding-top:0">
-                                    <b style="width: 300px;display: inline-block; height: 40px; overflow: hidden;"><%# Eval("Name")%></b>
-                                </td>
-                            </tr>
-                        </table>
+
+                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px"><%# Eval("Name")%></b>
+
                     </div>
                     <div class="card-body">
                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
-                            <table class="table-sm card-text" style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                            <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <tr>
-                                    <td>
+                                    <td style="height:104px">
                                         <%# CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
                                     </td>
                                 </tr>                                
                                 <tr>
-                                    <td style="line-height:16px; padding-top:10px;">
-                                        Document: <strong style="font-size:16px;"> <%# Eval("Document")%></strong>&nbsp;&nbsp;
-                                        Source: <strong style="font-size:16px;"> <%# FormatSource(Eval("Source"))%></strong>
+                                    <td style="font-size:12px; padding-top:10px;">
+                                         <%# FormatSource(Eval("Source"))%>:&nbsp<b><%# Eval("Document")%></b>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="line-height:16px">
-                                         Date: <strong  style="font-size:16px;"><%# Eval("Date", "{0:d}")%></strong> &nbsp;&nbsp;
-                                        Size: <strong  style="font-size:16px;"><%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%></strong>
+                                    <td style="font-size:12px">
+                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
+                                         <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                     </td>
                                 </tr>                                
                             </table>
@@ -119,7 +129,7 @@
 
         </telerik:RadListView>
 
-<%--        <telerik:RadGrid ID="RadGridAzureFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GroupPanelPosition="Top" ShowFooter="true"
+        <%--        <telerik:RadGrid ID="RadGridAzureFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GroupPanelPosition="Top" ShowFooter="true"
             AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" AllowAutomaticDeletes="True">
             <ClientSettings Selecting-AllowRowSelect="true"></ClientSettings>
             <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id, Source" DataSourceID="SqlDataSourceAzureFiles"
@@ -196,7 +206,6 @@
                 </EditFormSettings>
             </MasterTableView>
         </telerik:RadGrid>--%>
-
     </div>
 
 

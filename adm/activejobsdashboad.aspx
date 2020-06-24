@@ -18,6 +18,14 @@
             padding: 5px;
             padding-left: 30px;
         }
+
+        .card-body {
+            padding: 0.25rem;
+        }
+
+        .card-header {
+            padding: 0 .50rem;
+        }
     </style>
     <link rel="manifest" href="../manifest.json" />
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
@@ -231,7 +239,7 @@
                                 <telerik:GridTemplateColumn UniqueName="Column1" ItemStyle-Font-Size="X-Small">
                                     <ItemTemplate>
                                         <div>
-                                            <table class="table-sm" style="width: 100%;text-align:center">
+                                            <table class="table-sm" style="width: 100%; text-align: center">
                                                 <tr>
                                                     <td style='<%# GetDateOfWeekStyle(Eval("Date9"))%>'>
                                                         <%# String.Concat(Eval("weekOFday9"), ":", Eval("Date9", "{0:d}")) %>
@@ -357,12 +365,12 @@
             </LayoutTemplate>
             <ItemTemplate>
 
-                <div class="card" style="float: left; width: 400px; margin: 5px">
+                <div class="card" style="float: left; width: 310px; margin: 3px">
                     <div class="card-header">
                         <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: left">
-                                    <h1 style="margin: 0"><%# Eval("Code")%></h1>
+                                    <h3 style="margin: 0"><%# Eval("Code")%></h3>
                                 </td>
                                 <td style="width: 32px; text-align: right; font-size: 24px;">
                                     <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
@@ -376,59 +384,37 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="text-align: center">
                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
-                            <table class="table-sm card-text" style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                            <p style="width: 100%; text-align: center; margin: 0; flex-wrap: nowrap; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                <b><%# Eval("itemName")%></b><br />
+                                <%# Eval("ClientCompany")%><br />
+                                <%# Eval("ClientName")%><br />
+                                PM: <%# Eval("PM")%>
+                            </p>
+                            <table style="width: 100%">
                                 <tr>
-                                    <td>
-                                        <h4><b><%# Eval("itemName")%></b></h4>
+                                    <td style="width: 100px; text-align: right">
+                                        <%# Eval("HoursUsed", "{0:N1}")%>/<%# Eval("HoursAssigned", "{0:N0}")%>
                                     </td>
-                                </tr>
-                                <tr>
                                     <td>
-                                        <h4 style="margin: 0"><%# Eval("ClientCompany")%></h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <h4 style="margin: 0"><%# Eval("ClientName")%></h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-top: 15px">
-                                        <h4>PM: <%# Eval("PM")%></h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <br />
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <td style="width: 100px; text-align: right">
-                                                    <%# Eval("HoursUsed", "{0:N1}")%>/<%# Eval("HoursAssigned", "{0:N0}")%>
-                                                </td>
-                                                <td>
-                                                    <telerik:RadProgressBar ID="RadProgressBar1" runat="server"
-                                                        RenderMode="Lightweight"
-                                                        Height="18px" ShowLabel="false"
-                                                        BarType="Value"
-                                                        Skin="Metro"
-                                                        MaxValue='<%# Eval("HoursAssigned")%>'
-                                                        Value='<%# Eval("HoursUsed")%>'
-                                                        Width="100%"
-                                                        Visible='<%# Eval("HoursUsed") > 0%>'>
-                                                        <AnimationSettings Duration="0" />
-                                                    </telerik:RadProgressBar>
-
-                                                </td>
-                                                <td style="width: 100px; text-align: left">
-                                                    <%# Eval("HourUsedPercent", "{0:N0}")%> %
-                                                </td>
-
-                                            </tr>
-                                        </table>
+                                        <telerik:RadProgressBar ID="RadProgressBar1" runat="server"
+                                            RenderMode="Lightweight"
+                                            Height="18px" ShowLabel="false"
+                                            BarType="Value"
+                                            Skin="Metro"
+                                            MaxValue='<%# Eval("HoursAssigned")%>'
+                                            Value='<%# Eval("HoursUsed")%>'
+                                            Width="100%"
+                                            Visible='<%# Eval("HoursUsed") > 0%>'>
+                                            <AnimationSettings Duration="0" />
+                                        </telerik:RadProgressBar>
 
                                     </td>
+                                    <td style="width: 100px; text-align: left">
+                                        <%# Eval("HourUsedPercent", "{0:N0}")%> %
+                                    </td>
+
                                 </tr>
                             </table>
                         </asp:LinkButton>
