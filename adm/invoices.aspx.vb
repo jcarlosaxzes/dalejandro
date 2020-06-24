@@ -96,7 +96,7 @@ Public Class invoices
     '    End While
     'End Sub
 
-    Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
+    Protected Async Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditInvoice"
@@ -136,6 +136,18 @@ Public Class invoices
             Case "EditJob"
                 sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
+
+            Case "PDF"
+                lblInvoiceId.Text = LocalAPI.Invoice_Duplicate(e.CommandArgument)
+                Dim pdf As PdfApi = New PdfApi()
+                Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
+                Dim pdfBytes = Await pdf.CreateInvoicePdfBytes(companyId, lblInvoiceId.Text)
+                Dim response As HttpResponse = HttpContext.Current.Response
+                response.ContentType = "application/pdf"
+                response.AddHeader("Content-Disposition", "attachment; filename=Invoice.pdf")
+                response.ClearContent()
+                response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+                response.Flush()
         End Select
     End Sub
 

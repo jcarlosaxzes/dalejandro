@@ -52,7 +52,7 @@ Public Class Job_accounting
         InvoiceDlg()
     End Sub
 
-    Protected Sub RadGridIncoices_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridIncoices.ItemCommand
+    Protected Async Sub RadGridIncoices_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridIncoices.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
 
@@ -87,6 +87,19 @@ Public Class Job_accounting
             Case "Duplicate"
                 lblInvoiceId.Text = LocalAPI.Invoice_Duplicate(e.CommandArgument)
                 InvoiceDlg()
+
+            Case "PDF"
+                lblInvoiceId.Text = LocalAPI.Invoice_Duplicate(e.CommandArgument)
+                Dim pdf As PdfApi = New PdfApi()
+                Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
+                Dim pdfBytes = Await pdf.CreateInvoicePdfBytes(companyId, lblInvoiceId.Text)
+                Dim response As HttpResponse = HttpContext.Current.Response
+                response.ContentType = "application/pdf"
+                response.AddHeader("Content-Disposition", "attachment; filename=Invoice.pdf")
+                response.ClearContent()
+                response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+                response.Flush()
+
         End Select
 
     End Sub
