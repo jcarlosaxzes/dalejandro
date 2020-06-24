@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" %>
+﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" Async="true"%>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>

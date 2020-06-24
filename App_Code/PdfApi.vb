@@ -165,7 +165,7 @@ Public Class PdfApi
                             jsonProposal.Add("CompanySing", Convert.ToBase64String(CompanySing))
                         End If
                     Else
-                            jsonProposal.Add("CompanySing", "")
+                        jsonProposal.Add("CompanySing", "")
                     End If
                     jsonProposal.Add("CompanyContact", reader("CompanyContact").ToString())
                     jsonProposal.Add("IsPhases", reader("IsPhases").ToString())
@@ -366,7 +366,7 @@ Public Class PdfApi
                     jsonInvoices.Add("Time", reader("Time").ToString())
                     jsonInvoices.Add("Rate", reader("Rate").ToString())
                     Dim FirstEmission = reader("FirstEmission").ToString()
-                    If MaturityDate IsNot Nothing And MaturityDate.Length > 0 Then
+                    If FirstEmission IsNot Nothing And FirstEmission.Length > 0 Then
                         Dim Date2 = DateTime.Parse(FirstEmission)
                         jsonInvoices.Add("FirstEmission", Date2.ToShortDateString())
                     Else
