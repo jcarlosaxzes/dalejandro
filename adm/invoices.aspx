@@ -233,19 +233,21 @@
                         UniqueName="InvoiceNotes">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="column"
-                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
+                        HeaderStyle-Width="160px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnInvoiceInv44" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id") %>'
                                 ToolTip="Send Email with Invoice information" CausesValidation="false">
                                         <i class="far fa-envelope"></i>
                             </asp:LinkButton>
-                            &nbsp;
-                                    <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+
                             &nbsp;
                                     <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
                                         CommandName="PDF" CommandArgument='<%# Eval("Id")%>'>
                                             <i class="far fa-file-pdf"></i></a>
                                     </asp:LinkButton>
+
+                            &nbsp;
+                                    <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
                             &nbsp;
                                     <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                         ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
