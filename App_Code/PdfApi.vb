@@ -66,6 +66,14 @@ Public Class PdfApi
         Return bytePDF
     End Function
 
+    Public Async Function CreateWorkScopePdfBytes(companyId As String, JobId As String) As Task(Of Byte())
+        Dim jsonObj = loadJobScopeJson(companyId, JobId)
+        Dim json As String = jsonObj.ToString()
+        Dim base64 As String = Await GetBase64Document("121504", json)
+        Dim bytePDF As Byte() = Convert.FromBase64String(base64)
+        Return bytePDF
+    End Function
+
     Public Function loadJson(CompanyId As String, ProposalId As String) As JObject
         Dim jsonObj As JObject = New JObject()
         Try
@@ -508,6 +516,57 @@ Public Class PdfApi
         Catch ex As Exception
             Console.WriteLine(ex.Message())
         End Try
+        Dim jstr = jsonObj.ToString()
+        Return jsonObj
+
+    End Function
+
+
+    Public Function loadJobScopeJson(CompanyId As String, JobId As String) As JObject
+
+        Dim ProposalId = LocalAPI.GetJobProperty(JobId, "proposalId")
+        Dim CustomerID = LocalAPI.GetJobProperty(JobId, "Client")
+
+
+        Dim jsonObj As JObject = New JObject()
+        Try
+            'Company Data
+            jsonObj.Add("CompanyId", CompanyId)
+            jsonObj.Add("CompanyName", LocalAPI.GetCompanyProperty(CompanyId, "Name"))
+            jsonObj.Add("CompanyAddress", LocalAPI.GetCompanyProperty(CompanyId, "Address"))
+            jsonObj.Add("CompanyCity", LocalAPI.GetCompanyProperty(CompanyId, "City"))
+            jsonObj.Add("CompanyState", LocalAPI.GetCompanyProperty(CompanyId, "State"))
+            jsonObj.Add("CompanyZipCode", LocalAPI.GetCompanyProperty(CompanyId, "ZipCode"))
+            jsonObj.Add("CompanyPhone", LocalAPI.GetCompanyProperty(CompanyId, "Phone"))
+            jsonObj.Add("CompanyEmail", LocalAPI.GetCompanyProperty(CompanyId, "Email"))
+            jsonObj.Add("CompanyWebLink", LocalAPI.GetCompanyProperty(CompanyId, "web"))
+            Dim Base64StringCompanyLogo = LocalAPI.GetCompanyLogo(CompanyId)
+            If (Base64StringCompanyLogo IsNot Nothing) Then
+                jsonObj.Add("Base64StringCompanyLogo", Convert.ToBase64String(Base64StringCompanyLogo))
+            Else
+                jsonObj.Add("Base64StringCompanyLogo", "")
+            End If
+            Dim Base64StringCompanyLetterHead = LocalAPI.GetCompanyLetterHead(CompanyId)
+            If (Base64StringCompanyLetterHead IsNot Nothing) Then
+                jsonObj.Add("Base64StringCompanyLetterHead", Convert.ToBase64String(Base64StringCompanyLetterHead))
+            Else
+                jsonObj.Add("Base64StringCompanyLetterHead", "")
+            End If
+        Catch ex As Exception
+            Console.WriteLine(ex.Message())
+        End Try
+
+        Dim jsonWorkScope As JObject = New JObject()
+        jsonWorkScope.Add("ProposalNumber", LocalAPI.ProposalNumber(ProposalId))
+        jsonWorkScope.Add("ProposalBy", LocalAPI.GetJobProposalBy(JobId))
+        jsonWorkScope.Add("ClientName", LocalAPI.GetClientProperty(CustomerID, "Name"))
+        jsonWorkScope.Add("Company", LocalAPI.GetClientProperty(CustomerID, "Company"))
+
+        Dim sb = New StringBuilder()
+        LocalAPI.GetScopeOfWork(ProposalId, sb)
+        jsonWorkScope.Add("ScopeOfWorkText", sb.ToString)
+        jsonObj.Add("ScopeOfWork", jsonWorkScope)
+
         Dim jstr = jsonObj.ToString()
         Return jsonObj
 

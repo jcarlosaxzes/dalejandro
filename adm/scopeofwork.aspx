@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="scopeofwork.aspx.vb" Inherits="pasconcept20.scopeofwork" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="scopeofwork.aspx.vb" Inherits="pasconcept20.scopeofwork" Async="true"%>
 
 <!DOCTYPE html>
 

@@ -28,9 +28,16 @@
         End If
     End Sub
 
-    Private Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
-        txtHTML.ExportSettings.FileName = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork"
-        txtHTML.ExportToDocx()
+    Private Async Sub btnDownload_Click(sender As Object, e As EventArgs) Handles btnDownload.Click
+        Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
+        Dim pdf As PdfApi = New PdfApi()
+        Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, lblJobId.Text)
+        Dim response As HttpResponse = HttpContext.Current.Response
+        response.ContentType = "application/pdf"
+        response.AddHeader("Content-Disposition", "attachment; filename=WorkScope.pdf")
+        response.ClearContent()
+        response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+        response.Flush()
 
     End Sub
 
