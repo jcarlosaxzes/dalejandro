@@ -179,10 +179,10 @@
                         </table>
                     </EditItemTemplate>
                 </asp:FormView>
-                <telerik:RadGrid ID="RadGridIncoices" runat="server" AllowAutomaticDeletes="True" Skin="Bootstrap"
-                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoices" GridLines="None" 
+                <telerik:RadGrid ID="RadGridIncoices" runat="server" AllowAutomaticDeletes="True" HeaderStyle-HorizontalAlign="Center"
+                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoices" 
                     ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="X-Small"
-                    ShowFooter="True" Width="100%" CellSpacing="0">
+                    ShowFooter="True" Width="100%" >
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceInvoices" AllowSorting="true"
                         >
                         <CommandItemSettings ExportToPdfText="Export to PDF" />
@@ -194,8 +194,8 @@
                         </ExpandCollapseColumn>
                         <Columns>
                             <telerik:GridTemplateColumn DataField="Id" DataType="System.Int32" FilterControlAltText="Filter Id column"
-                                HeaderText="Invoice Number" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber" ReadOnly="true" Aggregate="Count" FooterAggregateFormatString="{0:N0}"
-                                HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center">
+                                HeaderText="Invoice" HeaderTooltip="Invoice Number" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber" ReadOnly="true" Aggregate="Count" FooterAggregateFormatString="{0:N0}"
+                                 HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEditInvoice" runat="server" CommandName="EditInvoice" CommandArgument='<%# Eval("Id") %>'
                                         Text='<%# Eval("InvoiceNumber") %>' ToolTip="Click to Edit Invoice"></asp:LinkButton>
@@ -203,7 +203,7 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="InvoiceType" DataType="System.Int32" ReadOnly="true"
                                 FilterControlAltText="Filter InvoiceType column" HeaderText="Type" SortExpression="InvoiceType"
-                                UniqueName="InvoiceType" HeaderStyle-HorizontalAlign="Center"
+                                UniqueName="InvoiceType" 
                                 ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20px">
                                 <ItemTemplate>
                                     <asp:Label ID="typeLabelInv" runat="server" Text='<%#IIf(Eval("InvoiceType") = 1, "hr", "sc") %>'></asp:Label>
@@ -211,57 +211,57 @@
                             </telerik:GridTemplateColumn>
                             <telerik:GridDateTimeColumn DataField="InvoiceDate" DataFormatString="{0:MM/dd/yy}"
                                 FilterControlAltText="Filter InvoiceDate column" HeaderText="Date Created" SortExpression="InvoiceDate" Display="false"
-                                UniqueName="InvoiceDate" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                UniqueName="InvoiceDate"  ItemStyle-HorizontalAlign="Right">
                             </telerik:GridDateTimeColumn>
                             <telerik:GridDateTimeColumn DataField="MaturityDate" DataFormatString="{0:MM/dd/yy}"
-                                FilterControlAltText="Filter MaturityDate column" HeaderText="Due Date" HeaderStyle-Width="60px"
+                                FilterControlAltText="Filter MaturityDate column" HeaderText="Due Date" HeaderStyle-Width="120px"
                                 SortExpression="MaturityDate" UniqueName="MaturityDate">
                             </telerik:GridDateTimeColumn>
-                            <telerik:GridTemplateColumn DataField="Amount" HeaderText="Invoice Amount" SortExpression="Amount"
-                                UniqueName="Amount" FilterControlAltText="Filter Amount column" HeaderStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-Width="60px"
+                            <telerik:GridTemplateColumn DataField="Amount" HeaderText="Amount" HeaderTooltip="Invoice Amount" SortExpression="Amount"
+                                UniqueName="Amount" FilterControlAltText="Filter Amount column" HeaderStyle-Width="60px"  ItemStyle-HorizontalAlign="Right"
+                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-Width="120px"
                                 FooterStyle-HorizontalAlign="Right">
                                 <ItemTemplate>
                                     <asp:Label ID="AmountLabelInv" runat="server" Text='<%# Eval("Amount", "{0:N2}") %>'
                                         ForeColor='<%# GetColor(Eval("Amount")) %>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="AmountDue" HeaderText="Amount Due" ReadOnly="True" SortExpression="AmountDue" UniqueName="AmountDue"
-                                HeaderStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-Width="60px" FooterStyle-HorizontalAlign="Right">
+                            <telerik:GridBoundColumn DataField="AmountDue" HeaderText="Amount Due"  ReadOnly="True" SortExpression="AmountDue" UniqueName="AmountDue"
+                                HeaderStyle-Width="60px"  ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}"
+                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-Width="120px" FooterStyle-HorizontalAlign="Right">
                             </telerik:GridBoundColumn>
                             <telerik:GridTemplateColumn HeaderText="Invoice Description" UniqueName="InvoiceNotes"
-                                HeaderStyle-HorizontalAlign="Center" DataField="InvoiceNotes" SortExpression="InvoiceNotes">
+                                 DataField="InvoiceNotes" SortExpression="InvoiceNotes">
                                 <ItemTemplate>
                                     <asp:Label ID="InvoiceNotesLabelInv" runat="server" Text='<%# Eval("InvoiceNotes") %>'></asp:Label>
                                 </ItemTemplate>
                                 <HeaderStyle HorizontalAlign="Center" />
                             </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="Emitted" DataType="System.Int16" HeaderStyle-HorizontalAlign="Center"
+                            <telerik:GridBoundColumn DataField="Emitted" 
                                 HeaderText="Emitted" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="30px"
                                 ReadOnly="true" SortExpression="Emitted" UniqueName="Emitted">
                             </telerik:GridBoundColumn>
 
-                            <telerik:GridBoundColumn DataField="EmissionRecurrenceDays" DataType="System.Int16" HeaderStyle-HorizontalAlign="Center" Display="false"
+                            <telerik:GridBoundColumn DataField="EmissionRecurrenceDays"  Display="false"
                                 HeaderText="Emission Recurrence Days" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="30px" HeaderTooltip="Define frequency of automated email reccurence"
                                 SortExpression="EmissionRecurrenceDays" UniqueName="EmissionRecurrenceDays">
                             </telerik:GridBoundColumn>
                             <telerik:GridTemplateColumn DataField="BadDebt" DataType="System.Boolean" FilterControlAltText="Filter BadDebt column" HeaderText="Bad Debt" ReadOnly="true"
-                                SortExpression="BadDebt" UniqueName="BadDebt" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="30px" ItemStyle-HorizontalAlign="Center">
+                                SortExpression="BadDebt" UniqueName="BadDebt"  HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="BadDebtCheckBoxInv2" runat="server" Checked='<%# Eval("BadDebt")%>' Enabled="false" />
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn HeaderText="Billing Contact" UniqueName="Billing_contact" HeaderStyle-Width="160px"
-                                HeaderStyle-HorizontalAlign="Center" DataField="Billing_contact" SortExpression="Billing_contact">
+                            <telerik:GridTemplateColumn HeaderText="Billing Contact" UniqueName="Billing_contact" HeaderStyle-Width="160px" Display="false"
+                                 DataField="Billing_contact" SortExpression="Billing_contact">
                                 <ItemTemplate>
                                     <%# Eval("Billing_contact") %><%# Eval("Billing_Telephone") %>
                                 </ItemTemplate>
                                 <HeaderStyle HorizontalAlign="Center" />
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn HeaderText="Actions" ReadOnly="true" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px" ItemStyle-HorizontalAlign="Center">
+                            <telerik:GridTemplateColumn HeaderText="Actions" ReadOnly="true" UniqueName="Actions"  HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
 
                                     <asp:LinkButton ID="btnInvoiceInv44" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id") %>'
@@ -273,7 +273,11 @@
                                                             ToolTip="Get a link to copy and paste in an email or browser" CausesValidation="false">
                                                             <i class="far fa-share-square"></i>
                                                         </asp:LinkButton>
-
+                                    &nbsp;
+                                                        <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
+                                                            CommandName="PDF" CommandArgument='<%# Eval("Id")%>'>
+                                                               <i class="far fa-file-pdf"></i></a>
+                                                        </asp:LinkButton>
                                     &nbsp;
                                                         <asp:LinkButton ID="btnClone" runat="server" UseSubmitBehavior="false" ToolTip="Duplicate Invoice"
                                                             CommandName="Duplicate" CommandArgument='<%# Eval("Id")%>'>
@@ -296,7 +300,7 @@
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Invoice?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
+                                UniqueName="DeleteColumn" HeaderText="" 
                                 ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
                             </telerik:GridButtonColumn>
 
@@ -310,8 +314,8 @@
         <div class="row">
             <div class="col-12">
                 <h4>Payment(s)</h4>
-                <telerik:RadGrid ID="RadGridPayments" runat="server" AllowAutomaticDeletes="True" Skin="Bootstrap"
-                    AutoGenerateColumns="False" DataSourceID="SqlDataSourcePayments" GridLines="None" ShowFooter="True">
+                <telerik:RadGrid ID="RadGridPayments" runat="server" AllowAutomaticDeletes="True" HeaderStyle-HorizontalAlign="Center"
+                    AutoGenerateColumns="False" DataSourceID="SqlDataSourcePayments"  ShowFooter="True">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayments" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="X-Small">
                         <CommandItemSettings ExportToPdfText="Export to PDF" />
                         <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column">
@@ -320,31 +324,30 @@
                         </ExpandCollapseColumn>
                         <Columns>
                             <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Payment ID" ReadOnly="True"
-                                HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center" SortExpression="Id" UniqueName="Id">
+                                HeaderStyle-Width="120px"  SortExpression="Id" UniqueName="Id">
                             </telerik:GridBoundColumn>
                             <telerik:GridTemplateColumn DataField="InvoiceNumber" FilterControlAltText="Filter Id column"
-                                HeaderText="Invoice Number" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber" HeaderStyle-Width="120px" ReadOnly="true"
-                                HeaderStyle-HorizontalAlign="Center">
+                                HeaderText="Invoice" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber" HeaderStyle-Width="120px" ReadOnly="true">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEditPayment" runat="server" CommandName="EditPayment" CommandArgument='<%# Eval("Id") %>'
                                         Text='<%# Eval("InvoiceNumber") %>' ToolTip="Click to Edit Payment"></asp:LinkButton>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridDateTimeColumn DataField="CollectedDate" DataFormatString="{0:MM/dd/yy}" FilterControlAltText="Filter CollectedDate column" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px" HeaderText="Collected Date" ItemStyle-HorizontalAlign="Right" SortExpression="CollectedDate" UniqueName="CollectedDate">
+                            <telerik:GridDateTimeColumn DataField="CollectedDate" DataFormatString="{0:MM/dd/yy}" FilterControlAltText="Filter CollectedDate column"  HeaderStyle-Width="120px" HeaderText="Collected Date" ItemStyle-HorizontalAlign="Right" SortExpression="CollectedDate" UniqueName="CollectedDate">
                             </telerik:GridDateTimeColumn>
-                            <telerik:GridTemplateColumn DataField="Method" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px" HeaderText="Payment Method" SortExpression="Method" UniqueName="Method">
+                            <telerik:GridTemplateColumn DataField="Method"  HeaderStyle-Width="150px" HeaderText="Payment Method" SortExpression="Method" UniqueName="Method">
                                 <ItemTemplate>
                                     <asp:Label ID="PaymentMethodLabel_paym" runat="server" Text='<%# Eval("PaymentMethodName")%>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn Aggregate="Sum" DataField="Amount" FilterControlAltText="Filter Amount column" FooterAggregateFormatString="{0:N2}"
-                                FooterStyle-HorizontalAlign="Right" FooterStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px" HeaderText="Amount Received" ItemStyle-HorizontalAlign="Right" SortExpression="Amount" UniqueName="Amount">
+                                FooterStyle-HorizontalAlign="Right" FooterStyle-Width="60px"  HeaderStyle-Width="150px" HeaderText="Amount Received" ItemStyle-HorizontalAlign="Right" SortExpression="Amount" UniqueName="Amount">
                                 <ItemTemplate>
                                     <asp:Label ID="AmountLabel_paym" runat="server" Text='<%# Eval("Amount", "{0:N2}") %>'>
                                     </asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="CollectedNotes" HeaderText="Collected Notes" SortExpression="CollectedNotes" UniqueName="CollectedNotes" HeaderStyle-HorizontalAlign="Center">
+                            <telerik:GridTemplateColumn DataField="CollectedNotes" HeaderText="Collected Notes" SortExpression="CollectedNotes" UniqueName="CollectedNotes" >
                                 <ItemTemplate>
                                     <table>
                                         <tr>
@@ -363,7 +366,7 @@
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this note?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
+                                UniqueName="DeleteColumn" HeaderText="" 
                                 ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
                             </telerik:GridButtonColumn>
 

@@ -12,6 +12,7 @@ Public Class MasterJOB
         If (Not Page.IsPostBack) Then
             lblJobId.Text = Request.QueryString("jobId")
             If LocalAPI.IsCompanyViolation(lblJobId.Text, "Jobs", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            Page.Title = LocalAPI.GetJobCodeName(lblJobId.Text)
         End If
     End Sub
 

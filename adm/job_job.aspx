@@ -129,7 +129,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right">Assigned Employee:
+                                <td style="text-align: right">Project Manager:
                                 </td>
                                 <td>
                                     <telerik:RadComboBox ID="cboEmployee" runat="server" SelectedValue='<%# Bind("Employee") %>'
