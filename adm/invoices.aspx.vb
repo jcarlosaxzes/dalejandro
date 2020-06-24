@@ -138,7 +138,7 @@ Public Class invoices
                 CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
 
             Case "PDF"
-                lblInvoiceId.Text = LocalAPI.Invoice_Duplicate(e.CommandArgument)
+                lblInvoiceId.Text = e.CommandArgument
                 Dim pdf As PdfApi = New PdfApi()
                 Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
                 Dim pdfBytes = Await pdf.CreateInvoicePdfBytes(companyId, lblInvoiceId.Text)
