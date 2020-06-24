@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Uploaded Files" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="clientfiles.aspx.vb" Inherits="pasconcept20.clientfiles" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
+<%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
@@ -69,7 +70,56 @@
 
 
     <div>
-        <telerik:RadGrid ID="RadGridAzureFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GroupPanelPosition="Top" ShowFooter="true"
+        <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceAzureFiles" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderStyle="Solid">
+            <LayoutTemplate>
+                <fieldset style="width: 100%; text-align: center">
+                    <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
+                </fieldset>
+
+            </LayoutTemplate>
+            <ItemTemplate>
+
+                <div class="card" style="float: left; width: 400px; margin: 5px">
+                    <div class="card-header">
+                        <table class="table-sm" style="width: 100%">
+                            <tr>
+                                <td style="text-align: left;padding-bottom: 0;padding-top:0">
+                                    <b style="width: 300px;display: inline-block; height: 40px; overflow: hidden;"><%# Eval("Name")%></b>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
+                            <table class="table-sm card-text" style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                                <tr>
+                                    <td>
+                                        <%# CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td style="line-height:16px; padding-top:10px;">
+                                        Document: <strong style="font-size:16px;"> <%# Eval("Document")%></strong>&nbsp;&nbsp;
+                                        Source: <strong style="font-size:16px;"> <%# FormatSource(Eval("Source"))%></strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="line-height:16px">
+                                         Date: <strong  style="font-size:16px;"><%# Eval("Date", "{0:d}")%></strong> &nbsp;&nbsp;
+                                        Size: <strong  style="font-size:16px;"><%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%></strong>
+                                    </td>
+                                </tr>                                
+                            </table>
+                        </asp:LinkButton>
+
+                    </div>
+                </div>
+
+            </ItemTemplate>
+
+        </telerik:RadListView>
+
+<%--        <telerik:RadGrid ID="RadGridAzureFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GroupPanelPosition="Top" ShowFooter="true"
             AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" AllowAutomaticDeletes="True">
             <ClientSettings Selecting-AllowRowSelect="true"></ClientSettings>
             <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id, Source" DataSourceID="SqlDataSourceAzureFiles"
@@ -145,7 +195,8 @@
                     </EditColumn>
                 </EditFormSettings>
             </MasterTableView>
-        </telerik:RadGrid>
+        </telerik:RadGrid>--%>
+
     </div>
 
 
