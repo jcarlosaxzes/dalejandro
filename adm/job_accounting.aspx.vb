@@ -89,7 +89,7 @@ Public Class Job_accounting
                 InvoiceDlg()
 
             Case "PDF"
-                lblInvoiceId.Text = LocalAPI.Invoice_Duplicate(e.CommandArgument)
+                lblInvoiceId.Text = e.CommandArgument
                 Dim pdf As PdfApi = New PdfApi()
                 Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
                 Dim pdfBytes = Await pdf.CreateInvoicePdfBytes(companyId, lblInvoiceId.Text)
