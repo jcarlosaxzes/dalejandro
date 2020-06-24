@@ -97,12 +97,14 @@
                                             <td style="text-align: right; width: 450px; vertical-align: top; margin: 6px">
 
 
-                                                <a class="btn btn-primary noprint" href="paymenthistory.aspx" role="button">Payment History</a>
+                                                <a class="btn btn-primary noprint" href="paymenthistory.aspx" role="button" title="Payment History Page">Payment History</a>
                                                 &nbsp;&nbsp;
-                                                <a class="btn btn-danger noprint" href="CP_jobs.aspx" role="button">My Jobs</a>
+                                                <a class="btn btn-primary noprint" href="CP_jobs.aspx" role="button" title="My Job List Page">My Jobs</a>
                                                 &nbsp;&nbsp;
                                                 
-                                                <button type="button" class="btn btn-secondary noprint"  runat="server" onserverclick="Print_ServerClick">Print</button>
+                                                <button type="button" title="Export PDF Report"
+                                                    class="btn btn-danger noprint"  
+                                                    runat="server" onserverclick="Print_ServerClick">PDF</i></button>
                                                 <h3 style="margin: 5px"><%# Eval("Name") %></h3>
                                                 <i class="fas fa-map-marker-alt"></i>&nbsp;<%# Eval("Address") %><br>
                                                 <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
@@ -171,7 +173,7 @@
                         <telerik:LayoutColumn Span="8">
                             <p class="small" style="text-align: right">
                                 <br />
-                                &copy; 2009-2019 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="https://www.axzes.com/" target="_blank">Axzes llc</a>
+                                &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="https://www.axzes.com/" target="_blank">Axzes llc</a>
                             </p>
                         </telerik:LayoutColumn>
                     </Columns>
