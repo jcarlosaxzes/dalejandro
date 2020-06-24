@@ -15,7 +15,7 @@ Public Class clientfiles
     End Sub
 
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
-        RadGridAzureFiles.DataBind()
+        RadListView1.DataBind()
     End Sub
 
     Private Sub SqlDataSourceAzureFiles_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceAzureFiles.Selecting
@@ -43,20 +43,20 @@ Public Class clientfiles
 
     Private Sub btnDeleteSelected_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
         Try
-            'get a reference to the row
-            If RadGridAzureFiles.SelectedItems.Count > 0 Then
-                For Each dataItem As GridDataItem In RadGridAzureFiles.SelectedItems
-                    If dataItem.Selected Then
-                        lblSelectedId.Text = dataItem("Id").Text
-                        lblSelectedSource.Text = dataItem("Source").Text
-                        SqlDataSourceAzureFiles.Delete()
-                    End If
-                Next
-                RadGridAzureFiles.DataBind()
-            Else
-                Master.ErrorMessage("Select records!")
+            ''get a reference to the row
+            'If RadGridAzureFiles.SelectedItems.Count > 0 Then
+            '    For Each dataItem As GridDataItem In RadGridAzureFiles.SelectedItems
+            '        If dataItem.Selected Then
+            '            lblSelectedId.Text = dataItem("Id").Text
+            '            lblSelectedSource.Text = dataItem("Source").Text
+            '            SqlDataSourceAzureFiles.Delete()
+            '        End If
+            '    Next
+            '    RadGridAzureFiles.DataBind()
+            'Else
+            '    Master.ErrorMessage("Select records!")
 
-            End If
+            'End If
 
 
 
@@ -69,4 +69,30 @@ Public Class clientfiles
         Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
         AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
     End Sub
+
+    Public Function FormatSource(source As String)
+        Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")
+    End Function
+
+    Public Function CreateIcon(sContentType As String, sUrl As String, sName As String)
+        If sContentType = "application/pdf" Then
+            Return $"<a class=""far fa-file-pdf"" style=""font-size: 150px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+        End If
+        If sContentType = "application/zip" Or sContentType = "application/x-tar" Or sContentType = "application/x-rar" Then
+            Return $"<a class=""far fa-file-archive"" style=""font-size: 150px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+        End If
+        If sContentType = "application/vnd.ms-excel" Or sContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" Then
+            Return $"<a class=""far fa-file-excel"" style=""font-size: 150px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+        End If
+        If sContentType = "application/msword" Or sContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" Then
+            Return $"<a class=""far fa-file-pdf"" style=""font-size: 150px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+        End If
+        If sContentType = "image/tiff" Or sContentType = "image/bmp" Or sContentType = "image/jpeg" Or sContentType = "image/gif" Or sContentType = "Image/jpg" Or sContentType = "image/png" Then
+            Return $"<image src=""{sUrl}"" width=""300px""/>"
+        End If
+
+        Return $"<a class=""far fa-file"" style=""font-size: 150px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+
+    End Function
+
 End Class
