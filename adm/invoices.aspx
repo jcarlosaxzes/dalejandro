@@ -128,14 +128,14 @@
 
     </div>
     <div class="pasconcept-bar noprint">
-        
-                    <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice">
+
+        <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice">
                     <i class="fas fa-plus"></i> Simple Charge
-                    </asp:LinkButton>
-                
-                <span class="pasconcept-pagetitle" style="padding-left: 250px;">Invoices</span>
-                    
-                
+        </asp:LinkButton>
+
+        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Invoices</span>
+
+
     </div>
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
@@ -181,7 +181,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lblBillingContact" runat="server" Text='<%# Eval("ClientName") %>' ></asp:Label>
+                                        <asp:Label ID="lblBillingContact" runat="server" Text='<%# Eval("ClientName") %>'></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -198,7 +198,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>' ></asp:Label>
+                                        <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>'></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
@@ -241,6 +241,11 @@
                             </asp:LinkButton>
                             &nbsp;
                                     <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                            &nbsp;
+                                    <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
+                                        CommandName="PDF" CommandArgument='<%# Eval("Id")%>'>
+                                            <i class="far fa-file-pdf"></i></a>
+                                    </asp:LinkButton>
                             &nbsp;
                                     <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                         ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
@@ -309,8 +314,8 @@
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Receive Payment
+        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Receive Payment
             </span>
         </h2>
         <table class="table-sm" style="width: 500px">
@@ -379,8 +384,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipEditInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Edit Invoice
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Edit Invoice
             </span>
         </h2>
 
@@ -487,8 +492,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipNewInvoice" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="navbar navbar-expand-md bg-dark text-white">New Invoice
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">New Invoice
             </span>
         </h2>
 
@@ -623,5 +628,5 @@
     <asp:Label ID="lblKeyName" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblContentBytes" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblContentType" runat="server" Visible="False"></asp:Label>
-<asp:Label ID="lblStatus" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblStatus" runat="server" Visible="False"></asp:Label>
 </asp:Content>
