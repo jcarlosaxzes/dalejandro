@@ -58,6 +58,7 @@
                                 DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Width="100%" CausesValidation="False">
                                 <Items>
                                     <telerik:RadComboBoxItem runat="server" Text="(All Clients Types...)" Value="-1" />
+                                    <telerik:RadComboBoxItem runat="server" Text="(Not Type Defined...)" Value="0" />
                                 </Items>
                             </telerik:RadComboBox>
                         </td>

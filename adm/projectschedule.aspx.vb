@@ -12,9 +12,10 @@ Public Class projectschedule
             Master.Help = "http://blog.pasconcept.com/2015/04/analyticsproject-schedule.html"
             lblCompanyId.Text = Session("companyId")
 
-            Dim datefrom As Date = DateAdd(DateInterval.Month, -2, Date.Today)
-            RadDatePickerFrom.DbSelectedDate = datefrom.Month & "/01/" & datefrom.Year
-            RadDatePickerTo.DbSelectedDate = Date.Today
+
+            cboPeriod.DataBind()
+            cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(Master.UserId, "FilterJob_Month")
+            IniciaPeriodo(cboPeriod.SelectedValue)
 
             cboEmployee.DataBind()
             cboDepartment.DataBind()
@@ -25,11 +26,35 @@ Public Class projectschedule
 
         End If
     End Sub
+    Private Sub IniciaPeriodo(nPeriodo As Integer)
+        Select Case nPeriodo
+            Case 13  ' (All Years)
+                RadDatePickerFrom.DbSelectedDate = "01/01/2000"
+                RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
+            Case 15  ' (Last Years)
+                RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year - 1
+                RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year - 1
+
+            Case 30, 60, 90, 120, 180, 365 '   days....
+                RadDatePickerTo.DbSelectedDate = Date.Today
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
+
+            Case 99   'Custom
+                ' Allow RadDatePicker user Values...
+
+            Case 14  '14 and any other old setting (This Years)
+                RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
+
+        End Select
+        cboPeriod.SelectedValue = nPeriodo
+    End Sub
     Private Sub RerfresGrantt()
+        IniciaPeriodo(cboPeriod.SelectedValue)
         ShowCheckedOneItem(lblDepartmentIN_List, cboDepartment)
         RadGranttConfigurator()
-        SqlDataSourceGrantt.DataBind()
+        RadGantt1.DataBind()
     End Sub
 
     Protected Sub RadGranttConfigurator()
@@ -42,7 +67,6 @@ Public Class projectschedule
         'Year View
         RadGantt1.YearView.SlotWidth = Unit.Parse(cboSlotWidth.SelectedValue)
 
-        'ResetDates(RadGantt1.DayView.RangeStart, RadGantt1.DayView.RangeEnd, RadGantt1.DayView.SelectedDate)
 
     End Sub
 
@@ -51,7 +75,6 @@ Public Class projectschedule
 
         Select Case e.Command
             Case Telerik.Web.UI.Gantt.GanttNavigationCommand.SwitchToDayView
-                'ResetDates(RadGantt1.DayView.RangeStart, RadGantt1.DayView.RangeEnd, RadGantt1.DayView.SelectedDate)
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, -7, Date.Today)
                 RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, 7, Date.Today)
                 RerfresGrantt()
@@ -59,12 +82,10 @@ Public Class projectschedule
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, Date.Today)
                 RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Month, 1, Date.Today)
                 RerfresGrantt()
-                'ResetDates(RadGantt1.WeekView.RangeStart, RadGantt1.WeekView.RangeEnd, RadGantt1.WeekView.SelectedDate)
             Case Telerik.Web.UI.Gantt.GanttNavigationCommand.SwitchToMonthView
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -3, Date.Today)
                 RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Month, 1, Date.Today)
                 RerfresGrantt()
-                'ResetDates(RadGantt1.MonthView.RangeStart, RadGantt1.MonthView.RangeEnd, RadGantt1.MonthView.SelectedDate)
             Case Telerik.Web.UI.Gantt.GanttNavigationCommand.SwitchToYearView
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Date.Today.Year
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Date.Today.Year
@@ -74,19 +95,6 @@ Public Class projectschedule
                 Exit Select
         End Select
     End Sub
-
-    Private Sub ResetDates(rangeStart As DateTime, rangeEnd As DateTime, selectedDate As DateTime)
-        RadDatePickerFrom.MaxDate = rangeEnd.AddDays(-1)
-        RadDatePickerTo.MinDate = rangeStart.AddDays(1)
-
-        'SelectedDateDatePicker.MinDate = rangeStart
-        'SelectedDateDatePicker.MaxDate = rangeEnd.AddDays(-1)
-
-        'SelectedDateDatePicker.SelectedDate = selectedDate
-        RadDatePickerFrom.SelectedDate = rangeStart
-        RadDatePickerTo.SelectedDate = rangeEnd
-    End Sub
-
 
     Private Sub ShowCheckedOneItem(LabelIN_List As Label, Combo1 As RadComboBox)
         ' Companies...............................
