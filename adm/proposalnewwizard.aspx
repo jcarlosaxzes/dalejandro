@@ -727,7 +727,7 @@
                                 </td>
                                 <td>
                                     <telerik:RadCheckBox ID="chkLumpSum" runat="server" Text="Detail Totals" 
-                                            ToolTip="Hide details Totals for Task in Client View" AutoPostBack="false">
+                                            ToolTip="Hide details Totals for Task in Client View" AutoPostBack="true">
                                         </telerik:RadCheckBox>
                                 </td>
                             </tr>

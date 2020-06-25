@@ -302,7 +302,7 @@ Public Class proposalnewwizard
             TextBoxOwner.Text = ProposalObject("Owner")
             If ProposalObject("ProjectManagerId") > 0 Then cboProjectManagerId.SelectedValue = ProposalObject("ProjectManagerId")
 
-            chkLumpSum.Checked = IIf(ProposalObject("ProjectSector") = 0, False, True)
+            chkLumpSum.Checked = IIf(ProposalObject("LumpSum") = 0, False, True)
         End If
     End Sub
 #End Region
@@ -442,5 +442,9 @@ Public Class proposalnewwizard
             RadGridFees.MasterTableView.GetColumn("Estimated").Visible = False
         End If
 
+    End Sub
+
+    Private Sub chkLumpSum_Click(sender As Object, e As EventArgs) Handles chkLumpSum.Click
+        LocalAPI.SetProposalLumpSum(lblProposalId.Text, IIf(chkLumpSum.Checked, 1, 0))
     End Sub
 End Class
