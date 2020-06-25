@@ -14,10 +14,6 @@ Public Class ADM_Main_Responsive
             cboCompany.DataBind()
             If Session("companyId") Is Nothing Then
                 Session("companyId") = LocalAPI.GetCompanyDefault(UserEmail)
-            Else
-                If cboCompany.SelectedValue <> Session("companyId") Then
-                    cboCompany.SelectedValue = Session("companyId")
-                End If
             End If
 
             Dim versionId As Integer = LocalAPI.sys_VersionId(Session("companyId"))
@@ -67,6 +63,14 @@ Public Class ADM_Main_Responsive
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
+            cboCompany.DataBind()
+            If Session("companyId") Is Nothing Then
+                Session("companyId") = LocalAPI.GetCompanyDefault(UserEmail)
+            Else
+                If cboCompany.SelectedValue <> Session("companyId") Then
+                    cboCompany.SelectedValue = Session("companyId")
+                End If
+            End If
 
             If Not LocalAPI.IAgree(UserEmail) And Val("" & Session("ReadLater")) <> "1" Then
                 Response.RedirectPermanent("~/adm/useragree.aspx")

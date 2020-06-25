@@ -91,6 +91,12 @@
         span.rnvMore.rnvRight::before {
             margin: 0 0 0 -0.5em !important;
         }
+
+
+        /*Submenu*/
+        .dropdown-submenu {
+            position: relative;
+        }
        
         .rnvLink .rnvText {
             font-size:16px !important;
