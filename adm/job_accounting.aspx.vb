@@ -57,7 +57,9 @@ Public Class Job_accounting
         Select Case e.CommandName
 
             Case "SendInvoice"
-                Response.Redirect("~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=1103")
+                sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=1103"
+                CreateRadWindows(e.CommandName, sUrl, 960, 790, False, "OnClientIncoicesClose")
+
 
             Case "GetSharedLink"
                 sUrl = "~/adm/sharelink.aspx?ObjType=4&ObjId=" & e.CommandArgument

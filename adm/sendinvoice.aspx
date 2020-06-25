@@ -27,8 +27,8 @@
 
     <div class="pas-container">
 
-        <telerik:RadWizard ID="RadWizard1" runat="server" Height="680px" DisplayProgressBar="false"
-            RenderMode="Lightweight" Skin="Material" Localization-Cancel="Back" Localization-Finish="Send">
+        <telerik:RadWizard ID="RadWizard1" runat="server" Height="680px" DisplayProgressBar="false" DisplayCancelButton="false"
+            RenderMode="Lightweight" Skin="Material" Localization-Finish="Send">
             <WizardSteps>
 
                 <%-- Contact Information --%>
