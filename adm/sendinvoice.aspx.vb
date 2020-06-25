@@ -32,39 +32,25 @@ Public Class sendinvoice
                         lblInvoice.Text = "0"
                     End If
 
-                    'If nInvoiceType = 0 Then
                     ' Simple charge
                     Select Case lblOrigen.Text
-                            Case 5, 6, 7   ' Desde Perfil Client, no hay opciones de Mail
-                                'PanelEmail.Visible = False
-                                PanelSMS.Visible = False
-                            Case Else   ' Desde Admin
-                                'txtTo.Text = LocalAPI.GetClientEmailFromInvoice(lblInvoice.Text)
-                                SqlDataSourceClient.DataBind()
+                        Case 5, 6, 7   ' Desde Perfil Client, no hay opciones de Mail
+                            'PanelEmail.Visible = False
+                            PanelSMS.Visible = False
+                        Case Else   ' Desde Admin
+                            'txtTo.Text = LocalAPI.GetClientEmailFromInvoice(lblInvoice.Text)
+                            SqlDataSourceClient.DataBind()
 
-                                txtTo.Entries.Add(New AutoCompleteBoxEntry(LocalAPI.GetInvoiceProperty(lblInvoice.Text, "[Clients].[Name]"), LocalAPI.GetClientEmailFromInvoice(lblInvoice.Text)))
-                                Dim sbillingContact As String = LocalAPI.GetBillingContactEmailFromInvoice(lblInvoice.Text)
-                                If LocalAPI.ValidEmail(sbillingContact) Then
-                                    txtTo.Entries.Add(New AutoCompleteBoxEntry(LocalAPI.GetInvoiceProperty(lblInvoice.Text, "[Clients].[Billing_contact]"), sbillingContact))
-                                End If
+                            txtTo.Entries.Add(New AutoCompleteBoxEntry(LocalAPI.GetInvoiceProperty(lblInvoice.Text, "[Clients].[Name]"), LocalAPI.GetClientEmailFromInvoice(lblInvoice.Text)))
+                            Dim sbillingContact As String = LocalAPI.GetBillingContactEmailFromInvoice(lblInvoice.Text)
+                            If LocalAPI.ValidEmail(sbillingContact) Then
+                                txtTo.Entries.Add(New AutoCompleteBoxEntry(LocalAPI.GetInvoiceProperty(lblInvoice.Text, "[Clients].[Billing_contact]"), sbillingContact))
+                            End If
 
-                                txtCC.Text = LocalAPI.GetBillingContactEmailFromInvoice(lblInvoice.Text)
+                            txtCC.Text = LocalAPI.GetBillingContactEmailFromInvoice(lblInvoice.Text)
 
-                                LeerInvoiceTemplate()
-                                SMS_Init()
-                        End Select
-
-                    'Else
-                    ' Hourly rate Page not exist in 2020
-                    'Response.RedirectPermanent("~/ADMCLI/InvoiceHR_RDLC.aspx?InvoiceNo=" & lblInvoice.Text & "&Origen=" & lblOrigen.Text)
-                    'End If
-
-                    ' Tratamiento boton back
-                    Select Case lblOrigen.Text
-                        Case "103", "104", "1103"  ' desde editjob con ResponseRedirect()
-                            RadWizard1.DisplayCancelButton = True
-                        Case Else
-                            RadWizard1.DisplayCancelButton = False
+                            LeerInvoiceTemplate()
+                            SMS_Init()
                     End Select
 
                     cboNotification.SelectedValue = 1

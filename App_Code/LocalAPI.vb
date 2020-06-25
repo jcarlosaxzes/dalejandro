@@ -11099,8 +11099,8 @@ Public Class LocalAPI
 
     End Function
 
-    Public Shared Function SetProposalRetainer(ByVal lId As Long, Value As Integer) As Boolean
-        Return ExecuteNonQuery("UPDATE [Proposal] SET [Retainer]=" & Value & " WHERE Id=" & lId)
+    Public Shared Function SetProposalRetainer(ByVal proposalId As Long, RetainerValue As Integer) As Boolean
+        Return ExecuteNonQuery($"UPDATE [Proposal] SET [Retainer]={RetainerValue} WHERE Id={proposalId}")
     End Function
 #End Region
 
