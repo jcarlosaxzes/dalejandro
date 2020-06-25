@@ -216,38 +216,34 @@
                                         RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
                                             <FooterStyle BorderStyle="None" />
-
                                             <Columns>
                                                 <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="" UniqueName="Phase"
                                                     HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                 </telerik:GridBoundColumn>
-                                                <%--                                <telerik:GridBoundColumn DataField="taskcode" HeaderText="" UniqueName="taskcode"
-                                    HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridBoundColumn>--%>
                                                 <telerik:GridBoundColumn DataField="Description" HeaderText="DESCRIPTION" UniqueName="Description"
                                                     HeaderStyle-HorizontalAlign="Center" ItemStyle-CssClass="GridColumn">
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridTemplateColumn DataField="Amount" HeaderText="QUANTITY" UniqueName="Amount"
-                                                    HeaderStyle-Width="70px" HeaderStyle-HorizontalAlign="Center" FooterStyle-CssClass="hidden-sm-down" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="hidden-sm-down" ItemStyle-CssClass="hidden-sm-down">
+                                                    HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center" FooterStyle-CssClass="hidden-sm-down" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="hidden-sm-down" ItemStyle-CssClass="hidden-sm-down">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblAmount" runat="server" Text='<%# IIf(Eval("Amount") = 0, "N/A", Eval("Amount"))%>' />
+                                                        <%# Eval("Amount")%>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn DataField="Hours" HeaderText="HOURS" UniqueName="Hours"
-                                                    HeaderStyle-Width="70px" HeaderStyle-HorizontalAlign="Center" FooterStyle-CssClass="hidden-sm-down" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="hidden-sm-down" ItemStyle-CssClass="hidden-sm-down">
+                                                    HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center" FooterStyle-CssClass="hidden-sm-down" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="hidden-sm-down" ItemStyle-CssClass="hidden-sm-down">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblHours" runat="server" Text='<%# IIf(Eval("Hours") = 0, "N/A", Eval("Hours"))%>' />
+                                                        <%# Eval("Hours")%>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
-                                                <telerik:GridBoundColumn DataField="Rates" DataType="System.Double" FooterStyle-CssClass="hidden-sm-down" HeaderText="RATES" UniqueName="Rates"
-                                                    HeaderStyle-Width="110px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="None" DataFormatString="{0:C}"
+                                                <telerik:GridBoundColumn DataField="Rates" FooterStyle-CssClass="hidden-sm-down" HeaderText="RATES" UniqueName="Rates"
+                                                    HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="None" DataFormatString="{0:C}"
                                                     ItemStyle-CssClass="GridColumn hidden-sm-down" HeaderStyle-CssClass="hidden-sm-down">
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridTemplateColumn DataField="TotalRow" HeaderText="TOTAL" UniqueName="TotalRow"
                                                     HeaderStyle-Width="200px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="Sum"
                                                     FooterAggregateFormatString="{0:C}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true" ItemStyle-CssClass="GridColumn">
                                                     <ItemTemplate>
-                                                        <asp:Label ID="lblTotal2" runat="server" ForeColor='<%# IIf(Eval("TotalRow") = 0,System.Drawing.Color.White,System.Drawing.Color.Black )%>' Text='<%# Eval("TotalRow","{0:C2}")%>' />
+                                                        <asp:Label ID="lblTotal2" runat="server" Visible='<%# IIf(Eval("TotalRow") = 0 Or Eval("LumpSum") = 1, False, True)%>' Text='<%# Eval("TotalRow", "{0:C2}")%>' />
                                                     </ItemTemplate>
 
                                                 </telerik:GridTemplateColumn>
@@ -509,7 +505,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcePropDetails" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="PROPOSAL_Details_Page_Select" SelectCommandType="StoredProcedure">
+        SelectCommand="PROPOSAL_Details_ClientPage_Select" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />

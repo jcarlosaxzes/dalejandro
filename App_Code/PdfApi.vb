@@ -185,7 +185,7 @@ Public Class PdfApi
         'Services Feeds
         Try
             Dim jsonTaskArray As JArray = New JArray()
-            Dim reader = ExecProsedure("PROPOSAL_Details_Page_Select", "@ProposalId", ProposalId)
+            Dim reader = ExecProsedure("PROPOSAL_Details_ClientPage_Select", "@ProposalId", ProposalId)
             Dim TaskTotal As Decimal = 0
             While reader.Read()
                 If reader.HasRows Then
@@ -229,7 +229,7 @@ Public Class PdfApi
 
         'Scope Work
         Try
-            Dim reader = ExecProsedure("PROPOSAL_Details_Page_Select", "@ProposalId", ProposalId)
+            Dim reader = ExecProsedure("PROPOSAL_Details_ClientPage_Select", "@ProposalId", ProposalId)
             Dim jsonScopeWorkArray As JArray = New JArray()
             While reader.Read()
                 If reader.HasRows Then

@@ -11102,6 +11102,9 @@ Public Class LocalAPI
     Public Shared Function SetProposalRetainer(ByVal proposalId As Long, RetainerValue As Integer) As Boolean
         Return ExecuteNonQuery($"UPDATE [Proposal] SET [Retainer]={RetainerValue} WHERE Id={proposalId}")
     End Function
+    Public Shared Function SetProposalLumpSum(ByVal proposalId As Long, LumpSumValue As Integer) As Boolean
+        Return ExecuteNonQuery($"UPDATE [Proposal] SET [LumpSum]={LumpSumValue} WHERE Id={proposalId}")
+    End Function
 #End Region
 
 #Region "Transmittal"
