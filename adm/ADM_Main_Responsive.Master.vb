@@ -4,14 +4,16 @@ Imports Microsoft.AspNet.Identity.Owin
 Public Class ADM_Main_Responsive
     Inherits System.Web.UI.MasterPage
 
+    Public UserIdp As Integer
+    Public Companyp As Integer
 
     Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         Try
             ' Inicializando Controles y Properties de la Master Page
-            UserEmail = Context.User.Identity.GetUserName()
+
             cboCompany.DataBind()
             If Session("companyId") Is Nothing Then
-                Session("companyId") = cboCompany.SelectedValue
+                Session("companyId") = LocalAPI.GetCompanyDefault(UserEmail)
             Else
                 If cboCompany.SelectedValue <> Session("companyId") Then
                     cboCompany.SelectedValue = Session("companyId")
@@ -27,6 +29,7 @@ Public Class ADM_Main_Responsive
                 FormsAuthentication.RedirectToLoginPage()
             Else
                 lblCompanyId.Text = Session("companyId")
+                Companyp = Session("companyId")
                 UserId = LocalAPI.GetEmployeeId(UserEmail, lblCompanyId.Text)
                 UserName = LocalAPI.GetEmployeeFullName(UserEmail, lblCompanyId.Text)
             End If
@@ -38,7 +41,7 @@ Public Class ADM_Main_Responsive
                 Response.Redirect("~/Default.aspx?IPAddress=" & Request.UserHostAddress())
             End If
 
-            CheckbillingExpirationDate(lblCompanyId.Text)
+            CheckbillingExpirationDate(Companyp)
 
             LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
 
@@ -73,7 +76,7 @@ Public Class ADM_Main_Responsive
                 'RadNavigation1.DataBind()
                 'RadNavigation2.DataBind()
 
-                lblCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
+                lblCompanyName.Text = LocalAPI.GetCompanyName(Companyp)
 
             End If
         End If
@@ -121,24 +124,23 @@ Public Class ADM_Main_Responsive
 
     Public Property UserId() As Integer
         Get
-            UserId = lblEmployeeId.Text
+            UserId = UserIdp
         End Get
         Set(ByVal value As Integer)
-            lblEmployeeId.Text = value.ToString
+            UserIdp = value.ToString
         End Set
     End Property
 
     Public Property UserEmail() As String
         Get
-            UserEmail = lblEmployeeEmail.Text
+            UserEmail = Context.User.Identity.GetUserName()
             If Session("AdmLogin") Is Nothing Then
                 Session("AdmLogin") = UserEmail
                 Try
-                    LocalAPI.sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.AdminLogin, cboCompany.SelectedValue, LocalAPI.GetEmployeeFullName(UserEmail, lblCompanyId.Text))
+                    LocalAPI.sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.AdminLogin, cboCompany.SelectedValue, LocalAPI.GetEmployeeFullName(UserEmail, Companyp))
                 Catch ex As Exception
 
                 End Try
-
             End If
         End Get
         Set(ByVal value As String)
@@ -157,7 +159,7 @@ Public Class ADM_Main_Responsive
     End Property
 
     Public Function IsMasterUser() As Boolean
-        Return LocalAPI.IsMasterUser(UserEmail, lblCompanyId.Text)
+        Return LocalAPI.IsMasterUser(UserEmail, Companyp)
     End Function
     Public Function VersionCaracteristica(CaracteristicaId As Integer) As Boolean
         Return LocalAPI.sys_CaracteristicaVisible(CaracteristicaId, Session("Version"))
@@ -192,6 +194,7 @@ Public Class ADM_Main_Responsive
 
         Session("companyId") = cboCompany.SelectedValue
         lblCompanyId.Text = cboCompany.SelectedValue
+        Companyp = cboCompany.SelectedValue
 
         If chkSetAsDefault.Checked Then
             SqlDataSourceCompany.Update()
@@ -206,6 +209,9 @@ Public Class ADM_Main_Responsive
     End Sub
     Public Function IsTicketsVisible() As Boolean
         ' Programmers/Computer/IT
+        If Session("companyId") Is Nothing Then
+            Session("companyId") = LocalAPI.GetCompanyDefault(UserEmail)
+        End If
         Return (LocalAPI.GetCompanyProperty(Session("companyId"), "Type") = 16)
     End Function
 

@@ -91,55 +91,14 @@
         span.rnvMore.rnvRight::before {
             margin: 0 0 0 -0.5em !important;
         }
-
-
-        /*Submenu*/
-        .dropdown-submenu {
-            position: relative;
+       
+        .rnvLink .rnvText {
+            font-size:16px !important;
+        }
+        .CompanyNameClass {            
+            color:inherit !important;
         }
 
-            .dropdown-submenu > .dropdown-menu {
-                top: 0;
-                right: 100%;
-                margin-top: -6px;
-                margin-left: -1px;
-                -webkit-border-radius: 0 6px 6px 6px;
-                -moz-border-radius: 0 6px 6px 6px;
-                border-radius: 0 6px 6px 6px;
-            }
-
-            .dropdown-submenu > a:after {
-                display: block;
-                content: " ";
-                float: right;
-                width: 0;
-                height: 0;
-                border-color: transparent;
-                border-style: solid;
-                border-width: 5px 0 5px 5px;
-                border-left-color: #cccccc;
-                margin-top: 5px;
-                margin-right: -10px;
-            }
-
-            .dropdown-submenu:hover > a:after {
-                border-left-color: #555;
-            }
-
-            .dropdown-submenu.pull-left {
-                float: none;
-            }
-
-                .dropdown-submenu.pull-left > .dropdown-menu {
-                    left: -100%;
-                    margin-left: 10px;
-                    -webkit-border-radius: 6px 0 6px 6px;
-                    -moz-border-radius: 6px 0 6px 6px;
-                    border-radius: 6px 0 6px 6px;
-                }
-                .rnvLink .rnvText {
-                    font-size:16px !important;
-                }
     </style>
     <form id="form1" runat="server">
         <telerik:RadScriptManager
@@ -197,7 +156,7 @@
                                                 Visible='<%# EmployeePermission("Deny_TimesbyPeriods")%>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/Transmittals" Text="Transmittals"
-                                                Visible='<%# EmployeePermission("Deny_TransmittalList") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                                Visible='<%# EmployeePermission("Deny_TransmittalList") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/JobTickets" Text="Tickets"
                                                 Visible='<%# IsTicketsVisible() %>'>
@@ -417,18 +376,18 @@
                                                 Visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/calculator" Text="Calculator"
-                                                Visible='<%# EmployeePermission("Deny_ProposalsList") And lblCompanyId.Text = 260962 %>'>
+                                                Visible='<%# EmployeePermission("Deny_ProposalsList") And Companyp = 260962 %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/TagCloud" Text="Projects Tag Search"
                                                 Visible='<%# EmployeePermission("Deny_JobTagFinder") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/ProjectClasification" Text="Projects Classification Search"
-                                                Visible='<%# EmployeePermission("Deny_ProjectClasification") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 And lblCompanyId.Text = 260962 %>'>
+                                                Visible='<%# EmployeePermission("Deny_ProjectClasification") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 And Companyp = 260962 %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="NAICS Codes" NavigateUrl="~/adm/naics_us_codes">
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="Use & Occupancy Classification" NavigateUrl="~/adm/jobuse"
-                                                Visible='<%# EmployeePermission("Deny_UseClassification") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                                Visible='<%# EmployeePermission("Deny_UseClassification") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/Messages" Text="Email History Log"
                                                 Visible='<%# EmployeePermission("Deny_HistoryLog") And VersionCaracteristica(802)%>'>
@@ -447,93 +406,34 @@
                             </telerik:RadNavigation>
                         </td>
                         <td style="text-align:right">
-                            <asp:Label runat="server" ID="lblCompanyName" Font-Bold="true" Font-Size="Medium" ForeColor="DarkBlue"></asp:Label>
+                           <asp:LinkButton ID="lblCompanyName" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="CompanyNameClass">
+                           </asp:LinkButton>  
                         </td>
-                        <td class="noprint" style="width: 150px; text-align: right">
-                            <telerik:RadNavigation ID="RadNavigation2" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material">
-                                <Nodes>
-                                    <telerik:NavigationNode Text="Setting">
+                        <td style="text-align:right;color: inherit;">
+                                <%= UserName() %>                       
+                        </td>
+                        <td class="noprint" style="width: 30px; text-align: right">
+                            <telerik:RadNavigation ID="RadNavigation2" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material" OnClientNodeExpanding="OnClientNodeExpandingMenu2">
+                                <NodeTemplate>
+                                        <i class="fas fa-user"></i>
+                                </NodeTemplate>
+                                <Nodes>                                    
+                                    <telerik:NavigationNode runat="server" Text=''>
                                         <Nodes>
-                                             <%--Company--%>
-                                            <telerik:NavigationNode Text="Company" Visible='<%# EmployeePermission("Deny_CompanyMenu") %>'>
-                                                <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/Company" Text="Company Profile" visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/companymultiplier" Text="Company Multiplier" visible='<%# EmployeePermission("Deny_Multiplier") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/DepartmentsList" Text="Departments" visible='<%# EmployeePermission("Deny_DepartmentsList") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/PaidDayList" Text="Payroll" visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/MessagesTemplates" Text="Messages Templates" visible='<%# EmployeePermission("Deny_MessagesTemplates") %>'>
-                                                    </telerik:NavigationNode>
-                                                </Nodes>
+                                            <telerik:NavigationNode Text="My Account" NavigateUrl="~/adm/Options">
+                                                <NodeTemplate>
+                                                    <a  Font-Size="16px">
+                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    </a>
+                                                </NodeTemplate>
                                             </telerik:NavigationNode>
-
-                                            <%--Proposal--%>
-                                            <telerik:NavigationNode Text="Proposal">
-                                                <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/Proposal_tasks" Text="Proposal Tasks" visible='<%# EmployeePermission("Deny_ProposalTasksList") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/InvoicesTypes" Text="Payment Schedules" visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/TandCtemplates" Text="Terms & Conditions" visible='<%# EmployeePermission("Deny_ProposalTermsConditions") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/PhasesTemplate" Text="Phases Template" visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/Proposal_types" Text="Proposal Templates" visible='<%# EmployeePermission("Deny_ProposalTemplates") %>'>
-                                                    </telerik:NavigationNode>
-                                                </Nodes>
+                                            <telerik:NavigationNode Text="Video Chat" NavigateUrl="https://video.spike.chat/?" Target="_blank">
+                                                <NodeTemplate>
+                                                    <a  Font-Size="16px">
+                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    </a>
+                                                </NodeTemplate>
                                             </telerik:NavigationNode>
-
-                                            <%--Projects--%>
-                                            <telerik:NavigationNode Text="Projects">
-                                                <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/JobTypes" Text="Job Types" visible='<%# EmployeePermission("Deny_JobCodes") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/ProjectTags" Text="Project Tags" visible='<%# EmployeePermission("Deny_JobCodes") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/TransmittalPackageTypes" Text="Transmittal Package Types" visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16%>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/TimeCategory" Text="Productive Time Categories" visible='<%# EmployeePermission("Deny_TimeCategory") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/NoJobsTimeTypes" Text="Non-Productive Time Categories" visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>
-                                                    </telerik:NavigationNode>
-                                                </Nodes>
-                                            </telerik:NavigationNode>
-
-                                            <%--Contacts--%>
-                                            <telerik:NavigationNode Text="Contacts">
-                                                <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/ClientTypes" Text="Client Types" visible='<%# EmployeePermission("Deny_ClientType") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/Discipline" Text="Subconsultants Discipline" visible='<%# EmployeePermission("Deny_DisciplinesList") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/Position" Text="Employee Positions" visible='<%# EmployeePermission("Deny_NewEmployee") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/vendortypes" Text="Vendor Types" visible='<%# EmployeePermission("Deny_VendorTypes") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/contactypes" Text="Contact Types" visible='<%# EmployeePermission("Deny_ClientType") %>'>
-                                                    </telerik:NavigationNode>
-                                                </Nodes>
-                                            </telerik:NavigationNode>
-
-                                            <%--Security Settings--%>
-                                            <telerik:NavigationNode Text="Security Settings">
-                                                <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/Employee_Permissions" Text="Employees Permissions" visible='<%# IsMasterUser() %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/roles" Text="Roles Permissions" visible='<%# IsMasterUser() %>'>
-                                                    </telerik:NavigationNode>
-                                                </Nodes>
-                                            </telerik:NavigationNode>
-                                        </Nodes>
-
-                                    </telerik:NavigationNode>
-                                    <telerik:NavigationNode runat="server" Text='<%# UserName() %>'>
-                                        <Nodes>
-                                            <telerik:NavigationNode Text="My Account" NavigateUrl="~/adm/Options"></telerik:NavigationNode>
-                                            <telerik:NavigationNode Text="Video Chat" NavigateUrl="https://video.spike.chat/?" Target="_blank"></telerik:NavigationNode>
                                             <telerik:NavigationNode ID="SwitchCompany">
                                                 <NodeTemplate>
                                                     <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px">
@@ -555,8 +455,227 @@
                                     </telerik:NavigationNode>
                                 </Nodes>
                             </telerik:RadNavigation>
-
                         </td>
+                        <td class="noprint" style="width: 30px; text-align: right">
+                            <telerik:RadNavigation ID="RadNavigation3" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material"  Visible='<%# EmployeePermission("Deny_CompanyMenu") %>' OnClientNodeExpanding="OnClientNodeExpandingMenu3">
+                                <NodeTemplate>
+                                        <i class="fas fa-cog"></i>
+                                </NodeTemplate>
+                                <Nodes>
+                                    <telerik:NavigationNode Text="Setting">
+                                        <Nodes>
+                                             <%--Company--%>
+                                            <telerik:NavigationNode Text="Company" Visible='<%# EmployeePermission("Deny_CompanyMenu") %>'>
+                                                <NodeTemplate>
+                                                    <a  Font-Size="16px">
+                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    </a>
+                                                </NodeTemplate>
+                                                <Nodes>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/Company" Text="Company Profile" visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/companymultiplier" Text="Company Multiplier" visible='<%# EmployeePermission("Deny_Multiplier") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/DepartmentsList" Text="Departments" visible='<%# EmployeePermission("Deny_DepartmentsList") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/PaidDayList" Text="Payroll" visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/MessagesTemplates" Text="Messages Templates" visible='<%# EmployeePermission("Deny_MessagesTemplates") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                </Nodes>
+                                            </telerik:NavigationNode>
+                                            <%--Proposal--%>
+                                            <telerik:NavigationNode Text="Proposal">
+                                                <NodeTemplate>
+                                                    <a  Font-Size="16px">
+                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    </a>
+                                                </NodeTemplate>
+                                                <Nodes>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/Proposal_tasks" Text="Proposal Tasks" visible='<%# EmployeePermission("Deny_ProposalTasksList") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/InvoicesTypes" Text="Payment Schedules" visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/TandCtemplates" Text="Terms & Conditions" visible='<%# EmployeePermission("Deny_ProposalTermsConditions") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/PhasesTemplate" Text="Phases Template" visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/Proposal_types" Text="Proposal Templates" visible='<%# EmployeePermission("Deny_ProposalTemplates") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                </Nodes>
+                                            </telerik:NavigationNode>
+                                            <%--Projects--%>
+                                            <telerik:NavigationNode Text="Projects">
+                                                <NodeTemplate>
+                                                    <a  Font-Size="16px">
+                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    </a>
+                                                </NodeTemplate>
+                                                <Nodes>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/JobTypes" Text="Job Types" visible='<%# EmployeePermission("Deny_JobCodes") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/ProjectTags" Text="Project Tags" visible='<%# EmployeePermission("Deny_JobCodes") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/TransmittalPackageTypes" Text="Transmittal Package Types" visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16%>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/TimeCategory" Text="Productive Time Categories" visible='<%# EmployeePermission("Deny_TimeCategory") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/NoJobsTimeTypes" Text="Non-Productive Time Categories" visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                </Nodes>
+                                            </telerik:NavigationNode>
+
+                                            <%--Contacts--%>
+                                            <telerik:NavigationNode Text="Contacts">
+                                                <NodeTemplate>
+                                                    <a  Font-Size="16px">
+                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    </a>
+                                                </NodeTemplate>                                                    
+                                                <Nodes>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/ClientTypes" Text="Client Types" visible='<%# EmployeePermission("Deny_ClientType") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/Discipline" Text="Subconsultants Discipline" visible='<%# EmployeePermission("Deny_DisciplinesList") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/Position" Text="Employee Positions" visible='<%# EmployeePermission("Deny_NewEmployee") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/vendortypes" Text="Vendor Types" visible='<%# EmployeePermission("Deny_VendorTypes") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/contactypes" Text="Contact Types" visible='<%# EmployeePermission("Deny_ClientType") %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                </Nodes>
+                                            </telerik:NavigationNode>
+
+                                            <%--Security Settings--%>
+                                            <telerik:NavigationNode Text="Security Settings">
+                                                <NodeTemplate>
+                                                    <a  Font-Size="16px">
+                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    </a>
+                                                </NodeTemplate>                                                    
+                                                <Nodes>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/Employee_Permissions" Text="Employees Permissions" visible='<%# IsMasterUser() %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/roles" Text="Roles Permissions" visible='<%# IsMasterUser() %>'>
+                                                        <NodeTemplate>
+                                                            <a  Font-Size="16px">
+                                                                    <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                </Nodes>
+                                            </telerik:NavigationNode>
+                                        </Nodes>
+                                    </telerik:NavigationNode>                                    
+                                </Nodes>
+                            </telerik:RadNavigation>
+                        </td>
+
                     </tr>
                 </table>
             </asp:Panel>
@@ -700,6 +819,20 @@
                 });
             });
         })(jQuery);
+
+        function OnClientNodeExpandingMenu2(sender, eventArgs) {
+            var nav = $find("<%= RadNavigation3.ClientID %>");
+            var allnodes = nav.get_allNodes() 
+            allnodes.forEach(node => node.collapse());
+            //nav.collapseMenuButton();
+        }
+
+        function OnClientNodeExpandingMenu3(sender, eventArgs) {
+            var nav = $find("<%= RadNavigation2.ClientID %>");
+            var allnodes = nav.get_allNodes()
+            allnodes.forEach(node => node.collapse());
+            //nav.collapseMenuButton();
+        }
 
     </script>
 </body>
