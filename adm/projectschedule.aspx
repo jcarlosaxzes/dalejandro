@@ -2,107 +2,116 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
-        <Rows>
-            <telerik:LayoutRow>
-                <Content>
-                    <table class="Formulario" style="width: 100%">
-                        <tr>
-                            <td>
-                                <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="110px" Culture="en-US">
+    <table class="pasconcept-bar noprint" style="width: 100%">
+        <tr>
+            <td>Range:
+                <telerik:RadComboBox ID="cboPeriod" runat="server" Width="200px" AppendDataBoundItems="True" MarkFirstMatch="True">
+                    <Items>
+                        <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
+                        <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                        <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                        <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                        <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                        <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                        <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
+                        <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
+                        <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                        <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
+                    </Items>
+                </telerik:RadComboBox>
+                &nbsp;From:
+                                <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
                                 </telerik:RadDatePicker>
-                                To
-                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="110px" Culture="en-US">
+                &nbsp;To
+                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
                                 </telerik:RadDatePicker>
-                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
-                                    Width="150px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="250px" DropDownAutoWidth="Enabled"
-                                    AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                                &nbsp;
-                                <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" DropDownAutoWidth="Enabled"
-                                    Width="150px" CheckBoxes="true" Height="250px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
-                                    <Localization AllItemsCheckedString="(All Departments...)" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
-                                </telerik:RadComboBox>
-                                &nbsp;
+                &nbsp;Client:
+                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
+                    Width="400px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px"
+                    AppendDataBoundItems="true">
+                    <Items>
+                        <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
+                    </Items>
+                </telerik:RadComboBox>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Department:
+                <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" DropDownAutoWidth="Enabled"
+                    Width="300px" CheckBoxes="true" Height="250px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
+                    <Localization AllItemsCheckedString="(All Departments...)" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
+                </telerik:RadComboBox>
+                &nbsp;Employee:
                                 <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmployee"
-                                    Width="150px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="250px" DropDownAutoWidth="Enabled"
+                                    Width="300px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="250px"
                                     AppendDataBoundItems="true">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
                                     </Items>
                                 </telerik:RadComboBox>
-                                &nbsp;
-                                <telerik:RadComboBox ID="cboJobStatus" runat="server" Width="150px" DropDownAutoWidth="Enabled" AppendDataBoundItems="true" ToolTip="Job status">
+                &nbsp;Job Status:
+                                <telerik:RadComboBox ID="cboJobStatus" runat="server" Width="200px" DropDownAutoWidth="Enabled" AppendDataBoundItems="true" ToolTip="Job status">
                                     <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="In Progress" Value="2" Selected="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="Not in Progress" Value="0" Selected="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="(All In/Not in Progress)" Value="-1" Selected="true" />
+                                        <telerik:RadComboBoxItem runat="server" Text="(Not in Progress and In Progress)" Value="-1" Selected="true" />
+                                        <telerik:RadComboBoxItem runat="server" Text="In Progress" Value="2" />
+                                        <telerik:RadComboBoxItem runat="server" Text="Not in Progress" Value="0" />
                                     </Items>
                                 </telerik:RadComboBox>
-                                &nbsp;
-                                <telerik:RadComboBox ID="cboSlotWidth" runat="server" Width="60px" AppendDataBoundItems="true" ToolTip="Slot Width (px)">
+                &nbsp;Slot Width:
+                                <telerik:RadComboBox ID="cboSlotWidth" runat="server" Width="100px" AppendDataBoundItems="true" ToolTip="Slot Width (px)">
                                     <Items>
                                         <telerik:RadComboBoxItem Value="65px" Text="65" Selected="true" />
                                         <telerik:RadComboBoxItem Value="85px" Text="85" />
                                         <telerik:RadComboBoxItem Value="100px" Text="100" />
                                     </Items>
                                 </telerik:RadComboBox>
-                            </td>
-                            <td style="text-align: right; width: 120px">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+
+            </td>
+            <td style="text-align: right; width: 120px">
+                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Search
-                                </asp:LinkButton>
-                            </td>
-                        </tr>
+                </asp:LinkButton>
+            </td>
+        </tr>
 
 
+    </table>
 
-                    </table>
-                </Content>
-            </telerik:LayoutRow>
+    <div class="pasconcept-bar" style="text-align: center">
+        <h3 style="margin: 0">Projects Schedule
+        </h3>
+    </div>
+    <div>
+        <telerik:RadGantt ID="RadGantt1" runat="server" ReadOnly="true" Height="800px" AutoGenerateColumns="false"
+            SelectedView="MonthView" DayView-UserSelectable="false" Skin="Silk"
+            OnNavigationCommand="RadGantt1_NavigationCommand"
+            ShowFullWeek="false"
+            DataSourceID="SqlDataSourceGrantt"
+            EnableResources="true"
+            ShowCurrentTimeMarker="true"
+            AllowColumnResize="true">
+            <YearView UserSelectable="true" />
+            <Columns>
+                <telerik:GanttBoundColumn DataField="Title" DataType="String" HeaderText="Project Name"></telerik:GanttBoundColumn>
+                <telerik:GanttBoundColumn DataField="PercentComplete" Width="80px" HeaderText="Time Used"></telerik:GanttBoundColumn>
+            </Columns>
+            <DataBindings>
+                <TasksDataBindings
+                    IdField="ID"
+                    TitleField="Title"
+                    StartField="StartDay"
+                    EndField="EndDay"
+                    ParentIdField="ParentID"
+                    SummaryField="Summary"
+                    PercentCompleteField="PercentComplete" ExpandedField="Expanded" />
+            </DataBindings>
+        </telerik:RadGantt>
+    </div>
 
-            <telerik:LayoutRow>
-                <Content>
-                    <div style="text-align: center">
-                        <h3 style="margin: 0">Projects Schedule
-                        </h3>
-                    </div>
-
-                    <telerik:RadGantt ID="RadGantt1" runat="server" ReadOnly="true" Height="800px" AutoGenerateColumns="false"
-                        SelectedView="MonthView" DayView-UserSelectable="false" Skin="Silk"
-                        OnNavigationCommand="RadGantt1_NavigationCommand"
-                        ShowFullWeek="false"
-                        DataSourceID="SqlDataSourceGrantt"
-                        EnableResources="true"
-                        ShowCurrentTimeMarker="true"
-                        AllowColumnResize="true">
-                        <YearView UserSelectable="true" />
-                        <Columns>
-                            <telerik:GanttBoundColumn DataField="Title" DataType="String" HeaderText="Project Name"></telerik:GanttBoundColumn>
-                            <telerik:GanttBoundColumn DataField="PercentComplete" Width="80px" HeaderText="Time Used"></telerik:GanttBoundColumn>
-                        </Columns>
-                        <DataBindings>
-                            <TasksDataBindings
-                                IdField="ID"
-                                TitleField="Title"
-                                StartField="StartDay"
-                                EndField="EndDay"
-                                ParentIdField="ParentID"
-                                SummaryField="Summary"
-                                PercentCompleteField="PercentComplete" ExpandedField="Expanded" />
-                        </DataBindings>
-                    </telerik:RadGantt>
-                </Content>
-            </telerik:LayoutRow>
-
-        </Rows>
-    </telerik:RadPageLayout>
 
     <asp:SqlDataSource ID="SqlDataSourceGrantt" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Grantt2_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="Grantt_v20_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
