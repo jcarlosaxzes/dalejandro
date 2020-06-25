@@ -710,17 +710,25 @@
                         </div>
                         <table class="table-sm" style="width: 100%">
                             <tr>
-                                <td></td>
-
-                                <td style="width: 300px">
-                                    <telerik:RadComboBox ID="cboRetainer" runat="server" AutoPostBack="true" Width="100%" Label="Retainer:" ToolTip="Send First Invoice when Proposal is Accepted">
+                                <td style="width: 150px; text-align:right">
+                                    Retainer:
+                                </td>
+                                <td style="width: 250px">
+                                    <telerik:RadComboBox ID="cboRetainer" runat="server" AutoPostBack="true" Width="100%" ToolTip="Send First Invoice when Proposal is Accepted">
                                         <Items>
                                             <telerik:RadComboBoxItem runat="server" Text="(Select Retainer option...)" Value="-1" />
                                             <telerik:RadComboBoxItem runat="server" Text="YES" Value="1" />
                                             <telerik:RadComboBoxItem runat="server" Text="NO" Value="0" />
                                         </Items>
                                     </telerik:RadComboBox>
-
+                                </td>
+                                <td style="width: 150px; text-align:right">
+                                    Lump Sum:
+                                </td>
+                                <td>
+                                    <telerik:RadCheckBox ID="chkLumpSum" runat="server" Text="Detail Totals" 
+                                            ToolTip="Hide details Totals for Task in Client View" AutoPostBack="false">
+                                        </telerik:RadCheckBox>
                                 </td>
                             </tr>
                         </table>

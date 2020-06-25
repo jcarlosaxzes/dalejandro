@@ -716,6 +716,15 @@ Partial Public Class proposalnewwizard
     Protected WithEvents cboRetainer As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
+    '''chkLumpSum control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkLumpSum As Global.Telerik.Web.UI.RadCheckBox
+    
+    '''<summary>
     '''cboPaymentSchedules control.
     '''</summary>
     '''<remarks>

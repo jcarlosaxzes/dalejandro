@@ -301,6 +301,8 @@ Public Class proposalnewwizard
             If ProposalObject("EmployeeAprovedId") > 0 Then cboEmployee.SelectedValue = ProposalObject("EmployeeAprovedId")
             TextBoxOwner.Text = ProposalObject("Owner")
             If ProposalObject("ProjectManagerId") > 0 Then cboProjectManagerId.SelectedValue = ProposalObject("ProjectManagerId")
+
+            chkLumpSum.Checked = IIf(ProposalObject("ProjectSector") = 0, False, True)
         End If
     End Sub
 #End Region

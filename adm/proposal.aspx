@@ -175,7 +175,7 @@
                             <table class="table-sm" style="width: 100%;">
 
                                 <tr>
-                                    <td style="text-align: right; width: 100px">Number:
+                                    <td style="text-align: right; width: 180px">Number:
                                     </td>
                                     <td style="width: 450px">
                                         <table>
@@ -428,8 +428,6 @@
 
                                     </td>
 
-
-
                                     <td style="text-align: right;">Share with Client:</td>
                                     <td>
                                         <telerik:RadCheckBox ID="chkSharePublicLinks" runat="server" Text="Public Upload Documents" Checked='<%# Bind("SharePublicLinks")%>'
@@ -439,11 +437,9 @@
 
                                 </tr>
 
-
-
                                 <tr>
                                     <td style="text-align: right;">Retainer:</td>
-                                    <td colspan="2">
+                                    <td>
                                         <telerik:RadCheckBox ID="chkRetainer" runat="server" Checked='<%# Bind("Retainer")%>'
                                             Text="On acceptance, the first invoice will be emitted"
                                             ToolTip="If selected, upon the clients acceptance of the proposal, the first invoice of the payment schedule will be sent to the client"
@@ -451,7 +447,12 @@
                                         </telerik:RadCheckBox>
 
                                     </td>
-                                    <td style="text-align: right;"></td>
+                                    <td style="text-align: right;">Lump Sum:</td>
+                                    <td>
+                                        <telerik:RadCheckBox ID="chkLumpSum" runat="server" Text="Detail Totals" Checked='<%# Bind("LumpSum")%>'
+                                            ToolTip="Hide details Totals for Task in Client View" AutoPostBack="false">
+                                        </telerik:RadCheckBox>
+                                    </td>
 
                                 </tr>
 
@@ -1207,6 +1208,7 @@
             <asp:Parameter Name="ProjectManagerId" Type="Int32" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="paymentscheduleId" Type="Int32" />
+            <asp:Parameter Name="LumpSum" Type="Boolean" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
         <SelectParameters>
