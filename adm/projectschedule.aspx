@@ -25,9 +25,21 @@
                 &nbsp;To
                                 <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
                                 </telerik:RadDatePicker>
+                &nbsp;Parent Mode View:
+                    <telerik:RadComboBox ID="cboParentMode" runat="server" Width="200px" AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="Proposal" Value="Proposal"  />
+                            <telerik:RadComboBoxItem runat="server" Text="Job" Value="Job" Selected="true" />
+                            <telerik:RadComboBoxItem runat="server" Text="Client" Value="Client"  />
+                            <telerik:RadComboBoxItem runat="server" Text="Department" Value="Department"  />
+                            <telerik:RadComboBoxItem runat="server" Text="Employee" Value="Employee"  />
+                            <telerik:RadComboBoxItem runat="server" Text="Subconsultant" Value="Subconsultant"  />
+                        </Items>
+                    </telerik:RadComboBox>
+                
                 &nbsp;Client:
                 <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
-                    Width="400px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px"
+                    Width="450px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px"
                     AppendDataBoundItems="true">
                     <Items>
                         <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
@@ -50,18 +62,13 @@
                                         <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
                                     </Items>
                                 </telerik:RadComboBox>
-                &nbsp;Job Status:
-                                <telerik:RadComboBox ID="cboJobStatus" runat="server" Width="200px" DropDownAutoWidth="Enabled" AppendDataBoundItems="true" ToolTip="Job status">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(Not in Progress and In Progress)" Value="-1" Selected="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="In Progress" Value="2" />
-                                        <telerik:RadComboBoxItem runat="server" Text="Not in Progress" Value="0" />
-                                    </Items>
-                                </telerik:RadComboBox>
                 &nbsp;Slot Width:
                                 <telerik:RadComboBox ID="cboSlotWidth" runat="server" Width="100px" AppendDataBoundItems="true" ToolTip="Slot Width (px)">
                                     <Items>
-                                        <telerik:RadComboBoxItem Value="65px" Text="65" Selected="true" />
+                                        <telerik:RadComboBoxItem Value="15px" Text="15" />
+                                        <telerik:RadComboBoxItem Value="25px" Text="25" Selected="true" />
+                                        <telerik:RadComboBoxItem Value="50px" Text="50"  />
+                                        <telerik:RadComboBoxItem Value="65px" Text="65" />
                                         <telerik:RadComboBoxItem Value="85px" Text="85" />
                                         <telerik:RadComboBoxItem Value="100px" Text="100" />
                                     </Items>
@@ -83,8 +90,8 @@
         </h3>
     </div>
     <div>
-        <telerik:RadGantt ID="RadGantt1" runat="server" ReadOnly="true" Height="800px" AutoGenerateColumns="false"
-            SelectedView="MonthView" DayView-UserSelectable="false" Skin="Silk"
+        <telerik:RadGantt ID="RadGantt1" runat="server" ReadOnly="true" Height="1000px" AutoGenerateColumns="false" 
+            SelectedView="MonthView" DayView-UserSelectable="false" Skin="Material"
             OnNavigationCommand="RadGantt1_NavigationCommand"
             ShowFullWeek="false"
             DataSourceID="SqlDataSourceGrantt"
@@ -93,8 +100,7 @@
             AllowColumnResize="true">
             <YearView UserSelectable="true" />
             <Columns>
-                <telerik:GanttBoundColumn DataField="Title" DataType="String" HeaderText="Project Name"></telerik:GanttBoundColumn>
-                <telerik:GanttBoundColumn DataField="PercentComplete" Width="80px" HeaderText="Time Used"></telerik:GanttBoundColumn>
+                <telerik:GanttBoundColumn DataField="Title" DataType="String" HeaderText="Title" ></telerik:GanttBoundColumn>
             </Columns>
             <DataBindings>
                 <TasksDataBindings
@@ -103,10 +109,11 @@
                     StartField="StartDay"
                     EndField="EndDay"
                     ParentIdField="ParentID"
-                    SummaryField="Summary"
-                    PercentCompleteField="PercentComplete" ExpandedField="Expanded" />
+                    SummaryField="Summary" 
+                    PercentCompleteField="PercentComplete"/>
             </DataBindings>
         </telerik:RadGantt>
+                    <%--PercentCompleteField="PercentComplete" ExpandedField="Expanded"  />--%>
     </div>
 
 
@@ -119,8 +126,9 @@
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboEmployee" Name="Employee" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboJobStatus" Name="JobStatus" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblDepartmentIN_List" Name="lblDepartmentIN_List" PropertyName="Text" Type="String" />
+            <asp:ControlParameter ControlID="cboParentMode" Name="ParentMode" PropertyName="SelectedValue" />
+            
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceClient" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
