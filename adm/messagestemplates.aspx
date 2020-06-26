@@ -33,26 +33,24 @@
             <telerik:LayoutRow>
                 <Content>
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
-                        AutoGenerateColumns="False" AllowAutomaticDeletes="True"
-                        AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0">
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" EditMode="PopUp">
+                        AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowSorting="True" 
+                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" >
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                             <PagerStyle Mode="Slider" AlwaysVisible="false" />
                             <Columns>
-                                <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                    HeaderText="Edit" ItemStyle-Width="30px" HeaderStyle-Width="30px">
+                                <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="Edit" HeaderStyle-Width="30px">
                                 </telerik:GridEditCommandColumn>
-                                <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="true" Display="false"
-                                    SortExpression="Id" UniqueName="Id"
+                                <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="true" Display="false" SortExpression="Id" UniqueName="Id"
                                     ItemStyle-Width="40px" HeaderStyle-HorizontalAlign="Center">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="Type" HeaderText="Type" SortExpression="Type" ReadOnly="true"
-                                    UniqueName="Type" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
+                                    UniqueName="Type" HeaderStyle-Width="200px" HeaderStyle-HorizontalAlign="Center">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridTemplateColumn DataField="Subject" FilterControlAltText="Filter Subject column" ItemStyle-HorizontalAlign="Left"
                                     HeaderText="Subject" SortExpression="Subject" UniqueName="Subject" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
                                         <telerik:RadTextBox ID="SubjectTextBox" runat="server" Text='<%# Bind("Subject") %>'
-                                            Width="600px" MaxLength="255">
+                                            Width="800px" MaxLength="255">
                                         </telerik:RadTextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
@@ -66,7 +64,7 @@
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <telerik:RadEditor ID="gridEditor_Body" runat="server" Content='<%# Bind("Body") %>'
-                                            Height="600px" AllowScripts="True" RenderMode="Auto"
+                                            Height="400px" AllowScripts="True" RenderMode="Auto" ToolsFile="~/BasicTools.xml"
                                             Width="800px">
                                         </telerik:RadEditor>
                                     </EditItemTemplate>

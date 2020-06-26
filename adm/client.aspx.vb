@@ -43,14 +43,19 @@ Public Class client
             ' Update Latitude, Longitude
             LocalAPI.ClientGeolocationUpdate(lblClientId.Text)
         Catch ex As Exception
-
+            Throw ex
         End Try
 
     End Sub
 
     Protected Sub FormView1_ItemUpdating(sender As Object, e As FormViewUpdateEventArgs) Handles FormView1.ItemUpdating
-        e.NewValues("Subtype") = CType(FormView1.FindControl("cboSubtype"), RadComboBox).SelectedValue
-        e.NewValues("TAGS") = CType(FormView1.FindControl("lblActualTAGS"), Label).Text + CType(FormView1.FindControl("cboTags"), RadAutoCompleteBox).Text
+        Try
+
+            e.NewValues("Subtype") = CType(FormView1.FindControl("cboSubtype"), RadComboBox).SelectedValue
+            e.NewValues("TAGS") = CType(FormView1.FindControl("lblActualTAGS"), Label).Text + CType(FormView1.FindControl("cboTags"), RadAutoCompleteBox).Text
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Sub
 
     Protected Sub btnUpdateClient1_Click(ByVal sender As Object, ByVal e As System.EventArgs)
