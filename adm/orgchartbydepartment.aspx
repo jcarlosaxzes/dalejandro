@@ -3,10 +3,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <link href="../App_Themes/Estandar/OrgChartStyle.css" rel="stylesheet" type="text/css" />
-    <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
-        <Rows>
-            <telerik:LayoutRow>
-                <Content>
+
+    <div>
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 100px; text-align: right; vertical-align: bottom">
@@ -51,34 +49,31 @@
 
                             function exportRadOrgChart() {
                                 $find('<%=RadClientExportManager1.ClientID%>').exportPDF($(".RadOrgChart"));
-                        }
+                            }
 
-                        var fontSize = 12;
-                        $(document).ready(function () {
+                            var fontSize = 12;
+                            $(document).ready(function () {
 
 
-                            $('.foo').bind('DOMMouseScroll mousewheel', function (event) {
-                                if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
-                                    fontSize++;
-                                    $(".RadOrgChart").css("font-size", fontSize + "px");
-                                }
-                                else {
-                                    fontSize--;
-                                    $(".RadOrgChart").css("font-size", fontSize + "px");
-                                }
+                                $('.foo').bind('DOMMouseScroll mousewheel', function (event) {
+                                    if (event.originalEvent.wheelDelta > 0 || event.originalEvent.detail < 0) {
+                                        fontSize++;
+                                        $(".RadOrgChart").css("font-size", fontSize + "px");
+                                    }
+                                    else {
+                                        fontSize--;
+                                        $(".RadOrgChart").css("font-size", fontSize + "px");
+                                    }
 
-                                event.preventDefault();
+                                    event.preventDefault();
+                                });
                             });
-                        });
                         </script>
                     </telerik:RadScriptBlock>
+    </div>
 
-                </Content>
-            </telerik:LayoutRow>
-
-            <telerik:LayoutRow>
-                <Content>
-                    <div class="foo" style="width:100%">
+    <%--class="foo..." allow scroll in OrgChar--%>
+    <div class="row pas-container foo" style="width:100%">
                         <telerik:RadOrgChart ID="RadOrgChart1" runat="server" 
                             GroupColumnCount="2" 
                             EnableCollapsing="true" 
@@ -112,11 +107,6 @@
                             </Nodes>
                         </telerik:RadOrgChart>
                     </div>
-
-                </Content>
-            </telerik:LayoutRow>
-        </Rows>
-    </telerik:RadPageLayout>
 
 
     <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
