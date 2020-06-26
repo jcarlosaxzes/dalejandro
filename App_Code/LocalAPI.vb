@@ -8664,6 +8664,33 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetCompanyDefault(email As String) As String
+
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand("dbo.Company_default_SELECT", conn)
+                    comm.CommandType = CommandType.StoredProcedure
+
+                    Dim p0 As New SqlParameter("@Email", SqlDbType.NVarChar)
+                    p0.Direction = ParameterDirection.Input
+                    p0.Value = email
+                    comm.Parameters.Add(p0)
+
+                    Dim reader = comm.ExecuteReader()
+                    While reader.Read()
+                        If reader.HasRows Then
+                            Return reader("companyId").ToString()
+                        End If
+                    End While
+                End Using
+            End Using
+            Return 0
+        Catch e As Exception
+            Return 0
+        End Try
+
+    End Function
+
     Public Shared Function GetPositionProperty(positionId As Integer, sProperty As String) As String
         Select Case sProperty
             Case "HourRate"
