@@ -736,7 +736,7 @@
     <asp:SqlDataSource ID="SqlDataSourcePayment" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Payment_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Payment_UPDATE" UpdateCommandType="StoredProcedure"
-        InsertCommand="INVOICE_PAYMENTS3_INSERT" InsertCommandType="StoredProcedure">
+        InsertCommand="Invoice_Payment_v20_INSERT" InsertCommandType="StoredProcedure">
         <UpdateParameters>
             <asp:Parameter Name="Method" />
             <asp:Parameter Name="CollectedDate" Type="DateTime" />
@@ -759,6 +759,8 @@
             <asp:ControlParameter ControlID="lblKeyName" Name="KeyName" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="lblContentBytes" Name="ContentBytes" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblContentType" Name="ContentType" PropertyName="Text" Type="String" />
+
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="EmployeeId" PropertyName="Text" />
         </InsertParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceJobStatus" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

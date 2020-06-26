@@ -413,7 +413,7 @@
                         <td style="text-align:right;color: inherit;">
                                 <%= UserName() %>                       
                         </td>
-                        <td class="noprint" style="width: 30px; text-align: right">
+                        <td class="noprint" style="width: 30px; text-align: right;margin:0">
                             <telerik:RadNavigation ID="RadNavigation2" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material" OnClientNodeExpanding="OnClientNodeExpandingMenu2">
                                 <NodeTemplate>
                                         <i class="fas fa-user"></i>
@@ -457,7 +457,7 @@
                                 </Nodes>
                             </telerik:RadNavigation>
                         </td>
-                        <td class="noprint" style="width: 30px; text-align: right">
+                        <td class="noprint" style="width: 30px; text-align: right;margin:0">
                             <telerik:RadNavigation ID="RadNavigation3" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material"  Visible='<%# EmployeePermission("Deny_CompanyMenu") %>' OnClientNodeExpanding="OnClientNodeExpandingMenu3">
                                 <NodeTemplate>
                                         <i class="fas fa-cog"></i>

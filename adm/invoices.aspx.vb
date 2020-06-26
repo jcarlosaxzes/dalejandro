@@ -235,7 +235,7 @@ Public Class invoices
 
     Private Sub btnNewSimpleChargeInvoice_Click(sender As Object, e As EventArgs) Handles btnNewSimpleChargeInvoice.Click
         If cboJobNewInvoice.SelectedValue > 0 Then
-            lblInvoiceId.Text = LocalAPI.NuevoInvoiceSimpleCharge(cboJobNewInvoice.SelectedValue, Date.Today, 0, "")
+            lblInvoiceId.Text = LocalAPI.NuevoInvoiceSimpleCharge(cboJobNewInvoice.SelectedValue, Date.Today, 0, "", Master.UserId)
             FormViewInvoice.DataBind()
             RadToolTipEditInvoice.Visible = True
             RadToolTipEditInvoice.Show()
