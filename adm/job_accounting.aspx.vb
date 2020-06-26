@@ -30,7 +30,7 @@ Public Class Job_accounting
     Protected Sub btnInvoice_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnInvoice.Click
         Try
             If cboInvoicesType.SelectedValue > 0 Then
-                If LocalAPI.GenerateInvoicesSchedules(lblJobId.Text, cboInvoicesType.SelectedValue) Then
+                If LocalAPI.GenerateInvoicesSchedules(lblJobId.Text, cboInvoicesType.SelectedValue, lblEmployeeId.Text) Then
                     Master.InfoMessage("The Invoice(s) was inserted.")
                     ' Refrescar el grid
                     cboInvoiceFilterCode.SelectedValue = 0
@@ -48,7 +48,7 @@ Public Class Job_accounting
     End Sub
 
     Protected Sub btnNewInvoice_Click(sender As Object, e As EventArgs) Handles btnNewInvoice.Click
-        lblInvoiceId.Text = LocalAPI.NuevoInvoiceSimpleCharge(lblJobId.Text, Date.Today, 0, "")
+        lblInvoiceId.Text = LocalAPI.NuevoInvoiceSimpleCharge(lblJobId.Text, Date.Today, 0, "", lblEmployeeId.Text)
         InvoiceDlg()
     End Sub
 

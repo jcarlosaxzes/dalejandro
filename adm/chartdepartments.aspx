@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="row Formulario">
+    <div class="row pasconcept-bar">
         <div class="col-md-4" style="text-align: center">
             <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYear" Label="Year:"
                 DataTextField="nYear" DataValueField="Year" Width="150px">
