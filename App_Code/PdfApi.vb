@@ -193,14 +193,26 @@ Public Class PdfApi
                     jsonTask.Add("Description", reader("Description").ToString())
                     jsonTask.Add("Amount", reader("Amount").ToString())
                     jsonTask.Add("Hours", reader("Hours").ToString())
-                    jsonTask.Add("Rates", "$" & reader("Rates").ToString())
-                    jsonTask.Add("TotalRow", "$" & reader("TotalRow").ToString())
+                    Dim Rates = reader("Rates").ToString()
+                    If Rates = "" Or Rates = "0" Then
+                        jsonTask.Add("Rates", "")
+                    Else
+                        jsonTask.Add("Rates", FormatCurrency(Rates, 2))
+                    End If
+                    Dim LumpSum = reader("LumpSum").ToString()
+                    Dim TotalRow = reader("TotalRow").ToString()
+                    If (LumpSum = "1" Or TotalRow = "0") Then
+                        jsonTask.Add("TotalRow", "")
+                    Else
+                        jsonTask.Add("TotalRow", FormatCurrency(TotalRow, 2))
+                    End If
+                    jsonTask.Add("LumpSum", LumpSum)
                     TaskTotal += CType(reader("TotalRow").ToString(), Decimal)
                     jsonTaskArray.Add(jsonTask)
                 End If
             End While
             jsonObj.Add("Feeds", jsonTaskArray)
-            jsonObj.Add("FeedsTotal", "$" & TaskTotal)
+            jsonObj.Add("FeedsTotal", FormatCurrency(TaskTotal, 2))
         Catch ex As Exception
             Console.WriteLine(ex.Message())
         End Try
@@ -213,16 +225,21 @@ Public Class PdfApi
             While reader.Read()
                 If reader.HasRows Then
                     Dim jsonTask As JObject = New JObject()
-                    jsonTask.Add("Percentage", reader("Percentage").ToString())
+                    jsonTask.Add("Percentage", reader("Percentage").ToString() & "%")
                     jsonTask.Add("Description", reader("Description").ToString())
-                    jsonTask.Add("Amount", "$" & reader("Amount").ToString())
+                    Dim Amount = reader("Amount").ToString()
+                    If Amount = "" Or Amount = "0" Then
+                        jsonTask.Add("Amount", "")
+                    Else
+                        jsonTask.Add("Amount", FormatCurrency(Amount, 2))
+                    End If
                     PaymentTotal += CType(reader("Amount").ToString(), Decimal)
                     jsonPaymentArray.Add(jsonTask)
                 End If
             End While
 
             jsonObj.Add("Payments", jsonPaymentArray)
-            jsonObj.Add("PaymentsTotal", "$" & PaymentTotal)
+            jsonObj.Add("PaymentsTotal", FormatCurrency(PaymentTotal, 2))
         Catch ex As Exception
             Console.WriteLine(ex.Message())
         End Try
