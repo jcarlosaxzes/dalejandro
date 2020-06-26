@@ -34,6 +34,7 @@ Partial Public Class Login
 
                 Select Case result
                     Case SignInStatus.Success
+                        Session("companyId") = LocalAPI.GetCompanyDefault(UserName.Text)
                         If LocalAPI.IAgree(UserName.Text) Then
                             If IsNothing(Request.QueryString("ReturnUrl")) Then
                                 Response.Redirect("~/adm/dashboard")

@@ -93,11 +93,6 @@
         }
 
 
-        /*Submenu*/
-        .dropdown-submenu {
-            position: relative;
-        }
-       
         .rnvLink .rnvText {
             font-size:16px !important;
         }
@@ -442,19 +437,19 @@
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode ID="SwitchCompany">
                                                 <NodeTemplate>
-                                                    <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px">
+                                                    <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="CompanyNameClass">
                                                             Switch Company
                                                     </asp:LinkButton>
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode>
                                                 <NodeTemplate>
-                                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" CssClass="rnvText"
+                                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" CssClass="rnvText CompanyNameClass"
                                                         ToolTip="Logout"
                                                         Font-Size="16px"
                                                         LogoutText="Log out"
                                                        
-                                                        LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                                        LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut"  />
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>
                                         </Nodes>

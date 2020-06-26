@@ -11,6 +11,7 @@ Public Class ADM_Main_Responsive
         Try
             ' Inicializando Controles y Properties de la Master Page
 
+            lblEmployeeEmail.Text = UserEmail
             cboCompany.DataBind()
             If Session("companyId") Is Nothing Then
                 Session("companyId") = LocalAPI.GetCompanyDefault(UserEmail)
@@ -62,29 +63,20 @@ Public Class ADM_Main_Responsive
     End Function
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         If Not IsPostBack Then
-            cboCompany.DataBind()
             If Session("companyId") Is Nothing Then
                 Session("companyId") = LocalAPI.GetCompanyDefault(UserEmail)
-            Else
-                If cboCompany.SelectedValue <> Session("companyId") Then
-                    cboCompany.SelectedValue = Session("companyId")
-                End If
             End If
-
             If Not LocalAPI.IAgree(UserEmail) And Val("" & Session("ReadLater")) <> "1" Then
                 Response.RedirectPermanent("~/adm/useragree.aspx")
             Else
-
-
-                'RadNavigation1.DataBind()
-                'RadNavigation2.DataBind()
-
                 lblCompanyName.Text = LocalAPI.GetCompanyName(Companyp)
-
+            End If
+            If cboCompany.SelectedValue <> Session("companyId") Then
+                cboCompany.SelectedValue = Session("companyId")
             End If
         End If
-
     End Sub
 
     Public Function GetEmployeeImage(ByVal sEmail As String) As String
