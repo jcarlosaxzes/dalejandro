@@ -165,7 +165,9 @@ Public Class useradmin
         'Asyn previous Function
         'Dim user = LocalAPI.CreateOrUpdateUser(Email, password)
 
-        CreateUser(Email, password)
+        If CreateUser(Email, password) Then
+            LocalAPI.NormalizeUser(Email)
+        End If
 
         LocalAPI.ConfirmEmailUser(Email)
 
@@ -205,4 +207,17 @@ Public Class useradmin
         End Try
     End Function
 
+    Private Sub btnMigrateSelected_Click(sender As Object, e As EventArgs) Handles btnMigrateSelected.Click
+        If RadGridEmployeesAsUsers.SelectedItems.Count > 0 Then
+            Dim nSelecteds As Integer = RadGridEmployeesAsUsers.SelectedItems.Count
+            For Each dataItem As GridDataItem In RadGridEmployeesAsUsers.SelectedItems
+
+                If dataItem.Selected Then
+                    MigrateUser(dataItem("Email").Text)
+                End If
+            Next
+            RadGridEmployeesAsUsers.DataBind()
+        End If
+
+    End Sub
 End Class

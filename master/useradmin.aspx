@@ -10,9 +10,9 @@
                 <td style="width: 150px">
                     <telerik:RadComboBox ID="cboMigrateStatusId" runat="server" Width="100%" AppendDataBoundItems="true" Enabled="false">
                         <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="Pending" Value="0"  />
+                            <telerik:RadComboBoxItem runat="server" Text="Pending" Value="0" />
                             <telerik:RadComboBoxItem runat="server" Text="Migrated" Value="1" />
-                            <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" Selected="true"/>
+                            <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" Selected="true" />
                         </Items>
                     </telerik:RadComboBox>
                 </td>
@@ -38,13 +38,26 @@
             </tr>
         </table>
     </asp:Panel>
-
+    <div style="text-align:right">
+        <asp:LinkButton ID="btnMigrateSelected" runat="server" UseSubmitBehavior="false" ToolTip="Migrate user" CssClass="btn btn-primary" >
+                                                Migrate Selected
+                                        </asp:LinkButton>
+    </div>
     <div>
         <telerik:RadGrid ID="RadGridEmployeesAsUsers" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceEmployeesAsUsers" GridLines="None" AllowPaging="True"
-            CellSpacing="0" AllowSorting="True" PageSize="25" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
+            CellSpacing="0" AllowSorting="True" PageSize="25" 
+            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" 
+            AllowMultiRowSelection="True" Height="1000px">
+
+            <ClientSettings Selecting-AllowRowSelect="true">
+                <Scrolling AllowScroll="True" ></Scrolling>
+            </ClientSettings>
+
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceEmployeesAsUsers" CommandItemDisplay="None" ShowFooter="True" HeaderStyle-Font-Size="Small">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                 <Columns>
+                    <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center">
+                    </telerik:GridClientSelectColumn>
                     <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="ID" UniqueName="ID">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="FullName" HeaderText="User Name" SortExpression="FullName" UniqueName="FullName">
@@ -62,19 +75,19 @@
                         <ItemTemplate>
                             <table class="table-sm" style="width: 100%">
                                 <tr>
-                                    <td style="width:80px;text-align:center">
+                                    <td style="width: 80px; text-align: center">
                                         <asp:LinkButton ID="btnMigrate" runat="server" UseSubmitBehavior="false" ToolTip="Migrate user" CssClass="btn btn-primary btn-sm" Visible='<%# Not LocalAPI.IsUserIdentityMigrated(Eval("Email"))%>'
                                             CommandName="Migrate" CommandArgument='<%# Eval("Email")%>'>
-                                                Migrate</a>
+                                                Migrate
                                         </asp:LinkButton>
                                     </td>
-                                    <td style="text-align:center">
-                                        <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" ToolTip="Migrate user" CssClass="btn btn-secondary btn-sm" 
+                                    <td style="text-align: center">
+                                        <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" ToolTip="Migrate user" CssClass="btn btn-secondary btn-sm"
                                             CommandName="SendCredentials" CommandArgument='<%# Eval("Email")%>'>
-                                                Send Credentials</a>
+                                                Send Credentials
                                         </asp:LinkButton>
                                     </td>
-<%--                                    <td>
+                                    <%--                                    <td>
                                         <asp:LinkButton runat="server" ID="btnAzureStorage" CommandName="AzureUpload" CommandArgument='<%# Eval("Id") %>' ToolTip="Upload Files">
                                                 <i class="fas fa-cloud-upload-alt"></i>                                                
                                         </asp:LinkButton>
@@ -92,7 +105,7 @@
 
     <hr />
     <div>
-<%--        <telerik:RadGrid ID="RadGrid1" GridLines="None" runat="server" AllowSorting="True"
+        <%--        <telerik:RadGrid ID="RadGrid1" GridLines="None" runat="server" AllowSorting="True"
             AllowAutomaticInserts="False" PageSize="20" AllowAutomaticUpdates="False" AllowMultiRowEdit="False"
             AllowPaging="True" DataSourceID="DataSource1"
             AllowFilteringByColumn="True"
@@ -136,7 +149,7 @@
 
 
 
-  <%--  <asp:SqlDataSource SelectCommand="SELECT [Id] ,[FullName] ,[Email] ,[companyId],  isnull([IsMigrate], 0) as IsMigrate FROM [dbo].[Employees] where Inactive = 0" ConnectionString="Server=axzesu1server.database.windows.net;Database=pasconcept_db;User ID=axzesu1@axzesu1server;Password=P@ssw0rd;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" ProviderName="System.Data.SqlClient" ID="DataSource1" runat="server"></asp:SqlDataSource>--%>
+    <%--  <asp:SqlDataSource SelectCommand="SELECT [Id] ,[FullName] ,[Email] ,[companyId],  isnull([IsMigrate], 0) as IsMigrate FROM [dbo].[Employees] where Inactive = 0" ConnectionString="Server=axzesu1server.database.windows.net;Database=pasconcept_db;User ID=axzesu1@axzesu1server;Password=P@ssw0rd;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;" ProviderName="System.Data.SqlClient" ID="DataSource1" runat="server"></asp:SqlDataSource>--%>
 
     <asp:SqlDataSource ID="SqlDataSourceEmployeesAsUsers" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="EmployeesAsUsers_SELECT" SelectCommandType="StoredProcedure">
@@ -147,7 +160,6 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceCompany" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Id]=companyId, Name FROM [Company] ORDER BY [Name]">
-    </asp:SqlDataSource>
+        SelectCommand="SELECT [Id]=companyId, Name FROM [Company] ORDER BY [Name]"></asp:SqlDataSource>
 
 </asp:Content>
