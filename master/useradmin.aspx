@@ -45,7 +45,8 @@
     </div>
     <div>
         <telerik:RadGrid ID="RadGridEmployeesAsUsers" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceEmployeesAsUsers" GridLines="None" AllowPaging="True"
-            CellSpacing="0" AllowSorting="True" PageSize="25" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" 
+            CellSpacing="0" AllowSorting="True" PageSize="25" 
+            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" 
             AllowMultiRowSelection="True" Height="1000px">
 
             <ClientSettings Selecting-AllowRowSelect="true">

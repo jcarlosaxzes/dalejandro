@@ -177,7 +177,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: right"><b>Receive By:</b>
+                        <td style="text-align: right"><b>Received By:</b>
                         </td>
                         <td style="text-align: left" class="TituloHTML">
                             <%# Eval("ReceiveBy")%>
@@ -210,7 +210,7 @@
                 <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: center;">
-                            <h1 style="margin: 0">EDIT TRANSMITTAL LETTER</h1>
+                            <h2 style="margin: 0">EDIT TRANSMITTAL LETTER</h2>
                         </td>
                         <td style="width: 90px">
                             <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CommandName="Update">
@@ -248,7 +248,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;"><b>Receive By:</b>
+                        <td style="text-align: right;"><b>Received By:</b>
                         </td>
                         <td>
                             <telerik:RadTextBox ID="txtReceiveBy" runat="server" Text='<%# Bind("ReceiveBy")%>' MaxLength="50" Width="100%"></telerik:RadTextBox>
@@ -276,10 +276,11 @@
                         <td>
                             <telerik:RadGrid ID="RadGridEditDetails" runat="server" DataSourceID="SqlDataSourceDetails" GridLines="None"
                                 AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                                AllowAutomaticUpdates="True" AllowPaging="True" PageSize="100" AllowSorting="True" CellSpacing="0">
+                                AllowAutomaticUpdates="True" AllowPaging="True" PageSize="100" AllowSorting="True" 
+                                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
                                 <MasterTableView DataSourceID="SqlDataSourceDetails" DataKeyNames="Id">
                                     <Columns>
-                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="Edit" ItemStyle-Width="30px">
+                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="" ItemStyle-Width="30px">
                                             <ItemStyle Width="20px"></ItemStyle>
                                         </telerik:GridEditCommandColumn>
                                         <telerik:GridTemplateColumn DataField="AmountCopy" HeaderText="Amount Copy" UniqueName="AmountCopy"
@@ -326,7 +327,7 @@
                                             </ItemTemplate>
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
-                                            CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText="Delete"
+                                            CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                                             HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
                                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                                             <ItemStyle HorizontalAlign="Center" />
