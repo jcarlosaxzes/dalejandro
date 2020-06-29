@@ -76,5 +76,18 @@ Public Class IdentityHelper
             response.Redirect("~/")
         End If
     End Sub
+
+    ' Creado JC 6/29/2020
+    Public Class IdentityHelper
+        Public Class UserManager
+            Inherits UserManager(Of ApplicationUser)
+            Public Sub New()
+                MyBase.New(New UserStore(Of ApplicationUser)(New ApplicationDbContext()))
+                UserValidator = New UserValidator(Of ApplicationUser)(Me) With {.AllowOnlyAlphanumericUserNames = False}
+            End Sub
+        End Class
+
+    End Class
+
 End Class
 #End Region
