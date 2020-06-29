@@ -12,58 +12,76 @@ Option Explicit On
 
 
 Partial Public Class useradmin
-
+    
     '''<summary>
-    '''btnClients control.
+    '''pnlFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnClients As Global.System.Web.UI.WebControls.Button
-
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
     '''<summary>
-    '''RadAjaxLoadingPanel1 control.
+    '''cboMigrateStatusId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-
+    Protected WithEvents cboMigrateStatusId As Global.Telerik.Web.UI.RadComboBox
+    
     '''<summary>
-    '''RadAjaxPanel1 control.
+    '''cboCompany control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxPanel1 As Global.Telerik.Web.UI.RadAjaxPanel
-
+    Protected WithEvents cboCompany As Global.Telerik.Web.UI.RadComboBox
+    
     '''<summary>
-    '''RadGrid1 control.
+    '''txtFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
+    
     '''<summary>
-    '''RadWindowManager1 control.
+    '''btnFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
+    
     '''<summary>
-    '''DataSource1 control.
+    '''RadGridEmployeesAsUsers control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents RadGridEmployeesAsUsers As Global.Telerik.Web.UI.RadGrid
+    
+    '''<summary>
+    '''SqlDataSourceEmployeesAsUsers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceEmployeesAsUsers As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceCompany control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceCompany As Global.System.Web.UI.WebControls.SqlDataSource
 End Class

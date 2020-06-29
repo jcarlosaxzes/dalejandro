@@ -2,6 +2,14 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <style>
+        .gantt-container {
+    padding: 0 2px 2px 0;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+    </style>
     <table class="pasconcept-bar noprint" style="width: 100%">
         <tr>
             <td>Range:
@@ -92,15 +100,15 @@
     <div>
         <telerik:RadGantt ID="RadGantt1" runat="server" ReadOnly="true" Height="1000px" AutoGenerateColumns="false" 
             SelectedView="MonthView" DayView-UserSelectable="false" Skin="Material"
-            OnNavigationCommand="RadGantt1_NavigationCommand"
+            OnNavigationCommand="RadGantt1_NavigationCommand" 
             ShowFullWeek="false"
             DataSourceID="SqlDataSourceGrantt"
             EnableResources="true"
-            ShowCurrentTimeMarker="true"
+            ShowCurrentTimeMarker="true" 
             AllowColumnResize="true">
             <YearView UserSelectable="true" />
             <Columns>
-                <telerik:GanttBoundColumn DataField="Title" DataType="String" HeaderText="Title" ></telerik:GanttBoundColumn>
+                <telerik:GanttBoundColumn DataField="Title" DataType="String" HeaderText="Entity" ></telerik:GanttBoundColumn>
             </Columns>
             <DataBindings>
                 <TasksDataBindings
@@ -118,7 +126,7 @@
 
 
     <asp:SqlDataSource ID="SqlDataSourceGrantt" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Grantt_v20_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="Gantt_v20_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />

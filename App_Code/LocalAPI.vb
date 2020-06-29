@@ -9810,6 +9810,20 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function IsUserIdentityMigrated(email As String) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetUsersConnection()
+            Dim cmd As New SqlCommand($"select count(*) from [dbo].[AspNetUsers] where Email='{email}'", cnn1)
+            Dim count = cmd.ExecuteScalar()
+            cnn1.Close()
+            Return count > 0
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+
     Public Shared Function GetUserEmailByGuid(guid As String) As String
         Return GetStringEscalar("Select TOP 1 Email FROM Employees where [guid]='" & guid & "'")
     End Function
