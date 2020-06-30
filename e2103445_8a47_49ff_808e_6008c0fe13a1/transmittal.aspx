@@ -117,7 +117,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right;"><b>Receive By:</b>
+                    <td style="text-align: right;"><b>Received By:</b>
                     </td>
                     <td style="width: 330px; text-align: center; padding-top: 10px" class="TituloHTML">
                         <%# Eval("ReceiveBy")%>

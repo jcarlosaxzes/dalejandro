@@ -97,7 +97,7 @@
                             <td align="right"  valign="top">Find:</td>
                             <td align="left"  colspan="4">
                                 <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Text=""
-                                    EmptyMessage="Additional search for Transmittal Number, Job Code & Name, Receive By, Notes, Client Name, Company... "
+                                    EmptyMessage="Additional search for Transmittal Number, Job Code & Name, Received By, Notes, Client Name, Company... "
                                     LabelWidth="" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
