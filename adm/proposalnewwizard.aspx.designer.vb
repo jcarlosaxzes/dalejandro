@@ -923,6 +923,15 @@ Partial Public Class proposalnewwizard
     Protected WithEvents lblMsg As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''RadWindowManagerJob control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWindowManagerJob As Global.Telerik.Web.UI.RadWindowManager
+    
+    '''<summary>
     '''SqlDataSourceProposal_Step1 control.
     '''</summary>
     '''<remarks>
