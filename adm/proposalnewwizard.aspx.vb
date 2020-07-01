@@ -109,6 +109,8 @@ Public Class proposalnewwizard
 
             RadGridFees.DataBind()
 
+            RefreshRatios()
+
             FormViewTC.DataBind()
 
             RadGridPS.DataBind()
@@ -164,6 +166,7 @@ Public Class proposalnewwizard
                 Else
                     ' UPDATE PROPOSAL
                     SqlDataSourceProposal_Step1.Update()
+                    RefreshRatios()
                 End If
 
                 RadWizard1.WizardSteps(2).Enabled = (lblProposalId.Text) > 0
@@ -293,6 +296,7 @@ Public Class proposalnewwizard
             cboDepartment.SelectedValue = ProposalObject("DepartmentId")
             cboRetainer.SelectedValue = IIf(ProposalObject("Retainer"), 1, 0)
             txtUnit.DbValue = ProposalObject("Unit")
+            cboMeasure.DataBind()
             cboMeasure.SelectedValue = ProposalObject("Measure")
             cboSector.SelectedValue = ProposalObject("ProjectSector")
             cboUse.DataBind()
@@ -446,5 +450,28 @@ Public Class proposalnewwizard
 
     Private Sub chkLumpSum_Click(sender As Object, e As EventArgs) Handles chkLumpSum.Click
         LocalAPI.SetProposalLumpSum(lblProposalId.Text, IIf(chkLumpSum.Checked, 1, 0))
+    End Sub
+
+    Private Sub btnRefreshRatios_Click(sender As Object, e As EventArgs) Handles btnRefreshRatios.Click
+        RefreshRatios()
+    End Sub
+    Private Sub RefreshRatios()
+        RadGridRatios.DataBind()
+        '!!!RadHtmlChartRatios.DataBind()
+        lblMeasureAndUnits.Text = IIf(txtUnit.Text > 0, FormatNumber(txtUnit.Text, 2), "(Units Pending!)") & " " & IIf(Len(cboMeasure.Text) > 0, cboMeasure.Text, "(Measure Pending!)")
+    End Sub
+    Private Sub SqlDataSourceRatios_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceRatios.Selecting
+        If cboClientRatios.SelectedValue = 0 Then
+            e.Command.Parameters("@clientId").Value = cboClients.SelectedValue
+        Else
+            e.Command.Parameters("@clientId").Value = -1
+        End If
+        If cboDatesRates.SelectedValue = 0 Then
+            ' Last 3 years
+            e.Command.Parameters("@DateFrom").Value = "1-1-2000"
+        Else
+            e.Command.Parameters("@DateFrom").Value = DateAdd(DateInterval.Year, -3, Today)
+        End If
+        e.Command.Parameters("@DateTo").Value = "12-31-" & Year(Today)
     End Sub
 End Class
