@@ -644,6 +644,24 @@ Partial Public Class proposalnewwizard
     Protected WithEvents lblMeasureAndUnits As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''txtRatio control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtRatio As Global.Telerik.Web.UI.RadNumericTextBox
+    
+    '''<summary>
+    '''txtEstimatedTotal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEstimatedTotal As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
     '''btnRefreshRatios control.
     '''</summary>
     '''<remarks>
@@ -1182,6 +1200,15 @@ Partial Public Class proposalnewwizard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPreProjectId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblExcludeJobsList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblExcludeJobsList As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

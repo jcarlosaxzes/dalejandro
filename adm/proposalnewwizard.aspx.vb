@@ -474,4 +474,29 @@ Public Class proposalnewwizard
         End If
         e.Command.Parameters("@DateTo").Value = "12-31-" & Year(Today)
     End Sub
+
+    Private Sub CalculateFromRatio(Value As Double, Text As String)
+        Try
+            txtRatio.DbValue = Value
+            txtRatio.Label = Text
+            txtEstimatedTotal.Text = FormatCurrency(txtRatio.DbValue * txtUnit.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub RadGridRatios_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridRatios.ItemCommand
+        Select Case e.CommandName
+            Case "RemoveRow"
+                lblExcludeJobsList.Text = lblExcludeJobsList.Text & IIf(Len(lblExcludeJobsList.Text) > 0, ",", "") & e.CommandArgument
+                RadGridRatios.DataBind()
+            Case "CosteByUnit"
+                CalculateFromRatio(e.CommandArgument, "Coste By Unit: ")
+            Case "AdjustedByUnit"
+                CalculateFromRatio(e.CommandArgument, "Adjusted By Unit: ")
+            Case "HourByUnit"
+                CalculateFromRatio(e.CommandArgument, "Hour By Unit: ")
+            Case "BudgetByUnit"
+                CalculateFromRatio(e.CommandArgument, "Budget By Unit: ")
+        End Select
+    End Sub
 End Class
