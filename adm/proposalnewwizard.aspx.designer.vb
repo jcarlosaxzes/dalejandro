@@ -617,6 +617,51 @@ Partial Public Class proposalnewwizard
     Protected WithEvents RadGridFees As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
+    '''cboClientRatios control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboClientRatios As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboDatesRates control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboDatesRates As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''lblMeasureAndUnits control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMeasureAndUnits As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''btnRefreshRatios control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRefreshRatios As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''RadGridRatios control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridRatios As Global.Telerik.Web.UI.RadGrid
+    
+    '''<summary>
     '''TC control.
     '''</summary>
     '''<remarks>
@@ -1074,6 +1119,15 @@ Partial Public Class proposalnewwizard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClientBalance As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceRatios control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceRatios As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblClientId control.
