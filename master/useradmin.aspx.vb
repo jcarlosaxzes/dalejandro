@@ -162,9 +162,6 @@ Public Class useradmin
         Dim password = LocalAPI.GetMembershipUserPasswod(Email)
         LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
 
-        'Asyn previous Function
-        'Dim user = LocalAPI.CreateOrUpdateUser(Email, password)
-
         If CreateUser(Email, password) Then
             LocalAPI.NormalizeUser(Email)
         End If
