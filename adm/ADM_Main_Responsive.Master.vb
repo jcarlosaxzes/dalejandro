@@ -133,7 +133,7 @@ Public Class ADM_Main_Responsive
             If Session("AdmLogin") Is Nothing Then
                 Session("AdmLogin") = UserEmail
                 Try
-                    LocalAPI.sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.AdminLogin, cboCompany.SelectedValue, LocalAPI.GetEmployeeFullName(UserEmail, Companyp))
+                    LocalAPI.sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.AdminLogin, Session("companyId"), LocalAPI.GetEmployeeFullName(UserEmail, Companyp))
                 Catch ex As Exception
 
                 End Try
