@@ -458,7 +458,7 @@ Public Class proposalnewwizard
     Private Sub RefreshRatios()
         RadGridRatios.DataBind()
         '!!!RadHtmlChartRatios.DataBind()
-        lblMeasureAndUnits.Text = cboProjectType.Text & ": " IIf(txtUnit.Text > 0, FormatNumber(txtUnit.Text, 2), "(Units Pending!)") & " " & IIf(Len(cboMeasure.Text) > 0, cboMeasure.Text, "(Measure Pending!)")
+        lblMeasureAndUnits.Text = cboProjectType.Text & ": " & IIf(txtUnit.Text > 0, FormatNumber(txtUnit.Text, 2), "(Units Pending!)") & " " & IIf(Len(cboMeasure.Text) > 0, cboMeasure.Text, "(Measure Pending!)")
         CalculateFromRatio(txtRatio.DbValue, txtRatio.Label)
     End Sub
     Private Sub SqlDataSourceRatios_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceRatios.Selecting
