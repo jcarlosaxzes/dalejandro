@@ -11,5 +11,17 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Contact
+Partial Public Class adm_menu_test
+
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+        Get
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
+        End Get
+    End Property
 End Class

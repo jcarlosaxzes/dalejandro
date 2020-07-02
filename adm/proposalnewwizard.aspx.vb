@@ -78,7 +78,7 @@ Public Class proposalnewwizard
                 'Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html"
 
             End If
-
+            RadWindowManagerJob.EnableViewState = False
         Catch ex As Exception
             Throw ex
         End Try
@@ -108,6 +108,8 @@ Public Class proposalnewwizard
             SqlDataSourceProposal_Step1.DataBind()
 
             RadGridFees.DataBind()
+
+            RefreshRatios()
 
             FormViewTC.DataBind()
 
@@ -164,6 +166,7 @@ Public Class proposalnewwizard
                 Else
                     ' UPDATE PROPOSAL
                     SqlDataSourceProposal_Step1.Update()
+                    RefreshRatios()
                 End If
 
                 RadWizard1.WizardSteps(2).Enabled = (lblProposalId.Text) > 0
@@ -293,6 +296,7 @@ Public Class proposalnewwizard
             cboDepartment.SelectedValue = ProposalObject("DepartmentId")
             cboRetainer.SelectedValue = IIf(ProposalObject("Retainer"), 1, 0)
             txtUnit.DbValue = ProposalObject("Unit")
+            cboMeasure.DataBind()
             cboMeasure.SelectedValue = ProposalObject("Measure")
             cboSector.SelectedValue = ProposalObject("ProjectSector")
             cboUse.DataBind()
@@ -446,5 +450,80 @@ Public Class proposalnewwizard
 
     Private Sub chkLumpSum_Click(sender As Object, e As EventArgs) Handles chkLumpSum.Click
         LocalAPI.SetProposalLumpSum(lblProposalId.Text, IIf(chkLumpSum.Checked, 1, 0))
+    End Sub
+
+    Private Sub btnRefreshRatios_Click(sender As Object, e As EventArgs) Handles btnRefreshRatios.Click
+        RefreshRatios()
+    End Sub
+    Private Sub RefreshRatios()
+        RadGridRatios.DataBind()
+        '!!!RadHtmlChartRatios.DataBind()
+        lblMeasureAndUnits.Text = cboProjectType.Text & ": " & IIf(txtUnit.Text > 0, FormatNumber(txtUnit.Text, 2), "(Units Pending!)") & " " & IIf(Len(cboMeasure.Text) > 0, cboMeasure.Text, "(Measure Pending!)")
+        CalculateFromRatio(txtRatio.DbValue, txtRatio.Label)
+    End Sub
+    Private Sub SqlDataSourceRatios_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceRatios.Selecting
+        If cboClientRatios.SelectedValue = 0 Then
+            e.Command.Parameters("@clientId").Value = cboClients.SelectedValue
+        Else
+            e.Command.Parameters("@clientId").Value = -1
+        End If
+        If cboDatesRates.SelectedValue = 0 Then
+            ' Last 3 years
+            e.Command.Parameters("@DateFrom").Value = "1-1-2000"
+        Else
+            e.Command.Parameters("@DateFrom").Value = DateAdd(DateInterval.Year, -3, Today)
+        End If
+        e.Command.Parameters("@DateTo").Value = "12-31-" & Year(Today)
+    End Sub
+
+    Private Sub CalculateFromRatio(Value As Double, Text As String)
+        Try
+            txtRatio.DbValue = Value
+            txtRatio.Label = Text
+            txtEstimatedTotal.Text = FormatCurrency(txtRatio.DbValue * txtUnit.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub RadGridRatios_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridRatios.ItemCommand
+        Select Case e.CommandName
+            Case "EditJob"
+                Dim sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
+
+            Case "RemoveRow"
+                lblExcludeJobsList.Text = lblExcludeJobsList.Text & IIf(Len(lblExcludeJobsList.Text) > 0, ",", "") & e.CommandArgument
+                RadGridRatios.DataBind()
+            Case "CosteByUnit"
+                CalculateFromRatio(e.CommandArgument, "Cost By Unit: ")
+            Case "AdjustedByUnit"
+                CalculateFromRatio(e.CommandArgument, "Adjusted By Unit: ")
+            Case "HourByUnit"
+                CalculateFromRatio(e.CommandArgument, "Hours By Unit: ")
+            Case "BudgetByUnit"
+                CalculateFromRatio(e.CommandArgument, "Budget By Unit: ")
+        End Select
+    End Sub
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean, bRefreshOnClose As Boolean)
+        Try
+
+            RadWindowManagerJob.Windows.Clear()
+            Dim window1 As RadWindow = New RadWindow()
+            window1.NavigateUrl = sUrl
+            window1.VisibleOnPageLoad = True
+            window1.VisibleStatusbar = False
+            window1.ID = WindowsID
+            If Maximize Then window1.InitialBehaviors = WindowBehaviors.Maximize
+            window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize
+            window1.Width = Width
+            window1.Height = Height
+            window1.Modal = True
+            window1.DestroyOnClose = True
+            If bRefreshOnClose Then window1.OnClientClose = "OnClientClose"
+            window1.ShowOnTopWhenMaximized = Maximize
+            RadWindowManagerJob.Windows.Add(window1)
+        Catch ex As Exception
+            Master.ErrorMessage("Error. " & ex.Message)
+        End Try
     End Sub
 End Class

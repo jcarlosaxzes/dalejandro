@@ -42,15 +42,15 @@
     </telerik:RadWindowManager>
 
 
-    <div class="Formulario">
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 90px">
+                <td style="width: 100px">
                     <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                         <i class="fas fa-filter"></i>&nbsp;Filter
                     </button>
                 </td>
-                <td style="width: 100px">
+                <td style="width: 130px">
                      <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Map View">
                     </asp:LinkButton>
                 </td>

@@ -233,7 +233,8 @@
             </tr>
             <tr>
                 <td>
-                    <telerik:RadGrid ID="RadGridFooter" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDateWORKHOURS" Width="100%" ShowHeader="false" ShowFooter="false">
+                    <telerik:RadGrid ID="RadGridFooter" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSourceDateWORKHOURS" Width="100%"  
+                        ShowHeader="false" ShowFooter="false" RenderMode="Lightweight">
                         <MasterTableView DataSourceID="SqlDataSourceDateWORKHOURS" ShowFooter="false" CommandItemDisplay="None">
                             <Columns>
                                 <telerik:GridTemplateColumn UniqueName="Column1" ItemStyle-Font-Size="X-Small">
@@ -365,7 +366,7 @@
             </LayoutTemplate>
             <ItemTemplate>
 
-                <div class="card" style="float: left; width: 310px; margin: 3px">
+                <div class="card" style="float: left; width: 300px; margin: 1px">
                     <div class="card-header">
                         <table class="table-sm" style="width: 100%">
                             <tr>

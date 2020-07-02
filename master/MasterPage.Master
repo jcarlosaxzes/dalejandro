@@ -89,28 +89,26 @@
 
                                     <telerik:NavigationNode  runat="server" Text="Templates">
                                         <Nodes>
-                                            <telerik:NavigationNode  runat="server" Text="Proposal T &amp; C" NavigateUrl="~/MASTER/ProposalTandC.aspx"></telerik:NavigationNode >
+<%--                                            <telerik:NavigationNode  runat="server" Text="Proposal T &amp; C" NavigateUrl="~/MASTER/ProposalTandC.aspx"></telerik:NavigationNode >
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/ProposalTask_TEMPLATE.aspx" Text="Proposal Task">
                                             </telerik:NavigationNode >
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Disciplines.aspx" Text="Disciplines">
-                                            </telerik:NavigationNode >
+                                            </telerik:NavigationNode >--%>
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/MessagesTemplates.aspx" Text="Messages Templates">
                                             </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/MiscellaneousTimeCodes.aspx" Text="Miscellaneous Time Codes">
+                                           <%-- <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/MiscellaneousTimeCodes.aspx" Text="Miscellaneous Time Codes">
                                             </telerik:NavigationNode >
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Transmittals_package_types.aspx" Text="Transmittals Package Types">
-                                            </telerik:NavigationNode >
+                                            </telerik:NavigationNode >--%>
                                         </Nodes>
                                     </telerik:NavigationNode >
-                                    <telerik:NavigationNode  runat="server" Text="Term &amp; Conditions">
+<%--                                    <telerik:NavigationNode  runat="server" Text="Term &amp; Conditions">
                                         <Nodes>
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/TandCedit.aspx" Text="Term &amp; Conditions Pages">
                                             </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/UsersAgreeList.aspx" Text="Users Agree List">
-                                            </telerik:NavigationNode >
                                         </Nodes>
-                                    </telerik:NavigationNode >
-                                    <telerik:NavigationNode  runat="server" Text="Versiones">
+                                    </telerik:NavigationNode >--%>
+                                  <%--  <telerik:NavigationNode  runat="server" Text="Versiones">
                                         <Nodes>
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Versiones.aspx" Text="Versiones List">
                                             </telerik:NavigationNode >
@@ -119,12 +117,14 @@
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/FeaturesCount.aspx" Text="Features Count">
                                             </telerik:NavigationNode >
                                         </Nodes>
-                                    </telerik:NavigationNode >
-                                    <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/DataTool.aspx" Text="Data Tools">
-                                    </telerik:NavigationNode >
-                                    <telerik:NavigationNode  runat="server" Text="User">
+                                    </telerik:NavigationNode >--%>
+<%--                                    <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/DataTool.aspx" Text="Data Tools">
+                                    </telerik:NavigationNode >--%>
+                                    <telerik:NavigationNode  runat="server" Text="Users">
                                         <Nodes>
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Admin Users">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/UsersAgreeList.aspx" Text="Users Agree List">
                                             </telerik:NavigationNode >
                                         </Nodes>
                                     </telerik:NavigationNode >
