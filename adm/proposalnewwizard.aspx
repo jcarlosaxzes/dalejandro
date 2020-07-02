@@ -686,6 +686,12 @@
                         </tr>
                     </table>
                     <div>
+                        <script>
+                            function OnClientClose(sender, args) {
+                                var masterTable = $find("<%= RadGridRatios.ClientID %>").get_masterTableView();
+                                masterTable.rebind();
+                            }
+                        </script>
                         <telerik:RadGrid ID="RadGridRatios" runat="server" DataSourceID="SqlDataSourceRatios"
                             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-HorizontalAlign="Center"
                             AutoGenerateColumns="False" AllowPaging="True" PageSize="25" AllowSorting="True">
@@ -693,8 +699,8 @@
                                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                                 <Columns>
 
-                                    <telerik:GridTemplateColumn HeaderText="-" 
-                                        UniqueName="RemoveRow" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" >
+                                    <telerik:GridTemplateColumn HeaderText="-"
+                                        UniqueName="RemoveRow" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnRemoveRow" runat="server" CommandName="RemoveRow" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                 ToolTip="Click to RemoveRow">
@@ -710,7 +716,12 @@
                                     <telerik:GridTemplateColumn DataField="Job" HeaderText="Project - Client" SortExpression="Job" UniqueName="Job"
                                         ItemStyle-HorizontalAlign="Left">
                                         <ItemTemplate>
-                                            <%# Eval("Source")%>: <b><%# Eval("Job")%></b> -- <%# Eval("Client")%>
+                                            <%# Eval("Source")%>:  
+                                            <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job"
+                                                CommandName="EditJob" UseSubmitBehavior="false" Enabled='<%# Eval("Source") = "Job" %>'>
+                                                <%# Eval("Job")%>
+                                            </asp:LinkButton>
+                                            -- <%# Eval("Client")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridBoundColumn DataField="Budget" HeaderText="Budget" SortExpression="Budget" UniqueName="Budget" DataFormatString="{0:N2}"
@@ -729,42 +740,42 @@
                                         ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="100px" ItemStyle-ForeColor="Red" HeaderTooltip="[Adjusted To Date]= SUM(Time)*PositionHR">
                                     </telerik:GridBoundColumn>
 
-                                    <telerik:GridTemplateColumn DataField="CosteByUnit" HeaderText="Cost/Unit" SortExpression="CosteByUnit" UniqueName="CosteByUnit" 
+                                    <telerik:GridTemplateColumn DataField="CosteByUnit" HeaderText="Cost/Unit" SortExpression="CosteByUnit" UniqueName="CosteByUnit"
                                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderTooltip="CosteByUnit=[Budget]/[Unit]">
                                         <ItemTemplate>
-                                             <asp:LinkButton ID="btnCosteByUnit" runat="server" CommandName="CosteByUnit" CommandArgument='<%# Eval("CosteByUnit") %>' CausesValidation="false"
+                                            <asp:LinkButton ID="btnCosteByUnit" runat="server" CommandName="CosteByUnit" CommandArgument='<%# Eval("CosteByUnit") %>' CausesValidation="false"
                                                 ToolTip="Click to Calculate Estaimated Total" CssClass="btn btn-warning btn-sm" Width="100%" Visible='<%# Eval("CosteByUnit") > 0 %>'>
                                                     <%# Eval("CosteByUnit", "{0:N2}") %>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
-                                    
-                                    <telerik:GridTemplateColumn DataField="AdjustedByUnit" HeaderText="Ajusted/Unit" SortExpression="AdjustedByUnit" UniqueName="AdjustedByUnit" 
+
+                                    <telerik:GridTemplateColumn DataField="AdjustedByUnit" HeaderText="Ajusted/Unit" SortExpression="AdjustedByUnit" UniqueName="AdjustedByUnit"
                                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderTooltip="AdjustedByUnit=[Budget]/[Unit]">
                                         <ItemTemplate>
-                                             <asp:LinkButton ID="btnAdjustedByUnit" runat="server" CommandName="AdjustedByUnit" CommandArgument='<%# Eval("AdjustedByUnit") %>' CausesValidation="false"
+                                            <asp:LinkButton ID="btnAdjustedByUnit" runat="server" CommandName="AdjustedByUnit" CommandArgument='<%# Eval("AdjustedByUnit") %>' CausesValidation="false"
                                                 ToolTip="Click to Calculate Estaimated Total" CssClass="btn btn-danger btn-sm" Width="100%" Visible='<%# Eval("AdjustedByUnit") > 0 %>'>
                                                     <%# Eval("AdjustedByUnit", "{0:N2}") %>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
-                                    <telerik:GridTemplateColumn DataField="HourByUnit" HeaderText="Hours/Unit" SortExpression="HourByUnit" UniqueName="HourByUnit" 
+                                    <telerik:GridTemplateColumn DataField="HourByUnit" HeaderText="Hours/Unit" SortExpression="HourByUnit" UniqueName="HourByUnit"
                                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderTooltip="HourByUnit=[Budget]/[Unit]">
                                         <ItemTemplate>
-                                             <asp:LinkButton ID="btnHourByUnit" runat="server" CommandName="HourByUnit" CommandArgument='<%# Eval("HourByUnit") %>' CausesValidation="false"
-                                                ToolTip="Click to Calculate Estaimated Total" CssClass="btn btn-info btn-sm" Width="100%" Visible='<%# Eval("HourByUnit") > 0 %>'>
+                                            <asp:LinkButton ID="btnHourByUnit" runat="server" CommandName="HourByUnit" CommandArgument='<%# Eval("HourByUnit") %>' CausesValidation="false"
+                                                ToolTip="Click to Calculate Estaimated Total" CssClass="btn btn-dark btn-sm" Width="100%" Visible='<%# Eval("HourByUnit") > 0 %>'>
                                                     <%# Eval("HourByUnit", "{0:N2}") %>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
 
-                                    <telerik:GridTemplateColumn DataField="BudgetByUnit" HeaderText="Budget/Unit" SortExpression="BudgetByUnit" UniqueName="BudgetByUnit" 
+                                    <telerik:GridTemplateColumn DataField="BudgetByUnit" HeaderText="Budget/Unit" SortExpression="BudgetByUnit" UniqueName="BudgetByUnit"
                                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderTooltip="BudgetByUnit=[Budget]/[Unit]">
                                         <ItemTemplate>
-                                             <asp:LinkButton ID="btnBudgetByUnit" runat="server" CommandName="BudgetByUnit" CommandArgument='<%# Eval("BudgetByUnit") %>' CausesValidation="false"
+                                            <asp:LinkButton ID="btnBudgetByUnit" runat="server" CommandName="BudgetByUnit" CommandArgument='<%# Eval("BudgetByUnit") %>' CausesValidation="false"
                                                 ToolTip="Click to Calculate Estaimated Total" CssClass="btn btn-success btn-sm" Width="100%" Visible='<%# Eval("BudgetByUnit") > 0 %>'>
                                                     <%# Eval("BudgetByUnit", "{0:N2}") %>
                                             </asp:LinkButton>
@@ -1046,6 +1057,9 @@
     <div>
         <asp:Label ID="lblMsg" runat="server" ForeColor="Red"></asp:Label>
     </div>
+
+    <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
+    </telerik:RadWindowManager>
 
     <asp:SqlDataSource ID="SqlDataSourceProposal_Step1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="PROPOSAL_Adapter" SelectCommandType="StoredProcedure"
