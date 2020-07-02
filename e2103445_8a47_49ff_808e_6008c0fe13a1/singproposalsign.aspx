@@ -305,10 +305,9 @@
                                 </div>
                             </div>
                             <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-danger" runat="server" onserverclick="btnPrint_Click">
-                                    <i class="fa fa-file-pdf"></i>
-                                    &nbsp;&nbsp;
-                                PDF
+                                <button class="btn btn-inverse print">
+                                    <i class="fa fa-print"></i>
+                                    &nbsp;&nbsp;Print
                                 </button>
                             </div>
                         </div>
@@ -374,10 +373,9 @@
                                 </section>
                             </div>
                             <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-danger"  runat="server" onserverclick="btnPrint_Click">
-                                    <i class="fa fa-file-pdf"></i>
-                                    &nbsp;&nbsp;
-                                PDF
+                                <button class="btn btn-inverse print">
+                                    <i class="fa fa-print"></i>
+                                    &nbsp;&nbsp;Print
                                 </button>
                             </div>
                         </div>
@@ -467,10 +465,9 @@
                                 </section>
                             </div>
                             <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-danger"  runat="server" onserverclick="btnPrint_Click">
-                                    <i class="fa fa-file-pdf"></i>
-                                    &nbsp;&nbsp;
-                                PDF
+                                <button class="btn btn-inverse print">
+                                    <i class="fa fa-print"></i>
+                                    &nbsp;&nbsp;Print
                                 </button>
                             </div>
                         </div>

@@ -156,6 +156,10 @@ Public Class singproposalsign
                 SignProposal(lblProposalId.Text, lblCompanyId.Text, txtSignName.Text, Request("__EVENTARGUMENT"))
             End If
         End If
+
+        If Not Request.QueryString("printing") Is Nothing Then
+            pnlSideTools.Visible = False
+        End If
     End Sub
 
     Private Async Sub SignProposal(proposalId As Integer, companyId As Integer, clientName As String, img As String)

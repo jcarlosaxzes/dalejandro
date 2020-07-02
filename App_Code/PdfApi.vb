@@ -6,9 +6,27 @@ Imports Newtonsoft.Json.Linq
 
 Public Class PdfApi
     Public Property BaseUrl As String = "https://us1.pdfgeneratorapi.com/api/v3/"
+
+    Public Property ConvertApi_BaseUrl As String = "https://v2.convertapi.com/convert/web/to/pdf"
+
+    Public Property ConvertApi_Secret As String = "inTjL4nf0ZeuvVzH"
     Public Property Key As String = "bdb8ab512d5daeb626aab7ce5a325b81ccf3f836b6ccfcb198bde8599a315c61"
     Public Property Secret As String = "764342337400f71b36d3e555779eb8f4f161626a76f1b16e73100cb844b116ca"
     Public Property Workspace As String = "info@axzes.com"
+
+    Public Async Function GetConvertApiPdf(ByVal Url As String) As Task(Of Byte())
+        Try
+            Dim httpClient = New HttpClient()
+            httpClient.BaseAddress = New Uri(ConvertApi_BaseUrl)
+            Dim encodeUrl As String = HttpUtility.UrlEncode(Url & "&printing=true")
+            Dim httpRequestMessage As HttpRequestMessage = New HttpRequestMessage(HttpMethod.Get, $"?secret={ConvertApi_Secret}&download=inline&url={encodeUrl}")
+            Dim response = Await httpClient.SendAsync(httpRequestMessage)
+            Dim ByteArray = Await response.Content.ReadAsByteArrayAsync()
+            Return ByteArray
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
 
     Public Async Function GetBase64Document(ByVal documentId As String, ByVal body As String) As Task(Of String)
         Try
@@ -34,18 +52,14 @@ Public Class PdfApi
     Public Async Function CreateProposalSignedPdfAsync(ProposalId As String, Keyname As String) As Task
         'Dim ProposalId As String = LocalAPI.GetSharedLink_Id(11, Guid)
         Dim CompanyId As String = LocalAPI.GetCompanyIdFromProposal(ProposalId)
-        Dim bytePDF As Byte() = Await CreateProposalPdfBytes(ProposalId)
+        Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, ProposalId)
+        Dim bytePDF As Byte() = Await GetConvertApiPdf(ProposalUrl)
         Dim Url = AzureStorageApi.UploadBytesData("Proposal_Signed_" & DateTime.Now.Month & "_" & DateTime.Now.Day & "_" & DateTime.Now.Year & ".pdf", Keyname, bytePDF, "application/pdf", CompanyId, ProposalId, "Proposal")
     End Function
 
     Public Async Function CreateProposalPdfBytes(ProposalId As String) As Task(Of Byte())
-        'Dim ProposalId As String = LocalAPI.GetSharedLink_Id(11, Guid)
-        Dim CompanyId As String = LocalAPI.GetCompanyIdFromProposal(ProposalId)
-
-        Dim jsonObj = loadJson(CompanyId, ProposalId)
-        Dim json As String = jsonObj.ToString()
-        Dim base64 As String = Await GetBase64Document("117735", json)
-        Dim bytePDF As Byte() = Convert.FromBase64String(base64)
+        Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, ProposalId)
+        Dim bytePDF As Byte() = Await GetConvertApiPdf(ProposalUrl)
         Return bytePDF
     End Function
 
