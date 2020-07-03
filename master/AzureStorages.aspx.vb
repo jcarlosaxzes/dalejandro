@@ -28,7 +28,7 @@ Public Class AzureStorages
                 If Keyname <> DesName Then
                     If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Jobs_azureuploads] set KeyName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname, cboCompany.SelectedValue)
+                        AzureStorageApi.DeleteFile(Keyname)
                     Else
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Jobs_azureuploads] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                     End If
@@ -63,7 +63,7 @@ Public Class AzureStorages
                 If Keyname <> DesName Then
                     If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Proposals_azureuploads] set KeyName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname, 0)
+                        AzureStorageApi.DeleteFile(Keyname)
                     Else
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Proposals_azureuploads] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                     End If
@@ -98,7 +98,7 @@ Public Class AzureStorages
                 If Keyname <> DesName Then
                     If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Clients_azureuploads] set KeyName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname, 0)
+                        AzureStorageApi.DeleteFile(Keyname)
                     Else
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Clients_azureuploads] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                     End If
@@ -132,12 +132,12 @@ Public Class AzureStorages
                 If Keyname <> DesName Then
                     If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[RequestForProposals_azureuploads] set KeyName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname, 0)
+                        AzureStorageApi.DeleteFile(Keyname)
                     Else
                         Dim old = "old_2016/" & IO.Path.GetFileName(Keyname)
                         If AzureStorageApi.CopyFile(old, DesName, 0) Then
                             LocalAPI.ExecuteNonQuery($"update [dbo].[RequestForProposals_azureuploads] set KeyName = '{DesName}', Fmove = 1 where Id = {Id}")
-                            AzureStorageApi.DeleteFile(old, 0)
+                            AzureStorageApi.DeleteFile(old)
                         Else
                             LocalAPI.ExecuteNonQuery($"update [dbo].[RequestForProposals_azureuploads] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                         End If
@@ -173,7 +173,7 @@ Public Class AzureStorages
                 If Keyname <> DesName Then
                     If AzureStorageApi.CopyFile(Keyname, DesName, 0) Then
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Invoices_payments] set KeyName = '{DesName}', Fmove = 1 where Id = {Id}")
-                        AzureStorageApi.DeleteFile(Keyname, 0)
+                        AzureStorageApi.DeleteFile(Keyname)
                     Else
                         LocalAPI.ExecuteNonQuery($"update [dbo].[Invoices_payments] set DesName = 'NotFound', Fmove = 1 where Id = {Id}")
                     End If
@@ -204,7 +204,7 @@ Public Class AzureStorages
                 Try
                     Dim Keyname = reader.GetString(0)
                     LocalAPI.ExecuteNonQuery($"delete from  For_Delete_Files where KeyName = '{Keyname}'")
-                    AzureStorageApi.DeleteFile(Keyname, 0)
+                    AzureStorageApi.DeleteFile(Keyname)
                     totla += 1
                 Catch ex As Exception
                 End Try
