@@ -174,7 +174,7 @@
                 </tr>
             </table>
             <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
-                ProviderType="Azure" MaxFileSize="1048">
+                ProviderType="Azure" MaxFileSize="1048576">
             </telerik:RadCloudUpload>
  
         </div>
