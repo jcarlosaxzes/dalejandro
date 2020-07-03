@@ -12,6 +12,13 @@ Public Class clientfiles
 
             lblCompanyId.Text = Session("companyId")
         End If
+        If cboClients.SelectedItem Is Nothing Then
+            UploadPanel.Visible = False
+        ElseIf String.IsNullOrEmpty(cboClients.SelectedItem.Value) Or cboClients.SelectedItem.Value = "-1" Then
+            UploadPanel.Visible = False
+        Else
+            UploadPanel.Visible = True
+        End If
     End Sub
 
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
@@ -43,23 +50,22 @@ Public Class clientfiles
 
     Private Sub btnDeleteSelected_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
         Try
-            ''get a reference to the row
-            'If RadGridAzureFiles.SelectedItems.Count > 0 Then
-            '    For Each dataItem As GridDataItem In RadGridAzureFiles.SelectedItems
-            '        If dataItem.Selected Then
-            '            lblSelectedId.Text = dataItem("Id").Text
-            '            lblSelectedSource.Text = dataItem("Source").Text
-            '            SqlDataSourceAzureFiles.Delete()
-            '        End If
-            '    Next
-            '    RadGridAzureFiles.DataBind()
-            'Else
-            '    Master.ErrorMessage("Select records!")
+            'get a reference to the row
+            If RadListView1.SelectedItems.Count > 0 Then
+                For Each dataItem As RadListViewDataItem In RadListView1.SelectedItems
+                    If dataItem.Selected Then
+                        Dim idFile = dataItem.GetDataKeyValue("Id").ToString()
+                        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
+                        LocalAPI.DeleteAzureFile(idFile)
+                        AzureStorageApi.DeleteFile(KeyName)
+                    End If
+                Next
+                RadListView1.ClearSelectedItems()
+                RadListView1.DataBind()
+            Else
+                Master.ErrorMessage("Select records!")
 
-            'End If
-
-
-
+            End If
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
@@ -67,7 +73,7 @@ Public Class clientfiles
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
-        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
+        AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
     Public Function FormatSource(source As String)
@@ -94,5 +100,33 @@ Public Class clientfiles
         Return $"<a class=""far fa-file"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
 
     End Function
+
+
+    Public Sub RadCloudUpload1_FileUploaded(sender As Object, e As CloudFileUploadedEventArgs) Handles RadCloudUpload1.FileUploaded
+        Try
+            Dim tempName = e.FileInfo.KeyName
+            Dim fileExt = IO.Path.GetExtension(tempName)
+            Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
+            AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+            AzureStorageApi.DeleteFile(tempName)
+
+            ' The uploaded files need to be removed from the storage by the control after a certain time.
+            Dim EmployeeId = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+            e.IsValid = LocalAPI.ClientAzureStorage_Insert(cboClients.SelectedValue, 0, 0, e.FileInfo.OriginalFileName, newName, False, e.FileInfo.ContentLength, e.FileInfo.ContentType, EmployeeId, lblCompanyId.Text)
+            If e.IsValid Then
+                RadListView1.ClearSelectedItems()
+                RadListView1.DataBind()
+                Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
+            Else
+                Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
+                AzureStorageApi.DeleteFile(newName)
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+
+    End Sub
+
+
 
 End Class
