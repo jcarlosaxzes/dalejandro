@@ -85,32 +85,31 @@
 
 
     <div>
-        <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceAzureFiles" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderStyle="Solid">
+        <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceAzureFiles" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderStyle="Solid" AllowMultiItemSelection="true">
             <LayoutTemplate>
                 <fieldset style="width: 100%; text-align: center">
                     <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
                 </fieldset>
-
             </LayoutTemplate>
             <ItemTemplate>
-
                 <div class="card" style="float: left; width: 230px; margin: 2px">
                     <div class="card-header">
-
-                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px"><%# Eval("Name")%></b>
-
+                        <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Select">
+                            <i class="far fa-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
+                        </asp:LinkButton>
+                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width:90%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
                     </div>
                     <div class="card-body">
                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <tr>
-                                    <td style="height:104px">
+                                    <td style="height:108px">
                                         <%# CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
                                     </td>
                                 </tr>                                
                                 <tr>
                                     <td style="font-size:12px; padding-top:10px;">
-                                         <%# FormatSource(Eval("Source"))%>:&nbsp<b><%# Eval("Document")%></b>
+                                        <%# LocalAPI.TruncateString(Eval("Name"), 30)%> 
                                     </td>
                                 </tr>
                                 <tr>
@@ -126,8 +125,60 @@
                 </div>
 
             </ItemTemplate>
+            <SelectedItemTemplate>
+                <div class="card" style="float: left; width: 230px; margin: 2px">
+                    <div class="card-header">
+                        <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Select">
+                            <i class="fa fa-check-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
+                        </asp:LinkButton>
+                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width:90%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+                    </div>
+                    <div class="card-body">
+                        <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
+                            <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                                <tr>
+                                    <td style="height:108px">
+                                        <%# CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                    </td>
+                                </tr>                                
+                                <tr>
+                                    <td style="font-size:12px; padding-top:10px;">
+                                        <%# LocalAPI.TruncateString(Eval("Name"), 30)%> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size:12px">
+                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
+                                         <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                    </td>
+                                </tr>                                
+                            </table>
+                        </asp:LinkButton>
+
+                    </div>
+                </div>
+
+            </SelectedItemTemplate>
 
         </telerik:RadListView>
+        <asp:Panel ID="UploadPanel" runat="server">
+        <div style="width:100%;height:200px; background-color:lightgray; margin-top:20px;">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 90%;"><h3 class="additional-text">Select Files to Upload</h3></td>
+                    <td style="width:150px;">
+                        <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files" >
+                            <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+            <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
+                ProviderType="Azure" MaxFileSize="1048">
+            </telerik:RadCloudUpload>
+ 
+        </div>
+        </asp:Panel>
 
         <%--        <telerik:RadGrid ID="RadGridAzureFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GroupPanelPosition="Top" ShowFooter="true"
             AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" AllowAutomaticDeletes="True">
