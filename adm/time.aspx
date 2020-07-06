@@ -365,9 +365,9 @@
                                 SortExpression="Hours" UniqueName="Hours" ItemStyle-Width="40px" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Right">
                             </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
+                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
                                 UniqueName="Notes" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
-                            </telerik:GridTemplateColumn>
+                            </telerik:GridBoundColumn>
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                 CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                                 HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
@@ -382,58 +382,6 @@
                     </MasterTableView>
                 </telerik:RadGrid>
 
-
-                <%--<telerik:RadGrid ID="RadGrid2222" runat="server" AllowSorting="True" DataSourceID="SqlDataSource2" AllowAutomaticDeletes="true"
-                    GridLines="None" Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowPaging="True" PageSize="100" Height="1000px">
-                    <ClientSettings>
-                        <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
-                    </ClientSettings>
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource2" ShowFooter="True">
-                        <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                        <Columns>
-                            <telerik:GridBoundColumn AllowFiltering="False" DataField="nEmployee" HeaderText="Employee Name" ReadOnly="True"
-                                SortExpression="nEmployee" UniqueName="nEmployee" HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridDateTimeColumn DataField="DateFrom" DataFormatString="{0:MM/dd/yy}" DataType="System.DateTime"
-                                HeaderText="Date From" SortExpression="DateFrom" UniqueName="DateFrom" HeaderStyle-Width="80px"
-                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
-                            </telerik:GridDateTimeColumn>
-                            <telerik:GridDateTimeColumn DataField="DateTo" DataFormatString="{0:MM/dd/yy}" DataType="System.DateTime"
-                                HeaderText="Date To" SortExpression="DateTo" UniqueName="DateTo" HeaderStyle-Width="80px"
-                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
-                            </telerik:GridDateTimeColumn>
-                            <telerik:GridNumericColumn AllowFiltering="False" DataField="Hours"
-                                HeaderText="Time (hrs)" SortExpression="Hours" UniqueName="Hours" Aggregate="Sum"
-                                DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}" HeaderStyle-Width="80px"
-                                ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
-                            </telerik:GridNumericColumn>
-                            <telerik:GridTemplateColumn DataField="categoryId" FilterControlAltText="Filter CategoryId column" Display="false"
-                                HeaderText="Category" SortExpression="categoryId" UniqueName="categoryId" HeaderStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="TimeTypeLabel" runat="server" Text='<%# Eval("TimeType")%>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="TimeType" FilterControlAltText="Filter TimeType column" HeaderStyle-Width="150px"
-                                HeaderText="Type" SortExpression="TimeType" UniqueName="TimeType" HeaderStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="CategoryLabel" runat="server" Text='<%# Eval("TimeType")%>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="Notes" FilterControlAltText="Filter Notes column"
-                                HeaderText="Description" SortExpression="Notes" UniqueName="Notes" HeaderStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="NotesLabel" runat="server" Text='<%# Eval("Notes")%>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this record?" ConfirmTitle="Delete"
-                                ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
-                                HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px"
-                                ItemStyle-HorizontalAlign="Center">
-                            </telerik:GridButtonColumn>
-                        </Columns>
-                    </MasterTableView>
-                    <PagerStyle AlwaysVisible="false" />
-                </telerik:RadGrid>--%>
             </telerik:RadWizardStep>
         </WizardSteps>
     </telerik:RadWizard>
