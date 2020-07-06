@@ -35,106 +35,85 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
-    <table class="table-sm" style="width: 100%;">
-        <tr>
-            <td class="PanelFilter">
-                <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table width="100%" class="table-sm pasconcept-bar" >
-                        <tr>
-                            <td width="100px" align="right" >Date:
-                            </td>
-                            <td width="110px" align="left" >
-                                <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
-                                    DataValueField="Year" Width="100%" AppendDataBoundItems="True">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Years...)" Value="0" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                            <td width="140px" align="left" >
-                                <telerik:RadComboBox ID="cboMes" runat="server" DataSourceID="SqlDataSourceMes"
-                                    DataTextField="Month" DataValueField="id" Width="100%">
-                                </telerik:RadComboBox>
-                            </td>
-                            <td width="100px" align="right" >Employee:
-                            </td>
-                            <td width="350px">
-                                <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl"
-                                    Width="100%" DataTextField="Name" DataValueField="Id"
-                                    MarkFirstMatch="True" Filter="Contains"
-                                    Height="300px" AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td align="right" >Status:
-                            </td>
-                            <td align="left"  colspan="2">
-                                <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceTrasmittalStatus" DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="1000" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                            <td width="100px" align="right" >Client:
-                            </td>
-                            <td style="text-align: left" >
-                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
-                                    Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
-                                    Height="300px" AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td align="right"  valign="top">Find:</td>
-                            <td align="left"  colspan="4">
-                                <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Text=""
-                                    EmptyMessage="Additional search for Transmittal Number, Job Code & Name, Received By, Notes, Client Name, Company... "
-                                    LabelWidth="" Width="100%">
-                                </telerik:RadTextBox>
-                            </td>
-                            <td>
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
-                                </asp:LinkButton>
 
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
-    <table class="table-sm pasconcept-bar">
-        <tr>
-            <td>
-                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                            <i class="fas fa-plus"></i>&nbsp;Transmittal
-                </asp:LinkButton>
-            </td>
-            <td>
-                <script type="text/javascript">
-                    function PrintPage(sender, args) {
-                        window.print();
-                    }
-                </script>
-                <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                    <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                </telerik:RadButton>
-            </td>
-            <td>
-                <span class="pasconcept-pagetitle" style="padding-left: 50px">Transmittals</span>
-            </td>
-        </tr>
-    </table>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Transmittals</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                        Add New Transmittal
+            </asp:LinkButton>
+        </span>
+
+    </div>
+
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
+            <table  class="table-sm pasconcept-bar" style="width:100%" border="1">
+                <tr>
+                    <td width="110px" align="left">
+                        <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
+                            DataValueField="Year" Width="100%" AppendDataBoundItems="True">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Years...)" Value="0" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td width="140px" align="left">
+                        <telerik:RadComboBox ID="cboMes" runat="server" DataSourceID="SqlDataSourceMes"
+                            DataTextField="Month" DataValueField="id" Width="100%">
+                        </telerik:RadComboBox>
+                    </td>
+                    <td width="350px">
+                        <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl"
+                            Width="100%" DataTextField="Name" DataValueField="Id"
+                            MarkFirstMatch="True" Filter="Contains"
+                            Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceTrasmittalStatus" DataTextField="Name" DataValueField="Id" Width="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="1000" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
+                            Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
+                            Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Text=""
+                            EmptyMessage="Additional search for Transmittal Number, Job Code & Name, Received By, Notes, Client Name, Company... "
+                            LabelWidth="" Width="100%">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="width:150px; text-align:right">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
+                        </asp:LinkButton>
+
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
+    </div>
+
 
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
@@ -146,7 +125,7 @@
             </script>
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceTransmittals" Width="100%"
-            AllowAutomaticInserts="True" AllowAutomaticDeletes="true" AllowPaging="True" PageSize="250" Height="1000px" HeaderStyle-Font-Size="X-Small"
+            AllowAutomaticInserts="True" AllowAutomaticDeletes="true" AllowPaging="True" PageSize="250" Height="1000px" HeaderStyle-Font-Size="X-Small" 
             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -171,7 +150,7 @@
                     <telerik:GridTemplateColumn DataField="ClientCode" HeaderText="Client Code" SortExpression="ClientCode" UniqueName="ClientCode"
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" ReadOnly="true">
                         <ItemTemplate>
-                            <asp:Label ID="ClientCodeLabel" runat="server" Text='<%# Eval("ClientCode")%>' ></asp:Label>
+                            <asp:Label ID="ClientCodeLabel" runat="server" Text='<%# Eval("ClientCode")%>'></asp:Label>
                             <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="ClientCodeLabel" RelativeTo="Element"
                                 Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Name")%>' ShowEvent="OnClick"
                                 HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">

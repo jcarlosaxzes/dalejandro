@@ -70,101 +70,96 @@
     </telerik:RadWindowManager>
 
     <div class="pasconcept-bar noprint">
-        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add new Project and RFP for selected Subconsultants">
-                       <i class="fas fa-plus"></i>&nbsp;Project & RFPs
-                    </asp:LinkButton>
-        <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Table view Page">
+        <span class="pasconcept-pagetitle">Request for Proposals (tree view)</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="RFP Table view Page">
                        <i class="fas fa-align-justify"></i> Table
-                    </asp:LinkButton>
-        <script type="text/javascript">
-            function PrintPage(sender, args) {
-                window.print();
-            }
-                    </script>
-                    <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                    </telerik:RadButton>
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Request for Proposals (tree view)</span>
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Request for Proposal">
+                       Add New RFP
+            </asp:LinkButton>
+        </span>
 
     </div>
 
     <div class="collapse" id="collapseFilter">
-        
-            <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar noprint" DefaultButton="btnRefresh">
-                <table class="table-sm" style="width: 100%">
-                    <tr>
-                        <td style="width: 200px">
-                            <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" Selected="true" />
-                                    <telerik:RadComboBoxItem Text="(Last 60 days)" Value="60" />
-                                    <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
-                                    <telerik:RadComboBoxItem Text="(Last 120 days)" Value="120" />
-                                    <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
-                                    <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" />
-                                    <telerik:RadComboBoxItem Text="(This year)" Value="14" />
-                                    <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
-                                    <telerik:RadComboBoxItem Text="(Custom...)" Value="99" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td style="width: 130px">
-                            <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
-                            </telerik:RadDatePicker>
-                        </td>
-                        <td style="width: 130px">
-                            <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter">
-                            </telerik:RadDatePicker>
-                        </td>
-                        <td style="width: 400px">
-                            <telerik:RadComboBox ID="cboSubconsultant" runat="server" DataSourceID="SqlDataSourceSubconsultant"
-                                DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="100%"
-                                AppendDataBoundItems="True">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All Subconsultants…)" Value="-1" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td></td>
 
-                    </tr>
+        <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar noprint" DefaultButton="btnRefresh">
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                    <td style="width: 200px">
+                        <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" Selected="true" />
+                                <telerik:RadComboBoxItem Text="(Last 60 days)" Value="60" />
+                                <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
+                                <telerik:RadComboBoxItem Text="(Last 120 days)" Value="120" />
+                                <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
+                                <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" />
+                                <telerik:RadComboBoxItem Text="(This year)" Value="14" />
+                                <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                                <telerik:RadComboBoxItem Text="(Custom...)" Value="99" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 130px">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
+                        </telerik:RadDatePicker>
+                    </td>
+                    <td style="width: 130px">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter">
+                        </telerik:RadDatePicker>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboSubconsultant" runat="server" DataSourceID="SqlDataSourceSubconsultant"
+                            DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="450px"
+                            AppendDataBoundItems="True">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Subconsultants…)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td></td>
+                </tr>
 
-                    <tr>
-                        <td>
-                            <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceStatus" DataTextField="State" DataValueField="Id" Filter="Contains" MarkFirstMatch="True" Width="100%">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td colspan="2">
-                            <telerik:RadComboBox ID="cboDiscipline" runat="server" DataSourceID="SqlDataSourceDiscipline"
-                                DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="100%"
-                                AppendDataBoundItems="True">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All disciplines...)" Value="-1" />
-                                </Items>
-                            </telerik:RadComboBox>
+                <tr>
+                    <td>
+                        <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceStatus" DataTextField="State" DataValueField="Id" Filter="Contains" MarkFirstMatch="True" Width="100%">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td colspan="2">
+                        <telerik:RadComboBox ID="cboDiscipline" runat="server" DataSourceID="SqlDataSourceDiscipline"
+                            DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="100%"
+                            AppendDataBoundItems="True">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All disciplines...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
 
-                        </td>
-                        <td>
-                            <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Text=""
-                                EmptyMessage="Search for Number, Project Name, ..." Width="100%">
-                            </telerik:RadTextBox>
-                        </td>
-                        <td style="padding-left: 50px">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Text=""
+                            EmptyMessage="Search for Number, Project Name, ..." Width="100%">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="width:150px;text-align:right;">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Search
-                            </asp:LinkButton>
+                        </asp:LinkButton>
 
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
     </div>
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
@@ -203,22 +198,22 @@
                     ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="X-Small" HeaderTooltip="Number of RFP for this Project">
                 </telerik:TreeListBoundColumn>
                 <telerik:TreeListBoundColumn DataField="DateCreated" HeaderText="Date" SortExpression="DateCreated"
-                    UniqueName="DateCreated" HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Right" DataFormatString="{0:d}">
+                    UniqueName="DateCreated" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:d}">
                 </telerik:TreeListBoundColumn>
-                <telerik:TreeListBoundColumn DataField="Total" HeaderText="Total" UniqueName="Total" HeaderStyle-Width="100px"  DataFormatString="{0:C2}"
+                <telerik:TreeListBoundColumn DataField="Total" HeaderText="Total" UniqueName="Total" HeaderStyle-Width="100px" DataFormatString="{0:C2}"
                     ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                 </telerik:TreeListBoundColumn>
 
                 <telerik:TreeListBoundColumn DataField="TotalPayments" DataFormatString="{0:N2}"
                     HeaderText="Payments" SortExpression="TotalPayments" UniqueName="TotalPayments"
-                    HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
+                    HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                 </telerik:TreeListBoundColumn>
-                <telerik:TreeListBoundColumn DataField="Balance" HeaderText="Balance" UniqueName="Balance" HeaderStyle-Width="100px"  DataFormatString="{0:C2}"
+                <telerik:TreeListBoundColumn DataField="Balance" HeaderText="Balance" UniqueName="Balance" HeaderStyle-Width="100px" DataFormatString="{0:C2}"
                     ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}">
                 </telerik:TreeListBoundColumn>
 
                 <telerik:TreeListTemplateColumn DataField="jobId" HeaderText="Job" SortExpression="jobId"
-                    UniqueName="jobId" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" >
+                    UniqueName="jobId" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                     <ItemTemplate>
                         <asp:LinkButton ID="btnViewJob" runat="server" CommandName="ViewJobPage" CommandArgument='<%# Eval("jobId") %>'
                             ToolTip="View Job page">
@@ -236,27 +231,27 @@
                 <telerik:TreeListTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
                     ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                     <ItemTemplate>
-                                    <asp:LinkButton ID="btnNewRFP" runat="server" CommandName="NewRFPforProject" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("ParentID") = 0 %>'
-                                        UseSubmitBehavior="false" ToolTip="Add RFP for this Project">
+                        <asp:LinkButton ID="btnNewRFP" runat="server" CommandName="NewRFPforProject" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("ParentID") = 0 %>'
+                            UseSubmitBehavior="false" ToolTip="Add RFP for this Project">
                                             <span style="font-size:small" class="fas fa-plus"></span>
-                                    </asp:LinkButton>
-                            &nbsp;&nbsp;
+                        </asp:LinkButton>
+                        &nbsp;&nbsp;
                                     <a href='<%# LocalAPI.GetSharedLink_URL(2002, Eval("Id"))%>' target="_blank" title="Subconsultant View of RFP">
                                         <i class="far fa-share-square"></i>
                                     </a>
-                            &nbsp;&nbsp;
+                        &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnSendRFP" runat="server" CommandName="SendRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") <= 1, "true", "false")%>'
                                         ToolTip="Click to Send Proposal">
                                                 <i class="far fa-envelope"></i>
                                     </asp:LinkButton>
-                           &nbsp;&nbsp;
+                        &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnAceptRFP" runat="server" CommandName="AceptRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") = 2 Or Eval("StateId") = 3, "true", "false")%>'
                                         ToolTip="Click to Accept RFP">
                                                 <span style="color:green" class="fas fa-check"></span>
                                     </asp:LinkButton>
-                           &nbsp;&nbsp;
+                        &nbsp;&nbsp;
                                     <asp:LinkButton ID="btnDecline1" runat="server" CommandName="DeclineRFP" CommandArgument='<%# Eval("Id") %>'
                                         Visible='<%# IIf(Eval("StateId") = 2, "true", "false")%>'
                                         ToolTip="Click to Decline RFP">
@@ -267,7 +262,8 @@
                 </telerik:TreeListTemplateColumn>
 
                 <telerik:TreeListButtonColumn UniqueName="DeleteCommandColumn" HeaderStyle-Width="50px" Text="Delete" CommandName="Delete" ButtonType="FontIconButton"
-                    ConfirmDialogType="RadWindow" ConfirmText="Delete this RequestForProposals?"></telerik:TreeListButtonColumn>
+                    ConfirmDialogType="RadWindow" ConfirmText="Delete this RequestForProposals?">
+                </telerik:TreeListButtonColumn>
             </Columns>
         </telerik:RadTreeList>
     </div>
@@ -279,8 +275,8 @@
                 <tr>
                     <td>
                         <h4>
-                            <h2 style="margin: 0; text-align: center; color:white; width: 700px">
-                               <span class="navbar navbar-expand-md bg-dark text-white">
+                            <h2 style="margin: 0; text-align: center; color: white; width: 700px">
+                                <span class="navbar navbar-expand-md bg-dark text-white">
                                     <asp:Label ID="lblRFPNumber" runat="server"></asp:Label>
                                 </span>
                             </h2>
@@ -338,8 +334,8 @@
             <table class="table table-bordered" style="width: 500px">
                 <tr>
                     <td>
-                        <h2 style="margin: 0; text-align: center; color:white; width: 500px">
-                           <span class="navbar navbar-expand-md bg-dark text-white">Decline Selected Records
+                        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+                            <span class="navbar navbar-expand-md bg-dark text-white">Decline Selected Records
                             </span>
                         </h2>
 
@@ -380,8 +376,8 @@
     </div>
     <div>
         <telerik:RadToolTip ID="RadToolTipNewRFPforProject" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-               <span class="navbar navbar-expand-md bg-dark text-white">New RFP for Project
+            <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+                <span class="navbar navbar-expand-md bg-dark text-white">New RFP for Project
                 </span>
             </h2>
             <table class="table-sm" style="width: 600px">

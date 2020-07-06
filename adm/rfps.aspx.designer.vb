@@ -41,15 +41,6 @@ Partial Public Class rfps
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''btnNew control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnTablePage control.
     '''</summary>
     '''<remarks>
@@ -59,13 +50,13 @@ Partial Public Class rfps
     Protected WithEvents btnTablePage As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''printbutton control.
+    '''btnNew control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.

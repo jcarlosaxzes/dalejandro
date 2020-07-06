@@ -41,13 +41,13 @@ Partial Public Class requestforproposals
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''btnNew control.
+    '''btnTreePage control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnTreePage As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnDecline control.
@@ -59,22 +59,13 @@ Partial Public Class requestforproposals
     Protected WithEvents btnDecline As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnTreePage control.
+    '''btnNew control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnTreePage As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''printbutton control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.

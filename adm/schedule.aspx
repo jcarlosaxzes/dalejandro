@@ -20,58 +20,60 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
     </telerik:RadAjaxLoadingPanel>
 
-    <div class="pasconcept-bar">
-        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-        <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
-                        <i class="fas fa-plus"></i> Activity
-                    </asp:LinkButton>
-        <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
-                        <i class="far fa-calendar-alt"></i> Export to Outlook
-                    </asp:LinkButton>
-        <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
-                        <i class="fas fa-download"></i> Export to PDF
-                    </asp:LinkButton>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Calendar</span>
 
-        <span class="pasconcept-pagetitle" style="padding-left: 150px;">Calendar</span>
-        <span class="pasconcept-pagetitle" style="padding-left: 150px;"><asp:Label runat="server" ID="AppointmentsCount" Font-Size="Small"></asp:Label></span>
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+
+            <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+                        <i class="far fa-calendar-alt"></i>&nbsp; Export to Outlook
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+                        Export to PDF
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
+                            Add New Activity
+            </asp:LinkButton>
+        </span>
+
     </div>
 
     <div class="collapse" id="collapseFilter">
 
-            <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
-
-
-                <table class="table-sm" style="width: 100%">
-                    <tr>
-                        <td>
-                            <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJob" DropDownAutoWidth="Enabled"
-                                DataTextField="JobName" DataValueField="Id" Width="250px" MarkFirstMatch="True" Filter="Contains"
-                                Height="300px" EmptyMessage="(All Jobs...)">
-                            </telerik:RadComboBox>
-                            &nbsp;
+        <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                    <td>
+                        <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJob" DropDownAutoWidth="Enabled"
+                            DataTextField="JobName" DataValueField="Id" Width="250px" MarkFirstMatch="True" Filter="Contains"
+                            Height="300px" EmptyMessage="(All Jobs...)">
+                        </telerik:RadComboBox>
+                        &nbsp;
                                 <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" DropDownAutoWidth="Enabled"
                                     DataTextField="Name" DataValueField="Id" Width="250px" MarkFirstMatch="True"
                                     Filter="Contains" Height="300px" EmptyMessage="(All Clients...)">
                                 </telerik:RadComboBox>
-                            &nbsp;
+                        &nbsp;
                                 <telerik:RadComboBox ID="cboEmployee" runat="server" DropDownAutoWidth="Enabled"
                                     DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
                                     Width="250px" Height="300px" EmptyMessage="(All calendar...)">
                                 </telerik:RadComboBox>
 
-                        </td>
-                        <td style="text-align: right; width: 120px">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                    </td>
+                    <td style="text-align: right; width: 120px">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Search
-                            </asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
 
-            </asp:Panel>
-        
+        </asp:Panel>
+
     </div>
 
     <div>
@@ -122,8 +124,8 @@
 
 
     <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 650px">
-           <span class="navbar navbar-expand-md bg-dark text-white">Proposal Task & Share Event
+        <h2 style="margin: 0; text-align: center; color: white; width: 650px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Proposal Task & Share Event
             </span>
         </h2>
         <asp:Panel runat="server" ID="panelProposalTask">
@@ -167,8 +169,8 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipCRM" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-           <span class="navbar navbar-expand-md bg-dark text-white">New Client Activity Record
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">New Client Activity Record
             </span>
         </h2>
         <table class="table-sm" style="width: 600px">
@@ -235,6 +237,7 @@
             </tr>
         </table>
     </telerik:RadToolTip>
+    <asp:Label runat="server" ID="AppointmentsCount" Font-Size="Small"></asp:Label>
 
     <asp:SqlDataSource ID="SqlDataSourceAppointments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Appointment_DELETE" DeleteCommandType="StoredProcedure"

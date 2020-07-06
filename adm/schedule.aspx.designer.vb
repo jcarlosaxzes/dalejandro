@@ -32,15 +32,6 @@ Partial Public Class schedule
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
-    '''btnCRM control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCRM As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnOutlook control.
     '''</summary>
     '''<remarks>
@@ -59,13 +50,13 @@ Partial Public Class schedule
     Protected WithEvents btnPDF As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''AppointmentsCount control.
+    '''btnCRM control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents AppointmentsCount As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnCRM As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.
@@ -273,6 +264,15 @@ Partial Public Class schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancel As Global.Telerik.Web.UI.RadButton
+    
+    '''<summary>
+    '''AppointmentsCount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AppointmentsCount As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''SqlDataSourceAppointments control.
