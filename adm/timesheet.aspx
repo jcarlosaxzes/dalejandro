@@ -36,48 +36,48 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <div class="pasconcept-bar">
-        <table class="table-sm">
-            <tr>
-                <td>From:
-                </td>
-                <td>
-                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" AutoPostBack="true" Width="130px"
-                        DateFormat="MM/dd/yyyy">
-                    </telerik:RadDatePicker>
-                </td>
-                <td>To:
-                </td>
-                <td>
-                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ToolTip="Payroll Closing Date" Width="120px"
-                        ReadOnly="True" >
-                    </telerik:RadDateInput>
-                </td>
-                <td>Employee:
-                </td>
-                <td>
-                    <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" Height="400px"
-                        Width="250px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
-                        AutoPostBack="True">
-                        <CollapseAnimation Type="OutQuint" Duration="200"></CollapseAnimation>
-                    </telerik:RadComboBox>
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-backward"></i> Previous
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-forward"></i> Next
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <span class="pasconcept-pagetitle" style="padding-left:50px">Time Sheet</span>
-                </td>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Time Sheet</span>
+        <span style="float: right; vertical-align: middle;">
+            <table class="table-sm">
+                <tr>
+                    <td>From:
+                    </td>
+                    <td>
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" AutoPostBack="true" Width="130px"
+                            DateFormat="MM/dd/yyyy">
+                        </telerik:RadDatePicker>
+                    </td>
+                    <td>To:
+                    </td>
+                    <td>
+                        <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ToolTip="Payroll Closing Date" Width="120px"
+                            ReadOnly="True">
+                        </telerik:RadDateInput>
+                    </td>
+                    <td>Employee:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" Height="400px"
+                            Width="250px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
+                            AutoPostBack="True">
+                            <CollapseAnimation Type="OutQuint" Duration="200"></CollapseAnimation>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="120px">
+                                    <i class="fas fa-backward"></i>&nbsp;Previous
+                        </asp:LinkButton>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="120px">
+                                    <i class="fas fa-forward"></i>&nbsp;Next
+                        </asp:LinkButton>
+                    </td>
 
-            </tr>
-        </table>
+                </tr>
+            </table>
+        </span>
     </div>
 
     <telerik:RadGrid ID="RadGrid1" runat="server" RenderMode="Auto" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs"

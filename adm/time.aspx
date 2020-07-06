@@ -20,26 +20,16 @@
     </telerik:RadWindowManager>
 
     <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">Time Entries</span>
 
-        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-            <i class="fas fa-filter"></i>&nbsp;Filter
-        </button>
-
-        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                       <i class="fas fa-user-clock"></i>&nbsp;Time
-        </asp:LinkButton>
-
-        <script type="text/javascript">
-            function PrintPage(sender, args) {
-                window.print();
-            }
-        </script>
-        <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-            <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-        </telerik:RadButton>
-
-        <span class="pasconcept-pagetitle" style="padding-left: 250px">Time Entries</span>
-
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                           <i class="fas fa-user-clock"></i>&nbsp;Time
+            </asp:LinkButton>
+        </span>
     </div>
     <div class="collapse" id="collapseFilter">
         

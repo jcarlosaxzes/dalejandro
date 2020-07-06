@@ -42,66 +42,58 @@
     </telerik:RadAjaxManager>--%>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <div class="pasconcept-bar">
-        <table class="table-sm noprint">
-            <tr>
-                <td>
-                    <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="150px">
-                        <Items>
-                            <telerik:DropDownListItem Text="By Periods" Value="0" />
-                            <telerik:DropDownListItem Text="By Moths" Value="1" />
-                            <telerik:DropDownListItem Text="By Years" Value="2" />
-                        </Items>
-                    </telerik:RadDropDownList>
-                </td>
-                <td>From:
-                </td>
-                <td>
-                    <telerik:RadDateInput ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Width="120px">
-                    </telerik:RadDateInput>
-                </td>
-                <td>To:
-                </td>
-                <td>
-                    <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Width="120px">
-                    </telerik:RadDateInput>
-                </td>
-                <td>
-                    <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
-                        DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains" AutoPostBack="true"
-                        Height="250px" MarkFirstMatch="True" Width="350px" DropDownAutoWidth="Enabled" EmptyMessage="(Select Department...)">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-backward"></i> Previous
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-forward"></i> Next
-                    </asp:LinkButton>
-                </td>
-                <td>
-                    <script type="text/javascript">
-                        function PrintPage(sender, args) {
-                            window.print();
-                        }
-                    </script>
-                    <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                    </telerik:RadButton>
+    <div class="pasconcept-bar noprint">
 
-                </td>
-                <td>
-                    <span class="pasconcept-pagetitle" style="padding-left: 50px">Time By Periods</span>
-                </td>
+        <span class="pasconcept-pagetitle">Time By Periods</span>
 
-            </tr>
-        </table>
+        <span style="float: right; vertical-align: middle;">
+            <table class="table-sm">
+                <tr>
+                    <td>
+                        <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="150px">
+                            <Items>
+                                <telerik:DropDownListItem Text="By Periods" Value="0" />
+                                <telerik:DropDownListItem Text="By Moths" Value="1" />
+                                <telerik:DropDownListItem Text="By Years" Value="2" />
+                            </Items>
+                        </telerik:RadDropDownList>
+                    </td>
+                    <td>From:
+                    </td>
+                    <td>
+                        <telerik:RadDateInput ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Width="120px">
+                        </telerik:RadDateInput>
+                    </td>
+                    <td>To:
+                    </td>
+                    <td>
+                        <telerik:RadDateInput ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" ReadOnly="True" Width="120px">
+                        </telerik:RadDateInput>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
+                            DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains" AutoPostBack="true"
+                            Height="250px" MarkFirstMatch="True" Width="350px" DropDownAutoWidth="Enabled" EmptyMessage="(Select Department...)">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="120px">
+                                    <i class="fas fa-backward"></i>&nbsp;Previous
+                        </asp:LinkButton>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="btnNext" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" Width="120px">
+                                    <i class="fas fa-forward"></i>&nbsp;Next
+                        </asp:LinkButton>
+                    </td>
+
+                </tr>
+            </table>
+        </span>
+
     </div>
 
 
