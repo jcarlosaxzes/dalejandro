@@ -31,7 +31,6 @@
 
     Private Sub Previous()
         Try
-
             'Dim attachment As String = "attachment; filename=" & LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.docx"
             Dim attachment As String = "attachment; filename=" & "19-001" & "__ScopeOfWork.txt"
             HttpContext.Current.Response.Clear()
@@ -52,12 +51,13 @@
     End Sub
 
     Protected Async Sub Pdf_ServerClick(sender As Object, e As EventArgs)
+        Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork"
         Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
         Dim pdf As PdfApi = New PdfApi()
         Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, lblJobId.Text)
         Dim response As HttpResponse = HttpContext.Current.Response
         response.ContentType = "application/pdf"
-        response.AddHeader("Content-Disposition", "attachment; filename=WorkScope.pdf")
+        response.AddHeader("Content-Disposition", "attachment; filename=" & FileName)
         response.ClearContent()
         response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
         response.Flush()

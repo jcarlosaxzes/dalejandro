@@ -646,7 +646,7 @@
                     </table>
 
                     <hr style="margin-top: 35px; margin-bottom: 0px" />
-                    <h3>Historical Projects</h3>
+                    <h3>Project History</h3>
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 200px">
