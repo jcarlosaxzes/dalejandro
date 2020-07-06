@@ -132,6 +132,7 @@
             }
             .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px;}
             .toggle.ios .toggle-handle { border-radius: 20px;}
+
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -284,7 +285,7 @@
     <div class="pasconcept-subbar">
 
         <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
-            Width="175px" DataTextField="Name" DataValueField="Id" Height="250px"  AppendDataBoundItems="true" Font-Size="Small">
+            Width="175px" DataTextField="Name" DataValueField="Id" Height="250px" AppendDataBoundItems="true" Font-Size="Small">
             <Items>
                 <telerik:RadComboBoxItem runat="server" Text="(Bulk Status Update)" Value="-1" />
             </Items>
@@ -293,7 +294,7 @@
                                             Update Status
         </asp:LinkButton>
 
-        <span style="float: right; vertical-align:middle; padding-top: 3px"">
+        <span style="float: right; vertical-align:middle; padding-top: 3px">
 
             <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
                                             <i class="fas fa-print" style="padding-right:10px"></i>

@@ -75,3 +75,13 @@ DashboardBackcolorRED {
     vertical-align: middle;
     font-weight: 500
 }
+
+.rcbItem, .rcbInputCell, .rcbInput, .element.style, .rcbHovered {
+    font-size: small !important;
+}
+.RadPicker .RadInput > input {
+    font-size: small !important;
+}
+.riTextBox {
+    font-size: small !important;
+}
