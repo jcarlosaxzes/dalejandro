@@ -77,6 +77,33 @@ Partial Public Class clientfiles
     Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
 
     '''<summary>
+    '''UploadPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UploadPanel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''btnSaveUpload control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSaveUpload As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadCloudUpload1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
+
+    '''<summary>
     '''SqlDataSourceAzureFiles control.
     '''</summary>
     '''<remarks>

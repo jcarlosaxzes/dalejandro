@@ -504,7 +504,7 @@ Public Class singproposalsign
         Dim pdfBytes = Await pdf.CreateProposalPdfBytes(lblProposalId.Text)
         Dim response As HttpResponse = HttpContext.Current.Response
         response.ContentType = "application/pdf"
-        response.AddHeader("Content-Disposition", "attachment; filename=file.pdf")
+        response.AddHeader("Content-Disposition", "attachment; filename=Proposal.pdf")
         response.ClearContent()
         response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
         response.Flush()

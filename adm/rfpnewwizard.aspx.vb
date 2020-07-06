@@ -238,7 +238,7 @@ Public Class rfpnewwizard
                 Dim fileExt = IO.Path.GetExtension(tempName)
                 Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
                 AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
-                AzureStorageApi.DeleteFile(tempName, 0)
+                AzureStorageApi.DeleteFile(tempName)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
                 e.IsValid = LocalAPI.RequestForProposalsAzureStorage_Insert(0, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblAzureGuiId.Text, lblCompanyId.Text)
                 RadGridAzureuploads.DataBind()
@@ -254,7 +254,7 @@ Public Class rfpnewwizard
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
-        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
+        AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
     Private Sub cboPaymentSchedules_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboPaymentSchedules.SelectedIndexChanged

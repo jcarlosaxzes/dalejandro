@@ -1070,6 +1070,12 @@ Public Class LocalAPI
         Return result
     End Function
 
+
+    Public Shared Function TruncateString(value As String, maxLength As Integer) As String
+        If String.IsNullOrEmpty(value) Then Return value
+        Return If(value.Length <= maxLength, value, value.Substring(0, maxLength) & "...")
+    End Function
+
 #End Region
 
 #Region "RFP"
@@ -11772,6 +11778,10 @@ Public Class LocalAPI
 
     Public Shared Function GetAzureFileKeyName(Id As Integer) As String
         Return GetStringEscalar("SELECT isnull([KeyName],'') FROM [Azure_Uploads] where Id=" & Id)
+    End Function
+
+    Public Shared Function DeleteAzureFile(Id As Integer) As String
+        Return ExecuteNonQuery("Delete FROM [Azure_Uploads] where Id=" & Id)
     End Function
 
 

@@ -30,7 +30,7 @@ Public Class azurestorage_client
                 Dim fileExt = IO.Path.GetExtension(tempName)
                 Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
                 AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
-                AzureStorageApi.DeleteFile(tempName, lblCompanyId.Text)
+                AzureStorageApi.DeleteFile(tempName)
 
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
                 e.IsValid = LocalAPI.ClientAzureStorage_Insert(lblClientId.Text, cboPreProject.SelectedValue, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblEmployeeId.Text, lblCompanyId.Text)
@@ -51,7 +51,7 @@ Public Class azurestorage_client
 
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Deleting
         Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
-        AzureStorageApi.DeleteFile(KeyName, lblCompanyId.Text)
+        AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
 End Class
