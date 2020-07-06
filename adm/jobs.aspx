@@ -130,6 +130,9 @@
             .RadProgressBar_Material.rpbHorizontal {
                 margin: 0 !important;
             }
+            .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px;}
+            .toggle.ios .toggle-handle { border-radius: 20px;}
+
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -142,6 +145,8 @@
 
 
     <div class="pasconcept-bar">
+       <span class="pasconcept-pagetitle">Jobs</span>
+       <span style="float: right; vertical-align:middle;">
         <button class="btn btn-warning" type="button" data-toggle="collapse"
             data-target="#collapseFilter"
             aria-expanded="false"
@@ -150,54 +155,14 @@
             Filter
         </button>
 
-        <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
-            $ Dashboard
+        <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+            View Summary
         </asp:LinkButton>
 
         <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                        <i class="fas fa-plus"></i> Job
+                                        <%--<i class="fas fa-plus"></i>--%>Add New Job
         </asp:LinkButton>
-        <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">
-                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-style="ios"/>
-        </asp:LinkButton>
-
-        <span class="pasconcept-pagetitle" style="padding-left: 100px; padding-right: 100px">Jobs</span>
-
-
-        <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
-            Width="250px" DataTextField="Name" DataValueField="Id" Height="300px" AppendDataBoundItems="true">
-            <Items>
-                <telerik:RadComboBoxItem runat="server" Text="(Select Status...)" Value="-1" />
-            </Items>
-        </telerik:RadComboBox>
-        <asp:LinkButton ID="btnApplyStatus" runat="server" UseSubmitBehavior="false" CssClass="btn btn-primary" ToolTip="Apply selected status to selected records">
-                                            Apply
-        </asp:LinkButton>
-
-        <span style="padding-left: 50px">
-
-            <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
-                                            <i class="fas fa-print"></i>
-            </asp:LinkButton>
-
-            <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Share">
-            <i class="fas fa-eye"></i>
-            </asp:LinkButton>
-
-
-            <asp:LinkButton ID="btnCopyF" runat="server" UseSubmitBehavior="false" ToolTip="Copy/Save Filter combinations">
-                                        <i class="far fa-copy"></i> 
-            </asp:LinkButton>
-
-            <asp:LinkButton ID="btnPasteF" runat="server" UseSubmitBehavior="false" ToolTip="Get Paste/Shared Filter combinations">
-                                        <i class="fas fa-paste"></i>
-            </asp:LinkButton>
-            <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
-            <i class="far fa-share-square"></i>
-            </asp:LinkButton>
         </span>
-
-
     </div>
     <div class="collapse" id="collapseFilter">
         <div class="card card-body">
@@ -308,8 +273,8 @@
                             </telerik:RadTextBox>
                         </td>
                         <td style="text-align: right">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                             </asp:LinkButton>
                         </td>
                     </tr>
@@ -317,42 +282,82 @@
             </asp:Panel>
         </div>
     </div>
+    <div class="pasconcept-subbar">
+
+        <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
+            Width="175px" DataTextField="Name" DataValueField="Id" Height="250px" AppendDataBoundItems="true" Font-Size="Small">
+            <Items>
+                <telerik:RadComboBoxItem runat="server" Text="(Bulk Status Update)" Value="-1" />
+            </Items>
+        </telerik:RadComboBox>
+        <asp:LinkButton ID="btnApplyStatus" runat="server" UseSubmitBehavior="false" CssClass="btn btn-primary btn-sm" ToolTip="Apply selected status to selected records">
+                                            Update Status
+        </asp:LinkButton>
+
+        <span style="float: right; vertical-align:middle; padding-top: 3px">
+
+            <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
+                                            <i class="fas fa-print" style="padding-right:10px"></i>
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Share">
+            <i class="fas fa-eye" style="padding-right:10px"></i>
+            </asp:LinkButton>
+
+
+            <asp:LinkButton ID="btnCopyF" runat="server" UseSubmitBehavior="false" ToolTip="Copy/Save Filter combinations">
+                                        <i class="far fa-copy" style="padding-right:10px"></i> 
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnPasteF" runat="server" UseSubmitBehavior="false" ToolTip="Get Paste/Shared Filter combinations">
+                                        <i class="fas fa-paste" style="padding-right:10px"></i>
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
+            <i class="far fa-share-square" style="padding-right:10px"></i>
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">
+                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-style="ios" data-size="mini"/>
+        </asp:LinkButton>
+        </span>
+
+
+    </div>
 
     <asp:Panel runat="server" ID="panelTotals" Visible="false">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td colspan="11" style="text-align: center">
-                    <h2 style="margin: 0">Job Dashboard</h2>
+                    <h2 style="margin: 0">Jobs Summary</h2>
                 </td>
             </tr>
             <tr>
                 <td style="width: 14%; text-align: center; background-color: #039be5;">
-                    <span class="DashboardFont2">Budget</span>
+                    <span class="DashboardFont2">Budget</span><br />
                     <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
                 <td style="width: 14%; text-align: center; background-color: #546e7a;">
-                    <span class="DashboardFont2">Billed</span>
+                    <span class="DashboardFont2">Billed</span> <br />
                     <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
                 <td style="width: 14%; text-align: center; background-color: #43a047;">
-                    <span class="DashboardFont2">Collected</span>
+                    <span class="DashboardFont2">Collected</span><br />
                     <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
                 <td style="width: 14%; text-align: center; background-color: #e53935;">
-                    <span class="DashboardFont2">Pending</span>
+                    <span class="DashboardFont2">Pending</span><br />
                     <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
                 <td style="width: 14%; text-align: center; background-color: #43a047;">
-                    <span class="DashboardFont2">Balance</span>
+                    <span class="DashboardFont2">Balance</span><br />
                     <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
                 <td style="width: 14%; text-align: center; background-color: #e53935;">
-                    <span class="DashboardFont2">SubContract</span>
+                    <span class="DashboardFont2">SubContract</span><br />
                     <asp:Label ID="lblTotalSubContract" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
 
