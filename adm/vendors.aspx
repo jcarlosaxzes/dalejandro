@@ -45,7 +45,7 @@
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-            <table class="table-sm pasconcept-bar">
+            <table class="table-sm pasconcept-bar" style="width:100%">
                 <tr>
                     <td>
                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%"

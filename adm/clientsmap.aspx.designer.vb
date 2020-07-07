@@ -32,42 +32,6 @@ Partial Public Class clientsmap
     Protected WithEvents RadWindow1 As Global.Telerik.Web.UI.RadWindow
     
     '''<summary>
-    '''btnSattelite control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSattelite As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''Image4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Image4 As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
-    '''Image1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Image1 As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
-    '''Image2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Image2 As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
     '''Image3 control.
     '''</summary>
     '''<remarks>
@@ -75,6 +39,33 @@ Partial Public Class clientsmap
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Image3 As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''Image5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Image5 As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''Image6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Image6 As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''btnSattelite control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSattelite As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.

@@ -5,9 +5,6 @@
     <script>
         var $ = $telerik.$;
 
-        function exportContent() {
-            $find('<%=RadClientExportManager1.ClientID%>').exportPDF($(".RadMap"));
-        }
         function OpenProject(Id) {
             //alert(Id);
             console.log(<%=RadWindow1.ClientID%>);
@@ -42,126 +39,101 @@
         </Windows>
     </telerik:RadWindowManager>
 
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 100px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-                </td>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Map View">
-                    </asp:LinkButton>
-                </td>
-                <td style="width: 120px">
-                    <telerik:RadButton runat="server" OnClientClicked="exportContent" Text="Export PDF" AutoPostBack="false" UseSubmitBehavior="false"></telerik:RadButton>
-                </td>
-                
-                                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Projects Map
-                    </h3>
-                </td>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Projects Map</span>
 
-                <td style="text-align: right; width:400px">
-                    <b>Sector:</b>
-                    &nbsp;&nbsp;&nbsp;
+        <span style="float: right; vertical-align: middle;">
+                                <b>Sector:</b>
+            &nbsp;&nbsp;&nbsp;
                                     <asp:Image ID="Image3" runat="server" ImageUrl="~/Images/MarkerImages/redmarker.png" />&nbsp;Private 
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Image ID="Image5" runat="server" ImageUrl="~/Images/MarkerImages/greenmarker.png" />&nbsp;Public
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Image ID="Image6" runat="server" ImageUrl="~/Images/MarkerImages/bluemarker.png" />&nbsp;Institution
-                </td>
+            &nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
 
-            </tr>
-        </table>
+            <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Map View">
+            </asp:LinkButton>
+        </span>
     </div>
-
 
     <div class="collapse" id="collapseFilter">
-        <div class="card card-body">
-            <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-                <table class="table-sm" style="width: 100%" >
-                    <tr>
-                        <td style="width: 180px">
-                            <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
-                                <Items>
-                                    <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
-                                    <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
-                                    <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
-                                    <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
-                                    <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
-                                    <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
-                                    <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
-                                    <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
-                                    <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td style="width: 250px">
-                            <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="150px" Culture="en-US" ToolTip="Date From for filter">
-                            </telerik:RadDatePicker>
-                        </td>
-                        <td style="width: 250px">
-                            <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="150px" Culture="en-US" ToolTip="Date To for filter">
-                            </telerik:RadDatePicker>
-                        </td>
-                        <td colspan="2">
-                            <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name"
-                                DataValueField="Id" Width="100%" AppendDataBoundItems="true">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td  style="width: 280px">
-                            <telerik:RadComboBox ID="cboJobType" runat="server" DataSourceID="SqlDataSourceJobTypes" DataTextField="Name" DataValueField="Id" Width="100%"
-                                AppendDataBoundItems="true" Height="300px">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All Job Types...)" Value="-1" Selected="true" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients"
-                                Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
-                                </Items>
-                            </telerik:RadComboBox>
+        <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                    <td style="width: 180px">
+                        <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                                <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                                <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                                <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                                <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
+                                <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
+                                <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 250px">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="150px" Culture="en-US" ToolTip="Date From for filter">
+                        </telerik:RadDatePicker>
+                    </td>
+                    <td style="width: 250px">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="150px" Culture="en-US" ToolTip="Date To for filter">
+                        </telerik:RadDatePicker>
+                    </td>
+                    <td colspan="2">
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name"
+                            DataValueField="Id" Width="100%" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 280px">
+                        <telerik:RadComboBox ID="cboJobType" runat="server" DataSourceID="SqlDataSourceJobTypes" DataTextField="Name" DataValueField="Id" Width="100%"
+                            AppendDataBoundItems="true" Height="300px">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Job Types...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients"
+                            Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
 
-                        </td>
-                        <td colspan="2">
-                                <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" MarkFirstMatch="True" ToolTip="Select active Employye (this year)"
-                                    Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="0" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                        </td>
-                        <td>
-                            <telerik:RadTextBox ID="txtZipCodes" runat="server" Width="100%" x-webkit-speech="x-webkit-speech" EmptyMessage="ZIP Codes comma separated" ToolTip="ZIP Codes comma separated">
-                            </telerik:RadTextBox>
-                        </td>
-                        <td style=" width:150px;text-align: right;">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                    </td>
+                    <td colspan="2">
+                        <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" MarkFirstMatch="True" ToolTip="Select active Employye (this year)"
+                            Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="0" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtZipCodes" runat="server" Width="100%" x-webkit-speech="x-webkit-speech" EmptyMessage="ZIP Codes comma separated" ToolTip="ZIP Codes comma separated">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="width: 150px; text-align: right;">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Search
-                            </asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-
-        </div>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
     </div>
-    <div>
-        <telerik:RadClientExportManager runat="server" ID="RadClientExportManager1">
-            <PdfSettings FileName="ProjectMap.pdf" />
-        </telerik:RadClientExportManager>
-    </div>
-
 
     <div class="pas-container">
         <telerik:RadMap runat="server" ID="RadMap1" Zoom="10" DataSourceID="SqlDataSource1" Skin="Default" Height="800px" Width="100%">

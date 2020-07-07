@@ -5,9 +5,6 @@
     <script>
         var $ = $telerik.$;
 
-        function exportContent() {
-            $find('<%=RadClientExportManager1.ClientID%>').exportPDF($(".RadMap"));
-        }
         function OpenProject(Id) {
             //alert(Id);
             var oWnd = $find("<%=RadWindow1.ClientID%>");
@@ -19,17 +16,17 @@
     <style type="text/css">
         .RadMap .k-marker.k-i-marker-active:before {
             color: green;
-            font-size:14px;
+            font-size: 14px;
         }
 
         .RadMap .k-marker.k-i-marker-inactive:before {
             color: red;
-            font-size:14px;
+            font-size: 14px;
         }
 
         .RadMap .k-marker.k-i-marker-potencial:before {
             color: blue;
-            font-size:14px;
+            font-size: 14px;
         }
     </style>
 
@@ -41,87 +38,74 @@
         </Windows>
     </telerik:RadWindowManager>
 
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Clients Map</span>
 
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 100px">
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-                </td>
-                <td style="width: 130px">
-                     <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Map View">
-                    </asp:LinkButton>
-                </td>
-                <td style="width: 120px">
-                    <telerik:RadButton runat="server" OnClientClicked="exportContent" Text="Export PDF" AutoPostBack="false" UseSubmitBehavior="false"></telerik:RadButton>
-                </td>
-                                <td style="text-align:center">
-                    <h3 style="margin:0">
-                        Clients Map
-                    </h3>
-                </td>
+        <span style="float: right; vertical-align: middle;">
+            <b>Sector:</b>
+            &nbsp;&nbsp;&nbsp;
+                                    <asp:Image ID="Image3" runat="server" ImageUrl="~/Images/MarkerImages/redmarker.png" />&nbsp;Private 
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Image ID="Image5" runat="server" ImageUrl="~/Images/MarkerImages/greenmarker.png" />&nbsp;Public
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Image ID="Image6" runat="server" ImageUrl="~/Images/MarkerImages/bluemarker.png" />&nbsp;Institution
+            &nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
 
-                <td style="text-align: right; width:400px">
-                    <b>Status:</b>
-                    &nbsp;&nbsp;&nbsp;
-                                    <asp:Image ID="Image4" runat="server" ImageUrl="~/Images/MarkerImages/redmarker.png" />&nbsp;Inactive
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/MarkerImages/greenmarker.png" />&nbsp;Active
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Image ID="Image2" runat="server" ImageUrl="~/Images/MarkerImages/bluemarker.png" />&nbsp;Potential
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Image ID="Image3" runat="server" ImageUrl="~/Images/MarkerImages/blackmarker.png" />&nbsp;Prospective
-                </td>
-
-            </tr>
-        </table>
+            <asp:LinkButton ID="btnSattelite" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Text="Map View">
+            </asp:LinkButton>
+        </span>
     </div>
 
+
+
     <div class="collapse" id="collapseFilter">
-        <div class="card card-body">
-            <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-                <table class="table-sm" style="width: 100%">
-                    <tr>
-                        <td style="width: 280px">
-                            <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="True" DataTextField="Name" DataValueField="Id" DataSourceID="SqlDataSourceClientStatus">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td style="width: 280px">
-                            <telerik:RadComboBox ID="cboTypes" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceClientTypes" 
-                                DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Width="100%" CausesValidation="False">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All Clients Types...)" Value="-1" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td style="width: 280px">
-                            <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name"
-                                DataValueField="Id" Width="100%" AppendDataBoundItems="true">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
-                                </Items>
-                            </telerik:RadComboBox>
-                        </td>
-                        <td>
-                            <telerik:RadTextBox ID="txtZipCodes" runat="server" Width="100%" x-webkit-speech="x-webkit-speech" EmptyMessage="ZIP Codes comma separated" ToolTip="ZIP Codes comma separated">
-                            </telerik:RadTextBox>
-                        </td>
-                        <td style="text-align: right;width:100px">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+
+        <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                    <td style="width: 280px">
+                        <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="True" DataTextField="Name" DataValueField="Id" DataSourceID="SqlDataSourceClientStatus">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 280px">
+                        <telerik:RadComboBox ID="cboTypes" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceClientTypes"
+                            DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Width="100%" CausesValidation="False">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Clients Types...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 280px">
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name"
+                            DataValueField="Id" Width="100%" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtZipCodes" runat="server" Width="100%" x-webkit-speech="x-webkit-speech" EmptyMessage="ZIP Codes comma separated" ToolTip="ZIP Codes comma separated">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="text-align: right; width: 100px">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Search
-                            </asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        </div>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
     </div>
     <div>
         <telerik:RadClientExportManager runat="server" ID="RadClientExportManager1">
-                            <PdfSettings FileName="ProjectMap.pdf" />
-                        </telerik:RadClientExportManager>
+            <PdfSettings FileName="ProjectMap.pdf" />
+        </telerik:RadClientExportManager>
     </div>
     <div class="pas-container">
         <telerik:RadMap runat="server" ID="RadMap1" Zoom="10" DataSourceID="SqlDataSource1" Skin="Default" Height="800px" Width="100%">
