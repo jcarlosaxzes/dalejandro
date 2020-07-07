@@ -32,24 +32,6 @@ Partial Public Class subconsultants
     Protected WithEvents btnNewSubconsultant As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnprint control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnprint As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''btnImport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnImport As Global.Telerik.Web.UI.RadLinkButton
-    
-    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>

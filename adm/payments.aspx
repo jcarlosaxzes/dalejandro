@@ -9,29 +9,40 @@
         }
     </script>
 
-    <table style="width: 100%">
-        <tr>
-            <td class="PanelFilter">
-                <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="pasconcept-bar" style="width: 100%">
-                        <tr>
-                            <td>From:
+
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Payments</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+        </span>
+
+    </div>
+
+
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
+            <table class="table-sm pasconcept-bar" style="width: 100%">
+                <tr>
+                    <td>From:
                                 <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US" ToolTip="Date From of the filter">
                                 </telerik:RadDatePicker>
-                                &nbsp;To:
+                        &nbsp;To:
                                 <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
                                 </telerik:RadDatePicker>
 
-                                &nbsp;
+                        &nbsp;
 
                                 <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
-                                    DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="200px" DropDownAutoWidth="Enabled">
+                                    DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="350px" >
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
                                     </Items>
                                 </telerik:RadComboBox>
 
-                                &nbsp;
+                        &nbsp;
 
                                 <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
                                     DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains"
@@ -41,7 +52,7 @@
                                     </Items>
                                 </telerik:RadComboBox>
 
-                                &nbsp;
+                        &nbsp;
 
                                 <telerik:RadComboBox ID="cboPaymentMethod" runat="server" AppendDataBoundItems="true"
                                     DataSourceID="SqlDataSourcePaymentMethod" DataTextField="Name" DataValueField="Id"
@@ -53,26 +64,21 @@
                                     </Items>
                                 </telerik:RadComboBox>
 
-                                &nbsp;
+                        &nbsp;
 
                                 <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Search for Invoice/Statement, Job/Client, Notes..."
                                     Width="350px" x-webkit-speech="x-webkit-speech">
                                 </telerik:RadTextBox>
 
-                            </td>
-                            <td style="text-align: right; width: 110px">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                    </td>
+                    <td style="text-align: right; width: 150px">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Search
-                                </asp:LinkButton>
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
-    <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Payments</span>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
     </div>
     <div>
         <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true"

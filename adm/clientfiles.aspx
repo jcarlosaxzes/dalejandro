@@ -35,7 +35,25 @@
             width: auto;
         }
     </style>
-    <div class="PanelFilter noprint">
+
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Client Uploaded Files</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnDeleteSelected" runat="server"
+                CssClass="btn btn-danger btn" UseSubmitBehavior="false">
+                                     Delete selected!
+            </asp:LinkButton>
+        </span>
+
+
+    </div>
+
+
+    <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
             <table onclick="table-sm pasconcept-bar noprint" width="100%">
                 <tr>
@@ -44,7 +62,7 @@
                             DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="100%" Height="300px"
                             AppendDataBoundItems="true">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="(Select Client...)" Value="-1" Selected="true" />
                             </Items>
                         </telerik:RadComboBox>
 
@@ -59,11 +77,11 @@
                         </telerik:RadComboBox>
 
                     </td>
-                    <td style="width: 200px">
-                        <telerik:RadTextBox ID="txtJob" runat="server" MaxLength="6" EmptyMessage="Job Code"></telerik:RadTextBox>
+                    <td >
+                        <telerik:RadTextBox ID="txtJob" runat="server" MaxLength="6" EmptyMessage="Job Code" Width="250px"></telerik:RadTextBox>
                     </td>
-                    <td>
-                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                    <td style="width: 150px;text-align:right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
                                             <i class="fas fa-search"></i> Search
                         </asp:LinkButton>
                     </td>
@@ -73,14 +91,6 @@
 
     </div>
 
-
-    <div class="pasconcept-bar noprint">
-        <asp:LinkButton ID="btnDeleteSelected" runat="server"
-            CssClass="btn btn-danger btn" UseSubmitBehavior="false">
-                                     Delete selected!
-        </asp:LinkButton>
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Client Files</span>
-    </div>
 
 
 
@@ -97,7 +107,7 @@
                         <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Select">
                             <i class="far fa-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                         </asp:LinkButton>
-                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width:90%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 90%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
                     </div>
                     <div class="card-body">
                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
@@ -131,7 +141,7 @@
                         <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Select">
                             <i class="fa fa-check-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                         </asp:LinkButton>
-                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width:90%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 90%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
                     </div>
                     <div class="card-body">
                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
@@ -162,22 +172,24 @@
 
         </telerik:RadListView>
         <asp:Panel ID="UploadPanel" runat="server">
-        <div style="width:100%;height:200px; background-color:lightgray; margin-top:20px;">
-            <table style="width: 100%;">
-                <tr>
-                    <td style="width: 90%;"><h3 class="additional-text">Select Files to Upload</h3></td>
-                    <td style="width:150px;">
-                        <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files" >
+            <div style="width: 100%; height: 200px; background-color: lightgray; margin-top: 20px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 90%;">
+                            <h3 class="additional-text">Select Files to Upload</h3>
+                        </td>
+                        <td style="width: 150px;">
+                            <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
                             <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
-                        </asp:LinkButton>
-                    </td>
-                </tr>
-            </table>
-            <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
-                ProviderType="Azure" MaxFileSize="1048576" CssClass="h-100">
-            </telerik:RadCloudUpload>
- 
-        </div>
+                            </asp:LinkButton>
+                        </td>
+                    </tr>
+                </table>
+                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
+                    ProviderType="Azure" MaxFileSize="1048576" CssClass="h-100">
+                </telerik:RadCloudUpload>
+
+            </div>
         </asp:Panel>
 
         <%--        <telerik:RadGrid ID="RadGridAzureFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GroupPanelPosition="Top" ShowFooter="true"

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" Async="true"%>
+﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" Async="true" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
@@ -41,7 +41,21 @@
     </telerik:RadWindowManager>
 
 
-    <div class="pasconcept-bar">
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Invoices</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice Simple Change">
+                    Add New Invoice
+            </asp:LinkButton>
+        </span>
+
+    </div>
+
+    <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
@@ -127,16 +141,7 @@
         </asp:Panel>
 
     </div>
-    <div class="pasconcept-bar noprint">
 
-        <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice">
-                    <i class="fas fa-plus"></i> Simple Charge
-        </asp:LinkButton>
-
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Invoices</span>
-
-
-    </div>
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
             <script type="text/javascript">
