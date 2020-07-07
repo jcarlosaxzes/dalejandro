@@ -22,21 +22,16 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <table class="table-sm Formulario" style="width: 100%">
-        <tr>
-            <td style="width: 200px">
-                <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"
-                    DataTextField="nYear" DataValueField="Year" Width="200px" AppendDataBoundItems="True" AutoPostBack="true">
-                </telerik:RadComboBox>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Expenses</span>
 
-            </td>
-            <td style="text-align: center">
-                <h3 style="margin: 0">Cash Flow
-                </h3>
-            </td>
+        <span style="float: right; vertical-align: middle;">
+            <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"
+                DataTextField="nYear" DataValueField="Year" Width="200px" AppendDataBoundItems="True" AutoPostBack="true">
+            </telerik:RadComboBox>
 
-        </tr>
-    </table>
+        </span>
+    </div>
 
     <div class="row">
         <div class="col-md-5">
@@ -44,7 +39,7 @@
             <br />
             <telerik:RadGrid ID="RadGrid1" runat="server" CellSpacing="0" Culture="en-US" DataSourceID="SqlDataSourceMonth" GridLines="None">
                 <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonth" ShowFooter="true"
-                            ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small">
+                    ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small">
                     <Columns>
                         <telerik:GridBoundColumn DataField="colMonth" FilterControlAltText="Filter colMonth column" HeaderText="Month" SortExpression="colMonth" UniqueName="colMonth"
                             HeaderStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"

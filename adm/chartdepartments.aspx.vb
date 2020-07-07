@@ -30,7 +30,7 @@ Public Class chartdepartments
 
     End Sub
 
-    Private Sub cboCurrentSource_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboCurrentSource.SelectedIndexChanged
+    Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         If cboCurrentSource.SelectedValue = 0 Then
             SqlDataSource1.SelectCommand = "BudgetDepartments_Chart"
         Else
