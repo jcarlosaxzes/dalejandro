@@ -86,7 +86,7 @@
                 <td>
                     <telerik:RadNumericTextBox ID="txtTimeSel" runat="server"
                         MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours"
-                        Value="1" Width="155px" MaxValue="24">
+                        Value="1" Width="200px" MaxValue="24">
                         <NumberFormat DecimalDigits="2" />
                         <IncrementSettings Step="1" />
                     </telerik:RadNumericTextBox>
@@ -96,7 +96,7 @@
                 <td style="text-align: right">Date of Work:
                 </td>
                 <td style="text-align: left;">
-                    <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US">
+                    <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Width="200px">
                     </telerik:RadDatePicker>
                 </td>
             </tr>
@@ -164,12 +164,15 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Set Job Status (optional):</td>
+                <td style="text-align: right">Job Status (optional):</td>
                 <td style="text-align: left">
-
-                    <asp:RadioButton runat="server" ID="opcDone" GroupName="status" Text="&nbsp;Done" ToolTip="Set Job to Done status"></asp:RadioButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <asp:RadioButton runat="server" ID="opcHold" GroupName="status" Text="&nbsp;On Hold" ToolTip="Set Job to On Hold status"></asp:RadioButton>
+                    <telerik:RadComboBox ID="cboJobStatus" runat="server" Width="200px" AppendDataBoundItems="true" CausesValidation="false">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="(No status changes...)" Value="-1" />
+                            <telerik:RadComboBoxItem Text="Done" Value="7" />
+                            <telerik:RadComboBoxItem Text="On Hold" Value="3" />
+                        </Items>
+                    </telerik:RadComboBox>
                 </td>
             </tr>
 

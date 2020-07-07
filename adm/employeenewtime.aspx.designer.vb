@@ -131,22 +131,13 @@ Partial Public Class employeenewtime
     Protected WithEvents txtDescription As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''opcDone control.
+    '''cboJobStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents opcDone As Global.System.Web.UI.WebControls.RadioButton
-    
-    '''<summary>
-    '''opcHold control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents opcHold As Global.System.Web.UI.WebControls.RadioButton
+    Protected WithEvents cboJobStatus As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''btnInsertTime control.
