@@ -30,15 +30,8 @@
             }
     </style>
 
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="text-align: center">
-                    <span class="pasconcept-bar">Company Overview</span>
-                </td>
-            </tr>
-        </table>
-
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Company Overview</span>
     </div>
     <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
 

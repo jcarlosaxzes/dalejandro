@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class dashboard
     
     '''<summary>
-    '''RadPageLayout1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
-    
-    '''<summary>
     '''RadHtmlChart1 control.
     '''</summary>
     '''<remarks>
