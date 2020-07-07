@@ -51,8 +51,8 @@ Public Class employeenewtime
 
     Private Sub InitDialog()
         Try
-            opcDone.Checked = False
-            opcHold.Checked = False
+            cboJobStatus.DataBind()
+            cboJobStatus.SelectedValue = -1
             txtDescription.Text = ""
 
             Dim DefaultValuesObject = LocalAPI.GetJobNewTimeDefaultValues(lblSelectedJob.Text, lblEmployeeId.Text)
@@ -174,14 +174,9 @@ Public Class employeenewtime
                                   taskId, cboCategory.SelectedValue, lblCompanyId.Text, JobTicketId) Then
 
                 ' Actualizar el status del Job
-                If opcDone.Checked Then
-                    LocalAPI.SetJobStatus(lblSelectedJob.Text, 7, lblEmployeeId.Text, lblCompanyId.Text, lblLogedEmployeeId.Text)
-                    opcDone.Checked = False
-
-                ElseIf opcHold.Checked Then
-                    LocalAPI.SetJobStatus(lblSelectedJob.Text, 3, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text)
-                    opcHold.Checked = False
-
+                If cboJobStatus.SelectedValue <> -1 Then
+                    LocalAPI.SetJobStatus(lblSelectedJob.Text, cboJobStatus.SelectedValue, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text)
+                    cboJobStatus.SelectedValue = -1
                 End If
 
                 Return True
