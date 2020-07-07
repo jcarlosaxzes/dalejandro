@@ -3,35 +3,55 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="row Formulario">
-        <div class="col-md-5" style="text-align: right">
-            <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments"
-                DataTextField="Name" DataValueField="Id" Height="300px" Width="100%">
-            </telerik:RadComboBox>
-        </div>
-        <div class="col-md-4">
-            <telerik:RadDropDownList ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
-                DataValueField="Year" Width="100px" AutoPostBack="true" CausesValidation="false" UseSubmitBehavior="false">
-            </telerik:RadDropDownList>
 
-        </div>
-        <div class="col-md-3" style="text-align: right">
-            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
-                ToolTip="Refresh data" CausesValidation="false">
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Department Report</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+        </span>
+
+
+    </div>
+
+
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
+
+            <table class="table-sm pasconcept-bar" style="width: 100%">
+                <tr>
+                    <td style="width: 150px">
+                        <telerik:RadDropDownList ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
+                            DataValueField="Year" Width="100px" AutoPostBack="true" CausesValidation="false" UseSubmitBehavior="false">
+                        </telerik:RadDropDownList>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments"
+                            DataTextField="Name" DataValueField="Id" Height="300px" Width="400px">
+                        </telerik:RadComboBox>
+
+
+                    </td>
+                    <td style="width: 150px; text-align: right">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
+                            ToolTip="Refresh data" CausesValidation="false">
                             <i class="fas fa-redo"></i> Refresh
-            </asp:LinkButton>
-        </div>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+
+        </asp:Panel>
     </div>
-    <div style="text-align: center">
-        <h3 style="margin: 10px">Department Report
-        </h3>
-    </div>
+
 
     <div class="row">
         <div class="col-md-6">
             <%--[Insert table with Employees and their FTE]--%>
             <telerik:RadGrid ID="RadGridEmpls" runat="server" DataSourceID="SqlDataSourceEmployees" AllowPaging="True" PageSize="8"
-                GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true">
+                GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                 <MasterTableView DataSourceID="SqlDataSourceEmployees" DataKeyNames="EmployeeId">
                     <PagerStyle Mode="Slider" AlwaysVisible="false" />
                     <Columns>
@@ -389,7 +409,7 @@
                 <h4>Detailed Employees</h4>
                 <%--[Same as standard employee chart but filtered to this department]--%>
                 <telerik:RadGrid ID="RadGridDetailedEmployees" runat="server" DataSourceID="SqlDataSourceDetailedEmployees" PageSize="10" AllowPaging="True"
-                    GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" Skin="Bootstrap">
+                    GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                     </ClientSettings>

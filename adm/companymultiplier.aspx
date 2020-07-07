@@ -16,16 +16,6 @@
             font-size: 12px !important;
         }
 
-        .photo {
-            box-shadow: inset 0 0 30px rgba(0,0,0,.3);
-            margin: 0 10px 0 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            display: inline-block;
-        }
     </style>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
@@ -296,7 +286,7 @@
                                             <Columns>
                                                 <telerik:GridTemplateColumn HeaderText="Photo" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                                                     <ItemTemplate>
-                                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("employeeId"))%>' CssClass="photo"
+                                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("employeeId"))%>' CssClass="photo50"
                                                             runat="server" AlternateText=""></asp:Image>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>

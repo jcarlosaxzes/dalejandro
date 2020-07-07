@@ -3,27 +3,23 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="pas-container">
-        <div class="Formulario">
-            <table class="table-sm" style="width: 100%">
-                <tr>
-                    <td style="width: 60px; text-align: right">Year:
-                    </td>
-                    <td style="width: 100px">
-                        <telerik:RadComboBox ID="cboYears" runat="server" DataSourceID="SqlDataSourceYear"
+        <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Top Ten Charts</span>
+
+        <span style="float: right; vertical-align: middle;">
+            Year:
+             <telerik:RadComboBox ID="cboYears" runat="server" DataSourceID="SqlDataSourceYear"
                             DataTextField="nYear" DataValueField="Year" AutoPostBack="True"
                             Width="150px">
                         </telerik:RadComboBox>
-                    </td>
-                    <td style="text-align: center">
-                        <h3 style="margin: 0">Top Ten Charts
-                        </h3>
-                    </td>
-                </tr>
-            </table>
 
-        </div>
+        </span>
+    </div>
 
+
+
+
+    <div class="pas-container">
         <div class="row">
             <div class="col-md-12" style="text-align: center">
 

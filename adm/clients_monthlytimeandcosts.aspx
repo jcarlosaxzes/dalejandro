@@ -13,19 +13,37 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <div class="Formulario">
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Margins per Clients</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            
+            <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Width="100px"
+                                CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
+                                    <i class="fas fa-download"></i> Export
+                            </asp:LinkButton>
+        </span>
+
+
+    </div>
+
+
+
+    <div class="collapse" id="collapseFilter">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 60px; text-align: right" class="Normal">Year:</td>
                 <td style="width: 150px">
-                    <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYears" DataTextField="nYear" DataValueField="Year" Width="100%" AppendDataBoundItems="True">
+                    <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYears" DataTextField="nYear" DataValueField="Year" Width="100%" AppendDataBoundItems="True">
                         <Items>
                             <telerik:RadComboBoxItem runat="server" Text="(All Years...)" Value="-1" />
                         </Items>
                     </telerik:RadComboBox>
                 </td>
-                <td style="width: 300px">
-                    <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" AutoPostBack="True"
+                <td style="width: 350px">
+                    <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" 
                         DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" AppendDataBoundItems="True"
                         Filter="Contains" Height="300px">
                         <Items>
@@ -34,8 +52,8 @@
                     </telerik:RadComboBox>
 
                 </td>
-                <td style="width: 250px">
-                    <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True" AutoPostBack="True"
+                <td style="width: 300px">
+                    <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True" 
                         DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id"
                         Width="100%" MarkFirstMatch="True"
                         Filter="Contains" Height="300px">
@@ -45,9 +63,9 @@
                     </telerik:RadComboBox>
 
                 </td>
-                <td style="width: 250px">
-                    <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" AutoPostBack="True"
-                        DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" AppendDataBoundItems="True"
+                <td >
+                    <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" 
+                        DataTextField="Name" DataValueField="Id" Width="300px" MarkFirstMatch="True" AppendDataBoundItems="True"
                         Filter="Contains" Height="300px">
                         <Items>
                             <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" />
@@ -55,17 +73,14 @@
                     </telerik:RadComboBox>
 
                 </td>
-                <td></td>
-                <td style="text-align:right">
-                    <asp:ImageButton ID="ExcelButton" ImageUrl="~/Images/Toolbar/Excel-icon.png" runat="server" ToolTip="Export List to Excel file format (.XSLS)" />
+                <td style="width: 150px;text-align:right">
+                    <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
+                        </asp:LinkButton>
                 </td>
 
             </tr>
         </table>
-    </div>
-    <div style="text-align: center">
-        <h3 style="margin: 0">Margins per Clients
-        </h3>
     </div>
 
     <div>

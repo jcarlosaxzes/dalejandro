@@ -32,6 +32,15 @@ Partial Public Class clients_monthlytimeandcosts
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''cboYear control.
     '''</summary>
     '''<remarks>
@@ -68,13 +77,13 @@ Partial Public Class clients_monthlytimeandcosts
     Protected WithEvents cboEmployees As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''ExcelButton control.
+    '''btnFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ExcelButton As Global.System.Web.UI.WebControls.ImageButton
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGridMonthly control.

@@ -38,8 +38,6 @@
             </asp:LinkButton>
 
         </span>
-
-
     </div>
 
     <div class="collapse" id="collapseFilter">
