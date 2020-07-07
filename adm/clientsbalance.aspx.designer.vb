@@ -32,6 +32,15 @@ Partial Public Class clientsbalance
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''cboFilter control.
     '''</summary>
     '''<remarks>
@@ -57,15 +66,6 @@ Partial Public Class clientsbalance
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''ExcelButton control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ExcelButton As Global.System.Web.UI.WebControls.ImageButton
     
     '''<summary>
     '''RadGrid1 control.

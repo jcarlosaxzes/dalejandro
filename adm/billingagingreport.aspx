@@ -3,11 +3,28 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="Formulario">
+        <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Clients Aging Report</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+
+                        <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Width="100px"
+                CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
+                                    <i class="fas fa-download"></i> Export
+            </asp:LinkButton>
+
+
+        </span>
+    </div>
+
+
+    <div class="collapse" id="collapseFilter">
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 100px; text-align: right">Client:
-                </td>
+             
                 <td style="width: 400px">
                     <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true"
                         DataSourceID="SqlDataSourceClients" DataTextField="Name" DataValueField="Id" Filter="Contains"
@@ -17,11 +34,9 @@
                         </Items>
                     </telerik:RadComboBox>
                 </td>
-                <td style="width: 100px; text-align: right">Department:
-                </td>
-                <td style="width: 350px">
+                <td>
                     <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments"
-                        DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true">
+                        DataTextField="Name" DataValueField="Id" Width="350px" AppendDataBoundItems="true">
                         <Items>
                             <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
                         </Items>
@@ -32,17 +47,9 @@
                                     <i class="fas fa-search"></i> Search
                     </asp:LinkButton>
                 </td>
-                <td style="text-align: right; padding-top: 10px">
-                    <asp:ImageButton ID="ExcelButton" ImageUrl="~/Images/Toolbar/Excel-icon.png" runat="server" ToolTip="Export List to Excel file format (.XSLS)" />
-                </td>
 
             </tr>
         </table>
-    </div>
-    <div style="text-align: center">
-        <h3>Clients Aging Report
-        </h3>
-
     </div>
 
     <div>

@@ -41,6 +41,42 @@ Partial Public Class reports
     Protected WithEvents cboGroups As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
+    '''cboNames control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboNames As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''btnRefresh control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''pnlFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''cboTimeFrame control.
     '''</summary>
     '''<remarks>
@@ -68,24 +104,6 @@ Partial Public Class reports
     Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
     
     '''<summary>
-    '''cboDepartment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboDepartment As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''cboNames control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboNames As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
     '''txtCode control.
     '''</summary>
     '''<remarks>
@@ -95,22 +113,13 @@ Partial Public Class reports
     Protected WithEvents txtCode As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''btnRefresh control.
+    '''cboDepartment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnExport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents cboDepartment As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''RadGrid1 control.

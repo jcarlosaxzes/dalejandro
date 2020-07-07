@@ -12,10 +12,6 @@
             lblCompanyId.Text = Session("companyId")
         End If
     End Sub
-    Protected Sub ExcelButton_Click(sender As Object, e As ImageClickEventArgs) Handles ExcelButton.Click
-        ConfigureExport()
-        RadGrid1.MasterTableView.ExportToExcel()
-    End Sub
     Private Sub ConfigureExport()
         RadGrid1.ExportSettings.FileName = "Client_balance_" & DateTime.Today.ToString("yyyy-MM-dd")
         RadGrid1.ExportSettings.ExportOnlyData = True
@@ -24,5 +20,10 @@
         RadGrid1.ExportSettings.UseItemStyles = False
         RadGrid1.ExportSettings.HideStructureColumns = True
         RadGrid1.MasterTableView.ShowFooter = True
+    End Sub
+
+    Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+        ConfigureExport()
+        RadGrid1.MasterTableView.ExportToExcel()
     End Sub
 End Class

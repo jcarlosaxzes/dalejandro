@@ -41,22 +41,13 @@ Partial Public Class balancedepartments
     Protected WithEvents cboYear As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''printbutton control.
+    '''btnExport control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''ExcelButton control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ExcelButton As Global.System.Web.UI.WebControls.ImageButton
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGrid1 control.

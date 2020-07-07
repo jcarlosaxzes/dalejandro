@@ -59,7 +59,7 @@
 
 
     <%--class="foo..." allow scroll in OrgChar--%>
-    <div class="row pas-container foo" style="width: 100%">
+    <div class="pas-container foo" style="width: 100%">
         <telerik:RadOrgChart ID="RadOrgChart1" runat="server"
             GroupColumnCount="2"
             EnableCollapsing="true"
