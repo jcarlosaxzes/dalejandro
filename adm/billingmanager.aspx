@@ -21,71 +21,70 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td class="PanelFilter">
-                    <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh" CssClass="noprint">
-                        <div>
 
-                            <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
-                                DataTextField="Name" DataValueField="Id" Filter="Contains" Height="250px" MarkFirstMatch="True" Width="200px" DropDownAutoWidth="Enabled">
-                                <Items>
-                                    <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
-                                </Items>
-                            </telerik:RadComboBox>
-
-                            &nbsp;
-
-                                <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" ToolTip="Departments"
-                                    Width="250px" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains" EmptyMessage="(All Departments...)">
-                                    <Localization AllItemsCheckedString="All Items Checked" CheckAllString="Check All..." ItemsCheckedString="departments checked"></Localization>
-                                </telerik:RadComboBox>
-
-                            &nbsp;
-
-                                <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceJobStatus" DataTextField="Name" DataValueField="Id"
-                                    Width="150px" AppendDataBoundItems="true" ToolTip="Job Status">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Active Status...)" Value="-1" />
-                                    </Items>
-                                </telerik:RadComboBox>
-
-                            &nbsp;
-                                <telerik:RadComboBox ID="cboPasDueStatus" runat="server" ToolTip="Past Due Status"
-                                    Width="250px" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
-                                    <Localization AllItemsCheckedString="All Past Due Checked" CheckAllString="Check All..." ItemsCheckedString="PastDue status checked"></Localization>
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="Final Past Due (5)" Value="5" Checked="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="90 Days Past Due (4)" Value="4" Checked="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="60 Days Past Due (3)" Value="3" Checked="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="First Past Due (2)" Value="2" Checked="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="Pending to Emit (1)" Value="1" Checked="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="Recently notified (0)" Value="0" Checked="false" />
-                                    </Items>
-                                </telerik:RadComboBox>
-
-                            &nbsp;
-
-                                <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Search for Invoice Number, Job Name, Client Name, ..."
-                                    Width="250px" x-webkit-speech="x-webkit-speech">
-                                </telerik:RadTextBox>
-
-
-
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
-                            </asp:LinkButton>
-
-                        </div>
-                    </asp:Panel>
-                </td>
-            </tr>
-        </table>
-    </div>
     <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Billing Assistant</span>
 
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Billing Assistant</span>
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+        </span>
+
+    </div>
+
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh" CssClass="noprint">
+            <div class="pasconcept-bar">
+
+                <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
+                    DataTextField="Name" DataValueField="Id" Filter="Contains" Height="250px" MarkFirstMatch="True" Width="350px" >
+                    <Items>
+                        <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
+                    </Items>
+                </telerik:RadComboBox>
+
+                &nbsp;
+                <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" ToolTip="Departments"
+                    Width="250px" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains" EmptyMessage="(All Departments...)">
+                    <Localization AllItemsCheckedString="All Items Checked" CheckAllString="Check All..." ItemsCheckedString="departments checked"></Localization>
+                </telerik:RadComboBox>
+
+                &nbsp;
+
+                <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceJobStatus" DataTextField="Name" DataValueField="Id"
+                    Width="150px" AppendDataBoundItems="true" ToolTip="Job Status">
+                    <Items>
+                        <telerik:RadComboBoxItem runat="server" Text="(All Active Status...)" Value="-1" />
+                    </Items>
+                </telerik:RadComboBox>
+
+                &nbsp;
+                <telerik:RadComboBox ID="cboPasDueStatus" runat="server" ToolTip="Past Due Status"
+                    Width="250px" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
+                    <Localization AllItemsCheckedString="All Past Due Checked" CheckAllString="Check All..." ItemsCheckedString="PastDue status checked"></Localization>
+                    <Items>
+                        <telerik:RadComboBoxItem runat="server" Text="Final Past Due (5)" Value="5" Checked="true" />
+                        <telerik:RadComboBoxItem runat="server" Text="90 Days Past Due (4)" Value="4" Checked="true" />
+                        <telerik:RadComboBoxItem runat="server" Text="60 Days Past Due (3)" Value="3" Checked="true" />
+                        <telerik:RadComboBoxItem runat="server" Text="First Past Due (2)" Value="2" Checked="true" />
+                        <telerik:RadComboBoxItem runat="server" Text="Pending to Emit (1)" Value="1" Checked="true" />
+                        <telerik:RadComboBoxItem runat="server" Text="Recently notified (0)" Value="0" Checked="false" />
+                    </Items>
+                </telerik:RadComboBox>
+
+                &nbsp;
+
+                <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Search for Invoice Number, Job Name, Client Name, ..."
+                    Width="250px" x-webkit-speech="x-webkit-speech">
+                </telerik:RadTextBox>
+                &nbsp;&nbsp;&nbsp;
+                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Search
+                </asp:LinkButton>
+
+            </div>
+        </asp:Panel>
 
     </div>
 

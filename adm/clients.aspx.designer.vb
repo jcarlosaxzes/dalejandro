@@ -59,15 +59,6 @@ Partial Public Class clients
     Protected WithEvents btnNewClient As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''printbutton control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>

@@ -32,15 +32,6 @@ Partial Public Class clientmanagement
     Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
     
     '''<summary>
-    '''btnNew control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''cboCampaing control.
     '''</summary>
     '''<remarks>
@@ -75,6 +66,15 @@ Partial Public Class clientmanagement
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnDeleteCampaign As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnNew control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.

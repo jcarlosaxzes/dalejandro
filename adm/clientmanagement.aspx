@@ -14,39 +14,42 @@
     </telerik:RadCodeBlock>
 
     <div class="pasconcept-bar noprint">
-        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-            <i class="fas fa-filter"></i>&nbsp;Filter
-        </button>
+        <span class="pasconcept-pagetitle" style="padding-left: 250px; padding-right: 150px">Clients Management</span>
 
-        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Campaign">
-                    <i class="fas fa-plus"></i> Campaign
-        </asp:LinkButton>
-
-        <telerik:RadComboBox ID="cboCampaing" runat="server" DataSourceID="SqlDataSourceCampaing" AutoPostBack="true" CausesValidation="False"
-            Width="350px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-            <Items>
-                <telerik:RadComboBoxItem runat="server" Text="(Select Campaing...)" Value="-1" Selected="true" />
-            </Items>
-        </telerik:RadComboBox>
-
-        <asp:LinkButton ID="btnExecuteCampaign" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Run Campaign" Visible="false">
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <telerik:RadComboBox ID="cboCampaing" runat="server" DataSourceID="SqlDataSourceCampaing" AutoPostBack="true" CausesValidation="False"
+                Width="350px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                <Items>
+                    <telerik:RadComboBoxItem runat="server" Text="(Select Campaing...)" Value="-1" Selected="true" />
+                </Items>
+            </telerik:RadComboBox>
+            <asp:LinkButton ID="btnExecuteCampaign" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Run Campaign" Visible="false">
                     <i class="far fa-envelope"></i> Run
-        </asp:LinkButton>
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;padding-right:150px">Clients Management</span>
-        <asp:LinkButton runat="server" ID="CSVButton"
-            CssClass="btn btn-secondary btn"
-            UseSubmitBehavior="false"
-            ToolTip="Export List to Comma-Separated Values format (.CSV)"
-            CausesValidation="false">
+            </asp:LinkButton>
+            <asp:LinkButton runat="server" ID="CSVButton"
+                CssClass="btn btn-secondary btn"
+                UseSubmitBehavior="false"
+                ToolTip="Export List to Comma-Separated Values format (.CSV)"
+                CausesValidation="false">
                                         <i class="fas fa-cloud-download-alt"></i> Export
-        </asp:LinkButton>
+            </asp:LinkButton>
 
-        <asp:LinkButton ID="btnDeleteCampaign" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false" ToolTip="Delete Campaign" Visible="false">
+            <asp:LinkButton ID="btnDeleteCampaign" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false" ToolTip="Delete Campaign" Visible="false">
                     <i class="far fa-trash-alt"></i> Delete
-        </asp:LinkButton>
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Campaign">
+                    Add New Campaign
+            </asp:LinkButton>
+        </span>
+
+
+
     </div>
     <div class="collapse" id="collapseFilter">
-
         <div class="pasconcept-bar">
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
                 <table class="table-sm" style="width: 100%">
@@ -124,7 +127,7 @@
 
     </div>
 
-    
+
 
 
     <div>

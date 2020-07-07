@@ -52,7 +52,7 @@
 
     <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-            <table  class="table-sm pasconcept-bar" style="width:100%" border="1">
+            <table  class="table-sm pasconcept-bar" style="width:100%">
                 <tr>
                     <td width="110px" align="left">
                         <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"

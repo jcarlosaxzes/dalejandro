@@ -23,6 +23,15 @@ Partial Public Class statement
     Protected WithEvents RadCodeBlock2 As Global.Telerik.Web.UI.RadCodeBlock
     
     '''<summary>
+    '''btnNew control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>
@@ -66,15 +75,6 @@ Partial Public Class statement
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnNew control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadCodeBlock1 control.
