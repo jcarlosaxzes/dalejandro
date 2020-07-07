@@ -14,33 +14,6 @@ Option Explicit On
 Partial Public Class employeereport
     
     '''<summary>
-    '''cboEmployees control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboEmployees As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''cboYear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboYear As Global.Telerik.Web.UI.RadDropDownList
-    
-    '''<summary>
-    '''btnRefresh control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnView control.
     '''</summary>
     '''<remarks>
@@ -57,6 +30,42 @@ Partial Public Class employeereport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnMemory As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''pnlFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''cboYear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboYear As Global.Telerik.Web.UI.RadDropDownList
+    
+    '''<summary>
+    '''cboEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboEmployees As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''btnRefresh control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''FormView1 control.

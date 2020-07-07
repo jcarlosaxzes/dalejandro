@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class departmentreport
     
     '''<summary>
-    '''cboDepartments control.
+    '''pnlFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''cboYear control.
@@ -30,6 +30,15 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboYear As Global.Telerik.Web.UI.RadDropDownList
+    
+    '''<summary>
+    '''cboDepartments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''btnRefresh control.

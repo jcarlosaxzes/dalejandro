@@ -33,18 +33,6 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <style>
-        .photo {
-            box-shadow: inset 0 0 30px rgba(0,0,0,.3);
-            margin: 0 10px 0 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            display: inline-block;
-        }
-    </style>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Silk">
     </telerik:RadWindowManager>
 
@@ -113,7 +101,7 @@
 
                                         <asp:LinkButton ID="btnEditEmpl2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to Edit Employee Photo"
                                             CommandName="EditPhoto" UseSubmitBehavior="false">
-                                            <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>' CssClass="photo"
+                                            <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>' CssClass="photo50"
                                                 runat="server" AlternateText=""></asp:Image>
                                         </asp:LinkButton>
 
