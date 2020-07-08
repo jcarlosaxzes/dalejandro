@@ -92,7 +92,7 @@
                         <telerik:RadTextBox ID="txtZipCodes" runat="server" Width="100%" x-webkit-speech="x-webkit-speech" EmptyMessage="ZIP Codes comma separated" ToolTip="ZIP Codes comma separated">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="text-align: right; width: 100px">
+                    <td style="width: 150px; text-align:right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>

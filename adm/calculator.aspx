@@ -153,7 +153,7 @@
 
                         </td>
                         <td style="text-align: right">
-                            <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn">
+                            <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary btn">
                                             <i class="fas fa-search"></i> Filter/Search
                             </asp:LinkButton>
                         </td>
