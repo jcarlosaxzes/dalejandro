@@ -64,8 +64,8 @@
 
                 </td>
                 <td style="width: 150px; text-align: right">
-                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                     </asp:LinkButton>
                 </td>
             </tr>

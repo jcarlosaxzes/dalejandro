@@ -11,7 +11,7 @@
 
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    Add New Terms & Conditions
+                    Add Terms & Conditions
             </asp:LinkButton>
         </span>
     </div>

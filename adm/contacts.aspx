@@ -57,26 +57,26 @@
             </button>
 
             <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> Client
+                    Add Client
             </asp:LinkButton>
 
 
             <asp:LinkButton ID="btnNewEmployee" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                            <i class="fas fa-plus"></i>&nbsp;Employee
+                   Add Employee
             </asp:LinkButton>
 
 
             <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> SubConsultant
+                    Add SubConsultant
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-warning btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> Vendor
+                    Add Vendor
             </asp:LinkButton>
 
 
             <asp:LinkButton ID="btnNewContact" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
-                                        <i class="fas fa-plus"></i>&nbsp;Other
+                    Add Other
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
@@ -113,7 +113,7 @@
                     </td>
                     <td style="width: 150px">
                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <i class="fas fa-search"></i> Search
+                                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>

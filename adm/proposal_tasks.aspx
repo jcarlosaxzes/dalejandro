@@ -36,7 +36,7 @@
                                     Delete Selected
             </asp:LinkButton>
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    Add New Task
+                    Add Task
             </asp:LinkButton>
         </span>
     </div>
@@ -59,7 +59,7 @@
                     </td>
                     <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-search"></i> Search
+                                            <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>

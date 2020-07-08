@@ -33,10 +33,10 @@
 
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    Add New Type
+                    Add Type
             </asp:LinkButton>
             <asp:LinkButton ID="btnNewSubtype" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    Add New Subtype
+                    Add Subtype
             </asp:LinkButton>
 
         </span>

@@ -689,7 +689,7 @@
 
 	/**
 	 *
-	 * Add new area to the collection of AreaCollection in the map
+	 * Add area to the collection of AreaCollection in the map
 	 *
 	 * @param MapArea Object
 	 * @type Bool

@@ -41,8 +41,8 @@
                     <i class="far fa-trash-alt"></i> Delete
             </asp:LinkButton>
 
-            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Campaign">
-                    Add New Campaign
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Campaign">
+                    Add Campaign
             </asp:LinkButton>
         </span>
 
@@ -116,8 +116,8 @@
                             </telerik:RadTextBox>
                         </td>
                         <td style="text-align: right">
-                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                            <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                             </asp:LinkButton>
                         </td>
                     </tr>

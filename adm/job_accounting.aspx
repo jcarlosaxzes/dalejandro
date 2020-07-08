@@ -287,7 +287,7 @@
 
                                     &nbsp;
                                                         <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
-                                                            ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
+                                                            ToolTip="Add Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                                             <i class="fas fa-dollar-sign"></i>
                                                         </asp:LinkButton>
                                     &nbsp;

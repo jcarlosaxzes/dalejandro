@@ -32,7 +32,7 @@
             </button>
 
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    Add New Tag
+                    Add Tag
             </asp:LinkButton>
 
         </span>
@@ -55,8 +55,8 @@
 
                     </td>
                     <td style="width: 150px; text-align: right">
-                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-search"></i> Search
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                            <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>

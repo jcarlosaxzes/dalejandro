@@ -335,7 +335,7 @@
                                         <asp:Label ID="lblActualTAGS" runat="server" Text='<%# Eval("TAGS") %>'></asp:Label>
                                         <br />
                                         <telerik:RadAutoCompleteBox RenderMode="Lightweight" ID="cboTags" runat="server" EnableClientFiltering="true" Width="90%"
-                                            DropDownHeight="150" DataSourceID="SqlDataSourceTags" DataTextField="Tag" EmptyMessage="Add New Tags"
+                                            DropDownHeight="150" DataSourceID="SqlDataSourceTags" DataTextField="Tag" EmptyMessage="Add Tags"
                                             DataValueField="Tag">
                                         </telerik:RadAutoCompleteBox>
                                     </td>

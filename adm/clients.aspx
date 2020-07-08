@@ -50,7 +50,7 @@
             </button>
 
             <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    Add New Client
+                    Add Client
             </asp:LinkButton>
 
         </span>
@@ -79,8 +79,8 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="width: 150px; text-align:right">
-                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>

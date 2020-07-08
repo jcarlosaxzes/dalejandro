@@ -79,8 +79,8 @@
                     Width="250px" x-webkit-speech="x-webkit-speech">
                 </telerik:RadTextBox>
                 &nbsp;&nbsp;&nbsp;
-                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                 </asp:LinkButton>
 
             </div>

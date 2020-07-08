@@ -19,7 +19,7 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                Add New Statement
+                Add Statement
             </asp:LinkButton>
         </span>
 
@@ -55,7 +55,7 @@
                     </td>
                     <td style="text-align: right; width: 150px">
                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-search"></i> Search
+                                            <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
 
                     </td>

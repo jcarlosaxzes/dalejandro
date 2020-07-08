@@ -355,9 +355,9 @@ Public Class activejobsdashboad
     Public Function GetAddRevisionToolTip() As String
         If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
             ' Programmers/Computer/IT
-            Return "Add New Ticket"
+            Return "Add Ticket"
         Else
-            Return "Add New Revision Record"
+            Return "Add Revision Record"
         End If
     End Function
     Public Function GetViewEditRevisionToolTip() As String

@@ -98,7 +98,7 @@
                                                                             <i class="fas fa-dollar-sign"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
-                                                                        <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
+                                                                        <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add Time"
                                                                             CommandName="NewTime" UseSubmitBehavior="false">
                                                                             <span aria-hidden="true" <i class="fas fa-user-clock"></i>
                                                                         </asp:LinkButton>
