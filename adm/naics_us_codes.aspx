@@ -2,20 +2,31 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="Formulario">
-        <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
-            <table class="table-sm" style="width: 100%">
-                <tr>
-                    <td style="width: 80px; text-align: left">
-                        <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" Width="40px"
-                            UseSubmitBehavior="false" ToolTip="View NAICS Table View" Visible="false">
+
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">NAICS US Codes</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" Width="40px"
+                UseSubmitBehavior="false" ToolTip="View NAICS Table View" Visible="false">
                             <i class="fas fa-align-justify"></i>
-                        </asp:LinkButton>
-                        <asp:LinkButton ID="btnTreePage" runat="server" CssClass="btn btn-info" Width="40px"
-                            UseSubmitBehavior="false" ToolTip="View NAICS Tree View" Visible="true">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnTreePage" runat="server" CssClass="btn btn-info" Width="40px"
+                UseSubmitBehavior="false" ToolTip="View NAICS Tree View" Visible="true">
                            <span class="fas fa-stream"></span>
-                        </asp:LinkButton>
-                    </td>
+            </asp:LinkButton>
+
+
+        </span>
+    </div>
+
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
+            <table class="table-sm pasconcept-bar" style="width: 100%">
+                <tr>
                     <td style="width: 180px">
                         <telerik:RadComboBox ID="cboLeves" runat="server" Width="100%" CheckBoxes="true" EnableCheckAllItemsCheckBox="true">
                             <Localization AllItemsCheckedString="All Levels Checked" CheckAllString="Check All..." ItemsCheckedString="levels checked"></Localization>
@@ -35,7 +46,7 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="width: 150px; text-align: right">
-                        <asp:LinkButton runat="server" ID="btnRefresh" CssClass="btn btn-success">
+                        <asp:LinkButton runat="server" ID="btnRefresh" CssClass="btn btn-info">
                             <i class="fas fa-redo"></i> 
                              Refresh
                         </asp:LinkButton>
@@ -49,7 +60,7 @@
             AutoGenerateColumns="False" ParentDataKeyNames="rootCode" DataKeyNames="Code" Visible="false"
             HeaderStyle-HorizontalAlign="Center">
             <Columns>
-                <telerik:TreeListTemplateColumn DataField="Code" HeaderText="Code" UniqueName="Code" HeaderStyle-Width="150px"  ItemStyle-Font-Bold="true" ItemStyle-Font-Size="20px">
+                <telerik:TreeListTemplateColumn DataField="Code" HeaderText="Code" UniqueName="Code" HeaderStyle-Width="150px" ItemStyle-Font-Bold="true" ItemStyle-Font-Size="20px">
                     <ItemTemplate>
                         <span style='<%# Eval("fontstyle") %>'><%# Eval("Code") %></span>
                     </ItemTemplate>
@@ -57,7 +68,7 @@
                 <telerik:TreeListTemplateColumn DataField="Title" HeaderText="Title" UniqueName="Title" ItemStyle-HorizontalAlign="Left">
                     <ItemTemplate>
                         <span class="label badge-primary"><%# Eval("Level") %></span>
-                         &nbsp;
+                        &nbsp;
                         <span style='<%# Eval("fontstyle") %>'><%# Eval("Title") %></span>
                     </ItemTemplate>
                 </telerik:TreeListTemplateColumn>
@@ -78,7 +89,7 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Title" HeaderText="Title" UniqueName="Title">
                         <ItemTemplate>
-                            <span style="font-size:16px" class="badge badge-secondary"><%# Eval("Level") %></span>
+                            <span style="font-size: 16px" class="badge badge-secondary"><%# Eval("Level") %></span>
                             &nbsp;
                             <span style='<%# Eval("fontstyle") %>'><%# Eval("Title") %></span>
                         </ItemTemplate>

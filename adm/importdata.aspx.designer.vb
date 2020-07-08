@@ -56,7 +56,7 @@ Partial Public Class importdata
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnImport As Global.Telerik.Web.UI.RadPushButton
+    Protected WithEvents btnImport As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''lblMsg control.

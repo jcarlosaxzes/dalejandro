@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class tagcloud
     
     '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''cboDepartments control.
     '''</summary>
     '''<remarks>
@@ -39,15 +48,6 @@ Partial Public Class tagcloud
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnExport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGridJobs control.
