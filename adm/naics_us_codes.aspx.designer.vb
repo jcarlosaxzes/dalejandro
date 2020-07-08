@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class naics_us_codes
     
     '''<summary>
-    '''pnlFind control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
     '''btnTablePage control.
     '''</summary>
     '''<remarks>
@@ -39,6 +30,15 @@ Partial Public Class naics_us_codes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnTreePage As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''pnlFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''cboLeves control.
