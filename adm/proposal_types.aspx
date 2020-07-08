@@ -15,7 +15,7 @@
             </button>
 
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    Add New Template
+                    Add Template
             </asp:LinkButton>
 
         </span>
@@ -28,9 +28,9 @@
                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%" EmptyMessage="Find">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="width: 120px">
-                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-search"></i> Search
+                    <td style="width: 150px; text-align:right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                            <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>

@@ -52,7 +52,7 @@
                                 ItemStyle-Width="60px" HeaderStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                             </telerik:GridBoundColumn>
                         </Columns>
-                        <CommandItemSettings AddNewRecordText="Add New Discipline" />
+                        <CommandItemSettings AddNewRecordText="Add Discipline" />
                         <ExpandCollapseColumn Resizable="False" Visible="False">
                             <HeaderStyle Width="20px" />
                         </ExpandCollapseColumn>

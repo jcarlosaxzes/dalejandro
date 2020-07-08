@@ -68,7 +68,7 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
             <asp:LinkButton ID="btnNewWizard" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                        Add New Proposal
+                        Add Proposal
             </asp:LinkButton>
             <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">
                     <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-style="ios"/>
@@ -142,8 +142,8 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="text-align: right;">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>

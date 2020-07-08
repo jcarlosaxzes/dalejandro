@@ -44,7 +44,7 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                        Add New Transmittal
+                        Add Transmittal
             </asp:LinkButton>
         </span>
 
@@ -103,8 +103,8 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="width:150px; text-align:right">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
 
                     </td>
@@ -253,7 +253,7 @@
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridButtonColumn>
                 </Columns>
-                <EditFormSettings CaptionFormatString="Add New Transmittal" PopUpSettings-Width="700px" EditFormType="Template">
+                <EditFormSettings CaptionFormatString="Add Transmittal" PopUpSettings-Width="700px" EditFormType="Template">
                     <EditColumn ButtonType="PushButton">
                     </EditColumn>
                     <FormTemplate>

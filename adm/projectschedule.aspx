@@ -100,9 +100,9 @@
                     </telerik:RadComboBox>
 
                 </td>
-                <td style="text-align: right; width: 120px">
-                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                <td style="text-align: right; width: 150px">
+                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                     </asp:LinkButton>
                 </td>
             </tr>

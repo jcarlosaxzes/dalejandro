@@ -67,7 +67,7 @@
                                     UniqueName="PayBill" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnRFPPayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="PayBill" CommandArgument='<%# Eval("Id") %>'
-                                            ToolTip="Add New Payments bill" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
+                                            ToolTip="Add Payments bill" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                                             <i class="fas fa-dollar-sign"></i>
                                         </asp:LinkButton>
                                     </ItemTemplate>

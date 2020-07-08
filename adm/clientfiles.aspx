@@ -81,8 +81,8 @@
                         <telerik:RadTextBox ID="txtJob" runat="server" MaxLength="6" EmptyMessage="Job Code" Width="250px"></telerik:RadTextBox>
                     </td>
                     <td style="width: 150px;text-align:right">
-                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-search"></i> Search
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                            <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>

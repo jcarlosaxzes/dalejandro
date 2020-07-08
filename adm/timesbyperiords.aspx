@@ -324,7 +324,7 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center; padding-top: 15px">
-                    <telerik:RadButton ID="btnOkNewMiscellaneousTime" runat="server" Text="Add New Time" ValidationGroup="AddRecord" UseSubmitBehavior="false">
+                    <telerik:RadButton ID="btnOkNewMiscellaneousTime" runat="server" Text="Add Time" ValidationGroup="AddRecord" UseSubmitBehavior="false">
                         <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
                     </telerik:RadButton>
 

@@ -62,7 +62,7 @@ export default class Popper {
 
     // modifiers have the ability to execute arbitrary code when Popper.js get inited
     // such code is executed in the same order of its modifier
-    // they could add new properties to their options configuration
+    // they could Add properties to their options configuration
     // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
     this.modifiers.forEach(modifierOptions => {
       if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {

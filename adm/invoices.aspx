@@ -48,8 +48,8 @@
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
-            <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice Simple Change">
-                    Add New Invoice
+            <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Invoice Simple Change">
+                    Add Invoice
             </asp:LinkButton>
         </span>
 
@@ -131,9 +131,9 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width: 100px; text-align: right">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                    <td style="width: 150px; text-align:right">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -255,7 +255,7 @@
                                     <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
                             &nbsp;
                                     <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
-                                        ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
+                                        ToolTip="Add Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                         <i class="fas fa-dollar-sign"></i>
                                     </asp:LinkButton>
                             &nbsp;

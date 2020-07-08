@@ -11,7 +11,7 @@
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnNewRole" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    Add New Roles
+                    Add Roles
             </asp:LinkButton>
 
         </span>
