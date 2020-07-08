@@ -7,4 +7,9 @@
 
         End If
     End Sub
+
+    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
+        LocalAPI.RestoreDefaultMessageTemplate(lblCompanyId.Text)
+        RadGrid1.DataBind()
+    End Sub
 End Class

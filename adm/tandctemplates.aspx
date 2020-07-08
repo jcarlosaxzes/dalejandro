@@ -6,78 +6,53 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-    <table style="width: 100%" class="table-sm">
-        <tr>
-            <td>
-                <div class="PanelFilter">
-                    <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                        <table style="width: 100%" class="table-sm Formulario">
-                            <tr>
-                                <td style="width: 100px">Find:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%" EmptyMessage="Find">
-                                    </telerik:RadTextBox>
-                                </td>
-                                <td style="width: 120px">
-                                    <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-search"></i> Search
-                                    </asp:LinkButton>
-                                </td>
-                            </tr>
-                        </table>
-                    </asp:Panel>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Proposal Template">
-                                    <i class="fas fa-plus"></i> Terms & Conditions
-                </asp:LinkButton>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <script type="text/javascript">
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Terms & Conditions</span>
 
-                    function OnClientClose(sender, args) {
-                        var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-                        masterTable.rebind();
-                    }
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add New Terms & Conditions
+            </asp:LinkButton>
+        </span>
+    </div>
 
-                </script>
-                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" PageSize="25"
-                    AllowAutomaticDeletes="True" >
-                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                    <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id">
-                        <Columns>
-                            <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column"
-                                HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="btnEditTemplate" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Template"
-                                        CommandName="EditTemplate">
+    <div>
+        <script type="text/javascript">
+
+            function OnClientClose(sender, args) {
+                var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+                masterTable.rebind();
+            }
+
+        </script>
+        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowPaging="True" AllowSorting="True" PageSize="25"
+            AllowAutomaticDeletes="True">
+            <PagerStyle Mode="Slider" AlwaysVisible="false" />
+            <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id">
+                <Columns>
+                    <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column"
+                        HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnEditTemplate" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Template"
+                                CommandName="EditTemplate">
                                                 <%# Eval("Name")%>
-                                    </asp:LinkButton>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <%--<telerik:GridHTMLEditorColumn UniqueName="Descripction" SortExpression="Descripction" HeaderText="Terms &amp; Conditions"
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+                    <%--<telerik:GridHTMLEditorColumn UniqueName="Descripction" SortExpression="Descripction" HeaderText="Terms &amp; Conditions"
                                 DataField="Descripction" Display="False" >
                             </telerik:GridHTMLEditorColumn>--%>
-                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this record?" ConfirmTitle="Delete" ButtonType="ImageButton"
-                                CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
-                                HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
-                            </telerik:GridButtonColumn>
-                        </Columns>
+                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this record?" ConfirmTitle="Delete" ButtonType="ImageButton"
+                        CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
+                        HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                    </telerik:GridButtonColumn>
+                </Columns>
 
 
-                    </MasterTableView>
-                </telerik:RadGrid>
-            </td>
-        </tr>
-    </table>
+            </MasterTableView>
+        </telerik:RadGrid>
 
-
+    </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [Proposal_TandCtemplates] WHERE [Id] = @Id"
         SelectCommand="Proposal_TandCtemplates_SELECT" SelectCommandType="StoredProcedure">
@@ -101,4 +76,6 @@
         </InsertParameters>
     </asp:SqlDataSource>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+    <telerik:RadTextBox ID="txtFind" runat="server" Width="100%" Visible="false" EmptyMessage="Find">
+    </telerik:RadTextBox>
 </asp:Content>

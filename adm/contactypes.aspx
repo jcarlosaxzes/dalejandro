@@ -27,29 +27,36 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <table width="100%" cellpading="3">
+
+        <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Contact Types</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add New Type
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnNewSubtype" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add New Subtype
+            </asp:LinkButton>
+
+        </span>
+    </div>
+
+
+
+    <table class="table-sm" style="width: 100%">
+       
         <tr>
-            <td style="width: 400px;" class="ToolButtom">
-                <telerik:RadButton ID="btnNew" runat="server" Text="Add New Type">
-                    <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                </telerik:RadButton>
-            </td>
-            <td style="padding-left: 10px; padding-top: 25px; padding-bottom: 15px">
-                <telerik:RadButton ID="btnNewSubtype" runat="server" Text="Add New Subtype">
-                    <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                </telerik:RadButton>
-            </td>
-        </tr>
-        <tr>
-            <td style="vertical-align: top; width: 400px">
+            <td style="vertical-align: top; width: 40%">
                 <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                     AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                    AllowAutomaticUpdates="True" AllowPaging="True" AllowSorting="True" PageSize="25">
+                    AllowAutomaticUpdates="True" AllowPaging="True" AllowSorting="True" PageSize="25"
+                    HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                         <PagerStyle Mode="Slider" AlwaysVisible="false" />
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="30px">
+                                HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                             </telerik:GridEditCommandColumn>
                             <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Name"
                                 SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
@@ -80,12 +87,13 @@
 
                 <telerik:RadGrid ID="RadGrid2" runat="server" DataSourceID="SqlDataSource2" GridLines="None"
                     AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                    AllowAutomaticUpdates="True" AllowPaging="True" AllowSorting="True" PageSize="25">
+                    AllowAutomaticUpdates="True" AllowPaging="True" AllowSorting="True" PageSize="25"
+                    HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource2">
                         <PagerStyle Mode="Slider" AlwaysVisible="false" />
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                HeaderText="Edit" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="30px">
+                                HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                             </telerik:GridEditCommandColumn>
                             <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Name"
                                 SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
