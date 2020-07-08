@@ -8,7 +8,7 @@
                 <td style="width: 130px">
                     <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
                         <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
-                            $ Dashboard
+                            View Summary
                         </button>
                     </asp:Panel>
                 </td>

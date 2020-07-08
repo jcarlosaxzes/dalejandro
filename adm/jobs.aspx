@@ -160,7 +160,7 @@
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                        <%--<i class="fas fa-plus"></i>--%>Add Job
+                Add Job
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">

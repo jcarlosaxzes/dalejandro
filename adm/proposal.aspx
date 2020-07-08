@@ -82,8 +82,8 @@
     </telerik:RadWindowManager>
 
     <div class="pasconcept-bar">
-        <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
-                       $ Dashboard
+        <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       View Summary
         </asp:LinkButton>
         <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false" CausesValidation="false">
                        Back to List
