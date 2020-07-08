@@ -38,7 +38,7 @@ Partial Public Class contactypes
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnNew As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnNewSubtype control.
@@ -47,7 +47,7 @@ Partial Public Class contactypes
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnNewSubtype As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnNewSubtype As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGrid1 control.

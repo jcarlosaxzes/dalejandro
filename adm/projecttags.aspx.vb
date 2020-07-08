@@ -22,13 +22,13 @@ Public Class projecttags
         End If
     End Sub
 
-    Protected Sub btnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNew.Click
-        RadGrid1.MasterTableView.InsertItem()
-    End Sub
-
     Private Sub cboDepartments_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboDepartments.SelectedIndexChanged
         cboCategory.Items.Clear()
         cboCategory.DataBind()
+    End Sub
+
+    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+        RadGrid1.MasterTableView.InsertItem()
     End Sub
 End Class
 

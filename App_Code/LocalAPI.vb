@@ -7491,8 +7491,9 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function RestoreDefaultMessageTemplate(companyId As Integer) As String
-        ExecuteNonQuery("delete from [Messages_Templates] where companyId=" & companyId)
-        ExecuteNonQuery("INSERT INTO [Messages_Templates] ([Type],[Subject],[Body],[companyId]) Select [Type],[Subject],[Body]," & companyId & " FROM [Messages_TemplatesTEMPLATE]")
+        Dim companyType As Integer = GetCompanyProperty(companyId, "Type")
+        ExecuteNonQuery($"delete from [Messages_Templates] where companyId={companyId}")
+        ExecuteNonQuery($"INSERT INTO [Messages_Templates] ([Type],[Subject],[Body],[companyId]) SELECT [Type],[Subject],[Body],{companyId} AS CompanyId FROM [Messages_Templates] WHERE companyid={companyType} and [Type] not in(select [Type] from [Messages_Templates] where companyId={companyId})")
     End Function
 
 

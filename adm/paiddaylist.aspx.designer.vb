@@ -32,6 +32,15 @@ Partial Public Class paiddaylist
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
+    '''btnNewVendor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNewVendor As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>

@@ -22,8 +22,8 @@
              <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYears" DataTextField="nYear" DataValueField="Year" Width="150px">
              </telerik:RadComboBox>
 
-            <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Width="100px"
-                CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
+            <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" 
+                CssClass="btn btn-secondary" UseSubmitBehavior="false">
                                     <i class="fas fa-download"></i> Export
             </asp:LinkButton>
 

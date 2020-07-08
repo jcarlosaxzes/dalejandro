@@ -23,13 +23,13 @@ Partial Public Class proposal_types
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''RadPageLayout1 control.
+    '''btnNew control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.
@@ -57,24 +57,6 @@ Partial Public Class proposal_types
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnNew control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''printbutton control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
     
     '''<summary>
     '''RadGrid1 control.

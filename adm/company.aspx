@@ -17,7 +17,14 @@
 
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
-    <table class="table-sm" style="padding-left: 50px; padding-top: 10px">
+
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Company Profile</span>
+    </div>
+
+
+
+    <table class="table-sm pasconcept-bar" style="padding-left: 50px; padding-top: 10px">
         <tr>
             <td>
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSource1" Width="100%">
@@ -29,7 +36,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">Company Information</h3>
+                                                <h4 style="margin: 0">Company Information</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Update changes to Company Profile" CommandName="Edit" CausesValidation="False"
@@ -186,7 +193,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">Email Outgoing Settings</h3>
+                                                <h4 style="margin: 0">Email Outgoing Settings</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton4" runat="server" ToolTip="Update changes to Company SMTP" CommandName="Edit" CausesValidation="False"
@@ -253,7 +260,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td colspan="2">
-                                                <h3 style="margin: 0">Storage Info</h3>
+                                                <h4 style="margin: 0">Storage Info</h3>
                                             </td>
                                         </tr>
                                         <tr>
@@ -278,7 +285,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">Notification Alerts</h3>
+                                                <h4 style="margin: 0">Notification Alerts</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton5" runat="server" ToolTip="Update changes to Company Alerts" CommandName="Edit" CausesValidation="False"
@@ -365,7 +372,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">PayPal Setting</h3>
+                                                <h4 style="margin: 0">PayPal Setting</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton6" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
@@ -392,7 +399,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">Collection Attorney Firm</h3>
+                                                <h4 style="margin: 0">Collection Attorney Firm</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton13" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
@@ -439,7 +446,7 @@
 
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepLogo" Title="Logo & Signature" StepType="Step">
-                                    <h3 style="margin: 0">Logo & Signature Setting</h3>
+                                    <h4 style="margin: 0">Logo & Signature Setting</h3>
                                     <table class="table-sm">
                                         <tr>
                                             <td>Picture quality recommended for company letter head: 1700 x 225 pixels, 200 dpi resolution equivalent to 8,5" x 1,5"
@@ -661,7 +668,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">Company Information</h3>
+                                                <h4 style="margin: 0">Company Information</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton2" runat="server" ToolTip="Update changes to Company Profile" CommandName="Update" CausesValidation="True"
@@ -824,7 +831,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">Email SMTP Outgoing Settings</h3>
+                                                <h4 style="margin: 0">Email SMTP Outgoing Settings</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton7" runat="server" ToolTip="Update changes to Company Email SMTP Settings" CommandName="Update" CausesValidation="True"
@@ -903,7 +910,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">Notification Alerts</h3>
+                                                <h4 style="margin: 0">Notification Alerts</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton9" runat="server" ToolTip="Update changes to Company Notification Alerts" CommandName="Update" CausesValidation="True"
@@ -997,7 +1004,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">
+                                                <h4 style="margin: 0">
                                                     <h3>PayPal Setting</h3>
                                                 </h3>
                                             </td>
@@ -1057,7 +1064,7 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h3 style="margin: 0">
+                                                <h4 style="margin: 0">
                                                     <h3>Collection Setting</h3>
                                                 </h3>
                                             </td>
@@ -1200,94 +1207,95 @@
             <td>
 
                 <telerik:RadWizard ID="RadWizard5" runat="server" Height="720px" DisplayCancelButton="false"
-                            RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
+                    RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
                     <WizardSteps>
                         <telerik:RadWizardStep runat="server" ID="RadWizardStepsCompanyInfo2" Title="Holidays" StepType="Step">
                             <telerik:RadGrid ID="RadGridHoliday" GridLines="None" runat="server" AllowAutomaticDeletes="True"
-                                        AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceHoliday" 
-                                        Height="350px" PageSize="100">
-                                        <ClientSettings>
-                                            <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
-                                        </ClientSettings>
-                                        <MasterTableView CommandItemDisplay="Top" DataKeyNames="Id"
-                                            DataSourceID="SqlDataSourceHoliday" HorizontalAlign="NotSet" AutoGenerateColumns="False">
-                                            <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                                            <CommandItemSettings AddNewRecordText="Holiday" />
-                                            <Columns>
-                                                <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                                    HeaderText="" HeaderStyle-Width="40px">
-                                                </telerik:GridEditCommandColumn>
-                                                <telerik:GridDateTimeColumn DataField="Holiday" HeaderStyle-Width="180px" PickerType="DatePicker" HeaderText="Holiday"
-                                                    SortExpression="Holiday" UniqueName="Holiday" DataFormatString="{0:d}">
-                                                </telerik:GridDateTimeColumn>
-                                                <telerik:GridBoundColumn DataField="Description" HeaderText="Description"
-                                                    SortExpression="Description" UniqueName="Description">
-                                                </telerik:GridBoundColumn>
-                                                <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
-                                                    ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
-                                                    CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
-                                                </telerik:GridButtonColumn>
-                                            </Columns>
-                                        </MasterTableView>
-                                    </telerik:RadGrid>
+                                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
+                                AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceHoliday"
+                                Height="350px" PageSize="100">
+                                <ClientSettings>
+                                    <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
+                                </ClientSettings>
+                                <MasterTableView CommandItemDisplay="Top" DataKeyNames="Id"
+                                    DataSourceID="SqlDataSourceHoliday" HorizontalAlign="NotSet" AutoGenerateColumns="False">
+                                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                                    <CommandItemSettings AddNewRecordText="Holiday" />
+                                    <Columns>
+                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                                            HeaderText="" HeaderStyle-Width="40px">
+                                        </telerik:GridEditCommandColumn>
+                                        <telerik:GridDateTimeColumn DataField="Holiday" HeaderStyle-Width="180px" PickerType="DatePicker" HeaderText="Holiday"
+                                            SortExpression="Holiday" UniqueName="Holiday" DataFormatString="{0:d}">
+                                        </telerik:GridDateTimeColumn>
+                                        <telerik:GridBoundColumn DataField="Description" HeaderText="Description"
+                                            SortExpression="Description" UniqueName="Description">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
+                                            ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
+                                            CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
+                                        </telerik:GridButtonColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
                         </telerik:RadWizardStep>
-                        <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Expenses (Other)" StepType="Step" >
-                                                    <table class="table-sm">
-                            <tr>
-                                <td style="text-align: center; width: 80px">
-                                    <telerik:RadNumericTextBox ID="txtExpensesYear" ToolTip="Year" runat="server" Width="100px"
-                                        EmptyMessage="Year" ShowSpinButtons="True">
-                                        <NumberFormat DecimalDigits="0" GroupSeparator="" />
-                                        <IncrementSettings Step="1" />
-                                    </telerik:RadNumericTextBox>
-                                </td>
-                                <td style="text-align: center">
-                                    <small>Structure of the CSV file to import(ExpDate, Category, Amount)</small>
-                                </td>
-                                <td style="width: 200px; text-align: right">
-                                    <telerik:RadAsyncUpload ID="RadUploadExpenses1" runat="server" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true"
-                                        AllowedFileExtensions="csv,txt" RenderMode="Classic">
-                                    </telerik:RadAsyncUpload>
-                                </td>
-                                <td style="width: 110px; text-align: right">
+                        <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Expenses (Other)" StepType="Step">
+                            <table class="table-sm">
+                                <tr>
+                                    <td style="text-align: center; width: 80px">
+                                        <telerik:RadNumericTextBox ID="txtExpensesYear" ToolTip="Year" runat="server" Width="100px"
+                                            EmptyMessage="Year" ShowSpinButtons="True">
+                                            <NumberFormat DecimalDigits="0" GroupSeparator="" />
+                                            <IncrementSettings Step="1" />
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <small>Structure of the CSV file to import(ExpDate, Category, Amount)</small>
+                                    </td>
+                                    <td style="width: 200px; text-align: right">
+                                        <telerik:RadAsyncUpload ID="RadUploadExpenses1" runat="server" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true"
+                                            AllowedFileExtensions="csv,txt" RenderMode="Classic">
+                                        </telerik:RadAsyncUpload>
+                                    </td>
+                                    <td style="width: 110px; text-align: right">
 
-                                    <asp:LinkButton ID="btnExpensesImport" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
-                                        CssClass="btn btn-info btn" UseSubmitBehavior="false">
+                                        <asp:LinkButton ID="btnExpensesImport" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
+                                            CssClass="btn btn-info btn" UseSubmitBehavior="false">
                                      Update Import
-                                    </asp:LinkButton>
-                                </td>
-                            </tr>
-                        </table>
-                        <telerik:RadGrid ID="RadGridExpenses" runat="server" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small"
-                            AlternatingItemStyle-Font-Size="Small" AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" ShowFooter="true"
-                            AutoGenerateColumns="False" DataSourceID="SqlDataSourceExpenses" Height="400px" PageSize="100" AllowSorting="true" MasterTableView-EditMode="InPlace">
-                            <ClientSettings>
-                                <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
-                            </ClientSettings>
-                            <MasterTableView CommandItemDisplay="Top" DataKeyNames="Id"
-                                DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" Cssclass="table-sm">
-                                <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                                <CommandItemSettings AddNewRecordText="Expense" />
-                                <Columns>
-                                    <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                        HeaderText="" HeaderStyle-Width="40px">
-                                    </telerik:GridEditCommandColumn>
-                                    <telerik:GridDateTimeColumn DataField="ExpDate" HeaderStyle-Width="180px" PickerType="DatePicker" HeaderText="Date"
-                                        SortExpression="ExpDate" UniqueName="ExpDate" DataFormatString="{0:d}">
-                                    </telerik:GridDateTimeColumn>
-                                    <telerik:GridBoundColumn DataField="Category" HeaderText="Category"
-                                        SortExpression="Category" UniqueName="Category">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridNumericColumn DataField="Amount" HeaderStyle-Width="180px" HeaderText="Amount"
-                                        SortExpression="Amount" UniqueName="Amount" DataFormatString="{0:N2}" Aggregate="Sum">
-                                    </telerik:GridNumericColumn>
-                                    <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
-                                        ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
-                                        CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
-                                    </telerik:GridButtonColumn>
-                                </Columns>
-                            </MasterTableView>
-                        </telerik:RadGrid>
+                                        </asp:LinkButton>
+                                    </td>
+                                </tr>
+                            </table>
+                            <telerik:RadGrid ID="RadGridExpenses" runat="server" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small"
+                                AlternatingItemStyle-Font-Size="Small" AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" ShowFooter="true"
+                                AutoGenerateColumns="False" DataSourceID="SqlDataSourceExpenses" Height="400px" PageSize="100" AllowSorting="true" MasterTableView-EditMode="InPlace">
+                                <ClientSettings>
+                                    <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
+                                </ClientSettings>
+                                <MasterTableView CommandItemDisplay="Top" DataKeyNames="Id"
+                                    DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" CssClass="table-sm">
+                                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                                    <CommandItemSettings AddNewRecordText="Expense" />
+                                    <Columns>
+                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                                            HeaderText="" HeaderStyle-Width="40px">
+                                        </telerik:GridEditCommandColumn>
+                                        <telerik:GridDateTimeColumn DataField="ExpDate" HeaderStyle-Width="180px" PickerType="DatePicker" HeaderText="Date"
+                                            SortExpression="ExpDate" UniqueName="ExpDate" DataFormatString="{0:d}">
+                                        </telerik:GridDateTimeColumn>
+                                        <telerik:GridBoundColumn DataField="Category" HeaderText="Category"
+                                            SortExpression="Category" UniqueName="Category">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridNumericColumn DataField="Amount" HeaderStyle-Width="180px" HeaderText="Amount"
+                                            SortExpression="Amount" UniqueName="Amount" DataFormatString="{0:N2}" Aggregate="Sum">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
+                                            ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
+                                            CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
+                                        </telerik:GridButtonColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
 
 
                         </telerik:RadWizardStep>
@@ -1296,7 +1304,7 @@
 
             </td>
         </tr>
-       
+
     </table>
 
     <asp:SqlDataSource ID="SqlDataSourceLogo" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

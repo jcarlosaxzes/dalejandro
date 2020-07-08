@@ -18,63 +18,60 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <table class="table-sm" style="width: 100%">
-        <tr>
-            <td>
-                <h2>Non-Productive Time Categories</h2>
-            </td>
-        </tr>
-        <tr>
-            <td class="ToolButtom noprint">
-                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Non Job Time Code">
-                                   <i class="fas fa-plus"></i> Non-Productive Time Category
-                </asp:LinkButton>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel2" runat="server" />
 
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1"
-                    GridLines="None" AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                    AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0" AllowPaging="True" PageSize="25">
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
-                        <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                        <Columns>
-                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                HeaderText="" HeaderStyle-Width="50px">
-                            </telerik:GridEditCommandColumn>
-                            <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" HeaderStyle-Width="80px"
-                                HeaderStyle-HorizontalAlign="Center" Display="false" ReadOnly="true">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="Name" HeaderText="Code Name" SortExpression="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left"
-                                UniqueName="Name">
-                                <EditItemTemplate>
-                                    <div style="margin: 5px">
-                                        <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
-                                    </div>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
-                                </ItemTemplate>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Non-Productive Time Categories</span>
 
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Code?" ConfirmTitle="Delete"
-                                ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
-                                HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px"
-                                ItemStyle-HorizontalAlign="Center">
-                            </telerik:GridButtonColumn>
-                        </Columns>
-                        <EditFormSettings>
-                            <PopUpSettings Modal="true" Width="600px" />
-                            <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
-                            </EditColumn>
-                        </EditFormSettings>
-                    </MasterTableView>
-                </telerik:RadGrid>
-            </td>
-        </tr>
-    </table>
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add New Category
+            </asp:LinkButton>
+
+        </span>
+    </div>
+
+    <div>
+        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1"
+            GridLines="None" AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
+            AllowAutomaticUpdates="True" AllowSorting="True" CellSpacing="0" AllowPaging="True" PageSize="25"
+            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
+                <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                <Columns>
+                    <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                        HeaderText="" HeaderStyle-Width="50px">
+                    </telerik:GridEditCommandColumn>
+                    <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" HeaderStyle-Width="80px"
+                        HeaderStyle-HorizontalAlign="Center" Display="false" ReadOnly="true">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridTemplateColumn DataField="Name" HeaderText="Code Name" SortExpression="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left"
+                        UniqueName="Name">
+                        <EditItemTemplate>
+                            <div style="margin: 5px">
+                                <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="80" Width="600px"></telerik:RadTextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                            </div>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                        </ItemTemplate>
+
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Code?" ConfirmTitle="Delete"
+                        ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
+                        HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px"
+                        ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridButtonColumn>
+                </Columns>
+                <EditFormSettings>
+                    <PopUpSettings Modal="true" Width="600px" />
+                    <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                    </EditColumn>
+                </EditFormSettings>
+            </MasterTableView>
+        </telerik:RadGrid>
+    </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [NonRegularHours_types] WHERE companyId=@companyId AND [Id] = @Id"

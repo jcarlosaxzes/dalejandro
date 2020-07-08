@@ -32,6 +32,15 @@ Partial Public Class nojobstimetypes
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
+    '''RadAjaxLoadingPanel2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxLoadingPanel2 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+    
+    '''<summary>
     '''btnNew control.
     '''</summary>
     '''<remarks>

@@ -13,11 +13,11 @@
         End If
     End Sub
 
-    Protected Sub btnNew_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNew.Click
+    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         RadGrid1.MasterTableView.InsertItem()
     End Sub
 
-    Protected Sub btnNewSubtype_Click(sender As Object, e As EventArgs) Handles btnNewSubtype.Click
+    Private Sub btnNewSubtype_Click(sender As Object, e As EventArgs) Handles btnNewSubtype.Click
         RadGrid2.MasterTableView.InsertItem()
     End Sub
 End Class

@@ -18,39 +18,28 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
-        <Rows>
-            <telerik:LayoutRow>
-                <Content>
-                    <div style="text-align: left" class="ToolButtom noprint">
-                        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Position">
-                                   <i class="fas fa-plus"></i> Position
-                        </asp:LinkButton>
+        <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Employee Positions</span>
 
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <script type="text/javascript">
-                    function PrintPage(sender, args) {
-                        window.print();
-                    }
-                </script>
-                        <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                            <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                        </telerik:RadButton>
+        <span style="float: right; vertical-align: middle;">
 
-                    </div>
-                </Content>
-            </telerik:LayoutRow>
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add New Position
+            </asp:LinkButton>
 
-            <telerik:LayoutRow>
-                <Content>
-                    <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
+        </span>
+    </div>
+
+    <div>
+        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                         AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                        AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" CellSpacing="0">
+                        AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" CellSpacing="0"
+                        HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                             <PagerStyle Mode="Slider" AlwaysVisible="false" />
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                    HeaderText="" HeaderStyle-Width="60px">
+                                    HeaderText="" HeaderStyle-Width="50px">
                                 </telerik:GridEditCommandColumn>
                                 <telerik:GridTemplateColumn DataField="Name"
                                     FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
@@ -64,7 +53,7 @@
                                         <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="HourRate" HeaderText="Hour Rate (for estimate only)" SortExpression="HourRate" UniqueName="HourRate" HeaderStyle-Width="120px"
+                                <telerik:GridTemplateColumn DataField="HourRate" HeaderText="Hour Rate (for estimate only)" SortExpression="HourRate" UniqueName="HourRate" HeaderStyle-Width="220px"
                                     ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Label ID="lblHourRate" runat="server" Text='<%# Eval("HourRate", "{0:N2}")%>'></asp:Label>
@@ -86,10 +75,8 @@
                             </EditFormSettings>
                         </MasterTableView>
                     </telerik:RadGrid>
-                </Content>
-            </telerik:LayoutRow>
-        </Rows>
-    </telerik:RadPageLayout>
+    </div>
+    
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Employees_Position_DELETE" DeleteCommandType="StoredProcedure"
