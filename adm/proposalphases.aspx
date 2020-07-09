@@ -13,7 +13,7 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
     
-    <div style="text-align: right; padding-right: 50px; padding-top: 10px;padding-bottom:10px" class="Formulario">
+    <div style="text-align: right; padding-right: 50px; padding-top: 10px;padding-bottom:10px" class="pasconcept-bar">
         <telerik:RadButton ID="btnExcel" runat="server" Text="Export to Excel" UseSubmitBehavior="false">
         </telerik:RadButton>
         &nbsp;&nbsp;&nbsp;

@@ -55,7 +55,7 @@
             margin-right: 5px !important;
         }
     </style>
-    <div class="Formulario">
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 120px">
