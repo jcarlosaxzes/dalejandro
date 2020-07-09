@@ -30,7 +30,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <div class="Formulario">
+    <div class="pasconcept-bar">
         <table class="table-sm">
             <tr>
                 <td>

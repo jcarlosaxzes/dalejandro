@@ -512,7 +512,7 @@
                                 </telerik:RadWizardStep>
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="QuickBooks" ValidationGroup="QuickBooks" StepType="Step" CssClass="wizardStepHidden">
-                                    <div class="Formulario">
+                                    <div class="pasconcept-bar">
                                         <table class="table-sm">
                                             <tr>
                                                 <td colspan="2">
@@ -615,7 +615,7 @@
                                 </telerik:RadWizardStep>
 
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Add-Ons" ValidationGroup="Add-Ons" StepType="Step" CssClass="wizardStepHidden">
-                                    <div class="Formulario" style="width: 800px">
+                                    <div class="pasconcept-bar" style="width: 800px">
                                         <h3>List of modules available</h3>
 
                                         <div class="checkbox">

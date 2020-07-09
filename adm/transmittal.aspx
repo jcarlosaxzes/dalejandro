@@ -3,7 +3,7 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/BasicMasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div>
+    <div style="margin:25px">
         <%--Header--%>
         <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompany" RenderOuterTable="false">
             <ItemTemplate>
@@ -46,14 +46,14 @@
                 <table class="table-sm" style="width: 100%">
                     <tr>
                         <td>
-                            <h1>TRANSMITTAL LETTER</h1>
+                            <h1>Transmittal Letter</h1>
                         </td>
-                        <td class="noprint" style="width: 10px">
+                        <td class="noprint" style="width: 150px">
                             <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false" CommandName="Edit">
                                 Edit
                             </asp:LinkButton>
                         </td>
-                        <td class="noprint" style="width: 100px">
+                        <td class="noprint" style="width: 150px">
                             <asp:LinkButton ID="btnPickUp" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" OnClick="btnPickUp_Click">
                                 <i class="far fa-envelope"></i>&nbsp;Pick Up
                             </asp:LinkButton>
@@ -144,8 +144,6 @@
                         <td colspan="2">
                             <telerik:RadGrid ID="RadGridDetails" RenderMode="Lightweight" runat="server" DataSourceID="SqlDataSourceDetails" Skin="" Width="100%" CssClass="RemoveBorders" AutoGenerateColumns="False" GridLines="Both">
                                 <MasterTableView DataSourceID="SqlDataSourceDetails" CssClass="RemoveBorders" HeaderStyle-BackColor="LightGray">
-                                    <ItemStyle CssClass="GridRow" />
-                                    <AlternatingItemStyle CssClass="GridRow" />
                                     <Columns>
                                         <telerik:GridBoundColumn DataField="AmountCopy" HeaderText="Amount Copy" UniqueName="AmountCopy"
                                             HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
@@ -163,7 +161,6 @@
                                             </ItemTemplate>
                                         </telerik:GridTemplateColumn>
                                     </Columns>
-                                    <HeaderStyle BackColor="LightGray" />
                                 </MasterTableView>
                             </telerik:RadGrid>
                         </td>
@@ -280,8 +277,8 @@
                                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
                                 <MasterTableView DataSourceID="SqlDataSourceDetails" DataKeyNames="Id">
                                     <Columns>
-                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="" ItemStyle-Width="30px">
-                                            <ItemStyle Width="20px"></ItemStyle>
+                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="">
+                                            <ItemStyle Width="50px"></ItemStyle>
                                         </telerik:GridEditCommandColumn>
                                         <telerik:GridTemplateColumn DataField="AmountCopy" HeaderText="Amount Copy" UniqueName="AmountCopy"
                                             HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
@@ -328,7 +325,7 @@
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                             CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
-                                            HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                                            HeaderStyle-HorizontalAlign="Center" ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
                                             <ItemStyle HorizontalAlign="Center" />
                                         </telerik:GridButtonColumn>

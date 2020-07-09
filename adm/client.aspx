@@ -58,7 +58,7 @@
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
-    <div class="Formulario">
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 130px">

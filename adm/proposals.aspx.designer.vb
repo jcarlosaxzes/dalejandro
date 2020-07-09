@@ -50,6 +50,15 @@ Partial Public Class proposals
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
+    '''spanViewSummary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents spanViewSummary As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''btnNewWizard control.
     '''</summary>
     '''<remarks>
@@ -149,6 +158,15 @@ Partial Public Class proposals
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''FormViewViewSummary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormViewViewSummary As Global.System.Web.UI.WebControls.FormView
+    
+    '''<summary>
     '''RadGrid1 control.
     '''</summary>
     '''<remarks>
@@ -210,6 +228,15 @@ Partial Public Class proposals
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceViewSummary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceViewSummary As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.

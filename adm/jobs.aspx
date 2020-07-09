@@ -145,19 +145,19 @@
     <telerik:RadWindowManager ID="RadWindowManagerPrint" runat="server">
     </telerik:RadWindowManager>
 
-
-
-
-
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Jobs</span>
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
-            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                View Summary
-            </asp:LinkButton>
+
+           <span id="spanViewSummary" runat="server">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
+                    View Summary
+                </button>
+            </span>
+
 
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                 Add Job
@@ -170,7 +170,7 @@
     </div>
     <div class="collapse" id="collapseFilter">
 
-        <asp:Panel ID="pnlFind" runat="server" class="Formulario" DefaultButton="btnRefresh">
+        <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
                     <td style="width: 200px">
@@ -286,7 +286,7 @@
         </asp:Panel>
 
     </div>
-    <div class="pasconcept-subbar">
+    <div runat="server" id="panelSubbar" class="pasconcept-subbar" visible="false">
 
         <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
             Width="175px" DataTextField="Name" DataValueField="Id" Height="250px" AppendDataBoundItems="true" Font-Size="Small">
@@ -324,8 +324,8 @@
 
     </div>
 
-    <asp:Panel runat="server" ID="panelTotals" Visible="false">
-        <table class="table-sm" style="width: 100%">
+    <div class="collapse" id="collapseSummary">
+        <table class="table-sm pasconcept-subbar" style="width: 100%">
             <tr>
                 <td colspan="11" style="text-align: center">
                     <h2 style="margin: 0">Jobs Summary</h2>
@@ -365,7 +365,7 @@
 
             </tr>
         </table>
-    </asp:Panel>
+    </div>
 
     <table class="table-sm" style="width: 100%;">
         <tr>
@@ -379,7 +379,7 @@
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceJobs" ShowFooter="True" CommandItemDisplay="None">
                         <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                         <Columns>
-                            <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center">
+                            <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" UniqueName="ClientSelectColumn" Visible="false">
                             </telerik:GridClientSelectColumn>
                             <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="10px">
                             </telerik:GridBoundColumn>

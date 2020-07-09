@@ -11,7 +11,9 @@ Public Class proposals
                 ' Si no tiene permiso New, boton.Visible=False
                 'btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
                 btnNewWizard.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
-                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Budget")
+                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports")
+
+                spanViewSummary.Visible = btnPrivate.Visible
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Proposal List"
                 Master.PageTitle = "Proposals/Proposal List"
@@ -162,7 +164,7 @@ Public Class proposals
             IniciaPeriodo(cboPeriod.SelectedValue)
             SqlDataSourceProp.DataBind()
             RadGrid1.DataBind()
-
+            FormViewViewSummary.DataBind()
         Catch ex As Exception
         End Try
     End Sub
