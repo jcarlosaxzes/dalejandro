@@ -102,9 +102,17 @@
                                                 <a class="btn btn-primary noprint" href="CP_jobs.aspx" role="button" title="My Job List Page">My Jobs</a>
                                                 &nbsp;&nbsp;
                                                 
-                                                <button type="button" title="Export PDF Report"
+                                                <%--<button type="button" title="Export PDF Report"
                                                     class="btn btn-danger noprint"  
-                                                    runat="server" onserverclick="Print_ServerClick">PDF</i></button>
+                                                    runat="server" onserverclick="Print_ServerClick">PDF</i></button>--%>
+                                                
+                                                <script type="text/javascript">
+                                                    function PrintPage(sender, args) {
+                                                        window.print();
+                                                    }
+                                                </script>
+                                                <button type="button" class="btn btn-default noprint" onclick="PrintPage()">Print</button>
+
                                                 <h3 style="margin: 5px"><%# Eval("Name") %></h3>
                                                 <i class="fas fa-map-marker-alt"></i>&nbsp;<%# Eval("Address") %><br>
                                                 <%# Eval("City") %>, <%# Eval("State") %> <%# Eval("ZipCode") %><br>
