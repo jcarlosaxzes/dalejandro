@@ -2,10 +2,16 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Job Chart by Year</span>
+    </div>
+
+
     <div class="pas-container">
         <table class="table-sm" style="width: 100%" >
             <tr>
-                <td style="width:300px;padding-top:85px;vertical-align:top">
+                <td style="width:300px;padding-top:40px;vertical-align:top">
                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None" 
                         ItemStyle-Font-Size="x-Small" AlternatingItemStyle-Font-Size="x-Small" Font-Size="X-Small">
                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSource1" ShowFooter="True">
@@ -65,9 +71,9 @@
                     </telerik:RadGrid>
                 </td>
                 <td style="vertical-align:top;text-align:center">
-                    <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="00px" Width="100%">
-                        <ChartTitle Text="Results by Year">
-                            <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
+                    <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="750px" Width="100%">
+                        <ChartTitle >
+                            <Appearance  Visible="false"></Appearance>
                         </ChartTitle>
                         <PlotArea>
                             <Series>
@@ -91,7 +97,7 @@
                                 </telerik:ColumnSeries>
                             </Series>
                             <Series>
-                                <telerik:ColumnSeries DataFieldY="sumCoste" Name="Coste" AxisName="LeftAxis">
+                                <telerik:ColumnSeries DataFieldY="sumCoste" Name="Cost" AxisName="LeftAxis">
                                     <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
                                     </LabelsAppearance>
                                     <Appearance>

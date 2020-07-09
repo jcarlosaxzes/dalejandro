@@ -15,50 +15,59 @@
         .MostInnerAlernatingItemStyle {
             font-size: 12px !important;
         }
-
-        .photo {
-            box-shadow: inset 0 0 30px rgba(0,0,0,.3);
-            margin: 0 10px 0 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            display: inline-block;
-        }
     </style>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-    <div class="Formulario">
-        <table class="table-sm">
-            <tr>
-                <td>
-                    <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYears"
-                        DataTextField="nYear" DataValueField="Year" Width="80px">
-                    </telerik:RadComboBox>
-                </td>
-                <td>
-                    <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" MarkFirstMatch="True" AutoPostBack="true"
-                        Width="300px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="-1" Selected="true" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-                <td>
-                    <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" AutoPostBack="true"
-                        Width="300px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-        </table>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Company Multiplier</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+        </span>
     </div>
 
-    <div style="padding-top: 15px">
+
+    <div class="collapse" id="collapseFilter">
+
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table class="table-sm pasconcept-bar" style="width: 100%">
+                <tr>
+                    <td style="width:200px">
+                        <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYears"
+                            DataTextField="nYear" DataValueField="Year" Width="100%">
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width:350px">
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" MarkFirstMatch="True" 
+                            Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" 
+                            Width="350px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 150px; text-align: right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+
+                </tr>
+            </table>
+        </asp:Panel>
+    </div>
+
+    <div class="pasconcept-bar" style="padding-top: 15px">
         <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Company Multiplier" StepType="Step">
@@ -296,7 +305,7 @@
                                             <Columns>
                                                 <telerik:GridTemplateColumn HeaderText="Photo" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                                                     <ItemTemplate>
-                                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("employeeId"))%>' CssClass="photo"
+                                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("employeeId"))%>' CssClass="photo50"
                                                             runat="server" AlternateText=""></asp:Image>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
@@ -535,16 +544,13 @@
             </WizardSteps>
         </telerik:RadWizard>
 
-
-
-
     </div>
     <telerik:RadToolTip ID="RadToolTipInitialize" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="text-align: center">
-                    <h2 style="margin: 0; text-align: center; color:white;">
-                       <span class="navbar navbar-expand-md bg-dark text-white">Hourly Wage for Selected Year
+                    <h2 style="margin: 0; text-align: center; color: white;">
+                        <span class="navbar navbar-expand-md bg-dark text-white">Hourly Wage for Selected Year
                         </span>
                     </h2>
                 </td>
@@ -584,8 +590,8 @@
         <table class="table-sm" style="width: 650px">
             <tr>
                 <td style="text-align: center">
-                    <h2 style="margin: 0; text-align: center; color:white;">
-                       <span class="navbar navbar-expand-md bg-dark text-white">Calculate Multiplier
+                    <h2 style="margin: 0; text-align: center; color: white;">
+                        <span class="navbar navbar-expand-md bg-dark text-white">Calculate Multiplier
                         </span>
                     </h2>
                 </td>

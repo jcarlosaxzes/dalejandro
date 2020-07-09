@@ -17,19 +17,23 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <table class="table-sm noprint" style="width:100%">
-        <tr>
-            <td class="ToolButtom noprint">
-                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Package Type">
-                     <i class="fas fa-plus"></i> Package Type
-                </asp:LinkButton>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
+
+        <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Package Types</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add Package Type
+            </asp:LinkButton>
+
+        </span>
+    </div>
+
+    <div>
+        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None"
                     AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                    AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" CellSpacing="0">
+                    AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" CellSpacing="0"
+                    HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                     <ExportSettings>
                         <Pdf PageBottomMargin="" PageFooterMargin="" PageHeaderMargin="" PageHeight="11in"
                             PageLeftMargin="" PageRightMargin="" PageTopMargin="" PageWidth="8.5in" />
@@ -70,9 +74,9 @@
                     <HeaderContextMenu CssClass="GridContextMenu GridContextMenu_Default">
                     </HeaderContextMenu>
                 </telerik:RadGrid>
-            </td>
-        </tr>
-    </table>
+    </div>
+
+    
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM Transmittals_package_types WHERE (Id = @Id)"
         InsertCommand="INSERT INTO Transmittals_package_types(companyId, Name) VALUES (@companyId, @Name)"

@@ -3,38 +3,100 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="row pasconcept-bar">
-        <div class="col-md-4" style="text-align: center">
-            <telerik:RadComboBox ID="cboYear" runat="server" AutoPostBack="True" DataSourceID="SqlDataSourceYear" Label="Year:"
-                DataTextField="nYear" DataValueField="Year" Width="150px">
-            </telerik:RadComboBox>
-        </div>
-        <div class="col-md-4" style="text-align: center">
-            <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments"
-                DataTextField="Name" DataValueField="Id" Width="300px" AppendDataBoundItems="true" AutoPostBack="True" Label="Department:">
-                <Items>
-                    <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
-                </Items>
-            </telerik:RadComboBox>
-        </div>
-        <div class="col-md-4" style="text-align: center">
-            <telerik:RadComboBox ID="cboCurrentSource" runat="server" Width="300px" AppendDataBoundItems="true" AutoPostBack="True" Label="Current:">
-                <Items>
-                    <telerik:RadComboBoxItem runat="server" Text="From Job's Budgets" Value="0" Selected="true" />
-                    <telerik:RadComboBoxItem runat="server" Text="From Payments Received" Value="1" />
-                </Items>
-            </telerik:RadComboBox>
-        </div>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Monthly (Current vs Budget) Balance by Departments</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+
+        </span>
     </div>
-    <br />
+
+    <div class="collapse" id="collapseFilter">
+
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table class="table-sm pasconcept-bar" style="width: 100%">
+                <tr>
+                    <td style="width: 200px">
+                        <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear" DataValueField="Year" Width="100%">
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 300px">
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments"
+                            DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboCurrentSource" runat="server" Width="300px" AppendDataBoundItems="true" AutoPostBack="True" Label="Current:">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="From Job's Budgets" Value="0" Selected="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="From Payments Received" Value="1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+
+
+                    <td style="width: 150px; text-align: right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
+    </div>
+
     <div class="pas-container">
 
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 80%;vertical-align:top">
+                <td style="padding-top: 50px; vertical-align: top">
+
+                    <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"
+                        GridLines="None" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small">
+                        <MasterTableView DataKeyNames="Month3" DataSourceID="SqlDataSource1" ShowFooter="True">
+                            <Columns>
+                                <telerik:GridBoundColumn DataField="Month3" HeaderText="Month" SortExpression="Month3"
+                                    UniqueName="Month3">
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn Aggregate="Sum" DataField="DptoBudget" DataFormatString="{0:N0}"
+                                    FooterAggregateFormatString="{0:N0}" HeaderText="Target"
+                                    ReadOnly="True" SortExpression="DptoBudget" UniqueName="DptoBudget"
+                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn Aggregate="Sum" DataField="Executed" DataFormatString="{0:N0}"
+                                    FooterAggregateFormatString="{0:N0}" HeaderText="Current"
+                                    ReadOnly="True" SortExpression="Executed" UniqueName="Executed"
+                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn Aggregate="Sum" DataField="Balance" DataFormatString="{0:N0}"
+                                    FooterAggregateFormatString="{0:N0}" HeaderText="Balance"
+                                    ReadOnly="True" SortExpression="Balance" UniqueName="Balance"
+                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Accumulated" DataFormatString="{0:N0}"
+                                    HeaderText="Accumulated" ReadOnly="True" SortExpression="Accumulated" UniqueName="Accumulated"
+                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridBoundColumn>
+                            </Columns>
+                        </MasterTableView>
+                        <FilterMenu EnableTheming="True">
+                            <CollapseAnimation Type="OutQuint" Duration="200"></CollapseAnimation>
+                        </FilterMenu>
+                    </telerik:RadGrid>
+
+                </td>
+                <td style="width: 80%; vertical-align: top">
                     <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="600px" Width="100%">
-                        <ChartTitle Text="Monthly (Current vs Budget) Balance by Departments">
-                            <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
+                        <ChartTitle Text="">
+                            <Appearance Visible="false"></Appearance>
                         </ChartTitle>
                         <PlotArea>
                             <Series>
@@ -94,43 +156,7 @@
                         </Legend>
                     </telerik:RadHtmlChart>
                 </td>
-                <td style="padding-top: 90px;vertical-align:top">
-
-                    <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"
-                        GridLines="None" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small">
-                        <MasterTableView DataKeyNames="Month3" DataSourceID="SqlDataSource1" ShowFooter="True">
-                            <Columns>
-                                <telerik:GridBoundColumn DataField="Month3" HeaderText="Month" SortExpression="Month3"
-                                    UniqueName="Month3">
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn Aggregate="Sum" DataField="DptoBudget" DataFormatString="{0:N0}"
-                                    FooterAggregateFormatString="{0:N0}" HeaderText="Target"
-                                    ReadOnly="True" SortExpression="DptoBudget" UniqueName="DptoBudget"
-                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn Aggregate="Sum" DataField="Executed" DataFormatString="{0:N0}"
-                                    FooterAggregateFormatString="{0:N0}" HeaderText="Current"
-                                    ReadOnly="True" SortExpression="Executed" UniqueName="Executed"
-                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn Aggregate="Sum" DataField="Balance" DataFormatString="{0:N0}"
-                                    FooterAggregateFormatString="{0:N0}" HeaderText="Balance"
-                                    ReadOnly="True" SortExpression="Balance" UniqueName="Balance"
-                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Accumulated" DataFormatString="{0:N0}"
-                                    HeaderText="Accumulated" ReadOnly="True" SortExpression="Accumulated" UniqueName="Accumulated"
-                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
-                                </telerik:GridBoundColumn>
-                            </Columns>
-                        </MasterTableView>
-                        <FilterMenu EnableTheming="True">
-                            <CollapseAnimation Type="OutQuint" Duration="200"></CollapseAnimation>
-                        </FilterMenu>
-                    </telerik:RadGrid>
-
-                </td>
+                
             </tr>
         </table>
 

@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class chartdepartments
     
     '''<summary>
+    '''pnlFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''cboYear control.
     '''</summary>
     '''<remarks>
@@ -41,13 +50,13 @@ Partial Public Class chartdepartments
     Protected WithEvents cboCurrentSource As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''RadHtmlChart1 control.
+    '''btnFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGrid1 control.
@@ -57,6 +66,15 @@ Partial Public Class chartdepartments
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
+    
+    '''<summary>
+    '''RadHtmlChart1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
     
     '''<summary>
     '''SqlDataSource1 control.

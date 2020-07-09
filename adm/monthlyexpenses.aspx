@@ -50,32 +50,27 @@
             padding-left: 15px;
         }
     </style>
-    <table class="table-sm Formulario" style="width: 100%">
-        <tr>
-            <td style="width: 200px">
-                <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"
-                    DataTextField="nYear" DataValueField="Year" Width="100%" AppendDataBoundItems="True" AutoPostBack="true">
+
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Expenses</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" Label="  Year:"
+                    DataTextField="nYear" DataValueField="Year" Width="200px" AppendDataBoundItems="True" AutoPostBack="true">
                     <Items>
                         <telerik:RadComboBoxItem Selected="True" runat="server" Text="(All Years... )"
                             Value="-1" />
                     </Items>
                 </telerik:RadComboBox>
-
-            </td>
-            <td style="text-align: center">
-                <h3 style="margin: 0">Expenses
-                </h3>
-            </td>
-
-        </tr>
-    </table>
+        </span>
+    </div>
 
     <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="730px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false" Skin="Silk">
         <WizardSteps>
             <telerik:RadWizardStep Title="Monthly Expenses">
                 <div class="form-group">
-                    <asp:LinkButton ID="btnMonthlyNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                <i class="fas fa-plus"></i> Expense
+                    <asp:LinkButton ID="btnMonthlyNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                Add Expense
                     </asp:LinkButton>
                 </div>
 

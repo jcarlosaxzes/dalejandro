@@ -11,63 +11,59 @@
         </script>
     </telerik:RadCodeBlock>
 
-
-
-    <table class="table-sm pasconcept-bar" style="width: 100%">
-        <tr>
-            <td class="PanelFilter">
-                <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                    <table>
-                        <tr>
-                            <td width="80px" align="right" class="Normal">Period:
-                            </td>
-                            <td width="150px" align="left" class="Normal">
-                                <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True">
-                                    <Items>
-                                        <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
-                                        <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
-                                        <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" Selected="true" />
-                                        <telerik:RadComboBoxItem Text="(This year)" Value="14" />
-                                        <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                            <td width="400px">
-                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients"
-                                    Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
-                                    Height="300px" AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%" EmptyMessage="Find...">
-                                </telerik:RadTextBox>
-                            </td>
-                            <td style="text-align: right; width: 100px">
-                                <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-search"></i> Search
-                                </asp:LinkButton>
-
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
-
-
     <div class="pasconcept-bar">
-        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                <i class="fas fa-plus"></i> Statement
-        </asp:LinkButton>
-        
-        <span class="pasconcept-pagetitle" style="padding-left:250px;">Statements</span>
-        
+        <span class="pasconcept-pagetitle">Statements</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                Add Statement
+            </asp:LinkButton>
+        </span>
 
     </div>
+
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table class="table-sm" style="width:100%">
+                <tr>
+                    <td width="180px" align="left" >
+                        <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
+                                <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
+                                <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" Selected="true" />
+                                <telerik:RadComboBoxItem Text="(This year)" Value="14" />
+                                <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td width="400px">
+                        <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients"
+                            Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
+                            Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%" EmptyMessage="Find...">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="text-align: right; width: 150px">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                                            <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+    </div>
+
 
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
@@ -291,7 +287,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="Normal">The invoices below, are not included in another statement and have not been collected from the Client. Click on the check-boxes to select invoices for this statement.
+                                    <td >The invoices below, are not included in another statement and have not been collected from the Client. Click on the check-boxes to select invoices for this statement.
                                     </td>
                                 </tr>
                                 <tr>
@@ -418,7 +414,7 @@
             </h2>
             <table class="table-bordered" style="width: 500px">
                 <tr>
-                    <td style="width: 140px; text-align: right" class="Normal">Collected Date:
+                    <td style="width: 140px; text-align: right" >Collected Date:
                     </td>
                     <td>
                         <telerik:RadDatePicker ID="RadDatePickerPayment2" runat="server" ZIndex="50001">
@@ -426,7 +422,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right" class="Normal">Method:
+                    <td style="text-align: right" >Method:
                     </td>
                     <td>
                         <telerik:RadComboBox ID="cboPaymentMethod_paym2" runat="server" DataSourceID="SqlDataSourcePaymentMethod" DataTextField="Name" DataValueField="Id"
@@ -435,7 +431,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right" class="Normal">Notes:
+                    <td style="text-align: right" >Notes:
                     </td>
                     <td>
                         <telerik:RadTextBox ID="txtPaymentNotes2" runat="server" Width="100%" MaxLength="1024" Rows="2">

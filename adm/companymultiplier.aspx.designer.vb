@@ -23,6 +23,15 @@ Partial Public Class companymultiplier
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
+    '''pnlFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''cboYear control.
     '''</summary>
     '''<remarks>
@@ -48,6 +57,15 @@ Partial Public Class companymultiplier
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboEmployees As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''btnFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadWizard1 control.

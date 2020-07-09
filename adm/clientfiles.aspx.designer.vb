@@ -12,52 +12,7 @@ Option Explicit On
 
 
 Partial Public Class clientfiles
-
-    '''<summary>
-    '''pnlFind control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''cboClients control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''cboProposals control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboProposals As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''txtJob control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtJob As Global.Telerik.Web.UI.RadTextBox
-
-    '''<summary>
-    '''btnFind control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''btnDeleteSelected control.
     '''</summary>
@@ -66,7 +21,52 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnDeleteSelected As Global.System.Web.UI.WebControls.LinkButton
-
+    
+    '''<summary>
+    '''pnlFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''cboClients control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboProposals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboProposals As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''txtJob control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtJob As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''btnFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
+    
     '''<summary>
     '''RadListView1 control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
-
+    
     '''<summary>
     '''UploadPanel control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UploadPanel As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''btnSaveUpload control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSaveUpload As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''RadCloudUpload1 control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
-
+    
     '''<summary>
     '''SqlDataSourceAzureFiles control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceAzureFiles As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceDocTypes control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDocTypes As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceClient control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClient As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceProposals control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceProposals As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceJobs control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobs As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''lblJobId control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblproposalId control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblproposalId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblSelectedId control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectedId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblSelectedSource control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectedSource As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''Master property.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class clientfiles
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

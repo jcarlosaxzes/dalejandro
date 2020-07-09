@@ -38,7 +38,7 @@ Partial Public Class messages
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnFind As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGrid1 control.

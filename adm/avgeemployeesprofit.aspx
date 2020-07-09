@@ -3,21 +3,19 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <style>
-        .photo {
-            box-shadow: inset 0 0 30px rgba(0,0,0,.3);
-            margin: 0 10px 0 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            display: inline-block;
-        }
-    </style>
 
-    
-    <table style="width: 100%" class="table-sm Formulario">
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Employees Efficiency Chart</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+        </span>
+    </div>
+
+    <div class="collapse" id="collapseFilter">
+    <table class="table-sm pasconcept-bar" style="width:100%">
         <tr>
             <td style="width: 150px;">
                 <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear"
@@ -43,20 +41,20 @@
                     <Localization AllItemsCheckedString="All Departments Checked" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
                 </telerik:RadComboBox>
             </td>
-            <td style="text-align:right">
-                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+            <td style="text-align: right">
+                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                 </asp:LinkButton>
             </td>
         </tr>
     </table>
+    </div>
 
-    
     <div class="pas-container">
-    <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
-        <WizardSteps>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Average Chart" StepType="Step">
-                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
+        <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
+            <WizardSteps>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Average Chart" StepType="Step">
+                    <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
                         <ChartTitle Text="Average Budget Used(%) by Employee">
                             <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
                         </ChartTitle>
@@ -116,9 +114,9 @@
                         </Legend>
 
                     </telerik:RadHtmlChart>
-            </telerik:RadWizardStep>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Profit Chart" StepType="Step">
-                <telerik:RadHtmlChart ID="RadHtmlChart2" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
+                </telerik:RadWizardStep>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Profit Chart" StepType="Step">
+                    <telerik:RadHtmlChart ID="RadHtmlChart2" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
                         <ChartTitle Text="Profit Chart by Employee">
                             <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
                         </ChartTitle>
@@ -161,90 +159,90 @@
                         </Legend>
 
                     </telerik:RadHtmlChart>
-            </telerik:RadWizardStep>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Data Sheet" StepType="Step">
-                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" PageSize="250" Height="620px" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" ShowFooter="true"
-                    HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" >
-                    <ClientSettings>
-                        <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
-                    </ClientSettings>
-                    <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="EmployeeId">
-                        <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                        <Columns>
-                            <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" ReadOnly="true">
-                                <ItemTemplate>
-                                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("EmployeeId"))%>' CssClass="photo"
-                                                        runat="server" AlternateText=""></asp:Image>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="EmployeeName" HeaderText="Employee" SortExpression="EmployeeName" Aggregate="Count"
-                                UniqueName="EmployeeName" HeaderStyle-HorizontalAlign="Center"
-                                FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center" ReadOnly="true">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Jobs_Count" HeaderText="Jobs (#)"
-                                ReadOnly="True" SortExpression="Jobs_Count" UniqueName="Jobs_Count" DataFormatString="{0:N0}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
+                </telerik:RadWizardStep>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Data Sheet" StepType="Step">
+                    <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" PageSize="250" Height="620px" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" ShowFooter="true"
+                        HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                        <ClientSettings>
+                            <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+                        </ClientSettings>
+                        <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="EmployeeId">
+                            <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                            <Columns>
+                                <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" ReadOnly="true">
+                                    <ItemTemplate>
+                                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("EmployeeId"))%>' CssClass="photo50"
+                                            runat="server" AlternateText=""></asp:Image>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+                                <telerik:GridBoundColumn DataField="EmployeeName" HeaderText="Employee" SortExpression="EmployeeName" Aggregate="Count"
+                                    UniqueName="EmployeeName" HeaderStyle-HorizontalAlign="Center"
+                                    FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center" ReadOnly="true">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Jobs_Count" HeaderText="Jobs (#)"
+                                    ReadOnly="True" SortExpression="Jobs_Count" UniqueName="Jobs_Count" DataFormatString="{0:N0}"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
+                                </telerik:GridBoundColumn>
 
-                            <telerik:GridBoundColumn DataField="Uptime" HeaderText="Uptime" HeaderTooltip="Total amount of employee productive time dedicated towards the completion of a job/project"
-                                ReadOnly="True" SortExpression="Uptime" UniqueName="Uptime" DataFormatString="{0:N0}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="70px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Downtime" HeaderText="Downtime" HeaderTooltip="Total amount of employee miscellaneous time dedicated to tasks not related to a specific job/project"
-                                ReadOnly="True" SortExpression="Downtime" UniqueName="Downtime" DataFormatString="{0:N0}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Uptime" HeaderText="Uptime" HeaderTooltip="Total amount of employee productive time dedicated towards the completion of a job/project"
+                                    ReadOnly="True" SortExpression="Uptime" UniqueName="Uptime" DataFormatString="{0:N0}"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Downtime" HeaderText="Downtime" HeaderTooltip="Total amount of employee miscellaneous time dedicated to tasks not related to a specific job/project"
+                                    ReadOnly="True" SortExpression="Downtime" UniqueName="Downtime" DataFormatString="{0:N0}"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
+                                </telerik:GridBoundColumn>
 
-                            <telerik:GridBoundColumn DataField="ConsistencyPercent" DataType="System.Double" HeaderText="Consistency (%)" HeaderStyle-Width="100px"
-                                ReadOnly="True" SortExpression="ConsistencyPercent" UniqueName="ConsistencyPercent" DataFormatString="{0:N2}" HeaderTooltip="Simple average of % Budget Used disregarding individual job/project budget weight with respect to Revenue per employee"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="EfficiencyPercent" DataType="System.Double" HeaderText="Efficiency (%)" HeaderStyle-Width="100px"
-                                ReadOnly="True" SortExpression="EfficiencyPercent" UniqueName="EfficiencyPercent" DataFormatString="{0:N2}" HeaderTooltip="Weighted average of % Budget Used based on individual job/project budget weight with respect to Revenue per employee"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Revenue" HeaderText="Revenue" HeaderTooltip="Gross financial income as per contract agreement, including outsourcing"
-                                ReadOnly="True" SortExpression="Revenue" UniqueName="Revenue" DataFormatString="{0:N2}" HeaderStyle-Width="100px"
-                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" HeaderStyle-Width="100px" HeaderTooltip="Amount utilized from available budget"
-                                ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" DataFormatString="{0:N2}"
-                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" HeaderStyle-Width="100px" HeaderTooltip="Net financial gain; difference between amount earned (Revenue) and amount spent (Budget Used)"
-                                ReadOnly="True" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N2}"
-                                ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="EmployeeHR" HeaderText="Employee HR" SortExpression="EmployeeHR" UniqueName="EmployeeHR" HeaderStyle-Width="100px"
-                                HeaderTooltip="Value of 'Hourly Rate' in employee profile"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <asp:Label ID="lnkEdit" runat="server" Text='<%# Eval("EmployeeHR", "{0:N2}")%>' ToolTip="Click to edit" ></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="ProductionHR" HeaderText="Production HR" HeaderTooltip="The sum of the Revenue generated by an employee divided by the sum of production time (Uptime)"
-                                ReadOnly="True" SortExpression="ProductionHR" UniqueName="ProductionHR" DataFormatString="{0:N2}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="HourlyRate" HeaderText="Hourly Rate" HeaderTooltip="The sum of the Revenue generated by an employee divided by the sum of total time (Uptime and Downtime)"
-                                ReadOnly="True" SortExpression="HourlyRate" UniqueName="HourlyRate" DataFormatString="{0:N2}"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
-            </telerik:RadWizardStep>
-        </WizardSteps>
-    </telerik:RadWizard>
-</div>
+                                <telerik:GridBoundColumn DataField="ConsistencyPercent" DataType="System.Double" HeaderText="Consistency (%)" HeaderStyle-Width="130px"
+                                    ReadOnly="True" SortExpression="ConsistencyPercent" UniqueName="ConsistencyPercent" DataFormatString="{0:N2}" HeaderTooltip="Simple average of % Budget Used disregarding individual job/project budget weight with respect to Revenue per employee"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="EfficiencyPercent" DataType="System.Double" HeaderText="Efficiency (%)" HeaderStyle-Width="120px"
+                                    ReadOnly="True" SortExpression="EfficiencyPercent" UniqueName="EfficiencyPercent" DataFormatString="{0:N2}" HeaderTooltip="Weighted average of % Budget Used based on individual job/project budget weight with respect to Revenue per employee"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Revenue" HeaderText="Revenue" HeaderTooltip="Gross financial income as per contract agreement, including outsourcing"
+                                    ReadOnly="True" SortExpression="Revenue" UniqueName="Revenue" DataFormatString="{0:N2}" HeaderStyle-Width="120px"
+                                    ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" HeaderStyle-Width="120px" HeaderTooltip="Amount utilized from available budget"
+                                    ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" DataFormatString="{0:N2}"
+                                    ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" HeaderStyle-Width="120px" HeaderTooltip="Net financial gain; difference between amount earned (Revenue) and amount spent (Budget Used)"
+                                    ReadOnly="True" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N2}"
+                                    ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridTemplateColumn DataField="EmployeeHR" HeaderText="Employee HR" SortExpression="EmployeeHR" UniqueName="EmployeeHR" HeaderStyle-Width="120px"
+                                    HeaderTooltip="Value of 'Hourly Rate' in employee profile"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lnkEdit" runat="server" Text='<%# Eval("EmployeeHR", "{0:N2}")%>' ToolTip="Click to edit"></asp:Label>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+                                <telerik:GridBoundColumn DataField="ProductionHR" HeaderText="Production HR" HeaderTooltip="The sum of the Revenue generated by an employee divided by the sum of production time (Uptime)"
+                                    ReadOnly="True" SortExpression="ProductionHR" UniqueName="ProductionHR" DataFormatString="{0:N2}"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="HourlyRate" HeaderText="Hourly Rate" HeaderTooltip="The sum of the Revenue generated by an employee divided by the sum of total time (Uptime and Downtime)"
+                                    ReadOnly="True" SortExpression="HourlyRate" UniqueName="HourlyRate" DataFormatString="{0:N2}"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
+                                </telerik:GridBoundColumn>
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
+                </telerik:RadWizardStep>
+            </WizardSteps>
+        </telerik:RadWizard>
+    </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="YearStadistic_EMPLOYES_PROFIT3" SelectCommandType="StoredProcedure">
         <SelectParameters>

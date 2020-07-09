@@ -32,15 +32,6 @@ Partial Public Class historylog
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
-    '''RadPageLayout1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
-    
-    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>
@@ -65,7 +56,7 @@ Partial Public Class historylog
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnFind As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGrid1 control.

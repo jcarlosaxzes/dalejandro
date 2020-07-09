@@ -57,8 +57,8 @@
                         Decline
             </asp:LinkButton>
 
-            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Request for Proposal">
-                       Add New RFP
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Request for Proposal">
+                       Add RFP
             </asp:LinkButton>
 
         </span>
@@ -129,8 +129,8 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="width:150px;text-align:right;">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
 
                     </td>

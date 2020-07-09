@@ -1,6 +1,14 @@
 ﻿.pas-container {
-    box-shadow: 0 0 10px rgba(0,0,0,.3) !important;
-    border: 1px solid #ddd !important
+    box-shadow: 0 0 5px rgba(0,0,0,.3) !important;
+    border: 1px solid #f7f7f9 !important
+}
+.pasconcept-bar {
+    padding: .5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border-width: .2rem;
+    position: relative;
+    border: solid #f7f7f9
 }
 
 DashboardBackcolorBLUE {
@@ -70,10 +78,11 @@ DashboardBackcolorRED {
     }
 
 .pasconcept-pagetitle {
+    font-family: 'Fira Sans', sans-serif;
     font-size: 22px;
     margin: 0;
     vertical-align: middle;
-    font-weight: 500
+    font-weight: bold
 }
 
 .rcbItem, .rcbInputCell, .rcbInput, .element.style, .rcbHovered {
@@ -87,4 +96,39 @@ DashboardBackcolorRED {
 }
 .rcbActionButton {
     font-size: small !important;
+}
+.rddlFakeInput {
+    font-size: small !important;
+}
+.photo50 {
+    box-shadow: inset 0 0 30px rgba(0,0,0,.3);
+    margin: 0 10px 0 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.photo150 {
+    box-shadow: inset 0 0 30px rgba(0,0,0,.3);
+    margin: 0 10px 0 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+.demo-container .rocViewPort {
+    padding: 2em
+}
+
+html .RadOrgChart .rocImageWrap, html .RadOrgChart .rocImageWrap img {
+    width: 60px !important;
+    height: 70px !important
+}
+
+html .RadOrgChart .rocNodeFields .rocItemField {
+    font-weight: 700
 }

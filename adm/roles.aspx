@@ -1,22 +1,22 @@
 ﻿<%@ Page Title="Roles" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="roles.aspx.vb" Inherits="pasconcept20.roles" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <table class="table-sm Formulario" style="width:100%">
-        <tr>
-            <td style="width:100px">
-                <asp:LinkButton ID="btnNewRole" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> Role
-                </asp:LinkButton>
-            </td>
-            <td style="width:100px">
-                <asp:LinkButton ID="btnInitialize" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false" ToolTip="Setup default initial roles">
-                     Initialize
-                </asp:LinkButton>
 
-            </td>
-            <td></td>
-        </tr>
-    </table>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Employee Roles</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnInitialize" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false" ToolTip="Setup default initial roles">
+                    Initialize Default Roles
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnNewRole" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add Roles
+            </asp:LinkButton>
+
+        </span>
+    </div>
+   
     <div class="row">
         <div class="col-md-12">
             <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">

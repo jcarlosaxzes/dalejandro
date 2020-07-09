@@ -14,51 +14,6 @@ Option Explicit On
 Partial Public Class orgchartbydepartment
     
     '''<summary>
-    '''Image8 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Image8 As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
-    '''lblCompanyName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblCompanyName As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lABEL2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lABEL2 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''btnPrivate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnPrivate As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''btnOrientation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnOrientation As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
     '''RadClientExportManager1 control.
     '''</summary>
     '''<remarks>
@@ -75,6 +30,24 @@ Partial Public Class orgchartbydepartment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadScriptBlock1 As Global.Telerik.Web.UI.RadScriptBlock
+    
+    '''<summary>
+    '''btnOrientation control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnOrientation As Global.Telerik.Web.UI.RadButton
+    
+    '''<summary>
+    '''btnPrivate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnPrivate As Global.Telerik.Web.UI.RadButton
     
     '''<summary>
     '''RadOrgChart1 control.
@@ -102,6 +75,15 @@ Partial Public Class orgchartbydepartment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''lblCompanyName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCompanyName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblCompanyId control.

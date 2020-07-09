@@ -75,7 +75,7 @@
             </button>
 
             <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Non-Productive Time">
-                    Add New Non-Productive Time
+                    Add Non-Productive Time
             </asp:LinkButton>
         </span>
 
@@ -100,8 +100,8 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="width: 150px; text-align: right">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
 
                     </td>
@@ -376,7 +376,7 @@
                                 <td style="width: 32px; text-align: right; font-size: 24px;">
                                     <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
                                         CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
-                                            <i title="Add New Productive Time" class="fas fa-user-clock" style='<%# LocalAPI.GetJobStatusColorCSS(Eval("statusId")) %>'></i>
+                                            <i title="Add Productive Time" class="fas fa-user-clock" style='<%# LocalAPI.GetJobStatusColorCSS(Eval("statusId")) %>'></i>
                                     </asp:LinkButton>
                                 </td>
                                 <td style="width: 40px; text-align: right">

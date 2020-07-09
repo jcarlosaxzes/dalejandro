@@ -32,13 +32,13 @@ Partial Public Class bill_collected_employees
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
-    '''RadPageLayout1 control.
+    '''pnlFind1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
+    Protected WithEvents pnlFind1 As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''cboYear control.
@@ -93,6 +93,15 @@ Partial Public Class bill_collected_employees
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
+    
+    '''<summary>
+    '''pnlFind12 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind12 As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''cboDepartments2 control.

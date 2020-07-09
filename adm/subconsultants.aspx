@@ -8,45 +8,41 @@
     </telerik:RadWindowManager>
 
     <div class="pasconcept-bar noprint">
-        
-                    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                        <i class="fas fa-filter"></i>&nbsp;Filter
-                    </button>
-                
-                    <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> Subconsultant
-                    </asp:LinkButton>
-                
-                    <telerik:RadButton ID="btnprint" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                    </telerik:RadButton>
-                
-                    <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=subconsultants" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
-                        <Icon CssClass="rbUpload"></Icon>
-                    </telerik:RadLinkButton>
-                
-                    <span class="pasconcept-pagetitle" style="padding-left: 250px;">Subconsultants</span>
+        <span class="pasconcept-pagetitle">Subconsultants</span>
+
+        <span style="float: right; vertical-align: middle;">
+
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+
+            <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add Subconsultant
+            </asp:LinkButton>
+
+        </span>
+
     </div>
 
     <div class="collapse" id="collapseFilter">
-        
-            <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-sm pasconcept-bar noprint" style="width:100%">
-                    <tr>
-                        <td style="width:600px">
-                            <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="600px"
-                                EmptyMessage="Search for Name, Organization... ">
-                            </telerik:RadTextBox>
-                        </td>
-                        <td>
-                            <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
-                            </asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        
+
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
+                <tr>
+                    <td>
+                        <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%"
+                            EmptyMessage="Search for Name, Organization... ">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="width: 150px; text-align: right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
     </div>
 
     <div>
@@ -58,7 +54,7 @@
                 }
             </script>
         </telerik:RadCodeBlock>
-                <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" AllowAutomaticDeletes="true"
+        <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" AllowAutomaticDeletes="true"
             DataSourceID="SqlDataSource1" GridLines="None" AllowPaging="True" PageSize="250" Height="1000px"
             CellSpacing="0" AllowSorting="True" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>
@@ -83,10 +79,10 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn HeaderText="NAICS Code" UniqueName="NAICS_US_Codes" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                                <%# Eval("NAICSCodeAndTitle") %>    
+                            <%# Eval("NAICSCodeAndTitle") %>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                   
+
                     <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column"
                         HeaderText="Contact info" SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
@@ -101,18 +97,18 @@
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
 
-                            <table style="width:100%">
+                            <table style="width: 100%">
                                 <tr>
-                                    <td style="width:50%;text-align:center">
+                                    <td style="width: 50%; text-align: center">
                                         <a href='<%# LocalAPI.GetSharedLink_URL(2001, Eval("Id"))%>' target="_blank" title="View Subconsultant Portal">
                                             <i class="far fa-share-square"></i></a>
                                         </a>
                                     </td>
-                                    <td style="text-align:center">
+                                    <td style="text-align: center">
                                         <asp:LinkButton ID="btnCredentials" runat="server" UseSubmitBehavior="false" ToolTip="Send Email with credentials"
-                                                CommandName="SendCredential" CommandArgument='<%#Eval("Id")%>'>
+                                            CommandName="SendCredential" CommandArgument='<%#Eval("Id")%>'>
                                                 <i class="far fa-envelope"></i></a>
-                                            </asp:LinkButton>
+                                        </asp:LinkButton>
                                     </td>
                                 </tr>
                             </table>

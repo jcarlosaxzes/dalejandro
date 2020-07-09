@@ -41,22 +41,13 @@ Partial Public Class employees
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
-    '''RadWizard1 control.
+    '''btnNew control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
-    
-    '''<summary>
-    '''RadWizardStep1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.
@@ -95,31 +86,22 @@ Partial Public Class employees
     Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnNew control.
+    '''RadWizard1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
     
     '''<summary>
-    '''printbutton control.
+    '''RadWizardStep1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents printbutton As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''btnImport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnImport As Global.Telerik.Web.UI.RadLinkButton
+    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''RadCodeBlock1 control.

@@ -14,10 +14,24 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <div class="card card-body">
+        <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">First Steps</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+        </span>
+    </div>
+
+
+
+
+    <div class="collapse" id="collapseFilter">
+
         <asp:Panel ID="Panel1" runat="server" DefaultButton="btnFind">
             <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-sm Formulario" style="width: 100%">
+                <table class="table-sm pasconcept-bar" style="width:100%">
                     <tr>
                         <td style="text-align: right; width: 100px">Group:
                         </td>
@@ -54,8 +68,8 @@
                             </telerik:RadComboBox>
                         </td>
                         <td style="text-align: right">
-                            <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                            <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                             </asp:LinkButton>
 
                         </td>

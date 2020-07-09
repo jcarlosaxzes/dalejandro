@@ -1,8 +1,21 @@
 ﻿<%@ Page Title="Billing Activity" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="billingactivity.aspx.vb" Inherits="pasconcept20.billingactivity" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="Formulario" >
-        <table class="table-sm">
+
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Billing Activity Chart</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+        </span>
+    </div>
+
+
+    <div class="collapse" id="collapseFilter">
+        <table class="table-sm pasconcept-bar" style="width: 100%">
             <tr>
                 <td style="width: 280px">
                     <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="120px">
@@ -28,7 +41,7 @@
                     </telerik:RadDatePicker>
                 </td>
                 <td style="width: 130px;">
-                    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US"  ToolTip="Date To">
+                    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US" ToolTip="Date To">
                     </telerik:RadDatePicker>
                 </td>
                 <td>
@@ -40,53 +53,54 @@
                     </telerik:RadComboBox>
 
                 </td>
-                <td>
-                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                <td style="width: 150px;text-align:right">
+                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                     </asp:LinkButton>
 
                 </td>
             </tr>
-        </table>
-        <table class="table-sm">
             <tr>
-                <td style="text-align: center; width:150px">Hour
+                <td colspan="4">
+                    <table class="table-sm">
+                        <tr>
+                            <td style="text-align: center; width: 150px">Hour
                     <br />
-                    <asp:RadioButton runat="server" ID="hour" GroupName="datepart" AutoPostBack="true" />
-                </td>
-                <td style="text-align: center; width:150px">Day
+                                <asp:RadioButton runat="server" ID="hour" GroupName="datepart" AutoPostBack="true" />
+                            </td>
+                            <td style="text-align: center; width: 150px">Day
                     <br />
-                    <asp:RadioButton runat="server" ID="day" GroupName="datepart" Checked="true" AutoPostBack="true" />
-                </td>
-                <td style="text-align: center; width:150px">Week
+                                <asp:RadioButton runat="server" ID="day" GroupName="datepart" Checked="true" AutoPostBack="true" />
+                            </td>
+                            <td style="text-align: center; width: 150px">Week
                     <br />
-                    <asp:RadioButton runat="server" ID="week" GroupName="datepart" AutoPostBack="true" />
-                </td>
-                <td style="text-align: center; width:150px">Weekday
+                                <asp:RadioButton runat="server" ID="week" GroupName="datepart" AutoPostBack="true" />
+                            </td>
+                            <td style="text-align: center; width: 150px">Weekday
                     <br />
-                    <asp:RadioButton runat="server" ID="weekday" GroupName="datepart" AutoPostBack="true" />
-                </td>
-                <td style="text-align: center; width:150px">Month
+                                <asp:RadioButton runat="server" ID="weekday" GroupName="datepart" AutoPostBack="true" />
+                            </td>
+                            <td style="text-align: center; width: 150px">Month
                     <br />
-                    <asp:RadioButton runat="server" ID="month" GroupName="datepart" AutoPostBack="true" />
-                </td>
-                <td style="text-align: center; width:150px">Quarter
+                                <asp:RadioButton runat="server" ID="month" GroupName="datepart" AutoPostBack="true" />
+                            </td>
+                            <td style="text-align: center; width: 150px">Quarter
                     <br />
-                    <asp:RadioButton runat="server" ID="quarter" GroupName="datepart" AutoPostBack="true" />
-                </td>
-                <td style="text-align: center; width:150px">Year
+                                <asp:RadioButton runat="server" ID="quarter" GroupName="datepart" AutoPostBack="true" />
+                            </td>
+                            <td style="text-align: center; width: 150px">Year
                     <br />
-                    <asp:RadioButton runat="server" ID="year" GroupName="datepart" AutoPostBack="true" />
+                                <asp:RadioButton runat="server" ID="year" GroupName="datepart" AutoPostBack="true" />
+                            </td>
+                        </tr>
+                    </table>
+
                 </td>
             </tr>
         </table>
+
     </div>
 
-     <div style="text-align: center">
-                    <h3>Billing Activity Chart
-                    </h3>
-         
-                </div>
     <div class="pas-container">
         <telerik:RadHtmlChart runat="server" Width="100%" Height="600px" ID="RadChartRemainderStadistic" Transitions="true"
             DataSourceID="SqlDataSourceRemainderStadistic">

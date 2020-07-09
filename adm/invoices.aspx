@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" Async="true"%>
+﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" Async="true" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
@@ -41,7 +41,21 @@
     </telerik:RadWindowManager>
 
 
-    <div class="pasconcept-bar">
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Invoices</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Invoice Simple Change">
+                    Add Invoice
+            </asp:LinkButton>
+        </span>
+
+    </div>
+
+    <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
@@ -117,9 +131,9 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width: 100px; text-align: right">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                    <td style="width: 150px; text-align:right">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -127,16 +141,7 @@
         </asp:Panel>
 
     </div>
-    <div class="pasconcept-bar noprint">
 
-        <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Invoice">
-                    <i class="fas fa-plus"></i> Simple Charge
-        </asp:LinkButton>
-
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Invoices</span>
-
-
-    </div>
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
             <script type="text/javascript">
@@ -250,7 +255,7 @@
                                     <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
                             &nbsp;
                                     <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
-                                        ToolTip="Add New Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
+                                        ToolTip="Add Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                         <i class="fas fa-dollar-sign"></i>
                                     </asp:LinkButton>
                             &nbsp;

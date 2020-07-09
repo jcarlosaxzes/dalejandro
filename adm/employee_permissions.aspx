@@ -8,50 +8,60 @@
             padding: 5px 0px;
         }
     </style>
-    <table class="table-sm Formulario" style="width: 100%">
-        <tr>
-            <td class="ToolButtom noprint Normal" style="width: 200px">
-                <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true" Label="Status" AutoPostBack="true">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="Active" Value="0" Selected="true" />
-                        <telerik:RadComboBoxItem runat="server" Text="Inactive" Value="1" />
-                        <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-            <td class="ToolButtom noprint Normal" style="width: 200px">
-                <telerik:RadComboBox ID="cboSourceRole" runat="server" AppendDataBoundItems="true"
-                    Width="100%" DataSourceID="SqlDataSourceRoles" DataTextField="Name" DataValueField="Id" Height="300px">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Role...)" Value="-1" />
-                    </Items>
-                </telerik:RadComboBox>
 
-            </td>
-            <td>
-                <asp:LinkButton ID="btnApply" runat="server"
-                    CssClass="btn btn-danger btn" UseSubmitBehavior="false">
-                                     Apply Role to selected employees
-                </asp:LinkButton>
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtIPv4" runat="server" Width="200px"
-                    MaxLength="80" EmptyMessage="Type IP v4" ToolTip="IP v4 to Apply Selected Role">
-                </telerik:RadTextBox>
-                <asp:LinkButton ID="btnApplyIPv4toRole" runat="server"
-                    CssClass="btn btn-danger btn" UseSubmitBehavior="false">
-                                     Apply IP v4 to Role
-                </asp:LinkButton>
-            </td>
-            <td style="width: 100px">
-                <asp:LinkButton ID="btnExport" runat="server" UseSubmitBehavior="false" class="btn btn-secondary">
-                    Export</span>
-                </asp:LinkButton>
-            </td>
-        </tr>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Employee Permissions</span>
 
-    </table>
-    <div class="row">
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+
+            <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
+                CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
+                                    <i class="fas fa-download"></i> Export
+            </asp:LinkButton>
+
+
+        </span>
+    </div>
+
+    <div class="collapse pasconcept-bar" id="collapseFilter">
+        Status:&nbsp;
+        <telerik:RadComboBox ID="cboStatus" runat="server" Width="350px" AppendDataBoundItems="true" AutoPostBack="true">
+            <Items>
+                <telerik:RadComboBoxItem runat="server" Text="Active" Value="0" Selected="true" />
+                <telerik:RadComboBoxItem runat="server" Text="Inactive" Value="1" />
+                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" />
+            </Items>
+        </telerik:RadComboBox>
+    </div>
+
+    <div class="pasconcept-subbar">
+        <telerik:RadComboBox ID="cboSourceRole" runat="server" AppendDataBoundItems="true"
+            Width="350px" DataSourceID="SqlDataSourceRoles" DataTextField="Name" DataValueField="Id" Height="300px" Font-Size="Small">
+            <Items>
+                <telerik:RadComboBoxItem runat="server" Text="(Select Role...)" Value="-1" />
+            </Items>
+        </telerik:RadComboBox>
+        <asp:LinkButton ID="btnApply" runat="server"
+            CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false">
+                                     Apply Role to Selected Employees
+        </asp:LinkButton>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+            <telerik:RadTextBox ID="txtIPv4" runat="server" Width="300px"
+                MaxLength="80" EmptyMessage="IPv4 addresses separated by a comma" ToolTip="IP v4 to Apply Selected Role" Font-Size="Small">
+            </telerik:RadTextBox>
+        <asp:LinkButton ID="btnApplyIPv4toRole" runat="server"
+            CssClass="btn btn-primary  btn-sm" UseSubmitBehavior="false">
+                                         Apply IP to Selected Role
+        </asp:LinkButton>
+
+
+    </div>
+
+
+    <div class="row" style="padding-top: 5px">
         <div class="col-md-12">
             <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
                 <script type="text/javascript">
@@ -63,7 +73,8 @@
                 </script>
             </telerik:RadCodeBlock>
             <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AllowMultiRowSelection="True" ShowFooter="true"
-                Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" AllowSorting="True" GroupPanelPosition="Top" HeaderStyle-Font-Size="X-Small">
+                Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" AllowSorting="True" GroupPanelPosition="Top"
+                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                 <ClientSettings EnableRowHoverStyle="true">
                     <ClientEvents OnGridCreated="isRowSelected" OnRowSelected="isRowSelected" OnRowDeselected="isRowSelected"></ClientEvents>
                     <Selecting AllowRowSelect="True"></Selecting>
@@ -92,27 +103,7 @@
                         <telerik:GridCheckBoxColumn DataField="Allow_EmployeesPermissions" DataType="System.Boolean" EditFormColumnIndex="0"
                             FilterControlAltText="Filter Allow_EmployeesPermissions column" HeaderText="Allow Empl Perm"
                             SortExpression="Allow_EmployeesPermissions" UniqueName="Allow_EmployeesPermissions"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                        </telerik:GridCheckBoxColumn>
-                        <telerik:GridCheckBoxColumn DataField="Allow_EditAcceptedProposal" DataType="System.Boolean" EditFormColumnIndex="0"
-                            FilterControlAltText="Filter Allow_EditAcceptedProposal column" HeaderText="Allow Edit Accepted Prop"
-                            SortExpression="Allow_EditAcceptedProposal" UniqueName="Allow_EditAcceptedProposal"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                        </telerik:GridCheckBoxColumn>
-                        <telerik:GridCheckBoxColumn DataField="Allow_InactivateJob" DataType="System.Boolean" EditFormColumnIndex="0"
-                            FilterControlAltText="Filter Allow_InactivateJob column" HeaderText="Allow Inact Jobs"
-                            SortExpression="Allow_InactivateJob" UniqueName="Allow_InactivateJob"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                        </telerik:GridCheckBoxColumn>
-                        <telerik:GridCheckBoxColumn DataField="Allow_DepartmentReport" DataType="System.Boolean" EditFormColumnIndex="0"
-                            FilterControlAltText="Filter Allow_DepartmentReport column" HeaderText="Allow Dep/Emp Report"
-                            SortExpression="Allow_DepartmentReport" UniqueName="Allow_DepartmentReport"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
-                        </telerik:GridCheckBoxColumn>
-                        <telerik:GridCheckBoxColumn DataField="Allow_BadDebt" DataType="System.Boolean" EditFormColumnIndex="0"
-                            FilterControlAltText="Filter Allow_BadDebt column" HeaderText="Allow Inv BadDebt"
-                            SortExpression="Allow_BadDebt" UniqueName="Allow_BadDebt"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center">
+                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px" HeaderStyle-HorizontalAlign="Center">
                         </telerik:GridCheckBoxColumn>
 
 

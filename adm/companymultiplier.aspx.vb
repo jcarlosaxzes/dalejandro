@@ -103,5 +103,13 @@ Public Class companymultiplier
         End Select
     End Sub
 
+    Private Sub Refresh()
+        RadGridMultiplier.DataBind()
+        RadGridDptoTarget.DataBind()
+        RadGridHourlyWage.DataBind()
+    End Sub
 
+    Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        Refresh()
+    End Sub
 End Class

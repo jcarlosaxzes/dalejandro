@@ -104,7 +104,7 @@
                     </asp:LinkButton>
                     <asp:LinkButton ID="btnAdminPay" runat="server" title="Check Pay" data-toggle="tooltip" class="btn btn-warning width-100 btn-lg" Visible="false">
                                         Pay (Admin)&nbsp;
-                                        <span class="circle bg-white"><i class="fa fa-paypal" aria-hidden="true"></i></span>
+                                        <i class="far fa-paypal"></i>
                     </asp:LinkButton>
                 </div>
             </div>

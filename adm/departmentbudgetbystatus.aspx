@@ -2,61 +2,55 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Departments Budget Status</span>
 
-    <table style="width: 100%">
-        <tr>
-            <td class="PanelFilter">
-                <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="Formulario" style="width: 100%">
-                        <tr>
-                            <td style="width:350px">
-                                &nbsp;&nbsp;&nbsp;
-                                From:
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+
+        </span>
+    </div>
+
+    <div class="collapse" id="collapseFilter">
+
+        <asp:Panel ID="PanelFilter" runat="server" DefaultButton="btnFind">
+            <table class="table-sm pasconcept-bar" style="width: 100%">
+                <tr>
+                    <td style="width: 350px">From:
                                 <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" ToolTip="Date From of the filter">
                                 </telerik:RadDatePicker>
-                                &nbsp;&nbsp;&nbsp;To:
+                        &nbsp;&nbsp;&nbsp;To:
                                 <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US">
                                 </telerik:RadDatePicker>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
+                            DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="450px">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
 
-                            </td>
-                            <td>
-                                <%-- <telerik:RadMultiColumnComboBox runat="server" ID="cboClients" Skin="Default"
-                                Width="220px" Height="400" DropDownWidth="400"
-                                DataTextField="Name" DataValueField="Id" DataSourceID="SqlDataSourceClient"
-                                Filter="Contains" FilterFields="Name">
-                                <ColumnsCollection>
-                                    <telerik:MultiColumnComboBoxColumn Field="Name" Title="Name">
-                                    </telerik:MultiColumnComboBoxColumn>
-                                    <telerik:MultiColumnComboBoxColumn Field="Company" Title="Company">
-                                    </telerik:MultiColumnComboBoxColumn>
-                                </ColumnsCollection>
-                            </telerik:RadMultiColumnComboBox>--%>
-                                <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
-                                    DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="450px">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                            <td style="text-align: right; width: 110px">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
-                                </asp:LinkButton>
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
-                    <div style="text-align: center">
-                    <h3 style="margin: 0">Departments Budget Status
-                    </h3>
-                </div>
+                    </td>
+                    <td style="width: 150px; text-align: right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
+    </div>
+
+
+
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"
-            GridLines="None">
+             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <MasterTableView DataKeyNames="Departament" DataSourceID="SqlDataSource1" ShowFooter="True">
                 <Columns>
                     <telerik:GridBoundColumn DataField="Departament" HeaderText="Departament" SortExpression="Departament"

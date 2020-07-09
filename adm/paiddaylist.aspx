@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Payroll Calendar" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="paiddaylist.aspx.vb" Inherits="pasconcept20.paiddaylist" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
@@ -46,50 +47,62 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Payroll</span>
 
-    <table style="width: 100%">
-        <tr>
-            <td class="PanelFilter">
-                <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-                    <table class="Formulario" style="width: 100%">
-                        <tr>
-                            <td style="width: 150px">
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
 
-                                <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear"
-                                    DataTextField="nYear" DataValueField="Year" Width="100px">
-                                </telerik:RadComboBox>
-                            </td>
+            <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add Vendor
+            </asp:LinkButton>
 
-                            <td style="width: 300px">
-                                <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" MarkFirstMatch="True" AutoPostBack="true"
-                                    Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="-1" Selected="true" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-
-                            <td style="width: 300px">
-                                <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" AutoPostBack="true"
-                                    Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
+        </span>
+    </div>
 
 
-                            <td style="text-align: right;">
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
-                                </asp:LinkButton>
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
+    <div class="collapse" id="collapseFilter">
+
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
+            <table class="table-sm pasconcept-bar" style="width: 100%">
+                <tr>
+                    <td style="width: 150px">
+
+                        <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear"
+                            DataTextField="nYear" DataValueField="Year" Width="100px">
+                        </telerik:RadComboBox>
+                    </td>
+
+                    <td style="width: 300px">
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" MarkFirstMatch="True" AutoPostBack="true"
+                            Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+
+                    <td style="width: 300px">
+                        <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" AutoPostBack="true"
+                            Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+
+
+                    <td style="text-align: right;">
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+    </div>
 
 
     <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="800px" Skin="Silk"
@@ -105,7 +118,7 @@
 
                                     <asp:LinkButton ID="btnAddHourlyWage" runat="server" ToolTip="Add Hourly Wage Record "
                                         CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-plus"></i></span> New Record
+                                    <i class="fas fa-plus"></i> New Record
                                     </asp:LinkButton>
 
                                 </td>
@@ -122,7 +135,8 @@
                     <div class="row">
                         <telerik:RadGrid ID="RadGridHourlyWage" runat="server" DataSourceID="SqlDataSourceHourlyWage"
                             AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="600px" ShowFooter="true"
-                            AllowAutomaticDeletes="true" AllowAutomaticInserts="true" AllowAutomaticUpdates="true">
+                            AllowAutomaticDeletes="true" AllowAutomaticInserts="true" AllowAutomaticUpdates="true"
+                            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                             <ClientSettings>
                                 <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
                             </ClientSettings>
@@ -183,7 +197,7 @@
                                     </telerik:GridTemplateColumn>
 
                                     <telerik:GridTemplateColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="$/Hour" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" 
+                                        SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
                                         HeaderTooltip="Hourly Wage Rate">
                                         <ItemTemplate>
                                             <%# Eval("Amount","{0:C2}") %>
@@ -292,7 +306,8 @@
                                 <td style="width: 200px">
                                     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource5" GridLines="None"
                                         AutoGenerateColumns="False" AllowAutomaticDeletes="True" Width="100%" AllowAutomaticUpdates="True"
-                                        AllowPaging="True" CellSpacing="0" AllowSorting="True" PageSize="50" Height="600px">
+                                        AllowPaging="True" CellSpacing="0" AllowSorting="True" PageSize="50" Height="600px"
+                                        HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                                         <ClientSettings>
                                             <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                                         </ClientSettings>
@@ -339,7 +354,7 @@
                             <tr>
                                 <td></td>
                                 <td style="width: 200px; text-align: right">
-                                    <telerik:RadAsyncUpload ID="RadUpload1" runat="server" Width="100%" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true"
+                                    <telerik:RadAsyncUpload ID="RadUpload1" runat="server" Width="100%" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true" RenderMode="Classic"
                                         AllowedFileExtensions="csv,txt">
                                     </telerik:RadAsyncUpload>
                                 </td>
@@ -347,7 +362,7 @@
 
                                     <asp:LinkButton ID="btnImport" runat="server" ToolTip="Import Payroll CSV file('Check Date,Name,Net Amount,Total Hours,Gross Amount')"
                                         CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                     Update Import
+                                       Upload
                                     </asp:LinkButton>
 
                                 </td>

@@ -82,8 +82,8 @@
     </telerik:RadWindowManager>
 
     <div class="pasconcept-bar">
-        <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
-                       $ Dashboard
+        <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       View Summary
         </asp:LinkButton>
         <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false" CausesValidation="false">
                        Back to List
@@ -783,12 +783,12 @@
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep22" Title="Phases" StepType="Step">
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
-                        <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Phase">
+                        <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Phase">
                                    <i class="fas fa-plus"></i> Phase
                         </asp:LinkButton>
 
                         &nbsp;&nbsp;&nbsp;
-                        <asp:LinkButton ID="btnPivotPhases" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Add New Phase">
+                        <asp:LinkButton ID="btnPivotPhases" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Add Phase">
                                    <i class="fas fa-plus"></i> Project Phases
                         </asp:LinkButton>
                     </div>

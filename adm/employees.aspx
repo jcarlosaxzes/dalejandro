@@ -33,77 +33,54 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <style>
-        .photo {
-            box-shadow: inset 0 0 30px rgba(0,0,0,.3);
-            margin: 0 10px 0 0;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-size: 100%;
-            background-repeat: no-repeat;
-            display: inline-block;
-        }
-    </style>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Silk">
     </telerik:RadWindowManager>
 
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Employees</span>
+
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                        Add Employee
+            </asp:LinkButton>
+        </span>
+
+    </div>
+
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table width="100%" class="pasconcept-bar noprint">
+                <tr>
+                    <td align="right" width="100px">Status:</td>
+                    <td style="width: 250px">
+                        <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(Active Employees...)" Value="0" Selected="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="(Inactive Employees...)" Value="1" />
+                                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="width: 150px;text-align:right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                                <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
+    </div>
     <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Employees" StepType="Step">
-                <table class="table-sm" style="width: 100%">
-                    <tr>
-                        <td class="PanelFilter">
-                            <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                                <table width="100%" class="pasconcept-bar noprint">
-                                    <tr>
-                                        <td align="right" width="100px">Status:</td>
-                                        <td style="width: 200px">
-                                            <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true">
-                                                <Items>
-                                                    <telerik:RadComboBoxItem runat="server" Text="(Active Employees...)" Value="0" Selected="true" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="(Inactive Employees...)" Value="1" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" />
-                                                </Items>
-                                            </telerik:RadComboBox>
-                                        </td>
-                                        <td style="width: 400px">
-                                            <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%">
-                                            </telerik:RadTextBox>
-                                        </td>
-                                        <td>
-                                            <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                <i class="fas fa-search"></i> Search
-                                            </asp:LinkButton>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
-                        </td>
-                    </tr>
-
-                </table>
-
-                <div class="pasconcept-bar noprint">
-
-                    <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                            <i class="fas fa-plus"></i>&nbsp;Employee
-                    </asp:LinkButton>
-
-
-                    <script type="text/javascript">
-                        function PrintPage(sender, args) {
-                            window.print();
-                        }
-                    </script>
-                    <telerik:RadButton ID="printbutton" OnClientClicked="PrintPage" Text="Print Page" runat="server" AutoPostBack="false" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass=" rbPrint"></Icon>
-                    </telerik:RadButton>
-
-                    <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=Employees" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
-                    </telerik:RadLinkButton>
-                    <span class="pasconcept-pagetitle" style="padding-left: 250px;">Employees</span>
-                </div>
                 <div>
                     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
                         <script type="text/javascript">
@@ -124,7 +101,7 @@
 
                                         <asp:LinkButton ID="btnEditEmpl2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to Edit Employee Photo"
                                             CommandName="EditPhoto" UseSubmitBehavior="false">
-                                            <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>' CssClass="photo"
+                                            <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>' CssClass="photo50"
                                                 runat="server" AlternateText=""></asp:Image>
                                         </asp:LinkButton>
 

@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class billingagingreport
     
     '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''cboClients control.
     '''</summary>
     '''<remarks>
@@ -39,15 +48,6 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''ExcelButton control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ExcelButton As Global.System.Web.UI.WebControls.ImageButton
     
     '''<summary>
     '''RadGrid1 control.

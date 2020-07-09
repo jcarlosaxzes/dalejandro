@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class roles
     
     '''<summary>
-    '''btnNewRole control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNewRole As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnInitialize control.
     '''</summary>
     '''<remarks>
@@ -30,6 +21,15 @@ Partial Public Class roles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnInitialize As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnNewRole control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNewRole As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadCodeBlock1 control.

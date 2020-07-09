@@ -6,8 +6,8 @@
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 130px">
-                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false">
-                       $ Dashboard
+                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       View Summary
                     </asp:LinkButton>
                 </td>
                 <td style="width: 130px">

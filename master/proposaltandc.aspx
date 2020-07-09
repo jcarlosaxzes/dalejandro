@@ -28,7 +28,7 @@
             <telerik:LayoutRow>
                 <Content>
                     <div class="ToolButtom noprint" style="text-align: left">
-                        <telerik:RadButton ID="btnNew" runat="server" Text="Add New Template">
+                        <telerik:RadButton ID="btnNew" runat="server" Text="Add Template">
                             <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
                         </telerik:RadButton>
                     </div>

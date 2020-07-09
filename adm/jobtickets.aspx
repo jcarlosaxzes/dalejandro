@@ -71,8 +71,8 @@
                             </td>
 
                             <td>
-                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
+                                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -177,7 +177,7 @@
                                         </asp:LinkButton>
                                     </td>
                                     <td style="width: 24px; text-align: right">
-                                        <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
+                                        <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add Time"
                                             CommandName="NewTime" UseSubmitBehavior="false">
                                                 <i class="fas fa-user-clock"></i>
                                         </asp:LinkButton>

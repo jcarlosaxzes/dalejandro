@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class departmentbudgetbystatus
     
     '''<summary>
-    '''pnlFind control.
+    '''PanelFilter control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents PanelFilter As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''RadDatePickerFrom control.
@@ -50,13 +50,13 @@ Partial Public Class departmentbudgetbystatus
     Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''btnRefresh control.
+    '''btnFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGrid1 control.

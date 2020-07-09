@@ -6,7 +6,7 @@
     <table width="100%">
         <tr>
             <td class="ToolButtom noprint">
-            <telerik:RadButton ID="btnNew" runat="server" Text="Add New Discipline">
+            <telerik:RadButton ID="btnNew" runat="server" Text="Add Discipline">
                 <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4"  PrimaryIconTop="4"></Icon>
             </telerik:RadButton>
             </td>
@@ -56,7 +56,7 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </telerik:GridButtonColumn>
                         </Columns>
-                        <CommandItemSettings AddNewRecordText="Add New Discipline" />
+                        <CommandItemSettings AddNewRecordText="Add Discipline" />
                         <ExpandCollapseColumn Resizable="False" Visible="False">
                             <HeaderStyle Width="20px" />
                         </ExpandCollapseColumn>

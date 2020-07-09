@@ -160,11 +160,11 @@
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                        <%--<i class="fas fa-plus"></i>--%>Add New Job
+                Add Job
             </asp:LinkButton>
 
             <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">
-                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-style="ios" data-size="mini"/>
+                <input type="checkbox" data-toggle="toggle" data-onstyle="danger" />
             </asp:LinkButton>
         </span>
     </div>
@@ -462,7 +462,7 @@
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td>
-                                                    <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
+                                                    <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add Time"
                                                         CommandName="NewTime" UseSubmitBehavior="false">
                                                 <i class="fas fa-user-clock"></i>
                                                     </asp:LinkButton>

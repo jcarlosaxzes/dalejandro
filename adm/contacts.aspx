@@ -47,78 +47,78 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-
-    <table style="width: 100%">
-        <tr>
-            <td class="PanelFilter">
-                <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                    <table class="table-sm pasconcept-bar noprint" style="width: 100%">
-                        <tr>
-                            <td style="width: 150px">Contact Type:</td>
-                            <td style="width: 400px">
-                                <telerik:RadComboBox ID="cboContactType" runat="server" ToolTip="Select Contact types"
-                                    Width="100%" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
-                                    <Localization AllItemsCheckedString="All Contact types Checked" CheckAllString="Check All..." ItemsCheckedString="Contact status checked"></Localization>
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="Contacts" Value="1" Checked="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="Clients" Value="2" Checked="false" />
-                                        <telerik:RadComboBoxItem runat="server" Text="Employees" Value="3" Checked="true" />
-                                        <telerik:RadComboBoxItem runat="server" Text="SubConsultants" Value="4" Checked="false" />
-                                        <telerik:RadComboBoxItem runat="server" Text="Vendors" Value="5" Checked="false" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Find (max. 50 records)..." Width="100%">
-                                </telerik:RadTextBox>
-                            </td>
-                            <td style="width: 150px">
-                                <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                                    <i class="fas fa-search"></i> Search
-                                </asp:LinkButton>
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </td>
-        </tr>
-    </table>
     <div class="pasconcept-bar noprint">
-        
-                    <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> Client
-                    </asp:LinkButton>
+        <span class="pasconcept-pagetitle">Contacts</span>
 
-                
-                    <asp:LinkButton ID="btnNewEmployee" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
-                                            <i class="fas fa-plus"></i>&nbsp;Employee
-                    </asp:LinkButton>
+        <span style="float: right; vertical-align: middle;">
 
-               
-                    <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> SubConsultant
-                    </asp:LinkButton>
-                
-                    <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-warning btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> Vendor
-                    </asp:LinkButton>
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
 
-               
-                    <asp:LinkButton ID="btnNewContact" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
-                                        <i class="fas fa-plus"></i>&nbsp;Other
-                    </asp:LinkButton>
+            <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                    Add Client
+            </asp:LinkButton>
 
-                <span class="pasconcept-pagetitle" style="padding-left: 150px;padding-right:150px">Contacts</span>
-                        
-                    
-                    <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
+
+            <asp:LinkButton ID="btnNewEmployee" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false">
+                   Add Employee
+            </asp:LinkButton>
+
+
+            <asp:LinkButton ID="btnNewSubconsultant" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false">
+                    Add SubConsultant
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-warning btn" UseSubmitBehavior="false">
+                    Add Vendor
+            </asp:LinkButton>
+
+
+            <asp:LinkButton ID="btnNewContact" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
+                    Add Other
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Import records from CSV files">
                                         <i class="fas fa-cloud-upload-alt"></i>&nbsp;Import
-                    </asp:LinkButton>
-               
-                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Update records from CSV files">
+            </asp:LinkButton>
+
+            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Update records from CSV files">
                                         <i class="fas fa-cloud-upload-alt"></i>&nbsp;Update
-                    </asp:LinkButton>
-                
+            </asp:LinkButton>
+        </span>
+    </div>
+
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
+                <tr>
+                    <td style="width: 150px">Contact Type:</td>
+                    <td style="width: 400px">
+                        <telerik:RadComboBox ID="cboContactType" runat="server" ToolTip="Select Contact types"
+                            Width="100%" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
+                            <Localization AllItemsCheckedString="All Contact types Checked" CheckAllString="Check All..." ItemsCheckedString="Contact status checked"></Localization>
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="Contacts" Value="1" Checked="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="Clients" Value="2" Checked="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="Employees" Value="3" Checked="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="SubConsultants" Value="4" Checked="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="Vendors" Value="5" Checked="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Find (max. 50 records)..." Width="100%">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="width: 150px; text-align:right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                                    <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
     </div>
 
     <div>

@@ -23,6 +23,15 @@ Partial Public Class invoices
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
     
     '''<summary>
+    '''btnNewInvoice control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNewInvoice As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>
@@ -102,15 +111,6 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnNewInvoice control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNewInvoice As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadCodeBlock1 control.

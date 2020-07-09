@@ -26,42 +26,39 @@
 
 
     <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Vendors</span>
 
-        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-            <i class="fas fa-filter"></i>&nbsp;Filter
-        </button>
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
 
-        <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                    <i class="fas fa-plus"></i> Vendor
-        </asp:LinkButton>
+            <asp:LinkButton ID="btnNewVendor" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+                    Add Vendor
+            </asp:LinkButton>
 
-        <telerik:RadLinkButton ID="btnImport" runat="server" Text="Import Data" NavigateUrl="~/ADM/ImportData.aspx?source=Clients" ToolTip="Import records from CSV files" UseSubmitBehavior="false">
-            <Icon CssClass="rbUpload"></Icon>
-        </telerik:RadLinkButton>
-
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Vendors</span>
-
+        </span>
     </div>
 
     <div class="collapse" id="collapseFilter">
-        
-            <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                <table class="table-sm pasconcept-bar">
-                    <tr>
-                        <td style="width:600px">
-                            <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%"
-                                EmptyMessage="Search for Name, Company... ">
-                            </telerik:RadTextBox>
-                        </td>
-                        <td>
-                            <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-search"></i> Search
-                            </asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        
+
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table class="table-sm pasconcept-bar" style="width:100%">
+                <tr>
+                    <td>
+                        <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%"
+                            EmptyMessage="Search for Name, Company... ">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="width: 150px; text-align: right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
     </div>
 
     <div>
@@ -75,7 +72,8 @@
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" AllowAutomaticDeletes="true"
             DataSourceID="SqlDataSource1" GridLines="None" AllowPaging="True" PageSize="250" Height="1000px"
-            CellSpacing="0" AllowSorting="True" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+            CellSpacing="0" AllowSorting="True" 
+            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>

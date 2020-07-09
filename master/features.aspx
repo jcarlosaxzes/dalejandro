@@ -11,7 +11,7 @@
             <td class="ToolButtom noprint">
                 Insert only features NO AVAILABLES by version<br />
                 <br />
-                <telerik:RadButton ID="btnNew" runat="server" Text="Add New Feature">
+                <telerik:RadButton ID="btnNew" runat="server" Text="Add Feature">
                     <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4"  PrimaryIconTop="4"></Icon>
                 </telerik:RadButton>
                 <br />
@@ -75,7 +75,7 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </telerik:GridButtonColumn>
                         </Columns>
-                        <CommandItemSettings AddNewRecordText="Add New Feature" />
+                        <CommandItemSettings AddNewRecordText="Add Feature" />
                         <ExpandCollapseColumn Resizable="False" Visible="False">
                             <HeaderStyle Width="20px" />
                         </ExpandCollapseColumn>

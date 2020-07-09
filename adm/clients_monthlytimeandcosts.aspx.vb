@@ -15,15 +15,6 @@ Public Class clients_monthlytimeandcosts
         End If
     End Sub
 
-    Protected Sub ExcelButton_Click(sender As Object, e As ImageClickEventArgs) Handles ExcelButton.Click
-        If cboYear.SelectedValue > 0 Then
-            ConfigureExport(RadGridMonthly)
-            RadGridMonthly.MasterTableView.ExportToExcel()
-        Else
-            ConfigureExport(RadGridAllYears)
-            RadGridAllYears.MasterTableView.ExportToExcel()
-        End If
-    End Sub
     Private Sub ConfigureExport(RadGrid1 As RadGrid)
         RadGrid1.ExportSettings.FileName = "CLIENTS_Time_And_Costs_" & DateTime.Today.ToString("yyyy-MM-dd")
         RadGrid1.ExportSettings.ExportOnlyData = True
@@ -34,7 +25,22 @@ Public Class clients_monthlytimeandcosts
         RadGrid1.MasterTableView.ShowFooter = True
     End Sub
 
-    Private Sub cboYear_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboYear.SelectedIndexChanged
+
+    Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+        If cboYear.SelectedValue > 0 Then
+            ConfigureExport(RadGridMonthly)
+            RadGridMonthly.MasterTableView.ExportToExcel()
+        Else
+            ConfigureExport(RadGridAllYears)
+            RadGridAllYears.MasterTableView.ExportToExcel()
+        End If
+    End Sub
+
+    Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        Refresh
+    End Sub
+
+    Private Sub Refresh()
         If cboYear.SelectedValue > 0 Then
             RadGridMonthly.Visible = True
             RadGridAllYears.Visible = False

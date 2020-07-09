@@ -30,15 +30,8 @@
             }
     </style>
 
-    <div class="Formulario">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="text-align: center">
-                    <span class="pasconcept-bar">Company Overview</span>
-                </td>
-            </tr>
-        </table>
-
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Company Overview</span>
     </div>
     <telerik:RadDockLayout runat="server" ID="RadDockLayout1">
 
@@ -105,7 +98,7 @@
                                                                             <i class="fas fa-dollar-sign"></i>
                                                                         </asp:LinkButton>
                                                                         &nbsp;&nbsp;
-                                                                        <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add New Time"
+                                                                        <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add Time"
                                                                             CommandName="NewTime" UseSubmitBehavior="false">
                                                                             <span aria-hidden="true" <i class="fas fa-user-clock"></i>
                                                                         </asp:LinkButton>

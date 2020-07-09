@@ -32,15 +32,6 @@ Partial Public Class projectmap
     Protected WithEvents RadWindow1 As Global.Telerik.Web.UI.RadWindow
     
     '''<summary>
-    '''btnSattelite control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSattelite As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''Image3 control.
     '''</summary>
     '''<remarks>
@@ -66,6 +57,15 @@ Partial Public Class projectmap
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Image6 As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''btnSattelite control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSattelite As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''pnlFind control.
@@ -156,15 +156,6 @@ Partial Public Class projectmap
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''RadClientExportManager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadClientExportManager1 As Global.Telerik.Web.UI.RadClientExportManager
     
     '''<summary>
     '''RadMap1 control.

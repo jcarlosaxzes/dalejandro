@@ -4,45 +4,47 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <table style="width: 100%" class="table-sm">
-        <tr>
-            <td>
-                <div class="PanelFilter">
-                    <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                        <table style="width: 100%" class="table-sm pasconcept-bar">
-                            <tr>
-                                <td style="width: 300px">
-                                    <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="true" Width="100%" Label="Collection Status:">
-                                        <Items>
-                                            <telerik:RadComboBoxItem Text="Active" Selected="true" Value="1" />
-                                            <telerik:RadComboBoxItem Text="Closed" Selected="true" Value="2" />
-                                            <telerik:RadComboBoxItem Text="(All Status...)" Value="-1" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%"
-                                        EmptyMessage="Find for Name, Company, Phone, Email">
-                                    </telerik:RadTextBox>
-                                </td>
-                                <td style="width: 120px">
-                                    <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-search"></i> Search
-                                    </asp:LinkButton>
-                                </td>
-                            </tr>
-                        </table>
-                    </asp:Panel>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <div class="pasconcept-bar">
-        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add New Record">
-                                    <i class="fas fa-plus"></i> Client to Collection
-        </asp:LinkButton>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Clients Colletion</span>
 
-        <span class="pasconcept-pagetitle" style="padding-left: 250px;">Clients Colletion</span>
+        <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Record">
+                                    Add Client to Collection
+            </asp:LinkButton>
+        </span>
+    </div>
+
+
+    <div class="collapse" id="collapseFilter">
+
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table style="width: 100%" class="table-sm pasconcept-bar">
+                <tr>
+                    <td style="width: 300px">
+                        <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="true" Width="100%" Label="Collection Status:">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="Active" Selected="true" Value="1" />
+                                <telerik:RadComboBoxItem Text="Closed" Selected="true" Value="2" />
+                                <telerik:RadComboBoxItem Text="(All Status...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%"
+                            EmptyMessage="Find for Name, Company, Phone, Email">
+                        </telerik:RadTextBox>
+                    </td>
+                    <td style="width: 150px; text-align:right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                            <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
     </div>
 
     <div>
