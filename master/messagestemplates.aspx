@@ -2,12 +2,24 @@
 
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <script type="text/javascript">
+        function OnClientCommandExecuting(editor, args) {
+            var name = args.get_name();
+            var val = args.get_value();
+
+            if (name == "Variables") {
+                editor.pasteHtml(val);
+                //Cancel the further execution of the command as such a command does not exist in the editor command list        
+                args.set_cancel(true);
+            }   
+        }
+    </script>
     <table style="width: 100%">
         <tr>
             <td width="100%">
                 <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" 
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" 
-                    AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowSorting="True" >
+                    AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowSorting="True"  OnItemDataBound="RadGrid1_ItemDataBound">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                         <PagerStyle Mode="Slider" AlwaysVisible="false" />
                         <Columns>
@@ -33,9 +45,10 @@
                                     <%# Eval("Body") %>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <telerik:RadEditor ID="gridEditor_Body" runat="server" Content='<%# Bind("Body") %>' RenderMode="Auto" Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design"
-                                        Width="800px">
-                                    </telerik:RadEditor>
+                                    <telerik:RadEditor ID="GridEditorBody" runat="server" Content='<%# Bind("Body") %>'
+                                            Height="400px" AllowScripts="True" RenderMode="Auto" ToolsFile="~/BasicTools.xml"
+                                            Width="800px" OnClientCommandExecuting="OnClientCommandExecuting">                                            
+                                        </telerik:RadEditor>
                                 </EditItemTemplate>
                             </telerik:GridTemplateColumn>
                            <%-- <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" AllowFiltering="False" ItemStyle-HorizontalAlign="Center" 
@@ -49,11 +62,11 @@
                             </telerik:GridTemplateColumn>--%>
                         </Columns>
                         <EditFormSettings CaptionDataField="Type" CaptionFormatString="Edit {0}" EditColumn-HeaderStyle-VerticalAlign="Top">
-                            <FormTableItemStyle Wrap="False"></FormTableItemStyle>
+                            <FormTableItemStyle Wrap="True"></FormTableItemStyle>
                             <FormMainTableStyle GridLines="None" CellSpacing="0" CellPadding="3" BackColor="White"
                                 Width="100%" />
                             <FormTableStyle CellSpacing="0" CellPadding="2" BackColor="White" />
-                            <FormTableAlternatingItemStyle Wrap="False"></FormTableAlternatingItemStyle>
+                            <FormTableAlternatingItemStyle Wrap="True"></FormTableAlternatingItemStyle>
                             <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1"
                                 CancelText="Cancel">
                             </EditColumn>
