@@ -3,7 +3,7 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -55,11 +55,6 @@
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManagerJob"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnPrint">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManagerPrint" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
-                </UpdatedControls>
-            </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboPeriod">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
@@ -68,26 +63,14 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
 
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
-           <%-- function PrintReport(sender, args) {
-                var RadWindow = $find("<%=RadWindowReport.ClientID%>");
-                RadWindow.show();
-            }--%>
-
-            function NewJob() {
-                window.open('Job.aspx?Job=-1', '_blank');
-            }
-
-
             function OnClientClose(sender, args) {
                 var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
                 masterTable.rebind();
-
-
             }
 
 

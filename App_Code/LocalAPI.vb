@@ -10501,8 +10501,8 @@ Public Class LocalAPI
                         ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{dProposalTotal} WHERE Id={jobId}")
                         NewJobNote(jobId, "$Log: job Budget modified (+" & dProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
 
-                        '2.3 Simple Charge, and ...
-                        NuevoInvoiceSimpleCharge(jobId, GetDateTime(), dProposalTotal, "Proposal (Additional Charge): " & ProposalNumber(proposalId))
+                        ''2.3 Simple Charge, and ..., se esta duplicando en 3. - Invoices from PaymentSchedule
+                        'NuevoInvoiceSimpleCharge(jobId, GetDateTime(), dProposalTotal, "Proposal (Additional Charge): " & ProposalNumber(proposalId))
 
                         '2.4 Mandatory Retainer
                         bRetainer = True
