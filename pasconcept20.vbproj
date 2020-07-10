@@ -1925,6 +1925,7 @@
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\invoice.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\job.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\jobprogressrollup.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\mtransmittal.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\PrintPDF.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\SingProposalSignPrint.aspx" />
@@ -4023,6 +4024,13 @@
       <DependentUpon>jobprogressrollup.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\mtransmittal.aspx.designer.vb">
+      <DependentUpon>mtransmittal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\mtransmittal.aspx.vb">
+      <DependentUpon>mtransmittal.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx.designer.vb">
       <DependentUpon>paymenthistory.aspx</DependentUpon>
     </Compile>
@@ -4515,7 +4523,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

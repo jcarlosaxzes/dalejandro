@@ -50,6 +50,7 @@
                     <telerik:AjaxUpdatedControl ControlID="cboClients" />
                     <telerik:AjaxUpdatedControl ControlID="txtFind" />
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1" />
+                    <telerik:AjaxUpdatedControl ControlID="FormViewViewSummary" />
                 </UpdatedControls>
 
             </telerik:AjaxSetting>
@@ -67,6 +68,13 @@
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
+
+            <span id="spanViewSummary" runat="server">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
+                    View Summary
+                </button>
+            </span>
+
             <asp:LinkButton ID="btnNewWizard" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                         Add Proposal
             </asp:LinkButton>
@@ -151,7 +159,45 @@
         </asp:Panel>
 
     </div>
-
+    <div class="collapse" id="collapseSummary">
+        <asp:FormView ID="FormViewViewSummary" runat="server" DataSourceID="SqlDataSourceViewSummary" Width="100%" CssClass="pasconcept-subbar">
+            <ItemTemplate>
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td style="width: 19%; text-align: center; background-color: #039be5">
+                            <span class="DashboardFont2">Total</span><br />
+                            <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("Total", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Total Proposed</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">Total Accepted</span><br />
+                            <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AcceptedTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Total Accepted</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #e53935">
+                            <span class="DashboardFont2">Total Declined</span><br />
+                            <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("DeclinedTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Total Declined</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #546e7a">
+                            <span class="DashboardFont2">Ratio</span><br />
+                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Ratio", "{0:P2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">(Total Proposed)/(Total Accepted)</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #546e7a">
+                            <span class="DashboardFont2">Total Others</span><br />
+                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("OthersTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Not Emitted + Pending + Hold</span>
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+    </div>
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceProp" AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True"
             PageSize="50" AllowPaging="true" Height="1000px" RenderMode="Auto" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
@@ -318,7 +364,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceProp" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="PROPOSAL_2_SELECT" DeleteCommand="Proposal_DELETE" DeleteCommandType="StoredProcedure"
+        SelectCommand="PROPOSAL_v20_SELECT" DeleteCommand="Proposal_DELETE" DeleteCommandType="StoredProcedure"
         SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
@@ -349,6 +395,19 @@
         SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId and isnull(Productive,0)=1 ORDER BY [Name]">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceViewSummary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="ProposalViewSummary_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
+            <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboStatus" Name="StatusId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
 

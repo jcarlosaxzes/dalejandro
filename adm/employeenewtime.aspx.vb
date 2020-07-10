@@ -202,8 +202,8 @@ Public Class employeenewtime
         BackPage()
     End Sub
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
-        FormViewTimeBalance.Visible = Not FormViewTimeBalance.Visible
-        lblJobName.Visible = Not FormViewTimeBalance.Visible
+        FormViewViewSummary.Visible = Not FormViewViewSummary.Visible
+        lblJobName.Visible = Not FormViewViewSummary.Visible
     End Sub
 
     Private Sub BotonesVisibles()

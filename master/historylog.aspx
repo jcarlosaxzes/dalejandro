@@ -8,7 +8,7 @@
         <tr>
             <td class="PanelFilter">
                 <asp:Panel ID="pnlFind" runat="server" >
-                    <table width="100%" class="Formulario">
+                    <table width="100%" class="pasconcept-bar">
                         <tr>
                             <td align="right" class="Normal" width="80px">Company:
                             </td>

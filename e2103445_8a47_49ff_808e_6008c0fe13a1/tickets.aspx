@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="main-content">
-        <div class="Formulario">
+        <div class="pasconcept-bar">
             <table class="table-sm noprint" style="width: 100%">
                 <tr>
                     <td style="width: 100px">

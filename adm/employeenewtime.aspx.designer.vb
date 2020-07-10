@@ -41,13 +41,13 @@ Partial Public Class employeenewtime
     Protected WithEvents lblJobName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''FormViewTimeBalance control.
+    '''FormViewViewSummary control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormViewTimeBalance As Global.System.Web.UI.WebControls.FormView
+    Protected WithEvents FormViewViewSummary As Global.System.Web.UI.WebControls.FormView
     
     '''<summary>
     '''lblEmployeeName control.
@@ -221,13 +221,13 @@ Partial Public Class employeenewtime
     Protected WithEvents SqlDataSourceActiveTickets As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''SqlDataSourceTimeBalance control.
+    '''SqlDataSourceViewSummary control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceTimeBalance As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceViewSummary As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblEmployeeId control.

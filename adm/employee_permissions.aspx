@@ -41,7 +41,7 @@
         <telerik:RadComboBox ID="cboSourceRole" runat="server" AppendDataBoundItems="true"
             Width="350px" DataSourceID="SqlDataSourceRoles" DataTextField="Name" DataValueField="Id" Height="300px" Font-Size="Small">
             <Items>
-                <telerik:RadComboBoxItem runat="server" Text="(Select Role...)" Value="-1" />
+                <telerik:RadComboBoxItem runat="server" Text="(Bulk Apply Role...)" Value="-1" />
             </Items>
         </telerik:RadComboBox>
         <asp:LinkButton ID="btnApply" runat="server"
@@ -50,7 +50,7 @@
         </asp:LinkButton>
         &nbsp;&nbsp;&nbsp;&nbsp;
             <telerik:RadTextBox ID="txtIPv4" runat="server" Width="300px"
-                MaxLength="80" EmptyMessage="IPv4 addresses separated by a comma" ToolTip="IP v4 to Apply Selected Role" Font-Size="Small">
+                MaxLength="80" EmptyMessage="Bulk IPv4 addresses separated by a comma" ToolTip="IP v4 to Apply Selected Role" Font-Size="Small">
             </telerik:RadTextBox>
         <asp:LinkButton ID="btnApplyIPv4toRole" runat="server"
             CssClass="btn btn-primary  btn-sm" UseSubmitBehavior="false">

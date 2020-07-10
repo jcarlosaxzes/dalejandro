@@ -13,8 +13,8 @@ Public Class jobs
                 If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
                 btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewJob")
 
-                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Budget")
-                btnTotals.Visible = btnPrivate.Visible
+                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports")
+                spanViewSummary.Visible = btnPrivate.Visible
 
                 Master.PageTitle = "Jobs/Jobs List"
                 Master.Help = "http://blog.pasconcept.com/2012/04/jobs-jobs-listhome-page.html"
@@ -60,6 +60,7 @@ Public Class jobs
                     lblJobIdInput.Text = Request.QueryString("JobIdInput")
                 End If
 
+                EEGvertical
             End If
 
             If RadWindowManagerJob.Windows.Count > 0 Then
@@ -70,6 +71,15 @@ Public Class jobs
 
         End Try
     End Sub
+
+    Private Sub EEGvertical()
+        If lblCompanyId.Text = 260962 Then
+            panelSubbar.Visible = True
+        End If
+
+    End Sub
+
+
     Private Sub jobs_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
         If lblJobIdInput.Text > 0 Then
             Dim sUrl As String
@@ -218,7 +228,8 @@ Public Class jobs
     Protected Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
         Try
 
-            If LocalAPI.IsTabletOrSmarthphone(Request.UserAgent) Then
+            If lblCompanyId.Text = 260962 Then 'EEG vertica
+                RadGrid1.MasterTableView.GetColumn("ClientSelectColumn").Visible = True
                 'RadGrid1.MasterTableView.GetColumn("Type").Visible = False
                 'RadGrid1.MasterTableView.GetColumn("Balance").Visible = False
                 'RadGrid1.MasterTableView.GetColumn("Coste").Visible = False
@@ -617,10 +628,6 @@ Public Class jobs
         End Try
     End Sub
 
-    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
-        panelTotals.Visible = Not panelTotals.Visible
-    End Sub
-
     Private Sub btnApplyStatus_Click(sender As Object, e As EventArgs) Handles btnApplyStatus.Click
         If RadGrid1.SelectedItems.Count > 0 And cboStatusLotes.SelectedValue >= 0 Then
             Dim nSelecteds As Integer = RadGrid1.SelectedItems.Count
@@ -640,4 +647,5 @@ Public Class jobs
         End If
 
     End Sub
+
 End Class

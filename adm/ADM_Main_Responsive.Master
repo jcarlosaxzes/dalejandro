@@ -133,33 +133,30 @@
                                     <%--Projects menu--%>
                                     <telerik:NavigationNode Text="Projects">
                                         <Nodes>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Pre-Projects" Text="Pre-Proposals"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/pre-projects" Text="Pre-Proposals"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/rfps" Text="Requests for Proposals"
                                                 Visible='<%# EmployeePermission("Deny_RequestsProposalsList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Proposals" Text="Proposals"
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/proposals" Text="Proposals"
                                                 Visible='<%# EmployeePermission("Deny_ProposalsList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Jobs" Text="Jobs"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/jobs" Text="Jobs"
                                                 Visible='<%# EmployeePermission("Deny_JobsList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Schedule" Text="Calendar">
+                                            <telerik:NavigationNode NavigateUrl="~/adm/schedule" Text="Calendar">
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/TimeSheet" Text="Time Sheet"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/timeSheet" Text="Time Sheet"
                                                 Visible='<%# EmployeePermission("Deny_Timesheet") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Time" Text="Time Entries"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/time" Text="Time Entries"
                                                 Visible='<%# EmployeePermission("Deny_ProjectTimeEntries") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/TimesByPeriords" Text="Times by Periods"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/timesbyperiords" Text="Times by Periods"
                                                 Visible='<%# EmployeePermission("Deny_TimesbyPeriods")%>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Transmittals" Text="Transmittals"
-                                                Visible='<%# EmployeePermission("Deny_TransmittalList") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
-                                            </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/JobTickets" Text="Tickets"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/jobtickets" Text="Tickets"
                                                 Visible='<%# IsTicketsVisible() %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/activejobsdashboad" Text="Time Activity">
@@ -170,19 +167,19 @@
                                     <%--Billing menu--%>
                                     <telerik:NavigationNode Text="Billing" Visible='<%# EmployeePermission("Deny_BillingMenu") %>'>
                                         <Nodes>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Invoices" Text="Invoices"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/invoices" Text="Invoices"
                                                 Visible='<%# EmployeePermission("Deny_InvoicesList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Statement" Text="Statements"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/statement" Text="Statements"
                                                 Visible='<%# EmployeePermission("Deny_StatementList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Payments" Text="Payments"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/payments" Text="Payments"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/clientscolletion" Text="Client Collection"
                                                 Visible='<%# EmployeePermission("Deny_ClientsColletion") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/BillingManager" Text="Billing Assistant"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/billingManager" Text="Billing Assistant"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:NavigationNode>
                                         </Nodes>
@@ -191,32 +188,32 @@
                                     <%--Contacts menu--%>
                                     <telerik:NavigationNode Text="Contacts" Visible='<%# EmployeePermission("Deny_ContactsMenu") %>'>
                                         <Nodes>
-                                            <telerik:NavigationNode Text="All Contacts" NavigateUrl="~/adm/Contacts" Visible='<%# EmployeePermission("Deny_ContactsList") %>'>
+                                            <telerik:NavigationNode Text="All Contacts" NavigateUrl="~/adm/contacts" Visible='<%# EmployeePermission("Deny_ContactsList") %>'>
                                             </telerik:NavigationNode>
                                             <%--Clients Submenu--%>
                                             <telerik:NavigationNode Text="Clients">
                                                 <Nodes>
-                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/Clients" Text="Clients"
+                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/clients" Text="Clients"
                                                         Visible='<%# EmployeePermission("Deny_ClientsList") %>'>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/ClientManagement" Text="Client Management"
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/clientmanagement" Text="Client Management"
                                                         Visible='<%# EmployeePermission("Deny_ClientManagement") %>'>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/ClientFiles" Text="Client Uploaded Files"
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/clientFiles" Text="Client Uploaded Files"
                                                         Visible='<%# EmployeePermission("Deny_ClientsList") %>'>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/ExportClientsCSV" Text="Export"
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/exportclientscsv" Text="Export"
                                                         Visible='<%# EmployeePermission("Deny_ClientsList") %>'>
                                                     </telerik:NavigationNode>
                                                 </Nodes>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/Employees" Text="Employees"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/employees" Text="Employees"
                                                 Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="Subconsultants" NavigateUrl="~/adm/subconsultants"
                                                 Visible='<%# EmployeePermission("Deny_SubconsultantsList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode Text="Vendors" NavigateUrl="~/adm/Vendors" Visible='<%# EmployeePermission("Deny_VendorsList") %>'>
+                                            <telerik:NavigationNode Text="Vendors" NavigateUrl="~/adm/vendors" Visible='<%# EmployeePermission("Deny_VendorsList") %>'>
                                             </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
@@ -224,10 +221,10 @@
                                     <%--Dashboard menu--%>
                                     <telerik:NavigationNode Text="Dashboards" Visible='<%# EmployeePermission("Deny_Analytics") %>'>
                                         <Nodes>
-                                            <telerik:NavigationNode Text="Company Overview" NavigateUrl="~/adm/Default"
+                                            <telerik:NavigationNode Text="Company Overview" NavigateUrl="~/adm/default"
                                                 Visible='<%# EmployeePermission("Deny_Analytics") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode Text="Company Insights" NavigateUrl="~/adm/Dashboard"
+                                            <telerik:NavigationNode Text="Company Insights" NavigateUrl="~/adm/dashboard"
                                                 Visible='<%# EmployeePermission("Deny_Dashboard") %>'>
                                             </telerik:NavigationNode>
 
@@ -235,13 +232,13 @@
                                             <telerik:NavigationNode Text="Projects"
                                                 Visible='<%# EmployeePermission("Deny_Projectmap") Or EmployeePermission("Deny_Clientmap") Or EmployeePermission("Deny_AnalyticCharts")%>'>
                                                 <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/ProjectMap" Text="Projects Map"
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/projectMap" Text="Projects Map"
                                                         Visible='<%# EmployeePermission("Deny_Projectmap") %>'>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/ClientsMap" Text="Clients Map"
                                                         Visible='<%# EmployeePermission("Deny_Clientmap") %>'>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/ProjectSchedule" Text="Project Schedule"
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/projectSchedule" Text="Project Schedule"
                                                         Visible='<%# EmployeePermission("Deny_AnalyticCharts") %>'>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/TopTen" Text="Top Ten Charts"
@@ -367,6 +364,9 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/Reports?group=QB Report" Text="QB Report"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
+                                            <telerik:NavigationNode NavigateUrl="~/adm/Transmittals" Text="Transmittals"
+                                                Visible='<%# EmployeePermission("Deny_TransmittalList") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
+                                            </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
 
@@ -382,7 +382,7 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/TagCloud" Text="Projects Tag Search"
                                                 Visible='<%# EmployeePermission("Deny_JobTagFinder") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/ProjectClasification" Text="Projects Classification Search"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/projectClasification" Text="Projects Classification Search"
                                                 Visible='<%# EmployeePermission("Deny_ProjectClasification") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 And Companyp = 260962 %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="NAICS Codes" NavigateUrl="~/adm/naics_us_codes">

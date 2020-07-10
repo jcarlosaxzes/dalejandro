@@ -4,7 +4,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="Formulario">
+    <div class="pasconcept-bar">
         <div class="collapse" id="collapseFilter">
             <div class="card card-body">
 

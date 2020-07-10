@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div style="text-align: right; padding-right: 50px; padding-top: 10px; padding-bottom: 10px" class="Formulario">
+    <div style="text-align: right; padding-right: 50px; padding-top: 10px; padding-bottom: 10px" class="pasconcept-bar">
         <telerik:RadButton ID="btnCancel" runat="server" Text="Back" Width="150px" CausesValidation="false">
             <Icon PrimaryIconCssClass=" rbPrevious" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
         </telerik:RadButton>
