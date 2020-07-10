@@ -13,7 +13,7 @@ Public Class jobs
                 If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
                 btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewJob")
 
-                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports")
+                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
                 spanViewSummary.Visible = btnPrivate.Visible
 
                 Master.PageTitle = "Jobs/Jobs List"

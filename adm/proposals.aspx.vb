@@ -11,7 +11,7 @@ Public Class proposals
                 ' Si no tiene permiso New, boton.Visible=False
                 'btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
                 btnNewWizard.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
-                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports")
+                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
 
                 spanViewSummary.Visible = btnPrivate.Visible
 

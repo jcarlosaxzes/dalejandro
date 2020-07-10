@@ -472,7 +472,7 @@
     </telerik:RadWindowManager>
 
     <asp:SqlDataSource ID="SqlDataSourceProposalJobs" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="YearStadistic_PROPOSALS_JOBS" SelectCommandType="StoredProcedure">
+        SelectCommand="YearStadistic_v20_PROPOSALS_JOBS" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
