@@ -8084,6 +8084,32 @@ Public Class LocalAPI
         End Try
     End Function
 
+
+    Public Shared Function Company_Init_TEMPLATES(ByVal companyId As Integer) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Company_Init_TEMPLATES"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
 #End Region
 
 #Region "Departments"
@@ -8390,8 +8416,6 @@ Public Class LocalAPI
 
         End Try
     End Function
-
-
     Public Shared Async Function NewEmployeeAsync(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
                                          ByVal sAddress As String, ByVal sAddress2 As String, ByVal sCity As String, ByVal sSate As String,
                                             ByVal sZipCode As String, ByVal sPhone As String, ByVal sCellular As String,
@@ -8447,6 +8471,74 @@ Public Class LocalAPI
             End If
 
             Await RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
+            ' Set algunos perminos de inicio
+            ExecuteNonQuery("UPDATE [Employees] SET [Allow_OtherEmployeeJobs]=1 WHERE Id=" & employeeId)
+
+            sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewEmployee, companyId, sName)
+
+            Return employeeId
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+
+
+    Public Shared Function NewEmployee(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
+                                         ByVal sAddress As String, ByVal sAddress2 As String, ByVal sCity As String, ByVal sSate As String,
+                                            ByVal sZipCode As String, ByVal sPhone As String, ByVal sCellular As String,
+                                            ByVal sEmail As String, ByVal sHourRate As String, ByVal sNotes As String,
+                                            ByVal companyId As Integer) As Integer
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "EMPLOYEE_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Email", sEmail)
+            cmd.Parameters.AddWithValue("@Name", sName)
+            cmd.Parameters.AddWithValue("@LastName", sLastName)
+            cmd.Parameters.AddWithValue("@Address", sAddress)
+            cmd.Parameters.AddWithValue("@Address2", sAddress2)
+            cmd.Parameters.AddWithValue("@City", sCity)
+            cmd.Parameters.AddWithValue("@State", sSate)
+            cmd.Parameters.AddWithValue("@ZipCode", sZipCode)
+            cmd.Parameters.AddWithValue("@Phone", sPhone)
+            cmd.Parameters.AddWithValue("@Cellular", sCellular)
+            cmd.Parameters.AddWithValue("@starting_Date", Date.Now)
+            cmd.Parameters.AddWithValue("@HourRate", sHourRate)
+            cmd.Parameters.AddWithValue("@ProducerRate", 1)
+            cmd.Parameters.AddWithValue("@Notes", sNotes)
+            cmd.Parameters.AddWithValue("@PositionId", PositionId)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Valores Nulos
+            cmd.Parameters.AddWithValue("@SS", "")
+            cmd.Parameters.AddWithValue("@DOB", DBNull.Value)
+            cmd.Parameters.AddWithValue("@Gender", "")
+            cmd.Parameters.AddWithValue("@DepartmentId", 0)
+            cmd.Parameters.AddWithValue("@Benefits_vacations", 0)
+            cmd.Parameters.AddWithValue("@Benefits_personals", 0)
+
+            ' Execute the stored procedure.
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.ExecuteNonQuery()
+
+            Dim employeeId As Integer = parOUT_ID.Value
+            cnn1.Close()
+
+            If Len(sEmployee_Code) > 0 Then
+                ExecuteNonQuery(String.Format("UPDATE Employees Set [Employee_Code]= '{0}' WHERE Id={1}", sEmployee_Code, employeeId))
+            End If
+
             ' Set algunos perminos de inicio
             ExecuteNonQuery("UPDATE [Employees] SET [Allow_OtherEmployeeJobs]=1 WHERE Id=" & employeeId)
 

@@ -183,7 +183,7 @@
                         </td>
                         <td></td>
                         <td style="width: 19%; text-align: center; background-color: #546e7a">
-                            <span class="DashboardFont2">Ratio</span><br />
+                            <span class="DashboardFont2">Hit Rate $</span><br />
                             <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Ratio", "{0:P2}") %>'></asp:Label><br />
                             <span class="DashboardFont3">(Total Proposed)/(Total Accepted)</span>
                         </td>

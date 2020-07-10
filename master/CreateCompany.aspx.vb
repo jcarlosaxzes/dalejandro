@@ -1,4 +1,5 @@
-﻿Imports Microsoft.AspNet.Identity.Owin
+﻿Imports System.Threading.Tasks
+Imports Microsoft.AspNet.Identity.Owin
 Imports Telerik.Web.UI
 
 Public Class CreateCompany
@@ -32,46 +33,6 @@ Public Class CreateCompany
         End Try
     End Sub
 
-    Protected Async Sub SqlDataSource1_InsertedAsync(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        Try
-            '1.- Recibimos nuevo companyId
-            lblCompanyId.Text = e.Command.Parameters("@OUT_companylId").Value
-            If Val(lblCompanyId.Text) > 0 Then
-
-                lblCompanyRegistred.Text = "Congratulations " & txtContact.Text & ", the company '" & txtCompanyName.Text & "' was registered successfully! . ID=" & lblCompanyId.Text
-
-
-                '2.- Crear este usuario como Employee de la company
-                Await LocalAPI.NewEmployeeAsync(txtContact.Text, "Admin", 0, "", "", "", "", "", "", txtTelephone.Text, txtCellPhone.Text, txtEmail.Text, "", "", lblCompanyId.Text)
-
-                '3.- Eliminar PreUser
-                LocalAPI.EliminarpreUser(txtEmail.Text)
-
-                Dim sEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Email")
-                If sEmail.Length > 0 Then
-                    ' ¿Usuario ya existe?
-                    LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
-
-                    If chkSendAdminCredentials.Checked Then
-                        Await LocalAPI.EmployeeEmailResetPassword(sEmail)
-                    End If
-
-                    If chkSendGetStarted.Checked Then
-                        If LocalAPI.PASconceptGetStartedEmail(lblCompanyId.Text) Then
-                            LocalAPI.ExecuteNonQuery("UPDATE [Company] SET [GetStartedEmailDate]=dbo.CurrentTime() WHERE companyId=" & lblCompanyId.Text)
-                            lblGetStartedEmail.Text = "The Email to Get Started was sent successfully!"
-                        End If
-                    End If
-                End If
-
-
-            End If
-        Catch ex As Exception
-            lblMsg.Text = "Error. " & ex.Message
-        End Try
-
-    End Sub
-
     Private Sub cboClient_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboClient.SelectedIndexChanged
         cboJob.Items.Clear()
         cboJob.Items.Insert(0, New RadComboBoxItem("(Create NEW Axzes Job...)", 0))
@@ -95,6 +56,53 @@ Public Class CreateCompany
 
     Private Sub btnGoCompanyList_Click(sender As Object, e As EventArgs) Handles btnGoCompanyList.Click
         Response.Redirect("~/MASTER/CompanyList.aspx")
+    End Sub
+
+    Private Sub SqlDataSource1_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Inserting
+
+    End Sub
+
+    Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
+        Try
+            '1.- Recibimos nuevo companyId
+            lblCompanyId.Text = e.Command.Parameters("@OUT_companylId").Value
+            If Val(lblCompanyId.Text) > 0 Then
+
+                '1.1 Repasar (por duplicado) esta accion .....
+                LocalAPI.Company_Init_TEMPLATES(lblCompanyId.Text)
+
+
+                lblCompanyRegistred.Text = "Congratulations " & txtContact.Text & ", the company '" & txtCompanyName.Text & "' was registered successfully! . ID=" & lblCompanyId.Text
+
+                '2.- Crear este usuario como Employee de la company
+                LocalAPI.NewEmployee(txtContact.Text, "Admin", 0, "", "", "", "", "", "", txtTelephone.Text, txtCellPhone.Text, txtEmail.Text, "", "", lblCompanyId.Text)
+
+                '3.- Eliminar PreUser
+                LocalAPI.EliminarpreUser(txtEmail.Text)
+
+                Dim sEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Email")
+                If sEmail.Length > 0 Then
+                    ' ¿Usuario ya existe?
+                    LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
+                    Task.Run(Function() LocalAPI.RefrescarUsuarioVinculadoAsync(txtEmail.Text, "Empleados"))
+
+                    If chkSendAdminCredentials.Checked Then
+                        'Await LocalAPI.EmployeeEmailResetPassword(sEmail)
+                    End If
+
+                    If chkSendGetStarted.Checked Then
+                        If LocalAPI.PASconceptGetStartedEmail(lblCompanyId.Text) Then
+                            LocalAPI.ExecuteNonQuery("UPDATE [Company] SET [GetStartedEmailDate]=dbo.CurrentTime() WHERE companyId=" & lblCompanyId.Text)
+                            lblGetStartedEmail.Text = "The Email to Get Started was sent successfully!"
+                        End If
+                    End If
+                End If
+
+
+            End If
+        Catch ex As Exception
+            lblMsg.Text = "Error. " & ex.Message
+        End Try
     End Sub
 End Class
 
