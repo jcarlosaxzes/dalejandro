@@ -43,17 +43,20 @@ Public Class messagestemplates1
             ddn.Attributes("Height") = "100px"
 
             Dim dataItemRow = editItem.DataItem
-            Dim jsonText As String = dataItemRow("Variables")
-            Dim jsonObj As JObject = JObject.Parse(jsonText)
+            If Not IsNothing(dataItemRow("Variables")) AndAlso Not (TypeOf dataItemRow("Variables") Is DBNull) Then
+                Dim jsonText As String = dataItemRow("Variables")
+                Dim jsonObj As JObject = JObject.Parse(jsonText)
 
-            Dim dictObj As Dictionary(Of String, String) = jsonObj.ToObject(Of Dictionary(Of String, String))()
+                Dim dictObj As Dictionary(Of String, String) = jsonObj.ToObject(Of Dictionary(Of String, String))()
 
-            For Each kvp As KeyValuePair(Of String, String) In dictObj
-                ddn.Items.Add($"[{kvp.Key}]", $"[{kvp.Key}]")
-            Next
+                For Each kvp As KeyValuePair(Of String, String) In dictObj
+                    ddn.Items.Add($"[{kvp.Key}]", $"[{kvp.Key}]")
+                Next
 
-            'Add tool to toolbar   
-            dynamicToolbar.Tools.Add(ddn)
+                'Add tool to toolbar   
+                dynamicToolbar.Tools.Add(ddn)
+            End If
+
         End If
 
     End Sub
