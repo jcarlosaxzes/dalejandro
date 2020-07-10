@@ -25,8 +25,6 @@
     </div>
 
 
-
-
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="Panel1" runat="server" DefaultButton="btnFind">
@@ -107,12 +105,12 @@
 
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Amount" HeaderText="# Records" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridTemplateColumn DataField="Amount" HeaderText="# Records" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <%# Eval("Amount", "{0:N0}")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                         <span class='<%# LocalAPI.GetSettingStatusCSS(Eval("Status")) %>'><%# Eval("Status") %></span>
                         </ItemTemplate>

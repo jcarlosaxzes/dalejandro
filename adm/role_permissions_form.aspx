@@ -33,7 +33,7 @@
                                     EmptyMessage="Name is mandatory...">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 200px; text-align: right">
+                            <td style="width: 250px; text-align: right">
                                 <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CommandName="Update">
                                         Update
                                 </asp:LinkButton>
@@ -70,6 +70,12 @@
                                         <td style="width: 250px"><span class="label badge-danger">Allow Employees Permissions</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_EmployeesPermissionsCheckBox" runat="server" Checked='<%# Bind("Allow_EmployeesPermissions") %>' />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 250px"><span class="label badge-danger">Allow Private Mode Permissions</span>:</td>
+                                        <td>
+                                            <telerik:RadCheckBox ID="RadCheckBox1" runat="server" Checked='<%# Bind("Allow_PrivateMode") %>' />
                                         </td>
                                     </tr>
                                     <tr>
@@ -646,7 +652,7 @@
                             <td>
                                 <h2 style="margin: 0"><%# Eval("Name") %></h2>
                             </td>
-                            <td style="width: 150px; text-align: right">
+                            <td style="width: 200px; text-align: right">
                                 <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CommandName="Edit">
                                         Edit Permissions
                                 </asp:LinkButton>
@@ -675,6 +681,12 @@
                                         <td style="width: 250px"><span class="label badge-danger">Allow Employees Permissions</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_EmployeesPermissionsCheckBox" runat="server" Checked='<%# Bind("Allow_EmployeesPermissions") %>' Enabled="false"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge badge-danger">Allow Private Mode Permissions</span>:</td>
+                                        <td>
+                                            <telerik:RadCheckBox ID="RadCheckBox4" runat="server" Checked='<%# Bind("Allow_PrivateMode") %>' Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1332,6 +1344,8 @@
             <asp:Parameter Name="Deny_TimesbyPeriods" Type="Boolean" />
             <asp:Parameter Name="Deny_ClientsColletion" Type="Boolean" />
             <asp:Parameter Name="Deny_VendorTypes" Type="Boolean" />
+
+            <asp:Parameter Name="Allow_PrivateMode" Type="Boolean" />
 
             <asp:ControlParameter ControlID="lblRoleId" Name="Id" PropertyName="Text" />
         </UpdateParameters>
