@@ -215,35 +215,33 @@
                             <ContentTemplate>
                                 <telerik:RadGrid ID="RadGridProposalJobs" runat="server" DataSourceID="SqlDataSourceProposalJobs" Width="100%" AutoGenerateColumns="False">
                                     <MasterTableView DataSourceID="SqlDataSourceProposalJobs" Width="100%">
-                                        <ItemStyle CssClass="GridRow" />
-                                        <AlternatingItemStyle CssClass="GridRow" />
                                         <Columns>
-                                            <telerik:GridTemplateColumn DataField="CONCEPT" UniqueName="CONCEPT" HeaderStyle-Width="290px" ItemStyle-CssClass="CONCEPT">
+                                            <telerik:GridTemplateColumn DataField="CONCEPT" UniqueName="CONCEPT" ItemStyle-CssClass="CONCEPT">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel07" runat="server" CssClass="GridRow" Text='<%# Eval("CONCEPT")%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year-4" UniqueName="year-4" HeaderText="year-4" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year-4" UniqueName="year-4" HeaderText="year-4" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel171" runat="server" CssClass="GridRow" Text='<%# Eval("year-4", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-4"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year-3" UniqueName="year-3" HeaderText="year-3" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year-3" UniqueName="year-3" HeaderText="year-3" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel27" runat="server" CssClass="GridRow" Text='<%# Eval("year-3", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-3"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year-2" UniqueName="year-2" HeaderText="year-2" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year-2" UniqueName="year-2" HeaderText="year-2" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel37" runat="server" CssClass="GridRow" Text='<%# Eval("year-2", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-2"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year-1" UniqueName="year-1" HeaderText="year-1" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year-1" UniqueName="year-1" HeaderText="year-1" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel47" runat="server" CssClass="GridRow" Text='<%# Eval("year-1", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-1"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year" UniqueName="year" HeaderText="year" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year" UniqueName="year" HeaderText="year" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel57" runat="server" CssClass="GridRow" Text='<%# Eval("year", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
@@ -263,32 +261,32 @@
                                         <ItemStyle CssClass="GridRow" />
                                         <AlternatingItemStyle CssClass="GridRow" />
                                         <Columns>
-                                            <telerik:GridTemplateColumn DataField="CONCEPT" UniqueName="CONCEPT" ItemStyle-Width="290px" ItemStyle-CssClass="CONCEPT">
+                                            <telerik:GridTemplateColumn DataField="CONCEPT" UniqueName="CONCEPT" ItemStyle-CssClass="CONCEPT">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel08" runat="server" CssClass="GridRow" Text='<%# Eval("CONCEPT")%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year-4" UniqueName="year-4" HeaderText="year-4" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year-4" UniqueName="year-4" HeaderText="year-4" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel18" runat="server" CssClass="GridRow" Text='<%# Eval("year-4", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-4"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year-3" UniqueName="year-3" HeaderText="year-3" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year-3" UniqueName="year-3" HeaderText="year-3" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel28" runat="server" CssClass="GridRow" Text='<%# Eval("year-3", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-3"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year-2" UniqueName="year-2" HeaderText="year-2" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year-2" UniqueName="year-2" HeaderText="year-2" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel38" runat="server" CssClass="GridRow" Text='<%# Eval("year-2", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-2"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year-1" UniqueName="year-1" HeaderText="year-1" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year-1" UniqueName="year-1" HeaderText="year-1" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel48" runat="server" CssClass="GridRow" Text='<%# Eval("year-1", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-1"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="year" UniqueName="year" HeaderText="year" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right">
+                                            <telerik:GridTemplateColumn DataField="year" UniqueName="year" HeaderText="year" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel58" runat="server" CssClass="GridRow" Text='<%# Eval("year", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year"), Eval("IsRate"))%>'></asp:Label>
                                                 </ItemTemplate>

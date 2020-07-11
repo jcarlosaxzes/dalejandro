@@ -310,11 +310,6 @@
     <div class="collapse" id="collapseSummary">
         <table class="table-sm pasconcept-subbar" style="width: 100%">
             <tr>
-                <td colspan="11" style="text-align: center">
-                    <h2 style="margin: 0">Jobs Summary</h2>
-                </td>
-            </tr>
-            <tr>
                 <td style="width: 14%; text-align: center; background-color: #039be5;">
                     <span class="DashboardFont2">Budget</span><br />
                     <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text="$0.00"></asp:Label>
@@ -331,7 +326,7 @@
                     <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
-                <td style="width: 14%; text-align: center; background-color: #e53935;">
+                <td style="width: 14%; text-align: center; background-color: #e53935">
                     <span class="DashboardFont2">Pending</span><br />
                     <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
@@ -341,7 +336,7 @@
                     <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
-                <td style="width: 14%; text-align: center; background-color: #e53935;">
+                <td style="width: 14%; text-align: center; background-color: #343a40;">
                     <span class="DashboardFont2">SubContract</span><br />
                     <asp:Label ID="lblTotalSubContract" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
