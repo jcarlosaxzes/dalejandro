@@ -3,7 +3,7 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -55,11 +55,6 @@
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManagerJob"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnPrint">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManagerPrint" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
-                </UpdatedControls>
-            </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboPeriod">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
@@ -68,26 +63,14 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
 
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
-           <%-- function PrintReport(sender, args) {
-                var RadWindow = $find("<%=RadWindowReport.ClientID%>");
-                RadWindow.show();
-            }--%>
-
-            function NewJob() {
-                window.open('Job.aspx?Job=-1', '_blank');
-            }
-
-
             function OnClientClose(sender, args) {
                 var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
                 masterTable.rebind();
-
-
             }
 
 
@@ -327,11 +310,6 @@
     <div class="collapse" id="collapseSummary">
         <table class="table-sm pasconcept-subbar" style="width: 100%">
             <tr>
-                <td colspan="11" style="text-align: center">
-                    <h2 style="margin: 0">Jobs Summary</h2>
-                </td>
-            </tr>
-            <tr>
                 <td style="width: 14%; text-align: center; background-color: #039be5;">
                     <span class="DashboardFont2">Budget</span><br />
                     <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text="$0.00"></asp:Label>
@@ -348,7 +326,7 @@
                     <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
-                <td style="width: 14%; text-align: center; background-color: #e53935;">
+                <td style="width: 14%; text-align: center; background-color: #e53935">
                     <span class="DashboardFont2">Pending</span><br />
                     <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
@@ -358,7 +336,7 @@
                     <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
-                <td style="width: 14%; text-align: center; background-color: #e53935;">
+                <td style="width: 14%; text-align: center; background-color: #343a40;">
                     <span class="DashboardFont2">SubContract</span><br />
                     <asp:Label ID="lblTotalSubContract" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>

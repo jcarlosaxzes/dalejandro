@@ -60,6 +60,12 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td style="width: 250px"><span class="label badge-danger">Allow Private Mode Permissions</span>:</td>
+                                        <td>
+                                            <telerik:RadCheckBox ID="RadCheckBox1" runat="server" Checked='<%# Bind("Allow_PrivateMode") %>' />
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td><span class="badge badge-secondary">Allow Edit Accepted Proposal</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_EditAcceptedProposalCheckBox" runat="server" Checked='<%# Bind("Allow_EditAcceptedProposal") %>' />
@@ -657,6 +663,12 @@
                                         <td style="width: 250px"><span class="label badge-danger">Allow Employees Permissions</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_EmployeesPermissionsCheckBox" runat="server" Checked='<%# Bind("Allow_EmployeesPermissions") %>' Enabled="false"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="badge badge-danger">Allow Private Mode Permissions</span>:</td>
+                                        <td>
+                                            <telerik:RadCheckBox ID="RadCheckBox4" runat="server" Checked='<%# Bind("Allow_PrivateMode") %>' Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1312,6 +1324,8 @@
             <asp:Parameter Name="Deny_TimesbyPeriods" Type="Boolean" />
             <asp:Parameter Name="Deny_ClientsColletion" Type="Boolean" />
             <asp:Parameter Name="Deny_VendorTypes" Type="Boolean" />
+
+            <asp:Parameter Name="Allow_PrivateMode" Type="Boolean" />
 
             <asp:ControlParameter ControlID="lblEmployeeId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>

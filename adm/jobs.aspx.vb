@@ -13,7 +13,7 @@ Public Class jobs
                 If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
                 btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewJob")
 
-                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports")
+                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
                 spanViewSummary.Visible = btnPrivate.Visible
 
                 Master.PageTitle = "Jobs/Jobs List"
@@ -94,6 +94,7 @@ Public Class jobs
     End Sub
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)
+        cboPeriod.SelectedValue = nPeriodo
         Select Case nPeriodo
             Case 13  ' (All Years)
                 RadDatePickerFrom.DbSelectedDate = "01/01/2000"
@@ -108,6 +109,7 @@ Public Class jobs
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
 
             Case 99   'Custom
+                RadDatePickerFrom.Focus()
                 ' Allow RadDatePicker user Values...
 
             Case 14  '14 and any other old setting (This Years)
@@ -115,7 +117,6 @@ Public Class jobs
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
         End Select
-        cboPeriod.SelectedValue = nPeriodo
     End Sub
 
     Public Function GetBudgetUsedImageUrl(ByVal dValue As Double) As String

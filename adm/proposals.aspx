@@ -101,7 +101,9 @@
                                 <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
                                 <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" />
                                 <telerik:RadComboBoxItem Text="(This year)" Value="14" />
+                                <telerik:RadComboBoxItem Text="(Last year)" Value="15" />
                                 <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                                <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -167,7 +169,7 @@
                         <td style="width: 19%; text-align: center; background-color: #039be5">
                             <span class="DashboardFont2">Total</span><br />
                             <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("Total", "{0:C2}") %>'></asp:Label><br />
-                            <span class="DashboardFont3">Total Proposed</span>
+                            <span class="DashboardFont3">(Total) - (Not Emitted) - (Hold) - (D. Not Submitted) </span>
                         </td>
                         <td></td>
                         <td style="width: 19%; text-align: center; background-color: #43a047">
@@ -176,22 +178,22 @@
                             <span class="DashboardFont3">Total Accepted</span>
                         </td>
                         <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #343a40">
+                            <span class="DashboardFont2">Hit Rate $</span><br />
+                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("HitRate", "{0:P2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">(Total Accepted + Jobs w/o Prop.) / (Total + Jobs w/o Prop.)</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #546e7a">
+                            <span class="DashboardFont2">Total Pending</span><br />
+                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("PendingTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Submitted to Client, Pending Accept/Decline</span>
+                        </td>
+                        <td></td>
                         <td style="width: 19%; text-align: center; background-color: #e53935">
                             <span class="DashboardFont2">Total Declined</span><br />
                             <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("DeclinedTotal", "{0:C2}") %>'></asp:Label><br />
-                            <span class="DashboardFont3">Total Declined</span>
-                        </td>
-                        <td></td>
-                        <td style="width: 19%; text-align: center; background-color: #546e7a">
-                            <span class="DashboardFont2">Ratio</span><br />
-                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Ratio", "{0:P2}") %>'></asp:Label><br />
-                            <span class="DashboardFont3">(Total Proposed)/(Total Accepted)</span>
-                        </td>
-                        <td></td>
-                        <td style="width: 19%; text-align: center; background-color: #546e7a">
-                            <span class="DashboardFont2">Total Others</span><br />
-                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("OthersTotal", "{0:C2}") %>'></asp:Label><br />
-                            <span class="DashboardFont3">Not Emitted + Pending + Hold</span>
+                            <span class="DashboardFont3">By Client + Not Competitive + Not Submitted</span>
                         </td>
                     </tr>
                 </table>
@@ -404,7 +406,6 @@
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboStatus" Name="StatusId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboDepartments" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />

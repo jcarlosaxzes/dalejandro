@@ -11,7 +11,7 @@ Public Class proposals
                 ' Si no tiene permiso New, boton.Visible=False
                 'btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
                 btnNewWizard.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
-                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports")
+                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
 
                 spanViewSummary.Visible = btnPrivate.Visible
 
@@ -69,22 +69,29 @@ Public Class proposals
     End Sub
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)
-
+        cboPeriod.SelectedValue = nPeriodo
         Select Case nPeriodo
-            Case 13  ' All Years...
+            Case 13  ' (All Years)
                 RadDatePickerFrom.DbSelectedDate = "01/01/2000"
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
+
+            Case 15  ' (Last Years)
+                RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year - 1
+                RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year - 1
 
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
 
-            Case 14  ' This year...
-                RadDatePickerFrom.DbSelectedDate = "01/01/" & Date.Today.Year
-                RadDatePickerTo.DbSelectedDate = "12/31/" & Date.Today.Year
+            Case 99   'Custom
+                RadDatePickerFrom.Focus()
+                ' Allow RadDatePicker user Values...
+
+            Case 14  '14 and any other old setting (This Years)
+                RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
         End Select
-        cboPeriod.SelectedValue = nPeriodo
     End Sub
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
