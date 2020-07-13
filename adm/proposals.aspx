@@ -198,7 +198,7 @@
                     </tr>
                 </table>
             </ItemTemplate>
-        </asp:FormView>
+        </asp:FormView>        
     </div>
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceProp" AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True"

@@ -325,12 +325,12 @@
                                                     <asp:Label ID="NameLabel174" runat="server" CssClass="GridRow" Text='<%# Eval("EfficiencyAsTM", "{0:N0}")%>' ForeColor='<%# LocalAPI.DegradadoDeEfficiency(Eval("EfficiencyAsTM"))%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="WeeklyHours" UniqueName="WeeklyHours" HeaderText="WeeklyHours" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Weekly Timesheet Hours">
+                                            <telerik:GridTemplateColumn DataField="WeeklyHours" UniqueName="WeeklyHours" HeaderText="Weekly Hours" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Weekly Timesheet Hours">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel175" runat="server" CssClass="GridRow" Text='<%# Eval("WeeklyHours", "{0:N0}")%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
-                                            <telerik:GridTemplateColumn DataField="RemainingWeekDays" UniqueName="RemainingWeekDays" HeaderText="RemainingWeekDays" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Remaining Timesheet Week Days">
+                                            <telerik:GridTemplateColumn DataField="RemainingWeekDays" UniqueName="RemainingWeekDays" HeaderText="Remaining Week Days" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Remaining Timesheet Week Days">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel17" runat="server" CssClass="GridRow" Text='<%# Eval("RemainingWeekDays", "{0:N0}")%>'></asp:Label>
                                                 </ItemTemplate>
