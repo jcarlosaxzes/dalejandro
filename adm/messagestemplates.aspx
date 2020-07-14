@@ -31,7 +31,7 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
     <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle">Vendors</span>
+        <span class="pasconcept-pagetitle">Messages Templates</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">

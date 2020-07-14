@@ -1,14 +1,9 @@
-﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" Async="true" %>
+﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <script type="text/javascript">
-        function onRequestStart(sender, args) {
-            if (args.get_eventTarget().indexOf("ExportTo") >= 0) {
-                args.set_enableAjax(false);
-            }
-        }
         function onClientUploadFailed(sender, eventArgs) {
             alert(eventArgs.get_message())
         }
@@ -18,7 +13,7 @@
         }
     </script>
 
-    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+   <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -26,17 +21,10 @@
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnRefresh">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="lblStatus" />
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager2"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
-                </UpdatedControls>
-            </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
+
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
@@ -48,6 +36,11 @@
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
+            <span id="spanViewSummary" runat="server">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
+                    View Summary
+                </button>
+            </span>
             <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Invoice Simple Change">
                     Add Invoice
             </asp:LinkButton>
@@ -142,29 +135,66 @@
 
     </div>
 
+    <div class="collapse" id="collapseSummary">
+        <asp:FormView ID="FormViewViewSummary" runat="server" DataSourceID="SqlDataSourceViewSummary" Width="100%" CssClass="pasconcept-subbar">
+            <ItemTemplate>
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td style="width: 13%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">Collected</span><br />
+                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("CollectedTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Collected</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 13%; text-align: center; background-color:#e53935">
+                            <span class="DashboardFont2">Amount Due</span><br />
+                            <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountDue", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3"> Amount Due w/o Bad Debts and Not Emitted </span>
+                        </td>
+                        <td></td>
+                        <td style="width: 13%; text-align: center; background-color: #343a40">
+                            <span class="DashboardFont2">Amount Due Hit Rate</span><br />
+                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountDueHitRate", "{0:P2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Amount Due/(Collected + Not Collected)</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 13%; text-align: center; background-color: #343a40">
+                            <span class="DashboardFont2">Collected Hit Rate</span><br />
+                            <asp:Label ID="Label1" runat="server" CssClass="DashboardFont1" Text='<%# Eval("CollectionHitRate", "{0:P2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Collected/(Collected + Not Collected)</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 13%; text-align: center; background-color: #e53935">
+                            <span class="DashboardFont2">Not Collected</span><br />
+                            <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("NotCollectedTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Pending Collect</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 13%; text-align: center; background-color: #039be5">
+                            <span class="DashboardFont2">Not Emitted</span><br />
+                            <asp:Label ID="Label2" runat="server" CssClass="DashboardFont1" Text='<%# Eval("NotEmittedTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Not Submitted to Client</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 13%; text-align: center; background-color: #e53935">
+                            <span class="DashboardFont2">Bad Debts</span><br />
+                            <asp:Label ID="Label3" runat="server" CssClass="DashboardFont1" Text='<%# Eval("BadDebtsTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Bad Debts</span>
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+    </div>
+
     <div>
-        <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
-            <script type="text/javascript">
-                var popUp;
-                function PopUpShowing(sender, eventArgs) {
-                    popUp = eventArgs.get_popUp();
-                    var gridWidth = sender.get_element().offsetWidth;
-                    var gridHeight = sender.get_element().offsetHeight;
-                    var popUpWidth = popUp.style.width.substr(0, popUp.style.width.indexOf("px"));
-                    var popUpHeight = "800px"//popUp.style.height.substr(0, popUp.style.height.indexOf("px"));
-                    popUp.style.left = ((gridWidth - popUpWidth) / 2 + sender.get_element().offsetLeft).toString() + "px";
-                    popUp.style.top = "0px";
-                }
-            </script>
-        </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceInvoices" ShowFooter="True" AutoGenerateColumns="False" AllowSorting="True"
-            PageSize="100" AllowPaging="true" AllowAutomaticDeletes="True"
+            PageSize="100" AllowPaging="true" AllowAutomaticDeletes="True" Height="1000px"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <ClientSettings>
-                <ClientEvents OnPopUpShowing="PopUpShowing" />
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
-            <MasterTableView DataKeyNames="Id" ClientDataKeyNames="Id" DataSourceID="SqlDataSourceInvoices" ShowFooter="True"
-                EditMode="PopUp">
+            <MasterTableView DataKeyNames="Id" ClientDataKeyNames="Id" DataSourceID="SqlDataSourceInvoices" ShowFooter="True">
                 <CommandItemSettings ShowExportToWordButton="true" ShowExportToExcelButton="true" ShowExportToPdfButton="true" ShowExportToCsvButton="true"
                     ShowRefreshButton="true" ShowAddNewRecordButton="false" />
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
@@ -273,12 +303,6 @@
 
                 </Columns>
             </MasterTableView>
-
-            <ClientSettings>
-                <Virtualization EnableVirtualization="false" InitiallyCachedItemsCount="1000" LoadingPanelID="RadAjaxLoadingPanel1"
-                    ItemsPerView="100" EnableCurrentPageScrollOnly="true" />
-                <Scrolling AllowScroll="true" UseStaticHeaders="true" ScrollHeight="680px" />
-            </ClientSettings>
         </telerik:RadGrid>
         <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
             Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Billing Contact Information</b>" ShowEvent="OnClick"
@@ -624,6 +648,22 @@
             <asp:ControlParameter ControlID="lblContentType" Name="ContentType" PropertyName="Text" Type="String" />
         </InsertParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceViewSummary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="InvoicesViewSummary_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
+            <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="cboClients" Name="ClientId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboJobs" Name="JobId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartment" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboStatement" Name="StatementStatus" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+
     <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter" Visible="false">
     </telerik:RadDatePicker>
     <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for Filter" Visible="false">
