@@ -13,6 +13,8 @@ Public Class invoices
                 Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"
                 lblCompanyId.Text = Session("companyId")
 
+                spanViewSummary.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
+
                 'RestoreFilters()
                 cboClients.DataBind()
 
@@ -27,6 +29,7 @@ Public Class invoices
             RadWindowManager1.EnableViewState = False
 
         Catch ex As Exception
+            Dim e1 As String = ex.Message
         End Try
     End Sub
 
@@ -53,8 +56,6 @@ Public Class invoices
 
             IniciaPeriodo(cboPeriod.SelectedValue)
 
-            RadGrid1.DataBind()
-
             Select Case cboInvoiceStatus.SelectedValue
                 Case 0 '"Not Collected"  />
                     lblStatus.Text = "Billing/Account <b>Not Collected or Partially</b>"
@@ -78,6 +79,8 @@ Public Class invoices
                 lblStatus.Text = lblStatus.Text & cboPeriod.Text
             End If
 
+            RadGrid1.DataBind()
+            FormViewViewSummary.DataBind()
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
