@@ -56,27 +56,15 @@ Public Class managementrequest
             Dim DateRequest As String = LocalAPI.GetNonJobTime_Request_Property(lblRequestId.Text, "DateFrom")
             Dim ResponseExplanation As String = LocalAPI.GetNonJobTime_Request_Property(lblRequestId.Text, "NotesResponse")
 
-            sMsg.Append("Mr./Mrs. <b>" & EmployeeFullName & "</b>")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("Your time off request has been reviewed and processed. Your request for time off on <b>" & DateRequest & "</b> was <b>" & ResponseType & "</b> ")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("Notes:")
-            sMsg.Append("<br />")
-            sMsg.Append(ResponseExplanation)
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("Thank you.")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("PASconcept Notifications")
-            sMsg.Append("<br />")
-            sMsg.Append(LocalAPI.GetPASSign())
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[EmployeeFullName]", EmployeeFullName)
+            DictValues.Add("[DateRequest]", DateRequest)
+            DictValues.Add("[ResponseType]", ResponseType)
+            DictValues.Add("[ResponseExplanation]", ResponseExplanation)
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-            Dim sBody As String = sMsg.ToString
-            Dim sSubject As String = "PASconcept. Request has been reviewed and processed"
+            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Manager_Response_Request", lblCompanyId.Text, DictValues)
+            Dim sBody As String = LocalAPI.GetMessageTemplateBody("Manager_Response_Request", lblCompanyId.Text, DictValues)
 
             Return SendGrid.Email.SendMail(EmployeeEmail, "", "", sSubject, sBody, lblCompanyId.Text)
 
