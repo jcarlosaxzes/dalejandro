@@ -18,6 +18,11 @@
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
+            <span id="spanViewSummary" runat="server">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
+                    View Summary
+                </button>
+            </span>
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                 Add Statement
             </asp:LinkButton>
@@ -64,6 +69,45 @@
         </asp:Panel>
     </div>
 
+    <div class="collapse" id="collapseSummary">
+        <asp:FormView ID="FormViewViewSummary" runat="server" DataSourceID="SqlDataSourceViewSummary" Width="100%" CssClass="pasconcept-subbar">
+            <ItemTemplate>
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td style="width: 19%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">Collected</span><br />
+                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("CollectedTotal", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Collected</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color:#e53935">
+                            <span class="DashboardFont2">Amount Due</span><br />
+                            <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountDue", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3"> Amount Due </span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #343a40">
+                            <span class="DashboardFont2">Amount Due Hit Rate</span><br />
+                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountDueHitRate", "{0:P2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Amount Due / Amount Billed</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #343a40">
+                            <span class="DashboardFont2">Collected Hit Rate</span><br />
+                            <asp:Label ID="Label1" runat="server" CssClass="DashboardFont1" Text='<%# Eval("CollectionHitRate", "{0:P2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Collected Total / Amount Billed</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 19%; text-align: center; background-color: #039be5">
+                            <span class="DashboardFont2">Amount Billed</span><br />
+                            <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountBilled", "{0:C2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Amount Billed</span>
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+    </div>
 
     <div>
         <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
@@ -521,6 +565,19 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceViewSummary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="StatementsViewSummary_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
+            <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+
     <asp:Label ID="lblCompanyId" runat="server" Visible="False">1</asp:Label>
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblStatementId" runat="server"></asp:Label>
