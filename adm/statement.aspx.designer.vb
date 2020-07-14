@@ -23,6 +23,15 @@ Partial Public Class statement
     Protected WithEvents RadCodeBlock2 As Global.Telerik.Web.UI.RadCodeBlock
     
     '''<summary>
+    '''spanViewSummary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents spanViewSummary As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''btnNew control.
     '''</summary>
     '''<remarks>
@@ -75,6 +84,15 @@ Partial Public Class statement
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''FormViewViewSummary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormViewViewSummary As Global.System.Web.UI.WebControls.FormView
     
     '''<summary>
     '''RadCodeBlock1 control.
@@ -201,6 +219,15 @@ Partial Public Class statement
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePaymentMethod As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceViewSummary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceViewSummary As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.

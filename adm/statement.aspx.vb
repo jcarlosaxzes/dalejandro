@@ -13,6 +13,8 @@ Public Class statement
             lblEmployee.Text = Master.UserEmail
             lblCompanyId.Text = Session("companyId")
 
+            spanViewSummary.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
+
             cboPeriod.DataBind()
             IniciaPeriodo(14)
 
