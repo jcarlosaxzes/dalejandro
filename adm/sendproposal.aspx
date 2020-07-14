@@ -17,21 +17,15 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin:0">Send Proposal to Client</h3>
-                </td>
-
-            </tr>
-        </table>
+            </asp:LinkButton>
+            Send Proposal to Client
+        </span>
     </div>
-    <div class="pas-container">
+
+    <div class="pasconcept-bar">
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayProgressBar="false"
             RenderMode="Lightweight" Skin="Material" Localization-Cancel="Back" Localization-Finish="Send">
             <WizardSteps>
@@ -122,10 +116,10 @@
 
                         </ItemTemplate>
                     </asp:FormView>
-                    <hr style="margin:0" />
+                    <hr style="margin: 0" />
                     <table class="table-sm" style="width: 100%">
                         <tr>
-                            <td style="width: 300px;text-align:right">Proposal By:
+                            <td style="width: 300px; text-align: right">Proposal By:
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboProjectManagerId" runat="server" ValidationGroup="Confirmation"
@@ -138,7 +132,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align:right">Notification Type:
+                            <td style="text-align: right">Notification Type:
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboNotification" runat="server" Width="150px" ValidationGroup="Confirmation">
@@ -152,7 +146,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align:right">Automatic Retainer (Yes or No):
+                            <td style="text-align: right">Automatic Retainer (Yes or No):
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboRetainer" runat="server" Width="150px" ValidationGroup="Confirmation">
@@ -165,7 +159,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align:right">Share Attached Documents (Yes or No):
+                            <td style="text-align: right">Share Attached Documents (Yes or No):
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboAttached" runat="server" Width="150px" ValidationGroup="Confirmation">
@@ -179,7 +173,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td  style="text-align:right">Sent to Agile Campaign (Yes or No):
+                            <td style="text-align: right">Sent to Agile Campaign (Yes or No):
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboAgile" runat="server" Width="150px" ValidationGroup="Confirmation">
@@ -191,30 +185,28 @@
                                 </telerik:RadComboBox>
                             </td>
                         </tr>
-                        <tr style="text-align:right">
+                        <tr style="text-align: right">
                             <td>Totals:
                             </td>
                             <td>
-                                <table style="width:400px">
+                                <table style="width: 400px">
                                     <tr>
-                                        <td style="text-align:center;width:50%">
-                                            Proposal Total
+                                        <td style="text-align: center; width: 50%">Proposal Total
                                         </td>
-                                        <td style="text-align:center;">
-                                            Payment Schedule Total
+                                        <td style="text-align: center;">Payment Schedule Total
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align:center">
+                                        <td style="text-align: center">
                                             <asp:Label ID="lblProposalTotal" runat="server"></asp:Label>
                                         </td>
-                                        <td style="text-align:center">
+                                        <td style="text-align: center">
                                             <asp:Label ID="lblScheduleTotal" runat="server"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" style="text-align:center">
-                                            <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"  ></asp:Label>
+                                        <td colspan="2" style="text-align: center">
+                                            <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"></asp:Label>
                                         </td>
                                     </tr>
 
@@ -229,19 +221,19 @@
                             ErrorMessage="Define Automatic Retainer (Yes or No)">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboAttached"  Display="None" ForeColor="Red"
+                            ControlToValidate="cboAttached" Display="None" ForeColor="Red"
                             ErrorMessage="Define Share Attached Documents (Yes or No)">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboAgile"  Display="None" ForeColor="Red"
+                            ControlToValidate="cboAgile" Display="None" ForeColor="Red"
                             ErrorMessage="Define Sent to Agile Campaign (Yes or No)">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator3" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboProjectManagerId"  Display="None" ForeColor="Red"
+                            ControlToValidate="cboProjectManagerId" Display="None" ForeColor="Red"
                             ErrorMessage="Define Proposal By">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator4" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboNotification"  Display="None" ForeColor="Red"
+                            ControlToValidate="cboNotification" Display="None" ForeColor="Red"
                             ErrorMessage="Define Notification Type">
                         </asp:CompareValidator>
                     </div>

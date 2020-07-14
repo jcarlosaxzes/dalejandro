@@ -3,28 +3,23 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
- <script type="text/javascript">
+    <script type="text/javascript">
         function onClientUploadFailed(sender, eventArgs) {
             alert(eventArgs.get_message())
         }
 
     </script>
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Request for Proposal</h3>
-                </td>
 
-            </tr>
-        </table>
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+            </asp:LinkButton>
+            Request for Proposal
+        </span>
     </div>
-    <div class="pas-container">
+
+    <div class="pasconcept-bar">
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" DefaultMode="Edit" Width="100%">
             <EditItemTemplate>
                 <table style="width: 100%" class="table-sm">
@@ -587,7 +582,7 @@
         </UpdateParameters>
     </asp:SqlDataSource>
 
- <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+    <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="RequestForProposals_azureuploads_v20_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="RequestForProposals_azureuploads_v20_DELETE" DeleteCommandType="StoredProcedure"
         UpdateCommand="RequestForProposals_azureuploads_v20_UPDATE" UpdateCommandType="StoredProcedure">
@@ -605,7 +600,7 @@
             <asp:Parameter Name="Source" />
         </UpdateParameters>
     </asp:SqlDataSource>
-<asp:SqlDataSource ID="SqlDataSourceRFPdetalles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+    <asp:SqlDataSource ID="SqlDataSourceRFPdetalles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, TaskCode, Description, isnull(DescriptionPlus,'') as DescriptionPlus, Quantity, UnitPrice, LineTotal FROM RequestForProposals_details WHERE (rfpId = @rfpId) ORDER BY Id">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblRFPId" Name="rfpId" PropertyName="Text" />
@@ -630,7 +625,7 @@
 
 
     <asp:Label ID="lblGuiId" runat="server" Visible="False" Text="e2103445-8a47-49ff-808e-6008c0fe13a1"></asp:Label>
-    
+
     <asp:Label ID="lblRFPId" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
 

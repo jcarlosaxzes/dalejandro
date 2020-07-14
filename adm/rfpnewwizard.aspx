@@ -55,22 +55,17 @@
             margin-right: 5px !important;
         }
     </style>
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Request for Proposal</h3>
-                </td>
 
-            </tr>
-        </table>
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+            </asp:LinkButton>
+            Request for Proposal
+        </span>
     </div>
-    <div class="pas-container">
+
+    <div class="pasconcept-bar">
         <asp:Label ID="lblMsg" runat="server" CssClass="Error"></asp:Label>
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material">
             <WizardSteps>

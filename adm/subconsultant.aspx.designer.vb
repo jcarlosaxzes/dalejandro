@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class subconsultant
     
     '''<summary>
-    '''btnTotals control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnBack control.
     '''</summary>
     '''<remarks>
@@ -30,6 +21,15 @@ Partial Public Class subconsultant
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnTotals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''FormViewSubconsultBalance control.

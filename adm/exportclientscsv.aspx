@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 100%; margin-left: 50px">
             <tr>
                 <td colspan="2">

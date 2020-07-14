@@ -2,27 +2,29 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 130px">
-                    <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
-                        <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
+        <span class="pasconcept-pagetitle">
+
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+            </asp:LinkButton>
+            Department Profile
+        </span>
+        <span style="float: right; vertical-align: middle;">
+            <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
                             View Summary
                         </button>
                     </asp:Panel>
-                </td>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="false">
-                       Back to List
-                    </asp:LinkButton>
-                </td>
-                <td></td>
-            </tr>
-        </table>
-        <div class="collapse" id="collapseTotals">
+        </span>
+
+    </div>
+    
+    <div class="collapse" id="collapseTotals">
             <div class="card card-body">
-                <asp:FormView ID="FormViewDepartmentBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceDepartmentBalance" Width="100%">
+                <asp:FormView ID="FormViewDepartmentBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceDepartmentBalance" Width="100%" CssClass="pasconcept-subbar">
                     <ItemTemplate>
                         <table class="table-sm" style="width: 100%">
                             <tr>
@@ -72,8 +74,8 @@
 
             </div>
         </div>
-    </div>
-    <div class="pas-container">
+    
+    <div class="pasconcept-bar">
         <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Department Details" StepType="Step">

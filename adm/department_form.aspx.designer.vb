@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class department_form
     
     '''<summary>
-    '''panelTotals control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents panelTotals As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
     '''btnBack control.
     '''</summary>
     '''<remarks>
@@ -30,6 +21,15 @@ Partial Public Class department_form
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''panelTotals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents panelTotals As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''FormViewDepartmentBalance control.

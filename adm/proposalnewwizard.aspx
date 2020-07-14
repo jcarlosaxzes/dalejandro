@@ -133,22 +133,18 @@
             margin-right: 5px !important;
         }
     </style>
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Proposal</h3>
-                </td>
 
-            </tr>
-        </table>
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+            </asp:LinkButton>
+            Proposal
+        </span>
     </div>
-    <div class="pas-container">
+
+
+    <div class="pasconcept-bar">
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false"
             RenderMode="Lightweight" Skin="Material">
             <WizardSteps>
@@ -453,7 +449,7 @@
                                 <td>
 
                                     <asp:Label ID="Label11" runat="server" AssociatedControlID="cboProjectType" Text="Job Type:"></asp:Label>
-                                    <telerik:RadComboBox ID="cboProjectType" runat="server" 
+                                    <telerik:RadComboBox ID="cboProjectType" runat="server"
                                         DataSourceID="SqlDataSourceProjectType" DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True"
                                         Filter="Contains" Height="250px"
                                         RenderMode="Lightweight" Skin="Material">
@@ -671,14 +667,14 @@
                                 <asp:Label runat="server" ID="lblMeasureAndUnits"></asp:Label>
                             </td>
 
-                            <td style="text-align:right">
+                            <td style="text-align: right">
                                 <telerik:RadNumericTextBox ID="txtRatio" runat="server" Text='<%# Bind("Name") %>' Width="200px" Label="Ration:">
                                 </telerik:RadNumericTextBox>
                             </td>
-                            <td style="width: 250px;text-align:right">
+                            <td style="width: 250px; text-align: right">
                                 <telerik:RadTextBox ID="txtEstimatedTotal" runat="server" Font-Bold="true" Text='<%# Bind("Name") %>' Width="100%" Label="Estimate Total:" ReadOnly="true" Skin="Material"></telerik:RadTextBox>
                             </td>
-                            <td style="width: 150px;text-align: right">
+                            <td style="width: 150px; text-align: right">
                                 <asp:LinkButton ID="btnRefreshRatios" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false" CausesValidation="false">
                                         <i class="fas fa-redo"></i>&nbsp;&nbsp;Refresh
                                 </asp:LinkButton>

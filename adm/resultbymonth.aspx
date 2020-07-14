@@ -14,7 +14,7 @@
         </span>
     </div>
 
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 300px; text-align: center"></td>

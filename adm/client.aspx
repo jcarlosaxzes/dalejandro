@@ -58,70 +58,70 @@
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
+
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                       View Summary
-                    </asp:LinkButton>
-                </td>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <span class="pasconcept-pagetitle">
+
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-                <td></td>
-            </tr>
-        </table>
-        <div id="collapseTotals">
-            <div class="card card-body">
-                <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
-                    <ItemTemplate>
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td colspan="9">
-                                    <hr style="margin: 0" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="9" style="text-align: center">
-                                    <h2 style="margin: 0"><%# Eval("ClientName")%>, <%# Eval("ClientCompany") %></h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 18%; text-align: center; background-color: #039be5">
-                                    <span class="DashboardFont2">Pending Proposals</span><br />
-                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
-                                </td>
-                                <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #546e7a">
-                                    <span class="DashboardFont2">Acepted Proposal</span><br />
-                                    <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
-                                </td>
-                                <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Jobs Budget</span><br />
-                                    <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
-                                </td>
-                                <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Amount Paid</span><br />
-                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
-                                </td>
-                                <td></td>
-                                <td style="width: 18%; text-align: center; background-color: #e53935">
-                                    <span class="DashboardFont2">Remaining Balance</span><br />
-                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
-                                </td>
-                            </tr>
-                        </table>
-                    </ItemTemplate>
-                </asp:FormView>
-            </div>
-        </div>
+            </asp:LinkButton>
+            Client Profile
+        </span>
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       View Summary
+            </asp:LinkButton>
+        </span>
+
     </div>
-    <div class="pas-container">
+
+
+    <div>
+        <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" CssClass="pasconcept-subbar">
+            <ItemTemplate>
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td colspan="9">
+                            <hr style="margin: 0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9" style="text-align: center">
+                            <h2 style="margin: 0"><%# Eval("ClientName")%>, <%# Eval("ClientCompany") %></h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 18%; text-align: center; background-color: #039be5">
+                            <span class="DashboardFont2">Pending Proposals</span><br />
+                            <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
+                        </td>
+                        <td></td>
+                        <td style="width: 18%; text-align: center; background-color: #546e7a">
+                            <span class="DashboardFont2">Acepted Proposal</span><br />
+                            <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
+                        </td>
+                        <td></td>
+                        <td style="width: 18%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">Jobs Budget</span><br />
+                            <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
+                        </td>
+                        <td></td>
+                        <td style="width: 18%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">Amount Paid</span><br />
+                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
+                        </td>
+                        <td></td>
+                        <td style="width: 18%; text-align: center; background-color: #e53935">
+                            <span class="DashboardFont2">Remaining Balance</span><br />
+                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+
+    </div>
+    <div class="pasconcept-bar">
         <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Client Details" StepType="Step">
@@ -501,7 +501,7 @@
                                 <telerik:GridTemplateColumn DataField="ProjectName" FilterControlAltText="Filter ProjectName column" HeaderText="Project Name"
                                     SortExpression="ProjectName" UniqueName="ProjectName" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("ProjectName")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' 
+                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("ProjectName")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
                                             ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
@@ -540,14 +540,14 @@
                                     SortExpression="Code" UniqueName="Code" ItemStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px"
                                     FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}" ReadOnly="true">
                                     <ItemTemplate>
-                                        <asp:HyperLink ID="hlkJobedit" runat="server" Text='<%# Eval("Code")%>' NavigateUrl='<%# Eval("Id", "~/ADM/Job_job.aspx?JobId={0}")%>' 
+                                        <asp:HyperLink ID="hlkJobedit" runat="server" Text='<%# Eval("Code")%>' NavigateUrl='<%# Eval("Id", "~/ADM/Job_job.aspx?JobId={0}")%>'
                                             ToolTip="Click to edit job in new tab" Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Name" SortExpression="Job" UniqueName="Job" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
                                     <ItemTemplate>
                                         <asp:Label ID="lblJobCompleto" runat="server" CssClass="PequenaNegrita" Visible='<%# LocalAPI.IsJobComplete(Eval("Id"))%>' Text="*" ToolTip="This Job is complete"></asp:Label>
-                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>' 
+                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
                                             ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>

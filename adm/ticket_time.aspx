@@ -2,16 +2,17 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-            </tr>
-        </table>
+            </asp:LinkButton>
+            Ticket Time
+        </span>
+    </div>
+
+    <div class="pasconcept-bar">
         <asp:FormView ID="FormViewTicketBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceTicketBalance" Width="100%">
             <ItemTemplate>
                 <table class="table-sm" style="width: 100%">
@@ -59,35 +60,30 @@
                 </table>
             </ItemTemplate>
         </asp:FormView>
-
     </div>
-    <div class="pas-container">
-
-        <div>
-            <telerik:RadGrid ID="RadGridEmployees" runat="server" DataSourceID="SqlDataSourceTicketEmployees" ShowFooter="true"
-                HeaderStyle-HorizontalAlign="Center">
-                <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceTicketEmployees">
-                    <Columns>
-                        <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID"  SortExpression="Id" UniqueName="Id" Display="False">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Employee" HeaderText="Employee"  SortExpression="Employee" UniqueName="Employee"
-                            FooterAggregateFormatString="{0:N0}" Aggregate="Count" FooterStyle-HorizontalAlign="Center" >
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="HoursWorked" HeaderText="H. Worked"  SortExpression="HoursWorked" UniqueName="HoursWorked"
-                            DataFormatString="{0:N0}" FooterAggregateFormatString="{0:N0}" FooterStyle-Font-Bold="true" HeaderTooltip="Hours Worked"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Center"  HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="FromDate" HeaderText="From" HeaderStyle-Width="180px" SortExpression="FromDate" UniqueName="FromDate" 
-                            DataFormatString="{0:d}" ItemStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="ToDate" HeaderText="To" HeaderStyle-Width="180px" SortExpression="ToDate" UniqueName="ToDate" DataFormatString="{0:d}"
-                             ItemStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                    </Columns>
-                </MasterTableView>
-            </telerik:RadGrid>
-
-        </div>
+    <div class="pasconcept-bar">
+        <telerik:RadGrid ID="RadGridEmployees" runat="server" DataSourceID="SqlDataSourceTicketEmployees" ShowFooter="true"
+            HeaderStyle-HorizontalAlign="Center">
+            <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceTicketEmployees">
+                <Columns>
+                    <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Employee" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee"
+                        FooterAggregateFormatString="{0:N0}" Aggregate="Count" FooterStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="HoursWorked" HeaderText="H. Worked" SortExpression="HoursWorked" UniqueName="HoursWorked"
+                        DataFormatString="{0:N0}" FooterAggregateFormatString="{0:N0}" FooterStyle-Font-Bold="true" HeaderTooltip="Hours Worked"
+                        Aggregate="Sum" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="FromDate" HeaderText="From" HeaderStyle-Width="180px" SortExpression="FromDate" UniqueName="FromDate"
+                        DataFormatString="{0:d}" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="ToDate" HeaderText="To" HeaderStyle-Width="180px" SortExpression="ToDate" UniqueName="ToDate" DataFormatString="{0:d}"
+                        ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                </Columns>
+            </MasterTableView>
+        </telerik:RadGrid>
     </div>
     <asp:SqlDataSource ID="SqlDataSourceTicketEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Jobs_TicketEmployees_SELECT" SelectCommandType="StoredProcedure">

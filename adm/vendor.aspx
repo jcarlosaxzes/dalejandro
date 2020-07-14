@@ -39,12 +39,15 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
 
     <div class="pasconcept-bar">
-
-        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-        </asp:LinkButton>
+            </asp:LinkButton>
+            Vendor
+        </span>
     </div>
-    <div class="pas-container">
+
+    <div class="pasconcept-bar">
         <div>
             <asp:ValidationSummary ID="vsClient" runat="server" ValidationGroup="UpdateVendor" ForeColor="Red"
                 HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>

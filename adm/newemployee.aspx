@@ -75,7 +75,7 @@
             ValidationGroup="Employee" />
 
     </div>
-    <div class="pas-container">
+    <div class="pasconcept-bar">
 
         <table style="width: 90%" class="table-sm">
             <tr>

@@ -13,7 +13,7 @@
         <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
         </telerik:RadScriptManager>
 
-        <div class="pas-container">
+        <div class="pasconcept-bar">
 
             <div class="DropZone1" style="height: 350px; background-color: whitesmoke; text-align: center;width:605px;margin:10px">
                 <h4 style="color: black">Select or Drag and Drop (jpg,png,gif,bmp) files (up to 10Mb)</h4>
