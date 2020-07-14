@@ -195,22 +195,24 @@ Public Class rfps
     Private Function EmailAcept(ByVal rfpId As Integer, ByVal companyid As Integer) As Boolean
         Try
             Dim RFPObject = LocalAPI.GetRecord(rfpId, "RFP_SELECT")
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[RFPNumber]", RFPObject("RFPNumber"))
+            DictValues.Add("[ProjectName]", RFPObject("ProjectName"))
+            DictValues.Add("[ProjectLocation]", RFPObject("ProjectLocation"))
+            DictValues.Add("[SubconsultantName]", RFPObject("SubconsultantName"))
+            DictValues.Add("[Discipline]", RFPObject("Discipline"))
+            DictValues.Add("[Client]", RFPObject("Client"))
+            DictValues.Add("[Total]", RFPObject("Total"))
+            DictValues.Add("[Sender]", RFPObject("Sender"))
+            DictValues.Add("[SenderEmail]", RFPObject("SenderEmail"))
+            DictValues.Add("[CompanyName]", RFPObject("CompanyName"))
+            DictValues.Add("[CompanyContact]", RFPObject("CompanyContact"))
+            DictValues.Add("[SharedLink_URL]", LocalAPI.GetSharedLink_URL(2002, rfpId))
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-            Dim sSubject As String = "Congratulations, you have been selected for " & RFPObject("ProjectName")
-            Dim sMsg As New System.Text.StringBuilder
+            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("RFP_Accepted_Notification", lblCompanyId.Text, DictValues)
+            Dim sBody As String = LocalAPI.GetMessageTemplateBody("RFP_Accepted_Notification", lblCompanyId.Text, DictValues)
 
-            sMsg.Append("Dear " & RFPObject("SubconsultantName") & ",")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("Congratulations, your proposal for RFP " & RFPObject("ProjectName") & " has been accepted. A representative from " & LocalAPI.GetCompanyName(lblCompanyId.Text) & " will be reaching out to you to define and establish the next steps.")
-            sMsg.Append("<br />")
-            sMsg.Append("To view RFP details, ")
-            sMsg.Append("<a href=" & """" & LocalAPI.GetSharedLink_URL(2002, rfpId) & """" & ">click here</a>")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append(LocalAPI.GetPASSign())
-
-            Dim sBody As String = sMsg.ToString
             Dim sCC As String = ""
             Dim sCCO As String = ""
             If LocalAPI.IsCompanyNotification(lblCompanyId.Text, "Notification_AceptedRFP") Then
@@ -247,25 +249,25 @@ Public Class rfps
 
             Dim RFPObject = LocalAPI.GetRecord(rfpId, "RFP_SELECT")
 
-            Dim sSubject As String = "Your Proposal of " & RFPObject("ProjectName") & " have been Declined."
-            Dim sMsg As New System.Text.StringBuilder
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[SubconsultantName]", RFPObject("SubconsultantName"))
+            DictValues.Add("[Sender]", RFPObject("Sender"))
+            DictValues.Add("[Organization]", RFPObject("Organization"))
+            DictValues.Add("[ProjectName]", RFPObject("ProjectName"))
+            DictValues.Add("[CompanyName]", RFPObject("CompanyName"))
+            DictValues.Add("[RFPNumber]", RFPObject("RFPNumber"))
+            DictValues.Add("[ProjectLocation]", RFPObject("ProjectLocation"))
+            DictValues.Add("[Discipline]", RFPObject("Discipline"))
+            DictValues.Add("[Client]", RFPObject("Client"))
+            DictValues.Add("[Total]", RFPObject("Total"))
+            DictValues.Add("[SenderEmail]", RFPObject("SenderEmail"))
+            DictValues.Add("[CompanyContact]", RFPObject("CompanyContact"))
+            DictValues.Add("[DeclineNotes]", txtDeclineNotes.Text)
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-            sMsg.Append("Dear " & RFPObject("SubconsultantName") & ",")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append(RFPObject("Sender") & " would like to thank " & RFPObject("Organization") & " for your submission, however we have chosen not to select your company for this " & RFPObject("ProjectName") & ". We will, however, keep " & RFPObject("CompanyName") & " in mind for future projects.")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
+            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("RFP_Decline_Notification", lblCompanyId.Text, DictValues)
+            Dim sBody As String = LocalAPI.GetMessageTemplateBody("RFP_Decline_Notification", lblCompanyId.Text, DictValues)
 
-            sMsg.Append("Decline notes:")
-            sMsg.Append("<br />")
-            sMsg.Append(txtDeclineNotes.Text)
-
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append(LocalAPI.GetPASSign())
-
-            Dim sBody As String = sMsg.ToString
             Dim sCC As String = ""
             Dim sCCO As String = ""
             If LocalAPI.IsCompanyNotification(lblCompanyId.Text, "Notification_AceptedRFP") Then

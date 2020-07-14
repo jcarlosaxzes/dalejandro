@@ -278,25 +278,17 @@ Public Class invoice
             Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
             If Len(AccountantEmail) > 0 Then
                 Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoice.Text)
-                Dim sMsg As New System.Text.StringBuilder
 
-                sMsg.Append("This message is to notify an invoice payment using PayHere from PayPal")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("Job: " & invoiceInfo("ProjectName"))
-                sMsg.Append("<br />")
-                sMsg.Append("Invoice: " & invoiceInfo("InvoiceNumber"))
-                sMsg.Append("<br />")
-                sMsg.Append("Amount: " & FormatCurrency(amountDue))
-                sMsg.Append("<br />")
-                sMsg.Append("Notes: " & invoiceInfo("Notes"))
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("PASconcept Notifications")
-                sMsg.Append("<br />")
-                Dim sBody As String = sMsg.ToString
-                Dim sSubject As String = "PayHere to " & LocalAPI.GetCompanyName(lblCompanyId.Text) & " from PayPal, Invoice: " & invoiceInfo("InvoiceNumber")
+                Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+                DictValues.Add("[ProjectName]", invoiceInfo("ProjectName"))
+                DictValues.Add("[InvoiceNumber]", invoiceInfo("InvoiceNumber"))
+                DictValues.Add("[AmountDue]", FormatCurrency(amountDue))
+                DictValues.Add("[Notes]", invoiceInfo("Notes"))
+                DictValues.Add("[CompanyName]", LocalAPI.GetCompanyName(lblCompanyId.Text))
+                DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+
+                Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Invocie_Payment", lblCompanyId.Text, DictValues)
+                Dim sBody As String = LocalAPI.GetMessageTemplateBody("Invocie_Payment", lblCompanyId.Text, DictValues)
 
                 SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text)
                 SqlDataSourceInvoice.DataBind()

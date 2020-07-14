@@ -354,29 +354,17 @@ Public Class pro
             Dim AxzesInvoiceId As Integer = LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "AxzesInvoiceId")
 
             Dim AxzesInvoiceNumber As String = LocalAPI.InvoiceNumber(AxzesInvoiceId)
-            Dim sMsg As New System.Text.StringBuilder
 
-            sMsg.Append("This message is to notify an invoice payment of PASconcept subscription using PayHere from PayPal")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("Company Name: " & LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Name"))
-            sMsg.Append("<br />")
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[AxzesInvoiceNumber]", AxzesInvoiceNumber)
+            DictValues.Add("[PaymentNumber]", LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "PaymentNumber"))
+            DictValues.Add("[Amount]", LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "Amount"))
+            DictValues.Add("[Notes]", LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "Notes"))
+            DictValues.Add("[CompanyName]", LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Name"))
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-            sMsg.Append("Axzes Invoice Number: " & AxzesInvoiceNumber)
-            sMsg.Append("<br />")
-
-            sMsg.Append("Payment Number: " & LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "PaymentNumber"))
-            sMsg.Append("<br />")
-            sMsg.Append("Amount: " & LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "Amount"))
-            sMsg.Append("<br />")
-            sMsg.Append("Notes: " & LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "Notes"))
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("PASconcept Notifications")
-            sMsg.Append("<br />")
-            Dim sBody As String = sMsg.ToString
-            Dim sSubject As String = "PASconcept subscription, Payment Number: " & LocalAPI.GetCompanyPaymentsProperty(lblCompanyPaymentsPendingId.Text, "PaymentNumber")
+            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Company_Subscription_Payment", lblCompanyId.Text, DictValues)
+            Dim sBody As String = LocalAPI.GetMessageTemplateBody("Company_Subscription_Payment", lblCompanyId.Text, DictValues)
 
             Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
             If Len(AccountantEmail) > 0 Then

@@ -232,42 +232,20 @@ Public Class activejobsdashboad
             Dim HRname As String = LocalAPI.GetCompanyHRname(lblCompanyId.Text)
             Dim sTo As String = LocalAPI.GetCompanyHRemail(lblCompanyId.Text)
 
-            sMsg.Append("Dear " & HRname)
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[CompanyName]", HRname)
+            DictValues.Add("[EmployeeFullName]", LocalAPI.GetEmployeeFullName(lblUserEmail.Text, lblCompanyId.Text))
+            DictValues.Add("[Category]", cboType.Text)
+            DictValues.Add("[DateRequest]", Date.Today)
+            DictValues.Add("[DateFrom]", RadDatePickerFrom.SelectedDate)
+            DictValues.Add("[DateTo]", RadDatePickerTo.SelectedDate)
+            DictValues.Add("[Notes]", txtNotes.Text)
+            DictValues.Add("[TimeHours]", txtMiscellaneousHours.Text)
+            DictValues.Add("[UrlDetails]", LocalAPI.GetHostAppSite() & "/ADM/ManagementRequest.aspx?Id=" & requestId & "&guid=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text))
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-            sMsg.Append("This message is to notify you that " & LocalAPI.GetEmployeeFullName(lblUserEmail.Text, lblCompanyId.Text) & " has requested " & cboType.Text)
-            sMsg.Append("<br />")
-            sMsg.Append("Date Request: " & Date.Today)
-            sMsg.Append("<br />")
-            sMsg.Append("From: " & RadDatePickerFrom.SelectedDate & "   To " & RadDatePickerTo.SelectedDate)
-            sMsg.Append("<br />")
-            sMsg.Append("Time: " & txtMiscellaneousHours.Text & " Hours")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("Notes:")
-            sMsg.Append("<br />")
-            sMsg.Append(txtNotes.Text)
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-
-            sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/ADM/ManagementRequest.aspx?Id=" & requestId & "&guid=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text) & """" & "> Please click the following link to view all details and accept or decline the request</a>")
-
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("Thank you.")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("PASconcept Notifications")
-            sMsg.Append("<br />")
-            sMsg.Append(LocalAPI.GetPASSign())
-
-            Dim sBody As String = sMsg.ToString
-
-
-
-            Dim sSubject As String = "Request " & cboType.Text
+            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)
+            Dim sBody As String = LocalAPI.GetMessageTemplateBody("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)
 
             Return SendGrid.Email.SendMail(sTo, "", "", sSubject, sBody, lblCompanyId.Text)
 

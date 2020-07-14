@@ -209,58 +209,31 @@ Public Class singproposalsign
             Dim guid As String = LocalAPI.GetJobCodeName(JobId)
             Dim sClientName As String = LocalAPI.GetClientName(nClientId)
 
-            Dim sSubject As String = "New Job: " & JobCodeName
-            Dim sMsg As New System.Text.StringBuilder
 
-            sMsg.Append("Greetings,")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append(sClientName & " has accepted the Proposal " & ProposalNumber & " and has been created the Job: " & JobCodeName)
-            sMsg.Append("<br />")
-            sMsg.Append("Date: " & sAceptedDate)
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[RFPNumber]", ProposalNumber)
+            DictValues.Add("[Client]", sClientName)
+            DictValues.Add("[JobCodeName]", JobCodeName)
+            DictValues.Add("[AceptedDate]", sAceptedDate)
+            DictValues.Add("[ProposalPdfURL]", ProposalPdfURL)
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+
+            Dim sSubject As String = ""
+            Dim sBody As String = ""
 
             If companyid = 260962 Then
                 Try
                     sCC = "mayte@easterneg.com,"
-                    'Number,Name,Location,Client,Employee,Department,Type 
-                    '18 605,Sloans Curve Cabana ,2100 S Ocean Blvd Parking, South Ocean Boulevard, Palm Beach, FL 33480, USA,The Windows guys of Florida,Celia Maria Suarez Quintas,Spec. Eng. WD,Shop Dwgs
-                    sMsg.Append("<br />")
-                    sMsg.Append("<b>Titleblock</b>")
-                    sMsg.Append("<br />")
-                    sMsg.Append("Click here to")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/titleblock.aspx?guid=" & JobGUID & """" & "> download Titleblock </a> csv file")
-                    sMsg.Append("<br />")
-
-                    sMsg.Append("<br />")
-                    sMsg.Append("-------------------------------------------------------------------------------------------------------")
-                    sMsg.Append("<br />")
-                    sMsg.Append("<br />")
-                    sMsg.Append("<b>Scope of Work</b>")
-                    sMsg.Append("<br />")
-                    sMsg.Append("Click here to ")
-                    sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/scopeofwork.aspx?guid=" & JobGUID & """" & "> view Scope of Work </a> from Proposal Page")
-                    sMsg.Append("<br />")
-
+                    DictValues.Add("[TitleBlockUrl]", LocalAPI.GetHostAppSite() & "/adm/titleblock.aspx?guid=" & JobGUID)
+                    DictValues.Add("[ScopeOfWorkUrl]", LocalAPI.GetHostAppSite() & "/adm/scopeofwork.aspx?guid=" & JobGUID)
+                    sSubject = LocalAPI.GetMessageTemplateSubject("Sign_Proposal_New_Job_Easterneg", lblCompanyId.Text, DictValues)
+                    sBody = LocalAPI.GetMessageTemplateBody("Sign_Proposal_New_Job_Easterneg", lblCompanyId.Text, DictValues)
                 Catch ex As Exception
-
                 End Try
+            Else
+                sSubject = LocalAPI.GetMessageTemplateSubject("Sign_Proposal_New_Job", lblCompanyId.Text, DictValues)
+                sBody = LocalAPI.GetMessageTemplateBody("Sign_Proposal_New_Job", lblCompanyId.Text, DictValues)
             End If
-
-            sMsg.Append("<br />")
-            sMsg.Append("<a href=""" & ProposalPdfURL & """> Download PDF </a>")
-            sMsg.Append("<br />")
-
-            sMsg.Append("<br />")
-            sMsg.Append("Thank you.")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("PASconcept Notifications")
-            sMsg.Append("<br />")
-            sMsg.Append(LocalAPI.GetPASSign())
-
-            Dim sBody As String = sMsg.ToString
             Dim sProjectManagerEmail As String = LocalAPI.GetProjectManagerEmailFromProposal(lProposalId)
 
             If Len(sProjectManagerEmail) > 0 Then
@@ -288,26 +261,15 @@ Public Class singproposalsign
             Dim sAceptedDate As String = LocalAPI.GetProposalData(lProposalId, "AceptedDate")
             Dim ProposalNumber As String = LocalAPI.ProposalNumber(lblProposalId.Text)
 
-            Dim sSubject As String = "Alert. Proposal accepted " & ProposalNumber & ", And no Job created!!!"
-            Dim sMsg As New System.Text.StringBuilder
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[RFPNumber]", ProposalNumber)
+            DictValues.Add("[AceptedDate]", sAceptedDate)
+            DictValues.Add("[ProposalPdfURL]", ProposalPdfURL)
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-            sMsg.Append("PASconcept Alert!!!,")
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("The Proposal (<strong>" & ProposalNumber & "</strong>) has been acepted and a Job was not created!!!")
-            sMsg.Append("<br />")
-            sMsg.Append("Date: " & sAceptedDate)
-            sMsg.Append("<br />")
+            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Sign_Proposal_No_Job", lblCompanyId.Text, DictValues)
+            Dim sBody As String = LocalAPI.GetMessageTemplateBody("Sign_Proposal_No_Job", lblCompanyId.Text, DictValues)
 
-            sMsg.Append("<br />")
-            sMsg.Append("<a href=""" & ProposalPdfURL & """> Download PDF</a>")
-            sMsg.Append("<br />")
-
-            sMsg.Append("<br />")
-            sMsg.Append("<br />")
-            sMsg.Append("Thank you.")
-
-            Dim sBody As String = sMsg.ToString
             Dim sCC As String = ""
             Dim sProjectManagerEmail As String = ""
             Dim sCCO As String = ""
@@ -356,19 +318,18 @@ Public Class singproposalsign
 
                 Dim CompanyName As String = LocalAPI.GetCompanyProperty(companyid, "Name")
 
-                Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Proposal Acceptance", lblCompanyId.Text)
-                Dim sBody As String = LocalAPI.GetMessageTemplateBody("Proposal Acceptance", lblCompanyId.Text)
+                Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+                DictValues.Add("[ProjectName]", ProposalObject("ProjectName"))
+                DictValues.Add("[CompanyName]", CompanyName)
+                DictValues.Add("[PASconceptLink]", LocalAPI.GetSharedLink_URL(11, lblProposalId.Text))
+                DictValues.Add("[ProposalBy]", ProposalObject("ProposalBy"))
+                DictValues.Add("[ProposalByEmail]", ProposalObject("ProposalByEmail"))
+                DictValues.Add("[CompamyPhone]", LocalAPI.GetCompanyProperty(companyid, "Phone"))
+                DictValues.Add("[PrposalPdfUrl]", PrposalpdfUrl)
+                DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-                sSubject = Replace(sSubject, "[Project Name]", ProposalObject("ProjectName"))
-
-                sBody = Replace(sBody, "[Project Name]", ProposalObject("ProjectName"))
-                sBody = Replace(sBody, "[Company Name]", CompanyName)
-                sBody = Replace(sBody, "[PASconceptLink]", LocalAPI.GetSharedLink_URL(11, lblProposalId.Text))
-                sBody = Replace(sBody, "[ProposalBy]", ProposalObject("ProposalBy"))
-                sBody = Replace(sBody, "[ProposalByEmail]", ProposalObject("ProposalByEmail"))
-                sBody = Replace(sBody, "[CompamyPhone]", LocalAPI.GetCompanyProperty(companyid, "Phone"))
-
-                sBody = sBody & " <br /> <a href=""" & PrposalpdfUrl & """ > Download PDF</a><br />"
+                Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Proposal_Acceptance", lblCompanyId.Text, DictValues)
+                Dim sBody As String = LocalAPI.GetMessageTemplateBody("Proposal_Acceptance", lblCompanyId.Text, DictValues)
 
                 Dim sCC As String = ""
                 Dim sProjectManagerEmail As String = ""
@@ -417,29 +378,20 @@ Public Class singproposalsign
 
                 Dim sAceptedDate As String = LocalAPI.GetProposalData(lProposalId, "AceptedDate")
                 Dim ProposalNumber As String = LocalAPI.ProposalNumber(lblProposalId.Text)
-                Dim sSubject As String = "You have declined Proposal " & ProposalNumber
                 Dim sClientName As String = LocalAPI.GetClientName(nClientId)
                 Dim sClientEmail As String = LocalAPI.GetClientEmailFromProposal(lProposalId)
-                Dim sMsg As New System.Text.StringBuilder
 
-                sMsg.Append("Greetings,")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("You have declined Proposal  (<strong>" & ProposalNumber & "</strong>), And a notification has been sent to '<strong>" & LocalAPI.GetCompanyProperty(companyid, "Name") & "</strong>")
-                sMsg.Append("<br />")
-                sMsg.Append("Date: " & sAceptedDate)
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("Decline by: anonymously online")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("Thank you.")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("PASconcept Notifications")
 
-                Dim sBody As String = sMsg.ToString
+                Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+                DictValues.Add("[RFPNumber]", ProposalNumber)
+                DictValues.Add("[Client]", sClientName)
+                DictValues.Add("[AceptedDate]", sAceptedDate)
+                DictValues.Add("[CompanyName]", LocalAPI.GetCompanyProperty(companyid, "Name"))
+                DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+
+                Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Sign_Proposal_Declined", lblCompanyId.Text, DictValues)
+                Dim sBody As String = LocalAPI.GetMessageTemplateBody("Sign_Proposal_Declined", lblCompanyId.Text, DictValues)
+
                 Dim sCC As String = ""
                 Dim sCCO As String = ""
                 If LocalAPI.IsCompanyNotification(lblCompanyId.Text, "Notification_AceptedProposal") Then

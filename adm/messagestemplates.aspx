@@ -2,6 +2,18 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <script type="text/javascript">
+        function OnClientCommandExecuting(editor, args) {
+            var name = args.get_name();
+            var val = args.get_value();
+
+            if (name == "Varialbles") {
+                editor.pasteHtml(val);
+                //Cancel the further execution of the command as such a command does not exist in the editor command list        
+                args.set_cancel(true);
+            }   
+        }
+    </script>
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
@@ -85,7 +97,6 @@
             </HeaderContextMenu>
         </telerik:RadGrid>
     </div>
-
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [Messages_Templates] WHERE [Id] = @Id "

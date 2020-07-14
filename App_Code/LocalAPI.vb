@@ -7300,6 +7300,66 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetMessageTemplateBody(ByVal sType As String, ByVal companyId As Integer, dictValues As Dictionary(Of String, String)) As String
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As New SqlCommand("SELECT ISNULL([Body],'') FROM [dbo].[Messages_TemplatesTEMPLATE] WHERE [Type]='" & sType & "' ", cnn1)
+            Dim rdr As SqlDataReader
+            rdr = cmd.ExecuteReader
+            rdr.Read()
+            If rdr.HasRows Then
+                Dim body As String = rdr(0)
+                If Not String.IsNullOrEmpty(body) Then
+                    For Each kvp As KeyValuePair(Of String, String) In dictValues
+                        If Not String.IsNullOrEmpty(kvp.Value) Then
+                            body = body.Replace(kvp.Key, kvp.Value)
+                        Else
+                            body = body.Replace(kvp.Key, "")
+                        End If
+                    Next
+                    GetMessageTemplateBody = body
+                Else
+                    GetMessageTemplateBody = ""
+                End If
+            End If
+            rdr.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function GetMessageTemplateSubject(ByVal sType As String, ByVal companyId As Integer, dictValues As Dictionary(Of String, String)) As String
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As New SqlCommand("SELECT ISNULL([Subject],'') FROM [dbo].[Messages_TemplatesTEMPLATE] WHERE [Type]='" & sType & "' ", cnn1)
+            Dim rdr As SqlDataReader
+            rdr = cmd.ExecuteReader
+            rdr.Read()
+            If rdr.HasRows Then
+                Dim subject As String = rdr(0)
+                If Not String.IsNullOrEmpty(subject) Then
+                    For Each kvp As KeyValuePair(Of String, String) In dictValues
+                        If Not String.IsNullOrEmpty(kvp.Value) Then
+                            subject = subject.Replace(kvp.Key, kvp.Value)
+                        Else
+                            subject = subject.Replace(kvp.Key, "")
+                        End If
+                    Next
+                    GetMessageTemplateSubject = subject
+                Else
+                    GetMessageTemplateSubject = ""
+                End If
+            End If
+            rdr.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
     Public Shared Function ActualizarClient(ByVal lClientId As Integer,
                                     ByVal sField As String,
                                     ByVal sValue As String) As Boolean
