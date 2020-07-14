@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class employeenewtime
     
     '''<summary>
-    '''btnTotals control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnBack control.
     '''</summary>
     '''<remarks>
@@ -30,6 +21,15 @@ Partial Public Class employeenewtime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lblEmployeeName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblJobName control.
@@ -41,6 +41,15 @@ Partial Public Class employeenewtime
     Protected WithEvents lblJobName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''btnTotals control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''FormViewViewSummary control.
     '''</summary>
     '''<remarks>
@@ -48,15 +57,6 @@ Partial Public Class employeenewtime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewViewSummary As Global.System.Web.UI.WebControls.FormView
-    
-    '''<summary>
-    '''lblEmployeeName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblEmployeeName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtTimeSel control.

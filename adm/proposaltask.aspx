@@ -34,7 +34,7 @@
             </tr>
         </table>
     </div>
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 99%;" >
             <tr>
                 <td style="text-align: right; width: 200px">

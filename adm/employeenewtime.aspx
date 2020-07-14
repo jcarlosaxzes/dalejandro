@@ -2,26 +2,26 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                       View Summary
-                    </asp:LinkButton>
-                </td>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">
-                        <asp:Label ID="lblJobName" runat="server" Visible="false"></asp:Label></h3>
-                </td>
-            </tr>
-        </table>
 
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+            </asp:LinkButton>
+            Productive Time (<asp:Label ID="lblEmployeeName" runat="server"></asp:Label>)
+        </span>
+        <span style="float: right; vertical-align: middle;">&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="lblJobName" runat="server" Font-Size="Large" Visible="false"></asp:Label>
+            &nbsp;&nbsp;&nbsp;
+            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       View Summary
+            </asp:LinkButton>
+        </span>
+
+    </div>
+
+    <div>
         <asp:FormView ID="FormViewViewSummary" runat="server" DataSourceID="SqlDataSourceViewSummary" Width="100%" CssClass="pasconcept-subbar">
             <ItemTemplate>
                 <table class="table-sm" style="width: 100%">
@@ -64,20 +64,9 @@
                 </table>
             </ItemTemplate>
         </asp:FormView>
-        
     </div>
 
-    <div class="pas-container">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="text-align: right; text-align: right; width: 50%">
-                    <h2>Productive Time</h2>
-                </td>
-                <td>
-                    <asp:Label ID="lblEmployeeName" runat="server" CssClass="badge badge-dark" Font-Size="Large"></asp:Label>
-                </td>
-            </tr>
-        </table>
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="width: 250px; text-align: right">Time Worked (in hours 0.25-24):

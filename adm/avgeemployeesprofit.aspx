@@ -50,7 +50,7 @@
     </table>
     </div>
 
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Average Chart" StepType="Step">

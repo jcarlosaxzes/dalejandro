@@ -74,7 +74,7 @@
             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were this errors:"></asp:ValidationSummary>
     </div>
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <table style="width: 100%" class="table-sm">
             <tr>
                 <td style="width: 200px; text-align: right">Source:

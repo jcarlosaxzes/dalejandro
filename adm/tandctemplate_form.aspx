@@ -3,27 +3,22 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Terms & Conditions</h3>
-                </td>
-
-            </tr>
-        </table>
+            </asp:LinkButton>
+            Terms & Conditions
+        </span>
     </div>
+
+
      <div>
         <asp:ValidationSummary ID="vsPre_Project" runat="server" ValidationGroup="TandC"
             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
     </div>
-    <div class="pas-container">
+    <div class="pasconcept-bar">
 
         <table style="width: 99%" class="table-sm">
 

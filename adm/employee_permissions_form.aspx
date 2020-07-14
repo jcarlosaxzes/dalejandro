@@ -2,24 +2,18 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align:center">
-                    <h2 style="margin:0">Employee Permissions</h2>
-                </td>
-            </tr>
-        </table>
+            </asp:LinkButton>
+            Employee Permissions (<asp:Label ID="lblEmployeeName" runat="server"></asp:Label>)
+        </span>
     </div>
-    <div class="pas-container">
-        <h2 style="text-align: center">
-            <asp:Label ID="lblEmployeeName" runat="server"></asp:Label>
-        </h2>
+
+
+    <div class="pasconcept-bar">
         <div style="margin-left: 50px; margin-right: 50px">
             <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
                 <EditItemTemplate>

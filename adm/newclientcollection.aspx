@@ -4,25 +4,17 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3>Client Collection Notification</h3>
-                </td>
+        <span class="pasconcept-pagetitle">
 
-            </tr>
-        </table>
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+            </asp:LinkButton>
+            Client Collection Notification 
+        </span>
     </div>
 
-
-    <div class="pas-container">
+    <div class="pasconcept-bar">
 
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="680px" DisplayProgressBar="false"
             RenderMode="Lightweight" Skin="Material" Localization-Cancel="Back" Localization-Finish="Send">
@@ -51,13 +43,11 @@
                             </td>
                         </tr>
                         <tr>
+                            <td></td>
                             <td>
+                                <asp:Label runat="server" ID="lblClientAddress" Font-Size="Small"></asp:Label>
+                            </td>
 
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblClientAddress" Font-Size="Small" ></asp:Label>
-                            </td>
-                            
                         </tr>
                         <tr>
                             <td style="width: 180px; text-align: right">Notes:
@@ -270,7 +260,7 @@
 
     </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="Clients_collection_INSERT" InsertCommandType="StoredProcedure" 
+        InsertCommand="Clients_collection_INSERT" InsertCommandType="StoredProcedure"
         UpdateCommand="Clients_collection_UPDATE" UpdateCommandType="StoredProcedure">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />

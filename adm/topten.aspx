@@ -19,7 +19,7 @@
 
 
 
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <div class="row">
             <div class="col-md-12" style="text-align: center">
 

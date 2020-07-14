@@ -81,42 +81,46 @@
         </Windows>
     </telerik:RadWindowManager>
 
+
+
+
+
     <div class="pasconcept-bar">
-        <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                       View Summary
-        </asp:LinkButton>
-        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark btn" UseSubmitBehavior="false" CausesValidation="false">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-        </asp:LinkButton>
-        <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
+            </asp:LinkButton>
+            Proposal
+        </span>
+
+
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
                              Update
-        </asp:LinkButton>
-        <asp:LinkButton ID="btnDeleteProposal" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false" ToolTip="Delete" CausesValidation="false">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnDeleteProposal" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false" ToolTip="Delete" CausesValidation="false">
                              Delete
-        </asp:LinkButton>
-        <asp:LinkButton ID="btnSaveAs" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As New Propsal"
-            CausesValidation="true" ValidationGroup="Proposal">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnSaveAs" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As New Propsal"
+                CausesValidation="true" ValidationGroup="Proposal">
                              Save As
-        </asp:LinkButton>
-        <asp:LinkButton ID="btnSaveAsTemplate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As Proposal Template "
-            CausesValidation="true" ValidationGroup="Proposal">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnSaveAsTemplate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As Proposal Template "
+                CausesValidation="true" ValidationGroup="Proposal">
                              Save Template
-        </asp:LinkButton>
-        <asp:LinkButton ID="btnPrintProposal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
-            ToolTip="Print/Send Email with Proposal Information">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnPrintProposal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
+                ToolTip="Print/Send Email with Proposal Information">
                              View/Send
-        </asp:LinkButton>
-        <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
-            ToolTip="Export PDF">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
+                ToolTip="Export PDF">
                              Export PDF
-        </asp:LinkButton>
-        <telerik:RadButton ID="btnDataProcecing" runat="server" Text="Processing" OnClientClicked="DataProcessing" AutoPostBack="false" UseSubmitBehavior="false" CausesValidation="false" Width="120px" Visible="false">
-            <Icon PrimaryIconCssClass="rbRefresh"></Icon>
-        </telerik:RadButton>
-        <telerik:RadButton ID="btnHelp" runat="server" Text="Help" ButtonType="LinkButton" AutoPostBack="false" Font-Bold="true" CausesValidation="false" Visible="false"
-            UseSubmitBehavior="false" Width="100px" Target="_blank" NavigateUrl="http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html">
-            <Icon PrimaryIconCssClass="rbHelp"></Icon>
-        </telerik:RadButton>
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       View Summary
+            </asp:LinkButton>
+        </span>
     </div>
     <div id="collapseTotals">
         <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" Visible="false">
@@ -1405,6 +1409,9 @@
         </UpdateParameters>
     </asp:SqlDataSource>
 
+    <telerik:RadButton ID="btnDataProcecing" runat="server" Text="Processing" OnClientClicked="DataProcessing" AutoPostBack="false" UseSubmitBehavior="false" CausesValidation="false" Width="120px" Visible="false">
+        <Icon PrimaryIconCssClass="rbRefresh"></Icon>
+    </telerik:RadButton>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblProposalId" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblOriginalStatus" runat="server" Visible="false"></asp:Label>

@@ -70,83 +70,74 @@
     </telerik:RadWindowManager>
 
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
-                       View Summary
-                    </asp:LinkButton>
-                </td>
-                <td style="width: 130px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <span class="pasconcept-pagetitle">
+
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-                <td></td>
-            </tr>
-        </table>
-        <div id="collapseTotals">
-            <div class="card card-body">
-                <asp:FormView ID="FormViewEmployeeBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEmployeeBalance" Width="100%">
-                    <ItemTemplate>
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td colspan="11">
-                                    <hr style="margin: 0" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="11" style="text-align: center">
-                                    <h2 style="margin: 0"><%# Eval("EmployeeName")%></h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 15%; text-align: center; background-color: #039be5">
-                                    <span class="DashboardFont2">Vacations</span><br />
-                                    <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("Pending_vacations", "{0:N0}") %>'></asp:Label><br />
-                                    <span class="DashboardFont3">Pending This Year</span>
-                                </td>
-                                <td></td>
-                                <td style="width: 15%; text-align: center; background-color: #039be5">
-                                    <span class="DashboardFont2">Personals Days</span><br />
-                                    <asp:Label ID="Label1" CssClass="DashboardFont1" runat="server" Text='<%# Eval("Pending_personals", "{0:N0}") %>'></asp:Label><br />
-                                    <span class="DashboardFont3">Pending This Year</span>
-                                </td>
-                                <td></td>
-                                <td style="width: 15%; text-align: center; background-color: #e53935">
-                                    <span class="DashboardFont2">Cost</span><br />
-                                    <asp:Label ID="Label2" CssClass="DashboardFont1" runat="server" Text='<%# Eval("EmployeeCost", "{0:N0}") %>'></asp:Label><br />
-                                    <span class="DashboardFont3">This Year</span>
-                                </td>
-                                <td></td>
-                                <td style="width: 15%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">Revenue</span><br />
-                                    <asp:Label ID="Label3" CssClass="DashboardFont1" runat="server" Text='<%# Eval("EmployeeRevenue", "{0:N0}") %>'></asp:Label><br />
-                                    <span class="DashboardFont3">This Year</span>
-                                </td>
-                                <td></td>
-                                <td style="width: 15%; text-align: center; background-color: #43a047">
-                                    <span class="DashboardFont2">FTE</span><br />
-                                    <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("EmployeeFTE", "{0:N2}") %>'></asp:Label><br />
-                                    <span class="DashboardFont3">Full Time Employment</span>
-                                </td>
-                                <td></td>
-                                <td style="width: 15%; text-align: center; background-color: #546e7a">
-                                    <span class="DashboardFont2">Efficiency</span><br />
-                                    <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("EmployeeEfficiency", "{0:P0}") %>'></asp:Label><br />
-                                    <span class="DashboardFont3">Assigned/Worked Hours</span>
+            </asp:LinkButton>
+            Employee Profile
+        </span>
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                       View Summary
+            </asp:LinkButton>
+        </span>
 
-                                </td>
-                            </tr>
-                        </table>
-                    </ItemTemplate>
-                </asp:FormView>
-
-            </div>
-        </div>
     </div>
 
-    <div class="pas-container">
+    <div>
+        <asp:FormView ID="FormViewEmployeeBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEmployeeBalance" Width="100%" CssClass="pasconcept-subbar">
+            <ItemTemplate>
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td colspan="11" style="text-align: center">
+                            <h2 style="margin: 0"><%# Eval("EmployeeName")%></h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 15%; text-align: center; background-color: #039be5">
+                            <span class="DashboardFont2">Vacations</span><br />
+                            <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("Pending_vacations", "{0:N0}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Pending This Year</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 15%; text-align: center; background-color: #039be5">
+                            <span class="DashboardFont2">Personals Days</span><br />
+                            <asp:Label ID="Label1" CssClass="DashboardFont1" runat="server" Text='<%# Eval("Pending_personals", "{0:N0}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Pending This Year</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 15%; text-align: center; background-color: #e53935">
+                            <span class="DashboardFont2">Cost</span><br />
+                            <asp:Label ID="Label2" CssClass="DashboardFont1" runat="server" Text='<%# Eval("EmployeeCost", "{0:N0}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">This Year</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 15%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">Revenue</span><br />
+                            <asp:Label ID="Label3" CssClass="DashboardFont1" runat="server" Text='<%# Eval("EmployeeRevenue", "{0:N0}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">This Year</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 15%; text-align: center; background-color: #43a047">
+                            <span class="DashboardFont2">FTE</span><br />
+                            <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("EmployeeFTE", "{0:N2}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Full Time Employment</span>
+                        </td>
+                        <td></td>
+                        <td style="width: 15%; text-align: center; background-color: #546e7a">
+                            <span class="DashboardFont2">Efficiency</span><br />
+                            <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("EmployeeEfficiency", "{0:P0}") %>'></asp:Label><br />
+                            <span class="DashboardFont3">Assigned/Worked Hours</span>
+
+                        </td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+        </asp:FormView>
+    </div>
+
+    <div class="pasconcept-bar">
         <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Employee Details" StepType="Step">

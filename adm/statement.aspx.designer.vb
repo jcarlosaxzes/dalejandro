@@ -23,6 +23,24 @@ Partial Public Class statement
     Protected WithEvents RadCodeBlock2 As Global.Telerik.Web.UI.RadCodeBlock
     
     '''<summary>
+    '''RadAjaxManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
+    
+    '''<summary>
+    '''RadAjaxLoadingPanel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+    
+    '''<summary>
     '''spanViewSummary control.
     '''</summary>
     '''<remarks>

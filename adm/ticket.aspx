@@ -15,21 +15,13 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h2 style="margin: 0">Ticket</h2>
-                </td>
-
-            </tr>
-        </table>
+            </asp:LinkButton>
+            Ticket
+        </span>
     </div>
-
 
     <div>
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" DisplayMode="BulletList"
@@ -38,226 +30,226 @@
 
     </div>
 
-    <div class="pas-container">
-    <table class="table-sm" style="width: 100%; text-align: left">
-        <tr>
-            <td style="width: 20%; text-align: right">Title:
-            </td>
-            <td colspan="3">
-                <telerik:RadTextBox ID="txtTitle" runat="server" MaxLength="512" Width="100%" EmptyMessage="(*)required..." ToolTip="Title">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-        </tr>
-        <tr>
-            <td style="text-align: right">App. Name:
-            </td>
-            <td style="width: 30%">
-                <telerik:RadDropDownList ID="cboAppNameEdit" runat="server" AppendDataBoundItems="true" Width="100%"
-                    DataSourceID="SqlDataSourceTicketAppName" DataTextField="Name" DataValueField="Id">
-                    <Items>
-                        <telerik:DropDownListItem Text="(Select App Name...)" Selected="true" />
-                    </Items>
-                </telerik:RadDropDownList>
-            </td>
-            <td style="width: 20%; text-align: right">Location/Module:
-            </td>
-            <td>
-                <telerik:RadDropDownList ID="cboLocationModuleEdit" runat="server" AppendDataBoundItems="true" Width="100%"
-                    DataSourceID="SqlDataSourceTicketLocationModule" DataTextField="Name" DataValueField="Id">
-                    <Items>
-                        <telerik:DropDownListItem Text="(Select Location/Module...)" Selected="true" />
-                    </Items>
-                </telerik:RadDropDownList>
-            </td>
-        </tr>
+    <div class="pasconcept-bar">
+        <table class="table-sm" style="width: 100%; text-align: left">
+            <tr>
+                <td style="width: 20%; text-align: right">Title:
+                </td>
+                <td colspan="3">
+                    <telerik:RadTextBox ID="txtTitle" runat="server" MaxLength="512" Width="100%" EmptyMessage="(*)required..." ToolTip="Title">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+                <td style="text-align: right">App. Name:
+                </td>
+                <td style="width: 30%">
+                    <telerik:RadDropDownList ID="cboAppNameEdit" runat="server" AppendDataBoundItems="true" Width="100%"
+                        DataSourceID="SqlDataSourceTicketAppName" DataTextField="Name" DataValueField="Id">
+                        <Items>
+                            <telerik:DropDownListItem Text="(Select App Name...)" Selected="true" />
+                        </Items>
+                    </telerik:RadDropDownList>
+                </td>
+                <td style="width: 20%; text-align: right">Location/Module:
+                </td>
+                <td>
+                    <telerik:RadDropDownList ID="cboLocationModuleEdit" runat="server" AppendDataBoundItems="true" Width="100%"
+                        DataSourceID="SqlDataSourceTicketLocationModule" DataTextField="Name" DataValueField="Id">
+                        <Items>
+                            <telerik:DropDownListItem Text="(Select Location/Module...)" Selected="true" />
+                        </Items>
+                    </telerik:RadDropDownList>
+                </td>
+            </tr>
 
 
-        <tr>
-            <td style="text-align: right">Client Description:
-            </td>
-            <td colspan="3">
-                <telerik:RadTextBox ID="txtClientDescription" runat="server" Rows="2" TextMode="MultiLine" Width="100%" ToolTip="Client Description">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Company Description:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtCompanyDescription" runat="server" Rows="2" TextMode="MultiLine" Width="100%" ToolTip="Company Description">
-                </telerik:RadTextBox>
-            </td>
-            <td style="text-align: right">Client Feedback:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtNotes" runat="server" Rows="2" TextMode="MultiLine" Width="100%" ToolTip="Notes">
-                </telerik:RadTextBox>
-            </td>
+            <tr>
+                <td style="text-align: right">Client Description:
+                </td>
+                <td colspan="3">
+                    <telerik:RadTextBox ID="txtClientDescription" runat="server" Rows="2" TextMode="MultiLine" Width="100%" ToolTip="Client Description">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Company Description:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtCompanyDescription" runat="server" Rows="2" TextMode="MultiLine" Width="100%" ToolTip="Company Description">
+                    </telerik:RadTextBox>
+                </td>
+                <td style="text-align: right">Client Feedback:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtNotes" runat="server" Rows="2" TextMode="MultiLine" Width="100%" ToolTip="Notes">
+                    </telerik:RadTextBox>
+                </td>
 
-        </tr>
-        <tr>
-            <td style="text-align: right">Type:
-            </td>
-            <td>
-                <telerik:RadDropDownList ID="cboTypeEdit" runat="server" AppendDataBoundItems="true" Width="100%"
-                    DataSourceID="SqlDataSourceTicketTypes" DataTextField="Name" DataValueField="Id">
-                    <%--<Items>
+            </tr>
+            <tr>
+                <td style="text-align: right">Type:
+                </td>
+                <td>
+                    <telerik:RadDropDownList ID="cboTypeEdit" runat="server" AppendDataBoundItems="true" Width="100%"
+                        DataSourceID="SqlDataSourceTicketTypes" DataTextField="Name" DataValueField="Id">
+                        <%--<Items>
                         <telerik:DropDownListItem Text="(Select Type...)" Selected="true" />
                     </Items>--%>
-                </telerik:RadDropDownList>
-            </td>
-            <td style="text-align: right">Priority:
-            </td>
-            <td>
-                <telerik:RadDropDownList ID="cboPriority" runat="server" AppendDataBoundItems="true" Width="100%">
-                    <Items>
-                        <telerik:DropDownListItem Text="Low" />
-                        <telerik:DropDownListItem Text="Medium" />
-                        <telerik:DropDownListItem Text="High" />
-                    </Items>
-                </telerik:RadDropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Status:
-            </td>
-            <td>
-                <telerik:RadDropDownList ID="cboStatusEdit" runat="server" AppendDataBoundItems="true" Width="100%" ZIndex="50001"
-                    DataSourceID="SqlDataSourceTicketsStatus" DataTextField="Name">
-                </telerik:RadDropDownList>
-            </td>
-            <td style="text-align: right">Tags:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtTags" runat="server" MaxLength="80" Width="100%" ToolTip="Tags" EmptyMessage="Tags for grouping tickets">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Client Approved Status:
-            </td>
-            <td>
-                <telerik:RadDropDownList ID="cboApprovedStatus" runat="server" AppendDataBoundItems="true" Width="100%">
-                    <Items>
-                        <telerik:DropDownListItem runat="server" Text="Pending" Selected="true" />
-                        <telerik:DropDownListItem runat="server" Text="Approved" />
-                        <telerik:DropDownListItem runat="server" Text="Rejected" />
-                    </Items>
-                </telerik:RadDropDownList>
-            </td>
-            <td style="text-align: right">Expected Start:
-            </td>
-            <td>
-                <telerik:RadDatePicker ID="RadDatePickerExpectedStartDate" runat="server" DateFormat="MM/dd/yyyy" Width="150px" Culture="en-US">
-                </telerik:RadDatePicker>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Expected Staging:
-            </td>
-            <td>
-                <telerik:RadDatePicker ID="RadDatePickerStagingDate" runat="server" Width="150px" Culture="en-US">
-                </telerik:RadDatePicker>
-            </td>
-            <td style="text-align: right">Expected Production:
-            </td>
-            <td>
-                <telerik:RadDatePicker ID="RadDatePickerProductionDate" runat="server" Width="150px" Culture="en-US">
-                </telerik:RadDatePicker>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Employee:
-            </td>
-            <td>
-                <telerik:RadDropDownList ID="cboEmployee" runat="server" AppendDataBoundItems="true" Width="100%"
-                    DataSourceID="SqlDataSourceEmployee" DataTextField="FullName" DataValueField="employeeId">
-                    <Items>
-                        <telerik:DropDownListItem Text="(Select Assined Employee...)" Selected="true" Value="0" />
-                    </Items>
-                </telerik:RadDropDownList>
-            </td>
-            <td style="text-align: right">Employee to be notified:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboNotificationBCCEmail" runat="server" DataSourceID="SqlDataSourceEmployee" DataTextField="Email" DataValueField="employeeId"
-                    Width="100%" CheckBoxes="true" Height="250px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
-                    <Localization AllItemsCheckedString="All Emails Checked" CheckAllString="Check All..." ItemsCheckedString="emails checked"></Localization>
-                </telerik:RadComboBox>
+                    </telerik:RadDropDownList>
+                </td>
+                <td style="text-align: right">Priority:
+                </td>
+                <td>
+                    <telerik:RadDropDownList ID="cboPriority" runat="server" AppendDataBoundItems="true" Width="100%">
+                        <Items>
+                            <telerik:DropDownListItem Text="Low" />
+                            <telerik:DropDownListItem Text="Medium" />
+                            <telerik:DropDownListItem Text="High" />
+                        </Items>
+                    </telerik:RadDropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Status:
+                </td>
+                <td>
+                    <telerik:RadDropDownList ID="cboStatusEdit" runat="server" AppendDataBoundItems="true" Width="100%" ZIndex="50001"
+                        DataSourceID="SqlDataSourceTicketsStatus" DataTextField="Name">
+                    </telerik:RadDropDownList>
+                </td>
+                <td style="text-align: right">Tags:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtTags" runat="server" MaxLength="80" Width="100%" ToolTip="Tags" EmptyMessage="Tags for grouping tickets">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Client Approved Status:
+                </td>
+                <td>
+                    <telerik:RadDropDownList ID="cboApprovedStatus" runat="server" AppendDataBoundItems="true" Width="100%">
+                        <Items>
+                            <telerik:DropDownListItem runat="server" Text="Pending" Selected="true" />
+                            <telerik:DropDownListItem runat="server" Text="Approved" />
+                            <telerik:DropDownListItem runat="server" Text="Rejected" />
+                        </Items>
+                    </telerik:RadDropDownList>
+                </td>
+                <td style="text-align: right">Expected Start:
+                </td>
+                <td>
+                    <telerik:RadDatePicker ID="RadDatePickerExpectedStartDate" runat="server" DateFormat="MM/dd/yyyy" Width="150px" Culture="en-US">
+                    </telerik:RadDatePicker>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Expected Staging:
+                </td>
+                <td>
+                    <telerik:RadDatePicker ID="RadDatePickerStagingDate" runat="server" Width="150px" Culture="en-US">
+                    </telerik:RadDatePicker>
+                </td>
+                <td style="text-align: right">Expected Production:
+                </td>
+                <td>
+                    <telerik:RadDatePicker ID="RadDatePickerProductionDate" runat="server" Width="150px" Culture="en-US">
+                    </telerik:RadDatePicker>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Employee:
+                </td>
+                <td>
+                    <telerik:RadDropDownList ID="cboEmployee" runat="server" AppendDataBoundItems="true" Width="100%"
+                        DataSourceID="SqlDataSourceEmployee" DataTextField="FullName" DataValueField="employeeId">
+                        <Items>
+                            <telerik:DropDownListItem Text="(Select Assined Employee...)" Selected="true" Value="0" />
+                        </Items>
+                    </telerik:RadDropDownList>
+                </td>
+                <td style="text-align: right">Employee to be notified:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboNotificationBCCEmail" runat="server" DataSourceID="SqlDataSourceEmployee" DataTextField="Email" DataValueField="employeeId"
+                        Width="100%" CheckBoxes="true" Height="250px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
+                        <Localization AllItemsCheckedString="All Emails Checked" CheckAllString="Check All..." ItemsCheckedString="emails checked"></Localization>
+                    </telerik:RadComboBox>
 
-            </td>
-        </tr>
+                </td>
+            </tr>
 
-        <tr>
-            <td style="text-align: right">Business Client Name:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtNotificationClientName" runat="server" MaxLength="80" Width="100%" ToolTip="Notification Client Name">
-                </telerik:RadTextBox>
-            </td>
-            <td style="text-align: right">Client Emails to be notified:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtNotificationClientEmail" runat="server" MaxLength="128" Width="100%" ToolTip="Notification Client Email">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Trello URL:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txttrelloURL" runat="server" MaxLength="128" Width="100%" ToolTip="Link to Trello Card">
-                </telerik:RadTextBox>
-            </td>
-            <td style="text-align: right">Jira URL:
-            </td>
-            <td>
-                <telerik:RadTextBox ID="txtJiraURL" runat="server" MaxLength="128" Width="100%" ToolTip="Link to Jira Card">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-        </tr>
+            <tr>
+                <td style="text-align: right">Business Client Name:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtNotificationClientName" runat="server" MaxLength="80" Width="100%" ToolTip="Notification Client Name">
+                    </telerik:RadTextBox>
+                </td>
+                <td style="text-align: right">Client Emails to be notified:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtNotificationClientEmail" runat="server" MaxLength="128" Width="100%" ToolTip="Notification Client Email">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Trello URL:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txttrelloURL" runat="server" MaxLength="128" Width="100%" ToolTip="Link to Trello Card">
+                    </telerik:RadTextBox>
+                </td>
+                <td style="text-align: right">Jira URL:
+                </td>
+                <td>
+                    <telerik:RadTextBox ID="txtJiraURL" runat="server" MaxLength="128" Width="100%" ToolTip="Link to Jira Card">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+            </tr>
 
-    </table>
-    <table class="table-sm" style="width: 100%;">
-        <tr>
-            <td style="width: 20%"></td>
-            <td style="width: 30%">
-                <telerik:RadCheckBox ID="chkNotifyClient" runat="server" ToolTip="Notifiy changes to client when Save?" Text="&nbsp;Notify client on Save?" />
-            </td>
-            <td style="width: 20%; text-align: right">Estimated Hours:</td>
-            <td>
-                <telerik:RadTextBox ID="txtEstimatedHours" runat="server" Width="150px" ToolTip="Estimated Hours for Complete Ticket">
-                </telerik:RadTextBox>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <telerik:RadCheckBox ID="chkIsBillable" runat="server" ToolTip="Is Billable?" Text="&nbsp;Is Billable?" />
-            </td>
-            <td></td>
-            <td>
+        </table>
+        <table class="table-sm" style="width: 100%;">
+            <tr>
+                <td style="width: 20%"></td>
+                <td style="width: 30%">
+                    <telerik:RadCheckBox ID="chkNotifyClient" runat="server" ToolTip="Notifiy changes to client when Save?" Text="&nbsp;Notify client on Save?" />
+                </td>
+                <td style="width: 20%; text-align: right">Estimated Hours:</td>
+                <td>
+                    <telerik:RadTextBox ID="txtEstimatedHours" runat="server" Width="150px" ToolTip="Estimated Hours for Complete Ticket">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <telerik:RadCheckBox ID="chkIsBillable" runat="server" ToolTip="Is Billable?" Text="&nbsp;Is Billable?" />
+                </td>
+                <td></td>
+                <td>
 
-                <telerik:RadCheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <telerik:RadCheckBox ID="chkIsPrivate" runat="server" ToolTip="Is Private?" Text="&nbsp;Is Private?" />
-            </td>
-            <td></td>
-            <td style="text-align: center;">
-                <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
+                    <telerik:RadCheckBox ID="chkNotifyEmployee" runat="server" ToolTip="Notifiy changes to employee when Save?" Text="&nbsp;Notify employee(s) on Save?" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <telerik:RadCheckBox ID="chkIsPrivate" runat="server" ToolTip="Is Private?" Text="&nbsp;Is Private?" />
+                </td>
+                <td></td>
+                <td style="text-align: center;">
+                    <asp:LinkButton runat="server" ID="btnSave" CssClass="btn btn-success btn-lg" ToolTip="Save Ticket" ValidationGroup="Ticket">
                              Update
-                </asp:LinkButton>
-            </td>
-        </tr>
-    </table>
+                    </asp:LinkButton>
+                </td>
+            </tr>
+        </table>
     </div>
     <div>
         <asp:CompareValidator runat="server" ID="Comparevalidator3" ForeColor="Red" Operator="NotEqual" SetFocusOnError="true" ValidationGroup="Ticket"

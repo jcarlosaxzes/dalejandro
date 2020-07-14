@@ -101,7 +101,7 @@
 
     </div>
 
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <telerik:RadHtmlChart runat="server" Width="100%" Height="600px" ID="RadChartRemainderStadistic" Transitions="true"
             DataSourceID="SqlDataSourceRemainderStadistic">
             <PlotArea>

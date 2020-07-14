@@ -59,15 +59,6 @@ Partial Public Class proposal
     Protected WithEvents RadWindowDataProcessing As Global.Telerik.Web.UI.RadWindow
     
     '''<summary>
-    '''btnTotals control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnBack control.
     '''</summary>
     '''<remarks>
@@ -131,22 +122,13 @@ Partial Public Class proposal
     Protected WithEvents btnPdf As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''btnDataProcecing control.
+    '''btnTotals control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDataProcecing As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''btnHelp control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnHelp As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''FormViewClientBalance control.
@@ -651,6 +633,15 @@ Partial Public Class proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePS As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''btnDataProcecing control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDataProcecing As Global.Telerik.Web.UI.RadButton
     
     '''<summary>
     '''lblCompanyId control.

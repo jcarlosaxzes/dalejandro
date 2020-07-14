@@ -11,6 +11,32 @@
         </script>
     </telerik:RadCodeBlock>
 
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <ClientEvents OnRequestStart="onRequestStart"></ClientEvents>
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadGrid1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnFind">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
+                    <telerik:AjaxUpdatedControl ControlID="cboClients" />
+                    <telerik:AjaxUpdatedControl ControlID="txtFind" />
+                    <telerik:AjaxUpdatedControl ControlID="RadWindowManager1" />
+                    <telerik:AjaxUpdatedControl ControlID="FormViewViewSummary" />
+                </UpdatedControls>
+
+            </telerik:AjaxSetting>
+
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">Statements</span>
 
@@ -31,10 +57,10 @@
     </div>
 
     <div class="collapse" id="collapseFilter">
-        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-            <table class="table-sm" style="width:100%">
+        <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
+            <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td width="180px" align="left" >
+                    <td width="180px" align="left">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
@@ -80,10 +106,10 @@
                             <span class="DashboardFont3">Collected</span>
                         </td>
                         <td></td>
-                        <td style="width: 19%; text-align: center; background-color:#e53935">
+                        <td style="width: 19%; text-align: center; background-color: #e53935">
                             <span class="DashboardFont2">Amount Due</span><br />
                             <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountDue", "{0:C2}") %>'></asp:Label><br />
-                            <span class="DashboardFont3"> Amount Due </span>
+                            <span class="DashboardFont3">Amount Due </span>
                         </td>
                         <td></td>
                         <td style="width: 19%; text-align: center; background-color: #343a40">
@@ -331,7 +357,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td >The invoices below, are not included in another statement and have not been collected from the Client. Click on the check-boxes to select invoices for this statement.
+                                    <td>The invoices below, are not included in another statement and have not been collected from the Client. Click on the check-boxes to select invoices for this statement.
                                     </td>
                                 </tr>
                                 <tr>
@@ -458,7 +484,7 @@
             </h2>
             <table class="table-bordered" style="width: 500px">
                 <tr>
-                    <td style="width: 140px; text-align: right" >Collected Date:
+                    <td style="width: 140px; text-align: right">Collected Date:
                     </td>
                     <td>
                         <telerik:RadDatePicker ID="RadDatePickerPayment2" runat="server" ZIndex="50001">
@@ -466,7 +492,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right" >Method:
+                    <td style="text-align: right">Method:
                     </td>
                     <td>
                         <telerik:RadComboBox ID="cboPaymentMethod_paym2" runat="server" DataSourceID="SqlDataSourcePaymentMethod" DataTextField="Name" DataValueField="Id"
@@ -475,7 +501,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: right" >Notes:
+                    <td style="text-align: right">Notes:
                     </td>
                     <td>
                         <telerik:RadTextBox ID="txtPaymentNotes2" runat="server" Width="100%" MaxLength="1024" Rows="2">

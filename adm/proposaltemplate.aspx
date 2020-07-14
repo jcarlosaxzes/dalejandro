@@ -4,19 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Proposal Template</h3>
-                </td>
-
-            </tr>
-        </table>
+            </asp:LinkButton>
+            Proposal Template
+        </span>
     </div>
 
     <div>
@@ -24,7 +17,7 @@
             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
     </div>
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <h4 style="text-align: center">Templates are used as a predefined Structure to create a new Proposal</h4>
         <table class="table-sm" style="width: 98%">
             <tr>
@@ -69,7 +62,7 @@
 
             <tr>
                 <td></td>
-                <td style="text-align:right">
+                <td style="text-align: right">
                     <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules"
                         DataTextField="Name" DataValueField="Id" Width="400px" MarkFirstMatch="True" AppendDataBoundItems="true"
                         Filter="Contains" ToolTip="Select Payment Schedules to define first time or modify the current">
@@ -97,7 +90,7 @@
                 </td>
                 <td>
                     <telerik:RadTextBox ID="PaymentsTextListTextBox" runat="server"
-                         Width="100%" Rows="3" MaxLength="512"
+                        Width="100%" Rows="3" MaxLength="512"
                         EmptyMessage="Insert descriptions of payments separated by commas; e.g. Due at Time of Signed Contract Agreement,50% Due at 100% Submittal">
                     </telerik:RadTextBox>
                 </td>

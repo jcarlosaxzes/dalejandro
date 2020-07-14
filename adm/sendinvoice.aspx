@@ -25,7 +25,7 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
-    <div class="pas-container">
+    <div class="pasconcept-bar">
 
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="680px" DisplayProgressBar="false" DisplayCancelButton="false"
             RenderMode="Lightweight" Skin="Material" Localization-Finish="Send">

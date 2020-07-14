@@ -6,7 +6,7 @@
         <span class="pasconcept-pagetitle">Import data from "CSV" files</span>
     </div>
 
-    <div class="pas-container">
+    <div class="pasconcept-bar">
 
 
         <div class="PanelFilter" style="padding-left: 50px">

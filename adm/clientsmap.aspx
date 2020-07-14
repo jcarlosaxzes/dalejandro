@@ -107,7 +107,7 @@
             <PdfSettings FileName="ProjectMap.pdf" />
         </telerik:RadClientExportManager>
     </div>
-    <div class="pas-container">
+    <div class="pasconcept-bar">
         <telerik:RadMap runat="server" ID="RadMap1" Zoom="10" DataSourceID="SqlDataSource1" Skin="Default" Height="800px" Width="100%">
             <ControlsSettings Attribution="false">
                 <NavigatorSettings Position="BottomLeft" />
