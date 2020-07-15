@@ -417,8 +417,15 @@ Public Class jobs
                 sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & e.CommandArgument & "&Dialog=1"
                 CreateRadWindows(e.CommandName, sUrl, 1024, 820, True, False)
 
+            Case "Action"
+
         End Select
     End Sub
+    Public Sub cboActions_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs)
+        Dim e1 As String = e.Text
+        Dim e2 As String = e.Value
+    End Sub
+
 
     Protected Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         CopyFilterToEmployeeClipboard(lblEmployeeId.Text)

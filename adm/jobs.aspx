@@ -3,7 +3,7 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -135,7 +135,7 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
 
-           <span id="spanViewSummary" runat="server">
+            <span id="spanViewSummary" runat="server">
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
                     View Summary
                 </button>
@@ -677,6 +677,21 @@
                                     </table>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
+
+
+                            <telerik:GridTemplateColumn UniqueName="Actions" HeaderStyle-Width="180px">
+                                <ItemTemplate>
+                                    <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="100%" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" >
+                                        <Items>
+                                            <telerik:RadComboBoxItem Text="(Select Action)" Value="-1" Selected="true" />
+                                            <telerik:RadComboBoxItem Text="Job" Value="Job"  />
+                                            <telerik:RadComboBoxItem Text="Accounting" Value="Accounting"  />
+                                        </Items>
+                                    </telerik:RadComboBox>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+
 
                             <%--Columnas No visibles para propositos de calculos--%>
                             <telerik:GridBoundColumn DataField="JobInvoiceAmount" UniqueName="JobInvoiceAmountHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
