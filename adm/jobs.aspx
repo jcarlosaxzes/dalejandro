@@ -684,8 +684,6 @@
                                     <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="100%" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" >
                                         <Items>
                                             <telerik:RadComboBoxItem Text="(Select Action)" Value="-1" Selected="true" />
-                                            <telerik:RadComboBoxItem Text="Job" Value="Job"  />
-                                            <telerik:RadComboBoxItem Text="Accounting" Value="Accounting"  />
                                         </Items>
                                     </telerik:RadComboBox>
                                 </ItemTemplate>

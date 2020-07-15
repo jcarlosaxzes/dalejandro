@@ -422,8 +422,16 @@ Public Class jobs
         End Select
     End Sub
     Public Sub cboActions_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs)
-        Dim e1 As String = e.Text
-        Dim e2 As String = e.Value
+        Dim action As String = e.Text
+        Dim jobId As String = e.Value
+        If action = "Job" Then
+            Dim sUrl As String = "~/ADM/Job_job.aspx?JobId=" & JobId
+            CreateRadWindows("Edit Job", sUrl, 960, 820, True, True)
+        End If
+        If action = "Accounting" Then
+            Dim sUrl As String = "~/ADM/Job_accounting.aspx?JobId=" & jobId
+            CreateRadWindows("Accounting", sUrl, 960, 820, True, True)
+        End If
     End Sub
 
 
@@ -488,9 +496,16 @@ Public Class jobs
 
             If TypeOf e.Item Is GridDataItem Then
                 Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
+                'Set Acction to Combo box
+                Dim jobId As Integer = item("Id").Text
+
+                Dim cboActions As RadComboBox = CType(item.FindControl("cboActions"), RadComboBox)
+                cboActions.Items.Insert(0, New RadComboBoxItem("Job", jobId))
+                cboActions.Items.Insert(0, New RadComboBoxItem("Accounting", jobId))
+
+
                 Dim Label1 As Label = DirectCast(item.FindControl("lblJobInvoiceAmount"), Label)
                 If DirectCast(item.FindControl("lblBalance"), Label).Text <> 0 Then
-                    Dim jobId As Integer = item("Id").Text
                     Dim lEmitted As Integer = LocalAPI.GetInvoiceEmmited(jobId)
                     Select Case lEmitted
                         Case 0  '"~/Images/Toolbar/white_circle.png"
