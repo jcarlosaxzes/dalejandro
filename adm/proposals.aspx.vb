@@ -49,11 +49,11 @@ Public Class proposals
 
             End If
 
-            'RadWindowManager1.EnableViewState = False
-            If RadWindowManager1.Windows.Count > 0 Then
-                RadWindowManager1.Windows.Clear()
-                RadGrid1.DataBind()
-            End If
+            RadWindowManager1.EnableViewState = False
+            'If RadWindowManager1.Windows.Count > 0 Then
+            '    RadWindowManager1.Windows.Clear()
+            '    'RadGrid1.DataBind()
+            'End If
 
         Catch ex As Exception
 

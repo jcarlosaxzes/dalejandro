@@ -18,17 +18,13 @@ Public Class clients
             If Not Request.QueryString("restoreFilter") Is Nothing Then
                 RestoreFilter()
             End If
-
-            '!!!! temporal
-            'lblEmployee.Text = "carlos@allservicedesign.com"
-            'lblCompanyId.Text = 260986
-
         End If
-        'RadWindowManager1.EnableViewState = False
-        If RadWindowManager1.Windows.Count > 0 Then
-            RadWindowManager1.Windows.Clear()
-            RadGrid1.DataBind()
-        End If
+
+        RadWindowManager1.EnableViewState = False
+        'If RadWindowManager1.Windows.Count > 0 Then
+        '    RadWindowManager1.Windows.Clear()
+        '    'RadGrid1.DataBind()
+        'End If
 
 
     End Sub
