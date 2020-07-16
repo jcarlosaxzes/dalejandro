@@ -350,7 +350,7 @@ Public Class jobs
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
-            Case "EditJob", "Accounting", "Images", "JobTimes", "Notes", "JobTags", "Tags", "GetSharedLink", "EditClient", "AzureUpload", "SetEmployee", "EditStatus", "NewTime"
+            Case "Edit Job", "Accounting", "Images", "JobTimes", "Notes", "JobTags", "Tags", "GetSharedLink", "EditClient", "AzureUpload", "SetEmployee", "EditStatus", "NewTime"
                 FireJobCommand(e.CommandName, e.CommandArgument)
 
             Case "HideClient"
@@ -399,6 +399,7 @@ Public Class jobs
         cboActions.Items.Insert(0, New RadComboBoxItem("View Page", jobId))
         cboActions.Items.Insert(0, New RadComboBoxItem("Client Profile", jobId))
         cboActions.Items.Insert(0, New RadComboBoxItem("Edit Status", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Map Location", jobId))
 
         ' Opciones for EEG
         If lblCompanyId.Text = 260962 Then
@@ -507,6 +508,13 @@ Public Class jobs
                     sUrl = "~/e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=" & guid
                     CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
 
+                Case "Map Location"
+                    'NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
+                    Dim ProjectLocation As String = LocalAPI.GetJobProperty(JobId, "ProjectLocation")
+                    If Len(ProjectLocation) > 0 Then
+                        sUrl = LocalAPI.urlProjectLocationGmap(ProjectLocation)
+                        CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+                    End If
             End Select
         Catch ex As Exception
 
@@ -580,36 +588,36 @@ Public Class jobs
                 Dim cboActions As RadComboBox = CType(item.FindControl("cboActions"), RadComboBox)
                 FillCboActions(cboActions, jobId)
 
-                Dim Label1 As Label = DirectCast(item.FindControl("lblJobInvoiceAmount"), Label)
+                Dim lblJobBilled As Label = DirectCast(item.FindControl("lblJobBilledAmount"), Label)
                 If DirectCast(item.FindControl("lblBalance"), Label).Text <> 0 Then
                     Dim lEmitted As Integer = LocalAPI.GetInvoiceEmmited(jobId)
                     Select Case lEmitted
                         Case 0  '"~/Images/Toolbar/white_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Blue
-                            Label1.ToolTip = "Blue. Balance>0 and Amount Due<>0 and Emitted=0"
+                            lblJobBilled.BackColor = System.Drawing.Color.Blue
+                            lblJobBilled.ToolTip = "Blue. Balance>0 and Amount Due<>0 and Emitted=0"
 
                         Case 1  '"~/Images/Toolbar/green_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Green
-                            Label1.ToolTip = "Green. Balance>0 and Amount Due<>0 and Emitted=1"
+                            lblJobBilled.BackColor = System.Drawing.Color.Green
+                            lblJobBilled.ToolTip = "Green. Balance>0 and Amount Due<>0 and Emitted=1"
 
                         Case 2  '"~/Images/Toolbar/yellow_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Orange
-                            Label1.ToolTip = "Orange. Balance>0 and Amount Due<>0 and Emitted=2"
+                            lblJobBilled.BackColor = System.Drawing.Color.Orange
+                            lblJobBilled.ToolTip = "Orange. Balance>0 and Amount Due<>0 and Emitted=2"
 
                         Case Else   '"~/Images/Toolbar/red_circle.png"
-                            Label1.BackColor = System.Drawing.Color.OrangeRed
-                            Label1.ToolTip = "OrangeRed. Balance>0 and Amount Due<>0 and Emitted>=3"
+                            lblJobBilled.BackColor = System.Drawing.Color.OrangeRed
+                            lblJobBilled.ToolTip = "OrangeRed. Balance>0 and Amount Due<>0 and Emitted>=3"
                     End Select
                 Else
                     ' Balance = 0
-                    If DirectCast(item.FindControl("lblBudget"), Label).Text = DirectCast(item.FindControl("lblJobInvoiceAmount"), Label).Text Then
+                    If DirectCast(item.FindControl("lblBudget"), Label).Text = DirectCast(item.FindControl("lblJobBilledAmount"), Label).Text Then
                         ' Budget = SUM(Invoice Amount)
-                        Label1.BackColor = System.Drawing.Color.Black
-                        Label1.ToolTip = "Black. Close, Balance=0 and JobBudget=SUM(Invoice Amount)"
+                        lblJobBilled.BackColor = System.Drawing.Color.Black
+                        lblJobBilled.ToolTip = "Black. Close, Balance=0 and JobBudget=SUM(Invoice Amount)"
                     Else
                         ' Budget <> SUM(Invoice Amount)
-                        Label1.BackColor = System.Drawing.Color.Purple
-                        Label1.ToolTip = "Purple. ? Balance=0 but JobBudget<>SUM(Invoice Amount)"
+                        lblJobBilled.BackColor = System.Drawing.Color.Purple
+                        lblJobBilled.ToolTip = "Purple. ? Balance=0 but JobBudget<>SUM(Invoice Amount)"
                     End If
                 End If
             End If

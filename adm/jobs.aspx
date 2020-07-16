@@ -374,11 +374,11 @@
                             <telerik:GridTemplateColumn UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code">
                                 <ItemTemplate>
                                     <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="100%" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
-                                        DropDownAutoWidth="Enabled" Skin="Silk">
+                                        DropDownAutoWidth="Enabled" Skin="Bootstrap">
                                     </telerik:RadComboBox>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="Open_date" HeaderText="Date" UniqueName="Open_date" HeaderStyle-Width="80px" SortExpression="Open_date" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="10px">
+                            <telerik:GridTemplateColumn DataField="Open_date" HeaderText="Date" UniqueName="Open_date" HeaderStyle-Width="80px" SortExpression="Open_date" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
                                     <%# Eval("Open_date","{0:MM/dd/yyyy}")%>
                                 </ItemTemplate>
@@ -386,9 +386,9 @@
 
                             <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type" SortExpression="Job" UniqueName="Job"  ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-
-                                    <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
-                                        ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
+                                    <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job" CommandName="Edit Job" UseSubmitBehavior="false" Font-Size="12px" >
+                                            <%#Eval("Job")%> 
+                                   </asp:LinkButton>
                                     <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                         <%#Eval("JobUploadFiles")%>
                                     </span>
@@ -396,9 +396,9 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Job" UniqueName="Job"  ItemStyle-Font-Size="X-Small">
+                            <telerik:GridTemplateColumn DataField="Client" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Client" UniqueName="Client" ItemStyle-Font-Size="x-small">
                                 <ItemTemplate>
-                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name"), " - ", Eval("Company"))%>'></asp:Label>
+                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("Name") %>' Font-Bold="true" Font-Size="12px"></asp:Label> - <%# Eval("Company") %>
                                     <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
                                         Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
                                         HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
@@ -482,7 +482,7 @@
                             <telerik:GridTemplateColumn DataField="JobInvoiceAmount" Display="false" HeaderText="Billed" SortExpression="JobInvoiceAmount" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="Billed" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblJobInvoiceAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:C0}")%>' ToolTip="Total Invoice Billed"></asp:Label>
+                                    <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:C0}")%>' ToolTip="Total Invoice Billed" ForeColor="White"></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
@@ -496,7 +496,7 @@
                             <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <%# Eval("Balance", "{0:C0}")%>
+                                    <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected"></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
