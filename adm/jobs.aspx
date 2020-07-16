@@ -129,6 +129,10 @@
                 .toggle.ios .toggle-handle {
                     border-radius: 20px;
                 }
+
+            .RadComboBox_Material .rcbInner {
+                padding: 4px 20px 4px 4px;
+            }
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -209,7 +213,7 @@
                             Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="0" />
-                                <telerik:RadComboBoxItem runat="server" Text="(PM not defined...)" Value="-2" />
+                                <telerik:RadComboBoxItem runat="server" Text="(PM Unassigned...)" Value="-2" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -280,7 +284,7 @@
     <div runat="server" id="panelSubbar" class="pasconcept-subbar" visible="false">
 
         <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
-            Width="175px" DataTextField="Name" DataValueField="Id" Height="250px" AppendDataBoundItems="true" Font-Size="Small">
+            Width="175px" DataTextField="Name" DataValueField="Id" Height="200px" AppendDataBoundItems="true" Font-Size="Small">
             <Items>
                 <telerik:RadComboBoxItem runat="server" Text="(Bulk Status Update)" Value="-1" />
             </Items>
@@ -358,7 +362,7 @@
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
                     PageSize="50" AllowPaging="true" Height="1500px" RenderMode="Auto"
-                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true" 
+                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="X-Small">
                     <ClientSettings Selecting-AllowRowSelect="true">
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -366,15 +370,18 @@
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceJobs" ShowFooter="True" CommandItemDisplay="None">
                         <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                         <Columns>
-                            <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px"  UniqueName="ClientSelectColumn" Visible="false">
+                            <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn" Visible="false">
                             </telerik:GridClientSelectColumn>
                             <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="10px">
                             </telerik:GridBoundColumn>
 
-                            <telerik:GridTemplateColumn UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code">
+                            <telerik:GridTemplateColumn UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="100%" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
-                                        DropDownAutoWidth="Enabled" Skin="Bootstrap">
+                                    <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job" CommandName="Edit Job" UseSubmitBehavior="false" Font-Bold="true">
+                                            <%#Eval("Code")%> 
+                                    </asp:LinkButton>
+                                    <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="30px" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
+                                        DropDownAutoWidth="Enabled" Skin="Material">
                                     </telerik:RadComboBox>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
@@ -384,21 +391,28 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type" SortExpression="Job" UniqueName="Job"  ItemStyle-Font-Size="X-Small">
+                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type" SortExpression="Job" UniqueName="Job" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job" CommandName="Edit Job" UseSubmitBehavior="false" Font-Size="12px" >
-                                            <%#Eval("Job")%> 
-                                   </asp:LinkButton>
+                                    <asp:HyperLink ID="hlkLocation" runat="server" NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
+                                        ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    </asp:HyperLink>
+
+                                    <asp:Label runat="server" Text='<%#Eval("Job")%>' Font-Bold="true">
+                                    </asp:Label>
                                     <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                         <%#Eval("JobUploadFiles")%>
                                     </span>
-                                    <%# String.Concat(" - ", Eval("TypeName")) %>
+                                    <br />
+                                    <%# Eval("TypeName") %>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Client" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Client" UniqueName="Client" ItemStyle-Font-Size="x-small">
                                 <ItemTemplate>
-                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("Name") %>' Font-Bold="true" Font-Size="12px"></asp:Label> - <%# Eval("Company") %>
+                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("Name") %>' Font-Bold="true"></asp:Label>
+                                    <br />
+                                    <%# Eval("Company") %>
                                     <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
                                         Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
                                         HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
@@ -447,14 +461,14 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="nStatus" ItemStyle-HorizontalAlign="Center"
-                                UniqueName="Status"  AllowFiltering="true" HeaderStyle-Width="120px">
+                                UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="125px">
                                 <ItemTemplate>
                                     <span title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>'><%# Eval("nStatus") %></span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM & Employees" SortExpression="EmployeeName"
-                                UniqueName="EmployeeName"  AllowFiltering="true" HeaderStyle-Width="180px" ItemStyle-Font-Size="X-Small">
+                                UniqueName="EmployeeName" AllowFiltering="true" HeaderStyle-Width="180px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="SetEmployee" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
                                                     <span aria-hidden="true" style='<%# IIf(Eval("employeeNumbers")=0,"color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
@@ -462,20 +476,28 @@
                                                         <%#Eval("employeeNumbers")%>
                                                     </span>
                                     </asp:LinkButton>
-                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
+                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
+                                        style='<%# IIf(Eval("companyId")=260962,"display:none","display:normal;font-size:x-small")%>'>
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </a>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget (%)" SortExpression="Budget" Display="false"
-                                UniqueName="Budget" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Budget - % Budget Used"
+                                UniqueName="Budget" HeaderTooltip="Budget - % Budget Used"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
-                                 HeaderStyle-Width="100px">
+                                HeaderStyle-Width="120px">
                                 <ItemTemplate>
-                                        <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" Font-Size="12px" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
-                                            &nbsp;
-                                        <%# Eval("Profit", "{0:N0}")%>%
+                                    <table style="width:100%">
+                                            <tr>
+                                                <td style="width:32px;text-align:right">
+                                                    <span title="Budget Used (%)" class='<%# LocalAPI.GetPercentUpLabelCSS(Eval("Profit")) %>'><%# Eval("Profit", "{0:N0}")%>%</span>
+                                                </td>
+                                                <td style="text-align:right">
+                                                    <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
+                                                </td>
+                                            </tr>
+                                    </table>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
@@ -500,7 +522,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                             <telerik:GridTemplateColumn DataField="SubContract" Display="false" HeaderText="RFP" SortExpression="SubContract" ItemStyle-HorizontalAlign="Right"
+                            <telerik:GridTemplateColumn DataField="SubContract" Display="false" HeaderText="RFP" SortExpression="SubContract" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="SubContract" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
                                     <%# Eval("SubContract", "{0:C0}")%>
@@ -512,8 +534,7 @@
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Job?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete" Display="false"
-                                UniqueName="DeleteColumn" HeaderText="" 
-                                ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                                UniqueName="DeleteColumn" HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                             </telerik:GridButtonColumn>
 
                         </Columns>
@@ -597,7 +618,7 @@
     </telerik:RadToolTip>
 
     <asp:SqlDataSource ID="SqlDataSourceJobs" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="JOBS_99C_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="JOBS_v_20_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="JOB_DELETE" DeleteCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
