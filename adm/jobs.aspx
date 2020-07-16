@@ -77,6 +77,10 @@
             $(document).on("click", ".toggle-on", function (event) {
                 var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
 
+                
+                columnIndex = masterTableView.getColumnByUniqueName("Profit").get_element().cellIndex;
+                masterTableView.showColumn(columnIndex);
+
                 columnIndex = masterTableView.getColumnByUniqueName("Budget").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Billed").get_element().cellIndex;
@@ -97,6 +101,10 @@
 
             $(document).on("click", ".toggle-off", function (event) {
                 var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+
+                columnIndex = masterTableView.getColumnByUniqueName("Profit").get_element().cellIndex;
+                masterTableView.hideColumn(columnIndex);
+
                 columnIndex = masterTableView.getColumnByUniqueName("Budget").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Billed").get_element().cellIndex;
@@ -132,6 +140,9 @@
 
             .RadComboBox_Material .rcbInner {
                 padding: 4px 20px 4px 4px;
+            }
+            .table-sm td, .table-sm th {
+               padding: .05rem;
             }
         </style>
     </telerik:RadCodeBlock>
@@ -471,9 +482,9 @@
                                 UniqueName="EmployeeName" AllowFiltering="true" HeaderStyle-Width="180px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="SetEmployee" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
-                                                    <span aria-hidden="true" style='<%# IIf(Eval("employeeNumbers")=0,"color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
-                                                    <span class="badge badge-pill badge-light" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal;font-size:x-small")%>'>
-                                                        <%#Eval("employeeNumbers")%>
+                                                    <span aria-hidden="true" style='<%# IIf(Left(Eval("EmployeeName"),2)="PM","color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
+                                                    <span class="badge badge-pill badge-primary" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal;font-size:x-small")%>'>
+                                                        +<%# Eval("employeeNumbers") %>
                                                     </span>
                                     </asp:LinkButton>
                                     <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
@@ -483,14 +494,66 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget (%)" SortExpression="Budget" Display="false"
+                            <telerik:GridTemplateColumn DataField="Profit" HeaderText="Budget Collected-Used" SortExpression="Profit"
+                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Size="X-Small"
+                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
+                                HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="220px">
+                                <ItemTemplate>
+                                    <table style="width: 100%;padding: 0 !important;margin: 0 !important;border-spacing:0 !important">
+                                        <tr>
+                                            <td>
+
+                                                <telerik:RadProgressBar ID="RadProgressBar98" runat="server"
+                                                    RenderMode="Lightweight"
+                                                    Height="6px" ShowLabel="false"
+                                                    BarType="Value"
+                                                    Skin="Bootstrap"
+                                                    MaxValue='<%# Eval("Budget")%>'
+                                                    Value='<%# Eval("Collected")%>'
+                                                    Width="100%"
+                                                    Visible='<%# Eval("Collected")>0%>'>
+                                                    <AnimationSettings Duration="0" />
+                                                </telerik:RadProgressBar>
+
+                                            </td>
+                                            <td style="width: 32px; text-align: right">
+                                                <%# GetCollectedPercent( Eval("Budget"),Eval("Collected")) %>%
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <telerik:RadProgressBar ID="RadProgressBar99" runat="server"
+                                                        RenderMode="Lightweight"
+                                                        Height="10px" ShowLabel="false"
+                                                        BarType="Value"
+                                                        Skin="Material"
+                                                        MaxValue='<%# Eval("Budget")%>'
+                                                        Value='<%# Eval("Coste")%>'
+                                                        Width="100%"
+                                                        CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'
+                                                        Visible='<%# Eval("Profit")>0%>'>
+                                                        <AnimationSettings Duration="0" />
+                                                    </telerik:RadProgressBar>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: right">
+                                                <%# Eval("Profit", "{0:N0}")%>%
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <%--Private Mode--%> 
+                            <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" HeaderTooltip="Budget - % Budget Used"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
                                 HeaderStyle-Width="120px">
                                 <ItemTemplate>
                                     <table style="width:100%">
                                             <tr>
-                                                <td style="width:32px;text-align:right">
+                                                <td style="width:32px;text-align:right;font-size:small">
                                                     <span title="Budget Used (%)" class='<%# LocalAPI.GetPercentUpLabelCSS(Eval("Profit")) %>'><%# Eval("Profit", "{0:N0}")%>%</span>
                                                 </td>
                                                 <td style="text-align:right">
