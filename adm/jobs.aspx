@@ -77,11 +77,15 @@
             $(document).on("click", ".toggle-on", function (event) {
                 var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
 
-                var columnIndex = masterTableView.getColumnByUniqueName("Profit").get_element().cellIndex;
-                masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Budget").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("Billed").get_element().cellIndex;
+                masterTableView.hideColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("Collected").get_element().cellIndex;
+                masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Balance").get_element().cellIndex;
+                masterTableView.hideColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("SubContract").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("DeleteColumn").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
@@ -93,11 +97,15 @@
 
             $(document).on("click", ".toggle-off", function (event) {
                 var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-                var columnIndex = masterTableView.getColumnByUniqueName("Profit").get_element().cellIndex;
-                masterTableView.showColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Budget").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("Billed").get_element().cellIndex;
+                masterTableView.showColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("Collected").get_element().cellIndex;
+                masterTableView.showColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Balance").get_element().cellIndex;
+                masterTableView.showColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("SubContract").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("DeleteColumn").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
@@ -350,356 +358,161 @@
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
                     PageSize="50" AllowPaging="true" Height="1500px" RenderMode="Auto"
-                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true" 
+                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="X-Small">
                     <ClientSettings Selecting-AllowRowSelect="true">
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                     </ClientSettings>
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceJobs" ShowFooter="True" CommandItemDisplay="None">
                         <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                         <Columns>
-                            <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" UniqueName="ClientSelectColumn" Visible="false">
+                            <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px"  UniqueName="ClientSelectColumn" Visible="false">
                             </telerik:GridClientSelectColumn>
                             <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="10px">
                             </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="Code" Groupable="False" HeaderText="Number<br/>Actions"
-                                SortExpression="Code" UniqueName="Code" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="140px"
-                                FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}" ReadOnly="true">
+
+                            <telerik:GridTemplateColumn UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code">
                                 <ItemTemplate>
-
-                                    <div style="text-align: center">
-                                        <table style="width: 100%">
-                                            <tr>
-                                                <td style="text-align: left">
-                                                    <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job"
-                                                        CommandName="EditJob" UseSubmitBehavior="false" ForeColor="Black">
-                                            <%#Eval("Code")%> 
-                                            <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
-                                                <%#Eval("JobUploadFiles")%>
-                                            </span>
-                                                    </asp:LinkButton>
-                                                </td>
-                                                <td style="width: 16px; text-align: right">
-                                                    <asp:Label ID="lblShare" runat="server"> <i class="fas fa-share"></i></asp:Label>
-                                                    <telerik:RadToolTip RenderMode="Lightweight" ID="RadToolTipShareJob" runat="server" TargetControlID="lblShare" Width="300px"
-                                                        RelativeTo="Element" Position="MiddleLeft" HideEvent="ManualClose">
-                                                        <table style="width: 100%">
-                                                            <tr>
-                                                                <td style="text-align: center">
-                                                                    <telerik:RadSocialShare RenderMode="Lightweight" ID="RadSocialShare1" runat="server" Skin="Telerik"
-                                                                        UrlToShare='<%# String.Concat(LocalAPI.GetHostAppSite() & "/ope/ope_project.aspx?guId=", Eval("guid"), "&Id=", Eval("id"))%>'
-                                                                        TitleToShare='<%# Eval("Job")%>'>
-                                                                        <MainButtons>
-                                                                            <telerik:RadSocialButton SocialNetType="ShareOnFacebook"></telerik:RadSocialButton>
-                                                                            <telerik:RadSocialButton SocialNetType="ShareOnTwitter"></telerik:RadSocialButton>
-                                                                            <telerik:RadSocialButton SocialNetType="ShareOnGooglePlus"></telerik:RadSocialButton>
-                                                                            <telerik:RadSocialButton SocialNetType="LinkedIn"></telerik:RadSocialButton>
-                                                                        </MainButtons>
-                                                                    </telerik:RadSocialShare>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    <telerik:RadTextBox ID="txtURL" SelectionOnFocus="SelectAll" runat="server" Width="100%"
-                                                                        Text='<%# String.Concat(LocalAPI.GetHostAppSite() & "/ope/ope_project.aspx?guId=", Eval("guid"), "&Id=", Eval("id"))%>'>
-                                                                    </telerik:RadTextBox>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </telerik:RadToolTip>
-                                                </td>
-                                            </tr>
-
-                                        </table>
-
-
-                                    </div>
-
-                                    <div style="text-align: center">
-                                        <table style="width: 100%; text-align: center">
-                                            <tr>
-                                                <td>
-                                                    <asp:LinkButton ID="btnAccounting" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Accounting"
-                                                        CommandName="Accounting" UseSubmitBehavior="false" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>'>
-                                                <i class="fas fa-dollar-sign"></i>
-                                                        
-                                                    </asp:LinkButton>
-                                                </td>
-                                                <td>
-                                                    <a class="far fa-share-square" title="Click to View Job" href='<%#String.Concat("../e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=", Eval("guid")) %>' target="_blank" aria-hidden="true"></a>
-                                                </td>
-                                                <td>
-                                                    <asp:LinkButton ID="btnImages" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Images"
-                                                        CommandName="Images" UseSubmitBehavior="false" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>'>
-                                                        <i class="far fa-image"></i>
-                                                    </asp:LinkButton>
-                                                </td>
-                                                <td>
-                                                    <asp:LinkButton ID="btnNotes" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Notes"
-                                                        CommandName="Notes" UseSubmitBehavior="false">
-                                                <i class="far fa-edit"></i>
-                                                    </asp:LinkButton>
-                                                </td>
-                                                <td>
-                                                    <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add Time"
-                                                        CommandName="NewTime" UseSubmitBehavior="false">
-                                                <i class="fas fa-user-clock"></i>
-                                                    </asp:LinkButton>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type<br/>Client - Company" SortExpression="Job" UniqueName="Job" HeaderStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <div>
-                                        <asp:LinkButton ID="btnAzureStorage" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Upload files"
-                                            CommandName="AzureUpload" UseSubmitBehavior="false">
-                                                    <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
-                                        </asp:LinkButton>
-
-                                        <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
-                                            ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
-
-                                        <%# String.Concat(" - ",Eval("TypeName")) %>
-                                    </div>
-                                    <div>
-                                        <asp:LinkButton ID="btnHideClient" runat="server" CommandArgument='<%# Eval("Client")%>' ToolTip="Hide client from list"
-                                            CommandName="HideClient" UseSubmitBehavior="false">
-                                                    <i class="fas fa-eye-slash"></i>
-                                        </asp:LinkButton>
-                                        <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank">
-                                            <i class="fas fa-th-list"></i>
-                                        </a>
-                                        <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name")," - ",Eval("Company"))%>'></asp:Label>
-                                        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
-                                            Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
-                                            HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
-                                            <table class="table-sm">
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Client") %>'
-                                                            CommandName="EditClient" Text='<%# Eval("Name")%>' UseSubmitBehavior="false" Font-Size="Medium"
-                                                            CssClass="badge badge-info ">
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2" style="margin-top: 10px">
-                                                        <%# Eval("Company") %>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="width: 60px">Phone:
-                                                    </td>
-                                                    <td>
-                                                        <telerik:RadMaskedTextBox ID="PhoneTextBox" runat="server" ReadOnly="true"
-                                                            Text='<%# LocalAPI.GetClientProperty(Eval("Client"), "Phone")%>' Mask="(###) ###-####" BorderStyle="None" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cellular:
-                                                    </td>
-                                                    <td>
-                                                        <telerik:RadMaskedTextBox ID="RadMaskedTextBox1" runat="server" ReadOnly="true"
-                                                            Text='<%# LocalAPI.GetClientProperty(Eval("Client"), "Cellular")%>' Mask="(###) ###-####" BorderStyle="None" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Email:
-                                                    </td>
-                                                    <td>
-                                                        <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </telerik:RadToolTip>
-
-                                        <%-- Representacion previa de Tags en forma de <span.../>
-                                            <asp:LinkButton ID="lnkViewTag1" runat="server" CommandName="JobTags" CommandArgument='<%# Eval("Id") %>' ToolTip="View/Edit Job TAGs">
-                                            <span aria-hidden="true" class="fas fa-tag" style='<%# IIf(len(Eval("Tags"))>0,"display:none","display:normal")%>'></span>
-                                             <%# LocalAPI.ConvertSpanTags(Eval("Tags")) %>
-                                        </asp:LinkButton>--%>
-                                        <asp:LinkButton ID="lnkViewTag1" runat="server" CommandName="JobTags" CommandArgument='<%# Eval("Id") %>' ToolTip="View/Edit Job TAGs">
-                                            <i class="fas fa-tag"></i>
-                                             <%# IIf(Eval("Tags") > 0, String.Concat(" (", Eval("Tags"), ")"), "") %>
-                                        </asp:LinkButton>
-
-
-                                    </div>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="Status" HeaderText="PM & Employees</br>Status" SortExpression="nStatus"
-                                UniqueName="Status" HeaderStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="250px">
-                                <ItemTemplate>
-                                    <table style="width: 100%">
-                                        <tr>
-                                            <td>
-                                                <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="SetEmployee" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
-                                                    <%# Eval("EmployeeName")%>
-                                                    <span aria-hidden="true" class="fas fa-user"  style='<%# IIf(Eval("employeeNumbers")=0,"color:red","color:#23527c")%>'></span>
-                                                    <span class="badge badge-pill badge-light" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal;font-size:x-small")%>'>
-                                                        <%#Eval("employeeNumbers")%>
-                                                    </span>
-                                                </asp:LinkButton>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditStatus" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Job Status">
-                                                    <span title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>'><%# Eval("nStatus") %></span>
-                                                </asp:LinkButton>
-                                                <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
-                                                    <i class="fas fa-cloud-download-alt"></i>
-                                                </a>
-                                            </td>
-
-                                        </tr>
-                                    </table>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected (%)<br/>Budget Used (%)" SortExpression="Profit"
-                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Size="X-Small"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
-                                HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
-                                <ItemTemplate>
-                                    <table style="width: 100%">
-                                        <tr>
-                                            <td>
-
-                                                <telerik:RadProgressBar ID="RadProgressBar98" runat="server"
-                                                    RenderMode="Lightweight"
-                                                    Height="5px" ShowLabel="false"
-                                                    BarType="Value"
-                                                    Skin="Bootstrap"
-                                                    MaxValue='<%# Eval("Budget")%>'
-                                                    Value='<%# Eval("Collected")%>'
-                                                    Width="100%"
-                                                    Visible='<%# Eval("Collected")>0%>'>
-                                                    <AnimationSettings Duration="0" />
-                                                </telerik:RadProgressBar>
-
-                                            </td>
-                                            <td style="width: 32px; text-align: right">
-                                                <%# GetCollectedPercent( Eval("Budget"),Eval("Collected")) %>%
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div>
-                                                    <telerik:RadProgressBar ID="RadProgressBar99" runat="server"
-                                                        RenderMode="Lightweight"
-                                                        Height="15px" ShowLabel="false"
-                                                        BarType="Value"
-                                                        Skin="Material"
-                                                        MaxValue='<%# Eval("Budget")%>'
-                                                        Value='<%# Eval("Coste")%>'
-                                                        Width="100%"
-                                                        CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'
-                                                        Visible='<%# Eval("Profit")>0%>'>
-                                                        <AnimationSettings Duration="0" />
-                                                    </telerik:RadProgressBar>
-                                                </div>
-                                            </td>
-                                            <td style="text-align: right">
-                                                <%# Eval("Profit", "{0:N0}")%>%
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn DataField="Budget" HeaderText="Date - Budget<br/>Budget Used ($%)" SortExpression="Budget" Display="false"
-                                UniqueName="Budget" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
-                                HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
-                                <ItemTemplate>
-                                    <table style="width: 100%">
-                                        <tr>
-                                            <td style="text-align: center">
-                                                <%# Eval("Open_date","{0:MM/dd/yyyy}")%>
-                                            </td>
-                                            <td style="width: 60px; text-align: right">
-                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:N0}")%>' Font-Bold="true" Font-Size="16px" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left">
-                                                <asp:LinkButton ID="lnkTime" runat="server" CommandName="JobTimes" CommandArgument='<%# Eval("Id") %>'>
-                                                    <telerik:RadProgressBar ID="RadProgressBar1" runat="server" BarType="Value" Skin="Metro"
-                                                        ShowLabel="true"
-                                                        MaxValue='<%# Eval("Budget")%>'
-                                                        Value='<%# Eval("Coste")%>'
-                                                        Label='<%# GetFormatString(Eval("Coste", "{0:C0}"), Eval("Profit", "{0:N0}"))%>' Width="100%"
-                                                        ToolTip='<%# String.Concat(Eval("Profit", "{0:N0}"), " %")%>' CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
-                                                        <AnimationSettings Duration="0" />
-                                                    </telerik:RadProgressBar>
-                                                </asp:LinkButton>
-                                            </td>
-                                            <td style="text-align: right">
-                                                <span style="font-size: 12px"><%# Eval("Coste", "{0:N0}")%></span>
-
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="Balance" Display="false"
-                                Groupable="False" HeaderText="Billed - Collected<br/> Subc.Fee - Balance" SortExpression="Balance"
-                                UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
-                                HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
-                                <ItemTemplate>
-                                    <table style="width: 100%; vertical-align: top">
-                                        <tr>
-                                            <td style="text-align: right; width: 80px">
-                                                <asp:Label ID="lblJobInvoiceAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:N0}")%>' ForeColor="White" ToolTip="Total Invoice Amount"></asp:Label>
-                                            </td>
-                                            <td style="text-align: right">
-                                                <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:N0}")%>' ToolTip="Total Invoice Collected"></asp:Label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: right">
-                                                <asp:LinkButton ID="btnEditJob2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Job"
-                                                    CommandName="EditJob" Text='<%# Eval("SubContract","{0:N0}")%>' UseSubmitBehavior="false">
-                                                </asp:LinkButton>
-                                            </td>
-                                            <td style="text-align: right">
-                                                <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:N0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-
-                            <telerik:GridTemplateColumn UniqueName="Actions" HeaderStyle-Width="180px">
-                                <ItemTemplate>
-                                    <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="100%" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" >
-                                        <Items>
-                                            <telerik:RadComboBoxItem Text="(Select Action)" Value="-1" Selected="true" />
-                                        </Items>
+                                    <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="100%" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
+                                        DropDownAutoWidth="Enabled" Skin="Silk">
                                     </telerik:RadComboBox>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="Open_date" HeaderText="Date" UniqueName="Open_date" HeaderStyle-Width="80px" SortExpression="Open_date" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="10px">
+                                <ItemTemplate>
+                                    <%# Eval("Open_date","{0:MM/dd/yyyy}")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
 
+                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type" SortExpression="Job" UniqueName="Job"  ItemStyle-Font-Size="X-Small">
+                                <ItemTemplate>
 
+                                    <asp:HyperLink ID="hlkJobLabel" runat="server" Text='<%# Eval("Job")%>' NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
+                                        ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank"></asp:HyperLink>
+                                    <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
+                                        <%#Eval("JobUploadFiles")%>
+                                    </span>
+                                    <%# String.Concat(" - ", Eval("TypeName")) %>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Job" UniqueName="Job"  ItemStyle-Font-Size="X-Small">
+                                <ItemTemplate>
+                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# String.Concat(Eval("Name"), " - ", Eval("Company"))%>'></asp:Label>
+                                    <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
+                                        Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
+                                        HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
+                                        <table class="table-sm">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Client") %>'
+                                                        CommandName="EditClient" Text='<%# Eval("Name")%>' UseSubmitBehavior="false" Font-Size="Medium"
+                                                        CssClass="badge badge-info ">
+                                                    </asp:LinkButton>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="margin-top: 10px">
+                                                    <%# Eval("Company") %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 60px">Phone:
+                                                </td>
+                                                <td>
+                                                    <telerik:RadMaskedTextBox ID="PhoneTextBox" runat="server" ReadOnly="true"
+                                                        Text='<%# LocalAPI.GetClientProperty(Eval("Client"), "Phone")%>' Mask="(###) ###-####" BorderStyle="None" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cellular:
+                                                </td>
+                                                <td>
+                                                    <telerik:RadMaskedTextBox ID="RadMaskedTextBox1" runat="server" ReadOnly="true"
+                                                        Text='<%# LocalAPI.GetClientProperty(Eval("Client"), "Cellular")%>' Mask="(###) ###-####" BorderStyle="None" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email:
+                                                </td>
+                                                <td>
+                                                    <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </telerik:RadToolTip>
+
+                                    <%# IIf(Eval("Tags") > 0, String.Concat(" (", Eval("Tags"), ")"), "") %>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="nStatus" ItemStyle-HorizontalAlign="Center"
+                                UniqueName="Status"  AllowFiltering="true" HeaderStyle-Width="120px">
+                                <ItemTemplate>
+                                    <span title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>'><%# Eval("nStatus") %></span>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM & Employees" SortExpression="EmployeeName"
+                                UniqueName="EmployeeName"  AllowFiltering="true" HeaderStyle-Width="180px" ItemStyle-Font-Size="X-Small">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="SetEmployee" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
+                                                    <span aria-hidden="true" style='<%# IIf(Eval("employeeNumbers")=0,"color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
+                                                    <span class="badge badge-pill badge-light" style='<%# IIf(Eval("employeeNumbers")=0,"display:none","display:normal;font-size:x-small")%>'>
+                                                        <%#Eval("employeeNumbers")%>
+                                                    </span>
+                                    </asp:LinkButton>
+                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank">
+                                        <i class="fas fa-cloud-download-alt"></i>
+                                    </a>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget (%)" SortExpression="Budget" Display="false"
+                                UniqueName="Budget" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Budget - % Budget Used"
+                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
+                                 HeaderStyle-Width="100px">
+                                <ItemTemplate>
+                                        <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:N0}")%>' Font-Bold="true" Font-Size="12px" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
+                                            &nbsp;
+                                        <%# Eval("Profit", "{0:N0}")%>%
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="JobInvoiceAmount" Display="false" HeaderText="Billed" SortExpression="JobInvoiceAmount"
+                                UniqueName="Billed" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblJobInvoiceAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:N0}")%>' ToolTip="Total Invoice Billed"></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Collected" SortExpression="Collected"
+                                UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:N0}")%>' ToolTip="Total Invoice Collected"></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance"
+                                UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
+                                <ItemTemplate>
+                                    <%# Eval("Balance", "{0:N0}")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                             <telerik:GridTemplateColumn DataField="SubContract" Display="false" HeaderText="RFP" SortExpression="SubContract"
+                                UniqueName="SubContract" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
+                                <ItemTemplate>
+                                    <%# Eval("SubContract", "{0:N0}")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
 
                             <%--Columnas No visibles para propositos de calculos--%>
-                            <telerik:GridBoundColumn DataField="JobInvoiceAmount" UniqueName="JobInvoiceAmountHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
-                            <telerik:GridBoundColumn DataField="Collected" UniqueName="CollectedtHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
-                            <telerik:GridBoundColumn DataField="SubContract" UniqueName="SubContractHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
                             <telerik:GridBoundColumn DataField="JobInvoiceAmountPending" UniqueName="JobInvoiceAmountPendingHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Job?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete" Display="false"
-                                UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
+                                UniqueName="DeleteColumn" HeaderText="" 
                                 ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
                             </telerik:GridButtonColumn>
 

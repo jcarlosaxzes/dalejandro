@@ -54,21 +54,22 @@ Public Class jobs
                     RestoreFilter()
                 End If
 
-                SqlDataSourceJobs.DataBind()
-
                 If Not Request.QueryString("JobIdInput") Is Nothing Then
                     lblJobIdInput.Text = Request.QueryString("JobIdInput")
                 End If
 
-                EEGvertical
-            End If
+                EEGvertical()
 
-            If RadWindowManagerJob.Windows.Count > 0 Then
-                RadWindowManagerJob.Windows.Clear()
                 RadGrid1.DataBind()
             End If
-        Catch ex As Exception
 
+            'If RadWindowManagerJob.Windows.Count > 0 Then
+            '    RadWindowManagerJob.Windows.Clear()
+            '    'RadGrid1.DataBind()
+            'End If
+            RadWindowManagerJob.EnableViewState = False
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
         End Try
     End Sub
 
@@ -349,46 +350,8 @@ Public Class jobs
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
-            Case "EditJob"
-                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
-
-            Case "Accounting"
-                sUrl = "~/ADM/Job_accounting.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
-
-            Case "Images"
-                sUrl = "~/ADM/Job_images_files.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, False)
-
-            Case "JobTimes"
-                sUrl = "~/ADM/Job_times.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
-
-            Case "Notes"
-                sUrl = "~/ADM/Job_notes.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
-
-            Case "JobTags"
-                sUrl = "~/ADM/Job_tags.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
-
-            Case "GetSharedLink"
-                sUrl = "~/adm/sharelink.aspx?ObjType=2&ObjId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 520, 400, False, False)
-
-            Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 750, False, False)
-
-            Case "Tags"
-                sUrl = "~/ADM/Job_tags.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, False)
-
-            Case "AzureUpload"
-                sUrl = "~/ADM/Job_links.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, False)
-                'sUrl = "~/ADM/AzureStorage.aspx?JobId=" & e.CommandArgument
+            Case "EditJob", "Accounting", "Images", "JobTimes", "Notes", "JobTags", "Tags", "GetSharedLink", "EditClient", "AzureUpload", "SetEmployee", "EditStatus", "NewTime"
+                FireJobCommand(e.CommandName, e.CommandArgument)
 
             Case "HideClient"
                 Dim ClientId As Integer = e.CommandArgument
@@ -398,40 +361,156 @@ Public Class jobs
                     Refresh()
                 End If
 
-            Case "SetEmployee"
-                sUrl = "~/ADM/Job_employees.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
-                'sUrl = "~/ADM/JobAssignEmployee.aspx?JobId=" & e.CommandArgument
-                'CreateRadWindows(e.CommandName, sUrl, 850, 650, False, True)
-
-            Case "EditStatus"
-                lblSelectedJobId.Text = e.CommandArgument
-                cboJobNewStatus.DataBind()
-                RadToolTipJobStatus.Visible = True
-                RadToolTipJobStatus.Show()
-
-            Case "NewTime"
-                If cboEmployee.SelectedValue > 0 Then
-                    Session("employeefortime") = cboEmployee.SelectedValue
-                End If
-                sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & e.CommandArgument & "&Dialog=1"
-                CreateRadWindows(e.CommandName, sUrl, 1024, 820, True, False)
-
-            Case "Action"
-
         End Select
     End Sub
+
+
+    Private Sub FillCboActions(cboActions As RadComboBox, jobId As Integer)
+        cboActions.Items.Insert(0, New RadComboBoxItem(LocalAPI.GetJobCode(jobId), -1))
+
+        ' Permissin for all employees
+        cboActions.Items.Insert(0, New RadComboBoxItem("Edit Job", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Notes", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Add Time", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Uploaded Files", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Scope of Work", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("View Job", jobId))
+
+        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") Then
+            cboActions.Items.Insert(0, New RadComboBoxItem("Accounting", jobId))
+            cboActions.Items.Insert(0, New RadComboBoxItem("Images", jobId))
+        End If
+
+        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") Then
+            cboActions.Items.Insert(0, New RadComboBoxItem("Proposals", jobId))
+        End If
+
+        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") Then
+            cboActions.Items.Insert(0, New RadComboBoxItem("Transmittal", jobId))
+        End If
+
+        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") Then
+            cboActions.Items.Insert(0, New RadComboBoxItem("Expenses", jobId))
+        End If
+
+        cboActions.Items.Insert(0, New RadComboBoxItem("Employees", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Time Activity", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Tags", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("View Page", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Client Profile", jobId))
+        cboActions.Items.Insert(0, New RadComboBoxItem("Edit Status", jobId))
+
+        ' Opciones for EEG
+        If lblCompanyId.Text = 260962 Then
+            cboActions.Items.Insert(0, New RadComboBoxItem("Hide Client", jobId))
+        End If
+
+        cboActions.SelectedValue = -1
+        cboActions.Items.Sort()
+
+
+    End Sub
+
     Public Sub cboActions_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs)
-        Dim action As String = e.Text
-        Dim jobId As String = e.Value
-        If action = "Job" Then
-            Dim sUrl As String = "~/ADM/Job_job.aspx?JobId=" & JobId
-            CreateRadWindows("Edit Job", sUrl, 960, 820, True, True)
-        End If
-        If action = "Accounting" Then
-            Dim sUrl As String = "~/ADM/Job_accounting.aspx?JobId=" & jobId
-            CreateRadWindows("Accounting", sUrl, 960, 820, True, True)
-        End If
+        Try
+            FireJobCommand(e.Text, e.Value)
+            CType(sender, RadComboBox).SelectedValue = -1
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub FireJobCommand(CommandName As String, JobId As Integer)
+        Try
+            Dim sUrl As String
+            Select Case CommandName
+                Case "EditJob", "Edit Job"
+                    sUrl = "~/ADM/Job_job.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+
+                Case "Accounting"
+                    sUrl = "~/ADM/Job_accounting.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+
+                Case "Images"
+                    sUrl = "~/ADM/Job_images_files.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "AzureUpload", "Uploaded Files"
+                    sUrl = "~/ADM/Job_links.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "JobTimes", "Time Activity"
+                    sUrl = "~/ADM/Job_times.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "Notes"
+                    sUrl = "~/ADM/Job_notes.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "JobTags", "Tags"
+                    sUrl = "~/ADM/Job_tags.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "GetSharedLink", "View Page"
+                    sUrl = "~/adm/sharelink.aspx?ObjType=2&ObjId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 520, 400, False, False)
+
+                Case "EditClient", "Client Profile"
+                    Dim ClientId As Integer = LocalAPI.GetJobProperty(JobId, "Client")
+                    sUrl = "~/ADM/Client.aspx?clientId=" & ClientId
+                    CreateRadWindows(CommandName, sUrl, 900, 750, False, False)
+
+                Case "SetEmployee", "Employees"
+                    sUrl = "~/ADM/Job_employees.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+
+                Case "EditStatus", "Edit Status"
+                    lblSelectedJobId.Text = JobId
+                    cboJobNewStatus.DataBind()
+                    RadToolTipJobStatus.Visible = True
+                    RadToolTipJobStatus.Show()
+
+                Case "NewTime", "Add Time"
+                    If cboEmployee.SelectedValue > 0 Then
+                        Session("employeefortime") = cboEmployee.SelectedValue
+                    End If
+                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&Dialog=1"
+                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+
+                Case "Transmittal"
+                    sUrl = "~/ADM/job_transmittals.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "Expenses"
+                    sUrl = "~/ADM/job_rfps.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "Proposals"
+                    sUrl = "~/ADM/job_proposals.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "Hide Client"
+                    Dim ClientId As Integer = LocalAPI.GetJobProperty(JobId, "Client")
+                    If ClientId > 0 Then
+                        lblExcludeClientId_List.Text = lblExcludeClientId_List.Text & IIf(Len(lblExcludeClientId_List.Text) > 0, ",", "") & ClientId
+                        btnClientUnhide.Visible = True
+                        Refresh()
+                    End If
+
+                Case "Scope of Work"
+                    Dim guid As String = LocalAPI.GetJobProperty(JobId, "guid")
+                    sUrl = "~/adm/scopeofwork.aspx?guid=" & guid
+                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+
+                Case "View Job"
+                    Dim guid As String = LocalAPI.GetJobProperty(JobId, "guid")
+                    sUrl = "~/e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=" & guid
+                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+
+            End Select
+        Catch ex As Exception
+
+        End Try
     End Sub
 
 
@@ -498,11 +577,8 @@ Public Class jobs
                 Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
                 'Set Acction to Combo box
                 Dim jobId As Integer = item("Id").Text
-
                 Dim cboActions As RadComboBox = CType(item.FindControl("cboActions"), RadComboBox)
-                cboActions.Items.Insert(0, New RadComboBoxItem("Job", jobId))
-                cboActions.Items.Insert(0, New RadComboBoxItem("Accounting", jobId))
-
+                FillCboActions(cboActions, jobId)
 
                 Dim Label1 As Label = DirectCast(item.FindControl("lblJobInvoiceAmount"), Label)
                 If DirectCast(item.FindControl("lblBalance"), Label).Text <> 0 Then
@@ -621,11 +697,12 @@ Public Class jobs
         Try
             Dim footerItem As GridFooterItem = RadGrid1.MasterTableView.GetItems(GridItemType.Footer)(0)
             lblTotalBudget.Text = footerItem("Budget").Text
-            lblTotalBilled.Text = footerItem("JobInvoiceAmountHide").Text
-            lblTotalCollected.Text = footerItem("CollectedtHide").Text
-            lblTotalPending.Text = footerItem("JobInvoiceAmountPendingHide").Text
+            lblTotalBilled.Text = footerItem("Billed").Text
+            lblTotalCollected.Text = footerItem("Collected").Text
             LabelblTotalBalance.Text = footerItem("Balance").Text
-            lblTotalSubContract.Text = footerItem("SubContractHide").Text
+            lblTotalSubContract.Text = footerItem("SubContract").Text
+
+            lblTotalPending.Text = footerItem("JobInvoiceAmountPendingHide").Text
         Catch ex As Exception
 
         End Try
