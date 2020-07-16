@@ -241,7 +241,7 @@ Public Class proposalnewwizard
 
     Private Sub SqlDataSourceProposalClient_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceProposalClient.Updated
         lblClientId.Text = e.Command.Parameters("@Id_OUT").Value.ToString
-        If cboClients.SelectedValue = "-1" Then
+        If cboClients.SelectedValue <= 0 Then
             RefreshClientControls()
         End If
     End Sub
