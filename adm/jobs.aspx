@@ -473,37 +473,37 @@
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
                                  HeaderStyle-Width="100px">
                                 <ItemTemplate>
-                                        <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:N0}")%>' Font-Bold="true" Font-Size="12px" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
+                                        <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" Font-Size="12px" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
                                             &nbsp;
                                         <%# Eval("Profit", "{0:N0}")%>%
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="JobInvoiceAmount" Display="false" HeaderText="Billed" SortExpression="JobInvoiceAmount"
+                            <telerik:GridTemplateColumn DataField="JobInvoiceAmount" Display="false" HeaderText="Billed" SortExpression="JobInvoiceAmount" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="Billed" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblJobInvoiceAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:N0}")%>' ToolTip="Total Invoice Billed"></asp:Label>
+                                    <asp:Label ID="lblJobInvoiceAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:C0}")%>' ToolTip="Total Invoice Billed"></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Collected" SortExpression="Collected"
+                            <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:N0}")%>' ToolTip="Total Invoice Collected"></asp:Label>
+                                    <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoice Collected"></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance"
+                            <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <%# Eval("Balance", "{0:N0}")%>
+                                    <%# Eval("Balance", "{0:C0}")%>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                             <telerik:GridTemplateColumn DataField="SubContract" Display="false" HeaderText="RFP" SortExpression="SubContract"
+                             <telerik:GridTemplateColumn DataField="SubContract" Display="false" HeaderText="RFP" SortExpression="SubContract" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="SubContract" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <%# Eval("SubContract", "{0:N0}")%>
+                                    <%# Eval("SubContract", "{0:C0}")%>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
