@@ -1639,6 +1639,21 @@ Public Class LocalAPI
         End Select
     End Function
 
+
+    Public Shared Function GetPercentUpLabelCSS(ByVal PercentValue As Integer) As String
+        Select Case PercentValue
+            Case 0 To 33
+                Return "badge badge-pill badge-secondary"
+            Case 34 To 66
+                Return "badge badge-pill badge-success"
+            Case 67 To 99
+                Return "badge badge-pill badge-warning"
+            Case >= 100
+                Return "badge badge-pill badge-danger"
+        End Select
+    End Function
+
+
     Public Shared Function GetJobStatusColorCSS(ByVal statusId As Integer) As String
         '        0   Not in Progress		"default"
         '        1   Inactive		"default"

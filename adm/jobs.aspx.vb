@@ -366,7 +366,7 @@ Public Class jobs
 
 
     Private Sub FillCboActions(cboActions As RadComboBox, jobId As Integer)
-        cboActions.Items.Insert(0, New RadComboBoxItem(LocalAPI.GetJobCode(jobId), -1))
+        cboActions.Items.Insert(0, New RadComboBoxItem(" ", -1))
 
         ' Permissin for all employees
         cboActions.Items.Insert(0, New RadComboBoxItem("Edit Job", jobId))
