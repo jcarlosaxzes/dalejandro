@@ -4,7 +4,7 @@
 
 @page {
     size: auto; /* auto is the initial value */
-    margin: 0; /* this affects the margin in the printer settings */
+     margin: 10mm 2mm; /* this affects the margin in the printer settings */
 }
 
 .row.page {
@@ -20,7 +20,7 @@
 
 @media print {
     .content {
-        padding: 15px 0px 42px !important;
+        padding: 0px !important;
     }
 
     p {

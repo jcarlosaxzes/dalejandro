@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/Content/sing-theme/application.min.css" />
     <link rel="stylesheet" href="~/Content/sing-theme/telerik-form-fixes.css" />
     <link rel="stylesheet" href="~/Content/sing-theme/template-fixes.css" />
-    <link rel="stylesheet" href="~/Content/sing-theme/print-page.css" />
+    <link rel="stylesheet" href="~/Content/sing-theme/print-page.css?v=1" />
     <!-- as of IE9 cannot parse css files with more that 4K classes separating in two files -->
     <!--[if IE 9]>
         <link href="Content/application-ie9-part2.css" rel="stylesheet">
