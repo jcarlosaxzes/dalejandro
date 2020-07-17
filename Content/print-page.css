@@ -1,0 +1,33 @@
+﻿
+@page {
+    size: auto; /* auto is the initial value */
+    margin: 20mm; /* this affects the margin in the printer settings */
+}
+
+@media print {
+    p {
+        page-break-inside: avoid;
+    }
+
+    .print-nobreak {
+        page-break-inside: avoid;
+        padding-top: 30px;
+    }
+
+    table {
+        page-break-inside: auto
+    }
+
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+}
