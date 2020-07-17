@@ -548,7 +548,7 @@
                             </telerik:GridTemplateColumn>
 
                             <%--Private Mode--%>
-                            <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
+                            <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" HeaderTooltip="Budget - % Budget Used"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
                                 HeaderStyle-Width="120px">
@@ -574,9 +574,19 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
+                                UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="120px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoice Collected"></asp:Label>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 32px; text-align: right;">
+                                                <span title="Budget Collected (%)" class='<%# LocalAPI.GetPercentDonwLabelCSS(GetCollectedPercent(Eval("Budget"), Eval("Collected"))) %>' style="font-size:10px"><%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%</span>
+                                            </td>
+                                            <td style="text-align: right">
+                                                <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoices Collected"></asp:Label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 

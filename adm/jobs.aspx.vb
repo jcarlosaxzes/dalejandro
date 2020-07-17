@@ -350,7 +350,7 @@ Public Class jobs
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
-            Case "Edit Job", "Accounting", "Images", "JobTimes", "Notes", "JobTags", "Tags", "GetSharedLink", "EditClient", "AzureUpload", "SetEmployee", "EditStatus", "NewTime"
+            Case "View/Edit Info", "View/Edit Client Profile", "View/Edit Employees"
                 FireJobCommand(e.CommandName, e.CommandArgument)
 
             Case "HideClient"
