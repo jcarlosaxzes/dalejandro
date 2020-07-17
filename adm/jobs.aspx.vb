@@ -366,45 +366,72 @@ Public Class jobs
 
 
     Private Sub FillCboActions(cboActions As RadComboBox, jobId As Integer)
+
         cboActions.Items.Insert(0, New RadComboBoxItem(" ", -1))
 
         ' Permissin for all employees
-        cboActions.Items.Insert(0, New RadComboBoxItem("Edit Job", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Notes", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Add Time", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Uploaded Files", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Scope of Work", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("View Job", jobId))
+        '1.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Info", jobId))
 
+        '2.-
         If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("Accounting", jobId))
-            cboActions.Items.Insert(0, New RadComboBoxItem("Images", jobId))
+            cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Billing", jobId))
         End If
 
+        '3.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Employees", jobId))
+
+        '4.-
         If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("Proposals", jobId))
+            cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Proposal(s)", jobId))
         End If
 
-        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("Transmittal", jobId))
-        End If
-
+        '5.-
         If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("Expenses", jobId))
+            cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Expenses", jobId))
         End If
 
-        cboActions.Items.Insert(0, New RadComboBoxItem("Employees", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Time Activity", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Tags", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("View Page", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Client Profile", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Edit Status", jobId))
-        cboActions.Items.Insert(0, New RadComboBoxItem("Map Location", jobId))
+        '6.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Notes", jobId))
 
-        ' Opciones for EEG
+        '7.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Time Entries", jobId))
+
+        '8.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Files", jobId))
+
+        '!9
+        cboActions.Items.Insert(0, New RadComboBoxItem("View Schedule", jobId))
+        '! 10
+        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Revisions", jobId))
+
+        '11.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Tags", jobId))
+
+        '12.-
+        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") Then
+            cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Transmittals", jobId))
+        End If
+
+        '13.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("Update Status", jobId))
+
+        '14.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Client Profile", jobId))
+
+        '15.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("Job Print View", jobId))
+
+        '16.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("Scope of Work Print View", jobId))
+
+        '18.- Opciones for EEG
         If lblCompanyId.Text = 260962 Then
             cboActions.Items.Insert(0, New RadComboBoxItem("Hide Client", jobId))
         End If
+
+        '19.-
+        cboActions.Items.Insert(0, New RadComboBoxItem("Add Time", jobId))
 
         cboActions.SelectedValue = -1
         cboActions.Items.Sort()
@@ -424,71 +451,74 @@ Public Class jobs
         Try
             Dim sUrl As String
             Select Case CommandName
-                Case "EditJob", "Edit Job"
+                Case "View/Edit Info"
                     sUrl = "~/ADM/Job_job.aspx?JobId=" & JobId
                     CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
 
-                Case "Accounting"
+                Case "View/Edit Billing"
                     sUrl = "~/ADM/Job_accounting.aspx?JobId=" & JobId
                     CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
 
-                Case "Images"
-                    sUrl = "~/ADM/Job_images_files.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
-
-                Case "AzureUpload", "Uploaded Files"
-                    sUrl = "~/ADM/Job_links.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
-
-                Case "JobTimes", "Time Activity"
-                    sUrl = "~/ADM/Job_times.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
-
-                Case "Notes"
-                    sUrl = "~/ADM/Job_notes.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
-
-                Case "JobTags", "Tags"
-                    sUrl = "~/ADM/Job_tags.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
-
-                Case "GetSharedLink", "View Page"
-                    sUrl = "~/adm/sharelink.aspx?ObjType=2&ObjId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 520, 400, False, False)
-
-                Case "EditClient", "Client Profile"
-                    Dim ClientId As Integer = LocalAPI.GetJobProperty(JobId, "Client")
-                    sUrl = "~/ADM/Client.aspx?clientId=" & ClientId
-                    CreateRadWindows(CommandName, sUrl, 900, 750, False, False)
-
-                Case "SetEmployee", "Employees"
+                Case "View/Edit Employees"
                     sUrl = "~/ADM/Job_employees.aspx?JobId=" & JobId
                     CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
 
-                Case "EditStatus", "Edit Status"
+                Case "View/Edit Proposal(s)"
+                    sUrl = "~/ADM/job_proposals.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "View/Edit Expenses"
+                    sUrl = "~/ADM/job_rfps.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "View/Edit Notes"
+                    sUrl = "~/ADM/Job_notes.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "View/Edit Time Entries"
+                    sUrl = "~/ADM/Job_times.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "View/Edit Files"
+                    sUrl = "~/ADM/Job_links.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "View Schedule"
+                    sUrl = "~/ADM/job_schedule.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "View/Edit Revisions"
+                    sUrl = "~/ADM/job_reviews.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "View/Edit Tags"
+                    sUrl = "~/ADM/Job_tags.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "View/Edit Transmittals"
+                    sUrl = "~/ADM/job_transmittals.aspx?JobId=" & JobId
+                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+
+                Case "Update Status"
                     lblSelectedJobId.Text = JobId
                     cboJobNewStatus.DataBind()
                     RadToolTipJobStatus.Visible = True
                     RadToolTipJobStatus.Show()
 
-                Case "NewTime", "Add Time"
-                    If cboEmployee.SelectedValue > 0 Then
-                        Session("employeefortime") = cboEmployee.SelectedValue
-                    End If
-                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&Dialog=1"
+                Case "View/Edit Client Profile"
+                    Dim ClientId As Integer = LocalAPI.GetJobProperty(JobId, "Client")
+                    sUrl = "~/ADM/Client.aspx?clientId=" & ClientId
+                    CreateRadWindows(CommandName, sUrl, 900, 750, False, False)
+
+                Case "Job Print View"
+                    Dim guid As String = LocalAPI.GetJobProperty(JobId, "guid")
+                    sUrl = "~/e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=" & guid
                     CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
 
-                Case "Transmittal"
-                    sUrl = "~/ADM/job_transmittals.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
-
-                Case "Expenses"
-                    sUrl = "~/ADM/job_rfps.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
-
-                Case "Proposals"
-                    sUrl = "~/ADM/job_proposals.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                Case "Scope of Work Print View"
+                    Dim guid As String = LocalAPI.GetJobProperty(JobId, "guid")
+                    sUrl = "~/adm/scopeofwork.aspx?guid=" & guid
+                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
 
                 Case "Hide Client"
                     Dim ClientId As Integer = LocalAPI.GetJobProperty(JobId, "Client")
@@ -498,23 +528,13 @@ Public Class jobs
                         Refresh()
                     End If
 
-                Case "Scope of Work"
-                    Dim guid As String = LocalAPI.GetJobProperty(JobId, "guid")
-                    sUrl = "~/adm/scopeofwork.aspx?guid=" & guid
-                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
-
-                Case "View Job"
-                    Dim guid As String = LocalAPI.GetJobProperty(JobId, "guid")
-                    sUrl = "~/e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=" & guid
-                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
-
-                Case "Map Location"
-                    'NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
-                    Dim ProjectLocation As String = LocalAPI.GetJobProperty(JobId, "ProjectLocation")
-                    If Len(ProjectLocation) > 0 Then
-                        sUrl = LocalAPI.urlProjectLocationGmap(ProjectLocation)
-                        CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+                Case "Add Time"
+                    If cboEmployee.SelectedValue > 0 Then
+                        Session("employeefortime") = cboEmployee.SelectedValue
                     End If
+                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&Dialog=1"
+                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+
             End Select
         Catch ex As Exception
 
