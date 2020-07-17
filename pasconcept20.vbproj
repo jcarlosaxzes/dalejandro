@@ -1869,6 +1869,7 @@
     <Content Include="Content\fontawesome-free-5.1.1-web\webfonts\fa-solid-900.svg" />
     <Content Include="Content\pasconcept.css" />
     <Content Include="Content\pasconcept.min.css" />
+    <Content Include="Content\print-page.css" />
     <Content Include="Content\sing-theme\application-ie9-part2.css" />
     <Content Include="Content\sing-theme\application.css" />
     <Content Include="Content\sing-theme\application.min.css" />
@@ -4523,7 +4524,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
