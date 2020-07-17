@@ -139,7 +139,7 @@
             <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
             </asp:LinkButton>
-            Proposal
+            Proposal <asp:Label ID="lblProposalNumber" runat="server" ></asp:Label>
         </span>
     </div>
 
@@ -1298,7 +1298,6 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-
 
     <asp:Label ID="lblClientId" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblProposalId" runat="server" Visible="False" Text="0"></asp:Label>
