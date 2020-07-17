@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class job_schedule
     
     '''<summary>
+    '''RadAjaxManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
+    
+    '''<summary>
+    '''RadAjaxLoadingPanel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+    
+    '''<summary>
     '''RadScheduler1 control.
     '''</summary>
     '''<remarks>

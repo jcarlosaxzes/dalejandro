@@ -415,6 +415,10 @@
                                     <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                         <%#Eval("JobUploadFiles")%>
                                     </span>
+                                    <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' target="_blank"
+                                        style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
+                                        <i class="fas fa-th-list"></i>
+                                    </a>
                                     <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-cloud-download-alt"></i>

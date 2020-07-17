@@ -2,54 +2,60 @@
 
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="container">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadScheduler1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
+    </telerik:RadAjaxLoadingPanel>
 
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td>
-                    <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" ToolTip="Press 'Double-Click' to insert/edit job's appointment"
-                    Height="400px"
-                    SelectedView="WeekView"
-                    ShowFooter="false"
-                    DataDescriptionField="Description"
-                    DataEndField="End"
-                    DataKeyField="Id"
-                    DataRecurrenceField="RecurrenceRule"
-                    DataRecurrenceParentKeyField="RecurrenceParentID"
-                    DataReminderField="Reminder"
-                    DataSourceID="SqlDataSourceAppointments"
-                    DataStartField="Start"
-                    DataSubjectField="Subject"
-                    DayEndTime="21:00:00"
-                    EditFormDateFormat="MM/dd/yyyy"
-                    WorkDayEndTime="21:00:00"
-                    FirstDayOfWeek="Monday" LastDayOfWeek="Sunday"
-                    StartInsertingInAdvancedForm="True"
-                    RowHeight="15px"
-                    CustomAttributeNames="Location">
-                    <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" />
-                    <DayView UserSelectable="True" />
-                    <WeekView UserSelectable="True" />
-                    <MonthView UserSelectable="True" />
-                    <TimelineView UserSelectable="True" />
-                    <MultiDayView UserSelectable="True" />
-                    <AgendaView UserSelectable="True" TimeColumnWidth="100px" DateColumnWidth="150px" ResourceMarkerType="Bar" />
-                    <Reminders Enabled="true"></Reminders>
-                    <ResourceTypes>
-                        <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceType"></telerik:ResourceType>
-                        <telerik:ResourceType KeyField="ID" Name="Assign to User" TextField="Name" ForeignKeyField="EmployeeId" DataSourceID="SqlDataSourceEmployees"></telerik:ResourceType>
-                    </ResourceTypes>
-                    <ResourceStyles>
-                        <telerik:ResourceStyleMapping Type="Activity Type" Text="Appointment" ApplyCssClass="rsCategoryBlue"></telerik:ResourceStyleMapping>
-                        <telerik:ResourceStyleMapping Type="Activity Type" Text="Meeting" ApplyCssClass="rsCategoryOrange"></telerik:ResourceStyleMapping>
-                        <telerik:ResourceStyleMapping Type="Activity Type" Text="Site Visit" ApplyCssClass="rsCategoryGreen"></telerik:ResourceStyleMapping>
-                        <telerik:ResourceStyleMapping Type="Activity Type" Text="Vacation" ApplyCssClass="rsCategoryRed"></telerik:ResourceStyleMapping>
-                    </ResourceStyles>
-                </telerik:RadScheduler>
-                </td>
-            </tr>
-        </table>
-       
+    <div>
+        <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" RenderMode="Auto" OverflowBehavior="Auto" Width="100%"
+            DataDescriptionField="Description"
+            DataEndField="End"
+            DataKeyField="Id"
+            DataRecurrenceField="RecurrenceRule"
+            DataRecurrenceParentKeyField="RecurrenceParentID"
+            DataReminderField="Reminder"
+            DataSourceID="SqlDataSourceAppointments"
+            DataStartField="Start"
+            DataSubjectField="Subject"
+            DayEndTime="21:00:00"
+            EditFormDateFormat="MM/dd/yyyy"
+            Height="600px"
+            WorkDayEndTime="23:59:59"
+            FirstDayOfWeek="Monday"
+            LastDayOfWeek="Sunday"
+            StartInsertingInAdvancedForm="True"
+            CustomAttributeNames="Location">
+            <ResourceTypes>
+                <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceType"></telerik:ResourceType>
+                <telerik:ResourceType KeyField="ID" Name="Assign to User" TextField="Name" ForeignKeyField="EmployeeId" DataSourceID="SqlDataSourceEmployees"></telerik:ResourceType>
+            </ResourceTypes>
+            <ResourceStyles>
+                <telerik:ResourceStyleMapping Type="Activity Type" Text="Appointment" ApplyCssClass="rsCategoryBlue"></telerik:ResourceStyleMapping>
+                <telerik:ResourceStyleMapping Type="Activity Type" Text="Meeting" ApplyCssClass="rsCategoryOrange"></telerik:ResourceStyleMapping>
+                <telerik:ResourceStyleMapping Type="Activity Type" Text="Site Visit" ApplyCssClass="rsCategoryGreen"></telerik:ResourceStyleMapping>
+                <telerik:ResourceStyleMapping Type="Activity Type" Text="Vacation" ApplyCssClass="rsCategoryRed"></telerik:ResourceStyleMapping>
+            </ResourceStyles>
+            <ExportSettings FileName="SchedulerExport" OpenInNewWindow="True">
+                <Pdf Author="PASconcept" />
+            </ExportSettings>
+            <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" Width="800px" EnableCustomAttributeEditing="true" EnableResourceEditing="true" />
+            <DayView UserSelectable="True" />
+            <WeekView UserSelectable="True" />
+            <MonthView UserSelectable="True" AdaptiveRowHeight="true" />
+            <TimelineView UserSelectable="True" />
+            <MultiDayView UserSelectable="True" />
+            <AgendaView UserSelectable="True" TimeColumnWidth="150px" DateColumnWidth="150px" ResourceMarkerType="Bar" />
+            <Reminders Enabled="true"></Reminders>
+
+        </telerik:RadScheduler>
     </div>
     <br />
     <asp:SqlDataSource ID="SqlDataSourceAppointments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

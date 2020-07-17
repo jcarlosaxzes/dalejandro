@@ -48,6 +48,20 @@ Public Class job_schedule
 
     End Sub
 
+    Protected Sub RadScheduler1_FormCreated(sender As Object, e As SchedulerFormCreatedEventArgs) Handles RadScheduler1.FormCreated
+        If (e.Container.Mode = SchedulerFormMode.AdvancedEdit) OrElse (e.Container.Mode = SchedulerFormMode.AdvancedInsert) Then
+            CType(e.Container.FindControl("ResActivity Type"), RadDropDownList).Width = 450
+            CType(e.Container.FindControl("ResActivity Type"), RadDropDownList).ZIndex = 7004
+
+            CType(e.Container.FindControl("ResAssign to User"), RadDropDownList).Width = 450
+            CType(e.Container.FindControl("ResAssign to User"), RadDropDownList).ZIndex = 7004
+
+
+
+        End If
+    End Sub
+
+
     Protected Sub SqlDataSourceAppointments_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceAppointments.Selecting
         e.Command.Parameters("@RangeStart").Value = RadScheduler1.VisibleRangeStart
         e.Command.Parameters("@RangeEnd").Value = RadScheduler1.VisibleRangeEnd

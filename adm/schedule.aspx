@@ -110,7 +110,7 @@
             <ExportSettings FileName="SchedulerExport" OpenInNewWindow="True">
                 <Pdf Author="PASconcept" />
             </ExportSettings>
-            <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" Width="600px" EnableCustomAttributeEditing="true" EnableResourceEditing="true" />
+            <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" Width="800px" EnableCustomAttributeEditing="true" EnableResourceEditing="true" />
             <DayView UserSelectable="True" />
             <WeekView UserSelectable="True" />
             <MonthView UserSelectable="True" AdaptiveRowHeight="true" />
