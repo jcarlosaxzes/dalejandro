@@ -76,7 +76,6 @@
         </div>
         <!-- common libraries. required for every page-->
         <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/site.min.js") %>'></script>
-        <script src='<%= ResolveUrl("~/Scripts/sing-theme/vendor/pace.js/pace.js") %>' data-pace-options='{ "target": ".content-wrap", "ghostTime": 1000 }'></script>
         <script src='<%= ResolveUrl("~/Scripts/sing-theme/js/bootstrap-fix/button.js") %>'></script>
 
         <!-- common app js -->
