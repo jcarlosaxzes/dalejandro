@@ -9,8 +9,8 @@
                     <asp:Panel runat="server" ID="PanelNo16Type">
 
                         <div style="padding-bottom:10px">
-                            <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <i class="fas fa-plus"></i> Revision
+                            <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                                                     Add Revision
                             </asp:LinkButton>
                         </div>
                         <telerik:RadGrid ID="RadGridReviewsPermits" runat="server" DataSourceID="SqlDataSourceReviewsPermits"
@@ -154,8 +154,8 @@
                 <td>
                     <asp:Panel runat="server" ID="Panel16Type">
 
-                        <asp:LinkButton ID="btnAddAppName" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <i class="fas fa-plus"></i> Application
+                        <asp:LinkButton ID="btnAddAppName" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                                                     Add Application
                         </asp:LinkButton>
 
                         <div style="padding-top:10px;padding-bottom:10px">
@@ -190,8 +190,8 @@
                             </telerik:RadGrid>
                         </div>
 
-                        <asp:LinkButton ID="btnAddModule" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <i class="fas fa-plus"></i> Module
+                        <asp:LinkButton ID="btnAddModule" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                                                     Add Module
                         </asp:LinkButton>
 
                         <div style="padding-top:10px">

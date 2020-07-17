@@ -44,7 +44,7 @@
                                 </td>
                                 <td></td>
                                 <td style="width: 15%; text-align: center; background-color: #546e7a">
-                                    <span class="DashboardFont2">Acepted Proposal</span><br />
+                                    <span class="DashboardFont2">Accepted Proposal</span><br />
                                     <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
                                 </td>
                                 <td></td>
