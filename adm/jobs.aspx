@@ -415,6 +415,11 @@
                                     <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                         <%#Eval("JobUploadFiles")%>
                                     </span>
+                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
+                                        style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
+                                        <i class="fas fa-cloud-download-alt"></i>
+                                    </a>
+
                                     <br />
                                     <%# Eval("TypeName") %>
                                 </ItemTemplate>
@@ -488,10 +493,6 @@
                                                         +<%# Eval("OthersEmployeesCount") %>
                                                     </span>
                                     </asp:LinkButton>
-                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
-                                        style='<%# IIf(Eval("companyId")=260962,"display:none","display:normal;font-size:x-small")%>'>
-                                        <i class="fas fa-cloud-download-alt"></i>
-                                    </a>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
@@ -503,7 +504,7 @@
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
                                             <td style="width: 32px; text-align: right">
-                                                <%# GetCollectedPercent( Eval("Budget"),Eval("Collected")) %>%
+                                                <%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%
                                             </td>
                                             <td>
                                                 <telerik:RadProgressBar ID="RadProgressBar98" runat="server" Font-Size="10px" RegisterWithScriptManager="true"
@@ -556,7 +557,7 @@
                                     <table style="width: 100%">
                                         <tr>
                                             <td style="width: 32px; text-align: right;">
-                                                <span title="Budget Used (%)" class='<%# LocalAPI.GetPercentUpLabelCSS(Eval("Profit")) %>' style="font-size:10px"><%# Eval("Profit", "{0:N0}")%>%</span>
+                                                <span title="Budget Used (%)" class='<%# LocalAPI.GetPercentUpLabelCSS(Eval("Profit")) %>' style="font-size: 10px"><%# Eval("Profit", "{0:N0}")%>%</span>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
@@ -579,14 +580,14 @@
                                     <table style="width: 100%">
                                         <tr>
                                             <td style="width: 32px; text-align: right;">
-                                                <span title="Budget Collected (%)" class='<%# LocalAPI.GetPercentDonwLabelCSS(GetCollectedPercent(Eval("Budget"), Eval("Collected"))) %>' style="font-size:10px"><%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%</span>
+                                                <span title="Budget Collected (%)" class='<%# LocalAPI.GetPercentDonwLabelCSS(GetCollectedPercent(Eval("Budget"), Eval("Collected"))) %>' style="font-size: 10px"><%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%</span>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoices Collected"></asp:Label>
                                             </td>
                                         </tr>
                                     </table>
-                                    
+
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
