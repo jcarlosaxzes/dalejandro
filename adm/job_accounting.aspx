@@ -292,7 +292,7 @@
                                     &nbsp;
                                                         <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger badge" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt")=0%>'
                                                             ToolTip="Mark Invoice as BadDept" CausesValidation="false">
-                                                            B
+                                                            <i class="fas fa-dollar-sign"></i>
                                                         </asp:LinkButton>
 
                                 </ItemTemplate>

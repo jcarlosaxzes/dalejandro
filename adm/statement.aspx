@@ -12,7 +12,6 @@
     </telerik:RadCodeBlock>
 
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-        <ClientEvents OnRequestStart="onRequestStart"></ClientEvents>
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>

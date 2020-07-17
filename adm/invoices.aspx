@@ -194,7 +194,7 @@
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
-            <MasterTableView DataKeyNames="Id" ClientDataKeyNames="Id" DataSourceID="SqlDataSourceInvoices" ShowFooter="True">
+            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceInvoices" ShowFooter="True">
                 <CommandItemSettings ShowExportToWordButton="true" ShowExportToExcelButton="true" ShowExportToPdfButton="true" ShowExportToCsvButton="true"
                     ShowRefreshButton="true" ShowAddNewRecordButton="false" />
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
@@ -267,8 +267,7 @@
                     <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Invoice Description" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"
                         UniqueName="InvoiceNotes">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="column"
-                        HeaderStyle-Width="160px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="160px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnInvoiceInv44" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id") %>'
                                 ToolTip="Send Email with Invoice information" CausesValidation="false">
@@ -276,10 +275,10 @@
                             </asp:LinkButton>
 
                             &nbsp;
-                                    <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
-                                        CommandName="PDF" CommandArgument='<%# Eval("Id")%>'>
+                                  <%--  <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
+                                        CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="false">
                                             <i class="far fa-file-pdf"></i></a>
-                                    </asp:LinkButton>
+                                    </asp:LinkButton>--%>
 
                             &nbsp;
                                     <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
@@ -291,19 +290,18 @@
                             &nbsp;
                                     <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger badge" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
                                         ToolTip="Mark Invoice as BadDept" CausesValidation="false">
-                                        B
+                                        <i class="fas fa-dollar-sign"></i>
                                     </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Invoice?"
-                        ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                        UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Invoice?" ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                        UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
                     </telerik:GridButtonColumn>
 
                 </Columns>
             </MasterTableView>
         </telerik:RadGrid>
+
         <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
             Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Billing Contact Information</b>" ShowEvent="OnClick"
             HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
@@ -325,6 +323,7 @@
                 </tr>
             </table>
         </telerik:RadToolTip>
+
         <telerik:RadToolTip ID="RadToolTipEmitted" runat="server" TargetControlID="lblEmitted" RelativeTo="Element"
             Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Emitted Information</b>" ShowEvent="OnClick"
             HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">

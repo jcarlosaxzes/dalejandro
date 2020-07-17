@@ -99,60 +99,7 @@ Public Class invoices
     '    End While
     'End Sub
 
-    Protected Async Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
-        Dim sUrl As String = ""
-        Select Case e.CommandName
-            Case "EditInvoice"
-                lblInvoiceId.Text = e.CommandArgument
-                FormViewInvoice.DataBind()
-                RadToolTipEditInvoice.Visible = True
-                RadToolTipEditInvoice.Show()
 
-            Case "InvoiceRDLC7"
-                'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
-                sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
-                CreateRadWindows(e.CommandName, sUrl, 960, 810, False)
-
-            Case "SendInvoice"
-                'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
-                sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
-                CreateRadWindows(e.CommandName, sUrl, 960, 790, False)
-
-            Case "RecivePayment"
-                lblInvoiceId.Text = e.CommandArgument
-                txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
-                txtAmountPayment.DbValue = txtAmountPayment.MaxValue
-                RadDatePickerPayment.DbSelectedDate = LocalAPI.GetDateTime()
-                txtPaymentNotes.Text = ""
-                RadToolTipInsertPayment.Visible = True
-                RadToolTipInsertPayment.Show()
-
-            Case "BadDebt"
-                If LocalAPI.GetEmployeePermission(Master.UserId, "Allow_BadDebt") Then
-                    sUrl = "~/ADM/BadDebt.aspx?invoiceId=" & e.CommandArgument
-                    CreateRadWindows(e.CommandName, sUrl, 520, 600, False)
-                Else
-                    Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
-                End If
-
-
-            Case "EditJob"
-                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
-
-            Case "PDF"
-                lblInvoiceId.Text = e.CommandArgument
-                Dim pdf As PdfApi = New PdfApi()
-                Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
-                Dim pdfBytes = Await pdf.CreateInvoicePdfBytes(companyId, lblInvoiceId.Text)
-                Dim response As HttpResponse = HttpContext.Current.Response
-                response.ContentType = "application/pdf"
-                response.AddHeader("Content-Disposition", "attachment; filename=Invoice.pdf")
-                response.ClearContent()
-                response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
-                response.Flush()
-        End Select
-    End Sub
 
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
         RadWindowManager1.Windows.Clear()
@@ -246,4 +193,59 @@ Public Class invoices
 
     End Sub
 
+    Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
+        Dim sUrl As String = ""
+        Select Case e.CommandName
+            Case "EditInvoice"
+                lblInvoiceId.Text = e.CommandArgument
+                FormViewInvoice.DataBind()
+                RadToolTipEditInvoice.Visible = True
+                RadToolTipEditInvoice.Show()
+
+            Case "InvoiceRDLC7"
+                'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
+                sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
+                CreateRadWindows(e.CommandName, sUrl, 960, 810, False)
+
+            Case "SendInvoice"
+                'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
+                sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
+                CreateRadWindows(e.CommandName, sUrl, 960, 790, False)
+
+            Case "RecivePayment"
+                lblInvoiceId.Text = e.CommandArgument
+                txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
+                txtAmountPayment.DbValue = txtAmountPayment.MaxValue
+                RadDatePickerPayment.DbSelectedDate = LocalAPI.GetDateTime()
+                txtPaymentNotes.Text = ""
+                RadToolTipInsertPayment.Visible = True
+                RadToolTipInsertPayment.Show()
+
+            Case "BadDebt"
+                If LocalAPI.GetEmployeePermission(Master.UserId, "Allow_BadDebt") Then
+                    sUrl = "~/ADM/BadDebt.aspx?invoiceId=" & e.CommandArgument
+                    CreateRadWindows(e.CommandName, sUrl, 520, 600, False)
+                Else
+                    Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
+                End If
+
+
+            Case "EditJob"
+                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
+
+                'Case "PDF"
+                '    lblInvoiceId.Text = e.CommandArgument
+                '    Dim pdf As PdfApi = New PdfApi()
+                '    Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
+                '    Dim pdfBytes = Await pdf.CreateInvoicePdfBytes(companyId, lblInvoiceId.Text)
+                '    Dim response As HttpResponse = HttpContext.Current.Response
+                '    response.ContentType = "application/pdf"
+                '    response.AddHeader("Content-Disposition", "attachment; filename=Invoice.pdf")
+                '    response.ClearContent()
+                '    response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+                '    response.Flush()
+        End Select
+
+    End Sub
 End Class

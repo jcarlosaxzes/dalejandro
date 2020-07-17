@@ -32,6 +32,15 @@ Partial Public Class proposalnewwizard
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''lblProposalNumber control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblProposalNumber As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''RadWizard1 control.
     '''</summary>
     '''<remarks>

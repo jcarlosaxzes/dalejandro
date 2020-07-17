@@ -281,6 +281,7 @@ Public Class proposalnewwizard
 
             ' Step 0
             lblClientId.Text = ProposalObject("ClientId")
+            lblProposalNumber.Text = ProposalObject("ProposalNumber")
             If lblClientId.Text <> cboClients.SelectedValue Then
                 cboClients.SelectedValue = lblClientId.Text
                 ReadClientInfo_Step0()
