@@ -80,7 +80,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right">Acepted Proposals:</td>
+                                                <td style="text-align: right">Accepted Proposals:</td>
                                                 <td style="text-align: right">
                                                     <b><%# Eval("ProposalAmount", "{0:C2}") %></b>
                                                 </td>

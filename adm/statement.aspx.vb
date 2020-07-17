@@ -3,27 +3,32 @@ Public Class statement
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not IsPostBack Then
-            ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_StatementList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+        Try
 
-            Master.PageTitle = "Billing/Statements"
-            Master.Help = "http://blog.pasconcept.com/2012/06/billing-statements-list.html"
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Statements"
-            lblEmployee.Text = Master.UserEmail
-            lblCompanyId.Text = Session("companyId")
+            If Not IsPostBack Then
+                ' Si no tiene permiso, la dirijo a message
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_StatementList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
 
-            spanViewSummary.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
+                Master.PageTitle = "Billing/Statements"
+                Master.Help = "http://blog.pasconcept.com/2012/06/billing-statements-list.html"
+                Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Statements"
+                lblEmployee.Text = Master.UserEmail
+                lblCompanyId.Text = Session("companyId")
 
-            cboPeriod.DataBind()
-            IniciaPeriodo(14)
+                spanViewSummary.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
 
-        End If
-        If RadWindowManager1.Windows.Count > 0 Then
-            RadWindowManager1.Windows.Clear()
-            RadGrid1.DataBind()
-        End If
+                cboPeriod.DataBind()
+                IniciaPeriodo(14)
 
+                FormViewViewSummary.DataBind()
+
+            End If
+
+            RadWindowManager1.EnableViewState = False
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Sub
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)

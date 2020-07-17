@@ -57,7 +57,7 @@
     </div>
 
     <div class="collapse" id="collapseFilter">
-        <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
+        <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnFind">
             <table class="table-sm" style="width: 100%">
                 <tr>
                     <td width="180px" align="left">

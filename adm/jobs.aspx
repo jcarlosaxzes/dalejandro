@@ -389,7 +389,7 @@
 
                             <telerik:GridTemplateColumn UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Job" CommandName="Edit Job" UseSubmitBehavior="false" Font-Bold="true">
+                                    <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Info" CommandName="View/Edit Info" UseSubmitBehavior="false" Font-Bold="true">
                                             <%#Eval("Code")%> 
                                     </asp:LinkButton>
                                     <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="30px" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
@@ -432,7 +432,7 @@
                                             <tr>
                                                 <td colspan="2">
                                                     <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Client") %>'
-                                                        CommandName="EditClient" Text='<%# Eval("Name")%>' UseSubmitBehavior="false" Font-Size="Medium"
+                                                        CommandName="View/Edit Client Profile" Text='<%# Eval("Name")%>' UseSubmitBehavior="false" Font-Size="Medium"
                                                         CssClass="badge badge-info ">
                                                     </asp:LinkButton>
                                                 </td>
@@ -479,10 +479,10 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM & Employees" SortExpression="EmployeeName"
+                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName"
                                 UniqueName="EmployeeName" AllowFiltering="true" HeaderStyle-Width="160px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="SetEmployee" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
+                                    <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
                                                     <span aria-hidden="true" style='<%# IIf(Left(Eval("EmployeeName"),2)="PM","color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
                                                     <span class="badge badge-pill badge-primary" style='<%# IIf(Eval("OthersEmployeesCount")=0,"display:none","display:normal;font-size:x-small")%>'>
                                                         +<%# Eval("OthersEmployeesCount") %>
@@ -496,7 +496,7 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected - Used" SortExpression="Profit"
-                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Size="X-Small" HeaderTooltip="Budget Colected / Budget Used"
+                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Size="X-Small" HeaderTooltip="Budget Collected / Budget Used"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
                                 HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                                 <ItemTemplate>
@@ -555,8 +555,8 @@
                                 <ItemTemplate>
                                     <table style="width: 100%">
                                         <tr>
-                                            <td style="width: 32px; text-align: right; font-size: small">
-                                                <span title="Budget Used (%)" class='<%# LocalAPI.GetPercentUpLabelCSS(Eval("Profit")) %>'><%# Eval("Profit", "{0:N0}")%>%</span>
+                                            <td style="width: 32px; text-align: right;">
+                                                <span title="Budget Used (%)" class='<%# LocalAPI.GetPercentUpLabelCSS(Eval("Profit")) %>' style="font-size:10px"><%# Eval("Profit", "{0:N0}")%>%</span>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
