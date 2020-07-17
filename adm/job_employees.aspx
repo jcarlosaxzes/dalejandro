@@ -15,7 +15,7 @@
             <tr>
                 <td>
                     <asp:LinkButton ID="btnSetEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Assin Employees">
-                                    <i class="fas fa-plus"></i>&nbsp;Employees
+                                    Add Employee
                     </asp:LinkButton>
                 </td>
             </tr>

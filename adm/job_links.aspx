@@ -139,8 +139,8 @@
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="padding-left: 15px">
-                                <asp:LinkButton ID="btnNewFileLink" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Attached uploaded file">
-                                        <i class="fas fa-plus"></i> Hyperlink
+                                <asp:LinkButton ID="btnNewFileLink" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Attached uploaded file">
+                                        Add Hyperlink
                                 </asp:LinkButton>
                                 &nbsp;&nbsp;&nbsp;
 
@@ -161,7 +161,7 @@
                         <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceLinks"
                             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                             <Columns>
-                                <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="Edit" HeaderStyle-Width="30px" UniqueName="EditCommandColumn">
+                                <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="" HeaderStyle-Width="50px" UniqueName="EditCommandColumn">
                                 </telerik:GridEditCommandColumn>
                                 <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID" ReadOnly="True"
                                     SortExpression="Id" UniqueName="Id" Display="False">
@@ -196,8 +196,8 @@
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this link?"
                                     ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                    UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center"
-                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                                    UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                                 </telerik:GridButtonColumn>
                             </Columns>
                             <EditFormSettings>

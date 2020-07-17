@@ -8,8 +8,8 @@
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
-                    <asp:LinkButton ID="btnNewPropsal" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                                                            <i class="fas fa-plus"></i> Proposal (Change Order)
+                    <asp:LinkButton ID="btnNewPropsal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                                            Add Proposal (Change Order)
                     </asp:LinkButton>
                 </td>
             </tr>

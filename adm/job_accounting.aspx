@@ -113,13 +113,13 @@
                             </telerik:RadComboBox>
                         </td>
                         <td style="width: 150px">
-                            <asp:LinkButton ID="btnInvoice" runat="server" CssClass="btn btn-info btn-sm" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <i class="fas fa-plus"></i> Schedules (%)
+                            <asp:LinkButton ID="btnInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false">
+                                                                     Create Invoice(s) From Schedules
                             </asp:LinkButton>
                         </td>
                         <td style="width: 150px">
-                            <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-info btn-sm" UseSubmitBehavior="false" CausesValidation="false">
-                                                                     <i class="fas fa-plus"></i> Simple Charge
+                            <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false">
+                                                                     Add Simple Charge
                             </asp:LinkButton>
                         </td>
                         <td>
@@ -615,17 +615,17 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipInvoicesDiscount" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+        <h2 style="margin: 0; text-align: center; color: white; width: 800px">
            <span class="navbar navbar-expand-md bg-dark text-white">Apply Invoices Discount
             </span>
         </h2>
         <p>
             Apply Discount Percent (%) or Discount Amount ($) to last Invoice scheduled and Job.Budget
         </p>
-        <table class="table-sm" style="width: 600px">
+        <table class="table-sm" style="width: 800px">
 
             <tr>
-                <td style="width: 120px">Discount Percent (%):
+                <td style="width: 180px;text-align:right">Discount Percent (%):
                 </td>
                 <td>
                     <telerik:RadNumericTextBox ID="txtDiscountPercent" runat="server" MinValue="0" MaxValue="100" MaxLength="2" Value="0">
@@ -633,7 +633,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Discount Amount ($):
+                <td style="text-align:right">Discount Amount ($):
                 </td>
                 <td>
                     <telerik:RadNumericTextBox ID="txtDiscountAmount" runat="server" MinValue="1">
@@ -642,7 +642,7 @@
             </tr>
 
             <tr>
-                <td style="width: 120px">
+                <td>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtDiscountNotes" ValidationGroup="InvoiceDiscount"
                         Text="*" ErrorMessage="Define Notes" SetFocusOnError="true"></asp:RequiredFieldValidator>
                     Discount Notes:
