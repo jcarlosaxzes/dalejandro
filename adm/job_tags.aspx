@@ -132,7 +132,7 @@
         <div style="margin-top: 25px">
             <asp:LinkButton ID="btnAddTags" runat="server" ToolTip="Insert selected Tags"
                 CssClass="btn btn-primary" UseSubmitBehavior="false" ValidationGroup="Tag">
-                            <i class="fas fa-plus"></i> TAGs
+                            Add TAGs
             </asp:LinkButton>
         </div>
 

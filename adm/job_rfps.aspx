@@ -8,7 +8,7 @@
             <tr>
                 <td>
                     <asp:LinkButton ID="btnNewSubconsultantFee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Insert Subconsultant Fee">
-                    <i class="fas fa-plus"></i> Subconsultant Fee
+                    Add Subconsultant Fee
                     </asp:LinkButton>
 
                     <asp:LinkButton ID="btnSelectRFP" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Select Existing RFP">

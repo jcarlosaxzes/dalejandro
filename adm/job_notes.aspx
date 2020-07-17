@@ -6,8 +6,8 @@
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
-                    <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false">
-                            <i class="fas fa-plus"></i> Note
+                    <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                            Add Note
                     </asp:LinkButton>
                 </td>
             </tr>
