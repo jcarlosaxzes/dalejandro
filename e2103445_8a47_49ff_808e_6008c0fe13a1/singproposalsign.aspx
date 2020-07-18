@@ -540,11 +540,16 @@
     <script src='<%= ResolveUrl("~/Scripts/signature-pad/signature_pad.js") %>'></script>
     <script src='<%= ResolveUrl("~/Scripts/signature-pad/app.js") %>'></script>
     <script>
-        var wrapper = document.getElementById("signature-pad"),
-            $clearButton = $("[data-action=clear]"),
-            $saveButton = $("[data-action=save]"),
-            canvas = wrapper.querySelector("canvas"),
-            signaturePad;
+    (function () {
+        var wrapper = document.getElementById("signature-pad");
+        if (!wrapper) {
+            // Safety check
+            return;
+        }
+        var $clearButton = $("[data-action=clear]");
+        var $saveButton = $("[data-action=save]");
+        var canvas = wrapper.querySelector("canvas");
+        var signaturePad;
 
         // Adjust canvas coordinate space taking into account pixel ratio,
         // to make it look crisp on mobile devices.
@@ -580,6 +585,7 @@
         $('#modal-accept').on('shown.bs.modal', function () {
             resizeCanvas();
         });
+    })();
     </script>
 </asp:Content>
 
