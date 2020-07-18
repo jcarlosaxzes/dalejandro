@@ -447,13 +447,13 @@
                                         </div>
                                     </div>
                                     <div class="row text-xs-center">
-                                        <div class="col-md-6 col-print-6 text-xs-center">
+                                        <div class="col-sm-6 col-print-6 text-xs-center">
                                             <h4></h4>
                                             <telerik:RadBinaryImage CssClass="img-signature" ID="imgEmpSignature" runat="server" AlternateText="Company Signature" DataValue='<%# IIf(Eval("CompanySing") Is DBNull.Value, Nothing, Eval("CompanySing"))%>' />
                                             <p><strong><%# Eval("CompanyContact") %></strong></p>
                                             <p><%# Eval("EmailDate", "{0:MMMM d, yyyy}")%></p>
                                         </div>
-                                        <div class="col-md-6 col-print-6 text-xs-center">
+                                        <div class="col-sm-6 col-print-6 text-xs-center">
                                             <asp:Panel ID="PanelSignature" runat="server" Visible='<%# Not Eval("AceptanceSignature") Is DBNull.Value %>'>
                                                 <h4></h4>
                                                 <telerik:RadBinaryImage CssClass="img-signature" ID="imgClientSignature" runat="server" AlternateText="Client Signature" DataValue='<%# IIf(Eval("AceptanceSignature") Is DBNull.Value, Nothing, Eval("AceptanceSignature"))%>' />
