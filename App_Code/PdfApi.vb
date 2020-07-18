@@ -19,7 +19,8 @@ Public Class PdfApi
             Dim httpClient = New HttpClient()
             httpClient.BaseAddress = New Uri(ConvertApi_BaseUrl)
             Dim encodeUrl As String = HttpUtility.UrlEncode(Url & "&printing=true")
-            Dim httpRequestMessage As HttpRequestMessage = New HttpRequestMessage(HttpMethod.Get, $"?secret={ConvertApi_Secret}&download=inline&url={encodeUrl}")
+            Dim params = "hideElements=button&marginTop=0&marginRight=0&marginBottom=0&marginLeft=0&background=false"
+            Dim httpRequestMessage As HttpRequestMessage = New HttpRequestMessage(HttpMethod.Get, $"?secret={ConvertApi_Secret}&download=inline&url={encodeUrl}&{params}")
             Dim response = Await httpClient.SendAsync(httpRequestMessage)
             Dim ByteArray = Await response.Content.ReadAsByteArrayAsync()
             Return ByteArray
