@@ -4,35 +4,42 @@ Public Class _Default1
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not IsPostBack Then
+        Try
 
-            Master.PageTitle = "Control Panel"
-            Master.Help = "http://blog.pasconcept.com/2015/04/home.html"
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Control Panel"
-            lblCompanyId.Text = Session("companyId")
-            panelCompany16.DataBind()
-            tableCompany16.DataBind()
+            If Not IsPostBack Then
 
-            lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
-            lblUserEmail.Text = Master.UserEmail
+                Master.PageTitle = "Control Panel"
+                Master.Help = "http://blog.pasconcept.com/2015/04/home.html"
+                Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Control Panel"
+                lblCompanyId.Text = Session("companyId")
+                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+                lblUserEmail.Text = Master.UserEmail
 
-            If LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Analytics") Then
-                ' User con Permiso al Administrator PORTAL
-                ' Load RadDocks status
-                RadDockProposals.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDP_Collapsed")
-                RadDockJobs.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDJ_Collapsed")
-                RadDockClients.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDC_Collapsed")
-                RadDockSubconsultants.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDS_Collapsed")
-            Else
-                ' User con Permiso al Employee PORTAL
-                Response.Redirect("~/ADM/activejobsdashboad")
-                'RadDockLayout1.Visible = False
-                'panelEmployeePortal.Visible = True
+                If LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Analytics") Then
+                    ' User con Permiso al Administrator PORTAL
+                    ' Load RadDocks status
+                    RadDockProposals.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDP_Collapsed")
+                    RadDockJobs.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDJ_Collapsed")
+                    RadDockClients.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDC_Collapsed")
+                    RadDockSubconsultants.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDS_Collapsed")
+                Else
+                    ' User con Permiso al Employee PORTAL
+                    Response.Redirect("~/ADM/activejobsdashboad")
+                    'RadDockLayout1.Visible = False
+                    'panelEmployeePortal.Visible = True
+                End If
+
+                RadGridProposalJobs.DataBind()
+                RadGridEmployeeStatistics.DataBind()
+                RadGridClients.DataBind()
+                RadGridSubConsultants.DataBind()
+
             End If
+            RadWindowManagerJob.EnableViewState = False
 
+        Catch ex As Exception
 
-        End If
-        RadWindowManagerJob.EnableViewState = False
+        End Try
     End Sub
 
     Private Sub RadGridProposalJobs_PreRender(sender As Object, e As EventArgs) Handles RadGridProposalJobs.PreRender
@@ -98,61 +105,6 @@ Public Class _Default1
         End Select
     End Sub
 
-    Private Sub RadListView1_ItemCommand(sender As Object, e As RadListViewCommandEventArgs) Handles RadListView1.ItemCommand
-        Dim sUrl As String
-        Select Case e.CommandName
-            Case "EditJob"
-                sUrl = "~/ADM/Job_job?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-            Case "Accounting"
-                sUrl = "~/ADM/Job_accounting?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-            Case "Tickets"
-                If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
-                    ' Programmers/Computer/IT
-                    Response.Redirect("~/ADM/JobTickets?JobId=" & e.CommandArgument)
-                End If
-
-            Case "Images"
-                sUrl = "~/ADM/Job_images_files?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-            Case "JobTimes"
-                sUrl = "~/ADM/Job_times?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-            Case "Notes"
-                sUrl = "~/ADM/Job_notes?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-            Case "NewTime"
-                Response.Redirect("~/adm/employeenewtime?JobId=" & e.CommandArgument & "&back=2")
-
-            Case "JobTags"
-                sUrl = "~/ADM/Job_tags?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-            Case "GetSharedLink"
-                sUrl = "~/adm/sharelink?ObjType=2&ObjId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
-
-            Case "EditClient"
-                sUrl = "~/ADM/Client?clientId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 750, False)
-
-            Case "Tags"
-                sUrl = "~/ADM/Job_tags?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-            Case "AzureUpload"
-                sUrl = "~/ADM/Job_links?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
-
-
-        End Select
-    End Sub
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
         Try
 
@@ -177,5 +129,29 @@ Public Class _Default1
 
     Private Sub btnEmployeePortal_Click(sender As Object, e As EventArgs) Handles btnEmployeePortal.Click
         Response.Redirect("~/EMP/Default")
+    End Sub
+
+    Private Sub SqlDataSourceClients_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceClients.Selecting
+        e.Command.CommandTimeout = 0
+    End Sub
+
+    Private Sub SqlDataSourceJobs_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceJobs.Selecting
+        e.Command.CommandTimeout = 0
+    End Sub
+
+    Private Sub SqlDataSourceRates_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceRates.Selecting
+        e.Command.CommandTimeout = 0
+    End Sub
+
+    Private Sub SqlDataSourceProposalEmployeeStatistics_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceProposalEmployeeStatistics.Selecting
+        e.Command.CommandTimeout = 0
+    End Sub
+
+    Private Sub SqlDataSourceProposalJobs_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceProposalJobs.Selecting
+        e.Command.CommandTimeout = 0
+    End Sub
+
+    Private Sub SqlDataSourceSubConsultants_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceSubConsultants.Selecting
+        e.Command.CommandTimeout = 0
     End Sub
 End Class
