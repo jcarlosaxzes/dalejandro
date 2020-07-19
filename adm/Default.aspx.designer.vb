@@ -32,40 +32,13 @@ Partial Public Class _Default1
     Protected WithEvents RadDockZone1 As Global.Telerik.Web.UI.RadDockZone
     
     '''<summary>
-    '''RadDockProposalsJobsRates control.
+    '''RadDockRates control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadDockProposalsJobsRates As Global.Telerik.Web.UI.RadDock
-    
-    '''<summary>
-    '''tableCompany16 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents tableCompany16 As Global.System.Web.UI.HtmlControls.HtmlTable
-    
-    '''<summary>
-    '''panelCompany16 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents panelCompany16 As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''RadListView1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
+    Protected WithEvents RadDockRates As Global.Telerik.Web.UI.RadDock
     
     '''<summary>
     '''RadHtmlChart1 control.
@@ -239,22 +212,13 @@ Partial Public Class _Default1
     Protected WithEvents SqlDataSourceProposalEmployeeStatistics As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''SqlDataSourcePropJobsBudgetsRate control.
+    '''SqlDataSourceRates control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourcePropJobsBudgetsRate As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceJobsInProgressByEmployee control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceJobsInProgressByEmployee As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceRates As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.

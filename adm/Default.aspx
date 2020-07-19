@@ -41,173 +41,53 @@
                 <td>
                     <telerik:RadDockZone runat="server" ID="RadDockZone1">
 
-                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockProposalsJobsRates" runat="server" Title="Proposal/Jobs Hit Rate" EnableAnimation="true"
+                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockRates" runat="server" Title="Company Rates" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <table runat="server" id="tableCompany16" class="table-sm" style="width: 100%">
-                                    <tr>
-                                        <td style='<%# iif(LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16,"width:250px;text-align: center; vertical-align: top","width:0px") %>'>
-                                            <asp:Panel ID="panelCompany16" runat="server" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>' Width="250px">
-                                                <span class="navbar navbar-expand-md bg-secondary center-block text-white">Jobs "In Progress" </span>
-                                                <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceJobsInProgressByEmployee" DataKeyNames="Id"
-                                                    ItemPlaceholderID="Container1"
-                                                    BorderStyle="Solid" Height="250px" Width="100%"
-                                                    AllowPaging="true">
-                                                    <LayoutTemplate>
-                                                        <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
-                                                        <telerik:RadDataPager RenderMode="Lightweight" ID="RadDataPager1" runat="server" PageSize="3">
-                                                            <Fields>
-                                                                <telerik:RadDataPagerButtonField FieldType="Numeric"></telerik:RadDataPagerButtonField>
-                                                            </Fields>
-                                                        </telerik:RadDataPager>
-                                                    </LayoutTemplate>
-                                                    <ItemTemplate>
-                                                        <div class="card" style="float: left; width: 250px; margin: 1px">
-                                                            <div class="card-body">
-                                                                <h4 style="margin: 0"><%# Eval("Code")%></h4>
-                                                                <table class="table-sm card-text" style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                                                                    <tr>
-                                                                        <td>
-                                                                            <b><%# Eval("itemName")%></b>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <%# Eval("ClientCompany")%>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <%# Eval("ClientName")%>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            PM: <%# Eval("PM")%>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <asp:LinkButton ID="btnEdit" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Job"
-                                                                            CommandName="EditJob" UseSubmitBehavior="false">
-                                                                            <i class="fas fa-pen"></i>
-                                                                        </asp:LinkButton>
-                                                                        &nbsp;&nbsp;
-                                                                        <asp:LinkButton ID="btnAccounting" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Accounting"
-                                                                            CommandName="Accounting" UseSubmitBehavior="false" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") %>'>
-                                                                            <i class="fas fa-dollar-sign"></i>
-                                                                        </asp:LinkButton>
-                                                                        &nbsp;&nbsp;
-                                                                        <asp:LinkButton ID="btnNewTime" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Add Time"
-                                                                            CommandName="NewTime" UseSubmitBehavior="false">
-                                                                            <span aria-hidden="true" <i class="fas fa-user-clock"></i>
-                                                                        </asp:LinkButton>
-                                                                        &nbsp;&nbsp;
-                                                                        <asp:LinkButton ID="btnTickets" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Tickets"
-                                                                            CommandName="Tickets" UseSubmitBehavior="false">
-                                                                                <i class="fa fa-clipboard-check"></i>
-                                                                        </asp:LinkButton>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
+                                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceRates" Width="100%" Height="400px">
+                                    <PlotArea>
+                                        <XAxis AxisCrossingValue="0" Color="black" MajorTickType="Outside" MinorTickType="Outside" Reversed="false" DataLabelsField="Year">
+                                            <TitleAppearance Visible="false" Position="Center" RotationAngle="0" Text="Years"></TitleAppearance>
+                                            <LabelsAppearance DataFormatString="{0}" RotationAngle="315" Skip="0" Step="1">
+                                                <TextStyle FontSize="10px" />
+                                            </LabelsAppearance>
+                                            <MajorGridLines Visible="false"></MajorGridLines>
+                                            <MinorGridLines Visible="false"></MinorGridLines>
+                                        </XAxis>
 
-                                                            </div>
-                                                        </div>
-                                                    </ItemTemplate>
-
-                                                </telerik:RadListView>
-                                            </asp:Panel>
-                                        </td>
-                                        <td>
-                                            <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourcePropJobsBudgetsRate" Width="100%" Height="400px">
-                                                <PlotArea>
-                                                    <XAxis AxisCrossingValue="0" Color="black" MajorTickType="Outside" MinorTickType="Outside" Reversed="false" DataLabelsField="YearDate">
-                                                        <TitleAppearance Visible="false" Position="Center" RotationAngle="0" Text="Years"></TitleAppearance>
-                                                        <LabelsAppearance DataFormatString="{0}" RotationAngle="315" Skip="0" Step="1">
-                                                            <TextStyle FontSize="10px" />
-                                                        </LabelsAppearance>
-                                                        <MajorGridLines Visible="false"></MajorGridLines>
-                                                        <MinorGridLines Visible="false"></MinorGridLines>
-
-                                                        <AxisCrossingPoints>
-                                                            <telerik:AxisCrossingPoint Value="0" />
-                                                            <telerik:AxisCrossingPoint Value="9999" />
-                                                        </AxisCrossingPoints>
-                                                    </XAxis>
-
-                                                    <YAxis Name="LeftAxis"
-                                                        AxisCrossingValue="0"
-                                                        Color="Red"
-                                                        Width="3"
-                                                        MajorTickType="Outside"
-                                                        MajorTickSize="4"
-                                                        MinorTickType="None"
-                                                        MinorTickSize="0"
-                                                        Reversed="false">
-                                                        <LabelsAppearance DataFormatString="{0:C0}" Skip="0" Step="2">
-                                                            <TextStyle Color="#666666" FontSize="10px" />
-                                                        </LabelsAppearance>
-                                                        <MajorGridLines Visible="true" Color="#efefef" Width="1"></MajorGridLines>
-                                                        <MinorGridLines Visible="true" Width="0"></MinorGridLines>
-                                                        <TitleAppearance Text="$" Position="Center" RotationAngle="0" Visible="false">
-                                                            <TextStyle Color="#555555" />
-                                                        </TitleAppearance>
-                                                    </YAxis>
-                                                    <AdditionalYAxes>
-                                                        <telerik:AxisY Name="RightAxis" Color="Green" Width="3">
-                                                            <TitleAppearance Text="Hit Rate %" Visible="false"></TitleAppearance>
-                                                            <LabelsAppearance DataFormatString="{0:N0}%">
-                                                                <TextStyle FontSize="10px" />
-                                                            </LabelsAppearance>
-                                                        </telerik:AxisY>
-                                                    </AdditionalYAxes>
-                                                    <Series>
-                                                        <telerik:AreaSeries DataFieldY="JobBudget" Name="Job Budgets" AxisName="LeftAxis">
-                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                                            </LabelsAppearance>
-                                                            <Appearance>
-                                                                <FillStyle BackgroundColor="#214EA5" />
-                                                            </Appearance>
-                                                            <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                                                        </telerik:AreaSeries>
-                                                        <telerik:AreaSeries DataFieldY="PropBudget" Name="Proposal Budgets" AxisName="LeftAxis">
-                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                                            </LabelsAppearance>
-                                                            <Appearance>
-                                                                <FillStyle BackgroundColor="#78A8F0" />
-                                                            </Appearance>
-                                                            <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                                                        </telerik:AreaSeries>
-                                                        <%-- <telerik:AreaSeries DataFieldY="DptoBudget" Name="Department Budgets" AxisName="LeftAxis">
-                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                                            </LabelsAppearance>
-                                                            <Appearance>
-                                                                <FillStyle BackgroundColor="#ccff33" />
-                                                            </Appearance>
-                                                            <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                                                        </telerik:AreaSeries>--%>
-                                                    </Series>
-                                                    <Series>
-                                                        <telerik:LineSeries DataFieldY="Rate" Name="Hit Rate (#Jobs/#Proposal)" AxisName="RightAxis">
-                                                            <LabelsAppearance Visible="false" DataFormatString="{0:C0}">
-                                                            </LabelsAppearance>
-                                                            <Appearance>
-                                                                <FillStyle BackgroundColor="#7787A5" />
-                                                            </Appearance>
-                                                            <LineAppearance LineStyle="Smooth" Width="3" />
-                                                            <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
-                                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                                        </telerik:LineSeries>
-                                                    </Series>
-                                                </PlotArea>
-                                                <Legend>
-                                                    <Appearance Visible="True" Position="Top"></Appearance>
-                                                </Legend>
-                                            </telerik:RadHtmlChart>
-                                        </td>
-                                    </tr>
-                                </table>
-
+                                        <YAxis Name="LeftAxis">
+                                                <TitleAppearance Text="Rate" Visible="false"></TitleAppearance>
+                                                <LabelsAppearance DataFormatString="{0:N2}">
+                                                    <TextStyle FontSize="10px" />
+                                                </LabelsAppearance>
+                                        </YAxis>
+                                        <Series>
+                                            <telerik:LineSeries DataFieldY="ProposalAcceptanceRate" Name="Proposal Acceptance Rate">
+                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                </LabelsAppearance>
+                                                <Appearance>
+                                                    <FillStyle BackgroundColor="#7787A5" />
+                                                </Appearance>
+                                                <LineAppearance LineStyle="Smooth" Width="3" />
+                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                            </telerik:LineSeries>
+                                            <telerik:LineSeries DataFieldY="EarnAdollarRate" Name="Earn A Dollar Rate">
+                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                </LabelsAppearance>
+                                                <Appearance>
+                                                    <FillStyle BackgroundColor="Red" />
+                                                </Appearance>
+                                                <LineAppearance LineStyle="Smooth" Width="3" />
+                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                            </telerik:LineSeries>
+                                        </Series>
+                                    </PlotArea>
+                                    <Legend>
+                                        <Appearance Visible="True" Position="Top"></Appearance>
+                                    </Legend>
+                                </telerik:RadHtmlChart>
                             </ContentTemplate>
                         </telerik:RadDock>
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockProposals" runat="server" Title="<a class='lnkGrid' href='Proposals' title='Go to Proposals List'>Proposals  / </a><a class='lnkGrid' href='Jobs' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
@@ -506,22 +386,12 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourcePropJobsBudgetsRate" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="YearStadistic_PROPOSALS_JOBS_BUDGETS_RATE" SelectCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="SqlDataSourceRates" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="YearStadistic_v20_RATES" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourceJobsInProgressByEmployee" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="JobsInProgressByEmployee_SELECT" SelectCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="Employee" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
