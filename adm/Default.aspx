@@ -48,8 +48,8 @@
                                     <PlotArea>
                                         <XAxis AxisCrossingValue="0" Color="black" MajorTickType="Outside" MinorTickType="Outside" Reversed="false" DataLabelsField="Year">
                                             <TitleAppearance Visible="false" Position="Center" RotationAngle="0" Text="Years"></TitleAppearance>
-                                            <LabelsAppearance DataFormatString="{0}" RotationAngle="315" Skip="0" Step="1">
-                                                <TextStyle FontSize="10px" />
+                                            <LabelsAppearance DataFormatString="{0}" Skip="0" Step="1">
+                                                <TextStyle FontSize="24px" Bold="true" />
                                             </LabelsAppearance>
                                             <MajorGridLines Visible="false"></MajorGridLines>
                                             <MinorGridLines Visible="false"></MinorGridLines>
@@ -58,7 +58,7 @@
                                         <YAxis Name="LeftAxis">
                                             <TitleAppearance Text="Rate" Visible="false"></TitleAppearance>
                                             <LabelsAppearance DataFormatString="{0:N2}">
-                                                <TextStyle FontSize="10px" />
+                                                <TextStyle FontSize="14px" Bold="true" />
                                             </LabelsAppearance>
                                         </YAxis>
                                         <Series>
@@ -116,7 +116,7 @@
                                     </PlotArea>
                                     <Legend>
                                         <Appearance Visible="True" Position="Right" Align="Start" >
-                                            <TextStyle FontSize="20"  />
+                                            <TextStyle FontSize="16"  />
                                         </Appearance>
 
                                     </Legend>
