@@ -24,72 +24,74 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <%-- Modals and the like --%>
-    <!-- DenyModal -->
-    <div id="modal-deny" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h5 class="modal-title text-xl-center fw-bold mt" id="modal-deny-header">Warning</h5>
+    <asp:Panel ID="pnlModals" runat="server">
+        <!-- DenyModal -->
+        <div id="modal-deny" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h5 class="modal-title text-xl-center fw-bold mt" id="modal-deny-header">Warning</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-xl-center text-muted mt-sm fs-mini">
+                            <strong>Are you sure you want to deny this proposal?</strong>
+                        </p>
+                    </div>
+                    <!-- End of Modal body -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
+                        <asp:LinkButton ID="btnDenyProposal" runat="server" CssClass="btn btn-danger" Text="Deny" OnClick="btnDenyProposal_Click"></asp:LinkButton>
+                    </div>
+                    <!-- End of Modal Footer -->
                 </div>
-                <div class="modal-body">
-                    <p class="text-xl-center text-muted mt-sm fs-mini">
-                        <strong>Are you sure you want to deny this proposal?</strong>
-                    </p>
-                </div>
-                <!-- End of Modal body -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
-                    <asp:LinkButton ID="btnDenyProposal" runat="server" CssClass="btn btn-danger" Text="Deny" OnClick="btnDenyProposal_Click"></asp:LinkButton>
-                </div>
-                <!-- End of Modal Footer -->
+                <!-- End of Modal content -->
             </div>
-            <!-- End of Modal content -->
+            <!-- End of Modal dialog -->
         </div>
-        <!-- End of Modal dialog -->
-    </div>
-    <!-- End of DenyModal -->
-    <!-- AcceptModal -->
-    <div id="modal-accept" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h5 class="modal-title text-xl-center fw-bold mt" id="modal-deny-accept">Accept by signing below</h5>
-                </div>
-                <div class="modal-body">
-                    <fieldset>
-                        <div class="form-group row">
-                            <label class="col-sm-4 form-control-label">Name</label>
-                            <div class="col-sm-7">
-                                <asp:TextBox ID="txtSignName" runat="server" CssClass="form-control sign-name"></asp:TextBox>
+        <!-- End of DenyModal -->
+        <!-- AcceptModal -->
+        <div id="modal-accept" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h5 class="modal-title text-xl-center fw-bold mt" id="modal-deny-accept">Accept by signing below</h5>
+                    </div>
+                    <div class="modal-body">
+                        <fieldset>
+                            <div class="form-group row">
+                                <label class="col-sm-4 form-control-label">Name</label>
+                                <div class="col-sm-7">
+                                    <asp:TextBox ID="txtSignName" runat="server" CssClass="form-control sign-name"></asp:TextBox>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-body">
+                        <div id="signature-pad" class="m-signature-pad">
+                            <div class="m-signature-pad--body">
+                                <canvas></canvas>
                             </div>
                         </div>
-                    </fieldset>
-                </div>
-                <div class="modal-body">
-                    <div id="signature-pad" class="m-signature-pad">
-                        <div class="m-signature-pad--body">
-                            <canvas></canvas>
-                        </div>
                     </div>
-                </div>
-                <!-- End of Modal body -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
-                    &nbsp;&nbsp;&nbsp;
+                    <!-- End of Modal body -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-gray" data-dismiss="modal">Cancel</button>
+                        &nbsp;&nbsp;&nbsp;
                     <button type="button" class="btn btn-secondary" data-action="clear">Clear</button>
-                    &nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;
                     <button id="btnSign" type="button" runat="server" data-action="save" class="btn btn-success" style="width: 100px">Sign</button>
+                    </div>
+                    <!-- End of Modal Footer -->
                 </div>
-                <!-- End of Modal Footer -->
+                <!-- End of Modal content -->
             </div>
-            <!-- End of Modal content -->
+            <!-- End of Modal dialog -->
         </div>
-        <!-- End of Modal dialog -->
-    </div>
-    <!-- End of Accept -->
-    <%-- End Modals and the like --%>
+        <!-- End of Accept -->
+        <%-- End Modals and the like --%>
+    </asp:Panel>
     <%-- Fixed Btns --%>
     <asp:Panel ID="pnlSideTools" runat="server">
         <div class="fixed-action-btns hidden-print">
@@ -212,7 +214,7 @@
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     <h3 class="company-name m-t-1">Service Fee(s)</h3>
-                                    <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails" ShowFooter="true" Width="100%" 
+                                    <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails" ShowFooter="true" Width="100%"
                                         RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
                                             <FooterStyle BorderStyle="None" />
@@ -252,12 +254,12 @@
                                     </telerik:RadGrid>
                                 </section>
                             </div>
-                             <%--Payments Schedule                                                           --%>
+                            <%--Payments Schedule                                                           --%>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <asp:Panel ID="Panel1" runat="server" Visible='<%# Eval("IsPaymentSchedule") %>' width="100%">
+                                    <asp:Panel ID="Panel1" runat="server" Visible='<%# Eval("IsPaymentSchedule") %>' Width="100%">
                                         <h3 class="company-name m-t-1">Payments Schedule</h3>
-                                        <telerik:RadGrid ID="RadGridPS" runat="server" 
+                                        <telerik:RadGrid ID="RadGridPS" runat="server"
                                             AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center" Width="100%"
                                             RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
                                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePS" ShowFooter="true" CssClass="table">
@@ -267,7 +269,7 @@
                                                     </telerik:GridBoundColumn>
 
                                                     <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center"
-                                                        HeaderText="SCHEDULE" SortExpression="Percentage" UniqueName="Percentage" 
+                                                        HeaderText="SCHEDULE" SortExpression="Percentage" UniqueName="Percentage"
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>
                                                     <telerik:GridBoundColumn DataField="Description"
@@ -284,7 +286,7 @@
                                                             </a>
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
-                                                    <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL" 
+                                                    <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL"
                                                         SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right"
                                                         FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
                                                         FooterStyle-HorizontalAlign="Right"
@@ -447,13 +449,13 @@
                                         </div>
                                     </div>
                                     <div class="row text-xs-center">
-                                        <div class="col-md-6 col-print-6 text-xs-center">
+                                        <div class="col-sm-6 col-print-6 text-xs-center">
                                             <h4></h4>
                                             <telerik:RadBinaryImage CssClass="img-signature" ID="imgEmpSignature" runat="server" AlternateText="Company Signature" DataValue='<%# IIf(Eval("CompanySing") Is DBNull.Value, Nothing, Eval("CompanySing"))%>' />
                                             <p><strong><%# Eval("CompanyContact") %></strong></p>
                                             <p><%# Eval("EmailDate", "{0:MMMM d, yyyy}")%></p>
                                         </div>
-                                        <div class="col-md-6 col-print-6 text-xs-center">
+                                        <div class="col-sm-6 col-print-6 text-xs-center">
                                             <asp:Panel ID="PanelSignature" runat="server" Visible='<%# Not Eval("AceptanceSignature") Is DBNull.Value %>'>
                                                 <h4></h4>
                                                 <telerik:RadBinaryImage CssClass="img-signature" ID="imgClientSignature" runat="server" AlternateText="Client Signature" DataValue='<%# IIf(Eval("AceptanceSignature") Is DBNull.Value, Nothing, Eval("AceptanceSignature"))%>' />
@@ -538,11 +540,16 @@
     <script src='<%= ResolveUrl("~/Scripts/signature-pad/signature_pad.js") %>'></script>
     <script src='<%= ResolveUrl("~/Scripts/signature-pad/app.js") %>'></script>
     <script>
-        var wrapper = document.getElementById("signature-pad"),
-            $clearButton = $("[data-action=clear]"),
-            $saveButton = $("[data-action=save]"),
-            canvas = wrapper.querySelector("canvas"),
-            signaturePad;
+    (function () {
+        var wrapper = document.getElementById("signature-pad");
+        if (!wrapper) {
+            // Safety check
+            return;
+        }
+        var $clearButton = $("[data-action=clear]");
+        var $saveButton = $("[data-action=save]");
+        var canvas = wrapper.querySelector("canvas");
+        var signaturePad;
 
         // Adjust canvas coordinate space taking into account pixel ratio,
         // to make it look crisp on mobile devices.
@@ -578,6 +585,7 @@
         $('#modal-accept').on('shown.bs.modal', function () {
             resizeCanvas();
         });
+    })();
     </script>
 </asp:Content>
 

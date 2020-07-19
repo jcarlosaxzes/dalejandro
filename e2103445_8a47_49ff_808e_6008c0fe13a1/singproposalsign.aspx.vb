@@ -142,6 +142,7 @@ Public Class singproposalsign
                 End If
 
                 pnlSideTools.Visible = Not IsReadOnly
+                pnlModals.Visible = Not IsReadOnly
                 '!!!lblProposalId.Text = 14424
                 'lblCompanyId.Text = LocalAPI.GetCompanyIdFromProposal(lblProposalId.Text)
 
@@ -159,6 +160,7 @@ Public Class singproposalsign
 
         If Not Request.QueryString("printing") Is Nothing Then
             pnlSideTools.Visible = False
+            pnlModals.Visible = False
         End If
     End Sub
 

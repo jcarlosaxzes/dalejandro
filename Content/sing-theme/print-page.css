@@ -12,6 +12,14 @@
     page-break-before: avoid;
 }
 
+@media (max-width: 767px) {
+    .content {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+        padding-top: 10px !important;
+    }
+}
+
 @media(min-width:992px) {
     .content {
         padding: 15px 220px 42px !important;
