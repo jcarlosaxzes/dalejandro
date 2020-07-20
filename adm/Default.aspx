@@ -72,7 +72,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="EarnAdollarRate" Name="Company [Earn One-Dollar] Rate">
+                                            <telerik:LineSeries DataFieldY="EarnAdollarRate" Name="Company [Return of Investment] Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -92,7 +92,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="ActiveClientRate" Name="Clients [Active Status] Rate">
+                                            <telerik:LineSeries DataFieldY="ActiveClientRate" Name="[Active Clients] Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -112,7 +112,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="EmployeeEfficiencyRate" Name="Employees [Worked/Assigned Hours] Rate">
+                                            <telerik:LineSeries DataFieldY="EmployeeEfficiencyRate" Name="Employees [Used/Assigned Hours] Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>

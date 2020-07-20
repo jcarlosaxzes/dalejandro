@@ -133,12 +133,5 @@ html .RadOrgChart .rocNodeFields .rocItemField {
     font-weight: 700
 }
 
-.table-sm td, .table-sm th {
-    padding-top: .05rem !important;
-    padding-bottom: .05rem !important;
-    padding-left: .2rem !important;
-    padding-right: .2rem !important;
-}
-
 
 
