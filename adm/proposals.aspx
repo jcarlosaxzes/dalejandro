@@ -32,6 +32,12 @@
                 masterTable.rebind();
             }
         </script>
+        <style>
+            .table-sm td, .table-sm th {
+            padding-top: .05rem;
+            padding-bottom: .05rem;
+        }
+        </style>
     </telerik:RadCodeBlock>
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <ClientEvents OnRequestStart="onRequestStart"></ClientEvents>

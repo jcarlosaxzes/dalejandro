@@ -142,6 +142,11 @@
                 padding: 4px 20px 4px 4px;
             }
 
+            .table-sm td, .table-sm th {
+                padding-top: .05rem;
+                padding-bottom: .05rem;
+            }
+
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
