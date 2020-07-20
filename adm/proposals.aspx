@@ -209,7 +209,7 @@
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceProp" ShowFooter="True" ClientDataKeyNames="Id">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                 <Columns>
-                    <telerik:GridTemplateColumn DataField="Id" HeaderText="Proposal Number"
+                    <telerik:GridTemplateColumn DataField="Id" HeaderText="Number"
                         SortExpression="Id" UniqueName="Id" ItemStyle-HorizontalAlign="Center"
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
@@ -238,7 +238,7 @@
                             </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="ProjectName" FilterControlAltText="Filter ProjectName column" HeaderText="Project Name<br/>Project Template - Job Type"
+                    <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Project Name - Template - Job Type"
                         SortExpression="ProjectName" UniqueName="ProjectName" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <table>
@@ -259,7 +259,7 @@
                             </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="ProposalBy" FilterControlAltText="Filter ProposalBy column" HeaderText="Proposal By - Prepared By<br/>Client - Company"
+                    <telerik:GridTemplateColumn DataField="ProposalBy" HeaderText="Proposal By - Prepared By /Client"
                         SortExpression="ProposalBy" UniqueName="ProposalBy" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <div>
@@ -315,10 +315,10 @@
                         FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}" FooterStyle-Width="90px">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Date" DataFormatString="{0:MM/dd/yy}" DataType="System.DateTime"
-                        HeaderText="Date Created" SortExpression="Date" UniqueName="Date"
-                        ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" AllowFiltering="False" HeaderStyle-Width="80px">
+                        HeaderText="Date" SortExpression="Date" UniqueName="Date"
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" AllowFiltering="False" HeaderStyle-Width="80px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="JobCode" HeaderText="Status<br/>Job No." SortExpression="JobCode"
+                    <telerik:GridTemplateColumn DataField="JobCode" HeaderText="Status - Job No." SortExpression="JobCode"
                         UniqueName="JobCode" ItemStyle-HorizontalAlign="Center"
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                         <ItemTemplate>

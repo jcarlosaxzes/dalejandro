@@ -142,9 +142,6 @@
                 padding: 4px 20px 4px 4px;
             }
 
-            .table-sm td, .table-sm th {
-                padding: .05rem;
-            }
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -332,7 +329,7 @@
     </div>
 
     <div class="collapse" id="collapseSummary">
-        <table class="table-sm pasconcept-subbar" style="width: 100%">
+        <table class="table-sm pasconcept-subbar" style="width: 100%;text-align:center">
             <tr>
                 <td style="width: 14%; text-align: center; background-color: #039be5;">
                     <span class="DashboardFont2">Budget</span><br />
@@ -620,7 +617,6 @@
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>
-
             </td>
         </tr>
     </table>
