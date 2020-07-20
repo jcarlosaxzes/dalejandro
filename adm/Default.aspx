@@ -44,7 +44,7 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockRates" runat="server" Title="Company Rates over the last 5 Years" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceRates" Width="100%" Height="400px">
+                                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceRates" Width="100%" Height="500px">
                                     <PlotArea>
                                         <XAxis AxisCrossingValue="0" Color="black" MajorTickType="Outside" MinorTickType="Outside" Reversed="false" DataLabelsField="Year">
                                             <TitleAppearance Visible="false" Position="Center" RotationAngle="0" Text="Years"></TitleAppearance>
@@ -62,7 +62,7 @@
                                             </LabelsAppearance>
                                         </YAxis>
                                         <Series>
-                                            <telerik:LineSeries DataFieldY="ProposalAcceptanceRate" Name="Proposal Acceptance Rate">
+                                            <telerik:LineSeries DataFieldY="ProposalAcceptanceRate" Name="Clients [Proposals Acceptance] Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -72,7 +72,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="EarnAdollarRate" Name="Earn A Dollar Rate">
+                                            <telerik:LineSeries DataFieldY="EarnAdollarRate" Name="Company [Earn One-Dollar] Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -82,7 +82,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="ProductiveSalaryRate" Name="Productive Salary Rate">
+                                            <telerik:LineSeries DataFieldY="ProductiveSalaryRate" Name="Employees [Productive Salary] Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -92,7 +92,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="ActiveClientRate" Name="Active Client Rate">
+                                            <telerik:LineSeries DataFieldY="ActiveClientRate" Name="Clients [Active Status] Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -102,7 +102,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="CollectionRate" Name="Collection Rate">
+                                            <telerik:LineSeries DataFieldY="CollectionRate" Name="Clients [Invoice Collection] Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -112,11 +112,21 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
+                                            <telerik:LineSeries DataFieldY="EmployeeEfficiencyRate" Name="Employees [Worked/Assigned Hours] Rate">
+                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                </LabelsAppearance>
+                                                <Appearance>
+                                                    <FillStyle BackgroundColor="Blue" />
+                                                </Appearance>
+                                                <LineAppearance LineStyle="Smooth" Width="3" />
+                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                            </telerik:LineSeries>
                                         </Series>
                                     </PlotArea>
                                     <Legend>
-                                        <Appearance Visible="True" Position="Right" Align="Start" >
-                                            <TextStyle FontSize="16"  />
+                                        <Appearance Visible="True" Position="Right"  >
+                                            <TextStyle FontSize="16" />
                                         </Appearance>
 
                                     </Legend>
