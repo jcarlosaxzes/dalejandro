@@ -38,7 +38,7 @@ Public Class _Default1
             RadWindowManagerJob.EnableViewState = False
 
         Catch ex As Exception
-
+            Master.ErrorMessage(ex.Message)
         End Try
     End Sub
 
