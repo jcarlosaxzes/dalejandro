@@ -62,7 +62,7 @@
                                             </LabelsAppearance>
                                         </YAxis>
                                         <Series>
-                                            <telerik:LineSeries DataFieldY="ProposalAcceptanceRate" Name="Proposal Success Rate">
+                                            <telerik:LineSeries DataFieldY="ProposalSuccessRate" Name="Proposal Success Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -72,7 +72,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="ReturnOfInvestment" Name="Return on Investment">
+                                            <telerik:LineSeries DataFieldY="ReturnOnInvestment" Name="Return on Investment">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -82,7 +82,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="ProductiveSalaryRate" Name="Direct Labor Rate">
+                                            <telerik:LineSeries DataFieldY="DirectLaborRate" Name="Direct Labor Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -102,7 +102,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="CollectionRate" Name="Billing Success Rate">
+                                            <telerik:LineSeries DataFieldY="BillingSuccessRate" Name="Billing Success Rate">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>
@@ -125,8 +125,11 @@
                                         </Series>
                                     </PlotArea>
                                     <Legend>
-                                        <Appearance Visible="True" Position="Right"  >
-                                            <TextStyle FontSize="16" />
+                                        <Appearance Visible="True" Position="Top"  >
+                                            <TextStyle FontSize="16" Bold="true" FontFamily="Fira Sans" />
+                                            <ClientTemplate>
+                                                #= text # &nbsp;
+                                            </ClientTemplate>
                                         </Appearance>
 
                                     </Legend>
