@@ -407,7 +407,7 @@
                             </telerik:RadNavigation>
                         </td>
                         <td style="text-align:right">
-                           <asp:LinkButton ID="lblCompanyName" Font-Bold="true" Font-Names="'Fira Sans" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="TopRightMenuClass">
+                           <asp:LinkButton ID="lblCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="TopRightMenuClass">
                            </asp:LinkButton>  
                         </td>
                         <td style="text-align:right;color: inherit;">
