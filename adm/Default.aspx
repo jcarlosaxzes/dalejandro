@@ -44,7 +44,7 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockRates" runat="server" Title="Company Trends Over the Last 5 Years" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceRates" Width="100%" Height="500px">
+                                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceRates" Width="100%" Height="500px" Skin="Material">
                                     <PlotArea>
                                         <XAxis AxisCrossingValue="0" Color="black" MajorTickType="Outside" MinorTickType="Outside" Reversed="false" DataLabelsField="Year">
                                             <TitleAppearance Visible="false" Position="Center" RotationAngle="0" Text="Years"></TitleAppearance>
@@ -126,7 +126,7 @@
                                     </PlotArea>
                                     <Legend>
                                         <Appearance Visible="True" Position="Top"  >
-                                            <TextStyle FontSize="16" Bold="true" FontFamily="Fira Sans" />
+                                            <TextStyle FontSize="16" Bold="true" FontFamily="Sans-Serif" />
                                             <ClientTemplate>
                                                 #= text # &nbsp;
                                             </ClientTemplate>
