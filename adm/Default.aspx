@@ -72,7 +72,7 @@
                                                 <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
                                                 <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                             </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="ReturnOnInvestment" Name="Return on Investment">
+                                            <telerik:LineSeries DataFieldY="ReturnOnInvestment" Name="R O I">
                                                 <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
                                                 </LabelsAppearance>
                                                 <Appearance>

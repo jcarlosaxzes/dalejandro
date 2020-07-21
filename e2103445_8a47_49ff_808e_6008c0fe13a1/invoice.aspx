@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="invoice.aspx.vb" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" Inherits="pasconcept20.invoice"  Async="true"%>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="invoice.aspx.vb" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" Inherits="pasconcept20.invoice" Async="true" %>
 
 <%@ Import Namespace="pasconcept20" %>
 
@@ -22,6 +22,12 @@
 
         .row .form-group {
             text-align: left !important;
+        }
+
+        .divcorners {
+            border-radius: 15px;
+            border: 2px solid black;
+            padding:5px;
         }
     </style>
     <telerik:RadAjaxManager ID="uxRadAjaxManager" runat="server">
@@ -168,9 +174,10 @@
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 48%">
-                                <h3 style=" text-align: center;color:white"><span class="navbar navbar-expand-md bg-dark d-print-block">Bill To</span></h3>
-
-                                <h4 style="margin: 0"><%# Eval("ClientName")%></h4>
+                                <div class="divcorners">
+                                    <h3 style="text-align: center; margin:10px">Bill To</h3>
+                                </div>
+                                <h4 style="padding-top:15px;padding-bottom:5px;margin:0"><%# Eval("ClientName")%></h4>
                                 <%# Eval("ClientCompany") %><br />
                                 <%# Eval("ClientFullAddress")%><br />
                                 <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br />
@@ -179,9 +186,10 @@
                             <td style="width: 5%"></td>
                             <td style="text-align: left; vertical-align: top">
 
-                                <h3 style=" text-align: center;color:white"><span class="navbar navbar-expand-md bg-dark d-print-block">Project Information</span></h3>
-
-                                <h4 style="margin: 0"><%# Eval("ProjectName") %></h4>
+                                <div class="divcorners">
+                                    <h3 style="text-align: center; margin:10px">Project Information</h3>
+                                </div>
+                                <h4 style="padding-top:15px;padding-bottom:5px;margin:0"><%# Eval("ProjectName") %></h4>
                                 Contract Amount:&nbsp;<span style="margin: 3px; font-weight: bold"><%# Eval("Budget", "{0:C2}") %></span>
                                 <br />
                                 <%# Eval("ProjectLocation") %>
@@ -192,16 +200,18 @@
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top">
-                                <h2 style=" text-align: center;color:white"><span class="navbar navbar-expand-md bg-dark d-print-block">Invoice <%# Eval("InvoiceNumber") %></span></h2>
+                                  <div class="divcorners">
+                                    <h3 style="text-align: center; margin:10px">Invoice <%# Eval("InvoiceNumber") %></h3>
+                                </div>
                                 <h4>Invoice Description:</h4>
                                 <%# Eval("Notes") %>
                             </td>
                         </tr>
                     </table>
-                    <table style="width:100%">
+                    <table style="width: 100%">
                         <tr>
                             <td></td>
-                            <td style="width:300px">
+                            <td style="width: 300px">
                                 <table class="table-sm" style="width: 100%" border="1">
                                     <tr>
                                         <td style="width: 150px; text-align: right; padding-right: 15px">Date Emitted</td>
@@ -234,7 +244,7 @@
 
             <asp:Panel runat="server" ID="pnlPayments">
                 <br />
-                <h2 style=" text-align: center;color:white"><span class="navbar navbar-expand-md bg-dark d-print-block">Payments</span></h2>
+                <h2 style="text-align: center; color: white"><span class="navbar navbar-expand-md bg-dark d-print-block">Payments</span></h2>
                 <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSourceInvoicesPayments" ShowFooter="true" Width="100%" Skin="Bootstrap">
 
                     <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoicesPayments">
@@ -284,7 +294,7 @@
                 <div class="col-lg-12" style="margin-top: 10px">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-6">
-                            <h2 style=" text-align: center;color:white"><span class="navbar navbar-expand-md bg-dark d-print-block">Payment method</span></h2>
+                            <h2 style="text-align: center; color: white"><span class="navbar navbar-expand-md bg-dark d-print-block">Payment method</span></h2>
                         </div>
                     </div>
                     <div class="row">
