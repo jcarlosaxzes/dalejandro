@@ -25,6 +25,12 @@
         .row .form-group {
             text-align: left !important;
         }
+
+        .divcorners {
+            border-radius: 15px;
+            border: 2px solid black;
+            padding: 5px;
+        }
     </style>
     <telerik:RadAjaxManager ID="uxRadAjaxManager" runat="server">
         <AjaxSettings>
@@ -169,19 +175,24 @@
                     <table style="width: 100%; background-color: white; margin-top: 20px">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 45%">
-                                <h2><span class="navbar navbar-expand-md bg-dark text-white d-print-block">Bill To</span></h2>
-                                <h3 style="margin: 0"><%# Eval("ClientName")%></h3>
+                                
+                                <div class="divcorners">
+                                    <h3 style="text-align: center; margin:10px">Bill To</h3>
+                                </div>
+                                <h3 style="padding-top:15px;padding-bottom:5px;margin:0"><%# Eval("ClientName")%></h3>
                                 <%# Eval("ClientCompany") %><br />
                                 <%# Eval("ClientFullAddress")%><br />
                                 <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%>
                             </td>
                             <td style="width: 10%"></td>
                             <td style="text-align: left; vertical-align: top">
-                                <h2><span class="navbar navbar-expand-md bg-dark text-white d-print-block">Statement</span></h2>
-                                <table style="width: 100%">
+                                <div class="divcorners" >
+                                    <h3 style="text-align: center; margin:10px">Statement</h3>
+                                </div>
+                                <table style="width: 100%;">
                                     <tr>
-                                        <td style="width: 180px; text-align: right; padding-right: 15px">Statement Number</td>
-                                        <td style="width: 200px;">
+                                        <td style="width: 180px; text-align: right; padding-right: 15px;padding-top:15px">Statement Number</td>
+                                        <td style="width: 200px;padding-top:15px">
                                             <h4 style="margin: 3px"><%# Eval("StatementNumber") %></h4>
                                         </td>
                                     </tr>
