@@ -97,6 +97,7 @@ Public Class proposalnewwizard
             cboProjectManagerId.SelectedValue = PreProjectInfo("ProposalBy")
             cboDepartment.SelectedValue = PreProjectInfo("DepartmentId")
         Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
         End Try
     End Sub
 

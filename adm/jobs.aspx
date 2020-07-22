@@ -431,7 +431,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Client" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Client" UniqueName="Client" ItemStyle-Font-Size="x-small">
+                            <telerik:GridTemplateColumn DataField="Client" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Client" UniqueName="Client" ItemStyle-Font-Size="x-small" HeaderStyle-Width ="250px">
                                 <ItemTemplate>
                                     <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("Name") %>' Font-Bold="true"></asp:Label>
                                     <br />
@@ -513,12 +513,12 @@
                                                 <%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%
                                             </td>
                                             <td>
-                                                <telerik:RadProgressBar ID="RadProgressBar98" runat="server" Font-Size="10px" RegisterWithScriptManager="true"
+                                                <telerik:RadProgressBar ID="RadProgressBar98" runat="server" Font-Size="10px" 
                                                     RenderMode="Lightweight"
-                                                    Height="14px"
+                                                    Height="8px"
                                                     ShowLabel="false"
-                                                    BarType="Chunk" ChunksCount="10"
-                                                    Skin="Material"
+                                                    BarType="Percent" 
+                                                    Skin="Bootstrap"
                                                     ToolTip="Budget Collected"
                                                     MaxValue="100"
                                                     Value='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'
@@ -535,7 +535,7 @@
                                             <td>
                                                 <telerik:RadProgressBar ID="RadProgressBar99" runat="server"
                                                     RenderMode="Lightweight"
-                                                    Height="5px" ShowLabel="false"
+                                                    Height="8px" ShowLabel="false"
                                                     BarType="Value"
                                                     Skin="Material"
                                                     MaxValue="100"
@@ -560,13 +560,29 @@
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
                                 HeaderStyle-Width="120px">
                                 <ItemTemplate>
-                                    <table style="width: 100%">
+                                    <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
-                                            <td style="width: 32px; text-align: right;">
-                                                <span title="Budget Used (%)" class='<%# LocalAPI.GetPercentUpLabelCSS(Eval("Profit")) %>' style="font-size: 10px"><%# Eval("Profit", "{0:N0}")%>%</span>
+                                            <td colspan="2" style="text-align:right">
+                                                 <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
                                             </td>
-                                            <td style="text-align: right">
-                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 32px; text-align: left">
+                                                <%# Eval("Profit", "{0:N0}")%>%
+                                            </td>
+                                            <td>
+                                                <telerik:RadProgressBar ID="RadProgressBar96" runat="server"
+                                                    RenderMode="Lightweight"
+                                                    Height="8px" ShowLabel="false"
+                                                    BarType="Value"
+                                                    Skin="Material"
+                                                    MaxValue="100"
+                                                    ToolTip="Budget Used"
+                                                    Value='<%# Eval("Profit")%>'
+                                                    Width="100%"
+                                                    CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
+                                                    <AnimationSettings Duration="0" />
+                                                </telerik:RadProgressBar>
                                             </td>
                                         </tr>
                                     </table>
@@ -583,17 +599,32 @@
                             <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="120px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <table style="width: 100%">
+                                    <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
-                                            <td style="width: 32px; text-align: right;">
-                                                <span title="Budget Collected (%)" class='<%# LocalAPI.GetPercentDonwLabelCSS(GetCollectedPercent(Eval("Budget"), Eval("Collected"))) %>' style="font-size: 10px"><%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%</span>
-                                            </td>
-                                            <td style="text-align: right">
+                                            <td colspan="2" style="text-align:right">
                                                 <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoices Collected"></asp:Label>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="width: 32px; text-align: right">
+                                                <%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%
+                                            </td>
+                                            <td>
+                                                <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px" 
+                                                    RenderMode="Lightweight"
+                                                    Height="8px"
+                                                    ShowLabel="false"
+                                                    BarType="Percent" 
+                                                    Skin="Bootstrap"
+                                                    ToolTip="Budget Collected"
+                                                    MaxValue="100"
+                                                    Value='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'
+                                                    Width="100%">
+                                                    <AnimationSettings Duration="0" />
+                                                </telerik:RadProgressBar>
+                                            </td>
+                                        </tr>
                                     </table>
-
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
