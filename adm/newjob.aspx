@@ -3,19 +3,12 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Cancel
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin:0">New Job</h3>
-                </td>
+        </asp:LinkButton>
 
-            </tr>
-        </table>
+        <span class="pasconcept-pagetitle">  New Job</span>
+
     </div>
     <div>
         <asp:ValidationSummary ID="vsClient" runat="server" ValidationGroup="JobUpdate" ForeColor="Red"
@@ -161,7 +154,7 @@
             <tr>
                 <td style="width: 200px; text-align: right">Budget:</td>
                 <td style="width: 180px;">
-                    <telerik:RadNumericTextBox ID="txtBudgest" runat="server" Width="180px">
+                    <telerik:RadNumericTextBox ID="txtBudgest" runat="server" Width="180px" Value="0">
                     </telerik:RadNumericTextBox>
                 </td>
                 <td style="width: 180px; text-align: right">Construction Cost:</td>
@@ -256,6 +249,8 @@
         <asp:CompareValidator runat="server" ID="Comparevalidator4" ValueToCompare="(Select Use...)"
             Operator="NotEqual" ControlToValidate="cboUse" Text="*" ErrorMessage="Define Use" SetFocusOnError="true" ValidationGroup="JobUpdate" Display="None">
         </asp:CompareValidator>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtBudgest" ValidationGroup="JobUpdate"
+            Text="*" ErrorMessage="Budget cannot be Empty" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
     </div>
 
     <%--SqlDataSource--%>
