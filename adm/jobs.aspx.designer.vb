@@ -284,6 +284,15 @@ Partial Public Class jobs
     Protected WithEvents lblTotalBudget As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblTotalBudgetUsed control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTotalBudgetUsed As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblTotalBilled control.
     '''</summary>
     '''<remarks>
@@ -300,15 +309,6 @@ Partial Public Class jobs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblTotalCollected As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblTotalPending control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblTotalPending As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''LabelblTotalBalance control.
