@@ -168,6 +168,7 @@
             Your payment has been processed. Thank you for your business!!!
                         <asp:Literal ID="ltrlSuccess" runat="server"></asp:Literal>
         </asp:Panel>
+        <br />
         <div style="font-size: 16px">
             <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceStatement" Width="100%">
                 <ItemTemplate>
@@ -228,7 +229,10 @@
                     </table>
 
                     <div style="text-align: left; margin-top: 30px">
-                        <h3 style="margin: 5px">Invoices of Statement</h3>
+                        <div class="divcorners">
+                            <h2 style="text-align: center; margin: 10px">Invoices of Statement</h2>
+                        </div>
+                        <br />
                         <telerik:RadGrid ID="RadGridInvoices" runat="server" DataSourceID="SqlDataSourceInvoices" ShowFooter="true" Width="100%" Skin="Bootstrap">
                             <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoices" ShowFooter="false">
                                 <FooterStyle BorderStyle="None" />
