@@ -83,8 +83,6 @@
 
                 columnIndex = masterTableView.getColumnByUniqueName("Budget").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
-                columnIndex = masterTableView.getColumnByUniqueName("Billed").get_element().cellIndex;
-                masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Collected").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Balance").get_element().cellIndex;
@@ -106,8 +104,6 @@
                 masterTableView.hideColumn(columnIndex);
 
                 columnIndex = masterTableView.getColumnByUniqueName("Budget").get_element().cellIndex;
-                masterTableView.showColumn(columnIndex);
-                columnIndex = masterTableView.getColumnByUniqueName("Billed").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Collected").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
@@ -146,7 +142,6 @@
                 padding-top: .05rem;
                 padding-bottom: .05rem;
             }
-
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -208,16 +203,16 @@
                     </td>
                     <td style="width: 250px">
                         <telerik:RadComboBox ID="cboBalanceStatus" runat="server"
-                            Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true" DropDownAutoWidth="Enabled">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="(All Balance Status...)" Value="-1" Selected="true" />
                                 <telerik:RadComboBoxItem runat="server" Text="Pending Balance" Value="100" Selected="true" />
-                                <telerik:RadComboBoxItem runat="server" Text="Balance>0. and Emitted=0" Value="1" ForeColor="White" BackColor="Blue" />
-                                <telerik:RadComboBoxItem runat="server" Text="Balance>0. and Emitted=1" Value="2" ForeColor="White" BackColor="Green" />
-                                <telerik:RadComboBoxItem runat="server" Text="Balance>0. and Emitted=2" Value="3" ForeColor="White" BackColor="Orange" />
-                                <telerik:RadComboBoxItem runat="server" Text="Balance>0. and Emitted>=3" Value="4" ForeColor="White" BackColor="OrangeRed" />
-                                <telerik:RadComboBoxItem runat="server" Text="Balance=0. Close" Value="0" ForeColor="White" BackColor="Black" />
-                                <telerik:RadComboBoxItem runat="server" Text="Balance=0. Budget ? Invoice" Value="99" ForeColor="White" BackColor="Purple" />
+                                <telerik:RadComboBoxItem runat="server" Text="Existing Pending Balance, Invoice Not Emitted" Value="1" ForeColor="White" BackColor="Blue" />
+                                <telerik:RadComboBoxItem runat="server" Text="Existing Pending Balance, Invoice Emitted One Time" Value="2" ForeColor="White" BackColor="Green" />
+                                <telerik:RadComboBoxItem runat="server" Text="Existing Pending Balance, Invoice Emitted Two Times" Value="3" ForeColor="White" BackColor="Orange" />
+                                <telerik:RadComboBoxItem runat="server" Text="Existing Pending Balance, Invoice Emitted Three Time" Value="4" ForeColor="White" BackColor="Red" />
+                                <telerik:RadComboBoxItem runat="server" Text="Closed and Paid in Full." Value="0" ForeColor="White" BackColor="Black" />
+                                <telerik:RadComboBoxItem runat="server" Text="Warning: No Pending Balance but Budget is Not Equal to the Billed Amount" Value="99" ForeColor="White" BackColor="Purple" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -334,7 +329,7 @@
     </div>
 
     <div class="collapse" id="collapseSummary">
-        <table class="table-sm pasconcept-subbar" style="width: 100%;text-align:center">
+        <table class="table-sm pasconcept-subbar" style="width: 100%; text-align: center">
             <tr>
                 <td style="width: 14%; text-align: center; background-color: #039be5;">
                     <span class="DashboardFont2">Budget</span><br />
@@ -431,7 +426,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Client" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Client" UniqueName="Client" ItemStyle-Font-Size="x-small" HeaderStyle-Width ="250px">
+                            <telerik:GridTemplateColumn DataField="Client" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Client" UniqueName="Client" ItemStyle-Font-Size="x-small">
                                 <ItemTemplate>
                                     <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("Name") %>' Font-Bold="true"></asp:Label>
                                     <br />
@@ -483,15 +478,9 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="nStatus" ItemStyle-HorizontalAlign="Center"
-                                UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="140px">
-                                <ItemTemplate>
-                                    <span title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>' style="font-size: 12px"><%# Eval("nStatus") %></span>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
+                            <%--PM - Employees--%>
                             <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName"
-                                UniqueName="EmployeeName" AllowFiltering="true" HeaderStyle-Width="160px" ItemStyle-Font-Size="X-Small">
+                                UniqueName="EmployeeName" AllowFiltering="true" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
                                                     <span aria-hidden="true" style='<%# IIf(Left(Eval("EmployeeName"),2)="PM","color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
@@ -502,10 +491,11 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
+                            <%--Collected - Used--%>
                             <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected - Used" SortExpression="Profit"
                                 UniqueName="Profit" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Size="X-Small" HeaderTooltip="Budget Collected / Budget Used"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
-                                HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
+                                HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
@@ -513,11 +503,11 @@
                                                 <%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%
                                             </td>
                                             <td>
-                                                <telerik:RadProgressBar ID="RadProgressBar98" runat="server" Font-Size="10px" 
+                                                <telerik:RadProgressBar ID="RadProgressBar98" runat="server" Font-Size="10px"
                                                     RenderMode="Lightweight"
                                                     Height="8px"
                                                     ShowLabel="false"
-                                                    BarType="Percent" 
+                                                    BarType="Percent"
                                                     Skin="Bootstrap"
                                                     ToolTip="Budget Collected"
                                                     MaxValue="100"
@@ -554,23 +544,36 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
+                            <%--Status--%>
+                            <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="nStatus" ItemStyle-HorizontalAlign="Center"
+                                UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="140px">
+                                <ItemTemplate>
+                                    <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>' style="font-size: 12px; display: inline-block; width: 120px"><%# Eval("nStatus") %></div>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
                             <%--Private Mode--%>
-                            <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget" SortExpression="Budget" Display="false"
+                            <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" HeaderTooltip="Budget - % Budget Used"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
-                                HeaderStyle-Width="120px">
+                                HeaderStyle-Width="140px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
-                                            <td colspan="2" style="text-align:right">
-                                                 <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
+                                            <td style="width: 45%; text-align: right">
+                                                <%# Eval("Coste", "{0:C0}")%>
+                                            </td>
+                                            <td style="width: 5%; text-align: center">of
+                                            </td>
+                                            <td style="text-align: right">
+                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Balance = [Total Invoice Amount] - [Amount Collected] - [Amount BadDebt]"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 32px; text-align: left">
+                                            <td style="text-align: right">
                                                 <%# Eval("Profit", "{0:N0}")%>%
                                             </td>
-                                            <td>
+                                            <td colspan="2">
                                                 <telerik:RadProgressBar ID="RadProgressBar96" runat="server"
                                                     RenderMode="Lightweight"
                                                     Height="8px" ShowLabel="false"
@@ -589,32 +592,30 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="JobInvoiceAmount" Display="false" HeaderText="Billed" SortExpression="JobInvoiceAmount" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Billed" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:C0}")%>' ToolTip="Total Invoice Billed" ForeColor="White"></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="120px" ItemStyle-Font-Size="X-Small">
+                            <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Billing Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
+                                UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
-                                            <td colspan="2" style="text-align:right">
+                                            <td style="width: 45%; text-align: right">
                                                 <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoices Collected"></asp:Label>
+                                            </td>
+                                            <td style="width: 5%; text-align: center">of
+                                            </td>
+                                            <td style="text-align: right">
+                                                <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:C0}")%>' ToolTip="Total Invoice Billed"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 32px; text-align: right">
-                                                <%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>%
+                                            <td style="text-align: right">
+                                                <asp:Label ID="lblColectedPercent" runat="server" Text='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>' ForeColor="White"></asp:Label>%    
                                             </td>
-                                            <td>
-                                                <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px" 
+                                            <td colspan="2">
+                                                <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px"
                                                     RenderMode="Lightweight"
                                                     Height="8px"
                                                     ShowLabel="false"
-                                                    BarType="Percent" 
+                                                    BarType="Percent"
                                                     Skin="Bootstrap"
                                                     ToolTip="Budget Collected"
                                                     MaxValue="100"
@@ -629,14 +630,27 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
+                                UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected"></asp:Label>
+                                    <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
+                                        <tr>
+                                            <td style="width: 32px; text-align: left">
+                                                <asp:Label ID="lblBalanceSymbol" runat="server">
+                                                    <i class="fas fa-circle"></i>
+                                                </asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Size="X-Small"></asp:Label>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="SubContract" Display="false" HeaderText="RFP" SortExpression="SubContract" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="SubContract" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
+                            <telerik:GridTemplateColumn DataField="SubContract" Display="false" HeaderText="Sub Fee(s)" SortExpression="SubContract" ItemStyle-HorizontalAlign="Right"
+                                UniqueName="SubContract" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
                                     <%# Eval("SubContract", "{0:C0}")%>
                                 </ItemTemplate>
@@ -644,6 +658,13 @@
 
                             <%--Columnas No visibles para propositos de calculos--%>
                             <telerik:GridBoundColumn DataField="JobInvoiceAmountPending" UniqueName="JobInvoiceAmountPendingHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
+                            <telerik:GridTemplateColumn DataField="JobInvoiceAmount" Display="false" HeaderText="Billed" SortExpression="JobInvoiceAmount" ItemStyle-HorizontalAlign="Right"
+                                UniqueName="Billed" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="80px" ItemStyle-Font-Size="X-Small">
+                                <ItemTemplate>
+                                    <%# Eval("JobInvoiceAmount", "{0:C0}")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Job?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete" Display="false"
