@@ -608,36 +608,36 @@ Public Class jobs
                 Dim cboActions As RadComboBox = CType(item.FindControl("cboActions"), RadComboBox)
                 FillCboActions(cboActions, jobId)
 
-                Dim lblJobBilled As Label = DirectCast(item.FindControl("lblJobBilledAmount"), Label)
+                Dim lblBalanceSymbol As Label = DirectCast(item.FindControl("lblBalanceSymbol"), Label)
                 If DirectCast(item.FindControl("lblBalance"), Label).Text <> 0 Then
                     Dim lEmitted As Integer = LocalAPI.GetInvoiceEmmited(jobId)
                     Select Case lEmitted
                         Case 0  '"~/Images/Toolbar/white_circle.png"
-                            lblJobBilled.BackColor = System.Drawing.Color.Blue
-                            lblJobBilled.ToolTip = "Blue. Balance>0 and Amount Due<>0 and Emitted=0"
+                            lblBalanceSymbol.ForeColor = System.Drawing.Color.Blue
+                            lblBalanceSymbol.ToolTip = "Blue. Existing Pending Balance, Invoice Not Emitted"
 
                         Case 1  '"~/Images/Toolbar/green_circle.png"
-                            lblJobBilled.BackColor = System.Drawing.Color.Green
-                            lblJobBilled.ToolTip = "Green. Balance>0 and Amount Due<>0 and Emitted=1"
+                            lblBalanceSymbol.ForeColor = System.Drawing.Color.Green
+                            lblBalanceSymbol.ToolTip = "Green. Existing Pending Balance, Invoice Emitted One Time"
 
                         Case 2  '"~/Images/Toolbar/yellow_circle.png"
-                            lblJobBilled.BackColor = System.Drawing.Color.Orange
-                            lblJobBilled.ToolTip = "Orange. Balance>0 and Amount Due<>0 and Emitted=2"
+                            lblBalanceSymbol.ForeColor = System.Drawing.Color.Orange
+                            lblBalanceSymbol.ToolTip = "Orange. Existing Pending Balance, Invoice Emitted Two Times"
 
                         Case Else   '"~/Images/Toolbar/red_circle.png"
-                            lblJobBilled.BackColor = System.Drawing.Color.OrangeRed
-                            lblJobBilled.ToolTip = "OrangeRed. Balance>0 and Amount Due<>0 and Emitted>=3"
+                            lblBalanceSymbol.ForeColor = System.Drawing.Color.Red
+                            lblBalanceSymbol.ToolTip = "Red. Existing Pending Balance, Invoice Emitted Three Time"
                     End Select
                 Else
                     ' Balance = 0
                     If DirectCast(item.FindControl("lblBudget"), Label).Text = DirectCast(item.FindControl("lblJobBilledAmount"), Label).Text Then
                         ' Budget = SUM(Invoice Amount)
-                        lblJobBilled.BackColor = System.Drawing.Color.Black
-                        lblJobBilled.ToolTip = "Black. Close, Balance=0 and JobBudget=SUM(Invoice Amount)"
+                        lblBalanceSymbol.ForeColor = System.Drawing.Color.Black
+                        lblBalanceSymbol.ToolTip = "Black. Closed and Paid in Full."
                     Else
                         ' Budget <> SUM(Invoice Amount)
-                        lblJobBilled.BackColor = System.Drawing.Color.Purple
-                        lblJobBilled.ToolTip = "Purple. ? Balance=0 but JobBudget<>SUM(Invoice Amount)"
+                        lblBalanceSymbol.ForeColor = System.Drawing.Color.Purple
+                        lblBalanceSymbol.ToolTip = "Purple. Warning: No Pending Balance but Budget is Not Equal to the Billed Amount"
                     End If
                 End If
             End If
