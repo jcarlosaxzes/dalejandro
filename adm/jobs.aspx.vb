@@ -730,7 +730,7 @@ Public Class jobs
             LabelblTotalBalance.Text = footerItem("Balance").Text
             lblTotalSubContract.Text = footerItem("SubContract").Text
 
-            lblTotalPending.Text = footerItem("JobInvoiceAmountPendingHide").Text
+            lblTotalBudgetUsed.Text = lblTotalBilled.Text - lblTotalCollected.Text
         Catch ex As Exception
 
         End Try
