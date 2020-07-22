@@ -126,9 +126,9 @@
                                     </PlotArea>
                                     <Legend>
                                         <Appearance Visible="True" Position="Top"  >
-                                            <TextStyle FontSize="16" Bold="true" FontFamily="Sans-Serif" />
+                                            <TextStyle FontSize="14" Bold="true" FontFamily="Sans-Serif" />
                                             <ClientTemplate>
-                                                #= text # &nbsp;
+                                                #= text #&nbsp;
                                             </ClientTemplate>
                                         </Appearance>
 

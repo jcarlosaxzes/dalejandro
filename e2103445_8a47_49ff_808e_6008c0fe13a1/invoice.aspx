@@ -27,7 +27,7 @@
         .divcorners {
             border-radius: 15px;
             border: 2px solid black;
-            padding:5px;
+            padding: 5px;
         }
     </style>
     <telerik:RadAjaxManager ID="uxRadAjaxManager" runat="server">
@@ -167,17 +167,18 @@
             Your payment has been processed. Thank you for your business!!!
                         <asp:Literal ID="ltrlSuccess" runat="server"></asp:Literal>
         </asp:Panel>
-        <div style="font-size: 16px">
+        <div style="font-size: 16px;">
             <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceInvoice" Width="100%">
                 <ItemTemplate>
-
+                    <br />
+                    <br />
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top; width: 48%">
                                 <div class="divcorners">
-                                    <h3 style="text-align: center; margin:10px">Bill To</h3>
+                                    <h3 style="text-align: center; margin: 10px">Bill To</h3>
                                 </div>
-                                <h4 style="padding-top:15px;padding-bottom:5px;margin:0"><%# Eval("ClientName")%></h4>
+                                <h4 style="padding-top: 15px; padding-bottom: 5px; margin: 0"><%# Eval("ClientName")%></h4>
                                 <%# Eval("ClientCompany") %><br />
                                 <%# Eval("ClientFullAddress")%><br />
                                 <%# LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone"))%><br />
@@ -187,9 +188,9 @@
                             <td style="text-align: left; vertical-align: top">
 
                                 <div class="divcorners">
-                                    <h3 style="text-align: center; margin:10px">Project Information</h3>
+                                    <h3 style="text-align: center; margin: 10px">Project Information</h3>
                                 </div>
-                                <h4 style="padding-top:15px;padding-bottom:5px;margin:0"><%# Eval("ProjectName") %></h4>
+                                <h4 style="padding-top: 15px; padding-bottom: 5px; margin: 0"><%# Eval("ProjectName") %></h4>
                                 Contract Amount:&nbsp;<span style="margin: 3px; font-weight: bold"><%# Eval("Budget", "{0:C2}") %></span>
                                 <br />
                                 <%# Eval("ProjectLocation") %>
@@ -197,17 +198,19 @@
                             </td>
                         </tr>
                     </table>
+                    <br />
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="text-align: left; vertical-align: top">
-                                  <div class="divcorners">
-                                    <h3 style="text-align: center; margin:10px">Invoice <%# Eval("InvoiceNumber") %></h3>
+                                <div class="divcorners">
+                                    <h3 style="text-align: center; margin: 10px">Invoice <%# Eval("InvoiceNumber") %></h3>
                                 </div>
                                 <h4>Invoice Description:</h4>
                                 <%# Eval("Notes") %>
                             </td>
                         </tr>
                     </table>
+                    <br />
                     <table style="width: 100%">
                         <tr>
                             <td></td>
@@ -241,10 +244,13 @@
 
                 </ItemTemplate>
             </asp:FormView>
-
+            <br />
             <asp:Panel runat="server" ID="pnlPayments">
                 <br />
-                <h2 style="text-align: center; color: white"><span class="navbar navbar-expand-md bg-dark d-print-block">Payments</span></h2>
+                <div class="divcorners">
+                    <h2 style="text-align: center; margin: 10px">Payments</h2>
+                </div>
+                <br />
                 <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSourceInvoicesPayments" ShowFooter="true" Width="100%" Skin="Bootstrap">
 
                     <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoicesPayments">
