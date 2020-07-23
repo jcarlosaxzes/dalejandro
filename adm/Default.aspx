@@ -28,6 +28,7 @@
             .RadDock .rdTitleWrapper {
                 border-radius: 6px;
             }
+
     </style>
 
     <div class="pasconcept-bar noprint">
@@ -125,7 +126,7 @@
                                         </Series>
                                     </PlotArea>
                                     <Legend>
-                                        <Appearance Visible="True" Position="Top"  >
+                                        <Appearance Visible="True" Position="Top">
                                             <TextStyle FontSize="14" Bold="true" FontFamily="Sans-Serif" />
                                             <ClientTemplate>
                                                 #= text #&nbsp;
@@ -136,17 +137,15 @@
                                 </telerik:RadHtmlChart>
                             </ContentTemplate>
                         </telerik:RadDock>
-                        <telerik:RadDock RenderMode="Lightweight" ID="RadDockProposals" runat="server" Title="<a class='lnkGrid' href='Proposals' title='Go to Proposals List'>Proposals  / </a><a class='lnkGrid' href='Jobs' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
+                        <telerik:RadDock RenderMode="Auto" ID="RadDockProposals" runat="server" Title="<a class='lnkGrid' href='Proposals' title='Go to Proposals List'>Proposals  / </a><a class='lnkGrid' href='Jobs' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadGrid ID="RadGridProposalJobs" runat="server" DataSourceID="SqlDataSourceProposalJobs" Width="100%" AutoGenerateColumns="False">
+                                <telerik:RadGrid ID="RadGridProposalJobs" runat="server" DataSourceID="SqlDataSourceProposalJobs" Width="100%" AutoGenerateColumns="False" RenderMode="Lightweight"
+                                    EnableHeaderContextMenu="false" AllowFilteringByColumn="false">
                                     <MasterTableView DataSourceID="SqlDataSourceProposalJobs" Width="100%">
                                         <Columns>
-                                            <telerik:GridTemplateColumn DataField="CONCEPT" UniqueName="CONCEPT" ItemStyle-CssClass="CONCEPT">
-                                                <ItemTemplate>
-                                                    <asp:Label ID="NameLabel07" runat="server" CssClass="GridRow" Text='<%# Eval("CONCEPT")%>'></asp:Label>
-                                                </ItemTemplate>
-                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridBoundColumn DataField="CONCEPT" UniqueName="CONCEPT">
+                                            </telerik:GridBoundColumn>
                                             <telerik:GridTemplateColumn DataField="year-4" UniqueName="year-4" HeaderText="year-4" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" HeaderStyle-Width="12%">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel171" runat="server" CssClass="GridRow" Text='<%# Eval("year-4", Eval("FormatString"))%>' Font-Bold='<%# Eval("IsRate") %>' ForeColor='<%# LocalAPI.DegradadoDeColorInverso(Eval("year-4"), Eval("IsRate"))%>'></asp:Label>
@@ -182,10 +181,8 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockJobs" runat="server" Title="<a class='lnkGrid' href='Jobs' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadGrid ID="RadGridJobs" runat="server" DataSourceID="SqlDataSourceJobs" Width="100%" AutoGenerateColumns="False">
+                                <telerik:RadGrid ID="RadGridJobs" runat="server" DataSourceID="SqlDataSourceJobs" Width="100%" AutoGenerateColumns="False" RenderMode="Lightweight">
                                     <MasterTableView DataSourceID="SqlDataSourceJobs" Width="100%">
-                                        <ItemStyle CssClass="GridRow" />
-                                        <AlternatingItemStyle CssClass="GridRow" />
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="CONCEPT" UniqueName="CONCEPT" ItemStyle-CssClass="CONCEPT">
                                                 <ItemTemplate>
@@ -218,7 +215,6 @@
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                         </Columns>
-
                                     </MasterTableView>
                                 </telerik:RadGrid>
                             </ContentTemplate>
@@ -227,8 +223,8 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockEmployeeStatistics" runat="server" Title="<a class='lnkGrid' href='TimesByPeriords' title='Go to Times By Periords'>Employee Statistics</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadGrid ID="RadGridEmployeeStatistics" runat="server" DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%" AutoGenerateColumns="False" pag
-                                    PageSize="10" AllowPaging="true">
+                                <telerik:RadGrid ID="RadGridEmployeeStatistics" runat="server" DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%" AutoGenerateColumns="False" 
+                                    PageSize="10" AllowPaging="true" RenderMode="Lightweight">
                                     <MasterTableView DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%">
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="Name" UniqueName="Name" HeaderStyle-Width="290px" ItemStyle-CssClass="CONCEPT">
@@ -271,10 +267,8 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockClients" runat="server" Title="<a class='lnkGrid' href='Clients' title='Go to Clients List'>Clients</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadGrid ID="RadGridClients" runat="server" DataSourceID="SqlDataSourceClients" Width="100%" AutoGenerateColumns="False">
+                                <telerik:RadGrid ID="RadGridClients" runat="server" DataSourceID="SqlDataSourceClients" Width="100%" AutoGenerateColumns="False" RenderMode="Lightweight">
                                     <MasterTableView DataSourceID="SqlDataSourceClients" Width="100%">
-                                        <ItemStyle CssClass="GridRow" />
-                                        <AlternatingItemStyle CssClass="GridRow" />
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="CONCEPT" UniqueName="CONCEPT" ItemStyle-Width="290px" ItemStyle-CssClass="CONCEPT">
                                                 <ItemTemplate>
@@ -315,10 +309,8 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockSubconsultants" runat="server" Title="<a class='lnkGrid' href='SubConsultans' title='Go to SubConsultants List'>Subconsultants  / </a><a class='lnkGrid' href='RequestForProposals' title='Go to Jobs List'>Request for Proposals</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadGrid ID="RadGridSubConsultants" runat="server" DataSourceID="SqlDataSourceSubConsultants" Width="100%" AutoGenerateColumns="False">
+                                <telerik:RadGrid ID="RadGridSubConsultants" runat="server" DataSourceID="SqlDataSourceSubConsultants" Width="100%" AutoGenerateColumns="False" RenderMode="Lightweight">
                                     <MasterTableView DataSourceID="SqlDataSourceSubConsultants" Width="100%">
-                                        <ItemStyle CssClass="GridRow" />
-                                        <AlternatingItemStyle CssClass="GridRow" />
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="CONCEPT" UniqueName="CONCEPT" ItemStyle-Width="290px" ItemStyle-CssClass="CONCEPT">
                                                 <ItemTemplate>
