@@ -609,7 +609,7 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right">
-                                                <asp:Label ID="lblColectedPercent" runat="server" Text='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>' ForeColor="White"></asp:Label>%    
+                                                <asp:Label ID="lblColectedPercent" runat="server" Text='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'></asp:Label>%    
                                             </td>
                                             <td colspan="2">
                                                 <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px"
