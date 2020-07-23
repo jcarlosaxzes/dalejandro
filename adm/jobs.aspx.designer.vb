@@ -320,13 +320,13 @@ Partial Public Class jobs
     Protected WithEvents LabelblTotalBalance As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblTotalSubContract control.
+    '''lblTotalSubFees control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTotalSubContract As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblTotalSubFees As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''RadGrid1 control.

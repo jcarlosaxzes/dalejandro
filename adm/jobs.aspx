@@ -87,7 +87,7 @@
                 masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Balance").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
-                columnIndex = masterTableView.getColumnByUniqueName("SubContract").get_element().cellIndex;
+                columnIndex = masterTableView.getColumnByUniqueName("SubFees").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("DeleteColumn").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
@@ -109,7 +109,7 @@
                 masterTableView.showColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("Balance").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
-                columnIndex = masterTableView.getColumnByUniqueName("SubContract").get_element().cellIndex;
+                columnIndex = masterTableView.getColumnByUniqueName("SubFees").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("DeleteColumn").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
@@ -359,7 +359,7 @@
                 <td></td>
                 <td style="width: 14%; text-align: center; background-color: #343a40;">
                     <span class="DashboardFont2">Sub Fee(s)</span><br />
-                    <asp:Label ID="lblTotalSubContract" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
+                    <asp:Label ID="lblTotalSubFees" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
 
             </tr>
@@ -422,13 +422,13 @@
                                     </a>
 
                                     <br />
-                                    <%# Eval("TypeName") %>
+                                    <%# Eval("JobType") %>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Client" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="Client" UniqueName="Client" ItemStyle-Font-Size="x-small">
+                            <telerik:GridTemplateColumn DataField="ClientName" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="ClientName" UniqueName="ClientName" ItemStyle-Font-Size="x-small">
                                 <ItemTemplate>
-                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("Name") %>' Font-Bold="true"></asp:Label>
+                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("ClientName") %>' Font-Bold="true"></asp:Label>
                                     <br />
                                     <%# Eval("Company") %>
                                     <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
@@ -437,8 +437,8 @@
                                         <table class="table-sm">
                                             <tr>
                                                 <td colspan="2">
-                                                    <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Client") %>'
-                                                        CommandName="View/Edit Client Profile" Text='<%# Eval("Name")%>' UseSubmitBehavior="false" Font-Size="Medium"
+                                                    <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("ClientID") %>'
+                                                        CommandName="View/Edit Client Profile" Text='<%# Eval("ClientName")%>' UseSubmitBehavior="false" Font-Size="Medium"
                                                         CssClass="badge badge-info ">
                                                     </asp:LinkButton>
                                                 </td>
@@ -453,7 +453,7 @@
                                                 </td>
                                                 <td>
                                                     <telerik:RadMaskedTextBox ID="PhoneTextBox" runat="server" ReadOnly="true"
-                                                        Text='<%# LocalAPI.GetClientProperty(Eval("Client"), "Phone")%>' Mask="(###) ###-####" BorderStyle="None" />
+                                                        Text='<%# LocalAPI.GetClientProperty(Eval("ClientID"), "Phone")%>' Mask="(###) ###-####" BorderStyle="None" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -461,7 +461,7 @@
                                                 </td>
                                                 <td>
                                                     <telerik:RadMaskedTextBox ID="RadMaskedTextBox1" runat="server" ReadOnly="true"
-                                                        Text='<%# LocalAPI.GetClientProperty(Eval("Client"), "Cellular")%>' Mask="(###) ###-####" BorderStyle="None" />
+                                                        Text='<%# LocalAPI.GetClientProperty(Eval("ClientID"), "Cellular")%>' Mask="(###) ###-####" BorderStyle="None" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -545,16 +545,16 @@
                             </telerik:GridTemplateColumn>
 
                             <%--Status--%>
-                            <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="nStatus" ItemStyle-HorizontalAlign="Center"
+                            <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" ItemStyle-HorizontalAlign="Center"
                                 UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="140px">
                                 <ItemTemplate>
-                                    <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("Status")) %>' style="font-size: 12px; display: inline-block; width: 120px"><%# Eval("nStatus") %></div>
+                                    <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; display: inline-block; width: 120px"><%# Eval("Status") %></div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
                             <%--Private Mode--%>
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
-                                UniqueName="Budget" HeaderTooltip="Budget - % Budget Used"
+                                UniqueName="Budget" HeaderTooltip="Budget Used of Budget"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
                                 HeaderStyle-Width="140px">
                                 <ItemTemplate>
@@ -562,7 +562,7 @@
                                         <tr>
                                             <td style="width: 45%; text-align: right">
                                                 
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("Coste", "{0:C0}")%>' Font-Bold="true" ToolTip="Budget Used"></asp:Label>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Bold="true" ToolTip="Budget Used"></asp:Label>
                                             </td>
                                             <td style="width: 5%; text-align: center">of
                                             </td>
@@ -604,7 +604,7 @@
                                             <td style="width: 5%; text-align: center">of
                                             </td>
                                             <td style="text-align: right">
-                                                <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("JobInvoiceAmount", "{0:C0}")%>' ToolTip="Total Invoice Billed" Font-Bold="true"></asp:Label>
+                                                <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("AmountBilled", "{0:C0}")%>' ToolTip="Total Invoice Billed" Font-Bold="true"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
@@ -650,17 +650,17 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="SubContract" Display="false" HeaderText="Sub Fee(s)" SortExpression="SubContract" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="SubContract" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="X-Small">
+                            <telerik:GridTemplateColumn DataField="SubFees" Display="false" HeaderText="Sub Fee(s)" SortExpression="SubFees" ItemStyle-HorizontalAlign="Right"
+                                UniqueName="SubFees" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="X-Small">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubContract", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Size="X-Small" Font-Bold="true"></asp:Label>
+                                    <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubFees", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Size="X-Small" Font-Bold="true"></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
                             <%--Columnas No visibles para propositos de calculos--%>
-                            <telerik:GridBoundColumn DataField="JobInvoiceAmountPending" UniqueName="JobInvoiceAmountPendingHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
-                            <telerik:GridBoundColumn DataField="JobInvoiceAmount" UniqueName="Billed" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
-                            <telerik:GridBoundColumn DataField="JobInvoiceAmount" UniqueName="Coste" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="AmountPending" UniqueName="JobInvoiceAmountPendingHide" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="AmountBilled" UniqueName="Billed" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
+                            <telerik:GridBoundColumn DataField="BudgetUsed" UniqueName="BudgetUsed" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" Visible="false" />
 
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Job?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete" Display="false"
