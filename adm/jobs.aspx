@@ -35,9 +35,9 @@
                     <telerik:AjaxUpdatedControl ControlID="lblTotalBudget" />
                     <telerik:AjaxUpdatedControl ControlID="lblTotalBilled" />
                     <telerik:AjaxUpdatedControl ControlID="lblTotalCollected" />
-                    <telerik:AjaxUpdatedControl ControlID="lblTotalPending" />
+                    <telerik:AjaxUpdatedControl ControlID="lblTotalBudgetUsed" />
                     <telerik:AjaxUpdatedControl ControlID="LabelblTotalBalance" />
-                    <telerik:AjaxUpdatedControl ControlID="lblTotalSubContract" />
+                    <telerik:AjaxUpdatedControl ControlID="lblTotalSubFees" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnHideClient">
