@@ -728,9 +728,9 @@ Public Class jobs
             lblTotalBilled.Text = footerItem("Billed").Text
             lblTotalCollected.Text = footerItem("Collected").Text
             LabelblTotalBalance.Text = footerItem("Balance").Text
-            lblTotalSubContract.Text = footerItem("SubContract").Text
+            lblTotalSubFees.Text = footerItem("SubFees").Text
 
-            lblTotalBudgetUsed.Text = lblTotalBilled.Text - lblTotalCollected.Text
+            lblTotalBudgetUsed.Text = footerItem("BudgetUsed").Text
         Catch ex As Exception
 
         End Try
