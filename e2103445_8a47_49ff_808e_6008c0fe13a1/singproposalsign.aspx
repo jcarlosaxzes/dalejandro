@@ -301,8 +301,8 @@
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>--%>
                                                     <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL"
-                                                        SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right"
-                                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
+                                                        SortExpression="Amount" DataFormatString="{0:C2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true"
+                                                        FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
                                                         FooterStyle-HorizontalAlign="Right"
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>

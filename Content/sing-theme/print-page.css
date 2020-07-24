@@ -45,7 +45,7 @@
     }
 
     tfoot {
-        display: table-header-group;
+        display: table-footer-group;
     }
 }
 
