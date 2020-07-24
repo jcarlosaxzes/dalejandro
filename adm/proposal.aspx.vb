@@ -167,16 +167,10 @@ Public Class proposal
 
     End Sub
 
-    Protected Async Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
-        Dim pdf As PdfApi = New PdfApi()
-        Dim pdfBytes = Await pdf.CreateProposalPdfBytes(lblProposalId.Text)
-        Dim response As HttpResponse = HttpContext.Current.Response
-        response.ContentType = "application/pdf"
-        response.AddHeader("Content-Disposition", "attachment; filename=Proposal.pdf")
-        response.ClearContent()
-        response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
-        response.Flush()
-
+    Protected Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
+        Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
+        Session("PrintUrl") = ProposalUrl
+        Response.Redirect("~/ADM/pdf_print.aspx")
     End Sub
 
     'Protected Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs)

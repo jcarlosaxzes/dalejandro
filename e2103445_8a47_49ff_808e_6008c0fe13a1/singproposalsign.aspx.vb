@@ -453,15 +453,9 @@ Public Class singproposalsign
         Response.Redirect(url, False)
     End Sub
 
-    Protected Async Sub btnPrint_Click(sender As Object, e As EventArgs)
-        Dim pdf As PdfApi = New PdfApi()
-        Dim pdfBytes = Await pdf.CreateProposalPdfBytes(lblProposalId.Text)
-        Dim response As HttpResponse = HttpContext.Current.Response
-        response.ContentType = "application/pdf"
-        response.AddHeader("Content-Disposition", "attachment; filename=Proposal.pdf")
-        response.ClearContent()
-        response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
-        response.Flush()
-
+    Protected  Sub btnPrint_Click(sender As Object, e As EventArgs)
+        Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
+        Session("PrintUrl") = ProposalUrl
+        Response.Redirect("~/ADM/pdf_print.aspx")
     End Sub
 End Class

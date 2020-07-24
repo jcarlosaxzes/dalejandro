@@ -420,6 +420,7 @@
     <Content Include="adm\orgchartbydepartment.aspx" />
     <Content Include="adm\paiddaylist.aspx" />
     <Content Include="adm\payments.aspx" />
+    <Content Include="adm\pdf_print.aspx" />
     <Content Include="adm\phasestemplate.aspx" />
     <Content Include="adm\position.aspx" />
     <Content Include="adm\pre-project.aspx" />
@@ -3485,6 +3486,13 @@
       <DependentUpon>payments.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\pdf_print.aspx.designer.vb">
+      <DependentUpon>pdf_print.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pdf_print.aspx.vb">
+      <DependentUpon>pdf_print.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\phasestemplate.aspx.designer.vb">
       <DependentUpon>phasestemplate.aspx</DependentUpon>
     </Compile>
@@ -4513,7 +4521,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

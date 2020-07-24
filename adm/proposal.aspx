@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposal.aspx.vb" Inherits="pasconcept20.proposal" Async="true" %>
+﻿<%@ Page Title="Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposal.aspx.vb" Inherits="pasconcept20.proposal" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
