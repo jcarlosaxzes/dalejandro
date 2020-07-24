@@ -277,7 +277,7 @@
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>
 
-                                                    <telerik:GridTemplateColumn DataField="InvoiceNumberEmitted" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center"
+                                                  <%--  <telerik:GridTemplateColumn DataField="InvoiceNumberEmitted" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center"
                                                         HeaderText="" SortExpression="InvoiceNumberEmitted" UniqueName="InvoiceNumberEmitted"
                                                         ItemStyle-CssClass="GridColumn">
                                                         <ItemTemplate>
@@ -285,7 +285,7 @@
                                                                 <%# Eval("InvoiceNumberEmitted") %>
                                                             </a>
                                                         </ItemTemplate>
-                                                    </telerik:GridTemplateColumn>
+                                                    </telerik:GridTemplateColumn>--%>
                                                     <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL"
                                                         SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right"
                                                         FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"

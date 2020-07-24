@@ -833,15 +833,6 @@ Partial Public Class proposalnewwizard
     Protected WithEvents Comparevalidator4 As Global.System.Web.UI.WebControls.CompareValidator
     
     '''<summary>
-    '''Comparevalidator3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Comparevalidator3 As Global.System.Web.UI.WebControls.CompareValidator
-    
-    '''<summary>
     '''RadWizardStepAttachments control.
     '''</summary>
     '''<remarks>

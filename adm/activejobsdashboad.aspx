@@ -535,7 +535,7 @@
                     <td></td>
                     <td>
                         <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddNonRecord" Width="180px" CausesValidation="true">
-                        Add Time
+                            Add Time
                         </asp:LinkButton>
                     </td>
                 </tr>

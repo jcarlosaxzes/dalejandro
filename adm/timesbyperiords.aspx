@@ -263,12 +263,21 @@
 
     <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">New Miscellaneous Time
+            <span class="navbar navbar-expand-md bg-dark text-white">Non-Productive Time
             </span>
         </h2>
-        <table style="width: 600px" cellpadding="2px">
+        <table class="table-sm" style="width: 600px">
             <tr>
-                <td style="width: 150px; text-align: right" class="Normal">Category:
+                <td style="width: 150px; text-align: right">Employee:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" MarkFirstMatch="True" ToolTip="Select active Employye" ZIndex="50001"
+                        Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px">
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Category:
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name" ZIndex="50001"
@@ -277,7 +286,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right" class="Normal">Time/day:
+                <td style="text-align: right">Time/day:
                 </td>
                 <td>
                     <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server" MaxLength="5" MaxValue="8"
@@ -288,7 +297,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right" class="Normal">From:</td>
+                <td style="text-align: right">From:</td>
                 <td>
                     <telerik:RadDatePicker ID="RadDatePicker1" runat="server" Culture="English (United States)" ZIndex="50001">
                         <DateInput DateFormat="MM/dd/yyyy" DisplayDateFormat="MM/dd/yyyy">
@@ -299,7 +308,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right" class="Normal">To:</td>
+                <td style="text-align: right">To:</td>
                 <td>
                     <telerik:RadDatePicker ID="RadDatePicker2" runat="server" Culture="English (United States)" ZIndex="50001">
                         <DateInput DateFormat="MM/dd/yyyy" DisplayDateFormat="MM/dd/yyyy">
@@ -311,7 +320,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right" class="Normal">
+                <td style="text-align: right">
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtNotes" Text="*" ErrorMessage="(*) Notes can not be empty"
                         SetFocusOnError="true" ValidationGroup="AddRecord">
                     </asp:RequiredFieldValidator>
@@ -324,14 +333,9 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center; padding-top: 15px">
-                    <telerik:RadButton ID="btnOkNewMiscellaneousTime" runat="server" Text="Add Time" ValidationGroup="AddRecord" UseSubmitBehavior="false">
-                        <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-                    </telerik:RadButton>
-
-                    &nbsp;&nbsp;&nbsp;
-                    <telerik:RadButton ID="btnCancelMiscellaneousTime" runat="server" Text="Cancel" CausesValidation="False">
-                        <Icon PrimaryIconCssClass=" rbCancel" PrimaryIconTop="5"></Icon>
-                    </telerik:RadButton>
+                    <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddRecord" Width="180px" CausesValidation="true">
+                            Add Time
+                    </asp:LinkButton>
                 </td>
             </tr>
             <tr>
@@ -400,7 +404,7 @@
         DeleteCommand="DELETE FROM Employee_Payroll WHERE Id=@Id"
         UpdateCommand="UPDATE Employee_Payroll SET SalaryDate=@SalaryDate, NetAmount=@NetAmount, GrossAmount=@GrossAmount, Hours=@Hours WHERE Id=@Id">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="From" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="To" PropertyName="SelectedDate" Type="DateTime" />
         </SelectParameters>
@@ -413,7 +417,7 @@
             <asp:Parameter Name="GrossAmount" />
             <asp:Parameter Name="Hours" />
             <asp:ControlParameter ControlID="chkAplyAllPayroll" Name="ApplyAllPayroll" PropertyName="Checked" Type="Boolean" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </InsertParameters>
         <UpdateParameters>
@@ -430,10 +434,15 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceEmpl_activos" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT Id, FullName as Name FROM Employees WHERE companyId=@companyId and isnull(Inactive,0)=0 ORDER BY Name">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblMesName" runat="server" Text="Septembre-Octuber" Visible="False" />
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
 
 </asp:Content>
 
