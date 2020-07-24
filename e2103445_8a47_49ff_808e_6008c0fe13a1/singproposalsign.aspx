@@ -92,7 +92,17 @@
         <!-- End of Accept -->
         <%-- End Modals and the like --%>
     </asp:Panel>
-    <%-- Fixed Btns --%>
+    <%-- Fixed print Btn --%>
+    <div class="fixed-action-btn-print hidden-print">
+        <div class="btn-toolbar mt-lg hidden-print print-buttons">
+            <button class="btn btn-inverse print">
+                <i class="fa fa-print"></i>
+                &nbsp;&nbsp;Print
+            </button>
+        </div>
+    </div>
+    <%-- End of Fixed print Btn --%>
+    <%-- Fixed Action Btns --%>
     <asp:Panel ID="pnlSideTools" runat="server">
         <div class="fixed-action-btns hidden-print">
             <div class="btn-group quote-popover">
@@ -128,7 +138,7 @@
             </div>
         </div>
     </asp:Panel>
-    <%-- End of Fixed Btns --%>
+    <%-- End of Fixed Action Btns --%>
     <%-- Main Content --%>
     <asp:FormView ID="mainProposalFormView" runat="server" RenderOuterTable="false" DataSourceID="SqlDataSourceProp1" DefaultMode="ReadOnly" DataKeyNames="Id">
         <ItemTemplate>
@@ -308,12 +318,6 @@
                                     <%# Eval("TextEnd") %>
                                 </div>
                             </div>
-                            <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print">
-                                    <i class="fa fa-print"></i>
-                                    &nbsp;&nbsp;Print
-                                </button>
-                            </div>
                         </div>
                     </section>
                 </div>
@@ -349,12 +353,6 @@
                                     </asp:Repeater>
                                 </section>
                             </div>
-                            <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print">
-                                    <i class="fa fa-print"></i>
-                                    &nbsp;&nbsp;Print
-                                </button>
-                            </div>
                         </div>
                     </section>
                 </div>
@@ -389,7 +387,9 @@
                                     </div>
                                 </section>
                             </asp:Panel>
-                            <section class="row-mb-lg">
+
+                            <div class="row mb-lg">
+
                                 <section class="col-md-12 col-print-12">
                                     <div class="row text-xs-center">
                                         <div>
@@ -415,6 +415,9 @@
                                         </div>
                                     </div>
                                 </section>
+                            </div>
+
+
                         </div>
                         <div class="btn-toolbar mt-lg hidden-print print-buttons">
                             <button class="btn btn-inverse print">
