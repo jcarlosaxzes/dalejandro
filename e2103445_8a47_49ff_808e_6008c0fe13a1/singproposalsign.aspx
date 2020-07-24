@@ -92,7 +92,17 @@
         <!-- End of Accept -->
         <%-- End Modals and the like --%>
     </asp:Panel>
-    <%-- Fixed Btns --%>
+    <%-- Fixed print Btn --%>
+    <div class="fixed-action-btn-print hidden-print">
+        <div class="btn-toolbar mt-lg hidden-print print-buttons">
+            <button class="btn btn-inverse print">
+                <i class="fa fa-print"></i>
+                &nbsp;&nbsp;Print
+            </button>
+        </div>
+    </div>
+    <%-- End of Fixed print Btn --%>
+    <%-- Fixed Action Btns --%>
     <asp:Panel ID="pnlSideTools" runat="server">
         <div class="fixed-action-btns hidden-print">
             <div class="btn-group quote-popover">
@@ -128,7 +138,7 @@
             </div>
         </div>
     </asp:Panel>
-    <%-- End of Fixed Btns --%>
+    <%-- End of Fixed Action Btns --%>
     <%-- Main Content --%>
     <asp:FormView ID="mainProposalFormView" runat="server" RenderOuterTable="false" DataSourceID="SqlDataSourceProp1" DefaultMode="ReadOnly" DataKeyNames="Id">
         <ItemTemplate>
@@ -277,7 +287,7 @@
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>
 
-                                                  <%--  <telerik:GridTemplateColumn DataField="InvoiceNumberEmitted" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center"
+                                                    <%--  <telerik:GridTemplateColumn DataField="InvoiceNumberEmitted" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center"
                                                         HeaderText="" SortExpression="InvoiceNumberEmitted" UniqueName="InvoiceNumberEmitted"
                                                         ItemStyle-CssClass="GridColumn">
                                                         <ItemTemplate>
@@ -305,12 +315,6 @@
                                         <%# Eval("TextEnd") %>
                                     </small>
                                 </div>
-                            </div>
-                            <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print">
-                                    <i class="fa fa-print"></i>
-                                    &nbsp;&nbsp;Print
-                                </button>
                             </div>
                         </div>
                     </section>
@@ -346,12 +350,6 @@
                                         </ItemTemplate>
                                     </asp:Repeater>
                                 </section>
-                            </div>
-                            <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print">
-                                    <i class="fa fa-print"></i>
-                                    &nbsp;&nbsp;Print
-                                </button>
                             </div>
                         </div>
                     </section>
@@ -412,12 +410,7 @@
                                     </div>
                                 </section>
                             </div>
-                            <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                                <button class="btn btn-inverse print">
-                                    <i class="fa fa-print"></i>
-                                    &nbsp;&nbsp;Print
-                                </button>
-                            </div>
+
                         </div>
                     </section>
                 </div>
@@ -486,52 +479,52 @@
     <script src='<%= ResolveUrl("~/Scripts/signature-pad/signature_pad.js") %>'></script>
     <script src='<%= ResolveUrl("~/Scripts/signature-pad/app.js") %>'></script>
     <script>
-    (function () {
-        var wrapper = document.getElementById("signature-pad");
-        if (!wrapper) {
-            // Safety check
-            return;
-        }
-        var $clearButton = $("[data-action=clear]");
-        var $saveButton = $("[data-action=save]");
-        var canvas = wrapper.querySelector("canvas");
-        var signaturePad;
-
-        // Adjust canvas coordinate space taking into account pixel ratio,
-        // to make it look crisp on mobile devices.
-        // This also causes canvas to be cleared.
-        function resizeCanvas() {
-            // When zoomed out to less than 100%, for some very strange reason,
-            // some browsers report devicePixelRatio as less than 1
-            // and only part of the canvas is cleared then.
-            var ratio = Math.max(window.devicePixelRatio || 1, 1);
-            canvas.width = canvas.offsetWidth * ratio;
-            canvas.height = canvas.offsetHeight * ratio;
-            canvas.getContext("2d").scale(ratio, ratio);
-        }
-
-        window.onresize = resizeCanvas;
-
-        signaturePad = new SignaturePad(canvas);
-
-        $clearButton.click(function (e) {
-            signaturePad.clear();
-        });
-
-        $saveButton.click(function (e) {
-            if (signaturePad.isEmpty()) {
-                alert("Please provide signature first.");
-            } else {
-                $('#modal-accept').modal('hide'); // Force the modal to hide
-                __doPostBack("btnSign", signaturePad.toDataURL()); // Finally do the AJAX sign action
+        (function () {
+            var wrapper = document.getElementById("signature-pad");
+            if (!wrapper) {
+                // Safety check
+                return;
             }
-        });
-        var clientName = $("#hdn-clientname").val();
-        $('.sign-name').attr('value', clientName);
-        $('#modal-accept').on('shown.bs.modal', function () {
-            resizeCanvas();
-        });
-    })();
+            var $clearButton = $("[data-action=clear]");
+            var $saveButton = $("[data-action=save]");
+            var canvas = wrapper.querySelector("canvas");
+            var signaturePad;
+
+            // Adjust canvas coordinate space taking into account pixel ratio,
+            // to make it look crisp on mobile devices.
+            // This also causes canvas to be cleared.
+            function resizeCanvas() {
+                // When zoomed out to less than 100%, for some very strange reason,
+                // some browsers report devicePixelRatio as less than 1
+                // and only part of the canvas is cleared then.
+                var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
+            }
+
+            window.onresize = resizeCanvas;
+
+            signaturePad = new SignaturePad(canvas);
+
+            $clearButton.click(function (e) {
+                signaturePad.clear();
+            });
+
+            $saveButton.click(function (e) {
+                if (signaturePad.isEmpty()) {
+                    alert("Please provide signature first.");
+                } else {
+                    $('#modal-accept').modal('hide'); // Force the modal to hide
+                    __doPostBack("btnSign", signaturePad.toDataURL()); // Finally do the AJAX sign action
+                }
+            });
+            var clientName = $("#hdn-clientname").val();
+            $('.sign-name').attr('value', clientName);
+            $('#modal-accept').on('shown.bs.modal', function () {
+                resizeCanvas();
+            });
+        })();
     </script>
 </asp:Content>
 

@@ -5,6 +5,13 @@
     z-index: 1000;
 }
 
+.fixed-action-btn-print {
+    position: fixed;
+    top: 0px;
+    right: 119px;
+    z-index: 1000;
+}
+
 .btn-circle {
     width: 30px;
     height: 30px;
