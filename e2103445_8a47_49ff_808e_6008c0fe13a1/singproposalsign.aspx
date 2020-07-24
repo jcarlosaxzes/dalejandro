@@ -176,16 +176,11 @@
                             </div>
                         </header>
                         <div class="widget-body">
-                            <div class="row mb-lg">
-                                <section class="col-md-12 col-print-12">
-                                    <h5 class="company-name m-t-1">Dear&nbsp;<%# Eval("ClientName")%>,</h5>
-                                    <%# Eval("TextBegin")%>
-                                </section>
-                            </div>
+
                             <div class="row mb-lg">
                                 <section class="col-sm-6 col-print-6">
-                                    <div class="text-muted">
-                                        <span class="fw-semi-bold">Client: </span><%# Eval("ClientName") %>
+                                    <div>
+                                        <h4><span class="fw-semi-bold">Client: <%# Eval("ClientName") %></span></h4>
                                     </div>
                                     <div class="text-muted">
                                         <%# Eval("ClientCompany") %>
@@ -200,8 +195,8 @@
                                     </address>
                                 </section>
                                 <section class="col-sm-6 col-print-6 text-sm-right text-xs-left">
-                                    <div class="text-muted">
-                                        <span class="fw-semi-bold">Project: </span><%# Eval("ProjectName") %>
+                                    <div>
+                                        <h4><span class="fw-semi-bold">Project: <%# Eval("ProjectName") %></span></h4>
                                     </div>
                                     <address runat="server" visible='<%# Not String.IsNullOrEmpty(Eval("ProjectLocation")) %>' style="margin-bottom: 0;">
                                         <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -221,9 +216,18 @@
                                     </div>
                                 </section>
                             </div>
+
+
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h3 class="company-name m-t-1">Service Fee(s)</h3>
+                                    Dear&nbsp;<%# Eval("ClientName")%>,<br />
+                                    <%# Eval("TextBegin")%>
+                                </section>
+                            </div>
+
+                            <div class="row mb-lg">
+                                <section class="col-md-12 col-print-12">
+                                    <h4 class="company-name m-t-1">Service Fee(s)</h4>
                                     <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails" ShowFooter="true" Width="100%"
                                         RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
@@ -247,7 +251,7 @@
                                                         <%# Eval("Hours")%>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
-                                                <telerik:GridBoundColumn DataField="Rates" FooterStyle-CssClass="hidden-sm-down" HeaderText="RATES" UniqueName="Rates"
+                                                <telerik:GridBoundColumn DataField="Rates" FooterStyle-CssClass="hidden-sm-down" HeaderText="RATE" UniqueName="Rates"
                                                     HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="None" DataFormatString="{0:C}"
                                                     ItemStyle-CssClass="GridColumn hidden-sm-down" HeaderStyle-CssClass="hidden-sm-down">
                                                 </telerik:GridBoundColumn>
@@ -268,7 +272,7 @@
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     <asp:Panel ID="Panel1" runat="server" Visible='<%# Eval("IsPaymentSchedule") %>' Width="100%">
-                                        <h3 class="company-name m-t-1">Payments Schedule</h3>
+                                        <h4 class="company-name m-t-1">Payments Schedule</h4>
                                         <telerik:RadGrid ID="RadGridPS" runat="server"
                                             AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center" Width="100%"
                                             RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
@@ -311,9 +315,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-print-12">
-                                    <small>
-                                        <%# Eval("TextEnd") %>
-                                    </small>
+                                    <%# Eval("TextEnd") %>
                                 </div>
                             </div>
                         </div>
@@ -328,7 +330,7 @@
                         <div class="widget-body">
                             <asp:Panel ID="PanelPhase" runat="server" Visible='<%# Eval("IsPhases") = 1%>' CssClass="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h3 class="company-name m-t-1">Project Phases</h3>
+                                    <h4 class="company-name m-t-1">Project Phases</h4>
                                     <asp:Repeater ID="rptrPhases" runat="server" DataSourceID="SqlDataSourcePHASES">
                                         <ItemTemplate>
                                             <h4 class="company-name m-t-1"><%# Eval("Code")%>&nbsp;&nbsp;<%# Eval("Name")%></h4>
@@ -342,7 +344,7 @@
                             </asp:Panel>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h3 class="company-name m-t-1">Scope of Work</h3>
+                                    <h4 class="company-name m-t-1">Scope of Work</h4>
                                     <asp:Repeater ID="rptrScopeOfWork" runat="server" DataSourceID="SqlDataSourceSCOPEOFWORK">
                                         <ItemTemplate>
                                             <h4 class="company-name m-t-1"><%# Eval("PhaseCode")%>&nbsp;&nbsp;<%# Eval("Description")%></h4>
@@ -363,13 +365,13 @@
                         <div class="widget-body">
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h3 class="company-name m-t-1">Professional Services Agreement</h3>
+                                    <h4 class="company-name m-t-1">Professional Services Agreement</h4>
                                     <%# Eval("Agreements") %>
                                 </section>
                             </div>
                             <asp:Panel ID="pnlSharedPublicLinks" runat="server" Visible='<%# ShareDocumentsPanelVisible(Eval("IsSharePublicLinks")) %>' CssClass="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h3 class="company-name m-t-1">Shared Documents</h3>
+                                    <h4 class="company-name m-t-1">Documents</h3>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <asp:Repeater ID="rptrSharedPublicLinks" runat="server" DataSourceID="SqlDataSourceAzureuploads">
@@ -385,35 +387,47 @@
                                     </div>
                                 </section>
                             </asp:Panel>
+
                             <div class="row mb-lg">
+
                                 <section class="col-md-12 col-print-12">
-                                    <div class="row">
-                                        <div class="col-md-12 col-print-12">
-                                            <h3 class="text-muted no-margin"></h3>
-                                        </div>
-                                    </div>
                                     <div class="row text-xs-center">
-                                        <div class="col-sm-6 col-print-6 text-xs-center">
-                                            <h4></h4>
+                                        <div>
                                             <telerik:RadBinaryImage CssClass="img-signature" ID="imgEmpSignature" runat="server" AlternateText="Company Signature" DataValue='<%# IIf(Eval("CompanySing") Is DBNull.Value, Nothing, Eval("CompanySing"))%>' />
-                                            <p><strong><%# Eval("CompanyContact") %></strong></p>
-                                            <p><%# Eval("EmailDate", "{0:MMMM d, yyyy}")%></p>
+                                            <br />
+                                            ____________________________________________
+                                            <br />
+                                            <strong><%# Eval("CompanyContact") %></strong>
+                                            &nbsp;&nbsp;<%# Eval("EmailDate", "{0:MMMM d, yyyy}")%>
+                                            <br />
+                                            <br />
                                         </div>
-                                        <div class="col-sm-6 col-print-6 text-xs-center">
+
+                                        <div>
                                             <asp:Panel ID="PanelSignature" runat="server" Visible='<%# Not Eval("AceptanceSignature") Is DBNull.Value %>'>
-                                                <h4></h4>
                                                 <telerik:RadBinaryImage CssClass="img-signature" ID="imgClientSignature" runat="server" AlternateText="Client Signature" DataValue='<%# IIf(Eval("AceptanceSignature") Is DBNull.Value, Nothing, Eval("AceptanceSignature"))%>' />
-                                                <p><strong><%# Eval("AceptanceName") %></strong></p>
-                                                <p><%# Eval("AceptedDate", "{0:MMMM d, yyyy}") %></p>
+                                                <br />
+                                                ____________________________________________
+                                                <br />
+                                                <strong><%# Eval("AceptanceName") %></strong>
+                                                &nbsp;&nbsp;<%# Eval("AceptedDate", "{0:MMMM d, yyyy}") %>
                                             </asp:Panel>
                                         </div>
                                     </div>
                                 </section>
                             </div>
 
+
                         </div>
-                    </section>
+                        <div class="btn-toolbar mt-lg hidden-print print-buttons">
+                            <button class="btn btn-inverse print">
+                                <i class="fa fa-print"></i>
+                                &nbsp;&nbsp;Print
+                            </button>
+                        </div>
                 </div>
+                </section>
+            </div>
             </div>
             <%-- End of Final Page --%>
         </ItemTemplate>
