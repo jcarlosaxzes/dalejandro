@@ -385,7 +385,7 @@
                                     </div>
                                 </section>
                             </asp:Panel>
-                            <div class="row-mb-lg">
+                            <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     <div class="row">
                                         <div class="col-md-12 col-print-12">
