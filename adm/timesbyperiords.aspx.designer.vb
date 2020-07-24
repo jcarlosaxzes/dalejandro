@@ -131,6 +131,15 @@ Partial Public Class timesbyperiords
     Protected WithEvents RadToolTipMiscellaneous As Global.Telerik.Web.UI.RadToolTip
     
     '''<summary>
+    '''cboEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboEmployee As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''cboType control.
     '''</summary>
     '''<remarks>
@@ -191,16 +200,7 @@ Partial Public Class timesbyperiords
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOkNewMiscellaneousTime As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''btnCancelMiscellaneousTime control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancelMiscellaneousTime As Global.Telerik.Web.UI.RadButton
+    Protected WithEvents btnOkNewMiscellaneousTime As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''ValidationSummaryJobUpdate control.
@@ -302,6 +302,15 @@ Partial Public Class timesbyperiords
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
+    '''SqlDataSourceEmpl_activos control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceEmpl_activos As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''lblMesName control.
     '''</summary>
     '''<remarks>
@@ -318,15 +327,6 @@ Partial Public Class timesbyperiords
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblEmployeeId control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

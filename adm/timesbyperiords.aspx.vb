@@ -15,6 +15,9 @@ Public Class timesbyperiords
 
                 IniciaPeriodo(0)
 
+                cboEmployee.DataBind()
+                cboEmployee.SelectedValue = Master.UserId
+
             End If
 
         Catch ex As Exception
@@ -132,13 +135,13 @@ Public Class timesbyperiords
 
         Select Case e.CommandName
             Case 1, 3, 4, 5, 6, 7, 8  'NonRegularHours_types Id
-                lblEmployeeId.Text = e.CommandArgument
+                cboEmployee.SelectedValue = e.CommandArgument
                 ShowNewMiscellaneousTimeDlg(e.CommandName)
 
             Case 2  'Holiday
                 '!!!! ShowNewHolidayDlg(e.CommandName)
             Case "Salary"
-                lblEmployeeId.Text = e.CommandArgument
+                cboEmployee.SelectedValue = e.CommandArgument
                 ShowSalaryDlg()
         End Select
     End Sub
@@ -153,7 +156,7 @@ Public Class timesbyperiords
     End Sub
 
     Private Sub ShowSalaryDlg()
-        RadToolTipSalary.Title = "Salary (<b>" & LocalAPI.GetEmployeeName(lblEmployeeId.Text) & "</b>)"
+        RadToolTipSalary.Title = "Salary (<b>" & LocalAPI.GetEmployeeName(cboEmployee.SelectedValue) & "</b>)"
         RadToolTipSalary.Visible = True
         RadToolTipSalary.Show()
     End Sub
@@ -180,9 +183,9 @@ Public Class timesbyperiords
         Dim dPermited As Double
         Dim dHours As Double
         ' Benefits_vacations
-        dHours = LocalAPI.GetEmployeeNonRegularHours_count(lblEmployeeId.Text, 7, dFrom, dTo)
+        dHours = LocalAPI.GetEmployeeNonRegularHours_count(cboEmployee.SelectedValue, 7, dFrom, dTo)
         lblVac2.Text = dHours
-        dPermited = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "Benefits_vacations")
+        dPermited = LocalAPI.GetEmployeeProperty(cboEmployee.SelectedValue, "Benefits_vacations")
         If dPermited >= 0 Then
             lblVac1.Text = dPermited
             lblVac3.Text = dPermited - dHours
@@ -192,10 +195,10 @@ Public Class timesbyperiords
         End If
 
         ' Benefits_personals Se suman 5 y 6 
-        dHours = LocalAPI.GetEmployeeNonRegularHours_count(lblEmployeeId.Text, 5, dFrom, dTo)
-        dHours = dHours + LocalAPI.GetEmployeeNonRegularHours_count(lblEmployeeId.Text, 6, dFrom, dTo)
+        dHours = LocalAPI.GetEmployeeNonRegularHours_count(cboEmployee.SelectedValue, 5, dFrom, dTo)
+        dHours = dHours + LocalAPI.GetEmployeeNonRegularHours_count(cboEmployee.SelectedValue, 6, dFrom, dTo)
         lblPer2.Text = dHours
-        dPermited = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "Benefits_personals")
+        dPermited = LocalAPI.GetEmployeeProperty(cboEmployee.SelectedValue, "Benefits_personals")
         If dPermited >= 0 Then
             lblPer1.Text = dPermited
             lblPer3.Text = dPermited - dHours
@@ -203,7 +206,7 @@ Public Class timesbyperiords
             lblPer1.Text = ""
             lblPer3.Text = ""
         End If
-        RadToolTipMiscellaneous.Title = "New Miscellaneous Time (<b>" & LocalAPI.GetEmployeeName(lblEmployeeId.Text) & "</b>)"
+        RadToolTipMiscellaneous.Title = "New Miscellaneous Time (<b>" & LocalAPI.GetEmployeeName(cboEmployee.SelectedValue) & "</b>)"
         RadToolTipMiscellaneous.Visible = True
         RadToolTipMiscellaneous.Show()
         cboType.Focus()
@@ -212,7 +215,7 @@ Public Class timesbyperiords
 
     Protected Sub btnOkNewMiscellaneousTime_Click(sender As Object, e As EventArgs) Handles btnOkNewMiscellaneousTime.Click
         Try
-            If LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePicker1.SelectedDate, RadDatePicker2.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text) Then
+            If LocalAPI.NewNonJobTime(cboEmployee.SelectedValue, cboType.SelectedValue, RadDatePicker1.SelectedDate, RadDatePicker2.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text) Then
                 RadToolTipMiscellaneous.Visible = False
                 SqlDataSource1.DataBind()
                 RadGrid1.DataBind()
@@ -221,10 +224,6 @@ Public Class timesbyperiords
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
         End Try
-    End Sub
-
-    Protected Sub btnCancelMiscellaneousTime_Click(sender As Object, e As EventArgs) Handles btnCancelMiscellaneousTime.Click
-        RadToolTipMiscellaneous.Visible = False
     End Sub
 
     Private Sub SqlDataSourceSalary_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceSalary.Inserting
