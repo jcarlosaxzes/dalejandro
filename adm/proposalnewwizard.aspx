@@ -891,23 +891,25 @@
 
                         <div style="padding-top:15px">
                             <telerik:RadGrid ID="RadGridPS" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-                                AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center"
+                                AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                                 CellSpacing="0" Width="100%">
                                 <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePS" ShowFooter="true">
                                     <Columns>
                                         <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
                                         </telerik:GridBoundColumn>
 
-                                        <telerik:GridBoundColumn DataField="Order" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
-                                            HeaderText="Order" SortExpression="Order" UniqueName="Order">
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
-                                            HeaderText="(%)" SortExpression="Percentage" UniqueName="Percentage">
+                                        <telerik:GridBoundColumn DataField="taskcode" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderText="Task" SortExpression="taskcode" UniqueName="taskcode">
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="Description"
                                             HeaderText="Description" SortExpression="Description" UniqueName="Description">
                                         </telerik:GridBoundColumn>
-
+                                        <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderText="(%)" SortExpression="Percentage" UniqueName="Percentage">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="InvoiceNumber" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center"
+                                            HeaderText="" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber">
+                                        </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="Amount" HeaderText="Total" ReadOnly="True"
                                             SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum"
                                             FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
