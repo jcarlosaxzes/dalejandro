@@ -926,9 +926,6 @@
                         <asp:CompareValidator runat="server" ID="Comparevalidator4" ValueToCompare="(Select Retainer option...)" Display="None"
                             Operator="NotEqual" ControlToValidate="cboRetainer" ErrorMessage="<span><b>Retainer</b> is required</span>" ValidationGroup="Payments">
                         </asp:CompareValidator>
-                        <asp:CompareValidator runat="server" ID="Comparevalidator3" ValueToCompare="(Select Payment Schedules...)" Display="None"
-                            Operator="NotEqual" ControlToValidate="cboPaymentSchedules" ErrorMessage="<span><b>Retainer</b> is required</span>" ValidationGroup="Payments">
-                        </asp:CompareValidator>
                     </div>
 
                 </telerik:RadWizardStep>

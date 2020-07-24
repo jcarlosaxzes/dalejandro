@@ -3874,6 +3874,66 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
+
+
+    Public Shared Function NewNonJobTime(ByVal EmployeeId As Integer, ByVal TypeId As Integer, ByVal DateFrom As DateTime, ByVal DateTo As DateTime, ByVal Hours As Double, ByVal Notes As String) As Boolean
+        Try
+            'InicializeEmployeeOfJob(lEmployee, lJob)
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "NonProductiveTime_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@EmployeeId", EmployeeId)
+            cmd.Parameters.AddWithValue("@TypeId", TypeId)
+            cmd.Parameters.AddWithValue("@DateFrom", DateFrom)
+            cmd.Parameters.AddWithValue("@DateTo", DateTo)
+            cmd.Parameters.AddWithValue("@Hours", Hours)
+            cmd.Parameters.AddWithValue("@Notes", Notes)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewNonJobTime, -1, Notes)
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+    Public Shared Function NewNonJobTime_old(ByVal lEmployee As Integer, ByVal lType As Integer, ByVal DateFrom As String, ByVal DateTo As String, ByVal nTime As String, ByVal sNotes As String) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+            Dim sTime As String = FormatearNumero2Tsql(nTime.ToString)
+            ' ClienteEmail
+            cmd.CommandText = "INSERT INTO [Employees_NonRegularHours] (EmployeeId, Type, DateFrom, DateTo, Hours, Notes) " &
+                                                    "VALUES (" & lEmployee.ToString & "," &
+                                                        lType.ToString & "," &
+                                                        GetFecha_102(DateFrom) & "," &
+                                                        GetFecha_102(DateTo) & "," &
+                                                        sTime & ",'" &
+                                                        sNotes & "')"
+
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+            Return True
+
+            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewNonJobTime, -1, sNotes)
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
     ' ................................................................................................................................
     ' Funcion: GetTimeData
     '          Leer datos del Time 
@@ -6582,32 +6642,6 @@ Public Class LocalAPI
             End If
             rdr.Close()
             cnn1.Close()
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Shared Function NewNonJobTime(ByVal lEmployee As Integer, ByVal lType As Integer, ByVal DateFrom As String,
-                                            ByVal DateTo As String, ByVal nTime As String, ByVal sNotes As String) As Boolean
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As SqlCommand = cnn1.CreateCommand()
-            Dim sTime As String = FormatearNumero2Tsql(nTime.ToString)
-            ' ClienteEmail
-            cmd.CommandText = "INSERT INTO [Employees_NonRegularHours] (EmployeeId, Type, DateFrom, DateTo, Hours, Notes) " &
-                                                    "VALUES (" & lEmployee.ToString & "," &
-                                                        lType.ToString & "," &
-                                                        GetFecha_102(DateFrom) & "," &
-                                                        GetFecha_102(DateTo) & "," &
-                                                        sTime & ",'" &
-                                                        sNotes & "')"
-
-            cmd.ExecuteNonQuery()
-            cnn1.Close()
-            NewNonJobTime = True
-
-            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewNonJobTime, -1, sNotes)
-
         Catch ex As Exception
             Throw ex
         End Try
