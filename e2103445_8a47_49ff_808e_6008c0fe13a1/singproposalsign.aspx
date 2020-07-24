@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/SingClientPortal.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
-    <link rel="stylesheet" href='<%= ResolveUrl("~/Content/sing-theme/quote-fullview.css") %>' />
+    <link rel="stylesheet" href='<%= ResolveUrl("~/Content/sing-theme/quote-fullview.css?v=1") %>' />
     <link rel="stylesheet" href='<%= ResolveUrl("~/Content/sing-theme/signature-pad.css") %>' />
     <style>
         hr {
@@ -301,8 +301,8 @@
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>--%>
                                                     <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL"
-                                                        SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right"
-                                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
+                                                        SortExpression="Amount" DataFormatString="{0:C2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true"
+                                                        FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
                                                         FooterStyle-HorizontalAlign="Right"
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>
