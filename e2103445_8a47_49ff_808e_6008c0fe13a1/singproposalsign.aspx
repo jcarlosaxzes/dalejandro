@@ -321,33 +321,6 @@
             <div class="row page">
                 <div class="col-lg-12">
                     <section class="widget widget-invoice">
-                        <header>
-                            <div class="row">
-                                <div class="col-sm-6 col-print-6">
-                                    <img src="data:image/png;base64,<%: Base64StringCompanyLogo %>" alt="Company Logo" class="invoice-logo img-fluid" />
-                                </div>
-                                <div class="col-sm-6 col-print-6 text-sm-right text-xs-left">
-                                    <h4><span class="fw-semi-bold"><%: CompanyName %></span>
-                                    </h4>
-                                    <address>
-                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                        <%: CompanyAddress %> <%: CompanyCity %>, <%: CompanyState %> <%: CompanyZipCode %><br>
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                                        <a href='mailto:<%: CompanyEmail %>'><%: CompanyEmail %></a><br>
-                                        <i class="fa fa-phone" aria-hidden="true"></i>
-                                        <a href="tel:<%: CompanyPhone %>" class="phone">
-                                            <%: CompanyPhone %>
-                                        </a>
-                                        <br>
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        <a href="<%: CompanyWebLink %>" target="_blank">
-                                            <%: CompanyWebLink %>
-                                        </a>
-                                        <br>
-                                    </address>
-                                </div>
-                            </div>
-                        </header>
                         <div class="widget-body">
                             <asp:Panel ID="PanelPhase" runat="server" Visible='<%# Eval("IsPhases") = 1%>' CssClass="row mb-lg">
                                 <section class="col-md-12 col-print-12">
@@ -389,33 +362,6 @@
             <div class="row page">
                 <div class="col-lg-12">
                     <section class="widget widget-invoice">
-                        <header>
-                            <div class="row">
-                                <div class="col-sm-6 col-print-6">
-                                    <img src="data:image/png;base64,<%: Base64StringCompanyLogo %>" alt="Company Logo" class="invoice-logo img-fluid" />
-                                </div>
-                                <div class="col-sm-6 col-print-6 text-sm-right text-xs-left">
-                                    <h4><span class="fw-semi-bold"><%: CompanyName %></span>
-                                    </h4>
-                                    <address>
-                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                        <%: CompanyAddress %> <%: CompanyCity %>, <%: CompanyState %> <%: CompanyZipCode %><br>
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                                        <a href='mailto:<%: CompanyEmail %>'><%: CompanyEmail %></a><br>
-                                        <i class="fa fa-phone" aria-hidden="true"></i>
-                                        <a href="tel:<%: CompanyPhone %>" class="phone">
-                                            <%: CompanyPhone %>
-                                        </a>
-                                        <br>
-                                        <i class="fa fa-globe" aria-hidden="true"></i>
-                                        <a href="<%: CompanyWebLink %>" target="_blank">
-                                            <%: CompanyWebLink %>
-                                        </a>
-                                        <br>
-                                    </address>
-                                </div>
-                            </div>
-                        </header>
                         <div class="widget-body">
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
