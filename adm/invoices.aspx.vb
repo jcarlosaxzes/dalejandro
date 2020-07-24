@@ -234,17 +234,11 @@ Public Class invoices
                 sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
 
-                'Case "PDF"
-                '    lblInvoiceId.Text = e.CommandArgument
-                '    Dim pdf As PdfApi = New PdfApi()
-                '    Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
-                '    Dim pdfBytes = Await pdf.CreateInvoicePdfBytes(companyId, lblInvoiceId.Text)
-                '    Dim response As HttpResponse = HttpContext.Current.Response
-                '    response.ContentType = "application/pdf"
-                '    response.AddHeader("Content-Disposition", "attachment; filename=Invoice.pdf")
-                '    response.ClearContent()
-                '    response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
-                '    response.Flush()
+            Case "PDF"
+                lblInvoiceId.Text = e.CommandArgument
+                Dim url = LocalAPI.GetSharedLink_URL(4, lblInvoiceId.Text)
+                Session("PrintUrl") = url
+                Response.Redirect("~/ADM/pdf_print.aspx")
         End Select
 
     End Sub

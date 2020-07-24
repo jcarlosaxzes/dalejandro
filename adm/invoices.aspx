@@ -275,10 +275,10 @@
                             </asp:LinkButton>
 
                             &nbsp;
-                                  <%--  <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
-                                        CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="false">
+                                    <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
+                                        CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="true">
                                             <i class="far fa-file-pdf"></i></a>
-                                    </asp:LinkButton>--%>
+                                    </asp:LinkButton>
 
                             &nbsp;
                                     <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
