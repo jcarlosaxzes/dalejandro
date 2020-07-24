@@ -7364,7 +7364,16 @@ Public Class LocalAPI
     Public Shared Function GetMessageTemplateBody(ByVal sType As String, ByVal companyId As Integer, dictValues As Dictionary(Of String, String)) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT ISNULL([Body],'') FROM [dbo].[Messages_TemplatesTEMPLATE] WHERE [Type]='" & sType & "' ", cnn1)
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "dbo.Messages_Templatet_Body_Select"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@Type", sType)
+
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -7394,7 +7403,16 @@ Public Class LocalAPI
     Public Shared Function GetMessageTemplateSubject(ByVal sType As String, ByVal companyId As Integer, dictValues As Dictionary(Of String, String)) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT ISNULL([Subject],'') FROM [dbo].[Messages_TemplatesTEMPLATE] WHERE [Type]='" & sType & "' ", cnn1)
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "dbo.Messages_Templatet_Subject_Select"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@Type", sType)
+
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
