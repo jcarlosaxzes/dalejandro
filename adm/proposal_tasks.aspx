@@ -104,13 +104,6 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="taskcode" HeaderText="Task ID" SortExpression="taskcode"
                         UniqueName="taskcode" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                        <EditItemTemplate>
-                            <div style="margin: 5px">
-                                <telerik:RadTextBox ID="taskcodeTextBox" runat="server" Text='<%# Bind("taskcode")%>' MaxLength="16" Width="150px">
-                                </telerik:RadTextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="taskcodeTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
-                            </div>
-                        </EditItemTemplate>
                         <ItemTemplate>
                             <div style="margin: 5px">
                                 <asp:LinkButton ID="lnkcodeLabel" runat="server" CommandName="Edit" CausesValidation="false"
@@ -121,13 +114,6 @@
                     <telerik:GridTemplateColumn DataField="Description" FilterControlAltText="Filter Description column"
                         HeaderText="Task Name" SortExpression="Description" UniqueName="Description" ItemStyle-HorizontalAlign="Left"
                         HeaderStyle-HorizontalAlign="Center">
-                        <EditItemTemplate>
-                            <div style="margin: 5px">
-                                <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Description") %>' MaxLength="80" Width="800px">
-                                </telerik:RadTextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
-                            </div>
-                        </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
                         </ItemTemplate>
@@ -137,37 +123,20 @@
                         <ItemTemplate>
                             <asp:Label ID="DescriptionPlusLabel" runat="server" Text='<%# Eval("DescriptionPlus") %>'></asp:Label>
                         </ItemTemplate>
-                        <EditItemTemplate>
-                            <div style="margin: 5px">
-                                <telerik:RadEditor ID="gridEditor_Saludo" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="300px"
-                                    AllowScripts="True" Width="800px"
-                                    ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
-                                </telerik:RadEditor>
-                            </div>
-                        </EditItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Hours" DataType="System.Double" FilterControlAltText="Filter Hours column"
                         HeaderText="Quantity (Hours)" SortExpression="Hours" UniqueName="Hours"
                         HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                        <EditItemTemplate>
-                            <div style="margin: 5px">
-                                <telerik:RadNumericTextBox ID="HoursTextBox" runat="server" Culture="en-US" DbValue='<%# Bind("Hours") %>'
-                                    LabelWidth="" Width="125px">
-                                </telerik:RadNumericTextBox>
-                            </div>
-                        </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="HoursLabel" runat="server" Text='<%# Eval("Hours") %>'></asp:Label>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Rates" DataType="System.Double" FilterControlAltText="Filter Rates column"
-                        HeaderText="Unit Price (Default Rate)" SortExpression="Rates" UniqueName="Rates"
+                        HeaderText="Rate or Unit Price" SortExpression="Rates" UniqueName="Rates"
                         HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                         <EditItemTemplate>
                             <div style="margin: 5px">
-                                <telerik:RadNumericTextBox ID="RatesTextBox" runat="server" Culture="en-US" DbValue='<%# Bind("Rates") %>'
-                                    LabelWidth="" Width="125px">
-                                </telerik:RadNumericTextBox>
+                                
                             </div>
                         </EditItemTemplate>
                         <ItemTemplate>
@@ -175,13 +144,81 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridCheckBoxColumn DataField="HourRatesService" DataType="System.Boolean"
-                        HeaderText="Hour Rates Service" SortExpression="HourRatesService" UniqueName="HourRatesService"
+                        HeaderText="Is Hourly Rate Service" SortExpression="HourRatesService" UniqueName="HourRatesService"
                         HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                     </telerik:GridCheckBoxColumn>
                 </Columns>
-                <EditFormSettings>
-                    <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
-                    </EditColumn>
+                <EditFormSettings EditFormType="Template">
+                    <FormTemplate>
+                        <table class="table-sm" style="width: 100%">
+                            <tr>
+                                <td style="text-align: right; width: 220px">Task ID:
+                                </td>
+                                <td>
+                                    <telerik:RadTextBox ID="taskcodeTextBox" runat="server" Text='<%# Bind("taskcode")%>' MaxLength="16" Width="150px">
+                                    </telerik:RadTextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="taskcodeTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Task Name:
+                                </td>
+                                <td>
+                                    <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Description") %>' MaxLength="80" Width="800px">
+                                    </telerik:RadTextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Description:
+                                </td>
+                                <td>
+                                    <telerik:RadEditor ID="gridEditor_Saludo" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="450px" Width="100%"
+                                        ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
+                                    </telerik:RadEditor>
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Hours (optional):
+                                </td>
+                                <td>
+                                    <telerik:RadNumericTextBox ID="HoursTextBox" runat="server" Culture="en-US" DbValue='<%# Bind("Hours") %>' Width="125px">
+                                    </telerik:RadNumericTextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">
+                                    Rate or Unit Price (optional):
+                                </td>
+                                <td>
+                                    <telerik:RadNumericTextBox ID="RatesTextBox" runat="server" Culture="en-US" DbValue='<%# Bind("Rates") %>' Width="125px">
+                                </telerik:RadNumericTextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">
+                                    Is Hourly Rate Service:
+                                </td>
+                                <td>
+                                    <telerik:RadCheckBox ID="chk1" runat="server" Checked='<%# Bind("HourRatesService") %>' AutoPostBack="false">
+                                </telerik:RadCheckBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <asp:LinkButton ID="btnUpdate" CssClass="btn-success btn-lg" 
+                                        Text='<%# IIf((TypeOf(Container) is GridEditFormInsertItem), "Insert", "Update") %>'
+                                        runat="server" CommandName='<%# IIf((TypeOf(Container) is GridEditFormInsertItem), "PerformInsert", "Update")%>'></asp:LinkButton>
+                                    &nbsp;&nbsp;
+                                    <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CssClass="btn-secondary btn-lg" 
+                                        CommandName="Cancel"></asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
+                    </FormTemplate>
+
                 </EditFormSettings>
             </MasterTableView>
         </telerik:RadGrid>

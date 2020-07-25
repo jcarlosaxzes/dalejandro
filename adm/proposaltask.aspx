@@ -93,7 +93,7 @@
                 <td>
                     <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="250px"
                         AllowScripts="True" Width="95%"
-                        ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="All">
+                        ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="Design" RenderMode="Auto">
                     </telerik:RadEditor>
                 </td>
             </tr>
@@ -177,7 +177,7 @@
                 </td>
             </tr>
         </table>
-        <asp:Panel runat="server" ID="PanelEstimator">
+        <asp:Panel runat="server" ID="PanelEstimator" BackColor="WhiteSmoke">
             <hr style="margin:0" />
             <h3 style="margin-left: 100px">Estimator
             </h3>
@@ -217,7 +217,7 @@
             <div style="padding-left: 180px; width: 90%">
                 <telerik:RadGrid ID="RadGridEstaimator" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSourceEstimator" CellSpacing="0" Width="100%"
-                    HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                    HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceEstimator" ShowFooter="true">
                         <Columns>
                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="" HeaderStyle-Width="50px">

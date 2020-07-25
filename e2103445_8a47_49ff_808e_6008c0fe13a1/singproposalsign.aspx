@@ -255,11 +255,10 @@
                             <%--Scope of Work--%>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-
                                     <h4 class="company-name m-t-1">Scope of Work</h4>
                                     <asp:Repeater ID="rptrScopeOfWork" runat="server" DataSourceID="SqlDataSourceSCOPEOFWORK">
                                         <ItemTemplate>
-                                            <h4 class="company-name m-t-1"><%# Eval("PhaseCode")%>&nbsp;&nbsp;<%# Eval("Description")%></h4>
+                                            <h5 class="company-name m-t-1"><%# IIf(Len(Eval("PhaseCode")) > 0, String.Concat(Eval("PhaseCode"), "  ", Eval("Description")), Eval("Description"))  %></h5>
                                             <%# Eval("DescriptionPlus")%>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -460,7 +459,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceSCOPEOFWORK" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="PROPOSAL_SCOPEOFWORK2_Select" SelectCommandType="StoredProcedure">
+        SelectCommand="PROPOSAL_SCOPEOFWORK_v20_Select" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />

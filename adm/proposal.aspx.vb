@@ -140,6 +140,15 @@ Public Class proposal
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
     End Sub
+    Protected Sub cboTandCtemplates_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs)
+        Try
+            Dim cbo As RadComboBox = CType(sender.NamingContainer.FindControl("cboTandCtemplates"), RadComboBox)
+            Dim editor As RadEditor = CType(sender.NamingContainer.FindControl("radEditor_TandC"), RadEditor)
+            editor.Content = LocalAPI.GetProposalTemplateDescription(Val("" & cbo.SelectedValue))
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Protected Sub btnUpdate1_Click(sender As Object, e As System.EventArgs) Handles btnUpdate1.Click
         GuardarProposal(True)
