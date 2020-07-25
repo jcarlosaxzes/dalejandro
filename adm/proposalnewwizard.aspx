@@ -808,7 +808,7 @@
                                     </td>
                                     <td style="text-align: right">
                                         <asp:LinkButton ID="btnTCUpdate" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                            <i class="fas fa-check"></i>&nbsp;&nbsp;Save
+                                            <i class="fas fa-check"></i>&nbsp;&nbsp;Update
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnCloseTC" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                             Close
