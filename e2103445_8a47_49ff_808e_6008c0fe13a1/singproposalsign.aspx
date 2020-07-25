@@ -177,6 +177,13 @@
                         </header>
                         <div class="widget-body">
 
+                            <div class="row mb-lg" style="text-align: center">
+                                <section class="col-md-12 col-print-12">
+                                    <h4><span class="fw-semi-bold">Professional Services Agreement</span>
+                                </section>
+                            </div>
+
+                            <%--Client / Project--%>
                             <div class="row mb-lg">
                                 <section class="col-sm-6 col-print-6">
                                     <div>
@@ -217,7 +224,7 @@
                                 </section>
                             </div>
 
-
+                            <%--Dear Client Text Begin--%>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     Dear&nbsp;<%# Eval("ClientName")%>,<br />
@@ -225,38 +232,82 @@
                                 </section>
                             </div>
 
+                            <%--Project Phases Hide?--%>
+                            <div class="row mb-lg">
+                                <section class="col-md-12 col-print-12">
+                                    <asp:Panel ID="PanelPhase" runat="server" Visible='<%# Eval("IsPhases") = 1%>' CssClass="row mb-lg">
+                                        <section class="col-md-12 col-print-12">
+                                            <h4 class="company-name m-t-1">Project Phases</h4>
+                                            <asp:Repeater ID="rptrPhases" runat="server" DataSourceID="SqlDataSourcePHASES">
+                                                <ItemTemplate>
+                                                    <h4 class="company-name m-t-1"><%# Eval("Code")%>&nbsp;&nbsp;<%# Eval("Name")%></h4>
+                                                    <span class="fw-semi-bold">
+                                                        <%# Eval("Period")%>
+                                                    </span>
+                                                    <%# Eval("Description")%>
+                                                </ItemTemplate>
+                                            </asp:Repeater>
+                                        </section>
+                                    </asp:Panel>
+                                </section>
+                            </div>
+
+                            <%--Scope of Work--%>
+                            <div class="row mb-lg">
+                                <section class="col-md-12 col-print-12">
+
+                                    <h4 class="company-name m-t-1">Scope of Work</h4>
+                                    <asp:Repeater ID="rptrScopeOfWork" runat="server" DataSourceID="SqlDataSourceSCOPEOFWORK">
+                                        <ItemTemplate>
+                                            <h4 class="company-name m-t-1"><%# Eval("PhaseCode")%>&nbsp;&nbsp;<%# Eval("Description")%></h4>
+                                            <%# Eval("DescriptionPlus")%>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+
+                                </section>
+                            </div>
+
+                            <%--Service Fee(s)--%>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     <h4 class="company-name m-t-1">Service Fee(s)</h4>
-                                    <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails" ShowFooter="true" Width="100%"
+                                    <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails"
+                                        HeaderStyle-HorizontalAlign="Center" ShowFooter="true" Width="100%"
                                         RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
                                             <FooterStyle BorderStyle="None" />
                                             <Columns>
-                                                <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="" UniqueName="Phase"
+                                                <%-- <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="" UniqueName="Phase"
                                                     HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                                </telerik:GridBoundColumn>--%>
+                                                <telerik:GridBoundColumn DataField="taskcode" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
+                                                    HeaderText="ID" SortExpression="taskcode" UniqueName="taskcode">
                                                 </telerik:GridBoundColumn>
-                                                <telerik:GridBoundColumn DataField="Description" HeaderText="DESCRIPTION" UniqueName="Description"
-                                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-CssClass="GridColumn">
+                                                <telerik:GridBoundColumn DataField="Description" HeaderText="TASK NAME" UniqueName="Description"
+                                                    HeaderStyle-HorizontalAlign="Left" ItemStyle-CssClass="GridColumn">
                                                 </telerik:GridBoundColumn>
-                                                <telerik:GridTemplateColumn DataField="Amount" HeaderText="QUANTITY" UniqueName="Amount"
-                                                    HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center" FooterStyle-CssClass="hidden-sm-down" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="hidden-sm-down" ItemStyle-CssClass="hidden-sm-down">
+                                                <telerik:GridTemplateColumn DataField="Amount" HeaderText="QTY" UniqueName="Amount"
+                                                    HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center"
+                                                    ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="GridColumn">
                                                     <ItemTemplate>
                                                         <%# Eval("Amount")%>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn DataField="Hours" HeaderText="HOURS" UniqueName="Hours"
-                                                    HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center" FooterStyle-CssClass="hidden-sm-down" ItemStyle-HorizontalAlign="Center" HeaderStyle-CssClass="hidden-sm-down" ItemStyle-CssClass="hidden-sm-down">
+                                                    HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="GridColumn">
                                                     <ItemTemplate>
                                                         <%# Eval("Hours")%>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
-                                                <telerik:GridBoundColumn DataField="Rates" FooterStyle-CssClass="hidden-sm-down" HeaderText="RATE" UniqueName="Rates"
-                                                    HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="None" DataFormatString="{0:C}"
-                                                    ItemStyle-CssClass="GridColumn hidden-sm-down" HeaderStyle-CssClass="hidden-sm-down">
-                                                </telerik:GridBoundColumn>
+                                                <telerik:GridTemplateColumn DataField="Rates" HeaderText="RATE" UniqueName="Rates" ItemStyle-CssClass="GridColumn"
+                                                    HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="None">
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblTotal2" runat="server" Visible='<%# IIf(Eval("Amount") Is DBNull.Value And Eval("Hours") Is DBNull.Value, False, True)%>' Text='<%# Eval("Rates", "{0:C2}")%>' />
+                                                    </ItemTemplate>
+
+                                                </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn DataField="TotalRow" HeaderText="TOTAL" UniqueName="TotalRow"
-                                                    HeaderStyle-Width="200px" HeaderStyle-HorizontalAlign="Right" ItemStyle-HorizontalAlign="Right" Aggregate="Sum"
+                                                    HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" Aggregate="Sum"
                                                     FooterAggregateFormatString="{0:C}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true" ItemStyle-CssClass="GridColumn">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblTotal2" runat="server" Visible='<%# IIf(Eval("TotalRow") = 0 Or Eval("LumpSum") = 1, False, True)%>' Text='<%# Eval("TotalRow", "{0:C2}")%>' />
@@ -268,6 +319,7 @@
                                     </telerik:RadGrid>
                                 </section>
                             </div>
+
                             <%--Payments Schedule                                                           --%>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
@@ -276,18 +328,22 @@
                                         <telerik:RadGrid ID="RadGridPS" runat="server"
                                             AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center" Width="100%"
                                             RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
+
                                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePS" ShowFooter="true" CssClass="table">
                                                 <FooterStyle BorderStyle="None" />
                                                 <Columns>
                                                     <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
                                                     </telerik:GridBoundColumn>
-
-                                                    <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center"
-                                                        HeaderText="SCHEDULE" SortExpression="Percentage" UniqueName="Percentage"
+                                                    <telerik:GridBoundColumn DataField="taskcode" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
+                                                        HeaderText="Task" SortExpression="taskcode" UniqueName="taskcode">
+                                                    </telerik:GridBoundColumn>
+                                                    <telerik:GridBoundColumn DataField="Description" HeaderStyle-HorizontalAlign="Left"
+                                                        HeaderText="DESCRIPTION" SortExpression="Description" UniqueName="Description"
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>
-                                                    <telerik:GridBoundColumn DataField="Description"
-                                                        HeaderText="DESCRIPTION" SortExpression="Description" UniqueName="Description"
+
+                                                    <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
+                                                        HeaderText="%" SortExpression="Percentage" UniqueName="Percentage"
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>
 
@@ -301,8 +357,8 @@
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>--%>
                                                     <telerik:GridBoundColumn DataField="Amount" HeaderText="TOTAL"
-                                                        SortExpression="Amount" DataFormatString="{0:C2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true"
-                                                        FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Right"
+                                                        SortExpression="Amount" DataFormatString="{0:C2}" UniqueName="Amount" Aggregate="Sum" HeaderStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="true"
+                                                        FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
                                                         FooterStyle-HorizontalAlign="Right"
                                                         ItemStyle-CssClass="GridColumn">
                                                     </telerik:GridBoundColumn>
@@ -313,6 +369,8 @@
 
                                 </section>
                             </div>
+
+                            <%--Text End--%>
                             <div class="row">
                                 <div class="col-md-12 col-print-12">
                                     <%# Eval("TextEnd") %>
@@ -323,41 +381,7 @@
                 </div>
             </div>
             <%-- End of First Page --%>
-            <%-- Second Page --%>
-            <div class="row page">
-                <div class="col-lg-12">
-                    <section class="widget widget-invoice">
-                        <div class="widget-body">
-                            <asp:Panel ID="PanelPhase" runat="server" Visible='<%# Eval("IsPhases") = 1%>' CssClass="row mb-lg">
-                                <section class="col-md-12 col-print-12">
-                                    <h4 class="company-name m-t-1">Project Phases</h4>
-                                    <asp:Repeater ID="rptrPhases" runat="server" DataSourceID="SqlDataSourcePHASES">
-                                        <ItemTemplate>
-                                            <h4 class="company-name m-t-1"><%# Eval("Code")%>&nbsp;&nbsp;<%# Eval("Name")%></h4>
-                                            <span class="fw-semi-bold">
-                                                <%# Eval("Period")%>
-                                            </span>
-                                            <%# Eval("Description")%>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </section>
-                            </asp:Panel>
-                            <div class="row mb-lg">
-                                <section class="col-md-12 col-print-12">
-                                    <h4 class="company-name m-t-1">Scope of Work</h4>
-                                    <asp:Repeater ID="rptrScopeOfWork" runat="server" DataSourceID="SqlDataSourceSCOPEOFWORK">
-                                        <ItemTemplate>
-                                            <h4 class="company-name m-t-1"><%# Eval("PhaseCode")%>&nbsp;&nbsp;<%# Eval("Description")%></h4>
-                                            <%# Eval("DescriptionPlus")%>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </section>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <%-- End of Second Page --%>
+
             <%-- Final Page --%>
             <div class="row page">
                 <div class="col-lg-12">
@@ -365,7 +389,7 @@
                         <div class="widget-body">
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h4 class="company-name m-t-1">Professional Services Agreement</h4>
+                                    <h4 class="company-name m-t-1">Terms and Conditions</h4>
                                     <%# Eval("Agreements") %>
                                 </section>
                             </div>
@@ -419,15 +443,8 @@
 
 
                         </div>
-                        <div class="btn-toolbar mt-lg hidden-print print-buttons">
-                            <button class="btn btn-inverse print">
-                                <i class="fa fa-print"></i>
-                                &nbsp;&nbsp;Print
-                            </button>
-                        </div>
                 </div>
                 </section>
-            </div>
             </div>
             <%-- End of Final Page --%>
         </ItemTemplate>
