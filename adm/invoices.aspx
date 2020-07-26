@@ -344,11 +344,11 @@
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
             <span class="navbar navbar-expand-md bg-dark text-white">Receive Payment
             </span>
         </h2>
-        <table class="table-sm" style="width: 500px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td style="width: 140px; text-align: right">Collected Date:
                 </td>
@@ -370,7 +370,7 @@
                 <td style="text-align: right">Amount:
                 </td>
                 <td>
-                    <telerik:RadNumericTextBox ID="txtAmountPayment" runat="server" Width="60px">
+                    <telerik:RadNumericTextBox ID="txtAmountPayment" runat="server" Width="180px">
                     </telerik:RadNumericTextBox>
                 </td>
             </tr>

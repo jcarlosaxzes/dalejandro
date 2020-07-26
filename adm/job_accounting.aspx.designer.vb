@@ -239,6 +239,24 @@ Partial Public Class Job_accounting
     Protected WithEvents FormViewPayment As Global.System.Web.UI.WebControls.FormView
     
     '''<summary>
+    '''Panel2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Panel2 As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''RadCloudUpload2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCloudUpload2 As Global.Telerik.Web.UI.RadCloudUpload
+    
+    '''<summary>
     '''btnUpdatePayment control.
     '''</summary>
     '''<remarks>
