@@ -155,7 +155,7 @@
                                 <td style="text-align: right; width: 220px">Task ID:
                                 </td>
                                 <td>
-                                    <telerik:RadTextBox ID="taskcodeTextBox" runat="server" Text='<%# Bind("taskcode")%>' MaxLength="16" Width="150px">
+                                    <telerik:RadTextBox ID="taskcodeTextBox" runat="server" Text='<%# Bind("taskcode")%>' MaxLength="16" Width="150px" >
                                     </telerik:RadTextBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="taskcodeTextBox" CssClass="Error" ErrorMessage=" (*)"></asp:RequiredFieldValidator>
                                 </td>

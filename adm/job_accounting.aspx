@@ -105,7 +105,7 @@
                 <div class="pasconcept-bar noprint">
                     <span>
                         <telerik:RadComboBox ID="cboInvoicesType" runat="server" DataSourceID="SqlDataSourceInvoicesTypes"
-                            DataTextField="Name" DataValueField="Id" Width="300px" MarkFirstMatch="True" RenderMode ="Lightweight" 
+                            DataTextField="Name" DataValueField="Id" Width="300px" MarkFirstMatch="True" RenderMode="Lightweight"
                             Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Select Payment Schedule)" Value="-1" />
@@ -270,7 +270,7 @@
                                     &nbsp;
                                                         <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
                                                             CommandName="PDF" CommandArgument='<%# Eval("Id")%>'>
-                                                               <i class="far fa-file-pdf"></i></a>
+                                                               <i class="far fa-file-pdf"></i>
                                                         </asp:LinkButton>
 
                                     &nbsp;
@@ -281,7 +281,7 @@
                                     &nbsp;
                                                         <asp:LinkButton ID="btnClone" runat="server" UseSubmitBehavior="false" ToolTip="Duplicate Invoice"
                                                             CommandName="Duplicate" CommandArgument='<%# Eval("Id")%>'>
-                                                                <i class="far fa-clone"></i></a>
+                                                                <i class="far fa-clone"></i>
                                                         </asp:LinkButton>
 
                                     &nbsp;
@@ -364,6 +364,16 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
+                            <telerik:GridTemplateColumn DataField="ReconciledBank" HeaderText="R" SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnReconciledBank" runat="server" UseSubmitBehavior="false" ToolTip="Payment is reconciled with bank statement"
+                                        CommandName="ReconciledBank" CommandArgument='<%# Eval("Id")%>'>
+                                            <telerik:RadCheckBox runat="server" Checked='<%# Eval("ReconciledBank")%>' AutoPostBack="false" Enabled="false"></telerik:RadCheckBox>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this note?"
                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
                                 UniqueName="DeleteColumn" HeaderText=""
@@ -386,11 +396,11 @@
 
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
             <span class="navbar navbar-expand-md bg-dark text-white">Receive Payment
             </span>
         </h2>
-        <table class="table-sm" style="width: 500px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td style="width: 140px; text-align: right">Collected Date:
                 </td>
@@ -412,7 +422,7 @@
                 <td style="text-align: right">Amount:
                 </td>
                 <td>
-                    <telerik:RadNumericTextBox ID="txtAmountPayment" runat="server" Width="60px">
+                    <telerik:RadNumericTextBox ID="txtAmountPayment" runat="server" Width="180px">
                     </telerik:RadNumericTextBox>
                 </td>
             </tr>
@@ -552,7 +562,7 @@
 
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+   <%-- <telerik:RadToolTip ID="ddddd" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
             <span class="navbar navbar-expand-md bg-dark text-white">Payment
             </span>
@@ -561,7 +571,7 @@
             <EditItemTemplate>
                 <table class="table-sm" style="width: 600px">
                     <tr>
-                        <td style="width: 140px; text-align: right">Collected Date:
+                        <td style="width: 160px; text-align: right">Collected Date:
                         </td>
                         <td>
                             <telerik:RadDatePicker ID="RadDateEditPickerPayment" runat="server" ZIndex="50001" DbSelectedDate='<%# Bind("CollectedDate") %>'>
@@ -591,8 +601,15 @@
                         <td style="text-align: right">Notes:
                         </td>
                         <td>
-                            <telerik:RadTextBox ID="txtEditPaymentNotes" runat="server" Width="100%" MaxLength="1024" TextMode="MultiLine" Rows="4" Text='<%# Bind("CollectedNotes") %>'>
+                            <telerik:RadTextBox ID="txtEditPaymentNotes" runat="server" Width="100%" MaxLength="1024" TextMode="MultiLine" Rows="3" Text='<%# Bind("CollectedNotes") %>'>
                             </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right" >Is Reconciled with Bank:
+                        </td>
+                        <td>
+                            <telerik:RadCheckBox runat="server" ID="chkReconciledBank" Checked='<%# Bind("ReconciledBank")%>' AutoPostBack="false"></telerik:RadCheckBox>
                         </td>
                     </tr>
 
@@ -612,7 +629,94 @@
                 </td>
             </tr>
         </table>
+    </telerik:RadToolTip>--%>
+
+
+    <telerik:RadToolTip ID="RadToolTipEditPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Payment
+            </span>
+        </h2>
+        <asp:FormView ID="FormViewPayment" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePayment" DefaultMode="Edit">
+            <EditItemTemplate>
+                <table class="table-sm" style="width: 600px">
+                    <tr>
+                        <td style="width: 160px; text-align: right" >Collected Date:
+                        </td>
+                        <td>
+                            <telerik:RadDatePicker ID="RadDateEditPickerPayment" runat="server" ZIndex="50001" DbSelectedDate='<%# Bind("CollectedDate") %>'>
+                            </telerik:RadDatePicker>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right" >Method:
+                        </td>
+                        <td>
+
+                            <telerik:RadComboBox ID="cboEditPaymentMethod_paym2" runat="server" DataSourceID="SqlDataSourcePaymentMethod" DataTextField="Name" DataValueField="Id"
+                                Filter="Contains" MarkFirstMatch="True" SelectedValue='<%# Bind("Method") %>' Width="100%" ZIndex="50001">
+                            </telerik:RadComboBox>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right" >Amount:
+                        </td>
+                        <td>
+                            <telerik:RadNumericTextBox ID="txtEditAmountPayment" runat="server" Width="180px" DbValue='<%# Bind("Amount") %>'>
+                            </telerik:RadNumericTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;vertical-align:top" >Notes:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="txtEditPaymentNotes" runat="server" Width="100%" MaxLength="1024" TextMode="MultiLine" Rows="3" Text='<%# Bind("CollectedNotes") %>'>
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right" >Is Reconciled with Bank:
+                        </td>
+                        <td>
+                            <telerik:RadCheckBox runat="server" ID="chkReconciledBank" Checked='<%# Bind("ReconciledBank")%>' AutoPostBack="false"></telerik:RadCheckBox>
+                        </td>
+                    </tr>
+
+                </table>
+            </EditItemTemplate>
+        </asp:FormView>
+        <table class="table-sm" style="width: 600px">
+            <tr>
+                <td>
+                    <asp:Panel ID="Panel2" runat="server" class="DropZone1">
+                        <h4>Select or Drag and Drop files (up to 10Mb)</h4>
+                        <telerik:RadCloudUpload ID="RadCloudUpload2" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
+                            OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
+                            MaxFileSize="10145728"
+                            DropZones=".DropZone1">
+                        </telerik:RadCloudUpload>
+                    </asp:Panel>
+                </td>
+            </tr>
+            <tr>
+
+                <td style="text-align: center">
+                    <asp:LinkButton ID="btnUpdatePayment" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
+                        CommandName="Update"> Update
+                    </asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:LinkButton ID="btnCancelUpdatePayment" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
+                        CommandName="Cancel"> Cancel
+                    </asp:LinkButton>
+                </td>
+            </tr>
+        </table>
     </telerik:RadToolTip>
+
+
+
+
 
     <telerik:RadToolTip ID="RadToolTipInvoicesDiscount" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 800px">
@@ -717,6 +821,7 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
+
     <asp:SqlDataSource ID="SqlDataSourcePayments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Payment_DELETE" DeleteCommandType="StoredProcedure"
         SelectCommand="Job_accountng_payments_SELECT" SelectCommandType="StoredProcedure">
@@ -735,15 +840,25 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcePayment" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Payment_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="Payment_UPDATE" UpdateCommandType="StoredProcedure"
+        UpdateCommand="Payment_v20_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Invoice_Payment_v20_INSERT" InsertCommandType="StoredProcedure">
-        <UpdateParameters>
+         <UpdateParameters>
             <asp:Parameter Name="Method" />
             <asp:Parameter Name="CollectedDate" Type="DateTime" />
             <asp:Parameter Name="CollectedNotes" />
             <asp:Parameter Name="Amount" />
+            <asp:Parameter Name="ReconciledBank" />
+
+            <asp:ControlParameter ControlID="lblOriginalFileName" Name="OriginalFileName" PropertyName="Text" Type="String" />
+            <asp:ControlParameter ControlID="lblKeyName" Name="KeyName" PropertyName="Text" Type="String" />
+            <asp:ControlParameter ControlID="lblContentBytes" Name="ContentBytes" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblContentType" Name="ContentType" PropertyName="Text" Type="String" />
+
             <asp:ControlParameter ControlID="lblPaymentId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
+
+
+
         <SelectParameters>
             <asp:ControlParameter ControlID="lblPaymentId" Name="Id" PropertyName="Text" Type="Int32" />
         </SelectParameters>
