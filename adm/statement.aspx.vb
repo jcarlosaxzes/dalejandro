@@ -179,4 +179,8 @@ Public Class statement
     Private Sub cboPeriod_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboPeriod.SelectedIndexChanged
         IniciaPeriodo(cboPeriod.SelectedValue)
     End Sub
+
+    Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
 End Class
