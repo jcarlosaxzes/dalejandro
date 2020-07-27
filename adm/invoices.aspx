@@ -302,7 +302,7 @@
             </MasterTableView>
         </telerik:RadGrid>
 
-        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
+<%--        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
             Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Billing Contact Information</b>" ShowEvent="OnClick"
             HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
             <table>
@@ -339,7 +339,7 @@
                     <td>Last time:&nbsp;<b><%# Eval("LatestEmission", "{0:d}")%></b></td>
                 </tr>
             </table>
-        </telerik:RadToolTip>
+        </telerik:RadToolTip>--%>
     </div>
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">

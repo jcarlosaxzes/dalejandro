@@ -11,7 +11,7 @@
         </script>
     </telerik:RadCodeBlock>
 
-<%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -78,6 +78,16 @@
                             Height="300px" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="wi=250px">
+                        <telerik:RadComboBox ID="cboReconcile" runat="server" AppendDataBoundItems="true"
+                            Filter="Contains" MarkFirstMatch="True" Width="100%">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Reconciled/Not Reconciled Payments...)" Value="-1" />
+                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="Reconciled" Value="1" />
+                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="Not Reconciled" Value="0" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -304,15 +314,14 @@
                                 </td>
                                 <td>
                                     <telerik:RadCheckBox runat="server" ID="chkReconciledBank" AutoPostBack="false"
-                                        Checked='<%# Bind("ReconciledBank")%>' 
+                                        Checked='<%# Bind("ReconciledBank")%>'
                                         Enabled='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "false", "true")%>'>
-
                                     </telerik:RadCheckBox>
                                 </td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td style="text-align:right;padding-right:20px">
+                                <td style="text-align: right; padding-right: 20px">
                                     <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success"
                                         Text='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "Insert Statement", "Update Statement")%>'
                                         CommandName='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "PerformInsert", "Update")%>'>
@@ -563,6 +572,7 @@
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboReconcile" Name="ReconciledId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
