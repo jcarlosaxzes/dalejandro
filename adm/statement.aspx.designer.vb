@@ -68,6 +68,15 @@ Partial Public Class statement
     Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
+    '''cboReconcile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboReconcile As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''txtFind control.
     '''</summary>
     '''<remarks>
