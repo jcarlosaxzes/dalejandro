@@ -105,32 +105,25 @@ Public Class sendproposal
             Dim sClienteName = LocalAPI.GetProposalData(lblProposalId.Text, "[Clients].[Name]")
             Dim sClienteCompany = LocalAPI.GetProposalData(lblProposalId.Text, "[Clients].[Company]")
             Dim sCompanyName = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Name")
-
             Dim sSign As String = LocalAPI.GetEmployeesSign(cboProjectManagerId.SelectedValue)
-
-            ' Leer subjet y body template
-            txtSubject.Text = LocalAPI.GetMessageTemplateSubject("Proposal", lblCompanyId.Text)
-            txtBody.Content = LocalAPI.GetMessageTemplateBody("Proposal", lblCompanyId.Text)
-
-            ' sustituir variables
-            txtSubject.Text = Replace(txtSubject.Text, "[Id]", lblProposalId.Text)
-            txtSubject.Text = Replace(txtSubject.Text, "[Project Name]", sProjectName)
-            txtSubject.Text = Replace(txtSubject.Text, "[Project Type]", sProjectType)
-
-
-            txtBody.Content = Replace(txtBody.Content, "[Id]", lblProposalId.Text)
-            txtBody.Content = Replace(txtBody.Content, "[Project Name]", sProjectName)
-            txtBody.Content = Replace(txtBody.Content, "[Project Type]", sProjectType)
-            txtBody.Content = Replace(txtBody.Content, "[Client Name]", sClienteName)
-            txtBody.Content = Replace(txtBody.Content, "[Client Company]", sClienteCompany)
-            txtBody.Content = Replace(txtBody.Content, "[Company Name]", sCompanyName)
-            txtBody.Content = Replace(txtBody.Content, "[Sign]", sSign)
-
             ' Enlace al Proposal
             'txtBody.Content = Replace(txtBody.Content, "[PASconceptLink]", LocalAPI.GetHostAppSite() & "/ADMCLI/AceptProposal.aspx?ProposalId=" & lblProposalId.Text)
             Dim sURL As String = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
-            txtBody.Content = Replace(txtBody.Content, "[PASconceptLink]", sURL)
 
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[Project_Name]", sProjectName)
+            DictValues.Add("[Id]", lblProposalId.Text)
+            DictValues.Add("[Project Type]", sProjectType)
+            DictValues.Add("[Client Name]", sClienteName)
+            DictValues.Add("[Client Company]", sClienteCompany)
+            DictValues.Add("[Company Name]", sCompanyName)
+            DictValues.Add("[Sign]", sSign)
+            DictValues.Add("[PASconceptLink]", sURL)
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+
+            ' Leer subjet y body template
+            txtSubject.Text = LocalAPI.GetMessageTemplateSubject("Proposal", lblCompanyId.Text, DictValues)
+            txtBody.Content = LocalAPI.GetMessageTemplateBody("Proposal", lblCompanyId.Text, DictValues)
 
         Catch ex As Exception
             ErrorMessage("Error. " & ex.Message)
