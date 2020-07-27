@@ -49,12 +49,7 @@ Public Class proposalnewwizard
                     lblProposalId.Text = Request.QueryString("proposalId")
                     lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
 
-                    cboPaymentSchedules.DataBind()
-                    cboPaymentSchedules.SelectedValue = LocalAPI.GetProposalProperty(lblProposalId.Text, "paymentscheduleId")
-                    RadGridPS.DataBind()
-
-                    cboPaymentSchedules.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
-                    btnUpdatePS.Visible = cboPaymentSchedules.Visible
+                    ReadPaymentSchedule()
 
                     ProposalItemsDataBind()
 
@@ -84,6 +79,24 @@ Public Class proposalnewwizard
         End Try
     End Sub
 
+    Private Sub ReadPaymentSchedule()
+        cboPaymentSchedules.DataBind()
+
+        ' General PS or PS by individual Services Fee(s)
+        btnUpdatePS.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+
+        If btnUpdatePS.Visible Then
+            ' General PS
+            cboPaymentSchedules.Enabled = True
+            cboPaymentSchedules.SelectedValue = LocalAPI.GetProposalProperty(lblProposalId.Text, "paymentscheduleId")
+        Else
+            ' PS by individual Services Fee
+            cboPaymentSchedules.SelectedValue = -1
+            cboPaymentSchedules.Enabled = False
+        End If
+
+        RadGridPS.DataBind()
+    End Sub
     Private Sub ReadPreProject(preprojectId As Integer)
         Try
             Dim PreProjectInfo = LocalAPI.GetRecord(preprojectId, "Pre_Project_SELECT")

@@ -994,19 +994,23 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="width: 300px">
-                                                                <telerik:RadComboBox ID="cboTandCtemplates" runat="server" DataSourceID="SqlDataSourceTandCtemplates"
+                                                                <telerik:RadComboBox ID="cboTandCtemplates" runat="server" DataSourceID="SqlDataSourceTandCtemplates" AutoPostBack="true" OnSelectedIndexChanged="cboTandCtemplates_SelectedIndexChanged"
                                                                     DataTextField="Name" DataValueField="Id" Width="100%" Height="200px" AppendDataBoundItems="true" ToolTip="To modify the current, select T&C template">
                                                                     <Items>
                                                                         <telerik:RadComboBoxItem runat="server" Text="(Select other T&C Template...)" Value="-1" />
                                                                     </Items>
                                                                 </telerik:RadComboBox>
                                                             </td>
-                                                            <td style="width: 160px">
-                                                                <%-- <telerik:RadButton ID="btnUpdateTandCTemplate" runat="server" CommandName="UpdateTandC"
-                                                                OnClick="btnUpdateTandCTemplate_Click" Text="Set T&amp;C Template" Width="140px" CausesValidation="false">
-                                                                <Icon PrimaryIconCssClass="rbConfig"></Icon>
-                                                            </telerik:RadButton>--%>
-                                                                <asp:LinkButton ID="btnUpdateTandCTemplate" runat="server" CommandName="UpdateTandC" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false">
+                                                            <td style="width: 400px">
+
+                                                                <asp:LinkButton ID="btnUpdateTandCTemplate" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" CommandName="Update">
+                                                                    <i class="fas fa-check"></i>&nbsp;&nbsp;Update
+                                                                </asp:LinkButton>
+                                                                <asp:LinkButton ID="btnCloseTC" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" CommandName="Cancel">
+                                                                    Cancel
+                                                                </asp:LinkButton>
+
+                                                                <%--  <asp:LinkButton ID="btnUpdateTandCTemplate" runat="server" CommandName="UpdateTandC" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false">
                                                                 Apply
                                                                 </asp:LinkButton>
 
@@ -1018,7 +1022,7 @@
                                                                 &nbsp;
                                                             <asp:LinkButton ID="btnCancelTyC" runat="server" CommandName="Cancel" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="false">
                                                                 Cancel
-                                                            </asp:LinkButton>
+                                                            </asp:LinkButton>--%>
 
                                                             </td>
                                                         </tr>
@@ -1364,7 +1368,7 @@
         DeleteCommand="ClientProsalJob_azureuploads_v20_DELETE" DeleteCommandType="StoredProcedure"
         UpdateCommand="ClientProsalJob_azureuploads_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblClientId" Name="clientId" PropertyName="Text" Type="Int32" />
+            <asp:Parameter Name="clientId" DefaultValue="0" />
             <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="JobId" DefaultValue="0" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />

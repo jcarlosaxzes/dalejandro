@@ -41,15 +41,6 @@ Partial Public Class payments
     Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
     
     '''<summary>
-    '''cboClients control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
     '''cboDepartments control.
     '''</summary>
     '''<remarks>
@@ -66,6 +57,24 @@ Partial Public Class payments
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboPaymentMethod As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboClients control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboReconcile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboReconcile As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''txtFind control.

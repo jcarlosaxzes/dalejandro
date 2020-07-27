@@ -299,10 +299,10 @@
                             </asp:Panel>
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h3 class="company-name m-t-1">Scope of Work</h3>
+                                    <h3 class="company-name m-t-1">Scope of Work.</h3>
                                     <asp:Repeater ID="rptrScopeOfWork" runat="server" DataSourceID="SqlDataSourceSCOPEOFWORK">
                                         <ItemTemplate>
-                                            <h4 class="company-name m-t-1"><%# Eval("PhaseCode")%>&nbsp;&nbsp;<%# Eval("Description")%></h4>
+                                            <h4 class="company-name m-t-1"><%# IIf(Eval("IsPhases") = 1, String.Concat(Eval("PhaseCode"), "  ", Eval("Description")), Eval("Description"))  %></h4>
                                             <%# Eval("DescriptionPlus")%>
                                         </ItemTemplate>
                                     </asp:Repeater>
