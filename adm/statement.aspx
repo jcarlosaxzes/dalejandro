@@ -11,7 +11,7 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+<%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -36,7 +36,7 @@
 
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
 
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">Statements</span>
@@ -298,7 +298,7 @@
                                 <td>
                                     <telerik:RadCheckBox runat="server" ID="chkReconciledBank" AutoPostBack="false"
                                         Checked='<%# Bind("ReconciledBank")%>' 
-                                        Enabled='<%# Eval("AmountBilled") > 0 %>'>
+                                        Enabled='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "false", "true")%>'>
 
                                     </telerik:RadCheckBox>
                                 </td>

@@ -183,4 +183,8 @@ Public Class statement
     Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
+
+    Private Sub SqlDataSource1_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Inserting
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
 End Class
