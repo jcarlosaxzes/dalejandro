@@ -7,7 +7,7 @@
         Dim Name = Session("PrintName")
         Dim pdfBytes = Await pdf.GetConvertApiPdf(url)
         Response.ContentType = "application/pdf"
-        Response.AddHeader($"Content-Disposition", "attachment; filename={Name}")
+        Response.AddHeader("Content-Disposition", $"attachment; filename={Name}")
         Response.ClearContent()
         Response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
         Response.Flush()
