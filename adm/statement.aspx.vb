@@ -82,6 +82,13 @@ Public Class statement
                     RadToolTipStatementsPayment.Visible = True
                     RadToolTipStatementsPayment.Show()
 
+                Case "PDF"
+                    lblStatementId.Text = e.CommandArgument
+                    Dim url = LocalAPI.GetSharedLink_URL(5, lblStatementId.Text)
+                    Session("PrintName") = "Statement_" & LocalAPI.GetStatementNumber(lblStatementId.Text) & ".pdf"
+                    Session("PrintUrl") = url
+                    Response.Redirect("~/ADM/pdf_print.aspx")
+
 
             End Select
         Catch ex As Exception

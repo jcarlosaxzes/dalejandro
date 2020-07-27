@@ -237,6 +237,7 @@ Public Class invoices
             Case "PDF"
                 lblInvoiceId.Text = e.CommandArgument
                 Dim url = LocalAPI.GetSharedLink_URL(4, lblInvoiceId.Text)
+                Session("PrintName") = "Invoice_" & LocalAPI.InvoiceNumber(lblInvoiceId.Text) & ".pdf"
                 Session("PrintUrl") = url
                 Response.Redirect("~/ADM/pdf_print.aspx")
         End Select

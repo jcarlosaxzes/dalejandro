@@ -25,22 +25,21 @@
             txtTo.Text = LocalAPI.GetClientEmail(lblClientId.Text)
             Dim sClienteName As String = LocalAPI.GetClientName(lClientId:=lblClientId.Text)
             Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
-
-            ' Leer subjet y body template
-            txtSubject.Text = LocalAPI.GetMessageTemplateSubject("Tickets", lblCompanyId.Text)
-            Dim sBody As String = LocalAPI.GetMessageTemplateBody("Tickets", lblCompanyId.Text)
-
-            ' sustituir variables
-            txtSubject.Text = Replace(txtSubject.Text, "[Project Name]", lblJob.Text)
-
-            sBody = Replace(sBody, "[Project Name]", lblJob.Text)
-            sBody = Replace(sBody, "[Client Name]", sClienteName)
-            sBody = Replace(sBody, "[Sign]", sSign)
-
             ' Enlace al Invoice
             Dim sURL As String = LocalAPI.GetSharedLink_URL(1204, lblJobId.Text)
-            sBody = Replace(sBody, "[link below url]", sURL)
-            sBody = Replace(sBody, "[Project Name url]", sURL)
+
+            Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+            DictValues.Add("[Project_Name]", lblJob.Text)
+            DictValues.Add("[Client_Name]", sClienteName)
+            DictValues.Add("[Sign]", sSign)
+            DictValues.Add("[link_below_url]", sURL)
+            DictValues.Add("[Project_Name_url]", sURL)
+            DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+
+
+            ' Leer subjet y body template
+            txtSubject.Text = LocalAPI.GetMessageTemplateSubject("Tickets", lblCompanyId.Text, DictValues)
+            Dim sBody As String = LocalAPI.GetMessageTemplateBody("Tickets", lblCompanyId.Text, DictValues)
 
             txtBody.Content = sBody
 
