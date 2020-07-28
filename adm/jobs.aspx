@@ -676,10 +676,10 @@
 
     <telerik:RadToolTip ID="RadToolTipJobStatus" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        <table class="table table-bordered" style="width: 500px">
+        <table class="table table-bordered" style="width: 600px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+                    <h2 style="margin: 0; text-align: center; color: white; width: 600px">
                         <span class="navbar navbar-expand-md bg-dark text-white">Update Job Status</span>
                         </>
                     </h2>
@@ -696,11 +696,11 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center">
-                    <asp:LinkButton ID="btnUpdateJobStatus" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnUpdateJobStatus" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="120px">
                                     <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCanceUpdateJobStatus" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="100px">
+                    <asp:LinkButton ID="btnCanceUpdateJobStatus" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                                      Cancel
                     </asp:LinkButton>
 

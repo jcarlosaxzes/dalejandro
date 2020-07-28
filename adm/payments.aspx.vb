@@ -1,4 +1,6 @@
-﻿Public Class payments
+﻿Imports Telerik.Web.UI
+
+Public Class payments
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -73,5 +75,25 @@
             e.IsValid = False
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub btnBulkReconcile_Click(sender As Object, e As EventArgs) Handles btnBulkReconcile.Click
+        If RadGridPayments.SelectedItems.Count > 0 Then
+            RadToolTipBulkReconcile.Visible = True
+            RadToolTipBulkReconcile.Show()
+        Else
+            Master.ErrorMessage("Select (Mark) Payments Records to Reconcile!")
+        End If
+
+    End Sub
+
+    Private Sub btnConfirmReconcileStatus_Click(sender As Object, e As EventArgs) Handles btnConfirmReconcileStatus.Click
+        For Each dataItem As GridDataItem In RadGridPayments.SelectedItems
+            If dataItem.Selected Then
+                dataItem.Selected = False
+                LocalAPI.SetPaymentReconcileStatus(dataItem("Id").Text, cboBulkReconcile.SelectedValue)
+            End If
+        Next
+        RadGridPayments.DataBind()
     End Sub
 End Class

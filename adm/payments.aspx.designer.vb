@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class payments
     
     '''<summary>
+    '''btnBulkReconcile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkReconcile As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>
@@ -156,6 +165,51 @@ Partial Public Class payments
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelUpdatePayment As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''RadToolTipBulkReconcile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipBulkReconcile As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
+    '''cboBulkReconcile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboBulkReconcile As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''Comparevalidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator2 As Global.System.Web.UI.WebControls.CompareValidator
+    
+    '''<summary>
+    '''btnConfirmReconcileStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirmReconcileStatus As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnCanceReconcile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCanceReconcile As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''SqlDataSourcePayment control.
