@@ -104,13 +104,12 @@
                 <i class="fa fa-print"></i>
                 &nbsp;&nbsp;Print
             </button>
-            <div class="d-none d-xl-block col-xl-2 bd-toc">
+            <div class="d-none d-xl-block col-xl-2 bd-toc" style="margin-top:5px;">
                 <ul class="section-nav list-unstyled" style="font-size: 1rem;width: 150px;">
 		            <li><a href="#ScopeofWork">Scope of Work</a></li>
 		            <li><a href="#ServiceFee">Service Fee(s)</a></li>
 		            <li><a href="#PaymentsSchedule">Payments Schedule</a></li>
 		            <li><a href="#TermsConditions">Terms and Conditions</a></li>
-		           <%-- <li><a href="#Documents">Documents</a></li>   <%-- Visible='<%# ShareDocumentsPanelVisible(Eval("IsSharePublicLinks")) %>'--%>--%>
 		            <li><a href="#Signature">Signature</a></li>
 	            </ul>
             </div>
