@@ -179,6 +179,7 @@ Public Class proposal
     Protected Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
         Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
         Session("PrintUrl") = ProposalUrl
+        Session("PrintName") = "Invoice_" & LocalAPI.ProposalNumber(lblProposalId.Text) & ".pdf"
         Response.Redirect("~/ADM/pdf_print.aspx")
     End Sub
 

@@ -456,6 +456,7 @@ Public Class singproposalsign
     Protected  Sub btnPrint_Click(sender As Object, e As EventArgs)
         Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
         Session("PrintUrl") = ProposalUrl
+        Session("PrintName") = "Invoice_" & LocalAPI.ProposalNumber(lblProposalId.Text) & ".pdf"
         Response.Redirect("~/ADM/pdf_print.aspx")
     End Sub
 End Class

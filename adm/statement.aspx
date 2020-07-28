@@ -224,6 +224,13 @@
                                                     <i class="far fa-envelope"></i>
                                         </asp:LinkButton>
                                     </td>
+                                    <td>
+                                        <asp:LinkButton ID="btnPrintStatement" runat="server" UseSubmitBehavior="false" ToolTip="Print Statement"
+                                            CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="true">
+                                                <i class="far fa-file-pdf"></i></a>
+                                        </asp:LinkButton>
+                                    </td>
+
                                     <td style="width: 33%; text-align: center">
                                         <a class="far fa-share-square" title="View Statement Page to share link"
                                             href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=55&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
