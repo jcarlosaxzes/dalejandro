@@ -18,7 +18,7 @@
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipStatementsPayment"></telerik:AjaxUpdatedControl>
-                    
+
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnFind">
@@ -206,6 +206,9 @@
                                 ToolTip='<%# "Last Emission: " + Eval("LatestEmission", "{0:MM/dd/yy}")%>'></asp:Label>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
+                    <telerik:GridCheckBoxColumn DataField="ReconciledBank" DataType="System.Boolean" HeaderText="R" HeaderTooltip="Reconciled Bank"
+                        SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridCheckBoxColumn>
                     <telerik:GridTemplateColumn DataField="InvoiceNotes" FilterControlAltText="Filter InvoiceNotes column"
                         HeaderText="Notes" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"
                         UniqueName="InvoiceNotes">
@@ -249,7 +252,7 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Statement?" ConfirmTitle="Delete"
                         ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
-                        HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                        HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                     </telerik:GridButtonColumn>
                 </Columns>
                 <EditFormSettings EditFormType="Template" CaptionFormatString="Editing statement ID: {0}" CaptionDataField="Id"
@@ -259,7 +262,7 @@
 
                         <table class="table-sm" style="width: 100%">
                             <tr>
-                                <td style="text-align: right; width: 180px">Statement Number:
+                                <td style="text-align: right; width: 250px">Statement Number:
                                 </td>
                                 <td>
                                     <%# Eval("Id") %>
@@ -296,8 +299,27 @@
                                     </telerik:RadTextBox>
                                 </td>
                             </tr>
-                        </table>
+                            <tr>
+                                <td style="text-align: right">Is Reconciled with Bank:
+                                </td>
+                                <td>
+                                    <telerik:RadCheckBox runat="server" ID="chkReconciledBank" AutoPostBack="false"
+                                        Checked='<%# Bind("ReconciledBank")%>' 
+                                        Enabled='<%# Eval("AmountBilled") > 0 %>'>
 
+                                    </telerik:RadCheckBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td style="text-align:right;padding-right:20px">
+                                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success"
+                                        Text='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "Insert Statement", "Update Statement")%>'
+                                        CommandName='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "PerformInsert", "Update")%>'>
+                                    </asp:LinkButton>
+                                </td>
+                            </tr>
+                        </table>
 
                         <fieldset style="width: 920px; padding-left: 10px;" id="PanelInvoices" runat="server" visible='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "False", "True") %>'>
                             <table class="table-sm" width="100%">
@@ -338,7 +360,7 @@
                                                                 ForeColor='<%# IIf(Eval("AmountDue") = 0, System.Drawing.Color.Red, System.Drawing.Color.Black)%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
-                                                    <telerik:GridCheckBoxColumn DataField="BadDebt" DataType="System.Boolean" FilterControlAltText="Filter BadDebt column" HeaderText="BadDebt"
+                                                    <telerik:GridCheckBoxColumn DataField="BadDebt" DataType="System.Boolean" HeaderText="BadDebt"
                                                         SortExpression="BadDebt" UniqueName="BadDebt" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                                     </telerik:GridCheckBoxColumn>
                                                     <telerik:GridBoundColumn DataField="InvoiceNotes" FilterControlAltText="Filter InvoiceNotes column"
@@ -459,19 +481,6 @@
                                 </SelectParameters>
                             </asp:SqlDataSource>
                         </fieldset>
-                        <%--<div style="text-align: right; padding-right: 50px; height: 40px; padding-top: 15px">--%>
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td style="text-align: right; padding-right: 15px">
-                                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success"
-                                        Text='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "Insert Statement", "Update Statement")%>'
-                                        Visible='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), True, False)%>'
-                                        CommandName='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "PerformInsert", "Update")%>'>
-                                    </asp:LinkButton>
-                                </td>
-                            </tr>
-
-                        </table>
                     </FormTemplate>
                 </EditFormSettings>
             </MasterTableView>
@@ -534,10 +543,10 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Style="z-index: 7001">
     </telerik:RadWindowManager>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        UpdateCommand="UPDATE [Invoices_statements] SET [InvoiceDate] = @InvoiceDate, [clientId] = @clientId, [InvoiceNotes] = @InvoiceNotes  WHERE [Id] = @Id"
-        SelectCommand="Statement2_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="Statement_v20_UPDATE" UpdateCommandType="StoredProcedure"
+        SelectCommand="Statements_v20_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="STATEMENT_DELETE"
-        InsertCommand="Statement_INSERT" InsertCommandType="StoredProcedure"
+        InsertCommand="Statement_v20_INSERT" InsertCommandType="StoredProcedure"
         DeleteCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
@@ -546,6 +555,7 @@
             <asp:Parameter Name="InvoiceDate" Type="DateTime" />
             <asp:Parameter Name="clientId" Type="Int32" />
             <asp:Parameter Name="InvoiceNotes" Type="String" />
+            <asp:Parameter Name="ReconciledBank" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
         </InsertParameters>
@@ -562,6 +572,7 @@
             <asp:Parameter Name="InvoiceDate" Type="DateTime" />
             <asp:Parameter Name="clientId" Type="Int32" />
             <asp:Parameter Name="InvoiceNotes" Type="String" />
+            <asp:Parameter Name="ReconciledBank" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
