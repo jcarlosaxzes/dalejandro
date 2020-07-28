@@ -147,6 +147,10 @@
                         HeaderText="Is Hourly Rate Service" SortExpression="HourRatesService" UniqueName="HourRatesService"
                         HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                     </telerik:GridCheckBoxColumn>
+                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this task?" ConfirmTitle="Delete" ButtonType="ImageButton"
+                        CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
+                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridButtonColumn>
                 </Columns>
                 <EditFormSettings EditFormType="Template">
                     <FormTemplate>

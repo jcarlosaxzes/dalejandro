@@ -84,7 +84,7 @@
                             EmptyMessage="Name, Description, Location..." Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="width: 150px; text-align:right">
+                    <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                             <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -142,7 +142,7 @@
                             <%# Eval("Name") %>
                         </div>
                         <div>
-                            <%# Eval("nProjectType") %>
+                           <small> <%# Eval("nProjectType") %></small>
                         </div>
 
                     </ItemTemplate>
@@ -155,16 +155,19 @@
                             <%# Eval("ClientName") %>
                         </div>
                         <div>
-                            <%# String.Concat(Eval("ProposalByName"), " - ", Eval("PreparedByName")) %>
+                           <small><%# String.Concat(Eval("ProposalByName"), " - ", Eval("PreparedByName")) %></small>
                         </div>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
 
 
                 <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status"
-                    UniqueName="Status" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="80px">
+                    UniqueName="Status" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="120px">
                     <ItemTemplate>
-                        <span class='<%# LocalAPI.GetPre_ProjectsStatusLabelCSS(Eval("statusId")) %>'><%# Eval("Status") %></span>
+                        <div style="font-size: 12px; width: 100%"
+                            class='<%# LocalAPI.GetPre_ProjectsStatusLabelCSS(Eval("statusId")) %>'>
+                            <%# Eval("Status") %>
+                        </div>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
 
