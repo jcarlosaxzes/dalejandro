@@ -66,7 +66,12 @@ Public Class proposalnewwizard
                         'FeesTab
                         RadWizardStepFees.Active = True
                     End If
+
                 End If
+
+                For i = RadWizard1.ActiveStepIndex + 1 To RadWizard1.WizardSteps.Count - 1
+                    RadWizard1.WizardSteps(i).Enabled = False
+                Next
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Proposal"
                 Master.PageTitle = "Proposals/New Proposal"
@@ -168,11 +173,13 @@ Public Class proposalnewwizard
         lblMsg.Text = ""
         Select Case e.CurrentStep.ID
             Case "Client"
+                e.NextStep.Enabled = True
                 SqlDataSourceProposalClient.Update()
 
                 RadWizard1.WizardSteps(1).Enabled = (cboClients.SelectedValue) > 0
 
             Case "RadWizardStepProposal"
+                e.NextStep.Enabled = True
                 If lblProposalId.Text = "0" Then
 
                     NewProposal()
@@ -183,16 +190,18 @@ Public Class proposalnewwizard
                     RefreshRatios()
                 End If
 
-                RadWizard1.WizardSteps(2).Enabled = (lblProposalId.Text) > 0
-                RadWizard1.WizardSteps(3).Enabled = (lblProposalId.Text) > 0
-                RadWizard1.WizardSteps(4).Enabled = (lblProposalId.Text) > 0
-                RadWizard1.WizardSteps(5).Enabled = (lblProposalId.Text) > 0
-                RadWizard1.WizardSteps(6).Enabled = (lblProposalId.Text) > 0
+                'RadWizard1.WizardSteps(2).Enabled = (lblProposalId.Text) > 0
+                'RadWizard1.WizardSteps(3).Enabled = (lblProposalId.Text) > 0
+                'RadWizard1.WizardSteps(4).Enabled = (lblProposalId.Text) > 0
+                'RadWizard1.WizardSteps(5).Enabled = (lblProposalId.Text) > 0
+                'RadWizard1.WizardSteps(6).Enabled = (lblProposalId.Text) > 0
 
-            Case "Fees"
+            Case "RadWizardStepFees"
+                e.NextStep.Enabled = True
                 FormViewTC.DataBind()
 
             Case "TC"
+                e.NextStep.Enabled = True
                 If FormViewTC.CurrentMode = FormViewMode.Edit Then
                     FormViewTC.UpdateItem(True)
                     FormViewTC.ChangeMode(FormViewMode.ReadOnly)
@@ -201,12 +210,19 @@ Public Class proposalnewwizard
                 RadGridAzureuploads.DataBind()
 
             Case "Payment"
+                e.NextStep.Enabled = True
                 RadGridPS.DataBind()
 
             Case "RadWizardStepAttachments"
+                e.NextStep.Enabled = True
                 RadGridAzureuploads.DataBind()
 
         End Select
+
+        For i = RadWizard1.ActiveStepIndex + 1 To RadWizard1.WizardSteps.Count - 1
+            RadWizard1.WizardSteps(i).Enabled = False
+        Next
+
     End Sub
 
     Private Sub RadWizard1_PreviousButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.PreviousButtonClick
