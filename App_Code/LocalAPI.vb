@@ -1621,21 +1621,21 @@ Public Class LocalAPI
         '        7   Done			"primary"
         Select Case statusId
             Case 0  'Not in Progress
-                Return "badge badge-secondary"
+                Return "badge badge-secondary statuslabel"
             Case 1  'Inactive
-                Return "badge badge-light"
+                Return "badge badge-light statuslabel"
             Case 2  'In Progress
-                Return "badge badge-success"
+                Return "badge badge-success statuslabel"
             Case 3  'On Hold,
-                Return "badge badge-danger"
+                Return "badge badge-danger statuslabel"
             Case 4  'Submitted
-                Return "badge badge-warning"
+                Return "badge badge-warning statuslabel"
             Case 5    ' Under Revision
-                Return "badge badge-info"
+                Return "badge badge-info statuslabel"
             Case 6  ''Approved
-                Return "badge badge-primary"
+                Return "badge badge-primary statuslabel"
             Case 7  ' Done
-                Return "badge badge-dark"
+                Return "badge badge-dark statuslabel"
         End Select
     End Function
 
@@ -10371,13 +10371,13 @@ Public Class LocalAPI
     Public Shared Function GetProposalStatusLabelCSS(ByVal statusId As Integer) As String
         Select Case statusId
             Case 0  'Not Emitted
-                Return "badge badge-secondary"
+                Return "badge badge-secondary statuslabel"
             Case 1  'Emitted
-                Return "badge badge-warning"
+                Return "badge badge-warning statuslabel"
             Case 2  'Accepted
-                Return "badge badge-success"
+                Return "badge badge-success statuslabel"
             Case Else
-                Return "badge badge-danger"
+                Return "badge badge-danger statuslabel"
         End Select
 
     End Function
@@ -13062,9 +13062,9 @@ Public Class LocalAPI
         '        1   Processed		"default"
         Select Case statusId
             Case 0  'Pending
-                Return "badge badge-warning"
+                Return "badge badge-warning statuslabel"
             Case 1  'Processed
-                Return "badge badge-dark"
+                Return "badge badge-dark statuslabel"
         End Select
     End Function
 
