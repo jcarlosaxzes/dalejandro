@@ -17,6 +17,10 @@
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
+            <asp:LinkButton ID="btnBulkReconcile" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Reconcile selected payments records with bank statements">
+                Bulk Reconcile
+            </asp:LinkButton>
+
         </span>
 
     </div>
@@ -92,13 +96,19 @@
         </asp:Panel>
     </div>
     <div>
-        <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true"
-            AllowAutomaticDeletes="True"
+        <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true" AllowAutomaticDeletes="True"
+            AllowMultiRowSelection="True" Height="1000px" PageSize="100" AllowPaging="true"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-            <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="Id">
-                <FooterStyle BorderStyle="None" />
+            <ClientSettings Selecting-AllowRowSelect="true">
+                <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
+            </ClientSettings>
 
+            <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="Id">
+                <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                 <Columns>
+
+                    <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn">
+                    </telerik:GridClientSelectColumn>
 
                     <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Payment ID" ReadOnly="True"
                         HeaderStyle-Width="120px" SortExpression="Id" UniqueName="Id">
@@ -297,6 +307,60 @@
                     <asp:LinkButton ID="btnCancelUpdatePayment" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
+                </td>
+            </tr>
+        </table>
+    </telerik:RadToolTip>
+
+    <telerik:RadToolTip ID="RadToolTipBulkReconcile" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+
+        <table class="table table-bordered" style="width: 500px">
+            <tr>
+                <td colspan="2">
+                    <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">Update Reconcile Status</span>
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                   <small>Check / Uncheck (selected) payments records as <b>Reconcilied</b> with Bank Statements</small>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 160px; text-align: right" class="Normal">Reconcile Status:
+                </td>
+                <td>
+
+                    <telerik:RadComboBox ID="cboBulkReconcile" runat="server" AppendDataBoundItems="true" ValidationGroup="Reconcile"
+                        Filter="Contains" MarkFirstMatch="True" Width="100%" ZIndex="50001">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Selected="true" Text="(Select Status ...)" Value="-1" />
+                            <telerik:RadComboBoxItem runat="server" Selected="true" Text="Reconciled" Value="1" />
+                            <telerik:RadComboBoxItem runat="server" Selected="true" Text="Not Reconciled" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Status ...)" ForeColor="Red"
+                        Operator="NotEqual" ControlToValidate="cboBulkReconcile" ErrorMessage="Select Reconcile Status!" SetFocusOnError="true" ValidationGroup="Reconcile"> </asp:CompareValidator>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center">
+                    <asp:LinkButton ID="btnConfirmReconcileStatus" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="120px" ValidationGroup="Reconcile">
+                                    <i class="fas fa-check"></i> Update
+                    </asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:LinkButton ID="btnCanceReconcile" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
+                                     Cancel
+                    </asp:LinkButton>
+
                 </td>
             </tr>
         </table>
