@@ -2951,7 +2951,16 @@ Public Class LocalAPI
         End Try
     End Function
 
-
+    Public Shared Function SetPaymentReconcileStatus(ByVal Id As Integer, ReconcileValue As Integer) As Boolean
+        If Id > 0 Then
+            ' direct Payment Id
+            Return ExecuteNonQuery($"UPDATE [Invoices_payments] Set ReconciledBank={ReconcileValue} where Id={Id}")
+        Else
+            ' Statement Id
+            Dim statementId As Integer = 0 - Id
+            Return ExecuteNonQuery($"UPDATE P Set P.ReconciledBank={ReconcileValue} from Invoices_payments P inner join Invoices I on P.InvoiceId = I.Id where isnull(I.statementId,0)={statementId}")
+        End If
+    End Function
 
     Public Shared Function ActualizarEmittedInvoice(ByVal lId As Integer, employeeId As Integer, Optional nEmissionRecurrenceDays As Integer = -1) As Boolean
         Try
