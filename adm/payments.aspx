@@ -208,14 +208,9 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="ReconciledBank" HeaderText="R" SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="btnReconciledBank" runat="server" UseSubmitBehavior="false" ToolTip="Payment is reconciled with bank statement"
-                                CommandName="ReconciledBank" CommandArgument='<%# Eval("Id")%>' Visible='<%# Eval("InvoicesId")>0 %>'>
-                                                        <telerik:RadCheckBox runat="server" Checked='<%# Eval("ReconciledBank")%>' AutoPostBack="false" Enabled="false"></telerik:RadCheckBox>
-                            </asp:LinkButton>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
+                    <telerik:GridCheckBoxColumn DataField="ReconciledBank" DataType="System.Boolean" HeaderText="R" HeaderTooltip="Reconciled Bank"
+                        SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridCheckBoxColumn>
 
                     <telerik:GridButtonColumn ButtonType="ImageButton" CommandName="Delete" ConfirmDialogType="RadWindow" ConfirmText="Delete this payment?" ConfirmTitle="Delete" HeaderStyle-Width="50px" HeaderText="" ItemStyle-HorizontalAlign="Center" Text="Delete" UniqueName="DeleteColumn">
                     </telerik:GridButtonColumn>
