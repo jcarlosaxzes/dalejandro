@@ -136,7 +136,7 @@ Public Class proposalnewwizard
 
             RadGridAzureuploads.DataBind()
 
-            iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1"
+            iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&FromWizard=1"
 
         End If
     End Sub
