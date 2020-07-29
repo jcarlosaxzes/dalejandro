@@ -389,18 +389,20 @@
                                     <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Info" CommandName="View/Edit Info" UseSubmitBehavior="false" Font-Bold="true">
                                             <%#Eval("Code")%> 
                                     </asp:LinkButton>
-                                    <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="30px" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
-                                        DropDownAutoWidth="Enabled" Skin="Material">
-                                    </telerik:RadComboBox>
+                                    <span style="float: right; vertical-align: middle; margin:0">
+                                        <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="30px" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
+                                            DropDownAutoWidth="Enabled" Skin="Material">
+                                        </telerik:RadComboBox>
+                                    </span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="Open_date" HeaderText="Date" UniqueName="Open_date" HeaderStyle-Width="80px" SortExpression="Open_date" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="X-Small">
+                            <telerik:GridTemplateColumn DataField="Open_date" HeaderText="Date" UniqueName="Open_date" HeaderStyle-Width="100px" SortExpression="Open_date" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <%# Eval("Open_date", "{0:MM/dd/yyyy}")%>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type" SortExpression="Job" UniqueName="Job" ItemStyle-Font-Size="X-Small">
+                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type" SortExpression="Job" UniqueName="Job">
                                 <ItemTemplate>
                                     <asp:HyperLink ID="hlkLocation" runat="server" NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
                                         ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank">
@@ -420,13 +422,11 @@
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </a>
-
-                                    <br />
-                                    <%# Eval("JobType") %>
+                                    <div><%# Eval("JobType") %></div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="ClientName" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="ClientName" UniqueName="ClientName" ItemStyle-Font-Size="x-small">
+                            <telerik:GridTemplateColumn DataField="ClientName" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="ClientName" UniqueName="ClientName">
                                 <ItemTemplate>
                                     <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("ClientName") %>' Font-Bold="true"></asp:Label>
                                     <br />
@@ -473,14 +473,13 @@
                                             </tr>
                                         </table>
                                     </telerik:RadToolTip>
-
                                     <%# IIf(Eval("Tags") > 0, String.Concat(" (", Eval("Tags"), ")"), "") %>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
                             <%--PM - Employees--%>
                             <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName"
-                                UniqueName="EmployeeName" AllowFiltering="true" ItemStyle-Font-Size="X-Small">
+                                UniqueName="EmployeeName" AllowFiltering="true">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
                                                     <span aria-hidden="true" style='<%# IIf(Left(Eval("EmployeeName"),2)="PM","color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
@@ -493,7 +492,7 @@
 
                             <%--Collected - Used--%>
                             <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected - Used" SortExpression="Profit"
-                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" ItemStyle-Font-Size="X-Small" HeaderTooltip="Budget Collected / Budget Used"
+                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Budget Collected / Budget Used"
                                 FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
                                 HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
@@ -555,8 +554,7 @@
                             <%--Private Mode--%>
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" HeaderTooltip="Budget Used of Budget"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ItemStyle-Font-Size="X-Small"
-                                HeaderStyle-Width="140px">
+                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
@@ -571,7 +569,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right">
+                                            <td style="text-align: right;font-size:x-small">
                                                 <%# Eval("Profit", "{0:N0}")%>%
                                             </td>
                                             <td colspan="2">
@@ -594,7 +592,7 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Billing Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px" ItemStyle-Font-Size="X-Small">
+                                UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
@@ -608,7 +606,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right">
+                                            <td style="text-align: right;font-size:x-small">
                                                 <asp:Label ID="lblColectedPercent" runat="server" Text='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'></asp:Label>%    
                                             </td>
                                             <td colspan="2">
@@ -641,19 +639,18 @@
                                                 </asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Size="X-Small" Font-Bold="true"></asp:Label>
+                                                <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Bold="true"></asp:Label>
                                             </td>
                                         </tr>
                                     </table>
-
 
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="SubFees" Display="false" HeaderText="Sub Fee(s)" SortExpression="SubFees" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="SubFees" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="X-Small">
+                                UniqueName="SubFees" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubFees", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Size="X-Small" Font-Bold="true"></asp:Label>
+                                    <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubFees", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Bold="true"></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
