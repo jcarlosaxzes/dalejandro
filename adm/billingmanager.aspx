@@ -76,7 +76,7 @@
                 &nbsp;
 
                 <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Search for Invoice Number, Job Name, Client Name, ..."
-                    Width="250px" x-webkit-speech="x-webkit-speech">
+                    Width="150px" x-webkit-speech="x-webkit-speech">
                 </telerik:RadTextBox>
                 &nbsp;&nbsp;&nbsp;
                 <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
@@ -235,7 +235,7 @@
                             </telerik:RadNumericTextBox>
                             <asp:LinkButton ID="btnSchedule" runat="server" ToolTip="Create recuring invoice emmisions every period (days)" Width="100px"
                                 CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                                    <i class="far fa-calendar-alt"></i></span> Schedule
+                                    <i class="far fa-calendar-alt"></i> Schedule
                             </asp:LinkButton>
                         </td>
                         <td style="width: 120px">
