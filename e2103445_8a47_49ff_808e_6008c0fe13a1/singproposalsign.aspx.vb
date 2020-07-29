@@ -134,15 +134,25 @@ Public Class singproposalsign
 
                     RadBarcode1.Text = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Signature.aspx?GuiId=" & lblGuiId.Text & "&ObjType=11"
                 End If
+
+                ' Panel Acept/Decline QR?
                 Dim IsReadOnly As Boolean
                 If Not Request.QueryString("IsReadOnly") Is Nothing Then
                     IsReadOnly = Request.QueryString("IsReadOnly")
-                Else
-                    IsReadOnly = LocalAPI.GetProposalData(lblProposalId.Text, "statusId") > 1
+                ElseIf LocalAPI.GetProposalData(lblProposalId.Text, "statusId") > 1 Then
+                    IsReadOnly = True
+                ElseIf LocalAPI.IsTabletOrSmarthphone(Request.UserAgent) Then
+                    IsReadOnly = True
                 End If
 
                 pnlSideTools.Visible = Not IsReadOnly
                 pnlModals.Visible = Not IsReadOnly
+
+                ' Panel Print?
+                If Not Request.QueryString("FromWizard") Is Nothing Or LocalAPI.IsTabletOrSmarthphone(Request.UserAgent) Then
+                    pnlPrint.Visible = False
+                End If
+
                 '!!!lblProposalId.Text = 14424
                 'lblCompanyId.Text = LocalAPI.GetCompanyIdFromProposal(lblProposalId.Text)
 
