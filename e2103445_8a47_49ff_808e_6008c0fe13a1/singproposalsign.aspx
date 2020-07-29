@@ -98,8 +98,9 @@
         <%-- End Modals and the like --%>
     </asp:Panel>
 
+
     <asp:Panel ID="pnlPrint" runat="server">
-        <div class="fixed-action-btn-print hidden-print">
+        <div class="fixed-action-btn-print hidden-print  .d-sm-none .d-md-block hidden-lg-down">
         <div class="btn-toolbar mt-lg hidden-print print-buttons">
             <button class="btn btn-inverse print" style="display: block;">
                 <i class="fa fa-print"></i>
@@ -107,11 +108,11 @@
             </button>
             <div class="d-none d-xl-block col-xl-2 bd-toc" style="margin-top:5px;">
                 <ul class="section-nav list-unstyled" style="font-size: 1rem;width: 150px;">
-		            <li><a href="#ScopeofWork">Scope of Work</a></li>
-		            <li><a href="#ServiceFee">Service Fee(s)</a></li>
-		            <li><a href="#PaymentsSchedule">Payments Schedule</a></li>
-		            <li><a href="#TermsConditions">Terms and Conditions</a></li>
-		            <li><a href="#Signature">Signature</a></li>
+		            <li><a href="#ScopeofWork" class="hidden-print">Scope of Work</a></li>
+		            <li><a href="#ServiceFee" class="hidden-print">Service Fee(s)</a></li>
+		            <li><a href="#PaymentsSchedule" class="hidden-print">Payments Schedule</a></li>
+		            <li><a href="#TermsConditions" class="hidden-print">Terms and Conditions</a></li>
+		            <li><a href="#Signature" class="hidden-print">Signature</a></li>
 	            </ul>
             </div>
         </div>

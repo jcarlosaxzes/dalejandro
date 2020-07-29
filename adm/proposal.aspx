@@ -473,7 +473,7 @@
                                             DataTextField="Name" DataValueField="Id" Width="400px" MarkFirstMatch="True" AppendDataBoundItems="true"
                                             Filter="Contains"
                                             ToolTip="Select Payment Schedules to define first time or modify the current"
-                                            Visible='<%# LocalAPI.IsGeneralPS(Eval("Id")) %>'>
+                                            >
                                             <Items>
                                                 <telerik:RadComboBoxItem runat="server" Text="(Select other Payment Schedules...)" Value="0" />
                                             </Items>
@@ -482,8 +482,8 @@
                                     <td>
                                         <asp:LinkButton ID="btnGeneratePaymentSchedules" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false"
                                             ToolTip="Define Payment Schedules"
-                                            CausesValidation="false" CommandName="Update"
-                                            Visible='<%# LocalAPI.IsGeneralPS(Eval("Id")) %>'>
+                                            CausesValidation="false" CommandName="Update" OnClick="btnGeneratePaymentSchedules_Click"
+                                           >
                                         Update
                                         </asp:LinkButton>
                                     </td>
@@ -516,6 +516,36 @@
                                     </Columns>
                                 </MasterTableView>
                             </telerik:RadGrid>
+
+                            <table class="table-sm" style="width: 100%">
+                                <tr style="text-align: right">
+                                <td>Totals:
+                                </td>
+                                <td>
+                                    <table style="width: 400px">
+                                        <tr>
+                                            <td style="text-align: center; width: 50%">Proposal Total
+                                            </td>
+                                            <td style="text-align: center;">Payment Schedule Total
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center">
+                                                <asp:Label ID="lblProposalTotal" runat="server"></asp:Label>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <asp:Label ID="lblScheduleTotal" runat="server"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center">
+                                                <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"></asp:Label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                         </table>
 
                         </telerik:RadWizardStep>
 
@@ -668,7 +698,7 @@
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNewTask" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ValidationGroup="Proposal">
-                                   <i class="fas fa-plus"></i> Task
+                                   Add Fee
                                 </asp:LinkButton>
 
                             </td>
@@ -769,6 +799,12 @@
                                                 FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
                                                 FooterStyle-HorizontalAlign="Right">
                                             </telerik:GridBoundColumn>
+                                            <telerik:GridTemplateColumn DataField="Paymentschedule" FilterControlAltText="Filter Paymentschedule column" ItemStyle-HorizontalAlign="Center"
+                                                    HeaderText="Payment Shedule" SortExpression="Paymentschedule" UniqueName="Paymentschedule" HeaderStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <%# Eval("Paymentschedule") %>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>
                                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?"
                                                 ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
                                                 UniqueName="DeleteColumn" HeaderText=""
@@ -1408,7 +1444,7 @@
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
-            <asp:ControlParameter ControlID="cboPaymentSchedules" Name="paymentscheduleId" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="lblPaymentSchedules" Name="paymentscheduleId" PropertyName="Text" Type="Int32"  />
             <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
@@ -1425,6 +1461,7 @@
     <asp:Label ID="lblDetailSelectedId" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblClientId" runat="server" Visible="false" Text="0"></asp:Label>
+    <asp:Label ID="lblPaymentSchedules" runat="server" Visible="false" Text="0"></asp:Label>
 
 </asp:Content>
 
