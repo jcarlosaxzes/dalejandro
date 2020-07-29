@@ -256,7 +256,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <%# String.Concat(Eval("nType"), " - ", Eval("JobType")) %>
+                                        <span style="font-size:x-small"><%# String.Concat(Eval("nType"), " - ", Eval("JobType")) %></span>
                                     </td>
                                     <td>
                                         <%# Eval("Area") %>
@@ -271,7 +271,7 @@
                             <div>
                                 <%# String.Concat(Eval("ProposalBy"), " - ", Eval("PreparedBy")) %>
                             </div>
-                            <div>
+                            <div style="font-size:x-small">
                                 <asp:Label ID="ClientNameLabel" runat="server" Text='<%# Eval("ClientName")%>'></asp:Label>
                                 <%# String.Concat(" - ",Eval("Company")) %>
                                 <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="ClientNameLabel" RelativeTo="Element"
@@ -316,9 +316,9 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn AllowFiltering="False" DataField="Total" DataFormatString="{0:N}" Display="false"
-                        Groupable="False" HeaderText="Proposal Amount" ReadOnly="True" SortExpression="Total"
-                        UniqueName="Total" HeaderStyle-Width="90px" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
-                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}" FooterStyle-Width="90px">
+                        Groupable="False" HeaderText="Total" ReadOnly="True" SortExpression="Total"
+                        UniqueName="Total" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center"
+                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N}" FooterStyle-Width="120px">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Date" DataFormatString="{0:MM/dd/yy}" DataType="System.DateTime"
                         HeaderText="Date" SortExpression="Date" UniqueName="Date"

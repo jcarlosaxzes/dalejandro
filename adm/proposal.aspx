@@ -1145,22 +1145,22 @@
 
 
     <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
             <span class="navbar navbar-expand-md bg-dark text-white">Delete Proposal
             </span>
         </h2>
-        <table class="table-sm" style="width: 500px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td>Are you sure you want to delete the active Proposal?
                 </td>
             </tr>
             <tr>
                 <td>
-                    <asp:LinkButton ID="btnConfirmDelete" runat="server" CssClass="btn btn-danger" Width="125px" UseSubmitBehavior="false">
+                    <asp:LinkButton ID="btnConfirmDelete" runat="server" CssClass="btn btn-danger" Width="150px" UseSubmitBehavior="false">
                              Delete Proposal
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <asp:LinkButton ID="btnCancelDelete" runat="server" CssClass="btn btn-secondary" Width="125px" UseSubmitBehavior="false">
+                    <asp:LinkButton ID="btnCancelDelete" runat="server" CssClass="btn btn-secondary" Width="150px" UseSubmitBehavior="false">
                              Cancel
                     </asp:LinkButton>
                 </td>
