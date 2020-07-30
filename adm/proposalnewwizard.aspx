@@ -546,8 +546,8 @@
                         <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
-                                    <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" CausesValidation="false">
-                                        <i class="fas fa-plus"></i>&nbsp;&nbsp;Fee
+                                    <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                        Add Fee
                                     </asp:LinkButton>
                                 </td>
                             </tr>
@@ -919,6 +919,36 @@
                                 </MasterTableView>
                             </telerik:RadGrid>
                         </div>
+                        <table class="table-sm" style="width: 100%">
+                            <tr style="text-align: right">
+                            <td>Totals:
+                            </td>
+                            <td>
+                                <table style="width: 400px">
+                                    <tr>
+                                        <td style="text-align: center; width: 50%">Proposal Total
+                                        </td>
+                                        <td style="text-align: center;">Payment Schedule Total
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center">
+                                            <asp:Label ID="lblProposalTotal" runat="server"></asp:Label>
+                                        </td>
+                                        <td style="text-align: center">
+                                            <asp:Label ID="lblScheduleTotal" runat="server"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align: center">
+                                            <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"></asp:Label>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                        </table>
                     </fieldset>
                     <div>
                         <asp:CompareValidator runat="server" ID="Comparevalidator4" ValueToCompare="(Select Retainer option...)" Display="None"

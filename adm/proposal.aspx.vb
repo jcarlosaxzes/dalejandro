@@ -106,7 +106,34 @@ Public Class proposal
         SqlDataSourceProposalType.DataBind()
         cboProposalType.DataBind()
         cboProposalType.SelectedValue = lblOriginalType.Text
+        TotalsAnalisis()
     End Sub
+
+    Private Function TotalsAnalisis() As Boolean
+        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+
+        Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
+
+        Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
+
+        CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(bTotal)
+        CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(bPSTotal)
+
+        If bTotal = 0 Then
+            CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It is mandatory that [Proposal Total] is greater than zero !"
+            Return False
+        Else
+            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
+                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+                Return False
+            Else
+                CType(WStep.FindControl("lblTotalAlert"), Label).Text = ""
+                Return True
+            End If
+        End If
+
+    End Function
 
     Private Sub GuardarProposal(bMsg As Boolean)
         Try
@@ -151,7 +178,14 @@ Public Class proposal
     End Sub
 
     Protected Sub btnUpdate1_Click(sender As Object, e As System.EventArgs) Handles btnUpdate1.Click
-        GuardarProposal(True)
+        If TotalsAnalisis() Then
+            GuardarProposal(True)
+        Else
+            Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
+            Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
+            WStep.Active = True
+        End If
+
     End Sub
 
     Protected Sub btnDeleteProposal_Click(sender As Object, e As System.EventArgs) Handles btnDeleteProposal.Click
@@ -183,16 +217,27 @@ Public Class proposal
         Response.Redirect("~/ADM/pdf_print.aspx")
     End Sub
 
-    'Protected Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs)
-    '    If CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue > 0 Then
-    '        GuardarProposal(False)
-    '        LocalAPI.Proposal_GeneratePaymentSchedules(lblId.Text, CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox).SelectedValue)
-    '        FormViewProp1.DataBind()
-    '        CType(sender.NamingContainer.FindControl("RadWizardStepPaymentSchedules"), RadWizardStep).Active = True
-    '        'CType(sender.NamingContainer.FindControl("RadMultiPage0"), RadMultiPage).SelectedIndex = 1
-    '        Master.InfoMessage("Proposal Payment Schedules Successfully Updated")
-    '    End If
-    'End Sub
+    Protected Sub btnGeneratePaymentSchedules_Click(sender As Object, e As EventArgs)
+        Dim cboPayment = CType(sender.NamingContainer.FindControl("cboPaymentSchedules"), RadComboBox)
+        If cboPayment.SelectedValue > 0 Then
+            lblPaymentSchedules.Text = cboPayment.SelectedValue
+            GuardarProposal(False)
+            SqlDataSourcePS.Update()
+            FormViewProp1.DataBind()
+
+            'Update Fees List
+            Dim TaskStep As RadWizardStep = RadWizard2.WizardSteps(0)
+            Dim RadGrid1 As RadGrid = CType(TaskStep.FindControl("RadGrid1"), RadGrid)
+            RadGrid1.DataBind()
+
+            'Show Step Payment Schedule
+            Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
+            Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
+            WStep.Active = True
+
+            Master.InfoMessage("Proposal Payment Schedules Successfully Updated")
+        End If
+    End Sub
 
     Protected Sub cboProposalType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboProposalType.SelectedIndexChanged
         btnModifyType.Enabled = (cboProposalType.SelectedValue <> lblOriginalType.Text)
@@ -402,6 +447,5 @@ Public Class proposal
     Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
     End Sub
-
 End Class
 

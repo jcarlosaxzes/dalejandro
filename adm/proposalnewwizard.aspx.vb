@@ -88,16 +88,14 @@ Public Class proposalnewwizard
         cboPaymentSchedules.DataBind()
 
         ' General PS or PS by individual Services Fee(s)
-        btnUpdatePS.Visible = LocalAPI.IsGeneralPS(lblProposalId.Text)
+        Dim GeneralPs = LocalAPI.IsGeneralPS(lblProposalId.Text)
 
-        If btnUpdatePS.Visible Then
+        If GeneralPs Then
             ' General PS
-            cboPaymentSchedules.Enabled = True
             cboPaymentSchedules.SelectedValue = LocalAPI.GetProposalProperty(lblProposalId.Text, "paymentscheduleId")
         Else
             ' PS by individual Services Fee
             cboPaymentSchedules.SelectedValue = -1
-            cboPaymentSchedules.Enabled = False
         End If
 
         RadGridPS.DataBind()
@@ -209,7 +207,10 @@ Public Class proposalnewwizard
                 HideTCtoolbar()
                 RadGridAzureuploads.DataBind()
 
+                TotalsAnalisis()
+
             Case "Payment"
+
                 e.NextStep.Enabled = True
                 RadGridPS.DataBind()
 
@@ -409,6 +410,29 @@ Public Class proposalnewwizard
         ' New code 6-3-2020
         SqlDataSourcePS.Update()
         RadGridPS.DataBind()
+        TotalsAnalisis()
+        SqlDataSourceProposal_Step1.Update()
+        RefreshRatios()
+    End Sub
+
+    Private Sub TotalsAnalisis()
+        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+        lblProposalTotal.Text = FormatCurrency(bTotal)
+        lblScheduleTotal.Text = FormatCurrency(bPSTotal)
+        If bTotal = 0 Then
+            lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
+            RadWizard1.DisplayNavigationButtons = False
+        Else
+            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
+                lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+                RadWizard1.DisplayNavigationButtons = False
+            Else
+                lblTotalAlert.Text = ""
+                RadWizard1.DisplayNavigationButtons = True
+            End If
+        End If
+
     End Sub
 
 #End Region
