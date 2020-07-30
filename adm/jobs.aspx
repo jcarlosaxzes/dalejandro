@@ -548,7 +548,7 @@
                             <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" ItemStyle-HorizontalAlign="Center"
                                 UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="140px">
                                 <ItemTemplate>
-                                    <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; display: inline-block; width: 120px"><%# Eval("Status") %></div>
+                                    <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; width: 120px"><%# Eval("Status") %></div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 

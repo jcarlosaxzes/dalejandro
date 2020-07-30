@@ -326,10 +326,10 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="JobCode" HeaderText="Status - Job No." SortExpression="JobCode"
                         UniqueName="JobCode" ItemStyle-HorizontalAlign="Center"
-                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
+                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                         <ItemTemplate>
-                            <div>
-                                <span class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'><%# Eval("Status") %></span>
+                            <div style="font-size: 12px; width: 100%"
+                                    class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'><%# Eval("Status") %>
                             </div>
                             <div>
                                 <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("JobId") %>' ToolTip="Click to View/Edit Job"

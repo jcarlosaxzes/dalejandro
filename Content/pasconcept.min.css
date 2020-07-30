@@ -144,3 +144,7 @@ html .RadOrgChart .rocNodeFields .rocItemField {
 .rgMobileColumnForm .rgMobileMenu, .rgMobileForm {
     display: none !important
 }
+
+.statuslabel {
+    display: inline-block;
+}
