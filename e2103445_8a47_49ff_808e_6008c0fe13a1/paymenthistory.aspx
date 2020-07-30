@@ -103,7 +103,8 @@
             </asp:FormView>
             <br />
             <h2><span class="navbar navbar-expand-md bg-dark text-white">Invoices</span></h2>
-            <telerik:RadGrid ID="RadGridInvoices" runat="server" DataSourceID="SqlDataSourceInvoicesPayments" ShowFooter="true" Width="100%" Skin="Bootstrap">
+            <telerik:RadGrid ID="RadGridInvoices" runat="server" DataSourceID="SqlDataSourceInvoicesPayments" ShowFooter="true" Width="100%" Skin="Bootstrap"
+                ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                 <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoicesPayments">
                     <FooterStyle BorderStyle="None" />
 
@@ -116,17 +117,22 @@
 
                         </telerik:GridTemplateColumn>
 
+                        <telerik:GridBoundColumn DataField="FirstEmission" HeaderText="Date Emitted" UniqueName="FirstEmission" ItemStyle-Font-Size="Small"
+                            HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataFormatString="{0:d}"
+                            ItemStyle-CssClass="GridColumn">
+                        </telerik:GridBoundColumn>
+
                         <telerik:GridBoundColumn DataField="InvoiceAmount" HeaderText="Amount" UniqueName="InvoiceAmount"
                             HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" DataFormatString="{0:C}"
                             FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true" ItemStyle-CssClass="GridColumn">
                         </telerik:GridBoundColumn>
 
                         <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Notes" UniqueName="InvoiceNotes"
-                            HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" ItemStyle-HorizontalAlign="Left">
+                            HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
                         </telerik:GridBoundColumn>
 
                         <telerik:GridTemplateColumn DataField="PaidInfo" HeaderText="Payment Info" UniqueName="PaidInfo" HeaderStyle-Width="230px"
-                            HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" ItemStyle-HorizontalAlign="Left">
+                            HeaderStyle-HorizontalAlign="Center"  ItemStyle-HorizontalAlign="Left">
                             <ItemTemplate>
                                 <span title='<%# Eval("PastDueStatusTitle") %>' class="label badge-<%# IIf(Eval("PastDueStatus") = 5, "danger", IIf(Eval("PastDueStatus") = 4, "warning", IIf(Eval("PastDueStatus") = 3, "primary", IIf(Eval("PastDueStatus") = 2, "info", IIf(Eval("PastDueStatus") = 1, "default", "success"))))) %>"><%# Eval("PastDueStatusName") %></span>
                                 <%# Eval("PaidInfo","{0:C}") %>

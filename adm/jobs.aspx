@@ -372,7 +372,8 @@
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
                     PageSize="50" AllowPaging="true" Height="1500px" RenderMode="Auto"
                     AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
-                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="X-Small">
+                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" 
+                    FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
                     <ClientSettings Selecting-AllowRowSelect="true">
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                     </ClientSettings>
@@ -384,7 +385,7 @@
                             <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="10px">
                             </telerik:GridBoundColumn>
 
-                            <telerik:GridTemplateColumn UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code" ItemStyle-HorizontalAlign="Center">
+                            <telerik:GridTemplateColumn DataField="Code" UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code" ItemStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Info" CommandName="View/Edit Info" UseSubmitBehavior="false" Font-Bold="true">
                                             <%#Eval("Code")%> 
@@ -492,9 +493,7 @@
 
                             <%--Collected - Used--%>
                             <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected - Used" SortExpression="Profit"
-                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Budget Collected / Budget Used"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}"
-                                HeaderStyle-HorizontalAlign="Center">
+                                UniqueName="Profit" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Budget Collected / Budget Used" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
@@ -554,7 +553,7 @@
                             <%--Private Mode--%>
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" HeaderTooltip="Budget Used of Budget"
-                                FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
+                                 Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
@@ -592,7 +591,7 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Billing Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Collected" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
+                                UniqueName="Collected" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
@@ -629,7 +628,7 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Balance" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="">
+                                UniqueName="Balance" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
@@ -648,7 +647,7 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="SubFees" Display="false" HeaderText="Sub Fee(s)" SortExpression="SubFees" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="SubFees" FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px">
+                                UniqueName="SubFees" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px">
                                 <ItemTemplate>
                                     <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubFees", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Bold="true"></asp:Label>
                                 </ItemTemplate>

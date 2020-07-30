@@ -83,7 +83,10 @@
                             </ItemTemplate>
 
                         </telerik:GridTemplateColumn>
-
+                        <telerik:GridBoundColumn DataField="FirstEmission" HeaderText="Date Emitted" UniqueName="FirstEmission"
+                            HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" DataFormatString="{0:d}"
+                            ItemStyle-CssClass="GridColumn">
+                        </telerik:GridBoundColumn>
                         <telerik:GridBoundColumn DataField="InvoiceAmount" HeaderText="Amount" UniqueName="InvoiceAmount"
                             HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" DataFormatString="{0:C}"
                             FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true" ItemStyle-CssClass="GridColumn">
