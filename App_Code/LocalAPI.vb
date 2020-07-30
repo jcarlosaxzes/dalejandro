@@ -10276,6 +10276,68 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetSharedLink_URL_ByGuid(ByVal objType As Integer, objGuid As String, Optional objId As Integer = 0) As String
+        '@objType:  1:Proposal;   2:Job;   3:RFP;    4:Invoice;    5:Statement  55: Statement in /e2103445_8a47_49ff_808e_6008c0fe13a1
+        Try
+            Dim url As String = ""
+            If Not (objGuid Is Nothing) Then
+                Select Case objType
+                    Case 1, 11 ' Firmar/Ver Proposal from client
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & objGuid
+                    Case 111 ' Firmar/Ver Proposal from /adm/proposals
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & objGuid & "&source=111"
+                    Case 2
+                        ' Tratamiento especifico de Job(Projects) para paginas publicas
+                        url = LocalAPI.GetHostAppSite() & "/ope/ope_project.aspx?guId=" & objGuid & "&Id=" & objId
+                    Case 3
+                        'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/RequestForProposal.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/RequestForProposal.aspx?GuiId=" & objGuid
+                    Case 4, 44
+                        'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & objGuid
+                    Case 5, 55
+                        'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & objGuid
+                    Case 6
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Transmittal.aspx?GuiId=" & objGuid
+                    Case 66
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/mtransmittal.aspx?GuiId=" & objGuid
+                    Case 7  ' jobprogressrollup from jobId
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/jobprogressrollup.aspx?jobguid=" & objGuid
+                    Case 8  ' jobprogressrollup from invoiceId
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/jobprogressrollup.aspx?invoiceguiId=" & objGuid
+                    Case 9  ' CP_jobs Client Portal
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/CP_jobs.aspx?clientguid=" & objGuid
+                    Case 91  ' paymenthistory Client Portal
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/paymenthistory.aspx?clientguid=" & objGuid
+
+                    Case 1204  ' Private Link Tickets from jobId
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/tickets.aspx?guid=" & objGuid
+                    Case 1205  ' Private Link Ticket from ticketId
+                        Dim jobId As Integer = GetTicketProperty(objId, "jobId")
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/ticket.aspx?guid=" & objGuid & "&TicketId=" & objId
+                    Case 1206  ' EMP/Ticket from ticketId
+                        Dim jobId As Integer = GetTicketProperty(objId, "jobId")
+                        url = LocalAPI.GetHostAppSite() & "/ADM/ticket.aspx?JobId=" & jobId & "&TicketId=" & objId
+
+
+                    Case 2001  ' Subconsultant Portal
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SUB/rfps.aspx?subconsultantguid=" & objGuid
+
+                    Case 2002  ' Gest Subconsultant Portal
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SUB/rfp.aspx?GuiId=" & objGuid
+                    Case 2003  ' RFP to Proposal
+                        url = LocalAPI.GetHostAppSite() & "/ADM/Proposals.aspx?rfpGUID=" & objGuid
+
+                End Select
+            End If
+
+            Return url
+        Catch ex As Exception
+
+        End Try
+    End Function
+
 
 #End Region
 

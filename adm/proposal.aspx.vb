@@ -71,6 +71,23 @@ Public Class proposal
             'RadWindowManager2.EnableViewState = False
             RadWindowManager1.EnableViewState = False
 
+
+            Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
+            Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
+
+            Dim TaskStep As RadWizardStep = RadWizard2.WizardSteps(0)
+            Dim btnNewTask As LinkButton = CType(TaskStep.FindControl("btnNewTask"), LinkButton)
+
+            If lblOriginalStatus.Text > 1 Then
+                CType(WStep.FindControl("cboPaymentSchedules"), RadComboBox).Visible = False
+                CType(WStep.FindControl("btnGeneratePaymentSchedules"), LinkButton).Visible = False
+                btnNewTask.Visible = False
+            Else
+                CType(WStep.FindControl("cboPaymentSchedules"), RadComboBox).Visible = True
+                CType(WStep.FindControl("btnGeneratePaymentSchedules"), LinkButton).Visible = True
+                btnNewTask.Visible = True
+            End If
+
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
@@ -301,6 +318,9 @@ Public Class proposal
     End Sub
 
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
+        If lblOriginalStatus.Text > 1 Then
+            Exit Sub
+        End If
         Select Case e.CommandName
             Case "EditTask"
                 Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument)

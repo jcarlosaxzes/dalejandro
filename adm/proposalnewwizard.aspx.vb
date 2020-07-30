@@ -66,7 +66,16 @@ Public Class proposalnewwizard
                         'FeesTab
                         RadWizardStepFees.Active = True
                     End If
-
+                    Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+                    If statusId > 1 Then
+                        btnNewFeeOk.Visible = False
+                        cboPaymentSchedules.Visible = False
+                        btnUpdatePS.Visible = False
+                    Else
+                        btnNewFeeOk.Visible = True
+                        cboPaymentSchedules.Visible = True
+                        btnUpdatePS.Visible = True
+                    End If
                 End If
 
                 For i = RadWizard1.ActiveStepIndex + 1 To RadWizard1.WizardSteps.Count - 1
@@ -79,6 +88,8 @@ Public Class proposalnewwizard
 
             End If
             RadWindowManagerJob.EnableViewState = False
+
+
         Catch ex As Exception
             Throw ex
         End Try
@@ -350,6 +361,10 @@ Public Class proposalnewwizard
     End Sub
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
+        Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+        If statusId > 1 Then
+            Exit Sub
+        End If
         Select Case e.CommandName
             Case "EditTask"
                 Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
@@ -423,14 +438,11 @@ Public Class proposalnewwizard
         lblScheduleTotal.Text = FormatCurrency(bPSTotal)
         If bTotal = 0 Then
             lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
-            RadWizard1.DisplayNavigationButtons = False
         Else
             If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
                 lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
-                RadWizard1.DisplayNavigationButtons = False
             Else
                 lblTotalAlert.Text = ""
-                RadWizard1.DisplayNavigationButtons = True
             End If
         End If
 

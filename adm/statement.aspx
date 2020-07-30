@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="Statements" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="statement.aspx.vb" Inherits="pasconcept20.statement" %>
 
+<%@ Import Namespace="pasconcept20" %>
+
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadCodeBlock ID="RadCodeBlock2" runat="server">
@@ -246,7 +248,7 @@
 
                                     <td style="width: 33%; text-align: center">
                                         <a class="far fa-share-square" title="View Statement Page to share link"
-                                            href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=55&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                           href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"))%>'  target="_blank" aria-hidden="true"></a>
 
                                     </td>
                                     <td style="text-align: center">

@@ -36,7 +36,8 @@ Public Class job_proposals
             Case "EmailPrint"
                 Response.Redirect("~/adm/sendproposal.aspx?proposalId=" & e.CommandArgument & "&backpage=job_proposals&HideMasterMenu=1")
             Case "GetSharedLink"
-                sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
+                Dim ObjGuid As String = LocalAPI.GetProposalProperty(e.CommandArgument, "guid")
+                sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjGuid=" & ObjGuid
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
                 Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument & "&backpage=job_proposals&HideMasterMenu=1")
