@@ -3,9 +3,18 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
+
             Dim ObjId As Integer = Request.QueryString("ObjId")
             Dim ObjType As Integer = Request.QueryString("ObjType")
-            txtURL.Text = LocalAPI.GetSharedLink_URL(ObjType, ObjId)
+
+            If Not Request.QueryString("ObjGuid") Is Nothing Then
+                Dim ObjGuid As Integer = Request.QueryString("ObjGuid")
+                txtURL.Text = LocalAPI.GetSharedLink_URL_ByGuid(ObjType, ObjGuid, ObjId)
+            Else
+                txtURL.Text = LocalAPI.GetSharedLink_URL(ObjType, ObjId)
+            End If
+
+
             '@objType:  1:Proposal;   2:Job;   3:RFP;    4:Invoice;    5:Statement
 
             Select Case ObjType

@@ -101,7 +101,8 @@ Public Class proposals
                 Response.Redirect("~/adm/sendproposal.aspx?ProposalId=" & e.CommandArgument)
 
             Case "GetSharedLink"
-                sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjId=" & e.CommandArgument
+                Dim ObjGuid As String = LocalAPI.GetProposalProperty(e.CommandArgument, "guid")
+                sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjGuid=" & ObjGuid
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
                 Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument)

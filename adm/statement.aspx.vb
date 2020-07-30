@@ -72,7 +72,8 @@ Public Class statement
                     CreateRadWindows(e.CommandName, sUrl, 960, 680, False)
 
                 Case "GetSharedLink"
-                    sUrl = "~/adm/sharelink.aspx?ObjType=5&ObjId=" & e.CommandArgument
+                    Dim ObjGuid As String = LocalAPI.GetStatementProperty(e.CommandArgument, "guid")
+                    sUrl = "~/adm/sharelink.aspx?ObjType=5&ObjGuid=" & ObjGuid
                     CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
 
                 Case "RecivePayment"

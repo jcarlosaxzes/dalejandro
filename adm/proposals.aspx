@@ -234,7 +234,7 @@
 
                                 &nbsp;
 
-                                        <a class="far fa-share-square" title="Preview Proposal " href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=111&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                        <a class="far fa-share-square" title="Preview Proposal " href='<%# LocalAPI.GetSharedLink_URL(111, Eval("Id"))%>' target="_blank" aria-hidden="true"></a>
                                 &nbsp;
                                 <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Upload Files"
                                     CommandName="UploadFiles" UseSubmitBehavior="false">

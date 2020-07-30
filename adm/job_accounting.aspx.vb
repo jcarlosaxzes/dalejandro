@@ -62,7 +62,8 @@ Public Class Job_accounting
 
 
             Case "GetSharedLink"
-                sUrl = "~/adm/sharelink.aspx?ObjType=4&ObjId=" & e.CommandArgument
+                Dim ObjGuid As String = LocalAPI.GetInvoiceProperty(e.CommandArgument, "guid")
+                sUrl = "~/adm/sharelink.aspx?ObjType=4&ObjGuid=" & ObjGuid
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False, "")
 
             Case "EditInvoice"

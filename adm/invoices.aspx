@@ -281,7 +281,7 @@
                                     </asp:LinkButton>
 
                             &nbsp;
-                                    <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=44&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                    <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"))%>' target="_blank" aria-hidden="true"></a>
                             &nbsp;
                                     <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
                                         ToolTip="Add Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>

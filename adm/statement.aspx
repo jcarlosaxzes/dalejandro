@@ -246,7 +246,7 @@
 
                                     <td style="width: 33%; text-align: center">
                                         <a class="far fa-share-square" title="View Statement Page to share link"
-                                            href='<%# Eval("Id", "../adm/sharelink.aspx?ObjType=55&ObjId={0}")%>' target="_blank" aria-hidden="true"></a>
+                                           href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"))%>'  target="_blank" aria-hidden="true"></a>
 
                                     </td>
                                     <td style="text-align: center">
