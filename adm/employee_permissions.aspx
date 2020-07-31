@@ -46,7 +46,7 @@
         </telerik:RadComboBox>
         <asp:LinkButton ID="btnApply" runat="server"
             CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false">
-                                     Apply Role to Selected Employees
+                                     Bulk Role Update
         </asp:LinkButton>
         &nbsp;&nbsp;&nbsp;&nbsp;
             <telerik:RadTextBox ID="txtIPv4" runat="server" Width="300px"
@@ -54,7 +54,7 @@
             </telerik:RadTextBox>
         <asp:LinkButton ID="btnApplyIPv4toRole" runat="server"
             CssClass="btn btn-primary  btn-sm" UseSubmitBehavior="false">
-                                         Apply IP to Selected Role
+                                         Bulk IP Update to Selected Role
         </asp:LinkButton>
 
 

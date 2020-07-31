@@ -8539,20 +8539,24 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function NewExpense(ByRef companyId As Integer, ExpDate As DateTime, Amount As Double, Category As String) As Boolean
+    Public Shared Function NewExpense(ByRef companyId As Integer, ExpDate As DateTime, ExpType As String, Reference As String, Amount As Double, Category As String, Vendor As String, Memo As String) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "Company_Expenses_INSERT"
+            cmd.CommandText = "Company_Expenses_v20_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
 
             ' Set up the input parameter 
-            cmd.Parameters.AddWithValue("@companyId", companyId)
             cmd.Parameters.AddWithValue("@ExpDate", ExpDate)
+            cmd.Parameters.AddWithValue("@Type", ExpType)
+            cmd.Parameters.AddWithValue("@Reference", Reference)
             cmd.Parameters.AddWithValue("@Amount", Amount)
             cmd.Parameters.AddWithValue("@Category", Left(Category, 50))
+            cmd.Parameters.AddWithValue("@Vendor", Vendor)
+            cmd.Parameters.AddWithValue("@Memo", Memo)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
 
             ' Execute the stored procedure.
             cmd.ExecuteNonQuery()

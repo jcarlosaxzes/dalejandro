@@ -233,7 +233,7 @@
                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                         <ItemTemplate>
                             <table style="width: 100%">
-                                <tr>
+                                <tr>0
                                     <td style="width: 33%; text-align: center">
                                         <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Statement information">
                                                     <i class="far fa-envelope"></i>

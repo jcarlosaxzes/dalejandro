@@ -798,13 +798,6 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, Name FROM Jobs_types WHERE companyId=@companyId ORDER BY Name">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-
     <asp:SqlDataSource ID="SqlDataSourceDepartment_USED_tags" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Employee_USED_tags_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
