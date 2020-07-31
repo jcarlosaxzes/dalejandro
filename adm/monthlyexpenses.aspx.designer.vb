@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class monthlyexpenses
     
     '''<summary>
+    '''btnNew control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''pnlFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
     '''cboYear control.
     '''</summary>
     '''<remarks>
@@ -21,6 +39,78 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboYear As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboVendors As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboCategory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboCategory As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''btnFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''txtYear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtYear As Global.Telerik.Web.UI.RadNumericTextBox
+    
+    '''<summary>
+    '''cboImportMode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboImportMode As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''RadUploadExpenses1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadUploadExpenses1 As Global.Telerik.Web.UI.RadAsyncUpload
+    
+    '''<summary>
+    '''btnExpensesImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExpensesImport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''Comparevalidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator2 As Global.System.Web.UI.WebControls.CompareValidator
     
     '''<summary>
     '''RadWizard1 control.
@@ -32,13 +122,13 @@ Partial Public Class monthlyexpenses
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
     
     '''<summary>
-    '''btnMonthlyNew control.
+    '''RadGridExpenses control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnMonthlyNew As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents RadGridExpenses As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
     '''RadGridMonthly control.
@@ -77,6 +167,15 @@ Partial Public Class monthlyexpenses
     Protected WithEvents FloatedTilesListView As Global.Telerik.Web.UI.RadListView
     
     '''<summary>
+    '''SqlDataSourceExpenses control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceExpenses As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''SqlDataSourceMonthly control.
     '''</summary>
     '''<remarks>
@@ -84,15 +183,6 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceMonthly As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceChartByMonth control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceChartByMonth As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''SqlDataSourceChartByYear control.
@@ -104,13 +194,13 @@ Partial Public Class monthlyexpenses
     Protected WithEvents SqlDataSourceChartByYear As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''SqlDataSource1 control.
+    '''SqlDataSourceGroupByCategory control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceGroupByCategory As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''SqlDataSourceYear control.
@@ -120,6 +210,33 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceYear As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceExpensesUtility control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceExpensesUtility As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceVendors As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceCategory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceCategory As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.

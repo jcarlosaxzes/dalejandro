@@ -473,15 +473,6 @@ Partial Public Class jobs
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''SqlDataSourceTypes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceTypes As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
     '''SqlDataSourceDepartment_USED_tags control.
     '''</summary>
     '''<remarks>

@@ -36,7 +36,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h4 style="margin: 0">Company Information</h3>
+                                                <h4 style="margin: 0">
+                                                Company Information</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Update changes to Company Profile" CommandName="Edit" CausesValidation="False"
@@ -193,7 +194,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h4 style="margin: 0">Email Outgoing Settings</h3>
+                                                <h4 style="margin: 0">
+                                                Email Outgoing Settings</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton4" runat="server" ToolTip="Update changes to Company SMTP" CommandName="Edit" CausesValidation="False"
@@ -260,7 +262,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td colspan="2">
-                                                <h4 style="margin: 0">Storage Info</h3>
+                                                <h4 style="margin: 0">
+                                                Storage Info</h3>
                                             </td>
                                         </tr>
                                         <tr>
@@ -285,7 +288,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h4 style="margin: 0">Notification Alerts</h3>
+                                                <h4 style="margin: 0">
+                                                Notification Alerts</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton5" runat="server" ToolTip="Update changes to Company Alerts" CommandName="Edit" CausesValidation="False"
@@ -372,7 +376,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h4 style="margin: 0">PayPal Setting</h3>
+                                                <h4 style="margin: 0">
+                                                PayPal Setting</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton6" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
@@ -399,7 +404,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h4 style="margin: 0">Collection Attorney Firm</h3>
+                                                <h4 style="margin: 0">
+                                                Collection Attorney Firm</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton13" runat="server" ToolTip="Update changes to Company PayPal" CommandName="Edit" CausesValidation="False"
@@ -668,7 +674,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h4 style="margin: 0">Company Information</h3>
+                                                <h4 style="margin: 0">
+                                                Company Information</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton2" runat="server" ToolTip="Update changes to Company Profile" CommandName="Update" CausesValidation="True"
@@ -831,7 +838,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h4 style="margin: 0">Email SMTP Outgoing Settings</h3>
+                                                <h4 style="margin: 0">
+                                                Email SMTP Outgoing Settings</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton7" runat="server" ToolTip="Update changes to Company Email SMTP Settings" CommandName="Update" CausesValidation="True"
@@ -910,7 +918,8 @@
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
-                                                <h4 style="margin: 0">Notification Alerts</h3>
+                                                <h4 style="margin: 0">
+                                                Notification Alerts</h3>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton9" runat="server" ToolTip="Update changes to Company Notification Alerts" CommandName="Update" CausesValidation="True"
@@ -1239,66 +1248,6 @@
                                 </MasterTableView>
                             </telerik:RadGrid>
                         </telerik:RadWizardStep>
-                        <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Expenses (Other)" StepType="Step">
-                            <table class="table-sm">
-                                <tr>
-                                    <td style="text-align: center; width: 80px">
-                                        <telerik:RadNumericTextBox ID="txtExpensesYear" ToolTip="Year" runat="server" Width="100px"
-                                            EmptyMessage="Year" ShowSpinButtons="True">
-                                            <NumberFormat DecimalDigits="0" GroupSeparator="" />
-                                            <IncrementSettings Step="1" />
-                                        </telerik:RadNumericTextBox>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <small>Structure of the CSV file to import(ExpDate, Category, Amount)</small>
-                                    </td>
-                                    <td style="width: 200px; text-align: right">
-                                        <telerik:RadAsyncUpload ID="RadUploadExpenses1" runat="server" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true"
-                                            AllowedFileExtensions="csv,txt" RenderMode="Classic">
-                                        </telerik:RadAsyncUpload>
-                                    </td>
-                                    <td style="width: 110px; text-align: right">
-
-                                        <asp:LinkButton ID="btnExpensesImport" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
-                                            CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                     Update Import
-                                        </asp:LinkButton>
-                                    </td>
-                                </tr>
-                            </table>
-                            <telerik:RadGrid ID="RadGridExpenses" runat="server" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small"
-                                AlternatingItemStyle-Font-Size="Small" AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" ShowFooter="true"
-                                AutoGenerateColumns="False" DataSourceID="SqlDataSourceExpenses" Height="400px" PageSize="100" AllowSorting="true" MasterTableView-EditMode="InPlace">
-                                <ClientSettings>
-                                    <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
-                                </ClientSettings>
-                                <MasterTableView CommandItemDisplay="Top" DataKeyNames="Id"
-                                    DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" CssClass="table-sm">
-                                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                                    <CommandItemSettings AddNewRecordText="Expense" />
-                                    <Columns>
-                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                            HeaderText="" HeaderStyle-Width="40px">
-                                        </telerik:GridEditCommandColumn>
-                                        <telerik:GridDateTimeColumn DataField="ExpDate" HeaderStyle-Width="180px" PickerType="DatePicker" HeaderText="Date"
-                                            SortExpression="ExpDate" UniqueName="ExpDate" DataFormatString="{0:d}">
-                                        </telerik:GridDateTimeColumn>
-                                        <telerik:GridBoundColumn DataField="Category" HeaderText="Category"
-                                            SortExpression="Category" UniqueName="Category">
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridNumericColumn DataField="Amount" HeaderStyle-Width="180px" HeaderText="Amount"
-                                            SortExpression="Amount" UniqueName="Amount" DataFormatString="{0:N2}" Aggregate="Sum">
-                                        </telerik:GridNumericColumn>
-                                        <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
-                                            ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
-                                            CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
-                                        </telerik:GridButtonColumn>
-                                    </Columns>
-                                </MasterTableView>
-                            </telerik:RadGrid>
-
-
-                        </telerik:RadWizardStep>
                     </WizardSteps>
                 </telerik:RadWizard>
 
@@ -1437,31 +1386,7 @@
         </UpdateParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceExpenses" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, ExpDate, Category, Amount FROM Company_Expenses WHERE ([companyId] = @companyId) and Year(ExpDate)=@Year ORDER BY ExpDate DESC, Category "
-        InsertCommand="INSERT INTO Company_Expenses(ExpDate, Amount, Category, companyId) VALUES(@ExpDate, @Amount, @Category, @companyId)"
-        DeleteCommand="DELETE FROM Company_Expenses WHERE Id=@Id"
-        UpdateCommand="UPDATE Company_Expenses SET ExpDate=@ExpDate, Amount=@Amount, Category=@Category WHERE Id=@Id">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="txtExpensesYear" Name="Year" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-        <DeleteParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-        </DeleteParameters>
-        <InsertParameters>
-            <asp:Parameter Name="ExpDate" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="Category" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-            <asp:Parameter Name="ExpDate" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="Category" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
+
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
