@@ -141,8 +141,8 @@ Public Class singproposalsign
                     IsReadOnly = Request.QueryString("IsReadOnly")
                 ElseIf LocalAPI.GetProposalData(lblProposalId.Text, "statusId") > 1 Then
                     IsReadOnly = True
-                ElseIf LocalAPI.IsTabletOrSmarthphone(Request.UserAgent) Then
-                    IsReadOnly = True
+                    'ElseIf LocalAPI.IsTabletOrSmarthphone(Request.UserAgent) Then
+                    '    IsReadOnly = True
                 End If
 
                 pnlSideTools.Visible = Not IsReadOnly

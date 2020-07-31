@@ -8,7 +8,7 @@
             Dim ObjType As Integer = Request.QueryString("ObjType")
 
             If Not Request.QueryString("ObjGuid") Is Nothing Then
-                Dim ObjGuid As Integer = Request.QueryString("ObjGuid")
+                Dim ObjGuid As String = Request.QueryString("ObjGuid")
                 txtURL.Text = LocalAPI.GetSharedLink_URL_ByGuid(ObjType, ObjGuid, ObjId)
             Else
                 txtURL.Text = LocalAPI.GetSharedLink_URL(ObjType, ObjId)
