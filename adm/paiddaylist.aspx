@@ -377,7 +377,7 @@
                             <ClientSettings>
                                 <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
                             </ClientSettings>
-                            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" EditMode="InPlace">
+                            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
                                 <Columns>
                                     <telerik:GridBoundColumn DataField="Employee" FilterControlAltText="Filter Employee column" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee" HeaderStyle-HorizontalAlign="Center" Aggregate="CountDistinct" FooterAggregateFormatString="{0:N0}">
                                     </telerik:GridBoundColumn>
