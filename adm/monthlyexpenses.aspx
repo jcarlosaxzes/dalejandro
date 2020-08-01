@@ -2,26 +2,38 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="RadGridMonthly">
+            <telerik:AjaxSetting AjaxControlID="RadGridExpenses">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridMonthly" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly" />
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridExpenses" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="cboYear">
+            <telerik:AjaxSetting AjaxControlID="btnExpensesImport">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridMonthly" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridExpenses" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnImportPayroll">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPayroll" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+
+            <telerik:AjaxSetting AjaxControlID="btnFind">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="btnFind" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridExpenses"  />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPayroll"  />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridMonthly"  />
                     <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly" />
                     <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly" />
-                    <telerik:AjaxUpdatedControl ControlID="FloatedTilesListView" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="FloatedTilesListView" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
     <style>
         .RadListView .rlvFloated {
             display: block;
@@ -46,8 +58,8 @@
         .productItemWrapper {
             height: 220px;
             width: 310px;
-            margin: 5px;
-            padding-left: 15px;
+            margin: 3px;
+            padding-left: 10px;
         }
     </style>
 
@@ -58,16 +70,20 @@
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
-            <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseImport" aria-expanded="false" aria-controls="collapseImport" title="Show/Hide Import panel">
-                Import
+            <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseImport" aria-expanded="false" aria-controls="collapseImport" title="Show/Hide Import expenses panel">
+                Import Expenses
+            </button>
+            <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseImportP" aria-expanded="false" aria-controls="collapseImportP" title="Show/Hide Import payroll panel">
+                Import Payroll
             </button>
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
                     Add Expense
             </asp:LinkButton>
         </span>
     </div>
-    <div class="collapse" id="collapseFilter">
 
+    <%--Filter Panel--%>
+    <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind" class="pasconcept-bar">
             <table class="table-sm" style="width: 100%">
                 <tr>
@@ -92,7 +108,27 @@
                         <telerik:RadComboBox ID="cboCategory" runat="server" DataSourceID="SqlDataSourceCategory"
                             Width="100%" DataTextField="Name" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="(All Categories...)" Selected="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="(All Categories...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="text-align: right"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" MarkFirstMatch="True" AutoPostBack="true"
+                            Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="-1" Selected="true" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" 
+                            Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -100,15 +136,17 @@
                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
+
                     </td>
                 </tr>
             </table>
         </asp:Panel>
-
     </div>
+
+    <%--Import Expenses Panel--%>
     <div class="collapse pasconcept-bar" id="collapseImport">
         <div>
-            <h4 style="margin: 0">Instructions for importing expense files</h4>
+            <h4 style="margin: 0">Instructions for importing Expenses files</h4>
             <ul>
                 <li>Ensure your CSV file adheres to the PASconcept structure: (ExpDate, Type, No., Payee, Category, Memo, Amount). <a href="https://app.pasconcept.com/csv/expenses.csv" target="_blank">Click to download</a> sample csv file. <a href="https://c25.qbo.intuit.com/app/expenses" target="_blank">Intuit QuickBooks exports Expenses </a>using this structure</li>
                 <li>Select Import Mode, Select File and click Import button</li>
@@ -142,7 +180,7 @@
 
                         <asp:LinkButton ID="btnExpensesImport" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
                             CssClass="btn btn-info btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Import">
-                                     <i class="fas fa-upload"></i>&nbsp;Import
+                                     <i class="fas fa-upload"></i>&nbsp;Import Expenses
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -157,7 +195,61 @@
             </table>
         </div>
     </div>
-    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="1000px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false" Skin="Silk">
+
+    <%--Import Payroll Panel--%>
+    <div class="collapse pasconcept-bar" id="collapseImportP">
+        <div>
+            <h4 style="margin: 0">Instructions for importing Payrolls files</h4>
+            <ul>
+                <li>Ensure your CSV file adheres to the PASconcept structure: (Check Date,Name,Net Amount,,Total Hours,Taxes Withheld,Total Deductions,Total Pay,Employer Taxes,Company Contributions,Total Cost,Check Num). <a href="https://app.pasconcept.com/csv/payroll.csv" target="_blank">Click to download</a> sample csv file. <a href="https://c25.qbo.intuit.com/app/payrollreport?h=reports&arg1=paystubs&rptid=9418890136-PC_PAYSTUBS-paystubs-1596286830976" target="_blank">Intuit QuickBooks exports Payroll Summary Report </a>using this structure</li>
+                <li>Select Import Mode, Select File and click Import button</li>
+            </ul>
+
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                    <td style="width: 100px; text-align: right">Import Year:
+                    </td>
+                    <td style="width: 100px">
+
+                        <telerik:RadNumericTextBox ID="txtYearPayroll" runat="server" Width="100%" MinValue="2000">
+                            <NumberFormat DecimalDigits="0" GroupSeparator="" />
+                        </telerik:RadNumericTextBox>
+                    </td>
+                    <td style="width: 500px">
+                        <telerik:RadComboBox ID="cboImportPayrollMode" runat="server" Width="100%" AppendDataBoundItems="True" ValidationGroup="ImportPayroll">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="(Select Import Mode...)" Value="-1" />
+                                <telerik:RadComboBoxItem Text="DELETE all records for the selected year, then Import new records" Value="0" />
+                                <telerik:RadComboBoxItem Text="Add imported records to existing entries" Value="1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 300px; text-align: right">
+                        <telerik:RadAsyncUpload ID="RadAsyncUploadPayroll" runat="server" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true"
+                            AllowedFileExtensions="csv,txt" RenderMode="Classic">
+                        </telerik:RadAsyncUpload>
+                    </td>
+                    <td style="padding-left: 50px; vertical-align: bottom">
+
+                        <asp:LinkButton ID="btnImportPayroll" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
+                            CssClass="btn btn-info btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="ImportPayroll">
+                                     <i class="fas fa-upload"></i>&nbsp;Import Payroll
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Import Mode...)" ForeColor="Red"
+                            Operator="NotEqual" ControlToValidate="cboImportPayrollMode" Display="Dynamic" ErrorMessage="Select Import Mode" SetFocusOnError="true" ValidationGroup="ImportPayroll">
+                        </asp:CompareValidator>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+    <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="1200px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false" Skin="Silk">
         <WizardSteps>
 
             <telerik:RadWizardStep Title="Expenses">
@@ -207,6 +299,37 @@
                                 ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
                                 CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
                             </telerik:GridButtonColumn>
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </telerik:RadWizardStep>
+
+            <telerik:RadWizardStep Title="Payroll">
+                <telerik:RadGrid ID="RadGridPayroll" runat="server" DataSourceID="SqlDataSourcePayroll"
+                    ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" AlternatingItemStyle-Font-Size="Small"
+                    AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="900px" ShowFooter="true">
+                    <ClientSettings>
+                        <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
+                    </ClientSettings>
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayroll">
+                        <Columns>
+                            <telerik:GridBoundColumn DataField="SalaryDate" DataType="System.DateTime" FilterControlAltText="Filter SalaryDate column" HeaderText="Date" SortExpression="SalaryDate" UniqueName="SalaryDate" DataFormatString="{0:d}" ItemStyle-HorizontalAlign="Center" 
+                                HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Employee" FilterControlAltText="Filter Employee column" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee"  Aggregate="CountDistinct" FooterAggregateFormatString="{0:N0}">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Hours" DataType="System.Double" HeaderText="Hours" SortExpression="Hours" UniqueName="Hours" Aggregate="Sum" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center"  FooterAggregateFormatString="{0:N1}"
+                                HeaderStyle-Width="100px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="NetAmount" DataType="System.Double" HeaderText="Net Amount" SortExpression="NetAmount" UniqueName="NetAmount" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right"  HeaderTooltip="Net Salary"
+                                HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="GrossAmount" DataType="System.Double" HeaderText="Gross Amount" SortExpression="GrossAmount" UniqueName="GrossAmount" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right"  HeaderTooltip="Gross Salary"
+                                HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="TotalCost" DataType="System.Double" HeaderText="Gross Amount" SortExpression="TotalCost" UniqueName="TotalCost" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right"  HeaderTooltip="Total Cost"
+                                HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>
@@ -300,11 +423,11 @@
                     <AlternatingItemTemplate>
 
                         <div class="rlvA productItemWrapper">
-                            <h4 style="margin: 0; text-align: center">
+                            <h5 style="margin: 0; text-align: center">
                                 <asp:Label ID="lblAlternatingCategory" runat="server" Font-Bold="true" Text='<%# Eval("Category") %>'></asp:Label>
-                            </h4>
+                            </h5>
 
-                            <h5 style="margin: 0; text-align: right; padding-right: 5px; font-weight: bold"><%# Eval("Tot", "{0:C2}")%></h4>
+                            <div style="margin: 0; text-align: right; padding-right: 5px; font-size:16px ; font-weight:500;color:darkblue"><%# Eval("Tot", "{0:C2}")%></div>
                             <telerik:RadHtmlChart ID="RainfallChart" runat="server" Width="100%" Height="150px" DataSourceID="SqlDataSourceItemAlternating">
                                 <Legend>
                                     <Appearance Visible="false">
@@ -322,11 +445,17 @@
                                     <XAxis DataLabelsField="MonthCode">
                                         <MajorGridLines Visible="false" />
                                         <MinorGridLines Visible="false" />
+                                        <LabelsAppearance>
+                                            <TextStyle FontSize="10px" />
+                                        </LabelsAppearance>
                                     </XAxis>
                                     <YAxis>
                                         <MajorGridLines Visible="true" />
                                         <MajorGridLines Color="#EFEFEF" Width="1"></MajorGridLines>
                                         <MinorGridLines Visible="false" />
+                                        <LabelsAppearance DataFormatString="{0:N0}">
+                                            <TextStyle FontSize="10px" />
+                                        </LabelsAppearance>
                                     </YAxis>
                                 </PlotArea>
                             </telerik:RadHtmlChart>
@@ -337,17 +466,16 @@
                                         <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
                                         <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
                                         <asp:ControlParameter ControlID="lblAlternatingCategory" Name="category" PropertyName="Text" />
-
                                     </SelectParameters>
                                 </asp:SqlDataSource>
                         </div>
                     </AlternatingItemTemplate>
                     <ItemTemplate>
                         <div class="rlvI productItemWrapper">
-                            <h4 style="margin: 0; text-align: center">
+                            <h5 style="margin: 0; text-align: center">
                                 <asp:Label ID="lblItemCategory" runat="server" Font-Bold="true" Text='<%# Eval("Category") %>'></asp:Label>
-                            </h4>
-                            <h5 style="margin: 0; text-align: right; padding-right: 5px; font-weight: bold"><%# Eval("Tot", "{0:C2}")%></h5>
+                            </h5>
+                            <div style="margin: 0; text-align: right; padding-right: 5px; font-size:16px ; font-weight:500;color:darkblue"><%# Eval("Tot", "{0:C2}")%></div>
                             <telerik:RadHtmlChart ID="SunshineChart" runat="server" Width="100%" Height="150px" DataSourceID="SqlDataSourceItem">
                                 <Legend>
                                     <Appearance Visible="false">
@@ -357,7 +485,7 @@
                                     <CommonTooltipsAppearance Color="White" />
                                     <Series>
                                         <telerik:ColumnSeries DataFieldY="Amount" Name="Amount">
-                                            <Appearance FillStyle-BackgroundColor="OrangeRed"></Appearance>
+                                            <Appearance FillStyle-BackgroundColor="Blue"></Appearance>
                                             <LabelsAppearance Visible="false"></LabelsAppearance>
                                             <TooltipsAppearance DataFormatString="{0:C2}"></TooltipsAppearance>
                                         </telerik:ColumnSeries>
@@ -365,11 +493,17 @@
                                     <XAxis DataLabelsField="MonthCode">
                                         <MajorGridLines Visible="false" />
                                         <MinorGridLines Visible="false" />
+                                         <LabelsAppearance>
+                                            <TextStyle FontSize="10px" />
+                                        </LabelsAppearance>
                                     </XAxis>
                                     <YAxis>
                                         <MajorGridLines Visible="true" />
                                         <MajorGridLines Color="#EFEFEF" Width="1"></MajorGridLines>
                                         <MinorGridLines Visible="false" />
+                                        <LabelsAppearance DataFormatString="{0:N0}">
+                                            <TextStyle FontSize="10px" />
+                                        </LabelsAppearance>
                                     </YAxis>
                                 </PlotArea>
                             </telerik:RadHtmlChart>
@@ -481,12 +615,17 @@
 
     <asp:SqlDataSource ID="SqlDataSourceExpensesUtility" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Company_Expenses_YEAR_DELETE" DeleteCommandType="StoredProcedure"
-        UpdateCommand="Company_To_Monthly_Expenses_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="Company_Payroll_YEAR_DELETE" UpdateCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:ControlParameter ControlID="txtYear" Name="Year" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </DeleteParameters>
+        <UpdateParameters>
+            <asp:ControlParameter ControlID="txtYearPayroll" Name="Year" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </UpdateParameters>
     </asp:SqlDataSource>
+
     <asp:SqlDataSource ID="SqlDataSourceVendors" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, Name FROM Vendors WHERE companyId=@companyId ORDER BY Name">
         <SelectParameters>
@@ -500,6 +639,32 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
+    <asp:SqlDataSource ID="SqlDataSourcePayroll" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Employee_Payroll_SELECT" SelectCommandType="StoredProcedure"
+        InsertCommand="PayrollInitialize_INSERT" InsertCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboEmployees" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+        <InsertParameters>
+            <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </InsertParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId and isnull(Productive,0)=1 ORDER BY [Name]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [Name]=[FullName]+case when isnull(Inactive,0)=1 then ' (I)' else '' end FROM [Employees] WHERE companyId=@companyId and DepartmentId=case when @DepartmentId>0 then @DepartmentId else DepartmentId end ORDER BY isnull(Inactive,0), [Name]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboDepartments" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
 </asp:Content>
 

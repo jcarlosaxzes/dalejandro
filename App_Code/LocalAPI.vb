@@ -8994,20 +8994,23 @@ Public Class LocalAPI
         End Try
     End Function
     Public Shared Function GetEmployeeIdFromLastNameCommaFirstName(ByVal LastNameCommaFirstName As String, ByVal companyId As Integer) As Integer
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT Id FROM [Employees] WHERE companyId=" & companyId & " and [LastName]+', '+[Name]='" & LastNameCommaFirstName & "'", cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                GetEmployeeIdFromLastNameCommaFirstName = rdr("Id").ToString
-            End If
-            rdr.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            Throw ex
-        End Try
+        'Try
+        '    Dim cnn1 As SqlConnection = GetConnection()
+        '    Dim cmd As New SqlCommand("SELECT Id FROM [Employees] WHERE companyId=" & companyId & " and [LastName]+', '+[Name]='" & LastNameCommaFirstName & "'", cnn1)
+        '    Dim rdr As SqlDataReader
+        '    rdr = cmd.ExecuteReader
+        '    rdr.Read()
+        '    If rdr.HasRows Then
+        '        GetEmployeeIdFromLastNameCommaFirstName = rdr("Id").ToString
+        '    End If
+        '    rdr.Close()
+        '    cnn1.Close()
+        'Catch ex As Exception
+        '    Throw ex
+        'End Try
+        'LastNameCommaFirstName = Replace(LastNameCommaFirstName, ".", "")
+        Return GetNumericEscalar($"SELECT Id FROM [Employees] WHERE companyId={companyId} and [LastName]+', '+[Name]='{LastNameCommaFirstName}'")
+
     End Function
 
     Public Shared Function GetEmployeeFullName(ByVal sEmail As String, scompanyId As String) As String

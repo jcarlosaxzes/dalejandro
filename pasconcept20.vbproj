@@ -2117,6 +2117,7 @@
     <Content Include="master\web.config" />
     <Content Include="Content\favicons\site.webmanifest" />
     <Content Include="csv\expenses.csv" />
+    <Content Include="csv\payroll.csv" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - Web Deploy.pubxml" />
@@ -4514,7 +4515,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
