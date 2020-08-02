@@ -55,6 +55,7 @@ Public Class paiddaylist
                 Dim TotalCost As Double = 0
                 Dim Hours As Double = 0
                 Dim employeeId As Integer
+                Dim EmployeeRef As String
                 Dim StreamerObject As Stream = RadUpload1.UploadedFiles(0).InputStream
                 Using parser As TextFieldParser = New TextFieldParser(StreamerObject)
 
@@ -78,7 +79,8 @@ Public Class paiddaylist
                                         SalaryDate = currentField
                                     Case 1
                                         ' Employee Name
-                                        employeeId = LocalAPI.GetEmployeeIdFromLastNameCommaFirstName(currentField, lblCompanyId.Text)
+                                        EmployeeRef = "" & currentField
+                                        employeeId = LocalAPI.GetEmployeeIdFromLastNameCommaFirstName(EmployeeRef, lblCompanyId.Text)
                                     Case 2
                                         ' Net Amount
                                         SalaryNet = LocalAPI.GetAmount(currentField)
@@ -96,7 +98,7 @@ Public Class paiddaylist
                             Next
                             If employeeId > 0 Then
                                 ' Insert Line
-                                LocalAPI.NewPayroll(employeeId, SalaryDate, SalaryNet, Hours, SalaryGross, TotalCost)
+                                LocalAPI.NewPayroll(employeeId, SalaryDate, SalaryNet, Hours, SalaryGross, TotalCost, EmployeeRef, lblCompanyId.Text)
                             End If
 
                         End While
