@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Company Monthly Expenses" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="monthlyexpenses.aspx.vb" Inherits="pasconcept20.monthlyexpenses" %>
+﻿<%@ Page Title="Company Expenses" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="monthlyexpenses.aspx.vb" Inherits="pasconcept20.monthlyexpenses" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
