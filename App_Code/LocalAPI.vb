@@ -8511,13 +8511,13 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function NewPayroll(ByRef employeeId As Integer, SalaryDate As DateTime, NetAmount As Double, Hours As Double, GrossAmount As Double, TotalCost As Double) As Boolean
+    Public Shared Function NewPayroll(ByRef employeeId As Integer, SalaryDate As DateTime, NetAmount As Double, Hours As Double, GrossAmount As Double, TotalCost As Double, OriginalReference As String, companyId As Integer) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "EmployeePayroll_INSERT"
+            cmd.CommandText = "EmployeePayroll_v20_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
 
             ' Set up the input parameter 
@@ -8527,6 +8527,8 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Hours", Hours)
             cmd.Parameters.AddWithValue("@GrossAmount", GrossAmount)
             cmd.Parameters.AddWithValue("@TotalCost", TotalCost)
+            cmd.Parameters.AddWithValue("@OriginalReference", OriginalReference)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
 
             ' Execute the stored procedure.
             cmd.ExecuteNonQuery()

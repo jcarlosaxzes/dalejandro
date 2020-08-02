@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGridExpenses">
                 <UpdatedControls>
@@ -11,21 +11,25 @@
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnExpensesImport">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridExpenses" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="btnExpensesImport" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridExpenses" />
+                    <telerik:AjaxUpdatedControl ControlID="cboYear" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnImportPayroll">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridPayroll" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="btnImportPayroll" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPayroll" />
+                    <telerik:AjaxUpdatedControl ControlID="cboYear" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
 
             <telerik:AjaxSetting AjaxControlID="btnFind">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="btnFind" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadGridExpenses"  />
-                    <telerik:AjaxUpdatedControl ControlID="RadGridPayroll"  />
-                    <telerik:AjaxUpdatedControl ControlID="RadGridMonthly"  />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridExpenses" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPayroll" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridMonthly" />
                     <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly" />
                     <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly" />
                     <telerik:AjaxUpdatedControl ControlID="FloatedTilesListView" />
@@ -125,7 +129,7 @@
                         </telerik:RadComboBox>
                     </td>
                     <td>
-                        <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" 
+                        <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True"
                             Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
@@ -252,172 +256,182 @@
     <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="1200px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false" Skin="Silk">
         <WizardSteps>
 
-            <telerik:RadWizardStep Title="Expenses">
+            <telerik:RadWizardStep Title="Monthly/Yearly Charts">
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td colspan="2">
+                            <h4>Monthly Expenses</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 65%">
+                            <telerik:RadHtmlChart ID="RadHtmlChartMonthly" runat="server" DataSourceID="SqlDataSourceMonthly" Height="500px" Width="95%">
+                                <PlotArea>
+                                    <Series>
+                                        <telerik:AreaSeries DataFieldY="Total" Name="Total = Expenses + Payroll">
+                                            <Appearance FillStyle-BackgroundColor="Red"></Appearance>
+                                            <LabelsAppearance Visible="false"></LabelsAppearance>
+                                            <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
+                                        </telerik:AreaSeries>
+                                        <telerik:LineSeries DataFieldY="Expenses" Name="Expenses">
+                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                            </LabelsAppearance>
+                                            <Appearance>
+                                                <FillStyle BackgroundColor="Red" />
+                                            </Appearance>
+                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                        </telerik:LineSeries>
+                                        <telerik:LineSeries DataFieldY="Payroll" Name="Payroll">
+                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                            </LabelsAppearance>
+                                            <Appearance>
+                                                <FillStyle BackgroundColor="Blue" />
+                                            </Appearance>
+                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                        </telerik:LineSeries>
+                                    </Series>
+                                    <YAxis Name="LeftAxis" MajorTickSize="4" MajorTickType="Outside" Width="3">
+                                        <TitleAppearance Text="$"></TitleAppearance>
+                                        <LabelsAppearance DataFormatString="{0:N0}"></LabelsAppearance>
+                                        <MinorGridLines Visible="false"></MinorGridLines>
+                                    </YAxis>
+                                    <XAxis DataLabelsField="Month">
+                                        <TitleAppearance Text="Month"></TitleAppearance>
+                                        <MinorGridLines Visible="false"></MinorGridLines>
+                                        <AxisCrossingPoints>
+                                            <telerik:AxisCrossingPoint Value="0" />
+                                            <telerik:AxisCrossingPoint Value="9999" />
+                                        </AxisCrossingPoints>
+                                    </XAxis>
+                                </PlotArea>
+                                <Legend>
+                                    <Appearance Visible="True" Position="Top">
+                                        <TextStyle FontSize="14" Bold="true" FontFamily="Sans-Serif" />
+                                        <ClientTemplate>
+                                                #= text #&nbsp;
+                                        </ClientTemplate>
+                                    </Appearance>
 
-                <telerik:RadGrid ID="RadGridExpenses" runat="server" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center"
-                    AlternatingItemStyle-Font-Size="Small" AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" ShowFooter="true"
-                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceExpenses" Height="900px" PageSize="100" AllowSorting="true">
-                    <ClientSettings>
-                        <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
-                    </ClientSettings>
-                    <MasterTableView DataKeyNames="Id"
-                        DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" CssClass="table-sm">
-                        <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                        <Columns>
-                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                HeaderText="" HeaderStyle-Width="40px">
-                            </telerik:GridEditCommandColumn>
-                            <telerik:GridDateTimeColumn DataField="ExpDate" HeaderStyle-Width="100px" PickerType="DatePicker" HeaderText="Date" ItemStyle-HorizontalAlign="Center"
-                                SortExpression="ExpDate" UniqueName="ExpDate" DataFormatString="{0:d}">
-                            </telerik:GridDateTimeColumn>
-                            <telerik:GridBoundColumn DataField="Type" HeaderText="Type" SortExpression="Type" UniqueName="Type" HeaderStyle-Width="180px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Reference" HeaderText="Reference" SortExpression="Reference" UniqueName="Reference" HeaderStyle-Width="150px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Category" HeaderText="Category" SortExpression="Category" UniqueName="Category">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="VendorId" HeaderText="Vendor" SortExpression="VendorId" UniqueName="VendorId">
-                                <EditItemTemplate>
-                                    <telerik:RadComboBox ID="cboVendorEdit" runat="server" SelectedValue='<%# Bind("VendorId") %>' DataSourceID="SqlDataSourceVendors"
-                                        DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True"
-                                        MarkFirstMatch="True" Filter="Contains">
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Select Vendor...)" Value="0" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <%# Eval("Vendor") %>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="Memo" HeaderText="Memo" SortExpression="Memo" UniqueName="Memo">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridNumericColumn DataField="Amount" HeaderStyle-Width="120px" HeaderText="Amount" ItemStyle-HorizontalAlign="Right"
-                                SortExpression="Amount" UniqueName="Amount" DataFormatString="{0:N2}" Aggregate="Sum">
-                            </telerik:GridNumericColumn>
-                            <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
-                                ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
-                                CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
-                            </telerik:GridButtonColumn>
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
+                                </Legend>
+                            </telerik:RadHtmlChart>
+                        </td>
+                        <td>
+                            <telerik:RadGrid ID="RadGridMonthly" runat="server" Width="95%"
+                                ShowFooter="true" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small"
+                                AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonthly" AllowPaging="true" PageSize="12"
+                                HeaderStyle-HorizontalAlign="Center">
+                                <MasterTableView DataSourceID="SqlDataSourceMonthly">
+                                    <Columns>
+                                        <telerik:GridNumericColumn DataField="Year" HeaderText="Year" SortExpression="Year" UniqueName="Year" ItemStyle-HorizontalAlign="Center">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridNumericColumn DataField="Month" HeaderText="Month" SortExpression="Month" UniqueName="Month" ItemStyle-HorizontalAlign="Center">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridNumericColumn DataField="Expenses" HeaderText="Expenses" SortExpression="Expenses" UniqueName="Expenses" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridNumericColumn DataField="Payroll" HeaderText="Payroll" SortExpression="Payroll" UniqueName="Payroll" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridNumericColumn DataField="Total" HeaderText="Total" SortExpression="Total" UniqueName="Total" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                        </telerik:GridNumericColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h4>Yearly Expenses</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <telerik:RadHtmlChart ID="RadHtmlChartYearly" runat="server" DataSourceID="SqlDataSourceChartByYear" Height="400px" Width="95%">
+                                <PlotArea>
+                                    <Series>
+                                        <telerik:AreaSeries DataFieldY="Total" Name="Total = Expenses + Payroll">
+                                            <Appearance FillStyle-BackgroundColor="Red"></Appearance>
+                                            <LabelsAppearance Visible="false"></LabelsAppearance>
+                                            <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
+                                        </telerik:AreaSeries>
+
+
+                                        <telerik:LineSeries DataFieldY="Expenses" Name="Expenses">
+                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                            </LabelsAppearance>
+                                            <Appearance>
+                                                <FillStyle BackgroundColor="Red" />
+                                            </Appearance>
+                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                        </telerik:LineSeries>
+                                        <telerik:LineSeries DataFieldY="Payroll" Name="Payroll">
+                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                            </LabelsAppearance>
+                                            <Appearance>
+                                                <FillStyle BackgroundColor="Blue" />
+                                            </Appearance>
+                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                        </telerik:LineSeries>
+
+
+                                    </Series>
+                                    <XAxis DataLabelsField="Year">
+                                        <TitleAppearance Text="Year"></TitleAppearance>
+                                        <MinorGridLines Visible="false"></MinorGridLines>
+                                    </XAxis>
+                                    <YAxis MajorTickSize="4" MajorTickType="Outside" MinorTickSize="1">
+                                        <LabelsAppearance DataFormatString="{0:C0}"></LabelsAppearance>
+                                        <MinorGridLines Visible="false"></MinorGridLines>
+                                    </YAxis>
+                                </PlotArea>
+                                <Legend>
+                                    <Appearance Visible="True" Position="Top">
+                                        <TextStyle FontSize="14" Bold="true" FontFamily="Sans-Serif" />
+                                        <ClientTemplate>
+                                                #= text #&nbsp;
+                                        </ClientTemplate>
+                                    </Appearance>
+
+                                </Legend>
+                            </telerik:RadHtmlChart>
+                        </td>
+                        <td>
+                            <telerik:RadGrid ID="RadGridYearly" runat="server" Width="95%"
+                                ShowFooter="true" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small"
+                                AutoGenerateColumns="False" DataSourceID="SqlDataSourceChartByYear" AllowPaging="true" PageSize="12"
+                                HeaderStyle-HorizontalAlign="Center">
+                                <MasterTableView DataSourceID="SqlDataSourceChartByYear">
+                                    <Columns>
+                                        <telerik:GridNumericColumn DataField="Year" HeaderText="Year" SortExpression="Year" UniqueName="Year" ItemStyle-HorizontalAlign="Center">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridNumericColumn DataField="Expenses" HeaderText="Expenses" SortExpression="Expenses" UniqueName="Expenses" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridNumericColumn DataField="Payroll" HeaderText="Payroll" SortExpression="Payroll" UniqueName="Payroll" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridNumericColumn DataField="Total" HeaderText="Total" SortExpression="Total" UniqueName="Total" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                        </telerik:GridNumericColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </td>
+                    </tr>
+                </table>
+
             </telerik:RadWizardStep>
 
-            <telerik:RadWizardStep Title="Payroll">
-                <telerik:RadGrid ID="RadGridPayroll" runat="server" DataSourceID="SqlDataSourcePayroll"
-                    ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" AlternatingItemStyle-Font-Size="Small"
-                    AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="900px" ShowFooter="true">
-                    <ClientSettings>
-                        <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
-                    </ClientSettings>
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayroll">
-                        <Columns>
-                            <telerik:GridBoundColumn DataField="SalaryDate" DataType="System.DateTime" FilterControlAltText="Filter SalaryDate column" HeaderText="Date" SortExpression="SalaryDate" UniqueName="SalaryDate" DataFormatString="{0:d}" ItemStyle-HorizontalAlign="Center" 
-                                HeaderStyle-Width="150px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Employee" FilterControlAltText="Filter Employee column" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee"  Aggregate="CountDistinct" FooterAggregateFormatString="{0:N0}">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Hours" DataType="System.Double" HeaderText="Hours" SortExpression="Hours" UniqueName="Hours" Aggregate="Sum" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center"  FooterAggregateFormatString="{0:N1}"
-                                HeaderStyle-Width="100px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="NetAmount" DataType="System.Double" HeaderText="Net Amount" SortExpression="NetAmount" UniqueName="NetAmount" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right"  HeaderTooltip="Net Salary"
-                                HeaderStyle-Width="150px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="GrossAmount" DataType="System.Double" HeaderText="Gross Amount" SortExpression="GrossAmount" UniqueName="GrossAmount" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right"  HeaderTooltip="Gross Salary"
-                                HeaderStyle-Width="150px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="TotalCost" DataType="System.Double" HeaderText="Gross Amount" SortExpression="TotalCost" UniqueName="TotalCost" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right"  HeaderTooltip="Total Cost"
-                                HeaderStyle-Width="150px">
-                            </telerik:GridBoundColumn>
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
-            </telerik:RadWizardStep>
-
-            <telerik:RadWizardStep Title="Monthly Expenses">
-                <div class="row">
-                    <div class="col-md-4">
-                        <telerik:RadGrid ID="RadGridMonthly" runat="server"
-                            ShowFooter="true" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small"
-                            AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonthly" AllowPaging="true" PageSize="12"
-                            HeaderStyle-HorizontalAlign="Center">
-                            <MasterTableView DataSourceID="SqlDataSourceMonthly">
-                                <Columns>
-                                    <telerik:GridNumericColumn DataField="Year" HeaderText="Year" SortExpression="Year" UniqueName="Year" ItemStyle-HorizontalAlign="Center">
-                                    </telerik:GridNumericColumn>
-                                    <telerik:GridNumericColumn DataField="Month" HeaderText="Month" SortExpression="Month" UniqueName="Month" ItemStyle-HorizontalAlign="Center">
-                                    </telerik:GridNumericColumn>
-                                    <telerik:GridNumericColumn DataField="Amount" HeaderText="Amount" SortExpression="Amount" UniqueName="Amount" DecimalDigits="2" MinValue="0" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
-                                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
-                                    </telerik:GridNumericColumn>
-                                </Columns>
-                            </MasterTableView>
-                        </telerik:RadGrid>
-                    </div>
-                    <div class="col-md-8">
-                        <telerik:RadHtmlChart ID="RadHtmlChartMonthly" runat="server" DataSourceID="SqlDataSourceMonthly" Height="450px" Width="95%">
-                            <PlotArea>
-                                <Series>
-                                    <telerik:AreaSeries DataFieldY="Amount" Name="Expenses by Month">
-                                        <Appearance FillStyle-BackgroundColor="Red"></Appearance>
-                                        <LabelsAppearance Visible="false"></LabelsAppearance>
-                                        <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
-                                    </telerik:AreaSeries>
-                                </Series>
-                                <YAxis Name="LeftAxis" MajorTickSize="4" MajorTickType="Outside" Width="3">
-                                    <TitleAppearance Text="$"></TitleAppearance>
-                                    <LabelsAppearance DataFormatString="{0:N0}"></LabelsAppearance>
-                                    <MinorGridLines Visible="false"></MinorGridLines>
-                                </YAxis>
-                                <XAxis DataLabelsField="Month">
-                                    <TitleAppearance Text="Month"></TitleAppearance>
-                                    <MinorGridLines Visible="false"></MinorGridLines>
-                                    <AxisCrossingPoints>
-                                        <telerik:AxisCrossingPoint Value="0" />
-                                        <telerik:AxisCrossingPoint Value="9999" />
-                                    </AxisCrossingPoints>
-                                </XAxis>
-                            </PlotArea>
-                            <Legend>
-                                <Appearance Visible="false"></Appearance>
-                            </Legend>
-                        </telerik:RadHtmlChart>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <telerik:RadHtmlChart ID="RadHtmlChartYearly" runat="server" DataSourceID="SqlDataSourceChartByYear" Height="400px" Width="95%" Visible="false">
-                            <PlotArea>
-                                <Series>
-                                    <telerik:ColumnSeries DataFieldY="Amount" Name="Billing">
-                                        <LabelsAppearance Visible="false" DataFormatString="{0:C0}">
-                                        </LabelsAppearance>
-                                        <TooltipsAppearance DataFormatString="{0:C0}"></TooltipsAppearance>
-                                        <Appearance>
-                                            <FillStyle BackgroundColor="Red" />
-                                        </Appearance>
-                                    </telerik:ColumnSeries>
-                                </Series>
-                                <XAxis DataLabelsField="Year">
-                                    <TitleAppearance Text="Year"></TitleAppearance>
-                                    <MinorGridLines Visible="false"></MinorGridLines>
-                                </XAxis>
-                                <YAxis MajorTickSize="4" MajorTickType="Outside" MinorTickSize="1">
-                                    <LabelsAppearance DataFormatString="{0:C0}"></LabelsAppearance>
-                                    <MinorGridLines Visible="false"></MinorGridLines>
-                                </YAxis>
-                            </PlotArea>
-                            <Legend>
-                                <Appearance Visible="false"></Appearance>
-                            </Legend>
-                        </telerik:RadHtmlChart>
-                    </div>
-                </div>
-
-            </telerik:RadWizardStep>
-
-            <telerik:RadWizardStep Title="Expenses Monthly Chart">
+            <telerik:RadWizardStep Title="Monthly Category Chart">
                 <telerik:RadListView runat="server" ID="FloatedTilesListView" RenderMode="Lightweight" AllowPaging="True"
                     DataKeyNames="Category" DataSourceID="SqlDataSourceGroupByCategory">
                     <AlternatingItemTemplate>
@@ -427,7 +441,7 @@
                                 <asp:Label ID="lblAlternatingCategory" runat="server" Font-Bold="true" Text='<%# Eval("Category") %>'></asp:Label>
                             </h5>
 
-                            <div style="margin: 0; text-align: right; padding-right: 5px; font-size:16px ; font-weight:500;color:darkblue"><%# Eval("Tot", "{0:C2}")%></div>
+                            <div style="margin: 0; text-align: right; padding-right: 5px; font-size: 16px; font-weight: 500; color: darkblue"><%# Eval("Tot", "{0:C2}")%></div>
                             <telerik:RadHtmlChart ID="RainfallChart" runat="server" Width="100%" Height="150px" DataSourceID="SqlDataSourceItemAlternating">
                                 <Legend>
                                     <Appearance Visible="false">
@@ -460,14 +474,14 @@
                                 </PlotArea>
                             </telerik:RadHtmlChart>
 
-                                <asp:SqlDataSource ID="SqlDataSourceItemAlternating" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-                                    SelectCommand="YearStadistic_ExpensesItem_Chart" SelectCommandType="StoredProcedure">
-                                    <SelectParameters>
-                                        <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-                                        <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
-                                        <asp:ControlParameter ControlID="lblAlternatingCategory" Name="category" PropertyName="Text" />
-                                    </SelectParameters>
-                                </asp:SqlDataSource>
+                            <asp:SqlDataSource ID="SqlDataSourceItemAlternating" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+                                SelectCommand="YearStadistic_ExpensesItem_Chart" SelectCommandType="StoredProcedure">
+                                <SelectParameters>
+                                    <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+                                    <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />
+                                    <asp:ControlParameter ControlID="lblAlternatingCategory" Name="category" PropertyName="Text" />
+                                </SelectParameters>
+                            </asp:SqlDataSource>
                         </div>
                     </AlternatingItemTemplate>
                     <ItemTemplate>
@@ -475,7 +489,7 @@
                             <h5 style="margin: 0; text-align: center">
                                 <asp:Label ID="lblItemCategory" runat="server" Font-Bold="true" Text='<%# Eval("Category") %>'></asp:Label>
                             </h5>
-                            <div style="margin: 0; text-align: right; padding-right: 5px; font-size:16px ; font-weight:500;color:darkblue"><%# Eval("Tot", "{0:C2}")%></div>
+                            <div style="margin: 0; text-align: right; padding-right: 5px; font-size: 16px; font-weight: 500; color: darkblue"><%# Eval("Tot", "{0:C2}")%></div>
                             <telerik:RadHtmlChart ID="SunshineChart" runat="server" Width="100%" Height="150px" DataSourceID="SqlDataSourceItem">
                                 <Legend>
                                     <Appearance Visible="false">
@@ -493,7 +507,7 @@
                                     <XAxis DataLabelsField="MonthCode">
                                         <MajorGridLines Visible="false" />
                                         <MinorGridLines Visible="false" />
-                                         <LabelsAppearance>
+                                        <LabelsAppearance>
                                             <TextStyle FontSize="10px" />
                                         </LabelsAppearance>
                                     </XAxis>
@@ -542,6 +556,99 @@
                 </telerik:RadListView>
 
             </telerik:RadWizardStep>
+
+            <telerik:RadWizardStep Title="Expenses Details">
+
+                <telerik:RadGrid ID="RadGridExpenses" runat="server" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center"
+                    AlternatingItemStyle-Font-Size="Small" AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" ShowFooter="true"
+                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceExpenses" Height="900px" PageSize="100" AllowSorting="true">
+                    <ClientSettings>
+                        <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
+                    </ClientSettings>
+                    <MasterTableView DataKeyNames="Id"
+                        DataSourceID="SqlDataSourceExpenses" HorizontalAlign="NotSet" AutoGenerateColumns="False" CssClass="table-sm">
+                        <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                        <Columns>
+                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                                HeaderText="" HeaderStyle-Width="40px">
+                            </telerik:GridEditCommandColumn>
+                            <telerik:GridDateTimeColumn DataField="ExpDate" HeaderStyle-Width="100px" PickerType="DatePicker" HeaderText="Date" ItemStyle-HorizontalAlign="Center"
+                                SortExpression="ExpDate" UniqueName="ExpDate" DataFormatString="{0:d}">
+                            </telerik:GridDateTimeColumn>
+                            <telerik:GridBoundColumn DataField="Type" HeaderText="Type" SortExpression="Type" UniqueName="Type" HeaderStyle-Width="180px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Reference" HeaderText="Reference" SortExpression="Reference" UniqueName="Reference" HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Category" HeaderText="Category" SortExpression="Category" UniqueName="Category">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridTemplateColumn DataField="VendorId" HeaderText="Vendor" SortExpression="VendorId" UniqueName="VendorId">
+                                <EditItemTemplate>
+                                    <telerik:RadComboBox ID="cboVendorEdit" runat="server" SelectedValue='<%# Bind("VendorId") %>' DataSourceID="SqlDataSourceVendors"
+                                        DataTextField="Name" DataValueField="Id" Width="350px" AppendDataBoundItems="True" Height="300px"
+                                        MarkFirstMatch="True" Filter="Contains">
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="(Select Vendor...)" Value="0" />
+                                        </Items>
+                                    </telerik:RadComboBox>
+                                    <br />
+                                    <span style="font-size: x-small; color: darkgray"><%# String.Concat("Original Import Reference: ", Eval("OriginalReference")) %></span>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <%# Eval("Vendor") %>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridBoundColumn DataField="Memo" HeaderText="Memo" SortExpression="Memo" UniqueName="Memo">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridNumericColumn DataField="Amount" HeaderStyle-Width="120px" HeaderText="Amount" ItemStyle-HorizontalAlign="Right"
+                                SortExpression="Amount" UniqueName="Amount" DataFormatString="{0:N2}" Aggregate="Sum">
+                            </telerik:GridNumericColumn>
+                            <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
+                                ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
+                                CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
+                            </telerik:GridButtonColumn>
+                        </Columns>
+                        <EditFormSettings>
+                            <PopUpSettings Modal="true" Width="800px" />
+                            <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                            </EditColumn>
+                        </EditFormSettings>
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </telerik:RadWizardStep>
+
+            <telerik:RadWizardStep Title="Payroll Details">
+                <telerik:RadGrid ID="RadGridPayroll" runat="server" DataSourceID="SqlDataSourcePayroll"
+                    ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" AlternatingItemStyle-Font-Size="Small"
+                    AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="900px" ShowFooter="true">
+                    <ClientSettings>
+                        <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
+                    </ClientSettings>
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayroll">
+                        <Columns>
+                            <telerik:GridBoundColumn DataField="SalaryDate" DataType="System.DateTime" FilterControlAltText="Filter SalaryDate column" HeaderText="Date" SortExpression="SalaryDate" UniqueName="SalaryDate" DataFormatString="{0:d}" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Employee" FilterControlAltText="Filter Employee column" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee" Aggregate="CountDistinct" FooterAggregateFormatString="{0:N0}">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="OriginalReference" HeaderText="Original Reference" SortExpression="OriginalReference" UniqueName="OriginalReference">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Hours" DataType="System.Double" HeaderText="Hours" SortExpression="Hours" UniqueName="Hours" Aggregate="Sum" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center" FooterAggregateFormatString="{0:N1}"
+                                HeaderStyle-Width="100px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="NetAmount" DataType="System.Double" HeaderText="Net Amount" SortExpression="NetAmount" UniqueName="NetAmount" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Net Salary"
+                                HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="GrossAmount" DataType="System.Double" HeaderText="Gross Amount" SortExpression="GrossAmount" UniqueName="GrossAmount" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Gross Salary"
+                                HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="TotalCost" DataType="System.Double" HeaderText="Gross Amount" SortExpression="TotalCost" UniqueName="TotalCost" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Total Cost"
+                                HeaderStyle-Width="150px">
+                            </telerik:GridBoundColumn>
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </telerik:RadWizardStep>
+
         </WizardSteps>
     </telerik:RadWizard>
 

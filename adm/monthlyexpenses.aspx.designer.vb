@@ -203,6 +203,51 @@ Partial Public Class monthlyexpenses
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
     
     '''<summary>
+    '''RadHtmlChartMonthly control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadHtmlChartMonthly As Global.Telerik.Web.UI.RadHtmlChart
+    
+    '''<summary>
+    '''RadGridMonthly control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridMonthly As Global.Telerik.Web.UI.RadGrid
+    
+    '''<summary>
+    '''RadHtmlChartYearly control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadHtmlChartYearly As Global.Telerik.Web.UI.RadHtmlChart
+    
+    '''<summary>
+    '''RadGridYearly control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridYearly As Global.Telerik.Web.UI.RadGrid
+    
+    '''<summary>
+    '''FloatedTilesListView control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FloatedTilesListView As Global.Telerik.Web.UI.RadListView
+    
+    '''<summary>
     '''RadGridExpenses control.
     '''</summary>
     '''<remarks>
@@ -219,42 +264,6 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridPayroll As Global.Telerik.Web.UI.RadGrid
-    
-    '''<summary>
-    '''RadGridMonthly control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridMonthly As Global.Telerik.Web.UI.RadGrid
-    
-    '''<summary>
-    '''RadHtmlChartMonthly control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadHtmlChartMonthly As Global.Telerik.Web.UI.RadHtmlChart
-    
-    '''<summary>
-    '''RadHtmlChartYearly control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadHtmlChartYearly As Global.Telerik.Web.UI.RadHtmlChart
-    
-    '''<summary>
-    '''FloatedTilesListView control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FloatedTilesListView As Global.Telerik.Web.UI.RadListView
     
     '''<summary>
     '''SqlDataSourceExpenses control.

@@ -14,52 +14,49 @@
             <tr>
                 <td>
                     <telerik:RadGrid ID="RadGridNotes" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowAutomaticInserts="true"
-                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceNotes" GridLines="None">
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes"
-                        ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" EditMode="PopUp">
-                        <Columns>
-                            <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="Edit" HeaderStyle-Width="30px" UniqueName="EditCommandColumn">
-                            </telerik:GridEditCommandColumn>
-                            <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" Display="False" HeaderText="ID"
-                                ReadOnly="True" SortExpression="Id" UniqueName="Id">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridDateTimeColumn DataField="Date" DataFormatString="{0:MM/dd/yyyy}" FilterControlAltText="Filter Date column" ReadOnly="true"
-                                HeaderText="Date" SortExpression="Date" UniqueName="Date" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
-                            </telerik:GridDateTimeColumn>
-                            <telerik:GridTemplateColumn DataField="Note" HeaderText="Note" SortExpression="Note"
-                                UniqueName="Note" HeaderStyle-HorizontalAlign="Center">
-                                <EditItemTemplate>
-                                    <telerik:RadTextBox ID="NoteTextBox" runat="server" MaxLength="1024" Text='<%# Bind("Note") %>'
-                                        TextMode="MultiLine" Rows="8" Width="350px">
-                                    </telerik:RadTextBox>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="NoteLabel" runat="server" Text='<%# Eval("Note") %>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
+                        AutoGenerateColumns="False" DataSourceID="SqlDataSourceNotes" GridLines="None">
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes"
+                            ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" EditMode="PopUp">
+                            <Columns>
+                                <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="Edit" HeaderStyle-Width="30px" UniqueName="EditCommandColumn">
+                                </telerik:GridEditCommandColumn>
+                                <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" Display="False" HeaderText="ID"
+                                    ReadOnly="True" SortExpression="Id" UniqueName="Id">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridDateTimeColumn DataField="Date" DataFormatString="{0:MM/dd/yyyy}" FilterControlAltText="Filter Date column" ReadOnly="true"
+                                    HeaderText="Date" SortExpression="Date" UniqueName="Date" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridDateTimeColumn>
+                                <telerik:GridTemplateColumn DataField="Note" HeaderText="Note" SortExpression="Note"
+                                    UniqueName="Note" HeaderStyle-HorizontalAlign="Center">
+                                    <EditItemTemplate>
+                                        <telerik:RadTextBox ID="NoteTextBox" runat="server" MaxLength="1024" Text='<%# Bind("Note") %>'
+                                            TextMode="MultiLine" Rows="8" Width="350px">
+                                        </telerik:RadTextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="NoteLabel" runat="server" Text='<%# Eval("Note") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="NoteBy" HeaderText="NoteBy" SortExpression="NoteBy"
-                                UniqueName="NoteBy" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
-                                <ItemTemplate>
-                                    <asp:Label ID="NoteByLabel" runat="server" Text='<%# Eval("NoteBy") %>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-
-
-                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this note?"
-                                ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
-                            </telerik:GridButtonColumn>
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
+                                <telerik:GridTemplateColumn DataField="NoteBy" HeaderText="NoteBy" SortExpression="NoteBy"
+                                    UniqueName="NoteBy" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
+                                    <ItemTemplate>
+                                        <asp:Label ID="NoteByLabel" runat="server" Text='<%# Eval("NoteBy") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this note?"
+                                    ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                                    UniqueName="DeleteColumn" HeaderText="Delete" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                                </telerik:GridButtonColumn>
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
                 </td>
             </tr>
-           
+
         </table>
 
-    
+
     </div>
     <asp:SqlDataSource ID="SqlDataSourceNotes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [Jobs_notes] WHERE [Id] = @Id"

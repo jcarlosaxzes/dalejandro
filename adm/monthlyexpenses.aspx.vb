@@ -35,20 +35,10 @@ Public Class monthlyexpenses
             RadGridPayroll.DataBind()
             RadGridMonthly.DataBind()
 
-            'SqlDataSourceGroupByCategory.DataBind()
-            'FloatedTilesListView.DataBind()
+            ' Genera error on Binding.... FloatedTilesListView.DataBind()
 
-            If cboYear.SelectedValue > 0 Then
-                RadHtmlChartYearly.Visible = False
-                RadHtmlChartMonthly.DataBind()
-                RadGridMonthly.Visible = True
-                RadHtmlChartMonthly.Visible = True
-            Else
-                RadGridMonthly.Visible = False
-                RadHtmlChartMonthly.Visible = False
-                RadHtmlChartYearly.DataBind()
-                RadHtmlChartYearly.Visible = True
-            End If
+            RadHtmlChartMonthly.DataBind()
+            RadHtmlChartYearly.DataBind()
 
             cboImportMode.SelectedValue = -1
             cboImportPayrollMode.SelectedValue = -1
@@ -262,7 +252,7 @@ Public Class monthlyexpenses
                             Next
 
                             If bIsValidDataRow Then
-                                LocalAPI.NewPayroll(employeeId, CheckDate, NetAmount, TotalHours, TotalPay, TotalCost)
+                                LocalAPI.NewPayroll(employeeId, CheckDate, NetAmount, TotalHours, TotalPay, TotalCost, EmployeeName, lblCompanyId.Text)
                                 nRecs = nRecs + 1
 
                             End If
