@@ -438,14 +438,11 @@ Public Class proposalnewwizard
         lblScheduleTotal.Text = FormatCurrency(bPSTotal)
         If bTotal = 0 Then
             lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
-            RadWizard1.DisplayNavigationButtons = False
         Else
             If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
                 lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
-                RadWizard1.DisplayNavigationButtons = False
             Else
                 lblTotalAlert.Text = ""
-                RadWizard1.DisplayNavigationButtons = True
             End If
         End If
 
