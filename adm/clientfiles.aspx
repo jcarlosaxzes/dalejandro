@@ -44,8 +44,12 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
             <asp:LinkButton ID="btnDeleteSelected" runat="server"
-                CssClass="btn btn-danger btn" UseSubmitBehavior="false">
-                                     Delete selected!
+                CssClass="btn btn-danger" UseSubmitBehavior="false">
+                                    Bulk Delete!
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnBulkEdit" runat="server"
+                CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    Bulk Update!
             </asp:LinkButton>
         </span>
 
@@ -107,7 +111,9 @@
                         <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Select">
                             <i class="far fa-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                         </asp:LinkButton>
-                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 90%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+                        
+                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+
                     </div>
                     <div class="card-body">
                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
@@ -118,16 +124,27 @@
                                     </td>
                                 </tr>                                
                                 <tr>
-                                    <td style="font-size:12px; padding-top:10px;">
+                                    <td style="font-size:12px; padding-top:5px;padding-bottom: 0px;">
                                         <%# LocalAPI.TruncateString(Eval("Name"), 30)%> 
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size:12px">
+                                    <td style="font-size:12px;padding: 0;">
                                          <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
                                          <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                     </td>
-                                </tr>                                
+                                </tr>                                 
+                                <tr>
+                                    <td style="font-size:12px;padding: 0;">
+                                       Type:   <%# Eval("nType")%>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="font-size:12px;padding: 0;">
+                                     <%#IIf(Eval("Public"), "Public", "Private") %>
+                                    </td>
+                                </tr>
+                               
                             </table>
                         </asp:LinkButton>
 
@@ -138,10 +155,12 @@
             <SelectedItemTemplate>
                 <div class="card" style="float: left; width: 230px; margin: 2px">
                     <div class="card-header">
-                        <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Select">
+                        <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Deselect">
                             <i class="fa fa-check-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                         </asp:LinkButton>
-                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 90%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+
+                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+
                     </div>
                     <div class="card-body">
                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
@@ -152,16 +171,27 @@
                                     </td>
                                 </tr>                                
                                 <tr>
-                                    <td style="font-size:12px; padding-top:10px;">
+                                    <td style="font-size:12px; padding-top:5px;padding-bottom: 0px;">
+                                        <asp:Label ID="lblFileName" runat="server" Visible="False" Text='<%# Bind("Name") %>' ></asp:Label>
                                         <%# LocalAPI.TruncateString(Eval("Name"), 30)%> 
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size:12px">
+                                    <td style="font-size:12px;padding: 0;">
                                          <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
                                          <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                     </td>
-                                </tr>                                
+                                </tr>                                 
+                                <tr>
+                                    <td style="font-size:12px;padding: 0;">
+                                       Type:   <%# Eval("nType")%>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="font-size:12px;padding: 0;">
+                                     <%#IIf(Eval("Public"), "Public", "Private") %>
+                                    </td>
+                                </tr>                             
                             </table>
                         </asp:LinkButton>
 
@@ -171,17 +201,32 @@
             </SelectedItemTemplate>
 
         </telerik:RadListView>
-        <asp:Panel ID="UploadPanel" runat="server">
+        <asp:Panel ID="UploadPanel" runat="server">            
             <div style="width: 100%; height: 200px; background-color: lightgray; margin-top: 20px;">
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td style="width: 20%;">
+                            <telerik:RadComboBox ID="cboDocType" runat="server" DataSourceID="SqlDataSourceDocTypes" Label="File type:" DataTextField="Name" DataValueField="Id" Width="100%">
+                            </telerik:RadComboBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">
+                            <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public" ToolTip="Public or private"></telerik:RadCheckBox>
+                        </td>   
+                    </tr>
+                    <tr>
+                        <td style="width: 60%;">
+                            <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
+                            <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
+                            </asp:LinkButton>
+                        </td>
+                    </tr>
+                </table>
                 <table style="width: 100%;">
                     <tr>
                         <td style="width: 90%;">
                             <h3 class="additional-text">Select Files to Upload</h3>
-                        </td>
-                        <td style="width: 150px;">
-                            <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
-                            <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
-                            </asp:LinkButton>
                         </td>
                     </tr>
                 </table>
@@ -192,90 +237,48 @@
             </div>
         </asp:Panel>
 
-        <%--        <telerik:RadGrid ID="RadGridAzureFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GroupPanelPosition="Top" ShowFooter="true"
-            AllowAutomaticUpdates="True" AllowPaging="True" PageSize="25" AllowSorting="True" AllowAutomaticDeletes="True">
-            <ClientSettings Selecting-AllowRowSelect="true"></ClientSettings>
-            <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id, Source" DataSourceID="SqlDataSourceAzureFiles"
-                ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
-                <Columns>
-                    <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridClientSelectColumn>
-                    <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                        HeaderText="" HeaderStyle-Width="40px">
-                    </telerik:GridEditCommandColumn>
-                    <telerik:GridBoundColumn DataField="Id" ReadOnly="True" HeaderText="Id" UniqueName="Id" Display="false">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="Source" ReadOnly="True" HeaderText="Source" UniqueName="Source" ItemStyle-Font-Size="X-Small"
-                        HeaderStyle-Width="100px">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="Document" FilterControlAltText="Filter Document column" HeaderText="Document" SortExpression="Document"
-                        UniqueName="Document" HeaderStyle-Width="80px" ReadOnly="true">
-                        <ItemTemplate>
-                            <%# Eval("Document")%>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="File Name" SortExpression="Name" UniqueName="Name"
-                        ItemStyle-Font-Size="Medium" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
-                        <EditItemTemplate>
-                            <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' MaxLength="255" Width="100%"></telerik:RadTextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="NameTextBox" CssClass="Error" ErrorMessage=" (*)">
-                            </asp:RequiredFieldValidator>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# Eval("Name")%></a>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Date" FilterControlAltText="Filter Date column" HeaderText="Date" SortExpression="Date" UniqueName="Date"
-                        HeaderStyle-Width="80px" ReadOnly="true">
-                        <ItemTemplate>
-                            <%# Eval("Date", "{0:d}")%>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="ContentType" FilterControlAltText="Filter ContentType column" HeaderText="ContentType" SortExpression="ContentType"
-                        UniqueName="ContentType" HeaderStyle-Width="80px" ReadOnly="true">
-                        <ItemTemplate>
-                            <%# Eval("ContentType")%>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-
-                    <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter nType column" HeaderText="Type" SortExpression="nType" UniqueName="Type"
-                        HeaderStyle-Width="80px">
-                        <ItemTemplate>
-                            <%# Eval("nType")%>
-                        </ItemTemplate>
-                        <EditItemTemplate>
-                            <telerik:RadComboBox ID="cboDocType2" runat="server" DataSourceID="SqlDataSourceDocTypes" DataTextField="Name"
-                                DataValueField="Id" Width="100%" ToolTip="Select file type to Upload" SelectedValue='<%# Bind("Type")%>'>
-                            </telerik:RadComboBox>
-                        </EditItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Public" FilterControlAltText="Filter Public column" HeaderText="Public" SortExpression="Public" UniqueName="Public"
-                        HeaderStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                        <EditItemTemplate>
-                            <telerik:RadCheckBox ID="chkPublicEdit" runat="server" ToolTip="Public or private" Checked='<%# Bind("Public") %>' AutoPostBack="false"></telerik:RadCheckBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <telerik:RadCheckBox ID="chkPublicEdit" runat="server" ToolTip="Public or private" Checked='<%# Eval("Public") %>'></telerik:RadCheckBox>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridBoundColumn UniqueName="KBytes" DataFormatString="{0:N0}" ReadOnly="true" Aggregate="Sum"
-                        SortExpression="KBytes" HeaderText="KBytes" DataField="KBytes"
-                        HeaderStyle-Width="80px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
-                    </telerik:GridBoundColumn>
-                </Columns>
-                <EditFormSettings>
-                    <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
-                    </EditColumn>
-                </EditFormSettings>
-            </MasterTableView>
-        </telerik:RadGrid>--%>
     </div>
+
+
+    <telerik:RadToolTip ID="RadToolTipBulkEdit" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+
+        <table class="table table-bordered" style="width: 500px">
+            <tr>
+                <td colspan="2">
+                    <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">Update Files</span>
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 20%;">
+                        <telerik:RadComboBox ID="cboDocTypeBulk" runat="server" DataSourceID="SqlDataSourceDocTypes" ZIndex="10000" Label="File type:" DataTextField="Name" DataValueField="Id" Width="100%">
+                        </telerik:RadComboBox>
+                 </td> 
+            </tr>
+            <tr>                
+                <td style="width: 20%;">
+                    <telerik:RadCheckBox ID="chkPublicBulk" runat="server" Text="Public" ToolTip="Public or private"></telerik:RadCheckBox>
+                </td> 
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center">
+                    <asp:LinkButton ID="btnUpdateStatus" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" Width="120px" ValidationGroup="Reconcile">
+                                    <i class="fas fa-check"></i> Update
+                    </asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:LinkButton ID="btnCance" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
+                                     Cancel
+                    </asp:LinkButton>
+                </td>
+            </tr>
+        </table>
+    </telerik:RadToolTip>
 
 
     <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="ClientProsalJob_azureuploads_v20_SELECT" SelectCommandType="StoredProcedure"
-        DeleteCommand="ClientProsalJob_azureuploads_v20_DELETE" DeleteCommandType="StoredProcedure"
-        UpdateCommand="ClientProsalJob_azureuploads_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        DeleteCommand="ClientProsalJob_azureuploads_v20_DELETE" DeleteCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboClients" Name="clientId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboProposals" Name="proposalId" PropertyName="SelectedValue" Type="Int32" />
@@ -286,13 +289,6 @@
             <asp:ControlParameter ControlID="lblSelectedSource" Name="Source" PropertyName="Text" />
             <asp:ControlParameter ControlID="lblSelectedId" Name="Id" PropertyName="Text" Type="Int32" />
         </DeleteParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Id" />
-            <asp:Parameter Name="Name" />
-            <asp:Parameter Name="Type" />
-            <asp:Parameter Name="Public" DbType="Boolean" />
-            <asp:Parameter Name="Source" />
-        </UpdateParameters>
 
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDocTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -323,6 +319,9 @@
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
+
+     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [Name] FROM [Jobs_azureuploads_types] ORDER BY [Id]"></asp:SqlDataSource>
 
     <asp:Label ID="lblJobId" runat="server" Visible="false" Text="0"></asp:Label>
     <asp:Label ID="lblproposalId" runat="server" Visible="false" Text="0"></asp:Label>

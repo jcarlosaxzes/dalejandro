@@ -12030,6 +12030,26 @@ Public Class LocalAPI
         Return ExecuteNonQuery("Delete FROM [Azure_Uploads] where Id=" & Id)
     End Function
 
+    Public Shared Function UpdateAzureUploads(Id As Integer, Type As Integer, Name As String, sPublic As Boolean) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "AzureUploads_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@Name", Name)
+            cmd.Parameters.AddWithValue("@Type", Type)
+            cmd.Parameters.AddWithValue("@Public", sPublic)
+            cmd.Parameters.AddWithValue("@Id", Id)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 
     Public Shared Function JobAzureStorage_Insert(jobId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
         Try
