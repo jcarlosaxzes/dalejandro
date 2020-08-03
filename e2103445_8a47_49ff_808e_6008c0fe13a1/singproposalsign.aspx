@@ -97,8 +97,10 @@
         <!-- End of Accept -->
         <%-- End Modals and the like --%>
     </asp:Panel>
-    <%-- Fixed print Btn --%>
-    <div class="fixed-action-btn-print hidden-print .d-sm-none .d-md-block hidden-lg-down">
+
+
+    <asp:Panel ID="pnlPrint" runat="server">
+        <div class="fixed-action-btn-print hidden-print  .d-sm-none .d-md-block hidden-lg-down">
         <div class="btn-toolbar mt-lg hidden-print print-buttons">
             <button class="btn btn-inverse print" style="display: block;">
                 <i class="fa fa-print"></i>
@@ -115,6 +117,8 @@
             </div>
         </div>
     </div>
+    </asp:Panel>
+    <%-- Fixed print Btn --%>
     <%-- End of Fixed print Btn --%>
     <%-- Fixed Action Btns --%>
     <asp:Panel ID="pnlSideTools" runat="server">

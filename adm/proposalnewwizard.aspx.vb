@@ -134,7 +134,7 @@ Public Class proposalnewwizard
 
             RadGridAzureuploads.DataBind()
 
-            iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1"
+            iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&FromWizard=1"
 
         End If
     End Sub
@@ -410,6 +410,7 @@ Public Class proposalnewwizard
         ' New code 6-3-2020
         SqlDataSourcePS.Update()
         RadGridPS.DataBind()
+        RadGridFees.DataBind()
         TotalsAnalisis()
         SqlDataSourceProposal_Step1.Update()
         RefreshRatios()
