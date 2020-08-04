@@ -127,8 +127,6 @@ Public Class clientfiles
         Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")
     End Function
 
-
-
     Public Sub RadCloudUpload1_FileUploaded(sender As Object, e As CloudFileUploadedEventArgs) Handles RadCloudUpload1.FileUploaded
         Try
             Dim tempName = e.FileInfo.KeyName
