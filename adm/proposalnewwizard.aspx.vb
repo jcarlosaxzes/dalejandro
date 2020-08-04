@@ -361,20 +361,27 @@ Public Class proposalnewwizard
     End Sub
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
+        Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         Select Case e.CommandName
             Case "EditTask"
                 Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
             Case "OrderDown"
-                LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
-                RadGridFees.DataBind()
+                If statusId <= 1 Then
+                    LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
+                    RadGridFees.DataBind()
+                End If
             Case "OrderUp"
-                LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, -1)
-                RadGridFees.DataBind()
+                If statusId <= 1 Then
+                    LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, -1)
+                    RadGridFees.DataBind()
+                End If
 
             Case "DetailDuplicate"
-                lblDetailSelectedId.Text = e.CommandArgument
-                SqlDataSourceProposaldDetailDuplicate.Insert()
-                RadGridFees.DataBind()
+                If statusId <= 1 Then
+                    lblDetailSelectedId.Text = e.CommandArgument
+                    SqlDataSourceProposaldDetailDuplicate.Insert()
+                    RadGridFees.DataBind()
+                End If
         End Select
 
     End Sub

@@ -322,9 +322,7 @@ Public Class proposal
             Case "EditTask"
                 Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument)
             Case "DetailDuplicate"
-                If lblOriginalStatus.Text > 1 Then
-                    Exit Sub
-                Else
+                If cboStatus.SelectedValue <= 1 Then
                     lblDetailSelectedId.Text = e.CommandArgument
                     SqlDataSourceProposaldDetailDuplicate.Insert()
                     RadGrid1.DataBind()
