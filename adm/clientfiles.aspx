@@ -34,6 +34,11 @@
             height: auto;
             width: auto;
         }
+        .fileUploadRad {
+            position:absolute;
+            margin-top:80px;
+            width:100%;
+        }
     </style>
 
     <div class="pasconcept-bar noprint">
@@ -45,11 +50,11 @@
             </button>
             <asp:LinkButton ID="btnDeleteSelected" runat="server"
                 CssClass="btn btn-danger" UseSubmitBehavior="false">
-                                    Bulk Delete!
+                   <i class="fas fa-trash"></i>&nbsp;Bulk Delete
             </asp:LinkButton>
             <asp:LinkButton ID="btnBulkEdit" runat="server"
                 CssClass="btn btn-primary" UseSubmitBehavior="false">
-                                    Bulk Update!
+                   <i class="fas fa-pencil-alt"></i>&nbsp; Bulk Update
             </asp:LinkButton>
         </span>
 
@@ -120,7 +125,7 @@
                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <tr>
                                     <td style="height:108px">
-                                        <%# CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
                                     </td>
                                 </tr>                                
                                 <tr>
@@ -167,7 +172,7 @@
                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                 <tr>
                                     <td style="height:108px">
-                                        <%# CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
                                     </td>
                                 </tr>                                
                                 <tr>
@@ -202,28 +207,25 @@
 
         </telerik:RadListView>
         <asp:Panel ID="UploadPanel" runat="server">            
-            <div style="width: 100%; height: 200px; background-color: lightgray; margin-top: 20px;">
-                <table class="table-sm" style="width: 100%">
+            <div style="width: 100%; height: 200px; background-color: lightgray; margin-top: 20px; position:relative">                
+                
+                <table class="table-sm" style="width: 100%; position:absolute;margin-top:0px;">
                     <tr>
-                        <td style="width: 20%;">
+                        <td style="width: 40%;">
                             <telerik:RadComboBox ID="cboDocType" runat="server" DataSourceID="SqlDataSourceDocTypes" Label="File type:" DataTextField="Name" DataValueField="Id" Width="100%">
                             </telerik:RadComboBox>
                         </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 20%;">
+                        <td style="width: 30%;">
                             <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public" ToolTip="Public or private"></telerik:RadCheckBox>
-                        </td>   
-                    </tr>
-                    <tr>
-                        <td style="width: 60%;">
+                        </td>                           
+                        <td style="width: 30%;" rowspan="2">
                             <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
                             <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
                             </asp:LinkButton>
                         </td>
                     </tr>
                 </table>
-                <table style="width: 100%;">
+                <table style="width: 100%; position:absolute;margin-top:40px;" >
                     <tr>
                         <td style="width: 90%;">
                             <h3 class="additional-text">Select Files to Upload</h3>
@@ -231,7 +233,7 @@
                     </tr>
                 </table>
                 <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
-                    ProviderType="Azure" MaxFileSize="1048576" CssClass="h-100">
+                    ProviderType="Azure" MaxFileSize="1048576" CssClass="h-100 fileUploadRad">
                 </telerik:RadCloudUpload>
 
             </div>
@@ -275,6 +277,29 @@
         </table>
     </telerik:RadToolTip>
 
+    <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Delete Proposal
+            </span>
+        </h2>
+        <table class="table-sm" style="width: 600px">
+            <tr>
+                <td>Are you sure you want to delete selected Files?
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:LinkButton ID="btnConfirmDelete" runat="server" CssClass="btn btn-danger" Width="150px" UseSubmitBehavior="false">
+                             Delete 
+                    </asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:LinkButton ID="btnCancelDelete" runat="server" CssClass="btn btn-secondary" Width="150px" UseSubmitBehavior="false">
+                             Cancel
+                    </asp:LinkButton>
+                </td>
+            </tr>
+        </table>
+    </telerik:RadToolTip>
 
     <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="ClientProsalJob_azureuploads_v20_SELECT" SelectCommandType="StoredProcedure"

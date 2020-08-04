@@ -143,7 +143,7 @@ Public Class proposalnewwizard
 
             RadGridPS.DataBind()
 
-            RadGridAzureuploads.DataBind()
+            RadListView1.DataBind()
 
             iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&FromWizard=1"
 
@@ -216,7 +216,7 @@ Public Class proposalnewwizard
                     FormViewTC.ChangeMode(FormViewMode.ReadOnly)
                 End If
                 HideTCtoolbar()
-                RadGridAzureuploads.DataBind()
+                RadListView1.DataBind()
 
                 TotalsAnalisis()
 
@@ -227,7 +227,7 @@ Public Class proposalnewwizard
 
             Case "RadWizardStepAttachments"
                 e.NextStep.Enabled = True
-                RadGridAzureuploads.DataBind()
+                RadListView1.DataBind()
 
         End Select
 
@@ -256,7 +256,7 @@ Public Class proposalnewwizard
                 RadGridPS.DataBind()
 
             Case "Preview"
-                RadGridAzureuploads.DataBind()
+                RadListView1.DataBind()
 
         End Select
 
@@ -463,7 +463,7 @@ Public Class proposalnewwizard
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
                 e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
                 If e.IsValid Then
-                    RadGridAzureuploads.DataBind()
+                    RadListView1.DataBind()
                     Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
                 Else
                     Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
@@ -479,6 +479,66 @@ Public Class proposalnewwizard
 
     Private Sub SqlDataSourceTandCtemplates_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceTandCtemplates.Updating
         Dim E1 As String = e.Command.Parameters(0).Value
+    End Sub
+
+
+    Private Sub btnDeleteSelected_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
+        If RadListView1.SelectedItems.Count > 0 Then
+            RadToolTipDelete.Visible = True
+            RadToolTipDelete.Show()
+        Else
+            Master.ErrorMessage("Select (Mark) Files to Update")
+        End If
+    End Sub
+    Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
+        Try
+            'get a reference to the row
+            If RadListView1.SelectedItems.Count > 0 Then
+                For Each dataItem As RadListViewDataItem In RadListView1.SelectedItems
+                    If dataItem.Selected Then
+                        Dim idFile = dataItem.GetDataKeyValue("Id").ToString()
+                        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
+                        LocalAPI.DeleteAzureFile(idFile)
+                        AzureStorageApi.DeleteFile(KeyName)
+                    End If
+                Next
+                RadListView1.ClearSelectedItems()
+                RadListView1.DataBind()
+            Else
+                Master.ErrorMessage("Select records!")
+
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage("Error. " & ex.Message)
+        End Try
+    End Sub
+
+    Protected Sub btnCancelDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDelete.Click
+        RadToolTipDelete.Visible = False
+    End Sub
+
+    Private Sub btnBulkEdit_Click(sender As Object, e As EventArgs) Handles btnBulkEdit.Click
+        If RadListView1.SelectedItems.Count > 0 Then
+            RadToolTipBulkEdit.Visible = True
+            RadToolTipBulkEdit.Show()
+        Else
+            Master.ErrorMessage("Select (Mark) Files to Update")
+        End If
+
+    End Sub
+
+    Private Sub btnUpdateStatus_Click(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
+        RadListView1.AllowMultiItemEdit = True
+
+        For Each item As RadListViewDataItem In RadListView1.SelectedItems
+            If item.Selected Then
+                item.Selected = False
+                Dim Id = item.OwnerListView.DataKeyValues(item.DisplayIndex)("Id").ToString()
+                Dim lblName As Label = CType(item.FindControl("lblFileName"), Label)
+                LocalAPI.UpdateAzureUploads(Id, cboDocTypeBulk.SelectedValue, lblName.Text, chkPublicBulk.Checked)
+            End If
+        Next
+        RadListView1.DataBind()
     End Sub
 
 #End Region
@@ -594,4 +654,8 @@ Public Class proposalnewwizard
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
     End Sub
+
+    Public Function FormatSource(source As String)
+        Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")
+    End Function
 End Class

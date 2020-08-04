@@ -176,6 +176,33 @@ Partial Public Class clientfiles
     Protected WithEvents btnCance As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''RadToolTipDelete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipDelete As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''btnConfirmDelete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirmDelete As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnCancelDelete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCancelDelete As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''SqlDataSourceAzureFiles control.
     '''</summary>
     '''<remarks>

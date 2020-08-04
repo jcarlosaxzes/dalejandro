@@ -11,8 +11,18 @@ Public Class clientfiles
             Master.PageTitle = "Clients/Uploaded Files"
 
             lblCompanyId.Text = Session("companyId")
+
+            If Not Request.QueryString("client") Is Nothing Then
+                Dim clientGuid As String = Request.QueryString("client")
+                Dim clietnId = LocalAPI.GetClientIdFromGUID(clientGuid)
+                If clietnId > 0 Then
+                    cboClients.DataBind()
+                    cboClients.SelectedValue = clietnId
+                End If
+            End If
+
         End If
-        If cboClients.SelectedItem Is Nothing Then
+            If cboClients.SelectedItem Is Nothing Then
             UploadPanel.Visible = False
         ElseIf String.IsNullOrEmpty(cboClients.SelectedItem.Value) Or cboClients.SelectedItem.Value = "-1" Then
             UploadPanel.Visible = False
@@ -49,6 +59,15 @@ Public Class clientfiles
     End Sub
 
     Private Sub btnDeleteSelected_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
+        If RadListView1.SelectedItems.Count > 0 Then
+            RadToolTipDelete.Visible = True
+            RadToolTipDelete.Show()
+        Else
+            Master.ErrorMessage("Select (Mark) Files to Update")
+        End If
+    End Sub
+    Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
+
         Try
             'get a reference to the row
             If RadListView1.SelectedItems.Count > 0 Then
@@ -71,6 +90,10 @@ Public Class clientfiles
         End Try
     End Sub
 
+    Protected Sub btnCancelDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDelete.Click
+        RadToolTipDelete.Visible = False
+    End Sub
+
     Private Sub btnBulkEdit_Click(sender As Object, e As EventArgs) Handles btnBulkEdit.Click
         If RadListView1.SelectedItems.Count > 0 Then
             RadToolTipBulkEdit.Visible = True
@@ -79,27 +102,6 @@ Public Class clientfiles
             Master.ErrorMessage("Select (Mark) Files to Update")
         End If
 
-
-        'Try
-        '    'get a reference to the row
-        '    If RadListView1.SelectedItems.Count > 0 Then
-        '        For Each dataItem As RadListViewDataItem In RadListView1.SelectedItems
-        '            If dataItem.Selected Then
-        '                Dim idFile = dataItem.GetDataKeyValue("Id").ToString()
-        '                Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
-        '                LocalAPI.DeleteAzureFile(idFile)
-        '                AzureStorageApi.DeleteFile(KeyName)
-        '            End If
-        '        Next
-        '        RadListView1.ClearSelectedItems()
-        '        RadListView1.DataBind()
-        '    Else
-        '        Master.ErrorMessage("Select records!")
-
-        '    End If
-        'Catch ex As Exception
-        '    Master.ErrorMessage("Error. " & ex.Message)
-        'End Try
     End Sub
 
     Private Sub btnUpdateStatus_Click(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
@@ -125,47 +127,7 @@ Public Class clientfiles
         Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")
     End Function
 
-    Public Function CreateIcon(sContentType As String, sUrl As String, sName As String)
-        If sContentType = "application/pdf" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/zip" Or sContentType = "application/x-tar" Or sContentType = "application/x-rar" Then
-            Return $"<a class=""far fa-file-archive"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/vnd.ms-excel" Or sContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" Then
-            Return $"<a class=""far fa-file-excel"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/msword" Or sContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "image/tiff" Or sContentType = "image/bmp" Or sContentType = "image/jpeg" Or sContentType = "image/gif" Or sContentType = "Image/jpg" Or sContentType = "image/png" Then
-            Return $"<image src=""{sUrl}"" width=""200px""/>"
-        End If
 
-        Return $"<a class=""far fa-file"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-
-    End Function
-
-    Public Function CreateSmallIcon(sContentType As String, sUrl As String, sName As String)
-        If sContentType = "application/pdf" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/zip" Or sContentType = "application/x-tar" Or sContentType = "application/x-rar" Then
-            Return $"<a class=""far fa-file-archive"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/vnd.ms-excel" Or sContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" Then
-            Return $"<a class=""far fa-file-excel"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/msword" Or sContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "image/tiff" Or sContentType = "image/bmp" Or sContentType = "image/jpeg" Or sContentType = "image/gif" Or sContentType = "Image/jpg" Or sContentType = "image/png" Then
-            Return $"<image src=""{sUrl}"" width=""100px""/>"
-        End If
-
-        Return $"<a class=""far fa-file"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-
-    End Function
 
     Public Sub RadCloudUpload1_FileUploaded(sender As Object, e As CloudFileUploadedEventArgs) Handles RadCloudUpload1.FileUploaded
         Try
