@@ -10212,7 +10212,7 @@ Public Class LocalAPI
                 Case 3
                     sSelectCommand = "SELECT [Id] FROM [RequestForProposals] WHERE [guid]=@guid"
                 Case 4
-                    sSelectCommand = "SELECT [Id] FROM [Invoices] WHERE [guid]=guid"
+                    sSelectCommand = "SELECT [Id] FROM [Invoices] WHERE [guid]=@guid"
                 Case 5
                     sSelectCommand = "SELECT [Id] FROM [Invoices_statements] WHERE [guid]=@guid"
                 Case 6, 22, 30
