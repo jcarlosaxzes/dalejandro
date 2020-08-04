@@ -318,16 +318,17 @@ Public Class proposal
     End Sub
 
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
-        If lblOriginalStatus.Text > 1 Then
-            Exit Sub
-        End If
         Select Case e.CommandName
             Case "EditTask"
                 Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument)
             Case "DetailDuplicate"
-                lblDetailSelectedId.Text = e.CommandArgument
-                SqlDataSourceProposaldDetailDuplicate.Insert()
-                RadGrid1.DataBind()
+                If lblOriginalStatus.Text > 1 Then
+                    Exit Sub
+                Else
+                    lblDetailSelectedId.Text = e.CommandArgument
+                    SqlDataSourceProposaldDetailDuplicate.Insert()
+                    RadGrid1.DataBind()
+                End If
         End Select
 
     End Sub
