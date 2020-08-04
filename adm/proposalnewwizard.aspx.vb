@@ -361,10 +361,6 @@ Public Class proposalnewwizard
     End Sub
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
-        Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
-        If statusId > 1 Then
-            Exit Sub
-        End If
         Select Case e.CommandName
             Case "EditTask"
                 Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
