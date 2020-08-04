@@ -20,6 +20,7 @@ Public Class proposaltask
                     lblTaskList.Visible = False
 
                     PanelEstimatorVisible()
+
                 Else
                     ' Insert
                     lbldetailId.Text = "0"
