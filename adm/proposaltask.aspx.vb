@@ -55,13 +55,8 @@ Public Class proposaltask
     End Sub
 
     Private Function EnabledProposal() As Boolean
-        Dim Allow_EditAcceptedProposal As Boolean = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_EditAcceptedProposal")
-        If Allow_EditAcceptedProposal Then
-            Return True
-        Else
-            Dim sStatus As Integer = LocalAPI.GetProposalData(lblproposalId.Text, "statusId")
-            Return (sStatus <> 4 And sStatus <> 2) ' diferente de Revised
-        End If
+        Dim sStatus As Integer = LocalAPI.GetProposalData(lblproposalId.Text, "statusId")
+        Return (sStatus <> 4 And sStatus <> 2) ' diferente de Revised
     End Function
 
     Private Sub ReadDetails()
