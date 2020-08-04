@@ -168,6 +168,10 @@ Public Class singproposalsign
             End If
         End If
 
+        If LocalAPI.IsTabletOrSmarthphone(Request.UserAgent) Then
+            RadBarcode1.Visible = False
+        End If
+
         If Not Request.QueryString("printing") Is Nothing Then
             pnlSideTools.Visible = False
             pnlModals.Visible = False
