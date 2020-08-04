@@ -540,7 +540,7 @@
                             <tr>
                                 <td>
                                     <telerik:RadEditor ID="radEditor_TandC" runat="server" RenderMode="Auto"
-                                        Height="380px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design"
+                                        Height="380px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview"
                                         Width="100%">
                                     </telerik:RadEditor>
                                 </td>
@@ -576,7 +576,7 @@
                             </td>
                             <td>
                                 <telerik:RadEditor ID="txtBody" runat="server" RenderMode="Auto"
-                                    Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design"
+                                    Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview"
                                     Width="100%">
                                 </telerik:RadEditor>
 

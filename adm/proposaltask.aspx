@@ -2,7 +2,6 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" DefaultLoadingPanelID="RadAjaxLoadingPanel1">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="cboMulticolumnTask">
@@ -35,7 +34,7 @@
         </table>
     </div>
     <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 99%;" >
+        <table class="table-sm" style="width: 99%;">
             <tr>
                 <td style="text-align: right; width: 200px">
                     <asp:Label ID="lblTaskList" runat="server" Text="Select Task from List:"></asp:Label>
@@ -91,9 +90,9 @@
                 <td style="text-align: right; vertical-align: top">Description:
                 </td>
                 <td>
-                    <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="250px"
+                    <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="250px" 
                         AllowScripts="True" Width="95%"
-                        ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="Design" RenderMode="Auto">
+                        ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="Design,Preview" RenderMode="Auto">
                     </telerik:RadEditor>
                 </td>
             </tr>
@@ -101,7 +100,7 @@
                 <td style="text-align: right">Quantity:
                 </td>
                 <td>
-                    <table class="table-sm" style="width: 95%" >
+                    <table class="table-sm" style="width: 95%">
                         <tr>
                             <td style="width: 120px">
                                 <telerik:RadNumericTextBox ID="txtAmount" runat="server" Width="100%" EmptyMessage="Optional">
@@ -146,12 +145,11 @@
                     <b>Expression</b>:
                 </td>
                 <td>
-                     <small>Total = [Quantity] * [Hours] * [Rates]</small>     <small>if [Quantity] or [Hours] 'is blank' then Total = [1] * [1] * [Rates]</small>
+                    <small>Total = [Quantity] * [Hours] * [Rates]</small>     <small>if [Quantity] or [Hours] 'is blank' then Total = [1] * [1] * [Rates]</small>
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">
-                    Payment Schedule:
+                <td style="text-align: right">Payment Schedule:
                 </td>
                 <td>
                     <table style="width: 100%">
@@ -165,7 +163,7 @@
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
-                            <td style="text-align: right;padding-right:5%">
+                            <td style="text-align: right; padding-right: 5%">
                                 <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="TaskUpdate" UseSubmitBehavior="false" Text="Insert">
                                 </asp:LinkButton>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -178,7 +176,7 @@
             </tr>
         </table>
         <asp:Panel runat="server" ID="PanelEstimator" BackColor="WhiteSmoke">
-            <hr style="margin:0" />
+            <hr style="margin: 0" />
             <h3 style="margin-left: 100px">Estimator
             </h3>
             <table class="table-sm" style="width: 100%">

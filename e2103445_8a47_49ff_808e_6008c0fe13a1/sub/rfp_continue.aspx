@@ -192,7 +192,7 @@
                             <tr>
                                 <td>
                                     <telerik:RadEditor ID="txtSubconsultaTandC" runat="server" RenderMode="Auto"
-                                        Height="450px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design"
+                                        Height="450px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview"
                                         Width="100%">
                                     </telerik:RadEditor>
                                 </td>

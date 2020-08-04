@@ -55,7 +55,7 @@
                 <tr>
                     <td colspan="4">
                         <telerik:RadEditor ID="txtBody" runat="server" Height="400px" RenderMode="Auto"
-                            AllowScripts="True" EditModes="Design" Width="100%">
+                            AllowScripts="True" EditModes="Design,Preview" Width="100%">
                             <Tools>
                                 <telerik:EditorToolGroup>
                                     <telerik:EditorTool Name="Cut" />

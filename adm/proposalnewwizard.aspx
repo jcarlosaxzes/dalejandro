@@ -849,7 +849,7 @@
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <telerik:RadEditor ID="radEditor_TandC" runat="server" Content='<%# Bind("Agreements") %>'
-                                    Height="400px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design" RenderMode="Auto"
+                                    Height="400px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto"
                                     Width="100%">
                                 </telerik:RadEditor>
                             </EditItemTemplate>
