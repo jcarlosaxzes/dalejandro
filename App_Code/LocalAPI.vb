@@ -1106,7 +1106,12 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetRFPIdFromGUID(rfpGUID As String) As Integer
-        Return GetNumericEscalar("SELECT ISNULL(Id,0) FROM RequestForProposals WHERE [guid]='" & rfpGUID & "'")
+        'inject sql!!! Return GetNumericEscalar("SELECT ISNULL(Id,0) FROM RequestForProposals WHERE [guid]='" & rfpGUID & "'")
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT ISNULL(Id,0) FROM RequestForProposals WHERE [guid]=@rfpGUID", cnn1)
+        cmd.Parameters.AddWithValue("@rfpGUID", rfpGUID)
+        GetRFPIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
     End Function
 
     Public Shared Function SetRFPStatus(ByVal rfpId As Integer, ByVal nSatus As RFPStatus_ENUM, Optional ByVal sDeclinedNotes As String = "", Optional ByVal jobId As Integer = -1) As Boolean
@@ -2323,7 +2328,13 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetJobIdFromGUID(ByVal guid As String) As Integer
-        Return GetNumericEscalar("SELECT [Id] FROM [Jobs] where [guid]='" & guid & "'")
+        'Inject SQL!!!! Return GetNumericEscalar("SELECT [Id] FROM [Jobs] where [guid]='" & guid & "'")
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT [Id] FROM [Jobs] where [guid]=@guid", cnn1)
+        cmd.Parameters.AddWithValue("@guid", guid)
+        GetJobIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
+
     End Function
 
     Public Shared Function GetJobCoste(ByRef jobId As Integer) As Double
@@ -4413,7 +4424,14 @@ Public Class LocalAPI
 
 
     Public Shared Function GetClientIdFromGUID(clientGUID As String) As Integer
-        Return GetNumericEscalar("SELECT ISNULL(Id,0) FROM [Clients] WHERE [guid]='" & clientGUID & "'")
+        ' inject sql ....Return GetNumericEscalar("SELECT ISNULL(Id,0) FROM [Clients] WHERE [guid]='" & clientGUID & "'")
+
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT ISNULL(Id,0) FROM [Clients] WHERE [guid]=@clientGUID", cnn1)
+        cmd.Parameters.AddWithValue("@clientGUID", clientGUID)
+        GetClientIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
+
     End Function
 
 
@@ -8047,21 +8065,27 @@ Public Class LocalAPI
 
 #Region "Company"
     Public Shared Function GetCompanyGUID(ByVal Id As Integer) As String
-        Return GetStringEscalar("SELECT [guId] FROM [Company] WHERE [companyId]=" & Id)
+        Return GetStringEscalar($"SELECT [guId] FROM [Company] WHERE [companyId]={Id}")
     End Function
 
     Public Shared Function GetCompanyIdFromGUID(ByVal gu_id As String) As Integer
-        Return GetNumericEscalar("SELECT [companyId] FROM [Company] WHERE [guId]='" & gu_id & "'")
+        'Inject SQL!!!!! Return GetNumericEscalar($"SELECT [companyId] FROM [Company] WHERE [guId]='{gu_id}'")
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT [companyId] FROM [Company] WHERE [guId]=@guid", cnn1)
+        cmd.Parameters.AddWithValue("@guid", gu_id)
+        GetCompanyIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
+
     End Function
 
     Public Shared Function GetLastCompanyCreated(sCompanyName As String, sEmail As String) As Integer
-        Return GetNumericEscalar("SELECT TOP 1 [companyId] FROM Company WHERE [Name]='" & sCompanyName & "' AND Email='" & sEmail & "' ORDER BY StartDate DESC")
+        Return GetNumericEscalar($"SELECT TOP 1 [companyId] FROM Company WHERE [Name]='{sCompanyName}' AND Email='{sEmail}' ORDER BY StartDate DESC")
     End Function
 
     Public Shared Function GetCompanyId(ByVal lEmployee As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT [companyId] FROM [Employees] WHERE [Id]=" & lEmployee, cnn1)
+            Dim cmd As New SqlCommand($"SELECT [companyId] FROM [Employees] WHERE [Id]={lEmployee}", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8078,7 +8102,7 @@ Public Class LocalAPI
     Public Shared Function GetCompanyIdFromJob(ByVal lJobId As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT [companyId] FROM [Jobs] WHERE [Id]=" & lJobId, cnn1)
+            Dim cmd As New SqlCommand($"SELECT [companyId] FROM [Jobs] WHERE [Id]={lJobId}", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8095,7 +8119,7 @@ Public Class LocalAPI
     Public Shared Function GetCompanyIdFromClient(ByVal sClientEmail As String) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT TOP 1 [companyId] FROM [Clients] WHERE [Email]='" & sClientEmail & "'", cnn1)
+            Dim cmd As New SqlCommand($"SELECT TOP 1 [companyId] FROM [Clients] WHERE [Email]='{sClientEmail}'", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8112,7 +8136,7 @@ Public Class LocalAPI
     Public Shared Function GetCompanyIdFromEmployee(ByVal sEmployeeEmail As String) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT TOP 1 [companyId] FROM [Employees] WHERE [Email]='" & sEmployeeEmail & "' order by companyId", cnn1)
+            Dim cmd As New SqlCommand($"SELECT TOP 1 [companyId] FROM [Employees] WHERE [Email]='{sEmployeeEmail}' order by companyId", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8129,7 +8153,7 @@ Public Class LocalAPI
     Public Shared Function GetActiveCompanyIdFromEmployee(ByVal sEmployeeEmail As String) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT TOP 1 [companyId] FROM [Employees] WHERE [Email]='" & sEmployeeEmail & "' and Inactive=0 order by companyId", cnn1)
+            Dim cmd As New SqlCommand($"SELECT TOP 1 [companyId] FROM [Employees] WHERE [Email]='{sEmployeeEmail}' and Inactive=0 order by companyId", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8146,7 +8170,7 @@ Public Class LocalAPI
     Public Shared Function GetCompanyIdFromEmployee(ByVal employeeId As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT [companyId] FROM [Employees] WHERE [Id]=" & employeeId, cnn1)
+            Dim cmd As New SqlCommand($"SELECT [companyId] FROM [Employees] WHERE [Id]={employeeId}", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8163,7 +8187,7 @@ Public Class LocalAPI
     Public Shared Function GetCompanyIdFromProposal(ByVal lProposalId As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT [companyId] FROM [Proposal] WHERE [Id]=" & lProposalId, cnn1)
+            Dim cmd As New SqlCommand($"SELECT [companyId] FROM [Proposal] WHERE [Id]={lProposalId}", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8180,7 +8204,7 @@ Public Class LocalAPI
     Public Shared Function GetCompanyIdFromRFP(ByVal lRFPId As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT [companyId] FROM [RequestForProposals] WHERE [Id]=" & lRFPId, cnn1)
+            Dim cmd As New SqlCommand($"SELECT [companyId] FROM [RequestForProposals] WHERE [Id]={lRFPId}", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8198,7 +8222,7 @@ Public Class LocalAPI
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT Jobs.companyId FROM Invoices INNER JOIN Jobs ON Invoices.JobId = Jobs.Id WHERE Invoices.Id=" & invoiceId, cnn1)
+            Dim cmd As New SqlCommand($"SELECT Jobs.companyId FROM Invoices INNER JOIN Jobs ON Invoices.JobId = Jobs.Id WHERE Invoices.Id={invoiceId}", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -8217,7 +8241,7 @@ Public Class LocalAPI
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT [companyId] FROM [Invoices_statements] WHERE [Id]=" & statementId, cnn1)
+            Dim cmd As New SqlCommand($"SELECT [companyId] FROM [Invoices_statements] WHERE [Id]={statementId}", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             rdr.Read()
@@ -9872,7 +9896,13 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetSubconsultantIdFromGUID(SubConsultantGUID As String) As Integer
-        Return GetNumericEscalar("SELECT ISNULL(Id,0) FROM [SubConsultans] WHERE [guid]='" & SubConsultantGUID & "'")
+        'Inject SQL!!!!Return GetNumericEscalar("SELECT ISNULL(Id,0) FROM [SubConsultans] WHERE [guid]='" & SubConsultantGUID & "'")
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT ISNULL(Id,0) FROM [SubConsultans] WHERE [guid]=@guid", cnn1)
+        cmd.Parameters.AddWithValue("@guid", SubConsultantGUID)
+        GetSubconsultantIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
+
     End Function
 
     Public Shared Function GetSubConsultanEmail(ByVal lSubConsultanId As Integer) As String
@@ -10153,7 +10183,7 @@ Public Class LocalAPI
         Return False
     End Function
 
-    Public Shared Function GetSharedLink_Id(ByVal objType As Integer, ByVal guiId As String) As Integer
+    Public Shared Function GetSharedLink_Id_injectsql(ByVal objType As Integer, ByVal guiId As String) As Integer
         If IsValidGuid(guiId) Then
 
             Select Case objType
@@ -10172,6 +10202,38 @@ Public Class LocalAPI
             End Select
         End If
     End Function
+
+    Public Shared Function GetSharedLink_Id(ByVal objType As Integer, ByVal guiId As String) As Integer
+        If IsValidGuid(guiId) Then
+            Dim sSelectCommand As String
+            Select Case objType
+                Case 1, 11, 111
+                    sSelectCommand = "SELECT [Id] FROM [Proposal] WHERE [guid]=@guid"
+                Case 3
+                    sSelectCommand = "SELECT [Id] FROM [RequestForProposals] WHERE [guid]=@guid"
+                Case 4
+                    sSelectCommand = "SELECT [Id] FROM [Invoices] WHERE [guid]=guid"
+                Case 5
+                    sSelectCommand = "SELECT [Id] FROM [Invoices_statements] WHERE [guid]=@guid"
+                Case 6, 22, 30
+                    sSelectCommand = "SELECT [Id] FROM [Transmittals] WHERE [guid]=@guid"
+                Case 7
+                    sSelectCommand = "SELECT [Id] FROM [Jobs] WHERE [guid]=@guid"
+            End Select
+
+            Try
+                Dim cnn1 As SqlConnection = GetConnection()
+                Dim cmd As New SqlCommand(sSelectCommand, cnn1)
+                cmd.Parameters.AddWithValue("@guid", guiId)
+                GetSharedLink_Id = Convert.ToDouble(cmd.ExecuteScalar())
+                cnn1.Close()
+            Catch ex As Exception
+                Return 0
+            End Try
+        End If
+    End Function
+
+
     Public Shared Function GetSharedLink_guiId(ByVal objType As Integer, objId As Integer) As String
         Try
             Select Case objType

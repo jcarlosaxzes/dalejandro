@@ -1134,7 +1134,7 @@
 
                                                 <td colspan="2">
                                                     <telerik:RadEditor ID="radEditor_TandC" runat="server" Content='<%# Bind("Agreements") %>'
-                                                        Height="600px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design" RenderMode="Auto"
+                                                        Height="600px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto"
                                                         Width="98%">
                                                     </telerik:RadEditor>
                                                 </td>

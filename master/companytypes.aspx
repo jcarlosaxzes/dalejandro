@@ -392,7 +392,7 @@
                                                                         <tr>
                                                                             <td>
                                                                                 <telerik:RadEditor ID="gridEditor_TandC" runat="server" Content='<%# Bind("Agreement") %>'
-                                                                                    Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design"
+                                                                                    Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview"
                                                                                     Width="650px" RenderMode="Auto">
                                                                                 </telerik:RadEditor>
                                                                             </td>
@@ -463,7 +463,7 @@
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <telerik:RadEditor ID="gridEditor_Saludo" runat="server" Content='<%# Bind("Descripction")%>'
-                                                                    Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design" RenderMode="Auto"
+                                                                    Height="300px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto"
                                                                     Width="600px">
                                                                 </telerik:RadEditor>
                                                             </EditItemTemplate>
