@@ -1,5 +1,4 @@
-﻿Imports System.IO
-Imports Telerik.Web.UI
+﻿Imports Telerik.Web.UI
 Public Class company
     Inherits System.Web.UI.Page
 
@@ -32,7 +31,7 @@ Public Class company
                 End If
 
 
-                txtExpensesYear.Value = Date.Today.Year
+
             End If
             RadWindowManager1.EnableViewState = False
         Catch ex As Exception
@@ -97,59 +96,6 @@ Public Class company
         End Try
     End Sub
 
-    Protected Sub btnExpensesImport_Click(sender As Object, e As EventArgs) Handles btnExpensesImport.Click
-        Try
-            'Company Expenses
-            If RadUploadExpenses1.UploadedFiles.Count > 0 Then
-                Dim arrValues
-                Dim sLine As String
-                Dim ExpDate As String
-                Dim Amount As Double
-                Dim Category As String
-                Dim StreamerObject As Stream = RadUploadExpenses1.UploadedFiles(0).InputStream
-                Dim sr As StreamReader = New StreamReader(StreamerObject)
-                ' 1ra fila es cabecera "ExpDate, Category, Amount"
-                sLine = sr.ReadLine()
-                If Not sLine Is Nothing Then
-                    Do
-                        sLine = sr.ReadLine()
-                        If sLine Is Nothing Then Exit Do
-                        arrValues = sLine.Split(",")
-
-                        ExpDate = arrValues(0)
-                        Category = Trim(arrValues(1))
-                        If Len(ExpDate) >= 6 Then
-
-                            Try
-                                Select Case UBound(arrValues)
-                                    Case 2
-                                        '"$62.00 "
-                                        Amount = LocalAPI.GetAmount(arrValues(2))
-                                    Case >= 3
-                                        ' Previendo comas en separador de miles, hay que leer siguiente campo
-                                        '"$1,062.00 "
-                                        Amount = LocalAPI.GetAmount(arrValues(2) & "," & arrValues(3))
-                                End Select
-                            Catch ex As Exception
-                                Amount = 0
-                            End Try
-
-                            LocalAPI.NewExpense(lblCompanyId.Text, ExpDate, Math.Abs(Amount), Category)
-
-                        End If
-                    Loop
-                End If
-                sr.Close()
-
-                RadGridExpenses.DataBind()
-                RadUploadExpenses1.UploadedFiles.Clear()
-
-            End If
-        Catch ex As Exception
-
-        End Try
-
-    End Sub
 
     Private Sub FormView1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormView1.ItemCommand
         Select Case e.CommandName

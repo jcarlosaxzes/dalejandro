@@ -101,7 +101,7 @@
                                 <td>
                                     <telerik:RadComboBox ID="cboCliente" runat="server" SelectedValue='<%# Bind("Client") %>' DataSourceID="SqlDataSourceClientes"
                                         DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True"
-                                        MarkFirstMatch="True" Filter="Contains" OnClientKeyPressing="(function(sender, e){ if (!sender.get_dropDownVisible() && sender.get_text().length >1) sender.showDropDown(); })">
+                                        MarkFirstMatch="True" Filter="Contains">
                                         <Items>
                                             <telerik:RadComboBoxItem runat="server" Text="(Select Client...)" Value="0" />
                                         </Items>

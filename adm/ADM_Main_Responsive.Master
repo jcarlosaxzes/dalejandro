@@ -57,7 +57,6 @@
             padding-left: 60px;
             padding-right: 60px;
         }
-        
     </style>
 </head>
 <body>
@@ -94,12 +93,12 @@
 
 
         .rnvLink .rnvText {
-            font-size:16px !important;
-        }
-        .TopRightMenuClass {            
-            color:inherit !important;
+            font-size: 16px !important;
         }
 
+        .TopRightMenuClass {
+            color: inherit !important;
+        }
     </style>
     <form id="form1" runat="server">
         <telerik:RadScriptManager
@@ -164,8 +163,8 @@
                                         </Nodes>
                                     </telerik:NavigationNode>
 
-                                    <%--Billing menu--%>
-                                    <telerik:NavigationNode Text="Billing" Visible='<%# EmployeePermission("Deny_BillingMenu") %>'>
+                                    <%--Finances menu--%>
+                                    <telerik:NavigationNode Text="Finances" Visible='<%# EmployeePermission("Deny_BillingMenu") %>'>
                                         <Nodes>
                                             <telerik:NavigationNode NavigateUrl="~/adm/invoices" Text="Invoices"
                                                 Visible='<%# EmployeePermission("Deny_InvoicesList") %>'>
@@ -182,6 +181,19 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/billingManager" Text="Billing Assistant"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:NavigationNode>
+                                            <%--Expenses--%>
+                                            <telerik:NavigationNode Text="Expenses"
+                                                Visible='<%# EmployeePermission("Deny_CompanyProfile") Or EmployeePermission("Deny_AnalyticCharts")%>'>
+                                                <Nodes>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/MonthlyExpenses" Text="Expenses"
+                                                        Visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/cashflow" Text="Cash Flow"
+                                                        Visible='<%# EmployeePermission("Deny_AnalyticCharts") %>'>
+                                                    </telerik:NavigationNode>
+                                                </Nodes>
+                                            </telerik:NavigationNode>
+
                                         </Nodes>
                                     </telerik:NavigationNode>
 
@@ -312,18 +324,6 @@
                                                 </Nodes>
                                             </telerik:NavigationNode>
 
-                                            <%--Expenses--%>
-                                            <telerik:NavigationNode Text="Expenses"
-                                                Visible='<%# EmployeePermission("Deny_CompanyProfile") Or EmployeePermission("Deny_AnalyticCharts")%>'>
-                                                <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/MonthlyExpenses" Text="Expenses"
-                                                        Visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/cashflow" Text="Cash Flow"
-                                                        Visible='<%# EmployeePermission("Deny_AnalyticCharts") %>'>
-                                                    </telerik:NavigationNode>
-                                                </Nodes>
-                                            </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
 
@@ -406,33 +406,33 @@
                                 </Nodes>
                             </telerik:RadNavigation>
                         </td>
-                        <td style="text-align:right">
-                           <asp:LinkButton ID="lblCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="TopRightMenuClass">
-                           </asp:LinkButton>  
+                        <td style="text-align: right">
+                            <asp:LinkButton ID="lblCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="TopRightMenuClass">
+                            </asp:LinkButton>
                         </td>
-                        <td style="text-align:right;color: inherit;">
-                                <%= UserName() %>                       
+                        <td style="text-align: right; color: inherit;">
+                            <%= UserName() %>                       
                         </td>
-                        <td class="noprint" style="width: 30px; text-align: right;margin:0">
+                        <td class="noprint" style="width: 30px; text-align: right; margin: 0">
                             <telerik:RadNavigation ID="RadNavigation2" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material" OnClientNodeExpanding="OnClientNodeExpandingMenu2">
                                 <NodeTemplate>
-                                        <i class="fas fa-user"></i>
+                                    <i class="fas fa-user"></i>
                                 </NodeTemplate>
-                                <Nodes>                                    
+                                <Nodes>
                                     <telerik:NavigationNode runat="server" Text=''>
                                         <Nodes>
                                             <telerik:NavigationNode Text="My Account" NavigateUrl="Options">
                                                 <NodeTemplate>
-														<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-															<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-														</a>
+                                                    <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                        <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                    </a>
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="Video Chat" NavigateUrl="https://video.spike.chat/?" Target="_blank">
                                                 <NodeTemplate>
-														<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-															<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-														</a>
+                                                    <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                        <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                    </a>
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode ID="SwitchCompany">
@@ -448,8 +448,7 @@
                                                         ToolTip="Logout"
                                                         Font-Size="16px"
                                                         LogoutText="Log out"
-                                                       
-                                                        LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut"  />
+                                                        LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>
 
@@ -464,55 +463,55 @@
                                 </Nodes>
                             </telerik:RadNavigation>
                         </td>
-                         
-                       <td class="noprint" style="width: 30px; text-align: right">
 
-                            <telerik:RadNavigation ID="RadNavigation3" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material"  Visible='<%# EmployeePermission("Deny_CompanyMenu") %>' OnClientNodeExpanding="OnClientNodeExpandingMenu3">
+                        <td class="noprint" style="width: 30px; text-align: right">
+
+                            <telerik:RadNavigation ID="RadNavigation3" runat="server" Style="z-index: 700" Font-Size="Medium" dir="rtl" Skin="Material" Visible='<%# EmployeePermission("Deny_CompanyMenu") %>' OnClientNodeExpanding="OnClientNodeExpandingMenu3">
                                 <NodeTemplate>
-                                        <i class="fas fa-cog"></i>
+                                    <i class="fas fa-cog"></i>
                                 </NodeTemplate>
                                 <Nodes>
                                     <telerik:NavigationNode Text="Setting">
                                         <Nodes>
-                                             <%--Company--%>
+                                            <%--Company--%>
                                             <telerik:NavigationNode Text="Company" Visible='<%# EmployeePermission("Deny_CompanyMenu") %>'>
                                                 <NodeTemplate>
-														<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                    <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
                                                 </NodeTemplate>
                                                 <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="Company" Text="Company Profile" visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="Company" Text="Company Profile" Visible='<%# EmployeePermission("Deny_CompanyProfile") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="companymultiplier" Text="Company Multiplier" visible='<%# EmployeePermission("Deny_Multiplier") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="companymultiplier" Text="Company Multiplier" Visible='<%# EmployeePermission("Deny_Multiplier") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="DepartmentsList" Text="Departments" visible='<%# EmployeePermission("Deny_DepartmentsList") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="DepartmentsList" Text="Departments" Visible='<%# EmployeePermission("Deny_DepartmentsList") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="PaidDayList" Text="Payroll" visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="PaidDayList" Text="Payroll" Visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="MessagesTemplates" Text="Messages Templates" visible='<%# EmployeePermission("Deny_MessagesTemplates") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="MessagesTemplates" Text="Messages Templates" Visible='<%# EmployeePermission("Deny_MessagesTemplates") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
                                                 </Nodes>
@@ -520,44 +519,44 @@
                                             <%--Proposal--%>
                                             <telerik:NavigationNode Text="Proposal">
                                                 <NodeTemplate>
-                                                    <a  Font-Size="16px">
-                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    <a font-size="16px">
+                                                        <%# DataBinder.Eval(Container, "Text").ToString() %>
                                                     </a>
                                                 </NodeTemplate>
                                                 <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="Proposal_tasks" Text="Proposal Tasks" visible='<%# EmployeePermission("Deny_ProposalTasksList") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="Proposal_tasks" Text="Proposal Tasks" Visible='<%# EmployeePermission("Deny_ProposalTasksList") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="InvoicesTypes" Text="Payment Schedules" visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="InvoicesTypes" Text="Payment Schedules" Visible='<%# EmployeePermission("Deny_BillingSchedules") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="TandCtemplates" Text="Terms & Conditions" visible='<%# EmployeePermission("Deny_ProposalTermsConditions") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="TandCtemplates" Text="Terms & Conditions" Visible='<%# EmployeePermission("Deny_ProposalTermsConditions") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="PhasesTemplate" Text="Phases Template" visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
+                                                    <telerik:NavigationNode NavigateUrl="PhasesTemplate" Text="Phases Template" Visible='<%# EmployeePermission("Deny_ProposalTemplates") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="Proposal_types" Text="Proposal Templates" visible='<%# EmployeePermission("Deny_ProposalTemplates") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="Proposal_types" Text="Proposal Templates" Visible='<%# EmployeePermission("Deny_ProposalTemplates") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
                                                 </Nodes>
@@ -565,44 +564,44 @@
                                             <%--Projects--%>
                                             <telerik:NavigationNode Text="Projects">
                                                 <NodeTemplate>
-                                                    <a  Font-Size="16px">
-                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    <a font-size="16px">
+                                                        <%# DataBinder.Eval(Container, "Text").ToString() %>
                                                     </a>
                                                 </NodeTemplate>
                                                 <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="JobTypes" Text="Job Types" visible='<%# EmployeePermission("Deny_JobCodes") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="JobTypes" Text="Job Types" Visible='<%# EmployeePermission("Deny_JobCodes") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="ProjectTags" Text="Project Tags" visible='<%# EmployeePermission("Deny_JobCodes") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="ProjectTags" Text="Project Tags" Visible='<%# EmployeePermission("Deny_JobCodes") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="TransmittalPackageTypes" Text="Transmittal Package Types" visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16%>'>
+                                                    <telerik:NavigationNode NavigateUrl="TransmittalPackageTypes" Text="Transmittal Package Types" Visible='<%# EmployeePermission("Deny_TransmittalPackageTypes") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16%>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="TimeCategory" Text="Productive Time Categories" visible='<%# EmployeePermission("Deny_TimeCategory") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="TimeCategory" Text="Productive Time Categories" Visible='<%# EmployeePermission("Deny_TimeCategory") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="NoJobsTimeTypes" Text="Non-Productive Time Categories" visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="NoJobsTimeTypes" Text="Non-Productive Time Categories" Visible='<%# EmployeePermission("Deny_MiscellaneousTimeCodes") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
                                                 </Nodes>
@@ -611,44 +610,44 @@
                                             <%--Contacts--%>
                                             <telerik:NavigationNode Text="Contacts">
                                                 <NodeTemplate>
-                                                    <a  Font-Size="16px">
-                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    <a font-size="16px">
+                                                        <%# DataBinder.Eval(Container, "Text").ToString() %>
                                                     </a>
-                                                </NodeTemplate>                                                    
+                                                </NodeTemplate>
                                                 <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="ClientTypes" Text="Client Types" visible='<%# EmployeePermission("Deny_ClientType") %>'>
-                                                        <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
-                                                        </NodeTemplate>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="Discipline" Text="Subconsultants Discipline" visible='<%# EmployeePermission("Deny_DisciplinesList") %>'>
-                                                        <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
-                                                        </NodeTemplate>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="Position" Text="Employee Positions" visible='<%# EmployeePermission("Deny_NewEmployee") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="ClientTypes" Text="Client Types" Visible='<%# EmployeePermission("Deny_ClientType") %>'>
                                                         <NodeTemplate>
                                                             <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-															</a>
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="vendortypes" Text="Vendor Types" visible='<%# EmployeePermission("Deny_VendorTypes") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="Discipline" Text="Subconsultants Discipline" Visible='<%# EmployeePermission("Deny_DisciplinesList") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="contactypes" Text="Contact Types" visible='<%# EmployeePermission("Deny_ClientType") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="Position" Text="Employee Positions" Visible='<%# EmployeePermission("Deny_NewEmployee") %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="vendortypes" Text="Vendor Types" Visible='<%# EmployeePermission("Deny_VendorTypes") %>'>
+                                                        <NodeTemplate>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
+                                                        </NodeTemplate>
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="contactypes" Text="Contact Types" Visible='<%# EmployeePermission("Deny_ClientType") %>'>
+                                                        <NodeTemplate>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
                                                 </Nodes>
@@ -657,34 +656,34 @@
                                             <%--Security Settings--%>
                                             <telerik:NavigationNode Text="Security Settings">
                                                 <NodeTemplate>
-                                                    <a  Font-Size="16px">
-                                                            <%# DataBinder.Eval(Container, "Text").ToString() %>
+                                                    <a font-size="16px">
+                                                        <%# DataBinder.Eval(Container, "Text").ToString() %>
                                                     </a>
-                                                </NodeTemplate>                                                    
+                                                </NodeTemplate>
                                                 <Nodes>
-                                                    <telerik:NavigationNode NavigateUrl="Employee_Permissions" Text="Employees Permissions" visible='<%# IsMasterUser() %>'>
+                                                    <telerik:NavigationNode NavigateUrl="Employee_Permissions" Text="Employees Permissions" Visible='<%# IsMasterUser() %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="roles" Text="Roles Permissions" visible='<%# IsMasterUser() %>'>
+                                                    <telerik:NavigationNode NavigateUrl="roles" Text="Roles Permissions" Visible='<%# IsMasterUser() %>'>
                                                         <NodeTemplate>
-																<a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-																	<span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-																</a>
+                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                            </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
                                                 </Nodes>
                                             </telerik:NavigationNode>
                                         </Nodes>
-                                    </telerik:NavigationNode>                                    
+                                    </telerik:NavigationNode>
                                 </Nodes>
                             </telerik:RadNavigation>
                         </td>
 
-                        
+
                     </tr>
                 </table>
             </asp:Panel>
@@ -733,7 +732,7 @@
         <div>
             <telerik:RadToolTip ID="RadToolTipSwitchCompany" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode" Skin="Default">
                 <div>
-                    <h2 style="margin: 0; text-align: center; color:white;">
+                    <h2 style="margin: 0; text-align: center; color: white;">
                         <span class="navbar navbar-expand-md bg-dark">Switch Company
                         </span>
                     </h2>
@@ -831,7 +830,7 @@
 
         function OnClientNodeExpandingMenu2(sender, eventArgs) {
             var nav = $find("<%= RadNavigation3.ClientID %>");
-            var allnodes = nav.get_allNodes() 
+            var allnodes = nav.get_allNodes()
             allnodes.forEach(node => node.collapse());
             //nav.collapseMenuButton();
         }

@@ -2116,6 +2116,8 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="master\web.config" />
     <Content Include="Content\favicons\site.webmanifest" />
+    <Content Include="csv\expenses.csv" />
+    <Content Include="csv\payroll.csv" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - Web Deploy.pubxml" />

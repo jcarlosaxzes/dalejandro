@@ -59,51 +59,6 @@ Partial Public Class company
     Protected WithEvents RadGridHoliday As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
-    '''RadWizardStep1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
-    
-    '''<summary>
-    '''txtExpensesYear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtExpensesYear As Global.Telerik.Web.UI.RadNumericTextBox
-    
-    '''<summary>
-    '''RadUploadExpenses1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadUploadExpenses1 As Global.Telerik.Web.UI.RadAsyncUpload
-    
-    '''<summary>
-    '''btnExpensesImport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnExpensesImport As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''RadGridExpenses control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridExpenses As Global.Telerik.Web.UI.RadGrid
-    
-    '''<summary>
     '''SqlDataSourceLogo control.
     '''</summary>
     '''<remarks>
@@ -156,15 +111,6 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceHoliday As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceExpenses control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceExpenses As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblCompanyId control.
