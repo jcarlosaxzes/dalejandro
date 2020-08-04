@@ -177,7 +177,7 @@
                                 <tr>
                                     <td colspan="4">
                                         <telerik:RadEditor ID="txtClientBody" runat="server" Height="250px" RenderMode="Auto"
-                                            AllowScripts="True" EditModes="Design" Width="90%">
+                                            AllowScripts="True" EditModes="Design,Preview" Width="90%">
                                             <Tools>
                                                 <telerik:EditorToolGroup>
                                                     <telerik:EditorTool Name="Cut" />
@@ -221,7 +221,7 @@
                                 <tr>
                                     <td colspan="4">
                                         <telerik:RadEditor ID="txtAttorneyBody" runat="server" Height="250px" RenderMode="Auto"
-                                            AllowScripts="True" EditModes="Design" Width="90%">
+                                            AllowScripts="True" EditModes="Design,Preview" Width="90%">
                                             <Tools>
                                                 <telerik:EditorToolGroup>
                                                     <telerik:EditorTool Name="Cut" />
