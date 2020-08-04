@@ -170,10 +170,9 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <asp:LinkButton runat="server" ID="btnAzureStorage" CommandName="AzureUpload" CommandArgument='<%# Eval("Id") %>' ToolTip="Upload Files">
+                                        <a href='<%# "clientfiles?client=" & Eval("guid").ToString()%>' target="_blank" title="Upload Files">
                                                 <i class="fas fa-cloud-upload-alt"></i>                                                
-                                        </asp:LinkButton>
-
+                                        </a>
                                     </td>
                                 </tr>
                             </table>

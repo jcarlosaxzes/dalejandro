@@ -114,9 +114,9 @@
                             </asp:LinkButton>
                         </div>
                         <div>
-                            <asp:LinkButton runat="server" ID="btnAzureStorage" CommandName="AzureUpload" CommandArgument='<%# Eval("Id") %>' ToolTip="Upload Files">
-                                                <i class="fas fa-cloud-upload-alt"></i>
-                            </asp:LinkButton>
+                            <a href='<%# "clientfiles?client=" & LocalAPI.GetClientProperty(LocalAPI.GetPreProjectProperty(Eval("Id"), "clientId"), "guid") %>' target="_blank" title="Upload Files">
+                                    <i class="fas fa-cloud-upload-alt"></i>                                                
+                            </a>
                             &nbsp;&nbsp;
                                             <asp:LinkButton ID="btnNewProposal" runat="server" CommandName="NewProposal" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("statusId") = 0 %>' ToolTip="Create new Proposal">
                                                 <i class="fas fa-file-export"></i>
