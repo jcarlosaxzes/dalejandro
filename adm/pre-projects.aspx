@@ -114,7 +114,7 @@
                             </asp:LinkButton>
                         </div>
                         <div>
-                            <a href='<%# "clientfiles?client=" & LocalAPI.GetClientProperty(LocalAPI.GetPreProjectProperty(Eval("Id"), "clientId"), "guid") %>' target="_blank" title="Upload Files">
+                            <a href='<%# "clientfiles?client=" & LocalAPI.GetClientProperty(LocalAPI.GetPreProjectProperty(Eval("Id"), "clientId"), "guid") & "&preproject=true" %>' title="Upload Files">
                                     <i class="fas fa-cloud-upload-alt"></i>                                                
                             </a>
                             &nbsp;&nbsp;

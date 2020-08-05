@@ -19,7 +19,15 @@ Public Class clientfiles
                     cboClients.DataBind()
                     cboClients.SelectedValue = clietnId
                 End If
+                btnBack.Visible = True
+                Session("BackTo") = "~/adm/clients"
             End If
+
+            If Not Request.QueryString("preproject") Is Nothing Then
+                btnBack.Visible = True
+                Session("BackTo") = "~/adm/pre-projects"
+            End If
+
 
         End If
             If cboClients.SelectedItem Is Nothing Then
@@ -152,5 +160,7 @@ Public Class clientfiles
 
     End Sub
 
-
+    Protected Sub btnBack_Click(sender As Object, e As EventArgs)
+        Response.Redirect(Session("BackTo"))
+    End Sub
 End Class
