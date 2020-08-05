@@ -1089,7 +1089,7 @@
 
                         </telerik:RadListView>
                         <asp:Panel ID="UploadPanel" runat="server">            
-                            <div style="width: 100%; height: 200px; background-color: lightgray; margin-top: 20px; position:relative">                
+                            <div style="width: 100%; height: 300px; background-color: lightgray; margin-top: 20px; position:relative">                
                 
                                 <table class="table-sm" style="width: 100%; position:absolute;margin-top:0px;">
                                     <tr>
@@ -1098,7 +1098,7 @@
                                             </telerik:RadComboBox>
                                         </td>
                                         <td style="width: 30%;">
-                                            <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public" ToolTip="Public or private"></telerik:RadCheckBox>
+                                            <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public" ToolTip="Public or private" AutoPostBack="false"></telerik:RadCheckBox>
                                         </td>                           
                                         <td style="width: 30%;" rowspan="2">
                                             <asp:LinkButton ID="btnDeleteSelected" runat="server"

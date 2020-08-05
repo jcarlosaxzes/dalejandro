@@ -194,6 +194,87 @@ Partial Public Class proposal
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''RadWizardStep4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep4 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''RadListView1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
+
+    '''<summary>
+    '''UploadPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UploadPanel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''cboDocType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboDocType As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''chkPublic control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkPublic As Global.Telerik.Web.UI.RadCheckBox
+
+    '''<summary>
+    '''btnDeleteSelected control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDeleteSelected As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnBulkEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkEdit As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnSaveUpload control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSaveUpload As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadCloudUpload1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
+
+    '''<summary>
     '''RadWizardStep22 control.
     '''</summary>
     '''<remarks>
@@ -399,6 +480,78 @@ Partial Public Class proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelDelete As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadToolTipBulkEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipBulkEdit As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''cboDocTypeBulk control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboDocTypeBulk As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''chkPublicBulk control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkPublicBulk As Global.Telerik.Web.UI.RadCheckBox
+
+    '''<summary>
+    '''LinkButton2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton2 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnCance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCance As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadToolTipDeleteFiles control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipDeleteFiles As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''btnConfirmDeleteFiles control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirmDeleteFiles As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnCancelDeleteFiles control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCancelDeleteFiles As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''SqlDataSourceProp1 control.

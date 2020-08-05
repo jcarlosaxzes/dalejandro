@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class clientfiles
 
     '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''btnDeleteSelected control.
     '''</summary>
     '''<remarks>

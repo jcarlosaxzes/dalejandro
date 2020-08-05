@@ -170,7 +170,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href='<%# "clientfiles?client=" & Eval("guid").ToString()%>' target="_blank" title="Upload Files">
+                                        <a href='<%# "clientfiles?client=" & Eval("guid").ToString()%>' title="Upload Files">
                                                 <i class="fas fa-cloud-upload-alt"></i>                                                
                                         </a>
                                     </td>
