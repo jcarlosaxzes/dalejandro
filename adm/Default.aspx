@@ -28,7 +28,6 @@
             .RadDock .rdTitleWrapper {
                 border-radius: 6px;
             }
-
     </style>
 
     <div class="pasconcept-bar noprint">
@@ -223,7 +222,7 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockEmployeeStatistics" runat="server" Title="<a class='lnkGrid' href='TimesByPeriords' title='Go to Times By Periords'>Employee Statistics</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadGrid ID="RadGridEmployeeStatistics" runat="server" DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%" AutoGenerateColumns="False" 
+                                <telerik:RadGrid ID="RadGridEmployeeStatistics" runat="server" DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%" AutoGenerateColumns="False"
                                     PageSize="10" AllowPaging="true" RenderMode="Lightweight">
                                     <MasterTableView DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%">
                                         <Columns>
@@ -355,6 +354,13 @@
 
 
     </telerik:RadDockLayout>
+
+    <asp:Panel runat="server" class="pasconcept-bar noprint" ID="MobileQRPanel" Visible="true" style="text-align: right; vertical-align: middle;">
+        <span class="pasconcept-pagetitle">Dashboard from your mobile device:</span>
+        <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Height="140px" Width="140px" OutputType="EmbeddedPNG" ToolTip="Dashboard from your mobile device" Text="">
+            <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />
+        </telerik:RadBarcode>
+    </asp:Panel>
 
     <asp:Panel runat="server" ID="panelEmployeePortal" Visible="false">
 
