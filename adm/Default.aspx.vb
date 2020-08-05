@@ -34,7 +34,7 @@ Public Class _Default1
                 RadGridClients.DataBind()
                 RadGridSubConsultants.DataBind()
 
-                RadBarcode1.Text = "https://app.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/smarth/salesstatus.aspx?GuiId=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text)
+                RadBarcode1.Text = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/smarth/salesstatus.aspx?GuiId=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text)
 
 
             End If
