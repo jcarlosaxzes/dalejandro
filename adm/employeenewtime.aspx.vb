@@ -235,6 +235,10 @@ Public Class employeenewtime
                                         btnInsertTimeAndInvoice.Visible = False
                                     Case 2  ' Solo Time+Invoices
                                         btnInsertTime.Visible = False
+                                    Case Else
+                                        ' 0 Billiable=False
+                                        btnInsertTimeAndInvoice.Visible = False
+                                        btnInsertTime.Visible = True
                                 End Select
                             End If
                         End If
