@@ -12064,10 +12064,35 @@ Public Class LocalAPI
 
                 Dim splublic = IIf(bPublic, 1, 0)
                 Dim fileType = System.IO.Path.GetExtension(FileName)
-                Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                                $"values({EntityId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), '{EntityType}', {companyId}, '{fileType}' )"
 
-                Return ExecuteNonQuery(sQuery)
+                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
+                '                $"values({EntityId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), '{EntityType}', {companyId}, '{fileType}' )"
+                'Return ExecuteNonQuery(sQuery)
+
+                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Dim cnn1 As SqlConnection = GetConnection()
+                Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                ' Setup the command to execute the stored procedure.
+                cmd.CommandText = "Azure_Entity_Uploads_INSERT"
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.AddWithValue("@EntityId", EntityId)
+                cmd.Parameters.AddWithValue("@Type", Type)
+                cmd.Parameters.AddWithValue("@FileName", FileName)
+                cmd.Parameters.AddWithValue("@KeyName", KeyName)
+                cmd.Parameters.AddWithValue("@Public", bPublic)
+                cmd.Parameters.AddWithValue("@ContentType", ContentType)
+                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+                cmd.Parameters.AddWithValue("@EntityType", EntityType)
+                cmd.Parameters.AddWithValue("@FileType", fileType)
+                cmd.Parameters.AddWithValue("@companyId", companyId)
+
+                cmd.ExecuteNonQuery()
+
+                cnn1.Close()
+
+                Return True
             Else
                 Return False
             End If
@@ -12269,10 +12294,37 @@ Public Class LocalAPI
                 ' statusId = actionId para Paid y Complete
                 Dim splublic = IIf(bPublic, 1, 0)
                 Dim fileType = System.IO.Path.GetExtension(FileName)
-                Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId],[preprojectId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                                $"values({ClientId}, {preprojectId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic} ,0 ,  {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
-                ExecuteNonQuery(sQuery)
+                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId],[preprojectId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
+                '                $"values({ClientId}, {preprojectId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic} ,0 ,  {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
+                'ExecuteNonQuery(sQuery)
+
+                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                Dim cnn1 As SqlConnection = GetConnection()
+                Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                ' Setup the command to execute the stored procedure.
+                cmd.CommandText = "Azure_Uploads_INSERT"
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.AddWithValue("@ClientId", ClientId)
+                cmd.Parameters.AddWithValue("@PreprojectId", preprojectId)
+                cmd.Parameters.AddWithValue("@Type", Type)
+                cmd.Parameters.AddWithValue("@FileName", FileName)
+                cmd.Parameters.AddWithValue("@KeyName", KeyName)
+                cmd.Parameters.AddWithValue("@bPublic", bPublic)
+                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+                cmd.Parameters.AddWithValue("@ContentType", ContentType)
+                cmd.Parameters.AddWithValue("@employeeId", employeeId)
+                cmd.Parameters.AddWithValue("@EntityType", "Clients")
+                cmd.Parameters.AddWithValue("@FileType", fileType)
+                cmd.Parameters.AddWithValue("@companyId", companyId)
+
+                cmd.ExecuteNonQuery()
+
+                cnn1.Close()
+
                 Clients_activities_INSERT(ClientId, "C", "Clients_azureuploads", 0, employeeId)
+
                 Return True
             Else
                 Return False
