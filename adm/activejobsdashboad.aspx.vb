@@ -59,6 +59,9 @@ Public Class activejobsdashboad
         '----------------------------------
         Session("employeefortime") = cboEmployee.SelectedValue
 
+        ' Refresh cboJobs
+
+
     End Sub
 
     Protected Sub cboJobs_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboJobs.SelectedIndexChanged

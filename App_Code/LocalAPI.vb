@@ -9073,11 +9073,15 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function GetEmployeePermission(ByVal EmployeesId As Integer, sOpcion As String) As Boolean
+    Public Shared Function GetEmployeePermission(ByVal EmployeesId As Integer, sOpcion As String, Optional InsertLogFlag As Boolean = True) As Boolean
         Try
             Dim Val As Boolean = LocalAPI.GetNumericEscalar($"select isnull([{sOpcion}],0) from [Employees] where [Id]={EmployeesId}")
 
             If sOpcion.Contains("Deny_") Then
+                If (Not Val) And InsertLogFlag Then
+                    ' Permit allowed AND InsertLogFlag
+                    OptionAllowed(EmployeesId, sOpcion)
+                End If
                 Return Not Val
             Else
                 Return Val
@@ -9088,6 +9092,25 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function OptionAllowed(ByVal EmployeeId As Integer, ByVal sOptionAllowed As String) As String
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "sys_OptionAllowed_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@employeeId", EmployeeId)
+            cmd.Parameters.AddWithValue("@OptionAllowed", sOptionAllowed)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
     Public Shared Function GetEmployeeEmail(ByVal lId As Integer) As String
         Return GetStringEscalar("SELECT Email FROM [Employees] WHERE [Id]=" & lId.ToString)
     End Function
@@ -10151,7 +10174,7 @@ Public Class LocalAPI
         If ConfigurationManager.AppSettings("Debug") <> "1" Then
             Dim sMasterEmail As String = LocalAPI.GetCompanyProperty(companyId, "Email")
             Dim empId = GetEmployeeId(email, companyId)
-            Return ((email.ToLower = sMasterEmail.ToLower) Or GetEmployeePermission(empId, "Allow_EmployeesPermissions"))
+            Return ((email.ToLower = sMasterEmail.ToLower) Or GetEmployeePermission(empId, "Allow_EmployeesPermissions", False))
         Else
             Return True
         End If
