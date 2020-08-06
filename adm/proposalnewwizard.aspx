@@ -863,7 +863,7 @@
                     <fieldset>
                         <legend>Payments Schedule</legend>
                         <div>
-                            <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Payments"
+                            <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Payments" ForeColor="Red"
                                 HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
                         </div>
