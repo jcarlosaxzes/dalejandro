@@ -66,11 +66,11 @@
                                             </telerik:NavigationNode >
                                             <telerik:NavigationNode  runat="server" IsSeparator="True" >
                                             </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/CompanyPendingBills.aspx"
-                                                Text="Company Billing">
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/CompanyPendingBills.aspx" Text="Company Billing">
                                             </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/HistoryLog.aspx"
-                                                Text="History Log">
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/master/pagetracking.aspx" Text="Page Tracking">
+                                            </telerik:NavigationNode >
+                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/HistoryLog.aspx" Text="History Log">
                                             </telerik:NavigationNode >
                                         </Nodes>
                                     </telerik:NavigationNode >

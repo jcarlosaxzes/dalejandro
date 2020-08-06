@@ -2119,6 +2119,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="master\pagetracking.aspx" />
     <Content Include="master\web.config" />
     <Content Include="Content\favicons\site.webmanifest" />
     <Content Include="csv\expenses.csv" />
@@ -4329,6 +4330,13 @@
       <DependentUpon>miscellaneoustimecodes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="master\pagetracking.aspx.designer.vb">
+      <DependentUpon>pagetracking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\pagetracking.aspx.vb">
+      <DependentUpon>pagetracking.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="master\proposaltandc.aspx.designer.vb">
       <DependentUpon>proposaltandc.aspx</DependentUpon>
     </Compile>
@@ -4564,7 +4572,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
