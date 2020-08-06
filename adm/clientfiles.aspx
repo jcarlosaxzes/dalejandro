@@ -3,22 +3,6 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="RadGrid1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnRefresh">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
-
     <style>
         .card-body {
             padding: 0.25rem;
@@ -61,7 +45,7 @@
     </div>
 
     <div class="pas-container" style="width: 100%">
-        <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
+        <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
             <WizardSteps>
                 <%--Upload Files--%>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Upload Files" StepType="Step">
@@ -125,6 +109,9 @@
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click">
                                                <i class="fas fa-align-justify"></i> Table
+                                        </asp:LinkButton>
+                                        <asp:LinkButton ID="btnGridPage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click" Visible="false">
+                                               <i class="fas fa-th"></i> Grid
                                         </asp:LinkButton>
                                         <asp:LinkButton ID="btnDeleteSelected" runat="server"
                                             CssClass="btn btn-danger" UseSubmitBehavior="false">
