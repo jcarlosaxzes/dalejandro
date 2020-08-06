@@ -15,6 +15,7 @@ Public Class ADM_Main_Responsive
             cboCompany.DataBind()
             If Session("companyId") Is Nothing Then
                 Session("companyId") = LocalAPI.GetCompanyDefault(UserEmail)
+                Session("LastPage") = ""
             End If
 
             Dim versionId As Integer = LocalAPI.sys_VersionId(Session("companyId"))
@@ -75,6 +76,11 @@ Public Class ADM_Main_Responsive
             End If
             If cboCompany.SelectedValue <> Session("companyId") Then
                 cboCompany.SelectedValue = Session("companyId")
+            End If
+
+            If Session("LastPage") <> HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path) Then
+                Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)
+                LocalAPI.EmployeePageTracking(UserId, Session("LastPage"))
             End If
         End If
     End Sub
@@ -163,14 +169,14 @@ Public Class ADM_Main_Responsive
 
     Public Function EmployeePermission(sOpcion As String) As Boolean
         If Session(sOpcion) Is Nothing Then
-            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion, False)
+            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
         End If
         Return Session(sOpcion)
     End Function
 
     Public Function EmployeePermissionHiden(sOpcion As String) As Integer
         If Session(sOpcion) Is Nothing Then
-            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion, False)
+            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
         End If
         If Session(sOpcion) Then
             Return 0
