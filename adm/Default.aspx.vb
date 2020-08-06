@@ -34,10 +34,15 @@ Public Class _Default1
                 RadGridClients.DataBind()
                 RadGridSubConsultants.DataBind()
 
-                RadBarcode1.Text = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/smarth/salesstatus.aspx?GuiId=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text)
-
-
+                Select Case lblUserEmail.Text
+                    Case "fernando@easterneg.com", "jcarlos@axzes.com", "matt@axzes.com", "robin@axzes.com"
+                        MobileQRPanel.Visible = True
+                        RadBarcode1.Text = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/smarth/salesstatus.aspx?GuiId=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text)
+                    Case Else
+                        MobileQRPanel.Visible = False
+                End Select
             End If
+
             RadWindowManagerJob.EnableViewState = False
 
         Catch ex As Exception
