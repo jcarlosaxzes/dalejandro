@@ -49,6 +49,15 @@
             </asp:LinkButton>
             Client Uploaded Files
         </span>
+        <span style="float: right; vertical-align: middle;">Client: 
+            <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" AutoPostBack="true"
+                DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="400px" Height="300px"
+                AppendDataBoundItems="true">
+                <Items>
+                    <telerik:RadComboBoxItem runat="server" Text="(Select Client...)" Value="-1" Selected="true" />
+                </Items>
+            </telerik:RadComboBox>
+        </span>
     </div>
 
     <div class="pas-container" style="width: 100%">
@@ -95,17 +104,7 @@
                         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
                             <table onclick="table-sm pasconcept-bar noprint" width="100%">
                                 <tr>
-                                    <td style="width: 300px">
-                                        <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" AutoPostBack="true"
-                                            DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="100%" Height="300px"
-                                            AppendDataBoundItems="true">
-                                            <Items>
-                                                <telerik:RadComboBoxItem runat="server" Text="(Select Client...)" Value="-1" Selected="true" />
-                                            </Items>
-                                        </telerik:RadComboBox>
-
-                                    </td>
-                                    <td style="width: 200px">
+                                    <td style="width: 250px">
                                         <telerik:RadComboBox ID="cboProposals" runat="server" DataSourceID="SqlDataSourceProposals" AutoPostBack="true"
                                             DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="100%" Height="300px"
                                             AppendDataBoundItems="true">
@@ -155,7 +154,7 @@
 
                                         <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
 
-                                         <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Edit">
+                                        <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Edit">
                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
                                         </asp:LinkButton>
                                     </div>
@@ -258,7 +257,7 @@
                                     </telerik:GridBoundColumn>
 
                                     <telerik:GridTemplateColumn DataField="Name" HeaderText="Name" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
-                                        HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left" >
+                                        HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnDownload" runat="server" CommandName="EditForm" CommandArgument='<%# Eval("Id") %>'
                                                 Text='<%# Eval("Name")%>' ToolTip="Click to Download ">
@@ -266,38 +265,38 @@
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
-                                    <telerik:GridTemplateColumn DataField="Type" HeaderText="Type" UniqueName="Type"  ItemStyle-HorizontalAlign="Center"
-                                        HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center" >
+                                    <telerik:GridTemplateColumn DataField="Type" HeaderText="Type" UniqueName="Type" ItemStyle-HorizontalAlign="Center"
+                                        HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                             <%# Eval("nType")%>
+                                            <%# Eval("nType")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
-                                    <telerik:GridTemplateColumn DataField="Public" HeaderText="Public" UniqueName="Public"  ItemStyle-HorizontalAlign="Center"
-                                        HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center" >
+                                    <telerik:GridTemplateColumn DataField="Public" HeaderText="Public" UniqueName="Public" ItemStyle-HorizontalAlign="Center"
+                                        HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                              <%#IIf(Eval("Public"), "Public", "Private") %>
+                                            <%#IIf(Eval("Public"), "Public", "Private") %>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
-                                    <telerik:GridTemplateColumn DataField="Source" HeaderText="Source" UniqueName="Source"  ItemStyle-HorizontalAlign="Center"
-                                        HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center" >
+                                    <telerik:GridTemplateColumn DataField="Source" HeaderText="Source" UniqueName="Source" ItemStyle-HorizontalAlign="Center"
+                                        HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                              <%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%>
+                                            <%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
-                                    <telerik:GridTemplateColumn DataField="Size" HeaderText="Size" UniqueName="Size"  ItemStyle-HorizontalAlign="Center"
-                                        HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center" >
+                                    <telerik:GridTemplateColumn DataField="Size" HeaderText="Size" UniqueName="Size" ItemStyle-HorizontalAlign="Center"
+                                        HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                              <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                            <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
-                                   <telerik:GridTemplateColumn DataField="Date" HeaderText="Date" UniqueName="Date" SortExpression="Date" ItemStyle-HorizontalAlign="Center"
-                                        HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center" Aggregate="Count" >
+                                    <telerik:GridTemplateColumn DataField="Date" HeaderText="Date" UniqueName="Date" SortExpression="Date" ItemStyle-HorizontalAlign="Center"
+                                        HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center" Aggregate="Count">
                                         <ItemTemplate>
-                                                  <%# Eval("Date", "{0:d}")%>
+                                            <%# Eval("Date", "{0:d}")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
@@ -307,15 +306,14 @@
                                         <ItemTemplate>
                                             <table>
                                                 <tr>
-                                                    <td >
+                                                    <td>
                                                         <asp:LinkButton ID="btnEdit" runat="server" CommandName="Update" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit">
                                                             <span class="fas fa-edit"></span>
                                                         </asp:LinkButton>
                                                     </td>
-                                                    <td>
-                                                        &nbsp;&nbsp;
+                                                    <td>&nbsp;&nbsp;
                                                     </td>
-                                                    <td >
+                                                    <td>
                                                         <asp:LinkButton ID="btnDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit">
                                                             <span class="fas fa-trash"></span>
                                                         </asp:LinkButton>
@@ -328,7 +326,7 @@
 
                             </MasterTableView>
 
-                            <ClientSettings>                                
+                            <ClientSettings>
                                 <Selecting AllowRowSelect="true" />
                             </ClientSettings>
                         </telerik:RadGrid>
