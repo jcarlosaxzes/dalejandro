@@ -150,9 +150,9 @@
         }
 
         .fileUploadRad {
-            position:absolute;
-            margin-top:80px;
-            width:100%;
+            position: absolute;
+            margin-top: 80px;
+            width: 100%;
         }
     </style>
 
@@ -344,6 +344,12 @@
                                                 <td style="text-align: right;">Remaining Balance:</td>
                                                 <td>
                                                     <b><%# Eval("Balance", "{0:C2}") %></b>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Balance 90D+:</td>
+                                                <td style="color: red">
+                                                    <b><%# Eval("Balance90Dplus", "{0:C2}") %></b>
                                                 </td>
                                             </tr>
                                         </table>
@@ -906,12 +912,12 @@
                                         Update
                                     </asp:LinkButton>
                                 </td>
-                                
-                                
+
+
                             </tr>
                         </table>
 
-                        <div style="padding-top:15px">
+                        <div style="padding-top: 15px">
                             <telerik:RadGrid ID="RadGridPS" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                                 AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                                 CellSpacing="0" Width="100%">
@@ -943,33 +949,33 @@
                         </div>
                         <table class="table-sm" style="width: 100%">
                             <tr style="text-align: right">
-                            <td>Totals:
-                            </td>
-                            <td>
-                                <table style="width: 400px">
-                                    <tr>
-                                        <td style="text-align: center; width: 50%">Proposal Total
-                                        </td>
-                                        <td style="text-align: center;">Payment Schedule Total
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center">
-                                            <asp:Label ID="lblProposalTotal" runat="server"></asp:Label>
-                                        </td>
-                                        <td style="text-align: center">
-                                            <asp:Label ID="lblScheduleTotal" runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="text-align: center">
-                                            <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"></asp:Label>
-                                        </td>
-                                    </tr>
+                                <td>Totals:
+                                </td>
+                                <td>
+                                    <table style="width: 400px">
+                                        <tr>
+                                            <td style="text-align: center; width: 50%">Proposal Total
+                                            </td>
+                                            <td style="text-align: center;">Payment Schedule Total
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center">
+                                                <asp:Label ID="lblProposalTotal" runat="server"></asp:Label>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <asp:Label ID="lblScheduleTotal" runat="server"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: center">
+                                                <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"></asp:Label>
+                                            </td>
+                                        </tr>
 
-                                </table>
-                            </td>
-                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
                         </table>
                     </fieldset>
                     <div>
@@ -998,7 +1004,7 @@
                                         <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Select">
                                             <i class="far fa-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                                         </asp:LinkButton>
-                        
+
                                         <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
 
                                     </div>
@@ -1053,32 +1059,31 @@
                                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
                                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                 <tr>
-                                                    <td style="height:108px">
+                                                    <td style="height: 108px">
                                                         <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
                                                     </td>
-                                                </tr>                                
+                                                </tr>
                                                 <tr>
-                                                    <td style="font-size:12px; padding-top:5px;padding-bottom: 0px;">
-                                                        <asp:Label ID="lblFileName" runat="server" Visible="False" Text='<%# Bind("Name") %>' ></asp:Label>
+                                                    <td style="font-size: 12px; padding-top: 5px; padding-bottom: 0px;">
+                                                        <asp:Label ID="lblFileName" runat="server" Visible="False" Text='<%# Bind("Name") %>'></asp:Label>
                                                         <%# LocalAPI.TruncateString(Eval("Name"), 30)%> 
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="font-size:12px;padding: 0;">
-                                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
+                                                    <td style="font-size: 12px; padding: 0;">
+                                                        <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
                                                          <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                                     </td>
-                                                </tr>                                 
+                                                </tr>
                                                 <tr>
-                                                    <td style="font-size:12px;padding: 0;">
-                                                       Type:   <%# Eval("nType")%>
+                                                    <td style="font-size: 12px; padding: 0;">Type:   <%# Eval("nType")%>
                                                     </td>
-                                                </tr> 
+                                                </tr>
                                                 <tr>
-                                                    <td style="font-size:12px;padding: 0;">
-                                                     <%#IIf(Eval("Public"), "Public", "Private") %>
+                                                    <td style="font-size: 12px; padding: 0;">
+                                                        <%#IIf(Eval("Public"), "Public", "Private") %>
                                                     </td>
-                                                </tr>                             
+                                                </tr>
                                             </table>
                                         </asp:LinkButton>
 
@@ -1088,10 +1093,10 @@
                             </SelectedItemTemplate>
 
                         </telerik:RadListView>
-                        <asp:Panel ID="UploadPanel" runat="server">            
-                            <div style="width: 100%; height: 300px; background-color: lightgray; margin-top: 20px; position:relative">                
-                
-                                <table class="table-sm" style="width: 100%; position:absolute;margin-top:0px;">
+                        <asp:Panel ID="UploadPanel" runat="server">
+                            <div style="width: 100%; height: 300px; background-color: lightgray; margin-top: 20px; position: relative">
+
+                                <table class="table-sm" style="width: 100%; position: absolute; margin-top: 0px;">
                                     <tr>
                                         <td style="width: 40%;">
                                             <telerik:RadComboBox ID="cboDocType" runat="server" DataSourceID="SqlDataSourceDocTypes" Label="File type:" DataTextField="Name" DataValueField="Id" Width="100%">
@@ -1099,7 +1104,7 @@
                                         </td>
                                         <td style="width: 30%;">
                                             <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public" ToolTip="Public or private" AutoPostBack="false"></telerik:RadCheckBox>
-                                        </td>                           
+                                        </td>
                                         <td style="width: 30%;" rowspan="2">
                                             <asp:LinkButton ID="btnDeleteSelected" runat="server"
                                                 CssClass="btn btn-danger float-right mr-3" UseSubmitBehavior="false">
@@ -1115,7 +1120,7 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <table style="width: 100%; position:absolute;margin-top:40px;" >
+                                <table style="width: 100%; position: absolute; margin-top: 40px;">
                                     <tr>
                                         <td style="width: 90%;">
                                             <h3 class="additional-text">Select Files to Upload</h3>
@@ -1129,7 +1134,7 @@
                             </div>
                         </asp:Panel>
 
-                    </div>                   
+                    </div>
 
                 </telerik:RadWizardStep>
 
@@ -1156,7 +1161,7 @@
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
-    
+
     <telerik:RadToolTip ID="RadToolTipBulkEdit" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
         <table class="table table-bordered" style="width: 500px">
@@ -1169,14 +1174,14 @@
             </tr>
             <tr>
                 <td style="width: 20%;">
-                        <telerik:RadComboBox ID="cboDocTypeBulk" runat="server" DataSourceID="SqlDataSourceDocTypes" ZIndex="10000" Label="File type:" DataTextField="Name" DataValueField="Id" Width="100%">
-                        </telerik:RadComboBox>
-                 </td> 
+                    <telerik:RadComboBox ID="cboDocTypeBulk" runat="server" DataSourceID="SqlDataSourceDocTypes" ZIndex="10000" Label="File type:" DataTextField="Name" DataValueField="Id" Width="100%">
+                    </telerik:RadComboBox>
+                </td>
             </tr>
-            <tr>                
+            <tr>
                 <td style="width: 20%;">
                     <telerik:RadCheckBox ID="chkPublicBulk" runat="server" Text="Public" ToolTip="Public or private"></telerik:RadCheckBox>
-                </td> 
+                </td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center">

@@ -34,6 +34,10 @@ Public Class activejobsdashboad
         e.Item.Checked = IIf(e.Item.Value = 0 Or e.Item.Value = 2, True, False)
     End Sub
     Private Sub cboEmployee_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboEmployee.SelectedIndexChanged
+        ' Refresh cboJobs
+        cboJobs.Items.Clear()
+        cboJobs.Items.Insert(0, New RadComboBoxItem("(Other Active Jobs...)", -1))
+        cboJobs.DataBind()
         RefrescarDatos()
     End Sub
 
@@ -58,9 +62,6 @@ Public Class activejobsdashboad
 
         '----------------------------------
         Session("employeefortime") = cboEmployee.SelectedValue
-
-        ' Refresh cboJobs
-
 
     End Sub
 
