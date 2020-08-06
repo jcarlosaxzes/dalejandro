@@ -30,7 +30,7 @@ Public Class clientfiles
 
 
         End If
-            If cboClients.SelectedItem Is Nothing Then
+        If cboClients.SelectedItem Is Nothing Then
             UploadPanel.Visible = False
         ElseIf String.IsNullOrEmpty(cboClients.SelectedItem.Value) Or cboClients.SelectedItem.Value = "-1" Then
             UploadPanel.Visible = False
@@ -163,4 +163,71 @@ Public Class clientfiles
     Protected Sub btnBack_Click(sender As Object, e As EventArgs)
         Response.Redirect(Session("BackTo"))
     End Sub
+
+    Protected Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs)
+        Select Case e.CommandName
+            Case "Update"
+                lblSelectedId.Text = e.CommandArgument
+
+                'Dim item As GridDataItem = TryCast(e.Item, GridDataItem)
+                ''Dim chart As RadHtmlChart = TryCast(item("ChartColumn").FindControl("RadHtmlChart1"), RadHtmlChart)
+                'Dim Id As String = item.GetDataKeyValue("Id").ToString()
+                'Dim TypeId As String = item("Type").Text
+                'Dim sPublic As String = item("Public").Text
+
+
+                RadToolTipBulkEdit.Visible = True
+                RadToolTipBulkEdit.Show()
+            Case "Delete"
+                Response.Redirect("~/adm/employee.aspx?employeeId=" & e.CommandArgument & "&fromcontacts=1")
+        End Select
+    End Sub
+
+
+
+
+    Private Sub RadListView1_ItemCommand(sender As Object, e As RadListViewCommandEventArgs) Handles RadListView1.ItemCommand
+
+        Select Case e.CommandName
+            Case "Update"
+                Dim item As RadListViewDataItem = TryCast(e.ListViewItem, RadListViewDataItem)
+
+
+                Dim editedItem As RadListViewEditableItem = TryCast(e.ListViewItem, RadListViewEditableItem)
+
+
+                Dim ProductID As String = editedItem.OwnerListView.DataKeyValues(editedItem.DisplayIndex)("cboDocTypeItem").ToString()
+
+
+                Dim comboBox As RadComboBox = DirectCast(editedItem.FindControl("RadComboBox1"), RadComboBox)
+
+                Dim id = e.CommandArgument
+                Dim lblName As Label = CType(editedItem.FindControl("Name"), Label)
+                Dim cboDocTypeItem As RadComboBox = CType(editedItem.FindControl("cboDocTypeItem"), RadComboBox)
+                Dim chkPublic As RadCheckBox = CType(editedItem.FindControl("chkPublic"), RadCheckBox)
+                LocalAPI.UpdateAzureUploads(id, cboDocType.SelectedValue, lblName.Text, chkPublic.Checked)
+                item.Edit = False
+            Case "Cancel"
+                Dim item As RadListViewDataItem = TryCast(e.ListViewItem, RadListViewDataItem)
+                item.Edit = False
+                item.Selected = False
+        End Select
+    End Sub
+
+    Protected Sub btnTablePage_Click(sender As Object, e As EventArgs)
+        RadListView1.Visible = Not RadListView1.Visible
+        RadGrid1.Visible = Not RadGrid1.Visible
+
+
+    End Sub
+
+
+    'Protected Sub RadWizard2_ActiveStepChanged(sender As Object, e As EventArgs)
+    '    Dim activeStepIndex As Integer = TryCast(sender, RadWizard).ActiveStep.Index
+    '    btnDeleteSelected.Visible = (activeStepIndex = 1)
+    '    btnBulkEdit.Visible = (activeStepIndex = 1)
+
+    'End Sub
+
+
 End Class
