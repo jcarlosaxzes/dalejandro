@@ -13,6 +13,11 @@ Public Class MasterJOB
             lblJobId.Text = Request.QueryString("jobId")
             If LocalAPI.IsCompanyViolation(lblJobId.Text, "Jobs", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
             Page.Title = LocalAPI.GetJobCodeName(lblJobId.Text)
+            If Session("LastPage") <> HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path) Then
+                Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)
+                LocalAPI.EmployeePageTracking(UserId, Session("LastPage"))
+            End If
+
         End If
     End Sub
 

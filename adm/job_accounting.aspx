@@ -88,6 +88,12 @@
                                                 <b><%# Eval("Balance", "{0:C2}") %></b>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="text-align: right;">Balance 90D+:</td>
+                                            <td style="color:red">
+                                               <b><%# Eval("Balance90Dplus", "{0:C2}") %></b>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>

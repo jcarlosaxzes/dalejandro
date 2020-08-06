@@ -38,8 +38,8 @@
                             HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
                     </div>
-                    
-                     <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
+
+                    <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
                         <ItemTemplate>
 
                             <table class="table-sm" style="width: 100%">
@@ -108,6 +108,12 @@
                                                     <b><%# Eval("Balance","{0:C2}") %></b>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td style="text-align: right;">Balance 90D+:</td>
+                                                <td style="color: red">
+                                                    <b><%# Eval("Balance90Dplus", "{0:C2}") %></b>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
@@ -116,23 +122,21 @@
 
                         </ItemTemplate>
                     </asp:FormView>
-                    <hr style="margin:0" />
+                    <hr style="margin: 0" />
                     <table class="table-sm" style="width: 100%">
                         <tr>
+                            <td style="text-align: left; vertical-align: top; width: 33%"></td>
                             <td style="text-align: left; vertical-align: top; width: 33%">
-
-                            </td>
-                            <td style="text-align: left; vertical-align: top; width: 33%">
-                                <telerik:RadTextBox ID="txtInvoiceNumber" runat="server" Width="100%" Label="Invoice Number:"  ReadOnly="true" Skin="Material">
-                                            </telerik:RadTextBox>
+                                <telerik:RadTextBox ID="txtInvoiceNumber" runat="server" Width="100%" Label="Invoice Number:" ReadOnly="true" Skin="Material">
+                                </telerik:RadTextBox>
                             </td>
                             <td style="text-align: right; vertical-align: top">
                                 <telerik:RadTextBox ID="txtInvoiceAmount" runat="server" Width="100%" Label="Invoice Amount:" ReadOnly="true" Skin="Material">
-                                            </telerik:RadTextBox>
+                                </telerik:RadTextBox>
                             </td>
                         </tr>
                     </table>
-                    <hr style="margin:0" />
+                    <hr style="margin: 0" />
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 270px">Client Notification Type:
@@ -210,15 +214,15 @@
                             <asp:Panel ID="PanelEmail" runat="server">
                                 <table style="width: 100%" class="table-sm">
                                     <tr>
-                                        <td >To:
+                                        <td>To:
                                         </td>
-                                        <td style="width:45%">
+                                        <td style="width: 45%">
                                             <telerik:RadAutoCompleteBox runat="server" ID="txtTo" EmptyMessage="Client Email Address" DataSourceID="SqlDataSourceClient" DataTextField="Name" DataValueField="Email" AllowCustomEntry="false"
                                                 InputType="Token" Width="100%" DropDownWidth="150px">
                                             </telerik:RadAutoCompleteBox>
                                         </td>
                                         <td>CC:
-                                        </td >
+                                        </td>
                                         <td>
                                             <telerik:RadTextBox ID="txtCC" runat="server" Width="100%" EmptyMessage="Billing contact email">
                                             </telerik:RadTextBox>
