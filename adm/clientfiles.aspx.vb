@@ -67,32 +67,58 @@ Public Class clientfiles
     End Sub
 
     Private Sub btnDeleteSelected_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
-        If RadListView1.SelectedItems.Count > 0 Then
-            RadToolTipDelete.Visible = True
-            RadToolTipDelete.Show()
+        If RadListView1.Visible Then
+            If RadListView1.SelectedItems.Count > 0 Then
+                RadToolTipDelete.Visible = True
+                RadToolTipDelete.Show()
+            Else
+                Master.ErrorMessage("Select (Mark) Files to Delete")
+            End If
         Else
-            Master.ErrorMessage("Select (Mark) Files to Update")
+            If RadGrid1.SelectedItems.Count > 0 Then
+                RadToolTipDelete.Visible = True
+                RadToolTipDelete.Show()
+            Else
+                Master.ErrorMessage("Select (Mark) Files to Delete")
+            End If
         End If
     End Sub
     Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
 
         Try
             'get a reference to the row
-            If RadListView1.SelectedItems.Count > 0 Then
-                For Each dataItem As RadListViewDataItem In RadListView1.SelectedItems
-                    If dataItem.Selected Then
-                        Dim idFile = dataItem.GetDataKeyValue("Id").ToString()
-                        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
-                        LocalAPI.DeleteAzureFile(idFile)
-                        AzureStorageApi.DeleteFile(KeyName)
-                    End If
-                Next
-                RadListView1.ClearSelectedItems()
-                RadListView1.DataBind()
+            If RadListView1.Visible Then
+                If RadListView1.SelectedItems.Count > 0 Then
+                    For Each dataItem As RadListViewDataItem In RadListView1.SelectedItems
+                        If dataItem.Selected Then
+                            Dim idFile = dataItem.GetDataKeyValue("Id").ToString()
+                            Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
+                            LocalAPI.DeleteAzureFile(idFile)
+                            AzureStorageApi.DeleteFile(KeyName)
+                        End If
+                    Next
+                    RadListView1.ClearSelectedItems()
+                    RadListView1.DataBind()
+                Else
+                    Master.ErrorMessage("Select records!")
+                End If
             Else
-                Master.ErrorMessage("Select records!")
-
+                If RadGrid1.SelectedItems.Count > 0 Then
+                    For Each item As GridDataItem In RadGrid1.SelectedItems
+                        If item.Selected Then
+                            item.Selected = False
+                            Dim idFile = item("Id").Text
+                            Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
+                            LocalAPI.DeleteAzureFile(idFile)
+                            AzureStorageApi.DeleteFile(KeyName)
+                        End If
+                    Next
+                    RadGrid1.DataBind()
+                Else
+                    Master.ErrorMessage("Select records!")
+                End If
             End If
+
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
@@ -149,6 +175,8 @@ Public Class clientfiles
             If e.IsValid Then
                 RadListView1.ClearSelectedItems()
                 RadListView1.DataBind()
+                RadGrid1.DataBind()
+                RadWizard1.ActiveStepIndex = 1
                 Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else
                 Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
@@ -216,9 +244,9 @@ Public Class clientfiles
 
     Protected Sub btnTablePage_Click(sender As Object, e As EventArgs)
         RadListView1.Visible = Not RadListView1.Visible
-        RadGrid1.Visible = Not RadGrid1.Visible
-
-
+        RadGrid1.Visible = Not RadListView1.Visible
+        btnGridPage.Visible = Not RadListView1.Visible
+        btnTablePage.Visible = RadListView1.Visible
     End Sub
 
 
