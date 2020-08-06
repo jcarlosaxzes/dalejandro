@@ -163,14 +163,14 @@ Public Class ADM_Main_Responsive
 
     Public Function EmployeePermission(sOpcion As String) As Boolean
         If Session(sOpcion) Is Nothing Then
-            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
+            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion, False)
         End If
         Return Session(sOpcion)
     End Function
 
     Public Function EmployeePermissionHiden(sOpcion As String) As Integer
         If Session(sOpcion) Is Nothing Then
-            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
+            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion, False)
         End If
         If Session(sOpcion) Then
             Return 0
