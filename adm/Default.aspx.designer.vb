@@ -140,6 +140,24 @@ Partial Public Class _Default1
     Protected WithEvents RadGridSubConsultants As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
+    '''MobileQRPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents MobileQRPanel As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''RadBarcode1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadBarcode1 As Global.Telerik.Web.UI.RadBarcode
+    
+    '''<summary>
     '''panelEmployeePortal control.
     '''</summary>
     '''<remarks>

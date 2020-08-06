@@ -1930,6 +1930,11 @@
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\mtransmittal.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\PrintPDF.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_accountsreceivable.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_jobstatus.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_jobsyoy.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\monthlytarget.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\salesstatus.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\statement.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfp.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\sub\rfps.aspx" />
@@ -2118,6 +2123,7 @@
     <Content Include="Content\favicons\site.webmanifest" />
     <Content Include="csv\expenses.csv" />
     <Content Include="csv\payroll.csv" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\mastersmarth.Master" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - Web Deploy.pubxml" />
@@ -4054,6 +4060,48 @@
       <DependentUpon>PrintPDF.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_accountsreceivable.aspx.designer.vb">
+      <DependentUpon>dashboard_accountsreceivable.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_accountsreceivable.aspx.vb">
+      <DependentUpon>dashboard_accountsreceivable.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_jobstatus.aspx.designer.vb">
+      <DependentUpon>dashboard_jobstatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_jobstatus.aspx.vb">
+      <DependentUpon>dashboard_jobstatus.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_jobsyoy.aspx.designer.vb">
+      <DependentUpon>dashboard_jobsyoy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_jobsyoy.aspx.vb">
+      <DependentUpon>dashboard_jobsyoy.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\mastersmarth.Master.designer.vb">
+      <DependentUpon>mastersmarth.Master</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\mastersmarth.Master.vb">
+      <DependentUpon>mastersmarth.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\monthlytarget.aspx.designer.vb">
+      <DependentUpon>monthlytarget.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\monthlytarget.aspx.vb">
+      <DependentUpon>monthlytarget.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\salesstatus.aspx.designer.vb">
+      <DependentUpon>salesstatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\salesstatus.aspx.vb">
+      <DependentUpon>salesstatus.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\statement.aspx.designer.vb">
       <DependentUpon>statement.aspx</DependentUpon>
     </Compile>
@@ -4479,6 +4527,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -4515,7 +4564,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
