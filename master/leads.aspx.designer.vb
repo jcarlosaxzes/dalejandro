@@ -11,122 +11,140 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MasterPage
+Partial Public Class leads
     
     '''<summary>
-    '''form1 control.
+    '''pnlFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''RadScriptManager1 control.
+    '''txtState control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
+    Protected WithEvents txtState As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''lblUserName control.
+    '''txtZipCode control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtZipCode As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''LoginStatus1 control.
+    '''txtPhone control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LoginStatus1 As Global.System.Web.UI.WebControls.LoginStatus
+    Protected WithEvents txtPhone As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''RadMenu1 control.
+    '''txtCity control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadMenu1 As Global.Telerik.Web.UI.RadNavigation
+    Protected WithEvents txtCity As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''ContentPlaceHolder1 control.
+    '''txtTags control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ContentPlaceHolder1 As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents txtTags As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''Image3 control.
+    '''txtNoTags control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Image3 As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents txtNoTags As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''lblVersion control.
+    '''btnFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblVersion As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''lblWarning control.
+    '''btnExport control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblWarning As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''Label31 control.
+    '''RadGrid1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label31 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
-    '''Label1 control.
+    '''RadToolTipExport control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents RadToolTipExport As Global.Telerik.Web.UI.RadToolTip
     
     '''<summary>
-    '''lblEmployeeId control.
+    '''txtExportTag control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtExportTag As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''lblEmployeeEmail control.
+    '''btnConfirmExport control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnConfirmExport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''SqlDataSource1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''lblSELECTed_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSELECTed_ID As Global.System.Web.UI.WebControls.Label
 End Class

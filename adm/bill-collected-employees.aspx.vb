@@ -5,7 +5,7 @@ Public Class bill_collected_employees
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientAccountsReport") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientAccountsReport") Then Response.RedirectPermanent("~/adm/default.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Bill vs Collected  by Employee"
             Master.PageTitle = "Billing/Bill vs Collected by Employee"

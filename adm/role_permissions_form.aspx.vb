@@ -4,11 +4,11 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
             If Not Master.IsMasterUser() Then
-                Response.RedirectPermanent("~/ADM/Default.aspx")
+                Response.RedirectPermanent("~/adm/default.aspx")
             End If
             lblCompanyId.Text = Session("companyId")
             lblRoleId.Text = Request.QueryString("roleId")
-            If LocalAPI.IsCompanyViolation(lblRoleId.Text, "Employees_roles", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If LocalAPI.IsCompanyViolation(lblRoleId.Text, "Employees_roles", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
             FormView1.DataBind()
         End If
     End Sub

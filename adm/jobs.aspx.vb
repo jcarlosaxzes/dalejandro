@@ -10,7 +10,7 @@ Public Class jobs
             If (Not Page.IsPostBack) Then
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobsList") Then Response.RedirectPermanent("~/adm/default.aspx")
                 btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewJob")
 
                 btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")

@@ -6,7 +6,7 @@
 
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Budget")
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Budget") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Budget") Then Response.RedirectPermanent("~/adm/default.aspx")
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Department Budget by Status"
                 Master.PageTitle = "Department/Budget by Status"
 

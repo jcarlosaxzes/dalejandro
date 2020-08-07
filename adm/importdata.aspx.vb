@@ -12,7 +12,7 @@ Public Class importdata
             Me.Title = "Others/Import data"
             ' Si no tiene permiso, la dirijo a message
             If Not LocalAPI.GetEmployeePermission(LocalAPI.GetEmployeeId(UserEmail, lblCompanyId.Text), "Deny_Importdata") Then
-                Response.RedirectPermanent("~/ADM/Default.aspx")
+                Response.RedirectPermanent("~/adm/default.aspx")
             End If
 
             Dim Source As String = "" & Request.QueryString("source")

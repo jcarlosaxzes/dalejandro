@@ -92,11 +92,11 @@ Public Class sendinvoice
         Dim jobId As Integer = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "JobId")
         Select Case lblOrigen.Text
             Case "103"
-                Response.Redirect("~/ADM/job.aspx?Job=" & jobId)'& "#invoices")
+                Response.Redirect("~/adm/job.aspx?Job=" & jobId)'& "#invoices")
             Case "104"
-                Response.Redirect("~/ADM/editjob.aspx?Job=" & jobId & "#invoices")
+                Response.Redirect("~/adm/editjob.aspx?Job=" & jobId & "#invoices")
             Case "1103"
-                Response.Redirect("~/ADM/Job_accounting.aspx?JobId=" & jobId) '& "#invoices")
+                Response.Redirect("~/adm/Job_accounting.aspx?JobId=" & jobId) '& "#invoices")
         End Select
     End Sub
 #End Region

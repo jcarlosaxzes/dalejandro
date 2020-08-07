@@ -58,7 +58,7 @@ Public Class newjob
 
             ' Si no tiene permiso, la dirijo a message
             'lblNew.Text = "Enter details Of the New Job below. Be mindful Of mandatory fields."
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewJob") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewJob") Then Response.RedirectPermanent("~/adm/default.aspx")
 
             Me.RadDatePicker1.SelectedDate = Date.Today
 

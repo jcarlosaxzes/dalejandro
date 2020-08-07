@@ -10,7 +10,7 @@ Public Class client
                 lblClientId.Text = Request.QueryString("clientId")
 
                 'Not necessary, Client_Select include @companyId
-                'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 If Not Request.QueryString("fromcontacts") Is Nothing Then
                     lblBackSource.Text = 1
@@ -74,8 +74,8 @@ Public Class client
     Private Sub FormView1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormView1.ItemCommand
         Select Case e.CommandName
             Case "Photo"
-                'Response.Redirect("~/ADM/UploadPhoto.aspx?Id=" & lblClientId.Text & "&Entity=Client")
-                Dim sUrl As String = "~/ADM/UploadPhoto.aspx?Id=" & lblClientId.Text & "&Entity=Client"
+                'Response.Redirect("~/adm/UploadPhoto.aspx?Id=" & lblClientId.Text & "&Entity=Client")
+                Dim sUrl As String = "~/adm/UploadPhoto.aspx?Id=" & lblClientId.Text & "&Entity=Client"
                 CreateRadWindows(e.CommandName, sUrl, 640, 400)
 
         End Select

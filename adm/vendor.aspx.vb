@@ -8,7 +8,7 @@
                 lblCompanyId.Text = Session("companyId")
                 lblVendorId.Text = Request.QueryString("VendorId")
 
-                If LocalAPI.IsCompanyViolation(lblVendorId.Text, "Vendors", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If LocalAPI.IsCompanyViolation(lblVendorId.Text, "Vendors", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 If Not Request.QueryString("fromcontacts") Is Nothing Then
                     lblBackSource.Text = 1

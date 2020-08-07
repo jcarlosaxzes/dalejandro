@@ -2104,6 +2104,7 @@
     <Content Include="master\featurescount.aspx" />
     <Content Include="master\historylog.aspx" />
     <Content Include="master\invoices.aspx" />
+    <Content Include="master\leads.aspx" />
     <Content Include="master\masscommunication.aspx" />
     <Content Include="master\MasterPage.Master" />
     <Content Include="help\eng\PASconcept_Help_EN.pdf" />
@@ -4302,6 +4303,13 @@
       <DependentUpon>invoices.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="master\leads.aspx.designer.vb">
+      <DependentUpon>leads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\leads.aspx.vb">
+      <DependentUpon>leads.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="master\masscommunication.aspx.designer.vb">
       <DependentUpon>masscommunication.aspx</DependentUpon>
     </Compile>
@@ -4572,7 +4580,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

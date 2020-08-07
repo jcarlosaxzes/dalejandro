@@ -48,8 +48,12 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 50%"></td>
-            <td></td>
+            <td style="width: 50%">
+                <h3>Page Tracking by Company</h3>
+            </td>
+            <td>
+                <h3>Page Tracking</h3>
+            </td>
         </tr>
         <tr>
             <td style="vertical-align: top">

@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-3">
             <asp:Panel ID="pnlReturn" runat="server" Style="margin-top: 10px">
-                <asp:LinkButton ID="btnHome" runat="server" title="Home" data-toggle="tooltip" class="btn btn-success width-100 btn-lg" PostBackUrl="~/ADM/Default.aspx">
+                <asp:LinkButton ID="btnHome" runat="server" title="Home" data-toggle="tooltip" class="btn btn-success width-100 btn-lg" PostBackUrl="~/adm/default.aspx">
                       Return&nbsp;<span class="circle bg-white"></span>
                 </asp:LinkButton>
                 <h5>class="navbar navbar-expand-md bg-dark text-white"</span>No outstanding payments</h5>

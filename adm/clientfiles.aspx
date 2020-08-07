@@ -331,9 +331,9 @@
         <table class="table table-bordered" style="width: 500px">
             <tr>
                 <td colspan="2">
-                    <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+                    <h3 style="margin: 0; text-align: center; color: white; width: 600px">
                         <span class="navbar navbar-expand-md bg-dark text-white">Update Files</span>
-                    </h2>
+                    </h3>
                 </td>
             </tr>
             <tr>
@@ -362,10 +362,10 @@
     </telerik:RadToolTip>
 
     <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+        <h3 style="margin: 0; text-align: center; color: white; width: 600px">
             <span class="navbar navbar-expand-md bg-dark text-white">Delete Files
             </span>
-        </h2>
+        </h3>
         <table class="table-sm" style="width: 600px">
             <tr>
                 <td>Are you sure you want to delete selected Files?

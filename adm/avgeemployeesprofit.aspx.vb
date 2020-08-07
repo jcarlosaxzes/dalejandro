@@ -7,7 +7,7 @@ Public Class avgeemployeesprofit
         Try
             If Not IsPostBack Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_EmployeesEfficiencyGraphic") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_EmployeesEfficiencyGraphic") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Master.PageTitle = "Employees/Employees Efficiency Graphic"
                 Master.Help = "http://blog.pasconcept.com/2012/07/employees-efficiency-chart.html"

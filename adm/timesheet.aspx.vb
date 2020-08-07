@@ -8,7 +8,7 @@ Public Class timesheet
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Timesheet"
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Timesheet") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Timesheet") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Master.PageTitle = "Employees/Timesheet"
                 Master.Help = "http://blog.pasconcept.com/2012/07/employees-periodic-timesheet.html"

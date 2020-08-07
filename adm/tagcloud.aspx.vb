@@ -5,7 +5,7 @@
         If Not IsPostBack() Then
 
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobTagFinder") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobTagFinder") Then Response.RedirectPermanent("~/adm/default.aspx")
 
             lblCompanyId.Text = Session("companyId")
             lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
