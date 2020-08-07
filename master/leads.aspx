@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/master/MasterPage.Master" CodeBehind="leads.aspx.vb" Inherits="pasconcept20.leads" %>
+<%@ MasterType VirtualPath="~/master/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
