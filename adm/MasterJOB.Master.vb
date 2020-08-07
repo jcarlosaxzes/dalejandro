@@ -1,4 +1,5 @@
-﻿Imports Microsoft.AspNet.Identity
+﻿Imports System.Threading.Tasks
+Imports Microsoft.AspNet.Identity
 
 Public Class MasterJOB
     Inherits System.Web.UI.MasterPage
@@ -11,11 +12,11 @@ Public Class MasterJOB
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
             lblJobId.Text = Request.QueryString("jobId")
-            If LocalAPI.IsCompanyViolation(lblJobId.Text, "Jobs", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If LocalAPI.IsCompanyViolation(lblJobId.Text, "Jobs", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
             Page.Title = LocalAPI.GetJobCodeName(lblJobId.Text)
             If Session("LastPage") <> HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path) Then
                 Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)
-                LocalAPI.EmployeePageTracking(UserId, Session("LastPage"))
+                Task.Run(Function() LocalAPI.EmployeePageTracking(UserId, Session("LastPage")))
             End If
 
         End If

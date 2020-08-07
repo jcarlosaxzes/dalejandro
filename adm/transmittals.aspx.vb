@@ -9,7 +9,7 @@ Public Class transmittals
             If (Not Page.IsPostBack) Then
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TransmittalList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TransmittalList") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Master.PageTitle = "Jobs/Transmittals"
                 Master.Help = "http://blog.pasconcept.com/2015/04/jobstransmittal-letter.html"

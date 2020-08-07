@@ -10346,7 +10346,7 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/ticket.aspx?guid=" & LocalAPI.GetJobProperty(jobId, "guid") & "&TicketId=" & objId
                     Case 1206  ' EMP/Ticket from ticketId
                         Dim jobId As Integer = GetTicketProperty(objId, "jobId")
-                        url = LocalAPI.GetHostAppSite() & "/ADM/ticket.aspx?JobId=" & jobId & "&TicketId=" & objId
+                        url = LocalAPI.GetHostAppSite() & "/adm/ticket.aspx?JobId=" & jobId & "&TicketId=" & objId
 
 
                     Case 2001  ' Subconsultant Portal
@@ -10355,7 +10355,7 @@ Public Class LocalAPI
                     Case 2002  ' Gest Subconsultant Portal
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SUB/rfp.aspx?GuiId=" & LocalAPI.GetRFPProperty(objId, "guid")
                     Case 2003  ' RFP to Proposal
-                        url = LocalAPI.GetHostAppSite() & "/ADM/Proposals.aspx?rfpGUID=" & LocalAPI.GetRFPProperty(objId, "guid")
+                        url = LocalAPI.GetHostAppSite() & "/adm/Proposals.aspx?rfpGUID=" & LocalAPI.GetRFPProperty(objId, "guid")
 
                 End Select
             End If
@@ -10408,7 +10408,7 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/ticket.aspx?guid=" & objGuid & "&TicketId=" & objId
                     Case 1206  ' EMP/Ticket from ticketId
                         Dim jobId As Integer = GetTicketProperty(objId, "jobId")
-                        url = LocalAPI.GetHostAppSite() & "/ADM/ticket.aspx?JobId=" & jobId & "&TicketId=" & objId
+                        url = LocalAPI.GetHostAppSite() & "/adm/ticket.aspx?JobId=" & jobId & "&TicketId=" & objId
 
 
                     Case 2001  ' Subconsultant Portal
@@ -10417,7 +10417,7 @@ Public Class LocalAPI
                     Case 2002  ' Gest Subconsultant Portal
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SUB/rfp.aspx?GuiId=" & objGuid
                     Case 2003  ' RFP to Proposal
-                        url = LocalAPI.GetHostAppSite() & "/ADM/Proposals.aspx?rfpGUID=" & objGuid
+                        url = LocalAPI.GetHostAppSite() & "/adm/Proposals.aspx?rfpGUID=" & objGuid
 
                 End Select
             End If
@@ -13688,7 +13688,15 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetTicketId(jobId As Integer, Title As String) As Integer
-        Return GetNumericEscalar("SELECT top 1 Id FROM Jobs_tickets WHERE jobId=" & jobId & " AND Title='" & Title & "' order by id desc")
+        'Return GetNumericEscalar("SELECT top 1 Id FROM Jobs_tickets WHERE jobId=" & jobId & " AND Title='" & Title & "' order by id desc")
+
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT top 1 Id FROM Jobs_tickets WHERE jobId=@jobId AND Title=@Title order by id desc", cnn1)
+        cmd.Parameters.AddWithValue("@jobId", jobId)
+        cmd.Parameters.AddWithValue("@Title", Title)
+        GetTicketId = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
+
     End Function
     Public Shared Function SendTicketNotificationToEmployee(jobId As Integer, ticketId As Integer, companyId As Integer, UpdateFor As String) As Boolean
         Try

@@ -5,7 +5,7 @@
         If Not IsPostBack() Then
             ' Si no tiene permiso, la dirijo a message
             '!!! pending permiso especifico
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_DepartmentsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_DepartmentsList") Then Response.RedirectPermanent("~/adm/default.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Department List"
             Master.PageTitle = "Departments/Department List"

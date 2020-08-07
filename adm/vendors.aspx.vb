@@ -5,7 +5,7 @@ Public Class vendors
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_VendorsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_VendorsList") Then Response.RedirectPermanent("~/adm/default.aspx")
             ' Si no tiene permiso New, boton.Visible=False
             btnNewVendor.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewVendor")
 

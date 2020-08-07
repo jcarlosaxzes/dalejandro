@@ -8,7 +8,7 @@ Public Class requestforproposals
             ' Si no tiene permiso, la dirijo a message
             lblCompanyId.Text = Session("companyId")
             Dim EmployeeId As Integer = Master.UserId
-            If Not LocalAPI.GetEmployeePermission(EmployeeId, "Deny_RequestsProposalsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If Not LocalAPI.GetEmployeePermission(EmployeeId, "Deny_RequestsProposalsList") Then Response.RedirectPermanent("~/adm/default.aspx")
             ' Si no tiene permiso New, boton.Visible=False
             btnNew.Visible = LocalAPI.GetEmployeePermission(EmployeeId, "Deny_NewRequestProposals")
 

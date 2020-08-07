@@ -9,7 +9,7 @@ Public Class time
                 ' Si no tiene permiso, la dirijo a message
                 lblCompanyId.Text = Session("companyId")
                 lblEmployeeId.Text = Master.UserId
-                If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Time Entries"
 

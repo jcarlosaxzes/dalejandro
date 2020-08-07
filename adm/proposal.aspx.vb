@@ -13,12 +13,12 @@ Public Class proposal
                 lblProposalId.Text = Me.Request.QueryString("proposalId")
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 lblCompanyId.Text = Session("companyId")
 
 
-                If LocalAPI.IsCompanyViolation(lblProposalId.Text, "Proposal", lblCompanyId.Text) Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If LocalAPI.IsCompanyViolation(lblProposalId.Text, "Proposal", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 If Val(lblCompanyId.Text) = 0 Then
                     ' Link externo de EEG

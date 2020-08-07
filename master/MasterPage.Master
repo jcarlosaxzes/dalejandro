@@ -27,88 +27,97 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+
+    <style>
+        .container {
+            max-width: 1800px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+
 </head>
 <body>
     <form id="form1" runat="server">
         <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
         </telerik:RadScriptManager>
 
-        <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
-            <Rows>
+        <div class="container">
 
-                <telerik:LayoutRow>
-                    <Content>
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td style="text-align: right">
-                                    <asp:Label ID="lblUserName" runat="server" Text="lblUserName" ></asp:Label>
-                                </td>
-                                <td style="width: 100px; text-align: right">
-                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="LogIn" LogoutAction="Redirect"
-                                        LogoutPageUrl="http://app.pasconcept.com/" />
-                                </td>
-                            </tr>
-                        </table>
-                    </Content>
-                </telerik:LayoutRow>
-                <telerik:LayoutRow>
-                    <Content>
-                        <div>
-                            <telerik:RadNavigation runat="server" ID="RadMenu1" >
-                                <Nodes>
-                                    <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Default.aspx" Text="Master Dashboard">
-                                    </telerik:NavigationNode >
-                                    <telerik:NavigationNode  runat="server" Text="Company">
-                                        <Nodes>
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/CompanyList.aspx" Text="Company List">
-                                            </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/CompanyTypes.aspx" Text="Company Types &amp; Templates">
-                                            </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" IsSeparator="True" >
-                                            </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/CompanyPendingBills.aspx" Text="Company Billing">
-                                            </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/master/pagetracking.aspx" Text="Page Tracking">
-                                            </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/HistoryLog.aspx" Text="History Log">
-                                            </telerik:NavigationNode >
-                                        </Nodes>
-                                    </telerik:NavigationNode >
-                                    <telerik:NavigationNode  runat="server" Text="Billing">
-                                        <Nodes>
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Invoices.aspx" Text="PAS Invoices"></telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" Text="Plans" NavigateUrl="~/MASTER/BillingPlans.aspx"></telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" Text="SMS/Campaigns Billing" NavigateUrl="~/MASTER/SMS_Bill.aspx" Visible="false"></telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" Text="Company Activity" NavigateUrl="~/MASTER/ActiveUsers.aspx"></telerik:NavigationNode >
-                                        </Nodes>
-                                    </telerik:NavigationNode >
+            <%--Pre-Menu--%>
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                    <td style="text-align: right">
+                        <asp:Label ID="lblUserName" runat="server" Text="lblUserName"></asp:Label>
+                    </td>
+                    <td style="width: 100px; text-align: right">
+                        <asp:LoginStatus ID="LoginStatus1" runat="server" LoginText="LogIn" LogoutAction="Redirect"
+                            LogoutPageUrl="http://app.pasconcept.com/" />
+                    </td>
+                </tr>
+            </table>
 
-                                    <telerik:NavigationNode  runat="server" Text="Mass Communication" NavigateUrl="~/MASTER/MassCommunication.aspx">
-                                    </telerik:NavigationNode >
+            <%--Menu Bar--%>
+            <div>
+                <telerik:RadNavigation runat="server" ID="RadMenu1">
+                    <Nodes>
+                        <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/Default.aspx" Text="Master Dashboard">
+                        </telerik:NavigationNode>
+                        <telerik:NavigationNode runat="server" Text="Company">
+                            <Nodes>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/CompanyList.aspx" Text="Company List">
+                                </telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/CompanyTypes.aspx" Text="Company Types &amp; Templates">
+                                </telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" IsSeparator="True">
+                                </telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/CompanyPendingBills.aspx" Text="Company Billing">
+                                </telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/master/pagetracking.aspx" Text="Page Tracking">
+                                </telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/HistoryLog.aspx" Text="History Log">
+                                </telerik:NavigationNode>
+                            </Nodes>
+                        </telerik:NavigationNode>
+                        <telerik:NavigationNode runat="server" Text="Billing">
+                            <Nodes>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/Invoices.aspx" Text="PAS Invoices"></telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" Text="Plans" NavigateUrl="~/MASTER/BillingPlans.aspx"></telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" Text="SMS/Campaigns Billing" NavigateUrl="~/MASTER/SMS_Bill.aspx" Visible="false"></telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" Text="Company Activity" NavigateUrl="~/MASTER/ActiveUsers.aspx"></telerik:NavigationNode>
+                            </Nodes>
+                        </telerik:NavigationNode>
 
+                        <telerik:NavigationNode runat="server" Text="Campaigns">
+                            <Nodes>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/leads.aspx" Text="PASconcept Leads"></telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/MassCommunication.aspx" Text="Mass Communication"></telerik:NavigationNode>
+                            </Nodes>
+                        </telerik:NavigationNode>
 
-                                    <telerik:NavigationNode  runat="server" Text="Templates">
-                                        <Nodes>
-<%--                                            <telerik:NavigationNode  runat="server" Text="Proposal T &amp; C" NavigateUrl="~/MASTER/ProposalTandC.aspx"></telerik:NavigationNode >
+                        <telerik:NavigationNode runat="server" Text="Templates">
+                            <Nodes>
+                                <%--                                            <telerik:NavigationNode  runat="server" Text="Proposal T &amp; C" NavigateUrl="~/MASTER/ProposalTandC.aspx"></telerik:NavigationNode >
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/ProposalTask_TEMPLATE.aspx" Text="Proposal Task">
                                             </telerik:NavigationNode >
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Disciplines.aspx" Text="Disciplines">
                                             </telerik:NavigationNode >--%>
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/MessagesTemplates.aspx" Text="Messages Templates">
-                                            </telerik:NavigationNode >
-                                           <%-- <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/MiscellaneousTimeCodes.aspx" Text="Miscellaneous Time Codes">
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/MessagesTemplates.aspx" Text="Messages Templates">
+                                </telerik:NavigationNode>
+                                <%-- <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/MiscellaneousTimeCodes.aspx" Text="Miscellaneous Time Codes">
                                             </telerik:NavigationNode >
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Transmittals_package_types.aspx" Text="Transmittals Package Types">
                                             </telerik:NavigationNode >--%>
-                                        </Nodes>
-                                    </telerik:NavigationNode >
-<%--                                    <telerik:NavigationNode  runat="server" Text="Term &amp; Conditions">
+                            </Nodes>
+                        </telerik:NavigationNode>
+                        <%--                                    <telerik:NavigationNode  runat="server" Text="Term &amp; Conditions">
                                         <Nodes>
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/TandCedit.aspx" Text="Term &amp; Conditions Pages">
                                             </telerik:NavigationNode >
                                         </Nodes>
                                     </telerik:NavigationNode >--%>
-                                  <%--  <telerik:NavigationNode  runat="server" Text="Versiones">
+                        <%--  <telerik:NavigationNode  runat="server" Text="Versiones">
                                         <Nodes>
                                             <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/Versiones.aspx" Text="Versiones List">
                                             </telerik:NavigationNode >
@@ -118,73 +127,66 @@
                                             </telerik:NavigationNode >
                                         </Nodes>
                                     </telerik:NavigationNode >--%>
-<%--                                    <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/DataTool.aspx" Text="Data Tools">
+                        <%--                                    <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/DataTool.aspx" Text="Data Tools">
                                     </telerik:NavigationNode >--%>
-                                    <telerik:NavigationNode  runat="server" Text="Users">
-                                        <Nodes>
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Admin Users">
-                                            </telerik:NavigationNode >
-                                            <telerik:NavigationNode  runat="server" NavigateUrl="~/MASTER/UsersAgreeList.aspx" Text="Users Agree List">
-                                            </telerik:NavigationNode >
-                                        </Nodes>
-                                    </telerik:NavigationNode >
-                                </Nodes>
-                            </telerik:RadNavigation>
-                        </div>
-                    </Content>
-                </telerik:LayoutRow>
-                <telerik:LayoutRow>
-                    <Content>
-                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        </asp:ContentPlaceHolder>
+                        <telerik:NavigationNode runat="server" Text="Users">
+                            <Nodes>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Admin Users">
+                                </telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/UsersAgreeList.aspx" Text="Users Agree List">
+                                </telerik:NavigationNode>
+                            </Nodes>
+                        </telerik:NavigationNode>
+                    </Nodes>
+                </telerik:RadNavigation>
+            </div>
 
-                    </Content>
-                </telerik:LayoutRow>
+            <%--Page Container--%>
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
 
-                <telerik:LayoutRow>
-                    <Content>
-                        <table id='TBL_Footer' class="TBL_Footer noprint" border="0" cellpadding="5" cellspacing="0" align="center">
-                            <tr>
-                                <td dir="ltr" class="TBL_Footer_CELL_Left">
-                                    <asp:Image ID="Image3" runat="server" ImageUrl="~/App_Themes/Estandar/LogoPasTrans.png" />
-                                </td>
-                                <td dir="ltr" class="TBL_Footer_CELL_Right">
-                                    <asp:Label ID="lblVersion" runat="server" Text="Free"></asp:Label>
-                                </td>
-                                <td style="text-align: right;">
-                                    <div title="Click to check: This Web site is secured with a GoDaddy.com Web Server Certificate. Transactions on the site are protected with up to 256-bit Secure Sockets Layer encryption.">
-                                        <span id="siteseal">
-                                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=fx5biLCC3cLKJUHvcVIRpASihEa0DHQ4NtHKvPiGoK1XPPmlTy"></script>
-                                        </span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </Content>
-                </telerik:LayoutRow>
+            <%--Footers--%>
+            <div>
+                <table id='TBL_Footer' class="TBL_Footer noprint" border="0" cellpadding="5" cellspacing="0" align="center">
+                    <tr>
+                        <td dir="ltr" class="TBL_Footer_CELL_Left">
+                            <asp:Image ID="Image3" runat="server" ImageUrl="~/App_Themes/Estandar/LogoPasTrans.png" />
+                        </td>
+                        <td dir="ltr" class="TBL_Footer_CELL_Right">
+                            <asp:Label ID="lblVersion" runat="server" Text="Free"></asp:Label>
+                        </td>
+                        <td style="text-align: right;">
+                            <div title="Click to check: This Web site is secured with a GoDaddy.com Web Server Certificate. Transactions on the site are protected with up to 256-bit Secure Sockets Layer encryption.">
+                                <span id="siteseal">
+                                    <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=fx5biLCC3cLKJUHvcVIRpASihEa0DHQ4NtHKvPiGoK1XPPmlTy"></script>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
 
-                <telerik:LayoutRow>
-                    <Content>
-                        <asp:Label ID="lblWarning" runat="server"></asp:Label>
-                        <table class="FondoPie noprint" cellpadding="0" cellspacing="0" style="text-align: center; width: 100%">
-                            <tr>
-                                <td align="center">
-                                    <a href="http://blog.pasconcept.com" target="_blank" class="enlacepie">Help | </a>
-                                    <a href="https://pasconcept.com/privacy-policy/" target="_blank" class="enlacepie">Privacy | </a>
-                                    <a href="https://pasconcept.com/terms/" target="_blank" class="enlacepie">Terms & Condition | </a>
-                                    <a href="https://pasconcept.com/security/" target="_blank" class="enlacepie">Security | </a>
-                                    <a href="https://pasconcept.com/help/" target="_blank" class="enlacepie">Support</a>
-                                    <br />
-                                    <asp:Label ID="Label31" runat="server" class="enlacepie" Text="&copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <b>Axzes</b>"></asp:Label>
-                                    <br />
-                                </td>
-                            </tr>
-                        </table>
-                    </Content>
-                </telerik:LayoutRow>
-            </Rows>
-        </telerik:RadPageLayout>
+                <asp:Label ID="lblWarning" runat="server"></asp:Label>
+                <table class="FondoPie noprint" cellpadding="0" cellspacing="0" style="text-align: center; width: 100%">
+                    <tr>
+                        <td align="center">
+                            <a href="http://blog.pasconcept.com" target="_blank" class="enlacepie">Help | </a>
+                            <a href="https://pasconcept.com/privacy-policy/" target="_blank" class="enlacepie">Privacy | </a>
+                            <a href="https://pasconcept.com/terms/" target="_blank" class="enlacepie">Terms & Condition | </a>
+                            <a href="https://pasconcept.com/security/" target="_blank" class="enlacepie">Security | </a>
+                            <a href="https://pasconcept.com/help/" target="_blank" class="enlacepie">Support</a>
+                            <br />
+                            <asp:Label ID="Label31" runat="server" class="enlacepie" Text="&copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <b>Axzes</b>"></asp:Label>
+                            <br />
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
+        </div>
 
 
         <asp:Label ID="Label1" runat="server" Text="Free" Visible="false"></asp:Label>

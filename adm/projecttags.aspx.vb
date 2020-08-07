@@ -5,7 +5,7 @@ Public Class projecttags
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
             ' Si no tiene permiso, la dirijo a message
-            'If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobCodes") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            'If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_JobCodes") Then Response.RedirectPermanent("~/adm/default.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Project Tags"
             Master.PageTitle = "Jobs/Project Tags"

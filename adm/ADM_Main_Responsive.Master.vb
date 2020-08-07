@@ -1,4 +1,5 @@
-﻿Imports Microsoft.AspNet.Identity
+﻿Imports System.Threading.Tasks
+Imports Microsoft.AspNet.Identity
 Imports Microsoft.AspNet.Identity.Owin
 
 Public Class ADM_Main_Responsive
@@ -55,7 +56,7 @@ Public Class ADM_Main_Responsive
 
             If LocalAPI.GetCompanyBillingAmount(companyId) > 0 Then
                 ' Payment subscriptor Page
-                Response.Redirect("~/ADM/subscribe/pro.aspx")
+                Response.Redirect("~/adm/subscribe/pro.aspx")
             Else
                 ' If Free Plan (Amount=0), extend 'Expiracion Date'
                 LocalAPI.CompanyExpirationDateUpdate(companyId, DateAdd(DateInterval.Year, 1, Date.Today))
@@ -80,7 +81,7 @@ Public Class ADM_Main_Responsive
 
             If Session("LastPage") <> HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path) Then
                 Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)
-                LocalAPI.EmployeePageTracking(UserId, Session("LastPage"))
+                Task.Run(Function() LocalAPI.EmployeePageTracking(UserId, Session("LastPage")))
             End If
         End If
     End Sub
@@ -207,7 +208,7 @@ Public Class ADM_Main_Responsive
         lblCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
 
         ' Navegate Default Page
-        Response.RedirectPermanent("~/ADM/Start.aspx")
+        Response.RedirectPermanent("~/adm/Start.aspx")
     End Sub
     Public Function IsTicketsVisible() As Boolean
         ' Programmers/Computer/IT

@@ -7,7 +7,7 @@ Public Class companymultiplier
 
             If Not IsPostBack() Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Multiplier") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Multiplier") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Company Multiplier"
                 Master.PageTitle = "Company/Multiplier"

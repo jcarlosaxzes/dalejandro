@@ -52,7 +52,7 @@
 
                                     <form>
                                         <div class="form-group" style="margin-top: 1em">
-                                            <p><H3>Your Payment has been done successfully. Click <asp:HyperLink ID="login" runat="server" NavigateUrl="~/adm/Default.aspx">here</asp:HyperLink> to continue with PASconcept </p></H3>                                  
+                                            <p><H3>Your Payment has been done successfully. Click <asp:HyperLink ID="login" runat="server" NavigateUrl="~/adm/default.aspx">here</asp:HyperLink> to continue with PASconcept </p></H3>                                  
                                         </div>                                       
                                     </form>
                                 </div>

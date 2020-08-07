@@ -7,7 +7,7 @@ Public Class invoices
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Invoices"
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_InvoicesList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_InvoicesList") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Master.PageTitle = "Billing/Invoices"
                 Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"
@@ -204,12 +204,12 @@ Public Class invoices
 
             Case "InvoiceRDLC7"
                 'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
-                sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
+                sUrl = "~/adm/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
                 CreateRadWindows(e.CommandName, sUrl, 960, 810, False)
 
             Case "SendInvoice"
                 'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
-                sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
+                sUrl = "~/adm/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
                 CreateRadWindows(e.CommandName, sUrl, 960, 790, False)
 
             Case "RecivePayment"
@@ -223,7 +223,7 @@ Public Class invoices
 
             Case "BadDebt"
                 If LocalAPI.GetEmployeePermission(Master.UserId, "Allow_BadDebt") Then
-                    sUrl = "~/ADM/BadDebt.aspx?invoiceId=" & e.CommandArgument
+                    sUrl = "~/adm/BadDebt.aspx?invoiceId=" & e.CommandArgument
                     CreateRadWindows(e.CommandName, sUrl, 520, 600, False)
                 Else
                     Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
@@ -231,7 +231,7 @@ Public Class invoices
 
 
             Case "EditJob"
-                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
+                sUrl = "~/adm/Job_job.aspx?JobId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
 
             Case "PDF"
@@ -239,7 +239,7 @@ Public Class invoices
                 Dim url = LocalAPI.GetSharedLink_URL(4, lblInvoiceId.Text)
                 Session("PrintName") = "Invoice_" & LocalAPI.InvoiceNumber(lblInvoiceId.Text) & ".pdf"
                 Session("PrintUrl") = url
-                Response.Redirect("~/ADM/pdf_print.aspx")
+                Response.Redirect("~/adm/pdf_print.aspx")
         End Select
 
     End Sub

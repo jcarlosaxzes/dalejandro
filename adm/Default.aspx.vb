@@ -24,7 +24,7 @@ Public Class _Default1
                     RadDockSubconsultants.Collapsed = LocalAPI.GetEmployeeDockCollapsed(lblEmployeeId.Text, "RDS_Collapsed")
                 Else
                     ' User con Permiso al Employee PORTAL
-                    Response.Redirect("~/ADM/activejobsdashboad")
+                    Response.Redirect("~/adm/activejobsdashboad")
                     'RadDockLayout1.Visible = False
                     'panelEmployeePortal.Visible = True
                 End If

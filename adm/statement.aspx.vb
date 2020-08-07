@@ -7,7 +7,7 @@ Public Class statement
 
             If Not IsPostBack Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_StatementList") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_StatementList") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Master.PageTitle = "Billing/Statements"
                 Master.Help = "http://blog.pasconcept.com/2012/06/billing-statements-list.html"

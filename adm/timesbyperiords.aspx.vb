@@ -7,7 +7,7 @@ Public Class timesbyperiords
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Times by Periods"
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TimesbyPeriods") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TimesbyPeriods") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Master.PageTitle = "Employees/Times by Periods"
                 Master.Help = "http://blog.pasconcept.com/2012/07/employees-periodic-timesheet.html"

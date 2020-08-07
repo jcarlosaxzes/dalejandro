@@ -97,9 +97,9 @@ Public Class activejobsdashboad
             Case "EditReviews"
                 If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                     ' Programmers/Computer/IT
-                    Response.Redirect("~/ADM/JobTickets.aspx?JobId=" & e.CommandArgument)
+                    Response.Redirect("~/adm/JobTickets.aspx?JobId=" & e.CommandArgument)
                 Else
-                    CreateRadWindows("NewJob", "~/ADM/Reviews.aspx?JobId=" & e.CommandArgument, 960, 600, False, True)
+                    CreateRadWindows("NewJob", "~/adm/Reviews.aspx?JobId=" & e.CommandArgument, 960, 600, False, True)
                 End If
 
                 lblSelectedJob.Text = e.CommandArgument
@@ -245,7 +245,7 @@ Public Class activejobsdashboad
             DictValues.Add("[DateTo]", RadDatePickerTo.SelectedDate)
             DictValues.Add("[Notes]", txtNotes.Text)
             DictValues.Add("[TimeHours]", txtMiscellaneousHours.Text)
-            DictValues.Add("[UrlDetails]", LocalAPI.GetHostAppSite() & "/ADM/ManagementRequest.aspx?Id=" & requestId & "&guid=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text))
+            DictValues.Add("[UrlDetails]", LocalAPI.GetHostAppSite() & "/adm/ManagementRequest.aspx?Id=" & requestId & "&guid=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text))
             DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
             Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)

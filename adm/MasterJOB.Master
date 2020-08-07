@@ -43,62 +43,62 @@
                 <Nodes>
                     <telerik:NavigationNode ID="NavigationNodejob_job" 
                         Text="Job Info"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_job.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_job.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Billing" ID="NavigationNodejob_accounting"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_accounting.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_accounting.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Employees" ID="NavigationNodejob_employees"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_employees.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_employees.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Proposals" ID="NavigationNodejob_proposals"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_proposals.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_proposals.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Expenses" ID="NavigationNodejob_rfps"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_rfps.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_rfps.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Notes" ID="NavigationNodejob_notes"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_notes.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_notes.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Times" ID="NavigationNodejob_times"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_times.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_times.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Files" ID="NavigationNodejob_links"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_links.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_links.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Schedule" ID="NavigationNodejob_schedule"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_schedule.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_schedule.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Revisions" ID="NavigationNodejob_reviews"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_reviews.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_reviews.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Tags" ID="NavigationNodejob_tags"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_tags.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_tags.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Transmittals" ID="NavigationNodejob_trasmittals"
-                        NavigateUrl='<%# String.Concat("~/ADM/Job_transmittals.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_transmittals.aspx?jobId=", lblJobId.Text)%>'>
                     </telerik:NavigationNode>
                 </Nodes>
             </telerik:RadNavigation>

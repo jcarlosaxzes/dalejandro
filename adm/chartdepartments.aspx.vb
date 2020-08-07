@@ -6,7 +6,7 @@ Public Class chartdepartments
         Try
             If Not IsPostBack Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_DepartmentChart") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_DepartmentChart") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Monthly Current vs Target"
                 Master.PageTitle = "Departments/Monthly Current vs Target"

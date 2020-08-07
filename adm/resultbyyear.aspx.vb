@@ -5,7 +5,7 @@
         Try
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Analytics") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Analytics") Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Results by Year"
                 Master.PageTitle = "Analytics/Results by Year"

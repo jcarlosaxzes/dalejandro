@@ -12,7 +12,7 @@
             End If
 
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient") Then Response.RedirectPermanent("~/ADM/Default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient") Then Response.RedirectPermanent("~/adm/default.aspx")
 
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Contact"
             Master.PageTitle = "Contacts/New Contact"
