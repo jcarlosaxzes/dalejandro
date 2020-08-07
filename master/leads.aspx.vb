@@ -2,9 +2,14 @@
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not IsPostBack Then
-            RadGrid1.DataBind()
-        End If
+        Try
+
+            If Not IsPostBack Then
+                RadGrid1.DataBind()
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage = ex.Message
+        End Try
     End Sub
 
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
@@ -19,10 +24,15 @@
         'lblSELECTed_ID.Text = e.Command.Parameters("@SELECTed_ID").Value
     End Sub
     Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
-        RadToolTipExport.Visible = True
-        txtExportTag.Text = txtState.Text & txtZipCode.Text & txtZipCode.Text & txtPhone.Text & txtCity.Text
-        RadToolTipExport.Show()
-        txtExportTag.Focus()
+        Try
+
+            RadToolTipExport.Visible = True
+            txtExportTag.Text = txtState.Text & txtZipCode.Text & txtZipCode.Text & txtPhone.Text & txtCity.Text
+            RadToolTipExport.Show()
+            txtExportTag.Focus()
+        Catch ex As Exception
+            Master.ErrorMessage = ex.Message
+        End Try
     End Sub
 
     Private Sub btnConfirmExport_Click(sender As Object, e As EventArgs) Handles btnConfirmExport.Click

@@ -147,4 +147,16 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSELECTed_ID As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.MasterPage
+        Get
+            Return CType(MyBase.Master,pasconcept20.MasterPage)
+        End Get
+    End Property
 End Class
