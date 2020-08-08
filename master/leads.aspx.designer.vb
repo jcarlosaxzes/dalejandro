@@ -77,6 +77,15 @@ Partial Public Class leads
     Protected WithEvents txtNoTags As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
+    '''cboSource control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboSource As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''btnFind control.
     '''</summary>
     '''<remarks>
@@ -84,6 +93,15 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnBulkTag control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkTag As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnExport control.
@@ -131,6 +149,33 @@ Partial Public Class leads
     Protected WithEvents btnConfirmExport As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''RadToolTipTagSelected control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipTagSelected As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
+    '''txtBulkTag control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtBulkTag As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''btnBulkTagConfirm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkTagConfirm As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
@@ -140,13 +185,22 @@ Partial Public Class leads
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
-    '''lblSELECTed_ID control.
+    '''SqlDataSourceSources control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblSELECTed_ID As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents SqlDataSourceSources As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''lblSelected_ID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelected_ID As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

@@ -1,4 +1,6 @@
-﻿Public Class leads
+﻿Imports Telerik.Web.UI
+
+Public Class leads
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -27,7 +29,7 @@
         Try
 
             RadToolTipExport.Visible = True
-            txtExportTag.Text = txtState.Text & txtZipCode.Text & txtZipCode.Text & txtPhone.Text & txtCity.Text
+            'txtExportTag.Text = txtState.Text & txtZipCode.Text & txtPhone.Text & txtCity.Text
             RadToolTipExport.Show()
             txtExportTag.Focus()
         Catch ex As Exception
@@ -54,5 +56,34 @@
         RadGrid1.ExportSettings.UseItemStyles = False
         RadGrid1.ExportSettings.HideStructureColumns = True
         RadGrid1.MasterTableView.ShowFooter = True
+    End Sub
+
+    Private Sub btnBulkTag_Click(sender As Object, e As EventArgs) Handles btnBulkTag.Click
+        RadToolTipTagSelected.Visible = True
+        'txtBulkTag.Text = txtState.Text & txtZipCode.Text & txtPhone.Text & txtCity.Text
+        RadToolTipTagSelected.Show()
+        txtExportTag.Focus()
+
+        ' Tres cambios
+        '2. Clasificar SourcesId
+        '3. Add Source Filter
+        '4. Send Agile
+
+    End Sub
+    Private Sub btnBulkTagConfirm_Click(sender As Object, e As EventArgs) Handles btnBulkTagConfirm.Click
+        If RadGrid1.SelectedItems.Count > 0 Then
+            Dim nSelecteds As Integer = RadGrid1.SelectedItems.Count
+            For Each dataItem As GridDataItem In RadGrid1.SelectedItems
+
+                If dataItem.Selected Then
+                    lblSelected_ID.Text = dataItem("Id").Text
+                    dataItem.Selected = False
+                    SqlDataSource1.Insert()
+                End If
+            Next
+            RadGrid1.DataBind()
+        Else
+            Master.ErrorMessage = "You must to select records previously!"
+        End If
     End Sub
 End Class
