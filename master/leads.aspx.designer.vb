@@ -77,6 +77,15 @@ Partial Public Class leads
     Protected WithEvents txtNoTags As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
+    '''txtPageSize control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPageSize As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
     '''cboSource control.
     '''</summary>
     '''<remarks>

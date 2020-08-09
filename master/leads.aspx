@@ -34,30 +34,31 @@
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
                     <table class="table-sm pasconcept-bar" style="width: 100%">
                         <tr>
-                            <td style="width: 150px; text-align: right">State:
+                            <td style="width: 120px; text-align: right">State:
                             </td>
-                            <td style="width: 150px">
+                            <td style="width: 130px">
                                 <telerik:RadTextBox ID="txtState" runat="server" MaxLength="15" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 150px; text-align: right">Biginig Zip Code:
+                            <td style="width: 140px; text-align: right">Biginig Zip Code:
                             </td>
-                            <td style="width: 150px">
+                            <td style="width: 130px">
                                 <telerik:RadTextBox ID="txtZipCode" runat="server" Text="" MaxLength="10" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 150px; text-align: right">Biginig Phone:
+                            <td style="width: 130px; text-align: right">Biginig Phone:
                             </td>
-                            <td style="width: 150px">
+                            <td style="width: 130px">
                                 <telerik:RadTextBox ID="txtPhone" runat="server" Text="" MaxLength="10" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 150px; text-align: right">City:
+                            <td style="width: 100px; text-align: right">City:
                             </td>
                             <td>
-                                <telerik:RadTextBox ID="txtCity" runat="server" Text="" MaxLength="50" Width="150px">
+                                <telerik:RadTextBox ID="txtCity" runat="server" Text="" MaxLength="50" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
+                            <td></td>
 
                         </tr>
                         <tr>
@@ -73,24 +74,27 @@
                                 <telerik:RadTextBox ID="txtNoTags" runat="server" MaxLength="100" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="text-align: right">Source:
+                            <td style="text-align: right">Page Size:
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboSource" runat="server" DataSourceID="SqlDataSourceSources" DataTextField="Name" DataValueField="Id" Width="350px"
+                                <telerik:RadTextBox ID="txtPageSize" runat="server" MaxLength="5" Width="100%" Text="100">
+                                </telerik:RadTextBox>
+                            </td>
+                            <td style="text-align: right">
+                                Source:
+                            </td>
+                            <td style="width:300px">
+                                <telerik:RadComboBox ID="cboSource" runat="server" DataSourceID="SqlDataSourceSources" DataTextField="Name" DataValueField="Id" Width="100%"
                                     AppendDataBoundItems="true" Height="300px" MarkFirstMatch="True">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="(All Sources List...)" Value="-1" Selected="true" />
                                     </Items>
                                 </telerik:RadComboBox>
-
-
                             </td>
                             <td>
                                 <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     Filter/Search
                                 </asp:LinkButton>
-                            </td>
-                            <td>
                                 <span style="float: right; vertical-align: middle;">
                                     <asp:LinkButton ID="btnBulkTag" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" ToolTip="Tag Selected records">
                                          Bulk Tag
@@ -344,6 +348,7 @@
         UpdateCommand="Leads_Tags_Bulk_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Leads_Tags_UPDATE" InsertCommandType="StoredProcedure">
         <SelectParameters>
+            <asp:ControlParameter ControlID="txtPageSize" Name="PageSize" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtState" Name="State" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtZipCode" Name="ZipCode" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtPhone" Name="Phone" PropertyName="Text" ConvertEmptyStringToNull="false" />
