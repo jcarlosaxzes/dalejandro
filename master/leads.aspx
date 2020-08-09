@@ -358,6 +358,7 @@
             <asp:ControlParameter ControlID="cboSource" Name="sourceId" PropertyName="SelectedValue" />
         </SelectParameters>
         <UpdateParameters>
+            <asp:ControlParameter ControlID="txtPageSize" Name="PageSize" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtState" Name="State" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtZipCode" Name="ZipCode" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtPhone" Name="Phone" PropertyName="Text" ConvertEmptyStringToNull="false" />
