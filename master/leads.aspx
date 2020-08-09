@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/master/MasterPage.Master" CodeBehind="leads.aspx.vb" Inherits="pasconcept20.leads" %>
+
 <%@ MasterType VirtualPath="~/master/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
@@ -27,52 +28,50 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
 
-        <table style="width: 100%">
+    <table style="width: 100%">
         <tr>
             <td colspan="2">
                 <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
                     <table class="table-sm pasconcept-bar" style="width: 100%">
                         <tr>
-                            <td style="width: 150px; text-align: right">
-                                State:
+                            <td style="width: 150px; text-align: right">State:
                             </td>
                             <td style="width: 150px">
-                               <telerik:RadTextBox ID="txtState" runat="server" MaxLength="15" Width="100%">
-                                        </telerik:RadTextBox>
+                                <telerik:RadTextBox ID="txtState" runat="server" MaxLength="15" Width="100%">
+                                </telerik:RadTextBox>
                             </td>
-                            <td style="width: 150px; text-align: right">
-                                Biginig Zip Code:
+                            <td style="width: 150px; text-align: right">Biginig Zip Code:
                             </td>
                             <td style="width: 150px">
-                               <telerik:RadTextBox ID="txtZipCode" runat="server" Text="" MaxLength="10" Width="100%">
-                                        </telerik:RadTextBox>
+                                <telerik:RadTextBox ID="txtZipCode" runat="server" Text="" MaxLength="10" Width="100%">
+                                </telerik:RadTextBox>
                             </td>
                             <td style="width: 150px; text-align: right">Biginig Phone:
                             </td>
                             <td style="width: 150px">
-                               <telerik:RadTextBox ID="txtPhone" runat="server" Text="" MaxLength="10" Width="100%">
-                                        </telerik:RadTextBox>
+                                <telerik:RadTextBox ID="txtPhone" runat="server" Text="" MaxLength="10" Width="100%">
+                                </telerik:RadTextBox>
                             </td>
                             <td style="width: 150px; text-align: right">City:
                             </td>
                             <td>
-                               <telerik:RadTextBox ID="txtCity" runat="server" Text="" MaxLength="50" Width="150px">
-                                        </telerik:RadTextBox>
+                                <telerik:RadTextBox ID="txtCity" runat="server" Text="" MaxLength="50" Width="150px">
+                                </telerik:RadTextBox>
                             </td>
-                           
+
                         </tr>
                         <tr>
-                        <td style="text-align: right">Contain Tags:
+                            <td style="text-align: right">Contain Tags:
                             </td>
                             <td>
-                               <telerik:RadTextBox ID="txtTags" runat="server" Text="" MaxLength="100" Width="100%">
-                                        </telerik:RadTextBox>
+                                <telerik:RadTextBox ID="txtTags" runat="server" Text="" MaxLength="100" Width="100%">
+                                </telerik:RadTextBox>
                             </td>
                             <td style="text-align: right">Not Contain Tags:
                             </td>
                             <td>
-                               <telerik:RadTextBox ID="txtNoTags" runat="server" MaxLength="100" Width="100%">
-                                        </telerik:RadTextBox>
+                                <telerik:RadTextBox ID="txtNoTags" runat="server" MaxLength="100" Width="100%">
+                                </telerik:RadTextBox>
                             </td>
                             <td style="text-align: right">Source:
                             </td>
@@ -122,20 +121,25 @@
                             </telerik:GridBoundColumn>
                             <telerik:GridBoundColumn DataField="Company" HeaderText="Company" SortExpression="Company" UniqueName="Company" HeaderStyle-Width="180px" ItemStyle-Font-Bold="true">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ContactName" HeaderText="Contact Name" SortExpression="ContactName" UniqueName="ContactName" HeaderStyle-Width="150px" ItemStyle-Font-Bold="true">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Position" HeaderText="Position" SortExpression="Position" UniqueName="Position"  HeaderStyle-Width="120px"  >
+                            <telerik:GridTemplateColumn DataField="ContactName" HeaderText="Contact Name" SortExpression="ContactName" UniqueName="ContactName" HeaderStyle-Width="150px" ItemStyle-Font-Bold="true">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="btnEditLead" runat="server" UseSubmitBehavior="false" CommandName="EditLead" CommandArgument='<%# Eval("Id") %>'>
+                                        <%# Eval("ContactName") %>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridBoundColumn DataField="Position" HeaderText="Position" SortExpression="Position" UniqueName="Position" HeaderStyle-Width="120px">
                             </telerik:GridBoundColumn>
                             <telerik:GridBoundColumn DataField="JobTitle" HeaderText="Job Title - Capabiliy" SortExpression="JobTitle" UniqueName="JobTitle" HeaderStyle-Width="280px">
                             </telerik:GridBoundColumn>
                             <telerik:GridBoundColumn DataField="Email" HeaderText="Email" SortExpression="Email" UniqueName="Email" HeaderStyle-Width="150px">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Phone" HeaderText="Phone" SortExpression="Phone" UniqueName="Phone"  HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                            <telerik:GridBoundColumn DataField="Phone" HeaderText="Phone" SortExpression="Phone" UniqueName="Phone" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
                             </telerik:GridBoundColumn>
                             <telerik:GridTemplateColumn DataField="WebSite" HeaderText="WebSite" SortExpression="WebSite" UniqueName="WebSite" HeaderStyle-Width="150px">
-                               <ItemTemplate>
-                                   <a href='<%# Eval("WebSite") %>' target="_blank"><%# Eval("WebSite") %></a>
-                               </ItemTemplate>
+                                <ItemTemplate>
+                                    <a href='<%# Eval("WebSite") %>' target="_blank"><%# Eval("WebSite") %></a>
+                                </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridBoundColumn DataField="Address" HeaderText="Address" SortExpression="Address" UniqueName="Address" HeaderStyle-Width="180px">
                             </telerik:GridBoundColumn>
@@ -157,15 +161,15 @@
         </h3>
         <table class="table-sm" style="width: 600px">
             <tr>
-                <td style="text-align:right;width:150px">TAG (exported rows):
+                <td style="text-align: right; width: 150px">TAG (exported rows):
                 </td>
                 <td>
                     <telerik:RadTextBox ID="txtExportTag" runat="server" Text="" MaxLength="100" Width="100%">
-                                        </telerik:RadTextBox>
+                    </telerik:RadTextBox>
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align:center">
+                <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnConfirmExport" runat="server" CssClass="btn btn-success" Width="150px" UseSubmitBehavior="false">
                              Export 
                     </asp:LinkButton>
@@ -174,22 +178,22 @@
         </table>
     </telerik:RadToolTip>
 
-     <telerik:RadToolTip ID="RadToolTipTagSelected" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+    <telerik:RadToolTip ID="RadToolTipTagSelected" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h3 style="margin: 0; text-align: center; color: white; width: 600px">
             <span class="navbar navbar-expand-md bg-dark text-white">Bulk Tag Update
             </span>
         </h3>
         <table class="table-sm" style="width: 600px">
             <tr>
-                <td style="text-align:right;width:150px">TAG (selected rows):
+                <td style="text-align: right; width: 150px">TAG (selected rows):
                 </td>
                 <td>
                     <telerik:RadTextBox ID="txtBulkTag" runat="server" Text="" MaxLength="100" Width="100%">
-                                        </telerik:RadTextBox>
+                    </telerik:RadTextBox>
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align:center">
+                <td colspan="2" style="text-align: center">
                     <asp:LinkButton ID="btnBulkTagConfirm" runat="server" CssClass="btn btn-success" Width="150px" UseSubmitBehavior="false">
                              Export 
                     </asp:LinkButton>
@@ -198,21 +202,158 @@
         </table>
     </telerik:RadToolTip>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server"  ConnectionString="<%$ ConnectionStrings:cnnAxzesLeads %>"
-        SelectCommand="Leads_SELECT" SelectCommandType="StoredProcedure" 
-        UpdateCommand="Leads_Tags_Bulk_UPDATE" UpdateCommandType="StoredProcedure" 
+    <telerik:RadToolTip ID="RadToolTipLead" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h3 style="margin: 0; text-align: center; color: white; width: 800px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Edit Contact
+            </span>
+        </h3>
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceLead" Width="100%" DefaultMode="Edit">
+            <EditItemTemplate>
+                <table class="table-sm" style="width: 800px">
+                    <tr>
+                        <td style="width: 220px; text-align: right">First Name:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="txtClientName" runat="server" Text='<%# Bind("FirstName") %>' MaxLength="80"
+                                Width="100%" EmptyMessage="Required">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Last Name:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBox1" runat="server" Text='<%# Bind("LastName") %>' MaxLength="80"
+                                Width="100%">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Position:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBox3" runat="server" Text='<%# Bind("Position") %>' MaxLength="80" Width="100%">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Job Title:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("JobTitle") %>' MaxLength="80" Width="100%">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Email:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="txtEmail" runat="server" Text='<%# Bind("Email") %>' MaxLength="80" Width="100%" EmptyMessage="Required">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Phone/Cell/Fax:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBoxPhone" runat="server" Text='<%# Bind("Phone") %>' ToolTip="Phone" />
+                            &nbsp;
+                                                                <telerik:RadTextBox ID="RadMaskedTextBox2" runat="server" Text='<%# Bind("Cellular") %>' ToolTip="Cell" />
+                            &nbsp;
+                                                                <telerik:RadTextBox ID="RadMaskedTextBox3" runat="server" Text='<%# Bind("Fax") %>' ToolTip="Facsimile" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Web Site:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBox11" runat="server" Text='<%# Bind("WebSite") %>' MaxLength="128" Width="100%">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Source:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cbos" runat="server" DataSourceID="SqlDataSourceSources"
+                                DataTextField="Name" DataValueField="Id" Width="100%" SelectedValue='<%# Bind("SourceId") %>'
+                                AppendDataBoundItems="true">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Text="(Source Not Defined...)" Value="0" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right">Address Line 1:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="txtAddress" runat="server" Text='<%# Bind("AddressLine1") %>' MaxLength="80" Width="100%">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Address Line 2:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="txtAddress2" runat="server" Text='<%# Bind("AddressLine2") %>' MaxLength="80" Width="100%">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">City/State/Zip:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBox2" runat="server" Text='<%# Bind("City") %>' MaxLength="50"
+                                Width="160px" ToolTip="City" EmptyMessage="City" CssClass="input-city">
+                            </telerik:RadTextBox>
+                            &nbsp;
+                                                                <telerik:RadTextBox ID="RadTextBox5" runat="server" Text='<%# Bind("State") %>'
+                                                                    MaxLength="50" Width="160px" ToolTip="State" EmptyMessage="State" CssClass="input-state">
+                                                                </telerik:RadTextBox>
+                            &nbsp;
+                                                                <telerik:RadTextBox ID="RadTextBox6" runat="server" Text='<%# Bind("ZipCode") %>' ToolTip="Zip Code" EmptyMessage="Zip Code"
+                                                                    MaxLength="50" Width="160px" CssClass="input-zip">
+                                                                </telerik:RadTextBox>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td style="text-align: right">Tags:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="RadTextBox14" runat="server" Text='<%# Bind("Tags") %>' Width="100%" MaxLength="80">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+
+                </table>
+            </EditItemTemplate>
+        </asp:FormView>
+        <div style="width: 100%; text-align: right">
+            <asp:LinkButton ID="btnUpdateContact" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
+                Update Contact
+            </asp:LinkButton>
+        </div>
+    </telerik:RadToolTip>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnAxzesLeads %>"
+        SelectCommand="Leads_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="Leads_Tags_Bulk_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Leads_Tags_UPDATE" InsertCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="txtState" Name="State" PropertyName="Text" ConvertEmptyStringToNull="false"  />
+            <asp:ControlParameter ControlID="txtState" Name="State" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtZipCode" Name="ZipCode" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtPhone" Name="Phone" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtCity" Name="City" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtTags" Name="Tag" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtNoTags" Name="NoTag" PropertyName="Text" ConvertEmptyStringToNull="false" />
-            <asp:ControlParameter ControlID="cboSource" Name="sourceId" PropertyName="SelectedValue"  />
+            <asp:ControlParameter ControlID="cboSource" Name="sourceId" PropertyName="SelectedValue" />
         </SelectParameters>
         <UpdateParameters>
-            <asp:ControlParameter ControlID="txtState" Name="State" PropertyName="Text" ConvertEmptyStringToNull="false"  />
+            <asp:ControlParameter ControlID="txtState" Name="State" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtZipCode" Name="ZipCode" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtPhone" Name="Phone" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtCity" Name="City" PropertyName="Text" ConvertEmptyStringToNull="false" />
@@ -224,9 +365,34 @@
             <asp:ControlParameter ControlID="txtBulkTag" Name="Tag" PropertyName="Text" ConvertEmptyStringToNull="false" />
         </InsertParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceSources" runat="server" ConnectionString="<%$ ConnectionStrings:cnnAxzesLeads %>"
-        SelectCommand="SELECT [Id], [Name] FROM [Leads_sources] ORDER BY [Id]">
+    <asp:SqlDataSource ID="SqlDataSourceLead" runat="server" ConnectionString="<%$ ConnectionStrings:cnnAxzesLeads %>"
+        SelectCommand="Lead_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="Lead_UPDATE" UpdateCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblSelected_ID" Name="Id" PropertyName="Text" />
+        </SelectParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="FirstName" />
+            <asp:Parameter Name="LastName" />
+            <asp:Parameter Name="Email" />
+            <asp:Parameter Name="Fax" />
+            <asp:Parameter Name="Phone" />
+            <asp:Parameter Name="Cellular" />
+            <asp:Parameter Name="WebSite" />
+            <asp:Parameter Name="AddressLine1" />
+            <asp:Parameter Name="AddressLine2" />
+            <asp:Parameter Name="City" />
+            <asp:Parameter Name="State" />
+            <asp:Parameter Name="ZipCode" />
+            <asp:Parameter Name="JobTitle" />
+            <asp:Parameter Name="Position" />
+            <asp:Parameter Name="Tags" />
+            <asp:Parameter Name="SourceId" />
+            <asp:ControlParameter ControlID="lblSelected_ID" Name="Id" PropertyName="Text" />
+        </UpdateParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceSources" runat="server" ConnectionString="<%$ ConnectionStrings:cnnAxzesLeads %>"
+        SelectCommand="SELECT [Id], [Name] FROM [Leads_sources] ORDER BY [Id]"></asp:SqlDataSource>
 
     <asp:Label ID="lblSelected_ID" runat="server" Visible="False"></asp:Label>
 

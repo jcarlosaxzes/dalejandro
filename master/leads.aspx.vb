@@ -86,4 +86,19 @@ Public Class leads
             Master.ErrorMessage = "You must to select records previously!"
         End If
     End Sub
+
+    Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
+        Select Case e.CommandName
+            Case "EditLead"
+                lblSelected_ID.Text = e.CommandArgument
+                FormView1.DataBind()
+                RadToolTipLead.Visible = True
+                RadToolTipLead.Show()
+        End Select
+    End Sub
+
+    Private Sub btnUpdateContact_Click(sender As Object, e As EventArgs) Handles btnUpdateContact.Click
+        FormView1.UpdateItem(True)
+        RadGrid1.DataBind()
+    End Sub
 End Class
