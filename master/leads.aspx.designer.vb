@@ -176,6 +176,33 @@ Partial Public Class leads
     Protected WithEvents btnBulkTagConfirm As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''RadToolTipLead control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipLead As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
+    '''FormView1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
+    
+    '''<summary>
+    '''btnUpdateContact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpdateContact As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
@@ -183,6 +210,15 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceLead control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceLead As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''SqlDataSourceSources control.
