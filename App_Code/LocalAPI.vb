@@ -57,6 +57,7 @@ Public Class LocalAPI
         NewSubconsultan = 1601
         PAS_IntuitQB = 2001
         UnhandleError = 404
+        azure_post = 3001
     End Enum
 
     Public Enum MensajeOneTime_ENUM
@@ -12511,8 +12512,11 @@ Public Class LocalAPI
 #Region "AzureWebServices"
     Public Shared Function EmissionRecurrenceEmails() As Boolean
         ' Tarea "PostEmissionRecurrenceEmails" tipo "Scheduler Job Collections" lanzada desde Azure 
-        ' WebMethod
-        ' iPasWS.EmissionRecurrenceEmails()
+        '[WebHook URL] "https://app.pasconcept.com/api/webhooks/post"
+        '[Authorization Token] = "Bearer 7497EE20-6811-4405-A2EE-471A8BFE3682"
+        '[HttpMethod] = "POST"
+
+        LocalAPI.sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST EmissionRecurrenceEmails")
         EmissionTask1()
         EmissionTask2()
         Return EmissionTask3()
