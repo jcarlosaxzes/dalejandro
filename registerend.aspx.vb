@@ -175,7 +175,7 @@ Public Class registerend
             sMsg.Append("<br />")
             sMsg.Append(LocalAPI.GetPASShortSign())
 
-            SendGrid.Email.SendMail(txtEmail.Text, "", "jcarlos@axzes.com,matt@axzes.com", "PASconcept. New Registered User", sMsg.ToString, -1)
+            SendGrid.Email.SendMail(txtEmail.Text, "", "jcarlos@axzes.com,matt@axzes.com", "PASconcept. New Registered User", sMsg.ToString, -1, 0, 0)
 
         Catch ex As Exception
 

@@ -66,7 +66,7 @@ Public Class managementrequest
             Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Manager_Response_Request", lblCompanyId.Text, DictValues)
             Dim sBody As String = LocalAPI.GetMessageTemplateBody("Manager_Response_Request", lblCompanyId.Text, DictValues)
 
-            Return SendGrid.Email.SendMail(EmployeeEmail, "", "", sSubject, sBody, lblCompanyId.Text)
+            Return SendGrid.Email.SendMail(EmployeeEmail, "", "", sSubject, sBody, lblCompanyId.Text, 0, 0)
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

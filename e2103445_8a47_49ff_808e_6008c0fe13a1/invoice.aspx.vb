@@ -289,8 +289,10 @@ Public Class invoice
 
                 Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Invocie_Payment", lblCompanyId.Text, DictValues)
                 Dim sBody As String = LocalAPI.GetMessageTemplateBody("Invocie_Payment", lblCompanyId.Text, DictValues)
+                Dim clientID = LocalAPI.GetClientIdFromInvoice(lblInvoice.Text)
+                Dim jobId = LocalAPI.GetJobIdFromInvoice(lblInvoice.Text)
 
-                SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text)
+                SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text, clientID, jobId)
                 SqlDataSourceInvoice.DataBind()
 
             End If

@@ -22,7 +22,7 @@ Module SendGrid
     End Class
 
     Public Class Email
-        Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer,
+        Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer,
                                     Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
             Dim host As String = ""
@@ -36,13 +36,13 @@ Module SendGrid
                 Return LocalAPI.SendMail(sTo, sCC, sCCO, sSubtject, sBody, companyId, sFromMail, sFromDisplay, replyToMail, sReplyToDisplay)
             Else
                 ' PASconcept notification or ' SMTP NOT defined for Company
-                Return SendMailSendGrid(sTo, sCC, sCCO, sSubtject, sBody, companyId, sFromMail, sFromDisplay, replyToMail, sReplyToDisplay)
+                Return SendMailSendGrid(sTo, sCC, sCCO, sSubtject, sBody, companyId, clientId, jobId, sFromMail, sFromDisplay, replyToMail, sReplyToDisplay)
             End If
 
         End Function
 
 
-        Public Shared Function SendMailSendGrid(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer,
+        Public Shared Function SendMailSendGrid(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer,
                                     Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
             Try
@@ -113,7 +113,7 @@ Module SendGrid
                 If companyId > 0 Then
                     Dim sAdresses As String = sTo
                     If Len(sCC) > 0 And sTo <> sCC Then sAdresses = sAdresses & ";" & sCC
-                    LocalAPI.SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId)
+                    LocalAPI.SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId, clientId, jobId)
                 End If
             Catch ex As Exception
                 Throw ex
