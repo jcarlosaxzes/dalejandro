@@ -6287,7 +6287,7 @@ Public Class LocalAPI
 
             Try
                 If ConfigurationManager.AppSettings("Debug") = "1" Then
-                    SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, 0, 0 ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
+                    SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, 0, 0, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
                 Else
                     SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, 0, 0, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
                 End If
