@@ -12257,7 +12257,7 @@ Public Class LocalAPI
                 cmd.CommandText = "Azure_Proposal_Uploads_INSERT"
                 cmd.CommandType = CommandType.StoredProcedure
 
-                cmd.Parameters.AddWithValue("@jobId", ProposalId)
+                cmd.Parameters.AddWithValue("@ProposalId", ProposalId)
                 cmd.Parameters.AddWithValue("@Type", Type)
                 cmd.Parameters.AddWithValue("@FileName", FileName)
                 cmd.Parameters.AddWithValue("@KeyName", KeyName)
