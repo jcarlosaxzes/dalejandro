@@ -140,7 +140,9 @@ Public Class newclientcollection
     End Sub
     Private Function SendClientNotification(SenderDisplay As String) As Boolean
         Try
-            Dim bRes As Boolean = SendGrid.Email.SendMail(txtClientTo.Text, txtClientCC.Text, "", txtClientSubject.Text, txtClientBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
+            Dim CollectionInfo = LocalAPI.GetRecord(lblCollectionId.Text, "Clients_collection_Form_SELECT")
+            Dim clientId = CollectionInfo("clientId")
+            Dim bRes As Boolean = SendGrid.Email.SendMail(txtClientTo.Text, txtClientCC.Text, "", txtClientSubject.Text, txtClientBody.Content, lblCompanyId.Text, clientId, 0,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
             If bRes Then
                 Master.InfoMessage("Client notification sent!")
                 Return True
@@ -150,7 +152,9 @@ Public Class newclientcollection
     End Function
     Private Function SendAttorneyNotification(SenderDisplay As String) As Boolean
         Try
-            Dim bRes As Boolean = SendGrid.Email.SendMail(txtAttorneyTo.Text, txtAttorneyCC.Text, "", txtAttorneySubject.Text, txtAttorneyBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
+            Dim CollectionInfo = LocalAPI.GetRecord(lblCollectionId.Text, "Clients_collection_Form_SELECT")
+            Dim clientId = CollectionInfo("clientId")
+            Dim bRes As Boolean = SendGrid.Email.SendMail(txtAttorneyTo.Text, txtAttorneyCC.Text, "", txtAttorneySubject.Text, txtAttorneyBody.Content, lblCompanyId.Text, clientId, 0,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
             If bRes Then
                 Master.InfoMessage("Attorney notification sent!")
                 Return True

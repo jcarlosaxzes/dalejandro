@@ -270,7 +270,7 @@ Public Class AzureStorages
                     Dim newName = "Companies/" & companyid & $"/{Guid.NewGuid().ToString()}.jpg"
                     AzureStorageApi.UploadBytesData(newName, bitesImages, "image/jpg")
 
-                    LocalAPI.JobAzureStorage_Insert(jobId, 0, "Job_photo.jpg", newName, False, bitesImages.Length, "Image/jpg", companyid)
+                    LocalAPI.AzureStorage_Insert(jobId, "Jobs", 0, "Job_photo.jpg", newName, False, bitesImages.Length, "Image/jpg", companyid)
 
                     LocalAPI.JobDeleteImages(jobId)
 

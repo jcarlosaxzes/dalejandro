@@ -110,7 +110,7 @@ Public Class schedule
                 sCCO = Left(sCCO, Len(sCCO) - 1)
             End If
 
-            Return LocalAPI.SendMailAndAttachmentExt(sEmailTo, sCCO, lblSelectedSubject.Text, fileData, lblSelectedSubject.Text & ".ics", lblCompanyId.Text)
+            Return LocalAPI.SendMailAndAttachmentExt(sEmailTo, sCCO, lblSelectedSubject.Text, fileData, lblSelectedSubject.Text & ".ics", lblCompanyId.Text, 0, 0)
 
             Master.InfoMessage("Appointment '" & lblSelectedSubject.Text & "' was sent")
         Catch ex As Exception
@@ -263,7 +263,7 @@ Public Class schedule
                 Dim sBody As String = sMsg.ToString
                 Dim sSubject As String = "PASconcet client activity. " & cboClient.Text & ", [" & cboActivityType.Text & "]"
 
-                Task.Run(Function() SendGrid.Email.SendMail(sEmailTo, Master.UserEmail, "", sSubject, sBody, lblCompanyId.Text))
+                Task.Run(Function() SendGrid.Email.SendMail(sEmailTo, Master.UserEmail, "", sSubject, sBody, lblCompanyId.Text, cboClient.SelectedValue, 0))
 
             End If
             Return True

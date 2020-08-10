@@ -53,7 +53,7 @@
         sMsg.Append("<br />")
         sMsg.Append(LocalAPI.GetPASShortSign())
 
-        If SendGrid.Email.SendMail(txtEmail.Text, "", ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept registration", sMsg.ToString, -1) Then
+        If SendGrid.Email.SendMail(txtEmail.Text, "", ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept registration", sMsg.ToString, -1, 0, 0) Then
             Response.RedirectPermanent("~/RegisterConfirm.aspx?Step=2")
         End If
     End Sub

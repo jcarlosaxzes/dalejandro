@@ -218,7 +218,7 @@ Public Class rfpnewwizard
                 iframeViewRFP.Src = LocalAPI.GetSharedLink_URL(2002, lblRFPLastId.Text) & "&IsReadOnly=1"
 
                 ' Delete original Images Uploads (sin @requestforproposalId definido todavia)
-                LocalAPI.RequestForProposals_azureuploads_DELETE(lblAzureGuiId.Text)
+                LocalAPI.DeleteAzureFileGuid(lblAzureGuiId.Text)
 
                 'Response.RedirectPermanent("~/ADM/RequestForProposals.aspx")
             Else
@@ -240,7 +240,7 @@ Public Class rfpnewwizard
                 AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
                 AzureStorageApi.DeleteFile(tempName)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.RequestForProposalsAzureStorage_Insert(0, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblAzureGuiId.Text, lblCompanyId.Text)
+                e.IsValid = LocalAPI.AzureStorageGuid_Insert(0, "Request_For_Proposal", CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text, lblAzureGuiId.Text)
                 RadGridAzureuploads.DataBind()
                 Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else

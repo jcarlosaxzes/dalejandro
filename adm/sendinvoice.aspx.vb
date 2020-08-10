@@ -190,7 +190,9 @@ Public Class sendinvoice
                         sBCO = sBCO & "," & AccountantEmail
                     End If
 
-                    bSendEmail = SendGrid.Email.SendMail(sTo, txtCC.Text, sBCO, txtSubject.Text, txtBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
+                    Dim clientID = LocalAPI.GetClientIdFromInvoice(lblInvoice.Text)
+                    Dim jobId = LocalAPI.GetJobIdFromInvoice(lblInvoice.Text)
+                    bSendEmail = SendGrid.Email.SendMail(sTo, txtCC.Text, sBCO, txtSubject.Text, txtBody.Content, lblCompanyId.Text, clientID, jobId,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay)
 
                     LocalAPI.NewAutomaticInvoiceReminderFromEmitted(lblInvoice.Text, lblEmployeeId.Text, lblCompanyId.Text)
 
@@ -284,7 +286,7 @@ Public Class sendinvoice
                 AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
                 AzureStorageApi.DeleteFile(tempName)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 10, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
+                e.IsValid = LocalAPI.AzureStorage_Insert(lblJobId.Text, "Jobs", 10, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
                 If e.IsValid Then
                     RadGridLinks.DataBind()
                     InfoMessage(e.FileInfo.OriginalFileName & " uploaded")

@@ -93,7 +93,7 @@ Public Class Job_images_files
                 AzureStorageApi.DeleteFile(tempName)
 
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 9, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, "image/png", lblCompanyId.Text)
+                e.IsValid = LocalAPI.AzureStorage_Insert(lblJobId.Text, "Jobs", 9, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, "image/png", lblCompanyId.Text)
                 If e.IsValid Then
                     RadListView1.DataBind()
                     Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
