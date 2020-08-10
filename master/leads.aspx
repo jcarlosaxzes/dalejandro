@@ -102,6 +102,9 @@
                                     <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" ToolTip="Export and (optional)Tag current List">
                                          Export
                                     </asp:LinkButton>
+                                    <asp:LinkButton ID="btnAgile" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Export selected records to Agile">
+                                         Agile
+                                    </asp:LinkButton>
                                 </span>
                             </td>
                         </tr>
@@ -160,7 +163,8 @@
 
     <telerik:RadToolTip ID="RadToolTipExport" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h3 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Export to CSV File
+            <span class="navbar navbar-expand-md bg-dark text-white">
+                <asp:Label runat="server" ID="lblExportTitle" Text="Export to CSV File"></asp:Label>
             </span>
         </h3>
         <table class="table-sm" style="width: 600px">
@@ -174,8 +178,8 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center">
-                    <asp:LinkButton ID="btnConfirmExport" runat="server" CssClass="btn btn-success" Width="150px" UseSubmitBehavior="false">
-                             Export 
+                    <asp:LinkButton ID="btnConfirmExport" runat="server" CssClass="btn btn-success" Width="150px" UseSubmitBehavior="false" Text="Export to CSV">
+                              
                     </asp:LinkButton>
                 </td>
             </tr>

@@ -185,7 +185,7 @@
 
     <div>
         <asp:ValidationSummary ID="ValidationSummary1" runat="server"
-            Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="Proposal" />
+            Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="Proposal" ForeColor="Red" />
 
     </div>
     <div class="pas-container" style="width: 100%">
@@ -612,7 +612,7 @@
                     <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td>
-                                <asp:LinkButton ID="btnNewTask" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ValidationGroup="Proposal">
+                                <asp:LinkButton ID="btnNewTask" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ValidationGroup="ProposalDetail">
                                    Add Fee
                                 </asp:LinkButton>
 
@@ -621,7 +621,7 @@
                         <tr>
                             <td style="padding-top: 10px; padding-bottom: 10px">
                                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposalDetails"
-                                    CellSpacing="0" ValidationGroup="Proposal" HeaderStyle-HorizontalAlign="Center"
+                                    CellSpacing="0" ValidationGroup="ProposalDetail" HeaderStyle-HorizontalAlign="Center"
                                     ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceProposalDetails" ShowFooter="true" CommandItemDisplay="None">
                                         <BatchEditingSettings EditType="Cell" />
@@ -665,7 +665,7 @@
                                             <telerik:GridTemplateColumn DataField="taskcode" HeaderText="Task" ReadOnly="True" SortExpression="taskcode"
                                                 UniqueName="taskcode" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                                                 <ItemTemplate>
-                                                    <asp:LinkButton ID="lnkDetailId" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' ValidationGroup="Proposal" UseSubmitBehavior="false"
+                                                    <asp:LinkButton ID="lnkDetailId" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' ValidationGroup="ProposalDetail" UseSubmitBehavior="false"
                                                         Text='<%# Eval("taskcode")%>' ToolTip="Click to Edit detail"></asp:LinkButton>
 
                                                     <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"

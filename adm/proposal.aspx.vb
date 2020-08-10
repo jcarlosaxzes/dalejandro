@@ -207,6 +207,7 @@ Public Class proposal
         If TotalsAnalisis() Then
             GuardarProposal(True)
         Else
+            GuardarProposal(True)
             Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
             Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
             WStep.Active = True
