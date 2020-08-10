@@ -12072,24 +12072,56 @@ Public Class LocalAPI
         Return GetNumericEscalar("SELECT count(*) FROM [Azure_Uploads] where EntityType= 'Proposal' and EntityId=" & proposalId)
     End Function
 
-    Public Shared Function AzureStorage_Insert(EntityId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, EntityType As String) As Boolean
+
+    Public Shared Function GetAzureFileKeyName(Id As Integer) As String
+        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM [Azure_Uploads] where Id=" & Id)
+    End Function
+
+    Public Shared Function DeleteAzureFile(Id As Integer) As String
+        Return ExecuteNonQuery("Delete FROM [Azure_Uploads] where Id=" & Id)
+    End Function
+
+    Public Shared Function DeleteAzureFileGuid(GUID As String) As Boolean
+        Return ExecuteNonQuery(String.Format("DELETE FROM [Azure_Uploads] WHERE [guid]='{0}' and EntityId=0", GUID))
+    End Function
+
+    Private Shared Function ExistAzureFile(EntityId As Integer, EntityType As String, FileName As String, ContentBytes As Integer) As Boolean
         Try
-            If Not ExistProposalAzureFile(EntityId, FileName, ContentBytes) Then
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Azure_Uploads_Exist"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@EntityId", EntityId)
+            cmd.Parameters.AddWithValue("@EntityType", EntityType)
+            cmd.Parameters.AddWithValue("@OriginalFileName", FileName)
+            cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+            Dim value = cmd.ExecuteScalar()
+            ExistAzureFile = (value > 0)
+            cnn1.Close()
+            Exit Function
+        Catch ex As Exception
+            Throw ex
+        End Try
+        ExistAzureFile = False
+    End Function
+
+
+    Public Shared Function AzureStorage_Insert(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
+        Try
+            If Not ExistAzureFile(EntityId, EntityType, FileName, ContentBytes) Then
 
                 ' Analisis de type en funcion del ContentType 
                 'Type = 9  Images
-                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
-                    Type = 9
-                End If
+                'If ContentType = "image/jpeg" Or ContentType = "image/png" Then
+                '    Type = 9
+                'End If
 
                 Dim splublic = IIf(bPublic, 1, 0)
                 Dim fileType = System.IO.Path.GetExtension(FileName)
 
-                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                '                $"values({EntityId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), '{EntityType}', {companyId}, '{fileType}' )"
-                'Return ExecuteNonQuery(sQuery)
-
-                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 Dim cnn1 As SqlConnection = GetConnection()
                 Dim cmd As SqlCommand = cnn1.CreateCommand()
 
@@ -12123,27 +12155,70 @@ Public Class LocalAPI
     End Function
 
 
-    Private Shared Function ExistJobAzureFile(jobId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from  [Azure_Uploads] where EntityId ={0} and EntityType= 'Jobs' and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
-        Dim ret As Boolean = IIf(GetNumericEscalar(sQuery) = 0, False, True)
-        If Not ret Then
-            ' Busco en proposal
-            Dim proposalId As Integer = GetProposalIdFromJob(jobId)
-            If proposalId > 0 Then
-                sQuery = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Proposal' and EntityId={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", proposalId, FileName, ContentBytes)
-                ret = IIf(GetNumericEscalar(sQuery) = 0, False, True)
+    Public Shared Function AzureStorageGuid_Insert(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, guid As String) As Boolean
+        Try
+            If Not ExistAzureFile(EntityId, EntityType, FileName, ContentBytes) Then
+
+                ' Analisis de type en funcion del ContentType 
+                'Type = 9  Images
+                'If ContentType = "image/jpeg" Or ContentType = "image/png" Then
+                '    Type = 9
+                'End If
+
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+
+                Dim cnn1 As SqlConnection = GetConnection()
+                Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                ' Setup the command to execute the stored procedure.
+                cmd.CommandText = "Azure_Entity_Uploads_Guid_INSERT"
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.AddWithValue("@EntityId", EntityId)
+                cmd.Parameters.AddWithValue("@Type", Type)
+                cmd.Parameters.AddWithValue("@FileName", FileName)
+                cmd.Parameters.AddWithValue("@KeyName", KeyName)
+                cmd.Parameters.AddWithValue("@Public", bPublic)
+                cmd.Parameters.AddWithValue("@ContentType", ContentType)
+                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+                cmd.Parameters.AddWithValue("@EntityType", EntityType)
+                cmd.Parameters.AddWithValue("@FileType", fileType)
+                cmd.Parameters.AddWithValue("@companyId", companyId)
+                cmd.Parameters.AddWithValue("@Guid", guid)
+
+                cmd.ExecuteNonQuery()
+
+                cnn1.Close()
+
+                Return True
+            Else
+                Return False
             End If
-        End If
 
-        Return ret
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
-    Public Shared Function GetAzureFileKeyName(Id As Integer) As String
-        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM [Azure_Uploads] where Id=" & Id)
-    End Function
+    Public Shared Function RequestForProposals_azureuploads_CLONE(requestforproposalId As Integer, GUID As String) As Boolean
+        Try
 
-    Public Shared Function DeleteAzureFile(Id As Integer) As String
-        Return ExecuteNonQuery("Delete FROM [Azure_Uploads] where Id=" & Id)
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "RequestForProposals_azureuploads_CLONE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@requestforproposalId", requestforproposalId)
+            cmd.Parameters.AddWithValue("@guid", GUID)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Shared Function UpdateAzureUploads(Id As Integer, Type As Integer, Name As String, sPublic As Boolean) As Boolean
@@ -12166,241 +12241,6 @@ Public Class LocalAPI
         End Try
     End Function
 
-
-    Public Shared Function JobAzureStorage_Insert(jobId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
-        Try
-            If Not ExistJobAzureFile(jobId, FileName, ContentBytes) Then
-
-                ' Analisis de type en funcion del ContentType 
-                'Type = 9  Images
-                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
-                    Type = 9
-                End If
-
-                ' statusId = actionId para Paid y Complete
-                Dim splublic = IIf(bPublic, 1, 0)
-                Dim fileType = System.IO.Path.GetExtension(FileName)
-                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                '                $"values({jobId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0 , {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Jobs', {companyId}, '{fileType}' )"
-                'Return ExecuteNonQuery(sQuery)
-
-                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Dim cnn1 As SqlConnection = GetConnection()
-                Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-                ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "Azure_Job_Uploads_INSERT"
-                cmd.CommandType = CommandType.StoredProcedure
-
-                cmd.Parameters.AddWithValue("@jobId", jobId)
-                cmd.Parameters.AddWithValue("@Type", Type)
-                cmd.Parameters.AddWithValue("@FileName", FileName)
-                cmd.Parameters.AddWithValue("@KeyName", KeyName)
-                cmd.Parameters.AddWithValue("@Public", bPublic)
-                cmd.Parameters.AddWithValue("@ContentType", ContentType)
-                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
-                cmd.Parameters.AddWithValue("@FileType", fileType)
-                cmd.Parameters.AddWithValue("@companyId", companyId)
-
-                cmd.ExecuteNonQuery()
-
-                cnn1.Close()
-
-                Return True
-            Else
-                Return False
-            End If
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Private Shared Function ExistProposalAzureFile(ProposalId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Proposal' and [EntityId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", ProposalId, FileName, ContentBytes)
-        Dim ret As Boolean = IIf(GetNumericEscalar(sQuery) = 0, False, True)
-
-        If Not ret Then
-            ' Busco en job
-            Dim jobId As Integer = GetProposalProperty(ProposalId, "JobId")
-            If jobId > 0 Then
-                sQuery = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Jobs' and [EntityId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
-                ret = IIf(GetNumericEscalar(sQuery) = 0, False, True)
-            End If
-        End If
-
-        Return ret
-    End Function
-
-    Public Shared Function ProposalAzureStorage_Insert(ProposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
-        Try
-            If Not ExistProposalAzureFile(ProposalId, FileName, ContentBytes) Then
-
-                ' Analisis de type en funcion del ContentType 
-                'Type = 9  Images
-                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
-                    Type = 9
-                End If
-
-                Dim splublic = IIf(bPublic, 1, 0)
-                Dim fileType = System.IO.Path.GetExtension(FileName)
-                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                '                $"values({ProposalId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Proposal', {companyId}, '{fileType}' )"
-
-                'Return ExecuteNonQuery(sQuery)
-
-                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Dim cnn1 As SqlConnection = GetConnection()
-                Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-                ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "Azure_Proposal_Uploads_INSERT"
-                cmd.CommandType = CommandType.StoredProcedure
-
-                cmd.Parameters.AddWithValue("@ProposalId", ProposalId)
-                cmd.Parameters.AddWithValue("@Type", Type)
-                cmd.Parameters.AddWithValue("@FileName", FileName)
-                cmd.Parameters.AddWithValue("@KeyName", KeyName)
-                cmd.Parameters.AddWithValue("@Public", bPublic)
-                cmd.Parameters.AddWithValue("@ContentType", ContentType)
-                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
-                cmd.Parameters.AddWithValue("@FileType", fileType)
-                cmd.Parameters.AddWithValue("@companyId", companyId)
-
-                cmd.ExecuteNonQuery()
-
-                cnn1.Close()
-
-                Return True
-
-            Else
-                Return False
-            End If
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-    Private Shared Function ExistRequestForProposalsAzureFile(ProposalId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = $"select count(*) from [Azure_Uploads] where [EntityId]={ProposalId} and [OriginalFileName]='{FileName}' and [ContentBytes]={ContentBytes} and EntityType = 'Request_For_Proposal'"
-        Return IIf(GetNumericEscalar(sQuery) = 0, False, True)
-    End Function
-    Public Shared Function RequestForProposalsAzureStorage_Insert(requestforproposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, GUID As String, companyId As Integer) As Boolean
-        Try
-            If Not ExistRequestForProposalsAzureFile(requestforproposalId, FileName, ContentBytes) Then
-
-                ' Analisis de type en funcion del ContentType 
-                'Type = 9  Images
-                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
-                    Type = 9
-                End If
-
-                Dim cnn1 As SqlConnection = GetConnection()
-                Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-                ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "RequestForProposals_azureuploads_v20_INSERT"
-                cmd.CommandType = CommandType.StoredProcedure
-
-                cmd.Parameters.AddWithValue("@requestforproposalId", requestforproposalId)
-                cmd.Parameters.AddWithValue("@Name", FileName)
-                cmd.Parameters.AddWithValue("@Type", Type)
-                cmd.Parameters.AddWithValue("@OriginalFileName", FileName)
-                cmd.Parameters.AddWithValue("@KeyName", KeyName)
-                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
-                cmd.Parameters.AddWithValue("@ContentType", ContentType)
-                cmd.Parameters.AddWithValue("@Public", bPublic)
-                cmd.Parameters.AddWithValue("@companyId", companyId)
-                cmd.Parameters.AddWithValue("@guid", GUID)
-
-                cmd.ExecuteNonQuery()
-
-                cnn1.Close()
-
-            Else
-                Return False
-            End If
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Shared Function RequestForProposals_azureuploads_CLONE(requestforproposalId As Integer, GUID As String) As Boolean
-        Try
-
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-            ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "RequestForProposals_azureuploads_CLONE"
-            cmd.CommandType = CommandType.StoredProcedure
-
-            cmd.Parameters.AddWithValue("@requestforproposalId", requestforproposalId)
-            cmd.Parameters.AddWithValue("@guid", GUID)
-
-            cmd.ExecuteNonQuery()
-
-            cnn1.Close()
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Shared Function RequestForProposals_azureuploads_DELETE(GUID As String) As Boolean
-        Return ExecuteNonQuery(String.Format("DELETE FROM [Azure_Uploads] WHERE [guid]='{0}' and EntityId=0", GUID))
-    End Function
-    Private Shared Function ExistClientAzureFile(clientId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from [Azure_Uploads] where [EntityId]={0} and EntityType='Clients' and [OriginalFileName]='{1}' and [ContentBytes]={2} ", clientId, FileName, ContentBytes)
-        Return IIf(GetNumericEscalar(sQuery) = 0, False, True)
-    End Function
-
-    Public Shared Function ClientAzureStorage_Insert(ClientId As Integer, preprojectId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, employeeId As Integer, companyId As Integer) As Boolean
-        Try
-            If Not ExistClientAzureFile(ClientId, FileName, ContentBytes) Then
-                ' statusId = actionId para Paid y Complete
-                Dim splublic = IIf(bPublic, 1, 0)
-                Dim fileType = System.IO.Path.GetExtension(FileName)
-                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId],[preprojectId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                '                $"values({ClientId}, {preprojectId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic} ,0 ,  {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
-                'ExecuteNonQuery(sQuery)
-
-                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Dim cnn1 As SqlConnection = GetConnection()
-                Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-                ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "Azure_Uploads_INSERT"
-                cmd.CommandType = CommandType.StoredProcedure
-
-                cmd.Parameters.AddWithValue("@ClientId", ClientId)
-                cmd.Parameters.AddWithValue("@PreprojectId", preprojectId)
-                cmd.Parameters.AddWithValue("@Type", Type)
-                cmd.Parameters.AddWithValue("@FileName", FileName)
-                cmd.Parameters.AddWithValue("@KeyName", KeyName)
-                cmd.Parameters.AddWithValue("@bPublic", bPublic)
-                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
-                cmd.Parameters.AddWithValue("@ContentType", ContentType)
-                cmd.Parameters.AddWithValue("@employeeId", employeeId)
-                cmd.Parameters.AddWithValue("@EntityType", "Clients")
-                cmd.Parameters.AddWithValue("@FileType", fileType)
-                cmd.Parameters.AddWithValue("@companyId", companyId)
-
-                cmd.ExecuteNonQuery()
-
-                cnn1.Close()
-
-                Clients_activities_INSERT(ClientId, "C", "Clients_azureuploads", 0, employeeId)
-
-                Return True
-            Else
-                Return False
-            End If
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
 
     Public Shared Function GetJobAzureDocumentLinks(ByVal jobId As Integer, ByRef sMsg As System.Text.StringBuilder) As Integer
         Try

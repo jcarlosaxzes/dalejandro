@@ -284,7 +284,7 @@ Public Class sendinvoice
                 AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
                 AzureStorageApi.DeleteFile(tempName)
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.JobAzureStorage_Insert(lblJobId.Text, 10, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
+                e.IsValid = LocalAPI.AzureStorage_Insert(lblJobId.Text, "Jobs", 10, e.FileInfo.OriginalFileName, newName, True, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
                 If e.IsValid Then
                     RadGridLinks.DataBind()
                     InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
