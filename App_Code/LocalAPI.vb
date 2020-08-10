@@ -6924,7 +6924,7 @@ Public Class LocalAPI
 
     End Function
 
-    Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer,
+    Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer,
                                     Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
         Try
@@ -6999,7 +6999,7 @@ Public Class LocalAPI
             If companyId > 0 Then
                 Dim sAdresses As String = sTo
                 If Len(sCC) > 0 And sTo <> sCC Then sAdresses = sAdresses & ";" & sCC
-                SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId, 0, 0)
+                SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId, clientId, jobId)
             End If
         Catch ex As Exception
             Throw ex
