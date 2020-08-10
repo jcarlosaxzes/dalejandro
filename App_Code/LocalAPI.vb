@@ -13727,6 +13727,35 @@ Public Class LocalAPI
         End Try
 
     End Function
+
+    Public Shared Function GetAxzescrmDBRecord(Id As Integer, StoreProcedureName As String) As Dictionary(Of String, Object)
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection_axzescrmDB()
+                Using comm As New SqlCommand(StoreProcedureName, conn)
+                    comm.CommandType = CommandType.StoredProcedure
+
+                    Dim p0 As New SqlParameter("@Id", SqlDbType.Int)
+                    p0.Direction = ParameterDirection.Input
+                    p0.Value = Id
+                    comm.Parameters.Add(p0)
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            result.Add(reader.GetName(lp), reader.GetValue(lp))
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+
     Public Shared Function NewPASconceptLead(LaedObject As LeadStruct) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection_axzescrmDB()
@@ -13763,6 +13792,47 @@ Public Class LocalAPI
         Catch ex As Exception
 
         End Try
+    End Function
+
+    Public Shared Function PASconceptLeadToAgile(LeadId As Integer, Tag As String) As Boolean
+
+        Try
+            Dim companyId As Integer = 260973     ' Axzes
+            Dim LeadObject = GetAxzescrmDBRecord(LeadId, "Lead_SELECT")
+
+            If Not Agile.IsContact(LeadObject("Email"), companyId) Then
+                Dim AgileRet As String
+                Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
+                                                                "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}]}"
+                ' -- SYSTEM FIELDS
+                jsonContactInfo = Replace(jsonContactInfo, "email_value", LeadObject("Email"))
+                jsonContactInfo = Replace(jsonContactInfo, "first_name_value", LeadObject("FirstName"))
+                jsonContactInfo = Replace(jsonContactInfo, "last_name_value", LeadObject("LastName"))
+                jsonContactInfo = Replace(jsonContactInfo, "company_value", LeadObject("Company"))
+                jsonContactInfo = Replace(jsonContactInfo, "phone_value", LeadObject("Phone"))
+                jsonContactInfo = Replace(jsonContactInfo, "title_value", LeadObject("Position"))
+
+                jsonContactInfo = Replace(jsonContactInfo, "tag_value", Tag)
+
+                AgileRet = Agile.CreateContact(jsonContactInfo, companyId)
+
+            Else
+                ' Add new Tag only
+                Agile.AddTags(LeadObject("Email"), Tag, companyId)
+
+            End If
+
+            Return True
+
+        Catch ex As Exception
+
+        End Try
+
     End Function
 #End Region
 End Class

@@ -59,6 +59,15 @@ Partial Public Class MasterPage
     Protected WithEvents RadMenu1 As Global.Telerik.Web.UI.RadNavigation
     
     '''<summary>
+    '''lblWarning control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblWarning As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''ContentPlaceHolder1 control.
     '''</summary>
     '''<remarks>
@@ -84,15 +93,6 @@ Partial Public Class MasterPage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblVersion As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblWarning control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblWarning As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Label31 control.

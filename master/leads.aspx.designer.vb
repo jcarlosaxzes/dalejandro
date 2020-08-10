@@ -131,6 +131,15 @@ Partial Public Class leads
     Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''btnAgile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAgile As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''RadGrid1 control.
     '''</summary>
     '''<remarks>
@@ -147,6 +156,15 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipExport As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
+    '''lblExportTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblExportTitle As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtExportTag control.
