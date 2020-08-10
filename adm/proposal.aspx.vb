@@ -66,6 +66,10 @@ Public Class proposal
                 End If
 
 
+                RadWizardFiles.ActiveStepIndex = 1
+                PanelUpload.Visible = False
+
+
             End If
             'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblProposalId.Text
             'RadWindowManager2.EnableViewState = False
@@ -355,32 +359,7 @@ Public Class proposal
         Dim e1 As String = RadGridPheseSchedule.SelectedValue
     End Sub
 
-    Protected Sub RadCloudUpload1_FileUploaded(sender As Object, e As Telerik.Web.UI.CloudFileUploadedEventArgs)
-        Try
-            If LocalAPI.IsAzureStorage(lblCompanyId.Text) Then
-                Dim tempName = e.FileInfo.KeyName
-                Dim fileExt = IO.Path.GetExtension(tempName)
-                Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
-                AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
-                AzureStorageApi.DeleteFile(tempName)
 
-                ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, CType(sender.NamingContainer.FindControl("cboDocType"), RadComboBox).SelectedValue, e.FileInfo.OriginalFileName, newName, CType(sender.NamingContainer.FindControl("chkPublic"), RadCheckBox).Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
-                If e.IsValid Then
-                    RadListView1.ClearSelectedItems()
-                    RadListView1.DataBind()
-                    Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
-                Else
-                    Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
-                End If
-            Else
-                Master.ErrorMessage("You do not have hired the module Upload files")
-            End If
-        Catch ex As Exception
-            e.IsValid = False
-            Master.ErrorMessage("Error. " & ex.Message)
-        End Try
-    End Sub
 
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean, OnClientClose As String)
         RadWindowManager1.Windows.Clear()
@@ -473,63 +452,227 @@ Public Class proposal
         FormViewClientBalance.Visible = Not FormViewClientBalance.Visible
     End Sub
 
-    Private Sub btnDeleteSelected_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
-        If RadListView1.SelectedItems.Count > 0 Then
-            RadToolTipDelete.Visible = True
-            RadToolTipDelete.Show()
+
+    Protected Sub btnUploadFiles_Click(sender As Object, e As EventArgs)
+        RadWizardFiles.ActiveStepIndex = 0
+        PanelUpload.Visible = True
+    End Sub
+
+    Protected Sub btnListFiles_Click(sender As Object, e As EventArgs)
+        RadWizardFiles.ActiveStepIndex = 1
+        PanelUpload.Visible = False
+    End Sub
+
+#Region "Bulk Delete"
+
+    Private Sub btnBulkDelete_Click(sender As Object, e As EventArgs) Handles btnBulkDelete.Click
+        lblSelectedId.Text = ""
+        If RadListViewFiles.Visible Then
+            If RadListViewFiles.SelectedItems.Count > 0 Then
+                RadToolTipBulkDelete.Visible = True
+                RadToolTipBulkDelete.Show()
+            Else
+                Master.ErrorMessage("Select (Mark) Files to Delete")
+            End If
         Else
-            Master.ErrorMessage("Select (Mark) Files to Update")
+            If RadGridFiles.SelectedItems.Count > 0 Then
+                RadToolTipBulkDelete.Visible = True
+                RadToolTipBulkDelete.Show()
+            Else
+                Master.ErrorMessage("Select (Mark) Files to Delete")
+            End If
         End If
     End Sub
     Protected Sub btnConfirmDeleteFiles_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDeleteFiles.Click
+
         Try
             'get a reference to the row
-            If RadListView1.SelectedItems.Count > 0 Then
-                For Each dataItem As RadListViewDataItem In RadListView1.SelectedItems
-                    If dataItem.Selected Then
-                        Dim idFile = dataItem.GetDataKeyValue("Id").ToString()
-                        Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
-                        LocalAPI.DeleteAzureFile(idFile)
-                        AzureStorageApi.DeleteFile(KeyName)
+            If String.IsNullOrEmpty(lblSelectedId.Text) Then
+                If RadListViewFiles.Visible Then
+                    If RadListViewFiles.SelectedItems.Count > 0 Then
+                        For Each dataItem As RadListViewDataItem In RadListViewFiles.SelectedItems
+                            If dataItem.Selected Then
+                                Dim idFile = dataItem.GetDataKeyValue("Id").ToString()
+                                Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
+                                LocalAPI.DeleteAzureFile(idFile)
+                                AzureStorageApi.DeleteFile(KeyName)
+                            End If
+                        Next
+                        RadListViewFiles.ClearSelectedItems()
+                    Else
+                        Master.ErrorMessage("Select records!")
                     End If
-                Next
-                RadListView1.ClearSelectedItems()
-                RadListView1.DataBind()
+                Else
+                    If RadGridFiles.SelectedItems.Count > 0 Then
+                        For Each item As GridDataItem In RadGridFiles.SelectedItems
+                            If item.Selected Then
+                                item.Selected = False
+                                Dim idFile = item("Id").Text
+                                Dim KeyName As String = LocalAPI.GetAzureFileKeyName(idFile)
+                                LocalAPI.DeleteAzureFile(idFile)
+                                AzureStorageApi.DeleteFile(KeyName)
+                            End If
+                        Next
+                    Else
+                        Master.ErrorMessage("Select records!")
+                    End If
+                End If
             Else
-                Master.ErrorMessage("Select records!")
-
+                Dim KeyName As String = LocalAPI.GetAzureFileKeyName(lblSelectedId.Text)
+                LocalAPI.DeleteAzureFile(lblSelectedId.Text)
+                AzureStorageApi.DeleteFile(KeyName)
+                lblSelectedId.Text = ""
             End If
+
+            RadListViewFiles.DataBind()
+            RadGridFiles.DataBind()
+
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
     End Sub
 
     Protected Sub btnCancelDeleteFiles_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDeleteFiles.Click
-        RadToolTipDelete.Visible = False
+        RadToolTipBulkDelete.Visible = False
     End Sub
+
+#End Region
+
+#Region "Bulk Update"
 
     Private Sub btnBulkEdit_Click(sender As Object, e As EventArgs) Handles btnBulkEdit.Click
-        If RadListView1.SelectedItems.Count > 0 Then
-            RadToolTipBulkEdit.Visible = True
-            RadToolTipBulkEdit.Show()
+        lblSelectedId.Text = ""
+        If RadListViewFiles.Visible Then
+            If RadListViewFiles.SelectedItems.Count > 0 Then
+                RadToolTipBulkEdit.Visible = True
+                RadToolTipBulkEdit.Show()
+            Else
+                Master.ErrorMessage("Select (Mark) Files to Update")
+            End If
         Else
-            Master.ErrorMessage("Select (Mark) Files to Update")
+            If RadGridFiles.SelectedItems.Count > 0 Then
+                RadToolTipBulkEdit.Visible = True
+                RadToolTipBulkEdit.Show()
+            Else
+                Master.ErrorMessage("Select (Mark) Files to Update")
+            End If
         End If
 
+
+
     End Sub
 
-    Private Sub btnUpdateStatus_Click(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
-        RadListView1.AllowMultiItemEdit = True
+    Private Sub btnUpdateStatusFiles_Click(sender As Object, e As EventArgs) Handles btnUpdateStatusFiles.Click
 
-        For Each item As RadListViewDataItem In RadListView1.SelectedItems
-            If item.Selected Then
-                item.Selected = False
-                Dim Id = item.OwnerListView.DataKeyValues(item.DisplayIndex)("Id").ToString()
-                Dim lblName As Label = CType(item.FindControl("lblFileName"), Label)
-                LocalAPI.UpdateAzureUploads(Id, cboDocTypeBulk.SelectedValue, lblName.Text, chkPublicBulk.Checked)
+        If String.IsNullOrEmpty(lblSelectedId.Text) Then
+            If RadListViewFiles.Visible Then
+                RadListViewFiles.AllowMultiItemEdit = True
+                For Each item As RadListViewDataItem In RadListViewFiles.SelectedItems
+                    If item.Selected Then
+                        item.Selected = False
+                        Dim Id = item.OwnerListView.DataKeyValues(item.DisplayIndex)("Id").ToString()
+                        Dim lblName As Label = CType(item.FindControl("lblFileName"), Label)
+                        LocalAPI.UpdateAzureUploads(Id, cboDocTypeBulk.SelectedValue, lblName.Text, chkPublicBulk.Checked)
+                    End If
+                Next
+            Else
+                For Each item As GridDataItem In RadGridFiles.SelectedItems
+                    If item.Selected Then
+                        item.Selected = False
+                        Dim Id = item("Id").Text
+                        Dim lblName As Label = CType(item.FindControl("lblNameHide"), Label)
+                        LocalAPI.UpdateAzureUploads(Id, cboDocTypeBulk.SelectedValue, lblName.Text, chkPublicBulk.Checked)
+                    End If
+                Next
             End If
-        Next
-        RadListView1.DataBind()
+
+        Else
+            LocalAPI.UpdateAzureUploads(lblSelectedId.Text, cboDocTypeBulk.SelectedValue, lblSelectedName.Text, chkPublicBulk.Checked)
+            lblSelectedId.Text = ""
+        End If
+
+        RadListViewFiles.DataBind()
+        RadGridFiles.DataBind()
     End Sub
+
+
+#End Region
+
+    Public Sub RadCloudUpload1_FileUploaded(sender As Object, e As CloudFileUploadedEventArgs) Handles RadCloudUpload1.FileUploaded
+        Try
+            Dim tempName = e.FileInfo.KeyName
+            Dim fileExt = IO.Path.GetExtension(tempName)
+            Dim newName = "Companies/" & lblCompanyId.Text & $"/{Guid.NewGuid().ToString()}" & fileExt
+            AzureStorageApi.CopyFile(tempName, newName, lblCompanyId.Text)
+            AzureStorageApi.DeleteFile(tempName)
+
+            ' The uploaded files need to be removed from the storage by the control after a certain time.
+            e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
+            If e.IsValid Then
+                RadListViewFiles.ClearSelectedItems()
+                RadListViewFiles.DataBind()
+                RadGridFiles.DataBind()
+                RadWizardFiles.ActiveStepIndex = 1
+                PanelUpload.Visible = False
+                Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
+            Else
+                Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
+                AzureStorageApi.DeleteFile(newName)
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+
+    End Sub
+
+    Protected Sub RadGridFiles_ItemCommand(sender As Object, e As GridCommandEventArgs)
+        Select Case e.CommandName
+            Case "Update"
+                lblSelectedId.Text = e.CommandArgument
+
+                Dim item As GridDataItem = TryCast(e.Item, GridDataItem)
+
+                lblSelectedId.Text = item.GetDataKeyValue("Id").ToString()
+                lblSelectedName.Text = CType(item.FindControl("lblNameHide"), Label).Text
+                Dim type As String = CType(item.FindControl("lblTypeHide"), Label).Text
+                Dim spublic As String = CType(item.FindControl("lblPubicHide"), Label).Text
+
+                RadToolTipBulkEdit.Visible = True
+                RadToolTipBulkEdit.Show()
+                CType(RadToolTipBulkEdit.FindControl("cboDocTypeBulk"), RadComboBox).SelectedValue = type
+                CType(RadToolTipBulkEdit.FindControl("chkPublicBulk"), RadCheckBox).Checked = spublic
+            Case "Delete"
+                Dim item As GridDataItem = TryCast(e.Item, GridDataItem)
+                lblSelectedId.Text = item.GetDataKeyValue("Id").ToString()
+                RadToolTipBulkDelete.Visible = True
+                RadToolTipBulkDelete.Show()
+        End Select
+    End Sub
+
+    Private Sub RadListViewFiles_ItemCommand(sender As Object, e As RadListViewCommandEventArgs) Handles RadListViewFiles.ItemCommand
+
+        Select Case e.CommandName
+            Case "Update"
+                Dim item As RadListViewDataItem = TryCast(e.ListViewItem, RadListViewDataItem)
+
+                lblSelectedId.Text = item.GetDataKeyValue("Id").ToString()
+                lblSelectedName.Text = CType(item.FindControl("lblNameHide"), Label).Text
+                Dim type As String = CType(item.FindControl("lblTypeHide"), Label).Text
+                Dim spublic As String = CType(item.FindControl("lblPubicHide"), Label).Text
+
+                RadToolTipBulkEdit.Visible = True
+                RadToolTipBulkEdit.Show()
+                CType(RadToolTipBulkEdit.FindControl("cboDocTypeBulk"), RadComboBox).SelectedValue = type
+                CType(RadToolTipBulkEdit.FindControl("chkPublicBulk"), RadCheckBox).Checked = spublic
+        End Select
+    End Sub
+
+    Protected Sub btnTablePage_Click(sender As Object, e As EventArgs)
+        RadListViewFiles.Visible = Not RadListViewFiles.Visible
+        RadGridFiles.Visible = Not RadListViewFiles.Visible
+        btnGridPage.Visible = Not RadListViewFiles.Visible
+        btnTablePage.Visible = RadListViewFiles.Visible
+    End Sub
+
 End Class
 

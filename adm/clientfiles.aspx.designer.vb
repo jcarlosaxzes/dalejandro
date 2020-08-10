@@ -32,13 +32,13 @@ Partial Public Class clientfiles
     Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''RadWizard1 control.
+    '''RadWizardFiles control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
+    Protected WithEvents RadWizardFiles As Global.Telerik.Web.UI.RadWizard
 
     '''<summary>
     '''RadWizardStep4 control.
@@ -158,13 +158,13 @@ Partial Public Class clientfiles
     Protected WithEvents btnGridPage As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''btnDeleteSelected control.
+    '''btnBulkDelete control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDeleteSelected As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnBulkDelete As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''btnBulkEdit control.
@@ -176,22 +176,22 @@ Partial Public Class clientfiles
     Protected WithEvents btnBulkEdit As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''RadListView1 control.
+    '''RadListViewFiles control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
+    Protected WithEvents RadListViewFiles As Global.Telerik.Web.UI.RadListView
 
     '''<summary>
-    '''RadGrid1 control.
+    '''RadGridFiles control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents RadGridFiles As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
     '''RadToolTipBulkEdit control.
@@ -239,13 +239,13 @@ Partial Public Class clientfiles
     Protected WithEvents btnCance As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''RadToolTipDelete control.
+    '''RadToolTipBulkDelete control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadToolTipDelete As Global.Telerik.Web.UI.RadToolTip
+    Protected WithEvents RadToolTipBulkDelete As Global.Telerik.Web.UI.RadToolTip
 
     '''<summary>
     '''btnConfirmDelete control.
@@ -354,6 +354,15 @@ Partial Public Class clientfiles
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectedId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblSelectedName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelectedName As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblSelectedSource control.

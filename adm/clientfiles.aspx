@@ -45,7 +45,7 @@
     </div>
 
     <div class="pas-container" style="width: 100%">
-        <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
+        <telerik:RadWizard ID="RadWizardFiles" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
             <WizardSteps>
                 <%--Upload Files--%>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Upload Files" StepType="Step">
@@ -99,7 +99,7 @@
 
                                     </td>
                                     <td>
-                                        <telerik:RadTextBox ID="txtJob" runat="server" MaxLength="6" EmptyMessage="Job Code" Width="250px"></telerik:RadTextBox>
+                                        <telerik:RadTextBox ID="txtJob" runat="server" MaxLength="7" EmptyMessage="Job Code" Width="250px"></telerik:RadTextBox>
                                     </td>
 
 
@@ -113,7 +113,7 @@
                                         <asp:LinkButton ID="btnGridPage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click" Visible="false">
                                                <i class="fas fa-th"></i> Grid
                                         </asp:LinkButton>
-                                        <asp:LinkButton ID="btnDeleteSelected" runat="server"
+                                        <asp:LinkButton ID="btnBulkDelete" runat="server"
                                             CssClass="btn btn-danger" UseSubmitBehavior="false">
                                                <i class="fas fa-trash"></i>&nbsp;Bulk Delete
                                         </asp:LinkButton>
@@ -126,7 +126,7 @@
                             </table>
                         </asp:Panel>
 
-                        <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceAzureFiles" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderStyle="Solid" AllowMultiItemSelection="true">
+                        <telerik:RadListView ID="RadListViewFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderStyle="Solid" AllowMultiItemSelection="true">
                             <LayoutTemplate>
                                 <fieldset style="width: 100%; text-align: center">
                                     <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
@@ -139,9 +139,9 @@
                                                 <i class="far fa-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                                         </asp:LinkButton>
 
-                                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+                                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;" title="<%# Eval("Name")%> "> <%# LocalAPI.TruncateString(Eval("Name"), 20)%> </b>
 
-                                        <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Edit">
+                                        <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Update">
                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
                                         </asp:LinkButton>
                                     </div>
@@ -154,8 +154,8 @@
                                                         </td>
                                                     </tr>                                
                                                     <tr>
-                                                        <td style="font-size:12px; padding-top:5px;padding-bottom: 0px;">
-                                                            <%# LocalAPI.TruncateString(Eval("Name"), 30)%> 
+                                                        <td style="font-size:12px; padding-top:5px;padding-bottom: 0px;">                                                            
+                                                            <%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -172,6 +172,10 @@
                                                     <tr>
                                                         <td style="font-size:12px;padding: 0;">
                                                          <%#IIf(Eval("Public"), "Public", "Private") %>
+                                                            
+                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>                                                            
+                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False"  Text='<%# Eval("Type") %>'></asp:Label>                                                           
+                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False"  Text='<%# Eval("Name") %>'></asp:Label>
                                                         </td>
                                                     </tr>
                                
@@ -189,9 +193,9 @@
                                             <i class="fa fa-check-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                                         </asp:LinkButton>
 
-                                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;"><%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%></b>
+                                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;" title="<%# Eval("Name")%> "> <%# LocalAPI.TruncateString(Eval("Name"), 20)%> </b>
 
-                                        <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Edit">
+                                        <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Update">
                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
                                         </asp:LinkButton>
                                     </div>
@@ -206,7 +210,7 @@
                                                 <tr>
                                                     <td style="font-size: 12px; padding-top: 5px; padding-bottom: 0px;">
                                                         <asp:Label ID="lblFileName" runat="server" Visible="False" Text='<%# Bind("Name") %>'></asp:Label>
-                                                        <%# LocalAPI.TruncateString(Eval("Name"), 30)%> 
+                                                       <%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -222,6 +226,10 @@
                                                 <tr>
                                                     <td style="font-size: 12px; padding: 0;">
                                                         <%#IIf(Eval("Public"), "Public", "Private") %>
+                                                            
+                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>                                                            
+                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False"  Text='<%# Eval("Type") %>'></asp:Label>                                                           
+                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False"  Text='<%# Eval("Name") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -232,8 +240,8 @@
                             </SelectedItemTemplate>
                         </telerik:RadListView>
 
-                        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceAzureFiles" GridLines="None" Visible="false"
-                            AllowPaging="True" PageSize="25" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center" OnItemCommand="RadGrid1_ItemCommand" AllowMultiRowSelection="true">
+                        <telerik:RadGrid ID="RadGridFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GridLines="None" Visible="false"
+                            AllowPaging="True" PageSize="25" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center" OnItemCommand="RadGridFiles_ItemCommand" AllowMultiRowSelection="true">
                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceAzureFiles"
                                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
@@ -304,6 +312,9 @@
                                                         <asp:LinkButton ID="btnDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit">
                                                             <span class="fas fa-trash"></span>
                                                         </asp:LinkButton>
+                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>                                                            
+                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False"  Text='<%# Eval("Type") %>'></asp:Label>                                                           
+                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False"  Text='<%# Eval("Name") %>'></asp:Label>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -344,7 +355,7 @@
             </tr>
             <tr>
                 <td style="width: 20%;">
-                    <telerik:RadCheckBox ID="chkPublicBulk" runat="server" Text="Public" ToolTip="Public or private"></telerik:RadCheckBox>
+                    <telerik:RadCheckBox ID="chkPublicBulk" runat="server" Text="Public" ToolTip="Public or private" AutoPostBack="false"></telerik:RadCheckBox>
                 </td>
             </tr>
             <tr>
@@ -361,7 +372,7 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+    <telerik:RadToolTip ID="RadToolTipBulkDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h3 style="margin: 0; text-align: center; color: white; width: 600px">
             <span class="navbar navbar-expand-md bg-dark text-white">Delete Files
             </span>
@@ -437,6 +448,7 @@
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblSelectedName" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedSource" runat="server" Visible="False"></asp:Label>
 </asp:Content>
 
