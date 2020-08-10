@@ -151,7 +151,7 @@ Public Class clientsmarketing
 
                     sBody = sBody & "<br />"
                     sBody = sBody & LocalAPI.GetPASShortSign()
-                    If SendGrid.Email.SendMail(Email, "", "", sSubject, sBody, lblCompanyId.Text) Then
+                    If SendGrid.Email.SendMail(Email, "", "", sSubject, sBody, lblCompanyId.Text, dataItem("ClientId").Text, 0) Then
                         nRecs = nRecs + 1
                     End If
 

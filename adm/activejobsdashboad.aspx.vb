@@ -251,7 +251,7 @@ Public Class activejobsdashboad
             Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)
             Dim sBody As String = LocalAPI.GetMessageTemplateBody("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)
 
-            Return SendGrid.Email.SendMail(sTo, "", "", sSubject, sBody, lblCompanyId.Text)
+            Return SendGrid.Email.SendMail(sTo, "", "", sSubject, sBody, lblCompanyId.Text,0, lblSelectedJob.Text)
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

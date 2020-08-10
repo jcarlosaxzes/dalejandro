@@ -327,8 +327,10 @@ Public Class billingmanager
                     If LocalAPI.LeerInvoiceTemplate(invoiceId, lblCompanyId.Text, Subject, Body) Then
                         LocalAPI.ActualizarEmittedInvoice(invoiceId, lblEmployeeId.Text)
                         emailTo = LocalAPI.GetClientEmailFromInvoice(invoiceId)
+                        Dim clientID = LocalAPI.GetClientIdFromInvoice(invoiceId)
+                        Dim jobId = LocalAPI.GetJobIdFromInvoice(invoiceId)
 
-                        SendGrid.Email.SendMail(emailTo, "", "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text)
+                        SendGrid.Email.SendMail(emailTo, "", "", Subject, Body, lblCompanyId.Text, clientID, jobId,,, lblEmployeeEmail.Text, lblEmployeeName.Text)
 
                         LocalAPI.NewAutomaticInvoiceReminderFromEmitted(invoiceId, lblEmployeeId.Text, lblCompanyId.Text)
 
@@ -360,13 +362,12 @@ Public Class billingmanager
 
                         Dim clientId As Integer = LocalAPI.GetStatementProperty(statementId, "clientId")
                         emailTo = LocalAPI.GetClientEmail(clientId)
-
                         Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
                         If Not LocalAPI.ValidEmail(AccountantEmail) Then
                             AccountantEmail = AccountantEmail
                         End If
 
-                        SendGrid.Email.SendMail(emailTo, "", AccountantEmail, Subject, Body, lblCompanyId.Text,, lblEmployeeName.Text, lblEmployeeEmail.Text, lblEmployeeName.Text)
+                        SendGrid.Email.SendMail(emailTo, "", AccountantEmail, Subject, Body, lblCompanyId.Text, clientId, 0,, lblEmployeeName.Text, lblEmployeeEmail.Text, lblEmployeeName.Text)
 
                         LocalAPI.NewAutomaticStatementReminderFromEmitted(statementId, lblEmployeeId.Text, lblCompanyId.Text)
 
@@ -613,8 +614,10 @@ Public Class billingmanager
                 Body = Replace(Body, "[Remainder]", RadDatePickerRemaider.SelectedDate)
                 Body = Replace(Body, "[Notes]", txtRemainderNotes.Text)
                 Body = Replace(Body, "[EmployeeName]", lblEmployeeName.Text)
+                Dim clientID = LocalAPI.GetClientIdFromInvoice(lblInvoiceId.Text)
+                Dim jobId = LocalAPI.GetJobIdFromInvoice(lblInvoiceId.Text)
 
-                Task.Run(Function() SendGrid.Email.SendMail(sTo, sCC, "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text))
+                Task.Run(Function() SendGrid.Email.SendMail(sTo, sCC, "", Subject, Body, lblCompanyId.Text, clientID, jobId,,, lblEmployeeEmail.Text, lblEmployeeName.Text))
 
                 ' Añadir una Note al Job
                 LocalAPI.NewJobNote(invoiceInfo("jobId"), Subject, lblEmployeeId.Text)
@@ -646,7 +649,8 @@ Public Class billingmanager
                 Body = Replace(Body, "[Notes]", txtRemainderNotes2.Text)
                 Body = Replace(Body, "[EmployeeName]", lblEmployeeName.Text)
 
-                Task.Run(Function() SendGrid.Email.SendMail(sTo, sCC, "", Subject, Body, lblCompanyId.Text,,, lblEmployeeEmail.Text, lblEmployeeName.Text))
+                Dim clientId As Integer = LocalAPI.GetStatementProperty(lblStatementId.Text, "clientId")
+                Task.Run(Function() SendGrid.Email.SendMail(sTo, sCC, "", Subject, Body, lblCompanyId.Text, clientId, 0,,, lblEmployeeEmail.Text, lblEmployeeName.Text))
 
             End If
 

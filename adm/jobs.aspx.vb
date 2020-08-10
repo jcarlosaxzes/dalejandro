@@ -747,8 +747,9 @@ Public Class jobs
             CopyFilterToEmployeeClipboard(cboEmployeeShare.SelectedValue)
             Dim sTo As String = LocalAPI.GetEmployeeEmail(cboEmployeeShare.SelectedValue)
             Dim sBody As String = txtShareFilter.Text
+            Dim clientId = LocalAPI.GetJobProperty(lblSelectedJobId.Text, "Client")
 
-            SendGrid.Email.SendMail(sTo, lblEmployee.Text, "", "PASconcept. Share filter setting with you", sBody, lblCompanyId.Text,, LocalAPI.GetEmployeeFullName(lblEmployee.Text, lblCompanyId.Text), lblEmployee.Text)
+            SendGrid.Email.SendMail(sTo, lblEmployee.Text, "", "PASconcept. Share filter setting with you", sBody, lblCompanyId.Text, clientId, lblSelectedJobId.Text,, LocalAPI.GetEmployeeFullName(lblEmployee.Text, lblCompanyId.Text), lblEmployee.Text)
             Master.InfoMessage("Filters shared with employee")
 
         Catch ex As Exception
