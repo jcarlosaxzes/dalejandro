@@ -31,6 +31,8 @@ Public Class leads
         Try
 
             RadToolTipExport.Visible = True
+            lblExportTitle.Text = "Export To CSV File"
+            btnConfirmExport.Text = "Export to CSV"
             'txtExportTag.Text = txtState.Text & txtZipCode.Text & txtPhone.Text & txtCity.Text
             RadToolTipExport.Show()
             txtExportTag.Focus()
@@ -40,12 +42,16 @@ Public Class leads
     End Sub
 
     Private Sub btnConfirmExport_Click(sender As Object, e As EventArgs) Handles btnConfirmExport.Click
-        ConfigureExport()
-        RadGrid1.MasterTableView.ExportToCSV()
+        If btnConfirmExport.Text = "Export to CSV" Then
+            ConfigureExport()
+            RadGrid1.MasterTableView.ExportToCSV()
 
-        If Len(txtExportTag.Text) > 0 Then
-            ' Update
-            SqlDataSource1.Update()
+            If Len(txtExportTag.Text) > 0 Then
+                ' Update
+                SqlDataSource1.Update()
+            End If
+        Else
+            ExportToAgile()
         End If
     End Sub
 
@@ -216,5 +222,40 @@ Public Class leads
     Private Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
         RadToolTipImport.Visible = True
         RadToolTipImport.Show()
+    End Sub
+
+    Private Sub btnAgile_Click(sender As Object, e As EventArgs) Handles btnAgile.Click
+        Try
+            If RadGrid1.SelectedItems.Count > 0 Then
+                RadToolTipExport.Visible = True
+
+                lblExportTitle.Text = "Export Selected To Agile"
+                btnConfirmExport.Text = "Export to Agile"
+
+                RadToolTipExport.Show()
+                txtExportTag.Focus()
+            Else
+                Master.ErrorMessage = "You must to select records previously!"
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage = ex.Message
+        End Try
+    End Sub
+    Private Sub ExportToAgile()
+
+        If RadGrid1.SelectedItems.Count > 0 Then
+            Dim nSelecteds As Integer = RadGrid1.SelectedItems.Count
+            For Each dataItem As GridDataItem In RadGrid1.SelectedItems
+
+                If dataItem.Selected Then
+                    dataItem.Selected = False
+                    LocalAPI.PASconceptLeadToAgile(dataItem("Id").Text, txtExportTag.Text)
+                End If
+            Next
+            RadGrid1.DataBind()
+        Else
+            Master.ErrorMessage = "You must to select records previously!"
+        End If
+
     End Sub
 End Class
