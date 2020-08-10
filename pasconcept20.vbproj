@@ -486,6 +486,7 @@
     <Content Include="api\paypal\webhooks\payment.aspx" />
     <Content Include="api\paypal\webhooks\plan.aspx" />
     <Content Include="api\paypal\webhooks\subscription.aspx" />
+    <Content Include="api\webhooks\post.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
     <Content Include="App_Data\RadCaptcha\2.wav" />
@@ -3957,6 +3958,13 @@
       <DependentUpon>subscription.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="api\webhooks\post.aspx.designer.vb">
+      <DependentUpon>post.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\webhooks\post.aspx.vb">
+      <DependentUpon>post.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="App_Code\AzureStorageApi.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -4580,7 +4588,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
