@@ -113,6 +113,15 @@ Partial Public Class leads
     Protected WithEvents btnBulkTag As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''btnImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnImport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''btnExport control.
     '''</summary>
     '''<remarks>
@@ -210,6 +219,51 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdateContact As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''RadToolTipImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipImport As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
+    '''cboSourceImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboSourceImport As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''RadUpload1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadUpload1 As Global.Telerik.Web.UI.RadAsyncUpload
+    
+    '''<summary>
+    '''btnConfirmImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirmImport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''Comparevalidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator2 As Global.System.Web.UI.WebControls.CompareValidator
     
     '''<summary>
     '''SqlDataSource1 control.
