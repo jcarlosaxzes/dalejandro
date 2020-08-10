@@ -553,7 +553,10 @@
 
             window.onresize = resizeCanvas;
 
-            signaturePad = new SignaturePad(canvas);
+            signaturePad = new SignaturePad(canvas, {
+                minWidth: 2,
+                maxWidth: 5
+            });
 
             $clearButton.click(function (e) {
                 signaturePad.clear();

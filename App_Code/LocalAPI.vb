@@ -157,6 +157,27 @@ Public Class LocalAPI
         Public ProductionDate As String
         Public EstimatedHours As Double
     End Structure
+
+
+    Public Structure LeadStruct
+        Public Company As String
+        Public FirstName As String
+        Public LastName As String
+        Public Email As String
+        Public Phone As String
+        Public Cellular As String
+        Public Website As String
+        Public AddressLine1 As String
+        Public AddressLine2 As String
+        Public City As String
+        Public State As String
+        Public ZipCode As String
+        Public JobTitle As String
+        Public Position As String
+        Public Tags As String
+        Public SourceId As Integer
+    End Structure
+
 #End Region
 
 #Region "Miselaneas"
@@ -13688,6 +13709,61 @@ Public Class LocalAPI
 
     End Function
 
+#End Region
+
+#Region "PASconcept Leads"
+    Private Shared Function GetConnection_axzescrmDB() As SqlConnection
+        Try
+            Dim cnn1 As SqlConnection
+            ' Connect to the source
+            cnn1 = New SqlConnection(ConfigurationManager.ConnectionStrings("cnnAxzesLeads").ToString)
+            ' Open the database
+            cnn1.Open()
+            ' Return the object
+            Return cnn1
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+    End Function
+    Public Shared Function NewPASconceptLead(LaedObject As LeadStruct) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection_axzescrmDB()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Leads_Contacs_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Company", LaedObject.Company)
+            cmd.Parameters.AddWithValue("@FirstName", LaedObject.FirstName)
+            cmd.Parameters.AddWithValue("@LastName", LaedObject.LastName)
+            cmd.Parameters.AddWithValue("@Email", LaedObject.Email)
+            cmd.Parameters.AddWithValue("@Phone", LaedObject.Phone)
+            cmd.Parameters.AddWithValue("@Cellular", LaedObject.Cellular)
+            cmd.Parameters.AddWithValue("@WebSite", LaedObject.Website)
+            cmd.Parameters.AddWithValue("@AddressLine1", LaedObject.AddressLine1)
+            cmd.Parameters.AddWithValue("@AddressLine2", LaedObject.AddressLine2)
+            cmd.Parameters.AddWithValue("@City", LaedObject.City)
+            cmd.Parameters.AddWithValue("@State", LaedObject.State)
+            cmd.Parameters.AddWithValue("@ZipCode", LaedObject.ZipCode)
+            cmd.Parameters.AddWithValue("@JobTitle", LaedObject.JobTitle)
+            cmd.Parameters.AddWithValue("@Position", LaedObject.Position)
+            cmd.Parameters.AddWithValue("@Tags", LaedObject.Tags)
+            cmd.Parameters.AddWithValue("@SourceId", LaedObject.SourceId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
 #End Region
 End Class
 
