@@ -166,8 +166,9 @@
 
             /*signaturePad = new SignaturePad(canvas);*/
             signaturePad = new SignaturePad(canvas, {
-                minWidth: 2,
-                maxWidth: 5
+                minWidth: 8,
+                maxWidth: 10,
+                penColor: "rgb(0, 0, 0)"
             });
 
             clearButton.addEventListener("click", function (event) {

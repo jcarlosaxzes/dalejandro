@@ -555,7 +555,8 @@
 
             signaturePad = new SignaturePad(canvas, {
                 minWidth: 2,
-                maxWidth: 5
+                maxWidth: 5,
+                penColor: "rgb(0, 0, 0)"
             });
 
             $clearButton.click(function (e) {
