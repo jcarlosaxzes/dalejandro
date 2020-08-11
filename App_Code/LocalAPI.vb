@@ -1340,7 +1340,13 @@ Public Class LocalAPI
             sBody = Replace(sBody, "[PASconcept_link]", sURLPASconceptUser)
             sBody = Replace(sBody, "[Guest_Link]", sURLGetst)
 
-            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), RFPObject("SenderEmail"), "", sSubject, sBody, RFPObject("companyId"), RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
+            Dim jobId = LocalAPI.GetRFPProperty(rfpId, "jobId")
+            Dim clientId = "0"
+            If Not String.IsNullOrEmpty(jobId) Then
+                clientId = LocalAPI.GetJobProperty(jobId, "Client")
+            End If
+
+            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), RFPObject("SenderEmail"), "", sSubject, sBody, RFPObject("companyId"), clientId, jobId, RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
 
 
             Return True
@@ -6281,9 +6287,9 @@ Public Class LocalAPI
 
             Try
                 If ConfigurationManager.AppSettings("Debug") = "1" Then
-                    SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
+                    SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, 0, 0, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
                 Else
-                    SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
+                    SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, 0, 0, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
                 End If
                 Return True
             Finally
@@ -6347,7 +6353,7 @@ Public Class LocalAPI
             sMsg.Append("<br />")
             sMsg.Append("+1 (786) 626-1611")
 
-            SendGrid.Email.SendMail(CompanyObject("Email"), "", "jcarlos@axzes.com,matt@axzes.com", CompanyObject("Contact") & ". Help to Get Started with PASconcept", sMsg.ToString, -1, "matt@axzes.com", "Matt Mur", "matt@axzes.com", "Matt Mur")
+            SendGrid.Email.SendMail(CompanyObject("Email"), "", "jcarlos@axzes.com,matt@axzes.com", CompanyObject("Contact") & ". Help to Get Started with PASconcept", sMsg.ToString, -1, 0, 0, "matt@axzes.com", "Matt Mur", "matt@axzes.com", "Matt Mur")
             Return True
         Catch ex As Exception
 
@@ -6924,7 +6930,7 @@ Public Class LocalAPI
 
     End Function
 
-    Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer,
+    Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer,
                                     Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
         Try
@@ -6999,7 +7005,7 @@ Public Class LocalAPI
             If companyId > 0 Then
                 Dim sAdresses As String = sTo
                 If Len(sCC) > 0 And sTo <> sCC Then sAdresses = sAdresses & ";" & sCC
-                SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId, 0, 0)
+                SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId, clientId, jobId)
             End If
         Catch ex As Exception
             Throw ex
@@ -9742,7 +9748,7 @@ Public Class LocalAPI
             sFullBody.Append("<br />")
             sFullBody.Append(LocalAPI.GetPASSign())
             Try
-                SendGrid.Email.SendMail(SunconsultantObject("Email").ToString, "", "", "PASconcept Private Portal", sFullBody.ToString, companyId, LocalAPI.GetCompanyProperty(companyId, "Email"), LocalAPI.GetCompanyProperty(companyId, "Name"))
+                SendGrid.Email.SendMail(SunconsultantObject("Email").ToString, "", "", "PASconcept Private Portal", sFullBody.ToString, companyId, 0, 0, LocalAPI.GetCompanyProperty(companyId, "Email"), LocalAPI.GetCompanyProperty(companyId, "Name"))
             Finally
             End Try
 
@@ -13550,7 +13556,7 @@ Public Class LocalAPI
 
             Dim SenderEmail As String = LocalAPI.GetEmployeeEmail(lId:=employeeId)
             Dim SenderDisplay As String = LocalAPI.GetEmployeeName(employeeId)
-            SendGrid.Email.SendMail(NotificationClientEmail, SenderEmail, "", Subject, Body, companyId, SenderEmail, SenderDisplay, SenderEmail, SenderDisplay)
+            SendGrid.Email.SendMail(NotificationClientEmail, SenderEmail, "", Subject, Body, companyId, 0, 0, SenderEmail, SenderDisplay, SenderEmail, SenderDisplay)
 
             Return True
         Catch ex As Exception

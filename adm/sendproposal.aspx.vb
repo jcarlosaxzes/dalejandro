@@ -146,7 +146,9 @@ Public Class sendproposal
                     'Dim ProposalByEmail = LocalAPI.GetEmployeeEmail(lId:=cboProjectManagerId.SelectedValue)
 
                     Dim ProjectManagerEmail As String = LocalAPI.GetEmployeeEmail(lId:=cboProjectManagerId.SelectedValue)
-                    If SendGrid.Email.SendMail(txtTo.Text, txtCC.Text, HeadDepartmentEmail, txtSubject.Text, txtBody.Content, lblCompanyId.Text, "", ProposalByName, ProjectManagerEmail, ProposalByName) Then
+                    Dim ProposalObject = LocalAPI.GetRecord(lblProposalId.Text, "ProposalRecord_SELECT")
+                    Dim ClientId = ProposalObject("ClientId")
+                    If SendGrid.Email.SendMail(txtTo.Text, txtCC.Text, HeadDepartmentEmail, txtSubject.Text, txtBody.Content, lblCompanyId.Text, ClientId, 0, "", ProposalByName, ProjectManagerEmail, ProposalByName) Then
                         bSendEmail = True
                     Else
                         ErrorMessage("Proposal was not sent by Email. ")

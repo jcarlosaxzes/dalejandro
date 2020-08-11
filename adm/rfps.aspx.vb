@@ -219,8 +219,12 @@ Public Class rfps
                 sCC = Master.UserEmail
                 'sCCO = LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCCO")
             End If
-
-            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), sCC, "", sSubject, sBody, lblCompanyId.Text, RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
+            Dim jobId = LocalAPI.GetRFPProperty(rfpId, "jobId")
+            Dim clientId = "0"
+            If Not String.IsNullOrEmpty(jobId) Then
+                clientId = LocalAPI.GetJobProperty(jobId, "Client")
+            End If
+            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), sCC, "", sSubject, sBody, lblCompanyId.Text, clientId, jobId, RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
             Return True
         Catch ex As Exception
             'lblStatus.Text = ex.Message
@@ -274,8 +278,12 @@ Public Class rfps
                 sCC = Master.UserEmail
                 'sCCO = LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCCO")
             End If
-
-            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), sCC, "", sSubject, sBody, lblCompanyId.Text, RFPObject("CompanyName"), RFPObject("SenderEmail"), RFPObject("Organization"))
+            Dim jobId = LocalAPI.GetRFPProperty(rfpId, "jobId")
+            Dim clientId = "0"
+            If Not String.IsNullOrEmpty(jobId) Then
+                clientId = LocalAPI.GetJobProperty(jobId, "Client")
+            End If
+            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), sCC, "", sSubject, sBody, lblCompanyId.Text, clientId, jobId, RFPObject("CompanyName"), RFPObject("SenderEmail"), RFPObject("Organization"))
             Return True
 
         Catch ex As Exception
