@@ -29,6 +29,8 @@ Public Class client
                     Master.HideMasterMenu()
                     btnBack.Visible = False
                 End If
+                SqlDataSourceMessages.DataBind()
+                RadGridMessages.DataBind()
             End If
             RadWindowManager1.EnableViewState = False
         Catch ex As Exception
@@ -117,5 +119,9 @@ Public Class client
     Private Sub SqlDataSourceAzureFiles_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureuploads.Deleting
         Dim KeyName As String = LocalAPI.GetAzureFileKeyName(e.Command.Parameters("@Id").Value)
         AzureStorageApi.DeleteFile(KeyName)
+    End Sub
+
+    Protected Sub btnFindMessages_Click(sender As Object, e As EventArgs)
+        RadGridMessages.DataBind()
     End Sub
 End Class
