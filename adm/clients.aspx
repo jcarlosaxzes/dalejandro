@@ -107,7 +107,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn Aggregate="Count" DataField="Name" FilterControlAltText="Filter Name column" HeaderStyle-Width="250px"
-                        FooterAggregateFormatString="{0:N0}" HeaderText="Name -- Company" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
+                        FooterAggregateFormatString="{0:N0}" HeaderText="Name - Company" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
                         UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <div>
@@ -124,7 +124,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter Type column"
-                        HeaderText="Type -- NAICS Code" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small">
+                        HeaderText="Type - NAICS Code" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small">
                         <ItemTemplate>
                             <%# Eval("nType")%>
                             <br />
@@ -133,7 +133,7 @@
                     </telerik:GridTemplateColumn>
 
                     <telerik:GridTemplateColumn DataField="Email" FilterControlAltText="Filter Email column"
-                        HeaderText="Contact info -- Customer Rep." SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
+                        HeaderText="Contact info - Customer Rep." SortExpression="Email" UniqueName="Email" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <div>
                                 <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>

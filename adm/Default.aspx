@@ -355,7 +355,7 @@
 
     </telerik:RadDockLayout>
 
-    <asp:Panel runat="server" class="pasconcept-bar noprint" ID="MobileQRPanel" Visible="true" style="text-align: right; vertical-align: middle;">
+    <asp:Panel runat="server" class="pasconcept-bar noprint" ID="MobileQRPanel" style="text-align: right; vertical-align: middle;">
         <span class="pasconcept-pagetitle">Dashboard from your mobile device:</span>
         <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Height="140px" Width="140px" OutputType="EmbeddedPNG" ToolTip="Dashboard from your mobile device" Text="">
             <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />

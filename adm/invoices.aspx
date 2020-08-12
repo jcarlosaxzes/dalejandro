@@ -13,7 +13,7 @@
         }
     </script>
 
-   <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -124,7 +124,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width: 150px; text-align:right">
+                    <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -146,10 +146,10 @@
                             <span class="DashboardFont3">Collected</span>
                         </td>
                         <td></td>
-                        <td style="width: 13%; text-align: center; background-color:#e53935">
+                        <td style="width: 13%; text-align: center; background-color: #e53935">
                             <span class="DashboardFont2">Amount Due</span><br />
                             <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountDue", "{0:C2}") %>'></asp:Label><br />
-                            <span class="DashboardFont3"> Amount Due w/o Bad Debts and Not Emitted </span>
+                            <span class="DashboardFont3">Amount Due w/o Bad Debts and Not Emitted </span>
                         </td>
                         <td></td>
                         <td style="width: 13%; text-align: center; background-color: #343a40">
@@ -188,10 +188,11 @@
     </div>
 
     <div>
-        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceInvoices" ShowFooter="True" AutoGenerateColumns="False" AllowSorting="True"
-            PageSize="100" AllowPaging="true" AllowAutomaticDeletes="True" Height="1000px"
-            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-            <ClientSettings>
+        <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceInvoices" ShowFooter="True" AutoGenerateColumns="False" AllowSorting="True" AllowAutomaticDeletes="True"
+            PageSize="50" AllowPaging="true"
+            Height="1500px" RenderMode="Lightweight"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+            <ClientSettings Selecting-AllowRowSelect="true">
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceInvoices" ShowFooter="True">
@@ -210,59 +211,38 @@
                             </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="JobName" HeaderText="Client/Job Info" SortExpression="JobName"
+                    <telerik:GridTemplateColumn DataField="JobName" HeaderText="Client - Job Info" SortExpression="JobName"
                         UniqueName="JobName">
                         <ItemTemplate>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lblBillingContact" runat="server" Text='<%# Eval("ClientName") %>'></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="color: darkblue">
-                                        <%# Eval("JobInfo") %>
-                                    </td>
-                                </tr>
-                            </table>
+
+                            <asp:Label ID="lblBillingContact" runat="server" Text='<%# Eval("ClientName") %>'></asp:Label>
+                            <br />
+                            <%# Eval("JobInfo") %>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Emitted<br/>Past Due"
+                    <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Emitted - Past Due"
                         SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>'></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center">
-                                        <span title="Past Due Status" class="<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>"><%# Eval("pastdue_status") %></span>
-                                    </td>
-                                </tr>
-                            </table>
+                            <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>'></asp:Label>
+                            <br />
+                            <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'> <%# Eval("pastdue_status") %></div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="AmountDue" HeaderText="Amount<br/>Amount Due" SortExpression="AmountDue" UniqueName="AmountDue"
-                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-ForeColor="Red"
-                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                    <telerik:GridTemplateColumn DataField="Amount" HeaderText="Amount" SortExpression="Amount" UniqueName="Amount"
+                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}" 
+                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                         <ItemTemplate>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <%# Eval("Amount", "{0:N2}") %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="color: darkred">
-                                        <asp:Label ID="lblAmountDue4" runat="server" Text='<%# Eval("AmountDue", "{0:N2}") %>' Font-Strikeout='<%# iif(Eval("BadDebt") = 0, False, True) %>'
-                                            ToolTip='<%# iif(Eval("BadDebt") = 0, "Amount Due", "Bad Debt") %>'></asp:Label>
-                                    </td>
-                                </tr>
-                            </table>
+                            <%# Eval("Amount", "{0:N2}") %>
                         </ItemTemplate>
 
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridTemplateColumn DataField="AmountDue" HeaderText="Amount Due" SortExpression="AmountDue" UniqueName="AmountDue"
+                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-ForeColor="Red"
+                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                        <ItemTemplate>
+                            <asp:Label ID="lblAmountDue4" runat="server" Text='<%# Eval("AmountDue", "{0:N2}") %>' Font-Strikeout='<%# iif(Eval("BadDebt") = 0, False, True) %>'
+                                ToolTip='<%# iif(Eval("BadDebt") = 0, "Amount Due", "Bad Debt") %>'></asp:Label>
+                        </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Invoice Description" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"
                         UniqueName="InvoiceNotes">
@@ -295,14 +275,14 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Invoice?" ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                        UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                        UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                     </telerik:GridButtonColumn>
 
                 </Columns>
             </MasterTableView>
         </telerik:RadGrid>
 
-<%--        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
+        <%--        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
             Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Billing Contact Information</b>" ShowEvent="OnClick"
             HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
             <table>

@@ -128,7 +128,7 @@
                             EmptyMessage="Search for Number, Project Name, ..." Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="width:150px;text-align:right;">
+                    <td style="width: 150px; text-align: right;">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -160,7 +160,12 @@
             </script>
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceRFP" GridLines="None" AllowAutomaticUpdates="True"
-            AllowAutomaticDeletes="True" AllowSorting="True" AllowPaging="True" PageSize="25" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center">
+            AllowAutomaticDeletes="True" AllowSorting="True" AutoGenerateColumns="False"
+            Height="1500px" RenderMode="Lightweight"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+            <ClientSettings Selecting-AllowRowSelect="true">
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+            </ClientSettings>
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRFP" ShowFooter="True"
                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
@@ -180,9 +185,9 @@
                     </telerik:GridTemplateColumn>
 
                     <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Project" SortExpression="ProjectName"
-                        UniqueName="ProjectName" HeaderStyle-HorizontalAlign="Center" FooterStyle-Font-Size="Small">
+                        UniqueName="ProjectName" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("ProjectName") %>' Visible='<%# Eval("ParentID") = 0 %>' Font-Size="Medium" Font-Bold="true" ForeColor="DarkBlue"></asp:Label>
+                            <asp:Label runat="server" Text='<%# Eval("ProjectName") %>' Visible='<%# Eval("ParentID") = 0 %>' Font-Bold="true"></asp:Label>
                             <asp:Label runat="server" Text='<%# Eval("ProjectName") %>' Visible='<%# Eval("ParentID") > 0 %>'></asp:Label>
                             <div>
                                 <%# Eval("SubconsultanName") %>
@@ -208,7 +213,7 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="DateCreated" DataFormatString="{0:MM/dd/yy}"
                         DataType="System.DateTime" HeaderText="Date" SortExpression="DateCreated"
-                        UniqueName="DateCreated" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Right">
+                        UniqueName="DateCreated" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="jobId" HeaderText="Job" SortExpression="jobId"
                         UniqueName="jobId" ItemStyle-Width="40px" ItemStyle-HorizontalAlign="Center"
@@ -221,9 +226,9 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="State" HeaderText="Status" UniqueName="State"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'><%# Eval("State") %></span>
+                            <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'><%# Eval("State") %></div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -276,7 +281,7 @@
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this RequestForProposals?" ConfirmTitle="Delete"
                         ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
                         HeaderText=""
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                     </telerik:GridButtonColumn>
                 </Columns>
 

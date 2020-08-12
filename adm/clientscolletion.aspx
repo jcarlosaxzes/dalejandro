@@ -37,7 +37,7 @@
                             EmptyMessage="Find for Name, Company, Phone, Email">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="width: 150px; text-align:right">
+                    <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                             <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -49,8 +49,14 @@
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False"
-            AllowPaging="True" AllowSorting="True" PageSize="25" HeaderStyle-HorizontalAlign="Center"
-            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" AllowAutomaticDeletes="true">
+            AllowPaging="True" AllowSorting="True"
+            PageSize="50"
+            Height="1500px" RenderMode="Lightweight"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+            <ClientSettings Selecting-AllowRowSelect="true">
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+            </ClientSettings>
+
             <PagerStyle Mode="Slider" AlwaysVisible="false" />
             <MasterTableView DataSourceID="SqlDataSource1" DataKeyNames="Id">
                 <Columns>
@@ -67,13 +73,13 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="AttorneyFirm" HeaderText="Attorney Firm" UniqueName="AttorneyFirm">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="DateIn" HeaderText="Date In" UniqueName="DateIn" DataFormatString="{0:d}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridBoundColumn DataField="DateIn" HeaderText="Date In" UniqueName="DateIn" DataFormatString="{0:d}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="DateOut" HeaderText="Date Out" UniqueName="DateOut" DataFormatString="{0:d}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridBoundColumn DataField="DateOut" HeaderText="Date Out" UniqueName="DateOut" DataFormatString="{0:d}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" UniqueName="Status" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" UniqueName="Status" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <span class="<%# LocalAPI.GetCollectionStatusLabelCSS(Eval("Status")) %>"><%# Eval("Status") %></span>
+                            <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetCollectionStatusLabelCSS(Eval("Status")) %>'> <%# Eval("Status") %></div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -94,7 +100,7 @@
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="It may be better to 'Close' record and leave a trace instead of deleting. Are you sure to Delete this record?"
                         ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
                         UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                     </telerik:GridButtonColumn>
 
                 </Columns>

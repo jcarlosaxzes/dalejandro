@@ -1108,22 +1108,22 @@ Public Class LocalAPI
     Public Shared Function GetRFPStatusLabelCSS(ByVal status As String) As String
         Select Case status
             Case "0", "Not Emitted"
-                Return "badge badge-secondary"
+                Return "badge badge-secondary statuslabel"
 
             Case "1", "Pending", "Sent"  'In Progress
-                Return "badge badge-info"
+                Return "badge badge-info statuslabel"
 
             Case "2", "Responded", "Submitted"
-                Return "badge badge-warning"
+                Return "badge badge-warning statuslabel"
 
             Case "3", "Accepted"
                 Return "badge badge-success"
 
             Case "4", "Rejected", "5", "Declined"
-                Return "badge badge-danger"
+                Return "badge badge-danger statuslabel"
 
             Case "6", "Closed"
-                Return "badge badge-dark"
+                Return "badge badge-dark statuslabel"
         End Select
     End Function
 
@@ -1760,13 +1760,13 @@ Public Class LocalAPI
     Public Shared Function GetInvoicePastDueLabelCSS(ByVal pastdue_status As String) As String
         Select Case pastdue_status
             Case "90D+"
-                Return "badge badge-danger"
+                Return "badge badge-danger statuslabel"
             Case "61 to 90D"
-                Return "badge badge-warning"
+                Return "badge badge-warning statuslabel"
             Case "31 to 60D"
-                Return "badge badge-info"
+                Return "badge badge-info statuslabel"
             Case "1 to 30D"
-                Return "badge badge-success"
+                Return "badge badge-success statuslabel"
             Case Else
                 Return ""
         End Select
@@ -13483,9 +13483,9 @@ Public Class LocalAPI
     Public Shared Function GetCollectionStatusLabelCSS(ByVal StatusValue As String) As String
         Select Case StatusValue
             Case "Active"
-                Return "badge badge-danger"
+                Return "badge badge-danger statuslabel"
             Case "Closed"
-                Return "badge badge-secondary"
+                Return "badge badge-secondary statuslabel"
         End Select
     End Function
 
@@ -13824,6 +13824,17 @@ Public Class LocalAPI
                 jsonContactInfo = Replace(jsonContactInfo, "title_value", LeadObject("Position"))
 
                 jsonContactInfo = Replace(jsonContactInfo, "tag_value", Tag)
+
+                ' Others...........................
+                'InAgile Check Column No visible por defecto
+                '"Off" Field No visible por defecto
+                'Agile Custom Field "Source"
+                'Agile Custom Field "Notes" <- JobTitle/Capabilities
+                'Agile Standard ?Field "WebSite"
+                'Agile Custom Field "State"
+                'Agile Custom Field "City"
+                'Agile Custom Field "ZipCode"
+
 
                 AgileRet = Agile.CreateContact(jsonContactInfo, companyId)
 
