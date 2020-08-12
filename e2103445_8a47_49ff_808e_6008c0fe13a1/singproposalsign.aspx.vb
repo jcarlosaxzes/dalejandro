@@ -194,7 +194,7 @@ Public Class singproposalsign
             Dim pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
 
             ' Accept Email
-            ProposalAcceptedEmail(proposalId, companyId, pdfUrl)
+            ProposalAcceptedEmail(proposalId, companyId, pdfUrl, JobId)
             Await pdf.CreateProposalSignedPdfAsync(proposalId, newName)
 
             If JobId > 0 Then
@@ -328,7 +328,7 @@ Public Class singproposalsign
         End Try
     End Sub
 
-    Private Function ProposalAcceptedEmail(ByVal lProposalId As Integer, ByVal companyid As Integer, PrposalpdfUrl As String) As Boolean
+    Private Function ProposalAcceptedEmail(ByVal lProposalId As Integer, ByVal companyid As Integer, PrposalpdfUrl As String, JobId As Integer) As Boolean
         Try
             Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
             Dim sClientEmail As String = ProposalObject("ClientEmail")
@@ -377,7 +377,7 @@ Public Class singproposalsign
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
                 End If
                 Dim ClientId = ProposalObject("ClientId")
-                SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid, ClientId, 0,,, sProjectManagerEmail, sProjectManagerName)
+                SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid, ClientId, JobId,,, sProjectManagerEmail, sProjectManagerName)
 
 
                 Dim recipientEmailSent As String = sCC & IIf(Len(sCCO) > 0, "," & sCCO, "")

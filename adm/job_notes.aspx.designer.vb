@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class job_notes
-    
+
     '''<summary>
     '''btnNewNote control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class job_notes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNewNote As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGridNotes control.
     '''</summary>
@@ -30,7 +30,52 @@ Partial Public Class job_notes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridNotes As Global.Telerik.Web.UI.RadGrid
-    
+
+    '''<summary>
+    '''pnlFindMessages control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFindMessages As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''cboTimeFrame control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboTimeFrame As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''txtFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''btnFindMessages control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFindMessages As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridMessages control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridMessages As Global.Telerik.Web.UI.RadGrid
+
     '''<summary>
     '''SqlDataSourceNotes control.
     '''</summary>
@@ -39,7 +84,16 @@ Partial Public Class job_notes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceNotes As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
+    '''<summary>
+    '''SqlDataSourceMessages control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceMessages As Global.System.Web.UI.WebControls.SqlDataSource
+
     '''<summary>
     '''lblJobId control.
     '''</summary>
@@ -48,7 +102,7 @@ Partial Public Class job_notes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeId control.
     '''</summary>
@@ -57,7 +111,7 @@ Partial Public Class job_notes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -66,7 +120,7 @@ Partial Public Class job_notes
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -75,7 +129,7 @@ Partial Public Class job_notes
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.MasterJOB
         Get
-            Return CType(MyBase.Master,pasconcept20.MasterJOB)
+            Return CType(MyBase.Master, pasconcept20.MasterJOB)
         End Get
     End Property
 End Class
