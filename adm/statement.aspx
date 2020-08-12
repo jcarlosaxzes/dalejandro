@@ -163,9 +163,10 @@
                 }
             </script>
         </telerik:RadCodeBlock>
-        <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AutoGenerateColumns="False"
-            DataSourceID="SqlDataSource1" AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowSorting="True"
-            PageSize="100" AllowPaging="true" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+        <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AutoGenerateColumns="False" 
+            DataSourceID="SqlDataSource1" AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowSorting="True" Height="1500px"
+            PageSize="50" AllowPaging="true" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
+            FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" CommandItemDisplay="None" ShowFooter="True" EditMode="PopUp">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                 <Columns>
@@ -233,7 +234,7 @@
                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                         <ItemTemplate>
                             <table style="width: 100%">
-                                <tr>0
+                                <tr>
                                     <td style="width: 33%; text-align: center">
                                         <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Statement information">
                                                     <i class="far fa-envelope"></i>

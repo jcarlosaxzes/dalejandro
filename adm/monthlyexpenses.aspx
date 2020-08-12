@@ -321,7 +321,8 @@
                         </td>
                         <td>
                             <telerik:RadGrid ID="RadGridMonthly" runat="server" Width="95%"
-                                ShowFooter="true" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small"
+                                ShowFooter="true" 
+                                ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small"
                                 AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonthly" AllowPaging="true" PageSize="12"
                                 HeaderStyle-HorizontalAlign="Center">
                                 <MasterTableView DataSourceID="SqlDataSourceMonthly">
@@ -406,7 +407,7 @@
                         </td>
                         <td>
                             <telerik:RadGrid ID="RadGridYearly" runat="server" Width="95%"
-                                ShowFooter="true" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small"
+                                ShowFooter="true" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small"
                                 AutoGenerateColumns="False" DataSourceID="SqlDataSourceChartByYear" AllowPaging="true" PageSize="12"
                                 HeaderStyle-HorizontalAlign="Center">
                                 <MasterTableView DataSourceID="SqlDataSourceChartByYear">
@@ -561,7 +562,7 @@
 
                 <telerik:RadGrid ID="RadGridExpenses" runat="server" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center"
                     AlternatingItemStyle-Font-Size="Small" AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" ShowFooter="true"
-                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceExpenses" Height="900px" PageSize="100" AllowSorting="true">
+                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceExpenses" Height="900px" PageSize="100" AllowSorting="true" HeaderStyle-Font-Size="Small">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" SaveScrollPosition="true"></Scrolling>
                     </ClientSettings>
@@ -619,7 +620,7 @@
             <telerik:RadWizardStep Title="Payroll Details">
                 <telerik:RadGrid ID="RadGridPayroll" runat="server" DataSourceID="SqlDataSourcePayroll"
                     ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" AlternatingItemStyle-Font-Size="Small"
-                    AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="900px" ShowFooter="true">
+                    AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="900px" ShowFooter="true" HeaderStyle-Font-Size="Small">
                     <ClientSettings>
                         <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
                     </ClientSettings>

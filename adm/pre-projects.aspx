@@ -94,9 +94,13 @@
         </asp:Panel>
     </div>
 
-    <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" GridLines="None" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
-        AutoGenerateColumns="False" AllowAutomaticDeletes="True"
-        AllowPaging="True" PageSize="25" AllowSorting="True" CellSpacing="0">
+    <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True"
+        PageSize="50" AllowPaging="true" 
+        Height="1500px" RenderMode="Lightweight"
+        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+        <ClientSettings Selecting-AllowRowSelect="true">
+            <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+        </ClientSettings>
         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1">
             <PagerStyle Mode="Slider" AlwaysVisible="false" />
             <Columns>
@@ -104,59 +108,48 @@
                     SortExpression="Id" UniqueName="Id" ItemStyle-HorizontalAlign="Center"
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                     <ItemTemplate>
-                        <div>
-                            <asp:LinkButton ID="btnEditProj" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Pre-Project"
-                                CommandName="EditPre_Project">
+                        <asp:LinkButton ID="btnEditProj" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Pre-Project"
+                            CommandName="EditPre_Project">
                                                 <%# Eval("Pre_ProjectNumber")%>
                                                 <span title="Number of files uploaded" class="badge badge-pill badge-danger" style='<%# IIf(Eval("PreProjectUploadFiles")=0,"display:none","display:normal")%>'>
                                                 <%#Eval("PreProjectUploadFiles")%>
                                             </span>
-                            </asp:LinkButton>
-                        </div>
-                        <div>
+                        </asp:LinkButton>
+                        <div style="float: right; vertical-align: top; margin: 0;">
                             <a href='<%# "clientfiles?client=" & LocalAPI.GetClientProperty(LocalAPI.GetPreProjectProperty(Eval("Id"), "clientId"), "guid") & "&preproject=true" %>' title="Upload Files">
-                                    <i class="fas fa-cloud-upload-alt"></i>                                                
+                                <i class="fas fa-cloud-upload-alt"></i>
                             </a>
-                            &nbsp;&nbsp;
-                                            <asp:LinkButton ID="btnNewProposal" runat="server" CommandName="NewProposal" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("statusId") = 0 %>' ToolTip="Create new Proposal">
-                                                <i class="fas fa-file-export"></i>
-                                            </asp:LinkButton>
-                            <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("proposalId") %>' ToolTip="Click to View/Edit Proposal" Font-Size="X-Small"
-                                CommandName="EditProposal" Text='<%# Eval("ProposalNumber")%>' Visible='<%# Eval("statusId") = 1 And Eval("proposalId") > 0 %>'>
-                            </asp:LinkButton>
-
                         </div>
-
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
-
+                <telerik:GridTemplateColumn DataField="Proposal" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" HeaderText="Proposal" SortExpression="Proposal" UniqueName="Proposal" HeaderStyle-HorizontalAlign="Center">
+                    <ItemTemplate>
+                        <asp:LinkButton ID="btnNewProposal" runat="server" CssClass="btn btn-primary btn-sm" CommandName="NewProposal" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("statusId") = 0 %>' ToolTip="Create new Proposal">
+                                                Add Proposal
+                        </asp:LinkButton>
+                        <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("proposalId") %>' ToolTip="Click to View/Edit Proposal"
+                            CommandName="EditProposal" Text='<%# Eval("ProposalNumber")%>' Visible='<%# Eval("statusId") = 1 And Eval("proposalId") > 0 %>'>
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </telerik:GridTemplateColumn>
                 <telerik:GridBoundColumn DataField="DateIn" DataFormatString="{0:MM/dd/yy}" DataType="System.DateTime"
                     HeaderText="Date" SortExpression="DateIn" UniqueName="DateIn"
                     ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" AllowFiltering="False" HeaderStyle-Width="80px">
                 </telerik:GridBoundColumn>
 
                 <telerik:GridTemplateColumn DataField="Name" ItemStyle-HorizontalAlign="Left"
-                    FilterControlAltText="Filter Name column" HeaderText="Name<br/>Type" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
+                    FilterControlAltText="Filter Name column" HeaderText="Name - Type" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                     <ItemTemplate>
-                        <div>
-                            <%# Eval("Name") %>
-                        </div>
-                        <div>
-                           <small> <%# Eval("nProjectType") %></small>
-                        </div>
-
+                        <b><%# Eval("Name") %></b>
+                        <%# Eval("nProjectType") %>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
 
                 <telerik:GridTemplateColumn DataField="clientId" ItemStyle-HorizontalAlign="Left"
-                    FilterControlAltText="Filter ClientName column" HeaderText="Client <br/>Proposal By - Prepared By" SortExpression="ClientName" UniqueName="ClientName" HeaderStyle-HorizontalAlign="Center">
+                    FilterControlAltText="Filter ClientName column" HeaderText="Client - Proposal By - Prepared By" SortExpression="ClientName" UniqueName="ClientName" HeaderStyle-HorizontalAlign="Center">
                     <ItemTemplate>
-                        <div>
-                            <%# Eval("ClientName") %>
-                        </div>
-                        <div>
-                           <small><%# String.Concat(Eval("ProposalByName"), " - ", Eval("PreparedByName")) %></small>
-                        </div>
+                        <b><%# Eval("ClientName") %></b>
+                        <%# String.Concat(Eval("ProposalByName"), " - ", Eval("PreparedByName")) %>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
 
@@ -164,16 +157,13 @@
                 <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status"
                     UniqueName="Status" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="120px">
                     <ItemTemplate>
-                        <div style="font-size: 12px; width: 100%"
-                            class='<%# LocalAPI.GetPre_ProjectsStatusLabelCSS(Eval("statusId")) %>'>
-                            <%# Eval("Status") %>
-                        </div>
+                        <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetPre_ProjectsStatusLabelCSS(Eval("statusId")) %>'> <%# Eval("Status") %></div>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
 
                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
-                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                 </telerik:GridButtonColumn>
             </Columns>
             <EditFormSettings>

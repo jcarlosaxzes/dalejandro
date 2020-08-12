@@ -40,13 +40,13 @@
                                 <telerik:RadTextBox ID="txtState" runat="server" MaxLength="15" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 140px; text-align: right">Zip Code Starting with:
+                            <td style="width: 140px; text-align: right">Zip Code Starting:
                             </td>
                             <td style="width: 130px">
                                 <telerik:RadTextBox ID="txtZipCode" runat="server" Text="" MaxLength="10" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 130px; text-align: right">Phone Starting with:
+                            <td style="width: 130px; text-align: right">Phone Starting:
                             <td style="width: 130px">
                                 <telerik:RadTextBox ID="txtPhone" runat="server" Text="" MaxLength="10" Width="100%">
                                 </telerik:RadTextBox>

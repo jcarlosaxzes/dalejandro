@@ -208,7 +208,9 @@
     </div>
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceProp" AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True"
-            PageSize="50" AllowPaging="true" Height="1000px" RenderMode="Auto" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+            PageSize="50" AllowPaging="true" 
+        Height="1500px" RenderMode="Lightweight"
+        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
@@ -356,7 +358,7 @@
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Note that the Proposal Accepted can not be eliminated. Delete this proposal?"
                         ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete" Display="false"
                         UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                     </telerik:GridButtonColumn>
                 </Columns>
 

@@ -142,6 +142,10 @@
                 padding-top: .05rem;
                 padding-bottom: .05rem;
             }
+            /*Job Action Buttom*/
+            .rcbActionButton {
+                padding-top: 0 !important;
+            }
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -352,7 +356,7 @@
                     <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
-                <td style="width: 14%; text-align: center; background-color:  #546e7a;">
+                <td style="width: 14%; text-align: center; background-color: #546e7a;">
                     <span class="DashboardFont2">Balance</span><br />
                     <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
@@ -370,9 +374,9 @@
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
-                    PageSize="50" AllowPaging="true" Height="1500px" RenderMode="Auto"
+                    PageSize="50" AllowPaging="true" Height="1500px" RenderMode="Lightweight"
                     AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
-                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" 
+                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                     FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
                     <ClientSettings Selecting-AllowRowSelect="true">
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -382,19 +386,18 @@
                         <Columns>
                             <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn" Visible="false">
                             </telerik:GridClientSelectColumn>
-                            <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="10px">
+                            <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="20px">
                             </telerik:GridBoundColumn>
 
                             <telerik:GridTemplateColumn DataField="Code" UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code" ItemStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Info" CommandName="View/Edit Info" UseSubmitBehavior="false" Font-Bold="true">
-                                            <%#Eval("Code")%> 
+                                                <%#Eval("Code")%> 
                                     </asp:LinkButton>
-                                    <span style="float: right; vertical-align: middle; margin:0">
-                                        <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="30px" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
-                                            DropDownAutoWidth="Enabled" Skin="Material">
+                                    <div style="float: right; vertical-align: top; margin: 0;">
+                                        <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="X-Small" Width="30px" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true" DropDownAutoWidth="Enabled" Skin="Material">
                                         </telerik:RadComboBox>
-                                    </span>
+                                    </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Open_date" HeaderText="Date" UniqueName="Open_date" HeaderStyle-Width="100px" SortExpression="Open_date" ItemStyle-HorizontalAlign="Center">
@@ -553,22 +556,22 @@
                             <%--Private Mode--%>
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" HeaderTooltip="Budget Used of Budget"
-                                 Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
+                                Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
                                             <td style="width: 45%; text-align: right">
-                                                
+
                                                 <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Bold="true" ToolTip="Budget Used"></asp:Label>
                                             </td>
                                             <td style="width: 5%; text-align: center">of
                                             </td>
                                             <td style="text-align: right">
-                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Job Budget" ></asp:Label>
+                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Job Budget"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right;font-size:x-small">
+                                            <td style="text-align: right; font-size: x-small">
                                                 <%# Eval("Profit", "{0:N0}")%>%
                                             </td>
                                             <td colspan="2">
@@ -605,7 +608,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right;font-size:x-small">
+                                            <td style="text-align: right; font-size: x-small">
                                                 <asp:Label ID="lblColectedPercent" runat="server" Text='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'></asp:Label>%    
                                             </td>
                                             <td colspan="2">

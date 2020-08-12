@@ -81,12 +81,13 @@
     </div>
 
     <telerik:RadGrid ID="RadGrid1" runat="server" RenderMode="Auto" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs"
-        PageSize="100" AllowPaging="true" HeaderStyle-Font-Size="X-Small" HeaderStyle-HorizontalAlign="Center">
+        PageSize="50" AllowPaging="true" 
+        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceJobs" ShowFooter="True" EditFormSettings-FormCaptionStyle-HorizontalAlign="Center">
             <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
             <Columns>
                 <telerik:GridTemplateColumn DataField="Id" FilterControlAltText="Filter JobName column" HeaderText="Job" SortExpression="Id"
-                    UniqueName="Id" ItemStyle-HorizontalAlign="Left" Aggregate="Count" FooterAggregateFormatString="{0:N0}" ItemStyle-Font-Size="X-Small">
+                    UniqueName="Id" ItemStyle-HorizontalAlign="Left" Aggregate="Count" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <asp:Panel ID="PanelJobTime" runat="server" Visible='<%# Eval("TimeType") = 2%>'>
                             <div>
@@ -104,9 +105,9 @@
                         </asp:Panel>
                         <asp:Panel ID="PanelNonJobTime" runat="server" Visible='<%# Eval("TimeType") = 1%>'>
                             <div>
-                                <h3 style="margin: 0; color: darkgreen">
+                                <span style="margin: 0; color: darkgreen">
                                     <%# Eval("itemName")%>
-                                </h3>
+                                </span>
                             </div>
                         </asp:Panel>
                     </ItemTemplate>
@@ -114,86 +115,86 @@
 
 
                 <telerik:GridTemplateColumn DataField="D13" FilterControlAltText="Filter D13 column" HeaderText="D13" SortExpression="D13" UniqueName="D13"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D13")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D12" FilterControlAltText="Filter D12 column" HeaderText="D12" SortExpression="D12" UniqueName="D12"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D12")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D11" FilterControlAltText="Filter D11 column" HeaderText="D11" SortExpression="D11" UniqueName="D11"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D11")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D10" FilterControlAltText="Filter D10 column" HeaderText="D10" SortExpression="D10" UniqueName="D10"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D10")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D9" FilterControlAltText="Filter D9 column" HeaderText="D9" SortExpression="D9" UniqueName="D9"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D9")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D8" FilterControlAltText="Filter D8 column" HeaderText="D8" SortExpression="D8" UniqueName="D8"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D8")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D7" FilterControlAltText="Filter D7 column" HeaderText="D7" SortExpression="D7" UniqueName="D7"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D7")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
 
                 <telerik:GridTemplateColumn DataField="D6" FilterControlAltText="Filter D6 column" HeaderText="D6" SortExpression="D6" UniqueName="D6"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D6")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D5" FilterControlAltText="Filter D5 column" HeaderText="D5" SortExpression="D5" UniqueName="D5"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D5")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D4" FilterControlAltText="Filter D4 column" HeaderText="D4" SortExpression="D4" UniqueName="D4"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D4")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D3" FilterControlAltText="Filter D3 column" HeaderText="D3" SortExpression="D3" UniqueName="D3"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D3")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D2" FilterControlAltText="Filter D2 column" HeaderText="D2" SortExpression="D2" UniqueName="D2"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D2")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D1" FilterControlAltText="Filter D1 column" HeaderText="D1" SortExpression="D1" UniqueName="D1"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D1")%>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
                 <telerik:GridTemplateColumn DataField="D0" FilterControlAltText="Filter D0 column" HeaderText="D0" SortExpression="D0" UniqueName="D0"
-                    HeaderStyle-Width="70px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                    HeaderStyle-Width="80px" Aggregate="Sum" FooterAggregateFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
                     <ItemTemplate>
                         <%# Eval("D0")%>
                     </ItemTemplate>

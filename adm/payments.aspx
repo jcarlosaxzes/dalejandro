@@ -97,12 +97,13 @@
     </div>
     <div>
         <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true" AllowAutomaticDeletes="True"
-            AllowMultiRowSelection="True" Height="1000px" PageSize="100" AllowPaging="true"
-            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+            AllowMultiRowSelection="True"
+            PageSize="50" AllowPaging="true"
+            Height="1500px" RenderMode="Lightweight"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <ClientSettings Selecting-AllowRowSelect="true">
-                <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
-
             <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="Id">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                 <Columns>
@@ -111,7 +112,7 @@
                     </telerik:GridClientSelectColumn>
 
                     <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Payment ID" ReadOnly="True"
-                        HeaderStyle-Width="120px" SortExpression="Id" UniqueName="Id">
+                        HeaderStyle-Width="100px" SortExpression="Id" UniqueName="Id" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridBoundColumn>
 
 
@@ -166,7 +167,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="ClientName" HeaderText="Client (Job) - Notes" UniqueName="ClientName"
+                    <telerik:GridTemplateColumn DataField="ClientName" HeaderText="Client - Job - Notes" UniqueName="ClientName"
                         ItemStyle-HorizontalAlign="Left">
                         <ItemTemplate>
                             <div>
@@ -324,7 +325,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                   <small>Check / Uncheck (selected) payments records as <b>Reconcilied</b> with Bank Statements</small>
+                    <small>Check / Uncheck (selected) payments records as <b>Reconcilied</b> with Bank Statements</small>
                 </td>
             </tr>
             <tr>

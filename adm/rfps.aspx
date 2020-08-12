@@ -171,7 +171,7 @@
                 }
             </script>
         </telerik:RadCodeBlock>
-        <telerik:RadTreeList ID="RadTreeList1" runat="server" DataSourceID="SqlDataSourceRFP" Skin="Bootstrap"
+        <telerik:RadTreeList ID="RadTreeList1" runat="server" DataSourceID="SqlDataSourceRFP" Skin="Bootstrap" HeaderStyle-Font-Size="Small"
             AutoGenerateColumns="False" Culture="en-US" HeaderStyle-HorizontalAlign="Center" AlternatingItemStyle-HorizontalAlign="Center" CommandItemDisplay="Top"
             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" ParentDataKeyNames="ParentId" DataKeyNames="Id">
             <CommandItemSettings />
@@ -187,10 +187,10 @@
                 <telerik:TreeListTemplateColumn DataField="ProjectName" HeaderText="Project Name" UniqueName="ProjectName" ItemStyle-HorizontalAlign="Left" ItemStyle-Font-Size="Small"
                     Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                     <ItemTemplate>
-                        <asp:Label runat="server" Text='<%# Eval("ProjectName") %>' Visible='<%# Eval("ParentID") = 0 %>' Font-Size="Medium" Font-Bold="true" ForeColor="DarkBlue"></asp:Label>
+                        <asp:Label runat="server" Text='<%# Eval("ProjectName") %>' Visible='<%# Eval("ParentID") = 0 %>' Font-Bold="true"></asp:Label>
                         <div>
                             <%# Eval("SubconsultanName") %>
-                            <span style="font-size: x-small; font-style: italic; color: gray"><%# Eval("Discipline") %></span>
+                            <span style="font-style: italic; color: gray"><%# Eval("Discipline") %></span>
                         </div>
                     </ItemTemplate>
                 </telerik:TreeListTemplateColumn>
@@ -222,9 +222,9 @@
                     </ItemTemplate>
                 </telerik:TreeListTemplateColumn>
                 <telerik:TreeListTemplateColumn DataField="State" HeaderText="Status" UniqueName="State"
-                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
+                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center">
                     <ItemTemplate>
-                        <span class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'><%# Eval("State") %></span>
+                        <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetRFPStatusLabelCSS(Eval("StateId")) %>'> <%# Eval("State") %></div>
                     </ItemTemplate>
                 </telerik:TreeListTemplateColumn>
 

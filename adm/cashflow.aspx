@@ -39,7 +39,7 @@
             <br />
             <telerik:RadGrid ID="RadGrid1" runat="server" CellSpacing="0" Culture="en-US" DataSourceID="SqlDataSourceMonth" GridLines="None">
                 <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonth" ShowFooter="true"
-                    ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small">
+                    ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                     <Columns>
                         <telerik:GridBoundColumn DataField="colMonth" FilterControlAltText="Filter colMonth column" HeaderText="Month" SortExpression="colMonth" UniqueName="colMonth"
                             HeaderStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
