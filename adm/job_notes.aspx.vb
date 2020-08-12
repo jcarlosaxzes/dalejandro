@@ -23,4 +23,7 @@ Public Class job_notes
         SqlDataSourceNotes.Insert()
         RadGridNotes.DataBind()
     End Sub
+    Protected Sub btnFindMessages_Click(sender As Object, e As EventArgs)
+        RadGridMessages.DataBind()
+    End Sub
 End Class

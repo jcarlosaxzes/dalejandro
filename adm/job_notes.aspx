@@ -58,6 +58,91 @@
 
 
     </div>
+    <br />
+    <div class="container">
+          <h4>Messages </h4>
+                    <table style="width: 100%">
+                        <tr>
+                            <td class="PanelFilter">
+                                <asp:Panel ID="pnlFindMessages" runat="server" DefaultButton="btnFindMessages">
+                                    <table class="table-sm pasconcept-bar" style="width: 100%">
+                                        <tr>
+                                            <td style="width: 400px">
+                                                <telerik:RadComboBox ID="cboTimeFrame" runat="server" AppendDataBoundItems="true" Width="100%">
+                                                    <Items>
+                                                        <telerik:RadComboBoxItem runat="server" Text="All Years" Value="1" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Last Year" Value="2" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="This Year" Value="3" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Last Quarter" Value="4" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="This Quarter" Value="5" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Last Month" Value="6" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="This Month" Value="7" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Last 30 Days" Value="8" Selected="true"/>
+                                                        <telerik:RadComboBoxItem runat="server" Text="Last 15 Days" Value="9" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Last 7 Days" Value="10" Selected="true" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Last  Day" Value="11" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="ToDay" Value="12" />
+                                                    </Items>
+                                                </telerik:RadComboBox>
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="txtFind" runat="server" EmptyMessage="Search From, To, Subject or Body..." Width="40%">
+                                                </telerik:RadTextBox>
+                                            </td>
+                                            <td style="width: 150px; text-align: right">
+                                                <asp:LinkButton ID="btnFindMessages" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" OnClick="btnFindMessages_Click">
+                                                        <i class="fas fa-search"></i> Filter/Search
+                                                </asp:LinkButton>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </asp:Panel>
+                            </td>
+                        </tr>
+                    </table>
+                    <telerik:RadGrid ID="RadGridMessages" runat="server" DataSourceID="SqlDataSourceMessages" AutoGenerateColumns="False" AllowSorting="True"
+                        PageSize="50" AllowPaging="true" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" >
+                        <ClientSettings>
+                            <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+                        </ClientSettings>
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceMessages" ShowFooter="True" ClientDataKeyNames="Id">
+                            <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
+                            <Columns>
+                                <telerik:GridTemplateColumn DataField="To" HeaderText="From/To/Date/Subject" SortExpression="To" UniqueName="To" HeaderStyle-Width="350px" ItemStyle-Width="150px" ItemStyle-Wrap="true" ItemStyle-VerticalAlign="Top">
+                                    <ItemTemplate>
+                                        <table class="table-sm" style="width: 100%; height:100px;">
+                                            <tr>
+                                                <td>
+                                                    <b>From:</b> <%# Eval("From")%>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>To:</b> <%# Eval("To")%>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <%# Eval("Received")%>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b><%# Eval("Subject")%></b>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+                                <telerik:GridBoundColumn DataField="Body" HeaderText="Body" SortExpression="Body" UniqueName="Body" HeaderStyle-HorizontalAlign="Center">
+                                </telerik:GridBoundColumn>
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
+                
+
+    </div>
     <asp:SqlDataSource ID="SqlDataSourceNotes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [Jobs_notes] WHERE [Id] = @Id"
         SelectCommand="SELECT [Jobs_notes].Id, JobId, Date, Note, Employees.Name as NoteBy FROM [Jobs_notes] left outer join Employees on [Jobs_notes].employeeId=Employees.Id WHERE ([JobId] = @Job) ORDER BY [Jobs_notes].[Id] desc"
@@ -79,6 +164,18 @@
             <asp:ControlParameter ControlID="lblJobId" DefaultValue="0" Name="Job" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceMessages" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Messages_v20_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="txtFind" PropertyName="Text" Name="Filter" Type="String" ConvertEmptyStringToNull="False" />
+            <asp:Parameter Name="clientId" DefaultValue="0" Type="Int32" /> 
+            <asp:ControlParameter ControlID="lblJobId" Name="jobId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="cboTimeFrame" Name="TimeFrameId" PropertyName="SelectedValue" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
 
     <asp:Label ID="lblJobId" runat="server" Visible="false" Text="0"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
