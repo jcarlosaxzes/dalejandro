@@ -13800,6 +13800,26 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function SetLeadAgileDate(LaedId As Integer) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection_axzescrmDB()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = $"UPDATE [Leads_Contacs] SET AgileDate=GetDate() WHERE Id={LaedId}"
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+
     Public Shared Function PASconceptLeadToAgile(LeadId As Integer, Tag As String) As Boolean
 
         Try
@@ -13814,14 +13834,26 @@ Public Class LocalAPI
                                                                 "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
                                                                 "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
                                                                 "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}]}"
+                                                                "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""City"", ""value"":""city_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""State"", ""value"":""state_value""}," &
+                                                                "{""type"":""SYSTEM"", ""name"":""Zip"", ""value"":""zip_value""}," &
+                                                                "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}" &
+                                                                "]}"
                 ' -- SYSTEM FIELDS
                 jsonContactInfo = Replace(jsonContactInfo, "email_value", LeadObject("Email"))
                 jsonContactInfo = Replace(jsonContactInfo, "first_name_value", LeadObject("FirstName"))
                 jsonContactInfo = Replace(jsonContactInfo, "last_name_value", LeadObject("LastName"))
                 jsonContactInfo = Replace(jsonContactInfo, "company_value", LeadObject("Company"))
                 jsonContactInfo = Replace(jsonContactInfo, "phone_value", LeadObject("Phone"))
+                jsonContactInfo = Replace(jsonContactInfo, "website_value", LeadObject("WebSite"))
+                jsonContactInfo = Replace(jsonContactInfo, "city_value", LeadObject("City"))
+                jsonContactInfo = Replace(jsonContactInfo, "state_value", LeadObject("State"))
+                jsonContactInfo = Replace(jsonContactInfo, "zip_value", LeadObject("ZipCode"))
                 jsonContactInfo = Replace(jsonContactInfo, "title_value", LeadObject("Position"))
+
+                jsonContactInfo = Replace(jsonContactInfo, "source_value", LeadObject("Source"))
 
                 jsonContactInfo = Replace(jsonContactInfo, "tag_value", Tag)
 
@@ -13843,6 +13875,7 @@ Public Class LocalAPI
                 Agile.AddTags(LeadObject("Email"), Tag, companyId)
 
             End If
+            SetLeadAgileDate(LeadId)
 
             Return True
 

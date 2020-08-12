@@ -59,6 +59,15 @@ Partial Public Class leads
     Protected WithEvents txtCity As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
+    '''cboOnOff control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboOnOff As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''txtTags control.
     '''</summary>
     '''<remarks>
@@ -93,6 +102,15 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboSource As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboInAgile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboInAgile As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''btnFind control.

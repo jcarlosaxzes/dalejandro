@@ -46,18 +46,27 @@
                                 <telerik:RadTextBox ID="txtZipCode" runat="server" Text="" MaxLength="10" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 130px; text-align: right">Phone Starting:
+                            <td style="width: 130px; text-align: right">Phone Starting:</td>
                             <td style="width: 130px">
                                 <telerik:RadTextBox ID="txtPhone" runat="server" Text="" MaxLength="10" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                                <td style="width: 100px; text-align: right">City:
-                                </td>
-                                <td>
-                                    <telerik:RadTextBox ID="txtCity" runat="server" Text="" MaxLength="50" Width="100%">
-                                    </telerik:RadTextBox>
-                                </td>
-                                <td></td>
+                            <td style="width: 100px; text-align: right">City:
+                            </td>
+                            <td style="width: 180px;">
+                                <telerik:RadTextBox ID="txtCity" runat="server" Text="" MaxLength="50" Width="100%">
+                                </telerik:RadTextBox>
+                            </td>
+                            <td>
+                                <telerik:RadComboBox ID="cboOnOff" runat="server" Width="150px" AppendDataBoundItems="true">
+                                    <Items>
+                                        <telerik:RadComboBoxItem runat="server" Text="Contact On" Value="0" Selected="true" />
+                                        <telerik:RadComboBoxItem runat="server" Text="Contact Off" Value="1" />
+                                    </Items>
+                                </telerik:RadComboBox>
+                            </td>
+                            <td></td>
+
                         </tr>
                         <tr>
                             <td style="text-align: right">Contain Tags:
@@ -89,9 +98,23 @@
                                 </telerik:RadComboBox>
                             </td>
                             <td>
+                                <telerik:RadComboBox ID="cboInAgile" runat="server" Width="150px" AppendDataBoundItems="true">
+                                    <Items>
+                                        <telerik:RadComboBoxItem runat="server" Text="Not In Agile" Value="0" Selected="true" />
+                                        <telerik:RadComboBoxItem runat="server" Text="In Agile" Value="1" />
+                                    </Items>
+                                </telerik:RadComboBox>
+                            </td>
+
+                            <td style="text-align: right">
                                 <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     Filter/Search
                                 </asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="text-align: right">
+
                                 <span style="float: right; vertical-align: middle;">
                                     <asp:LinkButton ID="btnBulkTag" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" ToolTip="Tag Selected records">
                                          Bulk Tag
@@ -336,7 +359,18 @@
                             </telerik:RadTextBox>
                         </td>
                     </tr>
-
+                    <tr>
+                        <td style="text-align: right">Contact:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cboOnOffEdit" runat="server" Width="100px" AppendDataBoundItems="true" SelectedValue='<%# Bind("ContactOff") %>' ZIndex="50001">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Text="On" Value="0" />
+                                    <telerik:RadComboBoxItem runat="server" Text="Off" Value="1" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+                    </tr>
                 </table>
             </EditItemTemplate>
         </asp:FormView>
@@ -414,6 +448,8 @@
             <asp:ControlParameter ControlID="txtTags" Name="Tag" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtNoTags" Name="NoTag" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="cboSource" Name="sourceId" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboInAgile" Name="InAgile" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboOnOff" Name="ContactOff" PropertyName="SelectedValue" />
         </SelectParameters>
         <UpdateParameters>
             <asp:ControlParameter ControlID="txtPageSize" Name="PageSize" PropertyName="Text" ConvertEmptyStringToNull="false" />
@@ -452,6 +488,7 @@
             <asp:Parameter Name="Position" />
             <asp:Parameter Name="Tags" />
             <asp:Parameter Name="SourceId" />
+            <asp:Parameter Name="ContactOff" />
             <asp:ControlParameter ControlID="lblSelected_ID" Name="Id" PropertyName="Text" />
         </UpdateParameters>
     </asp:SqlDataSource>
