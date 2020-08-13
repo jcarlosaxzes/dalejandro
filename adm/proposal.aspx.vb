@@ -68,7 +68,10 @@ Public Class proposal
 
                 RadWizardFiles.ActiveStepIndex = 1
                 PanelUpload.Visible = False
-
+                RadListViewFiles.Visible = False
+                RadGridFiles.Visible = Not RadListViewFiles.Visible
+                btnGridPage.Visible = Not RadListViewFiles.Visible
+                btnTablePage.Visible = RadListViewFiles.Visible
 
             End If
             'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblProposalId.Text
