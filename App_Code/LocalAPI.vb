@@ -13819,7 +13819,6 @@ Public Class LocalAPI
         End Try
     End Function
 
-
     Public Shared Function PASconceptLeadToAgile(LeadId As Integer, Tag As String) As Boolean
 
         Try
@@ -13828,32 +13827,48 @@ Public Class LocalAPI
 
             If Not Agile.IsContact(LeadObject("Email"), companyId) Then
                 Dim AgileRet As String
+                'Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
+                '                                                "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"": ""address"", ""value"":" & "{\""address\"":\""address_value\"",\""city\"":\""city_value\"",\""state\"":\""state_value\"",\""zip\"":\""zip_value\"",\""country\"":\""US\""}}," &
+                '                                                "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}" &
+                '                                                "]}"
+
+                '{"subtype":null,"name":"address","type":"SYSTEM","value":"{\"country\":\"US\",\"city\":\"doral\",\"latitude\":\"25.819542\",\"countryname\":\"United States\",\"state\":\"fl\",\"longitude\":\"-80.355330\"}"}
                 Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
-                                                                "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""City"", ""value"":""city_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""State"", ""value"":""state_value""}," &
-                                                                "{""type"":""SYSTEM"", ""name"":""Zip"", ""value"":""zip_value""}," &
-                                                                "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}" &
-                                                                "]}"
+                    "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                    "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}," &
+                    "{""type"":""CUSTOM"", ""name"":""Notes"", ""value"":""notes_value""}," &
+                    "{""subtype"":null,""name"":""address"",""type"":""SYSTEM"",""value"":""{\""zip\"":\""zip_value\"",\""country\"":\""US\"",\""address\"":\""address_value\"",\""city\"":\""city_value\"",\""countryname\"":\""United States\"",\""state\"":\""state_value\""}""}" &
+                    "]}"
+
                 ' -- SYSTEM FIELDS
+
                 jsonContactInfo = Replace(jsonContactInfo, "email_value", LeadObject("Email"))
                 jsonContactInfo = Replace(jsonContactInfo, "first_name_value", LeadObject("FirstName"))
                 jsonContactInfo = Replace(jsonContactInfo, "last_name_value", LeadObject("LastName"))
                 jsonContactInfo = Replace(jsonContactInfo, "company_value", LeadObject("Company"))
                 jsonContactInfo = Replace(jsonContactInfo, "phone_value", LeadObject("Phone"))
                 jsonContactInfo = Replace(jsonContactInfo, "website_value", LeadObject("WebSite"))
+                jsonContactInfo = Replace(jsonContactInfo, "title_value", LeadObject("Position"))
+                jsonContactInfo = Replace(jsonContactInfo, "address_value", LeadObject("AddressLine1"))
                 jsonContactInfo = Replace(jsonContactInfo, "city_value", LeadObject("City"))
                 jsonContactInfo = Replace(jsonContactInfo, "state_value", LeadObject("State"))
                 jsonContactInfo = Replace(jsonContactInfo, "zip_value", LeadObject("ZipCode"))
-                jsonContactInfo = Replace(jsonContactInfo, "title_value", LeadObject("Position"))
 
                 jsonContactInfo = Replace(jsonContactInfo, "source_value", LeadObject("Source"))
+                jsonContactInfo = Replace(jsonContactInfo, "notes_value", LeadObject("JobTitle"))
 
                 jsonContactInfo = Replace(jsonContactInfo, "tag_value", Tag)
 

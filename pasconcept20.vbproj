@@ -2128,6 +2128,8 @@
     <Content Include="csv\payroll.csv" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\mastersmarth.Master" />
     <Content Include="csv\pascoceptleads.csv" />
+    <Content Include="App_Data\AgileContact_previous.json" />
+    <Content Include="App_Data\AgileContact.json" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - Web Deploy.pubxml" />
@@ -4589,7 +4591,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

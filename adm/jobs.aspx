@@ -134,15 +134,15 @@
                     border-radius: 20px;
                 }
 
-            .RadComboBox_Material .rcbInner {
-                padding: 4px 20px 4px 4px;
-            }
 
             .table-sm td, .table-sm th {
                 padding-top: .05rem;
                 padding-bottom: .05rem;
             }
             /*Job Action Buttom*/
+            .RadComboBox_Material .rcbInner {
+                padding: 4px 20px 4px 4px;
+            }
             .rcbActionButton {
                 padding-top: 0 !important;
             }
@@ -179,7 +179,7 @@
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
-            <table class="table-sm" style="width: 100%">
+            <table style="width: 100%;border-collapse: separate; border-spacing: 3px;" >
                 <tr>
                     <td style="width: 200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
@@ -374,7 +374,7 @@
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
-                    PageSize="50" AllowPaging="true" Height="1500px" RenderMode="Lightweight"
+                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight"
                     AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                     FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
@@ -547,7 +547,7 @@
 
                             <%--Status--%>
                             <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" ItemStyle-HorizontalAlign="Center"
-                                UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="140px">
+                                UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="150px">
                                 <ItemTemplate>
                                     <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; width: 120px"><%# Eval("Status") %></div>
                                 </ItemTemplate>
@@ -631,20 +631,12 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Balance" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="">
+                                UniqueName="Balance" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" >
                                 <ItemTemplate>
-                                    <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
-                                        <tr>
-                                            <td style="width: 32px; text-align: left">
-                                                <asp:Label ID="lblBalanceSymbol" runat="server">
+                                    <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Bold="true"></asp:Label>
+                                    <asp:Label ID="lblBalanceSymbol" runat="server">
                                                     <i class="fas fa-circle"></i>
                                                 </asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Bold="true"></asp:Label>
-                                            </td>
-                                        </tr>
-                                    </table>
 
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
