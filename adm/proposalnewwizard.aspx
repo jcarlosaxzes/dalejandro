@@ -1087,11 +1087,11 @@
                                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
                                                         </asp:LinkButton>
                                                     </div>
-                                                    <div class="card-body">
+                                                    <div class="card-body" style="padding:0px;margin-top:-6px;">
                                                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
                                                                 <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                                     <tr>
-                                                                        <td style="height:108px">
+                                                                        <td style="height:108px;padding:0px;">
                                                                             <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
                                                                         </td>
                                                                     </tr>                                
@@ -1141,11 +1141,11 @@
                                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
                                                         </asp:LinkButton>
                                                     </div>
-                                                    <div class="card-body">
+                                                    <div class="card-body" style="padding:0px;margin-top:-6px;">
                                                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
                                                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                                 <tr>
-                                                                    <td style="height: 108px">
+                                                                    <td style="height: 108px;padding:0px">
                                                                         <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
                                                                     </td>
                                                                 </tr>
