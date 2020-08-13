@@ -205,7 +205,7 @@
                     <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AllowSorting="True" DataSourceID="SqlDataSource1"
                         GridLines="None" Width="100%" AutoGenerateColumns="False"
                         PageSize="50" AllowPaging="true"
-                        Height="1500px" RenderMode="Lightweight"
+                        Height="850px" RenderMode="Lightweight"
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
                         <ClientSettings Selecting-AllowRowSelect="true">
                             <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -317,7 +317,7 @@
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Non-Productive Time" StepType="Step">
                 <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSource2" PageSize="50" AllowPaging="true"
-                    Height="1500px" RenderMode="Lightweight"
+                    Height="850px" RenderMode="Lightweight"
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
                     <ClientSettings Selecting-AllowRowSelect="true">
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>

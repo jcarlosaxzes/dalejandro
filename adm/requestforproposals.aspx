@@ -161,7 +161,7 @@
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceRFP" GridLines="None" AllowAutomaticUpdates="True"
             AllowAutomaticDeletes="True" AllowSorting="True" AutoGenerateColumns="False"
-            Height="1500px" RenderMode="Lightweight"
+            Height="850px" RenderMode="Lightweight"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <ClientSettings Selecting-AllowRowSelect="true">
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
