@@ -89,6 +89,12 @@ Public Class proposalnewwizard
                 RadWizardFiles.ActiveStepIndex = 1
                 PanelUpload.Visible = False
 
+
+                RadListViewFiles.Visible = False
+                RadGridFiles.Visible = Not RadListViewFiles.Visible
+                btnGridPage.Visible = Not RadListViewFiles.Visible
+                btnTablePage.Visible = RadListViewFiles.Visible
+
             End If
             RadWindowManagerJob.EnableViewState = False
 

@@ -12360,7 +12360,7 @@ Public Class LocalAPI
             Return $"<a class=""far fa-file-pdf"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
         End If
         If sContentType = "image/tiff" Or sContentType = "image/bmp" Or sContentType = "image/jpeg" Or sContentType = "image/gif" Or sContentType = "Image/jpg" Or sContentType = "image/png" Then
-            Return $"<image src=""{sUrl}"" width=""200px""/>"
+            Return $"<div class=""container-fluid px-0""><div class=""row""><div class=""col-md-12""><img src=""{sUrl}"" class=""img-fluid w-100"" style=""object-fit: cover;"" /></div></div></div>"
         End If
 
         Return $"<a class=""far fa-file"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"

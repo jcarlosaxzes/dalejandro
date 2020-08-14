@@ -30,6 +30,10 @@ Public Class clientfiles
                 RadWizardFiles.ActiveStepIndex = 1
             End If
 
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = Not RadListViewFiles.Visible
+            btnGridPage.Visible = Not RadListViewFiles.Visible
+            btnTablePage.Visible = RadListViewFiles.Visible
 
         End If
         If cboClients.SelectedItem Is Nothing Then

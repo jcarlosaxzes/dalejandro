@@ -195,7 +195,8 @@ Public Class singproposalsign
 
             ' Accept Email
             ProposalAcceptedEmail(proposalId, companyId, pdfUrl, JobId)
-            Await pdf.CreateProposalSignedPdfAsync(proposalId, newName)
+            Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
+
 
             If JobId > 0 Then
                 NewJobEmail(proposalId, JobId, companyId, pdfUrl)
