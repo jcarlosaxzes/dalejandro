@@ -65,7 +65,10 @@
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
-                            <td></td>
+                            <td>
+                                 <telerik:RadTextBox ID="txtFind" runat="server" Text="" EmptyMessage="Contact or Company Name..." MaxLength="80" Width="100%">
+                                </telerik:RadTextBox>
+                            </td>
 
                         </tr>
                         <tr>
@@ -436,7 +439,7 @@
         </table>
     </telerik:RadToolTip>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnAxzesLeads %>"
-        SelectCommand="Leads_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Leads_v20_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Leads_Tags_Bulk_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Leads_Tags_UPDATE" InsertCommandType="StoredProcedure">
         <SelectParameters>
@@ -447,6 +450,7 @@
             <asp:ControlParameter ControlID="txtCity" Name="City" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtTags" Name="Tag" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtNoTags" Name="NoTag" PropertyName="Text" ConvertEmptyStringToNull="false" />
+            <asp:ControlParameter ControlID="txtFind" Name="Find" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="cboSource" Name="sourceId" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="cboInAgile" Name="InAgile" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="cboOnOff" Name="ContactOff" PropertyName="SelectedValue" />

@@ -68,6 +68,15 @@ Partial Public Class leads
     Protected WithEvents cboOnOff As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
+    '''txtFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
     '''txtTags control.
     '''</summary>
     '''<remarks>
