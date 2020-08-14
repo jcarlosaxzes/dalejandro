@@ -13899,6 +13899,7 @@ Public Class LocalAPI
         End Try
 
     End Function
+
 #End Region
 End Class
 
