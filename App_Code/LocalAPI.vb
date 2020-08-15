@@ -10379,9 +10379,13 @@ Public Class LocalAPI
                     Case 4, 44
                         'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetInvoiceProperty(objId, "guid")
+                    Case 4444
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetInvoiceProperty(objId, "guid") & "&entityType=2"
                     Case 5, 55
                         'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetStatementProperty(objId, "guid")
+                    Case "5555"
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetStatementProperty(objId, "guid") & "&entityType=3"
                     Case 6
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Transmittal.aspx?GuiId=" & LocalAPI.GetTransmittalProperty(objId, "guid")
                     Case 66
@@ -12666,7 +12670,7 @@ Public Class LocalAPI
             Body = Replace(Body, "[Client Name]", sClienteName)
             'Body = Replace(Body, "[Sign]", sSign)
 
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(5, statementId)
+            Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
             Body = Replace(Body, "[StatementUrl]", sURL)
 
             Return True

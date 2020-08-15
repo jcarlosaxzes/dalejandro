@@ -125,7 +125,7 @@ Public Class sendinvoice
             sBody = Replace(sBody, "[Sign]", sSign)
 
             ' Enlace al Invoice
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(4, lblInvoice.Text)
+            Dim sURL As String = LocalAPI.GetSharedLink_URL(4444, lblInvoice.Text)
             sBody = Replace(sBody, "[PASconceptLink]", sURL)
 
             sURL = LocalAPI.GetSharedLink_URL(8, lblInvoice.Text)

@@ -221,9 +221,12 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Emitted - Past Due"
-                        SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                        SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>'></asp:Label>
+                            <span title="Number of customer visits to Invoice Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                <%#Eval("clientvisits")%>
+                            </span>
                             <br />
                             <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'> <%# Eval("pastdue_status") %></div>
                         </ItemTemplate>
