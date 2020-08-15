@@ -206,9 +206,12 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="Emitted" FilterControlAltText="Filter Emitted column"
                         HeaderText="Emitted" SortExpression="Emitted" UniqueName="Emitted"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <asp:Label ID="EmittedLabel" runat="server" Text='<%# Eval("Emitted", "{0:N0}")%>' ToolTip='<%# "First Emission: " + Eval("FirstEmission", "{0:MM/dd/yy}")%>'></asp:Label>
+                            <asp:Label ID="EmittedLabel" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>' ToolTip="Emitted Date"></asp:Label>
+                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                <%#Eval("Emitted")%>
+                            </span>
                              <span title="Number of client visits to Statement Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
                                 <%#Eval("clientvisits")%>
                             </span>

@@ -214,7 +214,6 @@
                     <telerik:GridTemplateColumn DataField="JobName" HeaderText="Client - Job Info" SortExpression="JobName"
                         UniqueName="JobName">
                         <ItemTemplate>
-
                             <asp:Label ID="lblBillingContact" runat="server" Text='<%# Eval("ClientName") %>'></asp:Label>
                             <br />
                             <%# Eval("JobInfo") %>
@@ -223,7 +222,10 @@
                     <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Emitted - Past Due"
                         SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <asp:Label ID="lblEmitted" runat="server" Text='<%# String.Concat(Eval("FirstEmission", "{0:d}"), " (", Eval("Emitted").ToString, ")")%>'></asp:Label>
+                            <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>'></asp:Label>
+                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                <%#Eval("Emitted")%>
+                            </span>
                             <span title="Number of client visits to Invoice Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
                                 <%#Eval("clientvisits")%>
                             </span>
