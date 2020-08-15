@@ -347,7 +347,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="columnEmail" AllowFiltering="False"
-                        ItemStyle-Width="50px"  ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
+                        ItemStyle-Width="50px"  ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="130px">
                         <ItemTemplate>
                             <div>
                                 <asp:LinkButton runat="server" ID="btnSendProposal" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Proposal information">
@@ -355,8 +355,11 @@
                                 </asp:LinkButton>
                             </div>
                             <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("EmailDate", "{0:d}") %>' Font-Size="X-Small" ToolTip="Emitted Date"></asp:Label>
-                            <span title="Number of times sent" class="badge badge-pill badge-light" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
                                 <%#Eval("Emitted")%>
+                            </span>
+                            <span title="Number of customer visits to Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                <%#Eval("clientvisits")%>
                             </span>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>

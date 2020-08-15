@@ -81,6 +81,13 @@ Public Class statement1
 
                     End If
                 End If
+
+                'Clients_visitslog?
+                ' Visit not from Current session company "False visit"
+                If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> companyId Then
+                    LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblStatementId.Text, Request.UserHostAddress())
+                End If
+
             End If
         End If
     End Sub

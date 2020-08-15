@@ -9551,6 +9551,30 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function NewClients_visitslog(entityTypeId As String, entityId As Integer, IP As String) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Clients_visitslog_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@entityType", entityTypeId)
+            cmd.Parameters.AddWithValue("@entityId", entityId)
+            cmd.Parameters.AddWithValue("IP", IP)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     Public Shared Function GetClientPhotoURL(ClientId As Integer) As String
         Try
@@ -10342,6 +10366,8 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid")
                     Case 111 ' Firmar/Ver Proposal from /adm/proposals
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid") & "&source=111"
+                    Case 1111 ' URL to client for visilog
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid") & "&entityType=1"
                     Case 2
                         ' Tratamiento especifico de Job(Projects) para paginas publicas
                         Dim companyId As Integer = GetJobProperty(objId, "companyId")
@@ -10353,9 +10379,13 @@ Public Class LocalAPI
                     Case 4, 44
                         'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetInvoiceProperty(objId, "guid")
+                    Case 4444
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetInvoiceProperty(objId, "guid") & "&entityType=2"
                     Case 5, 55
                         'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetStatementProperty(objId, "guid")
+                    Case "5555"
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetStatementProperty(objId, "guid") & "&entityType=3"
                     Case 6
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Transmittal.aspx?GuiId=" & LocalAPI.GetTransmittalProperty(objId, "guid")
                     Case 66
@@ -12640,7 +12670,7 @@ Public Class LocalAPI
             Body = Replace(Body, "[Client Name]", sClienteName)
             'Body = Replace(Body, "[Sign]", sSign)
 
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(5, statementId)
+            Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
             Body = Replace(Body, "[StatementUrl]", sURL)
 
             Return True
