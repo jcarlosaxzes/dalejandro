@@ -118,7 +118,8 @@ Public Class proposals
                 CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
 
             Case "EditClient"
-                Response.Redirect("~/ADM/Client.aspx?clientId=" & e.CommandArgument)
+                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
+                CreateRadWindows("ClientW", sUrl, 900, 750, False)
         End Select
     End Sub
 
