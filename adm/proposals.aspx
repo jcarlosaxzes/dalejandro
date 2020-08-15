@@ -219,7 +219,7 @@
                 <Columns>
                     <telerik:GridTemplateColumn DataField="Id" HeaderText="Number"
                         SortExpression="Id" UniqueName="Id" ItemStyle-HorizontalAlign="Center"
-                         HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
+                        HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Proposal"
                                 CommandName="EditProposal">
@@ -248,10 +248,10 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="Date" DataFormatString="{0:MM/dd/yyyy}" DataType="System.DateTime"
                         HeaderText="Date" SortExpression="Date" UniqueName="Date"
-                        ItemStyle-HorizontalAlign="Center"  AllowFiltering="False" HeaderStyle-Width="100px">
+                        ItemStyle-HorizontalAlign="Center" AllowFiltering="False" HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Project Name - Client"
-                        SortExpression="ProjectName" UniqueName="ProjectName" >
+                        SortExpression="ProjectName" UniqueName="ProjectName">
                         <ItemTemplate>
                             <asp:HyperLink ID="hlkLocation" runat="server" NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
                                 ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank">
@@ -306,7 +306,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="ProposalBy" HeaderText="Job Type - Template"
-                        SortExpression="ProposalBy" UniqueName="ProposalBy"  HeaderStyle-Width="250px">
+                        SortExpression="ProposalBy" UniqueName="ProposalBy" HeaderStyle-Width="250px">
                         <ItemTemplate>
                             <div>
                                 <b><%# Eval("JobType") %></b>
@@ -317,7 +317,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="ProposalBy" HeaderText="Proposal By - Prepared By"
-                        SortExpression="ProposalBy" UniqueName="ProposalBy"  HeaderStyle-Width="200px">
+                        SortExpression="ProposalBy" UniqueName="ProposalBy" HeaderStyle-Width="220px">
                         <ItemTemplate>
                             <div>
                                 <b><%# Eval("ProposalBy") %></b>
@@ -328,12 +328,12 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn AllowFiltering="False" DataField="Total" DataFormatString="{0:C2}" Display="false" HeaderText="Total" ReadOnly="True" SortExpression="Total"
-                        UniqueName="Total" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right" 
-                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" >
+                        UniqueName="Total" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right"
+                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="JobCode" HeaderText="Status - Job No." SortExpression="JobCode"
+                    <telerik:GridTemplateColumn DataField="JobCode" HeaderText="Status - Job" SortExpression="JobCode"
                         UniqueName="JobCode" ItemStyle-HorizontalAlign="Center"
-                         HeaderStyle-Width="180px">
+                        HeaderStyle-Width="160px">
                         <ItemTemplate>
                             <div style="font-size: 12px; width: 100%"
                                 class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'>
@@ -347,26 +347,27 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="columnEmail" AllowFiltering="False"
-                        ItemStyle-Width="50px"  ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="130px">
+                        ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="130px">
                         <ItemTemplate>
-                            <div>
+                            <div style="font-size:x-small;">
                                 <asp:LinkButton runat="server" ID="btnSendProposal" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Proposal information">
-                                    <i class="far fa-envelope"></i>
+                                    <i style="font-size:small;vertical-align:middle" class="far fa-envelope"></i>
                                 </asp:LinkButton>
+                                &nbsp;
+                                <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
+                                    <%#Eval("Emitted")%>
+                                </span>
+                                <span title="Number of client visits to Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                    <%#Eval("clientvisits")%>
+                                </span>
                             </div>
                             <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("EmailDate", "{0:d}") %>' Font-Size="X-Small" ToolTip="Emitted Date"></asp:Label>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("Emitted")%>
-                            </span>
-                            <span title="Number of client visits to Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("clientvisits")%>
-                            </span>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Note that the Proposal Accepted can not be eliminated. Delete this proposal?"
                         ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete" Display="false"
-                        UniqueName="DeleteColumn" HeaderText="" 
+                        UniqueName="DeleteColumn" HeaderText=""
                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                     </telerik:GridButtonColumn>
                 </Columns>
