@@ -406,7 +406,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type" SortExpression="Job" UniqueName="Job">
+                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type - Client" SortExpression="Job" UniqueName="Job">
                                 <ItemTemplate>
                                     <asp:HyperLink ID="hlkLocation" runat="server" NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
                                         ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank">
@@ -426,22 +426,17 @@
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </a>
-                                    <div><%# Eval("JobType") %></div>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn DataField="ClientName" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="ClientName" UniqueName="ClientName">
-                                <ItemTemplate>
-                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("ClientName") %>' Font-Bold="true"></asp:Label>
+                                    <%# Eval("JobType") %>
                                     <br />
-                                    <%# Eval("Company") %>
-                                    <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
-                                        Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
+                                    <asp:HyperLink ID="InitialsLabel" runat="server" NavigateUrl="javascript:void(0);"><%# Eval("ClientandCompany") %></asp:HyperLink>
+                                    <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element" 
+                                        RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                        Position="BottomCenter" Modal="True" Title="" ShowEvent="OnClick"
                                         HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
                                         <table class="table-sm">
                                             <tr>
                                                 <td colspan="2">
-                                                    <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("ClientID") %>'
+                                                    <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Id") %>'
                                                         CommandName="View/Edit Client Profile" Text='<%# Eval("ClientName")%>' UseSubmitBehavior="false" Font-Size="Medium"
                                                         CssClass="badge badge-info ">
                                                     </asp:LinkButton>
@@ -482,7 +477,7 @@
                             </telerik:GridTemplateColumn>
 
                             <%--PM - Employees--%>
-                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName"
+                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName" HeaderStyle-Width="200px"
                                 UniqueName="EmployeeName" AllowFiltering="true">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
