@@ -108,7 +108,7 @@ Public Class sendproposal
             Dim sSign As String = LocalAPI.GetEmployeesSign(cboProjectManagerId.SelectedValue)
             ' Enlace al Proposal
             'txtBody.Content = Replace(txtBody.Content, "[PASconceptLink]", LocalAPI.GetHostAppSite() & "/ADMCLI/AceptProposal.aspx?ProposalId=" & lblProposalId.Text)
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
+            Dim sURL As String = LocalAPI.GetSharedLink_URL(1111, lblProposalId.Text)
 
             Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
             DictValues.Add("[Project_Name]", sProjectName)

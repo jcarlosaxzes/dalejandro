@@ -133,6 +133,13 @@ Public Class singproposalsign
                     UpdatePageProperties()
 
                     RadBarcode1.Text = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Signature.aspx?GuiId=" & lblGuiId.Text & "&ObjType=11"
+
+                    'Clients_visitslog?
+                    ' Visit not from Current session company "False visit"
+                    If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> CompanyId Then
+                        LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblProposalId.Text, Request.UserHostAddress())
+                    End If
+
                 End If
 
                 ' Panel Acept/Decline QR?

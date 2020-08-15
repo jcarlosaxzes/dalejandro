@@ -9551,6 +9551,30 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function NewClients_visitslog(entityTypeId As String, entityId As Integer, IP As String) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Clients_visitslog_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@entityType", entityTypeId)
+            cmd.Parameters.AddWithValue("@entityId", entityId)
+            cmd.Parameters.AddWithValue("IP", IP)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     Public Shared Function GetClientPhotoURL(ClientId As Integer) As String
         Try
@@ -10342,6 +10366,8 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid")
                     Case 111 ' Firmar/Ver Proposal from /adm/proposals
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid") & "&source=111"
+                    Case 1111 ' URL to client for visilog
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid") & "&entityType=1"
                     Case 2
                         ' Tratamiento especifico de Job(Projects) para paginas publicas
                         Dim companyId As Integer = GetJobProperty(objId, "companyId")
