@@ -1,9 +1,20 @@
-﻿<%@ Page Title="Transmittal Letter" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal1" %>
+﻿<%@ Page Title="Transmittal Letter" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal1" %>
 
 <%@ Import Namespace="pasconcept20" %>
-<%@ MasterType VirtualPath="~/adm/BasicMasterPage.Master" %>
+<%@ MasterType VirtualPath="~/adm/ADM_Main_Responsive.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div style="margin:25px">
+
+
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+            </asp:LinkButton>
+            Transmittal Letter
+        </span>
+    </div>
+    <div>
         <%--Header--%>
         <asp:FormView ID="FormViewCompany" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSourceCompany" RenderOuterTable="false">
             <ItemTemplate>
@@ -43,27 +54,24 @@
     <div>
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
             <ItemTemplate>
-                <table class="table-sm" style="width: 100%">
+                <table class="table-sm noprint" style="width: 100%">
                     <tr>
                         <td>
-                            <h1>Transmittal Letter</h1>
-                        </td>
-                        <td class="noprint" style="width: 150px">
-                            <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CausesValidation="false" CommandName="Edit">
+                            <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="false" CommandName="Edit">
                                 Edit
                             </asp:LinkButton>
-                        </td>
-                        <td class="noprint" style="width: 150px">
-                            <asp:LinkButton ID="btnPickUp" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="false" OnClick="btnPickUp_Click">
+                            <asp:LinkButton ID="btnPickUp" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" CausesValidation="false" OnClick="btnPickUp_Click">
                                 <i class="far fa-envelope"></i>&nbsp;Pick Up
                             </asp:LinkButton>
+                        </td>
+                        <td style="text-align: right">
+                            <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Text="" Height="140px" Width="140px" Style="margin-left: 30px" OutputType="EmbeddedPNG">
+                                <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />
+                            </telerik:RadBarcode>
                         </td>
                     </tr>
                 </table>
 
-
-                <div style="text-align: center; padding-top: 10px; background-color: white">
-                </div>
                 <table class="table-sm" style="width: 100%; background-color: white">
                     <tr>
                         <td style="width: 65%; vertical-align: top">
@@ -129,44 +137,34 @@
                                 </tr>
                             </table>
                         </td>
-                        <td style="vertical-align: top; text-align: right; padding-right: 25px">
-                            <div>
-                                <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Text="" Height="140px" Width="140px" Style="margin-left: 30px" OutputType="EmbeddedPNG">
-                                    <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />
-                                </telerik:RadBarcode>
-                            </div>
-                        </td>
                     </tr>
                 </table>
 
+                <telerik:RadGrid ID="RadGridDetails" RenderMode="Lightweight" runat="server" DataSourceID="SqlDataSourceDetails" Width="100%" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center"
+                    HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                    <MasterTableView DataSourceID="SqlDataSourceDetails" >
+                        <Columns>
+                            <telerik:GridBoundColumn DataField="AmountCopy" HeaderText="Amount Copy" UniqueName="AmountCopy"
+                                HeaderStyle-Width="150px"  ItemStyle-HorizontalAlign="Center">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="PakageContent" HeaderText="Package Content" UniqueName="PakageContent"
+                                HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="Description" HeaderText="Description" UniqueName="Description">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridTemplateColumn DataField="Signed" HeaderText="Signed & Sealed" UniqueName="Signed"
+                                HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSigned" runat="server" Text='<%# IIf(Eval("Signed") = 0, "No", "Yes")%>' />
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+
                 <table class="table-sm" style="width: 100%; background-color: white">
                     <tr>
-                        <td colspan="2">
-                            <telerik:RadGrid ID="RadGridDetails" RenderMode="Lightweight" runat="server" DataSourceID="SqlDataSourceDetails" Skin="" Width="100%" CssClass="RemoveBorders" AutoGenerateColumns="False" GridLines="Both">
-                                <MasterTableView DataSourceID="SqlDataSourceDetails" CssClass="RemoveBorders" HeaderStyle-BackColor="LightGray">
-                                    <Columns>
-                                        <telerik:GridBoundColumn DataField="AmountCopy" HeaderText="Amount Copy" UniqueName="AmountCopy"
-                                            HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="PakageContent" HeaderText="Package Content" UniqueName="PakageContent"
-                                            HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center">
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Description" HeaderText="Description" UniqueName="Description"
-                                            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="400px">
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridTemplateColumn DataField="Signed" HeaderText="Signed & Sealed" UniqueName="Signed"
-                                            HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblSigned" runat="server" Text='<%# IIf(Eval("Signed") = 0, "No", "Yes")%>' />
-                                            </ItemTemplate>
-                                        </telerik:GridTemplateColumn>
-                                    </Columns>
-                                </MasterTableView>
-                            </telerik:RadGrid>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right; width: 150px;">
+                        <td style="text-align: right; width: 180px;">
                             <b>Notes:</b>
                         </td>
                         <td style="text-align: left">
@@ -198,25 +196,17 @@
                         </td>
                     </tr>
                 </table>
-
-                <p style="text-align: right; padding-top: 25px; padding-right: 20px; font-family: Calibri; font-size: xx-small; font-style: italic">
-                    This Transmittal was made &amp; sent using PASconcept ( www.pasconcept.com ) 
-                </p>
+               
             </ItemTemplate>
             <EditItemTemplate>
                 <table class="table-sm" style="width: 100%">
                     <tr>
-                        <td style="text-align: center;">
-                            <h2 style="margin: 0">EDIT TRANSMITTAL LETTER</h2>
-                        </td>
-                        <td style="width: 90px">
-                            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CommandName="Update">
+                        <td>
+                            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CommandName="Update">
                                 Update
                             </asp:LinkButton>
-
-                        </td>
-                        <td style="width: 90px">
-                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="false" CommandName="Cancel">
+                            &nbsp;
+                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" CausesValidation="false" CommandName="Cancel">
                                 Cancel
                             </asp:LinkButton>
                         </td>
@@ -224,7 +214,7 @@
                 </table>
                 <table class="table-sm" style="width: 100%">
                     <tr>
-                        <td style="text-align: right;"><b>A/E of Record:</b></td>
+                        <td style="text-align: right; width: 180px"><b>A/E of Record:</b></td>
                         <td style="text-align: left">
                             <telerik:RadComboBox ID="cboEngRecord" runat="server"
                                 DataSourceID="SqlDataSourceEmployee" DataTextField="Name" DataValueField="Id" SelectedValue='<%# Bind("RecordBy")%>'
@@ -263,8 +253,8 @@
                 <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: left">
-                            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" OnClick="btnNew_Click" CausesValidation="false">
-                            <i class="fas fa-plus"></i> Package
+                            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" OnClick="btnNew_Click" CausesValidation="false">
+                            Add Package
                             </asp:LinkButton>
 
                         </td>
@@ -273,7 +263,7 @@
                         <td>
                             <telerik:RadGrid ID="RadGridEditDetails" runat="server" DataSourceID="SqlDataSourceDetails" GridLines="None"
                                 AutoGenerateColumns="False" AllowAutomaticInserts="True" AllowAutomaticDeletes="True"
-                                AllowAutomaticUpdates="True" AllowPaging="True" PageSize="100" AllowSorting="True" 
+                                AllowAutomaticUpdates="True" AllowPaging="True" PageSize="100" AllowSorting="True"
                                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
                                 <MasterTableView DataSourceID="SqlDataSourceDetails" DataKeyNames="Id">
                                     <Columns>
@@ -344,8 +334,8 @@
         </asp:FormView>
 
         <telerik:RadToolTip ID="RadToolTipMail" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-            <h2 style="margin: 0; text-align: center; color:white; width: 450px">
-               <span class="navbar navbar-expand-md bg-dark text-white">Email to Client
+            <h2 style="margin: 0; text-align: center; color: white; width: 450px">
+                <span class="navbar navbar-expand-md bg-dark text-white">Email to Client
                 </span>
             </h2>
             <table class="table-sm" style="width: 450px">
@@ -371,25 +361,6 @@
                 </tr>
             </table>
         </telerik:RadToolTip>
-    </div>
-
-    <div>
-        <%--Footeer--%>
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 40%">
-                    <a href="https://pasconcept.com/" target="_blank">
-                        <asp:Image ID="Image1" runat="server" SkinID="headerpasconceptlogo" />
-                    </a>
-                </td>
-                <td>
-                    <p class="small" style="text-align: right">
-                        &copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">AXZES LLC</a>
-                    </p>
-                </td>
-                <td></td>
-            </tr>
-        </table>
     </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

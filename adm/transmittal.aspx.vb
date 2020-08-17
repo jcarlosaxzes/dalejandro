@@ -21,6 +21,11 @@ Public Class transmittal1
                     lblTransmittalId.Text = 0
                 End If
 
+                If Request.QueryString("FullPage") Is Nothing Then
+                    Master.HideMasterMenu()
+                    btnBack.Visible = False
+                End If
+
             End If
 
             Botones()
@@ -89,5 +94,9 @@ Public Class transmittal1
         MailReadtToSign()
         RadToolTipMail.Visible = False
         CType(FormView1.FindControl("RadBarcode1"), RadBarcode).Text = LocalAPI.GetSharedLink_URL(66, lblTransmittalId.Text)
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Response.Redirect("~/adm/transmittals.aspx")
     End Sub
 End Class
