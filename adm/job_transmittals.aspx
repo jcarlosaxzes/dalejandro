@@ -23,58 +23,65 @@
                         </script>
                     </telerik:RadCodeBlock>
                     <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceTransmittals" Width="100%"
-                        AllowAutomaticDeletes="true" AllowPaging="True">
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceTransmittals" ShowFooter="True" EditMode="PopUp"
-                            ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small">
+                        AllowAutomaticDeletes="true" AllowPaging="True" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceTransmittals" ShowFooter="True" EditMode="PopUp">
                             <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                             <Columns>
                                 <telerik:GridTemplateColumn DataField="TransmittalID" Groupable="False" HeaderText="Transmittal ID"
-                                    SortExpression="TransmittalID" UniqueName="TransmittalID" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="160px"
+                                    SortExpression="TransmittalID" UniqueName="TransmittalID"  HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center" 
                                     FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}" ReadOnly="true">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditTransmittal" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Transmittal"
                                             CommandName="EditTransmittal" Text='<%# Eval("TransmittalID")%>'>
                                         </asp:LinkButton>
-                                        <span title="Number of Packages" class="badge badge-pill badge-danger" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
-                                            <%#Eval("PackageContent")%>
-                                        </span>
-                                        <a class="far fa-share-square" title="Preview Trasmittal " href='<%# LocalAPI.GetSharedLink_URL(6,Eval("Id")) %>' target="_blank" aria-hidden="true"></a>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridBoundColumn DataField="TransmittalDate" DataFormatString="{0:MM/dd/yyyy}" DataType="System.DateTime" ReadOnly="true"
-                                    HeaderText="Date Opened" SortExpression="TransmittalDate" UniqueName="TransmittalDate"
-                                    ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
+                                    HeaderText="Date Opened" SortExpression="TransmittalDate" UniqueName="TransmittalDate" HeaderStyle-Width="150px"
+                                    ItemStyle-HorizontalAlign="Center" >
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="ReadyDate" DataFormatString="{0:MM/dd/yyyy}" DataType="System.DateTime" ReadOnly="true"
-                                    HeaderText="Ready Date" SortExpression="ReadyDate" UniqueName="ReadyDate"
-                                    ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
+                                    HeaderText="Ready Date" SortExpression="ReadyDate" UniqueName="ReadyDate" HeaderStyle-Width="150px"
+                                    ItemStyle-HorizontalAlign="Center" >
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="PickUpDate" DataFormatString="{0:MM/dd/yyyy}" DataType="System.DateTime" ReadOnly="true"
-                                    HeaderText="Pick Up Date" SortExpression="PickUpDate" UniqueName="PickUpDate"
-                                    ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
+                                    HeaderText="Pick Up Date" SortExpression="PickUpDate" UniqueName="PickUpDate" HeaderStyle-Width="150px"
+                                    ItemStyle-HorizontalAlign="Center" >
                                 </telerik:GridBoundColumn>
                                 <telerik:GridTemplateColumn DataField="nStatus" HeaderText="Status" SortExpression="nStatus" ReadOnly="true"
-                                    UniqueName="nStatus" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="150px">
+                                    UniqueName="nStatus"  ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="150px">
                                     <ItemTemplate>
                                         <asp:Label ID="nStatusLabel" runat="server" Text='<%# Eval("nStatus")%>'></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn HeaderText="Ready for Pick Up" UniqueName="column" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
-                                    ItemStyle-HorizontalAlign="Center">
+                                <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="btnReadyToSign" runat="server"
-                                            Visible='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'
-                                            CommandName="EmailReadyToPickUp"
-                                            CommandArgument='<%# Eval("Id") %>'
-                                            ToolTip="Send Email to Client with Ready For Pick Up Notification"
-                                            CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                        <i class="far fa-envelope"></i>
-                                        </asp:LinkButton>
+                                        <div style="font-size: x-small; vertical-align: middle">
+                                            <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
+                                                <i style="font-size: small;" class="far fa-share-square"></i></a>
+                                            </a>
+                                            &nbsp;        
+                                            <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="Email" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
+                                                UseSubmitBehavior="false" Enabled='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
+                                                   <i style="font-size:small;" class="far fa-envelope"></i>
+                                            </asp:LinkButton>
+                                                        &nbsp;
+                                            <span title="Number of Packages" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
+                                                <%#Eval("PackageContent")%>
+                                            </span>
+                                                &nbsp;
+                                            <span title="Signed And Sealed Items" class="badge badge-pill badge-warning" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
+                                                <%#Eval("SignedAndSealed")%>
+                                            </span>
+                                        </div>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
+
+
+
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                     CommandName="Delete" Text="" UniqueName="DeleteColumn" HeaderText=""
-                                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                                     HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                 </telerik:GridButtonColumn>
                             </Columns>
                         </MasterTableView>

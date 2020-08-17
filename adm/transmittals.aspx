@@ -52,7 +52,7 @@
 
     <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
-            <table  class="table-sm pasconcept-bar" style="width:100%">
+            <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
                     <td width="110px" align="left">
                         <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
@@ -102,7 +102,7 @@
                             LabelWidth="" Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="width:150px; text-align:right">
+                    <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -125,16 +125,18 @@
             </script>
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceTransmittals" Width="100%"
-            AllowAutomaticInserts="True" AllowAutomaticDeletes="true" AllowPaging="True" PageSize="250" Height="1000px" HeaderStyle-Font-Size="X-Small" 
-            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-            <ClientSettings>
+            AllowAutomaticInserts="True" AllowAutomaticDeletes="true"
+            PageSize="50" AllowPaging="true"
+            Height="850px" RenderMode="Lightweight"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+            <ClientSettings Selecting-AllowRowSelect="true">
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceTransmittals" ShowFooter="True" EditMode="PopUp">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                 <Columns>
                     <telerik:GridTemplateColumn DataField="TransmittalID" Groupable="False" HeaderText="Transmittal ID"
-                        SortExpression="TransmittalID" UniqueName="TransmittalID" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
+                        SortExpression="TransmittalID" UniqueName="TransmittalID" HeaderStyle-Width="120px"
                         FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}" ReadOnly="true">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEditTransmittal" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Transmittal"
@@ -142,22 +144,35 @@
                             </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="JobName" HeaderText="Job Name" SortExpression="JobName" UniqueName="JobName" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
+                    <telerik:GridBoundColumn DataField="TransmittalDate" DataFormatString="{0:d}" DataType="System.DateTime" ReadOnly="true"
+                        HeaderText="Date" SortExpression="TransmittalDate" UniqueName="TransmittalDate" HeaderStyle-Width="100px" HeaderTooltip="Transmittal Date"
+                        ItemStyle-HorizontalAlign="Right">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridTemplateColumn DataField="JobName" HeaderText="Job Name" SortExpression="JobName" UniqueName="JobName" ReadOnly="true">
                         <ItemTemplate>
-                            <asp:Label ID="JobNameLabel" runat="server" Text='<%# Eval("JobName")%>'></asp:Label>
+                            <%# Eval("JobName")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="ClientCode" HeaderText="Client Code" SortExpression="ClientCode" UniqueName="ClientCode"
-                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px" ReadOnly="true">
+                    <telerik:GridTemplateColumn DataField="ClientandCompany" HeaderText="Client" SortExpression="ClientandCompany" UniqueName="ClientandCompany"
+                        ReadOnly="true">
                         <ItemTemplate>
-                            <asp:Label ID="ClientCodeLabel" runat="server" Text='<%# Eval("ClientCode")%>'></asp:Label>
-                            <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="ClientCodeLabel" RelativeTo="Element"
-                                Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Name")%>' ShowEvent="OnClick"
-                                HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
-                                <table>
+                            <asp:HyperLink ID="InitialsLabel" runat="server" NavigateUrl="javascript:void(0);"><%# Eval("ClientandCompany") %></asp:HyperLink>
+                            <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
+                                RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                Position="BottomCenter" Modal="True" Title="" ShowEvent="OnClick"
+                                HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
+                                <table class="table-sm">
                                     <tr>
                                         <td colspan="2">
-                                            <b><%# LocalAPI.GetClientProperty(Eval("ClientId"), "Company")%></b>
+                                            <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("clientId") %>'
+                                                CommandName="EditClient" Text='<%# Eval("ClientName")%>' UseSubmitBehavior="false" Font-Size="Medium"
+                                                CssClass="badge badge-info ">
+                                            </asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="margin-top: 10px">
+                                            <%# Eval("Company") %>
                                         </td>
                                     </tr>
                                     <tr>
@@ -180,77 +195,66 @@
                                         <td>Email:
                                         </td>
                                         <td>
-                                            <telerik:RadTextBox ID="EmailText" runat="server" ReadOnly="true"
-                                                Text='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Email")%>'>
-                                            </telerik:RadTextBox>
+                                            <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
                                         </td>
                                     </tr>
                                 </table>
                             </telerik:RadToolTip>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridBoundColumn DataField="TransmittalDate" DataFormatString="{0:MM/dd}" DataType="System.DateTime" ReadOnly="true"
-                        HeaderText="Date Opened" SortExpression="TransmittalDate" UniqueName="TransmittalDate" HeaderStyle-Width="70px"
-                        ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
+                    <telerik:GridBoundColumn DataField="ReadyDate" DataFormatString="{0:d}" DataType="System.DateTime" ReadOnly="true"
+                        HeaderText="Ready Date" SortExpression="ReadyDate" UniqueName="ReadyDate" HeaderStyle-Width="100px"
+                        ItemStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="ReadyDate" DataFormatString="{0:MM/dd}" DataType="System.DateTime" ReadOnly="true"
-                        HeaderText="Ready Date" SortExpression="ReadyDate" UniqueName="ReadyDate" HeaderStyle-Width="70px"
-                        ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="PickUpDate" DataFormatString="{0:MM/dd}" DataType="System.DateTime" ReadOnly="true"
-                        HeaderText="Pick-Up Date" SortExpression="PickUpDate" UniqueName="PickUpDate" HeaderStyle-Width="80px"
-                        ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center">
+                    <telerik:GridBoundColumn DataField="PickUpDate" DataFormatString="{0:d}" DataType="System.DateTime" ReadOnly="true"
+                        HeaderText="Pick-Up" SortExpression="PickUpDate" UniqueName="PickUpDate" HeaderStyle-Width="100px" HeaderTooltip="PickUp Date"
+                        ItemStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="nStatus" HeaderText="Status" SortExpression="nStatus" ReadOnly="true"
-                        UniqueName="nStatus" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="140px">
+                        UniqueName="nStatus" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="140px">
                         <ItemTemplate>
                             <asp:Label ID="nStatusLabel" runat="server" Text='<%# Eval("nStatus")%>'></asp:Label>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="Budget" DataFormatString="{0:N0}"
-                        DataType="System.Decimal" Groupable="False" HeaderText="Budget" SortExpression="Budget" ReadOnly="true"
-                        UniqueName="Budget" ItemStyle-HorizontalAlign="Right"
-                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}"
-                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
+                        DataType="System.Decimal" Groupable="False" HeaderText="Budget" SortExpression="Budget" ReadOnly="true" UniqueName="Budget" ItemStyle-HorizontalAlign="Right"
+                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}"
+                        HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="AmountPending" DataFormatString="{0:N0}"
-                        Groupable="False" HeaderText="Amount Pending" ReadOnly="True"
-                        SortExpression="AmountPending" UniqueName="AmountPending" ItemStyle-HorizontalAlign="Right"
-                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}"
-                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
+                        Groupable="False" HeaderText="Pending" HeaderTooltip="Amount Pending" ReadOnly="True" SortExpression="AmountPending" UniqueName="AmountPending" ItemStyle-HorizontalAlign="Right"
+                        FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="RecordBy" HeaderText="A/E Record" ReadOnly="true"
-                        SortExpression="RecordBy" UniqueName="RecordBy" HeaderStyle-Width="60px"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
-                        <ItemTemplate>
-                            <asp:Label ID="RecordByLabel" runat="server" Text='<%# Eval("RecordBy_Code")%>'></asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="column" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px"
+                    <telerik:GridTemplateColumn DataField="RecordBy" HeaderText="A/E Record" ReadOnly="true" SortExpression="RecordBy" UniqueName="RecordBy" HeaderStyle-Width="100px"
                         ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="width: 50%; text-align: center">
-                                        <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
-                                            <i class="far fa-share-square"></i></a>
-                                        </a>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="Email" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
-                                            UseSubmitBehavior="false" Enabled='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
-                                                                <i class="far fa-envelope"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                </tr>
-                            </table>
+                            <%# Eval("RecordBy_Code")%>
                         </ItemTemplate>
-                        <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-                        <ItemStyle HorizontalAlign="Center" Width="30px"></ItemStyle>
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                        <ItemTemplate>
+                            <div style="font-size: x-small;vertical-align:middle">
+                                <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
+                                    <i style="font-size:small;" class="far fa-share-square"></i></a>
+                                </a>
+                                &nbsp;        
+                                <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="Email" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
+                                    UseSubmitBehavior="false" Enabled='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
+                                       <i style="font-size:small;" class="far fa-envelope"></i>
+                                </asp:LinkButton>
+                                &nbsp;
+                                <span title="Number of Packages" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
+                                    <%#Eval("PackageContent")%>
+                                </span>
+                                <span title="Signed And Sealed Items" class="badge badge-pill badge-warning" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
+                                    <%#Eval("SignedAndSealed")%>
+                                </span>
+                            </div>
+                        </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
-                        CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText="Delete"
-                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                        CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
+                        HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridButtonColumn>
                 </Columns>
                 <EditFormSettings CaptionFormatString="Add Transmittal" PopUpSettings-Width="700px" EditFormType="Template">
@@ -292,7 +296,7 @@
         </telerik:RadGrid>
     </div>
     <asp:SqlDataSource ID="SqlDataSourceTransmittals" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Transmittals2_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Transmittals_v20_SELECT" SelectCommandType="StoredProcedure"
         InsertCommand="Transmittal_INSERT" InsertCommandType="StoredProcedure"
         DeleteCommand="DELETE FROM Transmittals WHERE Id=@Id">
         <DeleteParameters>
