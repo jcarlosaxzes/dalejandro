@@ -59,22 +59,13 @@ Partial Public Class transmittals
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''cboYear control.
+    '''cboPeriod control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboYear As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''cboMes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboMes As Global.Telerik.Web.UI.RadComboBox
+    Protected WithEvents cboPeriod As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''cboEmployee control.

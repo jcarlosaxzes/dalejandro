@@ -30,7 +30,7 @@ Public Class job_transmittals
 
             Case "EditTransmittal"
                 sUrl = "~/ADM/Transmittal.aspx?transmittalId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 970, 720, False)
+                CreateRadWindows(e.CommandName, sUrl, 970, 850, False)
 
             Case "EmailReadyToPickUp"
                 Dim Id = e.CommandArgument
@@ -59,4 +59,8 @@ Public Class job_transmittals
         RadWindowManager1.Windows.Add(window1)
     End Sub
 
+    Private Sub SqlDataSourceTransmittals_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceTransmittals.Inserted
+        Dim tID As Integer = e.Command.Parameters("@OUT_Id").Value
+        CreateRadWindows("New", "~/ADM/Transmittal.aspx?transmittalId=" & tID, 970, 850, False)
+    End Sub
 End Class
