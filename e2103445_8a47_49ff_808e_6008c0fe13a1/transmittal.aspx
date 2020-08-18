@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal" %>
+﻿<%@ Page Language="vb" Title="PASconcept. Transmittal Letter" AutoEventWireup="false" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal" %>
 
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.master" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
@@ -8,7 +8,7 @@
     <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
         <ItemTemplate>
             <div style="text-align: center; padding-top: 10px; background-color: white">
-                <h1>TRANSMITTAL LETTER</h1>
+                <h2 style="margin: 0"><span class="navbar navbar-expand-md bg-dark text-white d-print-flex">Transmittal Letter</span></h2>
             </div>
 
             <table class="table-sm" style="width: 100%;" >
@@ -16,39 +16,23 @@
                     <td style="vertical-align: top">
                         <table class="table-sm" style="width: 100%;">
                             <tr>
-                                <td style="text-align: right; width: 150px"><b>Transmittal ID:</b>
+                                <td style="text-align: right; width: 180px"><b>Transmittal ID:</b>
                                 </td>
                                 <td style="text-align: left">
                                     <%# Eval("TransmittalID")%>
+                                </td>
+                                <td style="text-align: right;; width: 150px"><b>Date Created:</b>
+                                </td>
+                                <td style="text-align: left;">
+                                    <%# Eval("TransmittalDate", "{0:d}")%>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="text-align: right;"><b>Client Name:</b>
                                 </td>
                                 <td style="text-align: left;">
-                                    <asp:Label ID="Label4" runat="server" Text='<%# Eval("ClientName")%>' />
+                                    <%# Eval("ClientName")%>
                                 </td>
-
-                            </tr>
-
-                            <tr>
-                                <td style="text-align: right;"><b>Date Created:</b>
-                                </td>
-                                <td style="text-align: left;">
-                                    <asp:Label ID="Label3" runat="server" Text='<%# Eval("TransmittalDate", "{0:d}")%>' />
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td style="text-align: right;"><b>Job No. & Name:</b>
-                                </td>
-                                <td style="text-align: left">
-                                    <asp:Label ID="Label9" runat="server" Text='<%# Eval("JobNo")%>' />
-                                    &nbsp;&nbsp;&nbsp;
-                                    <asp:Label ID="Label10" runat="server" Text='<%# Eval("JobName")%>' />
-                                </td>
-                            </tr>
-                            <tr>
                                 <td style="text-align: right"><b>A/E of Record:</b>
                                 </td>
                                 <td style="text-align: left">
@@ -56,12 +40,18 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td style="text-align: right;"><b>Project:</b>
+                                </td>
+                                <td style="text-align: left">
+                                    <%# Eval("JobName")%>
+                                </td>
                                 <td style="text-align: right;"><b>Status:</b>
                                 </td>
                                 <td style="text-align: left">
-                                    <asp:Label ID="ProposalNumberLabel" runat="server" Text='<%# Eval("nStatus")%>' />
+                                    <%# Eval("nStatus")%>
                                 </td>
                             </tr>
+
                         </table>
                     </td>
                     <td style="vertical-align: top; text-align: center; width:250px">
@@ -88,10 +78,8 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridTemplateColumn DataField="PakageContent" HeaderText="Package Content" UniqueName="PakageContent" ItemStyle-HorizontalAlign="Left">
                                         <ItemTemplate>
-                                            <%# Eval("PakageContent") %>
-                                            <p>
-                                                <%# Eval("Description") %>
-                                            </p>
+                                            <b><%# Eval("PakageContent") %></b> <%# Eval("Description") %>
+                                            
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridTemplateColumn DataField="Signed" HeaderText="Signed & Sealed" UniqueName="Signed"
@@ -109,7 +97,7 @@
 
             <table class="table-sm" style="width: 100%;">
                 <tr>
-                    <td style="text-align: right; width: 150px;">
+                    <td style="text-align: right; width: 180px;">
                         <b>Notes:</b>
                     </td>
                     <td colspan="2">
@@ -158,7 +146,7 @@
     </asp:FormView>
 
     <p style="text-align: right; padding-top: 25px; padding-right: 20px; font-family: Calibri; font-size: xx-small; font-style: italic">
-        This Transmittal was made &amp; sent using PASconcept ( www.pasconcept.com ) 
+        This Transmittal was made &amp; sent using <a href="https://pasconcept.com/" target="_blank">pasconcept.com</a> 
     </p>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="TRANSMITTAL_SELECT" SelectCommandType="StoredProcedure">
