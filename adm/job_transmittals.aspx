@@ -100,13 +100,14 @@
 
     <asp:SqlDataSource ID="SqlDataSourceTransmittals" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Transmittals_JOB_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="Transmittal2_INSERT" InsertCommandType="StoredProcedure"
-        DeleteCommand="DELETE FROM Transmittals WHERE Id=@Id">
+        InsertCommand="Transmittal_v20_INSERT" InsertCommandType="StoredProcedure"
+        DeleteCommand="Transmittal_DELETE" DeleteCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" />
         </DeleteParameters>
         <InsertParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="JobId" PropertyName="Text" />
+            <asp:Parameter Direction="InputOutput" Name="OUT_Id" Type="Int32" />
         </InsertParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="JobId" PropertyName="Text" />

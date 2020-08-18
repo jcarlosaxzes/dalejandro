@@ -429,4 +429,5 @@
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeName" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblBackPage" runat="server" Visible="False"></asp:Label>
 </asp:Content>
