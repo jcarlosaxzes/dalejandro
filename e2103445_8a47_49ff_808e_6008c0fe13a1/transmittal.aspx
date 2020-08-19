@@ -98,7 +98,7 @@
                 <h4>Documents(s)</h4>
                 <div class="table-responsive">
                     <table class="table">
-                        <asp:Repeater ID="rptrSharedPublicLinks" runat="server" DataSourceID="SqlDataSourceAzureuploads">
+                        <asp:Repeater ID="rptrSharedPublicLinks" runat="server" DataSourceID="SqlDataSourceFiles">
                             <ItemTemplate>
                                 <tr>
                                     <td>
