@@ -12224,6 +12224,51 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function AzureStorage_Insert_Transmittal(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, maxDownload As Integer) As Boolean
+        Try
+            If Not ExistAzureFile(EntityId, EntityType, FileName, ContentBytes) Then
+
+                ' Analisis de type en funcion del ContentType 
+                'Type = 9  Images
+                'If ContentType = "image/jpeg" Or ContentType = "image/png" Then
+                '    Type = 9
+                'End If
+
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+
+                Dim cnn1 As SqlConnection = GetConnection()
+                Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                ' Setup the command to execute the stored procedure.
+                cmd.CommandText = "Transmital_azureuploads_v20_INSERT"
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.AddWithValue("@EntityId", EntityId)
+                cmd.Parameters.AddWithValue("@Type", Type)
+                cmd.Parameters.AddWithValue("@FileName", FileName)
+                cmd.Parameters.AddWithValue("@KeyName", KeyName)
+                cmd.Parameters.AddWithValue("@Public", bPublic)
+                cmd.Parameters.AddWithValue("@ContentType", ContentType)
+                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+                cmd.Parameters.AddWithValue("@EntityType", EntityType)
+                cmd.Parameters.AddWithValue("@FileType", fileType)
+                cmd.Parameters.AddWithValue("@companyId", companyId)
+                cmd.Parameters.AddWithValue("@MaxDownload", maxDownload)
+
+                cmd.ExecuteNonQuery()
+
+                cnn1.Close()
+
+                Return True
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
     Public Shared Function AzureStorageGuid_Insert(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, guid As String) As Boolean
         Try
@@ -12303,6 +12348,26 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Name", Name)
             cmd.Parameters.AddWithValue("@Type", Type)
             cmd.Parameters.AddWithValue("@Public", sPublic)
+            cmd.Parameters.AddWithValue("@Id", Id)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function UpdateTransmittalAzureUploads(Id As Integer, Type As Integer, sPublic As Boolean, MaxDownload As Integer) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Transmital_AzureUploads_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@Type", Type)
+            cmd.Parameters.AddWithValue("@Public", sPublic)
+            cmd.Parameters.AddWithValue("@MaxDownload", MaxDownload)
             cmd.Parameters.AddWithValue("@Id", Id)
             cmd.ExecuteNonQuery()
             cnn1.Close()
