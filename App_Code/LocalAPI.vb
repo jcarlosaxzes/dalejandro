@@ -11434,7 +11434,7 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetTransmittalDigitalFilesCount(transmittalId As Integer) As Integer
-        Return GetNumericEscalar(String.Format($"Select count(*) FROM [Azure_Uploads] WHERE EntityType='Transmittal' AND EntityId={transmittalId} AND isnull([Public],0)=1"))
+        Return GetNumericEscalar(String.Format($"select count(*) from (select Id FROM [dbo].[Azure_Uploads] WHERE EntityType='Transmittal' AND EntityId={transmittalId} AND isnull([Public],0)=1	union all select Id FROM [Jobs_links] where isnull(TransmittalId,0)={transmittalId})T"))
     End Function
     Public Shared Function TransmittalNumber(ByVal Id As Integer) As String
         Return GetStringEscalar("SELECT dbo.TransmittalNumber(" & Id & ")")

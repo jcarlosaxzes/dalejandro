@@ -455,6 +455,7 @@
     <Content Include="adm\sendproposal.aspx" />
     <Content Include="adm\sendstatement.aspx" />
     <Content Include="adm\sendticketpage.aspx" />
+    <Content Include="adm\sendtransmittal.aspx" />
     <Content Include="adm\settingstatus.aspx" />
     <Content Include="adm\sharelink.aspx" />
     <Content Include="adm\signature.aspx" />
@@ -3744,6 +3745,13 @@
       <DependentUpon>sendticketpage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\sendtransmittal.aspx.designer.vb">
+      <DependentUpon>sendtransmittal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\sendtransmittal.aspx.vb">
+      <DependentUpon>sendtransmittal.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\settingstatus.aspx.designer.vb">
       <DependentUpon>settingstatus.aspx</DependentUpon>
     </Compile>
@@ -4591,7 +4599,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

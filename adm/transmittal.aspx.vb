@@ -38,6 +38,13 @@ Public Class transmittal1
         End Try
     End Sub
 
+    Protected Sub RadAjaxManager1_AjaxRequest(sender As Object, e As Telerik.Web.UI.AjaxRequestEventArgs)
+        ' Return of ClientClose
+        FormView1.DataBind()
+    End Sub
+
+
+
     Private Sub Botones()
         Try
 
@@ -61,11 +68,24 @@ Public Class transmittal1
     End Sub
 
     Protected Sub btnPickUp_Click(sender As Object, e As EventArgs)
-        Response.RedirectPermanent("~/adm/signature.aspx?ObjId=2&Id=" & lblTransmittalId.Text & "&BackPage=" & lblBackPage.Text)
+        If btnBack.Visible Then
+            Response.RedirectPermanent("~/adm/signature.aspx?ObjId=2&Id=" & lblTransmittalId.Text & "&BackPage=transmittals")
+        Else
+            Response.RedirectPermanent("~/adm/signature.aspx?ObjId=2&Id=" & lblTransmittalId.Text)
+        End If
+
     End Sub
 
     Protected Sub btnMailReadyToSign_Click(sender As Object, e As EventArgs)
         MailReadtToSign()
+    End Sub
+    Protected Sub btnMailDigitalDelivery_Click(sender As Object, e As EventArgs)
+        If btnBack.Visible Then
+            CreateRadWindows("Delivery", "~/adm/sendtransmittal.aspx?TransmittalId=" & lblTransmittalId.Text, 960, 780, True)
+        Else
+            Response.Redirect("~/adm/sendtransmittal.aspx?TransmittalId=" & lblTransmittalId.Text & "&BackPage=" & lblBackPage.Text)
+        End If
+
     End Sub
 
     Private Sub MailReadtToSign()
@@ -104,6 +124,22 @@ Public Class transmittal1
                 Response.Redirect("~/adm/transmittals.aspx")
         End Select
 
+    End Sub
+
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
+        RadWindowManager1.Windows.Clear()
+        Dim window1 As RadWindow = New RadWindow()
+        window1.NavigateUrl = sUrl
+        window1.VisibleOnPageLoad = True
+        window1.VisibleStatusbar = False
+        window1.ID = WindowsID
+        If Maximize Then window1.InitialBehaviors = WindowBehaviors.Maximize
+        window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize
+        window1.Width = Width
+        window1.Height = Height
+        window1.Modal = True
+        window1.OnClientClose = "OnClientClose"
+        RadWindowManager1.Windows.Add(window1)
     End Sub
 
 #Region "Upload Files"

@@ -41,6 +41,10 @@ Public Class job_transmittals
                     Master.InfoMessage("The Transmittal have been sent by email")
                 End If
 
+            Case "EmailDeliveryTransmittalDigital"
+                sUrl = "~/adm/sendtransmittal.aspx?TransmittalId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 960, 680, False)
+
         End Select
     End Sub
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)

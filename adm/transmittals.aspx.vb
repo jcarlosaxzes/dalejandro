@@ -83,15 +83,19 @@ Public Class transmittals
             Case "EditTransmittal"
                 Response.Redirect("~/ADM/Transmittal.aspx?transmittalId=" & e.CommandArgument & "&BackPage=transmittals")
 
-            Case "Email"
+            Case "EmailPickUp"
                 If LocalAPI.EmailReadyToPickUp(e.CommandArgument, lblCompanyId.Text, lblEmployeeEmail.Text, lblEmployeeName.Text) Then
                     LocalAPI.SetTransmittalJobToDoneStatus(e.CommandArgument)
                     Master.InfoMessage("The Transmittal have been sent by email")
                 End If
 
             Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
+                sUrl = "~/adm/client.aspx?clientId=" & e.CommandArgument
                 CreateRadWindows("ClientW", sUrl, 970, 750, False)
+
+            Case "EmailDeliveryTransmittalDigital"
+                sUrl = "~/adm/sendtransmittal.aspx?TransmittalId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 960, 680, False)
 
             Case "Delete"
         End Select
