@@ -61,8 +61,8 @@
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
                             <Items>
                                 <telerik:RadComboBoxItem Text="Last 30 days" Value="30"  />
-                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
-                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90"  />
                                 <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
                                 <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
                                 <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
@@ -221,9 +221,12 @@
                         ItemStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="nStatus" HeaderText="Status" SortExpression="nStatus" ReadOnly="true"
-                        UniqueName="nStatus" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="140px">
+                        UniqueName="nStatus" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <asp:Label ID="nStatusLabel" runat="server" Text='<%# Eval("nStatus")%>'></asp:Label>
+                            <div style="font-size: 12px; width: 100%"
+                                class='<%# LocalAPI.GetTransmittalStatusLabelCSS(Eval("Status")) %>'>
+                                <%# Eval("nStatus") %>
+                            </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="Budget" DataFormatString="{0:N0}"

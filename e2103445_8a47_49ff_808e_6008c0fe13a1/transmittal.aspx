@@ -11,7 +11,7 @@
                 <h2 style="margin: 0"><span class="navbar navbar-expand-md bg-dark text-white d-print-flex">Transmittal Letter</span></h2>
             </div>
 
-            <table class="table-sm" style="width: 100%;" >
+            <table class="table-sm" style="width: 100%;">
                 <tr>
                     <td style="vertical-align: top">
                         <table class="table-sm" style="width: 100%;">
@@ -21,7 +21,7 @@
                                 <td style="text-align: left">
                                     <%# Eval("TransmittalID")%>
                                 </td>
-                                <td style="text-align: right;; width: 150px"><b>Date Created:</b>
+                                <td style="text-align: right; width: 150px"><b>Date Created:</b>
                                 </td>
                                 <td style="text-align: left;">
                                     <%# Eval("TransmittalDate", "{0:d}")%>
@@ -54,15 +54,15 @@
 
                         </table>
                     </td>
-                    <td style="vertical-align: top; text-align: center; width:250px">
+                    <td style="vertical-align: top; text-align: center; width: 250px">
                         <div>
-                            <asp:Label ID="lblTitle1" runat="server" Text="Sign on your mobile device" Font-Bold="true" Font-Size="Small"  Visible='<%# Eval("Status") = 1 %>'/>
+                            <asp:Label ID="lblTitle1" runat="server" Text="Sign on your mobile device" Font-Bold="true" Font-Size="Small" Visible='<%# Eval("Status") = 1 %>' />
                             <br />
                             <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Text="" Height="140px" Width="140px" Style="margin-left: 30px" OutputType="EmbeddedPNG" Visible='<%# Eval("Status") = 1 %>'>
                                 <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />
                             </telerik:RadBarcode>
                             <br />
-                            <asp:Label ID="lblTitle2" runat="server" Text="Scan the QR code with your mobile device's camara or with a QR code reader app" Font-Italic="true" Font-Size="Small"  Visible='<%# Eval("Status") = 1 %>'/>
+                            <asp:Label ID="lblTitle2" runat="server" Text="Scan the QR code with your mobile device's camara or with a QR code reader app" Font-Italic="true" Font-Size="Small" Visible='<%# Eval("Status") = 1 %>' />
 
                         </div>
                     </td>
@@ -79,7 +79,6 @@
                                     <telerik:GridTemplateColumn DataField="PakageContent" HeaderText="Package Content" UniqueName="PakageContent" ItemStyle-HorizontalAlign="Left">
                                         <ItemTemplate>
                                             <b><%# Eval("PakageContent") %></b> <%# Eval("Description") %>
-                                            
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridTemplateColumn DataField="Signed" HeaderText="Signed & Sealed" UniqueName="Signed"
@@ -94,6 +93,48 @@
                     </td>
                 </tr>
             </table>
+            <asp:Panel runat="server" ID="PanelDigitalFiles">
+                <h4>Digital File(s)</h4>
+                <telerik:RadGrid ID="RadGridFiles" runat="server" DataSourceID="SqlDataSourceFiles" RenderMode="Lightweight" Width="100%"
+                    AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceFiles">
+                        <Columns>
+                            <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
+                            </telerik:GridBoundColumn>
+
+                            <telerik:GridTemplateColumn DataField="Name" HeaderText=" File Name" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
+                                HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
+                                <ItemTemplate>
+                                    <a href='<%# Eval("url")%>' target="_blank"><%# Eval("Name")%></a>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="FileType" HeaderText="Type" UniqueName="FileType" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <%# Eval("FileType")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Size" HeaderText="Size" UniqueName="Size" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Date" HeaderText="Date" UniqueName="Date" SortExpression="Date" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center" Aggregate="Count">
+                                <ItemTemplate>
+                                    <%# Eval("Date", "{0:d}")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                        </Columns>
+
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </asp:Panel>
 
             <table class="table-sm" style="width: 100%;">
                 <tr>
@@ -146,7 +187,7 @@
     </asp:FormView>
 
     <p style="text-align: right; padding-top: 25px; padding-right: 20px; font-family: Calibri; font-size: xx-small; font-style: italic">
-        This Transmittal was made &amp; sent using <a href="https://pasconcept.com/" target="_blank">pasconcept.com</a> 
+        This Transmittal was made &amp; sent using <a href="https://pasconcept.com/" target="_blank">pasconcept.com</a>
     </p>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="TRANSMITTAL_SELECT" SelectCommandType="StoredProcedure">
@@ -169,6 +210,14 @@
             <asp:ControlParameter ControlID="lblTransmittalId" Name="TransmittalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Transmittal_Files_for_Client_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="lblTransmittalId" Name="TransmittalId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblTransmittalId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblguid" runat="server" Visible="False"></asp:Label>
