@@ -32,6 +32,15 @@ Partial Public Class sendtransmittal
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
     
     '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''PanelEmail control.
     '''</summary>
     '''<remarks>
@@ -138,6 +147,15 @@ Partial Public Class sendtransmittal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblBackPage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBackPage As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

@@ -14,6 +14,15 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
 
 
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+
+            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to List
+            </asp:LinkButton>
+            Transmittal Letter
+        </span>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <h4>Send Digital Transmittal</h4>
@@ -83,5 +92,6 @@
     <asp:Label ID="lblOrigen" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblBackPage" runat="server" Visible="False"></asp:Label>
 </asp:Content>
 

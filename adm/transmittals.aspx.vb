@@ -90,11 +90,11 @@ Public Class transmittals
                 End If
 
             Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
+                sUrl = "~/adm/client.aspx?clientId=" & e.CommandArgument
                 CreateRadWindows("ClientW", sUrl, 970, 750, False)
 
             Case "EmailDeliveryTransmittalDigital"
-                sUrl = "~/ADM/SendStatement.aspx?StatementNo=" & e.CommandArgument
+                sUrl = "~/adm/sendtransmittal.aspx?TransmittalId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 680, False)
 
             Case "Delete"

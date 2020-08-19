@@ -254,7 +254,7 @@
                                     UseSubmitBehavior="false" Visible='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
                                        <i style="font-size:small;" class="far fa-envelope"></i>
                                 </asp:LinkButton>
-                                <asp:LinkButton ID="btnSendEmail2" runat="server" CommandName="EmailDeliveryTransmittalDigital" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Delivery Transmittal Digital Notification"
+                                <asp:LinkButton ID="btnSendEmail2" runat="server" CommandName="EmailDeliveryTransmittalDigital" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Transmittal Digital Delivery Notification"
                                     UseSubmitBehavior="false" Visible='<%# IIf(LocalAPI.GetTransmittalDigitalFilesCount(Eval("Id")) = 0, False, True)%>'>
                                        <i style="font-size:small;color:olivedrab" class="far fa-envelope"></i>
                                 </asp:LinkButton>

@@ -15,6 +15,14 @@
             If lblTransmittalId.Text > 0 Then
                 LeerTransmittalTemplate()
             End If
+
+            If Not Request.QueryString("BackPage") Is Nothing Then
+                lblBackPage.Text = Request.QueryString("BackPage")
+                btnBack.Visible = True
+            Else
+                btnBack.Visible = False
+            End If
+
         End If
     End Sub
     Private Sub LeerTransmittalTemplate()
@@ -77,5 +85,17 @@
         Catch ex As Exception
             lblMailResult.Text = "Email sending error." & ex.Message
         End Try
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Select Case lblBackPage.Text
+            Case "transmittal"
+                Response.RedirectPermanent("~/adm/Transmittal.aspx?transmittalId=" & lblTransmittalId.Text & "&BackPage=transmittals")
+            Case "job_transmittals"
+                Dim JobId As Integer = LocalAPI.GetTransmittalProperty(lblTransmittalId.Text, "JobId")
+                Response.RedirectPermanent("~/adm/job_transmittals.aspx?JobId=" & JobId)
+            Case Else
+                Response.RedirectPermanent("~/adm/Transmittal.aspx?transmittalId=" & lblTransmittalId.Text)
+        End Select
     End Sub
 End Class
