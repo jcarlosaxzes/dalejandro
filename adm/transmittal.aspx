@@ -951,4 +951,5 @@
     <asp:Label ID="lblEmployeeName" runat="server" Visible="False"></asp:Label>    
     <asp:Label ID="lblSelectedId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedName" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblBackPage" runat="server" Visible="False"></asp:Label>
 </asp:Content>

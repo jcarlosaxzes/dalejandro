@@ -21,7 +21,10 @@ Public Class transmittal1
                     lblTransmittalId.Text = 0
                 End If
 
-                If Request.QueryString("FullPage") Is Nothing Then
+                If Not Request.QueryString("BackPage") Is Nothing Then
+                    lblBackPage.Text = Request.QueryString("BackPage")
+                    btnBack.Visible = True
+                Else
                     Master.HideMasterMenu()
                     btnBack.Visible = False
                 End If
@@ -42,7 +45,6 @@ Public Class transmittal1
 
             ' Administrators
             CType(FormView1.FindControl("btnMailReadyToSign"), RadButton).Visible = bIsTransmittalReadyToSigned
-            CType(FormView1.FindControl("btnPickUp2"), RadButton).Visible = bIsTransmittalReadyToSigned
             CType(FormView1.FindControl("btnPickUp"), RadButton).Visible = bIsTransmittalReadyToSigned
         Catch ex As Exception
 
@@ -59,7 +61,7 @@ Public Class transmittal1
     End Sub
 
     Protected Sub btnPickUp_Click(sender As Object, e As EventArgs)
-        Response.RedirectPermanent("~/adm/signature.aspx?ObjId=2&Id=" & lblTransmittalId.Text)
+        Response.RedirectPermanent("~/adm/signature.aspx?ObjId=2&Id=" & lblTransmittalId.Text & "&BackPage=" & lblBackPage.Text)
     End Sub
 
     Protected Sub btnMailReadyToSign_Click(sender As Object, e As EventArgs)
@@ -97,7 +99,11 @@ Public Class transmittal1
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/transmittals.aspx")
+        Select Case lblBackPage.Text
+            Case "transmittals"
+                Response.Redirect("~/adm/transmittals.aspx")
+        End Select
+
     End Sub
 
 #Region "Upload Files"

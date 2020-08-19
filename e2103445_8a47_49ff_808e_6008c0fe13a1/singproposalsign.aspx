@@ -419,7 +419,7 @@
                                                 <ItemTemplate>
                                                     <tr>
                                                         <td>
-                                                            <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " -- (", Eval("Type"), ")")%></a>
+                                                            <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " -- (", Eval("nType"), ")")%></a>
                                                         </td>
                                                     </tr>
                                                 </ItemTemplate>

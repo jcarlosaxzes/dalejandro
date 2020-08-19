@@ -21,18 +21,14 @@ Public Class transmittals
                 LocalAPI.RefreshYearsList()
                 lblCompanyId.Text = Session("companyId")
 
-                cboYear.DataBind()
-                cboYear.SelectedValue = Today.Year
-                cboMes.DataBind()
-                cboMes.SelectedValue = Date.Today.Month
-                IniciaPeriodo(cboMes.SelectedValue)
+                cboPeriod.DataBind()
+                IniciaPeriodo(cboPeriod.SelectedValue)
 
                 If Len(Session("Employee")) Then
                     cboEmployee.SelectedValue = Session("Employee")
                 End If
 
                 cboStatus.DataBind()
-                cboStatus.SelectedValue = 1
 
             End If
 
@@ -47,34 +43,32 @@ Public Class transmittals
     End Sub
 
     Protected Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        IniciaPeriodo(cboMes.SelectedValue)
+        IniciaPeriodo(cboPeriod.SelectedValue)
         RadGrid1.DataBind()
     End Sub
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)
-
+        cboPeriod.SelectedValue = nPeriodo
         Select Case nPeriodo
-            Case 1 To 12 ' Meses
-                If cboYear.SelectedValue = 0 Then
-                    cboYear.SelectedValue = Date.Today.Year
-                End If
-                RadDatePickerFrom.DbSelectedDate = nPeriodo & "/01/" & cboYear.SelectedValue
-                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate)
-                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, RadDatePickerTo.DbSelectedDate)
+            Case 13  ' (All Years)
+                RadDatePickerFrom.DbSelectedDate = "01/01/2000"
+                RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
-            Case 0  ' All months...
-                Dim nYearFrom As Integer = IIf(cboYear.SelectedValue > 0, cboYear.SelectedValue, 2000)
-                Dim nYearTo As Integer = IIf(cboYear.SelectedValue > 0, cboYear.SelectedValue, Today.Year)
+            Case 15  ' (Last Years)
+                RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year - 1
+                RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year - 1
 
-                RadDatePickerFrom.DbSelectedDate = "01/01/" & nYearFrom
-                RadDatePickerTo.DbSelectedDate = "12/31/" & nYearTo
-
-            Case Is > 29   ' Last 60, 90 days....
-                ' Rectifico filtro de Year a This Year
-                cboYear.SelectedValue = Date.Today.Year
-
+            Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
+
+            Case 99   'Custom
+                RadDatePickerFrom.Focus()
+                ' Allow RadDatePicker user Values...
+
+            Case 14  '14 and any other old setting (This Years)
+                RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
         End Select
     End Sub
@@ -87,7 +81,7 @@ Public Class transmittals
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditTransmittal"
-                Response.Redirect("~/ADM/Transmittal.aspx?transmittalId=" & e.CommandArgument & "&FullPage=1")
+                Response.Redirect("~/ADM/Transmittal.aspx?transmittalId=" & e.CommandArgument & "&BackPage=transmittals")
 
             Case "Email"
                 If LocalAPI.EmailReadyToPickUp(e.CommandArgument, lblCompanyId.Text, lblEmployeeEmail.Text, lblEmployeeName.Text) Then

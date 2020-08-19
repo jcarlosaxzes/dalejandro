@@ -32,15 +32,6 @@ Partial Public Class signature1
     Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
     
     '''<summary>
-    '''RadPageLayout1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadPageLayout1 As Global.Telerik.Web.UI.RadPageLayout
-    
-    '''<summary>
     '''lblTitle control.
     '''</summary>
     '''<remarks>
@@ -48,24 +39,6 @@ Partial Public Class signature1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblTitle As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblExplication control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblExplication As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblReferencia control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblReferencia As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtNombre control.
@@ -95,6 +68,24 @@ Partial Public Class signature1
     Protected WithEvents btnClear As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''lblExplication control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblExplication As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblReferencia control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblReferencia As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lblId control.
     '''</summary>
     '''<remarks>
@@ -104,15 +95,6 @@ Partial Public Class signature1
     Protected WithEvents lblId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblObjId control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblObjId As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''lblBase64 control.
     '''</summary>
     '''<remarks>
@@ -120,4 +102,13 @@ Partial Public Class signature1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblBase64 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblBackPage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBackPage As Global.System.Web.UI.WebControls.Label
 End Class

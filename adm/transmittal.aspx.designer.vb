@@ -545,6 +545,15 @@ Partial Public Class transmittal1
     Protected WithEvents lblSelectedName As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''lblBackPage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBackPage As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Master property.
     '''</summary>
     '''<remarks>
