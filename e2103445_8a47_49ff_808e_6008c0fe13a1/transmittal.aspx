@@ -95,8 +95,9 @@
                 </tr>
             </table>
             <asp:Panel runat="server" ID="PanelDigitalFiles">
-                <h4>Documents(s)</h4>
-                <div class="table-responsive">
+                <br />
+                <h4 style="text-align:left">Documents(s)</h4>
+                <div class="table-responsive" style="text-align:left">
                     <table class="table">
                         <asp:Repeater ID="rptrSharedPublicLinks" runat="server" DataSourceID="SqlDataSourceFiles">
                             <ItemTemplate>
@@ -109,45 +110,7 @@
                         </asp:Repeater>
                     </table>
                 </div>
-                <%--                <telerik:RadGrid ID="RadGridFiles" runat="server" DataSourceID="SqlDataSourceFiles" RenderMode="Lightweight" Width="100%"
-                    AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceFiles">
-                        <Columns>
-                            <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
-                            </telerik:GridBoundColumn>
-
-                            <telerik:GridTemplateColumn DataField="Name" HeaderText=" File Name" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
-                                HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
-                                <ItemTemplate>
-                                    <a href='<%# Eval("url")%>' target="_blank"><%# Eval("Name")%></a>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn DataField="FileType" HeaderText="Type" UniqueName="FileType" ItemStyle-HorizontalAlign="Center"
-                                HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <%# Eval("FileType")%>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn DataField="Size" HeaderText="Size" UniqueName="Size" ItemStyle-HorizontalAlign="Center"
-                                HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-                                    <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn DataField="Date" HeaderText="Date" UniqueName="Date" SortExpression="Date" ItemStyle-HorizontalAlign="Center"
-                                HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center" Aggregate="Count">
-                                <ItemTemplate>
-                                    <%# Eval("Date", "{0:d}")%>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                        </Columns>
-
-                    </MasterTableView>
-                </telerik:RadGrid>--%>
+               
             </asp:Panel>
 
             <table class="table-sm" style="width: 100%;">

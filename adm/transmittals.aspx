@@ -250,10 +250,13 @@
                                 <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
                                     <i style="font-size:small;" class="far fa-share-square"></i></a>
                                 </a>
-                                &nbsp;        
-                                <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="Email" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
-                                    UseSubmitBehavior="false" Enabled='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
+                                <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="EmailEmailPickUp" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
+                                    UseSubmitBehavior="false" Visible='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
                                        <i style="font-size:small;" class="far fa-envelope"></i>
+                                </asp:LinkButton>
+                                <asp:LinkButton ID="btnSendEmail2" runat="server" CommandName="EmailDeliveryTransmittalDigital" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Delivery Transmittal Digital Notification"
+                                    UseSubmitBehavior="false" Visible='<%# IIf(LocalAPI.GetTransmittalDigitalFilesCount(Eval("Id")) = 0, False, True)%>'>
+                                       <i style="font-size:small;color:olivedrab" class="far fa-envelope"></i>
                                 </asp:LinkButton>
                                 &nbsp;
                                 <span title="Number of Packages" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
