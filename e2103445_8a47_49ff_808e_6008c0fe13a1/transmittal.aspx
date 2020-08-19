@@ -95,8 +95,21 @@
                 </tr>
             </table>
             <asp:Panel runat="server" ID="PanelDigitalFiles">
-                <h4>Digital File(s)</h4>
-                <telerik:RadGrid ID="RadGridFiles" runat="server" DataSourceID="SqlDataSourceFiles" RenderMode="Lightweight" Width="100%"
+                <h4>Documents(s)</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <asp:Repeater ID="rptrSharedPublicLinks" runat="server" DataSourceID="SqlDataSourceAzureuploads">
+                            <ItemTemplate>
+                                <tr>
+                                    <td>
+                                        <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " -- (", Eval("FileType"), ")")%></a>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </table>
+                </div>
+                <%--                <telerik:RadGrid ID="RadGridFiles" runat="server" DataSourceID="SqlDataSourceFiles" RenderMode="Lightweight" Width="100%"
                     AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceFiles">
                         <Columns>
@@ -134,7 +147,7 @@
                         </Columns>
 
                     </MasterTableView>
-                </telerik:RadGrid>
+                </telerik:RadGrid>--%>
             </asp:Panel>
 
             <table class="table-sm" style="width: 100%;">
