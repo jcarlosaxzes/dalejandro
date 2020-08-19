@@ -29,7 +29,6 @@ Public Class transmittals
                 End If
 
                 cboStatus.DataBind()
-                cboStatus.SelectedValue = 1
 
             End If
 

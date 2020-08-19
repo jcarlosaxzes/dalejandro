@@ -11433,6 +11433,9 @@ Public Class LocalAPI
         End Select
     End Function
 
+    Public Shared Function GetTransmittalDigitalFilesCount(transmittalId As Integer) As Integer
+        Return GetNumericEscalar(String.Format($"Select count(*) FROM [Azure_Uploads] WHERE EntityType='Transmittal' AND EntityId={transmittalId} AND isnull([Public],0)=1"))
+    End Function
     Public Shared Function TransmittalNumber(ByVal Id As Integer) As String
         Return GetStringEscalar("SELECT dbo.TransmittalNumber(" & Id & ")")
     End Function
@@ -11444,6 +11447,21 @@ Public Class LocalAPI
         SetJobStatus(jobId, 7, employeeId, companyId, 0)
 
     End Function
+
+    Public Shared Function GetTransmittalStatusLabelCSS(ByVal statusId As Integer) As String
+        Select Case statusId
+            Case 0  'Not Ready
+                Return "badge badge-warning statuslabel"
+            Case 1  'Ready for Pick Up
+                Return "badge badge-danger statuslabel"
+            Case 2  'Picked Up
+                Return "badge badge-success statuslabel"
+            Case Else
+                Return "badge badge-secondary statuslabel"
+        End Select
+
+    End Function
+
 
     Public Shared Function EmailJobInactive(ByVal jobId As Integer, employeeId As Integer, ByVal companyId As Integer) As Boolean
         Try
