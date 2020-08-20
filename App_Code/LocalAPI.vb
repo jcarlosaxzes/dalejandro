@@ -12260,7 +12260,7 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function AzureStorage_Insert_Transmittal(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, maxDownload As Integer) As Boolean
+    Public Shared Function AzureStorage_Insert_Transmittal(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, maxDownload As Integer, ExpirationDate As DateTime) As Boolean
         Try
             If Not ExistAzureFile(EntityId, EntityType, FileName, ContentBytes) Then
 
@@ -12291,6 +12291,11 @@ Public Class LocalAPI
                 cmd.Parameters.AddWithValue("@FileType", fileType)
                 cmd.Parameters.AddWithValue("@companyId", companyId)
                 cmd.Parameters.AddWithValue("@MaxDownload", maxDownload)
+                If Not (ExpirationDate = Nothing) Then
+                    cmd.Parameters.AddWithValue("@ExpirationDate", ExpirationDate)
+                Else
+                    cmd.Parameters.AddWithValue("@ExpirationDate", DBNull.Value)
+                End If
 
                 cmd.ExecuteNonQuery()
 
@@ -12392,7 +12397,7 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function UpdateTransmittalAzureUploads(Id As Integer, Type As Integer, sPublic As Boolean, MaxDownload As Integer) As Boolean
+    Public Shared Function UpdateTransmittalAzureUploads(Id As Integer, Type As Integer, sPublic As Boolean, MaxDownload As Integer, ExpirationDate As DateTime) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
@@ -12404,6 +12409,12 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Type", Type)
             cmd.Parameters.AddWithValue("@Public", sPublic)
             cmd.Parameters.AddWithValue("@MaxDownload", MaxDownload)
+            If Not (ExpirationDate = Nothing) Then
+                cmd.Parameters.AddWithValue("@ExpirationDate", ExpirationDate)
+            Else
+                cmd.Parameters.AddWithValue("@ExpirationDate", DBNull.Value)
+            End If
+
             cmd.Parameters.AddWithValue("@Id", Id)
             cmd.ExecuteNonQuery()
             cnn1.Close()
