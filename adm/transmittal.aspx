@@ -41,6 +41,11 @@
             margin-top: 80px;
             width: 100%;
         }
+
+        .checkRtl {
+            direction: rtl;
+            padding-top:7px !important;
+        }
     </style>
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">
@@ -498,7 +503,7 @@
 
                                                 </div>
                                                 <div class="card-body" style="padding: 0px; margin-top: -6px;">
-                                                    <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
+                                                    <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("MaxDownload")%>' ForeColor="Black" Font-Underline="false">
                                                         <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                             <tr>
                                                                 <td style="height: 108px; padding: 0px;">
@@ -525,8 +530,8 @@
                                                                 <td style="font-size: 12px; padding: 0;">
                                                                     <%#IIf(Eval("Public"), "Public", "Private") %>
                                                                     <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>
-                                                                    <asp:Label ID="lblTypeHide" runat="server" Visible="False" Text='<%# Eval("Type") %>'></asp:Label>
-                                                                    <asp:Label ID="lblMaxDownloadeHide" runat="server" Visible="False" Text='<%# Eval("MaxDownload") %>'></asp:Label>
+                                                                    <asp:Label ID="lblTypeHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>
+                                                                    <asp:Label ID="lblMaxDownloadeHide" runat="server" Visible="False" Text='<%# Eval("Type") %>'></asp:Label>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -558,18 +563,15 @@
                                                 </telerik:GridTemplateColumn>
 
                                                 <telerik:GridTemplateColumn DataField="Type" HeaderText="Type" UniqueName="Type" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-Width="120px" HeaderStyle-HorizontalAlign="Center">
+                                                    HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <%# Eval("nType")%>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
-                                                <telerik:GridTemplateColumn DataField="Public" HeaderText="Public" UniqueName="Public" ItemStyle-HorizontalAlign="Center"
+                                                <telerik:GridCheckBoxColumn DataField="Public" HeaderText="Public" UniqueName="Public" ItemStyle-HorizontalAlign="Center"
                                                     HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <%#IIf(Eval("Public"), "Public", "Private") %>
-                                                    </ItemTemplate>
-                                                </telerik:GridTemplateColumn>
+                                                </telerik:GridCheckBoxColumn>
 
                                                 <telerik:GridTemplateColumn DataField="Size" HeaderText="Size" UniqueName="Size" ItemStyle-HorizontalAlign="Center"
                                                     HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center">
@@ -579,15 +581,19 @@
                                                 </telerik:GridTemplateColumn>
 
                                                 <telerik:GridTemplateColumn DataField="Date" HeaderText="Date" UniqueName="Date" SortExpression="Date" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center" Aggregate="Count">
+                                                    HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
                                                         <%# Eval("Date", "{0:d}")%>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
-
-
+                                                <telerik:GridTemplateColumn DataField="ExpirationDate" HeaderText="Expiration" UniqueName="ExpirationDate" SortExpression="ExpirationDate" ItemStyle-HorizontalAlign="Center"
+                                                    HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <%# Eval("ExpirationDate", "{0:d}")%>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
-                                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="200px">
+                                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                                                     <ItemTemplate>
                                                         <table>
                                                             <tr>
@@ -630,31 +636,31 @@
                             <%--Upload Files--%>
                             <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Upload Files" StepType="Step">
                                 <asp:Panel ID="UploadPanel" runat="server">
-                                    <div style="width: 100%; height: 500px; position: relative">
-                                        <table class="table-sm" style="width: 100%; position: absolute; margin-top: 0px; background-color: lightgray;">
-                                            <tr>
-                                                <td style="width: 35%;">
-                                                    <telerik:RadComboBox ID="cboDocType" runat="server" DataSourceID="SqlDataSourceDocTypes" Label="File type:" DataTextField="Name" DataValueField="Id" Width="100%">
-                                                    </telerik:RadComboBox>
-                                                </td>
-                                                <td style="width: 15%;">
-                                                    <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public" ToolTip="Public or private" AutoPostBack="false" Checked="True"></telerik:RadCheckBox>
-                                                </td>
-                                                <td style="width: 30%;">
-                                                    <asp:Label ID="lblMaxDownload" runat="server" CssClass="NormalNegrita" Text="Max Download :"></asp:Label>
-                                                    <telerik:RadTextBox ID="tbMaxDownload" runat="server" Width="50px" Text="3" />
-                                                </td>
-                                                <td style="width: 20%;" rowspan="2">
-                                                    <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
+                                    <div class="pasconcept-bar noprint" style="font-size:small;vertical-align:middle;font-family:sans-serif">
+                                        File type: 
+                                        <telerik:RadComboBox ID="cboDocType" runat="server" DataSourceID="SqlDataSourceDocTypes" DataTextField="Name" DataValueField="Id" Width="250px">
+                                        </telerik:RadComboBox>
+                                        &nbsp;&nbsp;
+                                        <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public:" ToolTip="Public or private" AutoPostBack="false" Checked="True"  CssClass="checkRtl">
+                                        </telerik:RadCheckBox>
+                                        &nbsp;&nbsp;
+                                        Max Download:
+                                        <telerik:RadTextBox ID="tbMaxDownload" runat="server" Width="50px" Text="3" />
+                                        Expiration Date:
+                                        <telerik:RadDatePicker ID="RadDatePickerExpiration" runat="server" ZIndex="50001" >
+                                        </telerik:RadDatePicker>
+                                        <span style="float: right; vertical-align: middle;">
+                                            <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
                                                     <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
-                                                    </asp:LinkButton>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <table style="width: 100%; position: absolute; margin-top: 40px; background-color: lightgray; height: 100px;">
+                                            </asp:LinkButton>
+                                        </span>
+                                    </div>
+
+                                    <div style="width: 99%; height: 450px; position: relative">
+                                        <table style="width: 100%; position: absolute; margin-top: 3px; background-color: lightgray; height: 200px;">
                                             <tr>
                                                 <td style="width: 90%; vertical-align: top;">
-                                                    <h3 class="additional-text">Select Files to Upload</h3>
+                                                    <h4 class="additional-text">Select Files to Upload</h4>
                                                 </td>
                                             </tr>
                                         </table>
@@ -718,6 +724,8 @@
                                                 <telerik:RadTextBox ID="DescripciptionTextBox" runat="server" Rows="3" Text='<%# Bind("Descripciption") %>' Width="600px" MaxLength="1024"></telerik:RadTextBox>
                                             </EditItemTemplate>
                                         </telerik:GridTemplateColumn>
+                                        <telerik:GridDateTimeColumn DataField="ExpirationDate" HeaderText="Expiration" PickerType="DatePicker" UniqueName="ExpirationDate" SortExpression="ExpirationDate" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="90px" HeaderStyle-HorizontalAlign="Center" DataFormatString="{0:d}">
+                                        </telerik:GridDateTimeColumn>
                                         <telerik:GridTemplateColumn DataField="Link" FilterControlAltText="Filter Link column" Display="false"
                                             HeaderText="Link (url)" SortExpression="Link" UniqueName="Link" HeaderStyle-HorizontalAlign="Center">
                                             <ItemTemplate>
@@ -752,29 +760,46 @@
 
     <telerik:RadToolTip ID="RadToolTipBulkEdit" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        <table class="table table-bordered" style="width: 500px">
+        <table class="table-sm" style="width: 600px">
             <tr>
                 <td colspan="2">
                     <h3 style="margin: 0; text-align: center; color: white; width: 600px">
-                        <span class="navbar navbar-expand-md bg-dark text-white">Update Files</span>
+                        <span class="navbar navbar-expand-md bg-dark text-white">Update File(s)</span>
                     </h3>
                 </td>
             </tr>
             <tr>
-                <td style="width: 20%;">
-                    <telerik:RadComboBox ID="cboDocTypeBulk" runat="server" DataSourceID="SqlDataSourceDocTypes" ZIndex="10000" Label="File type:" DataTextField="Name" DataValueField="Id" Width="100%">
+                <td style="width: 180px;text-align:right">
+                    File type:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboDocTypeBulk" runat="server" DataSourceID="SqlDataSourceDocTypes" ZIndex="10000" DataTextField="Name" DataValueField="Id" Width="100%">
                     </telerik:RadComboBox>
                 </td>
             </tr>
             <tr>
-                <td style="width: 20%;">
-                    <telerik:RadCheckBox ID="chkPublicBulk" runat="server" Text="Public" ToolTip="Public or private" AutoPostBack="false"></telerik:RadCheckBox>
+                <td style="text-align:right">
+                    Public:
+                </td>
+                <td>
+                    <telerik:RadCheckBox ID="chkPublicBulk" runat="server" ToolTip="Public or private" AutoPostBack="false"></telerik:RadCheckBox>
                 </td>
             </tr>
             <tr>
-                <td style="width: 30%;">
-                    <asp:Label ID="Label1" runat="server" CssClass="NormalNegrita" Text="Max Download :"></asp:Label>
+                <td style="text-align:right">
+                    Max Download:
+                </td>
+                <td>
                     <telerik:RadTextBox ID="tbMaxDownloadBulk" runat="server" Width="50px" Text="3" />
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:right">
+                    Expiration Date:
+                </td>
+                <td>
+                     <telerik:RadDatePicker ID="RadDatePickerExpirationBulk" runat="server" ZIndex="50001" >
+                     </telerik:RadDatePicker>
                 </td>
             </tr>
             <tr>
@@ -836,9 +861,9 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDetails" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="TRANSMITTAL_DETAILS_SELECT" SelectCommandType="StoredProcedure" 
-        UpdateCommand="TRANSMITTAL_DETAILS_UPDATE" UpdateCommandType="StoredProcedure" 
-        DeleteCommand="TRANSMITTAL_DETAILS_DELETE" DeleteCommandType="StoredProcedure" 
+        SelectCommand="TRANSMITTAL_DETAILS_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="TRANSMITTAL_DETAILS_UPDATE" UpdateCommandType="StoredProcedure"
+        DeleteCommand="TRANSMITTAL_DETAILS_DELETE" DeleteCommandType="StoredProcedure"
         InsertCommand="TRANSMITTAL_DETAILS_INSERT" InsertCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
@@ -898,9 +923,9 @@
 
     <asp:SqlDataSource ID="SqlDataSourceLinks" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [Jobs_links] WHERE [Id] = @Id"
-        InsertCommand="INSERT INTO [Jobs_links] ([Job], [Title], [Descripciption], [Link], TransmittalId, [Date]) VALUES (@Job, @Title, @Descripciption, @Link, @TransmittalId, dbo.CurrentTime())"
-        SelectCommand="SELECT Id, Job, Title, Descripciption, Link FROM Jobs_links WHERE (TransmittalId = @TransmittalId) ORDER BY Title"
-        UpdateCommand="UPDATE [Jobs_links] SET  [Title] = @Title, [Descripciption] = @Descripciption, [Link] = @Link WHERE [Id] = @Id">
+        InsertCommand="INSERT INTO [Jobs_links] ([Job], [Title], [Descripciption], [Link], TransmittalId, [Date], [ExpirationDate]) VALUES (@Job, @Title, @Descripciption, @Link, @TransmittalId, dbo.CurrentTime(),@ExpirationDate)"
+        SelectCommand="SELECT Id, Job, Title, Descripciption, Link, ExpirationDate FROM Jobs_links WHERE (TransmittalId = @TransmittalId) ORDER BY Title"
+        UpdateCommand="UPDATE [Jobs_links] SET  [Title] = @Title, [Descripciption] = @Descripciption, [Link] = @Link,ExpirationDate=@ExpirationDate WHERE [Id] = @Id">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
@@ -908,6 +933,7 @@
             <asp:Parameter Name="Title" Type="String" />
             <asp:Parameter Name="Descripciption" Type="String" />
             <asp:Parameter Name="Link" Type="String" />
+            <asp:Parameter Name="ExpirationDate" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
         <SelectParameters>
@@ -920,6 +946,7 @@
             <asp:Parameter Name="Title" Type="String" />
             <asp:Parameter Name="Descripciption" Type="String" />
             <asp:Parameter Name="Link" Type="String" />
+            <asp:Parameter Name="ExpirationDate" />
         </InsertParameters>
     </asp:SqlDataSource>
 

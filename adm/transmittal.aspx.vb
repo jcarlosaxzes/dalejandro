@@ -156,7 +156,7 @@ Public Class transmittal1
             AzureStorageApi.DeleteFile(tempName)
 
             ' The uploaded files need to be removed from the storage by the control after a certain time.
-            e.IsValid = LocalAPI.AzureStorage_Insert_Transmittal(lblTransmittalId.Text, "Transmittal", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text, tbMaxDownload.Text)
+            e.IsValid = LocalAPI.AzureStorage_Insert_Transmittal(lblTransmittalId.Text, "Transmittal", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text, tbMaxDownload.Text, RadDatePickerExpiration.DbSelectedDate)
             If e.IsValid Then
                 RadListViewFiles.ClearSelectedItems()
                 RadListViewFiles.DataBind()
@@ -182,16 +182,16 @@ Public Class transmittal1
                 Dim item As GridDataItem = TryCast(e.Item, GridDataItem)
 
                 lblSelectedId.Text = item.GetDataKeyValue("Id").ToString()
-                Dim type As String = CType(item.FindControl("lblTypeHide"), Label).Text
-                Dim spublic As String = CType(item.FindControl("lblPubicHide"), Label).Text
-                Dim maxDownloade As String = CType(item.FindControl("lblMaxDownloadeHide"), Label).Text
+                Dim TransmittalFileObject = LocalAPI.GetRecord(lblSelectedId.Text, "Azure_Uploads_SELECT")
 
                 RadToolTipBulkEdit.Visible = True
                 RadToolTipBulkEdit.Show()
-                CType(RadToolTipBulkEdit.FindControl("cboDocTypeBulk"), RadComboBox).SelectedValue = type
-                CType(RadToolTipBulkEdit.FindControl("chkPublicBulk"), RadCheckBox).Checked = spublic
-                CType(RadToolTipBulkEdit.FindControl("tbMaxDownloadBulk"), RadTextBox).Text = maxDownloade
-
+                cboDocTypeBulk.SelectedValue = TransmittalFileObject("Type")
+                chkPublicBulk.Checked = TransmittalFileObject("Public")
+                tbMaxDownloadBulk.Text = TransmittalFileObject("MaxDownload")
+                If Not TransmittalFileObject("ExpirationDate") Is Nothing Then
+                    RadDatePickerExpirationBulk.DbSelectedDate = TransmittalFileObject("ExpirationDate")
+                End If
 
             Case "Delete"
                 Dim item As GridDataItem = TryCast(e.Item, GridDataItem)
@@ -253,7 +253,7 @@ Public Class transmittal1
                         item.Selected = False
                         Dim Id = item.OwnerListView.DataKeyValues(item.DisplayIndex)("Id").ToString()
                         Dim lblName As Label = CType(item.FindControl("lblFileName"), Label)
-                        LocalAPI.UpdateTransmittalAzureUploads(Id, cboDocTypeBulk.SelectedValue, chkPublicBulk.Checked, tbMaxDownloadBulk.Text)
+                        LocalAPI.UpdateTransmittalAzureUploads(Id, cboDocTypeBulk.SelectedValue, chkPublicBulk.Checked, tbMaxDownloadBulk.Text, RadDatePickerExpirationBulk.DbSelectedDate)
                     End If
                 Next
             Else
@@ -262,13 +262,13 @@ Public Class transmittal1
                         item.Selected = False
                         Dim Id = item("Id").Text
                         Dim lblName As Label = CType(item.FindControl("lblNameHide"), Label)
-                        LocalAPI.UpdateTransmittalAzureUploads(Id, cboDocTypeBulk.SelectedValue, chkPublicBulk.Checked, tbMaxDownloadBulk.Text)
+                        LocalAPI.UpdateTransmittalAzureUploads(Id, cboDocTypeBulk.SelectedValue, chkPublicBulk.Checked, tbMaxDownloadBulk.Text, RadDatePickerExpirationBulk.DbSelectedDate)
                     End If
                 Next
             End If
 
         Else
-            LocalAPI.UpdateTransmittalAzureUploads(lblSelectedId.Text, cboDocTypeBulk.SelectedValue, chkPublicBulk.Checked, tbMaxDownloadBulk.Text)
+            LocalAPI.UpdateTransmittalAzureUploads(lblSelectedId.Text, cboDocTypeBulk.SelectedValue, chkPublicBulk.Checked, tbMaxDownloadBulk.Text, RadDatePickerExpirationBulk.DbSelectedDate)
             lblSelectedId.Text = ""
         End If
 

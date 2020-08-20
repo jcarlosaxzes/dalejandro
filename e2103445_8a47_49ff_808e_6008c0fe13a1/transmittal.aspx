@@ -105,6 +105,12 @@
                                     <td>
                                         <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " -- (", Eval("FileType"), ")")%></a>
                                     </td>
+                                    <td style="width:180px;text-align:center">
+                                       <span title="Downloads Restriction"><%# Eval("Download") %>
+                                    </td>
+                                    <td style="width:150px;text-align:center">
+                                       <span title="Expiration Date to Download"><%# Eval("ExpirationDate", "{0:d}") %></span>
+                                    </td>
                                 </tr>
                             </ItemTemplate>
                         </asp:Repeater>

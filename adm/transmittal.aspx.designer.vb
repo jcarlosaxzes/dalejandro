@@ -248,15 +248,6 @@ Partial Public Class transmittal1
     Protected WithEvents chkPublic As Global.Telerik.Web.UI.RadCheckBox
     
     '''<summary>
-    '''lblMaxDownload control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblMaxDownload As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''tbMaxDownload control.
     '''</summary>
     '''<remarks>
@@ -264,6 +255,15 @@ Partial Public Class transmittal1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tbMaxDownload As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''RadDatePickerExpiration control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerExpiration As Global.Telerik.Web.UI.RadDatePicker
     
     '''<summary>
     '''btnSaveUpload control.
@@ -338,15 +338,6 @@ Partial Public Class transmittal1
     Protected WithEvents chkPublicBulk As Global.Telerik.Web.UI.RadCheckBox
     
     '''<summary>
-    '''Label1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''tbMaxDownloadBulk control.
     '''</summary>
     '''<remarks>
@@ -354,6 +345,15 @@ Partial Public Class transmittal1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tbMaxDownloadBulk As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
+    '''RadDatePickerExpirationBulk control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerExpirationBulk As Global.Telerik.Web.UI.RadDatePicker
     
     '''<summary>
     '''btnUpdateStatusFiles control.
