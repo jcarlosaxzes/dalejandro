@@ -836,13 +836,20 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDetails" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="TRANSMITTAL_DETAILS_SELECT" SelectCommandType="StoredProcedure" UpdateCommand="TRANSMITTAL_DETAILS_UPDATE" UpdateCommandType="StoredProcedure" DeleteCommand="TRANSMITTAL_DETAILS_DELETE" DeleteCommandType="StoredProcedure" InsertCommand="TRANSMITTAL_DETAILS_INSERT" InsertCommandType="StoredProcedure">
+        SelectCommand="TRANSMITTAL_DETAILS_SELECT" SelectCommandType="StoredProcedure" 
+        UpdateCommand="TRANSMITTAL_DETAILS_UPDATE" UpdateCommandType="StoredProcedure" 
+        DeleteCommand="TRANSMITTAL_DETAILS_DELETE" DeleteCommandType="StoredProcedure" 
+        InsertCommand="TRANSMITTAL_DETAILS_INSERT" InsertCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:Parameter Name="packageId" Type="Int32" />
+            <asp:Parameter Name="AmountCopy" Type="Int32" />
+            <asp:Parameter Name="Description" Type="String" />
+            <asp:Parameter Name="Signed" Type="Boolean" />
             <asp:ControlParameter ControlID="lblTransmittalId" Name="transmittalId" PropertyName="Text" Type="Int32" />
         </InsertParameters>
         <SelectParameters>

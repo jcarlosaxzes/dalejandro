@@ -81,7 +81,7 @@ Public Class transmittals
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditTransmittal"
-                Response.Redirect("~/ADM/Transmittal.aspx?transmittalId=" & e.CommandArgument & "&BackPage=transmittals")
+                Response.Redirect("~/adm/transmittal.aspx?transmittalId=" & e.CommandArgument & "&BackPage=transmittals")
 
             Case "EmailPickUp"
                 If LocalAPI.EmailReadyToPickUp(e.CommandArgument, lblCompanyId.Text, lblEmployeeEmail.Text, lblEmployeeName.Text) Then
