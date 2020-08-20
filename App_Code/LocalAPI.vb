@@ -24,8 +24,10 @@ Imports System.Text
 Imports System.Web.Script.Serialization
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Converters
+
 Imports Newtonsoft.Json.Linq
 
+Imports HtmlAgilityPack
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
     Public DataBaseSubscriber As String
@@ -6985,7 +6987,23 @@ Public Class LocalAPI
 
             message.Subject = sSubtject
             message.IsBodyHtml = True
-            message.Body = sBody
+
+            ' Correctio for avoid spam, 8-20-2020
+            ' Previuos: message.Body = sBody-----------------------------------------------------------------------
+            Dim mimeTypeHtml = New System.Net.Mime.ContentType("text/html")
+            Dim alternateHTML As AlternateView = AlternateView.CreateAlternateViewFromString(sBody, mimeTypeHtml)
+            message.AlternateViews.Add(alternateHTML)
+
+            ' Convert HTML to Plain Text...........
+            Dim htmlDoc = New HtmlDocument()
+            htmlDoc.LoadHtml(sBody)
+            Dim sBodyPlain As String = htmlDoc.DocumentNode.InnerText
+
+            ' Second email view Plain text
+            Dim mimeTypePlain = New System.Net.Mime.ContentType("text/plain")
+            Dim alternatePlain As AlternateView = AlternateView.CreateAlternateViewFromString(sBodyPlain, mimeTypePlain)
+            message.AlternateViews.Add(alternatePlain)
+            '-------------------------------------------------------------------------------------------------
 
             Dim sFrom As String = sFromMail
             If sFrom.Length = 0 Then sFrom = fromAddr
