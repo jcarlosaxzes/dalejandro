@@ -4,9 +4,16 @@ Imports Microsoft.AspNet.Identity
 Public Class MasterJOB
     Inherits System.Web.UI.MasterPage
     Private Sub MasterJOB_Init(sender As Object, e As EventArgs) Handles Me.Init
-        lblCompanyId.Text = Session("companyId")
-        lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
-        lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+        Try
+
+            lblCompanyId.Text = Session("companyId")
+            lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
+            lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
+
+        Catch ex As Exception
+            '!!! Posible perdida de session
+            ErrorMessage(ex.Message)
+        End Try
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

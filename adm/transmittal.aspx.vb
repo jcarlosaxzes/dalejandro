@@ -8,7 +8,7 @@ Public Class transmittal1
 
                 lblCompanyId.Text = Session("companyId")
                 lblTransmittalId.Text = Request.QueryString("transmittalId")
-                Dim JobId As Integer = LocalAPI.GetTransmittalProperty(lblTransmittalId.Text, "JobId")
+                lblJobId.Text = LocalAPI.GetTransmittalProperty(lblTransmittalId.Text, "JobId")
 
                 lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
@@ -59,7 +59,7 @@ Public Class transmittal1
     End Sub
 
     Protected Sub btnNew_Click(sender As Object, e As EventArgs)
-        SqlDataSourceDetails.Insert()
+        CType(FormView1.FindControl("RadGridEditDetails"), RadGrid).MasterTableView.InsertItem()
     End Sub
 
     Protected Sub SqlDataSourceDetails_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceDetails.Inserted
@@ -122,6 +122,8 @@ Public Class transmittal1
         Select Case lblBackPage.Text
             Case "transmittals"
                 Response.Redirect("~/adm/transmittals.aspx")
+            Case "job_transmittals"
+                Response.Redirect("~/adm/job_transmittals.aspx?jobId=" & lblJobId.Text)
         End Select
 
     End Sub

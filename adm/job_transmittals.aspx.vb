@@ -29,8 +29,7 @@ Public Class job_transmittals
         Select Case e.CommandName
 
             Case "EditTransmittal"
-                sUrl = "~/ADM/Transmittal.aspx?transmittalId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 970, 850, False)
+                Response.Redirect("~/adm/Transmittal.aspx?transmittalId=" & e.CommandArgument & "&BackPage=job_transmittals")
 
             Case "EmailReadyToPickUp"
                 Dim Id = e.CommandArgument
@@ -64,7 +63,7 @@ Public Class job_transmittals
     End Sub
 
     Private Sub SqlDataSourceTransmittals_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceTransmittals.Inserted
-        Dim tID As Integer = e.Command.Parameters("@OUT_Id").Value
-        CreateRadWindows("New", "~/ADM/Transmittal.aspx?transmittalId=" & tID, 970, 850, False)
+        Dim tId As Integer = e.Command.Parameters("@OUT_Id").Value
+        Response.Redirect("~/adm/Transmittal.aspx?transmittalId=" & tId & "&BackPage=job_transmittals")
     End Sub
 End Class
