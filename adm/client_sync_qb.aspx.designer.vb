@@ -11,7 +11,25 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class QueicBooksTestPages
+Partial Public Class client_sync_qb
+
+    '''<summary>
+    '''RadWizardQB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardQB As Global.Telerik.Web.UI.RadWizard
+
+    '''<summary>
+    '''RadWizardStep1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
     '''btnConnect control.
@@ -32,49 +50,13 @@ Partial Public Class QueicBooksTestPages
     Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''SyncPanel control.
+    '''RadWizardStep2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SyncPanel As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''btnGetCustomers control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnGetCustomers As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Label1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''RadGrid1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''RadGridLinked control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridLinked As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
     '''SqlDataSourceClientPending control.

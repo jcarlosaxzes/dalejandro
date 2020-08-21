@@ -533,6 +533,7 @@
     <Content Include="adm\clientsmarketing.aspx" />
     <Content Include="adm\clients_monthlytimeandcosts.aspx" />
     <Content Include="adm\clienttypes.aspx" />
+    <Content Include="adm\client_sync_qb.aspx" />
     <Content Include="adm\company.aspx" />
     <Content Include="adm\companymultiplier.aspx" />
     <Content Include="adm\contact.aspx" />
@@ -3210,6 +3211,13 @@
       <DependentUpon>clienttypes.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\client_sync_qb.aspx.designer.vb">
+      <DependentUpon>client_sync_qb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\client_sync_qb.aspx.vb">
+      <DependentUpon>client_sync_qb.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\company.aspx.designer.vb">
       <DependentUpon>company.aspx</DependentUpon>
     </Compile>
@@ -4181,6 +4189,9 @@
     <Compile Include="App_Code\PayPalUtils\Webhooks\PasConceptSubscriptionWebhook.vb" />
     <Compile Include="App_Code\PayPalUtils\Webhooks\PasConceptWebhook.vb" />
     <Compile Include="App_Code\PdfApi.vb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_Code\qbAPI.vb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="App_Code\SendGrid.vb">
