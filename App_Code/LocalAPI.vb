@@ -9136,6 +9136,56 @@ Public Class LocalAPI
         End Try
     End Function
 
+    ''' <summary>
+    ''' Dynamically builds a SQL query to fetch permissions columns and map them
+    ''' into a Dictionary for further usage. This function is meant to save multiple
+    ''' DB calls and therefore boost whole performance.
+    ''' </summary>
+    ''' <param name="employeeId">Employee's Identifier</param>
+    ''' <returns>Dictionary with ("ColumnName", bool) representing employee's permissions</returns>
+    Public Shared Function GetEmployeePermissions(ByVal employeeId As Integer) As Dictionary(Of String, Boolean)
+        Dim result = New Dictionary(Of String, Boolean)()
+
+        Dim query = "
+            DECLARE @query NVARCHAR(4000);
+            DECLARE @parmDefinition NVARCHAR(500);
+
+            SET @parmDefinition = N'@id int';
+
+            SELECT
+                @query = CONCAT(
+                            'SELECT ',
+                            STRING_AGG(CONCAT('[', COLUMN_NAME, ']'), ', '),
+                            ' FROM [dbo].[Employees] WHERE [ID] = @id')
+            FROM 
+                INFORMATION_SCHEMA.COLUMNS
+            WHERE 
+                TABLE_SCHEMA = 'dbo'
+                AND TABLE_NAME = 'Employees'
+                AND (COLUMN_NAME LIKE 'Deny%' OR COLUMN_NAME LIKE 'Allow%')
+
+
+            EXECUTE sp_executesql @query, @parmDefinition, @id=@employeeId
+            "
+        Using cnn As SqlConnection = GetOpenConnection()
+            Try
+                cnn.Open()
+                Dim cmd = New SqlCommand(query, cnn)
+                cmd.Parameters.AddWithValue("@employeeId", employeeId)
+                Using rdr As SqlDataReader = cmd.ExecuteReader()
+                    rdr.Read()
+                    If rdr.HasRows Then
+                        result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) rdr.GetValue(i))
+                    End If
+                End Using
+            Catch e As Exception
+                Throw e
+            End Try
+        End Using
+
+        Return result
+    End Function
+
     Public Shared Function EmployeePageTracking(ByVal EmployeeId As Integer, ByVal Page As String) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
