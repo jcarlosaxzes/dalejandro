@@ -169,8 +169,15 @@ Public Class ADM_Main_Responsive
     End Function
 
     Public Function EmployeePermission(sOpcion As String) As Boolean
-        If Session(sOpcion) Is Nothing Then
-            Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
+        If Session(sOpcion) Is Nothing And UserId > 0 Then
+            ' Reads all permissions once and updates Session
+            Dim permissions = LocalAPI.GetEmployeePermissions(UserId)
+            For Each kvp In permissions
+                ' Following pattern in `GetEmployeePermissions'
+                ' Negates permissions that starts with "Deny"
+                Session(kvp.Key) = If(kvp.Key.StartsWith("Deny"), Not kvp.Value, kvp.Value)
+            Next
+            ' Session(sOpcion) = LocalAPI.GetEmployeePermission(UserId, sOpcion)
         End If
         Return Session(sOpcion)
     End Function
