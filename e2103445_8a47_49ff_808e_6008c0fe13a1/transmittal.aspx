@@ -34,7 +34,7 @@
                                 <td style="text-align: left;">
                                     <%# Eval("ClientName")%>
                                 </td>
-                                <td style="text-align: right"><b>A/E of Record:</b>
+                                <td style="text-align: right"><b>Professional of Record:</b>
                                 </td>
                                 <td style="text-align: left">
                                     <asp:Label ID="Label11" runat="server" Text='<%# Eval("RecordBy_Name")%>' />

@@ -44,24 +44,15 @@
 
         .checkRtl {
             direction: rtl;
-            padding-top:7px !important;
+            padding-top: 7px !important;
         }
     </style>
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">
-
             <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
                        Back to List
             </asp:LinkButton>
             Transmittal Letter
-            <span style="float: right; vertical-align: middle;">
-                <script type="text/javascript">
-                    function PrintPage(sender, args) {
-                        window.print();
-                    }
-                </script>
-                <button type="button" class="btn btn-secondary noprint" onclick="PrintPage()">Print</button>
-            </span>
         </span>
     </div>
     <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
@@ -89,6 +80,10 @@
                                             OnClick="btnMailDigitalDelivery_Click" Visible='<%# IIf(LocalAPI.GetTransmittalDigitalFilesCount(Eval("Id")) = 0, False, True)%>'>
                                             <i class="far fa-envelope"></i>&nbsp;Digital Notification
                                         </asp:LinkButton>
+                                        <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"), True)%>' target="_blank" title="Print View Transmittal Page" class="btn btn-secondary btn-lg">
+                                            <i style="font-size:medium" class="fas fa-print"></i></a>
+                                        </a>
+
                                         <br />
                                         <table class="table-sm" style="width: 100%; background-color: white">
                                             <tr>
@@ -237,7 +232,7 @@
                             </table>
                             <table class="table-sm" style="width: 100%">
                                 <tr>
-                                    <td style="text-align: right; width: 180px"><b>A/E of Record:</b></td>
+                                    <td style="text-align: right; width: 180px"><b>Professional of Record:</b></td>
                                     <td style="text-align: left">
                                         <telerik:RadComboBox ID="cboEngRecord" runat="server"
                                             DataSourceID="SqlDataSourceEmployee" DataTextField="Name" DataValueField="Id" SelectedValue='<%# Bind("RecordBy")%>'
@@ -327,7 +322,7 @@
                                                             <asp:Label ID="DescriptionLabel" runat="server" Text='<%# Eval("Description")%>'></asp:Label>
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
-                                                    <telerik:GridTemplateColumn DataField="Signed" HeaderText="Signed & Sealed by" UniqueName="Signed"
+                                                    <telerik:GridTemplateColumn DataField="Signed" HeaderText="Signed & Sealed" UniqueName="Signed"
                                                         HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                         <EditItemTemplate>
                                                             <asp:CheckBox ID="SignedCheckBox1" runat="server" Checked='<%# Bind("Signed")%>' />
@@ -636,18 +631,20 @@
                             <%--Upload Files--%>
                             <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Upload Files" StepType="Step">
                                 <asp:Panel ID="UploadPanel" runat="server">
-                                    <div class="pasconcept-bar noprint" style="font-size:small;vertical-align:middle;font-family:sans-serif">
+                                    <div class="pasconcept-bar noprint" style="font-size: small; vertical-align: middle; font-family: sans-serif">
                                         File type: 
                                         <telerik:RadComboBox ID="cboDocType" runat="server" DataSourceID="SqlDataSourceDocTypes" DataTextField="Name" DataValueField="Id" Width="250px">
                                         </telerik:RadComboBox>
                                         &nbsp;&nbsp;
-                                        <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public:" ToolTip="Public or private" AutoPostBack="false" Checked="True"  CssClass="checkRtl">
+                                        <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public:" ToolTip="Public or private" AutoPostBack="false" Checked="True" CssClass="checkRtl">
                                         </telerik:RadCheckBox>
                                         &nbsp;&nbsp;
                                         Max Download:
-                                        <telerik:RadTextBox ID="tbMaxDownload" runat="server" Width="50px" Text="3" />
+                                        <telerik:RadNumericTextBox ID="tbMaxDownload" runat="server" Width="50px" Value="0" MinValue="0" MaxValue="9999">
+                                            <NumberFormat DecimalDigits="0" />
+                                        </telerik:RadNumericTextBox>
                                         Expiration Date:
-                                        <telerik:RadDatePicker ID="RadDatePickerExpiration" runat="server" ZIndex="50001" >
+                                        <telerik:RadDatePicker ID="RadDatePickerExpiration" runat="server" ZIndex="50001">
                                         </telerik:RadDatePicker>
                                         <span style="float: right; vertical-align: middle;">
                                             <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
@@ -769,8 +766,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="width: 180px;text-align:right">
-                    File type:
+                <td style="width: 180px; text-align: right">File type:
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboDocTypeBulk" runat="server" DataSourceID="SqlDataSourceDocTypes" ZIndex="10000" DataTextField="Name" DataValueField="Id" Width="100%">
@@ -778,28 +774,27 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align:right">
-                    Public:
+                <td style="text-align: right">Public:
                 </td>
                 <td>
                     <telerik:RadCheckBox ID="chkPublicBulk" runat="server" ToolTip="Public or private" AutoPostBack="false"></telerik:RadCheckBox>
                 </td>
             </tr>
             <tr>
-                <td style="text-align:right">
-                    Max Download:
+                <td style="text-align: right">Max Download:
                 </td>
                 <td>
-                    <telerik:RadTextBox ID="tbMaxDownloadBulk" runat="server" Width="50px" Text="3" />
+                    <telerik:RadNumericTextBox ID="tbMaxDownloadBulk" runat="server" Width="50px" Value="0" MinValue="0" MaxValue="9999">
+                        <NumberFormat DecimalDigits="0" />
+                    </telerik:RadNumericTextBox>
                 </td>
             </tr>
             <tr>
-                <td style="text-align:right">
-                    Expiration Date:
+                <td style="text-align: right">Expiration Date:
                 </td>
                 <td>
-                     <telerik:RadDatePicker ID="RadDatePickerExpirationBulk" runat="server" ZIndex="50001" >
-                     </telerik:RadDatePicker>
+                    <telerik:RadDatePicker ID="RadDatePickerExpirationBulk" runat="server" ZIndex="50001">
+                    </telerik:RadDatePicker>
                 </td>
             </tr>
             <tr>

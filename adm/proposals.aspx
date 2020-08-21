@@ -349,10 +349,14 @@
                     <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="columnEmail" AllowFiltering="False"
                         ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="130px">
                         <ItemTemplate>
-                            <div style="font-size:x-small;">
+                            <div style="font-size: x-small;">
                                 <asp:LinkButton runat="server" ID="btnSendProposal" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Proposal information">
                                     <i style="font-size:small;vertical-align:middle" class="far fa-envelope"></i>
                                 </asp:LinkButton>
+                                <a href='<%# LocalAPI.GetSharedLink_URL(111, Eval("Id"), True)%>' target="_blank" title="Print View Proposal Page">
+                                    <i style="font-size:small;vertical-align:middle" class="fas fa-print"></i></a>
+                                </a>
+
                                 &nbsp;
                                 <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
                                     <%#Eval("Emitted")%>

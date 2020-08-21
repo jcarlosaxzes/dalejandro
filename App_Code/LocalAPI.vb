@@ -10373,7 +10373,7 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function GetSharedLink_URL(ByVal objType As Integer, objId As Integer) As String
+    Public Shared Function GetSharedLink_URL(ByVal objType As Integer, objId As Integer, Optional PrintParameter As Boolean = False) As String
         '@objType:  1:Proposal;   2:Job;   3:RFP;    4:Invoice;    5:Statement  55: Statement in /e2103445_8a47_49ff_808e_6008c0fe13a1
         Try
             Dim url As String = ""
@@ -10436,6 +10436,9 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/adm/Proposals.aspx?rfpGUID=" & LocalAPI.GetRFPProperty(objId, "guid")
 
                 End Select
+                If PrintParameter Then
+                    url = url & "&Print=1"
+                End If
             End If
 
             Return url

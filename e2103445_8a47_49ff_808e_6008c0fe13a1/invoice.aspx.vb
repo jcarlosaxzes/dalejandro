@@ -94,6 +94,10 @@ Public Class invoice
                     LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblInvoiceId.Text, Request.UserHostAddress())
                 End If
 
+                If Not Request.QueryString("Print") Is Nothing Then
+                    Response.Write("<script>window.print();</script>")
+                End If
+
             End If
         End If
     End Sub
