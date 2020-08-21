@@ -8,6 +8,7 @@ Imports System.Linq
 Imports Intuit.Ipp.Security
 Imports Newtonsoft.Json
 Imports System.Data.SqlClient
+Imports System.Data
 Imports Intuit.Ipp.OAuth2PlatformClient
 
 Public Class qbAPI
@@ -69,6 +70,103 @@ Public Class qbAPI
         End Try
         Return False
     End Function
+
+    Public Shared Sub LoadQBCustomers(comapyId As String)
+        Dim dt As New DataTable()
+        dt.Columns.Add(New DataColumn("companyId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("QBId", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("QBCompany", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("DisplayName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Email", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Title", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("GivenName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("MiddleName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("FamilyName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("PrintOnCheckName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("CompanyName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("City", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("PostalCode", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Addr_Line1", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Addr_Line2", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Addr_Line3", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Mobile", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("PrimaryPhone", Type.GetType("System.String")))
+
+        Dim PrimaryKeyColumns As DataColumn() = New DataColumn(0) {}
+        PrimaryKeyColumns(0) = dt.Columns("DisplayName")
+        dt.PrimaryKey = PrimaryKeyColumns
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(comapyId)
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim customerQueryService As QueryService(Of Customer) = New QueryService(Of Customer)(serviceContext)
+            Dim Customers = customerQueryService.ExecuteIdsQuery("Select * From Customer")
+
+            LocalAPI.ExecuteNonQuery(" delete [dbo].[Clients_SyncQB] where companyId = " & comapyId)
+
+            For Each customerObj As Customer In Customers
+
+                Dim row As DataRow = dt.NewRow()
+                row("companyId") = comapyId
+                row("QBId") = customerObj.Id
+                row("QBCompany") = qbCompanyId
+                row("DisplayName") = customerObj.DisplayName
+                row("Email") = customerObj.PrimaryEmailAddr?.Address
+                row("Title") = customerObj.Title
+                row("GivenName") = customerObj.GivenName
+                row("MiddleName") = customerObj.MiddleName
+                row("FamilyName") = customerObj.FamilyName
+                row("PrintOnCheckName") = customerObj.PrintOnCheckName
+                row("CompanyName") = customerObj.CompanyName
+                row("City") = customerObj.BillAddr?.City
+                row("PostalCode") = customerObj.BillAddr?.PostalCode
+                row("Addr_Line1") = customerObj.BillAddr?.Line1
+                row("Addr_Line2") = customerObj.BillAddr?.Line2
+                row("Addr_Line3") = customerObj.BillAddr?.Line3
+                row("Mobile") = customerObj.Mobile?.FreeFormNumber
+                row("PrimaryPhone") = customerObj.PrimaryPhone?.FreeFormNumber
+
+                dt.Rows.Add(row)
+
+            Next
+
+
+            'insert into SQL
+
+            Dim objbulk As SqlBulkCopy = New SqlBulkCopy(LocalAPI.GetConnection())
+            objbulk.ColumnMappings.Add("companyId", "companyId")
+            objbulk.ColumnMappings.Add("QBId", "QBId")
+            objbulk.ColumnMappings.Add("QBCompany", "QBCompany")
+            objbulk.ColumnMappings.Add("DisplayName", "DisplayName")
+            objbulk.ColumnMappings.Add("Email", "Email")
+            objbulk.ColumnMappings.Add("Title", "Title")
+            objbulk.ColumnMappings.Add("GivenName", "GivenName")
+            objbulk.ColumnMappings.Add("MiddleName", "MiddleName")
+            objbulk.ColumnMappings.Add("FamilyName", "FamilyName")
+            objbulk.ColumnMappings.Add("PrintOnCheckName", "PrintOnCheckName")
+            objbulk.ColumnMappings.Add("CompanyName", "CompanyName")
+            objbulk.ColumnMappings.Add("City", "City")
+            objbulk.ColumnMappings.Add("PostalCode", "PostalCode")
+            objbulk.ColumnMappings.Add("Addr_Line1", "Addr_Line1")
+            objbulk.ColumnMappings.Add("Addr_Line2", "Addr_Line2")
+            objbulk.ColumnMappings.Add("Addr_Line3", "Addr_Line3")
+            objbulk.ColumnMappings.Add("Mobile", "Mobile")
+            objbulk.ColumnMappings.Add("PrimaryPhone", "PrimaryPhone")
+
+            objbulk.DestinationTableName = "Clients_SyncQB"
+            objbulk.WriteToServer(dt)
+
+
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+        End Try
+
+
+    End Sub
+
+
+
+
 
     Public Shared Function GetDataService(companyID As String, accessToken As String, accessTokenSecret As String) As DataService
         Try
