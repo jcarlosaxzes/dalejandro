@@ -254,7 +254,7 @@ Partial Public Class transmittal1
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbMaxDownload As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents tbMaxDownload As Global.Telerik.Web.UI.RadNumericTextBox
     
     '''<summary>
     '''RadDatePickerExpiration control.
@@ -344,7 +344,7 @@ Partial Public Class transmittal1
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents tbMaxDownloadBulk As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents tbMaxDownloadBulk As Global.Telerik.Web.UI.RadNumericTextBox
     
     '''<summary>
     '''RadDatePickerExpirationBulk control.

@@ -139,6 +139,9 @@ Public Class singproposalsign
                     If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> CompanyId Then
                         LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblProposalId.Text, Request.UserHostAddress())
                     End If
+                    If Not Request.QueryString("Print") Is Nothing Then
+                        Response.Write("<script>window.print();</script>")
+                    End If
 
                 End If
 

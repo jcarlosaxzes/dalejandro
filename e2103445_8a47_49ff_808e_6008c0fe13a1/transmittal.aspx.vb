@@ -21,6 +21,11 @@ Public Class transmittal
 
                     CType(FormView1.FindControl("PanelDigitalFiles"), Panel).Visible = IIf(LocalAPI.GetTransmittalDigitalFilesCount(lblTransmittalId.Text) > 0, True, False)
 
+                    If Not Request.QueryString("Print") Is Nothing Then
+                        Response.Write("<script>window.print();</script>")
+                    End If
+
+
                 End If
 
             End If
