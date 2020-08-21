@@ -250,7 +250,7 @@
                                                     <telerik:NavigationNode NavigateUrl="~/adm/ClientsMap" Text="Clients Map"
                                                         Visible='<%# EmployeePermission("Deny_Clientmap") %>'>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/projectSchedule" Text="Project Schedule"
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/projectSchedule" Text="Gantt Chart"
                                                         Visible='<%# EmployeePermission("Deny_AnalyticCharts") %>'>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/TopTen" Text="Top Ten Charts"
