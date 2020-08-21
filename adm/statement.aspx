@@ -163,7 +163,7 @@
                 }
             </script>
         </telerik:RadCodeBlock>
-        <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AutoGenerateColumns="False" 
+        <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticUpdates="True" AutoGenerateColumns="False"
             DataSourceID="SqlDataSource1" AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowSorting="True" Height="1500px"
             PageSize="50" AllowPaging="true" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
             FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
@@ -212,7 +212,7 @@
                             <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
                                 <%#Eval("Emitted")%>
                             </span>
-                             <span title="Number of client visits to Statement Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                            <span title="Number of client visits to Statement Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
                                 <%#Eval("clientvisits")%>
                             </span>
 
@@ -240,34 +240,26 @@
                     <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="column" AllowFiltering="False"
                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                         <ItemTemplate>
-                            <table style="width: 100%">
-                                <tr>
-                                    <td style="width: 33%; text-align: center">
-                                        <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Statement information">
+                            <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Statement information">
                                                     <i class="far fa-envelope"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <asp:LinkButton ID="btnPrintStatement" runat="server" UseSubmitBehavior="false" ToolTip="Print Statement"
-                                            CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="true">
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="btnPrintStatement" runat="server" UseSubmitBehavior="false" ToolTip="Print Statement"
+                                CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="false">
                                                 <i class="far fa-file-pdf"></i></a>
-                                        </asp:LinkButton>
-                                    </td>
+                            </asp:LinkButton>
+                            <a href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"), True)%>' target="_blank" title="Print View Proposal Page">
+                                <i style="font-size: small; vertical-align: middle" class="fas fa-print"></i></a>
+                            </a>
 
-                                    <td style="width: 33%; text-align: center">
-                                        <a class="far fa-share-square" title="View Statement Page to share link"
-                                           href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"))%>'  target="_blank" aria-hidden="true"></a>
-
-                                    </td>
-                                    <td style="text-align: center">
-                                        <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
-                                            ToolTip="Recive Payments" Visible='<%# Eval("AmountDue") > 0 %>'
-                                            CssClass="badge-success label">
+                            <a class="far fa-share-square" title="View Statement Page to share link"
+                                            href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"))%>' target="_blank" aria-hidden="true"></a>
+                            
+                            <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
+                                ToolTip="Recive Payments" Visible='<%# Eval("AmountDue") > 0 %>'
+                                CssClass="badge-success badge">
                                                     <i class="fas fa-dollar-sign"></i>
-                                        </asp:LinkButton>
-                                    </td>
-                                </tr>
-                            </table>
+                            </asp:LinkButton>
+
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Statement?" ConfirmTitle="Delete"

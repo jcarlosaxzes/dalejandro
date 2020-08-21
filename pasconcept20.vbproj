@@ -51,6 +51,9 @@
     <Reference Include="AspNet.ScriptManager.bootstrap, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\AspNet.ScriptManager.bootstrap.4.5.0\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Hyak.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Hyak.Common.1.0.2\lib\net45\Hyak.Common.dll</HintPath>
     </Reference>
@@ -636,6 +639,7 @@
     <Content Include="adm\sendproposal.aspx" />
     <Content Include="adm\sendstatement.aspx" />
     <Content Include="adm\sendticketpage.aspx" />
+    <Content Include="adm\sendtransmittal.aspx" />
     <Content Include="adm\settingstatus.aspx" />
     <Content Include="adm\sharelink.aspx" />
     <Content Include="adm\signature.aspx" />
@@ -3939,6 +3943,13 @@
       <DependentUpon>sendticketpage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\sendtransmittal.aspx.designer.vb">
+      <DependentUpon>sendtransmittal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\sendtransmittal.aspx.vb">
+      <DependentUpon>sendtransmittal.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\settingstatus.aspx.designer.vb">
       <DependentUpon>settingstatus.aspx</DependentUpon>
     </Compile>
@@ -4789,7 +4800,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

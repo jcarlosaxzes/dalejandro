@@ -87,6 +87,9 @@ Public Class statement1
                 If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> companyId Then
                     LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblStatementId.Text, Request.UserHostAddress())
                 End If
+                If Not Request.QueryString("Print") Is Nothing Then
+                    Response.Write("<script>window.print();</script>")
+                End If
 
             End If
         End If

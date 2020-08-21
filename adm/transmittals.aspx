@@ -54,20 +54,27 @@
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
-                    <td width="110px" align="left">
-                        <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
-                            DataValueField="Year" Width="100%" AppendDataBoundItems="True">
+                    <td style="width:150px; text-align:right">
+                        Period:
+                    </td>
+                    <td style="width:200px;">
+                        <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="(All Years...)" Value="0" />
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30"  />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90"  />
+                                <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                                <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                                <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                                <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
+                                <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
+                                <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                                <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
                         </telerik:RadComboBox>
+
                     </td>
-                    <td width="140px" align="left">
-                        <telerik:RadComboBox ID="cboMes" runat="server" DataSourceID="SqlDataSourceMes"
-                            DataTextField="Month" DataValueField="id" Width="100%">
-                        </telerik:RadComboBox>
-                    </td>
-                    <td width="350px">
+                    <td style="width:350px;">
                         <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl"
                             Width="100%" DataTextField="Name" DataValueField="Id"
                             MarkFirstMatch="True" Filter="Contains"
@@ -87,7 +94,10 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                     <td style="text-align:right">
+                        Client:
+                    </td>
+                    <td colspan="2">
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
                             Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
                             Height="300px" AppendDataBoundItems="true">
@@ -211,9 +221,12 @@
                         ItemStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="nStatus" HeaderText="Status" SortExpression="nStatus" ReadOnly="true"
-                        UniqueName="nStatus" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="140px">
+                        UniqueName="nStatus" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <asp:Label ID="nStatusLabel" runat="server" Text='<%# Eval("nStatus")%>'></asp:Label>
+                            <div style="font-size: 12px; width: 100%"
+                                class='<%# LocalAPI.GetTransmittalStatusLabelCSS(Eval("Status")) %>'>
+                                <%# Eval("nStatus") %>
+                            </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="Budget" DataFormatString="{0:N0}"
@@ -237,10 +250,13 @@
                                 <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
                                     <i style="font-size:small;" class="far fa-share-square"></i></a>
                                 </a>
-                                &nbsp;        
-                                <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="Email" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
-                                    UseSubmitBehavior="false" Enabled='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
+                                <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="EmailEmailPickUp" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
+                                    UseSubmitBehavior="false" Visible='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
                                        <i style="font-size:small;" class="far fa-envelope"></i>
+                                </asp:LinkButton>
+                                <asp:LinkButton ID="btnSendEmail2" runat="server" CommandName="EmailDeliveryTransmittalDigital" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Transmittal Digital Delivery Notification"
+                                    UseSubmitBehavior="false" Visible='<%# IIf(LocalAPI.GetTransmittalDigitalFilesCount(Eval("Id")) = 0, False, True)%>'>
+                                       <i style="font-size:small;color:olivedrab" class="far fa-envelope"></i>
                                 </asp:LinkButton>
                                 &nbsp;
                                 <span title="Number of Packages" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
@@ -252,10 +268,10 @@
                             </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
+                   <%-- <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                         CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                         HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
-                    </telerik:GridButtonColumn>
+                    </telerik:GridButtonColumn>--%>
                 </Columns>
                 <EditFormSettings CaptionFormatString="Add Transmittal" PopUpSettings-Width="700px" EditFormType="Template">
                     <EditColumn ButtonType="PushButton">
@@ -298,7 +314,7 @@
     <asp:SqlDataSource ID="SqlDataSourceTransmittals" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Transmittals_v20_SELECT" SelectCommandType="StoredProcedure"
         InsertCommand="Transmittal_INSERT" InsertCommandType="StoredProcedure"
-        DeleteCommand="DELETE FROM Transmittals WHERE Id=@Id">
+        DeleteCommand="Transmittal_DELETE" DeleteCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" />
         </DeleteParameters>

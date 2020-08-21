@@ -230,11 +230,11 @@
                                 <%#Eval("clientvisits")%>
                             </span>
                             <br />
-                            <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'> <%# Eval("pastdue_status") %></div>
+                            <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Amount" HeaderText="Amount" SortExpression="Amount" UniqueName="Amount"
-                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}" 
+                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}"
                         HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                         <ItemTemplate>
                             <%# Eval("Amount", "{0:N2}") %>
@@ -252,31 +252,29 @@
                     <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Invoice Description" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"
                         UniqueName="InvoiceNotes">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="160px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnInvoiceInv44" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id") %>'
                                 ToolTip="Send Email with Invoice information" CausesValidation="false">
                                         <i class="far fa-envelope"></i>
                             </asp:LinkButton>
 
-                            &nbsp;
-                                    <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
-                                        CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="true">
+                            <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
+                                CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="false">
                                             <i class="far fa-file-pdf"></i></a>
-                                    </asp:LinkButton>
-
-                            &nbsp;
-                                    <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"))%>' target="_blank" aria-hidden="true"></a>
-                            &nbsp;
-                                    <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
-                                        ToolTip="Add Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
+                            </asp:LinkButton>
+                            <a href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"), True)%>' target="_blank" title="Print View Proposal Page">
+                                <i style="font-size: small; vertical-align: middle" class="fas fa-print"></i></a>
+                            </a>
+                            <a class="far fa-share-square" title="View Invoice Page to share link" href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"))%>' target="_blank" aria-hidden="true"></a>
+                            <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
+                                ToolTip="Recive Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
                                         <i class="fas fa-dollar-sign"></i>
-                                    </asp:LinkButton>
-                            &nbsp;
-                                    <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger badge" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
-                                        ToolTip="Mark Invoice as BadDept" CausesValidation="false">
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger badge" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt") = 0%>'
+                                ToolTip="Mark Invoice as BadDept" CausesValidation="false">
                                         <i class="fas fa-dollar-sign"></i>
-                                    </asp:LinkButton>
+                            </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Invoice?" ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"

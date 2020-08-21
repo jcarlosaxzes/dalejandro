@@ -477,7 +477,7 @@
                             </telerik:GridTemplateColumn>
 
                             <%--PM - Employees--%>
-                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName" HeaderStyle-Width="200px"
+                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName" 
                                 UniqueName="EmployeeName" AllowFiltering="true">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
@@ -490,7 +490,7 @@
                             </telerik:GridTemplateColumn>
 
                             <%--Collected - Used--%>
-                            <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected - Used" SortExpression="Profit"
+                            <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected - Used" SortExpression="Profit" HeaderStyle-Width="220px"
                                 UniqueName="Profit" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Budget Collected / Budget Used" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">

@@ -1,5 +1,6 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal" %>
+﻿<%@ Page Language="vb" Title="PASconcept. Transmittal Letter" AutoEventWireup="false" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.Master" CodeBehind="transmittal.aspx.vb" Inherits="pasconcept20.transmittal" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/ClientPortalMP.master" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
@@ -8,71 +9,61 @@
     <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
         <ItemTemplate>
             <div style="text-align: center; padding-top: 10px; background-color: white">
-                <h1>TRANSMITTAL LETTER</h1>
+                <h2 style="margin: 0"><span class="navbar navbar-expand-md bg-dark text-white d-print-flex">Transmittal Letter</span></h2>
             </div>
 
-            <table class="table-sm" style="width: 100%;" >
+            <table class="table-sm" style="width: 100%;">
                 <tr>
                     <td style="vertical-align: top">
                         <table class="table-sm" style="width: 100%;">
                             <tr>
-                                <td style="text-align: right; width: 150px"><b>Transmittal ID:</b>
+                                <td style="text-align: right; width: 180px"><b>Transmittal ID:</b>
                                 </td>
                                 <td style="text-align: left">
                                     <%# Eval("TransmittalID")%>
+                                </td>
+                                <td style="text-align: right; width: 150px"><b>Date Created:</b>
+                                </td>
+                                <td style="text-align: left;">
+                                    <%# Eval("TransmittalDate", "{0:d}")%>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="text-align: right;"><b>Client Name:</b>
                                 </td>
                                 <td style="text-align: left;">
-                                    <asp:Label ID="Label4" runat="server" Text='<%# Eval("ClientName")%>' />
+                                    <%# Eval("ClientName")%>
                                 </td>
-
-                            </tr>
-
-                            <tr>
-                                <td style="text-align: right;"><b>Date Created:</b>
-                                </td>
-                                <td style="text-align: left;">
-                                    <asp:Label ID="Label3" runat="server" Text='<%# Eval("TransmittalDate", "{0:d}")%>' />
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td style="text-align: right;"><b>Job No. & Name:</b>
-                                </td>
-                                <td style="text-align: left">
-                                    <asp:Label ID="Label9" runat="server" Text='<%# Eval("JobNo")%>' />
-                                    &nbsp;&nbsp;&nbsp;
-                                    <asp:Label ID="Label10" runat="server" Text='<%# Eval("JobName")%>' />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right"><b>A/E of Record:</b>
+                                <td style="text-align: right"><b>Professional of Record:</b>
                                 </td>
                                 <td style="text-align: left">
                                     <asp:Label ID="Label11" runat="server" Text='<%# Eval("RecordBy_Name")%>' />
                                 </td>
                             </tr>
                             <tr>
+                                <td style="text-align: right;"><b>Project:</b>
+                                </td>
+                                <td style="text-align: left">
+                                    <%# Eval("JobName")%>
+                                </td>
                                 <td style="text-align: right;"><b>Status:</b>
                                 </td>
                                 <td style="text-align: left">
-                                    <asp:Label ID="ProposalNumberLabel" runat="server" Text='<%# Eval("nStatus")%>' />
+                                    <%# Eval("nStatus")%>
                                 </td>
                             </tr>
+
                         </table>
                     </td>
-                    <td style="vertical-align: top; text-align: center; width:250px">
+                    <td style="vertical-align: top; text-align: center; width: 250px">
                         <div>
-                            <asp:Label ID="lblTitle1" runat="server" Text="Sign on your mobile device" Font-Bold="true" Font-Size="Small"  Visible='<%# Eval("Status") = 1 %>'/>
+                            <asp:Label ID="lblTitle1" runat="server" Text="Sign on your mobile device" Font-Bold="true" Font-Size="Small" Visible='<%# Eval("Status") = 1 %>' />
                             <br />
                             <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Text="" Height="140px" Width="140px" Style="margin-left: 30px" OutputType="EmbeddedPNG" Visible='<%# Eval("Status") = 1 %>'>
                                 <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />
                             </telerik:RadBarcode>
                             <br />
-                            <asp:Label ID="lblTitle2" runat="server" Text="Scan the QR code with your mobile device's camara or with a QR code reader app" Font-Italic="true" Font-Size="Small"  Visible='<%# Eval("Status") = 1 %>'/>
+                            <asp:Label ID="lblTitle2" runat="server" Text="Scan the QR code with your mobile device's camara or with a QR code reader app" Font-Italic="true" Font-Size="Small" Visible='<%# Eval("Status") = 1 %>' />
 
                         </div>
                     </td>
@@ -88,10 +79,7 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridTemplateColumn DataField="PakageContent" HeaderText="Package Content" UniqueName="PakageContent" ItemStyle-HorizontalAlign="Left">
                                         <ItemTemplate>
-                                            <%# Eval("PakageContent") %>
-                                            <p>
-                                                <%# Eval("Description") %>
-                                            </p>
+                                            <b><%# Eval("PakageContent") %></b> <%# Eval("Description") %>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridTemplateColumn DataField="Signed" HeaderText="Signed & Sealed" UniqueName="Signed"
@@ -106,10 +94,34 @@
                     </td>
                 </tr>
             </table>
+            <asp:Panel runat="server" ID="PanelDigitalFiles">
+                <br />
+                <h4 style="text-align:left">Documents(s)</h4>
+                <div class="table-responsive" style="text-align:left">
+                    <table class="table">
+                        <asp:Repeater ID="rptrSharedPublicLinks" runat="server" DataSourceID="SqlDataSourceFiles">
+                            <ItemTemplate>
+                                <tr>
+                                    <td>
+                                        <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " -- (", Eval("FileType"), ")")%></a>
+                                    </td>
+                                    <td style="width:180px;text-align:center">
+                                       <span title="Downloads Restriction"><%# Eval("Download") %>
+                                    </td>
+                                    <td style="width:150px;text-align:center">
+                                       <span title="Expiration Date to Download"><%# Eval("ExpirationDate", "{0:d}") %></span>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </table>
+                </div>
+               
+            </asp:Panel>
 
             <table class="table-sm" style="width: 100%;">
                 <tr>
-                    <td style="text-align: right; width: 150px;">
+                    <td style="text-align: right; width: 180px;">
                         <b>Notes:</b>
                     </td>
                     <td colspan="2">
@@ -158,7 +170,7 @@
     </asp:FormView>
 
     <p style="text-align: right; padding-top: 25px; padding-right: 20px; font-family: Calibri; font-size: xx-small; font-style: italic">
-        This Transmittal was made &amp; sent using PASconcept ( www.pasconcept.com ) 
+        This Transmittal was made &amp; sent using <a href="https://pasconcept.com/" target="_blank">pasconcept.com</a>
     </p>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="TRANSMITTAL_SELECT" SelectCommandType="StoredProcedure">
@@ -181,6 +193,14 @@
             <asp:ControlParameter ControlID="lblTransmittalId" Name="TransmittalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Transmittal_Files_for_Client_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="lblTransmittalId" Name="TransmittalId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblTransmittalId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblguid" runat="server" Visible="False"></asp:Label>

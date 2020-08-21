@@ -24,8 +24,10 @@ Imports System.Text
 Imports System.Web.Script.Serialization
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Converters
+
 Imports Newtonsoft.Json.Linq
 
+Imports HtmlAgilityPack
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
     Public DataBaseSubscriber As String
@@ -6985,7 +6987,23 @@ Public Class LocalAPI
 
             message.Subject = sSubtject
             message.IsBodyHtml = True
-            message.Body = sBody
+
+            ' Correctio for avoid spam, 8-20-2020
+            ' Previuos: message.Body = sBody-----------------------------------------------------------------------
+            Dim mimeTypeHtml = New System.Net.Mime.ContentType("text/html")
+            Dim alternateHTML As AlternateView = AlternateView.CreateAlternateViewFromString(sBody, mimeTypeHtml)
+            message.AlternateViews.Add(alternateHTML)
+
+            ' Convert HTML to Plain Text...........
+            Dim htmlDoc = New HtmlDocument()
+            htmlDoc.LoadHtml(sBody)
+            Dim sBodyPlain As String = htmlDoc.DocumentNode.InnerText
+
+            ' Second email view Plain text
+            Dim mimeTypePlain = New System.Net.Mime.ContentType("text/plain")
+            Dim alternatePlain As AlternateView = AlternateView.CreateAlternateViewFromString(sBodyPlain, mimeTypePlain)
+            message.AlternateViews.Add(alternatePlain)
+            '-------------------------------------------------------------------------------------------------
 
             Dim sFrom As String = sFromMail
             If sFrom.Length = 0 Then sFrom = fromAddr
@@ -9118,6 +9136,56 @@ Public Class LocalAPI
         End Try
     End Function
 
+    ''' <summary>
+    ''' Dynamically builds a SQL query to fetch permissions columns and map them
+    ''' into a Dictionary for further usage. This function is meant to save multiple
+    ''' DB calls and therefore boost whole performance.
+    ''' </summary>
+    ''' <param name="employeeId">Employee's Identifier</param>
+    ''' <returns>Dictionary with ("ColumnName", bool) representing employee's permissions</returns>
+    Public Shared Function GetEmployeePermissions(ByVal employeeId As Integer) As Dictionary(Of String, Boolean)
+        Dim result = New Dictionary(Of String, Boolean)()
+
+        Dim query = "
+            DECLARE @query NVARCHAR(4000);
+            DECLARE @parmDefinition NVARCHAR(500);
+
+            SET @parmDefinition = N'@id int';
+
+            SELECT
+                @query = CONCAT(
+                            'SELECT ',
+                            STRING_AGG(CONCAT('[', COLUMN_NAME, ']'), ', '),
+                            ' FROM [dbo].[Employees] WHERE [ID] = @id')
+            FROM 
+                INFORMATION_SCHEMA.COLUMNS
+            WHERE 
+                TABLE_SCHEMA = 'dbo'
+                AND TABLE_NAME = 'Employees'
+                AND (COLUMN_NAME LIKE 'Deny%' OR COLUMN_NAME LIKE 'Allow%')
+
+
+            EXECUTE sp_executesql @query, @parmDefinition, @id=@employeeId
+            "
+        Using cnn As SqlConnection = GetOpenConnection()
+            Try
+                cnn.Open()
+                Dim cmd = New SqlCommand(query, cnn)
+                cmd.Parameters.AddWithValue("@employeeId", employeeId)
+                Using rdr As SqlDataReader = cmd.ExecuteReader()
+                    rdr.Read()
+                    If rdr.HasRows Then
+                        result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) rdr.GetValue(i))
+                    End If
+                End Using
+            Catch e As Exception
+                Throw e
+            End Try
+        End Using
+
+        Return result
+    End Function
+
     Public Shared Function EmployeePageTracking(ByVal EmployeeId As Integer, ByVal Page As String) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -10355,7 +10423,7 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function GetSharedLink_URL(ByVal objType As Integer, objId As Integer) As String
+    Public Shared Function GetSharedLink_URL(ByVal objType As Integer, objId As Integer, Optional PrintParameter As Boolean = False) As String
         '@objType:  1:Proposal;   2:Job;   3:RFP;    4:Invoice;    5:Statement  55: Statement in /e2103445_8a47_49ff_808e_6008c0fe13a1
         Try
             Dim url As String = ""
@@ -10418,6 +10486,9 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/adm/Proposals.aspx?rfpGUID=" & LocalAPI.GetRFPProperty(objId, "guid")
 
                 End Select
+                If PrintParameter Then
+                    url = url & "&Print=1"
+                End If
             End If
 
             Return url
@@ -11433,6 +11504,9 @@ Public Class LocalAPI
         End Select
     End Function
 
+    Public Shared Function GetTransmittalDigitalFilesCount(transmittalId As Integer) As Integer
+        Return GetNumericEscalar(String.Format($"select count(*) from (select Id FROM [dbo].[Azure_Uploads] WHERE EntityType='Transmittal' AND EntityId={transmittalId} AND isnull([Public],0)=1	union all select Id FROM [Jobs_links] where isnull(TransmittalId,0)={transmittalId})T"))
+    End Function
     Public Shared Function TransmittalNumber(ByVal Id As Integer) As String
         Return GetStringEscalar("SELECT dbo.TransmittalNumber(" & Id & ")")
     End Function
@@ -11444,6 +11518,21 @@ Public Class LocalAPI
         SetJobStatus(jobId, 7, employeeId, companyId, 0)
 
     End Function
+
+    Public Shared Function GetTransmittalStatusLabelCSS(ByVal statusId As Integer) As String
+        Select Case statusId
+            Case 0  'Not Ready
+                Return "badge badge-warning statuslabel"
+            Case 1  'Ready for Pick Up
+                Return "badge badge-danger statuslabel"
+            Case 2  'Picked Up
+                Return "badge badge-success statuslabel"
+            Case Else
+                Return "badge badge-secondary statuslabel"
+        End Select
+
+    End Function
+
 
     Public Shared Function EmailJobInactive(ByVal jobId As Integer, employeeId As Integer, ByVal companyId As Integer) As Boolean
         Try
@@ -12253,6 +12342,56 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function AzureStorage_Insert_Transmittal(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, maxDownload As Integer, ExpirationDate As DateTime) As Boolean
+        Try
+            If Not ExistAzureFile(EntityId, EntityType, FileName, ContentBytes) Then
+
+                ' Analisis de type en funcion del ContentType 
+                'Type = 9  Images
+                'If ContentType = "image/jpeg" Or ContentType = "image/png" Then
+                '    Type = 9
+                'End If
+
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+
+                Dim cnn1 As SqlConnection = GetConnection()
+                Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                ' Setup the command to execute the stored procedure.
+                cmd.CommandText = "Transmital_azureuploads_v20_INSERT"
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.AddWithValue("@EntityId", EntityId)
+                cmd.Parameters.AddWithValue("@Type", Type)
+                cmd.Parameters.AddWithValue("@FileName", FileName)
+                cmd.Parameters.AddWithValue("@KeyName", KeyName)
+                cmd.Parameters.AddWithValue("@Public", bPublic)
+                cmd.Parameters.AddWithValue("@ContentType", ContentType)
+                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+                cmd.Parameters.AddWithValue("@EntityType", EntityType)
+                cmd.Parameters.AddWithValue("@FileType", fileType)
+                cmd.Parameters.AddWithValue("@companyId", companyId)
+                cmd.Parameters.AddWithValue("@MaxDownload", maxDownload)
+                If Not (ExpirationDate = Nothing) Then
+                    cmd.Parameters.AddWithValue("@ExpirationDate", ExpirationDate)
+                Else
+                    cmd.Parameters.AddWithValue("@ExpirationDate", DBNull.Value)
+                End If
+
+                cmd.ExecuteNonQuery()
+
+                cnn1.Close()
+
+                Return True
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
     Public Shared Function AzureStorageGuid_Insert(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, guid As String) As Boolean
         Try
@@ -12332,6 +12471,32 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Name", Name)
             cmd.Parameters.AddWithValue("@Type", Type)
             cmd.Parameters.AddWithValue("@Public", sPublic)
+            cmd.Parameters.AddWithValue("@Id", Id)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function UpdateTransmittalAzureUploads(Id As Integer, Type As Integer, sPublic As Boolean, MaxDownload As Integer, ExpirationDate As DateTime) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Transmital_AzureUploads_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@Type", Type)
+            cmd.Parameters.AddWithValue("@Public", sPublic)
+            cmd.Parameters.AddWithValue("@MaxDownload", MaxDownload)
+            If Not (ExpirationDate = Nothing) Then
+                cmd.Parameters.AddWithValue("@ExpirationDate", ExpirationDate)
+            Else
+                cmd.Parameters.AddWithValue("@ExpirationDate", DBNull.Value)
+            End If
+
             cmd.Parameters.AddWithValue("@Id", Id)
             cmd.ExecuteNonQuery()
             cnn1.Close()
