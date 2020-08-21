@@ -9175,7 +9175,7 @@ Public Class LocalAPI
                 Using rdr As SqlDataReader = cmd.ExecuteReader()
                     rdr.Read()
                     If rdr.HasRows Then
-                        result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) rdr.GetValue(i))
+                        result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) IIf(TypeOf rdr.GetValue(i) Is DBNull, 0, rdr.GetValue(i)))
                     End If
                 End Using
             Catch e As Exception
@@ -12141,18 +12141,46 @@ Public Class LocalAPI
         Return GetStringEscalar("SELECT isnull([qbCompnyID],'') FROM Company where companyId=" & companyId)
     End Function
 
-    Public Shared Function SetqbAccessToken(companyId As Integer, AccessToken As String) As Boolean
+    Public Shared Function GetqbCustomer(QBId As Integer) As Dictionary(Of String, Object)
+
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand("select * from [Clients_SyncQB] where [QBId] = " & QBId, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            Dim val = reader.GetValue(lp)
+                            If TypeOf val Is DBNull Then
+                                val = ""
+                            End If
+                            result.Add(reader.GetName(lp), val)
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+    Public Shared Function SetqbAccessToken(companyId As Integer, AccessToken As String, AccessTokenExpiresIn As Long) As Boolean
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "UPDATE Company Set qbAccessToken=@qbAccessToken WHERE companyId=@companyId"
+            cmd.CommandText = "UPDATE Company Set qbAccessToken=@qbAccessToken, qbAccessTokenExpire =  DATEADD (ss, @AccessTokenExpiresIn, dbo.CurrentTime()) WHERE companyId=@companyId"
 
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@companyId", companyId)
             cmd.Parameters.AddWithValue("@qbAccessToken", AccessToken)
+            cmd.Parameters.AddWithValue("@AccessTokenExpiresIn", AccessTokenExpiresIn)
 
             cmd.ExecuteNonQuery()
 
@@ -12163,18 +12191,19 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-    Public Shared Function SetqbAccessTokenSecret(companyId As Integer, AccessTokenSecret As String) As Boolean
+    Public Shared Function SetqbRefreshToken(companyId As Integer, RefreshToken As String, RefreshTokenExpiresIn As Long) As Boolean
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "UPDATE Company Set qbAccessTokenSecret=@qbAccessTokenSecret WHERE companyId=@companyId"
+            cmd.CommandText = "UPDATE Company Set qbAccessTokenSecret=@RefreshToken, qbRefreshTokenExpire =  DATEADD (ss, @RefreshTokenExpiresIn, dbo.CurrentTime()) WHERE companyId=@companyId"
 
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@companyId", companyId)
-            cmd.Parameters.AddWithValue("@qbAccessTokenSecret", AccessTokenSecret)
+            cmd.Parameters.AddWithValue("@RefreshToken", RefreshToken)
+            cmd.Parameters.AddWithValue("@RefreshTokenExpiresIn", RefreshTokenExpiresIn)
 
             cmd.ExecuteNonQuery()
 
