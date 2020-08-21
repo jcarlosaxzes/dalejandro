@@ -9175,7 +9175,7 @@ Public Class LocalAPI
                 Using rdr As SqlDataReader = cmd.ExecuteReader()
                     rdr.Read()
                     If rdr.HasRows Then
-                        result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) rdr.GetValue(i))
+                        result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) IIf(TypeOf rdr.GetValue(i) Is DBNull, 0, rdr.GetValue(i)))
                     End If
                 End Using
             Catch e As Exception
