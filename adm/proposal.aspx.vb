@@ -126,37 +126,44 @@ Public Class proposal
     End Sub
 
     Private Sub InitProposal()
-        lblOriginalType.Text = LocalAPI.GetProposalData(lblProposalId.Text, "Proposal.Type")
-        SqlDataSourceProposalType.DataBind()
-        cboProposalType.DataBind()
-        cboProposalType.SelectedValue = lblOriginalType.Text
-        TotalsAnalisis()
+        Try
+            lblOriginalType.Text = LocalAPI.GetProposalData(lblProposalId.Text, "Proposal.Type")
+            SqlDataSourceProposalType.DataBind()
+            cboProposalType.DataBind()
+            cboProposalType.SelectedValue = lblOriginalType.Text
+            TotalsAnalisis()
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Sub
 
     Private Function TotalsAnalisis() As Boolean
-        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
-        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+        Try
+            Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+            Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+            Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
 
-        Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
+            Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
 
-        Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
+            CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(bTotal)
+            CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(bPSTotal)
 
-        CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(bTotal)
-        CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(bPSTotal)
-
-        If bTotal = 0 Then
-            CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It is mandatory that [Proposal Total] is greater than zero !"
-            Return False
-        Else
-            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
-                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+            If bTotal = 0 Then
+                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It is mandatory that [Proposal Total] is greater than zero !"
                 Return False
             Else
-                CType(WStep.FindControl("lblTotalAlert"), Label).Text = ""
-                Return True
+                If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
+                    CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+                    Return False
+                Else
+                    CType(WStep.FindControl("lblTotalAlert"), Label).Text = ""
+                    Return True
+                End If
             End If
-        End If
 
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Function
 
     Private Sub GuardarProposal(bMsg As Boolean)
