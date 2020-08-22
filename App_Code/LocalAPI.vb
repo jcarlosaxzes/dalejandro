@@ -9136,6 +9136,56 @@ Public Class LocalAPI
         End Try
     End Function
 
+    ''' <summary>
+    ''' Dynamically builds a SQL query to fetch permissions columns and map them
+    ''' into a Dictionary for further usage. This function is meant to save multiple
+    ''' DB calls and therefore boost whole performance.
+    ''' </summary>
+    ''' <param name="employeeId">Employee's Identifier</param>
+    ''' <returns>Dictionary with ("ColumnName", bool) representing employee's permissions</returns>
+    Public Shared Function GetEmployeePermissions(ByVal employeeId As Integer) As Dictionary(Of String, Boolean)
+        Dim result = New Dictionary(Of String, Boolean)()
+
+        Dim query = "
+            DECLARE @query NVARCHAR(4000);
+            DECLARE @parmDefinition NVARCHAR(500);
+
+            SET @parmDefinition = N'@id int';
+
+            SELECT
+                @query = CONCAT(
+                            'SELECT ',
+                            STRING_AGG(CONCAT('[', COLUMN_NAME, ']'), ', '),
+                            ' FROM [dbo].[Employees] WHERE [ID] = @id')
+            FROM 
+                INFORMATION_SCHEMA.COLUMNS
+            WHERE 
+                TABLE_SCHEMA = 'dbo'
+                AND TABLE_NAME = 'Employees'
+                AND (COLUMN_NAME LIKE 'Deny%' OR COLUMN_NAME LIKE 'Allow%')
+
+
+            EXECUTE sp_executesql @query, @parmDefinition, @id=@employeeId
+            "
+        Using cnn As SqlConnection = GetOpenConnection()
+            Try
+                cnn.Open()
+                Dim cmd = New SqlCommand(query, cnn)
+                cmd.Parameters.AddWithValue("@employeeId", employeeId)
+                Using rdr As SqlDataReader = cmd.ExecuteReader()
+                    rdr.Read()
+                    If rdr.HasRows Then
+                        result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) IIf(TypeOf rdr.GetValue(i) Is DBNull, 0, rdr.GetValue(i)))
+                    End If
+                End Using
+            Catch e As Exception
+                Throw e
+            End Try
+        End Using
+
+        Return result
+    End Function
+
     Public Shared Function EmployeePageTracking(ByVal EmployeeId As Integer, ByVal Page As String) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -12091,18 +12141,46 @@ Public Class LocalAPI
         Return GetStringEscalar("SELECT isnull([qbCompnyID],'') FROM Company where companyId=" & companyId)
     End Function
 
-    Public Shared Function SetqbAccessToken(companyId As Integer, AccessToken As String) As Boolean
+    Public Shared Function GetqbCustomer(QBId As Integer) As Dictionary(Of String, Object)
+
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand("select * from [Clients_SyncQB] where [QBId] = " & QBId, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            Dim val = reader.GetValue(lp)
+                            If TypeOf val Is DBNull Then
+                                val = ""
+                            End If
+                            result.Add(reader.GetName(lp), val)
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+    Public Shared Function SetqbAccessToken(companyId As Integer, AccessToken As String, AccessTokenExpiresIn As Long) As Boolean
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "UPDATE Company Set qbAccessToken=@qbAccessToken WHERE companyId=@companyId"
+            cmd.CommandText = "UPDATE Company Set qbAccessToken=@qbAccessToken, qbAccessTokenExpire =  DATEADD (ss, @AccessTokenExpiresIn, dbo.CurrentTime()) WHERE companyId=@companyId"
 
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@companyId", companyId)
             cmd.Parameters.AddWithValue("@qbAccessToken", AccessToken)
+            cmd.Parameters.AddWithValue("@AccessTokenExpiresIn", AccessTokenExpiresIn)
 
             cmd.ExecuteNonQuery()
 
@@ -12113,18 +12191,19 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-    Public Shared Function SetqbAccessTokenSecret(companyId As Integer, AccessTokenSecret As String) As Boolean
+    Public Shared Function SetqbRefreshToken(companyId As Integer, RefreshToken As String, RefreshTokenExpiresIn As Long) As Boolean
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "UPDATE Company Set qbAccessTokenSecret=@qbAccessTokenSecret WHERE companyId=@companyId"
+            cmd.CommandText = "UPDATE Company Set qbAccessTokenSecret=@RefreshToken, qbRefreshTokenExpire =  DATEADD (ss, @RefreshTokenExpiresIn, dbo.CurrentTime()) WHERE companyId=@companyId"
 
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@companyId", companyId)
-            cmd.Parameters.AddWithValue("@qbAccessTokenSecret", AccessTokenSecret)
+            cmd.Parameters.AddWithValue("@RefreshToken", RefreshToken)
+            cmd.Parameters.AddWithValue("@RefreshTokenExpiresIn", RefreshTokenExpiresIn)
 
             cmd.ExecuteNonQuery()
 
