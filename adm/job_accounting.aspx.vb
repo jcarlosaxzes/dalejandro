@@ -7,12 +7,18 @@ Public Class Job_accounting
         Try
 
             If (Not Page.IsPostBack) Then
+
                 lblCompanyId.Text = Session("companyId")
 
                 lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeId.Text = Master.UserId
 
                 lblJobId.Text = Request.QueryString("JobId")
+
+                ' Si no tiene permiso, la dirijo a message
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_BillingMenu") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+
+
                 lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
 
                 FormViewStatus.Enabled = LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Allow_InactivateJob")

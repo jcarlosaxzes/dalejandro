@@ -8,6 +8,10 @@ Public Class Job_times
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblJobId.Text = Request.QueryString("JobId")
+
+                ' Si no tiene permiso, la dirijo a message
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+
                 Master.ActiveTab(6)
             End If
 

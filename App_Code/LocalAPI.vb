@@ -9144,9 +9144,11 @@ Public Class LocalAPI
     ''' <param name="employeeId">Employee's Identifier</param>
     ''' <returns>Dictionary with ("ColumnName", bool) representing employee's permissions</returns>
     Public Shared Function GetEmployeePermissions(ByVal employeeId As Integer) As Dictionary(Of String, Boolean)
-        Dim result = New Dictionary(Of String, Boolean)()
+        Try
 
-        Dim query = "
+            Dim result = New Dictionary(Of String, Boolean)()
+
+            Dim query = "
             DECLARE @query NVARCHAR(4000);
             DECLARE @parmDefinition NVARCHAR(500);
 
@@ -9167,23 +9169,26 @@ Public Class LocalAPI
 
             EXECUTE sp_executesql @query, @parmDefinition, @id=@employeeId
             "
-        Using cnn As SqlConnection = GetOpenConnection()
-            Try
-                cnn.Open()
-                Dim cmd = New SqlCommand(query, cnn)
-                cmd.Parameters.AddWithValue("@employeeId", employeeId)
-                Using rdr As SqlDataReader = cmd.ExecuteReader()
-                    rdr.Read()
-                    If rdr.HasRows Then
-                        result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) IIf(TypeOf rdr.GetValue(i) Is DBNull, 0, rdr.GetValue(i)))
-                    End If
-                End Using
-            Catch e As Exception
-                Throw e
-            End Try
-        End Using
+            Using cnn As SqlConnection = GetOpenConnection()
+                Try
+                    cnn.Open()
+                    Dim cmd = New SqlCommand(query, cnn)
+                    cmd.Parameters.AddWithValue("@employeeId", employeeId)
+                    Using rdr As SqlDataReader = cmd.ExecuteReader()
+                        rdr.Read()
+                        If rdr.HasRows Then
+                            result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) IIf(TypeOf rdr.GetValue(i) Is DBNull, 0, rdr.GetValue(i)))
+                        End If
+                    End Using
+                Catch e As Exception
+                    Throw e
+                End Try
+            End Using
 
-        Return result
+            Return result
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Shared Function EmployeePageTracking(ByVal EmployeeId As Integer, ByVal Page As String) As String
