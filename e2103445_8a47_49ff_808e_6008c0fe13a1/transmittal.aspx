@@ -22,7 +22,7 @@
                                 <td style="text-align: left">
                                     <%# Eval("TransmittalID")%>
                                 </td>
-                                <td style="text-align: right; width: 150px"><b>Date Created:</b>
+                                <td style="text-align: right; width: 180px"><b>Date Created:</b>
                                 </td>
                                 <td style="text-align: left;">
                                     <%# Eval("TransmittalDate", "{0:d}")%>
@@ -108,8 +108,8 @@
                                     <td style="width:180px;text-align:center">
                                        <span title="Downloads Restriction"><%# Eval("Download") %>
                                     </td>
-                                    <td style="width:150px;text-align:center">
-                                       <span title="Expiration Date to Download"><%# Eval("ExpirationDate", "{0:d}") %></span>
+                                    <td style="width:200px;text-align:center">
+                                       expires: <span title="Expiration Date to Download"><%# Eval("ExpirationDate", "{0:d}") %></span>
                                     </td>
                                 </tr>
                             </ItemTemplate>

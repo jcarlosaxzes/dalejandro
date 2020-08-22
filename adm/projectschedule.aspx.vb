@@ -117,4 +117,8 @@ Public Class projectschedule
     Protected Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         RerfresGrantt()
     End Sub
+
+    Private Sub cboParentMode_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboParentMode.SelectedIndexChanged
+        RerfresGrantt()
+    End Sub
 End Class
