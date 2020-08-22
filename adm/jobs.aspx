@@ -130,9 +130,9 @@
                 border-radius: 20px;
             }
 
-                .toggle.ios .toggle-handle {
-                    border-radius: 20px;
-                }
+            .toggle.ios .toggle-handle {
+                border-radius: 20px;
+            }
 
 
             .table-sm td, .table-sm th {
@@ -147,13 +147,6 @@
             .rcbActionButton {
                 padding-top: 0 !important;
             }
-
-
-            /*.table-borderless tbody + tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
-                border: 0;
-                padding-top: 0.08rem !important;
-                padding-bottom: .5rem !important;
-            }*/
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
