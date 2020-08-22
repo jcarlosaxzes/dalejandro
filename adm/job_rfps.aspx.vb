@@ -10,6 +10,9 @@ Public Class job_rfps
                 lblCompanyId.Text = Session("companyId")
                 lblJob.Text = LocalAPI.GetJobCodeName(lblJobId.Text)
 
+                ' Si no tiene permiso, la dirijo a message
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_RequestsProposalsList") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+
                 RadGridReport.DataBind()
 
                 Master.ActiveTab(4)

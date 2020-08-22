@@ -63,7 +63,7 @@ cfg: { // Application Insights Configuration
 
                     <telerik:NavigationNode
                         Text="Billing" ID="NavigationNodejob_accounting"
-                        NavigateUrl='<%# String.Concat("~/adm/job_accounting.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_accounting.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
@@ -73,12 +73,12 @@ cfg: { // Application Insights Configuration
 
                     <telerik:NavigationNode
                         Text="Proposals" ID="NavigationNodejob_proposals"
-                        NavigateUrl='<%# String.Concat("~/adm/job_proposals.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_proposals.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
                         Text="Expenses" ID="NavigationNodejob_rfps"
-                        NavigateUrl='<%# String.Concat("~/adm/job_rfps.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_rfps.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
@@ -88,7 +88,7 @@ cfg: { // Application Insights Configuration
 
                     <telerik:NavigationNode
                         Text="Times" ID="NavigationNodejob_times"
-                        NavigateUrl='<%# String.Concat("~/adm/job_times.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_times.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
@@ -113,7 +113,7 @@ cfg: { // Application Insights Configuration
 
                     <telerik:NavigationNode
                         Text="Transmittals" ID="NavigationNodejob_trasmittals"
-                        NavigateUrl='<%# String.Concat("~/adm/job_transmittals.aspx?jobId=", lblJobId.Text)%>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_transmittals.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
                     </telerik:NavigationNode>
                 </Nodes>
             </telerik:RadNavigation>

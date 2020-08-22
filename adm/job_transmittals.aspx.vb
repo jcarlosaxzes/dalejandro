@@ -9,6 +9,8 @@ Public Class job_transmittals
                 lblCompanyId.Text = Session("companyId")
                 lblJobId.Text = Request.QueryString("JobId")
 
+                ' Si no tiene permiso, la dirijo a message
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TransmittalList") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
 
                 lblEmployeeEmail.Text = Master.UserEmail
                 Master.ActiveTab(11)

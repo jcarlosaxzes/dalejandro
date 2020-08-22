@@ -418,14 +418,14 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
                                                             <i class="fas fa-dollar-sign"></i>&nbsp;&nbsp;&nbsp;View/Edit Billing
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                        <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible="false">
                                                             <i class="fas fa-user-alt"></i>&nbsp;&nbsp;View/Edit Employees
                                                         </asp:LinkButton>
                                                     </td>
@@ -437,14 +437,14 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal(s)" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                        <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal(s)" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
                                                             View/Edit Proposal(s)
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Expenses" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                        <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Expenses" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
                                                             View/Edit Expenses
                                                         </asp:LinkButton>
                                                     </td>
@@ -463,7 +463,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton7" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                        <asp:LinkButton ID="LinkButton7" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
                                                             View/Edit Time Entries
                                                         </asp:LinkButton>
                                                     </td>
@@ -503,7 +503,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton11" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Transmittals" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                        <asp:LinkButton ID="LinkButton11" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Transmittals" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
+                                                           Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
                                                             View/Edit Transmittals
                                                         </asp:LinkButton>
                                                     </td>
