@@ -143,9 +143,17 @@
             .RadComboBox_Material .rcbInner {
                 padding: 4px 20px 4px 4px;
             }
+
             .rcbActionButton {
                 padding-top: 0 !important;
             }
+
+
+            /*.table-borderless tbody + tbody, .table-borderless td, .table-borderless th, .table-borderless thead th {
+                border: 0;
+                padding-top: 0.08rem !important;
+                padding-bottom: .5rem !important;
+            }*/
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -179,7 +187,7 @@
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
-            <table style="width: 100%;border-collapse: separate; border-spacing: 3px;" >
+            <table style="width: 100%; border-collapse: separate; border-spacing: 3px;">
                 <tr>
                     <td style="width: 200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
@@ -395,8 +403,148 @@
                                                 <%#Eval("Code")%> 
                                     </asp:LinkButton>
                                     <div style="float: right; vertical-align: top; margin: 0;">
-                                        <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="X-Small" Width="30px" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true" DropDownAutoWidth="Enabled" Skin="Material">
-                                        </telerik:RadComboBox>
+
+                                        <%--Three Point Action Menu--%>
+                                        <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-h"></i>
+                                        </asp:HyperLink>
+
+                                        <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
+                                            RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                            Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                            HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
+
+                                            <table class="table-borderless" style="width: 200px; font-size: medium">
+                                                <tr>
+                                                    <td>
+
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Info" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Info
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-dollar-sign"></i>&nbsp;&nbsp;&nbsp;View/Edit Billing
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-user-alt"></i>&nbsp;&nbsp;View/Edit Employees
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal(s)" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            View/Edit Proposal(s)
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Expenses" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            View/Edit Expenses
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton6" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Notes" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            View/Edit Notes
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton7" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            View/Edit Time Entries
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton14" runat="server" UseSubmitBehavior="false" CommandName="Add Time" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-user-clock"></i>&nbsp;&nbsp;Add Time
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton8" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Files" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;View/Edit Files
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton9" runat="server" UseSubmitBehavior="false" CommandName="View Schedule" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;View Schedule
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton10" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Revisions" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            View/Edit Revisions
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton11" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Transmittals" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            View/Edit Transmittals
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton15" runat="server" UseSubmitBehavior="false" CommandName="Hide Client" CommandArgument='<%# Eval("ClientID")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-eye-slash"></i>&nbsp;&nbsp; Hide Client
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton12" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            Update Status
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton13" runat="server" UseSubmitBehavior="false" CommandName="Scope of Work Print View" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            Scope of Work Print View
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </telerik:RadToolTip>
+
                                     </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
@@ -429,7 +577,7 @@
                                     <%# Eval("JobType") %>
                                     <br />
                                     <asp:HyperLink ID="InitialsLabel" runat="server" NavigateUrl="javascript:void(0);"><%# Eval("ClientandCompany") %></asp:HyperLink>
-                                    <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element" 
+                                    <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
                                         RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
                                         Position="BottomCenter" Modal="True" Title="" ShowEvent="OnClick"
                                         HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
@@ -477,7 +625,7 @@
                             </telerik:GridTemplateColumn>
 
                             <%--PM - Employees--%>
-                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName" 
+                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName"
                                 UniqueName="EmployeeName" AllowFiltering="true">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
@@ -626,12 +774,12 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Balance" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" >
+                                UniqueName="Balance" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px">
                                 <ItemTemplate>
                                     <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Bold="true"></asp:Label>
                                     <asp:Label ID="lblBalanceSymbol" runat="server">
                                                     <i class="fas fa-circle"></i>
-                                                </asp:Label>
+                                    </asp:Label>
 
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>

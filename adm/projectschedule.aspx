@@ -17,13 +17,13 @@
         <span style="float: right; vertical-align: middle;">Gantt Chart Type:
                     <telerik:RadComboBox ID="cboParentMode" runat="server" Width="200px" AppendDataBoundItems="true" AutoPostBack="true">
                         <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="Proposal" Value="Proposal" />
-                            <telerik:RadComboBoxItem runat="server" Text="Job" Value="Job" Selected="true" />
+                            <telerik:RadComboBoxItem runat="server" Text="Proposals" Value="Proposal" />
+                            <telerik:RadComboBoxItem runat="server" Text="Jobs" Value="Job" Selected="true" />
                             <telerik:RadComboBoxItem runat="server" Text="Billing" Value="Billing" />
-                            <telerik:RadComboBoxItem runat="server" Text="Client" Value="Client" />
-                            <telerik:RadComboBoxItem runat="server" Text="Department" Value="Department" />
-                            <telerik:RadComboBoxItem runat="server" Text="Employee" Value="Employee" />
-                            <telerik:RadComboBoxItem runat="server" Text="Subconsultant" Value="Subconsultant" />
+                            <telerik:RadComboBoxItem runat="server" Text="Clients" Value="Client" />
+                            <telerik:RadComboBoxItem runat="server" Text="Departments" Value="Department" />
+                            <telerik:RadComboBoxItem runat="server" Text="Employees" Value="Employee" />
+                            <telerik:RadComboBoxItem runat="server" Text="Subconsultants" Value="Subconsultant" />
                         </Items>
                     </telerik:RadComboBox>
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">

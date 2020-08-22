@@ -350,10 +350,10 @@ Public Class jobs
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
-            Case "View/Edit Info", "View/Edit Client Profile", "View/Edit Employees"
+            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Transmittals", "Update Status", "Scope of Work Print View"
                 FireJobCommand(e.CommandName, e.CommandArgument)
 
-            Case "HideClient"
+            Case "Hide Client"
                 Dim ClientId As Integer = e.CommandArgument
                 If ClientId > 0 Then
                     lblExcludeClientId_List.Text = lblExcludeClientId_List.Text & IIf(Len(lblExcludeClientId_List.Text) > 0, ",", "") & ClientId
@@ -362,89 +362,6 @@ Public Class jobs
                 End If
 
         End Select
-    End Sub
-
-
-    Private Sub FillCboActions(cboActions As RadComboBox, jobId As Integer)
-
-        cboActions.Items.Insert(0, New RadComboBoxItem(" ", -1))
-
-        ' Permissin for all employees
-        '1.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Info", jobId))
-
-        '2.-
-        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Billing", jobId))
-        End If
-
-        '3.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Employees", jobId))
-
-        '4.-
-        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Proposal(s)", jobId))
-        End If
-
-        '5.-
-        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Expenses", jobId))
-        End If
-
-        '6.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Notes", jobId))
-
-        '7.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Time Entries", jobId))
-
-        '8.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Files", jobId))
-
-        '!9
-        cboActions.Items.Insert(0, New RadComboBoxItem("View Schedule", jobId))
-        '! 10
-        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Revisions", jobId))
-
-        '11.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Tags", jobId))
-
-        '12.-
-        If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Transmittals", jobId))
-        End If
-
-        '13.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("Update Status", jobId))
-
-        '14.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("View/Edit Client Profile", jobId))
-
-        '15.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("Job Print View", jobId))
-
-        '16.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("Scope of Work Print View", jobId))
-
-        '18.- Opciones for EEG
-        If lblCompanyId.Text = 260962 Then
-            cboActions.Items.Insert(0, New RadComboBoxItem("Hide Client", jobId))
-        End If
-
-        '19.-
-        cboActions.Items.Insert(0, New RadComboBoxItem("Add Time", jobId))
-
-        cboActions.SelectedValue = -1
-        cboActions.Items.Sort()
-
-
-    End Sub
-
-    Public Sub cboActions_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs)
-        Try
-            FireJobCommand(e.Text, e.Value)
-            CType(sender, RadComboBox).SelectedValue = -1
-        Catch ex As Exception
-        End Try
     End Sub
 
     Private Sub FireJobCommand(CommandName As String, JobId As Integer)
@@ -605,8 +522,6 @@ Public Class jobs
                 Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
                 'Set Acction to Combo box
                 Dim jobId As Integer = item("Id").Text
-                Dim cboActions As RadComboBox = CType(item.FindControl("cboActions"), RadComboBox)
-                FillCboActions(cboActions, jobId)
 
                 Dim lblBalanceSymbol As Label = DirectCast(item.FindControl("lblBalanceSymbol"), Label)
                 If DirectCast(item.FindControl("lblBalance"), Label).Text <> 0 Then
