@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterJOB.master.vb" Inherits="pasconcept20.MasterJOB" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">

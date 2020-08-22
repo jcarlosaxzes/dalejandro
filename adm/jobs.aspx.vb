@@ -350,7 +350,7 @@ Public Class jobs
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
-            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Transmittals", "Update Status", "Scope of Work Print View", "Add Time"
+            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Transmittals", "Update Status", "Add Time"
                 FireJobCommand(e.CommandName, e.CommandArgument)
 
             Case "Hide Client"
@@ -430,11 +430,6 @@ Public Class jobs
                 Case "Job Print View"
                     Dim guid As String = LocalAPI.GetJobProperty(JobId, "guid")
                     sUrl = "~/e2103445_8a47_49ff_808e_6008c0fe13a1/job.aspx?guid=" & guid
-                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
-
-                Case "Scope of Work Print View"
-                    Dim guid As String = LocalAPI.GetJobProperty(JobId, "guid")
-                    sUrl = "~/adm/scopeofwork.aspx?guid=" & guid
                     CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
 
                 Case "Hide Client"

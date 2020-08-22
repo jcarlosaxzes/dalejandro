@@ -130,9 +130,9 @@
                 border-radius: 20px;
             }
 
-            .toggle.ios .toggle-handle {
-                border-radius: 20px;
-            }
+                .toggle.ios .toggle-handle {
+                    border-radius: 20px;
+                }
 
 
             .table-sm td, .table-sm th {
@@ -313,7 +313,7 @@
                                             <i class="fas fa-print" style="padding-right:10px"></i>
             </asp:LinkButton>
 
-            <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Share">
+            <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Stop hiding clients Filter">
             <i class="fas fa-eye" style="padding-right:10px"></i>
             </asp:LinkButton>
 
@@ -504,7 +504,7 @@
                                                 <tr>
                                                     <td style="padding-left: 24px">
                                                         <asp:LinkButton ID="LinkButton11" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Transmittals" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
-                                                           Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
+                                                            Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
                                                             View/Edit Transmittals
                                                         </asp:LinkButton>
                                                     </td>
@@ -515,13 +515,6 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>
-                                                        <asp:LinkButton ID="LinkButton15" runat="server" UseSubmitBehavior="false" CommandName="Hide Client" CommandArgument='<%# Eval("ClientID")%>' CssClass="dropdown-item">
-                                                            <i class="fas fa-eye-slash"></i>&nbsp;&nbsp; Hide Client
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                                <tr>
                                                     <td style="padding-left: 24px">
                                                         <asp:LinkButton ID="LinkButton12" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             Update Status
@@ -529,9 +522,16 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="padding-left: 24px">
-                                                        <asp:LinkButton ID="LinkButton13" runat="server" UseSubmitBehavior="false" CommandName="Scope of Work Print View" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
-                                                            Scope of Work Print View
+                                                    <td>
+                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank" >
+                                                            <i class="fas fa-th-list"></i>&nbsp;&nbsp; Scope of Work Print View
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton15" runat="server" UseSubmitBehavior="false" CommandName="Hide Client" CommandArgument='<%# Eval("ClientID")%>' CssClass="dropdown-item" Visible='<%# lblCompanyId.Text = 260962 %>'>
+                                                            <i class="fas fa-eye-slash"></i>&nbsp;&nbsp; Hide Client
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
