@@ -275,6 +275,10 @@
                                 ToolTip="Mark Invoice as BadDept" CausesValidation="false">
                                         <i class="fas fa-dollar-sign"></i>
                             </asp:LinkButton>
+                            <asp:LinkButton ID="btnQB" runat="server" CssClass="badge-warning badge" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# String.Concat(Eval("Id"), ",", Eval("qbCustomerId")) %>' Visible='<%# iif(Eval("qbCustomerId") = 0, False, True) %>'
+                                ToolTip="Send Invoice to QuickBooks" CausesValidation="false">
+                                        <i class="fas fa-file-invoice"></i>
+                            </asp:LinkButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Invoice?" ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"

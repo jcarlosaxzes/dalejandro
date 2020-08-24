@@ -165,7 +165,34 @@ Public Class qbAPI
     End Sub
 
 
+    Public Shared Function CreateItem(CustomerName As String, CustomerId As String, ItemName As String, ItemDescription As String, ItemPrice As String) As Item
+        Dim item As Item = New Item()
+        Dim randomNum As Random = New Random()
+        item.Name = "Replacement of Item-" & randomNum.[Next]()
+        item.Description = "Description"
+        item.Type = ItemTypeEnum.NonInventory
+        item.TypeSpecified = True
+        item.Active = True
+        item.ActiveSpecified = True
+        item.Taxable = False
+        item.TaxableSpecified = True
+        item.UnitPrice = New Decimal(100.0)
+        item.UnitPriceSpecified = True
+        item.TrackQtyOnHand = False
+        item.TrackQtyOnHandSpecified = True
+        item.IncomeAccountRef = New ReferenceType() With
+            {
+            .name = CustomerName,
+            .Value = CustomerId
+            }
+        item.ExpenseAccountRef = New ReferenceType() With
+            {
+            .name = CustomerName,
+            .Value = CustomerId
+            }
 
+        Return item
+    End Function
 
 
     Public Shared Function GetDataService(companyID As String, accessToken As String, accessTokenSecret As String) As DataService
