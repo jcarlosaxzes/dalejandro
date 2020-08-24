@@ -375,7 +375,7 @@
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
-                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight"
+                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight" BorderStyle="None"
                     AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                     FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
@@ -754,7 +754,7 @@
                                                 <asp:Label ID="lblColectedPercent" runat="server" Text='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'></asp:Label>%    
                                             </td>
                                             <td colspan="2">
-                                                <asp:LinkButton ID="lnkBilling" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id") %>' Enabled='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
+                                                <asp:LinkButton ID="lnkBilling" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id") %>' Enabled='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
                                                     <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px"
                                                         RenderMode="Lightweight"
                                                         Height="8px"
