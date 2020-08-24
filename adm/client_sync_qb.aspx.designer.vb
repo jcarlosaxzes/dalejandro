@@ -77,6 +77,51 @@ Partial Public Class client_sync_qb
     Protected WithEvents RadGridLinked As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''RadToolTipSearchClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipSearchClient As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''pnlFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''txtFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''btnFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridSearhcClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridSearhcClient As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''SqlDataSourceClientPending control.
     '''</summary>
     '''<remarks>
@@ -95,6 +140,15 @@ Partial Public Class client_sync_qb
     Protected WithEvents SqlDataSourceQBLinked As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''SqlDataSourceQBNotLinked control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceQBNotLinked As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -102,6 +156,15 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblSelectCustomer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelectCustomer As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.
