@@ -399,7 +399,7 @@
 
                                         <%--Three Point Action Menu--%>
                                         <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
-                                            <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-h"></i>
+                                            <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-v"></i>
                                         </asp:HyperLink>
 
                                         <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
@@ -523,7 +523,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank" >
+                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank">
                                                             <i class="fas fa-th-list"></i>&nbsp;&nbsp; Scope of Work Print View
                                                         </a>
                                                     </td>
@@ -712,18 +712,20 @@
                                                 <%# Eval("Profit", "{0:N0}")%>%
                                             </td>
                                             <td colspan="2">
-                                                <telerik:RadProgressBar ID="RadProgressBar96" runat="server"
-                                                    RenderMode="Lightweight"
-                                                    Height="8px" ShowLabel="false"
-                                                    BarType="Value"
-                                                    Skin="Material"
-                                                    MaxValue="100"
-                                                    ToolTip="Budget Used"
-                                                    Value='<%# Eval("Profit")%>'
-                                                    Width="100%"
-                                                    CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
-                                                    <AnimationSettings Duration="0" />
-                                                </telerik:RadProgressBar>
+                                                <asp:LinkButton ID="lnkTime" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id") %>'>
+                                                    <telerik:RadProgressBar ID="RadProgressBar96" runat="server"
+                                                        RenderMode="Lightweight"
+                                                        Height="8px" ShowLabel="false"
+                                                        BarType="Value"
+                                                        Skin="Material"
+                                                        MaxValue="100"
+                                                        ToolTip="Budget Used. Click to View/Edit Time Entries"
+                                                        Value='<%# Eval("Profit")%>'
+                                                        Width="100%"
+                                                        CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
+                                                        <AnimationSettings Duration="0" />
+                                                    </telerik:RadProgressBar>
+                                                </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
