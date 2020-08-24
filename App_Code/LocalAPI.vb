@@ -6312,6 +6312,9 @@ Public Class LocalAPI
             sFullBody.Append("<br />")
             sFullBody.Append("<br />")
             sFullBody.Append("Thank you,")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<a href=" & """" & GetHostAppSite() & """" & ">PASconcept</a> Notification")
+
             Try
                 If ConfigurationManager.AppSettings("Debug") = "1" Then
                     SendGrid.Email.SendMail("jcarlos@axzes.com", "", "", "PASconcept Email Notification Setup", sFullBody.ToString, companyId, 0, 0)
@@ -6932,6 +6935,34 @@ Public Class LocalAPI
 
     End Function
 
+    Private Shared Function GetPainTextFromHTML(HTMLSource As String) As String
+        Try
+            ' Convert HTML to Plain Text...........
+            Dim htmlDoc = New HtmlDocument()
+            htmlDoc.LoadHtml(HTMLSource)
+
+            'find all <a href=""></> nodes ?
+            Dim hrefValue As String
+            For Each linkNode As HtmlNode In htmlDoc.DocumentNode.SelectNodes("//a[@href]")
+
+                ' Get url
+                hrefValue = linkNode.GetAttributeValue("href", String.Empty)
+
+                ' Insert child node with plain url Text
+                If linkNode.ChildNodes.Count > 0 Then
+                    linkNode.ReplaceChild(htmlDoc.CreateTextNode(" " & hrefValue), linkNode.ChildNodes.First())
+                Else
+                    linkNode.AppendChild(htmlDoc.CreateTextNode(" " & hrefValue))
+                End If
+            Next
+
+            Return htmlDoc.DocumentNode.InnerText
+
+        Catch ex As Exception
+            Return HTMLSource
+        End Try
+    End Function
+
     Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer,
                                     Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
@@ -6995,9 +7026,7 @@ Public Class LocalAPI
             message.AlternateViews.Add(alternateHTML)
 
             ' Convert HTML to Plain Text...........
-            Dim htmlDoc = New HtmlDocument()
-            htmlDoc.LoadHtml(sBody)
-            Dim sBodyPlain As String = htmlDoc.DocumentNode.InnerText
+            Dim sBodyPlain As String = GetPainTextFromHTML(sBody)
 
             ' Second email view Plain text
             Dim mimeTypePlain = New System.Net.Mime.ContentType("text/plain")
