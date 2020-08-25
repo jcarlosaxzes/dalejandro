@@ -22,10 +22,8 @@ Public Class client_sync_qb
 
                     Threading.Tasks.Task.Run(Function() GetAuthTokensAsync(code, realmId))
 
-
                 Else
                     lblResutl.Text = "Conected Error"
-
 
                     '    String code = Request.QueryString["code"] ?? "none";
                     'String realmId = Request.QueryString["realmId"] ?? "none";
