@@ -113,10 +113,10 @@
 
         <telerik:RadToolTip ID="RadToolTipSearchClient" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-            <table style="width: 500px">
+            <table style="width: 400px">
                 <tr>
                     <td colspan="2">
-                        <h3 style="margin: 0; text-align: center; color: white; width: 600px">
+                        <h3 style="margin: 0; text-align: center; color: white;">
                             <span class="navbar navbar-expand-md bg-dark text-white">Match Client Files</span>
                         </h3>
                     </td>
