@@ -1,4 +1,7 @@
-﻿Imports Telerik.Web.UI
+﻿Imports Intuit.Ipp.Data
+Imports Intuit.Ipp.DataService
+Imports Intuit.Ipp.QueryFilter
+Imports Telerik.Web.UI
 Public Class invoices
     Inherits System.Web.UI.Page
 
@@ -27,6 +30,13 @@ Public Class invoices
             End If
 
             RadWindowManager1.EnableViewState = False
+
+
+            Dim valid = qbAPI.IsValidAccessToken(lblCompanyId.Text)
+            If Not valid Then
+                Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(lblCompanyId.Text))
+            End If
+
 
         Catch ex As Exception
             Dim e1 As String = ex.Message
@@ -240,6 +250,24 @@ Public Class invoices
                 Session("PrintName") = "Invoice_" & LocalAPI.InvoiceNumber(lblInvoiceId.Text) & ".pdf"
                 Session("PrintUrl") = url
                 Response.Redirect("~/adm/pdf_print.aspx")
+            Case "SendQB"
+                Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                Dim QBId As Integer = ids(1)
+                lblInvoiceId.Text = ids(0)
+
+
+                Dim CustomerObj = qbAPI.GetCustomer(lblCompanyId.Text, QBId)
+
+                Dim InvoiceObject = LocalAPI.GetInvoiceInfo(lblInvoiceId.Text)
+
+                Dim ItemObj = qbAPI.GetOrCreateItem(lblCompanyId.Text, CustomerObj.DisplayName, CustomerObj.Id)
+
+                Dim addedInvoice = qbAPI.CreateInvoice(lblCompanyId.Text, InvoiceObject, ItemObj, CustomerObj)
+
+                Dim invoceId = addedInvoice.Id
+
+                LocalAPI.SetInvoiceQBRef(lblInvoiceId.Text, invoceId)
+                RadGrid1.Rebind()
         End Select
 
     End Sub

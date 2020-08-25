@@ -164,8 +164,113 @@ Public Class qbAPI
 
     End Sub
 
+    Public Shared Function GetCustomer(comapyId As String, CustomerId As String) As Customer
+
+        Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+        Dim customerQueryService As QueryService(Of Customer) = New QueryService(Of Customer)(serviceContext)
+        Dim Result = customerQueryService.ExecuteIdsQuery("SELECT * FROM Customer WHERE Id = '" & CustomerId & "'").First()
+
+        Return Result
+    End Function
+
+    Public Shared Function GetOrCreateItem(comapyId As String, CustomerName As String, CustomerId As String) As Item
+
+        ' PASconcept Profesional Services
+        Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+        Dim customerQueryService As QueryService(Of Item) = New QueryService(Of Item)(serviceContext)
+        Dim itemExist = customerQueryService.ExecuteIdsQuery("Select * From Item where Name = 'PASconcept Profesional Services'").FirstOrDefault()
+        If Not IsNothing(itemExist) AndAlso itemExist.Name = "PASconcept Profesional Services" Then
+            Return itemExist
+        End If
+
+        Dim item As Item = New Item()
+        item.Name = "PASconcept Profesional Services"
+        item.Description = ""
+        item.Type = ItemTypeEnum.Service
+        item.TypeSpecified = True
+        item.Active = True
+        item.ActiveSpecified = True
+        item.Taxable = False
+        item.TaxableSpecified = True
+        item.TrackQtyOnHand = False
+        item.TrackQtyOnHandSpecified = True
+        item.IncomeAccountRef = New ReferenceType() With
+            {
+            .name = CustomerName,
+            .Value = CustomerId
+            }
+        'item.ExpenseAccountRef = New ReferenceType() With
+        '    {
+        '    .name = CustomerName,
+        '    .Value = CustomerId
+        '    }
+
+        Dim dataSrv = New DataService(serviceContext)
+        Dim itemAdded = dataSrv.Add(Of Item)(item)
+
+        Return itemAdded
+    End Function
 
 
+    Public Shared Function CreateInvoice(comapyId As String, InvoiceObject As Dictionary(Of String, Object), ItemObj As Item, CustomerObj As Customer) As Intuit.Ipp.Data.Invoice
+
+        ' PASconcept Profesional Services
+        Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+
+        Dim lineList As List(Of Line) = New List(Of Line)()
+        Dim LineObj = New Line()
+        LineObj.Description = InvoiceObject("InvoiceNumber") & "  " & InvoiceObject("Notes")
+        LineObj.Amount = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
+        LineObj.AmountSpecified = True
+
+        Dim itemDetail = New SalesItemLineDetail()
+        itemDetail.Qty = New Decimal(1.0)
+        itemDetail.ItemRef = New ReferenceType() With
+                    {
+                        .Value = ItemObj.Id
+                    }
+
+        LineObj.AnyIntuitObject = itemDetail
+
+        LineObj.DetailType = LineDetailTypeEnum.SalesItemLineDetail
+        LineObj.DetailTypeSpecified = True
+
+        lineList.Add(LineObj)
+        Dim newInvoices = New Intuit.Ipp.Data.Invoice()
+        newInvoices.CustomerRef = New ReferenceType() With
+                    {
+                        .name = CustomerObj.DisplayName,
+                        .Value = CustomerObj.Id
+                    }
+
+        newInvoices.Line = lineList.ToArray()
+
+        ''Step 5: Set other properties such as Total Amount, Due Date, Email status and Transaction Date
+        newInvoices.DueDate = DateTime.UtcNow.Date.AddMonths(1)
+        newInvoices.DueDateSpecified = True
+
+
+        newInvoices.TotalAmt = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
+        newInvoices.TotalAmtSpecified = True
+
+        newInvoices.EmailStatus = EmailStatusEnum.NotSet
+        newInvoices.EmailStatusSpecified = True
+
+        newInvoices.Balance = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
+        newInvoices.BalanceSpecified = True
+
+        newInvoices.TxnDate = DateTime.UtcNow.Date
+        newInvoices.TxnDateSpecified = True
+        newInvoices.TxnTaxDetail = New TxnTaxDetail() With
+                    {
+                        .TotalTax = Convert.ToDecimal(10),
+                        .TotalTaxSpecified = True
+                    }
+
+        Dim dataSrv = New DataService(serviceContext)
+        Dim addedInvoice = dataSrv.Add(Of Intuit.Ipp.Data.Invoice)(newInvoices)
+        Return addedInvoice
+    End Function
 
 
     Public Shared Function GetDataService(companyID As String, accessToken As String, accessTokenSecret As String) As DataService
