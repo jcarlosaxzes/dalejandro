@@ -275,8 +275,12 @@
                                 ToolTip="Mark Invoice as BadDept" CausesValidation="false">
                                         <i class="fas fa-dollar-sign"></i>
                             </asp:LinkButton>
-                            <asp:LinkButton ID="btnQB" runat="server" CssClass="badge-warning badge" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# String.Concat(Eval("Id"), ",", Eval("qbCustomerId")) %>' Visible='<%# iif(Eval("qbCustomerId") = 0, False, True) %>'
+                            <asp:LinkButton ID="btnQB" runat="server" CssClass="badge-warning badge" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# String.Concat(Eval("Id"), ",", Eval("qbCustomerId")) %>' Visible='<%# iif(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") = 0, True, False) %>'
                                 ToolTip="Send Invoice to QuickBooks" CausesValidation="false">
+                                        <i class="fas fa-file-invoice"></i>
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="badge-success badge" UseSubmitBehavior="false" CommandName="SendQBNone" Visible='<%#IIf(Eval("qbInvoiceId ") = 0, False, True) %>'
+                                ToolTip="Invoice Sended to QuickBooks" CausesValidation="false">
                                         <i class="fas fa-file-invoice"></i>
                             </asp:LinkButton>
                         </ItemTemplate>

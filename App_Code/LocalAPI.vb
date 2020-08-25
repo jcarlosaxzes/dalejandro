@@ -2917,6 +2917,13 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function SetInvoiceQBRef(invoiceId As Integer, QBId As String) As Boolean
+        Try
+            ExecuteNonQuery("UPDATE [Invoices] SET [qbInvoiceId] = '" & QBId & "' WHERE Id=" & invoiceId)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
     Public Shared Function Invoice_INSERT(jobId As Integer, InvoiceDate As DateTime, Amount As Double, InvoiceNotes As String, MaturityDate As DateTime) As Integer
         Try

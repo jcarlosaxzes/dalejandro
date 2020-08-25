@@ -31,6 +31,13 @@ Public Class invoices
 
             RadWindowManager1.EnableViewState = False
 
+
+            Dim valid = qbAPI.IsValidAccessToken(lblCompanyId.Text)
+            If Not valid Then
+                Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(lblCompanyId.Text))
+            End If
+
+
         Catch ex As Exception
             Dim e1 As String = ex.Message
         End Try
@@ -249,78 +256,18 @@ Public Class invoices
                 lblInvoiceId.Text = ids(0)
 
 
-                Dim serviceContext = qbAPI.GetServiceContext(lblCompanyId.Text)
-                Dim customerQueryService As QueryService(Of Customer) = New QueryService(Of Customer)(serviceContext)
-                Dim Customer = customerQueryService.ExecuteIdsQuery("SELECT * FROM Customer WHERE Id = '" & QBId & "'").First()
-                Dim ref = Customer.ResaleNum
-
-                Dim newInvoices = New Intuit.Ipp.Data.Invoice()
-                newInvoices.CustomerRef = New ReferenceType() With
-                    {
-                        .name = Customer.DisplayName,
-                        .Value = Customer.Id
-                    }
-
-                Dim dataSrv = New DataService(serviceContext)
+                Dim CustomerObj = qbAPI.GetCustomer(lblCompanyId.Text, QBId)
 
                 Dim InvoiceObject = LocalAPI.GetInvoiceInfo(lblInvoiceId.Text)
 
+                Dim ItemObj = qbAPI.GetOrCreateItem(lblCompanyId.Text, CustomerObj.DisplayName, CustomerObj.Id)
 
-                Dim ItemObj = qbAPI.CreateItem(Customer.DisplayName, Customer.Id, InvoiceObject("InvoiceNumber"), InvoiceObject("Notes"), InvoiceObject("InvoicePaid"))
-
-                Dim itemAdded = dataSrv.Add(Of Item)(ItemObj)
-
-                Dim lineList As List(Of Line) = New List(Of Line)()
-                Dim LineObj = New Line()
-                LineObj.Description = "Description Invoices 2"
-                LineObj.Amount = New Decimal(100.0)
-                LineObj.AmountSpecified = True
-
-                'Dim itemDetail = New SalesItemLineDetail()
-                'itemDetail.Qty = New Decimal(1.0)
-                'itemDetail.ItemRef = New ReferenceType() With
-                '    {
-                '        .Value = itemAdded.Id
-                '    }
-
-                'LineObj.AnyIntuitObject = itemDetail
-
-                LineObj.DetailType = LineDetailTypeEnum.SalesItemLineDetail
-                LineObj.DetailTypeSpecified = True
-
-                lineList.Add(LineObj)
-                newInvoices.Line = lineList.ToArray()
-
-                ''Step 5: Set other properties such as Total Amount, Due Date, Email status and Transaction Date
-                newInvoices.DueDate = DateTime.UtcNow.Date
-                newInvoices.DueDateSpecified = True
-
-
-                newInvoices.TotalAmt = New Decimal(10.0)
-                newInvoices.TotalAmtSpecified = True
-
-                newInvoices.EmailStatus = EmailStatusEnum.NotSet
-                newInvoices.EmailStatusSpecified = True
-
-                newInvoices.Balance = New Decimal(10.0)
-                newInvoices.BalanceSpecified = True
-
-                newInvoices.TxnDate = DateTime.UtcNow.Date
-                newInvoices.TxnDateSpecified = True
-                newInvoices.TxnTaxDetail = New TxnTaxDetail() With
-                    {
-                        .TotalTax = Convert.ToDecimal(10),
-                        .TotalTaxSpecified = True
-                    }
-
-                Dim addedInvoice = dataSrv.Add(Of Intuit.Ipp.Data.Invoice)(newInvoices)
+                Dim addedInvoice = qbAPI.CreateInvoice(lblCompanyId.Text, InvoiceObject, ItemObj, CustomerObj)
 
                 Dim invoceId = addedInvoice.Id
 
-
-                'Dim dataService As DataService = New DataService(serviceContext)
-                'Dim newInvoices = New Intuit.Ipp.Data.Invoice()
-                'Dim result = dataService.Add(Of Intuit.Ipp.Data.Invoice)(newInvoces)
+                LocalAPI.SetInvoiceQBRef(lblInvoiceId.Text, invoceId)
+                RadGrid1.Rebind()
         End Select
 
     End Sub
