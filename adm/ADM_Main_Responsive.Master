@@ -413,13 +413,14 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/HistoryLog" Text="User Activity History Log"
                                                 Visible='<%# EmployeePermission("Deny_HistoryLog") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/ImportData"
-                                                Text="Import Data" Visible='<%# EmployeePermission("Deny_Importdata") %>'>
-                                            </telerik:NavigationNode>
-                                        </Nodes>
+                                            <telerik:NavigationNode Text="Import Data" Visible='<%# EmployeePermission("Deny_Importdata") %>'>
+                                                <Nodes>
+                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/ImportData" Text="CSV Files">
+                                                    </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/client_sync_qb" Text="Intuit QuickBooks">
+                                                    </telerik:NavigationNode>
+                                                </Nodes>
                                     </telerik:NavigationNode>
-
-
                                 </Nodes>
                             </telerik:RadNavigation>
                         </td>
