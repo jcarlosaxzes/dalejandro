@@ -188,13 +188,13 @@ Public Class qbAPI
         ' PASconcept Profesional Services
         Dim serviceContext = qbAPI.GetServiceContext(comapyId)
         Dim customerQueryService As QueryService(Of Item) = New QueryService(Of Item)(serviceContext)
-        Dim itemExist = customerQueryService.ExecuteIdsQuery("Select * From Item where Name = 'PASconcept Profesional Services'").FirstOrDefault()
-        If Not IsNothing(itemExist) AndAlso itemExist.Name = "PASconcept Profesional Services" Then
+        Dim itemExist = customerQueryService.ExecuteIdsQuery("Select * From Item where Name = 'Professional Services'").FirstOrDefault()
+        If Not IsNothing(itemExist) AndAlso itemExist.Name = "Professional Services" Then
             Return itemExist
         End If
 
         Dim item As Item = New Item()
-        item.Name = "PASconcept Profesional Services"
+        item.Name = "Professional Services"
         item.Description = ""
         item.Type = ItemTypeEnum.Service
         item.TypeSpecified = True
