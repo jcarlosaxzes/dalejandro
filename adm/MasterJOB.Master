@@ -74,7 +74,7 @@ cfg: { // Application Insights Configuration
 
                     <telerik:NavigationNode
                         Text="Proposals" ID="NavigationNodejob_proposals"
-                        NavigateUrl='<%# String.Concat("~/adm/job_proposals.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
+                        NavigateUrl='<%# String.Concat("~/adm/job_proposals.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
                     </telerik:NavigationNode>
 
                     <telerik:NavigationNode
