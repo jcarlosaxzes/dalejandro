@@ -15,6 +15,9 @@ Public Class proposaltemplate
                 ' Mode EDIT
                 btnUpdate.Text = "Update"
                 lblTemplateId.Text = Request.QueryString("templateId")
+
+                cboTandCtemplates.DataBind()
+                cboPaymentSchedules.DataBind()
                 ReadTemplate()
 
             End If
@@ -31,7 +34,9 @@ Public Class proposaltemplate
         PaymentsTextListTextBox.Text = PreProjectInfo("PaymentsTextList")
         TextBeginTextBox.Text = PreProjectInfo("TextBegin")
         TextEndTextBox.Text = PreProjectInfo("TextEnd")
+
         cboTandCtemplates.SelectedValue = PreProjectInfo("tandcId")
+        cboPaymentSchedules.SelectedValue = PreProjectInfo("paymentscheduleId")
         Try
 
         Catch ex As Exception

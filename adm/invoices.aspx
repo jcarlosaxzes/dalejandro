@@ -69,8 +69,8 @@
                     <td width="250px">
                         <telerik:RadComboBox ID="cboInvoiceStatus" runat="server" Width="100%" MarkFirstMatch="True">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="Not Collected or Partially" Value="0" Selected="true" />
-                                <telerik:RadComboBoxItem runat="server" Text="Pending to Emit" Value="1" />
+                                <telerik:RadComboBoxItem runat="server" Text="Not Collected in Full" Value="0" Selected="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="Not Yet Emitted" Value="1" />
                                 <telerik:RadComboBoxItem runat="server" Text="Collected" Value="2" />
                                 <telerik:RadComboBoxItem runat="server" Text="Bad Debts" Value="3" />
                                 <telerik:RadComboBoxItem runat="server" Text="(All Invoices...)" Value="-1" />
@@ -203,7 +203,7 @@
                 <Columns>
                     <telerik:GridTemplateColumn DataField="Id" FilterControlAltText="Filter Id column"
                         HeaderText="Number" SortExpression="InvoiceNumber" UniqueName="Id"
-                        HeaderStyle-Width="120px"
+                        HeaderStyle-Width="130px"
                         FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEditJob" runat="server" ToolTip="Click to Invoice" CommandArgument='<%# Eval("Id") %>' CommandName="EditInvoice" Text='<%# Eval("InvoiceNumber")%>' UseSubmitBehavior="false">

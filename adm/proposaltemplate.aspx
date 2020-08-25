@@ -149,8 +149,8 @@
     </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        UpdateCommand="Proposal_type2_UPDATE" UpdateCommandType="StoredProcedure"
-        InsertCommand="Proposal_type2_INSERT" InsertCommandType="StoredProcedure">
+        UpdateCommand="Proposal_type_v20_UPDATE" UpdateCommandType="StoredProcedure"
+        InsertCommand="Proposal_type_v20_INSERT" InsertCommandType="StoredProcedure">
         <UpdateParameters>
             <asp:ControlParameter ControlID="NameTextBox" Name="Name" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TaskIdListTextBox" Name="TaskIdList" PropertyName="Text" Type="String" />
@@ -159,6 +159,7 @@
             <asp:ControlParameter ControlID="TextBeginTextBox" Name="TextBegin" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextEndTextBox" Name="TextEnd" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="cboTandCtemplates" Name="tandcId" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboPaymentSchedules" Name="paymentscheduleId" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="lblTemplateId" Name="Id" PropertyName="Text" />
         </UpdateParameters>
         <InsertParameters>
@@ -169,6 +170,7 @@
             <asp:ControlParameter ControlID="TextBeginTextBox" Name="TextBegin" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextEndTextBox" Name="TextEnd" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="cboTandCtemplates" Name="tandcId" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboPaymentSchedules" Name="paymentscheduleId" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </InsertParameters>
     </asp:SqlDataSource>

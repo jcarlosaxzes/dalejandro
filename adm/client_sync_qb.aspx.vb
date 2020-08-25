@@ -128,7 +128,7 @@ Public Class client_sync_qb
             Case "CreateNew"
                 Dim QBId As Integer = e.CommandArgument
                 Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
-                Dim ClientId = LocalAPI.Client_INSERT(QBCustomer("DisplayName"), QBCustomer("Email"), QBCustomer("Title"), lblCompanyId.Text, QBCustomer("CompanyName"), QBCustomer("Addr_Line1"), QBCustomer("Addr_Line2"), QBCustomer("City"), "", QBCustomer("PostalCode"), QBCustomer("PrimaryPhone"), QBCustomer("Mobile"), "", "")
+                Dim ClientId = LocalAPI.Client_INSERT(QBCustomer("DisplayName"), QBCustomer("Email"), QBCustomer("Title"), lblCompanyId.Text, QBCustomer("CompanyName"), QBCustomer("Addr_Line1"), QBCustomer("Addr_Line2"), QBCustomer("City"), QBCustomer(""), QBCustomer("PostalCode"), QBCustomer("PrimaryPhone"), QBCustomer("Mobile"), "", "")
                 LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
