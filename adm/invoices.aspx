@@ -52,7 +52,7 @@
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td width="150px" align="left">
+                    <td style="width:200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" />
@@ -66,7 +66,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td width="250px">
+                    <td style="width:250px">
                         <telerik:RadComboBox ID="cboInvoiceStatus" runat="server" Width="100%" MarkFirstMatch="True">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="Not Collected in Full" Value="0" Selected="true" />
@@ -74,6 +74,15 @@
                                 <telerik:RadComboBoxItem runat="server" Text="Collected" Value="2" />
                                 <telerik:RadComboBoxItem runat="server" Text="Bad Debts" Value="3" />
                                 <telerik:RadComboBoxItem runat="server" Text="(All Invoices...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 350px">
+                        <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments"
+                            Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" AutoPostBack="true"
+                            Height="300px" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -86,15 +95,6 @@
                             </Items>
                         </telerik:RadComboBox>
 
-                    </td>
-                    <td style="width: 250px">
-                        <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments"
-                            Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" AutoPostBack="true"
-                            Height="300px" AppendDataBoundItems="true">
-                            <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="-1" Selected="true" />
-                            </Items>
-                        </telerik:RadComboBox>
 
                     </td>
                     <td>
@@ -103,10 +103,8 @@
                         </telerik:RadTextBox>
                     </td>
                 </tr>
-            </table>
-            <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td>
+                    <td colspan="2">
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
                             Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" AutoPostBack="true"
                             Height="300px" AppendDataBoundItems="true">
@@ -115,7 +113,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td colspan="2">
+                    <td>
                         <telerik:RadComboBox ID="cboJobs" runat="server" DataSourceID="SqlDataSourceJobs"
                             Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
                             Height="300px" AppendDataBoundItems="true">
@@ -124,7 +122,17 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width: 150px; text-align: right">
+                    <td>
+                         <telerik:RadComboBox ID="cboQB" runat="server" Width="100%" >
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="QuickBooks - Unfiltered" Value="0" Selected="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="QB - Client Linked" Value="1" />
+                                <telerik:RadComboBoxItem runat="server" Text="QB - Invoice Pending" Value="2" />
+                                <telerik:RadComboBoxItem runat="server" Text="QB - Invoice Sent" Value="3" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="text-align: right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -601,7 +609,7 @@
 
 
     <asp:SqlDataSource ID="SqlDataSourceInvoices" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="INVOICES4_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Invoices_v20_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="INVOICE_DELETE" DeleteCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
@@ -613,6 +621,7 @@
             <asp:ControlParameter ControlID="cboDepartment" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboInvoiceStatus" Name="InvoiceStatus" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboStatement" Name="StatementStatus" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboQB" Name="qbFilter" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
         </SelectParameters>
         <DeleteParameters>

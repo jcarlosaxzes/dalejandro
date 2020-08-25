@@ -68,15 +68,6 @@ Partial Public Class invoices
     Protected WithEvents cboInvoiceStatus As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''cboStatement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboStatement As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
     '''cboDepartment control.
     '''</summary>
     '''<remarks>
@@ -84,6 +75,15 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboDepartment As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboStatement control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboStatement As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''txtFind control.
@@ -111,6 +111,15 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboJobs As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboQB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboQB As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''btnRefresh control.

@@ -26,6 +26,9 @@ Public Class invoices
                 cboPeriod.DataBind()
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
+                cboQB.DataBind()
+                cboQB.Visible = LocalAPI.IsQuickBookModule(lblCompanyId.Text)
+
                 RefrescarRecordset()
             End If
 
@@ -272,4 +275,5 @@ Public Class invoices
         End Select
 
     End Sub
+
 End Class
