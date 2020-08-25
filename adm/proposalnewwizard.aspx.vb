@@ -108,10 +108,11 @@ Public Class proposalnewwizard
         cboPaymentSchedules.DataBind()
 
         ' General PS or PS by individual Services Fee(s)
-        Dim GeneralPs = LocalAPI.IsGeneralPS(lblProposalId.Text)
+        Dim GeneralPs As Boolean = LocalAPI.IsGeneralPS(lblProposalId.Text)
 
         If GeneralPs Then
             ' General PS
+            cboPaymentSchedules.DataBind()
             cboPaymentSchedules.SelectedValue = LocalAPI.GetProposalProperty(lblProposalId.Text, "paymentscheduleId")
         Else
             ' PS by individual Services Fee
@@ -179,6 +180,8 @@ Public Class proposalnewwizard
 
 
             ProposalItemsDataBind()
+
+            ReadPaymentSchedule()
 
             Return (lblProposalId.Text > 0)
         Else

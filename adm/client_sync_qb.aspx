@@ -12,51 +12,52 @@
 
     <asp:Panel ID="SyncPanel" runat="server">
 
-        <br />
         <asp:Button ID="btnGetCustomers" runat="server" Text="Reload QuicBooks Customers" OnClick="btnGetCustomers_Click" />&nbsp;&nbsp; 
         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-        <br />
-
-        <br />
-        <br />
         <h3>QuickBooks Customers</h3>
-        <br />
-
-        <telerik:RadGrid ID="RadGrid1" runat="server" AllowPaging="True" Width="100%" DataSourceID="SqlDataSourceClientPending">
+        <telerik:RadGrid ID="RadGrid1" runat="server"  Width="100%" DataSourceID="SqlDataSourceClientPending"
+            PageSize="50" AllowPaging="true" Height="600px" RenderMode="Lightweight" BorderStyle="None"
+                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
+                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
+                    FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                    <ClientSettings Selecting-AllowRowSelect="true">
+                        <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+                    </ClientSettings>
             <MasterTableView AutoGenerateColumns="False" DataKeyNames="DisplayName" DataSourceID="SqlDataSourceClientPending">
                 <ColumnGroups>
                     <telerik:GridColumnGroup HeaderText="QuickBooks Customers" Name="QuickBooksCustomers" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50%" />
-                    <telerik:GridColumnGroup HeaderText="PASconcept Suggest Clients" Name="Clients" HeaderStyle-HorizontalAlign="Center" />
-                    <telerik:GridColumnGroup HeaderText="Acctions" Name="Acctions" HeaderStyle-HorizontalAlign="Center" />
+                    <telerik:GridColumnGroup HeaderText="PASconcept Suggested Clients" Name="Clients" HeaderStyle-HorizontalAlign="Center" />
+                    <telerik:GridColumnGroup HeaderText="" Name="Actions" HeaderStyle-HorizontalAlign="Center" />
                 </ColumnGroups>
                 <Columns>
 
                     <telerik:GridBoundColumn DataField="DisplayName"
-                        FilterControlAltText="Filter DisplayName column" HeaderText="DisplayName"
+                        FilterControlAltText="Filter DisplayName column" HeaderText="QB Display Name"
                         SortExpression="DisplayName" UniqueName="DisplayName" ColumnGroupName="QuickBooksCustomers">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Email"
-                        FilterControlAltText="Filter Email column" HeaderText="Email"
+                        FilterControlAltText="Filter Email column" HeaderText="QB Email"
                         SortExpression="Email" UniqueName="Email" ColumnGroupName="QuickBooksCustomers">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="CompanyName"
-                        FilterControlAltText="Filter CompanyName column" HeaderText="CompanyName"
+                        FilterControlAltText="Filter CompanyName column" HeaderText="QB Company"
                         SortExpression="CompanyName" UniqueName="CompanyName" ColumnGroupName="QuickBooksCustomers">
                     </telerik:GridBoundColumn>
 
 
-                    <telerik:GridTemplateColumn HeaderText="" UniqueName="Acctions" ColumnGroupName="Acctions" HeaderStyle-HorizontalAlign="Center"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" ColumnGroupName="Actions" HeaderStyle-HorizontalAlign="Center"
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="120px">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnLink" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
                                 ToolTip="Link to PASconcept Client" Visible='<%# IIf(TypeOf Eval("Name") Is DBNull, "False", "True") %>' CommandName="Link" CommandArgument='<%# String.Concat(Eval("QBId"), ",", Eval("Id")) %>'>
                                 <i class="fas fa-link" aria-hidden="true" ></i>
                             </asp:LinkButton>
+                            &nbsp;
                             <asp:LinkButton ID="btnCreate" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
-                                ToolTip="Import Customers to PASconcept" Visible='<%# IIf(TypeOf Eval("Name") Is DBNull, "True", "False") %>' CommandName="CreateNew" CommandArgument='<%# Eval("QBId")%>'>
+                                ToolTip="Import Customers to PASconcept" CommandName="CreateNew" CommandArgument='<%# Eval("QBId")%>'>
                                 <i class="far fa-clone" aria-hidden="true" ></i>
                             </asp:LinkButton>
-                            &nbsp;&nbsp;
+                            &nbsp;
                             <asp:LinkButton ID="btnSearch" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
                                 ToolTip="Search client in PASconcept" CommandName="Search" CommandArgument='<%# Eval("QBId")%>'>
                                 <i class="fas fa-search" aria-hidden="true" ></i>
@@ -65,11 +66,11 @@
                     </telerik:GridTemplateColumn>
 
                     <telerik:GridBoundColumn DataField="Name"
-                        FilterControlAltText="Name column" HeaderText="Name"
+                        FilterControlAltText="Name column" HeaderText="PAS Name"
                         SortExpression="Name" UniqueName="Name" ColumnGroupName="Clients">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="cEmail"
-                        FilterControlAltText=" Email column" HeaderText="cEmail"
+                        FilterControlAltText=" Email column" HeaderText="PAS Email"
                         SortExpression="cEmail" UniqueName="cEmail" ColumnGroupName="Clients">
                     </telerik:GridBoundColumn>
                 </Columns>
@@ -80,7 +81,14 @@
         <h3>PASconcept Linked Clients</h3>
         <br />
 
-        <telerik:RadGrid ID="RadGridLinked" runat="server" AllowPaging="True" Width="100%" DataSourceID="SqlDataSourceQBLinked">
+        <telerik:RadGrid ID="RadGridLinked" runat="server" Width="100%" DataSourceID="SqlDataSourceQBLinked"
+             PageSize="50" AllowPaging="true" Height="600px" RenderMode="Lightweight" BorderStyle="None"
+                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
+                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
+                    FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                    <ClientSettings Selecting-AllowRowSelect="true">
+                        <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+                    </ClientSettings>
             <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceQBLinked">
 
                 <Columns>
@@ -98,8 +106,8 @@
                     </telerik:GridBoundColumn>
 
 
-                    <telerik:GridTemplateColumn HeaderText="Acctions" UniqueName="Acctions" HeaderStyle-HorizontalAlign="Center"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnLink" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
                                 ToolTip="Unlink from Quickbooks" CommandName="UnLink" CommandArgument='<%# Eval("Id")%>'>
@@ -149,7 +157,7 @@
                                 <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceQBNotLinked">
 
                                     <Columns>
-                                        <telerik:GridTemplateColumn HeaderText="Clients" UniqueName="Acctions" HeaderStyle-HorizontalAlign="Center"
+                                        <telerik:GridTemplateColumn HeaderText="Clients" UniqueName="Clients" HeaderStyle-HorizontalAlign="Center"
                                             ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="60px">
                                             <ItemTemplate>
                                                 <h5><%# Eval("Name")%></h5>
@@ -160,7 +168,7 @@
                                         </telerik:GridTemplateColumn>
 
 
-                                        <telerik:GridTemplateColumn HeaderText="Acctions" UniqueName="Acctions" HeaderStyle-HorizontalAlign="Center"
+                                        <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
                                             ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnLink" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"

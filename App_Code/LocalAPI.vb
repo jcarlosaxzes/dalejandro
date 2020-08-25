@@ -5234,7 +5234,7 @@ Public Class LocalAPI
             Dim SharePublicLinks As Boolean = IsAzureStorage(companyId)
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "Proposal3_INSERT"
+            cmd.CommandText = "Proposal_v20_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
             Dim taskId As String
 
