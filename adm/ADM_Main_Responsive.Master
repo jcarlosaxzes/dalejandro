@@ -417,7 +417,7 @@
                                                  <Nodes>
                                                     <telerik:NavigationNode runat="server" NavigateUrl="~/adm/ImportData" Text="CSV Files">
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="~/adm/client_sync_qb" Text="Intuit QuickBooks">
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/client_sync_qb" Text="Intuit QuickBooks" Visible='<%# LocalAPI.IsQuickBookModule(Companyp)  %>'>
                                                     </telerik:NavigationNode>
                                                 </Nodes>
                                             </telerik:NavigationNode>
