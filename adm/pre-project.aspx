@@ -52,154 +52,156 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <h2>Pre-Project #:
+    <div class="container">
+        <h2>Pre-Project #:
         <asp:Label ID="lblPre_ProjectNumber" runat="server"></asp:Label>
-    </h2>
-    <div>
-        <asp:ValidationSummary ID="vsPre_Project" runat="server" ValidationGroup="Pre_Project"
-            HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+        </h2>
+        <div>
+            <asp:ValidationSummary ID="vsPre_Project" runat="server" ValidationGroup="Pre_Project"
+                HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
                                         There were errors on this step:"></asp:ValidationSummary>
+        </div>
+        <table class="table-sm" style="width: 100%">
+            <tr>
+                <td style="width: 150px">
+                    <asp:RequiredFieldValidator ID="rName"
+                        ControlToValidate="txtName" Display="None" runat="server" Text="*"
+                        ErrorMessage="<span><b>Pre-Project Name</b> is required</span>" SetFocusOnError="true" ValidationGroup="Pre_Project">
+                    </asp:RequiredFieldValidator>
+                    Name:
+                </td>
+                <td>
+                    <telerik:RadTextBox Width="100%" ID="txtName" runat="server" MaxLength="80" EmptyMessage="Pre-Project Name">
+                    </telerik:RadTextBox>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Client...)"
+                        Operator="NotEqual" ControlToValidate="cboCliente" Text="*" ErrorMessage="<span><b>Client</b> is required</span>" SetFocusOnError="true"
+                        ValidationGroup="Pre_Project"> </asp:CompareValidator>
+                    Client:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboCliente" runat="server" DataSourceID="SqlDataSourceClientes"
+                        DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True"
+                        MarkFirstMatch="True" Filter="Contains">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Client...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Prepared By:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboPreparedBy" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name"
+                        DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td>Proposal By:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboProposalBy" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name"
+                        DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td>Department:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name"
+                        DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                    </telerik:RadComboBox>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                    <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Project Type...)"
+                        Operator="NotEqual" ControlToValidate="cboType" Text="*" ErrorMessage="<span><b>Project Type</b> is required</span>" SetFocusOnError="true"
+                        ValidationGroup="Pre_Project"> </asp:CompareValidator>
+                    Project Type:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceProjectType" DataTextField="Name"
+                        DataValueField="Id" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Project Type...)" Value="0" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                        ControlToValidate="txtProjectLocation" Display="None" runat="server" Text="*"
+                        ErrorMessage="<span><b>Location</b> is required</span>" SetFocusOnError="true" ValidationGroup="Pre_Project">
+                    </asp:RequiredFieldValidator>
+                    Location:
+                </td>
+                <td>
+                    <telerik:RadTextBox Width="100%" ID="txtProjectLocation" runat="server" MaxLength="80" EmptyMessage="Address, City State Zip"
+                        CssClass="input-address-2">
+                    </telerik:RadTextBox>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Description:
+                </td>
+                <td>
+                    <telerik:RadTextBox Width="100%" ID="txtDescription" runat="server" MaxLength="255" Rows="2" TextMode="MultiLine">
+                    </telerik:RadTextBox>
+                </td>
+
+            </tr>
+            <tr>
+                <td>Status:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboStatus" runat="server" Width="50%" AppendDataBoundItems="True">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="Pending" Value="0" />
+                            <telerik:RadComboBoxItem runat="server" Text="Processed" Value="1" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td></td>
+
+                <td>
+                    <table style="text-align: center; width: 100%">
+                        <tr>
+
+                            <td style="text-align:center">
+                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" Text="Insert">
+                                </asp:LinkButton>
+                            
+                                <asp:LinkButton ID="btnUpload" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" Text="Upload File(s)" Visible="false">
+                                </asp:LinkButton>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                </td>
+            </tr>
+        </table>
+
     </div>
-    <table class="table-sm" style="width: 100%">
-        <tr>
-            <td style="width: 150px">
-                <asp:RequiredFieldValidator ID="rName"
-                    ControlToValidate="txtName" Display="None" runat="server" Text="*"
-                    ErrorMessage="<span><b>Pre-Project Name</b> is required</span>" SetFocusOnError="true" ValidationGroup="Pre_Project">
-                </asp:RequiredFieldValidator>
-                Name:
-            </td>
-            <td>
-                <telerik:RadTextBox Width="100%" ID="txtName" runat="server" MaxLength="80" EmptyMessage="Pre-Project Name">
-                </telerik:RadTextBox>
-            </td>
-
-        </tr>
-        <tr>
-            <td>
-                <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Client...)"
-                    Operator="NotEqual" ControlToValidate="cboCliente" Text="*" ErrorMessage="<span><b>Client</b> is required</span>" SetFocusOnError="true"
-                    ValidationGroup="Pre_Project"> </asp:CompareValidator>
-                Client:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboCliente" runat="server" DataSourceID="SqlDataSourceClientes"
-                    DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True"
-                    MarkFirstMatch="True" Filter="Contains">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Client...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Prepared By:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboPreparedBy" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name"
-                    DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Proposal By:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboProposalBy" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name"
-                    DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
-                </telerik:RadComboBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Department:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name"
-                    DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
-                </telerik:RadComboBox>
-            </td>
-
-        </tr>
-
-        <tr>
-            <td>
-                <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Project Type...)"
-                    Operator="NotEqual" ControlToValidate="cboType" Text="*" ErrorMessage="<span><b>Project Type</b> is required</span>" SetFocusOnError="true"
-                    ValidationGroup="Pre_Project"> </asp:CompareValidator>
-                Project Type:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceProjectType" DataTextField="Name"
-                    DataValueField="Id" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" Filter="Contains" Height="300px">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Project Type...)" Value="0" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-
-        </tr>
-        <tr>
-            <td>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                    ControlToValidate="txtProjectLocation" Display="None" runat="server" Text="*"
-                    ErrorMessage="<span><b>Location</b> is required</span>" SetFocusOnError="true" ValidationGroup="Pre_Project">
-                </asp:RequiredFieldValidator>
-                Location:
-            </td>
-            <td>
-                <telerik:RadTextBox Width="100%" ID="txtProjectLocation" runat="server" MaxLength="80" EmptyMessage="Address, City State Zip"
-                    CssClass="input-address-2">
-                </telerik:RadTextBox>
-            </td>
-
-        </tr>
-        <tr>
-            <td>Description:
-            </td>
-            <td>
-                <telerik:RadTextBox Width="100%" ID="txtDescription" runat="server" MaxLength="255" Rows="2" TextMode="MultiLine">
-                </telerik:RadTextBox>
-            </td>
-
-        </tr>
-        <tr>
-            <td>Status:
-            </td>
-            <td>
-                <telerik:RadComboBox ID="cboStatus" runat="server" Width="50%" AppendDataBoundItems="True">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="Pending" Value="0" />
-                        <telerik:RadComboBoxItem runat="server" Text="Processed" Value="1" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-
-        </tr>
-
-        <tr>
-            <td></td>
-
-            <td>
-                <table style="text-align: center; width: 100%">
-                    <tr>
-
-                        <td>
-                            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" Text="Insert">
-                            </asp:LinkButton></td>
-                        <td>
-                            <asp:LinkButton ID="btnUpload" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" Text="Upload File(s)">
-                            </asp:LinkButton>
-                        </td>
-                    </tr>
-                </table>
-
-
-
-            </td>
-        </tr>
-    </table>
-
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         UpdateCommand="Pre_Project_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Pre_Project_INSERT" InsertCommandType="StoredProcedure">

@@ -32,6 +32,10 @@ Public Class pre_projects
                 sUrl = "~/ADM/AzureStorage_client.aspx?clientId=" & clientId & "&preprojectId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 960, 750, False, False)
 
+            Case "View/Edit Client Profile"
+                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
+                CreateRadWindows("Client", sUrl, 970, 750, True, False)
+
         End Select
     End Sub
 

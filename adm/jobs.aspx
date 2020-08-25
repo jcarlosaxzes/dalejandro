@@ -375,7 +375,7 @@
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
-                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight"
+                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight" BorderStyle="None"
                     AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                     FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
@@ -399,7 +399,7 @@
 
                                         <%--Three Point Action Menu--%>
                                         <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
-                                            <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-h"></i>
+                                            <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-v"></i>
                                         </asp:HyperLink>
 
                                         <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
@@ -523,7 +523,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank" >
+                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank">
                                                             <i class="fas fa-th-list"></i>&nbsp;&nbsp; Scope of Work Print View
                                                         </a>
                                                     </td>
@@ -686,7 +686,10 @@
                             <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" ItemStyle-HorizontalAlign="Center"
                                 UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="150px">
                                 <ItemTemplate>
-                                    <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; width: 120px"><%# Eval("Status") %></div>
+
+                                    <asp:LinkButton ID="lnkUpdateStatus" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id") %>' >
+                                        <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; width: 120px"><%# Eval("Status") %></div>
+                                    </asp:LinkButton>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
@@ -712,18 +715,20 @@
                                                 <%# Eval("Profit", "{0:N0}")%>%
                                             </td>
                                             <td colspan="2">
-                                                <telerik:RadProgressBar ID="RadProgressBar96" runat="server"
-                                                    RenderMode="Lightweight"
-                                                    Height="8px" ShowLabel="false"
-                                                    BarType="Value"
-                                                    Skin="Material"
-                                                    MaxValue="100"
-                                                    ToolTip="Budget Used"
-                                                    Value='<%# Eval("Profit")%>'
-                                                    Width="100%"
-                                                    CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
-                                                    <AnimationSettings Duration="0" />
-                                                </telerik:RadProgressBar>
+                                                <asp:LinkButton ID="lnkTime" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id") %>' Enabled='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
+                                                    <telerik:RadProgressBar ID="RadProgressBar96" runat="server"
+                                                        RenderMode="Lightweight"
+                                                        Height="8px" ShowLabel="false"
+                                                        BarType="Value"
+                                                        Skin="Material"
+                                                        MaxValue="100"
+                                                        ToolTip="Budget Used. Click to View/Edit Time Entries"
+                                                        Value='<%# Eval("Profit")%>'
+                                                        Width="100%"
+                                                        CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
+                                                        <AnimationSettings Duration="0" />
+                                                    </telerik:RadProgressBar>
+                                                </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
@@ -749,18 +754,20 @@
                                                 <asp:Label ID="lblColectedPercent" runat="server" Text='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'></asp:Label>%    
                                             </td>
                                             <td colspan="2">
-                                                <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px"
-                                                    RenderMode="Lightweight"
-                                                    Height="8px"
-                                                    ShowLabel="false"
-                                                    BarType="Percent"
-                                                    Skin="Bootstrap"
-                                                    ToolTip="Budget Collected"
-                                                    MaxValue="100"
-                                                    Value='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'
-                                                    Width="100%">
-                                                    <AnimationSettings Duration="0" />
-                                                </telerik:RadProgressBar>
+                                                <asp:LinkButton ID="lnkBilling" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id") %>' Enabled='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
+                                                    <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px"
+                                                        RenderMode="Lightweight"
+                                                        Height="8px"
+                                                        ShowLabel="false"
+                                                        BarType="Percent"
+                                                        Skin="Bootstrap"
+                                                        ToolTip="Budget Collected. Click to View/Edit Billing"
+                                                        MaxValue="100"
+                                                        Value='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'
+                                                        Width="100%">
+                                                        <AnimationSettings Duration="0" />
+                                                    </telerik:RadProgressBar>
+                                                </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>

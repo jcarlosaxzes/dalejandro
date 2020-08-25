@@ -15,14 +15,14 @@
                 If Request.QueryString("preprojectsId") Is Nothing Then
                     ' Mode NEW
                     btnUpdate.Text = "Insert"
-                    btnUpload.Visible = False
+                    'btnUpload.Visible = False
                     cboPreparedBy.SelectedValue = lblEmployeeId.Text
                     cboProposalBy.SelectedValue = lblEmployeeId.Text
                     cboDepartment.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "DepartmentId")
                 Else
                     ' Mode EDIT
                     btnUpdate.Text = "Update"
-                    btnUpload.Visible = True
+                    'btnUpload.Visible = True
                     lblPreProjectId.Text = Request.QueryString("preprojectsId")
                     cboCliente.DataBind()
                     cboType.DataBind()

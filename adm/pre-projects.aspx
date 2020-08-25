@@ -95,8 +95,7 @@
     </div>
 
     <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True"
-        PageSize="50" AllowPaging="true" 
-        Height="850px" RenderMode="Lightweight"
+        PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight" BorderStyle="None"
         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
         <ClientSettings Selecting-AllowRowSelect="true">
             <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -116,17 +115,56 @@
                                             </span>
                         </asp:LinkButton>
                         <div style="float: right; vertical-align: top; margin: 0;">
-                            <a href='<%# "clientfiles?client=" & LocalAPI.GetClientProperty(LocalAPI.GetPreProjectProperty(Eval("Id"), "clientId"), "guid") & "&preproject=true" %>' title="Upload Files">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                            </a>
+
+                            <%--Three Point Action Menu--%>
+                            <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-v"></i>
+                            </asp:HyperLink>
+
+                            <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
+                                RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
+
+                                <table class="table-borderless" style="width: 200px; font-size: medium">
+                                    <tr>
+                                        <td>
+
+                                            <asp:LinkButton ID="btnEditProj2" runat="server" UseSubmitBehavior="false" CommandName="EditPre_Project" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Pre-Project
+                                            </asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href='<%# "clientfiles?client=" & LocalAPI.GetClientProperty(LocalAPI.GetPreProjectProperty(Eval("Id"), "clientId"), "guid") & "&preproject=true" %>' title="Upload Files" class="dropdown-item">
+                                                <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload Files
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:LinkButton ID="LinkButton1" runat="server" CommandName="View/Edit Client Profile" CommandArgument='<%# Eval("clientId") %>' CssClass="dropdown-item">
+                                                &nbsp;&nbsp;View/Edit Client Profile
+                                            </asp:LinkButton>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="padding-left: 24px">
+                                            <asp:LinkButton ID="btnNewProposal" runat="server" CommandName="NewProposal" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("statusId") = 0 %>' ToolTip="Create new Proposal">
+                                                Add Proposal
+                                            </asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </telerik:RadToolTip>
                         </div>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
-                <telerik:GridTemplateColumn DataField="Proposal" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" HeaderText="Proposal" SortExpression="Proposal" UniqueName="Proposal" HeaderStyle-HorizontalAlign="Center">
+                <telerik:GridTemplateColumn DataField="Proposal" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="130px" HeaderText="Proposal" SortExpression="Proposal" UniqueName="Proposal" HeaderStyle-HorizontalAlign="Center">
                     <ItemTemplate>
-                        <asp:LinkButton ID="btnNewProposal" runat="server" CssClass="btn btn-primary btn-sm" CommandName="NewProposal" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("statusId") = 0 %>' ToolTip="Create new Proposal">
-                                                Add Proposal
-                        </asp:LinkButton>
+
                         <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("proposalId") %>' ToolTip="Click to View/Edit Proposal"
                             CommandName="EditProposal" Text='<%# Eval("ProposalNumber")%>' Visible='<%# Eval("statusId") = 1 And Eval("proposalId") > 0 %>'>
                         </asp:LinkButton>
@@ -157,7 +195,7 @@
                 <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status"
                     UniqueName="Status" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="120px">
                     <ItemTemplate>
-                        <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetPre_ProjectsStatusLabelCSS(Eval("statusId")) %>'> <%# Eval("Status") %></div>
+                        <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetPre_ProjectsStatusLabelCSS(Eval("statusId")) %>'><%# Eval("Status") %></div>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
 
