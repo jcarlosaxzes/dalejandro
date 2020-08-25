@@ -173,6 +173,16 @@ Public Class qbAPI
         Return Result
     End Function
 
+
+    Public Shared Function GetQBCompany(comapyId As String) As CompanyInfo
+
+        Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+        Dim CompanyQueryService As QueryService(Of CompanyInfo) = New QueryService(Of CompanyInfo)(serviceContext)
+        Dim Result = CompanyQueryService.ExecuteIdsQuery("SELECT * FROM CompanyInfo").First()
+
+        Return Result
+    End Function
+
     Public Shared Function GetOrCreateItem(comapyId As String, CustomerName As String, CustomerId As String) As Item
 
         ' PASconcept Profesional Services

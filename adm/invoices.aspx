@@ -268,7 +268,7 @@
 
                                          <tr>
                                             <td style="padding-left: 24px">
-                                                <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
+                                                <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# String.Concat(Eval("Id"), ",", Eval("qbCustomerId")) %>' CssClass="dropdown-item"
                                                     Visible='<%# iif(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") = 0, True, False) %>'>
                                                             Send Invoice to QuickBooks
                                                 </asp:LinkButton>
