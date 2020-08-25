@@ -1768,7 +1768,7 @@ Public Class LocalAPI
             Case "31 to 60D"
                 Return "badge badge-info statuslabel"
             Case "1 to 30D"
-                Return "badge badge-success statuslabel"
+                Return "badge badge-secondary statuslabel"
             Case Else
                 Return ""
         End Select

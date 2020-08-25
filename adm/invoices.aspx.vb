@@ -250,6 +250,7 @@ Public Class invoices
                 Session("PrintName") = "Invoice_" & LocalAPI.InvoiceNumber(lblInvoiceId.Text) & ".pdf"
                 Session("PrintUrl") = url
                 Response.Redirect("~/adm/pdf_print.aspx")
+
             Case "SendQB"
                 Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                 Dim QBId As Integer = ids(1)
