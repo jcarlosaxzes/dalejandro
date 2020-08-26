@@ -257,13 +257,17 @@ Public Class invoices
                     Response.Redirect("~/adm/pdf_print.aspx")
 
                 Case "SendQB"
-                    Dim ids As String() = CType(e.CommandArgument, String).Split(",")
-                    Dim qbCustomerId As Integer = ids(1)
-                    lblInvoiceId.Text = ids(0)
 
-                    qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
+                    If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                        Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                        Dim qbCustomerId As Integer = ids(1)
+                        lblInvoiceId.Text = ids(0)
+                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
+                        RadGrid1.Rebind()
+                    Else
+                        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=invoices")
+                    End If
 
-                    RadGrid1.Rebind()
             End Select
 
         Catch ex As Exception

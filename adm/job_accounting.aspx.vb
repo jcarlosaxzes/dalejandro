@@ -106,13 +106,15 @@ Public Class Job_accounting
                     Response.Redirect("~/ADM/pdf_print.aspx")
 
                 Case "SendQB"
-                    Dim ids As String() = CType(e.CommandArgument, String).Split(",")
-                    Dim qbCustomerId As Integer = ids(1)
-                    lblInvoiceId.Text = ids(0)
-
-                    qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
-
-                    RadGridIncoices.Rebind()
+                    If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                        Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                        Dim qbCustomerId As Integer = ids(1)
+                        lblInvoiceId.Text = ids(0)
+                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
+                        RadGridIncoices.Rebind()
+                    Else
+                        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=job_accounting&JobId=" & lblJobId.Text)
+                    End If
 
             End Select
 

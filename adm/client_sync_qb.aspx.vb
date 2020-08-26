@@ -8,48 +8,7 @@ Public Class client_sync_qb
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             lblCompanyId.Text = Session("companyId")
-
-            If Not Request.QueryString("state") Is Nothing Then
-                Dim state = Request.QueryString("state")
-
-                If (state.Equals(Session("QBO_CSRFToken"))) Then
-                    lblResutl.Text = "Connected Success"
-                    btnConnect.Visible = False
-                    SyncPanel.Visible = True
-
-                    Dim code = Request.QueryString("code")
-                    Dim realmId = Request.QueryString("realmId")
-
-                    Threading.Tasks.Task.Run(Function() GetAuthTokensAsync(code, realmId))
-
-                Else
-                    lblResutl.Text = "Conected Error"
-
-                    '    String code = Request.QueryString["code"] ?? "none";
-                    'String realmId = Request.QueryString["realmId"] ?? "none";
-                    'await GetAuthTokensAsync(code, realmId);
-
-                    'ViewBag.Error = Request.QueryString["error"] ?? "none";
-
-                    'Return RedirectToAction("Tokens", "App");
-                End If
-            End If
-
-
         End If
-
-
-        Dim valid = qbAPI.IsValidAccessToken(lblCompanyId.Text)
-        If Not valid And Request.QueryString("state") Is Nothing Then
-            Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(lblCompanyId.Text))
-            btnConnect.Visible = True
-            SyncPanel.Visible = False
-        Else
-            btnConnect.Visible = False
-            SyncPanel.Visible = True
-        End If
-
-
     End Sub
 
     Private Async Function GetAuthTokensAsync(ByVal code As String, ByVal realmId As String) As Threading.Tasks.Task
@@ -71,40 +30,22 @@ Public Class client_sync_qb
             LocalAPI.SetqbRefreshToken(lblCompanyId.Text, tokenResponse.RefreshToken, tokenResponse.RefreshTokenExpiresIn)
             LocalAPI.SetqbCompanyID(lblCompanyId.Text, realmId)
 
-
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            Master.ErrorMessage(ex.Message)
         End Try
 
 
     End Function
 
-
-
     Protected Sub btnConnect_Click(sender As Object, e As EventArgs)
+        Try
+            If Not qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+            End If
 
-        Dim valid = qbAPI.IsValidAccessToken(lblCompanyId.Text)
-        If Not valid Then
-            Dim scopes As New List(Of OidcScopes)
-            scopes.Add(OidcScopes.Accounting)
-
-            Dim clientid = ConfigurationManager.AppSettings("clientid")
-            Dim clientsecret = ConfigurationManager.AppSettings("clientsecret")
-            Dim redirectUrl = ConfigurationManager.AppSettings("redirectUrl")
-            Dim environment = ConfigurationManager.AppSettings("appEnvironment")
-
-            Dim auth2Client As OAuth2Client = New OAuth2Client(clientid, clientsecret, redirectUrl, environment)
-
-
-            Dim authorizeUrl = auth2Client.GetAuthorizationURL(scopes)
-            Session("QBO_CSRFToken") = auth2Client.CSRFToken
-            Response.Redirect(authorizeUrl)
-        Else
-            btnConnect.Visible = False
-            SyncPanel.Visible = True
-        End If
-
-
+        Catch ex As Exception
+            lblResutl.Text = ex.Message
+        End Try
     End Sub
 
 
@@ -112,8 +53,6 @@ Public Class client_sync_qb
         qbAPI.LoadQBCustomers(lblCompanyId.Text)
         RadGrid1.DataBind()
     End Sub
-
-
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
 
@@ -138,7 +77,6 @@ Public Class client_sync_qb
                 RadToolTipSearchClient.Show()
         End Select
     End Sub
-
     Protected Sub RadGridSearhcClient_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridSearhcClient.ItemCommand
 
         Select Case e.CommandName
