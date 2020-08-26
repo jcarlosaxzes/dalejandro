@@ -620,6 +620,7 @@
     <Content Include="adm\proposaltemplate.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
+    <Content Include="adm\qb_refreshtoken.aspx" />
     <Content Include="adm\QueicBooksTestPages.aspx" />
     <Content Include="adm\reports.aspx" />
     <Content Include="adm\requestforproposals.aspx" />
@@ -3810,6 +3811,13 @@
       <DependentUpon>proposal_types.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\qb_refreshtoken.aspx.designer.vb">
+      <DependentUpon>qb_refreshtoken.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\qb_refreshtoken.aspx.vb">
+      <DependentUpon>qb_refreshtoken.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\QueicBooksTestPages.aspx.designer.vb">
       <DependentUpon>QueicBooksTestPages.aspx</DependentUpon>
     </Compile>
@@ -4800,7 +4808,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
