@@ -118,7 +118,7 @@
 
                             <%--Three Point Action Menu--%>
                             <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
-                                            <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-v"></i>
+                                            <i title="Click to menu for this row" style="color:dimgray" class="fas fa-ellipsis-v"></i>
                             </asp:HyperLink>
 
                             <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"

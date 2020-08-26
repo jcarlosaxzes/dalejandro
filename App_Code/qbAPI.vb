@@ -36,7 +36,7 @@ Public Class qbAPI
             IsValidAccessToken = (valid > 0)
             Exit Function
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            Throw ex
         End Try
         IsValidAccessToken = False
     End Function
@@ -47,7 +47,7 @@ Public Class qbAPI
             IsValidRefreshToken = (valid > 0)
             Exit Function
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            Throw ex
         End Try
         IsValidRefreshToken = False
     End Function
@@ -66,7 +66,7 @@ Public Class qbAPI
 
             Return True
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            Throw ex
         End Try
         Return False
     End Function
@@ -158,128 +158,141 @@ Public Class qbAPI
 
 
         Catch ex As Exception
-            Console.WriteLine(ex.Message)
+            Throw ex
         End Try
 
 
     End Sub
 
     Public Shared Function GetCustomer(comapyId As String, CustomerId As String) As Customer
+        Try
 
-        Dim serviceContext = qbAPI.GetServiceContext(comapyId)
-        Dim customerQueryService As QueryService(Of Customer) = New QueryService(Of Customer)(serviceContext)
-        Dim Result = customerQueryService.ExecuteIdsQuery("SELECT * FROM Customer WHERE Id = '" & CustomerId & "'").First()
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim customerQueryService As QueryService(Of Customer) = New QueryService(Of Customer)(serviceContext)
+            Dim Result = customerQueryService.ExecuteIdsQuery("SELECT * FROM Customer WHERE Id = '" & CustomerId & "'").First()
 
-        Return Result
+            Return Result
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
 
     Public Shared Function GetQBCompany(comapyId As String) As CompanyInfo
-
-        Dim serviceContext = qbAPI.GetServiceContext(comapyId)
-        Dim CompanyQueryService As QueryService(Of CompanyInfo) = New QueryService(Of CompanyInfo)(serviceContext)
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim CompanyQueryService As QueryService(Of CompanyInfo) = New QueryService(Of CompanyInfo)(serviceContext)
         Dim Result = CompanyQueryService.ExecuteIdsQuery("SELECT * FROM CompanyInfo").First()
 
         Return Result
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Shared Function GetOrCreateItem(comapyId As String, CustomerName As String, CustomerId As String) As Item
+        Try
+            ' PASconcept Profesional Services
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim customerQueryService As QueryService(Of Item) = New QueryService(Of Item)(serviceContext)
+            Dim itemExist = customerQueryService.ExecuteIdsQuery("Select * From Item where Name = 'Professional Services'").FirstOrDefault()
+            If Not IsNothing(itemExist) AndAlso itemExist.Name = "Professional Services" Then
+                Return itemExist
+            End If
 
-        ' PASconcept Profesional Services
-        Dim serviceContext = qbAPI.GetServiceContext(comapyId)
-        Dim customerQueryService As QueryService(Of Item) = New QueryService(Of Item)(serviceContext)
-        Dim itemExist = customerQueryService.ExecuteIdsQuery("Select * From Item where Name = 'Professional Services'").FirstOrDefault()
-        If Not IsNothing(itemExist) AndAlso itemExist.Name = "Professional Services" Then
-            Return itemExist
-        End If
-
-        Dim item As Item = New Item()
-        item.Name = "Professional Services"
-        item.Description = ""
-        item.Type = ItemTypeEnum.Service
-        item.TypeSpecified = True
-        item.Active = True
-        item.ActiveSpecified = True
-        item.Taxable = False
-        item.TaxableSpecified = True
-        item.TrackQtyOnHand = False
-        item.TrackQtyOnHandSpecified = True
-        item.IncomeAccountRef = New ReferenceType() With
+            Dim item As Item = New Item()
+            item.Name = "Professional Services"
+            item.Description = ""
+            item.Type = ItemTypeEnum.Service
+            item.TypeSpecified = True
+            item.Active = True
+            item.ActiveSpecified = True
+            item.Taxable = False
+            item.TaxableSpecified = True
+            item.TrackQtyOnHand = False
+            item.TrackQtyOnHandSpecified = True
+            item.IncomeAccountRef = New ReferenceType() With
             {
             .name = CustomerName,
             .Value = CustomerId
             }
-        'item.ExpenseAccountRef = New ReferenceType() With
-        '    {
-        '    .name = CustomerName,
-        '    .Value = CustomerId
-        '    }
+            'item.ExpenseAccountRef = New ReferenceType() With
+            '    {
+            '    .name = CustomerName,
+            '    .Value = CustomerId
+            '    }
 
-        Dim dataSrv = New DataService(serviceContext)
-        Dim itemAdded = dataSrv.Add(Of Item)(item)
+            Dim dataSrv = New DataService(serviceContext)
+            Dim itemAdded = dataSrv.Add(Of Item)(item)
 
-        Return itemAdded
+            Return itemAdded
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
 
     Public Shared Function CreateInvoice(comapyId As String, InvoiceObject As Dictionary(Of String, Object), ItemObj As Item, CustomerObj As Customer) As Intuit.Ipp.Data.Invoice
+        Try
+            ' PASconcept Profesional Services
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
 
-        ' PASconcept Profesional Services
-        Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim lineList As List(Of Line) = New List(Of Line)()
+            Dim LineObj = New Line()
+            LineObj.Description = InvoiceObject("InvoiceNumber") & "  " & InvoiceObject("Notes")
+            LineObj.Amount = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
+            LineObj.AmountSpecified = True
 
-        Dim lineList As List(Of Line) = New List(Of Line)()
-        Dim LineObj = New Line()
-        LineObj.Description = InvoiceObject("InvoiceNumber") & "  " & InvoiceObject("Notes")
-        LineObj.Amount = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
-        LineObj.AmountSpecified = True
-
-        Dim itemDetail = New SalesItemLineDetail()
-        itemDetail.Qty = New Decimal(1.0)
-        itemDetail.ItemRef = New ReferenceType() With
+            Dim itemDetail = New SalesItemLineDetail()
+            itemDetail.Qty = New Decimal(1.0)
+            itemDetail.ItemRef = New ReferenceType() With
                     {
                         .Value = ItemObj.Id
                     }
 
-        LineObj.AnyIntuitObject = itemDetail
+            LineObj.AnyIntuitObject = itemDetail
 
-        LineObj.DetailType = LineDetailTypeEnum.SalesItemLineDetail
-        LineObj.DetailTypeSpecified = True
+            LineObj.DetailType = LineDetailTypeEnum.SalesItemLineDetail
+            LineObj.DetailTypeSpecified = True
 
-        lineList.Add(LineObj)
-        Dim newInvoices = New Intuit.Ipp.Data.Invoice()
-        newInvoices.CustomerRef = New ReferenceType() With
+            lineList.Add(LineObj)
+            Dim newInvoices = New Intuit.Ipp.Data.Invoice()
+            newInvoices.CustomerRef = New ReferenceType() With
                     {
                         .name = CustomerObj.DisplayName,
                         .Value = CustomerObj.Id
                     }
 
-        newInvoices.Line = lineList.ToArray()
+            newInvoices.Line = lineList.ToArray()
 
-        ''Step 5: Set other properties such as Total Amount, Due Date, Email status and Transaction Date
-        newInvoices.DueDate = DateTime.UtcNow.Date.AddMonths(1)
-        newInvoices.DueDateSpecified = True
+            ''Step 5: Set other properties such as Total Amount, Due Date, Email status and Transaction Date
+            newInvoices.DueDate = DateTime.UtcNow.Date.AddMonths(1)
+            newInvoices.DueDateSpecified = True
 
 
-        newInvoices.TotalAmt = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
-        newInvoices.TotalAmtSpecified = True
+            newInvoices.TotalAmt = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
+            newInvoices.TotalAmtSpecified = True
 
-        newInvoices.EmailStatus = EmailStatusEnum.NotSet
-        newInvoices.EmailStatusSpecified = True
+            newInvoices.EmailStatus = EmailStatusEnum.NotSet
+            newInvoices.EmailStatusSpecified = True
 
-        newInvoices.Balance = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
-        newInvoices.BalanceSpecified = True
+            newInvoices.Balance = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
+            newInvoices.BalanceSpecified = True
 
-        newInvoices.TxnDate = DateTime.UtcNow.Date
-        newInvoices.TxnDateSpecified = True
-        newInvoices.TxnTaxDetail = New TxnTaxDetail() With
+            newInvoices.TxnDate = DateTime.UtcNow.Date
+            newInvoices.TxnDateSpecified = True
+            newInvoices.TxnTaxDetail = New TxnTaxDetail() With
                     {
                         .TotalTax = Convert.ToDecimal(10),
                         .TotalTaxSpecified = True
                     }
 
-        Dim dataSrv = New DataService(serviceContext)
-        Dim addedInvoice = dataSrv.Add(Of Intuit.Ipp.Data.Invoice)(newInvoices)
-        Return addedInvoice
+            Dim dataSrv = New DataService(serviceContext)
+            Dim addedInvoice = dataSrv.Add(Of Intuit.Ipp.Data.Invoice)(newInvoices)
+            Return addedInvoice
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
 
@@ -332,6 +345,24 @@ Public Class qbAPI
             Return "http://" & OriginalWeb
         End If
     End Function
+
+    Public Shared Function SendInvoiceToQuickBooks(InvoiceId As Integer, qbCustomerId As Integer, companyId As Integer) As Integer
+        Try
+
+            Dim CustomerObj = qbAPI.GetCustomer(companyId, qbCustomerId)
+            Dim InvoiceObject = LocalAPI.GetInvoiceInfo(InvoiceId)
+            Dim ItemObj = qbAPI.GetOrCreateItem(companyId, CustomerObj.DisplayName, CustomerObj.Id)
+            Dim addedInvoice = qbAPI.CreateInvoice(companyId, InvoiceObject, ItemObj, CustomerObj)
+            Dim qbInvoceId As Integer = addedInvoice.Id
+            LocalAPI.SetInvoiceQBRef(InvoiceId, qbInvoceId)
+
+            Return qbInvoceId
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
 
     'Private Shared Function IsQBEmployee(queryService As QueryService(Of employee), entity As employee) As String
     '    Try
