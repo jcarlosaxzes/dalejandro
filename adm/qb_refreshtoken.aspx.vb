@@ -33,15 +33,6 @@ Public Class qb_refreshtoken
             End If
         End If
 
-        Dim valid = qbAPI.IsValidAccessToken(Session("companyId"))
-        If Not valid And Request.QueryString("state") Is Nothing Then
-            Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(Session("companyId")))
-            btnConnect.Visible = True
-        Else
-            btnConnect.Visible = False
-            btnBack.Text = "Back"
-        End If
-
     End Sub
 
     Private Async Function GetAuthTokensAsync(ByVal code As String, ByVal realmId As String) As Threading.Tasks.Task
@@ -50,6 +41,10 @@ Public Class qb_refreshtoken
         End If
 
         Try
+            '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            'https://developer.intuit.com/app/developer/dashboard
+            'user:jcarlos@axzes.com
+            '
             Dim clientid = ConfigurationManager.AppSettings("clientid")
             Dim clientsecret = ConfigurationManager.AppSettings("clientsecret")
             Dim redirectUrl = ConfigurationManager.AppSettings("redirectUrl")
