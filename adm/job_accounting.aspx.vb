@@ -59,52 +59,66 @@ Public Class Job_accounting
     End Sub
 
     Protected Sub RadGridIncoices_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridIncoices.ItemCommand
-        Dim sUrl As String = ""
-        Select Case e.CommandName
+        Try
+            Dim sUrl As String = ""
+            Select Case e.CommandName
 
-            Case "SendInvoice"
-                sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=1103"
-                CreateRadWindows(e.CommandName, sUrl, 960, 790, False, "OnClientIncoicesClose")
+                Case "SendInvoice"
+                    sUrl = "~/ADM/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=1103"
+                    CreateRadWindows(e.CommandName, sUrl, 960, 790, False, "OnClientIncoicesClose")
 
 
-            Case "GetSharedLink"
-                Dim ObjGuid As String = LocalAPI.GetInvoiceProperty(e.CommandArgument, "guid")
-                sUrl = "~/adm/sharelink.aspx?ObjType=4&ObjGuid=" & ObjGuid
-                CreateRadWindows(e.CommandName, sUrl, 520, 400, False, "")
+                Case "GetSharedLink"
+                    Dim ObjGuid As String = LocalAPI.GetInvoiceProperty(e.CommandArgument, "guid")
+                    sUrl = "~/adm/sharelink.aspx?ObjType=4&ObjGuid=" & ObjGuid
+                    CreateRadWindows(e.CommandName, sUrl, 520, 400, False, "")
 
-            Case "EditInvoice"
-                lblInvoiceId.Text = e.CommandArgument
-                InvoiceDlg()
+                Case "EditInvoice"
+                    lblInvoiceId.Text = e.CommandArgument
+                    InvoiceDlg()
 
-            Case "RecivePayment"
-                lblInvoiceId.Text = e.CommandArgument
-                txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
-                txtAmountPayment.DbValue = txtAmountPayment.MaxValue
-                RadDatePickerPayment.DbSelectedDate = LocalAPI.GetDateTime()
-                txtPaymentNotes.Text = ""
-                RadToolTipInsertPayment.Visible = True
-                RadToolTipInsertPayment.Show()
+                Case "RecivePayment"
+                    lblInvoiceId.Text = e.CommandArgument
+                    txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
+                    txtAmountPayment.DbValue = txtAmountPayment.MaxValue
+                    RadDatePickerPayment.DbSelectedDate = LocalAPI.GetDateTime()
+                    txtPaymentNotes.Text = ""
+                    RadToolTipInsertPayment.Visible = True
+                    RadToolTipInsertPayment.Show()
 
-            Case "BadDebt"
-                If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Allow_BadDebt") Then
-                    sUrl = "~/ADM/BadDebt.aspx?invoiceId=" & e.CommandArgument
-                    CreateRadWindows(e.CommandName, sUrl, 520, 600, False, "OnClientIncoicesClose")
-                Else
-                    Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
-                End If
+                Case "BadDebt"
+                    If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Allow_BadDebt") Then
+                        sUrl = "~/ADM/BadDebt.aspx?invoiceId=" & e.CommandArgument
+                        CreateRadWindows(e.CommandName, sUrl, 520, 600, False, "OnClientIncoicesClose")
+                    Else
+                        Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
+                    End If
 
-            Case "Duplicate"
-                lblInvoiceId.Text = LocalAPI.Invoice_Duplicate(e.CommandArgument)
-                InvoiceDlg()
+                Case "Duplicate"
+                    lblInvoiceId.Text = LocalAPI.Invoice_Duplicate(e.CommandArgument)
+                    InvoiceDlg()
 
-            Case "PDF"
-                lblInvoiceId.Text = e.CommandArgument
-                Dim url = LocalAPI.GetSharedLink_URL(4, lblInvoiceId.Text)
-                Session("PrintUrl") = url
-                Session("PrintName") = "Invoice_" & LocalAPI.InvoiceNumber(lblInvoiceId.Text) & ".pdf"
-                Response.Redirect("~/ADM/pdf_print.aspx")
-        End Select
+                Case "PDF"
+                    lblInvoiceId.Text = e.CommandArgument
+                    Dim url = LocalAPI.GetSharedLink_URL(4, lblInvoiceId.Text)
+                    Session("PrintUrl") = url
+                    Session("PrintName") = "Invoice_" & LocalAPI.InvoiceNumber(lblInvoiceId.Text) & ".pdf"
+                    Response.Redirect("~/ADM/pdf_print.aspx")
 
+                Case "SendQB"
+                    Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                    Dim qbCustomerId As Integer = ids(1)
+                    lblInvoiceId.Text = ids(0)
+
+                    qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
+
+                    RadGridIncoices.Rebind()
+
+            End Select
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Sub
 
     Private Sub InvoiceDlg()

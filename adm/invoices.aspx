@@ -260,7 +260,7 @@
                                         </tr>
                                         <tr>
                                             <td style="padding-left: 24px">
-                                                <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# Eval("AmountDue")%>'>
                                                             Recive Payment
                                                 </asp:LinkButton>
                                             </td>
@@ -301,10 +301,10 @@
                         SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>'></asp:Label>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary">
                                 <%#Eval("Emitted")%>
                             </span>
-                            <span title="Number of client visits to Invoice Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                            <span title="Number of client visits to Invoice Page" class="badge badge-pill badge-warning">
                                 <%#Eval("clientvisits")%>
                             </span>
                             <span title="Invoice Sent to QuickBooks" class="badge badge-pill badge-success" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>

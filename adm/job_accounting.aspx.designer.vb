@@ -23,6 +23,24 @@ Partial Public Class Job_accounting
     Protected WithEvents FormViewClientBalance As Global.System.Web.UI.WebControls.FormView
     
     '''<summary>
+    '''FormViewStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormViewStatus As Global.System.Web.UI.WebControls.FormView
+    
+    '''<summary>
+    '''cboInvoiceFilterCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboInvoiceFilterCode As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''cboInvoicesType control.
     '''</summary>
     '''<remarks>
@@ -57,24 +75,6 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnDiscount As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''cboInvoiceFilterCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboInvoiceFilterCode As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''FormViewStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FormViewStatus As Global.System.Web.UI.WebControls.FormView
     
     '''<summary>
     '''RadGridIncoices control.
