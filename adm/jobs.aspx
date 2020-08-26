@@ -696,18 +696,18 @@
                             <%--Private Mode--%>
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" HeaderTooltip="Budget Used of Budget"
-                                Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
+                                Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="160px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
-                                            <td style="width: 45%; text-align: right">
+                                            <td style="width: 47%; text-align: right">
 
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Bold="true" ToolTip="Budget Used"></asp:Label>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Size="12px" ToolTip="Budget Used"></asp:Label>
                                             </td>
-                                            <td style="width: 5%; text-align: center">of
+                                            <td style=" text-align: center">of
                                             </td>
-                                            <td style="text-align: right">
-                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Job Budget"></asp:Label>
+                                            <td style="width: 47%;text-align: right">
+                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Size="12px" ToolTip="Job Budget"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
@@ -736,17 +736,17 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Billing Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Collected" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
+                                UniqueName="Collected" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="160px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
                                             <td style="width: 45%; text-align: right">
-                                                <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoices Collected" Font-Bold="true"></asp:Label>
+                                                <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoices Collected" Font-Size="12px"></asp:Label>
                                             </td>
                                             <td style="width: 5%; text-align: center">of
                                             </td>
                                             <td style="text-align: right">
-                                                <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("AmountBilled", "{0:C0}")%>' ToolTip="Total Invoice Billed" Font-Bold="true"></asp:Label>
+                                                <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("AmountBilled", "{0:C0}")%>' ToolTip="Total Invoice Billed" Font-Size="12px"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
@@ -777,7 +777,7 @@
                             <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="Balance" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Bold="true"></asp:Label>
+                                    <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Size="12px"></asp:Label>
                                     <asp:Label ID="lblBalanceSymbol" runat="server">
                                                     <i class="fas fa-circle"></i>
                                     </asp:Label>
@@ -788,7 +788,7 @@
                             <telerik:GridTemplateColumn DataField="SubFees" Display="false" HeaderText="Sub Fee(s)" SortExpression="SubFees" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="SubFees" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubFees", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Bold="true"></asp:Label>
+                                    <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubFees", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Size="12px"></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
