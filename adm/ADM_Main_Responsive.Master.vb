@@ -43,7 +43,7 @@ Public Class ADM_Main_Responsive
             CheckbillingExpirationDate(Companyp)
 
             LocalAPI.AppUserManager = Context.GetOwinContext().GetUserManager(Of ApplicationUserManager)()
-
+            LocalAPI.SiteUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
 
         Catch ex As Exception
             Dim e1 As String = ex.Message

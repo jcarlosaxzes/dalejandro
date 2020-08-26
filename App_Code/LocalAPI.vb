@@ -32,6 +32,7 @@ Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
     Public DataBaseSubscriber As String
     Public Shared AppUserManager As pasconcept20.ApplicationUserManager
+    Public Shared SiteUrl As String
 
 #Region "Enum"
     Public Enum sys_log_AccionENUM
@@ -887,10 +888,11 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetHostAppSite() As String
-        'Try
-        '    GetHostAppSite = ConfigurationManager.AppSettings("HostAppSite")
-        'Catch ex As Exception
-        'End Try
+        Try
+            Return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
+        Catch ex As Exception
+            Return SiteUrl
+        End Try
         'If Len(GetHostAppSite) = 0 Then GetHostAppSite = "https://pasconcept.com/"
 
         'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) Return https://localhost:44308
@@ -898,7 +900,7 @@ Public Class LocalAPI
         'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Query) Return https://localhost:44308/adm/sharelink?ObjType=111&ObjId=23396
         'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Scheme) Return https://
 
-        Return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
+
     End Function
 
     Public Shared Function GetSubscriberDatabase(ByVal sSubscriberCode As String) As String
