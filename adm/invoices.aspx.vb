@@ -112,8 +112,6 @@ Public Class invoices
     '    End While
     'End Sub
 
-
-
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
         RadWindowManager1.Windows.Clear()
         Dim window1 As RadWindow = New RadWindow()
@@ -265,7 +263,7 @@ Public Class invoices
                         qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
                         RadGrid1.Rebind()
                     Else
-                        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=invoices")
+                        CreateRadWindows("qbToken", "~/adm/qb_refreshtoken.aspx", 900, 700, False)
                     End If
 
             End Select

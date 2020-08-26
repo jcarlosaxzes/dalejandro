@@ -7,11 +7,6 @@ Public Class qb_refreshtoken
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            If Not Request.QueryString("QBAuthBackPage") Is Nothing Then
-                Session("QBAuthBackPage") = Request.QueryString("QBAuthBackPage")
-                Session("QBBackPageJobId") = "" & Request.QueryString("JobId")
-            End If
-
             If Not Request.QueryString("state") Is Nothing Then
                 Dim state = Request.QueryString("state")
 
@@ -25,10 +20,8 @@ Public Class qb_refreshtoken
 
                     Threading.Tasks.Task.Run(Function() GetAuthTokensAsync(code, realmId))
 
-                    btnBack.Text = "Back"
                 Else
                     lblResutl.Text = "Connection Error with QB!!!"
-
                 End If
             End If
         End If
@@ -62,17 +55,7 @@ Public Class qb_refreshtoken
         Catch ex As Exception
             lblResutl.Text = ex.Message
         End Try
-
-
     End Function
-
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        BackPage()
-    End Sub
-
-    Protected Sub BackPage()
-        Response.Redirect("~/adm/" & Session("QBAuthBackPage") & IIf(Len(Session("QBBackPageJobId")) > 0, "?jobId=" & Session("QBBackPageJobId"), ""))
-    End Sub
 
     Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
         Try

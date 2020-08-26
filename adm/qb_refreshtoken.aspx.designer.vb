@@ -23,15 +23,6 @@ Partial Public Class qb_refreshtoken
     Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''btnBack control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''btnConnect control.
     '''</summary>
     '''<remarks>

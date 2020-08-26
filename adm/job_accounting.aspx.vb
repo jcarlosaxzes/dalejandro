@@ -113,7 +113,7 @@ Public Class Job_accounting
                         qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
                         RadGridIncoices.Rebind()
                     Else
-                        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=job_accounting&JobId=" & lblJobId.Text)
+                        CreateRadWindows("qbToken", "~/adm/qb_refreshtoken.aspx", 900, 700, False, "")
                     End If
 
             End Select
