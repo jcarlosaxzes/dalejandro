@@ -46,7 +46,7 @@ cfg: { // Application Insights Configuration
 
     <style>
         .container {
-            max-width: 1800px;
+            max-width: 1900px;
             padding-left: 10px;
             padding-right: 10px;
         }

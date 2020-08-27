@@ -12,16 +12,7 @@ Option Explicit On
 
 
 Partial Public Class client_sync_qb
-
-    '''<summary>
-    '''btnConnect control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnConnect As Global.System.Web.UI.WebControls.Button
-
+    
     '''<summary>
     '''lblResutl control.
     '''</summary>
@@ -30,7 +21,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''SyncPanel control.
     '''</summary>
@@ -39,7 +30,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SyncPanel As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''btnGetCustomers control.
     '''</summary>
@@ -48,7 +39,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnGetCustomers As Global.System.Web.UI.WebControls.Button
-
+    
     '''<summary>
     '''Label1 control.
     '''</summary>
@@ -57,7 +48,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''RadGrid1 control.
     '''</summary>
@@ -66,7 +57,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
+    
     '''<summary>
     '''RadGridLinked control.
     '''</summary>
@@ -75,7 +66,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridLinked As Global.Telerik.Web.UI.RadGrid
-
+    
     '''<summary>
     '''RadToolTipSearchClient control.
     '''</summary>
@@ -84,7 +75,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipSearchClient As Global.Telerik.Web.UI.RadToolTip
-
+    
     '''<summary>
     '''pnlFind control.
     '''</summary>
@@ -93,7 +84,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''txtFind control.
     '''</summary>
@@ -102,7 +93,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
-
+    
     '''<summary>
     '''btnFind control.
     '''</summary>
@@ -111,7 +102,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''RadGridSearhcClient control.
     '''</summary>
@@ -120,7 +111,16 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridSearhcClient As Global.Telerik.Web.UI.RadGrid
-
+    
+    '''<summary>
+    '''RadWindowManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
+    
     '''<summary>
     '''SqlDataSourceClientPending control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClientPending As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceQBLinked control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceQBLinked As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''SqlDataSourceQBNotLinked control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceQBNotLinked As Global.System.Web.UI.WebControls.SqlDataSource
-
+    
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lblSelectCustomer control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectCustomer As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''Master property.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class client_sync_qb
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

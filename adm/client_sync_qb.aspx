@@ -5,24 +5,27 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <br />
-    <asp:Button ID="btnConnect" runat="server" Text="Connect to QuickBook" OnClick="btnConnect_Click" />&nbsp;&nbsp; 
     <asp:Label ID="lblResutl" runat="server" Text=""></asp:Label>
     <br />
+            <span class="pasconcept-pagetitle">
+            Import Clients from QuickBooks
+        </span>
 
 
     <asp:Panel ID="SyncPanel" runat="server">
-
-        <asp:Button ID="btnGetCustomers" runat="server" Text="Reload QuicBooks Customers" OnClick="btnGetCustomers_Click" />&nbsp;&nbsp; 
+        <asp:Button ID="btnGetCustomers" runat="server" Text="Reload QuicBooks Customers" CssClass="btn btn-success btn-lg" OnClick="btnGetCustomers_Click" />
+        <br />
+        &nbsp;&nbsp; 
         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         <h3>QuickBooks Customers</h3>
-        <telerik:RadGrid ID="RadGrid1" runat="server"  Width="100%" DataSourceID="SqlDataSourceClientPending"
+        <telerik:RadGrid ID="RadGrid1" runat="server" Width="100%" DataSourceID="SqlDataSourceClientPending"
             PageSize="50" AllowPaging="true" Height="600px" RenderMode="Lightweight" BorderStyle="None"
-                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
-                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
-                    FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
-                    <ClientSettings Selecting-AllowRowSelect="true">
-                        <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
-                    </ClientSettings>
+            AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
+            FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+            <ClientSettings Selecting-AllowRowSelect="true">
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+            </ClientSettings>
             <MasterTableView AutoGenerateColumns="False" DataKeyNames="DisplayName" DataSourceID="SqlDataSourceClientPending">
                 <ColumnGroups>
                     <telerik:GridColumnGroup HeaderText="QuickBooks Customers" Name="QuickBooksCustomers" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50%" />
@@ -82,13 +85,13 @@
         <br />
 
         <telerik:RadGrid ID="RadGridLinked" runat="server" Width="100%" DataSourceID="SqlDataSourceQBLinked"
-             PageSize="50" AllowPaging="true" Height="600px" RenderMode="Lightweight" BorderStyle="None"
-                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
-                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
-                    FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
-                    <ClientSettings Selecting-AllowRowSelect="true">
-                        <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
-                    </ClientSettings>
+            PageSize="50" AllowPaging="true" Height="600px" RenderMode="Lightweight" BorderStyle="None"
+            AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
+            FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+            <ClientSettings Selecting-AllowRowSelect="true">
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+            </ClientSettings>
             <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceQBLinked">
 
                 <Columns>
@@ -139,7 +142,7 @@
                                             EmptyMessage="Search for Client Name, email, Company">
                                         </telerik:RadTextBox>
                                     </td>
-                                    <td style="width: 150px; text-align: right"> 
+                                    <td style="width: 150px; text-align: right">
                                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" OnClick="btnFind_Click">
                                                 <i class="fas fa-search"></i> Search
                                         </asp:LinkButton>
@@ -189,6 +192,9 @@
 
 
     </asp:Panel>
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    </telerik:RadWindowManager>
+
     <asp:SqlDataSource ID="SqlDataSourceClientPending" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CLIENT_Sync_QBO_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
@@ -204,7 +210,7 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceQBNotLinked" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="CLIENT_Not_linked_QBO_SELECT" SelectCommandType="StoredProcedure" >
+        SelectCommand="CLIENT_Not_linked_QBO_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="txtFind" Name="Filter" PropertyName="Text" Type="String" ConvertEmptyStringToNull="false" />
