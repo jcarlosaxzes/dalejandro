@@ -40,13 +40,13 @@ Public Class client_sync_qb
     End Function
 
     Protected Sub btnGetCustomers_Click(sender As Object, e As EventArgs)
-        If Not qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
-            CreateRadWindows("qbToken", "~/adm/qb_refreshtoken.aspx", 900, 700, False)
-        Else
+        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
             qbAPI.LoadQBCustomers(lblCompanyId.Text)
             RadGrid1.DataBind()
+        Else
+            ' New Tab for QB Authentication
+            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
         End If
-
     End Sub
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand

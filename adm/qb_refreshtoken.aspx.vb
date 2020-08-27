@@ -7,12 +7,14 @@ Public Class qb_refreshtoken
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
+            If Not Request.QueryString("QBAuthBackPage") Is Nothing Then
+                Session("QBAuthBackPage") = Request.QueryString("QBAuthBackPage")
+                Session("QBAuthBackPageJobId") = "" & Request.QueryString("JobId")
+            End If
             If Not Request.QueryString("state") Is Nothing Then
                 Dim state = Request.QueryString("state")
-
                 If (state.Equals(Session("QBO_CSRFToken"))) Then
-                    lblResutl.Text = "Successfully connected to QB!!!"
-                    btnConnect.Visible = False
+                    lblResutl.Text = ""
 
                     ' Read others parameters returned
                     Dim code = Request.QueryString("code")
@@ -20,10 +22,18 @@ Public Class qb_refreshtoken
 
                     Threading.Tasks.Task.Run(Function() GetAuthTokensAsync(code, realmId))
 
+                    btnBack.Text = "Back"
                 Else
                     lblResutl.Text = "Connection Error with QB!!!"
+
                 End If
             End If
+
+            ' Botones y paneles en funcion de connexion valida
+            PanelSuccess.Visible = If qbAPI.IsValidAccessToken(Session("companyId")) Then
+            PanelInstructions.Visible = Not PanelSuccess.Visible
+            btnConnect.Visible = PanelInstructions.Visible
+
         End If
 
     End Sub
@@ -57,6 +67,12 @@ Public Class qb_refreshtoken
         End Try
     End Function
 
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        BackPage()
+    End Sub
+    Protected Sub BackPage()
+        Response.Redirect("~/adm/" & Session("QBAuthBackPage") & IIf(Len(Session("QBAuthBackPageJobId")) > 0, "?JobId=" & Session("QBAuthBackPageJobId"), ""))
+    End Sub
     Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
         Try
 

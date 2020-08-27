@@ -23,6 +23,15 @@ Partial Public Class qb_refreshtoken
     Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''btnBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''btnConnect control.
     '''</summary>
     '''<remarks>
@@ -30,4 +39,22 @@ Partial Public Class qb_refreshtoken
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnConnect As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''PanelInstructions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelInstructions As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''PanelSuccess control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelSuccess As Global.System.Web.UI.WebControls.Panel
 End Class
