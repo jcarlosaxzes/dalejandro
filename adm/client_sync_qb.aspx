@@ -7,11 +7,15 @@
     <br />
     <asp:Label ID="lblResutl" runat="server" Text=""></asp:Label>
     <br />
+            <span class="pasconcept-pagetitle">
+            Import Clients from QuickBooks
+        </span>
 
 
     <asp:Panel ID="SyncPanel" runat="server">
-
-        <asp:Button ID="btnGetCustomers" runat="server" Text="Reload QuicBooks Customers" OnClick="btnGetCustomers_Click" />&nbsp;&nbsp; 
+        <asp:Button ID="btnGetCustomers" runat="server" Text="Reload QuicBooks Customers" CssClass="btn btn-success btn-lg" OnClick="btnGetCustomers_Click" />
+        <br />
+        &nbsp;&nbsp; 
         <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         <h3>QuickBooks Customers</h3>
         <telerik:RadGrid ID="RadGrid1" runat="server" Width="100%" DataSourceID="SqlDataSourceClientPending"
