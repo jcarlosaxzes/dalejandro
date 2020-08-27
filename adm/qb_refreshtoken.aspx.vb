@@ -30,7 +30,7 @@ Public Class qb_refreshtoken
             End If
 
             ' Botones y paneles en funcion de connexion valida
-            PanelSuccess.Visible = qbAPI.IsValidAccessToken(Session("companyId"))
+            PanelSuccess.Visible = (btnBack.Text = "Back")
             PanelInstructions.Visible = Not PanelSuccess.Visible
             btnConnect.Visible = PanelInstructions.Visible
 
