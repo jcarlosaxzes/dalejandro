@@ -205,6 +205,7 @@ Public Class singproposalsign
 
             ' Accept Email
             ProposalAcceptedEmail(proposalId, companyId, pdfUrl, JobId)
+            LocalAPI.SiteUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
             Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
 
 
