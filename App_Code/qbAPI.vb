@@ -346,7 +346,7 @@ Public Class qbAPI
         End If
     End Function
 
-    Public Shared Function SendInvoiceToQuickBooks(InvoiceId As Integer, qbCustomerId As Integer, companyId As Integer) As Integer
+    Public Shared Function SendInvoiceToQuickBooks(InvoiceId As Integer, qbCustomerId As Integer, employeeId As Integer, companyId As Integer) As Integer
         Try
 
             Dim CustomerObj = qbAPI.GetCustomer(companyId, qbCustomerId)
@@ -354,7 +354,7 @@ Public Class qbAPI
             Dim ItemObj = qbAPI.GetOrCreateItem(companyId, CustomerObj.DisplayName, CustomerObj.Id)
             Dim addedInvoice = qbAPI.CreateInvoice(companyId, InvoiceObject, ItemObj, CustomerObj)
             Dim qbInvoceId As Integer = addedInvoice.Id
-            LocalAPI.SetInvoiceQBRef(InvoiceId, qbInvoceId)
+            LocalAPI.SetInvoiceQBRef(InvoiceId, qbInvoceId, employeeId)
 
             Return qbInvoceId
 

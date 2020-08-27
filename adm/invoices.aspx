@@ -297,7 +297,7 @@
                             <%# Eval("JobInfo") %>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Emitted - Past Due"
+                    <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Insights"
                         SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>'></asp:Label>

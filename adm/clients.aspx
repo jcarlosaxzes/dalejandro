@@ -39,6 +39,12 @@
             }
 
         </script>
+        <style>
+            .table-sm td, .table-sm th {
+                padding-top: .05rem;
+                padding-bottom: .05rem;
+            }
+        </style>
     </telerik:RadCodeBlock>
 
     <div class="pasconcept-bar noprint">
@@ -78,7 +84,7 @@
                             EmptyMessage="Search for Client Name, Organization, TAGS... ">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="width: 150px; text-align:right">
+                    <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -100,31 +106,79 @@
 
                             <asp:LinkButton ID="btnEditClient2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to Edit Client Photo"
                                 CommandName="EditPhoto" UseSubmitBehavior="false">
-                                <asp:Image ID="ImageClientPhoto" ImageUrl='<%# LocalAPI.GetClientPhotoURL(Eval("Id"))%>'
-                                    runat="server" Width="45" Height="50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
+                                <asp:Image runat="server" ID="ImageClientPhoto" ImageUrl='<%# LocalAPI.GetClientPhotoURL(Eval("Id"))%>' CssClass="photo50" AlternateText='<%# Eval("Name", "{0} photo")%>'></asp:Image>
                             </asp:LinkButton>
 
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn Aggregate="Count" DataField="Name" FilterControlAltText="Filter Name column" HeaderStyle-Width="250px"
-                        FooterAggregateFormatString="{0:N0}" HeaderText="Name - Company" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
+
+                    <telerik:GridTemplateColumn Aggregate="Count" DataField="Name" FooterAggregateFormatString="{0:N0}" HeaderText="Name - Company" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
                         UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <div>
-                                <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Client"
-                                    CommandName="EditClient" Text='<%# Eval("Name")%>' UseSubmitBehavior="false">
-                                </asp:LinkButton>
-                                <span style="font-size: x-small"><%# Eval("Position") %></span>
+                            <table class="table-sm" style="width: 100%">
+                                <tr>
+                                    <td rowspan="2" style="width: 30px; text-align: left">
+                                        <%--Three Point Action Menu--%>
+                                        <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                                <i title="Click to menu for this row" style="color:dimgray" class="fas fa-ellipsis-v"></i>
+                                        </asp:HyperLink>
+                                        <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
+                                            RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                            Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                            HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
 
-                            </div>
-                            <div>
-                                <span class="badge badge-important" title="Uploaded files"><%# LocalAPI.ClientFilesCount(Eval("Id"))  %></span>
-                                <%# Eval("Company")%>
-                            </div>
+                                            <table class="table-borderless" style="width: 200px; font-size: medium">
+                                                <tr>
+                                                    <td>
+
+                                                        <asp:LinkButton ID="btnEdit1" runat="server" UseSubmitBehavior="false" CommandName="EditClient" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Client Profile
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="btnClone" runat="server" UseSubmitBehavior="false" CommandName="Duplicate" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="far fa-clone"></i>&nbsp;&nbsp;Duplicate/Clone Client 
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href='<%# "clientfiles?client=" & Eval("guid").ToString()%>' class="dropdown-item">
+                                                            <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload Files
+                                                         </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href='<%# LocalAPI.GetSharedLink_URL(91, Eval("Id"))%>' target="_blank" title="View Client Portal" class="dropdown-item">
+                                                            <i class="far fa-share-square"></i>&nbsp;&nbsp;View Client Portal
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </telerik:RadToolTip>
+
+
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Client"
+                                            CommandName="EditClient" Text='<%# Eval("Name")%>' UseSubmitBehavior="false">
+                                        </asp:LinkButton>
+                                        <span><%# Eval("Position") %></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <%# Eval("Company")%>
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Type" FilterControlAltText="Filter Type column"
-                        HeaderText="Type - NAICS Code" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small">
+                        HeaderText="Type - NAICS Code" SortExpression="Type" UniqueName="Type" HeaderStyle-HorizontalAlign="Center">
                         <ItemTemplate>
                             <%# Eval("nType")%>
                             <br />
@@ -144,40 +198,19 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="Activity" FilterControlAltText="Filter Activity column" ItemStyle-HorizontalAlign="Center"
-                        HeaderText="Activity" SortExpression="Activity" UniqueName="Activity" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="90px" ItemStyle-Font-Size="Small">
+                    <telerik:GridTemplateColumn DataField="LastDateActivity" HeaderTooltip="Last Activity, Proposals, Jobs, Files..."
+                        HeaderText="Insights" SortExpression="LastDateActivity" UniqueName="LastDateActivity" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                         <ItemTemplate>
-                            <small><%# Eval("LastDateActivity", "{0:d}")%></small>
-                            <br />
-                            <small><%# Eval("EntityActivity")%></small>
+
+                            <span title='<%# Eval("EntityActivity")%>'><%# Eval("LastDateActivity", "{0:d}")%></span>
+                            <span title="Proposals of Client" class="badge badge-pill badge-dark" style='<%# IIf(Eval("Proposals ") = 0,"display:none","display:normal")%>'><%# Eval("Proposals")%></span>
+                            <span title="Jobs of Client" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Jobs ") = 0,"display:none","display:normal")%>'><%# Eval("Jobs")%></span>
+                            <span title="Uploaded files" class="badge badge-pill badge-secondary"><%# LocalAPI.ClientFilesCount(Eval("Id"))  %></span>
+                            <span title="Client linked to QuickBooks" class="badge badge-pill badge-success" style='<%# IIf(Eval("qbCustomerId ") = 0,"display:none","display:normal")%>'>qb</span>
+
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="column" HeaderStyle-HorizontalAlign="Center"
-                        HeaderStyle-Width="90px" ItemStyle-HorizontalAlign="Center">
-                        <ItemTemplate>
-                            <table style="width: 100%">
-                                <tr>
-                                    <td>
-                                        <asp:LinkButton ID="btnClone" runat="server" UseSubmitBehavior="false" ToolTip="Duplicate Client"
-                                            CommandName="Duplicate" CommandArgument='<%# Eval("Id")%>'>
-                                                <i class="far fa-clone"></i></a>
-                                        </asp:LinkButton>
-                                    </td>
-                                    <td>
-                                        <a href='<%# LocalAPI.GetSharedLink_URL(91, Eval("Id"))%>' target="_blank" title="View Client Portal">
-                                            <i class="far fa-share-square"></i></a>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href='<%# "clientfiles?client=" & Eval("guid").ToString()%>' title="Upload Files">
-                                                <i class="fas fa-cloud-upload-alt"></i>                                                
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this client and asociate user?" ConfirmTitle="Delete"
                         ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
                         HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px"

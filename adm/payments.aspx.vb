@@ -20,6 +20,11 @@ Public Class payments
 
                 PanelUpload.Visible = LocalAPI.IsAzureStorage(lblCompanyId.Text)
 
+                If lblCompanyId.Text = 260962 Then
+                    ' EEG 10 Mb
+                    RadCloudUpload1.MaxFileSize = 10485760
+                End If
+
             End If
 
         Catch ex As Exception

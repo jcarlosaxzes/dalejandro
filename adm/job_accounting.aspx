@@ -311,7 +311,7 @@
                             <telerik:GridCheckBoxColumn DataField="BadDebt" HeaderText="Bad Debt" UniqueName="BadDebt" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
                             </telerik:GridCheckBoxColumn>
 
-                            <telerik:GridTemplateColumn HeaderText="Insight" ReadOnly="true" UniqueName="Insight" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
+                            <telerik:GridTemplateColumn HeaderText="Insight" ReadOnly="true" UniqueName="Insights" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>' ToolTip="First Emission Date"></asp:Label>
                                     <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary">

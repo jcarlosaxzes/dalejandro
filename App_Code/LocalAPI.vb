@@ -2917,9 +2917,11 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function SetInvoiceQBRef(invoiceId As Integer, QBId As String) As Boolean
+    Public Shared Function SetInvoiceQBRef(invoiceId As Integer, QBId As String, employeeId As Integer) As Boolean
         Try
             ExecuteNonQuery("UPDATE [Invoices] SET [qbInvoiceId] = '" & QBId & "' WHERE Id=" & invoiceId)
+            ActualizarEmittedInvoice(invoiceId, employeeId)
+            Return True
         Catch ex As Exception
             Throw ex
         End Try
