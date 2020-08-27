@@ -12,11 +12,10 @@
         <br />
 
         <span class="pasconcept-pagetitle">
-
             <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark btn-lg" UseSubmitBehavior="false" CausesValidation="False">
                        Cancel
             </asp:LinkButton>
-            QuickBooks Connect to Refresh Token
+            PASconcept <----> QuickBooks Connect
             <span style="float: right; vertical-align: middle;">
                 <asp:LinkButton ID="btnConnect" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                     QuickBooks Connect

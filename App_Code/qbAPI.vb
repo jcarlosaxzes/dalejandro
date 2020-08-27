@@ -85,6 +85,7 @@ Public Class qbAPI
         dt.Columns.Add(New DataColumn("PrintOnCheckName", Type.GetType("System.String")))
         dt.Columns.Add(New DataColumn("CompanyName", Type.GetType("System.String")))
         dt.Columns.Add(New DataColumn("City", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("CountrySubDivisionCode", Type.GetType("System.String")))
         dt.Columns.Add(New DataColumn("PostalCode", Type.GetType("System.String")))
         dt.Columns.Add(New DataColumn("Addr_Line1", Type.GetType("System.String")))
         dt.Columns.Add(New DataColumn("Addr_Line2", Type.GetType("System.String")))
@@ -119,6 +120,7 @@ Public Class qbAPI
                 row("PrintOnCheckName") = customerObj.PrintOnCheckName
                 row("CompanyName") = customerObj.CompanyName
                 row("City") = customerObj.BillAddr?.City
+                row("CountrySubDivisionCode") = customerObj.BillAddr?.CountrySubDivisionCode
                 row("PostalCode") = customerObj.BillAddr?.PostalCode
                 row("Addr_Line1") = customerObj.BillAddr?.Line1
                 row("Addr_Line2") = customerObj.BillAddr?.Line2
@@ -146,6 +148,7 @@ Public Class qbAPI
             objbulk.ColumnMappings.Add("PrintOnCheckName", "PrintOnCheckName")
             objbulk.ColumnMappings.Add("CompanyName", "CompanyName")
             objbulk.ColumnMappings.Add("City", "City")
+            objbulk.ColumnMappings.Add("CountrySubDivisionCode", "CountrySubDivisionCode")
             objbulk.ColumnMappings.Add("PostalCode", "PostalCode")
             objbulk.ColumnMappings.Add("Addr_Line1", "Addr_Line1")
             objbulk.ColumnMappings.Add("Addr_Line2", "Addr_Line2")
