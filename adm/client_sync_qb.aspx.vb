@@ -1,6 +1,7 @@
 ﻿Imports Intuit.Ipp.Data
 Imports Intuit.Ipp.OAuth2PlatformClient
 Imports Intuit.Ipp.QueryFilter
+Imports Telerik.Web.UI
 
 Public Class client_sync_qb
     Inherits System.Web.UI.Page
@@ -9,6 +10,7 @@ Public Class client_sync_qb
         If Not IsPostBack Then
             lblCompanyId.Text = Session("companyId")
         End If
+        RadWindowManager1.EnableViewState = False
     End Sub
 
     Private Async Function GetAuthTokensAsync(ByVal code As String, ByVal realmId As String) As Threading.Tasks.Task
@@ -37,21 +39,14 @@ Public Class client_sync_qb
 
     End Function
 
-    Protected Sub btnConnect_Click(sender As Object, e As EventArgs)
-        Try
-            If Not qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
-                Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
-            End If
-
-        Catch ex As Exception
-            lblResutl.Text = ex.Message
-        End Try
-    End Sub
-
-
     Protected Sub btnGetCustomers_Click(sender As Object, e As EventArgs)
-        qbAPI.LoadQBCustomers(lblCompanyId.Text)
-        RadGrid1.DataBind()
+        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+            qbAPI.LoadQBCustomers(lblCompanyId.Text)
+            RadGrid1.DataBind()
+        Else
+            ' New Tab for QB Authentication
+            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+        End If
     End Sub
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
@@ -106,6 +101,27 @@ Public Class client_sync_qb
         RadToolTipSearchClient.Visible = True
         RadToolTipSearchClient.Show()
         RadGrid1.Rebind()
+    End Sub
+
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
+        RadWindowManager1.Windows.Clear()
+        Dim window1 As RadWindow = New RadWindow()
+        window1.NavigateUrl = sUrl
+        window1.VisibleOnPageLoad = True
+        window1.VisibleStatusbar = False
+        window1.ID = WindowsID
+        If Maximize Then window1.InitialBehaviors = WindowBehaviors.Maximize
+        window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize Or WindowBehaviors.Maximize
+        If Width = -1 Then
+            window1.AutoSize = True
+        Else
+            window1.AutoSize = False
+            window1.Width = Width
+            window1.Height = Height
+        End If
+        window1.Modal = True
+        window1.DestroyOnClose = True
+        RadWindowManager1.Windows.Add(window1)
     End Sub
 
 End Class

@@ -114,6 +114,8 @@ Public Class invoices
 
 
 
+
+
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
         RadWindowManager1.Windows.Clear()
         Dim window1 As RadWindow = New RadWindow()
