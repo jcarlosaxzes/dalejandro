@@ -24,6 +24,12 @@ Public Class Job_accounting
                 FormViewStatus.Enabled = LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Allow_InactivateJob")
 
                 Master.ActiveTab(1)
+
+                If lblCompanyId.Text = 260962 Then
+                    ' EEG 10 Mb
+                    RadCloudUpload1.MaxFileSize = 10485760
+                End If
+
             End If
             RadWindowManager1.EnableViewState = False
 
@@ -110,7 +116,7 @@ Public Class Job_accounting
                         Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                         Dim qbCustomerId As Integer = ids(1)
                         lblInvoiceId.Text = ids(0)
-                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
+                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
                         RadGridIncoices.Rebind()
                     Else
                         Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=job_accounting&JobId=" & lblJobId.Text)

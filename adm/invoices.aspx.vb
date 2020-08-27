@@ -30,6 +30,12 @@ Public Class invoices
                 cboQB.Visible = LocalAPI.IsQuickBookModule(lblCompanyId.Text)
 
                 RefrescarRecordset()
+
+                If lblCompanyId.Text = 260962 Then
+                    ' EEG 10 Mb
+                    RadCloudUpload1.MaxFileSize = 10485760
+                End If
+
             End If
 
             RadWindowManager1.EnableViewState = False
@@ -264,7 +270,7 @@ Public Class invoices
                         Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                         Dim qbCustomerId As Integer = ids(1)
                         lblInvoiceId.Text = ids(0)
-                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblCompanyId.Text)
+                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, Master.UserEmail, lblCompanyId.Text)
                         RadGrid1.Rebind()
                     Else
                         Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=invoices")

@@ -58,8 +58,8 @@
             <tr>
                 <td style="padding-top: 50px; vertical-align: top">
 
-                    <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"
-                        GridLines="None" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small">
+                    <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" HeaderStyle-Font-Size="Small"
+                        GridLines="None" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small" FooterStyle-Font-Bold="true">
                         <MasterTableView DataKeyNames="Month3" DataSourceID="SqlDataSource1" ShowFooter="True">
                             <Columns>
                                 <telerik:GridBoundColumn DataField="Month3" HeaderText="Month" SortExpression="Month3"
@@ -76,6 +76,12 @@
                                     ReadOnly="True" SortExpression="Executed" UniqueName="Executed"
                                     HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                 </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn Aggregate="Sum" DataField="PaymentsReceived" DataFormatString="{0:N0}"
+                                    FooterAggregateFormatString="{0:N0}" HeaderText="Collected"
+                                    ReadOnly="True" SortExpression="PaymentsReceived" UniqueName="PaymentsReceived"
+                                    HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                                </telerik:GridBoundColumn>
+                                
                                 <telerik:GridBoundColumn Aggregate="Sum" DataField="Balance" DataFormatString="{0:N0}"
                                     FooterAggregateFormatString="{0:N0}" HeaderText="Balance"
                                     ReadOnly="True" SortExpression="Balance" UniqueName="Balance"
