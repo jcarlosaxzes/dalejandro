@@ -320,7 +320,8 @@
                                     <span title="Number of client visits to Invoice Page" class="badge badge-pill badge-warning">
                                         <%#Eval("clientvisits")%>
                                     </span>
-                                    <span title="Invoice Sent to QuickBooks" class="badge badge-pill badge-success" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>qb
+                                    <span title="Invoice Sent to QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
+                                        <img src="../Images/C2QB_green_btn_sm_default.png" height="14" /> 
                                     </span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>

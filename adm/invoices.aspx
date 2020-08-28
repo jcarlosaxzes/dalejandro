@@ -42,7 +42,7 @@
                 </button>
             </span>
             <asp:LinkButton ID="btnBulkSentToQB" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Send selected records Invoices to QuickBooks">
-                    Bulk Send to QB
+                Send To QuickBooks
             </asp:LinkButton>
             <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Invoice Simple Change">
                     Add Invoice
@@ -126,13 +126,14 @@
                         </telerik:RadComboBox>
                     </td>
                     <td>
-                         <telerik:RadComboBox ID="cboQB" runat="server" Width="100%" >
+                         <telerik:RadComboBox ID="cboQB" runat="server" Width="100%" ToolTip="QuickBooks Filter">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="QuickBooks - Unfiltered" Value="0" Selected="true" />
-                                <telerik:RadComboBoxItem runat="server" Text="QB - Client Linked" Value="1" />
-                                <telerik:RadComboBoxItem runat="server" Text="QB - Invoice Pending" Value="2" />
-                                <telerik:RadComboBoxItem runat="server" Text="QB - Invoice Sent" Value="3" />
+                                <telerik:RadComboBoxItem runat="server" Text="Clienjavascript:__doPostBack('ctl00$ContentPlaceHolder1$RadGrid1$ctl00$ctl04$LinkButton4','')t Linked" Value="1" />
+                                <telerik:RadComboBoxItem runat="server" Text="Invoice Pending" Value="2" />
+                                <telerik:RadComboBoxItem runat="server" Text="Invoice Sent" Value="3" />
                             </Items>
+                        </telerik:RadComboBox>
                         </telerik:RadComboBox>
                     </td>
                     <td style="text-align: right">
@@ -315,8 +316,8 @@
                             <span title="Number of client visits to Invoice Page" class="badge badge-pill badge-warning">
                                 <%#Eval("clientvisits")%>
                             </span>
-                            <span title="Invoice Sent to QuickBooks" class="badge badge-pill badge-success" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
-                                qb
+                            <span title="Invoice Sent to QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
+                                <img src="../Images/C2QB_green_btn_sm_default.png" height="14" /> 
                             </span>
                             <br />
                             <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></div>

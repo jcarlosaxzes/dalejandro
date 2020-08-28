@@ -2142,6 +2142,18 @@
     <Content Include="adm\ADM_Main_Responsive.Master" />
     <Content Include="adm\web.config" />
     <Content Include="Images\.DS_Store" />
+    <Content Include="Images\C2QB_green_btn_lg_default.png" />
+    <Content Include="Images\C2QB_green_btn_lg_hover.png" />
+    <Content Include="Images\C2QB_green_btn_med_default.png" />
+    <Content Include="Images\C2QB_green_btn_med_hover.png" />
+    <Content Include="Images\C2QB_green_btn_sm_default.png" />
+    <Content Include="Images\C2QB_green_btn_sm_hover.png" />
+    <Content Include="Images\C2QB_white_btn_lg_default.png" />
+    <Content Include="Images\C2QB_white_btn_lg_hover.png" />
+    <Content Include="Images\C2QB_white_btn_med_default.png" />
+    <Content Include="Images\C2QB_white_btn_med_hover.png" />
+    <Content Include="Images\C2QB_white_btn_sm_default.png" />
+    <Content Include="Images\C2QB_white_btn_sm_hover.png" />
     <Content Include="Images\clients\Nophoto.jpg" />
     <Content Include="Images\employees\Nophoto.jpg" />
     <Content Include="Images\logo\pas_horizontal_logo.png" />
@@ -2380,7 +2392,6 @@
     <Content Include="Images\PresidentName.jpg" />
     <Content Include="Images\PresidentSing.jpg" />
     <Content Include="Images\Proposalheader.jpg" />
-    <Content Include="Images\qbconnect.png" />
     <Content Include="Images\qb_btn.png" />
     <Content Include="Images\qb_connected_form.png" />
     <Content Include="Images\qb_connected_grid.png" />
@@ -4808,7 +4819,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
