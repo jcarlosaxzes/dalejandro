@@ -261,7 +261,7 @@
                                                     <td style="padding-left: 24px">
                                                         <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# String.Concat(Eval("Id"), ",", Eval("qbCustomerId")) %>' CssClass="dropdown-item"
                                                             Visible='<%# iif(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") = 0, True, False) %>'>
-                                                            Send Invoice to QuickBooks
+                                                            Sync Invoice with QuickBooks
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
@@ -320,7 +320,7 @@
                                     <span title="Number of client visits to Invoice Page" class="badge badge-pill badge-warning">
                                         <%#Eval("clientvisits")%>
                                     </span>
-                                    <span title="Invoice Sent to QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
+                                    <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
                                         <img src="../Images/C2QB_green_btn_sm_default.png" height="14" /> 
                                     </span>
                                 </ItemTemplate>

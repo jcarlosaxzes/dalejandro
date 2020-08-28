@@ -9,6 +9,9 @@ Public Class client_sync_qb
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             lblCompanyId.Text = Session("companyId")
+            btnDisconnectFromQuickBooks.Visible = qbAPI.IsValidAccessToken(lblCompanyId.Text)
+            btnConnectToQuickBooks.Visible = Not btnDisconnectFromQuickBooks.Visible
+            btnGetCustomers.Visible = btnDisconnectFromQuickBooks.Visible
         End If
         RadWindowManager1.EnableViewState = False
     End Sub
@@ -77,4 +80,11 @@ Public Class client_sync_qb
         RadGrid1.Rebind()
     End Sub
 
+    Private Sub btnConnectToQuickBooks_Click(sender As Object, e As EventArgs) Handles btnConnectToQuickBooks.Click
+        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+    End Sub
+
+    Private Sub btnDisconnectFromQuickBooks_Click(sender As Object, e As EventArgs) Handles btnDisconnectFromQuickBooks.Click
+        Response.Redirect("~/adm/qb_disconnect")
+    End Sub
 End Class

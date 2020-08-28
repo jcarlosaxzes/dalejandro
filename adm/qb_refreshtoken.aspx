@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="QuickBooks Connect" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="qb_refreshtoken.aspx.vb" Inherits="pasconcept20.qb_refreshtoken" %>
-
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -8,7 +7,7 @@
         <div class="pasconcept-bar">
             <span class="pasconcept-pagetitle">
                 <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark btn-lg" UseSubmitBehavior="false" CausesValidation="False">
-                       Cancel
+                       Back
                 </asp:LinkButton>
                 &nbsp;&nbsp;&nbsp;
                 Connect PASconcept to QuickBooks Online
@@ -46,7 +45,7 @@
                         QuickBooks Connect Process have been completed successfully!
                     </p>
                     <p>
-                        The connection Token with QuickBook has been authorized for the next 60 minutes.
+                        The connection Token with QuickBook has been authorized.
                     <br />
                         You can now return (Back button) to the previous page to continue with the transaction between PASconcept and QuickBook
                     </p>

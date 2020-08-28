@@ -620,6 +620,7 @@
     <Content Include="adm\proposaltemplate.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
+    <Content Include="adm\qb_disconnect.aspx" />
     <Content Include="adm\qb_refreshtoken.aspx" />
     <Content Include="adm\QueicBooksTestPages.aspx" />
     <Content Include="adm\reports.aspx" />
@@ -3820,6 +3821,13 @@
     </Compile>
     <Compile Include="adm\proposal_types.aspx.vb">
       <DependentUpon>proposal_types.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\qb_disconnect.aspx.designer.vb">
+      <DependentUpon>qb_disconnect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\qb_disconnect.aspx.vb">
+      <DependentUpon>qb_disconnect.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\qb_refreshtoken.aspx.designer.vb">

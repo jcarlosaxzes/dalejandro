@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class client_sync_qb
     
     '''<summary>
+    '''btnDisconnectFromQuickBooks control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDisconnectFromQuickBooks As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnConnectToQuickBooks control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConnectToQuickBooks As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''btnGetCustomers control.
     '''</summary>
     '''<remarks>
@@ -39,15 +57,6 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Label1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''RadGrid1 control.
