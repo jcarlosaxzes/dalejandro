@@ -15,6 +15,7 @@ Public Class invoices
                 Master.PageTitle = "Billing/Invoices"
                 Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"
                 lblCompanyId.Text = Session("companyId")
+                lblEmployeeId.Text = Master.UserId
 
                 spanViewSummary.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
 
@@ -26,8 +27,10 @@ Public Class invoices
                 cboPeriod.DataBind()
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
+                ' ? Quickbooks.........................
                 cboQB.DataBind()
                 cboQB.Visible = LocalAPI.IsQuickBookModule(lblCompanyId.Text)
+                btnBulkSentToQB.Visible = cboQB.Visible
 
                 RefrescarRecordset()
 
@@ -270,7 +273,7 @@ Public Class invoices
                         Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                         Dim qbCustomerId As Integer = ids(1)
                         lblInvoiceId.Text = ids(0)
-                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, Master.UserEmail, lblCompanyId.Text)
+                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
                         RadGrid1.Rebind()
                     Else
                         Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=invoices")
@@ -283,4 +286,21 @@ Public Class invoices
         End Try
     End Sub
 
+    Private Sub btnBulkSentToQB_Click(sender As Object, e As EventArgs) Handles btnBulkSentToQB.Click
+        Try
+            If RadGrid1.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGrid1.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        qbAPI.SendInvoiceToQuickBooks(dataItem("Id").Text, dataItem("qbCustomerId").Text, lblEmployeeId.Text, lblCompanyId.Text)
+                    End If
+                Next
+                RadGrid1.DataBind()
+            Else
+                Master.ErrorMessage("Select (Mark) Invoices Records to Sent to QuickBooks!")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
 End Class

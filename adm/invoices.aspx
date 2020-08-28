@@ -37,10 +37,13 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
             <span id="spanViewSummary" runat="server">
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
                     View Summary
                 </button>
             </span>
+            <asp:LinkButton ID="btnBulkSentToQB" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Send selected records Invoices to QuickBooks">
+                    Bulk Send to QB
+            </asp:LinkButton>
             <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Invoice Simple Change">
                     Add Invoice
             </asp:LinkButton>
@@ -69,7 +72,7 @@
                     <td style="width:250px">
                         <telerik:RadComboBox ID="cboInvoiceStatus" runat="server" Width="100%" MarkFirstMatch="True">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="Not Collected in Full" Value="0" Selected="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="Pending Balance" Value="0" Selected="true" />
                                 <telerik:RadComboBoxItem runat="server" Text="Not Yet Emitted" Value="1" />
                                 <telerik:RadComboBoxItem runat="server" Text="Collected" Value="2" />
                                 <telerik:RadComboBoxItem runat="server" Text="Bad Debts" Value="3" />
@@ -197,6 +200,7 @@
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceInvoices" ShowFooter="True" AutoGenerateColumns="False" AllowSorting="True" AllowAutomaticDeletes="True"
+            AllowMultiRowSelection="True"
             PageSize="50" AllowPaging="true"
             Height="850px" RenderMode="Lightweight"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
@@ -209,9 +213,13 @@
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
 
                 <Columns>
-                    <telerik:GridTemplateColumn DataField="Id" FilterControlAltText="Filter Id column"
-                        HeaderText="Number" SortExpression="InvoiceNumber" UniqueName="Id"
-                        HeaderStyle-Width="130px"
+                    <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn">
+                    </telerik:GridClientSelectColumn>
+
+                    <telerik:GridBoundColumn DataField="Id" HeaderText="Id" HeaderStyle-Width="10px" UniqueName="Id" Display="false" ></telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="qbCustomerId" HeaderText="qbCustomerId"  HeaderStyle-Width="10px" UniqueName="qbCustomerId" Display="false" ></telerik:GridBoundColumn>
+
+                    <telerik:GridTemplateColumn DataField="InvoiceNumber" HeaderText="Number" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber" HeaderStyle-Width="130px"
                         FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEditJob" runat="server" ToolTip="Click to Invoice" CommandArgument='<%# Eval("Id") %>' CommandName="EditInvoice" Text='<%# Eval("InvoiceNumber")%>' UseSubmitBehavior="false">
@@ -715,4 +723,5 @@
     <asp:Label ID="lblContentBytes" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblContentType" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblStatus" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
 </asp:Content>
