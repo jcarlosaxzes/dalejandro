@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class qb_refreshtoken
     
     '''<summary>
-    '''lblResutl control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''btnBack control.
     '''</summary>
     '''<remarks>
@@ -30,15 +21,6 @@ Partial Public Class qb_refreshtoken
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnConnect control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnConnect As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''PanelInstructions control.
@@ -50,6 +32,24 @@ Partial Public Class qb_refreshtoken
     Protected WithEvents PanelInstructions As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''btnConnect control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConnect As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''lblResutl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''PanelSuccess control.
     '''</summary>
     '''<remarks>
@@ -57,4 +57,16 @@ Partial Public Class qb_refreshtoken
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PanelSuccess As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+        Get
+            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+        End Get
+    End Property
 End Class

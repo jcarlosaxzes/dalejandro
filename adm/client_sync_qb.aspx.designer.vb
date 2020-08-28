@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class client_sync_qb
     
     '''<summary>
-    '''lblResutl control.
+    '''btnGetCustomers control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnGetCustomers As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
     '''SyncPanel control.
@@ -32,13 +32,13 @@ Partial Public Class client_sync_qb
     Protected WithEvents SyncPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''btnGetCustomers control.
+    '''lblResutl control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnGetCustomers As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Label1 control.
