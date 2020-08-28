@@ -32,6 +32,15 @@ Partial Public Class invoices
     Protected WithEvents spanViewSummary As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''btnBulkSentToQB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkSentToQB As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''btnNewInvoice control.
     '''</summary>
     '''<remarks>
@@ -426,6 +435,15 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblStatus As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblEmployeeId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

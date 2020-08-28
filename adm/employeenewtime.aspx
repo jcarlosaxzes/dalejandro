@@ -14,7 +14,7 @@
         <span style="float: right; vertical-align: middle;">&nbsp;&nbsp;&nbsp;
             <asp:Label ID="lblJobName" runat="server" Font-Size="Large" Visible="false"></asp:Label>
             &nbsp;&nbsp;&nbsp;
-            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                        View Summary
             </asp:LinkButton>
         </span>

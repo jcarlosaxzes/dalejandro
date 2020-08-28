@@ -147,7 +147,7 @@
                         Invoices Filter:
                         <telerik:RadComboBox ID="cboInvoiceFilterCode" runat="server" Width="300px" RenderMode="Lightweight" AutoPostBack="true">
                             <Items>
-                                <telerik:RadComboBoxItem Text="Not Collected in Full" Value="1" />
+                                <telerik:RadComboBoxItem Text="Pending Balance" Value="1" />
                                 <telerik:RadComboBoxItem Text="(All Invoices ...)" Value="0" />
                                 <telerik:RadComboBoxItem Text="Collected" Value="2" />
                                 <telerik:RadComboBoxItem Text="Simple Charge Invoices" Value="3" />
