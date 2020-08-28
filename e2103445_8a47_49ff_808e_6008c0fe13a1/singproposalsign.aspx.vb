@@ -203,6 +203,10 @@ Public Class singproposalsign
             Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
             Dim pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
 
+            ' Register future PDF (not yet created) as Document
+            Dim PDFfilename As String = LocalAPI.ProposalNumber(proposalId) & "_Signed_on_" & Replace(LocalAPI.GetDateTime(), "/", "-") & ".pdf"
+            LocalAPI.AzureStorage_Insert(proposalId, "Proposal", 1, PDFfilename, newName, False, "450862", "application/pdf", companyId)
+
             ' Accept Email
             ProposalAcceptedEmail(proposalId, companyId, pdfUrl, JobId)
             LocalAPI.SiteUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
