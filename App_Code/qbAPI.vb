@@ -71,6 +71,26 @@ Public Class qbAPI
         Return False
     End Function
 
+    Public Shared Async Function RevokeDisconnectTokenAsync(companyId As String) As Threading.Tasks.Task(Of Boolean)
+        Try
+            Dim clientid = ConfigurationManager.AppSettings("clientid")
+            Dim clientsecret = ConfigurationManager.AppSettings("clientsecret")
+            Dim redirectUrl = ConfigurationManager.AppSettings("redirectUrl")
+            Dim environment = ConfigurationManager.AppSettings("appEnvironment")
+            Dim auth2Client As OAuth2Client = New OAuth2Client(clientid, clientsecret, redirectUrl, environment)
+            Dim qbCurrentToken As String = LocalAPI.GetCompanyProperty(companyId, "qbAccessToken")
+            Dim tokenResp = Await auth2Client.RevokeTokenAsync(qbCurrentToken)
+
+            LocalAPI.SetqbAccessToken(companyId, "", "")
+
+            Return True
+        Catch ex As Exception
+            LocalAPI.SetqbAccessToken(companyId, "", "")
+            Throw ex
+        End Try
+
+    End Function
+
     Public Shared Sub LoadQBCustomers(comapyId As String)
         Dim dt As New DataTable()
         dt.Columns.Add(New DataColumn("companyId", Type.GetType("System.Int32")))

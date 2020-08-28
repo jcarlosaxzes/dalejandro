@@ -41,8 +41,8 @@
                     View Summary
                 </button>
             </span>
-            <asp:LinkButton ID="btnBulkSentToQB" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Send selected records Invoices to QuickBooks">
-                Send To QuickBooks
+            <asp:LinkButton ID="btnBulkSentToQB" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Sync  selected records Invoices with QuickBooks">
+                Sync with QuickBooks
             </asp:LinkButton>
             <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Invoice Simple Change">
                     Add Invoice
@@ -129,11 +129,10 @@
                          <telerik:RadComboBox ID="cboQB" runat="server" Width="100%" ToolTip="QuickBooks Filter">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="QuickBooks - Unfiltered" Value="0" Selected="true" />
-                                <telerik:RadComboBoxItem runat="server" Text="Clienjavascript:__doPostBack('ctl00$ContentPlaceHolder1$RadGrid1$ctl00$ctl04$LinkButton4','')t Linked" Value="1" />
-                                <telerik:RadComboBoxItem runat="server" Text="Invoice Pending" Value="2" />
-                                <telerik:RadComboBoxItem runat="server" Text="Invoice Sent" Value="3" />
+                                <telerik:RadComboBoxItem runat="server" Text="Sync Clients" Value="1" />
+                                <telerik:RadComboBoxItem runat="server" Text="Invoices Pending" Value="2" />
+                                <telerik:RadComboBoxItem runat="server" Text="Invoices Synced" Value="3" />
                             </Items>
-                        </telerik:RadComboBox>
                         </telerik:RadComboBox>
                     </td>
                     <td style="text-align: right">
@@ -287,7 +286,7 @@
                                             <td style="padding-left: 24px">
                                                 <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# String.Concat(Eval("Id"), ",", Eval("qbCustomerId")) %>' CssClass="dropdown-item"
                                                     Visible='<%# iif(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") = 0, True, False) %>'>
-                                                            Send Invoice to QuickBooks
+                                                            Sync Invoice with QuickBooks
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -316,7 +315,7 @@
                             <span title="Number of client visits to Invoice Page" class="badge badge-pill badge-warning">
                                 <%#Eval("clientvisits")%>
                             </span>
-                            <span title="Invoice Sent to QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
+                            <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
                                 <img src="../Images/C2QB_green_btn_sm_default.png" height="14" /> 
                             </span>
                             <br />

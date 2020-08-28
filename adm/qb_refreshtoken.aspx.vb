@@ -22,7 +22,6 @@ Public Class qb_refreshtoken
 
                     Threading.Tasks.Task.Run(Function() GetAuthTokensAsync(code, realmId))
 
-                    btnBack.Text = "Back"
                 Else
                     lblResutl.Text = "Connection Error with QB!!!"
 
@@ -30,7 +29,7 @@ Public Class qb_refreshtoken
             End If
 
             ' Botones y paneles en funcion de connexion valida
-            PanelSuccess.Visible = (btnBack.Text = "Back")
+            PanelSuccess.Visible = True
             PanelInstructions.Visible = Not PanelSuccess.Visible
             btnConnect.Visible = PanelInstructions.Visible
 

@@ -9,16 +9,21 @@
             QuickBooks Customer Import Manager
         </span>
         <span style="float: right; vertical-align: middle;">
-            <asp:Button ID="btnGetCustomers" runat="server" Text="Get Customers from QuickBooks Online " CssClass="btn btn-success btn-lg" OnClick="btnGetCustomers_Click" />
+            <asp:LinkButton ID="btnDisconnectFromQuickBooks" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false">
+                    Disconnect from QuickBooks
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnConnectToQuickBooks" runat="server" CssClass="btn" UseSubmitBehavior="false">
+                <img src="../Images/C2QB_green_btn_lg_default.png" height="40" />
+            </asp:LinkButton>
+            <asp:Button ID="btnGetCustomers" runat="server" Text="Get Customers from QuickBooks Online " CssClass="btn btn-success" OnClick="btnGetCustomers_Click" />
         </span>
     </div>
     <br />
     <asp:Panel ID="SyncPanel" runat="server">
         <asp:Label ID="lblResutl" runat="server" Text=""></asp:Label>
-        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         <h4>Unlinked QuickBooks Customers</h4>
         <telerik:RadGrid ID="RadGrid1" runat="server" Width="100%" DataSourceID="SqlDataSourceClientPending"
-            PageSize="50" AllowPaging="true" Height="600px" RenderMode="Lightweight" BorderStyle="None"
+            PageSize="50" AllowPaging="true" Height="580px" RenderMode="Lightweight" BorderStyle="None"
             AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
             FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
@@ -81,8 +86,6 @@
 
         <br />
         <h4>Linked PASconcept Clients</h4>
-        <br />
-
         <telerik:RadGrid ID="RadGridLinked" runat="server" Width="100%" DataSourceID="SqlDataSourceQBLinked"
             PageSize="50" AllowPaging="true" Height="600px" RenderMode="Lightweight" BorderStyle="None"
             AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
