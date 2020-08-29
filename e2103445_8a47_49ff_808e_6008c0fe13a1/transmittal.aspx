@@ -96,20 +96,27 @@
             </table>
             <asp:Panel runat="server" ID="PanelDigitalFiles">
                 <br />
-                <h4 style="text-align:left">Documents(s)</h4>
+                <table style="width:100%">
+                    <tr>
+                        <td style="text-align:left"><h4 style="margin:0">Documents(s)</h4></td>
+                        <td style="width:200px;text-align:center">Expiration Date</td>
+                    </tr>
+                </table>
                 <div class="table-responsive" style="text-align:left">
                     <table class="table">
                         <asp:Repeater ID="rptrSharedPublicLinks" runat="server" DataSourceID="SqlDataSourceFiles">
                             <ItemTemplate>
                                 <tr>
                                     <td>
-                                        <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " -- (", Eval("FileType"), ")")%></a>
+                                       <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                        &nbsp;&nbsp;
+                                        <%# String.Concat(Eval("Name"), " -- (", Eval("FileType"), ")")%>
                                     </td>
                                     <td style="width:180px;text-align:center">
                                        <span title="Downloads Restriction"><%# Eval("Download") %>
                                     </td>
                                     <td style="width:200px;text-align:center">
-                                       expires: <span title="Expiration Date to Download"><%# Eval("ExpirationDate", "{0:d}") %></span>
+                                       <span title="Expiration Date to Download"><%# Eval("ExpirationDate", "{0:d}") %></span>
                                     </td>
                                 </tr>
                             </ItemTemplate>

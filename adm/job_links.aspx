@@ -76,16 +76,14 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <table style="width: 100%; position: absolute; margin-top: 40px; background-color: lightgray; height: 100px;">
-                                                <tr>
-                                                    <td style="width: 90%; vertical-align: top;">
-                                                        <h3 class="additional-text">Select Files to Upload</h3>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
-                                                ProviderType="Azure" MaxFileSize="1048576" CssClass="h-100 fileUploadRad">
-                                            </telerik:RadCloudUpload>
+                                            <div class="uploadfiles-canvas">
+                                                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded" CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576" >
+                                                    <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
+                                                </telerik:RadCloudUpload>
+                                                <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>
+                                            </div>
+
+
                                         </div>
                                     </asp:Panel>
                                 </telerik:RadWizardStep>

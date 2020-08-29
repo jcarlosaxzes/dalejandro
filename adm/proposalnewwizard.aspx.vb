@@ -86,21 +86,12 @@ Public Class proposalnewwizard
                 Master.PageTitle = "Proposals/New Proposal"
                 'Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html"
 
-                RadWizardFiles.ActiveStepIndex = 1
-                PanelUpload.Visible = False
-
+                ConfigUploadPanels()
 
                 RadListViewFiles.Visible = False
                 RadGridFiles.Visible = Not RadListViewFiles.Visible
                 btnGridPage.Visible = Not RadListViewFiles.Visible
                 btnTablePage.Visible = RadListViewFiles.Visible
-
-                If lblCompanyId.Text = 260962 Then
-                    ' EEG 10 Mb
-                    RadCloudUpload1.MaxFileSize = 10485760
-                End If
-
-
 
             End If
             RadWindowManagerJob.EnableViewState = False
@@ -109,6 +100,31 @@ Public Class proposalnewwizard
         Catch ex As Exception
             Throw ex
         End Try
+    End Sub
+
+    Protected Sub ConfigUploadPanels()
+        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal")
+
+        If ExistingFiles = 0 Then
+            RadWizardFiles.ActiveStepIndex = 0
+            PanelUpload.Visible = True
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = False
+        Else
+            RadWizardFiles.ActiveStepIndex = 1
+            PanelUpload.Visible = False
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = Not RadListViewFiles.Visible
+        End If
+
+        btnGridPage.Visible = Not RadListViewFiles.Visible
+        btnTablePage.Visible = RadListViewFiles.Visible
+
+        If lblCompanyId.Text = 260962 Then
+            ' EEG 10 Mb
+            RadCloudUpload1.MaxFileSize = 10485760
+        End If
+
     End Sub
 
     Private Sub ReadPaymentSchedule()

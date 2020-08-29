@@ -12301,8 +12301,8 @@ Public Class LocalAPI
         Return True
     End Function
 
-    Public Shared Function GetAzureFilesCountInProposal(proposalId As Integer) As Integer
-        Return GetNumericEscalar("SELECT count(*) FROM [Azure_Uploads] where EntityType= 'Proposal' and EntityId=" & proposalId)
+    Public Shared Function GetEntityAzureFilesCount(entityId As Integer, EntityLabel As String) As Integer
+        Return GetNumericEscalar($"SELECT count(*) FROM [Azure_Uploads] where EntityType= '{EntityLabel}' and EntityId={entityId}")
     End Function
 
 

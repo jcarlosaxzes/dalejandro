@@ -432,12 +432,12 @@
 
             <tr>
                 <td colspan="2">
-                    <asp:Panel ID="PanelUpload" runat="server" class="DropZone1">
+                    <asp:Panel ID="PanelUpload" runat="server" class="uploadfiles-canvas">
                         <h4>Select or Drag and Drop files (up to 10Mb)</h4>
                         <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
                             OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
                             MaxFileSize="10145728"
-                            DropZones=".DropZone1">
+                            DropZones=".uploadfiles-canvas">
                         </telerik:RadCloudUpload>
                     </asp:Panel>
                 </td>

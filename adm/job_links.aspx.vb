@@ -14,18 +14,12 @@ Public Class job_links
                 lblproposalId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "proposalId")
                 Master.ActiveTab(7)
 
-                RadWizardFiles.ActiveStepIndex = 1
-                PanelUpload.Visible = False
-
                 RadListViewFiles.Visible = False
                 RadGridFiles.Visible = Not RadListViewFiles.Visible
                 btnGridPage.Visible = Not RadListViewFiles.Visible
                 btnTablePage.Visible = RadListViewFiles.Visible
 
-                If lblCompanyId.Text = 260962 Then
-                    ' EEG 10 Mb
-                    RadCloudUpload1.MaxFileSize = 10485760
-                End If
+                ConfigUploadPanels()
 
             End If
 
@@ -36,6 +30,31 @@ Public Class job_links
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
     End Sub
+
+    Protected Sub ConfigUploadPanels()
+        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblJobId.Text, "Jobs")
+
+        If ExistingFiles = 0 Then
+            RadWizardFiles.ActiveStepIndex = 0
+            PanelUpload.Visible = True
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = False
+        Else
+            PanelUpload.Visible = False
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = Not RadListViewFiles.Visible
+        End If
+
+        btnGridPage.Visible = Not RadListViewFiles.Visible
+        btnTablePage.Visible = RadListViewFiles.Visible
+
+        If lblCompanyId.Text = 260962 Then
+            ' EEG 10 Mb
+            RadCloudUpload1.MaxFileSize = 10485760
+        End If
+
+    End Sub
+
 
     Public Function FormatSource(source As String)
         Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")

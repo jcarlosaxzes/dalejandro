@@ -258,12 +258,14 @@
                                 <table style="width: 100%" class="table-sm">
                                     <tr>
                                         <td colspan="2">
-                                            <p style="font-size: x-small">Upload your files</p>
-                                            <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Automatic"
-                                                OnClientUploadFailed="onClientUploadFailed"
-                                                OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
-                                                MaxFileSize="10145728">
-                                            </telerik:RadCloudUpload>
+                                            <div class="uploadfiles-canvas">
+                                                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Automatic"
+                                                    OnClientUploadFailed="onClientUploadFailed"
+                                                    OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
+                                                    MaxFileSize="10145728">
+                                                </telerik:RadCloudUpload>
+                                                <p style="font-size: x-small">Upload your files</p>
+                                            </div>
                                         </td>
                                         <td>
                                             <telerik:RadButton ID="btnSave" runat="server" Text="Upload" ToolTip="Upload and Save selected files" Width="120px" UseSubmitBehavior="false">

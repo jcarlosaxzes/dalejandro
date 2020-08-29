@@ -474,7 +474,7 @@ Public Class singproposalsign
 
     Public Function ShareDocumentsPanelVisible(IsSharePublicLinks As Integer) As Boolean
         If IsSharePublicLinks = 1 Then
-            Return LocalAPI.IsAzureStorage(lblCompanyId.Text) And LocalAPI.GetAzureFilesCountInProposal(lblProposalId.Text) > 0
+            Return LocalAPI.IsAzureStorage(lblCompanyId.Text) And LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal") > 0
         End If
     End Function
 
