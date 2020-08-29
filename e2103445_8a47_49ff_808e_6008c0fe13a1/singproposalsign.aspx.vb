@@ -205,9 +205,7 @@ Public Class singproposalsign
 
             ' Register future PDF (not yet created) as Document
             Dim PDFfilename As String = LocalAPI.ProposalNumber(proposalId) & "_Signed_on_" & LocalAPI.GetDateTime().ToString("yyyy-MM-dd_hhmm") & ".pdf"
-
             LocalAPI.AzureStorage_Insert(proposalId, "Proposal", 1, PDFfilename, newName, False, "450862", "application/pdf", companyId)
-            LocalAPI.AzureStorage_Insert(JobId, "Jobs", 1, PDFfilename, newName, False, "450862", "application/pdf", companyId)
 
             ' Accept Email
             ProposalAcceptedEmail(proposalId, companyId, pdfUrl, JobId)
@@ -476,7 +474,7 @@ Public Class singproposalsign
 
     Public Function ShareDocumentsPanelVisible(IsSharePublicLinks As Integer) As Boolean
         If IsSharePublicLinks = 1 Then
-            Return LocalAPI.IsAzureStorage(lblCompanyId.Text) And LocalAPI.GetAzureFilesCountInProposal(lblProposalId.Text) > 0
+            Return LocalAPI.IsAzureStorage(lblCompanyId.Text) And LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal") > 0
         End If
     End Function
 

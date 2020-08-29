@@ -81,7 +81,7 @@
                                             <i class="far fa-envelope"></i>&nbsp;Digital Notification
                                         </asp:LinkButton>
                                         <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"), True)%>' target="_blank" title="Print View Transmittal Page" class="btn btn-secondary btn-lg">
-                                            <i style="font-size:medium" class="fas fa-print"></i></a>
+                                            <i style="font-size: medium" class="fas fa-print"></i></a>
                                         </a>
 
                                         <br />
@@ -454,7 +454,7 @@
                                                         <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                             <tr>
                                                                 <td style="height: 108px; padding: 0px;">
-                                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -502,7 +502,7 @@
                                                         <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                             <tr>
                                                                 <td style="height: 108px; padding: 0px;">
-                                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -548,12 +548,12 @@
                                                 <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
                                                 </telerik:GridBoundColumn>
 
-                                                <telerik:GridTemplateColumn DataField="Name" HeaderText="Name" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
-                                                    HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left">
+                                                <telerik:GridTemplateColumn DataField="Name" HeaderText="FileName" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
+                                                    HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnDownload" runat="server" CommandName="EditForm" CommandArgument='<%# Eval("Id") %>'
-                                                            Text='<%# Eval("Name")%>' ToolTip="Click to Download ">
-                                                        </asp:LinkButton>
+                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                                            &nbsp;&nbsp;
+                                                            <%# Eval("Name")%>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
@@ -653,17 +653,11 @@
                                         </span>
                                     </div>
 
-                                    <div style="width: 99%; height: 450px; position: relative">
-                                        <table style="width: 100%; position: absolute; margin-top: 3px; background-color: lightgray; height: 200px;">
-                                            <tr>
-                                                <td style="width: 90%; vertical-align: top;">
-                                                    <h4 class="additional-text">Select Files to Upload</h4>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
-                                            ProviderType="Azure" MaxFileSize="1048576" CssClass="h-100 fileUploadRad">
+                                    <div style="width: 99%; height: 450px; position: relative" class="uploadfiles-canvas">
+                                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded" CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576">
+                                            <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
                                         </telerik:RadCloudUpload>
+                                        <p style="text-align: center; vertical-align: middle; padding-top: 100px; font-size: 36px">Upload your files</p>
                                     </div>
                                 </asp:Panel>
                             </telerik:RadWizardStep>

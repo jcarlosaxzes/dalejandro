@@ -65,18 +65,7 @@ Public Class proposal
                     Session("propsalbackpage") = Request.QueryString("backpage")
                 End If
 
-
-                RadWizardFiles.ActiveStepIndex = 1
-                PanelUpload.Visible = False
-                RadListViewFiles.Visible = False
-                RadGridFiles.Visible = Not RadListViewFiles.Visible
-                btnGridPage.Visible = Not RadListViewFiles.Visible
-                btnTablePage.Visible = RadListViewFiles.Visible
-
-                If lblCompanyId.Text = 260962 Then
-                    ' EEG 10 Mb
-                    RadCloudUpload1.MaxFileSize = 10485760
-                End If
+                ConfigUploadPanels()
 
             End If
             'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblProposalId.Text
@@ -105,6 +94,30 @@ Public Class proposal
         End Try
     End Sub
 
+    Protected Sub ConfigUploadPanels()
+        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal")
+
+        If ExistingFiles = 0 Then
+            RadWizardFiles.ActiveStepIndex = 0
+            PanelUpload.Visible = True
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = False
+        Else
+            RadWizardFiles.ActiveStepIndex = 1
+            PanelUpload.Visible = False
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = Not RadListViewFiles.Visible
+        End If
+
+        btnGridPage.Visible = Not RadListViewFiles.Visible
+        btnTablePage.Visible = RadListViewFiles.Visible
+
+        If lblCompanyId.Text = 260962 Then
+            ' EEG 10 Mb
+            RadCloudUpload1.MaxFileSize = 10485760
+        End If
+
+    End Sub
     Private Sub EnabledProposal()
         Dim Allow_EditAcceptedProposal As Boolean = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_EditAcceptedProposal")
         If Allow_EditAcceptedProposal Then

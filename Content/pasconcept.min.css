@@ -148,3 +148,15 @@ html .RadOrgChart .rocNodeFields .rocItemField {
 .statuslabel {
     display: inline-block;
 }
+
+.uploadfiles-canvas {
+    width: 100%;
+    min-height: 205px;
+    margin-top: 0;
+    padding: 40px 15px 5px;
+    color: #728ea3;
+    font: 13px "Segoe UI", Arial, Helvetica, sans-serif;
+    background: url("../images/uploadfilesbackground.png") repeat;
+    border: none;
+    border-radius: 5px;
+}

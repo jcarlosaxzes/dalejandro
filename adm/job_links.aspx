@@ -76,16 +76,14 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <table style="width: 100%; position: absolute; margin-top: 40px; background-color: lightgray; height: 100px;">
-                                                <tr>
-                                                    <td style="width: 90%; vertical-align: top;">
-                                                        <h3 class="additional-text">Select Files to Upload</h3>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
-                                                ProviderType="Azure" MaxFileSize="1048576" CssClass="h-100 fileUploadRad">
-                                            </telerik:RadCloudUpload>
+                                            <div class="uploadfiles-canvas">
+                                                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded" CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576" >
+                                                    <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
+                                                </telerik:RadCloudUpload>
+                                                <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>
+                                            </div>
+
+
                                         </div>
                                     </asp:Panel>
                                 </telerik:RadWizardStep>
@@ -143,7 +141,7 @@
                                                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                                 <tr>
                                                                     <td style="height: 108px; padding: 0px;">
-                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -196,7 +194,7 @@
                                                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                                 <tr>
                                                                     <td style="height: 108px; padding: 0px;">
-                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -243,12 +241,12 @@
                                                     <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
                                                     </telerik:GridBoundColumn>
 
-                                                    <telerik:GridTemplateColumn DataField="Name" HeaderText="Name" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
+                                                    <telerik:GridTemplateColumn DataField="Name" HeaderText="FileName" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
                                                         HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="btnDownload" runat="server" CommandName="EditForm" CommandArgument='<%# Eval("Id") %>'
-                                                                Text='<%# Eval("Name")%>' ToolTip="Click to Download ">
-                                                            </asp:LinkButton>
+                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                                            &nbsp;&nbsp;
+                                                            <%# Eval("Name")%>
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
 

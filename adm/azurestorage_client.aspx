@@ -12,11 +12,11 @@
     <table class="table-sm" style="width: 100%">
         <tr>
             <td colspan="4">
-                <asp:Panel runat="server" class="DropZoneClient">
+                <asp:Panel runat="server" class="uploadfiles-canvas">
                     <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Automatic" OnClientUploadFailed="onClientUploadFailed"
                         OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
                         MaxFileSize="100145728"
-                        DropZones=".DropZoneClient">
+                        DropZones=".uploadfiles-canvas">
                     </telerik:RadCloudUpload>
                     <p style="margin: 0">To Add/Upload documents to client: </p>
                     <ol style="text-align: left">
