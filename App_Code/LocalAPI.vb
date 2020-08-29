@@ -12615,47 +12615,58 @@ Public Class LocalAPI
     End Function
 
 
-    Public Shared Function CreateIcon(sContentType As String, sUrl As String, sName As String)
-        If sContentType = "application/pdf" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/zip" Or sContentType = "application/x-tar" Or sContentType = "application/x-rar" Then
-            Return $"<a class=""far fa-file-archive"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/vnd.ms-excel" Or sContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" Then
-            Return $"<a class=""far fa-file-excel"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/msword" Or sContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "image/tiff" Or sContentType = "image/bmp" Or sContentType = "image/jpeg" Or sContentType = "image/gif" Or sContentType = "Image/jpg" Or sContentType = "image/png" Then
-            Return $"<div class=""container-fluid px-0""><div class=""row""><div class=""col-md-12""><img src=""{sUrl}"" class=""img-fluid w-100"" style=""object-fit: cover;"" /></div></div></div>"
-        End If
+    Public Shared Function CreateIcon(sContentType As String, sUrl As String, FileName As String, IconPixelsHeihgt As Integer)
+        Dim FileExtention As String = ""
+        Dim FontSizeStyle As String = IIf(IconPixelsHeihgt > 16, $"font-size:{IconPixelsHeihgt}px;", "")
 
-        Return $"<a class=""far fa-file"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+        Select Case sContentType
+            Case "application/pdf"
+                FileExtention = ".pdf"
+            Case "application/zip", "application/x-tar", "application/x-rar"
+                FileExtention = ".zip"
+
+            Case "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                FileExtention = ".xls"
+
+            Case "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                FileExtention = ".doc"
+
+            Case "image/tiff", "image/bmp", "image/jpeg", "image/gif", "Image/jpg", "image/png"
+                FileExtention = ".png"
+            Case Else
+                FileExtention = LCase(System.IO.Path.GetExtension(FileName))
+        End Select
+
+        Select Case LCase(FileExtention)
+            Case ".pdf"
+                Return $"<a title=""{FileName}"" class=""far fa-file-pdf"" style=""{FontSizeStyle} color: darkred"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".zip"
+                Return $"<a title=""{FileName}"" class=""far fa-file-archive"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".xls", ".xlsx", ".csv"
+                Return $"<a title=""{FileName}"" class=""far fa-file-excel"" style=""{FontSizeStyle} color: darkgreen"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".doc", ".docx"
+                Return $"<a title=""{FileName}"" class=""far fa-file-word"" style=""{FontSizeStyle} color: darkblue"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".txt"
+                Return $"<a title=""{FileName}"" class=""far fa-file-alt"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".dwg"
+                Return $"<a title=""{FileName}"" class=""fas fa-drafting-compass"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".msg"
+                Return $"<a title=""{FileName}"" class=""far fa-envelope"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".xmcd"
+                Return $"<a title=""{FileName}"" class=""fas fa-equals"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+
+            Case ".tiff", ".bmp", ".jpeg", ".gif", ".jpg", ".png"
+                If IconPixelsHeihgt > 16 Then
+                    Return $"<div class=""container-fluid px-0""><div class=""row""><div class=""col-md-12""><img src=""{sUrl}"" class=""img-fluid w-100"" style=""object-fit: cover;"" /></div></div></div>"
+                Else
+                    Return $"<a class=""far fa-file-image"" style=""color: red"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+                End If
+            Case Else
+                Return $"<a title=""{FileName}"" class=""far fa-file"" style=""color: darkgray"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+        End Select
 
     End Function
 
-    Public Shared Function CreateSmallIcon(sContentType As String, sUrl As String, sName As String)
-        If sContentType = "application/pdf" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/zip" Or sContentType = "application/x-tar" Or sContentType = "application/x-rar" Then
-            Return $"<a class=""far fa-file-archive"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/vnd.ms-excel" Or sContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" Then
-            Return $"<a class=""far fa-file-excel"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/msword" Or sContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "image/tiff" Or sContentType = "image/bmp" Or sContentType = "image/jpeg" Or sContentType = "image/gif" Or sContentType = "Image/jpg" Or sContentType = "image/png" Then
-            Return $"<image src=""{sUrl}"" width=""100px""/>"
-        End If
-
-        Return $"<a class=""far fa-file"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-
-    End Function
 
 #End Region
 

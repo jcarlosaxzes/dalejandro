@@ -205,9 +205,7 @@ Public Class singproposalsign
 
             ' Register future PDF (not yet created) as Document
             Dim PDFfilename As String = LocalAPI.ProposalNumber(proposalId) & "_Signed_on_" & LocalAPI.GetDateTime().ToString("yyyy-MM-dd_hhmm") & ".pdf"
-
             LocalAPI.AzureStorage_Insert(proposalId, "Proposal", 1, PDFfilename, newName, False, "450862", "application/pdf", companyId)
-            LocalAPI.AzureStorage_Insert(JobId, "Jobs", 1, PDFfilename, newName, False, "450862", "application/pdf", companyId)
 
             ' Accept Email
             ProposalAcceptedEmail(proposalId, companyId, pdfUrl, JobId)

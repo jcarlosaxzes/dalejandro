@@ -454,7 +454,7 @@
                                                         <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                             <tr>
                                                                 <td style="height: 108px; padding: 0px;">
-                                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -502,7 +502,7 @@
                                                         <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                             <tr>
                                                                 <td style="height: 108px; padding: 0px;">
-                                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -548,14 +548,14 @@
                                                 <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
                                                 </telerik:GridBoundColumn>
 
-                                                <telerik:GridTemplateColumn DataField="Name" HeaderText="Name" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
-                                                    HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="btnDownload" runat="server" CommandName="EditForm" CommandArgument='<%# Eval("Id") %>'
-                                                            Text='<%# Eval("Name")%>' ToolTip="Click to Download ">
-                                                        </asp:LinkButton>
-                                                    </ItemTemplate>
-                                                </telerik:GridTemplateColumn>
+                                                    <telerik:GridTemplateColumn DataField="Name" HeaderText="FileName" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
+                                                        HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
+                                                        <ItemTemplate>
+                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                                            &nbsp;&nbsp;
+                                                            <%# Eval("Name")%>
+                                                        </ItemTemplate>
+                                                    </telerik:GridTemplateColumn>
 
                                                 <telerik:GridTemplateColumn DataField="Type" HeaderText="Type" UniqueName="Type" ItemStyle-HorizontalAlign="Center"
                                                     HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center">
