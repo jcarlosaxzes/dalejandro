@@ -131,13 +131,13 @@ Partial Public Class transmittal1
     Protected WithEvents RadWizardFiles As Global.Telerik.Web.UI.RadWizard
     
     '''<summary>
-    '''RadWizardStep5 control.
+    '''RadWizardStepFiles control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStep5 As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadWizardStepFiles As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''pnlFind control.
@@ -212,13 +212,13 @@ Partial Public Class transmittal1
     Protected WithEvents RadGridFiles As Global.Telerik.Web.UI.RadGrid
     
     '''<summary>
-    '''RadWizardStep3 control.
+    '''RadWizardStepUpload control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadWizardStepUpload As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''UploadPanel control.

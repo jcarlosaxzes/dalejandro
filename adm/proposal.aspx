@@ -739,7 +739,7 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Documents" StepType="Step">
                     <div class="pas-container" style="width: 100%">
                         <asp:Panel ID="PanelUpload" runat="server">
-                            <table onclick="table-sm pasconcept-bar noprint" width="100%">
+                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
                                 <tr>
                                     <td style="width: 550px; text-align: right">
                                         <asp:LinkButton ID="btnListFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnListFiles_Click">
@@ -753,7 +753,7 @@
                             DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationBar="false">
                             <WizardSteps>
                                 <%--Upload Files--%>
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Upload Files" StepType="Step">
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepUpload" Title="Upload Files" StepType="Step">
                                     <asp:Panel ID="UploadPanel" runat="server">
                                         <div style="width: 100%; height: 500px; position: relative">
                                             <table class="table-sm" style="width: 100%; position: absolute; margin-top: 0px; background-color: lightgray;">
@@ -783,10 +783,10 @@
                                 </telerik:RadWizardStep>
 
                                 <%--Files--%>
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Files" StepType="Step">
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepFiles" Title="Files" StepType="Step">
                                     <div>
                                         <asp:Panel ID="pnlFind" runat="server">
-                                            <table onclick="table-sm pasconcept-bar noprint" width="100%">
+                                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
                                                 <tr>
                                                     <td style="width: 550px; text-align: right">
                                                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click">

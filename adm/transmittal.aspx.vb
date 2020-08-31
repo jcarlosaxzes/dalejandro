@@ -29,6 +29,8 @@ Public Class transmittal1
                     btnBack.Visible = False
                 End If
 
+                ConfigUploadPanels()
+
             End If
 
             Botones()
@@ -38,6 +40,30 @@ Public Class transmittal1
         End Try
     End Sub
 
+    Protected Sub ConfigUploadPanels()
+        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblTransmittalId.Text, "Transmittal")
+
+        If ExistingFiles = 0 Then
+            RadWizardStepUpload.Active = True
+            PanelUpload.Visible = True
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = False
+        Else
+            RadWizardStepFiles.Active = True
+            PanelUpload.Visible = False
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = Not RadListViewFiles.Visible
+        End If
+
+        btnGridPage.Visible = Not RadListViewFiles.Visible
+        btnTablePage.Visible = RadListViewFiles.Visible
+
+        If lblCompanyId.Text = 260962 Then
+            ' EEG 10 Mb
+            RadCloudUpload1.MaxFileSize = 10485760
+        End If
+
+    End Sub
     Protected Sub RadAjaxManager1_AjaxRequest(sender As Object, e As Telerik.Web.UI.AjaxRequestEventArgs)
         ' Return of ClientClose
         FormView1.DataBind()
