@@ -54,7 +54,7 @@
                                         <asp:Label ID="nStatusLabel" runat="server" Text='<%# Eval("nStatus")%>'></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                                <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <div style="font-size: x-small; vertical-align: middle">
                                             <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
@@ -74,8 +74,11 @@
                                                 <%#Eval("PackageContent")%>
                                             </span>
                                                 &nbsp;
-                                            <span title="Signed And Sealed Items" class="badge badge-pill badge-warning" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
+                                            <span title="Signed And Sealed Items" class="badge badge-pill badge-dark" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
                                                 <%#Eval("SignedAndSealed")%>
+                                            </span>
+                                            <span title="Number of times the Client has visited the your Transmittal Page" class="badge badge-pill badge-warning">
+                                                <%#Eval("clientvisits")%>
                                             </span>
                                         </div>
                                     </ItemTemplate>

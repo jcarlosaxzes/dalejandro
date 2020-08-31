@@ -185,10 +185,11 @@ Public Class transmittal1
             e.IsValid = LocalAPI.AzureStorage_Insert_Transmittal(lblTransmittalId.Text, "Transmittal", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text, tbMaxDownload.Text, RadDatePickerExpiration.DbSelectedDate)
             If e.IsValid Then
                 RadListViewFiles.ClearSelectedItems()
-                RadListViewFiles.DataBind()
                 RadGridFiles.DataBind()
-                RadWizardFiles.ActiveStepIndex = 0
-                PanelUpload.Visible = False
+                RadListViewFiles.DataBind()
+                FormView1.DataBind()
+                RadWizardStepFiles.Active = True
+
                 Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else
                 Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")

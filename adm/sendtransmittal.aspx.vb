@@ -48,8 +48,8 @@
             sBody = Replace(sBody, "[Client Name]", TansmittalObject("ClientNameAndCompany"))
             sBody = Replace(sBody, "[Sign]", sSign)
 
-            ' Enlace al Transmittal
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(6, lblTransmittalId.Text)
+            ' Enlace al Transmittal with EntityTyp=4
+            Dim sURL As String = LocalAPI.GetSharedLink_URL(6666, lblTransmittalId.Text)
             sBody = Replace(sBody, "[PASconceptLink]", sURL)
 
             txtBody.Content = sBody
@@ -74,7 +74,7 @@
 
                 If SendGrid.Email.SendMail(txtTo.Text, txtCC.Text, "", txtSubject.Text, txtBody.Content, lblCompanyId.Text, TansmittalObject("ClientId"), TansmittalObject("JobId"),, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay) Then
                     lblMailResult.Text = "Transmittal successfully sent"
-
+                    LocalAPI.SetTransmittalEmailSent(lblTransmittalId.Text, "Sent via Email on " & LocalAPI.GetDateTime(), txtTo.Text)
                     btnEnviar.Enabled = False
                 End If
 

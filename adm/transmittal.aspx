@@ -200,7 +200,7 @@
                                     <td style="text-align: right;"><b>Receiver signature:</b>
                                     </td>
                                     <td style="text-align: left; vertical-align: middle">
-                                        <telerik:RadBinaryImage ID="RadBinaryClientSign" runat="server" AlternateText="(Not Signed...)"
+                                        <telerik:RadBinaryImage ID="RadBinaryClientSign" runat="server" AlternateText="(Not Signed...)" Visible='<%# IIf(Eval("SignImage") Is DBNull.Value, False, True)%>'
                                             Width="260px" Height="150px" ResizeMode="Fit"
                                             DataValue='<%# IIf(Eval("SignImage") Is DBNull.Value, Nothing, Eval("SignImage"))%>'></telerik:RadBinaryImage>
                                     </td>
