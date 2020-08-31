@@ -144,10 +144,20 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right;"><b>Receiver signature:</b>
+                    <td style="text-align: right;"><b>Pick Up/Delivery Date:</b>
+                    </td>
+                    <td style="text-align: center;">
+                        <%# Eval("PickUpDate", "{0:d}")%>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+            <table class="table-sm" style="width: 100%;">
+                <tr>
+                    <td style="text-align: right; width: 180px;"><b>Receiver signature:</b>
                     </td>
                     <td style="width: 330px; text-align: center; vertical-align: middle">
-                        <telerik:RadBinaryImage ID="RadBinaryClientSign" runat="server" AlternateText="(Not Signed...)"
+                        <telerik:RadBinaryImage ID="RadBinaryClientSign" runat="server" AlternateText="(Not Signed...)" Visible='<%# IIf(Eval("SignImage") Is DBNull.Value, False, True)%>'
                             Width="320px" Height="200px" ResizeMode="Fit" DataValue='<%# IIf(Eval("SignImage") Is DBNull.Value, Nothing, Eval("SignImage"))%>'></telerik:RadBinaryImage>
                     </td>
                     <td></td>
@@ -158,14 +168,6 @@
                         <asp:LinkButton ID="btnSignature" runat="server" CssClass="btn btn-success  btn-lg noprint" Visible='<%# Eval("Status") = 1 %>' UseSubmitBehavior="false" OnClick="btnPickUp_Click">
                             <i class="fas fa-pen"></i>&nbsp;&nbsp;Sign to Pick Up
                         </asp:LinkButton>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td style="text-align: right;"><b>Pick Up Date:</b>
-                    </td>
-                    <td style="text-align: center;">
-                        <%# Eval("PickUpDate", "{0:d}")%>
                     </td>
                     <td></td>
                 </tr>

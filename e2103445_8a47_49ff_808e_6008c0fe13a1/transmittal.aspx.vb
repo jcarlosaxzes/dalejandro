@@ -15,8 +15,15 @@ Public Class transmittal
 
                     lblCompanyId.Text = LocalAPI.GetTransmittalProperty(lblTransmittalId.Text, "companyId")
                     Master.Company = lblCompanyId.Text
+                    'Clients_visitslog?
+                    ' Visit not from Current session company "False visit"
+                    If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> lblCompanyId.Text Then
+                        LocalAPI.SetTransmittalStatusClientVisited(lblTransmittalId.Text)
+                        LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblTransmittalId.Text, Request.UserHostAddress())
+                    End If
 
                     FormView1.DataBind()
+
                     CType(FormView1.FindControl("RadBarcode1"), RadBarcode).Text = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Signature.aspx?GuiId=" & lblguid.Text & "&ObjType=22"
 
                     CType(FormView1.FindControl("PanelDigitalFiles"), Panel).Visible = IIf(LocalAPI.GetTransmittalDigitalFilesCount(lblTransmittalId.Text) > 0, True, False)
@@ -24,7 +31,6 @@ Public Class transmittal
                     If Not Request.QueryString("Print") Is Nothing Then
                         Response.Write("<script>window.print();</script>")
                     End If
-
 
                 End If
 

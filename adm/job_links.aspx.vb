@@ -35,11 +35,12 @@ Public Class job_links
         Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblJobId.Text, "Jobs")
 
         If ExistingFiles = 0 Then
-            RadWizardFiles.ActiveStepIndex = 0
+            RadWizardStepUpload.Active = True
             PanelUpload.Visible = True
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = False
         Else
+            RadWizardStepFiles.Active = True
             PanelUpload.Visible = False
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = Not RadListViewFiles.Visible

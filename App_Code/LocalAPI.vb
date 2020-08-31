@@ -10503,6 +10503,8 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Transmittal.aspx?GuiId=" & LocalAPI.GetTransmittalProperty(objId, "guid")
                     Case 66
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/mtransmittal.aspx?GuiId=" & LocalAPI.GetTransmittalProperty(objId, "guid")
+                    Case 6666
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Transmittal.aspx?GuiId=" & LocalAPI.GetTransmittalProperty(objId, "guid") & "&entityType=4"
                     Case 7  ' jobprogressrollup from jobId
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/jobprogressrollup.aspx?jobguid=" & LocalAPI.GetJobProperty(objId, "guid")
                     Case 8  ' jobprogressrollup from invoiceId
@@ -11552,6 +11554,19 @@ Public Class LocalAPI
     Public Shared Function GetTransmittalDigitalFilesCount(transmittalId As Integer) As Integer
         Return GetNumericEscalar(String.Format($"select count(*) from (select Id FROM [dbo].[Azure_Uploads] WHERE EntityType='Transmittal' AND EntityId={transmittalId} AND isnull([Public],0)=1	union all select Id FROM [Jobs_links] where isnull(TransmittalId,0)={transmittalId})T"))
     End Function
+
+    Public Shared Function SetTransmittalStatusClientVisited(ByVal transmittalId As Long) As Boolean
+        ExecuteNonQuery($"UPDATE [Transmittals] SET [PickUpDate]=dbo.CurrentTime() WHERE Id={transmittalId} and [PickUpDate]Is Null")
+        Return ExecuteNonQuery($"UPDATE [Transmittals] SET [Status]=2 WHERE Id={transmittalId} and [Status]<>2")
+    End Function
+    Public Shared Function SetTransmittalEmailSent(transmittalId As Long, Notes As String, ReceiveBy As String) As Boolean
+        Try
+            Return ExecuteNonQuery($"UPDATE [Transmittals] SET [Notes]=isnull([Notes],'') + ' ' +'{Notes}', ReceiveBy='{ReceiveBy}'  WHERE Id={transmittalId} and [Status]<>2")
+        Catch ex As Exception
+        End Try
+    End Function
+
+
     Public Shared Function TransmittalNumber(ByVal Id As Integer) As String
         Return GetStringEscalar("SELECT dbo.TransmittalNumber(" & Id & ")")
     End Function

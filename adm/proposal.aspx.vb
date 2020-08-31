@@ -98,12 +98,12 @@ Public Class proposal
         Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal")
 
         If ExistingFiles = 0 Then
-            RadWizardFiles.ActiveStepIndex = 0
+            RadWizardStepUpload.Active = True
             PanelUpload.Visible = True
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = False
         Else
-            RadWizardFiles.ActiveStepIndex = 1
+            RadWizardStepFiles.Active = True
             PanelUpload.Visible = False
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = Not RadListViewFiles.Visible

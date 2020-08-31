@@ -200,7 +200,7 @@
                                     <td style="text-align: right;"><b>Receiver signature:</b>
                                     </td>
                                     <td style="text-align: left; vertical-align: middle">
-                                        <telerik:RadBinaryImage ID="RadBinaryClientSign" runat="server" AlternateText="(Not Signed...)"
+                                        <telerik:RadBinaryImage ID="RadBinaryClientSign" runat="server" AlternateText="(Not Signed...)" Visible='<%# IIf(Eval("SignImage") Is DBNull.Value, False, True)%>'
                                             Width="260px" Height="150px" ResizeMode="Fit"
                                             DataValue='<%# IIf(Eval("SignImage") Is DBNull.Value, Nothing, Eval("SignImage"))%>'></telerik:RadBinaryImage>
                                     </td>
@@ -389,7 +389,7 @@
 
                 <div class="pas-container" style="width: 100%">
                     <asp:Panel ID="PanelUpload" runat="server">
-                        <table onclick="table-sm pasconcept-bar noprint" width="100%">
+                        <table class="table-sm pasconcept-bar noprint" style="width:100%">
                             <tr>
                                 <td style="width: 550px; text-align: right">
                                     <asp:LinkButton ID="btnListFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnListFiles_Click">
@@ -405,10 +405,10 @@
 
 
                             <%--Files--%>
-                            <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Files" StepType="Step">
+                            <telerik:RadWizardStep runat="server" ID="RadWizardStepFiles" Title="Files" StepType="Step">
                                 <div>
                                     <asp:Panel ID="pnlFind" runat="server">
-                                        <table onclick="table-sm pasconcept-bar noprint" width="100%">
+                                        <table onclick="table-sm pasconcept-bar noprint" style="width:100%">
                                             <tr>
                                                 <td style="width: 550px; text-align: right">
                                                     <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click" Visible="false">
@@ -629,7 +629,7 @@
                             </telerik:RadWizardStep>
 
                             <%--Upload Files--%>
-                            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Upload Files" StepType="Step">
+                            <telerik:RadWizardStep runat="server" ID="RadWizardStepUpload" Title="Upload Files" StepType="Step">
                                 <asp:Panel ID="UploadPanel" runat="server">
                                     <div class="pasconcept-bar noprint" style="font-size: small; vertical-align: middle; font-family: sans-serif">
                                         File type: 

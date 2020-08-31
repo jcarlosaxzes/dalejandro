@@ -54,15 +54,14 @@
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
-                    <td style="width:150px; text-align:right">
-                        Period:
+                    <td style="width: 150px; text-align: right">Period:
                     </td>
-                    <td style="width:200px;">
+                    <td style="width: 200px;">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
                             <Items>
-                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30"  />
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30" />
                                 <telerik:RadComboBoxItem Text="Last 60 days" Value="60" Selected="true" />
-                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90"  />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
                                 <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
                                 <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
                                 <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
@@ -74,7 +73,7 @@
                         </telerik:RadComboBox>
 
                     </td>
-                    <td style="width:350px;">
+                    <td style="width: 350px;">
                         <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl"
                             Width="100%" DataTextField="Name" DataValueField="Id"
                             MarkFirstMatch="True" Filter="Contains"
@@ -94,8 +93,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                     <td style="text-align:right">
-                        Client:
+                    <td style="text-align: right">Client:
                     </td>
                     <td colspan="2">
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
@@ -244,11 +242,11 @@
                             <%# Eval("RecordBy_Code")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <div style="font-size: x-small;vertical-align:middle">
+                            <div style="font-size: x-small; vertical-align: middle">
                                 <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" title="View Transmittal Private Client Page">
-                                    <i style="font-size:small;" class="far fa-share-square"></i></a>
+                                    <i style="font-size: small;" class="far fa-share-square"></i></a>
                                 </a>
                                 <asp:LinkButton ID="btnSendEmail" runat="server" CommandName="EmailEmailPickUp" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Ready For Pick Up Notification"
                                     UseSubmitBehavior="false" Visible='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>'>
@@ -262,13 +260,17 @@
                                 <span title="Number of Packages" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
                                     <%#Eval("PackageContent")%>
                                 </span>
-                                <span title="Signed And Sealed Items" class="badge badge-pill badge-warning" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
+                                <span title="Signed And Sealed Items" class="badge badge-pill badge-dark" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
                                     <%#Eval("SignedAndSealed")%>
                                 </span>
+                                <span title="Number of times the Client has visited the your Transmittal Page" class="badge badge-pill badge-warning">
+                                    <%#Eval("clientvisits")%>
+                                </span>
+
                             </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                   <%-- <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
+                    <%-- <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                         CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                         HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridButtonColumn>--%>

@@ -84,7 +84,7 @@
                     <div>
 
                         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                            <table onclick="table-sm pasconcept-bar noprint" width="100%">
+                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
                                 <tr>
                                     <td style="width: 250px">
                                         <telerik:RadComboBox ID="cboProposals" runat="server" DataSourceID="SqlDataSourceProposals" AutoPostBack="true"

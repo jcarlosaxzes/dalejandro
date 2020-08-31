@@ -317,7 +317,7 @@
                                     <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary">
                                         <%#Eval("Emitted")%>
                                     </span>
-                                    <span title="Number of client visits to Invoice Page" class="badge badge-pill badge-warning">
+                                    <span title="Number of times the Client has visited your Invoice Page" class="badge badge-pill badge-warning">
                                         <%#Eval("clientvisits")%>
                                     </span>
                                     <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
