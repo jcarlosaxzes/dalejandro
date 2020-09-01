@@ -399,7 +399,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" AllowFiltering="False" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
+                    <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" AllowFiltering="False" ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="150px">
                         <ItemTemplate>
                             <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
                             <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>

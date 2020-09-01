@@ -39,7 +39,6 @@
                     <telerik:AjaxUpdatedControl ControlID="lblTotalBudgetUsed" />
                     <telerik:AjaxUpdatedControl ControlID="LabelblTotalBalance" />
                     <telerik:AjaxUpdatedControl ControlID="lblTotalSubFees" />
-                    <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnHideClient">
