@@ -55,7 +55,7 @@
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td style="width:200px">
+                    <td style="width: 200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" />
@@ -69,7 +69,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width:250px">
+                    <td style="width: 250px">
                         <telerik:RadComboBox ID="cboInvoiceStatus" runat="server" Width="100%" MarkFirstMatch="True">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="Pending Balance" Value="0" Selected="true" />
@@ -126,7 +126,7 @@
                         </telerik:RadComboBox>
                     </td>
                     <td>
-                         <telerik:RadComboBox ID="cboQB" runat="server" Width="100%" ToolTip="QuickBooks Filter">
+                        <telerik:RadComboBox ID="cboQB" runat="server" Width="100%" ToolTip="QuickBooks Filter">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="QuickBooks - Unfiltered" Value="0" Selected="true" />
                                 <telerik:RadComboBoxItem runat="server" Text="Sync Clients" Value="1" />
@@ -216,8 +216,8 @@
                     <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn">
                     </telerik:GridClientSelectColumn>
 
-                    <telerik:GridBoundColumn DataField="Id" HeaderText="Id" HeaderStyle-Width="10px" UniqueName="Id" Display="false" ></telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="qbCustomerId" HeaderText="qbCustomerId"  HeaderStyle-Width="10px" UniqueName="qbCustomerId" Display="false" ></telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Id" HeaderText="Id" HeaderStyle-Width="10px" UniqueName="Id" Display="false"></telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="qbCustomerId" HeaderText="qbCustomerId" HeaderStyle-Width="10px" UniqueName="qbCustomerId" Display="false"></telerik:GridBoundColumn>
 
                     <telerik:GridTemplateColumn DataField="InvoiceNumber" HeaderText="Number" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber" HeaderStyle-Width="130px"
                         FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
@@ -274,7 +274,7 @@
                                             </td>
                                         </tr>
 
-                                         <tr>
+                                        <tr>
                                             <td style="padding-left: 24px">
                                                 <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             Mark Invoice as Bad Dept
@@ -282,7 +282,7 @@
                                             </td>
                                         </tr>
 
-                                         <tr>
+                                        <tr>
                                             <td style="padding-left: 24px">
                                                 <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# String.Concat(Eval("Id"), ",", Eval("qbCustomerId")) %>' CssClass="dropdown-item"
                                                     Visible='<%# iif(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") = 0, True, False) %>'>
@@ -332,7 +332,7 @@
                                 <%#Eval("clientvisits")%>
                             </span>
                             <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
-                                <img src="../Images/C2QB_green_btn_sm_default.png" height="14" /> 
+                                <img src="../Images/C2QB_green_btn_sm_default.png" height="14" />
                             </span>
                             <br />
                             <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></div>
@@ -429,20 +429,6 @@
                     </telerik:RadTextBox>
                 </td>
             </tr>
-
-            <tr>
-                <td colspan="2">
-                    <asp:Panel ID="PanelUpload" runat="server" class="uploadfiles-canvas">
-                        <h4>Select or Drag and Drop files (up to 10Mb)</h4>
-                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
-                            OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
-                            MaxFileSize="10145728"
-                            DropZones=".uploadfiles-canvas">
-                        </telerik:RadCloudUpload>
-                    </asp:Panel>
-                </td>
-            </tr>
-
             <tr>
                 <td colspan="2" style="text-align: center">
 
@@ -457,6 +443,40 @@
                     </asp:LinkButton>
                 </td>
             </tr>
+
+            <tr>
+                <td colspan="2">
+                    <asp:Panel ID="PanelUpload" runat="server" class="uploadfiles-canvas">
+                        <%-- <span style="font-size: 36px">Drag & Drop Files here, or
+                        </span>
+                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
+                            OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
+                            MaxFileSize="10145728"
+                            CssClass="fileUploadRad"
+                            DropZones=".uploadfiles-canvas">
+                        </telerik:RadCloudUpload>--%>
+                        <p style="text-align: center; vertical-align: middle; padding-top: 50px;">
+                            <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
+                            <br />
+                            <span style="font-size: 36px">Drag & Drop Files here, or
+                            </span>
+                            <br />
+                            <br />
+                            <br />
+                            <span style="font-size: 36px">
+                                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" ProviderType="Azure" MaxFileSize="10145728" MultipleFileSelection="Disabled"
+                                    OnFileUploaded="RadCloudUpload1_FileUploaded"
+                                    OnClientUploadFailed="onClientUploadFailed"
+                                    CssClass="fileUploadRad"
+                                    DropZones=".uploadfiles-canvas,#UploadPanel">
+                                    <Localization SelectButtonText="Select Files" />
+                                </telerik:RadCloudUpload>
+                            </span>
+                        </p>
+                    </asp:Panel>
+                </td>
+            </tr>
+
         </table>
     </telerik:RadToolTip>
 
