@@ -179,7 +179,7 @@
     </asp:FormView>
 
     <p style="text-align: right; padding-top: 25px; padding-right: 20px; font-family: Calibri; font-size: xx-small; font-style: italic">
-        This Transmittal was made &amp; sent using <a href="https://pasconcept.com/" target="_blank">pasconcept.com</a>
+        This Transmittal was made &amp; sent using <a href="https://pasconcept.com/" target="_blank">pasconcept app</a>
     </p>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="TRANSMITTAL_SELECT" SelectCommandType="StoredProcedure">

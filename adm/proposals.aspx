@@ -219,30 +219,74 @@
                 <Columns>
                     <telerik:GridTemplateColumn DataField="Id" HeaderText="Number"
                         SortExpression="Id" UniqueName="Id" ItemStyle-HorizontalAlign="Center"
-                        HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
+                        HeaderStyle-Width="130px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Proposal"
                                 CommandName="EditProposal">
                                 <%# Eval("ProposalNumber")%>
-                                 <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
-                                                <%#Eval("ProposalUploadFiles")%>
-                                            </span>
                             </asp:LinkButton>
-                            <div style="text-align: center">
-                                <asp:LinkButton ID="btnEditWizard" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Edit Wizard"
-                                    CommandName="EditWizard" UseSubmitBehavior="false">
-                                                <i class="far fa-edit"></i>
-                                </asp:LinkButton>
 
-                                &nbsp;
+                            <div style="float: right; vertical-align: top; margin: 0;">
+                                <%--Three Point Action Menu--%>
+                                <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i title="Click to menu for this row" style="color:dimgray" class="fas fa-ellipsis-v"></i>
+                                </asp:HyperLink>
 
-                                        <a class="far fa-share-square" title="Preview Proposal " href='<%# LocalAPI.GetSharedLink_URL(111, Eval("Id"))%>' target="_blank" aria-hidden="true"></a>
-                                &nbsp;
-                                <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to Upload Files"
-                                    CommandName="UploadFiles" UseSubmitBehavior="false">
-                                                <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>
-                                </asp:LinkButton>
+                                <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
+                                    RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                    Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                    HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
 
+                                    <table class="table-borderless" style="width: 200px; font-size: medium">
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="EditProposal" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                    <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Proposal (Form Page)
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="EditWizard" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                      <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Proposal (Wizard Page)
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 24px">
+                                                <asp:LinkButton ID="btnEditJob2" runat="server" CommandArgument='<%# Eval("JobId") %>' CommandName="EditJob" Visible='<%# iif(Eval("JobId") = 0, False, True) %>' CssClass="dropdown-item">
+                                                    View/Edit Job
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="UploadFiles" UseSubmitBehavior="false" CssClass="dropdown-item">
+                                                                <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>&nbsp;&nbsp;Upload Files
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton runat="server" ID="btnSendProposal" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' CssClass="dropdown-item">
+                                                    <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Proposal Email to Client
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href='<%# LocalAPI.GetSharedLink_URL(111, Eval("Id"), True)%>' target="_blank" class="dropdown-item">
+                                                    <i class="fas fa-print"></i>&nbsp;&nbsp;Print Proposal
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </telerik:RadToolTip>
                             </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
@@ -331,41 +375,35 @@
                         UniqueName="Total" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right"
                         FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="JobCode" HeaderText="Status - Job" SortExpression="JobCode"
-                        UniqueName="JobCode" ItemStyle-HorizontalAlign="Center"
-                        HeaderStyle-Width="160px">
+                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
                         <ItemTemplate>
                             <div style="font-size: 12px; width: 100%"
                                 class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'>
                                 <%# Eval("Status") %>
                             </div>
-                            <div>
-                                <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("JobId") %>' ToolTip="Click to View/Edit Job"
-                                    CommandName="EditJob" Text='<%# Eval("JobCode")%>' ForeColor='<%# JobForeColor(Eval("JobId"), Eval("Status"))%>'>
-                                </asp:LinkButton>
-                            </div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="columnEmail" AllowFiltering="False"
-                        ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="130px">
-                        <ItemTemplate>
-                            <div style="font-size: x-small;">
-                                <asp:LinkButton runat="server" ID="btnSendProposal" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' ToolTip="Send Email with Proposal information">
-                                    <i style="font-size:small;vertical-align:middle" class="far fa-envelope"></i>
-                                </asp:LinkButton>
-                                <a href='<%# LocalAPI.GetSharedLink_URL(111, Eval("Id"), True)%>' target="_blank" title="Print View Proposal Page">
-                                    <i style="font-size:small;vertical-align:middle" class="fas fa-print"></i></a>
-                                </a>
 
-                                &nbsp;
-                                <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
-                                    <%#Eval("Emitted")%>
-                                </span>
-                                <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                    <%#Eval("clientvisits")%>
-                                </span>
-                            </div>
-                            <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("EmailDate", "{0:d}") %>' Font-Size="X-Small" ToolTip="Emitted Date"></asp:Label>
+                    <telerik:GridTemplateColumn DataField="JobCode" HeaderText="Job" SortExpression="JobCode" UniqueName="JobCode" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("JobId") %>' ToolTip="Click to View/Edit Job"
+                                CommandName="EditJob" Text='<%# Eval("JobCode")%>' ForeColor='<%# JobForeColor(Eval("JobId"), Eval("Status"))%>'>
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+
+                    <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" AllowFiltering="False" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
+                        <ItemTemplate>
+                            <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
+                            <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
+                                <%#Eval("ProposalUploadFiles")%>
+                            </span>
+                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
+                                <%#Eval("Emitted")%>
+                            </span>
+                            <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                <%#Eval("ProposalUploadFiles")%>
+                            </span>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 

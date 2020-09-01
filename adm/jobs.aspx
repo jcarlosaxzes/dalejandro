@@ -412,7 +412,7 @@
                                                     <td>
 
                                                         <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Info" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
-                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Info
+                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Job
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
