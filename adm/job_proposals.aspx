@@ -24,8 +24,7 @@
                                     HeaderStyle-Width="130px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Proposal"
-                                            CommandName="EditProposal">
-                                <%# Eval("ProposalNumber")%>
+                                            CommandName="EditProposal"><%# Eval("ProposalNumber")%>
                                         </asp:LinkButton>
 
                                         <div style="float: right; vertical-align: top; margin: 0;">
@@ -102,6 +101,22 @@
                                 <telerik:GridBoundColumn DataField="AceptanceName" HeaderText="Aceptance Name" SortExpression="AceptanceName"
                                     UniqueName="AceptanceName">
                                 </telerik:GridBoundColumn>
+
+                                <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" AllowFiltering="False" ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="150px">
+                                    <ItemTemplate>
+                                        <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
+                                        <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
+                                            <%#Eval("ProposalUploadFiles")%>
+                                        </span>
+                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
+                                            <%#Eval("Emitted")%>
+                                        </span>
+                                        <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                            <%#Eval("clientvisits")%>
+                                        </span>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Note that the only Proposal with $0.00 can be eliminated. Delete this proposal?"
                                     ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
                                     UniqueName="DeleteColumn" HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">

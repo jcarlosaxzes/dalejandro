@@ -18,12 +18,6 @@
             height: auto;
             width: auto;
         }
-
-        .fileUploadRad {
-            position: absolute;
-            margin-top: 80px;
-            width: 100%;
-        }
     </style>
 
     <div class="pasconcept-bar noprint">
@@ -68,10 +62,30 @@
                                 </tr>
                             </table>
                             <div class="uploadfiles-canvas">
-                                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded" CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576">
+                                <%--<telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded" CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576">
                                     <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
                                 </telerik:RadCloudUpload>
-                                <p style="text-align: center; vertical-align: middle; padding-top: 100px; font-size: 36px">Upload your files</p>
+                                <p style="text-align: center; vertical-align: middle; padding-top: 100px; font-size: 36px">Upload your files</p>--%>
+                                <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
+                                    <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
+                                    <br />
+                                    <span style="font-size: 36px">Drag & Drop Files here, or
+                                    </span>
+                                    <br />
+                                    <span style="font-size: 36px; margin: 0">or
+                                    </span>
+                                    <br />
+                                    <span style="font-size: 36px">
+                                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" ProviderType="Azure" MaxFileSize="1048576"
+                                            OnFileUploaded="RadCloudUpload1_FileUploaded"
+                                            CssClass="fileUploadRad"
+                                            DropZones=".uploadfiles-canvas,#UploadPanel">
+                                            <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
+                                            <Localization SelectButtonText="Select Files" />
+                                        </telerik:RadCloudUpload>
+                                    </span>
+                                </p>
+
                             </div>
 
 
@@ -84,7 +98,7 @@
                     <div>
 
                         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
+                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                                 <tr>
                                     <td style="width: 250px">
                                         <telerik:RadComboBox ID="cboProposals" runat="server" DataSourceID="SqlDataSourceProposals" AutoPostBack="true"
