@@ -203,24 +203,6 @@ Partial Public Class invoices
     Protected WithEvents txtPaymentNotes As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''PanelUpload control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PanelUpload As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''RadCloudUpload1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
-    
-    '''<summary>
     '''btnInsertPayment control.
     '''</summary>
     '''<remarks>
@@ -237,6 +219,24 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelPayment As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''PanelUpload control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelUpload As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''RadCloudUpload1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
     
     '''<summary>
     '''RadToolTipEditInvoice control.

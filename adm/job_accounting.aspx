@@ -111,26 +111,24 @@
                 <asp:FormView ID="FormViewStatus" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceJob" DefaultMode="Edit" Width="100%" CssClass="pasconcept-bar">
                     <EditItemTemplate>
                         <div>
-                            <span style="vertical-align: middle;font-size:20px">
-                                &nbsp;&nbsp;Job Panel
+                            <span style="vertical-align: middle; font-size: 20px">&nbsp;&nbsp;Job Panel
                             </span>
-                            <span style="float: right; vertical-align: middle;">
-                                Budget:
+                            <span style="float: right; vertical-align: middle;">Budget:
                                  <telerik:RadNumericTextBox ID="txtBudgest" runat="server" DbValue='<%# Bind("Budget") %>' Width="150px">
-                                    </telerik:RadNumericTextBox>
+                                 </telerik:RadNumericTextBox>
                                 &nbsp;&nbsp;&nbsp; 
                                 Allow Open Budget:
-                                    <asp:CheckBox ID="chkAllowOpenBudget" runat="server" Checked='<%# Bind("AllowOpenBudget") %>' 
+                                    <asp:CheckBox ID="chkAllowOpenBudget" runat="server" Checked='<%# Bind("AllowOpenBudget") %>'
                                         ToolTip="Automatically update the Budget when Invoices are inserted or updated. Budget=SUM(Invoices.Amount)" />
                                 &nbsp;&nbsp;&nbsp;
                                 Status:
-                                    <telerik:RadComboBox ID="cboStatus" runat="server" SelectedValue='<%# Bind("Status") %>' 
+                                    <telerik:RadComboBox ID="cboStatus" runat="server" SelectedValue='<%# Bind("Status") %>'
                                         DataSourceID="SqlDataSourceJobStatus" DataTextField="Name" DataValueField="Id" Width="200px">
                                     </telerik:RadComboBox>
                                 &nbsp;
                                 <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-sm" UseSubmitBehavior="false" ToolTip="Update Job Info" ValidationGroup="JobUpdate" CommandName="Update">
                                     Update Job
-                                    </asp:LinkButton>
+                                </asp:LinkButton>
                             </span>
                         </div>
                     </EditItemTemplate>
@@ -142,9 +140,8 @@
             <div class="col-12">
 
                 <div class="pasconcept-bar noprint">
-                    <span style="font-size:24px;font-weight:500;margin:0">Invoices(s)&nbsp;&nbsp;&nbsp;&nbsp; </span>
-                    <span style="vertical-align: middle;">
-                        Invoices Filter:
+                    <span style="font-size: 24px; font-weight: 500; margin: 0">Invoices(s)&nbsp;&nbsp;&nbsp;&nbsp; </span>
+                    <span style="vertical-align: middle;">Invoices Filter:
                         <telerik:RadComboBox ID="cboInvoiceFilterCode" runat="server" Width="300px" RenderMode="Lightweight" AutoPostBack="true">
                             <Items>
                                 <telerik:RadComboBoxItem Text="Pending Balance" Value="1" />
@@ -321,7 +318,7 @@
                                         <%#Eval("clientvisits")%>
                                     </span>
                                     <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
-                                        <img src="../Images/C2QB_green_btn_sm_default.png" height="14" /> 
+                                        <img src="../Images/C2QB_green_btn_sm_default.png" height="14" />
                                     </span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
@@ -456,18 +453,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <asp:Panel ID="PanelUpload" runat="server" class="uploadfiles-canvas">
-                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
-                            OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
-                            MaxFileSize="10145728"
-                            DropZones=".uploadfiles-canvas">
-                        </telerik:RadCloudUpload>
-                        <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>
-                    </asp:Panel>
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2" style="text-align: center">
 
                     <asp:LinkButton ID="btnInsertPayment" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
@@ -479,6 +464,36 @@
                     <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <asp:Panel ID="PanelUpload" runat="server" class="uploadfiles-canvas">
+                        <%--<telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
+                            OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
+                            MaxFileSize="10145728"
+                            DropZones=".uploadfiles-canvas">
+                        </telerik:RadCloudUpload>
+                        <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>--%>
+                        <p style="text-align: center; vertical-align: middle; padding-top: 50px;">
+                            <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
+                            <br />
+                            <span style="font-size: 36px">Drag & Drop Files here, or
+                            </span>
+                            <br />
+                            <br />
+                            <br />
+                            <span style="font-size: 36px">
+                                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" ProviderType="Azure" MaxFileSize="10145728" MultipleFileSelection="Disabled"
+                                    OnFileUploaded="RadCloudUpload1_FileUploaded"
+                                    OnClientUploadFailed="onClientUploadFailed"
+                                    CssClass="fileUploadRad"
+                                    DropZones=".uploadfiles-canvas,#UploadPanel">
+                                    <Localization SelectButtonText="Select Files" />
+                                </telerik:RadCloudUpload>
+                            </span>
+                        </p>
+                    </asp:Panel>
                 </td>
             </tr>
         </table>
