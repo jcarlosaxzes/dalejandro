@@ -157,6 +157,7 @@ html .RadOrgChart .rocNodeFields .rocItemField {
     color: #728ea3;
     font: 13px "Segoe UI", Arial, Helvetica, sans-serif;
     background: url("../images/uploadfilesbackground.png") repeat;
-    border: none;
+    border:dashed;
+    border-width:medium ;
     border-radius: 5px;
 }

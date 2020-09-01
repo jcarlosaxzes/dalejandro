@@ -305,6 +305,22 @@
                             <%# Eval("JobInfo") %>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
+                    <telerik:GridTemplateColumn DataField="Amount" HeaderText="Amount" SortExpression="Amount" UniqueName="Amount"
+                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}"
+                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                        <ItemTemplate>
+                            <%# Eval("Amount", "{0:N2}") %>
+                        </ItemTemplate>
+
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridTemplateColumn DataField="AmountDue" HeaderText="Amount Due" SortExpression="AmountDue" UniqueName="AmountDue"
+                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-ForeColor="Red"
+                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                        <ItemTemplate>
+                            <asp:Label ID="lblAmountDue4" runat="server" Text='<%# Eval("AmountDue", "{0:N2}") %>' Font-Strikeout='<%# iif(Eval("BadDebt") = 0, False, True) %>'
+                                ToolTip='<%# iif(Eval("BadDebt") = 0, "Amount Due", "Bad Debt") %>'></asp:Label>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Insights"
                         SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
@@ -320,22 +336,6 @@
                             </span>
                             <br />
                             <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></div>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="Amount" HeaderText="Amount" SortExpression="Amount" UniqueName="Amount"
-                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}"
-                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
-                        <ItemTemplate>
-                            <%# Eval("Amount", "{0:N2}") %>
-                        </ItemTemplate>
-
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn DataField="AmountDue" HeaderText="Amount Due" SortExpression="AmountDue" UniqueName="AmountDue"
-                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-ForeColor="Red"
-                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
-                        <ItemTemplate>
-                            <asp:Label ID="lblAmountDue4" runat="server" Text='<%# Eval("AmountDue", "{0:N2}") %>' Font-Strikeout='<%# iif(Eval("BadDebt") = 0, False, True) %>'
-                                ToolTip='<%# iif(Eval("BadDebt") = 0, "Amount Due", "Bad Debt") %>'></asp:Label>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Invoice Description" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"

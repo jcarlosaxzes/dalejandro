@@ -285,6 +285,13 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <a href='<%# LocalAPI.GetSharedLink_URL(111, Eval("Id"), False)%>' target="_blank" class="dropdown-item">
+                                                    <i class="far fa-share-square"></i>&nbsp;&nbsp;View/Share Client Proposal Page
+                                                </a>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </telerik:RadToolTip>
                             </div>
@@ -402,7 +409,7 @@
                                 <%#Eval("Emitted")%>
                             </span>
                             <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("ProposalUploadFiles")%>
+                                <%#Eval("clientvisits")%>
                             </span>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
