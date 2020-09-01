@@ -78,15 +78,13 @@
                                                     <span style="font-size: 36px">Drag & Drop Files here, or
                                                     </span>
                                                     <br />
-                                                    <span style="font-size: 36px;margin:0">or
-                                                    </span>
+                                                    <br />
                                                     <br />
                                                     <span style="font-size: 36px">
                                                         <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" ProviderType="Azure" MaxFileSize="1048576"
                                                             OnFileUploaded="RadCloudUpload1_FileUploaded" 
                                                             CssClass="fileUploadRad" 
                                                             DropZones=".uploadfiles-canvas,#UploadPanel">
-                                                            <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
                                                             <Localization SelectButtonText="Select Files" />
                                                         </telerik:RadCloudUpload>
                                                     </span>

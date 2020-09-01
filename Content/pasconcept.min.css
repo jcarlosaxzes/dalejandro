@@ -159,7 +159,7 @@ html .RadOrgChart .rocNodeFields .rocItemField {
     border-radius: 5px;
 }
 .fileUploadRad {
-    position: absolute;
+    position: absolute !important;
     margin-left: auto;
     margin-right: auto;
     left: 0;
