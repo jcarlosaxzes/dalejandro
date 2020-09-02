@@ -50,13 +50,22 @@ Partial Public Class client_sync_qb
     Protected WithEvents SyncPanel As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''lblResutl control.
+    '''btnBulkLink control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblResutl As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnBulkLink As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnBulkCopy control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkCopy As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGrid1 control.

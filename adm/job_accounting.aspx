@@ -241,7 +241,7 @@
                                                 <tr>
                                                     <td style="padding-left: 24px">
                                                         <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# Eval("AmountDue")%>'>
-                                                                    Recive Payment
+                                                                    Receive Payment
                                                         </asp:LinkButton>
 
                                                     </td>

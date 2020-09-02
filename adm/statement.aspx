@@ -255,7 +255,7 @@
                                             href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"))%>' target="_blank" aria-hidden="true"></a>
                             
                             <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
-                                ToolTip="Recive Payments" Visible='<%# Eval("AmountDue") > 0 %>'
+                                ToolTip="Receive Payments" Visible='<%# Eval("AmountDue") > 0 %>'
                                 CssClass="badge-success badge">
                                                     <i class="fas fa-dollar-sign"></i>
                             </asp:LinkButton>
