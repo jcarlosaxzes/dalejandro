@@ -12201,6 +12201,10 @@ Public Class LocalAPI
         Return GetStringEscalar("SELECT isnull([qbCompnyID],'') FROM Company where companyId=" & companyId)
     End Function
 
+    Public Shared Function IsQuickBookDesckModule(companyId As Integer) As Boolean
+        Return GetNumericEscalar("SELECT isnull([qbDesktopModule],0) FROM Company where companyId=" & companyId)
+    End Function
+
     Public Shared Function GetqbCustomer(QBId As Integer) As Dictionary(Of String, Object)
 
         Dim result = New Dictionary(Of String, Object)()

@@ -268,23 +268,35 @@ Public Class invoices
                     Response.Redirect("~/adm/pdf_print.aspx")
 
                 Case "SendQB"
-
-                    If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                    If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                        'Mark this Invoice to be Sync with QuickBooks Desktop Web Connector
                         Dim ids As String() = CType(e.CommandArgument, String).Split(",")
-                        Dim qbCustomerId As Integer = ids(1)
                         lblInvoiceId.Text = ids(0)
-                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
+                        LocalAPI.SetInvoiceQBRef(lblInvoiceId.Text, -1, lblEmployeeId.Text)
                         RadGrid1.Rebind()
                     Else
-                        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=invoices")
-                    End If
+                        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                            Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                            Dim qbCustomerId As Integer = ids(1)
+                            lblInvoiceId.Text = ids(0)
+                            qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
+                            RadGrid1.Rebind()
+                        Else
+                            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=invoices")
+                        End If
 
+                    End If
             End Select
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
         End Try
     End Sub
+
+    Public Function IsQuickBooksEnable() As Boolean
+        Return LocalAPI.IsQuickBookModule(lblCompanyId.Text)
+    End Function
+
 
     Private Sub btnBulkSentToQB_Click(sender As Object, e As EventArgs) Handles btnBulkSentToQB.Click
         Try

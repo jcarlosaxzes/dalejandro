@@ -34,6 +34,10 @@ Public Class client_sync_qb
                 Dim QBId As Integer = ids(0)
                 Dim ClientId = ids(1)
                 LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
+                If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                    Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
+                    LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+                End If
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
             Case "CreateNew"
@@ -41,6 +45,9 @@ Public Class client_sync_qb
                 Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
                 Dim ClientId = LocalAPI.Client_INSERT(QBCustomer("DisplayName"), QBCustomer("Email"), QBCustomer("Title"), lblCompanyId.Text, QBCustomer("CompanyName"), QBCustomer("Addr_Line1"), QBCustomer("Addr_Line2"), QBCustomer("City"), QBCustomer("CountrySubDivisionCode"), QBCustomer("PostalCode"), QBCustomer("PrimaryPhone"), QBCustomer("Mobile"), "", "")
                 LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
+                If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                    LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+                End If
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
             Case "Search"
@@ -56,6 +63,10 @@ Public Class client_sync_qb
                 Dim QBId As Integer = lblSelectCustomer.Text
                 Dim ClientId = e.CommandArgument
                 LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
+                If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                    Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
+                    LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+                End If
                 RadToolTipSearchClient.Visible = False
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
