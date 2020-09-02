@@ -29,11 +29,6 @@
                 width: auto;
             }
 
-            .fileUploadRad {
-                position: absolute;
-                margin-top: 80px;
-                width: 100%;
-            }
         </style>
     </telerik:RadCodeBlock>
 
@@ -43,7 +38,7 @@
                 <td>
                     <div class="pas-container" style="width: 100%">
                         <asp:Panel ID="PanelUpload" runat="server">
-                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
+                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                                 <tr>
                                     <td style="width: 550px; text-align: right">
                                         <asp:LinkButton ID="btnListFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnListFiles_Click">
@@ -77,10 +72,23 @@
                                                 </tr>
                                             </table>
                                             <div class="uploadfiles-canvas">
-                                                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded" CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576" >
-                                                    <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
-                                                </telerik:RadCloudUpload>
-                                                <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>
+                                                <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
+                                                    <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
+                                                    <br />
+                                                    <span style="font-size: 36px">Drag & Drop Files here, or
+                                                    </span>
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <span style="font-size: 36px">
+                                                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" ProviderType="Azure" MaxFileSize="1048576"
+                                                            OnFileUploaded="RadCloudUpload1_FileUploaded" 
+                                                            CssClass="fileUploadRad" 
+                                                            DropZones=".uploadfiles-canvas,#UploadPanel">
+                                                            <Localization SelectButtonText="Select Files" />
+                                                        </telerik:RadCloudUpload>
+                                                    </span>
+                                                </p>
                                             </div>
 
 
@@ -92,7 +100,7 @@
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepFiles" Title="Files" StepType="Step">
                                     <div>
                                         <asp:Panel ID="pnlFind" runat="server">
-                                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
+                                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                                                 <tr>
                                                     <td style="width: 550px; text-align: right">
                                                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click">

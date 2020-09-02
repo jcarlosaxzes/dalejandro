@@ -284,7 +284,7 @@
                                 <td style="text-align: right">Client Name [Company]:
                                 </td>
                                 <td>
-                                    <telerik:RadComboBox ID="cboClient" runat="server" DataSourceID="SqlDataSourceClients"
+                                    <telerik:RadComboBox ID="cboClient" runat="server" DataSourceID="SqlDataSourceClients" Height="300px"
                                         DataTextField="Name" DataValueField="Id" SelectedValue='<%# Bind("clientId") %>'
                                         Width="98%" MarkFirstMatch="True" Filter="Contains"
                                         Enabled='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "True", "False")%>'

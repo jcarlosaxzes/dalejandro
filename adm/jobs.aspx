@@ -16,6 +16,7 @@
             <telerik:AjaxSetting AjaxControlID="btnUpdateJobStatus">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
 
@@ -48,6 +49,7 @@
             <telerik:AjaxSetting AjaxControlID="btnApplyStatus">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                     <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnNew">
@@ -295,42 +297,45 @@
         </asp:Panel>
 
     </div>
-    <div runat="server" id="panelSubbar" class="pasconcept-subbar" visible="false">
+    <div runat="server" id="panelSubbar" class="pasconcept-bar" visible="false">
+        <table style="width:100%">
+            <tr>
+                <td style="width:180px">
+                    <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
+                        Width="100%" DataTextField="Name" DataValueField="Id" Height="200px" AppendDataBoundItems="true" RenderMode="Lightweight">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Bulk Status Update)" Value="-1" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+                <td>
+                    <asp:LinkButton ID="btnApplyStatus" runat="server" UseSubmitBehavior="false" CssClass="btn btn-primary btn-sm" ToolTip="Apply selected status to selected records">
+                          Update Status
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align:right">
+                    <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
+                                                    <i class="fas fa-print" style="padding-right:10px"></i>
+                    </asp:LinkButton>
 
-        <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
-            Width="175px" DataTextField="Name" DataValueField="Id" Height="200px" AppendDataBoundItems="true" Font-Size="Small">
-            <Items>
-                <telerik:RadComboBoxItem runat="server" Text="(Bulk Status Update)" Value="-1" />
-            </Items>
-        </telerik:RadComboBox>
-        <asp:LinkButton ID="btnApplyStatus" runat="server" UseSubmitBehavior="false" CssClass="btn btn-primary btn-sm" ToolTip="Apply selected status to selected records">
-              Update Status
-        </asp:LinkButton>
-
-        <span style="float: right; vertical-align: middle; padding-top: 3px">
-
-            <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
-                                            <i class="fas fa-print" style="padding-right:10px"></i>
-            </asp:LinkButton>
-
-            <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Stop hiding clients Filter">
-            <i class="fas fa-eye" style="padding-right:10px"></i>
-            </asp:LinkButton>
-
-
-            <asp:LinkButton ID="btnCopyF" runat="server" UseSubmitBehavior="false" ToolTip="Copy/Save Filter combinations">
-                                        <i class="far fa-copy" style="padding-right:10px"></i> 
-            </asp:LinkButton>
-
-            <asp:LinkButton ID="btnPasteF" runat="server" UseSubmitBehavior="false" ToolTip="Get Paste/Shared Filter combinations">
-                                        <i class="fas fa-paste" style="padding-right:10px"></i>
-            </asp:LinkButton>
-            <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
-            <i class="far fa-share-square" style="padding-right:10px"></i>
-            </asp:LinkButton>
-        </span>
+                    <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Stop hiding clients Filter">
+                    <i class="fas fa-eye" style="padding-right:10px"></i>
+                    </asp:LinkButton>
 
 
+                    <asp:LinkButton ID="btnCopyF" runat="server" UseSubmitBehavior="false" ToolTip="Copy/Save Filter combinations">
+                                                <i class="far fa-copy" style="padding-right:10px"></i> 
+                    </asp:LinkButton>
+
+                    <asp:LinkButton ID="btnPasteF" runat="server" UseSubmitBehavior="false" ToolTip="Get Paste/Shared Filter combinations">
+                                                <i class="fas fa-paste" style="padding-right:10px"></i>
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
+                    <i class="far fa-share-square" style="padding-right:10px"></i>
+                    </asp:LinkButton>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="collapse" id="collapseSummary">
@@ -438,7 +443,7 @@
                                                 <tr>
                                                     <td style="padding-left: 24px">
                                                         <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal(s)" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
-                                                            View/Edit Proposal(s)
+                                                            View/Edit Proposals
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>

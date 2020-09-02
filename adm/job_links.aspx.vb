@@ -44,6 +44,8 @@ Public Class job_links
             PanelUpload.Visible = False
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = Not RadListViewFiles.Visible
+            RadGridFiles.DataBind()
+            RadListViewFiles.DataBind()
         End If
 
         btnGridPage.Visible = Not RadListViewFiles.Visible
@@ -239,12 +241,12 @@ Public Class job_links
             ' The uploaded files need to be removed from the storage by the control after a certain time.
             e.IsValid = LocalAPI.AzureStorage_Insert(lblJobId.Text, "Jobs", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
             If e.IsValid Then
-                RadListViewFiles.ClearSelectedItems()
-                RadListViewFiles.DataBind()
-                RadGridFiles.DataBind()
-                RadWizardFiles.ActiveStepIndex = 1
-                PanelUpload.Visible = False
-                Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
+                'RadListViewFiles.ClearSelectedItems()
+                'RadListViewFiles.DataBind()
+                'RadGridFiles.DataBind()
+                'RadWizardStepUpload.Active = True
+                'PanelUpload.Visible = False
+                'Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else
                 Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
                 AzureStorageApi.DeleteFile(newName)
@@ -304,4 +306,7 @@ Public Class job_links
         btnTablePage.Visible = RadListViewFiles.Visible
     End Sub
 
+    Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
+        ConfigUploadPanels()
+    End Sub
 End Class

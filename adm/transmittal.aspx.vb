@@ -53,6 +53,8 @@ Public Class transmittal1
             PanelUpload.Visible = False
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = Not RadListViewFiles.Visible
+            RadGridFiles.DataBind()
+            RadListViewFiles.DataBind()
         End If
 
         btnGridPage.Visible = Not RadListViewFiles.Visible
@@ -184,13 +186,13 @@ Public Class transmittal1
             ' The uploaded files need to be removed from the storage by the control after a certain time.
             e.IsValid = LocalAPI.AzureStorage_Insert_Transmittal(lblTransmittalId.Text, "Transmittal", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text, tbMaxDownload.Text, RadDatePickerExpiration.DbSelectedDate)
             If e.IsValid Then
-                RadListViewFiles.ClearSelectedItems()
-                RadGridFiles.DataBind()
-                RadListViewFiles.DataBind()
-                FormView1.DataBind()
-                RadWizardStepFiles.Active = True
+                'RadListViewFiles.ClearSelectedItems()
+                'RadGridFiles.DataBind()
+                'RadListViewFiles.DataBind()
+                'FormView1.DataBind()
+                'RadWizardStepFiles.Active = True
 
-                Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
+                'Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else
                 Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
                 AzureStorageApi.DeleteFile(newName)
@@ -409,5 +411,8 @@ Public Class transmittal1
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
         End Try
+    End Sub
+    Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
+        ConfigUploadPanels()
     End Sub
 End Class

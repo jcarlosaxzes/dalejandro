@@ -12690,30 +12690,30 @@ Public Class LocalAPI
 #End Region
 
 #Region "AzureWebServices"
-    Public Shared Function EmissionRecurrenceEmails() As Boolean
+    Public Shared Function DailyRecurrenceTasks() As Boolean
         ' Tarea "PostEmissionRecurrenceEmails" tipo "Scheduler Job Collections" lanzada desde Azure 
         '[WebHook URL] "https://app.pasconcept.com/api/webhooks/post"
         '[Authorization Token] = "Bearer 7497EE20-6811-4405-A2EE-471A8BFE3682"
         '[HttpMethod] = "POST"
 
-        LocalAPI.sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST EmissionRecurrenceEmails")
-        EmissionTask1()
-        EmissionTask2()
-        Return EmissionTask3()
+        LocalAPI.sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST DailyRecurrenceTasks")
+        SendRecurrenceInvoices()
+        SendDueDateInvoices()
+        SendEEGProposalsNotEmitted()
+        Return DeletePendingAzureFiles()
     End Function
 
-    Public Shared Function EmissionTask1() As Boolean
+    Public Shared Function SendRecurrenceInvoices() As Boolean
         ' Company.billingModule 
         '   and EmissionRecurrenceDays>0 
         '   and AmountDue>0 
         '   and BadDebt=0 
         '   and statementId = 0
         '   and EmissionRecurrenceDays<=DateDiff(day,LatestEmission,dbo.CurrentTime())
+        Dim cnn1 As SqlConnection = GetConnection()
         Try
-            Dim Subject As String
-            Dim Body As String
-            Dim emailTo As String
-            Dim cnn1 As SqlConnection = GetConnection()
+            Dim nRecs As Integer = 0
+
             Dim cmd As New SqlCommand("SELECT Invoices.Id, Jobs.companyId FROM Invoices INNER JOIN Jobs ON Invoices.JobId = Jobs.Id INNER JOIN Company ON Jobs.companyId = Company.companyId WHERE isnull(Company.billingModule,0)=1 and ISNULL(Invoices.EmissionRecurrenceDays, 0) > 0 and Invoices.AmountDue>0 and isnull(BadDebt,0)=0 and isnull(statementId,0)=0 and ISNULL(Invoices.EmissionRecurrenceDays, 0)<=DateDiff(day,Invoices.LatestEmission,dbo.CurrentTime())", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
@@ -12721,18 +12721,21 @@ Public Class LocalAPI
                 If rdr.HasRows Then
 
                     InvoiceAutomatictToClient(rdr("Id"), rdr("companyId"))
-
+                    nRecs = nRecs + 1
                 End If
             Loop
             rdr.Close()
-            cnn1.Close()
+
+            sys_Webhooks_INSERT("SendRecurrenceInvoices", nRecs, "")
 
         Catch ex As Exception
-
+            sys_Webhooks_INSERT("SendRecurrenceInvoices", 0, ex.Message)
+        Finally
+            cnn1.Close()
         End Try
     End Function
 
-    Public Shared Function EmissionTask2() As Boolean
+    Public Shared Function SendDueDateInvoices() As Boolean
         ' Automatic Emmit Invoice at Due Date...........................
         ' Emision automatica de Invoices para planes periodicos (mensuales)
         ' Company.billingModule 
@@ -12741,36 +12744,40 @@ Public Class LocalAPI
         '   and BadDebt=0 
         '   and statementId = 0
         '   and Emitted=0
+        Dim cnn1 As SqlConnection = GetConnection()
         Try
-            Dim Subject As String
-            Dim Body As String
-            Dim emailTo As String
-            Dim cnn1 As SqlConnection = GetConnection()
+            Dim nRecs As Integer = 0
+
             Dim cmd As New SqlCommand("SELECT Invoices.Id, Jobs.companyId FROM Invoices INNER JOIN Jobs ON Invoices.JobId = Jobs.Id INNER JOIN Company ON Jobs.companyId = Company.companyId WHERE isnull(Company.billingModule,0)=1 and Invoices.MaturityDate <= dbo.CurrentTime() and Invoices.AmountDue>0 and isnull(BadDebt,0)=0 and isnull(statementId,0)=0 and ISNULL(Invoices.Emitted, 0)=0", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             Do While rdr.Read()
                 If rdr.HasRows Then
                     InvoiceAutomatictToClient(rdr("Id"), rdr("companyId"))
-
+                    nRecs = nRecs + 1
                 End If
             Loop
             rdr.Close()
-            cnn1.Close()
+
+            sys_Webhooks_INSERT("SendDueDateInvoices", nRecs, "")
 
         Catch ex As Exception
-
+            sys_Webhooks_INSERT("SendDueDateInvoices", 0, ex.Message)
+        Finally
+            cnn1.Close()
         End Try
     End Function
 
-    Public Shared Function EmissionTask3() As Boolean
+    Public Shared Function SendEEGProposalsNotEmitted() As Boolean
         ' Proposals de EEG que se mantienen en status NotEmmitted 
+        Dim cnn1 As SqlConnection = GetConnection()
         Try
+            Dim nRecs As Integer = 0
             Dim Subject As String
             Dim Body As String
             Dim emailTo As String
             Dim emailBcc As String
-            Dim cnn1 As SqlConnection = GetConnection()
+
             Dim cmd As New SqlCommand("SELECT Proposal.Id,Proposal.DepartmentId, dbo.ProposalNumber(Proposal.Id) AS ProposalNumber,Proposal.[Date],Proposal.ProjectName, ProposalBy=isnull(Employees.FullName,''),ProposalByEmail=isnull(Employees.Email,''),[Days]=DATEDIFF(DAY,Proposal.[Date],dbo.CurrentTime()) FROM Proposal LEFT OUTER JOIN Employees ON Proposal.ProjectManagerId=Employees.Id WHERE Proposal.companyId=260962 and StatusId=0 and DATEDIFF(DAY,Proposal.[Date],dbo.CurrentTime())>0 and isnull(Proposal.DepartmentId,0)>0 order by id", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
@@ -12788,19 +12795,62 @@ Public Class LocalAPI
                     SendGrid.Email.SendMail(emailTo, "", emailBcc, Subject, Body, 260962, 0, 0)
 
                     OneSignalNotification.SendNotification(emailTo, "Not Emitted Proposal", Subject, "", 260962)
-
+                    nRecs = nRecs + 1
                 End If
 
             Loop
             rdr.Close()
-            cnn1.Close()
+
+            sys_Webhooks_INSERT("SendEEGProposalsNotEmitted", nRecs, "")
 
         Catch ex As Exception
-
+            sys_Webhooks_INSERT("SendEEGProposalsNotEmitted", 0, ex.Message)
+        Finally
+            cnn1.Close()
         End Try
     End Function
 
+    Public Shared Function DeletePendingAzureFiles() As Boolean
+        ' Delete from Azure all files Mark as Deleted
+        Dim cnn1 As SqlConnection = GetConnection()
+        Try
+            Dim nRecs As Integer = 0
 
+            Dim cmd As New SqlCommand("select Id, isnull([KeyName],'') as KeyName from [Azure_Uploads] where Deleted=1", cnn1)
+            Dim rdr As SqlDataReader
+            rdr = cmd.ExecuteReader
+            Do While rdr.Read()
+                If rdr.HasRows Then
+                    If Len(rdr("KeyName")) > 0 Then
+                        ' Delete file from Azure
+                        AzureStorageApi.DeleteFile(rdr("KeyName"))
+                    End If
+                    ' Delete record
+                    ExecuteNonQuery(String.Format("DELETE FROM [Azure_Uploads] WHERE Id={0}", rdr("Id")))
+                    nRecs = nRecs + 1
+                End If
+            Loop
+            rdr.Close()
+
+            sys_Webhooks_INSERT("DeletePendingAzureFiles", nRecs, "")
+
+        Catch ex As Exception
+            sys_Webhooks_INSERT("DeletePendingAzureFiles", 0, ex.Message)
+        Finally
+            cnn1.Close()
+        End Try
+    End Function
+
+    Private Shared Sub sys_Webhooks_INSERT(FunctionName As String, Records As Integer, ErrorMessage As String)
+        Try
+            Dim sQuery As String = String.Format("INSERT INTO [sys_Webhooks] ([DateIn],[FunctionName],[Records],[ErrorMessage]) " &
+                "VALUES(dbo.CurrentTime(), '{0}',{1},'{2}')", FunctionName, Records, ErrorMessage)
+            ExecuteNonQuery(sQuery)
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
     Public Shared Function EmployeeWeeklyTimesheetNotification() As Boolean
         ' Notificar a los employees sobre su Timesheet esta semana 
         Try
