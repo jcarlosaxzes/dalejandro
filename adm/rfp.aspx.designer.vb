@@ -86,6 +86,15 @@ Partial Public Class rfp
     Protected WithEvents SqlDataSourceStatus As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
+    '''SqlDataSourceDocTypes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceDocTypes As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''lblGuiId control.
     '''</summary>
     '''<remarks>
