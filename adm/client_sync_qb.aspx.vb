@@ -9,10 +9,28 @@ Public Class client_sync_qb
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             lblCompanyId.Text = Session("companyId")
-            btnDisconnectFromQuickBooks.Visible = qbAPI.IsValidAccessToken(lblCompanyId.Text)
-            btnConnectToQuickBooks.Visible = Not btnDisconnectFromQuickBooks.Visible
-            btnGetCustomers.Visible = btnDisconnectFromQuickBooks.Visible
         End If
+        If LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text) Then
+            ConnectPanel.Visible = False
+        Else
+            If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                btnDisconnectFromQuickBooks.Visible = True
+                btnConnectToQuickBooks.Visible = False
+                btnGetCustomers.Visible = True
+            ElseIf qbAPI.IsValidRefreshToken(lblCompanyId.Text) Then
+                btnDisconnectFromQuickBooks.Visible = True
+                btnConnectToQuickBooks.Visible = False
+                btnGetCustomers.Visible = True
+                Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(lblCompanyId.Text))
+            Else
+                btnDisconnectFromQuickBooks.Visible = False
+                btnConnectToQuickBooks.Visible = True
+                btnGetCustomers.Visible = False
+            End If
+        End If
+
+
+
         RadWindowManager1.EnableViewState = False
     End Sub
 
@@ -33,9 +51,7 @@ Public Class client_sync_qb
                 Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                 Dim QBId As Integer = ids(0)
                 Dim ClientId = ids(1)
-
                 LinkCustomer(ClientId, QBId)
-
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
 
@@ -54,6 +70,10 @@ Public Class client_sync_qb
 
     Protected Function LinkCustomer(ClientId As Integer, QBId As Integer) As Boolean
         If ClientId > 0 And QBId > 0 Then
+            If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
+                LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+            End If
             Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
         End If
     End Function
@@ -61,6 +81,9 @@ Public Class client_sync_qb
         If QBId > 0 Then
             Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
             Dim ClientId = LocalAPI.Client_INSERT(QBCustomer("DisplayName"), QBCustomer("Email"), QBCustomer("Title"), lblCompanyId.Text, QBCustomer("CompanyName"), QBCustomer("Addr_Line1"), QBCustomer("Addr_Line2"), QBCustomer("City"), QBCustomer("CountrySubDivisionCode"), QBCustomer("PostalCode"), QBCustomer("PrimaryPhone"), QBCustomer("Mobile"), "", "")
+            If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+            End If
             Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
         End If
     End Function
@@ -71,6 +94,10 @@ Public Class client_sync_qb
                 Dim QBId As Integer = lblSelectCustomer.Text
                 Dim ClientId = e.CommandArgument
                 LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
+                If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                    Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
+                    LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+                End If
                 RadToolTipSearchClient.Visible = False
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
@@ -117,7 +144,7 @@ Public Class client_sync_qb
                 Next
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
-                Master.ErrorMessage(nRecs & "Records Linked")
+                Master.ErrorMessage(nRecs & " Records Linked")
             Else
                 Master.ErrorMessage("Select (Mark) Records to Link")
             End If
@@ -140,7 +167,7 @@ Public Class client_sync_qb
                 Next
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
-                Master.ErrorMessage(nRecs & "Records Copied")
+                Master.ErrorMessage(nRecs & " Records Copied")
             Else
                 Master.ErrorMessage("Select (Mark) Records to Copy")
             End If
@@ -148,4 +175,6 @@ Public Class client_sync_qb
             Master.ErrorMessage(ex.Message)
         End Try
     End Sub
+
+
 End Class

@@ -61,8 +61,11 @@ Public Class qbAPI
             Dim auth2Client As OAuth2Client = New OAuth2Client(clientid, clientsecret, redirectUrl, environment)
 
             Dim tokenResp = Await auth2Client.RefreshTokenAsync(LocalAPI.GetqbAccessTokenSecret(companyId))
-
-            LocalAPI.SetqbAccessToken(companyId, tokenResp.AccessToken, tokenResp.AccessTokenExpiresIn)
+            If tokenResp.IsError Or IsNothing(tokenResp.AccessToken) Then 'If RefreshTokenAsync fail the RefreshToken is revke or pas 100 day 
+                LocalAPI.SetqbRefreshToken(companyId, "", -1000)
+            Else
+                LocalAPI.SetqbAccessToken(companyId, tokenResp.AccessToken, tokenResp.AccessTokenExpiresIn)
+            End If
 
             Return True
         Catch ex As Exception
@@ -81,11 +84,13 @@ Public Class qbAPI
             Dim qbCurrentToken As String = LocalAPI.GetCompanyProperty(companyId, "qbAccessToken")
             Dim tokenResp = Await auth2Client.RevokeTokenAsync(qbCurrentToken)
 
-            LocalAPI.SetqbAccessToken(companyId, "", "")
+            LocalAPI.SetqbAccessToken(companyId, "", -1000)
+            LocalAPI.SetqbRefreshToken(companyId, "", -1000)
 
             Return True
         Catch ex As Exception
-            LocalAPI.SetqbAccessToken(companyId, "", "")
+            LocalAPI.SetqbAccessToken(companyId, "", -1000)
+            LocalAPI.SetqbRefreshToken(companyId, "", -1000)
             Throw ex
         End Try
 
