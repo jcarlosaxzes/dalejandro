@@ -5,8 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <div class="pasconcept-bar">
-            <span class="pasconcept-pagetitle">
-            QuickBooks Customer Import Manager
+        <span class="pasconcept-pagetitle">QuickBooks Customer Import Manager
         </span>
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnDisconnectFromQuickBooks" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false">
@@ -18,10 +17,19 @@
             <asp:Button ID="btnGetCustomers" runat="server" Text="Get Customers from QuickBooks Online " CssClass="btn btn-success" OnClick="btnGetCustomers_Click" />
         </span>
     </div>
-    <br />
     <asp:Panel ID="SyncPanel" runat="server">
-        <asp:Label ID="lblResutl" runat="server" Text=""></asp:Label>
-        <h4>Unlinked QuickBooks Customers</h4>
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Unlinked QuickBooks Customers
+            </span>
+            <span style="float: right; vertical-align: middle;">
+                <asp:LinkButton ID="btnBulkLink" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Link all selected QuickBook Customers to PASconcept Clients">
+                    Bulk Link
+                </asp:LinkButton>
+                <asp:LinkButton ID="btnBulkCopy" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Copy all selected QuickBook Customers to PASconcept Clients">
+                    Bulk Copy
+                </asp:LinkButton>
+            </span>
+        </div>
         <telerik:RadGrid ID="RadGrid1" runat="server" Width="100%" DataSourceID="SqlDataSourceClientPending"
             PageSize="50" AllowPaging="true" Height="580px" RenderMode="Lightweight" BorderStyle="None"
             AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
@@ -32,11 +40,18 @@
             </ClientSettings>
             <MasterTableView AutoGenerateColumns="False" DataKeyNames="DisplayName" DataSourceID="SqlDataSourceClientPending">
                 <ColumnGroups>
-                    <telerik:GridColumnGroup HeaderText="QuickBooks Customers" Name="QuickBooksCustomers" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Bold="true" />
-                    <telerik:GridColumnGroup HeaderText="PASconcept Suggested Clients" Name="Clients" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Bold="true"/>
-                    <telerik:GridColumnGroup HeaderText="Options" Name="Actions" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Bold="true"/>
+                    <telerik:GridColumnGroup HeaderText="QuickBooks Customers" Name="QuickBooksCustomers" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Bold="true" HeaderStyle-Font-Size="Larger" HeaderStyle-ForeColor="DarkGreen" />
+                    <telerik:GridColumnGroup HeaderText="PASconcept Suggested Clients" Name="Clients" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Bold="true" HeaderStyle-Font-Size="24px" HeaderStyle-ForeColor="DarkBlue" />
+                    <telerik:GridColumnGroup HeaderText="Options" Name="Actions" HeaderStyle-HorizontalAlign="Center" />
                 </ColumnGroups>
                 <Columns>
+
+                    <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn">
+                    </telerik:GridClientSelectColumn>
+
+                    <telerik:GridBoundColumn DataField="Id" HeaderText="Id" HeaderStyle-Width="10px" UniqueName="Id" Display="false"></telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="QBId" HeaderText="QBId" HeaderStyle-Width="10px" UniqueName="QBId" Display="false"></telerik:GridBoundColumn>
+
 
                     <telerik:GridBoundColumn DataField="DisplayName"
                         FilterControlAltText="Filter DisplayName column" HeaderText="Customer Name"
@@ -61,7 +76,7 @@
                             </asp:LinkButton>
                             &nbsp;
                             <asp:LinkButton ID="btnCreate" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
-                                ToolTip="Import Customers to PASconcept" CommandName="CreateNew" CommandArgument='<%# Eval("QBId")%>'>
+                                ToolTip="Import Customers to PASconcept" Visible='<%# IIf(TypeOf Eval("cEmail") Is DBNull, "True", "False") %>' CommandName="CreateNew" CommandArgument='<%# Eval("QBId")%>'>
                                 <i class="far fa-clone" aria-hidden="true" ></i>
                             </asp:LinkButton>
                             &nbsp;

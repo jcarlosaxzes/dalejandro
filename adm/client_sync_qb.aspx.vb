@@ -33,29 +33,42 @@ Public Class client_sync_qb
                 Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                 Dim QBId As Integer = ids(0)
                 Dim ClientId = ids(1)
-                LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
-                If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
-                    Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
-                    LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
-                End If
+                LinkCustomer(ClientId, QBId)
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
+
             Case "CreateNew"
                 Dim QBId As Integer = e.CommandArgument
-                Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
-                Dim ClientId = LocalAPI.Client_INSERT(QBCustomer("DisplayName"), QBCustomer("Email"), QBCustomer("Title"), lblCompanyId.Text, QBCustomer("CompanyName"), QBCustomer("Addr_Line1"), QBCustomer("Addr_Line2"), QBCustomer("City"), QBCustomer("CountrySubDivisionCode"), QBCustomer("PostalCode"), QBCustomer("PrimaryPhone"), QBCustomer("Mobile"), "", "")
-                LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
-                If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
-                    LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
-                End If
+                CopyCustomer(QBId)
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
+
             Case "Search"
                 lblSelectCustomer.Text = e.CommandArgument
                 RadToolTipSearchClient.Visible = True
                 RadToolTipSearchClient.Show()
         End Select
     End Sub
+
+    Protected Function LinkCustomer(ClientId As Integer, QBId As Integer) As Boolean
+        If ClientId > 0 And QBId > 0 Then
+            If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
+                LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+            End If
+            Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
+        End If
+    End Function
+    Protected Function CopyCustomer(QBId As Integer) As Boolean
+        If QBId > 0 Then
+            Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
+            Dim ClientId = LocalAPI.Client_INSERT(QBCustomer("DisplayName"), QBCustomer("Email"), QBCustomer("Title"), lblCompanyId.Text, QBCustomer("CompanyName"), QBCustomer("Addr_Line1"), QBCustomer("Addr_Line2"), QBCustomer("City"), QBCustomer("CountrySubDivisionCode"), QBCustomer("PostalCode"), QBCustomer("PrimaryPhone"), QBCustomer("Mobile"), "", "")
+            If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+            End If
+            Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
+        End If
+    End Function
     Protected Sub RadGridSearhcClient_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridSearhcClient.ItemCommand
 
         Select Case e.CommandName
@@ -97,5 +110,51 @@ Public Class client_sync_qb
 
     Private Sub btnDisconnectFromQuickBooks_Click(sender As Object, e As EventArgs) Handles btnDisconnectFromQuickBooks.Click
         Response.Redirect("~/adm/qb_disconnect")
+    End Sub
+
+    Private Sub btnBulkLink_Click(sender As Object, e As EventArgs) Handles btnBulkLink.Click
+        Dim nRecs As Integer
+        Try
+            If RadGrid1.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGrid1.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        If LinkCustomer(Val(dataItem("Id").Text), Val(dataItem("QBId").Text)) Then
+                            nRecs = nRecs + 1
+                        End If
+                    End If
+                Next
+                RadGrid1.Rebind()
+                RadGridLinked.Rebind()
+                Master.ErrorMessage(nRecs & " Records Linked")
+            Else
+                Master.ErrorMessage("Select (Mark) Records to Link")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnBulkCopy_Click(sender As Object, e As EventArgs) Handles btnBulkCopy.Click
+        Dim nRecs As Integer
+        Try
+            If RadGrid1.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGrid1.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        If CopyCustomer(Val(dataItem("QBId").Text)) Then
+                            nRecs = nRecs + 1
+                        End If
+                    End If
+                Next
+                RadGrid1.Rebind()
+                RadGridLinked.Rebind()
+                Master.ErrorMessage(nRecs & " Records Copied")
+            Else
+                Master.ErrorMessage("Select (Mark) Records to Copy")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Sub
 End Class

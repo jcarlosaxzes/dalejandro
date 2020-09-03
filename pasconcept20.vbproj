@@ -513,7 +513,6 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="adm\activejobsdashboad.aspx" />
-    <Content Include="adm\adm_menu_test.aspx" />
     <Content Include="adm\avgeemployeesprofit.aspx" />
     <Content Include="adm\azurestorage_client.aspx" />
     <Content Include="adm\baddebt.aspx" />
@@ -2330,6 +2329,7 @@
     <Content Include="csv\pascoceptleads.csv" />
     <Content Include="App_Data\AgileContact_previous.json" />
     <Content Include="App_Data\AgileContact.json" />
+    <Content Include="App_Data\QB_customer.json" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - Web Deploy.pubxml" />
@@ -3060,13 +3060,6 @@
     <Compile Include="adm\ADM_Main_Responsive.Master.vb">
       <DependentUpon>ADM_Main_Responsive.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adm\adm_menu_test.aspx.designer.vb">
-      <DependentUpon>adm_menu_test.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\adm_menu_test.aspx.vb">
-      <DependentUpon>adm_menu_test.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\avgeemployeesprofit.aspx.designer.vb">
       <DependentUpon>avgeemployeesprofit.aspx</DependentUpon>
@@ -4828,7 +4821,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -12814,6 +12814,9 @@ Public Class LocalAPI
         ' Delete from Azure all files Mark as Deleted
         Dim cnn1 As SqlConnection = GetConnection()
         Try
+            ' Marca files colgados (se elimino su EntityId)
+            Azure_Uploads_Deleted_UPDATE()
+
             Dim nRecs As Integer = 0
 
             Dim cmd As New SqlCommand("select Id, isnull([KeyName],'') as KeyName from [Azure_Uploads] where Deleted=1", cnn1)
@@ -12838,6 +12841,25 @@ Public Class LocalAPI
             sys_Webhooks_INSERT("DeletePendingAzureFiles", 0, ex.Message)
         Finally
             cnn1.Close()
+        End Try
+    End Function
+
+    Public Shared Function Azure_Uploads_Deleted_UPDATE() As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Azure_Uploads_Deleted_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
         End Try
     End Function
 
