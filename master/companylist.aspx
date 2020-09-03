@@ -234,7 +234,7 @@
             <tr>
                 <td style="text-align: center">
                     <asp:LinkButton ID="btnBindAxzesClient" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" ValidationGroup="BindAxzesClient">
-                                    <i class="fas fa-check"></i> Bind Company<-->Axzes
+                                    <i class="fas fa-check"></i> Bind Company &lt;--&gt;Axzes
                     </asp:LinkButton>
                 </td>
             </tr>
