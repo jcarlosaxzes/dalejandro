@@ -7,10 +7,10 @@ Imports System.Runtime.InteropServices
 ' associated with an assembly.
 
 ' Review the values of the assembly attributes
-<Assembly: AssemblyTitle("pasconcept20")>
+<Assembly: AssemblyTitle("PASconcept.Web")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("pasconcept20")>
+<Assembly: AssemblyProduct("PASconcept.Web")>
 <Assembly: AssemblyCopyright("Copyright ©  2020")>
 <Assembly: AssemblyTrademark("")>
 
