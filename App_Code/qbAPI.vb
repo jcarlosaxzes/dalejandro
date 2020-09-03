@@ -65,6 +65,7 @@ Public Class qbAPI
                 LocalAPI.SetqbRefreshToken(companyId, "", -1000)
             Else
                 LocalAPI.SetqbAccessToken(companyId, tokenResp.AccessToken, tokenResp.AccessTokenExpiresIn)
+                LocalAPI.SetqbRefreshToken(companyId, tokenResp.RefreshToken, tokenResp.RefreshTokenExpiresIn)
             End If
 
             Return True
