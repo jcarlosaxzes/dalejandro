@@ -17,10 +17,6 @@
     </telerik:RadCodeBlock>
 
     <style>
-        .RadTabStrip .rtsLI, .RadTabStripVertical .rtsLI {
-            line-height: 10px;
-        }
-
         .card-body {
             padding: 0.25rem;
         }
