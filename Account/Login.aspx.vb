@@ -5,10 +5,17 @@ Imports Microsoft.AspNet.Identity.EntityFramework
 Imports Microsoft.AspNet.Identity.Owin
 Imports Microsoft.Owin.Security
 Imports Owin
+Imports PASconcept.DataAccess.Repositories.Abstract
 
 Partial Public Class Login
     Inherits Page
-
+    
+    Private ReadOnly _companiesRepository AS ICompaniesRepository
+    
+    Public Sub New (ByVal companiesRepository AS ICompaniesRepository)
+        Me._companiesRepository = companiesRepository
+    End Sub
+    
     Protected Sub Page_PreInit(ByVal sender As Object, ByVal e As EventArgs) Handles Me.PreInit
         Theme = LocalAPI.DefinirTheme(Request.UserAgent)
     End Sub
@@ -34,7 +41,8 @@ Partial Public Class Login
 
                 Select Case result
                     Case SignInStatus.Success
-                        Session("companyId") = LocalAPI.GetCompanyDefault(UserName.Text)
+                        Dim companyId = Me._companiesRepository.GetDefaultCompanyId(UserName.Text)
+                        Session("companyId") = companyId
                         If LocalAPI.IAgree(UserName.Text) Then
                             If IsNothing(Request.QueryString("ReturnUrl")) Then
                                 Response.Redirect("~/adm/dashboard")

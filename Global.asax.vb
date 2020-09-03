@@ -1,6 +1,11 @@
 ﻿Imports System.Data.Entity
 Imports System.Web.Optimization
 Imports Microsoft.AspNet.Identity
+Imports Microsoft.AspNet.WebFormsDependencyInjection.Unity
+Imports PASconcept.DataAccess.Repositories.Abstract
+Imports PASconcept.DataAccess.Repositories.Implementation
+Imports PASconcept.Domain.Utils
+Imports Unity
 
 Public Class Global_asax
     Inherits HttpApplication
@@ -10,7 +15,24 @@ Public Class Global_asax
         RouteConfig.RegisterRoutes(RouteTable.Routes)
         BundleConfig.RegisterBundles(BundleTable.Bundles)
         ' See: https://stackoverflow.com/a/34966050/2146113
-        Database.SetInitializer(Of ApplicationDbContext)(Nothing)
+        Database.SetInitializer (Of ApplicationDbContext)(Nothing)
+
+        Dim container = Me.AddUnity()
+
+        Dim cnnStr = ConfigurationManager.ConnectionStrings("cnnProjectsAccounting")
+        If cnnStr Is Nothing Or String.IsNullOrEmpty(cnnStr.ConnectionString)
+            Throw new Exception("Fatal error: missing connecting string in web.config file")
+        End If
+
+        ' Registering all DI
+        container.RegisterInstance(
+            Microsoft.Extensions.Options.Options.Create(New AppSettings With {
+                                                           .ConnectionString =
+                                                           cnnStr.ConnectionString
+                                                           })
+            )
+        container.RegisterType (Of IBaseDapperRepository, BaseDapperRepository)
+        container.RegisterType (Of ICompaniesRepository, CompaniesRepository)
     End Sub
     'Private Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
 
@@ -58,7 +80,4 @@ Public Class Global_asax
             Server.Transfer("ErrorPage.aspx", True)
         End If
     End Sub
-
-
-
 End Class
