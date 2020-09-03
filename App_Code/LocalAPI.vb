@@ -24,12 +24,15 @@ Imports System.Text
 Imports System.Web.Script.Serialization
 Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Converters
+
 Imports Newtonsoft.Json.Linq
 
+Imports HtmlAgilityPack
 Public Class LocalAPI
     ' VARIABLES PUBLICAS DE LA SESSION
     Public DataBaseSubscriber As String
     Public Shared AppUserManager As pasconcept20.ApplicationUserManager
+    Public Shared SiteUrl As String
 
 #Region "Enum"
     Public Enum sys_log_AccionENUM
@@ -157,6 +160,27 @@ Public Class LocalAPI
         Public ProductionDate As String
         Public EstimatedHours As Double
     End Structure
+
+
+    Public Structure LeadStruct
+        Public Company As String
+        Public FirstName As String
+        Public LastName As String
+        Public Email As String
+        Public Phone As String
+        Public Cellular As String
+        Public Website As String
+        Public AddressLine1 As String
+        Public AddressLine2 As String
+        Public City As String
+        Public State As String
+        Public ZipCode As String
+        Public JobTitle As String
+        Public Position As String
+        Public Tags As String
+        Public SourceId As Integer
+    End Structure
+
 #End Region
 
 #Region "Miselaneas"
@@ -864,10 +888,11 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetHostAppSite() As String
-        'Try
-        '    GetHostAppSite = ConfigurationManager.AppSettings("HostAppSite")
-        'Catch ex As Exception
-        'End Try
+        Try
+            Return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
+        Catch ex As Exception
+            Return SiteUrl
+        End Try
         'If Len(GetHostAppSite) = 0 Then GetHostAppSite = "https://pasconcept.com/"
 
         'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) Return https://localhost:44308
@@ -875,7 +900,7 @@ Public Class LocalAPI
         'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Query) Return https://localhost:44308/adm/sharelink?ObjType=111&ObjId=23396
         'HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Scheme) Return https://
 
-        Return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
+
     End Function
 
     Public Shared Function GetSubscriberDatabase(ByVal sSubscriberCode As String) As String
@@ -1087,22 +1112,22 @@ Public Class LocalAPI
     Public Shared Function GetRFPStatusLabelCSS(ByVal status As String) As String
         Select Case status
             Case "0", "Not Emitted"
-                Return "badge badge-secondary"
+                Return "badge badge-secondary statuslabel"
 
             Case "1", "Pending", "Sent"  'In Progress
-                Return "badge badge-info"
+                Return "badge badge-info statuslabel"
 
             Case "2", "Responded", "Submitted"
-                Return "badge badge-warning"
+                Return "badge badge-warning statuslabel"
 
             Case "3", "Accepted"
                 Return "badge badge-success"
 
             Case "4", "Rejected", "5", "Declined"
-                Return "badge badge-danger"
+                Return "badge badge-danger statuslabel"
 
             Case "6", "Closed"
-                Return "badge badge-dark"
+                Return "badge badge-dark statuslabel"
         End Select
     End Function
 
@@ -1319,7 +1344,13 @@ Public Class LocalAPI
             sBody = Replace(sBody, "[PASconcept_link]", sURLPASconceptUser)
             sBody = Replace(sBody, "[Guest_Link]", sURLGetst)
 
-            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), RFPObject("SenderEmail"), "", sSubject, sBody, RFPObject("companyId"), RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
+            Dim jobId = LocalAPI.GetRFPProperty(rfpId, "jobId")
+            Dim clientId = "0"
+            If Not String.IsNullOrEmpty(jobId) Then
+                clientId = LocalAPI.GetJobProperty(jobId, "Client")
+            End If
+
+            SendGrid.Email.SendMail(RFPObject("SubConsultanstEmail"), RFPObject("SenderEmail"), "", sSubject, sBody, RFPObject("companyId"), clientId, jobId, RFPObject("SenderEmail"), RFPObject("CompanyName"), RFPObject("SenderEmail"))
 
 
             Return True
@@ -1733,13 +1764,13 @@ Public Class LocalAPI
     Public Shared Function GetInvoicePastDueLabelCSS(ByVal pastdue_status As String) As String
         Select Case pastdue_status
             Case "90D+"
-                Return "badge badge-danger"
+                Return "badge badge-danger statuslabel"
             Case "61 to 90D"
-                Return "badge badge-warning"
+                Return "badge badge-warning statuslabel"
             Case "31 to 60D"
-                Return "badge badge-info"
+                Return "badge badge-info statuslabel"
             Case "1 to 30D"
-                Return "badge badge-success"
+                Return "badge badge-secondary statuslabel"
             Case Else
                 Return ""
         End Select
@@ -1790,8 +1821,8 @@ Public Class LocalAPI
 
             Dim sBody As String = sMsg.ToString
             Dim sTo As String = GetHeadDepartmentEmailFromJob(jobId)
-
-            Task.Run(Function() SendGrid.Email.SendMail(sTo, EmployeeEmail, "", sSubject, sBody, companyId))
+            Dim clientID = LocalAPI.GetJobProperty(jobId, "Client")
+            Task.Run(Function() SendGrid.Email.SendMail(sTo, EmployeeEmail, "", sSubject, sBody, companyId, clientID, jobId))
 
             Dim recipientEmailSent As String = sTo & "," & EmployeeEmail
             OneSignalNotification.SendNotification(recipientEmailSent, "Job status changed", EmployeeName & " changed the status of job " & sJobName & " to " & statusName, "", companyId)
@@ -2888,6 +2919,15 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function SetInvoiceQBRef(invoiceId As Integer, QBId As String, employeeId As Integer) As Boolean
+        Try
+            ExecuteNonQuery("UPDATE [Invoices] SET [qbInvoiceId] = '" & QBId & "' WHERE Id=" & invoiceId)
+            ActualizarEmittedInvoice(invoiceId, employeeId)
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
     Public Shared Function Invoice_INSERT(jobId As Integer, InvoiceDate As DateTime, Amount As Double, InvoiceNotes As String, MaturityDate As DateTime) As Integer
         Try
@@ -5148,7 +5188,7 @@ Public Class LocalAPI
 
                 Dim sBody As String = sMsg.ToString
 
-                SendGrid.Email.SendMail(sClientMail, "", ConfigurationManager.AppSettings("webEmailProfitWarningCC"), sSubject, sBody, companyId)
+                SendGrid.Email.SendMail(sClientMail, "", ConfigurationManager.AppSettings("webEmailProfitWarningCC"), sSubject, sBody, companyId, 0, 0)
                 SendInvoiceToClient_obsoleto = True
             End If
         End If
@@ -5198,7 +5238,7 @@ Public Class LocalAPI
             Dim SharePublicLinks As Boolean = IsAzureStorage(companyId)
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "Proposal3_INSERT"
+            cmd.CommandText = "Proposal_v20_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
             Dim taskId As String
 
@@ -6099,9 +6139,9 @@ Public Class LocalAPI
 
                     Try
                         If ConfigurationManager.AppSettings("Debug") = "1" Then
-                            SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
+                            SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
                         Else
-                            SendGrid.Email.SendMail(rdr("Email").ToString, "", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
+                            SendGrid.Email.SendMail(rdr("Email").ToString, "", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
                         End If
                         EmployeeEmailCredentials = True
                     Finally
@@ -6174,9 +6214,9 @@ Public Class LocalAPI
 
                 Try
                     If ConfigurationManager.AppSettings("Debug") = "1" Then
-                        SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId)
+                        SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
                     Else
-                        SendGrid.Email.SendMail(Email, "", "", ConfigurationManager.AppSettings("Titulo") & ". Reset Password", sFullBody.ToString, companyId)
+                        SendGrid.Email.SendMail(Email, "", "", ConfigurationManager.AppSettings("Titulo") & ". Reset Password", sFullBody.ToString, companyId, 0, 0)
                     End If
                     Return True
                 Finally
@@ -6212,9 +6252,9 @@ Public Class LocalAPI
             sFullBody.Append(GetCompanyProperty(companyId, "EmailSign2"))
 
             If ConfigurationManager.AppSettings("Debug") = "1" Then
-                SendGrid.Email.SendMail("jcarlos@axzes.com", "", "", CompanyName & ". Employee Memory " & year, sFullBody.ToString, companyId)
+                SendGrid.Email.SendMail("jcarlos@axzes.com", "", "", CompanyName & ". Employee Memory " & year, sFullBody.ToString, companyId, 0, 0)
             Else
-                SendGrid.Email.SendMail(EmployeeEmail, "", "", CompanyName & ". Employee Memory " & year, sFullBody.ToString, companyId)
+                SendGrid.Email.SendMail(EmployeeEmail, "", "", CompanyName & ". Employee Memory " & year, sFullBody.ToString, companyId, 0, 0)
             End If
             Return True
 
@@ -6260,9 +6300,9 @@ Public Class LocalAPI
 
             Try
                 If ConfigurationManager.AppSettings("Debug") = "1" Then
-                    SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
+                    SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, 0, 0, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
                 Else
-                    SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
+                    SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & " Login Information", sFullBody.ToString, -1, 0, 0, ConfigurationManager.AppSettings("FromPASconceptEmail"), "PASconcept")
                 End If
                 Return True
             Finally
@@ -6283,11 +6323,14 @@ Public Class LocalAPI
             sFullBody.Append("<br />")
             sFullBody.Append("<br />")
             sFullBody.Append("Thank you,")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<a href=" & """" & GetHostAppSite() & """" & ">PASconcept</a> Notification")
+
             Try
                 If ConfigurationManager.AppSettings("Debug") = "1" Then
-                    SendGrid.Email.SendMail("jcarlos@axzes.com", "", "", "PASconcept Email Notification Setup", sFullBody.ToString, companyId)
+                    SendGrid.Email.SendMail("jcarlos@axzes.com", "", "", "PASconcept Email Notification Setup", sFullBody.ToString, companyId, 0, 0)
                 Else
-                    SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & ". PASconcept test Email ", sFullBody.ToString, companyId)
+                    SendGrid.Email.SendMail(sUserEmail, "", "", ConfigurationManager.AppSettings("Titulo") & ". PASconcept test Email ", sFullBody.ToString, companyId, 0, 0)
                 End If
 
                 OneSignalNotification.SendNotification(sUserEmail, "Test Notification", "This is a test Notification sent from Company Profile", "", companyId)
@@ -6326,7 +6369,7 @@ Public Class LocalAPI
             sMsg.Append("<br />")
             sMsg.Append("+1 (786) 626-1611")
 
-            SendGrid.Email.SendMail(CompanyObject("Email"), "", "jcarlos@axzes.com,matt@axzes.com", CompanyObject("Contact") & ". Help to Get Started with PASconcept", sMsg.ToString, -1, "matt@axzes.com", "Matt Mur", "matt@axzes.com", "Matt Mur")
+            SendGrid.Email.SendMail(CompanyObject("Email"), "", "jcarlos@axzes.com,matt@axzes.com", CompanyObject("Contact") & ". Help to Get Started with PASconcept", sMsg.ToString, -1, 0, 0, "matt@axzes.com", "Matt Mur", "matt@axzes.com", "Matt Mur")
             Return True
         Catch ex As Exception
 
@@ -6421,7 +6464,7 @@ Public Class LocalAPI
     '          Envia un mensaje local 
     ' Retorno: Boolean. 
     ' ................................................................................................................................
-    Public Shared Function SendMessage(ByVal sFromEmail As String, ByVal sToEmailArray As String, ByVal sSubject As String, ByVal sBody As String, ByVal sLink As String, ByVal bImportant As Boolean, ByVal companyId As Integer) As Boolean
+    Public Shared Function SendMessage(ByVal sFromEmail As String, ByVal sToEmailArray As String, ByVal sSubject As String, ByVal sBody As String, ByVal sLink As String, ByVal bImportant As Boolean, ByVal companyId As Integer, clientId As Integer, jobId As Integer) As Boolean
         Dim cnn1 As SqlConnection = GetConnection()
         Try
 
@@ -6439,7 +6482,7 @@ Public Class LocalAPI
                         Dim i As Int16
                         For i = 0 To sArr.Length - 1
                             If Len(sArr(i).ToString) > 0 Then
-                                idMessage = Message_INSERT(sFromEmail, sArr(i).ToString, SuprimeCaracteresNoValidos(sSubject), SuprimeCaracteresNoValidos(sBody), sLink, bImportant, companyId)
+                                idMessage = Message_INSERT(sFromEmail, sArr(i).ToString, SuprimeCaracteresNoValidos(sSubject), SuprimeCaracteresNoValidos(sBody), sLink, bImportant, companyId, clientId, jobId)
                                 'cmd.CommandText = "INSERT INTO [Messages] ([From], CC, Subject, Received, Body, Link, Important) " &
                                 '                                        "VALUES ('" & sFromEmail & "','" &
                                 '                                            sArr(i).ToString & "','" &
@@ -6468,13 +6511,13 @@ Public Class LocalAPI
             cnn1.Close()
         End Try
     End Function
-    Public Shared Function Message_INSERT(ByVal FromEmail As String, ByVal CC As String, ByVal Subject As String, Body As String, Link As String, Important As Boolean, ByVal companyId As Integer) As Integer
+    Public Shared Function Message_INSERT(ByVal FromEmail As String, ByVal CC As String, ByVal Subject As String, Body As String, Link As String, Important As Boolean, ByVal companyId As Integer, clientId As Integer, jobId As Integer) As Integer
         Dim cnn1 As SqlConnection = GetConnection()
         Try
 
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            cmd.CommandText = "Message_INSERT"
+            cmd.CommandText = "Message_INSERT_v20"
             cmd.CommandType = CommandType.StoredProcedure
 
             cmd.Parameters.AddWithValue("@FromEmail", FromEmail)
@@ -6484,6 +6527,8 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Link", Link)
             cmd.Parameters.AddWithValue("@Important", IIf(Important, 1, 0))
             cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@ClientId", clientId)
+            cmd.Parameters.AddWithValue("@JobId", jobId)
 
             ' Execute the stored procedure.
             Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
@@ -6901,7 +6946,35 @@ Public Class LocalAPI
 
     End Function
 
-    Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer,
+    Private Shared Function GetPainTextFromHTML(HTMLSource As String) As String
+        Try
+            ' Convert HTML to Plain Text...........
+            Dim htmlDoc = New HtmlDocument()
+            htmlDoc.LoadHtml(HTMLSource)
+
+            'find all <a href=""></> nodes ?
+            Dim hrefValue As String
+            For Each linkNode As HtmlNode In htmlDoc.DocumentNode.SelectNodes("//a[@href]")
+
+                ' Get url
+                hrefValue = linkNode.GetAttributeValue("href", String.Empty)
+
+                ' Insert child node with plain url Text
+                If linkNode.ChildNodes.Count > 0 Then
+                    linkNode.ReplaceChild(htmlDoc.CreateTextNode(" " & hrefValue), linkNode.ChildNodes.First())
+                Else
+                    linkNode.AppendChild(htmlDoc.CreateTextNode(" " & hrefValue))
+                End If
+            Next
+
+            Return htmlDoc.DocumentNode.InnerText
+
+        Catch ex As Exception
+            Return HTMLSource
+        End Try
+    End Function
+
+    Public Shared Function SendMail(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer,
                                     Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "",
                                     Optional replyToMail As String = "", Optional ByVal sReplyToDisplay As String = "") As Boolean
         Try
@@ -6956,7 +7029,21 @@ Public Class LocalAPI
 
             message.Subject = sSubtject
             message.IsBodyHtml = True
-            message.Body = sBody
+
+            ' Correctio for avoid spam, 8-20-2020
+            ' Previuos: message.Body = sBody-----------------------------------------------------------------------
+            Dim mimeTypeHtml = New System.Net.Mime.ContentType("text/html")
+            Dim alternateHTML As AlternateView = AlternateView.CreateAlternateViewFromString(sBody, mimeTypeHtml)
+            message.AlternateViews.Add(alternateHTML)
+
+            ' Convert HTML to Plain Text...........
+            Dim sBodyPlain As String = GetPainTextFromHTML(sBody)
+
+            ' Second email view Plain text
+            Dim mimeTypePlain = New System.Net.Mime.ContentType("text/plain")
+            Dim alternatePlain As AlternateView = AlternateView.CreateAlternateViewFromString(sBodyPlain, mimeTypePlain)
+            message.AlternateViews.Add(alternatePlain)
+            '-------------------------------------------------------------------------------------------------
 
             Dim sFrom As String = sFromMail
             If sFrom.Length = 0 Then sFrom = fromAddr
@@ -6976,7 +7063,7 @@ Public Class LocalAPI
             If companyId > 0 Then
                 Dim sAdresses As String = sTo
                 If Len(sCC) > 0 And sTo <> sCC Then sAdresses = sAdresses & ";" & sCC
-                SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId)
+                SendMessage(sFrom, sAdresses, sSubtject, sBody, "", False, companyId, clientId, jobId)
             End If
         Catch ex As Exception
             Throw ex
@@ -7110,7 +7197,7 @@ Public Class LocalAPI
 
                 If companyId > 0 Then
                     Dim sAdresses As String = sTo
-                    SendMessage(fromAddr, sAdresses, sSubtject, sBody, "", False, companyId)
+                    SendMessage(fromAddr, sAdresses, sSubtject, sBody, "", False, companyId, 0, 0)
                 End If
 
 
@@ -7124,7 +7211,7 @@ Public Class LocalAPI
 
     Public Shared Function SendMailAndAttachmentExt(ByVal sTo As String, sCCO As String,
                                 ByVal sSubtject As String,
-                                fileData As Byte(), sFileName As String, ByVal companyId As Integer) As Boolean
+                                fileData As Byte(), sFileName As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer) As Boolean
         Try
 
 
@@ -7200,7 +7287,7 @@ Public Class LocalAPI
 
                 If companyId > 0 Then
                     Dim sAdresses As String = sTo
-                    SendMessage(fromAddr, sAdresses, sSubtject, sBody, "", False, companyId)
+                    SendMessage(fromAddr, sAdresses, sSubtject, sBody, "", False, companyId, clientId, jobId)
                 End If
 
 
@@ -8480,7 +8567,7 @@ Public Class LocalAPI
     Public Shared Function EmailToEmployee(ByVal nEmployee As Integer, ByVal sSubject As String, ByVal sBody As System.Text.StringBuilder, ByVal companyId As Integer) As Long
         Try
             Dim EmailTo As String = GetEmployeeEmail(nEmployee)
-            Task.Run(Function() SendGrid.Email.SendMail(EmailTo, "", "", sSubject, sBody.ToString, companyId))
+            Task.Run(Function() SendGrid.Email.SendMail(EmailTo, "", "", sSubject, sBody.ToString, companyId, 0, 0))
         Catch ex As Exception
             Throw ex
         End Try
@@ -9089,6 +9176,61 @@ Public Class LocalAPI
         End Try
     End Function
 
+    ''' <summary>
+    ''' Dynamically builds a SQL query to fetch permissions columns and map them
+    ''' into a Dictionary for further usage. This function is meant to save multiple
+    ''' DB calls and therefore boost whole performance.
+    ''' </summary>
+    ''' <param name="employeeId">Employee's Identifier</param>
+    ''' <returns>Dictionary with ("ColumnName", bool) representing employee's permissions</returns>
+    Public Shared Function GetEmployeePermissions(ByVal employeeId As Integer) As Dictionary(Of String, Boolean)
+        Try
+
+            Dim result = New Dictionary(Of String, Boolean)()
+
+            Dim query = "
+            DECLARE @query NVARCHAR(4000);
+            DECLARE @parmDefinition NVARCHAR(500);
+
+            SET @parmDefinition = N'@id int';
+
+            SELECT
+                @query = CONCAT(
+                            'SELECT ',
+                            STRING_AGG(CONCAT('[', COLUMN_NAME, ']'), ', '),
+                            ' FROM [dbo].[Employees] WHERE [ID] = @id')
+            FROM 
+                INFORMATION_SCHEMA.COLUMNS
+            WHERE 
+                TABLE_SCHEMA = 'dbo'
+                AND TABLE_NAME = 'Employees'
+                AND (COLUMN_NAME LIKE 'Deny%' OR COLUMN_NAME LIKE 'Allow%')
+
+
+            EXECUTE sp_executesql @query, @parmDefinition, @id=@employeeId
+            "
+            Using cnn As SqlConnection = GetOpenConnection()
+                Try
+                    cnn.Open()
+                    Dim cmd = New SqlCommand(query, cnn)
+                    cmd.Parameters.AddWithValue("@employeeId", employeeId)
+                    Using rdr As SqlDataReader = cmd.ExecuteReader()
+                        rdr.Read()
+                        If rdr.HasRows Then
+                            result = Enumerable.Range(0, rdr.FieldCount).ToDictionary(Of String, Boolean)(Function(i) rdr.GetName(i), Function(i) IIf(TypeOf rdr.GetValue(i) Is DBNull, 0, rdr.GetValue(i)))
+                        End If
+                    End Using
+                Catch e As Exception
+                    Throw e
+                End Try
+            End Using
+
+            Return result
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
     Public Shared Function EmployeePageTracking(ByVal EmployeeId As Integer, ByVal Page As String) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -9522,6 +9664,30 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function NewClients_visitslog(entityTypeId As String, entityId As Integer, IP As String) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Clients_visitslog_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@entityType", entityTypeId)
+            cmd.Parameters.AddWithValue("@entityId", entityId)
+            cmd.Parameters.AddWithValue("IP", IP)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     Public Shared Function GetClientPhotoURL(ClientId As Integer) As String
         Try
@@ -9719,7 +9885,7 @@ Public Class LocalAPI
             sFullBody.Append("<br />")
             sFullBody.Append(LocalAPI.GetPASSign())
             Try
-                SendGrid.Email.SendMail(SunconsultantObject("Email").ToString, "", "", "PASconcept Private Portal", sFullBody.ToString, companyId, LocalAPI.GetCompanyProperty(companyId, "Email"), LocalAPI.GetCompanyProperty(companyId, "Name"))
+                SendGrid.Email.SendMail(SunconsultantObject("Email").ToString, "", "", "PASconcept Private Portal", sFullBody.ToString, companyId, 0, 0, LocalAPI.GetCompanyProperty(companyId, "Email"), LocalAPI.GetCompanyProperty(companyId, "Name"))
             Finally
             End Try
 
@@ -10302,7 +10468,7 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function GetSharedLink_URL(ByVal objType As Integer, objId As Integer) As String
+    Public Shared Function GetSharedLink_URL(ByVal objType As Integer, objId As Integer, Optional PrintParameter As Boolean = False) As String
         '@objType:  1:Proposal;   2:Job;   3:RFP;    4:Invoice;    5:Statement  55: Statement in /e2103445_8a47_49ff_808e_6008c0fe13a1
         Try
             Dim url As String = ""
@@ -10313,6 +10479,8 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid")
                     Case 111 ' Firmar/Ver Proposal from /adm/proposals
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid") & "&source=111"
+                    Case 1111 ' URL to client for visilog
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(objId, "guid") & "&entityType=1"
                     Case 2
                         ' Tratamiento especifico de Job(Projects) para paginas publicas
                         Dim companyId As Integer = GetJobProperty(objId, "companyId")
@@ -10324,13 +10492,19 @@ Public Class LocalAPI
                     Case 4, 44
                         'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetInvoiceProperty(objId, "guid")
+                    Case 4444
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Invoice.aspx?GuiId=" & LocalAPI.GetInvoiceProperty(objId, "guid") & "&entityType=2"
                     Case 5, 55
                         'url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetSharedLink_guiId(objType, objId)
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetStatementProperty(objId, "guid")
+                    Case "5555"
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Statement.aspx?GuiId=" & LocalAPI.GetStatementProperty(objId, "guid") & "&entityType=3"
                     Case 6
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Transmittal.aspx?GuiId=" & LocalAPI.GetTransmittalProperty(objId, "guid")
                     Case 66
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/mtransmittal.aspx?GuiId=" & LocalAPI.GetTransmittalProperty(objId, "guid")
+                    Case 6666
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Transmittal.aspx?GuiId=" & LocalAPI.GetTransmittalProperty(objId, "guid") & "&entityType=4"
                     Case 7  ' jobprogressrollup from jobId
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/jobprogressrollup.aspx?jobguid=" & LocalAPI.GetJobProperty(objId, "guid")
                     Case 8  ' jobprogressrollup from invoiceId
@@ -10359,6 +10533,9 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/adm/Proposals.aspx?rfpGUID=" & LocalAPI.GetRFPProperty(objId, "guid")
 
                 End Select
+                If PrintParameter Then
+                    url = url & "&Print=1"
+                End If
             End If
 
             Return url
@@ -10919,6 +11096,7 @@ Public Class LocalAPI
                 Dim sJobCode As String = LocalAPI.GetInvoiceProperty(invoiceId, "[Jobs].[Code]")
                 Dim sJobName As String = LocalAPI.GetInvoiceProperty(invoiceId, "[Jobs].[Job]")
                 Dim sSubject As String = "Invoice " & sInvoiceNumber & " Has Been Emitted To Your Attention. Job " & sJobCode & ". " & sJobName
+                Dim sJobId As String = LocalAPI.GetInvoiceProperty(invoiceId, "[Jobs].[Id]")
 
                 Dim sMsg As New System.Text.StringBuilder
 
@@ -10960,7 +11138,7 @@ Public Class LocalAPI
                     sCCO = LocalAPI.GetCompanyProperty(companyId, "webEmailProfitWarningCCO")
                 End If
 
-                SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyId)
+                SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyId, clientId, sJobId)
             End If
         Catch ex As Exception
             Throw ex
@@ -10987,7 +11165,10 @@ Public Class LocalAPI
                 sBody = Replace(sBody, "[Sign]", SenderDisplay)
             End If
 
-            Task.Run(Function() SendGrid.Email.SendMail(emailTo, "", "", sSubject, sBody, companyId,, SenderDisplay, ReplyEmail, SenderDisplay))
+            Dim clientID = LocalAPI.GetClientIdFromInvoice(invoiceId)
+            Dim jobId = LocalAPI.GetJobIdFromInvoice(invoiceId)
+
+            Task.Run(Function() SendGrid.Email.SendMail(emailTo, "", "", sSubject, sBody, companyId, clientID, jobId,, SenderDisplay, ReplyEmail, SenderDisplay))
 
             ActualizarEmittedInvoice(invoiceId, 0)
 
@@ -11043,7 +11224,7 @@ Public Class LocalAPI
         Try
             Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
             Dim sClientEmail As String = ProposalObject("ClientEmail")
-
+            Dim ClientId = ProposalObject("ClientId")
             If Not LocalAPI.sys_IsLog(sClientEmail, LocalAPI.sys_log_AccionENUM.AceptProposal, companyid, "Proposal ID: " & lProposalId) Then
                 LocalAPI.sys_log_Nuevo(sClientEmail, LocalAPI.sys_log_AccionENUM.AceptProposal, companyid, "Proposal ID: " & lProposalId)
 
@@ -11097,7 +11278,7 @@ Public Class LocalAPI
                 If Len(sProjectManagerEmail) > 0 Then
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
                 End If
-                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid, ClientId, 0,,, sProjectManagerEmail, sProjectManagerName))
 
 
                 Dim recipientEmailSent As String = sCC & IIf(Len(sCCO) > 0, "," & sCCO, "")
@@ -11179,7 +11360,10 @@ Public Class LocalAPI
                 If Len(sProjectManagerEmail) > 0 Then
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
                 End If
-                Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+
+                Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
+                Dim ClientId = ProposalObject("ClientId")
+                Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid, ClientId, 0,,, sProjectManagerEmail, sProjectManagerName))
 
                 Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
                 Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
@@ -11224,7 +11408,11 @@ Public Class LocalAPI
             If Len(sProjectManagerEmail) > 0 Then
                 sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
             End If
-            Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName))
+
+            Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
+            Dim ClientId = ProposalObject("ClientId")
+
+            Task.Run(Function() SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid, ClientId, 0,,, sProjectManagerEmail, sProjectManagerName))
 
             Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
             Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
@@ -11363,6 +11551,22 @@ Public Class LocalAPI
         End Select
     End Function
 
+    Public Shared Function GetTransmittalDigitalFilesCount(transmittalId As Integer) As Integer
+        Return GetNumericEscalar(String.Format($"select count(*) from (select Id FROM [dbo].[Azure_Uploads] WHERE EntityType='Transmittal' AND EntityId={transmittalId} AND isnull([Public],0)=1	union all select Id FROM [Jobs_links] where isnull(TransmittalId,0)={transmittalId})T"))
+    End Function
+
+    Public Shared Function SetTransmittalStatusClientVisited(ByVal transmittalId As Long) As Boolean
+        ExecuteNonQuery($"UPDATE [Transmittals] SET [PickUpDate]=dbo.CurrentTime() WHERE Id={transmittalId} and [PickUpDate]Is Null")
+        Return ExecuteNonQuery($"UPDATE [Transmittals] SET [Status]=2 WHERE Id={transmittalId} and [Status]<>2")
+    End Function
+    Public Shared Function SetTransmittalEmailSent(transmittalId As Long, Notes As String, ReceiveBy As String) As Boolean
+        Try
+            Return ExecuteNonQuery($"UPDATE [Transmittals] SET [Notes]=isnull([Notes],'') + ' ' +'{Notes}', ReceiveBy='{ReceiveBy}'  WHERE Id={transmittalId} and [Status]<>2")
+        Catch ex As Exception
+        End Try
+    End Function
+
+
     Public Shared Function TransmittalNumber(ByVal Id As Integer) As String
         Return GetStringEscalar("SELECT dbo.TransmittalNumber(" & Id & ")")
     End Function
@@ -11374,6 +11578,21 @@ Public Class LocalAPI
         SetJobStatus(jobId, 7, employeeId, companyId, 0)
 
     End Function
+
+    Public Shared Function GetTransmittalStatusLabelCSS(ByVal statusId As Integer) As String
+        Select Case statusId
+            Case 0  'Not Ready
+                Return "badge badge-warning statuslabel"
+            Case 1  'Ready for Pick Up
+                Return "badge badge-danger statuslabel"
+            Case 2  'Picked Up
+                Return "badge badge-success statuslabel"
+            Case Else
+                Return "badge badge-secondary statuslabel"
+        End Select
+
+    End Function
+
 
     Public Shared Function EmailJobInactive(ByVal jobId As Integer, employeeId As Integer, ByVal companyId As Integer) As Boolean
         Try
@@ -11414,7 +11633,7 @@ Public Class LocalAPI
 
                 Dim sBody As String = sMsg.ToString
 
-                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, "", sEmployeeEmail, sSubject, sBody, companyId))
+                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, "", sEmployeeEmail, sSubject, sBody, companyId, nClientId, jobId))
 
                 OneSignalNotification.SendNotification(sEmployeeEmail, "Project has been completed", sSubject, "", companyId)
 
@@ -11516,8 +11735,8 @@ Public Class LocalAPI
             sMsg.Append(LocalAPI.GetPASSign())
 
             Dim sBody As String = sMsg.ToString
-
-            Return SendGrid.Email.SendMail(sClientEmail, "", "", sSubject, sBody, companyid,,, replyEmail, replyDisplay)
+            Dim clientid = LocalAPI.GetJobProperty(JobId, "Client")
+            Return SendGrid.Email.SendMail(sClientEmail, "", "", sSubject, sBody, companyid, clientid, JobId,,, replyEmail, replyDisplay)
 
         Catch ex As Exception
             Throw ex
@@ -11771,7 +11990,7 @@ Public Class LocalAPI
                 Case 0  ' Email directos
                     If Len(EmailTo) > 0 Then
                         FinalBody = Replace(Body, "[UserName]", "User Name Replaced")
-                        SendGrid.Email.SendMail(EmailTo, "", "", Subject, FinalBody, 260973,, "Matt Mur", "matt@axzes.com")
+                        SendGrid.Email.SendMail(EmailTo, "", "", Subject, FinalBody, 260973, 0, 0,, "Matt Mur", "matt@axzes.com")
                         res = 1
                     End If
 
@@ -11800,7 +12019,7 @@ Public Class LocalAPI
                     If rdr.HasRows Then
                         Try
                             FinalBody = Replace(Body, "[UserName]", rdr("FullName"))
-                            SendGrid.Email.SendMail(rdr("Email"), "", "", Subject, FinalBody, 260973, , "Matt Mur", "matt@axzes.com")
+                            SendGrid.Email.SendMail(rdr("Email"), "", "", Subject, FinalBody, 260973, 0, 0, , "Matt Mur", "matt@axzes.com")
                         Catch ex As Exception
                         End Try
                     End If
@@ -11982,18 +12201,46 @@ Public Class LocalAPI
         Return GetStringEscalar("SELECT isnull([qbCompnyID],'') FROM Company where companyId=" & companyId)
     End Function
 
-    Public Shared Function SetqbAccessToken(companyId As Integer, AccessToken As String) As Boolean
+    Public Shared Function GetqbCustomer(QBId As Integer) As Dictionary(Of String, Object)
+
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand("select * from [Clients_SyncQB] where [QBId] = " & QBId, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            Dim val = reader.GetValue(lp)
+                            If TypeOf val Is DBNull Then
+                                val = ""
+                            End If
+                            result.Add(reader.GetName(lp), val)
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+    Public Shared Function SetqbAccessToken(companyId As Integer, AccessToken As String, AccessTokenExpiresIn As Long) As Boolean
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "UPDATE Company Set qbAccessToken=@qbAccessToken WHERE companyId=@companyId"
+            cmd.CommandText = "UPDATE Company Set qbAccessToken=@qbAccessToken, qbAccessTokenExpire =  DATEADD (ss, @AccessTokenExpiresIn, dbo.CurrentTime()) WHERE companyId=@companyId"
 
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@companyId", companyId)
             cmd.Parameters.AddWithValue("@qbAccessToken", AccessToken)
+            cmd.Parameters.AddWithValue("@AccessTokenExpiresIn", AccessTokenExpiresIn)
 
             cmd.ExecuteNonQuery()
 
@@ -12004,18 +12251,19 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-    Public Shared Function SetqbAccessTokenSecret(companyId As Integer, AccessTokenSecret As String) As Boolean
+    Public Shared Function SetqbRefreshToken(companyId As Integer, RefreshToken As String, RefreshTokenExpiresIn As Long) As Boolean
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "UPDATE Company Set qbAccessTokenSecret=@qbAccessTokenSecret WHERE companyId=@companyId"
+            cmd.CommandText = "UPDATE Company Set qbAccessTokenSecret=@RefreshToken, qbRefreshTokenExpire =  DATEADD (ss, @RefreshTokenExpiresIn, dbo.CurrentTime()) WHERE companyId=@companyId"
 
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@companyId", companyId)
-            cmd.Parameters.AddWithValue("@qbAccessTokenSecret", AccessTokenSecret)
+            cmd.Parameters.AddWithValue("@RefreshToken", RefreshToken)
+            cmd.Parameters.AddWithValue("@RefreshTokenExpiresIn", RefreshTokenExpiresIn)
 
             cmd.ExecuteNonQuery()
 
@@ -12068,28 +12316,60 @@ Public Class LocalAPI
         Return True
     End Function
 
-    Public Shared Function GetAzureFilesCountInProposal(proposalId As Integer) As Integer
-        Return GetNumericEscalar("SELECT count(*) FROM [Azure_Uploads] where EntityType= 'Proposal' and EntityId=" & proposalId)
+    Public Shared Function GetEntityAzureFilesCount(entityId As Integer, EntityLabel As String) As Integer
+        Return GetNumericEscalar($"SELECT count(*) FROM [Azure_Uploads] where EntityType= '{EntityLabel}' and EntityId={entityId}")
     End Function
 
-    Public Shared Function AzureStorage_Insert(EntityId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, EntityType As String) As Boolean
+
+    Public Shared Function GetAzureFileKeyName(Id As Integer) As String
+        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM [Azure_Uploads] where Id=" & Id)
+    End Function
+
+    Public Shared Function DeleteAzureFile(Id As Integer) As String
+        Return ExecuteNonQuery("Delete FROM [Azure_Uploads] where Id=" & Id)
+    End Function
+
+    Public Shared Function DeleteAzureFileGuid(GUID As String) As Boolean
+        Return ExecuteNonQuery(String.Format("DELETE FROM [Azure_Uploads] WHERE [guid]='{0}' and EntityId=0", GUID))
+    End Function
+
+    Private Shared Function ExistAzureFile(EntityId As Integer, EntityType As String, FileName As String, ContentBytes As Integer) As Boolean
         Try
-            If Not ExistProposalAzureFile(EntityId, FileName, ContentBytes) Then
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Azure_Uploads_Exist"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@EntityId", EntityId)
+            cmd.Parameters.AddWithValue("@EntityType", EntityType)
+            cmd.Parameters.AddWithValue("@OriginalFileName", FileName)
+            cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+            Dim value = cmd.ExecuteScalar()
+            ExistAzureFile = (value > 0)
+            cnn1.Close()
+            Exit Function
+        Catch ex As Exception
+            Throw ex
+        End Try
+        ExistAzureFile = False
+    End Function
+
+
+    Public Shared Function AzureStorage_Insert(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
+        Try
+            If Not ExistAzureFile(EntityId, EntityType, FileName, ContentBytes) Then
 
                 ' Analisis de type en funcion del ContentType 
                 'Type = 9  Images
-                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
-                    Type = 9
-                End If
+                'If ContentType = "image/jpeg" Or ContentType = "image/png" Then
+                '    Type = 9
+                'End If
 
                 Dim splublic = IIf(bPublic, 1, 0)
                 Dim fileType = System.IO.Path.GetExtension(FileName)
 
-                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                '                $"values({EntityId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), '{EntityType}', {companyId}, '{fileType}' )"
-                'Return ExecuteNonQuery(sQuery)
-
-                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 Dim cnn1 As SqlConnection = GetConnection()
                 Dim cmd As SqlCommand = cnn1.CreateCommand()
 
@@ -12122,28 +12402,121 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function AzureStorage_Insert_Transmittal(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, maxDownload As Integer, ExpirationDate As DateTime) As Boolean
+        Try
+            If Not ExistAzureFile(EntityId, EntityType, FileName, ContentBytes) Then
 
-    Private Shared Function ExistJobAzureFile(jobId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from  [Azure_Uploads] where EntityId ={0} and EntityType= 'Jobs' and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
-        Dim ret As Boolean = IIf(GetNumericEscalar(sQuery) = 0, False, True)
-        If Not ret Then
-            ' Busco en proposal
-            Dim proposalId As Integer = GetProposalIdFromJob(jobId)
-            If proposalId > 0 Then
-                sQuery = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Proposal' and EntityId={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", proposalId, FileName, ContentBytes)
-                ret = IIf(GetNumericEscalar(sQuery) = 0, False, True)
+                ' Analisis de type en funcion del ContentType 
+                'Type = 9  Images
+                'If ContentType = "image/jpeg" Or ContentType = "image/png" Then
+                '    Type = 9
+                'End If
+
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+
+                Dim cnn1 As SqlConnection = GetConnection()
+                Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                ' Setup the command to execute the stored procedure.
+                cmd.CommandText = "Transmital_azureuploads_v20_INSERT"
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.AddWithValue("@EntityId", EntityId)
+                cmd.Parameters.AddWithValue("@Type", Type)
+                cmd.Parameters.AddWithValue("@FileName", FileName)
+                cmd.Parameters.AddWithValue("@KeyName", KeyName)
+                cmd.Parameters.AddWithValue("@Public", bPublic)
+                cmd.Parameters.AddWithValue("@ContentType", ContentType)
+                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+                cmd.Parameters.AddWithValue("@EntityType", EntityType)
+                cmd.Parameters.AddWithValue("@FileType", fileType)
+                cmd.Parameters.AddWithValue("@companyId", companyId)
+                cmd.Parameters.AddWithValue("@MaxDownload", maxDownload)
+                If Not (ExpirationDate = Nothing) Then
+                    cmd.Parameters.AddWithValue("@ExpirationDate", ExpirationDate)
+                Else
+                    cmd.Parameters.AddWithValue("@ExpirationDate", DBNull.Value)
+                End If
+
+                cmd.ExecuteNonQuery()
+
+                cnn1.Close()
+
+                Return True
+            Else
+                Return False
             End If
-        End If
 
-        Return ret
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
-    Public Shared Function GetAzureFileKeyName(Id As Integer) As String
-        Return GetStringEscalar("SELECT isnull([KeyName],'') FROM [Azure_Uploads] where Id=" & Id)
+    Public Shared Function AzureStorageGuid_Insert(EntityId As Integer, EntityType As String, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer, guid As String) As Boolean
+        Try
+            If Not ExistAzureFile(EntityId, EntityType, FileName, ContentBytes) Then
+
+                ' Analisis de type en funcion del ContentType 
+                'Type = 9  Images
+                'If ContentType = "image/jpeg" Or ContentType = "image/png" Then
+                '    Type = 9
+                'End If
+
+                Dim splublic = IIf(bPublic, 1, 0)
+                Dim fileType = System.IO.Path.GetExtension(FileName)
+
+                Dim cnn1 As SqlConnection = GetConnection()
+                Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                ' Setup the command to execute the stored procedure.
+                cmd.CommandText = "Azure_Entity_Uploads_Guid_INSERT"
+                cmd.CommandType = CommandType.StoredProcedure
+
+                cmd.Parameters.AddWithValue("@EntityId", EntityId)
+                cmd.Parameters.AddWithValue("@Type", Type)
+                cmd.Parameters.AddWithValue("@FileName", FileName)
+                cmd.Parameters.AddWithValue("@KeyName", KeyName)
+                cmd.Parameters.AddWithValue("@Public", bPublic)
+                cmd.Parameters.AddWithValue("@ContentType", ContentType)
+                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
+                cmd.Parameters.AddWithValue("@EntityType", EntityType)
+                cmd.Parameters.AddWithValue("@FileType", fileType)
+                cmd.Parameters.AddWithValue("@companyId", companyId)
+                cmd.Parameters.AddWithValue("@Guid", guid)
+
+                cmd.ExecuteNonQuery()
+
+                cnn1.Close()
+
+                Return True
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
-    Public Shared Function DeleteAzureFile(Id As Integer) As String
-        Return ExecuteNonQuery("Delete FROM [Azure_Uploads] where Id=" & Id)
+    Public Shared Function RequestForProposals_azureuploads_CLONE(requestforproposalId As Integer, GUID As String) As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "RequestForProposals_azureuploads_CLONE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@requestforproposalId", requestforproposalId)
+            cmd.Parameters.AddWithValue("@guid", GUID)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Shared Function UpdateAzureUploads(Id As Integer, Type As Integer, Name As String, sPublic As Boolean) As Boolean
@@ -12166,241 +12539,32 @@ Public Class LocalAPI
         End Try
     End Function
 
-
-    Public Shared Function JobAzureStorage_Insert(jobId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
+    Public Shared Function UpdateTransmittalAzureUploads(Id As Integer, Type As Integer, sPublic As Boolean, MaxDownload As Integer, ExpirationDate As DateTime) As Boolean
         Try
-            If Not ExistJobAzureFile(jobId, FileName, ContentBytes) Then
-
-                ' Analisis de type en funcion del ContentType 
-                'Type = 9  Images
-                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
-                    Type = 9
-                End If
-
-                ' statusId = actionId para Paid y Complete
-                Dim splublic = IIf(bPublic, 1, 0)
-                Dim fileType = System.IO.Path.GetExtension(FileName)
-                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                '                $"values({jobId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0 , {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Jobs', {companyId}, '{fileType}' )"
-                'Return ExecuteNonQuery(sQuery)
-
-                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Dim cnn1 As SqlConnection = GetConnection()
-                Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-                ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "Azure_Job_Uploads_INSERT"
-                cmd.CommandType = CommandType.StoredProcedure
-
-                cmd.Parameters.AddWithValue("@jobId", jobId)
-                cmd.Parameters.AddWithValue("@Type", Type)
-                cmd.Parameters.AddWithValue("@FileName", FileName)
-                cmd.Parameters.AddWithValue("@KeyName", KeyName)
-                cmd.Parameters.AddWithValue("@Public", bPublic)
-                cmd.Parameters.AddWithValue("@ContentType", ContentType)
-                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
-                cmd.Parameters.AddWithValue("@FileType", fileType)
-                cmd.Parameters.AddWithValue("@companyId", companyId)
-
-                cmd.ExecuteNonQuery()
-
-                cnn1.Close()
-
-                Return True
-            Else
-                Return False
-            End If
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Private Shared Function ExistProposalAzureFile(ProposalId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Proposal' and [EntityId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", ProposalId, FileName, ContentBytes)
-        Dim ret As Boolean = IIf(GetNumericEscalar(sQuery) = 0, False, True)
-
-        If Not ret Then
-            ' Busco en job
-            Dim jobId As Integer = GetProposalProperty(ProposalId, "JobId")
-            If jobId > 0 Then
-                sQuery = String.Format("select count(*) from [Azure_Uploads] where EntityType= 'Jobs' and [EntityId]={0} and [OriginalFileName]='{1}' and [ContentBytes]={2} ", jobId, FileName, ContentBytes)
-                ret = IIf(GetNumericEscalar(sQuery) = 0, False, True)
-            End If
-        End If
-
-        Return ret
-    End Function
-
-    Public Shared Function ProposalAzureStorage_Insert(ProposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, companyId As Integer) As Boolean
-        Try
-            If Not ExistProposalAzureFile(ProposalId, FileName, ContentBytes) Then
-
-                ' Analisis de type en funcion del ContentType 
-                'Type = 9  Images
-                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
-                    Type = 9
-                End If
-
-                Dim splublic = IIf(bPublic, 1, 0)
-                Dim fileType = System.IO.Path.GetExtension(FileName)
-                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                '                $"values({ProposalId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic}, 0, {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Proposal', {companyId}, '{fileType}' )"
-
-                'Return ExecuteNonQuery(sQuery)
-
-                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Dim cnn1 As SqlConnection = GetConnection()
-                Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-                ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "Azure_Proposal_Uploads_INSERT"
-                cmd.CommandType = CommandType.StoredProcedure
-
-                cmd.Parameters.AddWithValue("@ProposalId", ProposalId)
-                cmd.Parameters.AddWithValue("@Type", Type)
-                cmd.Parameters.AddWithValue("@FileName", FileName)
-                cmd.Parameters.AddWithValue("@KeyName", KeyName)
-                cmd.Parameters.AddWithValue("@Public", bPublic)
-                cmd.Parameters.AddWithValue("@ContentType", ContentType)
-                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
-                cmd.Parameters.AddWithValue("@FileType", fileType)
-                cmd.Parameters.AddWithValue("@companyId", companyId)
-
-                cmd.ExecuteNonQuery()
-
-                cnn1.Close()
-
-                Return True
-
-            Else
-                Return False
-            End If
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-    Private Shared Function ExistRequestForProposalsAzureFile(ProposalId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = $"select count(*) from [Azure_Uploads] where [EntityId]={ProposalId} and [OriginalFileName]='{FileName}' and [ContentBytes]={ContentBytes} and EntityType = 'Request_For_Proposal'"
-        Return IIf(GetNumericEscalar(sQuery) = 0, False, True)
-    End Function
-    Public Shared Function RequestForProposalsAzureStorage_Insert(requestforproposalId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, GUID As String, companyId As Integer) As Boolean
-        Try
-            If Not ExistRequestForProposalsAzureFile(requestforproposalId, FileName, ContentBytes) Then
-
-                ' Analisis de type en funcion del ContentType 
-                'Type = 9  Images
-                If ContentType = "image/jpeg" Or ContentType = "image/png" Then
-                    Type = 9
-                End If
-
-                Dim cnn1 As SqlConnection = GetConnection()
-                Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-                ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "RequestForProposals_azureuploads_v20_INSERT"
-                cmd.CommandType = CommandType.StoredProcedure
-
-                cmd.Parameters.AddWithValue("@requestforproposalId", requestforproposalId)
-                cmd.Parameters.AddWithValue("@Name", FileName)
-                cmd.Parameters.AddWithValue("@Type", Type)
-                cmd.Parameters.AddWithValue("@OriginalFileName", FileName)
-                cmd.Parameters.AddWithValue("@KeyName", KeyName)
-                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
-                cmd.Parameters.AddWithValue("@ContentType", ContentType)
-                cmd.Parameters.AddWithValue("@Public", bPublic)
-                cmd.Parameters.AddWithValue("@companyId", companyId)
-                cmd.Parameters.AddWithValue("@guid", GUID)
-
-                cmd.ExecuteNonQuery()
-
-                cnn1.Close()
-
-            Else
-                Return False
-            End If
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Shared Function RequestForProposals_azureuploads_CLONE(requestforproposalId As Integer, GUID As String) As Boolean
-        Try
-
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "RequestForProposals_azureuploads_CLONE"
+            cmd.CommandText = "Transmital_AzureUploads_UPDATE"
             cmd.CommandType = CommandType.StoredProcedure
 
-            cmd.Parameters.AddWithValue("@requestforproposalId", requestforproposalId)
-            cmd.Parameters.AddWithValue("@guid", GUID)
-
-            cmd.ExecuteNonQuery()
-
-            cnn1.Close()
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-
-    Public Shared Function RequestForProposals_azureuploads_DELETE(GUID As String) As Boolean
-        Return ExecuteNonQuery(String.Format("DELETE FROM [Azure_Uploads] WHERE [guid]='{0}' and EntityId=0", GUID))
-    End Function
-    Private Shared Function ExistClientAzureFile(clientId As Integer, FileName As String, ContentBytes As Integer) As Boolean
-        Dim sQuery As String = String.Format("select count(*) from [Azure_Uploads] where [EntityId]={0} and EntityType='Clients' and [OriginalFileName]='{1}' and [ContentBytes]={2} ", clientId, FileName, ContentBytes)
-        Return IIf(GetNumericEscalar(sQuery) = 0, False, True)
-    End Function
-
-    Public Shared Function ClientAzureStorage_Insert(ClientId As Integer, preprojectId As Integer, Type As Integer, FileName As String, KeyName As String, bPublic As Boolean, ContentBytes As Integer, ContentType As String, employeeId As Integer, companyId As Integer) As Boolean
-        Try
-            If Not ExistClientAzureFile(ClientId, FileName, ContentBytes) Then
-                ' statusId = actionId para Paid y Complete
-                Dim splublic = IIf(bPublic, 1, 0)
-                Dim fileType = System.IO.Path.GetExtension(FileName)
-                'Dim sQuery As String = $"insert into [Azure_Uploads] ([EntityId],[preprojectId], [Type], [Name],[OriginalFileName],[KeyName],[Public],[Deleted],[ContentBytes],[ContentType], [Date], [EntityType], [companyId],[FileType]) " &
-                '                $"values({ClientId}, {preprojectId}, {Type}, '{FileName}','{FileName}', '{KeyName}', {splublic} ,0 ,  {ContentBytes}, '{ContentType}',  dbo.CurrentTime(), 'Clients', {companyId}, '{fileType}' )"
-                'ExecuteNonQuery(sQuery)
-
-                ' Evitar SQL Injection!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                Dim cnn1 As SqlConnection = GetConnection()
-                Dim cmd As SqlCommand = cnn1.CreateCommand()
-
-                ' Setup the command to execute the stored procedure.
-                cmd.CommandText = "Azure_Uploads_INSERT"
-                cmd.CommandType = CommandType.StoredProcedure
-
-                cmd.Parameters.AddWithValue("@ClientId", ClientId)
-                cmd.Parameters.AddWithValue("@PreprojectId", preprojectId)
-                cmd.Parameters.AddWithValue("@Type", Type)
-                cmd.Parameters.AddWithValue("@FileName", FileName)
-                cmd.Parameters.AddWithValue("@KeyName", KeyName)
-                cmd.Parameters.AddWithValue("@bPublic", bPublic)
-                cmd.Parameters.AddWithValue("@ContentBytes", ContentBytes)
-                cmd.Parameters.AddWithValue("@ContentType", ContentType)
-                cmd.Parameters.AddWithValue("@employeeId", employeeId)
-                cmd.Parameters.AddWithValue("@EntityType", "Clients")
-                cmd.Parameters.AddWithValue("@FileType", fileType)
-                cmd.Parameters.AddWithValue("@companyId", companyId)
-
-                cmd.ExecuteNonQuery()
-
-                cnn1.Close()
-
-                Clients_activities_INSERT(ClientId, "C", "Clients_azureuploads", 0, employeeId)
-
-                Return True
+            cmd.Parameters.AddWithValue("@Type", Type)
+            cmd.Parameters.AddWithValue("@Public", sPublic)
+            cmd.Parameters.AddWithValue("@MaxDownload", MaxDownload)
+            If Not (ExpirationDate = Nothing) Then
+                cmd.Parameters.AddWithValue("@ExpirationDate", ExpirationDate)
             Else
-                Return False
+                cmd.Parameters.AddWithValue("@ExpirationDate", DBNull.Value)
             End If
+
+            cmd.Parameters.AddWithValue("@Id", Id)
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
         Catch ex As Exception
             Throw ex
         End Try
     End Function
+
 
     Public Shared Function GetJobAzureDocumentLinks(ByVal jobId As Integer, ByRef sMsg As System.Text.StringBuilder) As Integer
         Try
@@ -12453,7 +12617,8 @@ Public Class LocalAPI
                 sMsg.Append("<strong>" & GetCompanyProperty(companyId, "Name") & "</strong>")
                 sMsg.Append("<br />")
                 sMsg.Append(LocalAPI.GetPASShortSign())
-                SendGrid.Email.SendMail(EmailTo, EmailCC, ConfigurationManager.AppSettings("webEmailProfitWarningCC"), sSubject, sMsg.ToString, companyId)
+                Dim clientid = LocalAPI.GetJobProperty(jobId, "Client")
+                SendGrid.Email.SendMail(EmailTo, EmailCC, ConfigurationManager.AppSettings("webEmailProfitWarningCC"), sSubject, sMsg.ToString, companyId, clientid, jobId)
                 Return True
 
             End If
@@ -12465,75 +12630,86 @@ Public Class LocalAPI
     End Function
 
 
-    Public Shared Function CreateIcon(sContentType As String, sUrl As String, sName As String)
-        If sContentType = "application/pdf" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/zip" Or sContentType = "application/x-tar" Or sContentType = "application/x-rar" Then
-            Return $"<a class=""far fa-file-archive"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/vnd.ms-excel" Or sContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" Then
-            Return $"<a class=""far fa-file-excel"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/msword" Or sContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "image/tiff" Or sContentType = "image/bmp" Or sContentType = "image/jpeg" Or sContentType = "image/gif" Or sContentType = "Image/jpg" Or sContentType = "image/png" Then
-            Return $"<image src=""{sUrl}"" width=""200px""/>"
-        End If
+    Public Shared Function CreateIcon(sContentType As String, sUrl As String, FileName As String, IconPixelsHeihgt As Integer)
+        Dim FileExtention As String = ""
+        Dim FontSizeStyle As String = IIf(IconPixelsHeihgt > 16, $"font-size:{IconPixelsHeihgt}px;", "")
 
-        Return $"<a class=""far fa-file"" style=""font-size: 96px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+        Select Case sContentType
+            Case "application/pdf"
+                FileExtention = ".pdf"
+            Case "application/zip", "application/x-tar", "application/x-rar"
+                FileExtention = ".zip"
+
+            Case "application/vnd.ms-excel", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                FileExtention = ".xls"
+
+            Case "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                FileExtention = ".doc"
+
+            Case "image/tiff", "image/bmp", "image/jpeg", "image/gif", "Image/jpg", "image/png"
+                FileExtention = ".png"
+            Case Else
+                FileExtention = LCase(System.IO.Path.GetExtension(FileName))
+        End Select
+
+        Select Case LCase(FileExtention)
+            Case ".pdf"
+                Return $"<a title=""{FileName}"" class=""far fa-file-pdf"" style=""{FontSizeStyle} color: darkred"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".zip"
+                Return $"<a title=""{FileName}"" class=""far fa-file-archive"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".xls", ".xlsx", ".csv"
+                Return $"<a title=""{FileName}"" class=""far fa-file-excel"" style=""{FontSizeStyle} color: darkgreen"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".doc", ".docx"
+                Return $"<a title=""{FileName}"" class=""far fa-file-word"" style=""{FontSizeStyle} color: darkblue"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".txt"
+                Return $"<a title=""{FileName}"" class=""far fa-file-alt"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".dwg"
+                Return $"<a title=""{FileName}"" class=""fas fa-drafting-compass"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".msg"
+                Return $"<a title=""{FileName}"" class=""far fa-envelope"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+            Case ".xmcd"
+                Return $"<a title=""{FileName}"" class=""fas fa-equals"" style=""{FontSizeStyle} color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+
+            Case ".tiff", ".bmp", ".jpeg", ".gif", ".jpg", ".png"
+                If IconPixelsHeihgt > 16 Then
+                    Return $"<div class=""container-fluid px-0""><div class=""row""><div class=""col-md-12""><img src=""{sUrl}"" class=""img-fluid w-100"" style=""object-fit: cover;"" /></div></div></div>"
+                Else
+                    Return $"<a class=""far fa-file-image"" style=""color: red"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+                End If
+            Case Else
+                Return $"<a title=""{FileName}"" class=""far fa-file"" style=""color: darkgray"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
+        End Select
 
     End Function
 
-    Public Shared Function CreateSmallIcon(sContentType As String, sUrl As String, sName As String)
-        If sContentType = "application/pdf" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/zip" Or sContentType = "application/x-tar" Or sContentType = "application/x-rar" Then
-            Return $"<a class=""far fa-file-archive"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/vnd.ms-excel" Or sContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" Then
-            Return $"<a class=""far fa-file-excel"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "application/msword" Or sContentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document" Then
-            Return $"<a class=""far fa-file-pdf"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-        End If
-        If sContentType = "image/tiff" Or sContentType = "image/bmp" Or sContentType = "image/jpeg" Or sContentType = "image/gif" Or sContentType = "Image/jpg" Or sContentType = "image/png" Then
-            Return $"<image src=""{sUrl}"" width=""100px""/>"
-        End If
-
-        Return $"<a class=""far fa-file"" style=""font-size: 60px; color: black"" title=""Click To View "" href='{sUrl}' target=""_blank"" aria-hidden=""True""></a>"
-
-    End Function
 
 #End Region
 
 #Region "AzureWebServices"
-    Public Shared Function EmissionRecurrenceEmails() As Boolean
+    Public Shared Function DailyRecurrenceTasks() As Boolean
         ' Tarea "PostEmissionRecurrenceEmails" tipo "Scheduler Job Collections" lanzada desde Azure 
         '[WebHook URL] "https://app.pasconcept.com/api/webhooks/post"
         '[Authorization Token] = "Bearer 7497EE20-6811-4405-A2EE-471A8BFE3682"
         '[HttpMethod] = "POST"
 
-        LocalAPI.sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST EmissionRecurrenceEmails")
-        EmissionTask1()
-        EmissionTask2()
-        Return EmissionTask3()
+        LocalAPI.sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST DailyRecurrenceTasks")
+        SendRecurrenceInvoices()
+        SendDueDateInvoices()
+        SendEEGProposalsNotEmitted()
+        Return DeletePendingAzureFiles()
     End Function
 
-    Public Shared Function EmissionTask1() As Boolean
+    Public Shared Function SendRecurrenceInvoices() As Boolean
         ' Company.billingModule 
         '   and EmissionRecurrenceDays>0 
         '   and AmountDue>0 
         '   and BadDebt=0 
         '   and statementId = 0
         '   and EmissionRecurrenceDays<=DateDiff(day,LatestEmission,dbo.CurrentTime())
+        Dim cnn1 As SqlConnection = GetConnection()
         Try
-            Dim Subject As String
-            Dim Body As String
-            Dim emailTo As String
-            Dim cnn1 As SqlConnection = GetConnection()
+            Dim nRecs As Integer = 0
+
             Dim cmd As New SqlCommand("SELECT Invoices.Id, Jobs.companyId FROM Invoices INNER JOIN Jobs ON Invoices.JobId = Jobs.Id INNER JOIN Company ON Jobs.companyId = Company.companyId WHERE isnull(Company.billingModule,0)=1 and ISNULL(Invoices.EmissionRecurrenceDays, 0) > 0 and Invoices.AmountDue>0 and isnull(BadDebt,0)=0 and isnull(statementId,0)=0 and ISNULL(Invoices.EmissionRecurrenceDays, 0)<=DateDiff(day,Invoices.LatestEmission,dbo.CurrentTime())", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
@@ -12541,18 +12717,21 @@ Public Class LocalAPI
                 If rdr.HasRows Then
 
                     InvoiceAutomatictToClient(rdr("Id"), rdr("companyId"))
-
+                    nRecs = nRecs + 1
                 End If
             Loop
             rdr.Close()
-            cnn1.Close()
+
+            sys_Webhooks_INSERT("SendRecurrenceInvoices", nRecs, "")
 
         Catch ex As Exception
-
+            sys_Webhooks_INSERT("SendRecurrenceInvoices", 0, ex.Message)
+        Finally
+            cnn1.Close()
         End Try
     End Function
 
-    Public Shared Function EmissionTask2() As Boolean
+    Public Shared Function SendDueDateInvoices() As Boolean
         ' Automatic Emmit Invoice at Due Date...........................
         ' Emision automatica de Invoices para planes periodicos (mensuales)
         ' Company.billingModule 
@@ -12561,36 +12740,40 @@ Public Class LocalAPI
         '   and BadDebt=0 
         '   and statementId = 0
         '   and Emitted=0
+        Dim cnn1 As SqlConnection = GetConnection()
         Try
-            Dim Subject As String
-            Dim Body As String
-            Dim emailTo As String
-            Dim cnn1 As SqlConnection = GetConnection()
+            Dim nRecs As Integer = 0
+
             Dim cmd As New SqlCommand("SELECT Invoices.Id, Jobs.companyId FROM Invoices INNER JOIN Jobs ON Invoices.JobId = Jobs.Id INNER JOIN Company ON Jobs.companyId = Company.companyId WHERE isnull(Company.billingModule,0)=1 and Invoices.MaturityDate <= dbo.CurrentTime() and Invoices.AmountDue>0 and isnull(BadDebt,0)=0 and isnull(statementId,0)=0 and ISNULL(Invoices.Emitted, 0)=0", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
             Do While rdr.Read()
                 If rdr.HasRows Then
                     InvoiceAutomatictToClient(rdr("Id"), rdr("companyId"))
-
+                    nRecs = nRecs + 1
                 End If
             Loop
             rdr.Close()
-            cnn1.Close()
+
+            sys_Webhooks_INSERT("SendDueDateInvoices", nRecs, "")
 
         Catch ex As Exception
-
+            sys_Webhooks_INSERT("SendDueDateInvoices", 0, ex.Message)
+        Finally
+            cnn1.Close()
         End Try
     End Function
 
-    Public Shared Function EmissionTask3() As Boolean
+    Public Shared Function SendEEGProposalsNotEmitted() As Boolean
         ' Proposals de EEG que se mantienen en status NotEmmitted 
+        Dim cnn1 As SqlConnection = GetConnection()
         Try
+            Dim nRecs As Integer = 0
             Dim Subject As String
             Dim Body As String
             Dim emailTo As String
             Dim emailBcc As String
-            Dim cnn1 As SqlConnection = GetConnection()
+
             Dim cmd As New SqlCommand("SELECT Proposal.Id,Proposal.DepartmentId, dbo.ProposalNumber(Proposal.Id) AS ProposalNumber,Proposal.[Date],Proposal.ProjectName, ProposalBy=isnull(Employees.FullName,''),ProposalByEmail=isnull(Employees.Email,''),[Days]=DATEDIFF(DAY,Proposal.[Date],dbo.CurrentTime()) FROM Proposal LEFT OUTER JOIN Employees ON Proposal.ProjectManagerId=Employees.Id WHERE Proposal.companyId=260962 and StatusId=0 and DATEDIFF(DAY,Proposal.[Date],dbo.CurrentTime())>0 and isnull(Proposal.DepartmentId,0)>0 order by id", cnn1)
             Dim rdr As SqlDataReader
             rdr = cmd.ExecuteReader
@@ -12605,22 +12788,87 @@ Public Class LocalAPI
 
                     emailBcc = IIf(rdr("Days") > 1, "yanaisy@easterneg.com", "")
 
-                    SendGrid.Email.SendMail(emailTo, "", emailBcc, Subject, Body, 260962)
+                    SendGrid.Email.SendMail(emailTo, "", emailBcc, Subject, Body, 260962, 0, 0)
 
                     OneSignalNotification.SendNotification(emailTo, "Not Emitted Proposal", Subject, "", 260962)
-
+                    nRecs = nRecs + 1
                 End If
 
             Loop
             rdr.Close()
-            cnn1.Close()
+
+            sys_Webhooks_INSERT("SendEEGProposalsNotEmitted", nRecs, "")
 
         Catch ex As Exception
-
+            sys_Webhooks_INSERT("SendEEGProposalsNotEmitted", 0, ex.Message)
+        Finally
+            cnn1.Close()
         End Try
     End Function
 
+    Public Shared Function DeletePendingAzureFiles() As Boolean
+        ' Delete from Azure all files Mark as Deleted
+        Dim cnn1 As SqlConnection = GetConnection()
+        Try
+            ' Marca files colgados (se elimino su EntityId)
+            Azure_Uploads_Deleted_UPDATE()
 
+            Dim nRecs As Integer = 0
+
+            Dim cmd As New SqlCommand("select Id, isnull([KeyName],'') as KeyName from [Azure_Uploads] where Deleted=1", cnn1)
+            Dim rdr As SqlDataReader
+            rdr = cmd.ExecuteReader
+            Do While rdr.Read()
+                If rdr.HasRows Then
+                    If Len(rdr("KeyName")) > 0 Then
+                        ' Delete file from Azure
+                        AzureStorageApi.DeleteFile(rdr("KeyName"))
+                    End If
+                    ' Delete record
+                    ExecuteNonQuery(String.Format("DELETE FROM [Azure_Uploads] WHERE Id={0}", rdr("Id")))
+                    nRecs = nRecs + 1
+                End If
+            Loop
+            rdr.Close()
+
+            sys_Webhooks_INSERT("DeletePendingAzureFiles", nRecs, "")
+
+        Catch ex As Exception
+            sys_Webhooks_INSERT("DeletePendingAzureFiles", 0, ex.Message)
+        Finally
+            cnn1.Close()
+        End Try
+    End Function
+
+    Public Shared Function Azure_Uploads_Deleted_UPDATE() As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Azure_Uploads_Deleted_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+        End Try
+    End Function
+
+    Private Shared Sub sys_Webhooks_INSERT(FunctionName As String, Records As Integer, ErrorMessage As String)
+        Try
+            Dim sQuery As String = String.Format("INSERT INTO [sys_Webhooks] ([DateIn],[FunctionName],[Records],[ErrorMessage]) " &
+                "VALUES(dbo.CurrentTime(), '{0}',{1},'{2}')", FunctionName, Records, ErrorMessage)
+            ExecuteNonQuery(sQuery)
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
     Public Shared Function EmployeeWeeklyTimesheetNotification() As Boolean
         ' Notificar a los employees sobre su Timesheet esta semana 
         Try
@@ -12670,7 +12918,7 @@ Public Class LocalAPI
                         Body = Replace(Body, "[enteredhours]", rdr("WeeklyHous"))
                         Body = Replace(Body, "[HRname]", GetCompanyHRname(rdr("companyId")))
                         Subject = Replace("[CompanyName] Timesheets Due: PASconcept Automated Message", "[CompanyName]", companyName)
-                        SendGrid.Email.SendMail(rdr("Email"), "", "", Subject, Body, 0)
+                        SendGrid.Email.SendMail(rdr("Email"), "", "", Subject, Body, 0, 0, 0)
 
                         OneSignalNotification.SendNotification(rdr("Email"), "Timesheets Alert!!!", "This is a reminder that timesheets are due today Friday " & FormatDateTime(GetDateTime(), DateFormat.ShortDate) & ". ", "", rdr("companyId"))
 
@@ -12759,7 +13007,7 @@ Public Class LocalAPI
             Body = Replace(Body, "[Client Name]", sClienteName)
             'Body = Replace(Body, "[Sign]", sSign)
 
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(5, statementId)
+            Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
             Body = Replace(Body, "[StatementUrl]", sURL)
 
             Return True
@@ -13602,9 +13850,9 @@ Public Class LocalAPI
     Public Shared Function GetCollectionStatusLabelCSS(ByVal StatusValue As String) As String
         Select Case StatusValue
             Case "Active"
-                Return "badge badge-danger"
+                Return "badge badge-danger statuslabel"
             Case "Closed"
-                Return "badge badge-secondary"
+                Return "badge badge-secondary statuslabel"
         End Select
     End Function
 
@@ -13675,7 +13923,7 @@ Public Class LocalAPI
 
             Dim SenderEmail As String = LocalAPI.GetEmployeeEmail(lId:=employeeId)
             Dim SenderDisplay As String = LocalAPI.GetEmployeeName(employeeId)
-            SendGrid.Email.SendMail(NotificationClientEmail, SenderEmail, "", Subject, Body, companyId, SenderEmail, SenderDisplay, SenderEmail, SenderDisplay)
+            SendGrid.Email.SendMail(NotificationClientEmail, SenderEmail, "", Subject, Body, companyId, 0, 0, SenderEmail, SenderDisplay, SenderEmail, SenderDisplay)
 
             Return True
         Catch ex As Exception
@@ -13746,8 +13994,9 @@ Public Class LocalAPI
 
             Dim PMEmail As String = GetEmployeeEmail(lId:=LocalAPI.GetTicketProperty(ticketId, "employeeId"))
             Dim OtherEmplEmais As String = LocalAPI.GetTicketProperty(ticketId, "NotificationBCClientEmail")
+            Dim clientid = LocalAPI.GetJobProperty(jobId, "Client")
 
-            SendGrid.Email.SendMail(PMEmail, OtherEmplEmais, "jcarlos@axzes.com", Subject, Body, companyId)
+            SendGrid.Email.SendMail(PMEmail, OtherEmplEmais, "jcarlos@axzes.com", Subject, Body, companyId, clientid, jobId)
 
             Return True
         Catch ex As Exception
@@ -13830,6 +14079,191 @@ Public Class LocalAPI
         Dim Value = GetNumericEscalar($"select count(*) from Proposal_details where ProposalId={ProposalId} and isnull(paymentscheduleId,0)>0")
 
         Return IIf(Value = 0, True, False)
+
+    End Function
+
+#End Region
+
+#Region "PASconcept Leads"
+    Private Shared Function GetConnection_axzescrmDB() As SqlConnection
+        Try
+            Dim cnn1 As SqlConnection
+            ' Connect to the source
+            cnn1 = New SqlConnection(ConfigurationManager.ConnectionStrings("cnnAxzesLeads").ToString)
+            ' Open the database
+            cnn1.Open()
+            ' Return the object
+            Return cnn1
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+    End Function
+
+    Public Shared Function GetAxzescrmDBRecord(Id As Integer, StoreProcedureName As String) As Dictionary(Of String, Object)
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection_axzescrmDB()
+                Using comm As New SqlCommand(StoreProcedureName, conn)
+                    comm.CommandType = CommandType.StoredProcedure
+
+                    Dim p0 As New SqlParameter("@Id", SqlDbType.Int)
+                    p0.Direction = ParameterDirection.Input
+                    p0.Value = Id
+                    comm.Parameters.Add(p0)
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            result.Add(reader.GetName(lp), reader.GetValue(lp))
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+
+    Public Shared Function NewPASconceptLead(LaedObject As LeadStruct) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection_axzescrmDB()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Leads_Contacs_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Company", LaedObject.Company)
+            cmd.Parameters.AddWithValue("@FirstName", LaedObject.FirstName)
+            cmd.Parameters.AddWithValue("@LastName", LaedObject.LastName)
+            cmd.Parameters.AddWithValue("@Email", LaedObject.Email)
+            cmd.Parameters.AddWithValue("@Phone", LaedObject.Phone)
+            cmd.Parameters.AddWithValue("@Cellular", LaedObject.Cellular)
+            cmd.Parameters.AddWithValue("@WebSite", LaedObject.Website)
+            cmd.Parameters.AddWithValue("@AddressLine1", LaedObject.AddressLine1)
+            cmd.Parameters.AddWithValue("@AddressLine2", LaedObject.AddressLine2)
+            cmd.Parameters.AddWithValue("@City", LaedObject.City)
+            cmd.Parameters.AddWithValue("@State", LaedObject.State)
+            cmd.Parameters.AddWithValue("@ZipCode", LaedObject.ZipCode)
+            cmd.Parameters.AddWithValue("@JobTitle", LaedObject.JobTitle)
+            cmd.Parameters.AddWithValue("@Position", LaedObject.Position)
+            cmd.Parameters.AddWithValue("@Tags", LaedObject.Tags)
+            cmd.Parameters.AddWithValue("@SourceId", LaedObject.SourceId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function SetLeadAgileDate(LaedId As Integer) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection_axzescrmDB()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = $"UPDATE [Leads_Contacs] SET AgileDate=GetDate() WHERE Id={LaedId}"
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function PASconceptLeadToAgile(LeadId As Integer, Tag As String) As Boolean
+
+        Try
+            Dim companyId As Integer = 260973     ' Axzes
+            Dim LeadObject = GetAxzescrmDBRecord(LeadId, "Lead_SELECT")
+
+            If Not Agile.IsContact(LeadObject("Email"), companyId) Then
+                Dim AgileRet As String
+                'Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
+                '                                                "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"": ""address"", ""value"":" & "{\""address\"":\""address_value\"",\""city\"":\""city_value\"",\""state\"":\""state_value\"",\""zip\"":\""zip_value\"",\""country\"":\""US\""}}," &
+                '                                                "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}" &
+                '                                                "]}"
+
+                '{"subtype":null,"name":"address","type":"SYSTEM","value":"{\"country\":\"US\",\"city\":\"doral\",\"latitude\":\"25.819542\",\"countryname\":\"United States\",\"state\":\"fl\",\"longitude\":\"-80.355330\"}"}
+                Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
+                    "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                    "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}," &
+                    "{""type"":""CUSTOM"", ""name"":""Notes"", ""value"":""notes_value""}," &
+                    "{""subtype"":null,""name"":""address"",""type"":""SYSTEM"",""value"":""{\""zip\"":\""zip_value\"",\""country\"":\""US\"",\""address\"":\""address_value\"",\""city\"":\""city_value\"",\""countryname\"":\""United States\"",\""state\"":\""state_value\""}""}" &
+                    "]}"
+
+                ' -- SYSTEM FIELDS
+
+                jsonContactInfo = Replace(jsonContactInfo, "email_value", LeadObject("Email"))
+                jsonContactInfo = Replace(jsonContactInfo, "first_name_value", LeadObject("FirstName"))
+                jsonContactInfo = Replace(jsonContactInfo, "last_name_value", LeadObject("LastName"))
+                jsonContactInfo = Replace(jsonContactInfo, "company_value", LeadObject("Company"))
+                jsonContactInfo = Replace(jsonContactInfo, "phone_value", LeadObject("Phone"))
+                jsonContactInfo = Replace(jsonContactInfo, "website_value", LeadObject("WebSite"))
+                jsonContactInfo = Replace(jsonContactInfo, "title_value", LeadObject("Position"))
+                jsonContactInfo = Replace(jsonContactInfo, "address_value", LeadObject("AddressLine1"))
+                jsonContactInfo = Replace(jsonContactInfo, "city_value", LeadObject("City"))
+                jsonContactInfo = Replace(jsonContactInfo, "state_value", LeadObject("State"))
+                jsonContactInfo = Replace(jsonContactInfo, "zip_value", LeadObject("ZipCode"))
+
+                jsonContactInfo = Replace(jsonContactInfo, "source_value", LeadObject("Source"))
+                jsonContactInfo = Replace(jsonContactInfo, "notes_value", LeadObject("JobTitle"))
+
+                jsonContactInfo = Replace(jsonContactInfo, "tag_value", Tag)
+
+                ' Others...........................
+                'InAgile Check Column No visible por defecto
+                '"Off" Field No visible por defecto
+                'Agile Custom Field "Source"
+                'Agile Custom Field "Notes" <- JobTitle/Capabilities
+                'Agile Standard ?Field "WebSite"
+                'Agile Custom Field "State"
+                'Agile Custom Field "City"
+                'Agile Custom Field "ZipCode"
+
+
+                AgileRet = Agile.CreateContact(jsonContactInfo, companyId)
+
+            Else
+                ' Add new Tag only
+                Agile.AddTags(LeadObject("Email"), Tag, companyId)
+
+            End If
+            SetLeadAgileDate(LeadId)
+
+            Return True
+
+        Catch ex As Exception
+
+        End Try
 
     End Function
 

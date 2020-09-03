@@ -78,7 +78,7 @@
             Employee Profile
         </span>
         <span style="float: right; vertical-align: middle;">
-            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+            <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                        View Summary
             </asp:LinkButton>
         </span>

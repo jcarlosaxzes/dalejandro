@@ -7,7 +7,6 @@ Public Class signature1
         If Not Page.IsPostBack() Then
             If Request.QueryString("id") IsNot Nothing Then
                 lblId.Text = Request.QueryString("Id")
-                lblObjId.Text = Request.QueryString("ObjId")
 
                 Dim companyId As Integer = Session("companyId")
 
@@ -18,6 +17,7 @@ Public Class signature1
                 Dim employeeId As Integer = LocalAPI.GetEmployeeId(Context.User.Identity.GetUserName(), companyId)
                 txtNombre.Text = LocalAPI.GetEmployeeName(employeeId)
 
+                lblBackPage.Text = Request.QueryString("BackPage")
             End If
         Else
             ' Evento PostBack del boton btnSave
@@ -31,7 +31,14 @@ Public Class signature1
         Dim sName As String = txtNombre.Text
 
         LocalAPI.SignTransmittal(lblId.Text, Name, img64)
-        Response.RedirectPermanent("~/adm/Transmittal.aspx?transmittalId=" & Id)
+
+        Select Case lblBackPage.Text
+            Case "transmittals"
+                Response.RedirectPermanent("~/adm/Transmittal.aspx?transmittalId=" & Id & "&BackPage=transmittals")
+            Case Else
+                Response.RedirectPermanent("~/adm/Transmittal.aspx?transmittalId=" & Id)
+        End Select
+
 
     End Sub
 

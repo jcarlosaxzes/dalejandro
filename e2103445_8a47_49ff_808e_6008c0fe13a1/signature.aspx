@@ -163,7 +163,13 @@
 
             window.onresize = resizeCanvas;
             resizeCanvas();
-            signaturePad = new SignaturePad(canvas);
+
+            /*signaturePad = new SignaturePad(canvas);*/
+            signaturePad = new SignaturePad(canvas, {
+                minWidth: 8,
+                maxWidth: 10,
+                penColor: "rgb(0, 0, 0)"
+            });
 
             clearButton.addEventListener("click", function (event) {
                 signaturePad.clear();

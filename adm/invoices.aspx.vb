@@ -1,4 +1,7 @@
-﻿Imports Telerik.Web.UI
+﻿Imports Intuit.Ipp.Data
+Imports Intuit.Ipp.DataService
+Imports Intuit.Ipp.QueryFilter
+Imports Telerik.Web.UI
 Public Class invoices
     Inherits System.Web.UI.Page
 
@@ -12,6 +15,7 @@ Public Class invoices
                 Master.PageTitle = "Billing/Invoices"
                 Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"
                 lblCompanyId.Text = Session("companyId")
+                lblEmployeeId.Text = Master.UserId
 
                 spanViewSummary.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
 
@@ -23,10 +27,28 @@ Public Class invoices
                 cboPeriod.DataBind()
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
+                ' ? Quickbooks.........................
+                cboQB.DataBind()
+                cboQB.Visible = LocalAPI.IsQuickBookModule(lblCompanyId.Text)
+                btnBulkSentToQB.Visible = cboQB.Visible
+
                 RefrescarRecordset()
+
+                If lblCompanyId.Text = 260962 Then
+                    ' EEG 10 Mb
+                    RadCloudUpload1.MaxFileSize = 10485760
+                End If
+
             End If
 
             RadWindowManager1.EnableViewState = False
+
+
+            Dim valid = qbAPI.IsValidAccessToken(lblCompanyId.Text)
+            If Not valid Then
+                Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(lblCompanyId.Text))
+            End If
+
 
         Catch ex As Exception
             Dim e1 As String = ex.Message
@@ -98,6 +120,8 @@ Public Class invoices
     '        End If
     '    End While
     'End Sub
+
+
 
 
 
@@ -194,53 +218,89 @@ Public Class invoices
     End Sub
 
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
-        Dim sUrl As String = ""
-        Select Case e.CommandName
-            Case "EditInvoice"
-                lblInvoiceId.Text = e.CommandArgument
-                FormViewInvoice.DataBind()
-                RadToolTipEditInvoice.Visible = True
-                RadToolTipEditInvoice.Show()
+        Try
 
-            Case "InvoiceRDLC7"
-                'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
-                sUrl = "~/adm/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
-                CreateRadWindows(e.CommandName, sUrl, 960, 810, False)
+            Dim sUrl As String = ""
+            Select Case e.CommandName
+                Case "EditInvoice"
+                    lblInvoiceId.Text = e.CommandArgument
+                    FormViewInvoice.DataBind()
+                    RadToolTipEditInvoice.Visible = True
+                    RadToolTipEditInvoice.Show()
 
-            Case "SendInvoice"
-                'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
-                sUrl = "~/adm/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
-                CreateRadWindows(e.CommandName, sUrl, 960, 790, False)
+                Case "InvoiceRDLC7"
+                    'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
+                    sUrl = "~/adm/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"
+                    CreateRadWindows(e.CommandName, sUrl, 960, 810, False)
 
-            Case "RecivePayment"
-                lblInvoiceId.Text = e.CommandArgument
-                txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
-                txtAmountPayment.DbValue = txtAmountPayment.MaxValue
-                RadDatePickerPayment.DbSelectedDate = LocalAPI.GetDateTime()
-                txtPaymentNotes.Text = ""
-                RadToolTipInsertPayment.Visible = True
-                RadToolTipInsertPayment.Show()
+                Case "SendInvoice"
+                    'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
+                    sUrl = "~/adm/SendInvoice.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=2"
+                    CreateRadWindows(e.CommandName, sUrl, 960, 790, False)
 
-            Case "BadDebt"
-                If LocalAPI.GetEmployeePermission(Master.UserId, "Allow_BadDebt") Then
-                    sUrl = "~/adm/BadDebt.aspx?invoiceId=" & e.CommandArgument
-                    CreateRadWindows(e.CommandName, sUrl, 520, 600, False)
-                Else
-                    Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
-                End If
+                Case "RecivePayment"
+                    lblInvoiceId.Text = e.CommandArgument
+                    txtAmountPayment.MaxValue = LocalAPI.GetInvoicesAmountDue(lblInvoiceId.Text)
+                    txtAmountPayment.DbValue = txtAmountPayment.MaxValue
+                    RadDatePickerPayment.DbSelectedDate = LocalAPI.GetDateTime()
+                    txtPaymentNotes.Text = ""
+                    RadToolTipInsertPayment.Visible = True
+                    RadToolTipInsertPayment.Show()
+
+                Case "BadDebt"
+                    If LocalAPI.GetEmployeePermission(Master.UserId, "Allow_BadDebt") Then
+                        sUrl = "~/adm/BadDebt.aspx?invoiceId=" & e.CommandArgument
+                        CreateRadWindows(e.CommandName, sUrl, 520, 600, False)
+                    Else
+                        Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
+                    End If
 
 
-            Case "EditJob"
-                sUrl = "~/adm/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
+                Case "EditJob"
+                    sUrl = "~/adm/Job_job.aspx?JobId=" & e.CommandArgument
+                    CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
 
-            Case "PDF"
-                lblInvoiceId.Text = e.CommandArgument
-                Dim url = LocalAPI.GetSharedLink_URL(4, lblInvoiceId.Text)
-                Session("PrintName") = "Invoice_" & LocalAPI.InvoiceNumber(lblInvoiceId.Text) & ".pdf"
-                Session("PrintUrl") = url
-                Response.Redirect("~/adm/pdf_print.aspx")
-        End Select
+                Case "PDF"
+                    lblInvoiceId.Text = e.CommandArgument
+                    Dim url = LocalAPI.GetSharedLink_URL(4, lblInvoiceId.Text)
+                    Session("PrintName") = "Invoice_" & LocalAPI.InvoiceNumber(lblInvoiceId.Text) & ".pdf"
+                    Session("PrintUrl") = url
+                    Response.Redirect("~/adm/pdf_print.aspx")
 
+                Case "SendQB"
+
+                    If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                        Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                        Dim qbCustomerId As Integer = ids(1)
+                        lblInvoiceId.Text = ids(0)
+                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
+                        RadGrid1.Rebind()
+                    Else
+                        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=invoices")
+                    End If
+
+            End Select
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnBulkSentToQB_Click(sender As Object, e As EventArgs) Handles btnBulkSentToQB.Click
+        Try
+            If RadGrid1.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGrid1.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        qbAPI.SendInvoiceToQuickBooks(dataItem("Id").Text, dataItem("qbCustomerId").Text, lblEmployeeId.Text, lblCompanyId.Text)
+                    End If
+                Next
+                RadGrid1.DataBind()
+            Else
+                Master.ErrorMessage("Select (Mark) Invoices Records to Sent to QuickBooks!")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Sub
 End Class

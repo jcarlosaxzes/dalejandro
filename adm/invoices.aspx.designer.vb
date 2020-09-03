@@ -32,6 +32,15 @@ Partial Public Class invoices
     Protected WithEvents spanViewSummary As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''btnBulkSentToQB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkSentToQB As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''btnNewInvoice control.
     '''</summary>
     '''<remarks>
@@ -68,15 +77,6 @@ Partial Public Class invoices
     Protected WithEvents cboInvoiceStatus As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
-    '''cboStatement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboStatement As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
     '''cboDepartment control.
     '''</summary>
     '''<remarks>
@@ -84,6 +84,15 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboDepartment As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboStatement control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboStatement As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''txtFind control.
@@ -111,6 +120,15 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboJobs As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''cboQB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboQB As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
     '''btnRefresh control.
@@ -185,24 +203,6 @@ Partial Public Class invoices
     Protected WithEvents txtPaymentNotes As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
-    '''PanelUpload control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PanelUpload As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''RadCloudUpload1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
-    
-    '''<summary>
     '''btnInsertPayment control.
     '''</summary>
     '''<remarks>
@@ -219,6 +219,24 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelPayment As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''PanelUpload control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelUpload As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''RadCloudUpload1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
     
     '''<summary>
     '''RadToolTipEditInvoice control.
@@ -417,6 +435,15 @@ Partial Public Class invoices
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblStatus As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblEmployeeId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''Master property.

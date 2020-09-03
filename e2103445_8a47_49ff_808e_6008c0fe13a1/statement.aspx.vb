@@ -81,6 +81,16 @@ Public Class statement1
 
                     End If
                 End If
+
+                'Clients_visitslog?
+                ' Visit not from Current session company "False visit"
+                If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> companyId Then
+                    LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblStatementId.Text, Request.UserHostAddress())
+                End If
+                If Not Request.QueryString("Print") Is Nothing Then
+                    Response.Write("<script>window.print();</script>")
+                End If
+
             End If
         End If
     End Sub
@@ -290,7 +300,8 @@ Public Class statement1
                 Dim sBody As String = sMsg.ToString
                 Dim sSubject As String = "PayHere to " & LocalAPI.GetCompanyName(lblCompanyId.Text) & " from PayPal, Statement: " & statementInfo("StatementNumber")
 
-                Return SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text)
+                Dim clientid = LocalAPI.GetStatementProperty(lblStatementId.Text, "clientId")
+                Return SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text, clientid, 0)
                 SqlDataSourceStatement.DataBind()
 
             End If

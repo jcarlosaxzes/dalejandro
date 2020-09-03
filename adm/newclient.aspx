@@ -213,7 +213,7 @@
                 <td>
                     <telerik:RadTextBox ID="txtBillingTelephone" runat="server" MaxLength="25" Width="200px" EmptyMessage="Phone...">
                     </telerik:RadTextBox>
-                    <telerik:RadTextBox ID="txtBillingEmail" runat="server" MaxLength="25" Width="395px" EmptyMessage="Email...">
+                    <telerik:RadTextBox ID="txtBillingEmail" runat="server" MaxLength="80" Width="395px" EmptyMessage="Email...">
                     </telerik:RadTextBox>
                 </td>
             </tr>

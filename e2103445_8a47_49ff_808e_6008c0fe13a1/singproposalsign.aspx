@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/singclientportal.master" CodeBehind="singproposalsign.aspx.vb" Inherits="pasconcept20.singproposalsign" Async="true" %>
-
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/SingClientPortal.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <link rel="stylesheet" href='<%= ResolveUrl("~/Content/sing-theme/quote-fullview.css?v=1") %>' />
@@ -419,7 +419,9 @@
                                                 <ItemTemplate>
                                                     <tr>
                                                         <td>
-                                                            <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# String.Concat(Eval("Name"), " -- (", Eval("Type"), ")")%></a>
+                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                                            &nbsp;&nbsp;
+                                                            <%# String.Concat(Eval("Name"), " -- (", Eval("nType"), ")")%>
                                                         </td>
                                                     </tr>
                                                 </ItemTemplate>
@@ -553,7 +555,11 @@
 
             window.onresize = resizeCanvas;
 
-            signaturePad = new SignaturePad(canvas);
+            signaturePad = new SignaturePad(canvas, {
+                minWidth: 4,
+                maxWidth: 8,
+                penColor: "rgb(0, 0, 0)"
+            });
 
             $clearButton.click(function (e) {
                 signaturePad.clear();

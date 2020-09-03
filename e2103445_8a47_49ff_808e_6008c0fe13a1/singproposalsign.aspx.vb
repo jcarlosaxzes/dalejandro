@@ -133,6 +133,16 @@ Public Class singproposalsign
                     UpdatePageProperties()
 
                     RadBarcode1.Text = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/Signature.aspx?GuiId=" & lblGuiId.Text & "&ObjType=11"
+
+                    'Clients_visitslog?
+                    ' Visit not from Current session company "False visit"
+                    If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> CompanyId Then
+                        LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblProposalId.Text, Request.UserHostAddress())
+                    End If
+                    If Not Request.QueryString("Print") Is Nothing Then
+                        Response.Write("<script>window.print();</script>")
+                    End If
+
                 End If
 
                 ' Panel Acept/Decline QR?
@@ -193,9 +203,15 @@ Public Class singproposalsign
             Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
             Dim pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
 
+            ' Register future PDF (not yet created) as Document
+            Dim PDFfilename As String = LocalAPI.ProposalNumber(proposalId) & "_Signed_on_" & LocalAPI.GetDateTime().ToString("yyyy-MM-dd_hhmm") & ".pdf"
+            LocalAPI.AzureStorage_Insert(proposalId, "Proposal", 1, PDFfilename, newName, False, "450862", "application/pdf", companyId)
+
             ' Accept Email
-            ProposalAcceptedEmail(proposalId, companyId, pdfUrl)
-            Await pdf.CreateProposalSignedPdfAsync(proposalId, newName)
+            ProposalAcceptedEmail(proposalId, companyId, pdfUrl, JobId)
+            LocalAPI.SiteUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority)
+            Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
+
 
             If JobId > 0 Then
                 NewJobEmail(proposalId, JobId, companyId, pdfUrl)
@@ -258,7 +274,9 @@ Public Class singproposalsign
                 If Len(sProjectManagerEmail) > 0 Then
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, lblCompanyId.Text)
                 End If
-                SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName)
+
+                Dim clientid = LocalAPI.GetJobProperty(JobId, "Client")
+                SendGrid.Email.SendMail(sProjectManagerEmail, sCC, "", sSubject, sBody, companyid, clientid, JobId,,, sProjectManagerEmail, sProjectManagerName)
 
                 Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
                 Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
@@ -297,8 +315,10 @@ Public Class singproposalsign
             If Len(sProjectManagerEmail) > 0 Then
                 sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
             End If
+            Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
+            Dim ClientId = ProposalObject("ClientId")
 
-            SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName)
+            SendGrid.Email.SendMail(sProjectManagerEmail, sCC, sCCO, sSubject, sBody, companyid, ClientId, 0,,, sProjectManagerEmail, sProjectManagerName)
 
             Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
             Dim recipientEmailSent As String = sCC & IIf(Len(sProjectManagerEmail) > 0, "," & sProjectManagerEmail, "")
@@ -324,7 +344,7 @@ Public Class singproposalsign
         End Try
     End Sub
 
-    Private Function ProposalAcceptedEmail(ByVal lProposalId As Integer, ByVal companyid As Integer, PrposalpdfUrl As String) As Boolean
+    Private Function ProposalAcceptedEmail(ByVal lProposalId As Integer, ByVal companyid As Integer, PrposalpdfUrl As String, JobId As Integer) As Boolean
         Try
             Dim ProposalObject = LocalAPI.GetRecord(lProposalId, "ProposalRecord_SELECT")
             Dim sClientEmail As String = ProposalObject("ClientEmail")
@@ -372,7 +392,8 @@ Public Class singproposalsign
                 If Len(sProjectManagerEmail) > 0 Then
                     sProjectManagerName = LocalAPI.GetEmployeeFullName(sProjectManagerEmail, companyid)
                 End If
-                SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid,,, sProjectManagerEmail, sProjectManagerName)
+                Dim ClientId = ProposalObject("ClientId")
+                SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, companyid, ClientId, JobId,,, sProjectManagerEmail, sProjectManagerName)
 
 
                 Dim recipientEmailSent As String = sCC & IIf(Len(sCCO) > 0, "," & sCCO, "")
@@ -415,7 +436,7 @@ Public Class singproposalsign
                     sCCO = LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCCO")
                 End If
 
-                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, lblCompanyId.Text))
+                Task.Run(Function() SendGrid.Email.SendMail(sClientEmail, sCC, sCCO, sSubject, sBody, lblCompanyId.Text, nClientId, 0))
 
                 Dim sProposalURL As String = "https://www.pasconcept.com/e2103445_8a47_49ff_808e_6008c0fe13a1/SingProposalSign.aspx?GuiId=" & LocalAPI.GetProposalProperty(lProposalId, "guid")
                 Dim recipientEmailSent As String = sCC & IIf(Len(sCCO) > 0, "," & sCCO, "")
@@ -453,7 +474,7 @@ Public Class singproposalsign
 
     Public Function ShareDocumentsPanelVisible(IsSharePublicLinks As Integer) As Boolean
         If IsSharePublicLinks = 1 Then
-            Return LocalAPI.IsAzureStorage(lblCompanyId.Text) And LocalAPI.GetAzureFilesCountInProposal(lblProposalId.Text) > 0
+            Return LocalAPI.IsAzureStorage(lblCompanyId.Text) And LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal") > 0
         End If
     End Function
 

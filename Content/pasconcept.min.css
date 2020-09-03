@@ -148,3 +148,22 @@ html .RadOrgChart .rocNodeFields .rocItemField {
 .statuslabel {
     display: inline-block;
 }
+
+.uploadfiles-canvas {
+    width: 100%;
+    min-height: 205px;
+    margin-top: 0;
+    color: #728ea3;
+    border:dashed;
+    border-width:medium ;
+    border-radius: 5px;
+}
+.fileUploadRad {
+    position: absolute !important;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-top: -50px
+}

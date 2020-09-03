@@ -65,10 +65,7 @@ Public Class proposal
                     Session("propsalbackpage") = Request.QueryString("backpage")
                 End If
 
-
-                RadWizardFiles.ActiveStepIndex = 1
-                PanelUpload.Visible = False
-
+                ConfigUploadPanels()
 
             End If
             'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblProposalId.Text
@@ -97,6 +94,32 @@ Public Class proposal
         End Try
     End Sub
 
+    Protected Sub ConfigUploadPanels()
+        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal")
+
+        If ExistingFiles = 0 Then
+            RadWizardStepUpload.Active = True
+            PanelUpload.Visible = True
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = False
+        Else
+            RadWizardStepFiles.Active = True
+            PanelUpload.Visible = False
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = Not RadListViewFiles.Visible
+            RadGridFiles.DataBind()
+            RadListViewFiles.DataBind()
+        End If
+
+        btnGridPage.Visible = Not RadListViewFiles.Visible
+        btnTablePage.Visible = RadListViewFiles.Visible
+
+        If lblCompanyId.Text = 260962 Then
+            ' EEG 10 Mb
+            RadCloudUpload1.MaxFileSize = 10485760
+        End If
+
+    End Sub
     Private Sub EnabledProposal()
         Dim Allow_EditAcceptedProposal As Boolean = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_EditAcceptedProposal")
         If Allow_EditAcceptedProposal Then
@@ -123,37 +146,44 @@ Public Class proposal
     End Sub
 
     Private Sub InitProposal()
-        lblOriginalType.Text = LocalAPI.GetProposalData(lblProposalId.Text, "Proposal.Type")
-        SqlDataSourceProposalType.DataBind()
-        cboProposalType.DataBind()
-        cboProposalType.SelectedValue = lblOriginalType.Text
-        TotalsAnalisis()
+        Try
+            lblOriginalType.Text = LocalAPI.GetProposalData(lblProposalId.Text, "Proposal.Type")
+            SqlDataSourceProposalType.DataBind()
+            cboProposalType.DataBind()
+            cboProposalType.SelectedValue = lblOriginalType.Text
+            TotalsAnalisis()
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Sub
 
     Private Function TotalsAnalisis() As Boolean
-        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
-        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+        Try
+            Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+            Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+            Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
 
-        Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
+            Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
 
-        Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
+            CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(bTotal)
+            CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(bPSTotal)
 
-        CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(bTotal)
-        CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(bPSTotal)
-
-        If bTotal = 0 Then
-            CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It is mandatory that [Proposal Total] is greater than zero !"
-            Return False
-        Else
-            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
-                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+            If bTotal = 0 Then
+                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It is mandatory that [Proposal Total] is greater than zero !"
                 Return False
             Else
-                CType(WStep.FindControl("lblTotalAlert"), Label).Text = ""
-                Return True
+                If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
+                    CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+                    Return False
+                Else
+                    CType(WStep.FindControl("lblTotalAlert"), Label).Text = ""
+                    Return True
+                End If
             End If
-        End If
 
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Function
 
     Private Sub GuardarProposal(bMsg As Boolean)
@@ -207,6 +237,7 @@ Public Class proposal
         If TotalsAnalisis() Then
             GuardarProposal(True)
         Else
+            GuardarProposal(True)
             Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
             Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
             WStep.Active = True
@@ -607,14 +638,14 @@ Public Class proposal
             AzureStorageApi.DeleteFile(tempName)
 
             ' The uploaded files need to be removed from the storage by the control after a certain time.
-            e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
+            e.IsValid = LocalAPI.AzureStorage_Insert(lblProposalId.Text, "Proposal", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
             If e.IsValid Then
-                RadListViewFiles.ClearSelectedItems()
-                RadListViewFiles.DataBind()
-                RadGridFiles.DataBind()
-                RadWizardFiles.ActiveStepIndex = 1
-                PanelUpload.Visible = False
-                Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
+                'RadListViewFiles.ClearSelectedItems()
+                'RadListViewFiles.DataBind()
+                'RadGridFiles.DataBind()
+                'RadWizardFiles.ActiveStepIndex = 1
+                'PanelUpload.Visible = False
+                'Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else
                 Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
                 AzureStorageApi.DeleteFile(newName)
@@ -674,5 +705,8 @@ Public Class proposal
         btnTablePage.Visible = RadListViewFiles.Visible
     End Sub
 
+    Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
+        ConfigUploadPanels()
+    End Sub
 End Class
 

@@ -30,6 +30,15 @@ Public Class clientfiles
                 RadWizardFiles.ActiveStepIndex = 1
             End If
 
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = Not RadListViewFiles.Visible
+            btnGridPage.Visible = Not RadListViewFiles.Visible
+            btnTablePage.Visible = RadListViewFiles.Visible
+
+            If lblCompanyId.Text = 260962 Then
+                ' EEG 10 Mb
+                RadCloudUpload1.MaxFileSize = 10485760
+            End If
 
         End If
         If cboClients.SelectedItem Is Nothing Then
@@ -228,7 +237,7 @@ Public Class clientfiles
 
             ' The uploaded files need to be removed from the storage by the control after a certain time.
             Dim EmployeeId = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
-            e.IsValid = LocalAPI.ClientAzureStorage_Insert(cboClients.SelectedValue, 0, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, EmployeeId, lblCompanyId.Text)
+            e.IsValid = LocalAPI.AzureStorage_Insert(cboClients.SelectedValue, "Clients", cboDocType.SelectedIndex, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
             If e.IsValid Then
                 RadListViewFiles.ClearSelectedItems()
                 RadListViewFiles.DataBind()

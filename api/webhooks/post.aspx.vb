@@ -16,8 +16,8 @@ Public Class post
 
                     Select Case authToken
                         Case "Bearer D1532BCE-BBF3-44BD-88C6-34D4151844B0"
-                            'EmissionRecurrenceEmails
-                            Task.Run(Function() LocalAPI.EmissionRecurrenceEmails())
+                            'Daily Recurrence Tasks
+                            Task.Run(Function() LocalAPI.DailyRecurrenceTasks())
                             Response.StatusCode = 200
                         Case Else
                             Response.StatusCode = 401

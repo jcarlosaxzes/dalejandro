@@ -97,12 +97,13 @@
     </div>
     <div>
         <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true" AllowAutomaticDeletes="True"
-            AllowMultiRowSelection="True" Height="1000px" PageSize="100" AllowPaging="true"
-            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+            AllowMultiRowSelection="True"
+            PageSize="50" AllowPaging="true"
+            Height="850px" RenderMode="Lightweight"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <ClientSettings Selecting-AllowRowSelect="true">
-                <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
-
             <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSource1" DataKeyNames="Id">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
                 <Columns>
@@ -111,7 +112,7 @@
                     </telerik:GridClientSelectColumn>
 
                     <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Payment ID" ReadOnly="True"
-                        HeaderStyle-Width="120px" SortExpression="Id" UniqueName="Id">
+                        HeaderStyle-Width="100px" SortExpression="Id" UniqueName="Id" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridBoundColumn>
 
 
@@ -166,7 +167,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="ClientName" HeaderText="Client (Job) - Notes" UniqueName="ClientName"
+                    <telerik:GridTemplateColumn DataField="ClientName" HeaderText="Client - Job - Notes" UniqueName="ClientName"
                         ItemStyle-HorizontalAlign="Left">
                         <ItemTemplate>
                             <div>
@@ -287,13 +288,13 @@
         <table class="table-sm" style="width: 600px">
             <tr>
                 <td>
-                    <asp:Panel ID="PanelUpload" runat="server" class="DropZone1">
-                        <h4>Select or Drag and Drop files (up to 10Mb)</h4>
+                    <asp:Panel ID="PanelUpload" runat="server" class="uploadfiles-canvas">
                         <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
                             OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
                             MaxFileSize="10145728"
-                            DropZones=".DropZone1">
+                            DropZones=".uploadfiles-canvas">
                         </telerik:RadCloudUpload>
+                        <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>
                     </asp:Panel>
                 </td>
             </tr>
@@ -324,7 +325,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                   <small>Check / Uncheck (selected) payments records as <b>Reconcilied</b> with Bank Statements</small>
+                    <small>Check / Uncheck (selected) payments records as <b>Reconcilied</b> with Bank Statements</small>
                 </td>
             </tr>
             <tr>

@@ -1,0 +1,45 @@
+{
+  "tags": [ "GuidProcessing" ],
+  "properties": [
+    {
+      "type": "SYSTEM",
+      "name": "first_name",
+      "value": "Dionisio"
+    },
+    {
+      "type": "SYSTEM",
+      "name": "last_name",
+      "value": "Lamar"
+    },
+    {
+      "type": "SYSTEM",
+      "name": "email",
+      "value": "f15e03ec-a86a-49d8-bec7-d1b74577a7be"
+    },
+    {
+      "type": "SYSTEM",
+      "name": "Phone",
+      "value": "3052134613"
+    },
+    {
+      "type": "CUSTOM",
+      "name": "clientemail",
+      "value": "deonnyslamar@hotmail.com"
+    },
+    {
+      "type": "CUSTOM",
+      "name": "cell",
+      "value": "3052134613"
+    },
+    {
+      "type": "CUSTOM",
+      "name": "aoremail",
+      "value": "harold@insurancenation.com"
+    },
+    {
+      "type": "CUSTOM",
+      "name": "aorcellular",
+      "value": "8667829597"
+    }
+  ]
+}

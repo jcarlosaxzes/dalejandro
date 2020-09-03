@@ -20,10 +20,6 @@
         RadGrid1.DataBind()
     End Sub
 
-    Private Sub SqlDataSource1_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSource1.Selecting
-        Dim e1 As String = e.Command.Parameters(0).Value
-    End Sub
-
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         RefreshData()
     End Sub

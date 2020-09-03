@@ -120,7 +120,7 @@
 
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="DELETE FROM [Invoices_types] WHERE [Id] = @Id"
+        DeleteCommand="Invoices_types_DELETE" DeleteCommandType="StoredProcedure"
         InsertCommand="INSERT INTO Invoices_types(Name, PaymentsScheduleList, PaymentsTextList, companyId, BillingFrequency) VALUES (@Name, @PaymentsScheduleList, @PaymentsTextList, @companyId, @BillingFrequency)"
         SelectCommand="SELECT [Id],[Name],[PaymentsScheduleList],[PaymentsTextList],[companyId],isnull([BillingFrequency],'') As BillingFrequency FROM [Invoices_types] WHERE companyId=@companyId ORDER BY [Id]"
         UpdateCommand="UPDATE Invoices_types SET Name = @Name, PaymentsScheduleList = @PaymentsScheduleList, PaymentsTextList = @PaymentsTextList, BillingFrequency=@BillingFrequency WHERE (Id = @Id)">

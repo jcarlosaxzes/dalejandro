@@ -86,8 +86,12 @@ Public Class proposalnewwizard
                 Master.PageTitle = "Proposals/New Proposal"
                 'Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-edit-proposal-page.html"
 
-                RadWizardFiles.ActiveStepIndex = 1
-                PanelUpload.Visible = False
+                ConfigUploadPanels()
+
+                RadListViewFiles.Visible = False
+                RadGridFiles.Visible = Not RadListViewFiles.Visible
+                btnGridPage.Visible = Not RadListViewFiles.Visible
+                btnTablePage.Visible = RadListViewFiles.Visible
 
             End If
             RadWindowManagerJob.EnableViewState = False
@@ -98,14 +102,42 @@ Public Class proposalnewwizard
         End Try
     End Sub
 
+    Protected Sub ConfigUploadPanels()
+        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal")
+
+        If ExistingFiles = 0 Then
+            RadWizardStepUpload.Active = True
+            PanelUpload.Visible = True
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = False
+        Else
+            RadWizardStepFiles.Active = True
+            PanelUpload.Visible = False
+            RadListViewFiles.Visible = False
+            RadGridFiles.Visible = Not RadListViewFiles.Visible
+            RadGridFiles.DataBind()
+            RadListViewFiles.DataBind()
+        End If
+
+        btnGridPage.Visible = Not RadListViewFiles.Visible
+        btnTablePage.Visible = RadListViewFiles.Visible
+
+        If lblCompanyId.Text = 260962 Then
+            ' EEG 10 Mb
+            RadCloudUpload1.MaxFileSize = 10485760
+        End If
+
+    End Sub
+
     Private Sub ReadPaymentSchedule()
         cboPaymentSchedules.DataBind()
 
         ' General PS or PS by individual Services Fee(s)
-        Dim GeneralPs = LocalAPI.IsGeneralPS(lblProposalId.Text)
+        Dim GeneralPs As Boolean = LocalAPI.IsGeneralPS(lblProposalId.Text)
 
         If GeneralPs Then
             ' General PS
+            cboPaymentSchedules.DataBind()
             cboPaymentSchedules.SelectedValue = LocalAPI.GetProposalProperty(lblProposalId.Text, "paymentscheduleId")
         Else
             ' PS by individual Services Fee
@@ -173,6 +205,8 @@ Public Class proposalnewwizard
 
 
             ProposalItemsDataBind()
+
+            ReadPaymentSchedule()
 
             Return (lblProposalId.Text > 0)
         Else
@@ -621,14 +655,14 @@ Public Class proposalnewwizard
             AzureStorageApi.DeleteFile(tempName)
 
             ' The uploaded files need to be removed from the storage by the control after a certain time.
-            e.IsValid = LocalAPI.ProposalAzureStorage_Insert(lblProposalId.Text, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
+            e.IsValid = LocalAPI.AzureStorage_Insert(lblProposalId.Text, "Proposal", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
             If e.IsValid Then
-                RadListViewFiles.ClearSelectedItems()
-                RadListViewFiles.DataBind()
-                RadGridFiles.DataBind()
-                RadWizardFiles.ActiveStepIndex = 1
-                PanelUpload.Visible = False
-                Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
+                'RadListViewFiles.ClearSelectedItems()
+                'RadListViewFiles.DataBind()
+                'RadGridFiles.DataBind()
+                'RadWizardFiles.ActiveStepIndex = 1
+                'PanelUpload.Visible = False
+                'Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else
                 Master.ErrorMessage("The file " & e.FileInfo.OriginalFileName & " has been previously loaded!")
                 AzureStorageApi.DeleteFile(newName)
@@ -806,4 +840,7 @@ Public Class proposalnewwizard
         Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")
     End Function
 
+    Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
+        ConfigUploadPanels()
+    End Sub
 End Class

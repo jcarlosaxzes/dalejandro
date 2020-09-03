@@ -13,23 +13,23 @@ Public Class invoice
             If Not Request.QueryString("GuiId") Is Nothing Then
                 Dim guiId As String = Request.QueryString("GuiId")
                 'guiId  ="75ffa08b-e28f-488f-a863-e5d6d41c94ee"
-                lblInvoice.Text = LocalAPI.GetSharedLink_Id(4, guiId)
-                Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoice.Text)
+                lblInvoiceId.Text = LocalAPI.GetSharedLink_Id(4, guiId)
+                Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
                 lblCompanyId.Text = companyId
                 Master.Company = companyId
                 lblInvoiceGuid.Text = guiId
                 Master.Guid = guiId
                 Master.Type = "Invoice"
-                Title = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "InvoiceNumber")
+                Title = LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "InvoiceNumber")
 
                 ' Para navegar en CLIENT PORTAL.....................................
-                Dim JobId As Integer = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "JobId")
+                Dim JobId As Integer = LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "JobId")
                 Session("CLIENTPORTAL_clientId") = LocalAPI.GetJobProperty(JobId, "Client")
 
                 ' PayPal....................................................................................
                 If LocalAPI.IsPayPalModule(companyId) Then
                     ' Get All invoice Data
-                    Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoice.Text)
+                    Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoiceId.Text)
 
 
                     Dim amountDue As Double = invoiceInfo("AmountDue")
@@ -86,7 +86,17 @@ Public Class invoice
                 End If
 
                 ' pnlPayments Visible
-                pnlPayments.Visible = (LocalAPI.GetPaymentsForInvoice(lblInvoice.Text) > 0)
+                pnlPayments.Visible = (LocalAPI.GetPaymentsForInvoice(lblInvoiceId.Text) > 0)
+
+                'Clients_visitslog?
+                ' Visit not from Current session company "False visit"
+                If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> companyId Then
+                    LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblInvoiceId.Text, Request.UserHostAddress())
+                End If
+
+                If Not Request.QueryString("Print") Is Nothing Then
+                    Response.Write("<script>window.print();</script>")
+                End If
 
             End If
         End If
@@ -196,7 +206,7 @@ Public Class invoice
         Try
             pnlError.Visible = False
             ' Get All invoice Data
-            Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoice.Text)
+            Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoiceId.Text)
             ' Get PayPalClientId
             Dim clientId = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "PayPalClientId")
             ' Get PayPalClientSecret
@@ -246,7 +256,7 @@ Public Class invoice
 
     Private Sub SqlDataSourceInvoice_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceInvoice.Inserting
         Try
-            Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoice.Text)
+            Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoiceId.Text)
             e.Command.Parameters(2).Value = LocalAPI.GetDateTime()      'CollectedDate
             e.Command.Parameters(3).Value = 12                          '12: Method PayPal
             e.Command.Parameters(4).Value = invoiceInfo("AmountDue")    'Amount
@@ -277,7 +287,7 @@ Public Class invoice
 
             Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
             If Len(AccountantEmail) > 0 Then
-                Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoice.Text)
+                Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoiceId.Text)
 
                 Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
                 DictValues.Add("[ProjectName]", invoiceInfo("ProjectName"))
@@ -289,8 +299,10 @@ Public Class invoice
 
                 Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Invocie_Payment", lblCompanyId.Text, DictValues)
                 Dim sBody As String = LocalAPI.GetMessageTemplateBody("Invocie_Payment", lblCompanyId.Text, DictValues)
+                Dim clientID = LocalAPI.GetClientIdFromInvoice(lblInvoiceId.Text)
+                Dim jobId = LocalAPI.GetJobIdFromInvoice(lblInvoiceId.Text)
 
-                SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text)
+                SendGrid.Email.SendMail(AccountantEmail, "", "", sSubject, sBody, lblCompanyId.Text, clientID, jobId)
                 SqlDataSourceInvoice.DataBind()
 
             End If

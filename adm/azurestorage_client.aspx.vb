@@ -20,6 +20,11 @@ Public Class azurestorage_client
                 cboPreProject.SelectedValue = Request.QueryString("preprojectId")
             End If
 
+            If lblCompanyId.Text = 260962 Then
+                ' EEG 10 Mb
+                RadCloudUpload1.MaxFileSize = 10485760
+            End If
+
         End If
     End Sub
 
@@ -33,7 +38,7 @@ Public Class azurestorage_client
                 AzureStorageApi.DeleteFile(tempName)
 
                 ' The uploaded files need to be removed from the storage by the control after a certain time.
-                e.IsValid = LocalAPI.ClientAzureStorage_Insert(lblClientId.Text, cboPreProject.SelectedValue, cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblEmployeeId.Text, lblCompanyId.Text)
+                e.IsValid = LocalAPI.AzureStorage_Insert(lblClientId.Text, "Clients", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
                 If e.IsValid Then
                     RadGridAzureFiles.DataBind()
                     Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")

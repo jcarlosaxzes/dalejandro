@@ -163,6 +163,7 @@ Public Class paiddaylist
             LocalAPI.NuevoPaidDay(dDate, lblCompanyId.Text)
         End While
         RadGrid1.DataBind()
+        RadScheduler1.DataBind()
         Master.InfoMessage("Payroll Calendar was Inicialized!!!")
 
     End Sub

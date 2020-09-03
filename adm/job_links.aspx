@@ -13,51 +13,46 @@
                 alert(eventArgs.get_message())
             }
         </script>
-         <style>
-        .card-body {
-            padding: 0.25rem;
-        }
+        <style>
+            .card-body {
+                padding: 0.25rem;
+            }
 
-        .card-header {
-            padding: 0 .50rem;
-        }
+            .card-header {
+                padding: 0 .50rem;
+            }
 
-        img {
-            max-height: 96px;
-            max-width: 200px;
-            height: auto;
-            width: auto;
-        }
+            img {
+                max-height: 96px;
+                max-width: 200px;
+                height: auto;
+                width: auto;
+            }
 
-        .fileUploadRad {
-            position: absolute;
-            margin-top: 80px;
-            width: 100%;
-        }
-    </style>
+        </style>
     </telerik:RadCodeBlock>
 
     <div class="container">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td>
-                   <div class="pas-container" style="width: 100%">
-                            <asp:Panel ID="PanelUpload" runat="server">
-                                            <table onclick="table-sm pasconcept-bar noprint" width="100%">
-                                                <tr>
-                                                    <td style="width: 550px; text-align: right">
-                                                        <asp:LinkButton ID="btnListFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnListFiles_Click">
+                    <div class="pas-container" style="width: 100%">
+                        <asp:Panel ID="PanelUpload" runat="server">
+                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
+                                <tr>
+                                    <td style="width: 550px; text-align: right">
+                                        <asp:LinkButton ID="btnListFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnListFiles_Click">
                                                                <i class="fas fa-align-justify"></i>&nbsp;&nbsp;View Files
-                                                        </asp:LinkButton>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </asp:Panel>
-                        <telerik:RadWizard ID="RadWizardFiles" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" 
+                                        </asp:LinkButton>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
+                        <telerik:RadWizard ID="RadWizardFiles" runat="server" DisplayCancelButton="false" DisplayProgressBar="false"
                             DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationBar="false">
                             <WizardSteps>
                                 <%--Upload Files--%>
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Upload Files" StepType="Step">
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepUpload" Title="Upload Files" StepType="Step">
                                     <asp:Panel ID="UploadPanel" runat="server">
                                         <div style="width: 100%; height: 500px; position: relative">
                                             <table class="table-sm" style="width: 100%; position: absolute; margin-top: 0px; background-color: lightgray;">
@@ -76,25 +71,36 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <table style="width: 100%; position: absolute; margin-top: 40px; background-color: lightgray; height: 100px;">
-                                                <tr>
-                                                    <td style="width: 90%; vertical-align: top;">
-                                                        <h3 class="additional-text">Select Files to Upload</h3>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"
-                                                ProviderType="Azure" MaxFileSize="1048576" CssClass="h-100 fileUploadRad">
-                                            </telerik:RadCloudUpload>
+                                            <div class="uploadfiles-canvas">
+                                                <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
+                                                    <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
+                                                    <br />
+                                                    <span style="font-size: 36px">Drag & Drop Files here, or
+                                                    </span>
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <span style="font-size: 36px">
+                                                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" ProviderType="Azure" MaxFileSize="1048576"
+                                                            OnFileUploaded="RadCloudUpload1_FileUploaded" 
+                                                            CssClass="fileUploadRad" 
+                                                            DropZones=".uploadfiles-canvas,#UploadPanel">
+                                                            <Localization SelectButtonText="Select Files" />
+                                                        </telerik:RadCloudUpload>
+                                                    </span>
+                                                </p>
+                                            </div>
+
+
                                         </div>
                                     </asp:Panel>
                                 </telerik:RadWizardStep>
 
                                 <%--Files--%>
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Files" StepType="Step">
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepFiles" Title="Files" StepType="Step">
                                     <div>
                                         <asp:Panel ID="pnlFind" runat="server">
-                                            <table onclick="table-sm pasconcept-bar noprint" width="100%">
+                                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                                                 <tr>
                                                     <td style="width: 550px; text-align: right">
                                                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click">
@@ -102,7 +108,7 @@
                                                         </asp:LinkButton>
                                                         <asp:LinkButton ID="btnGridPage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click" Visible="false">
                                                                <i class="fas fa-th"></i> Grid
-                                                        </asp:LinkButton>                                                        
+                                                        </asp:LinkButton>
                                                         <asp:LinkButton ID="btnUploadFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" OnClick="btnUploadFiles_Click">
                                                                <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp; Uploads
                                                         </asp:LinkButton>
@@ -132,47 +138,46 @@
                                                                 <i class="far fa-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                                                         </asp:LinkButton>
 
-                                                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;" title="<%# Eval("Name")%> "> <%# LocalAPI.TruncateString(Eval("Name"), 20)%> </b>
+                                                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;" title="<%# Eval("Name")%> "><%# LocalAPI.TruncateString(Eval("Name"), 20)%> </b>
 
                                                         <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Update">
                                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
                                                         </asp:LinkButton>
                                                     </div>
-                                                    <div class="card-body">
+                                                    <div class="card-body" style="padding: 0px; margin-top: -6px;">
                                                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
-                                                                <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
-                                                                    <tr>
-                                                                        <td style="height:108px">
-                                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
-                                                                        </td>
-                                                                    </tr>                                
-                                                                    <tr>
-                                                                        <td style="font-size:12px; padding-top:5px;padding-bottom: 0px;">
-                                                                           <%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="font-size:12px;padding: 0;">
-                                                                             <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
+                                                            <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
+                                                                <tr>
+                                                                    <td style="height: 108px; padding: 0px;">
+                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-size: 12px; padding-top: 5px; padding-bottom: 0px;">
+                                                                        <%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-size: 12px; padding: 0;">
+                                                                        <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
                                                                              <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
-                                                                        </td>
-                                                                    </tr>                                 
-                                                                    <tr>
-                                                                        <td style="font-size:12px;padding: 0;">
-                                                                           Type:   <%# Eval("nType")%>
-                                                                        </td>
-                                                                    </tr> 
-                                                                    <tr>
-                                                                        <td style="font-size:12px;padding: 0;">
-                                                                         <%#IIf(Eval("Public"), "Public", "Private") %>
-                                                            
-                                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>                                                            
-                                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False"  Text='<%# Eval("Type") %>'></asp:Label>                                                           
-                                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False"  Text='<%# Eval("Name") %>'></asp:Label>
-                                                                        </td>
-                                                                    </tr>
-                               
-                                                                </table>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-size: 12px; padding: 0;">Type:   <%# Eval("nType")%>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-size: 12px; padding: 0;">
+                                                                        <%#IIf(Eval("Public"), "Public", "Private") %>
+
+                                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>
+                                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False" Text='<%# Eval("Type") %>'></asp:Label>
+                                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False" Text='<%# Eval("Name") %>'></asp:Label>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </table>
                                                         </asp:LinkButton>
 
                                                     </div>
@@ -186,18 +191,18 @@
                                                             <i class="fa fa-check-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
                                                         </asp:LinkButton>
 
-                                                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;" title="<%# Eval("Name")%> "> <%# LocalAPI.TruncateString(Eval("Name"), 20)%> </b>
+                                                        <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;" title="<%# Eval("Name")%> "><%# LocalAPI.TruncateString(Eval("Name"), 20)%> </b>
 
                                                         <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Update">
                                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
                                                         </asp:LinkButton>
                                                     </div>
-                                                    <div class="card-body">
+                                                    <div class="card-body" style="padding: 0px; margin-top: -6px;">
                                                         <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
                                                             <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                                 <tr>
-                                                                    <td style="height: 108px">
-                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"))%>
+                                                                    <td style="height: 108px; padding: 0px;">
+                                                                        <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -219,10 +224,10 @@
                                                                 <tr>
                                                                     <td style="font-size: 12px; padding: 0;">
                                                                         <%#IIf(Eval("Public"), "Public", "Private") %>
-                                                            
-                                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Type") %>'></asp:Label>                                                            
-                                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False"  Text='<%# Eval("Name") %>'></asp:Label>                                                           
-                                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False"  Text='<%# Eval("Name") %>'></asp:Label>
+
+                                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Type") %>'></asp:Label>
+                                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False" Text='<%# Eval("Name") %>'></asp:Label>
+                                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False" Text='<%# Eval("Name") %>'></asp:Label>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -244,12 +249,12 @@
                                                     <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
                                                     </telerik:GridBoundColumn>
 
-                                                    <telerik:GridTemplateColumn DataField="Name" HeaderText="Name" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
+                                                    <telerik:GridTemplateColumn DataField="Name" HeaderText="FileName" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
                                                         HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="btnDownload" runat="server" CommandName="EditForm" CommandArgument='<%# Eval("Id") %>'
-                                                                Text='<%# Eval("Name")%>' ToolTip="Click to Download ">
-                                                            </asp:LinkButton>
+                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                                            &nbsp;&nbsp;
+                                                            <%# Eval("Name")%>
                                                         </ItemTemplate>
                                                     </telerik:GridTemplateColumn>
 
@@ -305,9 +310,9 @@
                                                                         <asp:LinkButton ID="btnDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit">
                                                                             <span class="fas fa-trash"></span>
                                                                         </asp:LinkButton>
-                                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>                                                            
-                                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False"  Text='<%# Eval("Type") %>'></asp:Label>                                                           
-                                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False"  Text='<%# Eval("Name") %>'></asp:Label>
+                                                                        <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>
+                                                                        <asp:Label ID="lblTypeHide" runat="server" Visible="False" Text='<%# Eval("Type") %>'></asp:Label>
+                                                                        <asp:Label ID="lblNameHide" runat="server" Visible="False" Text='<%# Eval("Name") %>'></asp:Label>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -357,7 +362,7 @@
                         <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceLinks"
                             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                             <Columns>
-                                <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="" HeaderStyle-Width="50px" UniqueName="EditCommandColumn">
+                                <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="" HeaderStyle-Width="40px" UniqueName="EditCommandColumn">
                                 </telerik:GridEditCommandColumn>
                                 <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID" ReadOnly="True"
                                     SortExpression="Id" UniqueName="Id" Display="False">
@@ -368,27 +373,26 @@
                                         <telerik:RadTextBox ID="TitleTextBox" runat="server" Text='<%# Bind("Title") %>' MaxLength="80"></telerik:RadTextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <telerik:RadButton ID="btnLink" ButtonType="LinkButton" runat="server" Text='<%# Eval("Title")%>' NavigateUrl='<%# Eval("link")%>' ToolTip='<%# Eval("link")%>' Target="_blank">
-                                        </telerik:RadButton>
-                                        <br />
-                                        <asp:Label ID="linkLabel" runat="server" Text='<%# Eval("Descripciption")%>' CssClass="Pequena"></asp:Label>
+                                        <a href='<%# Eval("link")%>' target="_blank"><%# Eval("Title")%></a>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="Descripciption" FilterControlAltText="Filter Descripciption column" Display="false"
+                                <telerik:GridTemplateColumn DataField="Descripciption" FilterControlAltText="Filter Descripciption column"
                                     HeaderText="Description" SortExpression="Descripciption" UniqueName="Descripciption" HeaderStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <%# Eval("Descripciption")%>
+                                    </ItemTemplate>
                                     <EditItemTemplate>
                                         <telerik:RadTextBox ID="DescripciptionTextBox" runat="server" Rows="3" Text='<%# Bind("Descripciption") %>' Width="600px" MaxLength="1024"></telerik:RadTextBox>
                                     </EditItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="Link" FilterControlAltText="Filter Link column"
-                                    HeaderText="Link (url)" SortExpression="Link" UniqueName="Link" HeaderStyle-HorizontalAlign="Center" Display="false">
+                                <telerik:GridTemplateColumn DataField="Link" FilterControlAltText="Filter Link column" Display="false"
+                                    HeaderText="Link (url)" SortExpression="Link" UniqueName="Link" HeaderStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <%# Eval("Link")%>
+                                    </ItemTemplate>
                                     <EditItemTemplate>
                                         <telerik:RadTextBox ID="LinkTextBox" runat="server" Text='<%# Bind("Link") %>' Width="600px" MaxLength="256"></telerik:RadTextBox>
                                     </EditItemTemplate>
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink11" runat="server" Target="_blank" Text='<%# Eval("Link") %>'
-                                            NavigateUrl='<%# Eval("Link") %>'></asp:HyperLink>
-                                    </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this link?"
                                     ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
@@ -421,7 +425,7 @@
         </Windows>
     </telerik:RadWindowManager>
 
-    
+
     <telerik:RadToolTip ID="RadToolTipBulkEdit" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
         <table class="table table-bordered" style="width: 500px">
@@ -537,7 +541,7 @@
     <asp:Label ID="lblJobId" runat="server" Visible="false" Text="0"></asp:Label>
     <asp:Label ID="lblClientId" runat="server" Visible="false" Text="0"></asp:Label>
     <asp:Label ID="lblproposalId" runat="server" Visible="false" Text="0"></asp:Label>
-    <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>        
+    <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedName" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedSource" runat="server" Visible="False"></asp:Label>

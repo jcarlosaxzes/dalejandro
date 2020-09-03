@@ -59,6 +59,24 @@ Partial Public Class leads
     Protected WithEvents txtCity As Global.Telerik.Web.UI.RadTextBox
     
     '''<summary>
+    '''cboOnOff control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboOnOff As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''txtFind control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
+    
+    '''<summary>
     '''txtTags control.
     '''</summary>
     '''<remarks>
@@ -95,6 +113,15 @@ Partial Public Class leads
     Protected WithEvents cboSource As Global.Telerik.Web.UI.RadComboBox
     
     '''<summary>
+    '''cboInAgile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboInAgile As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''btnFind control.
     '''</summary>
     '''<remarks>
@@ -113,6 +140,15 @@ Partial Public Class leads
     Protected WithEvents btnBulkTag As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''btnImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnImport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''btnExport control.
     '''</summary>
     '''<remarks>
@@ -120,6 +156,15 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnAgile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAgile As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadGrid1 control.
@@ -138,6 +183,15 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipExport As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
+    '''lblExportTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblExportTitle As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtExportTag control.
@@ -210,6 +264,51 @@ Partial Public Class leads
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdateContact As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''RadToolTipImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipImport As Global.Telerik.Web.UI.RadToolTip
+    
+    '''<summary>
+    '''cboSourceImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboSourceImport As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''RadUpload1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadUpload1 As Global.Telerik.Web.UI.RadAsyncUpload
+    
+    '''<summary>
+    '''btnConfirmImport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirmImport As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''Comparevalidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator2 As Global.System.Web.UI.WebControls.CompareValidator
     
     '''<summary>
     '''SqlDataSource1 control.

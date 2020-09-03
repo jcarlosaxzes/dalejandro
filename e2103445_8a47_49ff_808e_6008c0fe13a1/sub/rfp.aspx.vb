@@ -85,7 +85,13 @@
                 'sCCO = LocalAPI.GetCompanyProperty(companyid, "webEmailProfitWarningCCO")
             End If
 
-            SendGrid.Email.SendMail(RFPObject("SenderEmail"), RFPObject("SubConsultanstEmail"), "", sSubject, sBody, lblCompanyId.Text, RFPObject("SubConsultanstEmail"), RFPObject("SubconsultantName"), RFPObject("SubConsultanstEmail"))
+            Dim jobId = LocalAPI.GetRFPProperty(rfpId, "jobId")
+            Dim clientId = "0"
+            If Not String.IsNullOrEmpty(jobId) Then
+                clientId = LocalAPI.GetJobProperty(jobId, "Client")
+            End If
+
+            SendGrid.Email.SendMail(RFPObject("SenderEmail"), RFPObject("SubConsultanstEmail"), "", sSubject, sBody, lblCompanyId.Text, clientId, jobId, RFPObject("SubConsultanstEmail"), RFPObject("SubconsultantName"), RFPObject("SubConsultanstEmail"))
             Return True
 
         Catch ex As Exception

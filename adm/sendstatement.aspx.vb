@@ -73,7 +73,8 @@
                     AccountantEmail = AccountantEmail
                 End If
 
-                If SendGrid.Email.SendMail(txtTo.Text, txtCC.Text, AccountantEmail, txtSubject.Text, txtBody.Content, lblCompanyId.Text,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay) Then
+                Dim clientId As Integer = LocalAPI.GetStatementProperty(lblStatementId.Text, "clientId")
+                If SendGrid.Email.SendMail(txtTo.Text, txtCC.Text, AccountantEmail, txtSubject.Text, txtBody.Content, lblCompanyId.Text, clientId, 0,, SenderDisplay, lblEmployeeEmail.Text, SenderDisplay) Then
                     lblMailResult.Text = "Statement successfully sent"
 
                     btnEnviar.Enabled = False

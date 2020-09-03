@@ -1,0 +1,57 @@
+{
+  "tags": [ "TEST" ],
+  "properties": [
+    {
+      "type": "SYSTEM",
+      "name": "email",
+      "value": "admin@dignitastechnologies.com"
+    },
+    {
+      "type": "SYSTEM",
+      "name": "first_name",
+      "value": "ELIZABETH BURCH"
+    },
+    {
+      "type": "SYSTEM",
+      "name": "last_name",
+      "value": ""
+    },
+    {
+      "type": "SYSTEM",
+      "name": "company",
+      "value": "Dignitas Technologies, LLC"
+    },
+    {
+      "type": "SYSTEM",
+      "name": "phone",
+      "value": "407-601-7847"
+    },
+    {
+      "type": "SYSTEM",
+      "name": "website",
+      "value": ""
+    },
+    {
+      "type": "SYSTEM",
+      "name": "title",
+      "value": ""
+    },
+    {
+      "type": "SYSTEM",
+      "name": "address",
+      "value": {
+        "address": "3626 Quadrangle Blvd Ste 100",
+        "city": "",
+        "state": "FL",
+        "zip": "32817-8360",
+        "country": "US",
+        "countryname": "United States"
+      }
+    },
+    {
+      "type": "CUSTOM",
+      "name": "Source",
+      "value": "SBA Capability Statements"
+    }
+  ]
+}

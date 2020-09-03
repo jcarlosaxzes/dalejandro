@@ -16,6 +16,7 @@
             <telerik:AjaxSetting AjaxControlID="btnUpdateJobStatus">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
 
@@ -48,6 +49,7 @@
             <telerik:AjaxSetting AjaxControlID="btnApplyStatus">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                     <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnNew">
@@ -134,13 +136,18 @@
                     border-radius: 20px;
                 }
 
-            .RadComboBox_Material .rcbInner {
-                padding: 4px 20px 4px 4px;
-            }
 
             .table-sm td, .table-sm th {
                 padding-top: .05rem;
                 padding-bottom: .05rem;
+            }
+            /*Job Action Buttom*/
+            .RadComboBox_Material .rcbInner {
+                padding: 4px 20px 4px 4px;
+            }
+
+            .rcbActionButton {
+                padding-top: 0 !important;
             }
         </style>
     </telerik:RadCodeBlock>
@@ -157,7 +164,7 @@
             </button>
 
             <span id="spanViewSummary" runat="server">
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
                     View Summary
                 </button>
             </span>
@@ -175,7 +182,7 @@
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
-            <table class="table-sm" style="width: 100%">
+            <table style="width: 100%; border-collapse: separate; border-spacing: 3px;">
                 <tr>
                     <td style="width: 200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
@@ -290,42 +297,45 @@
         </asp:Panel>
 
     </div>
-    <div runat="server" id="panelSubbar" class="pasconcept-subbar" visible="false">
+    <div runat="server" id="panelSubbar" class="pasconcept-bar" visible="false">
+        <table style="width:100%">
+            <tr>
+                <td style="width:180px">
+                    <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
+                        Width="100%" DataTextField="Name" DataValueField="Id" Height="200px" AppendDataBoundItems="true" RenderMode="Lightweight">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Bulk Status Update)" Value="-1" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+                <td>
+                    <asp:LinkButton ID="btnApplyStatus" runat="server" UseSubmitBehavior="false" CssClass="btn btn-primary btn-sm" ToolTip="Apply selected status to selected records">
+                          Update Status
+                    </asp:LinkButton>
+                </td>
+                <td style="text-align:right">
+                    <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
+                                                    <i class="fas fa-print" style="padding-right:10px"></i>
+                    </asp:LinkButton>
 
-        <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
-            Width="175px" DataTextField="Name" DataValueField="Id" Height="200px" AppendDataBoundItems="true" Font-Size="Small">
-            <Items>
-                <telerik:RadComboBoxItem runat="server" Text="(Bulk Status Update)" Value="-1" />
-            </Items>
-        </telerik:RadComboBox>
-        <asp:LinkButton ID="btnApplyStatus" runat="server" UseSubmitBehavior="false" CssClass="btn btn-primary btn-sm" ToolTip="Apply selected status to selected records">
-              Update Status
-        </asp:LinkButton>
-
-        <span style="float: right; vertical-align: middle; padding-top: 3px">
-
-            <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
-                                            <i class="fas fa-print" style="padding-right:10px"></i>
-            </asp:LinkButton>
-
-            <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Share">
-            <i class="fas fa-eye" style="padding-right:10px"></i>
-            </asp:LinkButton>
-
-
-            <asp:LinkButton ID="btnCopyF" runat="server" UseSubmitBehavior="false" ToolTip="Copy/Save Filter combinations">
-                                        <i class="far fa-copy" style="padding-right:10px"></i> 
-            </asp:LinkButton>
-
-            <asp:LinkButton ID="btnPasteF" runat="server" UseSubmitBehavior="false" ToolTip="Get Paste/Shared Filter combinations">
-                                        <i class="fas fa-paste" style="padding-right:10px"></i>
-            </asp:LinkButton>
-            <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
-            <i class="far fa-share-square" style="padding-right:10px"></i>
-            </asp:LinkButton>
-        </span>
+                    <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Stop hiding clients Filter">
+                    <i class="fas fa-eye" style="padding-right:10px"></i>
+                    </asp:LinkButton>
 
 
+                    <asp:LinkButton ID="btnCopyF" runat="server" UseSubmitBehavior="false" ToolTip="Copy/Save Filter combinations">
+                                                <i class="far fa-copy" style="padding-right:10px"></i> 
+                    </asp:LinkButton>
+
+                    <asp:LinkButton ID="btnPasteF" runat="server" UseSubmitBehavior="false" ToolTip="Get Paste/Shared Filter combinations">
+                                                <i class="fas fa-paste" style="padding-right:10px"></i>
+                    </asp:LinkButton>
+                    <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
+                    <i class="far fa-share-square" style="padding-right:10px"></i>
+                    </asp:LinkButton>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="collapse" id="collapseSummary">
@@ -352,7 +362,7 @@
                     <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
                 <td></td>
-                <td style="width: 14%; text-align: center; background-color:  #546e7a;">
+                <td style="width: 14%; text-align: center; background-color: #546e7a;">
                     <span class="DashboardFont2">Balance</span><br />
                     <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text="$0.00"></asp:Label>
                 </td>
@@ -370,9 +380,9 @@
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
-                    PageSize="50" AllowPaging="true" Height="1500px" RenderMode="Auto"
+                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight" BorderStyle="None"
                     AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
-                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" 
+                    HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                     FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
                     <ClientSettings Selecting-AllowRowSelect="true">
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -382,19 +392,159 @@
                         <Columns>
                             <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn" Visible="false">
                             </telerik:GridClientSelectColumn>
-                            <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="10px">
+                            <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="20px">
                             </telerik:GridBoundColumn>
 
                             <telerik:GridTemplateColumn DataField="Code" UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code" ItemStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Info" CommandName="View/Edit Info" UseSubmitBehavior="false" Font-Bold="true">
-                                            <%#Eval("Code")%> 
+                                                <%#Eval("Code")%> 
                                     </asp:LinkButton>
-                                    <span style="float: right; vertical-align: middle; margin:0">
-                                        <telerik:RadComboBox ID="cboActions" runat="server" Font-Size="Small" Width="30px" OnSelectedIndexChanged="cboActions_SelectedIndexChanged" AutoPostBack="true" RenderMode="Lightweight" AppendDataBoundItems="true"
-                                            DropDownAutoWidth="Enabled" Skin="Material">
-                                        </telerik:RadComboBox>
-                                    </span>
+                                    <div style="float: right; vertical-align: top; margin: 0;">
+
+                                        <%--Three Point Action Menu--%>
+                                        <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-v"></i>
+                                        </asp:HyperLink>
+
+                                        <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
+                                            RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                            Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                            HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
+
+                                            <table class="table-borderless" style="width: 200px; font-size: medium">
+                                                <tr>
+                                                    <td>
+
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Info" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Job
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
+                                                            <i class="fas fa-dollar-sign"></i>&nbsp;&nbsp;&nbsp;View/Edit Billing
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible="false">
+                                                            <i class="fas fa-user-alt"></i>&nbsp;&nbsp;View/Edit Employees
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal(s)" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
+                                                            View/Edit Proposals
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Expenses" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
+                                                            View/Edit Expenses
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton6" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Notes" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            View/Edit Notes
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton7" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
+                                                            View/Edit Time Entries
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton14" runat="server" UseSubmitBehavior="false" CommandName="Add Time" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-user-clock"></i>&nbsp;&nbsp;Add Time
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton8" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Files" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;View/Edit Files
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton9" runat="server" UseSubmitBehavior="false" CommandName="View Schedule" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;View Schedule
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton10" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Revisions" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            View/Edit Revisions
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton11" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Transmittals" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
+                                                            Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
+                                                            View/Edit Transmittals
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton12" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            Update Status
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank">
+                                                            <i class="fas fa-th-list"></i>&nbsp;&nbsp; Scope of Work Print View
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton15" runat="server" UseSubmitBehavior="false" CommandName="Hide Client" CommandArgument='<%# Eval("ClientID")%>' CssClass="dropdown-item" Visible='<%# lblCompanyId.Text = 260962 %>'>
+                                                            <i class="fas fa-eye-slash"></i>&nbsp;&nbsp; Hide Client
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </telerik:RadToolTip>
+
+                                    </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Open_date" HeaderText="Date" UniqueName="Open_date" HeaderStyle-Width="100px" SortExpression="Open_date" ItemStyle-HorizontalAlign="Center">
@@ -403,7 +553,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type" SortExpression="Job" UniqueName="Job">
+                            <telerik:GridTemplateColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job Name - Type - Client" SortExpression="Job" UniqueName="Job">
                                 <ItemTemplate>
                                     <asp:HyperLink ID="hlkLocation" runat="server" NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
                                         ToolTip='<%# String.Concat("Click to view [", Eval("ProjectLocation"), "] in Google Maps")%>' Target="_blank">
@@ -423,22 +573,17 @@
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </a>
-                                    <div><%# Eval("JobType") %></div>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn DataField="ClientName" FilterControlAltText="Filter Job column" HeaderText="Client - Company" SortExpression="ClientName" UniqueName="ClientName">
-                                <ItemTemplate>
-                                    <asp:Label ID="InitialsLabel" runat="server" Text='<%# Eval("ClientName") %>' Font-Bold="true"></asp:Label>
+                                    <%# Eval("JobType") %>
                                     <br />
-                                    <%# Eval("Company") %>
+                                    <asp:HyperLink ID="InitialsLabel" runat="server" NavigateUrl="javascript:void(0);"><%# Eval("ClientandCompany") %></asp:HyperLink>
                                     <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
-                                        Position="BottomCenter" RenderInPageRoot="true" Modal="True" Title="" ShowEvent="OnClick"
+                                        RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                        Position="BottomCenter" Modal="True" Title="" ShowEvent="OnClick"
                                         HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
                                         <table class="table-sm">
                                             <tr>
                                                 <td colspan="2">
-                                                    <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("ClientID") %>'
+                                                    <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("Id") %>'
                                                         CommandName="View/Edit Client Profile" Text='<%# Eval("ClientName")%>' UseSubmitBehavior="false" Font-Size="Medium"
                                                         CssClass="badge badge-info ">
                                                     </asp:LinkButton>
@@ -492,7 +637,7 @@
                             </telerik:GridTemplateColumn>
 
                             <%--Collected - Used--%>
-                            <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected - Used" SortExpression="Profit"
+                            <telerik:GridTemplateColumn DataField="Profit" HeaderText="Collected - Used" SortExpression="Profit" HeaderStyle-Width="220px"
                                 UniqueName="Profit" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Budget Collected / Budget Used" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
@@ -544,46 +689,51 @@
 
                             <%--Status--%>
                             <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" ItemStyle-HorizontalAlign="Center"
-                                UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="140px">
+                                UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="150px">
                                 <ItemTemplate>
-                                    <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; width: 120px"><%# Eval("Status") %></div>
+
+                                    <asp:LinkButton ID="lnkUpdateStatus" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id") %>' >
+                                        <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; width: 120px"><%# Eval("Status") %></div>
+                                    </asp:LinkButton>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
                             <%--Private Mode--%>
                             <telerik:GridTemplateColumn DataField="Budget" HeaderText="Budget Used" SortExpression="Budget" Display="false"
                                 UniqueName="Budget" HeaderTooltip="Budget Used of Budget"
-                                 Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
+                                Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="160px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
-                                            <td style="width: 45%; text-align: right">
-                                                
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Bold="true" ToolTip="Budget Used"></asp:Label>
+                                            <td style="width: 47%; text-align: right">
+
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Size="12px" ToolTip="Budget Used"></asp:Label>
                                             </td>
-                                            <td style="width: 5%; text-align: center">of
+                                            <td style=" text-align: center">of
                                             </td>
-                                            <td style="text-align: right">
-                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Bold="true" ToolTip="Job Budget" ></asp:Label>
+                                            <td style="width: 47%;text-align: right">
+                                                <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Size="12px" ToolTip="Job Budget"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right;font-size:x-small">
+                                            <td style="text-align: right; font-size: x-small">
                                                 <%# Eval("Profit", "{0:N0}")%>%
                                             </td>
                                             <td colspan="2">
-                                                <telerik:RadProgressBar ID="RadProgressBar96" runat="server"
-                                                    RenderMode="Lightweight"
-                                                    Height="8px" ShowLabel="false"
-                                                    BarType="Value"
-                                                    Skin="Material"
-                                                    MaxValue="100"
-                                                    ToolTip="Budget Used"
-                                                    Value='<%# Eval("Profit")%>'
-                                                    Width="100%"
-                                                    CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
-                                                    <AnimationSettings Duration="0" />
-                                                </telerik:RadProgressBar>
+                                                <asp:LinkButton ID="lnkTime" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Time Entries" CommandArgument='<%# Eval("Id") %>' Enabled='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
+                                                    <telerik:RadProgressBar ID="RadProgressBar96" runat="server"
+                                                        RenderMode="Lightweight"
+                                                        Height="8px" ShowLabel="false"
+                                                        BarType="Value"
+                                                        Skin="Material"
+                                                        MaxValue="100"
+                                                        ToolTip="Budget Used. Click to View/Edit Time Entries"
+                                                        Value='<%# Eval("Profit")%>'
+                                                        Width="100%"
+                                                        CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
+                                                        <AnimationSettings Duration="0" />
+                                                    </telerik:RadProgressBar>
+                                                </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
@@ -591,36 +741,38 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Collected" Display="false" HeaderText="Billing Collected" SortExpression="Collected" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Collected" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="140px">
+                                UniqueName="Collected" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="160px">
                                 <ItemTemplate>
                                     <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
                                         <tr>
                                             <td style="width: 45%; text-align: right">
-                                                <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoices Collected" Font-Bold="true"></asp:Label>
+                                                <asp:Label ID="lblCollected" runat="server" Text='<%# Eval("Collected", "{0:C0}")%>' ToolTip="Total Invoices Collected" Font-Size="12px"></asp:Label>
                                             </td>
                                             <td style="width: 5%; text-align: center">of
                                             </td>
                                             <td style="text-align: right">
-                                                <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("AmountBilled", "{0:C0}")%>' ToolTip="Total Invoice Billed" Font-Bold="true"></asp:Label>
+                                                <asp:Label ID="lblJobBilledAmount" runat="server" Text='<%# Eval("AmountBilled", "{0:C0}")%>' ToolTip="Total Invoice Billed" Font-Size="12px"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right;font-size:x-small">
+                                            <td style="text-align: right; font-size: x-small">
                                                 <asp:Label ID="lblColectedPercent" runat="server" Text='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'></asp:Label>%    
                                             </td>
                                             <td colspan="2">
-                                                <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px"
-                                                    RenderMode="Lightweight"
-                                                    Height="8px"
-                                                    ShowLabel="false"
-                                                    BarType="Percent"
-                                                    Skin="Bootstrap"
-                                                    ToolTip="Budget Collected"
-                                                    MaxValue="100"
-                                                    Value='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'
-                                                    Width="100%">
-                                                    <AnimationSettings Duration="0" />
-                                                </telerik:RadProgressBar>
+                                                <asp:LinkButton ID="lnkBilling" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Billing" CommandArgument='<%# Eval("Id") %>' Enabled='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
+                                                    <telerik:RadProgressBar ID="RadProgressBar88" runat="server" Font-Size="10px"
+                                                        RenderMode="Lightweight"
+                                                        Height="8px"
+                                                        ShowLabel="false"
+                                                        BarType="Percent"
+                                                        Skin="Bootstrap"
+                                                        ToolTip="Budget Collected. Click to View/Edit Billing"
+                                                        MaxValue="100"
+                                                        Value='<%# GetCollectedPercent(Eval("Budget"), Eval("Collected")) %>'
+                                                        Width="100%">
+                                                        <AnimationSettings Duration="0" />
+                                                    </telerik:RadProgressBar>
+                                                </asp:LinkButton>
                                             </td>
                                         </tr>
                                     </table>
@@ -628,20 +780,12 @@
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridTemplateColumn DataField="Balance" Display="false" HeaderText="Balance" SortExpression="Balance" ItemStyle-HorizontalAlign="Right"
-                                UniqueName="Balance" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px" ItemStyle-Font-Size="">
+                                UniqueName="Balance" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px">
                                 <ItemTemplate>
-                                    <table style="width: 100%; padding: 0 !important; margin: 0 !important; border-spacing: 0 !important">
-                                        <tr>
-                                            <td style="width: 32px; text-align: left">
-                                                <asp:Label ID="lblBalanceSymbol" runat="server">
+                                    <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Size="12px"></asp:Label>
+                                    <asp:Label ID="lblBalanceSymbol" runat="server">
                                                     <i class="fas fa-circle"></i>
-                                                </asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lblBalance" runat="server" Text='<%# Eval("Balance", "{0:C0}")%>' ToolTip="Total Billed - Collected" Font-Bold="true"></asp:Label>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    </asp:Label>
 
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
@@ -649,7 +793,7 @@
                             <telerik:GridTemplateColumn DataField="SubFees" Display="false" HeaderText="Sub Fee(s)" SortExpression="SubFees" ItemStyle-HorizontalAlign="Right"
                                 UniqueName="SubFees" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" HeaderStyle-Width="100px">
                                 <ItemTemplate>
-                                    <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubFees", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Bold="true"></asp:Label>
+                                    <asp:Label ID="lblSubFee" runat="server" Text='<%# Eval("SubFees", "{0:C0}")%>' ToolTip="Total Subconsultant Fees" Font-Size="12px"></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 

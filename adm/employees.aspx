@@ -3,6 +3,12 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <style>
+        .table-sm td, .table-sm th {
+            padding-top: .05rem;
+            padding-bottom: .05rem;
+        }
+    </style>
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
@@ -68,7 +74,7 @@
                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="width: 150px;text-align:right">
+                    <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                                 <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -90,9 +96,10 @@
                             }
                         </script>
                     </telerik:RadCodeBlock>
-                    <telerik:RadGrid ID="RadGrid1" runat="server" AllowPaging="True" CellSpacing="0" RenderMode="Auto" Skin="Bootstrap"
+                    <telerik:RadGrid ID="RadGrid1" runat="server" AllowPaging="True" CellSpacing="0" RenderMode="Auto"
                         DataSourceID="SqlDataSource1" GridLines="None" AllowAutomaticDeletes="True"
-                        AllowSorting="True" AutoGenerateColumns="False" Culture="en-US" PageSize="10" HeaderStyle-Font-Size="Small">
+                        AllowSorting="True" AutoGenerateColumns="False" Culture="en-US" PageSize="10"
+                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" ShowFooter="True" EditMode="PopUp">
                             <PagerStyle Mode="Slider" AlwaysVisible="false" />
                             <Columns>
@@ -108,7 +115,7 @@
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
                                 <telerik:GridTemplateColumn Aggregate="Count" DataField="Name" FilterControlAltText="Filter Name column"
-                                    FooterAggregateFormatString="{0:N0}" HeaderText="Name|Position <br/> Email" SortExpression="Name" ReadOnly="true"
+                                    FooterAggregateFormatString="{0:N0}" HeaderText="Name - Position - Email" SortExpression="Name" ReadOnly="true"
                                     UniqueName="Name" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <div>
@@ -137,7 +144,7 @@
                                         <%# Eval("Department")%>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="PrjNumber" HeaderText="# Prjs." SortExpression="PrjNumber" UniqueName="PrjNumber"
+                                <telerik:GridTemplateColumn DataField="PrjNumber" HeaderText="Jobs" SortExpression="PrjNumber" UniqueName="PrjNumber"
                                     ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="90px">
                                     <ItemTemplate>
                                         <%# Eval("PrjNumber", "{0:N0}")%>
@@ -149,60 +156,59 @@
                                         <%# Eval("ParentID")%>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="EmployeeTimeLast30days" HeaderText="Hours_30d" SortExpression="EmployeeTimeLast30days" UniqueName="EmployeeTimeLast30days"
+                                <telerik:GridTemplateColumn DataField="EmployeeTimeLast30days" HeaderText="Hours" SortExpression="EmployeeTimeLast30days" UniqueName="EmployeeTimeLast30days"
                                     ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="90px" HeaderTooltip="Hours in Timesheet Last 30 days">
                                     <ItemTemplate>
                                         <%# Eval("EmployeeTimeLast30days", "{0:N0}")%>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="Benefits_vacations" FilterControlAltText="Filter Benefits_vacations column"
-                                    HeaderText="Vacs | Used | Bal </br>Pers | Used | Bal" SortExpression="Benefits_vacations" HeaderStyle-Width="160px" UniqueName="Benefits_vacations" HeaderStyle-HorizontalAlign="Center">
+                                <telerik:GridTemplateColumn DataField="Benefits_vacations" HeaderTooltip="Vacs | Used | Bal / Pers | Used | Bal"
+                                    HeaderText="Benefits" SortExpression="Benefits_vacations" HeaderStyle-Width="160px" UniqueName="Benefits_vacations" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
-                                        <table style="width: 100%">
+                                        <table class="table table-borderless" style="width: 100%; margin-top: 10px">
                                             <tr>
                                                 <td style="width: 33%; text-align: center">
-                                                    <small><%# Eval("Benefits_vacations")%></small>
+                                                    <span title="Vacations"><%# Eval("Benefits_vacations")%></span>
                                                 </td>
                                                 <td style="width: 33%; text-align: center">
-                                                    <small><%# Eval("used_vacations")%></small>
+                                                    <span title="Vacations Used"><%# Eval("used_vacations")%></span>
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <small><%# Eval("vacations_balance")%></small>
+                                                    <span title="Vacations Pending"><%# Eval("vacations_balance")%></span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="width: 33%; text-align: center">
-                                                    <small><%# Eval("Benefits_personals")%></small>
+                                                    <span title="Personal Days"><%# Eval("Benefits_personals")%></span>
                                                 </td>
                                                 <td style="width: 33%; text-align: center">
-                                                    <small><%# Eval("used_personals")%></small>
+                                                    <span title="Personal Used"><%# Eval("used_personals")%></span>
                                                 </td>
                                                 <td style="text-align: center">
-                                                    <small><%# Eval("personals_balance")%></small>
+                                                    <span title="Personal Pending"><%# Eval("personals_balance")%></span>
                                                 </td>
-
                                             </tr>
                                         </table>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn HeaderText="Status" UniqueName="Inactive" HeaderStyle-HorizontalAlign="Center"
-                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="30px">
+                                <telerik:GridTemplateColumn HeaderText="Status" UniqueName="Inactive" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                                     <ItemTemplate>
-                                        <asp:LinkButton runat="server" ID="btnInactive" CommandName="UpdateStatus" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# iif(Eval("Inactive"), "Inactive Status. Click to change", "Active Status. Click to change") %>'
-                                            ForeColor='<%# GetStatusColor(Eval("Inactive")) %>'>
-                                                        <span class='<%# ActiveInactiveIcon(Eval("Inactive")) %>'></span>
-                                        </asp:LinkButton>
-
-
+                                        <%#IIf(Eval("Inactive"), "Inactive", "Active") %>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
 
                                 <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
-                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="90px">
+                                    ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="120px">
                                     <ItemTemplate>
                                         <table style="width: 100%">
                                             <tr>
-                                                <td style="width: 50%; text-align: center">
+                                                <td style="width: 33%; text-align: center">
+                                                    <asp:LinkButton runat="server" ID="btnInactive" CommandName="UpdateStatus" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# iif(Eval("Inactive"), "Inactive Status. Click to change", "Active Status. Click to change") %>'
+                                                        ForeColor='<%# GetStatusColor(Eval("Inactive")) %>'>
+                                                            <span class='<%# ActiveInactiveIcon(Eval("Inactive")) %>'></span>
+                                                    </asp:LinkButton>
+                                                </td>
+                                                <td style="width: 33%; text-align: center">
                                                     <asp:LinkButton runat="server" ID="btnCredentials" CommandName="SendCredentials" CommandArgument='<%# Eval("Id") %>'
                                                         ToolTip="Send Email with login credentials">
                                                                 <i class="far fa-envelope"></i>

@@ -132,10 +132,12 @@
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True"
-            GroupingEnabled="False" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="100%" Height="1200px"
-            PageSize="250" AllowPaging="True" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
+            GroupingEnabled="False" AutoGenerateColumns="False" DataSourceID="SqlDataSource1"
+            PageSize="50" AllowPaging="true"
+            Height="850px" RenderMode="Lightweight" BorderStyle="None"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <ClientSettings Selecting-AllowRowSelect="true">
-                <Scrolling AllowScroll="True"></Scrolling>
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" ShowFooter="True">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
@@ -159,7 +161,7 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Availability" HeaderText="Availability" ItemStyle-HorizontalAlign="Center"
                         SortExpression="Availability" UniqueName="Availability" FilterControlAltText="Filter Availability column"
-                        HeaderStyle-Width="100px">
+                        HeaderStyle-Width="150px">
                         <ItemTemplate>
                             <asp:LinkButton ID="lnkEditStatus" runat="server" CommandName="EditAvailability" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to edit Availability">
                                 <span title="Clic to edit Availability" class="label badge-<%# IIf(Eval("AvailabilityId") = 0, "success", IIf(Eval("AvailabilityId") = 1, "danger", "default")) %>"><%# Eval("Availability") %>
@@ -173,22 +175,22 @@
                     <telerik:GridBoundColumn DataField="nSubtype" HeaderText="Subtype" Display="False"
                         SortExpression="nSubtype" UniqueName="nSubtype" FilterControlAltText="Filter nSubtype column">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="ProposalAmount" HeaderText="Submitted Proposals" HeaderTooltip="Number of Proposals"
+                    <telerik:GridBoundColumn DataField="ProposalAmount" HeaderText="Proposals" HeaderTooltip="Number of Submitted Proposals"
                         SortExpression="ProposalAmount" UniqueName="ProposalAmount" ItemStyle-HorizontalAlign="Center"
-                        HeaderStyle-Width="100px"
+                        HeaderStyle-Width="120px"
                         Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="center">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="JobAmount" HeaderText="Accepted Jobs" FilterControlAltText="Filter JobAmount column"
+                    <telerik:GridBoundColumn DataField="JobAmount" HeaderText="Jobs" 
                         SortExpression="JobAmount" UniqueName="JobAmount" ItemStyle-HorizontalAlign="center"
-                        HeaderStyle-Width="100px"
+                        HeaderStyle-Width="120px"
                         Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="TotalBudget" FilterControlAltText="Filter TotalBudget column" HeaderText="Total Budget" SortExpression="TotalBudget" UniqueName="TotalBudget"
-                        HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}"
+                    <telerik:GridBoundColumn DataField="TotalBudget" FilterControlAltText="Filter TotalBudget column" HeaderText="Budget" SortExpression="TotalBudget" UniqueName="TotalBudget"
+                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}" HeaderTooltip="Total Job Budget"
                         Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="AmountDue" DataType="System.Double" FilterControlAltText="Filter AmountDue column" HeaderText="Amount Due" SortExpression="AmountDue" UniqueName="AmountDue"
-                        HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}"
+                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}"
                         Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Amount Due ($)">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Email" FilterControlAltText="Filter Email column" HeaderText="Email" SortExpression="Email" UniqueName="Email" ItemStyle-Font-Size="X-Small">

@@ -14,7 +14,7 @@
         </span>
         <span style="float: right; vertical-align: middle;">
             <asp:Panel ID="panelTotals" runat="server" UseSubmitBehavior="false">
-                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
+                        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseTotals" aria-expanded="false" aria-controls="collapseTotals">
                             View Summary
                         </button>
                     </asp:Panel>

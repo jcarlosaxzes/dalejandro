@@ -90,8 +90,8 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: right;">Balance 90D+:</td>
-                                            <td style="color:red">
-                                               <b><%# Eval("Balance90Dplus", "{0:C2}") %></b>
+                                            <td style="color: red">
+                                                <b><%# Eval("Balance90Dplus", "{0:C2}") %></b>
                                             </td>
                                         </tr>
                                     </table>
@@ -105,13 +105,58 @@
                 <hr style="margin: 0" />
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12">
+                <asp:FormView ID="FormViewStatus" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceJob" DefaultMode="Edit" Width="100%" CssClass="pasconcept-bar">
+                    <EditItemTemplate>
+                        <div>
+                            <span style="vertical-align: middle; font-size: 20px">&nbsp;&nbsp;Job Panel
+                            </span>
+                            <span style="float: right; vertical-align: middle;">Budget:
+                                 <telerik:RadNumericTextBox ID="txtBudgest" runat="server" DbValue='<%# Bind("Budget") %>' Width="150px">
+                                 </telerik:RadNumericTextBox>
+                                &nbsp;&nbsp;&nbsp; 
+                                Allow Open Budget:
+                                    <asp:CheckBox ID="chkAllowOpenBudget" runat="server" Checked='<%# Bind("AllowOpenBudget") %>'
+                                        ToolTip="Automatically update the Budget when Invoices are inserted or updated. Budget=SUM(Invoices.Amount)" />
+                                &nbsp;&nbsp;&nbsp;
+                                Status:
+                                    <telerik:RadComboBox ID="cboStatus" runat="server" SelectedValue='<%# Bind("Status") %>'
+                                        DataSourceID="SqlDataSourceJobStatus" DataTextField="Name" DataValueField="Id" Width="200px">
+                                    </telerik:RadComboBox>
+                                &nbsp;
+                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-sm" UseSubmitBehavior="false" ToolTip="Update Job Info" ValidationGroup="JobUpdate" CommandName="Update">
+                                    Update Job
+                                </asp:LinkButton>
+                            </span>
+                        </div>
+                    </EditItemTemplate>
+                </asp:FormView>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
 
                 <div class="pasconcept-bar noprint">
-                    <span>
+                    <span style="font-size: 24px; font-weight: 500; margin: 0">Invoices(s)&nbsp;&nbsp;&nbsp;&nbsp; </span>
+                    <span style="vertical-align: middle;">Invoices Filter:
+                        <telerik:RadComboBox ID="cboInvoiceFilterCode" runat="server" Width="300px" RenderMode="Lightweight" AutoPostBack="true">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="Pending Balance" Value="1" />
+                                <telerik:RadComboBoxItem Text="(All Invoices ...)" Value="0" />
+                                <telerik:RadComboBoxItem Text="Collected" Value="2" />
+                                <telerik:RadComboBoxItem Text="Simple Charge Invoices" Value="3" />
+                                <telerik:RadComboBoxItem Text="Hourly Rate Invoices" Value="4" />
+                                <telerik:RadComboBoxItem Text="Not Yet Emitted" Value="5" />
+                                <telerik:RadComboBoxItem Text="BadDept Invoices" Value="6" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </span>
+                    <span style="float: right; vertical-align: middle;">
                         <telerik:RadComboBox ID="cboInvoicesType" runat="server" DataSourceID="SqlDataSourceInvoicesTypes"
-                            DataTextField="Name" DataValueField="Id" Width="300px" MarkFirstMatch="True" RenderMode="Lightweight"
+                            DataTextField="Name" DataValueField="Id" Width="250px" MarkFirstMatch="True" RenderMode="Lightweight"
                             Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Select Payment Schedule)" Value="-1" />
@@ -127,83 +172,100 @@
                         <asp:LinkButton ID="btnDiscount" runat="server" CssClass="btn btn-danger btn-sm" UseSubmitBehavior="false" CausesValidation="false">
                                 Apply Discount
                         </asp:LinkButton>
-
-
-                    </span>
-                    <span style="float: right; vertical-align: middle;">
-                        <telerik:RadComboBox ID="cboInvoiceFilterCode" runat="server" Width="100%" Skin="Bootstrap" AutoPostBack="true" Label="Invoices Filter:">
-                            <Items>
-                                <telerik:RadComboBoxItem Text="Pending Balance Invoices" Value="1" />
-                                <telerik:RadComboBoxItem Text="All Invoices" Value="0" />
-                                <telerik:RadComboBoxItem Text="Paid Invoice" Value="2" />
-                                <telerik:RadComboBoxItem Text="Simple Charge Invoices" Value="3" />
-                                <telerik:RadComboBoxItem Text="Hourly Rate Invoices" Value="4" />
-                                <telerik:RadComboBoxItem Text="Non Emitted Invoices" Value="5" />
-                                <telerik:RadComboBoxItem Text="BadDept Invoices" Value="6" />
-                            </Items>
-                        </telerik:RadComboBox>
-
                     </span>
                 </div>
-
-
 
             </div>
 
         </div>
+
         <div class="row">
             <div class="col-12">
-                <asp:FormView ID="FormViewStatus" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceJob" DefaultMode="Edit" Width="100%">
-                    <EditItemTemplate>
-                        <table style="width: 100%">
-                            <tr>
-                                <td>
-                                    <h4>Invoices(s)</h4>
-                                </td>
-                                <td style="width: 180px">
-                                    <telerik:RadNumericTextBox ID="txtBudgest" runat="server" DbValue='<%# Bind("Budget") %>' Width="100%" Label="Budget:">
-                                    </telerik:RadNumericTextBox>
-                                </td>
-
-                                <td style="width: 180px; text-align: right">
-                                    <telerik:RadCheckBox ID="chkAllowOpenBudget" runat="server" Checked='<%# Bind("AllowOpenBudget") %>' Text="Allow Open Budget"
-                                        ToolTip="Automatically update the Budget when Invoices are inserted or updated. Budget=SUM(Invoices.Amount)" />
-                                </td>
-
-                                <td style="width: 280px; text-align: right">
-                                    <telerik:RadComboBox ID="cboStatus" runat="server" SelectedValue='<%# Bind("Status") %>' Label="Status"
-                                        DataSourceID="SqlDataSourceJobStatus" DataTextField="Name" DataValueField="Id" Width="90%">
-                                    </telerik:RadComboBox>
-                                </td>
-                                <td style="width: 100px; text-align: right">
-                                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-sm" UseSubmitBehavior="false" ToolTip="Update Job Info" ValidationGroup="JobUpdate" CommandName="Update">
-                                    Update Job
-                                    </asp:LinkButton>
-                                </td>
-                                <td></td>
-                            </tr>
-                        </table>
-                    </EditItemTemplate>
-                </asp:FormView>
                 <telerik:RadGrid ID="RadGridIncoices" runat="server" AllowAutomaticDeletes="True" HeaderStyle-HorizontalAlign="Center"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoices"
-                    ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="X-Small"
+                    ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true"
                     ShowFooter="True" Width="100%">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceInvoices" AllowSorting="true">
-                        <CommandItemSettings ExportToPdfText="Export to PDF" />
-                        <RowIndicatorColumn>
-                            <HeaderStyle Width="20px" />
-                        </RowIndicatorColumn>
-                        <ExpandCollapseColumn Resizable="False" Visible="False">
-                            <HeaderStyle Width="20px" />
-                        </ExpandCollapseColumn>
                         <Columns>
-                            <telerik:GridTemplateColumn DataField="Id" DataType="System.Int32" FilterControlAltText="Filter Id column"
+                            <telerik:GridTemplateColumn DataField="Id"
                                 HeaderText="Invoice" HeaderTooltip="Invoice Number" SortExpression="InvoiceNumber" UniqueName="InvoiceNumber" ReadOnly="true" Aggregate="Count" FooterAggregateFormatString="{0:N0}"
-                                HeaderStyle-Width="120px" FooterStyle-HorizontalAlign="Center">
+                                HeaderStyle-Width="130px" FooterStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEditInvoice" runat="server" CommandName="EditInvoice" CommandArgument='<%# Eval("Id") %>'
                                         Text='<%# Eval("InvoiceNumber") %>' ToolTip="Click to Edit Invoice"></asp:LinkButton>
+                                    <div style="float: right; vertical-align: top; margin: 0;">
+                                        <%--Three Point Action Menu--%>
+                                        <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i title="Click to menu for this row" style="color:dimgray" class="fas fa-ellipsis-v"></i>
+                                        </asp:HyperLink>
+                                        <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
+                                            RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                            Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                            HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
+                                            <table class="table-borderless" style="width: 200px; font-size: medium">
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="btnAction1" runat="server" UseSubmitBehavior="false" CommandName="EditInvoice" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Invoice
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="far fa-envelope"></i></i>&nbsp;&nbsp;Send Invoice to Client
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"), True)%>' target="_blank" class="dropdown-item">
+                                                            <i class="fas fa-print"></i>&nbsp;&nbsp;Print Invoice Page
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"), False)%>' target="_blank" class="dropdown-item">
+                                                            <i class="far fa-share-square"></i>&nbsp;&nbsp;View/Share Invoice Page
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton4" runat="server" UseSubmitBehavior="false" CommandName="Duplicate" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="far fa-clone"></i>&nbsp;&nbsp;Duplicate Invoice
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton5" runat="server" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# Eval("AmountDue")%>'>
+                                                                    Receive Payment
+                                                        </asp:LinkButton>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            Mark Invoice as Bad Dept
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="SendQB" CommandArgument='<%# String.Concat(Eval("Id"), ",", Eval("qbCustomerId")) %>' CssClass="dropdown-item"
+                                                            Visible='<%# iif(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") = 0, True, False) %>'>
+                                                            Sync Invoice with QuickBooks
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </telerik:RadToolTip>
+                                    </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="InvoiceType" DataType="System.Int32" ReadOnly="true"
@@ -242,72 +304,27 @@
                                 </ItemTemplate>
                                 <HeaderStyle HorizontalAlign="Center" />
                             </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="Emitted"
-                                HeaderText="Emitted" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="30px"
-                                ReadOnly="true" SortExpression="Emitted" UniqueName="Emitted">
-                            </telerik:GridBoundColumn>
 
-                            <telerik:GridBoundColumn DataField="EmissionRecurrenceDays" Display="false"
-                                HeaderText="Emission Recurrence Days" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="30px" HeaderTooltip="Define frequency of automated email reccurence"
-                                SortExpression="EmissionRecurrenceDays" UniqueName="EmissionRecurrenceDays">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="BadDebt" DataType="System.Boolean" FilterControlAltText="Filter BadDebt column" HeaderText="Bad Debt" ReadOnly="true"
-                                SortExpression="BadDebt" UniqueName="BadDebt" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                            <telerik:GridCheckBoxColumn DataField="BadDebt" HeaderText="Bad Debt" UniqueName="BadDebt" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                            </telerik:GridCheckBoxColumn>
+
+                            <telerik:GridTemplateColumn HeaderText="Insight" ReadOnly="true" UniqueName="Insights" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:CheckBox ID="BadDebtCheckBoxInv2" runat="server" Checked='<%# Eval("BadDebt")%>' Enabled="false" />
+                                    <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>' ToolTip="First Emission Date"></asp:Label>
+                                    <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary">
+                                        <%#Eval("Emitted")%>
+                                    </span>
+                                    <span title="Number of times the Client has visited your Invoice Page" class="badge badge-pill badge-warning">
+                                        <%#Eval("clientvisits")%>
+                                    </span>
+                                    <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
+                                        <img src="../Images/C2QB_green_btn_sm_default.png" height="14" />
+                                    </span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn HeaderText="Billing Contact" UniqueName="Billing_contact" HeaderStyle-Width="160px" Display="false"
-                                DataField="Billing_contact" SortExpression="Billing_contact">
-                                <ItemTemplate>
-                                    <%# Eval("Billing_contact") %><%# Eval("Billing_Telephone") %>
-                                </ItemTemplate>
-                                <HeaderStyle HorizontalAlign="Center" />
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridTemplateColumn HeaderText="Actions" ReadOnly="true" UniqueName="Actions" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
-                                <ItemTemplate>
-
-                                    <asp:LinkButton ID="btnInvoiceInv44" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id") %>'
-                                        ToolTip="Send Email with Invoice" CausesValidation="false">
-                                                            <i class="far fa-envelope"></i>
-                                    </asp:LinkButton>
-                                    &nbsp;
-                                                        <asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
-                                                            CommandName="PDF" CommandArgument='<%# Eval("Id")%>'>
-                                                               <i class="far fa-file-pdf"></i>
-                                                        </asp:LinkButton>
-
-                                    &nbsp;
-                                                        <asp:LinkButton ID="btnShareLink" runat="server" UseSubmitBehavior="false" CommandName="GetSharedLink" CommandArgument='<%# Eval("Id") %>'
-                                                            ToolTip="Get a link to copy and paste in an email or browser" CausesValidation="false">
-                                                            <i class="far fa-share-square"></i>
-                                                        </asp:LinkButton>
-                                    &nbsp;
-                                                        <asp:LinkButton ID="btnClone" runat="server" UseSubmitBehavior="false" ToolTip="Duplicate Invoice"
-                                                            CommandName="Duplicate" CommandArgument='<%# Eval("Id")%>'>
-                                                                <i class="far fa-clone"></i>
-                                                        </asp:LinkButton>
-
-                                    &nbsp;
-                                                        <asp:LinkButton ID="btnInvoicePayment" runat="server" CssClass="badge-success label" UseSubmitBehavior="false" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>'
-                                                            ToolTip="Add Payments" CausesValidation="false" Visible='<%# Eval("AmountDue")%>'>
-                                                            <i class="fas fa-dollar-sign"></i>
-                                                        </asp:LinkButton>
-                                    &nbsp;
-                                                        <asp:LinkButton ID="btnBadDebt" runat="server" CssClass="badge-danger badge" UseSubmitBehavior="false" CommandName="BadDebt" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("BadDebt")=0%>'
-                                                            ToolTip="Mark Invoice as BadDept" CausesValidation="false">
-                                                            <i class="fas fa-dollar-sign"></i>
-                                                        </asp:LinkButton>
-
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-
-                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Invoice?"
-                                ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                UniqueName="DeleteColumn" HeaderText=""
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px">
+                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this Invoice?" ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                                UniqueName="DeleteColumn" HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                             </telerik:GridButtonColumn>
 
 
@@ -319,15 +336,10 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <h4>Payment(s)</h4>
+                <h4>&nbsp;&nbsp;Payment(s)</h4>
                 <telerik:RadGrid ID="RadGridPayments" runat="server" AllowAutomaticDeletes="True" HeaderStyle-HorizontalAlign="Center"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSourcePayments" ShowFooter="True">
-                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayments" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="X-Small">
-                        <CommandItemSettings ExportToPdfText="Export to PDF" />
-                        <RowIndicatorColumn FilterControlAltText="Filter RowIndicator column">
-                        </RowIndicatorColumn>
-                        <ExpandCollapseColumn Created="True" FilterControlAltText="Filter ExpandColumn column" Visible="True">
-                        </ExpandCollapseColumn>
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayments" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
                         <Columns>
                             <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Payment ID" ReadOnly="True"
                                 HeaderStyle-Width="120px" SortExpression="Id" UniqueName="Id">
@@ -441,18 +453,6 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <asp:Panel ID="PanelUpload" runat="server" class="DropZone1">
-                        <h4>Select or Drag and Drop files (up to 10Mb)</h4>
-                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
-                            OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
-                            MaxFileSize="10145728"
-                            DropZones=".DropZone1">
-                        </telerik:RadCloudUpload>
-                    </asp:Panel>
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2" style="text-align: center">
 
                     <asp:LinkButton ID="btnInsertPayment" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
@@ -464,6 +464,36 @@
                     <asp:LinkButton ID="btnCancelPayment" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
                         CommandName="Cancel"> Cancel
                     </asp:LinkButton>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <asp:Panel ID="PanelUpload" runat="server" class="uploadfiles-canvas">
+                        <%--<telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" MultipleFileSelection="Disabled" OnClientUploadFailed="onClientUploadFailed"
+                            OnFileUploaded="RadCloudUpload1_FileUploaded" ProviderType="Azure"
+                            MaxFileSize="10145728"
+                            DropZones=".uploadfiles-canvas">
+                        </telerik:RadCloudUpload>
+                        <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>--%>
+                        <p style="text-align: center; vertical-align: middle; padding-top: 50px;">
+                            <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
+                            <br />
+                            <span style="font-size: 36px">Drag & Drop Files here, or
+                            </span>
+                            <br />
+                            <br />
+                            <br />
+                            <span style="font-size: 36px">
+                                <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" ProviderType="Azure" MaxFileSize="10145728" MultipleFileSelection="Disabled"
+                                    OnFileUploaded="RadCloudUpload1_FileUploaded"
+                                    OnClientUploadFailed="onClientUploadFailed"
+                                    CssClass="fileUploadRad"
+                                    DropZones=".uploadfiles-canvas,#UploadPanel">
+                                    <Localization SelectButtonText="Select Files" />
+                                </telerik:RadCloudUpload>
+                            </span>
+                        </p>
+                    </asp:Panel>
                 </td>
             </tr>
         </table>
@@ -568,7 +598,7 @@
 
     </telerik:RadToolTip>
 
-   <%-- <telerik:RadToolTip ID="ddddd" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+    <%-- <telerik:RadToolTip ID="ddddd" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h2 style="margin: 0; text-align: center; color: white; width: 600px">
             <span class="navbar navbar-expand-md bg-dark text-white">Payment
             </span>
@@ -647,7 +677,7 @@
             <EditItemTemplate>
                 <table class="table-sm" style="width: 600px">
                     <tr>
-                        <td style="width: 160px; text-align: right" >Collected Date:
+                        <td style="width: 160px; text-align: right">Collected Date:
                         </td>
                         <td>
                             <telerik:RadDatePicker ID="RadDateEditPickerPayment" runat="server" ZIndex="50001" DbSelectedDate='<%# Bind("CollectedDate") %>'>
@@ -655,7 +685,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: right" >Method:
+                        <td style="text-align: right">Method:
                         </td>
                         <td>
 
@@ -666,7 +696,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: right" >Amount:
+                        <td style="text-align: right">Amount:
                         </td>
                         <td>
                             <telerik:RadNumericTextBox ID="txtEditAmountPayment" runat="server" Width="180px" DbValue='<%# Bind("Amount") %>'>
@@ -674,7 +704,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: right;vertical-align:top" >Notes:
+                        <td style="text-align: right; vertical-align: top">Notes:
                         </td>
                         <td>
                             <telerik:RadTextBox ID="txtEditPaymentNotes" runat="server" Width="100%" MaxLength="1024" TextMode="MultiLine" Rows="3" Text='<%# Bind("CollectedNotes") %>'>
@@ -682,7 +712,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: right" >Is Reconciled with Bank:
+                        <td style="text-align: right">Is Reconciled with Bank:
                         </td>
                         <td>
                             <telerik:RadCheckBox runat="server" ID="chkReconciledBank" Checked='<%# Bind("ReconciledBank")%>' AutoPostBack="false"></telerik:RadCheckBox>
@@ -774,7 +804,7 @@
     </telerik:RadToolTip>
 
     <asp:SqlDataSource ID="SqlDataSourceInvoices" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="JOB_INVOICES3_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="JobInvoices_v20_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="INVOICE_DELETE" DeleteCommandType="StoredProcedure"
         UpdateCommand="INVOICES_APPLYDISCOUNT" UpdateCommandType="StoredProcedure">
         <SelectParameters>
@@ -848,7 +878,7 @@
         SelectCommand="Payment_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Payment_v20_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Invoice_Payment_v20_INSERT" InsertCommandType="StoredProcedure">
-         <UpdateParameters>
+        <UpdateParameters>
             <asp:Parameter Name="Method" />
             <asp:Parameter Name="CollectedDate" Type="DateTime" />
             <asp:Parameter Name="CollectedNotes" />

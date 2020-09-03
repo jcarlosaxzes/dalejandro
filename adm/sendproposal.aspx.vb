@@ -108,7 +108,7 @@ Public Class sendproposal
             Dim sSign As String = LocalAPI.GetEmployeesSign(cboProjectManagerId.SelectedValue)
             ' Enlace al Proposal
             'txtBody.Content = Replace(txtBody.Content, "[PASconceptLink]", LocalAPI.GetHostAppSite() & "/ADMCLI/AceptProposal.aspx?ProposalId=" & lblProposalId.Text)
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
+            Dim sURL As String = LocalAPI.GetSharedLink_URL(1111, lblProposalId.Text)
 
             Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
             DictValues.Add("[Project_Name]", sProjectName)
@@ -146,7 +146,9 @@ Public Class sendproposal
                     'Dim ProposalByEmail = LocalAPI.GetEmployeeEmail(lId:=cboProjectManagerId.SelectedValue)
 
                     Dim ProjectManagerEmail As String = LocalAPI.GetEmployeeEmail(lId:=cboProjectManagerId.SelectedValue)
-                    If SendGrid.Email.SendMail(txtTo.Text, txtCC.Text, HeadDepartmentEmail, txtSubject.Text, txtBody.Content, lblCompanyId.Text, "", ProposalByName, ProjectManagerEmail, ProposalByName) Then
+                    Dim ProposalObject = LocalAPI.GetRecord(lblProposalId.Text, "ProposalRecord_SELECT")
+                    Dim ClientId = ProposalObject("ClientId")
+                    If SendGrid.Email.SendMail(txtTo.Text, txtCC.Text, HeadDepartmentEmail, txtSubject.Text, txtBody.Content, lblCompanyId.Text, ClientId, 0, "", ProposalByName, ProjectManagerEmail, ProposalByName) Then
                         bSendEmail = True
                     Else
                         ErrorMessage("Proposal was not sent by Email. ")

@@ -43,7 +43,7 @@
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-            <table class="table-sm pasconcept-bar" style="width:100%">
+            <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
                     <td>
                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Width="100%"
@@ -71,12 +71,14 @@
             </script>
         </telerik:RadCodeBlock>
         <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" AllowAutomaticDeletes="true"
-            DataSourceID="SqlDataSource1" GridLines="None" AllowPaging="True" PageSize="250" Height="1000px"
-            CellSpacing="0" AllowSorting="True" 
-            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-            <ClientSettings>
+            DataSourceID="SqlDataSource1"
+            PageSize="50" AllowPaging="true"
+            Height="850px" RenderMode="Lightweight"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+            <ClientSettings Selecting-AllowRowSelect="true">
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
+
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" CommandItemDisplay="None" ShowFooter="True" EditMode="PopUp">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                 <Columns>

@@ -9,6 +9,8 @@ Public Class job_transmittals
                 lblCompanyId.Text = Session("companyId")
                 lblJobId.Text = Request.QueryString("JobId")
 
+                ' Si no tiene permiso, la dirijo a message
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TransmittalList") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
 
                 lblEmployeeEmail.Text = Master.UserEmail
                 Master.ActiveTab(11)
@@ -29,8 +31,7 @@ Public Class job_transmittals
         Select Case e.CommandName
 
             Case "EditTransmittal"
-                sUrl = "~/ADM/Transmittal.aspx?transmittalId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 970, 720, False)
+                Response.Redirect("~/adm/Transmittal.aspx?transmittalId=" & e.CommandArgument & "&BackPage=job_transmittals")
 
             Case "EmailReadyToPickUp"
                 Dim Id = e.CommandArgument
@@ -40,6 +41,10 @@ Public Class job_transmittals
                     LocalAPI.SetTransmittalJobToDoneStatus(Id)
                     Master.InfoMessage("The Transmittal have been sent by email")
                 End If
+
+            Case "EmailDeliveryTransmittalDigital"
+                sUrl = "~/adm/sendtransmittal.aspx?TransmittalId=" & e.CommandArgument
+                CreateRadWindows(e.CommandName, sUrl, 960, 680, False)
 
         End Select
     End Sub
@@ -59,4 +64,8 @@ Public Class job_transmittals
         RadWindowManager1.Windows.Add(window1)
     End Sub
 
+    Private Sub SqlDataSourceTransmittals_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceTransmittals.Inserted
+        Dim tId As Integer = e.Command.Parameters("@OUT_Id").Value
+        Response.Redirect("~/adm/Transmittal.aspx?transmittalId=" & tId & "&BackPage=job_transmittals")
+    End Sub
 End Class

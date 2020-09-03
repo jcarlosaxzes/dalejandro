@@ -40,25 +40,35 @@
                                 <telerik:RadTextBox ID="txtState" runat="server" MaxLength="15" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 140px; text-align: right">Biginig Zip Code:
+                            <td style="width: 140px; text-align: right">Zip Code Starting:
                             </td>
                             <td style="width: 130px">
                                 <telerik:RadTextBox ID="txtZipCode" runat="server" Text="" MaxLength="10" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="width: 130px; text-align: right">Biginig Phone:
-                            </td>
+                            <td style="width: 130px; text-align: right">Phone Starting:</td>
                             <td style="width: 130px">
                                 <telerik:RadTextBox ID="txtPhone" runat="server" Text="" MaxLength="10" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
                             <td style="width: 100px; text-align: right">City:
                             </td>
-                            <td>
+                            <td style="width: 180px;">
                                 <telerik:RadTextBox ID="txtCity" runat="server" Text="" MaxLength="50" Width="100%">
                                 </telerik:RadTextBox>
                             </td>
-                            <td></td>
+                            <td>
+                                <telerik:RadComboBox ID="cboOnOff" runat="server" Width="150px" AppendDataBoundItems="true">
+                                    <Items>
+                                        <telerik:RadComboBoxItem runat="server" Text="Contact On" Value="0" Selected="true" />
+                                        <telerik:RadComboBoxItem runat="server" Text="Contact Off" Value="1" />
+                                    </Items>
+                                </telerik:RadComboBox>
+                            </td>
+                            <td>
+                                 <telerik:RadTextBox ID="txtFind" runat="server" Text="" EmptyMessage="Contact or Company Name..." MaxLength="80" Width="100%">
+                                </telerik:RadTextBox>
+                            </td>
 
                         </tr>
                         <tr>
@@ -80,10 +90,9 @@
                                 <telerik:RadTextBox ID="txtPageSize" runat="server" MaxLength="5" Width="100%" Text="100">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="text-align: right">
-                                Source:
+                            <td style="text-align: right">Source:
                             </td>
-                            <td style="width:300px">
+                            <td style="width: 300px">
                                 <telerik:RadComboBox ID="cboSource" runat="server" DataSourceID="SqlDataSourceSources" DataTextField="Name" DataValueField="Id" Width="100%"
                                     AppendDataBoundItems="true" Height="300px" MarkFirstMatch="True">
                                     <Items>
@@ -92,15 +101,35 @@
                                 </telerik:RadComboBox>
                             </td>
                             <td>
+                                <telerik:RadComboBox ID="cboInAgile" runat="server" Width="150px" AppendDataBoundItems="true">
+                                    <Items>
+                                        <telerik:RadComboBoxItem runat="server" Text="Not In Agile" Value="0" Selected="true" />
+                                        <telerik:RadComboBoxItem runat="server" Text="In Agile" Value="1" />
+                                    </Items>
+                                </telerik:RadComboBox>
+                            </td>
+
+                            <td style="text-align: right">
                                 <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     Filter/Search
                                 </asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="10" style="text-align: right">
+
                                 <span style="float: right; vertical-align: middle;">
                                     <asp:LinkButton ID="btnBulkTag" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" ToolTip="Tag Selected records">
                                          Bulk Tag
                                     </asp:LinkButton>
+                                    <asp:LinkButton ID="btnImport" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" ToolTip="Import csv List">
+                                         Import
+                                    </asp:LinkButton>
                                     <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" ToolTip="Export and (optional)Tag current List">
                                          Export
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="btnAgile" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Export selected records to Agile">
+                                         Agile
                                     </asp:LinkButton>
                                 </span>
                             </td>
@@ -160,7 +189,8 @@
 
     <telerik:RadToolTip ID="RadToolTipExport" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h3 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Export to CSV File
+            <span class="navbar navbar-expand-md bg-dark text-white">
+                <asp:Label runat="server" ID="lblExportTitle" Text="Export to CSV File"></asp:Label>
             </span>
         </h3>
         <table class="table-sm" style="width: 600px">
@@ -174,8 +204,8 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center">
-                    <asp:LinkButton ID="btnConfirmExport" runat="server" CssClass="btn btn-success" Width="150px" UseSubmitBehavior="false">
-                             Export 
+                    <asp:LinkButton ID="btnConfirmExport" runat="server" CssClass="btn btn-success" Width="150px" UseSubmitBehavior="false" Text="Export to CSV">
+                              
                     </asp:LinkButton>
                 </td>
             </tr>
@@ -332,7 +362,18 @@
                             </telerik:RadTextBox>
                         </td>
                     </tr>
-
+                    <tr>
+                        <td style="text-align: right">Contact:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cboOnOffEdit" runat="server" Width="100px" AppendDataBoundItems="true" SelectedValue='<%# Bind("ContactOff") %>' ZIndex="50001">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Text="On" Value="0" />
+                                    <telerik:RadComboBoxItem runat="server" Text="Off" Value="1" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+                    </tr>
                 </table>
             </EditItemTemplate>
         </asp:FormView>
@@ -343,8 +384,62 @@
         </div>
     </telerik:RadToolTip>
 
+    <telerik:RadToolTip ID="RadToolTipImport" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h3 style="margin: 0; text-align: center; color: white; width: 800px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Import CSV Lead File
+            </span>
+        </h3>
+        <table class="table-sm" style="width: 800px">
+            <tr>
+                <td colspan="2">
+                    <h4 style="margin: 0">Instructions for importing csv Lead files</h4>
+                    <ul>
+                        <li>Ensure your CSV file adheres to the structure: (Company, FirstName, LastName, Email, Phone, Cellular, Website, AddressLine1, AddressLine2, City, State, ZipCode, JobTitle, Position, Tags). 
+                    <a href="https://app.pasconcept.com/csv/pascoceptleads.csv" target="_blank">Click to download</a> sample csv file.</li>
+                        <li>FirstName, Email are mandatory fields</li>
+                        <li>Select Source, Select File and click Import button</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right; width: 150px">Source:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboSourceImport" runat="server" DataSourceID="SqlDataSourceSources" DataTextField="Name" DataValueField="Id" Width="100%" ZIndex="50001"
+                        AppendDataBoundItems="true" Height="300px" MarkFirstMatch="True" ValidationGroup="Import">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Sources List...)" Value="-1" Selected="true" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right; width: 150px"></td>
+                <td>
+                    <telerik:RadAsyncUpload ID="RadUpload1" runat="server" ControlObjectsVisibility="None" MultipleFileSelection="Disabled" EnableFileInputSkinning="true"
+                        AllowedFileExtensions="csv,txt" RenderMode="Classic">
+                    </telerik:RadAsyncUpload>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center">
+                    <asp:LinkButton ID="btnConfirmImport" runat="server"
+                        CssClass="btn btn-info btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Import">
+                                     <i class="fas fa-upload"></i>&nbsp;Import Leads
+                    </asp:LinkButton>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Sources List...)" ForeColor="Red"
+                        Operator="NotEqual" ControlToValidate="cboSourceImport" Display="Dynamic" ErrorMessage="Select Source" SetFocusOnError="true" ValidationGroup="Import">
+                    </asp:CompareValidator>
+                </td>
+            </tr>
+        </table>
+    </telerik:RadToolTip>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnAxzesLeads %>"
-        SelectCommand="Leads_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Leads_v20_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Leads_Tags_Bulk_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Leads_Tags_UPDATE" InsertCommandType="StoredProcedure">
         <SelectParameters>
@@ -355,7 +450,10 @@
             <asp:ControlParameter ControlID="txtCity" Name="City" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtTags" Name="Tag" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="txtNoTags" Name="NoTag" PropertyName="Text" ConvertEmptyStringToNull="false" />
+            <asp:ControlParameter ControlID="txtFind" Name="Find" PropertyName="Text" ConvertEmptyStringToNull="false" />
             <asp:ControlParameter ControlID="cboSource" Name="sourceId" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboInAgile" Name="InAgile" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboOnOff" Name="ContactOff" PropertyName="SelectedValue" />
         </SelectParameters>
         <UpdateParameters>
             <asp:ControlParameter ControlID="txtPageSize" Name="PageSize" PropertyName="Text" ConvertEmptyStringToNull="false" />
@@ -394,6 +492,7 @@
             <asp:Parameter Name="Position" />
             <asp:Parameter Name="Tags" />
             <asp:Parameter Name="SourceId" />
+            <asp:Parameter Name="ContactOff" />
             <asp:ControlParameter ControlID="lblSelected_ID" Name="Id" PropertyName="Text" />
         </UpdateParameters>
     </asp:SqlDataSource>

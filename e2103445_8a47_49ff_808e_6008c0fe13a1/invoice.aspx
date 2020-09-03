@@ -328,11 +328,11 @@
         InsertCommand="INVOICE_PAYMENTS2_INSERT" InsertCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="lblInvoice" Name="InvoiceId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblInvoiceId" Name="InvoiceId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="lblInvoice" Name="InvoiceId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblInvoiceId" Name="InvoiceId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="CollectedDate" Type="DateTime" />
             <asp:Parameter Name="Method" />
             <asp:Parameter Name="Amount" />
@@ -345,13 +345,13 @@
         SelectCommand="INVOICE_Payments_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="lblInvoice" Name="InvoiceId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblInvoiceId" Name="InvoiceId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
 
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblInvoice" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblInvoiceId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblInvoiceGuid" runat="server" Visible="False"></asp:Label>
 
     <script

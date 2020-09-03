@@ -17,6 +17,14 @@ Public Class MasterPage
 
         End Try
     End Sub
+
+    Private Sub MasterPage_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If Not IsPostBack Then
+
+        End If
+        lblWarning.Text = ""
+    End Sub
+
     Public Property ErrorMessage() As String
         Get
             ErrorMessage = lblWarning.Text

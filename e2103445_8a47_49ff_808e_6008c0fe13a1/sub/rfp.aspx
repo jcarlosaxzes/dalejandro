@@ -151,7 +151,9 @@
                                         <ItemTemplate>
                                             <tr>
                                                 <td>
-                                                    <a href='<%# Eval("url")%>' target="_blank" download='<%# Eval("Name") %>'><%# Eval("Name")%></a>
+                                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                                    &nbsp;&nbsp;
+                                                    <%# String.Concat(Eval("Name"), " -- (", Eval("nType"), ")")%>
                                                 </td>
                                             </tr>
                                         </ItemTemplate>
@@ -443,8 +445,8 @@
         <table class="table table-bordered" style="width: 600px">
             <tr>
                 <td>
-                    <h2 style="margin: 0; text-align: center; color:white; width: 600px">
-                       <span class="navbar navbar-expand-md bg-dark text-white">Reject Proposal
+                    <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">Reject Proposal
                         </span>
                     </h2>
 

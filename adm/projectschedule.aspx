@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Project Schedule" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="projectschedule.aspx.vb" Inherits="pasconcept20.projectschedule" %>
+﻿<%@ Page Title="Gantt Chart for Projects" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="projectschedule.aspx.vb" Inherits="pasconcept20.projectschedule" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -12,9 +12,20 @@
     </style>
 
     <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle">Projects Schedule</span>
+        <span class="pasconcept-pagetitle">Gantt Chart for Projects</span>
 
-        <span style="float: right; vertical-align: middle;">
+        <span style="float: right; vertical-align: middle;">Gantt Chart Type:
+                    <telerik:RadComboBox ID="cboParentMode" runat="server" Width="200px" AppendDataBoundItems="true" AutoPostBack="true">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="Proposals" Value="Proposal" />
+                            <telerik:RadComboBoxItem runat="server" Text="Jobs" Value="Job" Selected="true" />
+                            <telerik:RadComboBoxItem runat="server" Text="Billing" Value="Billing" />
+                            <telerik:RadComboBoxItem runat="server" Text="Clients" Value="Client" />
+                            <telerik:RadComboBoxItem runat="server" Text="Departments" Value="Department" />
+                            <telerik:RadComboBoxItem runat="server" Text="Employees" Value="Employee" />
+                            <telerik:RadComboBoxItem runat="server" Text="Subconsultants" Value="Subconsultant" />
+                        </Items>
+                    </telerik:RadComboBox>
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
@@ -22,27 +33,27 @@
     </div>
 
     <div class="collapse" id="collapseFilter">
-        <table class="table-sm" style="width: 100%" >
+        <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width:200px">
+                <td style="width: 200px">
                     <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
-                    <Items>
-                        <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
-                        <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
-                        <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
-                        <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
-                        <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
-                        <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
-                        <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
-                        <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
-                        <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
-                        <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
-                    </Items>
-                </telerik:RadComboBox>
+                        <Items>
+                            <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
+                            <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                            <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                            <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                            <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                            <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                            <telerik:RadComboBoxItem Text="(This year...)" Value="14" />
+                            <telerik:RadComboBoxItem Text="(Last year...)" Value="15" />
+                            <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                            <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
+                        </Items>
+                    </telerik:RadComboBox>
                 </td>
-                <td style="width:350px;">
-                                <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
-                                </telerik:RadDatePicker>
+                <td style="width: 350px;">
+                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
+                    </telerik:RadDatePicker>
                     &nbsp;To
                                 <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
                                 </telerik:RadDatePicker>
@@ -58,48 +69,34 @@
                                     </Items>
                                 </telerik:RadComboBox>
                 </td>
-                <td style="width:450px">
-                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
-                    Width="450px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px"
-                    AppendDataBoundItems="true">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
-                    </Items>
-                </telerik:RadComboBox>
+                <td style="width: 450px">
+                    <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient"
+                        Width="450px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="300px"
+                        AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(All Clients...)" Value="-1" Selected="true" />
+                        </Items>
+                    </telerik:RadComboBox>
                 </td>
                 <td></td>
             </tr>
             <tr>
                 <td>
-                <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" DropDownAutoWidth="Enabled"
-                    Width="100%" CheckBoxes="true" Height="250px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
-                    <Localization AllItemsCheckedString="(All Departments...)" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
-                </telerik:RadComboBox>
-            </td>
-            <td>
-                                <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmployee"
-                                    Width="300px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="250px"
-                                    AppendDataBoundItems="true">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
-                                    </Items>
-                                </telerik:RadComboBox>
-            </td>
-            <td>
-                    
-                    Parent Mode View:
-                    <telerik:RadComboBox ID="cboParentMode" runat="server" Width="200px" AppendDataBoundItems="true">
+                    <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" DropDownAutoWidth="Enabled"
+                        Width="100%" CheckBoxes="true" Height="250px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
+                        <Localization AllItemsCheckedString="(All Departments...)" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
+                    </telerik:RadComboBox>
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmployee"
+                        Width="300px" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Height="250px"
+                        AppendDataBoundItems="true">
                         <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="Proposal" Value="Proposal" />
-                            <telerik:RadComboBoxItem runat="server" Text="Job" Value="Job" Selected="true" />
-                            <telerik:RadComboBoxItem runat="server" Text="Client" Value="Client" />
-                            <telerik:RadComboBoxItem runat="server" Text="Department" Value="Department" />
-                            <telerik:RadComboBoxItem runat="server" Text="Employee" Value="Employee" />
-                            <telerik:RadComboBoxItem runat="server" Text="Subconsultant" Value="Subconsultant" />
+                            <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
                         </Items>
                     </telerik:RadComboBox>
-
                 </td>
+                <td></td>
                 <td style="text-align: right; width: 150px">
                     <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
