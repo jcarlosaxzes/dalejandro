@@ -41,24 +41,6 @@ Partial Public Class transmittal1
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''RadWizard1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
-    
-    '''<summary>
-    '''RadWizardStep1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
-    
-    '''<summary>
     '''FormView1 control.
     '''</summary>
     '''<remarks>
@@ -95,22 +77,13 @@ Partial Public Class transmittal1
     Protected WithEvents btnCancelMail As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
-    '''RadWizardStep2 control.
+    '''btnUploadFiles control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
-    
-    '''<summary>
-    '''PanelUpload control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PanelUpload As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents btnUploadFiles As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnListFiles control.
@@ -156,15 +129,6 @@ Partial Public Class transmittal1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnTablePage As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnUploadFiles control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnUploadFiles As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''btnGridPage control.
@@ -282,15 +246,6 @@ Partial Public Class transmittal1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
-    
-    '''<summary>
-    '''RadWizardStep4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep4 As Global.Telerik.Web.UI.RadWizardStep
     
     '''<summary>
     '''btnNewFileLink control.
