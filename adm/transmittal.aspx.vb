@@ -45,17 +45,18 @@ Public Class transmittal1
 
         If ExistingFiles = 0 Then
             RadWizardStepUpload.Active = True
-            PanelUpload.Visible = True
+            btnListFiles.Visible = True
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = False
         Else
             RadWizardStepFiles.Active = True
-            PanelUpload.Visible = False
+            btnListFiles.Visible = False
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = Not RadListViewFiles.Visible
             RadGridFiles.DataBind()
             RadListViewFiles.DataBind()
         End If
+        btnUploadFiles.Visible = Not btnListFiles.Visible
 
         btnGridPage.Visible = Not RadListViewFiles.Visible
         btnTablePage.Visible = RadListViewFiles.Visible
@@ -384,16 +385,6 @@ Public Class transmittal1
         Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")
     End Function
 
-    Protected Sub btnUploadFiles_Click(sender As Object, e As EventArgs)
-        RadWizardFiles.ActiveStepIndex = 1
-        PanelUpload.Visible = True
-    End Sub
-
-    Protected Sub btnListFiles_Click(sender As Object, e As EventArgs)
-        RadWizardFiles.ActiveStepIndex = 0
-        PanelUpload.Visible = False
-    End Sub
-
     Protected Sub btnTablePage_Click(sender As Object, e As EventArgs)
         RadListViewFiles.Visible = Not RadListViewFiles.Visible
         RadGridFiles.Visible = Not RadListViewFiles.Visible
@@ -414,5 +405,17 @@ Public Class transmittal1
     End Sub
     Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
         ConfigUploadPanels()
+    End Sub
+
+    Private Sub btnListFiles_Click(sender As Object, e As EventArgs) Handles btnListFiles.Click
+        RadWizardFiles.ActiveStepIndex = 0
+        btnListFiles.Visible = False
+        btnUploadFiles.Visible = Not btnListFiles.Visible
+    End Sub
+
+    Private Sub btnUploadFiles_Click(sender As Object, e As EventArgs) Handles btnUploadFiles.Click
+        RadWizardFiles.ActiveStepIndex = 1
+        btnListFiles.Visible = True
+        btnUploadFiles.Visible = Not btnListFiles.Visible
     End Sub
 End Class
