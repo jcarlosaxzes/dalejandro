@@ -7,6 +7,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PASconcept.Web", "PASconcep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASconcept.DataAccess", "PASconcept.DataAccess\PASconcept.DataAccess.csproj", "{D655C634-0421-434D-B849-1F6B53C9EDEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASconcept.Domain", "PASconcept.Domain\PASconcept.Domain.csproj", "{2BB4DCA2-6AB0-44A2-8684-F87DDBC86A3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D655C634-0421-434D-B849-1F6B53C9EDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D655C634-0421-434D-B849-1F6B53C9EDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D655C634-0421-434D-B849-1F6B53C9EDEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BB4DCA2-6AB0-44A2-8684-F87DDBC86A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BB4DCA2-6AB0-44A2-8684-F87DDBC86A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BB4DCA2-6AB0-44A2-8684-F87DDBC86A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BB4DCA2-6AB0-44A2-8684-F87DDBC86A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

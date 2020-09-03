@@ -102,6 +102,10 @@
     <Reference Include="IppDotNetSdkForQuickBooksApiV3, Version=14.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\IppDotNetSdkForQuickBooksApiV3.14.2.0\lib\net472\IppDotNetSdkForQuickBooksApiV3.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.WebFormsDependencyInjection.Unity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>packages\Microsoft.AspNet.WebFormsDependencyInjection.Unity.1.0.0\lib\Net472\Microsoft.AspNet.WebFormsDependencyInjection.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNetCore.Cryptography.Internal.5.0.0-preview.2.20167.3\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
     </Reference>
@@ -400,6 +404,14 @@
     </Reference>
     <Reference Include="Telerik.Web.UI.Skins, Version=2019.3.1023.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <HintPath>packages\Telerik.UI.for.AspNet.Ajax.Net45.2019.3.1023\lib\net45\Telerik.Web.UI.Skins.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f">
+      <HintPath>packages\Unity.Abstractions.3.3.0\lib\net47\Unity.Abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.8.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0">
+      <HintPath>packages\Unity.Container.5.8.6\lib\net47\Unity.Container.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -4788,6 +4800,10 @@
     <ProjectReference Include="PASconcept.DataAccess\PASconcept.DataAccess.csproj">
       <Project>{d655c634-0421-434d-b849-1f6b53c9edeb}</Project>
       <Name>PASconcept.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="PASconcept.Domain\PASconcept.Domain.csproj">
+      <Project>{2bb4dca2-6ab0-44a2-8684-f87ddbc86a3e}</Project>
+      <Name>PASconcept.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
