@@ -32,6 +32,15 @@ Partial Public Class job_employees
     Protected WithEvents btnSetEmployee As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''btnPrivate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnPrivate As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''RadGridAssignedEmployees control.
     '''</summary>
     '''<remarks>

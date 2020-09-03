@@ -1,4 +1,5 @@
-﻿Imports Telerik.Web.UI
+﻿Imports Microsoft.AspNet.Identity
+Imports Telerik.Web.UI
 Public Class jobassignemployee
     Inherits System.Web.UI.Page
 
@@ -10,6 +11,9 @@ Public Class jobassignemployee
                 lblJobId.Text = Val("" & Request.QueryString("JobId"))
                 lblJobName.Text = LocalAPI.GetJobName(lblJobId.Text)
                 lblDptoId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "DepartmentId")
+
+                Dim UserEmail = Context.User.Identity.GetUserName()
+                btnPrivate.Visible = LocalAPI.GetEmployeePermission(LocalAPI.GetEmployeeId(UserEmail, lblCompanyId.Text), "Allow_PrivateMode")
 
                 If lblDptoId.Text > 0 Then
                     cboDepartment.DataBind()
@@ -100,7 +104,7 @@ Public Class jobassignemployee
                     Scope = "Employee"
                 End If
 
-                LocalAPI.Jobs_Employees_assigned_INSERT(lblJobId.Text, cboMulticolumnEmployee.Value, txtEmployeeHours.DbValue, txtHourlyRate.Value, Scope)
+                LocalAPI.Jobs_Employees_assigned_INSERT(lblJobId.Text, cboMulticolumnEmployee.Value, txtEmployeeHours.DbValue, txtHourlyRate.Value, Scope, cboPosition.SelectedValue)
 
                 NotifyEmployee(cboMulticolumnEmployee.Value, JobCodeName, txtEmployeeHours.DbValue)
 
@@ -130,10 +134,8 @@ Public Class jobassignemployee
     End Sub
     Protected Sub cboDepartment_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboDepartment.SelectedIndexChanged
         cboMulticolumnEmployee.DataBind()
-        cboMulticolumnEmployee.DataBind()
         If Val(cboMulticolumnEmployee.Value) > 0 Then
-            txtHourlyRate.MinValue = LocalAPI.GetEmployeeHourRate(cboMulticolumnEmployee.Value)
-            txtHourlyRate.Value = txtHourlyRate.MinValue
+            RefreshEmployeePositionRate()
         End If
         DefineHoursPerBudget()
     End Sub
@@ -158,11 +160,31 @@ Public Class jobassignemployee
     End Sub
 
     Private Sub cboMulticolumnEmployee_SelectedIndexChanged(sender As Object, e As RadMultiColumnComboBoxSelectedIndexChangedEventArgs) Handles cboMulticolumnEmployee.SelectedIndexChanged
-        If Val(cboMulticolumnEmployee.Value) > 0 Then
-            txtHourlyRate.MinValue = LocalAPI.GetEmployeeHourRate(cboMulticolumnEmployee.Value)
-            txtHourlyRate.Value = txtHourlyRate.MinValue
+        RefreshEmployeePositionRate()
+    End Sub
+
+    Private Sub cboPosition_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboPosition.SelectedIndexChanged
+        If cboPosition.SelectedValue = 0 Then
+            ' No existe Position
+            txtHourlyRate.MinValue = LocalAPI.GetPositionProperty(cboMulticolumnEmployee.Value, "HourRate")
         End If
         DefineHoursPerBudget()
+    End Sub
 
+    Protected Sub RefreshEmployeePositionRate()
+        If Val(cboMulticolumnEmployee.Value) > 0 Then
+            ' Employee defined, Get Position?
+            cboPosition.SelectedValue = LocalAPI.GetEmployeeProperty(cboMulticolumnEmployee.Value, "PositionId")
+        End If
+        If cboPosition.SelectedValue = 0 Then
+            ' No existe Position
+            txtHourlyRate.MinValue = LocalAPI.GetEmployeeHourRate(cboMulticolumnEmployee.Value)
+        Else
+            ' Rate of Position
+            txtHourlyRate.MinValue = LocalAPI.GetPositionProperty(cboPosition.SelectedValue, "HourRate")
+        End If
+        txtHourlyRate.Value = txtHourlyRate.MinValue
+
+        DefineHoursPerBudget()
     End Sub
 End Class

@@ -28,9 +28,12 @@ Public Class Job_times
             Case "NewHrInvoice"
                 lblTimeId.Text = e.CommandArgument
                 txtTimeSel.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "Time")
-                txtRate.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "HourRate")
+                'txtRate.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "HourRate")
+                Dim emloyeeId As Integer = LocalAPI.GetTimeProperty(lblTimeId.Text, "Employee")
+                txtRate.DbValue = LocalAPI.GetEmployeeAssignedHourRate(lblJobId.Text, emloyeeId)
+
                 txtTimeDescription.Text = LocalAPI.GetTimeProperty(lblTimeId.Text, "Description")
-                ConfirmInsertDlg("New Invoice", "Create New (hr) Invoice from Time record")
+                NewHrInvoiceDlg()
 
             Case "DeleteHrInvoice"
                 lblInvoiceSelected.Text = e.CommandArgument
@@ -40,10 +43,7 @@ Public Class Job_times
 
     End Sub
 
-    Private Sub ConfirmInsertDlg(Title As String, Text As String)
-        RadToolTipConfirmInsert.Title = Title
-        lblActionMesage.Text = Text & "<br /><br />Are you sure to do this action?<br /><br />"
-        btnOk.Text = Title
+    Private Sub NewHrInvoiceDlg()
         RadToolTipConfirmInsert.Visible = True
         RadToolTipConfirmInsert.Show()
     End Sub
@@ -56,9 +56,6 @@ Public Class Job_times
         RadToolTipConfirmDelete.Show()
     End Sub
 
-    Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        RadToolTipConfirmInsert.Visible = False
-    End Sub
     Protected Sub btnCancel2_Click(sender As Object, e As EventArgs) Handles btnCancel2.Click
         RadToolTipConfirmDelete.Visible = False
     End Sub
