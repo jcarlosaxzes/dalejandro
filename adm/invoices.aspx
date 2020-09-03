@@ -331,8 +331,11 @@
                             <span title="Number of times the Client has visited your Invoice Page" class="badge badge-pill badge-warning">
                                 <%#Eval("clientvisits")%>
                             </span>
-                            <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") = 0,"display:none","display:normal")%>'>
+                            <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") <= 0,"display:none","display:normal")%>'>
                                 <img src="../Images/C2QB_green_btn_sm_default.png" height="14" />
+                            </span>
+                             <span title="Invoice Pending Synced with QuickBooks" style='<%# "color:red;" & IIf(Eval("qbInvoiceId ") = -1,"display:normal","display:none")%>'>
+                                qb
                             </span>
                             <br />
                             <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></div>
