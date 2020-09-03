@@ -7,6 +7,7 @@
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">QuickBooks Customer Import Manager
         </span>
+        <asp:Panel ID="ConnectPanel" runat="server">
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnDisconnectFromQuickBooks" runat="server" CssClass="btn btn-danger btn" UseSubmitBehavior="false">
                     Disconnect from QuickBooks
@@ -16,6 +17,7 @@
             </asp:LinkButton>
             <asp:Button ID="btnGetCustomers" runat="server" Text="Get Customers from QuickBooks Online " CssClass="btn btn-success" OnClick="btnGetCustomers_Click" />
         </span>
+        </asp:Panel>
     </div>
     <asp:Panel ID="SyncPanel" runat="server">
         <div class="pasconcept-bar">

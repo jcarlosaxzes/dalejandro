@@ -10,20 +10,26 @@ Public Class client_sync_qb
         If Not IsPostBack Then
             lblCompanyId.Text = Session("companyId")
         End If
-        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
-            btnDisconnectFromQuickBooks.Visible = True
-            btnConnectToQuickBooks.Visible = False
-            btnGetCustomers.Visible = True
-        ElseIf qbAPI.IsValidRefreshToken(lblCompanyId.Text) Then
-            btnDisconnectFromQuickBooks.Visible = True
-            btnConnectToQuickBooks.Visible = False
-            btnGetCustomers.Visible = True
-            Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(lblCompanyId.Text))
+        If LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text) Then
+            ConnectPanel.Visible = False
         Else
-            btnDisconnectFromQuickBooks.Visible = False
-            btnConnectToQuickBooks.Visible = True
-            btnGetCustomers.Visible = False
+            If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                btnDisconnectFromQuickBooks.Visible = True
+                btnConnectToQuickBooks.Visible = False
+                btnGetCustomers.Visible = True
+            ElseIf qbAPI.IsValidRefreshToken(lblCompanyId.Text) Then
+                btnDisconnectFromQuickBooks.Visible = True
+                btnConnectToQuickBooks.Visible = False
+                btnGetCustomers.Visible = True
+                Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(lblCompanyId.Text))
+            Else
+                btnDisconnectFromQuickBooks.Visible = False
+                btnConnectToQuickBooks.Visible = True
+                btnGetCustomers.Visible = False
+            End If
         End If
+
+
 
         RadWindowManager1.EnableViewState = False
     End Sub
@@ -169,4 +175,6 @@ Public Class client_sync_qb
             Master.ErrorMessage(ex.Message)
         End Try
     End Sub
+
+
 End Class
