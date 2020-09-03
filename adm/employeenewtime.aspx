@@ -177,7 +177,11 @@
                 </td>
             </tr>
         </table>
-
+        <div>
+                <asp:ValidationSummary ID="vsClient" runat="server" ValidationGroup="time_insert" ForeColor="Red"
+                    HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+                                        There were this errors:"></asp:ValidationSummary>
+            </div>
         <div style="margin-left: 10px; margin-right: 10px">
             <h3>Last Time Records for this Job</h3>
             <telerik:RadGrid ID="RadGridTimes" runat="server" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true" AllowSorting="True" DataSourceID="SqlDataSourceTimes"
@@ -251,10 +255,10 @@
 
 
     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDescription" ErrorMessage="(*) Notes can not be empty"
-        ValidationGroup="time_insert">
+        ValidationGroup="time_insert" Display="None">
     </asp:RequiredFieldValidator>
     <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Time Sheet Category...)"
-        Operator="NotEqual" ControlToValidate="cboCategory" ErrorMessage="(*) You must select Category!" ValidationGroup="time_insert">
+        Operator="NotEqual" ControlToValidate="cboCategory" ErrorMessage="(*) You must select Category!" ValidationGroup="time_insert"  Display="None">
     </asp:CompareValidator>
 
 

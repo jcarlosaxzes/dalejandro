@@ -9,6 +9,7 @@ Public Class job_employees
                 lblCompanyId.Text = Session("companyId")
                 lblJobId.Text = Request.QueryString("JobId")
                 Master.ActiveTab(2)
+                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
             End If
 
             RadWindowManager1.EnableViewState = False
@@ -17,8 +18,23 @@ Public Class job_employees
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
     End Sub
+
+    Protected Sub RadGridAssignedEmployees_PreRender(sender As Object, e As EventArgs) Handles RadGridAssignedEmployees.PreRender
+        RadGridAssignedEmployees.MasterTableView.GetColumn("HourRate").Visible = (btnPrivate.Text = "Private")
+    End Sub
+    Private Sub btnPrivate_Click(sender As Object, e As EventArgs) Handles btnPrivate.Click
+        Select Case btnPrivate.Text
+            Case "Private"
+                RadGridAssignedEmployees.MasterTableView.GetColumn("HourRate").Visible = True
+                btnPrivate.Text = "Public"
+            Case "Public"
+                RadGridAssignedEmployees.MasterTableView.GetColumn("HourRate").Visible = btnPrivate.Visible = False
+                btnPrivate.Text = "Private"
+        End Select
+        RadGridAssignedEmployees.DataBind()
+    End Sub
     Protected Sub btnSetEmployee_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetEmployee.Click
-        CreateRadWindows("SetEmployee", "~/ADM/JobAssignEmployee.aspx?JobId=" & lblJobId.Text, 750, 450, False, "OnClientClose")
+        CreateRadWindows("SetEmployee", "~/ADM/JobAssignEmployee.aspx?JobId=" & lblJobId.Text, 960, 700, False, "OnClientClose")
     End Sub
 
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean, OnClientCloseFn As String)
@@ -84,4 +100,7 @@ Public Class job_employees
         LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' asigned", sFullBody, lblCompanyId.Text)
     End Sub
 
+    Private Sub SqlDataSourceAssignedEmployees_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAssignedEmployees.Updating
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
 End Class

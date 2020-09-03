@@ -86,6 +86,15 @@ Partial Public Class jobassignemployee
     Protected WithEvents cboMulticolumnEmployee As Global.Telerik.Web.UI.RadMultiColumnComboBox
     
     '''<summary>
+    '''cboPosition control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboPosition As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
     '''txtEmployeeHours control.
     '''</summary>
     '''<remarks>
@@ -149,6 +158,15 @@ Partial Public Class jobassignemployee
     Protected WithEvents btnDefineEmployee As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''vsClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents vsClient As Global.System.Web.UI.WebControls.ValidationSummary
+    
+    '''<summary>
     '''lblMsg control.
     '''</summary>
     '''<remarks>
@@ -156,6 +174,15 @@ Partial Public Class jobassignemployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMsg As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Comparevalidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator2 As Global.System.Web.UI.WebControls.CompareValidator
     
     '''<summary>
     '''SqlDataSourceEmpl_activos control.
@@ -183,6 +210,15 @@ Partial Public Class jobassignemployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourcePositions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourcePositions As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblJobId control.

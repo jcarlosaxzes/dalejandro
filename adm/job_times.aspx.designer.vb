@@ -50,15 +50,6 @@ Partial Public Class Job_times
     Protected WithEvents RadToolTipConfirmInsert As Global.Telerik.Web.UI.RadToolTip
     
     '''<summary>
-    '''lblActionMesage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblActionMesage As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''txtTimeSel control.
     '''</summary>
     '''<remarks>
@@ -93,15 +84,6 @@ Partial Public Class Job_times
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnOk As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnCancel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
     '''RadToolTipConfirmDelete control.
