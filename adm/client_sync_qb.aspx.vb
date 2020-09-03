@@ -9,10 +9,22 @@ Public Class client_sync_qb
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             lblCompanyId.Text = Session("companyId")
-            btnDisconnectFromQuickBooks.Visible = qbAPI.IsValidAccessToken(lblCompanyId.Text)
-            btnConnectToQuickBooks.Visible = Not btnDisconnectFromQuickBooks.Visible
-            btnGetCustomers.Visible = btnDisconnectFromQuickBooks.Visible
         End If
+        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+            btnDisconnectFromQuickBooks.Visible = True
+            btnConnectToQuickBooks.Visible = False
+            btnGetCustomers.Visible = True
+        ElseIf qbAPI.IsValidRefreshToken(lblCompanyId.Text) Then
+            btnDisconnectFromQuickBooks.Visible = True
+            btnConnectToQuickBooks.Visible = False
+            btnGetCustomers.Visible = True
+            Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(lblCompanyId.Text))
+        Else
+            btnDisconnectFromQuickBooks.Visible = False
+            btnConnectToQuickBooks.Visible = True
+            btnGetCustomers.Visible = False
+        End If
+
         RadWindowManager1.EnableViewState = False
     End Sub
 

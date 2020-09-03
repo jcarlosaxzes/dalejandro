@@ -21,17 +21,22 @@ Public Class qb_refreshtoken
                     Dim realmId = Request.QueryString("realmId")
 
                     Threading.Tasks.Task.Run(Function() GetAuthTokensAsync(code, realmId))
+                    PanelInstructions.Visible = False
+                    PanelSuccess.Visible = True
+                    btnConnect.Visible = False
 
                 Else
                     lblResutl.Text = "Connection Error with QB!!!"
 
                 End If
+            Else
+                ' Botones y paneles en funcion de connexion valida
+                PanelSuccess.Visible = qbAPI.IsValidAccessToken(Session("companyId"))
+                PanelInstructions.Visible = Not PanelSuccess.Visible
+                btnConnect.Visible = PanelInstructions.Visible
             End If
 
-            ' Botones y paneles en funcion de connexion valida
-            PanelSuccess.Visible = qbAPI.IsValidAccessToken(Session("companyId"))
-            PanelInstructions.Visible = Not PanelSuccess.Visible
-            btnConnect.Visible = PanelInstructions.Visible
+
 
         End If
 
