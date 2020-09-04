@@ -51,13 +51,13 @@ Public Class client_sync_qb
                 Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                 Dim QBId As Integer = ids(0)
                 Dim ClientId = ids(1)
-                LinkCustomer(ClientId, QBId)
+                qbAPI.LinkCustomer(lblCompanyId.Text, ClientId, QBId)
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
 
             Case "CreateNew"
                 Dim QBId As Integer = e.CommandArgument
-                CopyCustomer(QBId)
+                qbAPI.CopyCustomer(lblCompanyId.Text, QBId)
                 RadGrid1.Rebind()
                 RadGridLinked.Rebind()
 
@@ -68,25 +68,7 @@ Public Class client_sync_qb
         End Select
     End Sub
 
-    Protected Function LinkCustomer(ClientId As Integer, QBId As Integer) As Boolean
-        If ClientId > 0 And QBId > 0 Then
-            If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
-                Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
-                LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
-            End If
-            Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
-        End If
-    End Function
-    Protected Function CopyCustomer(QBId As Integer) As Boolean
-        If QBId > 0 Then
-            Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
-            Dim ClientId = LocalAPI.Client_INSERT(QBCustomer("DisplayName"), QBCustomer("Email"), QBCustomer("Title"), lblCompanyId.Text, QBCustomer("CompanyName"), QBCustomer("Addr_Line1"), QBCustomer("Addr_Line2"), QBCustomer("City"), QBCustomer("CountrySubDivisionCode"), QBCustomer("PostalCode"), QBCustomer("PrimaryPhone"), QBCustomer("Mobile"), "", "")
-            If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
-                LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
-            End If
-            Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
-        End If
-    End Function
+
     Protected Sub RadGridSearhcClient_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridSearhcClient.ItemCommand
 
         Select Case e.CommandName
@@ -137,7 +119,7 @@ Public Class client_sync_qb
                 For Each dataItem As GridDataItem In RadGrid1.SelectedItems
                     If dataItem.Selected Then
                         dataItem.Selected = False
-                        If LinkCustomer(Val(dataItem("Id").Text), Val(dataItem("QBId").Text)) Then
+                        If qbAPI.LinkCustomer(lblCompanyId.Text, Val(dataItem("Id").Text), Val(dataItem("QBId").Text)) Then
                             nRecs = nRecs + 1
                         End If
                     End If
@@ -160,7 +142,7 @@ Public Class client_sync_qb
                 For Each dataItem As GridDataItem In RadGrid1.SelectedItems
                     If dataItem.Selected Then
                         dataItem.Selected = False
-                        If CopyCustomer(Val(dataItem("QBId").Text)) Then
+                        If qbAPI.CopyCustomer(lblCompanyId.Text, Val(dataItem("QBId").Text)) Then
                             nRecs = nRecs + 1
                         End If
                     End If
