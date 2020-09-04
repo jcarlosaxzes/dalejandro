@@ -338,7 +338,7 @@
                                     </asp:LinkButton>
                                     &nbsp;&nbsp;&nbsp;
                                             <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
-                                                <i class="fas fa-plus"></i>&nbsp;Cancel
+                                                &nbsp;Cancel
                                             </asp:LinkButton>
                                 </td>
                             </tr>

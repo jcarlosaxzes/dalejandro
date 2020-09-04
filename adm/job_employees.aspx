@@ -27,7 +27,7 @@
             <telerik:RadGrid ID="RadGridAssignedEmployees" runat="server" DataSourceID="SqlDataSourceAssignedEmployees"
                 AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
                 ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
-                <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceAssignedEmployees">
+                <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceAssignedEmployees" EditMode="EditForms">
                     <Columns>
                         <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
                         </telerik:GridBoundColumn>
@@ -40,12 +40,16 @@
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-                        <telerik:GridDropDownColumn UniqueName="positionId" ListTextField="Name" ListValueField="Id" DataSourceID="SqlDataSourcePosition" HeaderText="Position"
-                            DataField="positionId" DropDownControlType="RadComboBox" AllowSorting="true">
-                        </telerik:GridDropDownColumn>
+                        <telerik:GridBoundColumn UniqueName="Position" HeaderText="Position" DataField="Position">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Hourly Rate" ItemStyle-HorizontalAlign="Right" SortExpression="HourRate" UniqueName="HourRate">
+                            <ItemTemplate>
+                                <%# Eval("HourRate", "{0:N2}") %>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
                         <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope">
                         </telerik:GridBoundColumn>
-                        <telerik:GridNumericColumn Aggregate="Sum" DataField="Hours" HeaderText="Est. Hours" UniqueName="Freight" HeaderTooltip="Estimared Hours"
+                        <telerik:GridNumericColumn Aggregate="Sum" DataField="Hours" HeaderText="Hours" UniqueName="Freight" HeaderTooltip="Assigned Hours"
                             HeaderStyle-Width="120px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
                         </telerik:GridNumericColumn>
                         <telerik:GridBoundColumn DataField="HoursWorked" HeaderText="H. Worked" ReadOnly="True" SortExpression="HoursWorked" UniqueName="HoursWorked"
@@ -53,11 +57,6 @@
                             Aggregate="Sum" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
 
-                        <telerik:GridTemplateColumn DataField="HourRate" ReadOnly="true" HeaderStyle-Width="120px" HeaderText="Hourly Rate" ItemStyle-HorizontalAlign="Right" SortExpression="HourRate" UniqueName="HourRate">
-                            <ItemTemplate>
-                                <%# Eval("HourRate", "{0:N2}") %>
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
                         <%--       <telerik:GridBoundColumn DataField="EstimatedTotal" HeaderText="Estimated Total" ReadOnly="True" SortExpression="EstimatedTotal" UniqueName="EstimatedTotal"
                                 DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}"
                                 Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
@@ -74,7 +73,7 @@
                             DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}"
                             Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE(%)" ReadOnly="True" SortExpression="FTE" UniqueName="FTE"
+                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE(%)" ReadOnly="True" SortExpression="FTE" UniqueName="FTE" Display="false"
                             DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
                             Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
@@ -88,10 +87,63 @@
                             ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
                         </telerik:GridButtonColumn>
                     </Columns>
-                    <EditFormSettings>
-                        <EditColumn FilterControlAltText="Filter EditCommandColumn1 column" ButtonType="PushButton"
-                            UniqueName="EditCommandColumn1">
-                        </EditColumn>
+                    <EditFormSettings CaptionFormatString="Edit Assigned Employee" EditFormType="Template" FormStyle-Width="600px">
+                        <FormTemplate>
+                            <br />
+                            <table style="width: 100%; font-size: small">
+                                <tr>
+                                    <td style="width: 100px; text-align: right">Position:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboPosition" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourcePosition"
+                                            DataTextField="Name" DataValueField="Id" SelectedValue='<%# Bind("positionId")%>'
+                                            Width="100%" MarkFirstMatch="True" Filter="Contains" Height="400px">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Select Position...)" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Hours:
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextBox1" runat="server" Width="200px" DbValue='<%# Bind("Hours")%>'>
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Hourly Rate:
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="txtRate" runat="server" Width="200px" DbValue='<%# Bind("HourRate")%>'>
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Scope:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="txtScope" runat="server" Width="100%" Text='<%# Bind("Scope") %>' MaxLength="128">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center" colspan="2">
+                                        <br />
+                                        <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CommandName="Update">
+                                                Update
+                                        </asp:LinkButton>
+                                        &nbsp;&nbsp;&nbsp;
+                                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
+                                                Cancel
+                                            </asp:LinkButton>
+
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                        </FormTemplate>
                     </EditFormSettings>
                 </MasterTableView>
             </telerik:RadGrid>
@@ -104,32 +156,23 @@
     <asp:SqlDataSource ID="SqlDataSourceAssignedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Jobs_Employees_assigned_DELETE" DeleteCommandType="StoredProcedure"
         SelectCommand="Jobs_Employees_assigned_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="Jobs_Employees_assigned_INSERT" InsertCommandType="StoredProcedure"
-        UpdateCommand="Jobs_Employees_assigned_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="Jobs_Employees_v20_assigned_UPDATE" UpdateCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="jobId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
-        <InsertParameters>
-            <asp:ControlParameter ControlID="lblId" Name="jobId" PropertyName="Text" Type="Int32" />
-            <asp:Parameter Name="employeeId" Type="Int32" />
+        <UpdateParameters>
             <asp:Parameter Name="positionId" Type="Int32" />
             <asp:Parameter Name="Scope" Type="String" />
             <asp:Parameter Name="Hours" Type="Double" />
             <asp:Parameter Name="HourRate" Type="Double" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="employeeId" Type="Int32" />
-            <asp:Parameter Name="positionId" Type="Int32" />
-            <asp:Parameter Name="Scope" Type="String" />
-            <asp:Parameter Name="Hours" Type="Double" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcePosition" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Select Id, Name from Employees_Position where companyId=@companyId Order By Name">
+        SelectCommand="Select Id, Name=Name + ' $ ' + cast(HourRate as nvarchar(20)) from Employees_Position where companyId=@companyId Order By Name">
         <SelectParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
