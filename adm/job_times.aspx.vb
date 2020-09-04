@@ -12,6 +12,12 @@ Public Class Job_times
                 ' Si no tiene permiso, la dirijo a message
                 If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
 
+                cboEmployee.DataBind()
+                If cboEmployee.Items.Count = 0 Then
+                    btnNewTime.Visible = False
+                    cboEmployee.Visible = False
+                End If
+
                 Master.ActiveTab(6)
             End If
 
@@ -107,5 +113,10 @@ Public Class Job_times
     Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
         ConfigureExport(LocalAPI.GetJobCodeName(lblJobId.Text))
         RadGridExportData.MasterTableView.ExportToCSV()
+    End Sub
+
+    Private Sub btnNewTime_Click(sender As Object, e As EventArgs) Handles btnNewTime.Click
+        Session("employeefortime") = cboEmployee.SelectedValue
+        Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & lblJobId.Text & "&backpage=job_times")
     End Sub
 End Class

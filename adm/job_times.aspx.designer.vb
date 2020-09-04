@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class Job_times
     
     '''<summary>
+    '''cboEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboEmployee As Global.Telerik.Web.UI.RadComboBox
+    
+    '''<summary>
+    '''btnNewTime control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNewTime As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''btnExport control.
     '''</summary>
     '''<remarks>
@@ -138,6 +156,15 @@ Partial Public Class Job_times
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceCategory As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
+    '''SqlDataSourceJobEmpls control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceJobEmpls As Global.System.Web.UI.WebControls.SqlDataSource
     
     '''<summary>
     '''lblJobId control.
