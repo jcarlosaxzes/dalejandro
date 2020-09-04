@@ -2665,7 +2665,7 @@ Public Class LocalAPI
     '    End If
     'End Function
 
-    Public Shared Function Jobs_Employees_assigned_INSERT(jobId As Integer, employeeId As Integer, Optional Hours As Integer = 0, Optional HourRate As Double = 0, Optional Scope As String = "Poject Manager") As Boolean
+    Public Shared Function Jobs_Employees_assigned_INSERT(jobId As Integer, employeeId As Integer, Optional Hours As Integer = 0, Optional HourRate As Double = 0, Optional Scope As String = "Poject Manager", Optional positionId As Integer = 0) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
@@ -2677,7 +2677,7 @@ Public Class LocalAPI
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@jobId", jobId)
             cmd.Parameters.AddWithValue("@employeeId", employeeId)
-            cmd.Parameters.AddWithValue("@positionId", 0)
+            cmd.Parameters.AddWithValue("@positionId", IIf(positionId > 0, positionId, GetEmployeeProperty(employeeId, "PositionId")))
             cmd.Parameters.AddWithValue("@Scope", Scope)
             cmd.Parameters.AddWithValue("@Hours", Hours)
             cmd.Parameters.AddWithValue("@HourRate", HourRate)
@@ -3275,9 +3275,6 @@ Public Class LocalAPI
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            'cmd.CommandText = "INSERT INTO [Invoices] ([JobId],[InvoiceDate],[Amount],[InvoiceNotes],[Emitted],[InvoiceType],[Time],[Rate],[employeeTimeId], [Number], [guid])  " &
-            '                                        "SELECT [Job], [Fecha]dAmount AS [TimexCoste], @invDescription, 0, 1dHours AS [Time]dRate AS HourRate, [Id]Number AS Number, NewId() FROM [Employees_time] WHERE [Id]=@timeId"
-
             cmd.CommandText = "INVOICE_HourlyRate_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
             cmd.Parameters.AddWithValue("@dAmount", FormatearNumero2Tsql(dAmount))
@@ -3292,10 +3289,7 @@ Public Class LocalAPI
 
             cnn1.Close()
 
-            ' Recalculo Budget desde un nuevo "hr"
-            'LocalAPI.JobCalculateBudgetFromNewInvoice(lJob, dAmount)
-
-            NuevoInvoiceHourlyRate = True
+            Return True
 
             Dim companyId As Integer = GetCompanyIdFromJob(lJob)
             LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewInvoice, companyId, "Time id: " & timeId)
@@ -7966,7 +7960,9 @@ Public Class LocalAPI
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            cmd.CommandText = "UPDATE [Invoices] SET [statementId]=" & statementId & " WHERE Id=" & invoiceId
+            ' 9-3-2020
+            ' No add invoices with Amount=0
+            cmd.CommandText = $"UPDATE [Invoices] SET [statementId]={statementId} WHERE Id={invoiceId} and Amount<>0"
 
             cmd.ExecuteNonQuery()
             cnn1.Close()
@@ -9412,6 +9408,26 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetEmployeeAssignedHourRate(jobId As Integer, ByVal employeeId As Long) As Double
+        Try
+            '************ Rate of Position of Employee in Job ************************
+            Return GetNumericEscalar($"select dbo.EmployeeAssignedHourRate({jobId},{employeeId})")
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function GetEmployeeJobPositionHourRate(jobId As Integer, ByVal employeeId As Long) As Double
+        Try
+            '************ Rate of Position of Employee in Job ************************
+            Return GetNumericEscalar($"select dbo.EmployeeJobPositionHourRate({jobId},{employeeId})")
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
     Public Shared Function GetWeeklyHoursByEmp(ByVal employeeId As Integer, companyId As Integer) As Double
         Return GetNumericEscalar("SELECT dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & ",dbo.CurrentTime())")
     End Function
@@ -9433,7 +9449,7 @@ Public Class LocalAPI
 
             ' Analisis del tipo de dato de retorno
             Select Case sProperty
-                Case "DepartmentId", "companyId", "Inactive", "HourRate", "Benefits_vacations", "Benefits_personals"
+                Case "DepartmentId", "companyId", "Inactive", "HourRate", "Benefits_vacations", "Benefits_personals", "PositionId"
                     'Enteros
                     sSQL = "SELECT ISNULL(" & sProperty & ",0) FROM [Employees] WHERE [Id]=" & lId
 

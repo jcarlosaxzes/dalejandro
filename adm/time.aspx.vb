@@ -148,7 +148,12 @@ Public Class time
             Case "NewHrInvoice"
                 lblTimeId.Text = e.CommandArgument
                 txtTimeSel.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "Time")
-                txtRate.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "HourRate")
+
+                'txtRate.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "HourRate")
+                Dim emloyeeId As Integer = LocalAPI.GetTimeProperty(lblTimeId.Text, "Employee")
+                Dim jobId As Integer = LocalAPI.GetTimeProperty(lblTimeId.Text, "Job")
+                txtRate.DbValue = LocalAPI.GetEmployeeAssignedHourRate(jobId, emloyeeId)
+
                 txtTimeDescription.Text = LocalAPI.GetTimeProperty(lblTimeId.Text, "Description")
                 ConfirmInsertDlg("New Invoice", "Create New (hr) Invoice from Time record")
 

@@ -245,12 +245,6 @@
                                     <asp:Label ID="lblRates" runat="server" Text='<%# Eval("Rate", "{0:N2}")%>'></asp:Label>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="Multiplier" HeaderText="Multiplier" SortExpression="Multiplier" UniqueName="Multiplier" HeaderStyle-Width="150px" ReadOnly="true"
-                                ItemStyle-HorizontalAlign="Right">
-                                <ItemTemplate>
-                                    <%# Eval("Multiplier", "{0:N2}") %>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
                             <telerik:GridBoundColumn DataField="Total" HeaderText="Total" ReadOnly="True"
                                 SortExpression="Total" DataFormatString="{0:N2}" UniqueName="Total" Aggregate="Sum"
                                 FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">

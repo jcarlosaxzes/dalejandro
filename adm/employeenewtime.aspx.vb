@@ -144,11 +144,14 @@ Public Class employeenewtime
             dRate = LocalAPI.GetProposalTaskRate(cboMulticolumnTask.Value)
         Else
             ' Parche para Axzes a $35/Hour
-            If lblCompanyId.Text = 260973 Then
-                dRate = 35
-            Else
-                dRate = LocalAPI.GetEmployeeHourRate(lblEmployeeId.Text)
-            End If
+            'If lblCompanyId.Text = 260973 Then
+            '    dRate = 35
+            'Else
+            ' dRate = LocalAPI.GetEmployeeHourRate(lblEmployeeId.Text)
+            'End If
+
+            ' 9-3-2020 
+            dRate = LocalAPI.GetEmployeeAssignedHourRate(lblSelectedJob.Text, lblEmployeeId.Text)
 
         End If
 

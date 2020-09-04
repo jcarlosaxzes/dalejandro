@@ -158,6 +158,15 @@ Partial Public Class employeenewtime
     Protected WithEvents btnInsertTimeAndInvoice As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''vsClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents vsClient As Global.System.Web.UI.WebControls.ValidationSummary
+    
+    '''<summary>
     '''RadGridTimes control.
     '''</summary>
     '''<remarks>

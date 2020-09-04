@@ -8,6 +8,8 @@
     <%--Bootstrap reference begin--%>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <%--Bootstrap reference end--%>
+    <link href="~/Content/pasconcept.min.css" rel="stylesheet" />
+
 </head>
 <body>
     <%--Bootstrap reference begin--%>
@@ -22,6 +24,7 @@
                 <telerik:AjaxSetting AjaxControlID="cboMulticolumnEmployee">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="cboMulticolumnEmployee" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="cboPosition" />
                         <telerik:AjaxUpdatedControl ControlID="txtEmployeeHours" />
                         <telerik:AjaxUpdatedControl ControlID="txtHourlyRate" />
                         <telerik:AjaxUpdatedControl ControlID="gaugeUsedBudget" />
@@ -31,6 +34,7 @@
                 <telerik:AjaxSetting AjaxControlID="cboDepartment">
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="cboMulticolumnEmployee" LoadingPanelID="RadAjaxLoadingPanel1" />
+                        <telerik:AjaxUpdatedControl ControlID="cboPosition" />
                         <telerik:AjaxUpdatedControl ControlID="txtEmployeeHours" />
                         <telerik:AjaxUpdatedControl ControlID="txtHourlyRate" />
                         <telerik:AjaxUpdatedControl ControlID="gaugeUsedBudget" />
@@ -43,6 +47,7 @@
                     <UpdatedControls>
                         <telerik:AjaxUpdatedControl ControlID="lblMsg" />
                         <telerik:AjaxUpdatedControl ControlID="cboMulticolumnEmployee" />
+                        <telerik:AjaxUpdatedControl ControlID="cboPosition" />
                         <telerik:AjaxUpdatedControl ControlID="chkIsProjectManager" />
                         <telerik:AjaxUpdatedControl ControlID="gaugeUsedBudget" />
                         <telerik:AjaxUpdatedControl ControlID="sliderUsedBudget" />
@@ -83,157 +88,173 @@
             }
             </script>
         </telerik:RadCodeBlock>--%>
+        <div style="padding-left:25px; padding-right:25px">
+            <br />
 
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td>
-                    <h3 style="margin: 5px">
-                        <asp:Label ID="lblJobName" runat="server"></asp:Label></h3>
-                </td>
-                <td style="width: 100px; text-align: right">
+            <div class="pasconcept-bar">
+                <span class="pasconcept-pagetitle">
+                    <asp:Label ID="lblJobName" runat="server"></asp:Label></span>
+                <span style="float: right; vertical-align: middle;">
                     <asp:LinkButton ID="btnPrivate" runat="server" ToolTip="Private/Public mode" Text="Private"
                         CssClass="btn btn-danger btn" UseSubmitBehavior="false">
                     </asp:LinkButton>
-                </td>
-            </tr>
-        </table>
-
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 60%; vertical-align: top">
+                </span>
+            </div>
 
 
-                    <table class="table-sm" style="width: 100%">
-                        <tr>
-                            <td style="width: 130px; text-align: right">Department:</td>
-                            <td>
-                                <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True" Width="100%" AutoPostBack="true" DataSourceID="SqlDataSourceDepartments"
-                                    DataTextField="Name" DataValueField="Id">
-                                    <Items>
-                                        <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="0" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right">Employee:
-                            </td>
-                            <td>
-                                <telerik:RadMultiColumnComboBox ID="cboMulticolumnEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" DataTextField="Name" DataValueField="Id" AutoPostBack="true"
-                                    Width="100%" DropDownWidth="700" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
-                                    FilterFields="Name" Placeholder="(Select Employee...)">
-                                    <ColumnsCollection>
-                                        <telerik:MultiColumnComboBoxColumn Field="Name" Title="Code" />
-                                        <telerik:MultiColumnComboBoxColumn Field="Experience" Title="Experience" Width="100px" />
-                                        <telerik:MultiColumnComboBoxColumn Field="WorkLoad" Title="WorkLoad" Width="100px" />
-                                        <telerik:MultiColumnComboBoxColumn Field="EfficiencyAsPM" Title="Eff.As PM" Width="100px" />
-                                        <telerik:MultiColumnComboBoxColumn Field="EfficiencyAsTM" Title="Eff.As TM" Width="100px" />
-                                    </ColumnsCollection>
-                                </telerik:RadMultiColumnComboBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Assign Time:
-                            </td>
-                            <td style="text-align: left">
-                                <table>
-                                    <tr>
-                                        <td style="width: 75px">
-                                            <telerik:RadNumericTextBox ID="txtEmployeeHours" runat="server" MinValue="0" Value="0" Width="95px">
-                                                <NumberFormat DecimalDigits="0" />
-                                            </telerik:RadNumericTextBox>
 
-                                        </td>
-                                        <td style="width: 75px">(hours)
-                                        </td>
-                                        <td style="text-align: right">
-                                            <telerik:RadNumericTextBox ID="txtHourlyRate" runat="server" MaxLength="3" AutoPostBack="true"
-                                                MinValue="25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Hourly rate" Visible="false"
-                                                Value="25" Width="100px" MaxValue="999">
-                                                <NumberFormat DecimalDigits="0" />
-                                                <IncrementSettings Step="5" />
-                                            </telerik:RadNumericTextBox>
-                                        </td>
-                                    </tr>
-                                </table>
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                    <td style="width: 60%; vertical-align: top">
+                        <table class="table-sm" style="width: 100%">
+                            <tr>
+                                <td style="width: 180px; text-align: right">Department:</td>
+                                <td>
+                                    <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True" Width="100%" AutoPostBack="true" DataSourceID="SqlDataSourceDepartments"
+                                        DataTextField="Name" DataValueField="Id">
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="(All Departments...)" Value="0" />
+                                        </Items>
+                                    </telerik:RadComboBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Employee:
+                                </td>
+                                <td>
+                                    <telerik:RadMultiColumnComboBox ID="cboMulticolumnEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" DataTextField="Name" DataValueField="Id" AutoPostBack="true"
+                                        Width="100%" DropDownWidth="700" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
+                                        FilterFields="Name" Placeholder="(Select Employee...)">
+                                        <ColumnsCollection>
+                                            <telerik:MultiColumnComboBoxColumn Field="Name" Title="Code" />
+                                            <telerik:MultiColumnComboBoxColumn Field="Experience" Title="Experience" Width="100px" />
+                                            <telerik:MultiColumnComboBoxColumn Field="WorkLoad" Title="WorkLoad" Width="100px" />
+                                            <telerik:MultiColumnComboBoxColumn Field="EfficiencyAsPM" Title="Eff.As PM" Width="100px" />
+                                            <telerik:MultiColumnComboBoxColumn Field="EfficiencyAsTM" Title="Eff.As TM" Width="100px" />
+                                        </ColumnsCollection>
+                                    </telerik:RadMultiColumnComboBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Position in Job:</td>
+                                <td>
+                                    <telerik:RadComboBox ID="cboPosition" runat="server" AppendDataBoundItems="True" Width="100%" DataSourceID="SqlDataSourcePositions"
+                                        DataTextField="Name" DataValueField="Id" AutoPostBack="true">
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="(Select Position...)" Value="0" />
+                                        </Items>
+                                    </telerik:RadComboBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Assign Time:
+                                </td>
+                                <td style="text-align: left">
+                                    <table>
+                                        <tr>
+                                            <td style="width: 75px">
+                                                <telerik:RadNumericTextBox ID="txtEmployeeHours" runat="server" MinValue="0" Value="0" Width="95px">
+                                                    <NumberFormat DecimalDigits="0" />
+                                                </telerik:RadNumericTextBox>
+
+                                            </td>
+                                            <td style="width: 75px">(hours)
+                                            </td>
+                                            <td style="text-align: right">
+                                                <telerik:RadNumericTextBox ID="txtHourlyRate" runat="server" MaxLength="3" AutoPostBack="true"
+                                                    MinValue="25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Hourly rate" Visible="false"
+                                                    Value="25" Width="100px" MaxValue="999">
+                                                    <NumberFormat DecimalDigits="0" />
+                                                    <IncrementSettings Step="5" />
+                                                </telerik:RadNumericTextBox>
+                                            </td>
+                                        </tr>
+                                    </table>
 
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right">Is Project Manager?:
-                            </td>
-                            <td>
-                                <telerik:RadCheckBox ID="chkIsProjectManager" runat="server" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right">Client Deadline:
-                            </td>
-                            <td style="color:red">
-                                <telerik:RadDatePicker ID="RadDatePickerDeadline" runat="server" Width="100%" ToolTip="Job Deadline" Enabled="false">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Is Project Manager?:
+                                </td>
+                                <td>
+                                    <telerik:RadCheckBox ID="chkIsProjectManager" runat="server" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">Client Deadline:
+                                </td>
+                                <td style="color: red">
+                                    <telerik:RadDatePicker ID="RadDatePickerDeadline" runat="server" Width="100%" ToolTip="Job Deadline" Enabled="false">
                                     </telerik:RadDatePicker>
-                            </td>
+                                </td>
 
-                        </tr>
-                    </table>
+                            </tr>
+                        </table>
 
-                </td>
+                    </td>
 
-                <td style="width: 7%"></td>
-                <td>
-                    <h5 style="margin: 3px; text-align: center">Time Budget Risk </h5>
-                    <telerik:RadRadialGauge runat="server" ID="gaugeUsedBudget" Width="100%" Height="130px"
-                        ToolTip="This gauge sets the risk to assign employee time. We reccomend low risk in complex/expense jobs">
-                        <Pointer Value="2.2">
-                            <Cap Size="0.1" />
-                        </Pointer>
-                        <Scale Min="60" Max="90" MajorUnit="5">
-                            <%--<Labels Format="{0}" />--%>
-                            <Ranges>
-                                <telerik:GaugeRange Color="#8dcb2a" From="60" To="67" />
-                                <telerik:GaugeRange Color="#ffc700" From="67" To="75" />
-                                <telerik:GaugeRange Color="#ff7a00" From="75" To="82" />
-                                <telerik:GaugeRange Color="#c20000" From="82" To="90" />
+                    <td style="width: 7%"></td>
+                    <td>
+                        <h5 style="margin: 3px; text-align: center">Time Budget Risk </h5>
+                        <telerik:RadRadialGauge runat="server" ID="gaugeUsedBudget" Width="100%" Height="130px"
+                            ToolTip="This gauge sets the risk to assign employee time. We reccomend low risk in complex/expense jobs">
+                            <Pointer Value="2.2">
+                                <Cap Size="0.1" />
+                            </Pointer>
+                            <Scale Min="60" Max="90" MajorUnit="5">
+                                <%--<Labels Format="{0}" />--%>
+                                <Ranges>
+                                    <telerik:GaugeRange Color="#8dcb2a" From="60" To="67" />
+                                    <telerik:GaugeRange Color="#ffc700" From="67" To="75" />
+                                    <telerik:GaugeRange Color="#ff7a00" From="75" To="82" />
+                                    <telerik:GaugeRange Color="#c20000" From="82" To="90" />
 
-                            </Ranges>
-                        </Scale>
-                    </telerik:RadRadialGauge>
+                                </Ranges>
+                            </Scale>
+                        </telerik:RadRadialGauge>
 
 
-                    <telerik:RadSlider RenderMode="Lightweight" runat="server" ID="sliderUsedBudget" Orientation="Horizontal" ShowDecreaseHandle="false"
-                        LargeChange="10" SmallChange="5"
-                        ShowIncreaseHandle="false" MinimumValue="60" AutoPostBack="true" ToolTip="This slide sets the risk to assign employee time. We reccomend low risk in complex/expense jobs"
-                        MaximumValue="90" Width="95%">
-                    </telerik:RadSlider>
-                </td>
+                        <telerik:RadSlider RenderMode="Lightweight" runat="server" ID="sliderUsedBudget" Orientation="Horizontal" ShowDecreaseHandle="false"
+                            LargeChange="10" SmallChange="5"
+                            ShowIncreaseHandle="false" MinimumValue="60" AutoPostBack="true" ToolTip="This slide sets the risk to assign employee time. We reccomend low risk in complex/expense jobs"
+                            MaximumValue="90" Width="95%">
+                        </telerik:RadSlider>
+                    </td>
 
-            </tr>
-        </table>
+                </tr>
+            </table>
 
-        <hr />
+            <hr />
 
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td>
-                    
-                </td>
-                <td style="text-align: right; padding-right: 10px; width: 180px">
-                    <asp:LinkButton ID="btnDefineEmployee" runat="server" ToolTip="Assign New Employee & Time"
-                        CssClass="btn btn-success btn" UseSubmitBehavior="false">
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                    <td style="text-align: right; padding-right: 10px;">
+                        <asp:LinkButton ID="btnDefineEmployee" runat="server" ToolTip="Assign New Employee & Time" ValidationGroup="AssignEmployee"
+                            CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
                                     <i class="fas fa-plus"></i> Assign Employee
-                    </asp:LinkButton>
-                </td>
-            </tr>
-        </table>
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <asp:ValidationSummary ID="vsClient" runat="server" ValidationGroup="AssignEmployee" ForeColor="Red"
+                    HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+                                        There were this errors:"></asp:ValidationSummary>
+            </div>
 
 
+            <div style="text-align: center;">
+                <asp:Label ID="lblMsg" runat="server" ForeColor="Red"></asp:Label>
 
-        <div style="text-align: center;">
-            <asp:Label ID="lblMsg" runat="server" ForeColor="Red"></asp:Label>
+            </div>
+            <div>
+                <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Position...)"
+                    Operator="NotEqual" ControlToValidate="cboPosition" Text="*" ErrorMessage="Define Position" SetFocusOnError="true" ValidationGroup="AssignEmployee" Display="None"> </asp:CompareValidator>
+
+            </div>
 
         </div>
-
         <asp:SqlDataSource ID="SqlDataSourceEmpl_activos" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
             SelectCommand="JobAssignEmployee_SELECT" SelectCommandType="StoredProcedure">
             <SelectParameters>
@@ -252,6 +273,12 @@
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
             SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId and isnull(Productive,0)=1 ORDER BY [Name]">
+            <SelectParameters>
+                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSourcePositions" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+            SelectCommand="SELECT [Id], [Name] FROM [Employees_Position] WHERE companyId=@companyId ORDER BY [Name]">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             </SelectParameters>
