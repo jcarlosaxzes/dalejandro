@@ -65,6 +65,7 @@ Public Class qbAPI
                 LocalAPI.SetqbRefreshToken(companyId, "", -1000)
             Else
                 LocalAPI.SetqbAccessToken(companyId, tokenResp.AccessToken, tokenResp.AccessTokenExpiresIn)
+                LocalAPI.SetqbRefreshToken(companyId, tokenResp.RefreshToken, tokenResp.RefreshTokenExpiresIn)
             End If
 
             Return True
@@ -205,6 +206,25 @@ Public Class qbAPI
         End Try
     End Function
 
+    Public Shared Function LinkCustomer(companyId As Integer, ClientId As Integer, QBId As Integer) As Boolean
+        If ClientId > 0 And QBId > 0 Then
+            If (LocalAPI.IsQuickBookDesckModule(companyId)) Then
+                Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
+                LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+            End If
+            Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
+        End If
+    End Function
+    Public Shared Function CopyCustomer(companyId As Integer, QBId As Integer) As Boolean
+        If QBId > 0 Then
+            Dim QBCustomer = LocalAPI.GetqbCustomer(QBId)
+            Dim ClientId = LocalAPI.Client_INSERT(QBCustomer("DisplayName"), QBCustomer("Email"), QBCustomer("Title"), companyId, QBCustomer("CompanyName"), QBCustomer("Addr_Line1"), QBCustomer("Addr_Line2"), QBCustomer("City"), QBCustomer("CountrySubDivisionCode"), QBCustomer("PostalCode"), QBCustomer("PrimaryPhone"), QBCustomer("Mobile"), "", "")
+            If (LocalAPI.IsQuickBookDesckModule(companyId)) Then
+                LocalAPI.ActualizarClient(ClientId, "qbListID", QBCustomer("ListID"))
+            End If
+            Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
+        End If
+    End Function
 
     Public Shared Function GetQBCompany(comapyId As String) As CompanyInfo
         Try
