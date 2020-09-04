@@ -34,9 +34,9 @@ Public Class employeenewtime
                 End If
 
                 If Not Request.QueryString("backpage") Is Nothing Then
-                    Session("employeenewbackpage") = Request.QueryString("backpage")
+                    Session("employeenewtimebackpage") = Request.QueryString("backpage")
                 Else
-                    Session("employeenewbackpage") = ""
+                    Session("employeenewtimebackpage") = ""
                 End If
 
 
@@ -254,11 +254,13 @@ Public Class employeenewtime
     End Sub
 
     Private Sub BackPage()
-        Select Case Session("employeenewbackpage")
+        Select Case Session("employeenewtimebackpage")
             Case "activejobsdashboad"
                 Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
             Case "time"
                 Response.Redirect("~/adm/time.aspx?restoreFilter=true")
+            Case "job_times"
+                Response.Redirect("~/adm/job_times.aspx?JobId=" & lblSelectedJob.Text)
             Case Else
                 Response.Redirect("~/adm/default.aspx")
         End Select

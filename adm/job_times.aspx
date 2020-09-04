@@ -4,14 +4,23 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Job Time Activity</span>
+            <span style="float: right; vertical-align: middle;">
+                <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceJobEmpls" MarkFirstMatch="True" ToolTip="Select Employye"
+                    Width="300px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px">
+                </telerik:RadComboBox>
+                <asp:LinkButton ID="btnNewTime" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                        Add Time
+                </asp:LinkButton>
+                <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" CssClass="btn btn-dark btn" UseSubmitBehavior="false">
+                                <i class="fas fa-download"></i> Export
+                </asp:LinkButton>
+            </span>
+        </div>
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td>
-                    <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
-                        CssClass="btn btn-success btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-download"></i> Export
-                    </asp:LinkButton>
-                </td>
+                <td></td>
             </tr>
             <tr>
                 <td>
@@ -194,7 +203,7 @@
             </tr>
             <tr>
                 <td style="text-align: center; padding-top: 25px" colspan="2">
-                    <asp:LinkButton ID="btnOk" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" >
+                    <asp:LinkButton ID="btnOk" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                                     Add Invoice
                     </asp:LinkButton>
                 </td>
@@ -256,6 +265,14 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
+    
+    <asp:SqlDataSource ID="SqlDataSourceJobEmpls" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="select E.Id ,E.FullName As Name from Jobs_Employees_assigned AS EA inner join Employees E ON EA.employeeId = E.Id where EA.jobId = @jobId order by E.FullName">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblJobId" DefaultValue="" Name="JobId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
 
     <asp:Label ID="lblJobId" runat="server" Visible="false" Text="0"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
