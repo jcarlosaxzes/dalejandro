@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.28917.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PASconcept.Web", "PASconcept.Web.vbproj", "{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASconcept.DataAccess", "PASconcept.DataAccess\PASconcept.DataAccess.csproj", "{D655C634-0421-434D-B849-1F6B53C9EDEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PASconcept.DataAccess", "PASconcept.DataAccess\PASconcept.DataAccess.csproj", "{D655C634-0421-434D-B849-1F6B53C9EDEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PASconcept.Domain", "PASconcept.Domain\PASconcept.Domain.csproj", "{2BB4DCA2-6AB0-44A2-8684-F87DDBC86A3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PASconcept.Domain", "PASconcept.Domain\PASconcept.Domain.csproj", "{2BB4DCA2-6AB0-44A2-8684-F87DDBC86A3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
