@@ -430,7 +430,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible="false">
+                                                        <asp:LinkButton ID="LinkButton3" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="fas fa-user-alt"></i>&nbsp;&nbsp;View/Edit Employees
                                                         </asp:LinkButton>
                                                     </td>
