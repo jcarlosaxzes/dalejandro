@@ -53,7 +53,7 @@
                                         <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridTemplateColumn DataField="HourRate" HeaderText="Hour Rate (for estimate only)" SortExpression="HourRate" UniqueName="HourRate" HeaderStyle-Width="220px"
+                                <telerik:GridTemplateColumn DataField="HourRate" HeaderText="Hourly Rate" SortExpression="HourRate" UniqueName="HourRate" HeaderStyle-Width="220px"
                                     ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center">
                                     <ItemTemplate>
                                         <asp:Label ID="lblHourRate" runat="server" Text='<%# Eval("HourRate", "{0:N2}")%>'></asp:Label>
