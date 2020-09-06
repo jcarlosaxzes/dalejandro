@@ -32,7 +32,9 @@ Public Class Global_asax
                                                            })
             )
         container.RegisterType (Of IBaseDapperRepository, BaseDapperRepository)
-        container.RegisterType (Of ICompaniesRepository, CompaniesRepository)
+        container.RegisterType(Of ICompaniesRepository, CompaniesRepository)
+        container.RegisterType(Of IQBOperationLogRepository, QBOperationLogRepository)
+        container.RegisterType(Of IPASconceptDbContext, PASconceptDbContext)
     End Sub
     'Private Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
 
