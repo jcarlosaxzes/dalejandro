@@ -112,16 +112,24 @@ Public Class Job_accounting
                     Response.Redirect("~/ADM/pdf_print.aspx")
 
                 Case "SendQB"
-                    If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                    If (LocalAPI.IsQuickBookDesckModule(lblCompanyId.Text)) Then
+                        'Mark this Invoice to be Sync with QuickBooks Desktop Web Connector
                         Dim ids As String() = CType(e.CommandArgument, String).Split(",")
-                        Dim qbCustomerId As Integer = ids(1)
                         lblInvoiceId.Text = ids(0)
-                        qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
+                        LocalAPI.SetInvoiceQBRef(lblInvoiceId.Text, -1, lblEmployeeId.Text)
                         RadGridIncoices.Rebind()
                     Else
-                        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=job_accounting&JobId=" & lblJobId.Text)
-                    End If
+                        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                            Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                            Dim qbCustomerId As Integer = ids(1)
+                            lblInvoiceId.Text = ids(0)
+                            qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
+                            RadGridIncoices.Rebind()
+                        Else
+                            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=job_accounting&JobId=" & lblJobId.Text)
+                        End If
 
+                    End If
             End Select
 
         Catch ex As Exception
