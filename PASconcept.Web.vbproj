@@ -729,6 +729,7 @@
     <Content Include="adm\tagcloud.aspx" />
     <Content Include="adm\tandctemplates.aspx" />
     <Content Include="adm\tandctemplate_form.aspx" />
+    <Content Include="adm\TestEntityFramenwork.aspx" />
     <Content Include="adm\ticket.aspx" />
     <Content Include="adm\ticket_time.aspx" />
     <Content Include="adm\time.aspx" />
@@ -4130,6 +4131,12 @@
     <Compile Include="adm\tandctemplate_form.aspx.vb">
       <DependentUpon>tandctemplate_form.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\TestEntityFramenwork.aspx.designer.vb">
+      <DependentUpon>TestEntityFramenwork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\TestEntityFramenwork.aspx.vb">
+      <DependentUpon>TestEntityFramenwork.aspx</DependentUpon>
     </Compile>
     <Compile Include="adm\ticket.aspx.designer.vb">
       <DependentUpon>ticket.aspx</DependentUpon>

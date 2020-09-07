@@ -20,8 +20,28 @@ namespace PASconcept.DataAccess.Repositories.Implementation
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Invoice>(entity =>
+            {
+                entity.Property(e => e.FirstEmission).HasColumnType("smalldatetime");
+                entity.Property(e => e.LatestEmission).HasColumnType("smalldatetime");
+                entity.Property(e => e.MaturityDate).HasColumnType("smalldatetime");
+                entity.Property(e => e.BadDebtDate).HasColumnType("smalldatetime");
+
+                //entity.Property(e => e.Note)
+                //    .IsRequired()
+                //    .HasMaxLength(1024);
+
+                //entity.Property(e => e.UserEmail)
+                //    .IsRequired()
+                //    .HasMaxLength(256);
+
+                //entity.Property(e => e.VisitDate).HasColumnType("datetime");
+            });
         }
         //entities
         public DbSet<QBOperationLog> QBOperationLogs { get; set; }
+
+        public DbSet<Invoice> Invoices { get; set; }
     }
 }
