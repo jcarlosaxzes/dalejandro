@@ -1,7 +1,19 @@
 ﻿Imports Microsoft.AspNet.Identity
+Imports PASconcept.DataAccess.Repositories.Abstract
+Imports PASconcept.Domain.Model
 Imports Telerik.Web.UI
 Public Class Job_accounting
     Inherits System.Web.UI.Page
+
+
+    Private ReadOnly qbOperationLogRepository As IQBOperationLogRepository
+
+    Private ReadOnly invoiceRepository As IInvoiceRepository
+
+    Public Sub New(ByVal qbOperationLogRepository As IQBOperationLogRepository, ByVal invoiceRepo As IInvoiceRepository)
+        Me.qbOperationLogRepository = qbOperationLogRepository
+        Me.invoiceRepository = invoiceRepo
+    End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
@@ -117,6 +129,18 @@ Public Class Job_accounting
                         Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                         lblInvoiceId.Text = ids(0)
                         LocalAPI.SetInvoiceQBRef(lblInvoiceId.Text, -1, lblEmployeeId.Text)
+
+                        'Save QB Operation Log
+                        Dim invoiceEntity = invoiceRepository.SingleOrDefault(lblInvoiceId.Text)
+                        Dim operation As QBOperationLog = New QBOperationLog() With {
+                            .LogDate = DateTime.Now,
+                            .OperationData = JsonConvert.SerializeObject(invoiceEntity),
+                            .OperationType = "Desktop:SyncInvoice",
+                            .ResutlStatus = ""
+                         }
+                        qbOperationLogRepository.Add(operation)
+                        qbOperationLogRepository.SaveChanges()
+
                         RadGridIncoices.Rebind()
                     Else
                         If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
@@ -124,6 +148,18 @@ Public Class Job_accounting
                             Dim qbCustomerId As Integer = ids(1)
                             lblInvoiceId.Text = ids(0)
                             qbAPI.SendInvoiceToQuickBooks(lblInvoiceId.Text, qbCustomerId, lblEmployeeId.Text, lblCompanyId.Text)
+
+                            'Save QB Operation Log
+                            Dim invoiceEntity = invoiceRepository.SingleOrDefault(lblInvoiceId.Text)
+                            Dim operation As QBOperationLog = New QBOperationLog() With {
+                                .LogDate = DateTime.Now,
+                                .OperationData = JsonConvert.SerializeObject(invoiceEntity),
+                                .OperationType = "Online:SyncInvoice",
+                                .ResutlStatus = ""
+                             }
+                            qbOperationLogRepository.Add(operation)
+                            qbOperationLogRepository.SaveChanges()
+
                             RadGridIncoices.Rebind()
                         Else
                             Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=job_accounting&JobId=" & lblJobId.Text)

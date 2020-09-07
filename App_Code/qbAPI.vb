@@ -292,7 +292,14 @@ Public Class qbAPI
             LineObj.AmountSpecified = True
 
             Dim itemDetail = New SalesItemLineDetail()
-            itemDetail.Qty = New Decimal(1.0)
+
+            If InvoiceObject("InvoiceType") = 1 Then
+                itemDetail.Qty = New Decimal.Parse(InvoiceObject("Time"))
+            Else
+                itemDetail.Qty = New Decimal(1.0)
+            End If
+
+
             itemDetail.ItemRef = New ReferenceType() With
                     {
                         .Value = ItemObj.Id
