@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.AspNet.Identity
+Imports Newtonsoft.Json
 Imports PASconcept.DataAccess.Repositories.Abstract
 Imports PASconcept.Domain.Model
 Imports Telerik.Web.UI
