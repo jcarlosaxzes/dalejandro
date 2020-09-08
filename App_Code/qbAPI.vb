@@ -284,32 +284,28 @@ Public Class qbAPI
         Try
             ' PASconcept Profesional Services
             Dim serviceContext = qbAPI.GetServiceContext(comapyId)
-
             Dim lineList As List(Of Line) = New List(Of Line)()
             Dim LineObj = New Line()
             LineObj.Description = InvoiceObject("InvoiceNumber") & "  " & InvoiceObject("Notes")
             LineObj.Amount = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
             LineObj.AmountSpecified = True
-
             Dim itemDetail = New SalesItemLineDetail()
-
             If InvoiceObject("InvoiceType") = 1 Then
-                itemDetail.Qty = New Decimal.Parse(InvoiceObject("Time"))
+                itemDetail.Qty = Decimal.Parse(InvoiceObject("Time"))
+                itemDetail.QtySpecified = True
+                itemDetail.AnyIntuitObject = CType(Math.Round(Decimal.Parse(InvoiceObject("Rate")), 2), Decimal)
+                itemDetail.ItemElementName = Intuit.Ipp.Data.ItemChoiceType.UnitPrice
             Else
                 itemDetail.Qty = New Decimal(1.0)
+                itemDetail.QtySpecified = True
             End If
-
-
             itemDetail.ItemRef = New ReferenceType() With
                     {
                         .Value = ItemObj.Id
                     }
-
             LineObj.AnyIntuitObject = itemDetail
-
             LineObj.DetailType = LineDetailTypeEnum.SalesItemLineDetail
             LineObj.DetailTypeSpecified = True
-
             lineList.Add(LineObj)
             Dim newInvoices = New Intuit.Ipp.Data.Invoice()
             newInvoices.CustomerRef = New ReferenceType() With
@@ -317,23 +313,16 @@ Public Class qbAPI
                         .name = CustomerObj.DisplayName,
                         .Value = CustomerObj.Id
                     }
-
             newInvoices.Line = lineList.ToArray()
-
             ''Step 5: Set other properties such as Total Amount, Due Date, Email status and Transaction Date
             newInvoices.DueDate = DateTime.UtcNow.Date.AddMonths(1)
             newInvoices.DueDateSpecified = True
-
-
             newInvoices.TotalAmt = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
             newInvoices.TotalAmtSpecified = True
-
             newInvoices.EmailStatus = EmailStatusEnum.NotSet
             newInvoices.EmailStatusSpecified = True
-
             newInvoices.Balance = Decimal.Parse(InvoiceObject("InvoicePaid").ToString())
             newInvoices.BalanceSpecified = True
-
             newInvoices.TxnDate = DateTime.UtcNow.Date
             newInvoices.TxnDateSpecified = True
             newInvoices.TxnTaxDetail = New TxnTaxDetail() With
@@ -341,7 +330,6 @@ Public Class qbAPI
                         .TotalTax = Convert.ToDecimal(10),
                         .TotalTaxSpecified = True
                     }
-
             Dim dataSrv = New DataService(serviceContext)
             Dim addedInvoice = dataSrv.Add(Of Intuit.Ipp.Data.Invoice)(newInvoices)
             Return addedInvoice
@@ -349,7 +337,6 @@ Public Class qbAPI
             Throw ex
         End Try
     End Function
-
 
     Public Shared Function GetDataService(companyID As String, accessToken As String, accessTokenSecret As String) As DataService
         Try
