@@ -12,7 +12,7 @@ Public Class sendinvoice
                 If lblInvoice.Text > 0 Then
                     lblJobId.Text = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "JobId")
                     lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
-                    txtEmissionRecurrenceDays.DbValue = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "EmissionRecurrenceDays")
+                    txtEmissionRecurrenceDays.Text = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "EmissionRecurrenceDays")
                     lblOrigen.Text = "" & Request.QueryString("Origen")
                     If Len(lblOrigen.Text) = 0 Then lblOrigen.Text = "1"
 
@@ -168,7 +168,7 @@ Public Class sendinvoice
 
                 If txtTo.Text.Length > 0 Then
 
-                    LocalAPI.ActualizarEmittedInvoice(lblInvoice.Text, lblEmployeeId.Text, txtEmissionRecurrenceDays.DbValue)
+                    LocalAPI.ActualizarEmittedInvoice(lblInvoice.Text, lblEmployeeId.Text, Val(txtEmissionRecurrenceDays.Text))
                     If cboInternalNotification.SelectedValue = 1 Then
                         LocalAPI.InvoiceMessage(lblInvoice.Text, lblCompanyId.Text)
                     End If
@@ -202,7 +202,7 @@ Public Class sendinvoice
             End If
 
             If cboNotification.SelectedValue = 2 Or cboNotification.SelectedValue = 3 Then
-                If SendProposalSMS() Then
+                If SendInvoiceSMS() Then
                     bSendSMS = True
                 End If
 
@@ -242,12 +242,12 @@ Public Class sendinvoice
         End If
     End Sub
 
-    Private Function SendProposalSMS() As Boolean
+    Private Function SendInvoiceSMS() As Boolean
         Try
 
             Dim sCellPhone As String = txtCellular.Text
             If SMS.IsValidPhone(sCellPhone) Then
-                If SMS.SendSMS(sCellPhone, txtSMS.Text, lblCompanyId.Text) Then
+                If SMS.SendSMS(lblEmployeeId.Text, sCellPhone, txtSMS.Text, lblCompanyId.Text) Then
                     Return True
                 End If
             Else

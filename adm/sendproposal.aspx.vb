@@ -200,7 +200,7 @@ Public Class sendproposal
 
             Dim sCellPhone As String = txtCellular.Text
             If SMS.IsValidPhone(sCellPhone) Then
-                If SMS.SendSMS(sCellPhone, txtSMS.Text, lblCompanyId.Text) Then
+                If SMS.SendSMS(Master.UserId, sCellPhone, txtSMS.Text, lblCompanyId.Text) Then
                     Return True
                 End If
             Else

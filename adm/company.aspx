@@ -131,12 +131,6 @@
                                             </td>
                                             <td>
                                                 <asp:Label ID="MovileLabel" runat="server" Text='<%# Eval("Movile")%>' />
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;
-                                        <telerik:RadButton ID="btnSMS" runat="server" Text="Send Test SMS" OnClick="btnSMS_Click" ToolTip="Send SMS to CellPhone" Visible='<%# LocalAPI.IsCompanySMSservice(lblCompanyId.Text)%>'>
-                                        </telerik:RadButton>
-                                                &nbsp;
-
                                             </td>
                                         </tr>
                                         <tr>
@@ -190,7 +184,7 @@
                                     </table>
                                 </telerik:RadWizardStep>
 
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStepSMTP" Title="Email/Storage" ValidationGroup="SMTP" StepType="Step">
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStepSMTP" Title="Email/SMS/Storage" ValidationGroup="SMTP" StepType="Step">
                                     <table style="width: 98%">
                                         <tr>
                                             <td>
@@ -208,7 +202,7 @@
 
                                     <table class="table-sm">
                                         <tr>
-                                            <td style="width: 180px">Outgoing Email From:
+                                            <td style="width: 220px">Outgoing Email From:
                                             </td>
                                             <td>
                                                 <asp:Label ID="labelwebEmailUserNameTextBox" runat="server" Text='<%# Eval("webEmailUserName")%>' ToolTip="Outgoing account name (username@company_domain.com)"></asp:Label>
@@ -217,7 +211,7 @@
                                         </tr>
 
                                         <tr>
-                                            <td style="width: 180px">SMTP Server:
+                                            <td>SMTP Server:
                                             </td>
                                             <td>
                                                 <asp:Label ID="webEmailSMTPLabel" runat="server" Text='<%# Eval("webEmailSMTP")%>' ToolTip="Outgoing mail SMTP (smtp.company_domain.com)" />
@@ -225,7 +219,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 180px">SMTP TLS/SSL Required:
+                                            <td>SMTP TLS/SSL Required:
                                             </td>
                                             <td>
                                                 <asp:CheckBox ID="CheckBox655" runat="server" Checked='<%# Eval("webEmailEnableSsl")%>' Enabled="false" />
@@ -240,7 +234,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 180px">SMTP Use Default Credentials:
+                                            <td>SMTP Use Default Credentials:
                                             </td>
                                             <td>
                                                 <asp:CheckBox ID="CheckBox13" runat="server" Checked='<%# Eval("webUseDefaultCredentials")%>' Enabled="false" />
@@ -259,6 +253,32 @@
 
                                     </table>
 
+                                     <table style="width: 98%">
+                                        <tr>
+                                            <td colspan="2">
+                                                <h4 style="margin: 0">
+                                                SMS Setting</h3>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 220px">Active/Inactive:
+                                            </td>
+                                            <td>
+                                                <asp:CheckBox ID="CheckBox15" runat="server" Checked='<%# LocalAPI.IsCompanyTwilio(lblCompanyId.Text)%>' Enabled="false" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <asp:LinkButton ID="btnSMS" runat="server" ToolTip="Send Test SMS" CommandName="SendTestSMS" CausesValidation="False" CssClass="btn btn-primary" UseSubmitBehavior="false"
+                                                    Visible='<%# LocalAPI.IsCompanyTwilio(lblCompanyId.Text)%>'>
+                                                        <i class="fas fa-sms"></i> Test SMS
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
                                     <table style="width: 98%">
                                         <tr>
                                             <td colspan="2">
@@ -267,7 +287,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 180px">Number of Files:
+                                            <td style="width: 220px">Number of Files:
                                             </td>
                                             <td>
                                                 <%# Eval("StorageFiles")%>

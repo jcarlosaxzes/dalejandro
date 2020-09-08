@@ -193,7 +193,7 @@ Public Class clientsmarketing
                         sMessage = Replace(sMessage, "[$Jobs]", FormatCurrency(dataItem("TotalBudget").Text))
 
                         sMessage = sMessage & vbCrLf & vbCrLf & "This SMS was sent using PASConcept"
-                        If SMS.SendSMS(Cellular, sMessage, lblCompanyId.Text) Then
+                        If SMS.SendSMS(Master.UserId, Cellular, sMessage, lblCompanyId.Text) Then
                             nRecs = nRecs + 1
                         End If
                     End If

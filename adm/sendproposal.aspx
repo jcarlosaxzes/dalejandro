@@ -105,7 +105,7 @@
                                             <tr>
                                                 <td style="text-align: right;">Remaining Balance:</td>
                                                 <td>
-                                                    <b><%# Eval("Balance","{0:C2}") %></b>
+                                                    <b><%# Eval("Balance", "{0:C2}") %></b>
                                                 </td>
                                             </tr>
                                             <tr>

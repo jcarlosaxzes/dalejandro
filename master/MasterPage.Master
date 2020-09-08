@@ -146,7 +146,9 @@ cfg: { // Application Insights Configuration
                                     </telerik:NavigationNode >--%>
                         <telerik:NavigationNode runat="server" Text="Users">
                             <Nodes>
-                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Admin Users">
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/usersmaster.aspx" Text="Master/Prime Users">
+                                </telerik:NavigationNode>
+                                <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/useradmin.aspx" Text="Users by Companies">
                                 </telerik:NavigationNode>
                                 <telerik:NavigationNode runat="server" NavigateUrl="~/MASTER/UsersAgreeList.aspx" Text="Users Agree List">
                                 </telerik:NavigationNode>
