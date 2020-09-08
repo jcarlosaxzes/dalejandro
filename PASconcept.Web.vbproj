@@ -405,6 +405,9 @@
     <Reference Include="Telerik.Web.UI.Skins, Version=2019.3.1023.45, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <HintPath>packages\Telerik.UI.for.AspNet.Ajax.Net45.2019.3.1023\lib\net45\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
+    <Reference Include="Twilio, Version=5.46.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Twilio.5.46.2\lib\net451\Twilio.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f">
       <HintPath>packages\Unity.Abstractions.3.3.0\lib\net47\Unity.Abstractions.dll</HintPath>
       <Private>True</Private>
@@ -2333,6 +2336,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="master\pagetracking.aspx" />
+    <Content Include="master\usersmaster.aspx" />
     <Content Include="master\web.config" />
     <Content Include="Content\favicons\site.webmanifest" />
     <Content Include="csv\expenses.csv" />
@@ -4640,6 +4644,13 @@
       <DependentUpon>usersagreelist.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="master\usersmaster.aspx.designer.vb">
+      <DependentUpon>usersmaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\usersmaster.aspx.vb">
+      <DependentUpon>usersmaster.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="master\versiones.aspx.designer.vb">
       <DependentUpon>versiones.aspx</DependentUpon>
     </Compile>
@@ -4842,7 +4853,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

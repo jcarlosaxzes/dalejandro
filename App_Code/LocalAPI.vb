@@ -1394,6 +1394,24 @@ Public Class LocalAPI
         Return IIf(Multiplier < 1, 1, Multiplier)
     End Function
 
+    Public Shared Function IsCompanyTwilio(companyId As Integer) As Boolean
+        Return IIf(GetNumericEscalar($"select count(*) from [Company_twiliosetting] where companyId={companyId} and Active=1") = 1, True, False)
+    End Function
+
+    Public Shared Function IsCompanyNotification(ByVal companyId As Integer, NotificationField As String) As Boolean
+        Try
+
+            Return GetNumericEscalar("SELECT ISNULL(" & NotificationField & ",0) FROM [Company] WHERE companyId=" & companyId)
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    Public Shared Function IsCompanySMSservice(ByVal companyId As Integer) As Boolean
+        Return IsCompanyTwilio(companyId)
+    End Function
+
+
     Public Shared Function GetCompanyMultiplierProperty(ByVal companyId As Integer, sProperty As String) As Double
         Try
             Select Case sProperty
@@ -3364,20 +3382,6 @@ Public Class LocalAPI
 #End Region
 
 #Region "SinClasificar"
-
-    Public Shared Function IsCompanyNotification(ByVal companyId As Integer, NotificationField As String) As Boolean
-        Try
-
-            Return GetNumericEscalar("SELECT ISNULL(" & NotificationField & ",0) FROM [Company] WHERE companyId=" & companyId)
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
-    Public Shared Function IsCompanySMSservice(ByVal companyId As Integer) As Boolean
-        Return GetNumericEscalar("SELECT ISNULL(SMSservice,0) FROM [Company] WHERE companyId=" & companyId)
-    End Function
-
 
     Public Shared Function IsJobName(ByVal lJobId As Integer, ByVal sName As String, ByVal companyId As Integer) As Boolean
         Try

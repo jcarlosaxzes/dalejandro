@@ -123,29 +123,32 @@
                         </ItemTemplate>
                     </asp:FormView>
                     <hr style="margin: 0" />
-                    <table class="table-sm" style="width: 100%">
+                    <table class="table-sm" style="width: 100%" >
                         <tr>
-                            <td style="text-align: left; vertical-align: top; width: 33%"></td>
-                            <td style="text-align: left; vertical-align: top; width: 33%">
-                                <telerik:RadTextBox ID="txtInvoiceNumber" runat="server" Width="100%" Label="Invoice Number:" ReadOnly="true" Skin="Material">
+                            <td style="width: 270px">Invoice Number:</td>
+                            <td>
+                                <telerik:RadTextBox ID="txtInvoiceNumber" runat="server" Width="100%" Label="" ReadOnly="true" Skin="Material">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="text-align: right; vertical-align: top">
-                                <telerik:RadTextBox ID="txtInvoiceAmount" runat="server" Width="100%" Label="Invoice Amount:" ReadOnly="true" Skin="Material">
+                            </tr>
+                        <tr>
+                            <td>Invoice Amount:</td>
+                            <td>
+                                <telerik:RadTextBox ID="txtInvoiceAmount" runat="server" Width="100%" ReadOnly="true" Skin="Material">
                                 </telerik:RadTextBox>
                             </td>
                         </tr>
                     </table>
                     <hr style="margin: 0" />
-                    <table class="table-sm" style="width: 100%">
+                    <table class="table-sm" style="width: 100%" >
                         <tr>
                             <td style="width: 270px">Client Notification Type:
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboNotification" runat="server" Width="150px" ValidationGroup="Confirmation">
+                                <telerik:RadComboBox ID="cboNotification" runat="server" Width="300px" ValidationGroup="Confirmation" Skin="Material">
                                     <Items>
                                         <telerik:RadComboBoxItem Text="?" Value="-1" Selected="true" />
-                                        <telerik:RadComboBoxItem Text="Only by Email" Value="1" />
+                                        <telerik:RadComboBoxItem Text="Only by Email" Value="1"  />
                                         <telerik:RadComboBoxItem Text="Email and SMS" Value="2" />
                                         <telerik:RadComboBoxItem Text="Only by SMS" Value="3" />
                                     </Items>
@@ -153,10 +156,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="width: 270px">Internal Notification (Yes or No):
+                            <td>Internal Notification (Yes or No):
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboInternalNotification" runat="server" Width="150px" ValidationGroup="Confirmation">
+                                <telerik:RadComboBox ID="cboInternalNotification" runat="server" Width="150px" ValidationGroup="Confirmation" Skin="Material">
                                     <Items>
                                         <telerik:RadComboBoxItem Text="No" Value="0" Selected="true" />
                                         <telerik:RadComboBoxItem Text="Yes" Value="1" />
@@ -170,16 +173,15 @@
                             <td>Emission Recurrence Days: 
                             </td>
                             <td>
-                                <telerik:RadNumericTextBox ID="txtEmissionRecurrenceDays" runat="server" Width="60px" MaxLength="2" MinValue="0" MaxValue="99" ToolTip="Define frequency of automated email reccurence">
-                                    <NumberFormat DecimalDigits="0" />
-                                </telerik:RadNumericTextBox>
+                                <telerik:RadTextBox runat="server" ID="txtEmissionRecurrenceDays" RenderMode="Lightweight" Width="60px" MaxLength="2" ToolTip="Define frequency of automated email reccurence" Skin="Material">
+                                </telerik:RadTextBox>
                             </td>
                         </tr>
                         <tr>
                             <td>Upload Documents (Yes or No):
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboAttached" runat="server" Width="150px" ValidationGroup="Confirmation">
+                                <telerik:RadComboBox ID="cboAttached" runat="server" Width="150px" ValidationGroup="Confirmation" Skin="Material">
                                     <Items>
                                         <telerik:RadComboBoxItem Text="No" Value="0" Selected="true" />
                                         <telerik:RadComboBoxItem Text="Yes" Value="1" />
