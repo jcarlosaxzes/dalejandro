@@ -13,8 +13,13 @@ Public Class invoices
     Private ReadOnly invoiceRepository As IInvoiceRepository
 
     Public Sub New(ByVal qbOperationLogRepository As IQBOperationLogRepository, ByVal invoiceRepo As IInvoiceRepository)
-        Me.qbOperationLogRepository = qbOperationLogRepository
-        Me.invoiceRepository = invoiceRepo
+        Try
+
+            Me.qbOperationLogRepository = qbOperationLogRepository
+            Me.invoiceRepository = invoiceRepo
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -267,9 +272,8 @@ Public Class invoices
                         Master.ErrorMessage("You do not have permission to Invoice BadDebt!!!")
                     End If
 
-
-                Case "EditJob"
-                    sUrl = "~/adm/Job_job.aspx?JobId=" & e.CommandArgument
+                Case "EditJobBilling"
+                    sUrl = "~/adm/Job_accounting.aspx?JobId=" & e.CommandArgument
                     CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
 
                 Case "PDF"
