@@ -2374,6 +2374,7 @@
     <Content Include="master\companypendingbills.aspx" />
     <Content Include="master\companytypes.aspx" />
     <Content Include="master\CreateCompany.aspx" />
+    <Content Include="master\dashboard.aspx" />
     <Content Include="master\Default.aspx" />
     <Content Include="master\disciplines.aspx" />
     <Content Include="master\employees.aspx" />
@@ -4579,6 +4580,13 @@
       <DependentUpon>CreateCompany.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="master\dashboard.aspx.designer.vb">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\dashboard.aspx.vb">
+      <DependentUpon>dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="master\Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
@@ -4921,7 +4929,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
