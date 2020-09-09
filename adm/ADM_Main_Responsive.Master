@@ -344,7 +344,6 @@
                                         </Nodes>
                                     </telerik:NavigationNode>
 
-
                                     <%--Reports menu--%>
                                     <telerik:NavigationNode Text="Reports" Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                         <Nodes>

@@ -7,11 +7,10 @@ Public Class MasterPage
         Try
             ' Inicializando Controles y Properties de la Master Page
             UserEmail = Context.User.Identity.GetUserName()
-            lblUserName.Text = LocalAPI.GetEmployeeFullName(UserEmail, Session("companyId"))
 
             Dim companyId As Integer = 260962 ' La empresa que envia mensajes como Master es EEG
             UserId = LocalAPI.GetEmployeeId(UserEmail, companyId)
-            UserName = LocalAPI.GetEmployeeFullName(UserEmail, companyId)
+            lblUserName.Text = LocalAPI.GetEmployeeName(UserId)
 
         Catch ex As Exception
 
@@ -49,15 +48,6 @@ Public Class MasterPage
         End Get
         Set(ByVal value As String)
             lblEmployeeEmail.Text = value.ToString
-        End Set
-    End Property
-
-    Public Property UserName() As String
-        Get
-            UserName = lblUserName.Text
-        End Get
-        Set(ByVal value As String)
-            lblUserName.Text = value.ToString
         End Set
     End Property
 
