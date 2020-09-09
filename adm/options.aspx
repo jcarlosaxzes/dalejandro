@@ -271,7 +271,7 @@
 
                             <telerik:GridTemplateColumn DataField="Url" HeaderText="Distribution Page Link" UniqueName="Download">
                                 <ItemTemplate>
-                                    <a href='<%# iif(Eval("Platform") = "iPhone", "https://www.pasconcept.com/Distribution/iphone.aspx", "https://www.pasconcept.com/Distribution/android.aspx") %>' target="_blank"><%#String.Concat("PASconcept Mobile App Distribution page for ", Eval("Platform"))%></a>
+                                    <a href='<%#IIf(Eval("Platform") = "iPhone", LocalAPI.GetHostAppSite() & "/distribution/iphone.aspx", LocalAPI.GetHostAppSite() & "/distribution/android.aspx") %>' target="_blank"><%#String.Concat("PASconcept Mobile App Distribution page for ", Eval("Platform"))%></a>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>

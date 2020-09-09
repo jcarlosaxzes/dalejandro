@@ -2187,6 +2187,8 @@
     <Content Include="css\menu\radActionsSprite.png" />
     <Content Include="css\menu\rmArrows.png" />
     <Content Include="Default.aspx" />
+    <Content Include="distribution\android.aspx" />
+    <Content Include="distribution\iphone.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\cp_jobs.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\invoice.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\job.aspx" />
@@ -4332,6 +4334,20 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="distribution\android.aspx.designer.vb">
+      <DependentUpon>android.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="distribution\android.aspx.vb">
+      <DependentUpon>android.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="distribution\iphone.aspx.designer.vb">
+      <DependentUpon>iphone.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="distribution\iphone.aspx.vb">
+      <DependentUpon>iphone.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\ClientPortalMP.Master.designer.vb">
       <DependentUpon>ClientPortalMP.Master</DependentUpon>
     </Compile>
@@ -4893,6 +4909,7 @@
       <Name>PASconcept.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -4929,7 +4946,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
