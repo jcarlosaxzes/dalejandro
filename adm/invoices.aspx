@@ -243,6 +243,18 @@
                                         </tr>
                                         <tr>
                                             <td>
+                                                <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="EditJobBilling" CommandArgument='<%# Eval("JobId")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-dollar-sign"></i>&nbsp;&nbsp;View/Edit Job's Billing
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Invoice Email to Client
                                                 </asp:LinkButton>
