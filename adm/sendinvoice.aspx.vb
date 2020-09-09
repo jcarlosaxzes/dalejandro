@@ -228,7 +228,7 @@ Public Class sendinvoice
     Private Sub SMS_Init()
         If LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
             Dim clientId As Integer = LocalAPI.GetClientIdFromInvoice(lblInvoice.Text)
-            If Not LocalAPI.IsClientDenySMS(clientId) Then
+            If Not LocalAPI.IsClientAllowSMS(clientId) Then
                 txtCellular.Text = LocalAPI.GetInvoiceProperty(lblInvoice.Text, "[Clients].[Cellular]")
                 Dim InvoiceNumber As String = LocalAPI.InvoiceNumber(lblInvoice.Text)
                 Dim sURL As String = LocalAPI.GetSharedLink_URL(4, lblInvoice.Text) & " "

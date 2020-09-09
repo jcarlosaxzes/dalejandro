@@ -180,7 +180,7 @@ Public Class clientsmarketing
                 If dataItem.Selected Then
                     Dim Cellular As String = dataItem("Cellular").Text
                     Dim clientId As Integer = dataItem("ClientId").Text
-                    If SMS.IsValidPhone(Cellular) And Not LocalAPI.IsClientDenySMS(clientId) Then
+                    If SMS.IsValidPhone(Cellular) And Not LocalAPI.IsClientAllowSMS(clientId) Then
                         '[Client Name], [Client Company], [Company], [Sign]
                         Dim sMessage As String = txtSMS.Text
                         sMessage = Replace(sMessage, "[Client Name]", dataItem("Name").Text)

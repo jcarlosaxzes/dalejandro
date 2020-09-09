@@ -4404,7 +4404,7 @@ Public Class LocalAPI
     Public Shared Function GetClientProperty(ByVal clientId As Long, ByVal sProperty As String) As String
         Try
             Select Case sProperty
-                Case "companyId", "Notification_invoiceemitted", "Notification_invoicecollected", "Notification_acceptedproposal", "Notification_declinedproposal", "ProposalPDFattached", "Type", "Subtype", "Deny_SMSnotification", "AvailabilityId", "qbCustomerId", "BillType", "Longitude", "Latitude"
+                Case "companyId", "Notification_invoiceemitted", "Notification_invoicecollected", "Notification_acceptedproposal", "Notification_declinedproposal", "ProposalPDFattached", "Type", "Subtype", "Allow_SMSnotification", "AvailabilityId", "qbCustomerId", "BillType", "Longitude", "Latitude"
                     Return GetNumericEscalar(String.Format("SELECT ISNULL([{0}],0) FROM [Clients] WHERE [Id]={1}", sProperty, clientId))
                 Case Else
                     Return GetStringEscalar(String.Format("SELECT ISNULL([{0}],'') FROM [Clients] WHERE [Id]={1}", sProperty, clientId))
@@ -9608,10 +9608,10 @@ Public Class LocalAPI
         Dim nRecs As Integer = GetNumericEscalar("select dbo.ClientFilesCount(" & clientId & ")")
         Return IIf(nRecs = 0, "", nRecs)
     End Function
-    Public Shared Function IsClientDenySMS(ByVal clientId As Integer) As Boolean
+    Public Shared Function IsClientAllowSMS(ByVal clientId As Integer) As Boolean
         Try
 
-            Return GetNumericEscalar("SELECT ISNULL(Deny_SMSnotification,0) FROM [Clients] WHERE Id=" & clientId)
+            Return GetNumericEscalar("SELECT ISNULL(Allow_SMSnotification,0) FROM [Clients] WHERE Id=" & clientId)
 
         Catch ex As Exception
             Throw ex

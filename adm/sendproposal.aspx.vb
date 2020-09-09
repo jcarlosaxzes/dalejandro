@@ -180,7 +180,7 @@ Public Class sendproposal
     Private Sub SMS_Init()
         If LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
             Dim clientId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
-            If Not LocalAPI.IsClientDenySMS(clientId) Then
+            If Not LocalAPI.IsClientAllowSMS(clientId) Then
                 txtCellular.Text = LocalAPI.GetClientProperty(clientId, "Cellular")
                 'chkSMS.Checked = Len(txtCellular.Text) >= 10
                 Dim ProjectName As String = LocalAPI.GetProposalProperty(lblProposalId.Text, "ProjectName")
