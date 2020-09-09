@@ -449,10 +449,10 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="text-align: right">Deny SMS Notifications:
+                                    <td style="text-align: right">Allow SMS Notifications:
                                     </td>
                                     <td>
-                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("Deny_SMSnotification")%>' />
+                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("Allow_SMSnotification")%>' />
                                     </td>
                                 </tr>
 
@@ -812,7 +812,7 @@
     </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        UpdateCommand="CLIENT_v20_UPDATE" UpdateCommandType="StoredProcedure"
+        UpdateCommand="CLIENT_UPDATE" UpdateCommandType="StoredProcedure"
         SelectCommand="CLIENT_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
@@ -843,7 +843,7 @@
             <asp:Parameter Name="Notification_invoicecollected" />
             <asp:Parameter Name="Notification_acceptedproposal" />
             <asp:Parameter Name="Notification_declinedproposal" />
-            <asp:Parameter Name="Deny_SMSnotification" />
+            <asp:Parameter Name="Allow_SMSnotification" />
             <asp:Parameter Name="ProposalPDFattached" />
             <asp:Parameter Name="Type" />
             <asp:Parameter Name="Subtype" />
