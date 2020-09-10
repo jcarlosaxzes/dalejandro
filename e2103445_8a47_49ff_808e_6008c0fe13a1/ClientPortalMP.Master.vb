@@ -22,7 +22,7 @@
     End Property
 
     Private Sub Panels()
-        CType(FormViewCompany.FindControl("pnl_advertising"), Panel).Visible = False '(lblCompanyId.Text = 260962)
+        'CType(FormViewCompany.FindControl("pnl_advertising"), Panel).Visible = False '(lblCompanyId.Text = 260962)
         pnl_reviews.Visible = (lblCompanyId.Text = 260962)
     End Sub
 

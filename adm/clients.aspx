@@ -53,6 +53,7 @@
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
+           
             </button>
 
             <asp:LinkButton ID="btnNewClient" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
@@ -145,6 +146,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
                                                         <a href='<%# "clientfiles?client=" & Eval("guid").ToString()%>' class="dropdown-item">
                                                             <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload Files
                                                          </a>
@@ -152,8 +158,27 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <a href='<%# LocalAPI.GetSharedLink_URL(91, Eval("Id"))%>' target="_blank" title="View Client Portal" class="dropdown-item">
+                                                        <a href='<%# LocalAPI.GetSharedLink_URL(91, Eval("Id"))%>' target="_blank" class="dropdown-item">
                                                             <i class="far fa-share-square"></i>&nbsp;&nbsp;View Client Portal
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="dropdown-divider"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="SendAcknowledgment" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Acknowledgment Email to Client
+                                                </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <a href='<%# LocalAPI.GetSharedLink_URL(3001, Eval("Id"))%>' target="_blank" class="dropdown-item">
+                                                            <i class="far fa-check-square"></i>&nbsp;&nbsp;View Client Acknowledgment
                                                         </a>
                                                     </td>
                                                 </tr>
