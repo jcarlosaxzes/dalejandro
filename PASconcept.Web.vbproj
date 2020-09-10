@@ -2246,6 +2246,12 @@
     <Content Include="Images\markerimages\private-marker.png" />
     <Content Include="Images\markerimages\public-marker.png" />
     <Content Include="Images\markerimages\redmarker.png" />
+    <Content Include="Images\mobile\PAS-iphone_install1.png" />
+    <Content Include="Images\mobile\PAS-iphone_install2.png" />
+    <Content Include="Images\mobile\PAS-iphone_install3.png" />
+    <Content Include="Images\mobile\PAS-iphone_install4.png" />
+    <Content Include="Images\mobile\PAS-iphone_install5.png" />
+    <Content Include="Images\mobile\PAS-iphone_install6.png" />
     <Content Include="Images\Thumbs.db" />
     <Content Include="App_Themes\Estandar\Combo.skin" />
     <Content Include="App_Themes\Estandar\Default.skin" />
@@ -4954,7 +4960,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
