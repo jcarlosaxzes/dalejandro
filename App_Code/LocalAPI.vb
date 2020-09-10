@@ -10552,6 +10552,9 @@ Public Class LocalAPI
                     Case 2003  ' RFP to Proposal
                         url = LocalAPI.GetHostAppSite() & "/adm/Proposals.aspx?rfpGUID=" & LocalAPI.GetRFPProperty(objId, "guid")
 
+                    Case 3001  'Client Acknowledgment Page
+                        url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/acknowledgment.aspx?clientguid=" & LocalAPI.GetClientProperty(objId, "guid")
+
                 End Select
                 If PrintParameter Then
                     url = url & "&Print=1"
@@ -14065,7 +14068,7 @@ Public Class LocalAPI
     End Function
 #End Region
 
-#Region "ClientPortal"
+#Region "ClientPortal & Acknowledgments"
     Public Shared Function sys_Log_clients_INSERT(IP_Address As String, clientId As Integer, ActionId As Integer, DocumentId As Integer, companyId As Integer) As Boolean
         Try
             ' ActionId codes
@@ -14096,6 +14099,72 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetClientAcknowledgments(clientId As Integer) As Boolean
+        Return IIf(GetNumericEscalar($"select count(*) from Clients_acknowledgments where clientId={clientId} and EndDate Is Null") = 0, False, True)
+    End Function
+
+    Public Shared Function ClientAcknowledgment_INSERT(clientId As Integer, Acknowledment As String, Initials As String, IP_Address As String) As Boolean
+        Try
+            ' ActionId codes
+            '   1:  Proposal visit page
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Clients_acknowledgments_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@clientId", clientId)
+            cmd.Parameters.AddWithValue("@Acknowledment", Acknowledment)
+            cmd.Parameters.AddWithValue("@Initials", Initials)
+            cmd.Parameters.AddWithValue("@IP_Address", IP_Address)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function SendClientAcknowledmentEmail(ByVal clientId As Integer, employeeId As Integer, ByVal companyId As Integer) As Boolean
+
+        Try
+            Dim employeeEmail As String = GetEmployeeEmail(employeeId)
+            Dim ClientObject = GetRecord(clientId, "Client_v20_SELECT")
+            Dim sFullBody As New System.Text.StringBuilder
+            sFullBody.Append("Mr./Mrs. " & ClientObject("Client") & ":")
+
+            sFullBody.Append("<br />")
+            sFullBody.Append("<br />")
+            sFullBody.Append("In order to improve our communication, we ask for your authorization to send you text messages about Proposals, Invoices or Statements.")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<a href=" & """" & LocalAPI.GetSharedLink_URL(3001, clientId) & """> Click to view the Acknowledment Page</a>")
+
+            sFullBody.Append("<br />")
+            sFullBody.Append("<br />")
+            sFullBody.Append("Thank you,")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<br />")
+            sFullBody.Append("<a href=" & """" & GetHostAppSite() & """" & ">PASconcept</a> Notification")
+            sFullBody.Append("<br />")
+            sFullBody.Append(GetEmployeesSign(employeeId))
+
+            Try
+                SendClientAcknowledmentEmail = SendGrid.Email.SendMail(ClientObject("Email"), employeeEmail, "", "PASconcept. Acknowledment Request", sFullBody.ToString, companyId, ClientObject("Id"), 0, employeeEmail,, employeeEmail, employeeEmail)
+            Finally
+            End Try
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 #End Region
 
 #Region "Propsal Payment Sschedule"

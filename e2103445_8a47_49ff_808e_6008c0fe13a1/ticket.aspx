@@ -25,9 +25,6 @@
             </tr>
         </table>
 
-
-
-
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%">
             <ItemTemplate>
                 <table class="table-sm" style="width: 100%; text-align: left">

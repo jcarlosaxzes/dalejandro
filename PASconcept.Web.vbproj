@@ -2189,6 +2189,7 @@
     <Content Include="Default.aspx" />
     <Content Include="distribution\android.aspx" />
     <Content Include="distribution\iphone.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\acknowledgment.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\cp_jobs.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\invoice.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\job.aspx" />
@@ -4141,6 +4142,7 @@
     </Compile>
     <Compile Include="adm\TestEntityFramenwork.aspx.vb">
       <DependentUpon>TestEntityFramenwork.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\ticket.aspx.designer.vb">
       <DependentUpon>ticket.aspx</DependentUpon>
@@ -4346,6 +4348,11 @@
     </Compile>
     <Compile Include="distribution\iphone.aspx.vb">
       <DependentUpon>iphone.aspx</DependentUpon>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\acknowledgment.aspx.designer.vb">
+      <DependentUpon>acknowledgment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\acknowledgment.aspx.vb">
+      <DependentUpon>acknowledgment.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\ClientPortalMP.Master.designer.vb">

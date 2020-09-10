@@ -452,7 +452,7 @@
                                     <td style="text-align: right">Allow SMS Notifications:
                                     </td>
                                     <td>
-                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("Allow_SMSnotification")%>' />
+                                        <asp:CheckBox ID="CheckBox1" runat="server" Checked='<%# Bind("Allow_SMSnotification")%>' ForeColor="DarkRed" Enabled="false" />
                                     </td>
                                 </tr>
 

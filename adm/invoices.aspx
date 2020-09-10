@@ -262,10 +262,6 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <%--<asp:LinkButton ID="btnPrintInvoice" runat="server" UseSubmitBehavior="false" ToolTip="Print Invoice"
-                                                    CommandName="PDF" CommandArgument='<%# Eval("Id")%>' Visible="false">
-                                                        <i class="far fa-file-pdf"></i></a>
-                                                </asp:LinkButton>--%>
                                                 <a href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"), True)%>' target="_blank" class="dropdown-item">
                                                     <i class="fas fa-print"></i>&nbsp;&nbsp;Print Invoice Page
                                                 </a>
@@ -276,6 +272,11 @@
                                                 <a href='<%# LocalAPI.GetSharedLink_URL(44, Eval("Id"), False)%>' target="_blank" class="dropdown-item">
                                                     <i class="far fa-share-square"></i>&nbsp;&nbsp;View/Share Invoice Page
                                                 </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
                                             </td>
                                         </tr>
                                         <tr>

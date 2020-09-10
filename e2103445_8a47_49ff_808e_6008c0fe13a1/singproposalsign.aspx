@@ -303,8 +303,7 @@
                                                 <telerik:GridBoundColumn DataField="Description" HeaderText="TASK NAME" UniqueName="Description"
                                                     HeaderStyle-HorizontalAlign="Left" ItemStyle-CssClass="GridColumn">
                                                 </telerik:GridBoundColumn>
-                                                <telerik:GridTemplateColumn DataField="Amount" HeaderText="QTY" UniqueName="Amount"
-                                                    HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center"
+                                                <telerik:GridTemplateColumn DataField="Amount" HeaderText="QTY" UniqueName="Amount" HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center"
                                                     ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="GridColumn">
                                                     <ItemTemplate>
                                                         <%# Eval("Amount")%>
