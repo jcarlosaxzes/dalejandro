@@ -4346,6 +4346,9 @@
     <Compile Include="distribution\iphone.aspx.designer.vb">
       <DependentUpon>iphone.aspx</DependentUpon>
     </Compile>
+    <Compile Include="distribution\iphone.aspx.vb">
+      <DependentUpon>iphone.aspx</DependentUpon>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\acknowledgment.aspx.designer.vb">
       <DependentUpon>acknowledgment.aspx</DependentUpon>
     </Compile>
@@ -4951,7 +4954,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
