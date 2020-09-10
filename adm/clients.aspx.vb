@@ -1,4 +1,5 @@
-﻿Imports Telerik.Web.UI
+﻿Imports System.Threading.Tasks
+Imports Telerik.Web.UI
 Public Class clients
     Inherits System.Web.UI.Page
 
@@ -105,6 +106,11 @@ Public Class clients
             Case "Duplicate"
                 lblSelected.Text = e.CommandArgument
                 SqlDataSource1.Insert()
+
+            Case "SendAcknowledgment"
+                If LocalAPI.SendClientAcknowledmentEmail(e.CommandArgument, Master.UserId, lblCompanyId.Text) Then
+                    Master.InfoMessage("The acknowledgment email was sent to the client!", 0)
+                End If
 
         End Select
     End Sub

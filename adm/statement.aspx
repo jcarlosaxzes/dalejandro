@@ -207,6 +207,11 @@
                                         </tr>
                                         <tr>
                                             <td>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 <asp:LinkButton runat="server" ID="btnSatementPrint" CommandName="EmailPrint" CommandArgument='<%# Eval("Id") %>' CssClass="dropdown-item">
                                                     <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Statement Email to Client
                                                 </asp:LinkButton>
@@ -224,6 +229,11 @@
                                                 <a href='<%# LocalAPI.GetSharedLink_URL(55, Eval("Id"))%>' target="_blank" class="dropdown-item">
                                                     <i class="far fa-share-square"></i>&nbsp;&nbsp;View/Share Statement Page
                                                 </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
                                             </td>
                                         </tr>
                                         <tr>

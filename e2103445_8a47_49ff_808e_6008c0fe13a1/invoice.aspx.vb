@@ -11,14 +11,11 @@ Public Class invoice
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
             If Not Request.QueryString("GuiId") Is Nothing Then
-                Dim guiId As String = Request.QueryString("GuiId")
-                'guiId  ="75ffa08b-e28f-488f-a863-e5d6d41c94ee"
-                lblInvoiceId.Text = LocalAPI.GetSharedLink_Id(4, guiId)
-                Dim companyId = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
-                lblCompanyId.Text = companyId
-                Master.Company = companyId
-                lblInvoiceGuid.Text = guiId
-                Master.Guid = guiId
+                lblInvoiceGuid.Text = Request.QueryString("GuiId")
+                lblInvoiceId.Text = LocalAPI.GetSharedLink_Id(4, lblInvoiceGuid.Text)
+                lblCompanyId.Text = LocalAPI.GetCompanyIdFromInvoice(lblInvoiceId.Text)
+                Master.Company = lblCompanyId.Text
+                Master.Guid = lblInvoiceGuid.Text
                 Master.Type = "Invoice"
                 Title = LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "InvoiceNumber")
 
@@ -27,21 +24,21 @@ Public Class invoice
                 Session("CLIENTPORTAL_clientId") = LocalAPI.GetJobProperty(JobId, "Client")
 
                 ' PayPal....................................................................................
-                If LocalAPI.IsPayPalModule(companyId) Then
+                If LocalAPI.IsPayPalModule(lblCompanyId.Text) Then
                     ' Get All invoice Data
                     Dim invoiceInfo = LocalAPI.GetInvoiceInfo(lblInvoiceId.Text)
 
 
                     Dim amountDue As Double = invoiceInfo("AmountDue")
-                    Dim PayHereMax As Double = LocalAPI.GetCompanyProperty(companyId, "PayHereMax")
+                    Dim PayHereMax As Double = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "PayHereMax")
 
                     ' PayHereMax condition....................................................................................
                     If (PayHereMax = 0) Or (PayHereMax > 0 And amountDue < PayHereMax) Then
 
                         ' Get PayPalClientId
-                        Dim clientId = LocalAPI.GetCompanyProperty(companyId, "PayPalClientId")
+                        Dim clientId = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "PayPalClientId")
                         ' Get PayPalClientSecret
-                        Dim clientSecret = LocalAPI.GetCompanyProperty(companyId, "PayPalClientSecret")
+                        Dim clientSecret = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "PayPalClientSecret")
 
                         ' PayPal Tokens condition....................................................................................
                         If amountDue > 0 AndAlso Not String.IsNullOrEmpty(clientId) AndAlso Not String.IsNullOrEmpty(clientSecret) Then
@@ -90,7 +87,7 @@ Public Class invoice
 
                 'Clients_visitslog?
                 ' Visit not from Current session company "False visit"
-                If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> companyId Then
+                If Not Request.QueryString("entityType") Is Nothing And Val("" & Session("companyId")) <> lblCompanyId.Text Then
                     LocalAPI.NewClients_visitslog(Request.QueryString("entityType"), lblInvoiceId.Text, Request.UserHostAddress())
                 End If
 

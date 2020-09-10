@@ -677,7 +677,7 @@
                                             <telerik:GridTemplateColumn DataField="Amount" DataType="System.Double" HeaderText="Qty"
                                                 SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Amount", "{0:N2}") %>'></asp:Label>
+                                                    <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Amount", "{0:N4}") %>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Hours" DataType="System.Double" HeaderText="Hours"

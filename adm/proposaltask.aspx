@@ -104,7 +104,7 @@
                         <tr>
                             <td style="width: 120px">
                                 <telerik:RadNumericTextBox ID="txtAmount" runat="server" Width="100%" EmptyMessage="Optional">
-                                    <NumberFormat DecimalDigits="2" />
+                                    <NumberFormat DecimalDigits="4" />
                                 </telerik:RadNumericTextBox>
                             </td>
                             <td style="text-align: right; width: 100px">Hours:
@@ -118,7 +118,6 @@
                             </td>
                             <td style="width: 120px">
                                 <telerik:RadNumericTextBox ID="txtRates" runat="server" Width="100%" EmptyMessage="Optional">
-                                    <NumberFormat DecimalDigits="2" />
                                 </telerik:RadNumericTextBox>
                             </td>
                             <td style="text-align: right; width: 100px">Bill Type:
