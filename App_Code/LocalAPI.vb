@@ -14157,8 +14157,7 @@ Public Class LocalAPI
             sFullBody.Append(GetEmployeesSign(employeeId))
 
             Try
-                'ClientObject("Email"), employeeEmail
-                SendClientAcknowledmentEmail = SendGrid.Email.SendMail("jcarlos@axzes.com", "matt@axzes.com", "", "PASconcept. Acknowledment Request", sFullBody.ToString, companyId, ClientObject("Id"), 0, employeeEmail,, employeeEmail, employeeEmail)
+                SendClientAcknowledmentEmail = SendGrid.Email.SendMail(ClientObject("Email"), employeeEmail, "", "PASconcept. Acknowledment Request", sFullBody.ToString, companyId, ClientObject("Id"), 0, employeeEmail,, employeeEmail, employeeEmail)
             Finally
             End Try
 
