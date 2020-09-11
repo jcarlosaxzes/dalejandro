@@ -23,7 +23,14 @@
             }
         });
     </script>
-
+    
+    <%--FreshDesk--%>
+    <script>
+        window.fwSettings = {'widget_id': 66000000640};
+        !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/66000000640.js' async defer></script>
+    
     <title>PASconcept</title>
 
     <%--Bootstrap reference begin--%>
@@ -412,8 +419,8 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/HistoryLog" Text="User Activity History Log"
                                                 Visible='<%# EmployeePermission("Deny_HistoryLog") %>'>
                                             </telerik:NavigationNode>
-                                             <telerik:NavigationNode Text="Import Data" Visible='<%# EmployeePermission("Deny_Importdata") %>'>
-                                                 <Nodes>
+                                            <telerik:NavigationNode Text="Import Data" Visible='<%# EmployeePermission("Deny_Importdata") %>'>
+                                                <Nodes>
                                                     <telerik:NavigationNode runat="server" NavigateUrl="~/adm/ImportData" Text="CSV Files">
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/client_sync_qb" Text="Intuit QuickBooks" Visible='<%# LocalAPI.IsQuickBookModule(Companyp)  %>'>
@@ -838,16 +845,16 @@
 
     <script type="text/javascript">
 
-        (function ($) {
-            $(document).ready(function () {
-                $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    $(this).parent().siblings().removeClass('open');
-                    $(this).parent().toggleClass('open');
+            (function ($) {
+                $(document).ready(function () {
+                    $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        $(this).parent().siblings().removeClass('open');
+                        $(this).parent().toggleClass('open');
+                    });
                 });
-            });
-        })(jQuery);
+            })(jQuery);
 
         function OnClientNodeExpandingMenu2(sender, eventArgs) {
             var nav = $find("<%= RadNavigation3.ClientID %>");
