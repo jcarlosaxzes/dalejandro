@@ -264,14 +264,14 @@
                                             <td style="width: 220px">Active/Inactive:
                                             </td>
                                             <td>
-                                                <asp:CheckBox ID="CheckBox15" runat="server" Checked='<%# LocalAPI.IsCompanyTwilio(lblCompanyId.Text)%>' Enabled="false" />
+                                                <asp:CheckBox ID="CheckBox15" runat="server" Checked='<%# Eval("Active")%>' Enabled="false" />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td>
                                                 <asp:LinkButton ID="btnSMS" runat="server" ToolTip="Send Test SMS" CommandName="SendTestSMS" CausesValidation="False" CssClass="btn btn-primary" UseSubmitBehavior="false"
-                                                    Visible='<%# LocalAPI.IsCompanyTwilio(lblCompanyId.Text)%>'>
+                                                    Visible='<%# Eval("Active")%>'>
                                                         <i class="fas fa-sms"></i> Test SMS
                                                 </asp:LinkButton>
                                             </td>
@@ -859,7 +859,7 @@
                                         <tr>
                                             <td>
                                                 <h4 style="margin: 0">
-                                                Email SMTP Outgoing Settings</h3>
+                                                Email SMTP Outgoing Settings</h4>
                                             </td>
                                             <td style="text-align: right">
                                                 <asp:LinkButton ID="LinkButton7" runat="server" ToolTip="Update changes to Company Email SMTP Settings" CommandName="Update" CausesValidation="True"
@@ -929,6 +929,51 @@
                                             </td>
                                             <td>
                                                 <asp:CheckBox ID="CheckBox14" runat="server" Checked='<%# Bind("webUseDefaultCredentials")%>' />
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                     <table class="table-sm">
+                                        <tr>
+                                            <td colspan="2">
+                                                <hr />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <h4>
+                                                Twilio SMS Settings (https://www.twilio.com/console)</h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Active:
+                                            </td>
+                                            <td>
+                                                <asp:CheckBox ID="CheckBox16" runat="server" Checked='<%# Bind("Active")%>' />
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td style="width: 220px">Account SID:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox12" runat="server" Text='<%# Bind("accountSid")%>' 
+                                                    Width="500px" EmptyMessage="" />
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>Auth Token:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox13" runat="server" Text='<%# Bind("authToken")%>' 
+                                                    Width="500px"  />
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>Twilio Phone:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox14" runat="server" Text='<%# Bind("TwilioPhone")%>' 
+                                                    Width="500px"  />
                                             </td>
                                         </tr>
                                     </table>
@@ -1321,7 +1366,7 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CompanyProfile_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="CompanyProfile_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="CompanyProfile_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
@@ -1376,6 +1421,11 @@
             <asp:Parameter Name="AttorneyName" />
             <asp:Parameter Name="AttorneyPhone" />
             <asp:Parameter Name="AttorneyEmail" />
+
+            <asp:Parameter Name="Active" />
+            <asp:Parameter Name="accountSid" />
+            <asp:Parameter Name="authToken" />
+            <asp:Parameter Name="TwilioPhone" />
 
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
