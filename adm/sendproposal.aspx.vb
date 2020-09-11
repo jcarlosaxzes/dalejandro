@@ -186,9 +186,7 @@ Public Class sendproposal
                 Dim ProjectName As String = LocalAPI.GetProposalProperty(lblProposalId.Text, "ProjectName")
                 Dim sURL As String = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text) & " "
 
-                txtSMS.Text = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Name") & " notification" & vbCrLf &
-                            "Click the following link To review/accept the proposal " & ProjectName & "    " &
-                sURL
+                txtSMS.Text = "You have received a proposal from " & LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Name") & " click below to review/accept: " & vbCrLf & sURL
 
 
             End If

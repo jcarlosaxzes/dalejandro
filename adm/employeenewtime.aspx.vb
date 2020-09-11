@@ -261,6 +261,8 @@ Public Class employeenewtime
                 Response.Redirect("~/adm/time.aspx?restoreFilter=true")
             Case "job_times"
                 Response.Redirect("~/adm/job_times.aspx?JobId=" & lblSelectedJob.Text)
+            Case "job_employees"
+                Response.Redirect("~/adm/job_employees.aspx?JobId=" & lblSelectedJob.Text)
             Case Else
                 Response.Redirect("~/adm/default.aspx")
         End Select

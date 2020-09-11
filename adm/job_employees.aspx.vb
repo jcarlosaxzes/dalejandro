@@ -24,12 +24,12 @@ Public Class job_employees
     End Sub
     Private Sub btnPrivate_Click(sender As Object, e As EventArgs) Handles btnPrivate.Click
         Select Case btnPrivate.Text
-            Case "Private"
+            Case "Private Mode"
                 RadGridAssignedEmployees.MasterTableView.GetColumn("HourRate").Visible = True
-                btnPrivate.Text = "Public"
-            Case "Public"
+                btnPrivate.Text = "Public Mode"
+            Case "Public Mode"
                 RadGridAssignedEmployees.MasterTableView.GetColumn("HourRate").Visible = btnPrivate.Visible = False
-                btnPrivate.Text = "Private"
+                btnPrivate.Text = "Private Mode"
         End Select
         RadGridAssignedEmployees.DataBind()
     End Sub
@@ -87,6 +87,10 @@ Public Class job_employees
                 Dim nHours As Double = LocalAPI.GetJobsEmployeesassignedProperty(Id, "Hours") - LocalAPI.GetJobHourWorked(lblJobId.Text)
 
                 NotifyEmployee(employeeId, JobCodeName, nHours)
+
+            Case "AddTime"
+                Session("employeefortime") = e.CommandArgument
+                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & lblJobId.Text & "&backpage=job_employees")
 
         End Select
     End Sub
