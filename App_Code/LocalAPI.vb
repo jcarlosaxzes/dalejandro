@@ -14138,26 +14138,24 @@ Public Class LocalAPI
             Dim employeeEmail As String = GetEmployeeEmail(employeeId)
             Dim ClientObject = GetRecord(clientId, "Client_v20_SELECT")
             Dim sFullBody As New System.Text.StringBuilder
-            sFullBody.Append("Mr./Mrs. " & ClientObject("Client") & ":")
+            sFullBody.Append("Mr./Mrs. " & ClientObject("Name") & ":")
 
             sFullBody.Append("<br />")
             sFullBody.Append("<br />")
-            sFullBody.Append("In order to improve our communication, we ask for your authorization to send you text messages about Proposals, Invoices or Statements.")
+            sFullBody.Append("In order to improve our communication, we ask for your authorization to send you text messages about Proposals, Invoices and Statements.")
             sFullBody.Append("<br />")
             sFullBody.Append("<br />")
-            sFullBody.Append("<a href=" & """" & LocalAPI.GetSharedLink_URL(3001, clientId) & """> Click to view the Acknowledment Page</a>")
+            sFullBody.Append("<a href=" & """" & LocalAPI.GetSharedLink_URL(3001, clientId) & """> Click to Authorize SMS Messages</a>")
 
             sFullBody.Append("<br />")
             sFullBody.Append("<br />")
             sFullBody.Append("Thank you,")
             sFullBody.Append("<br />")
             sFullBody.Append("<br />")
-            sFullBody.Append("<a href=" & """" & GetHostAppSite() & """" & ">PASconcept</a> Notification")
-            sFullBody.Append("<br />")
             sFullBody.Append(GetEmployeesSign(employeeId))
 
             Try
-                SendClientAcknowledmentEmail = SendGrid.Email.SendMail(ClientObject("Email"), employeeEmail, "", "PASconcept. Acknowledment Request", sFullBody.ToString, companyId, ClientObject("Id"), 0, employeeEmail,, employeeEmail, employeeEmail)
+                SendClientAcknowledmentEmail = SendGrid.Email.SendMail(ClientObject("Email"), employeeEmail, "", "Get SMS updates from " & GetCompanyName(companyId), sFullBody.ToString, companyId, ClientObject("Id"), 0, employeeEmail,, employeeEmail, employeeEmail)
             Finally
             End Try
 

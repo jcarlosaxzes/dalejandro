@@ -16,6 +16,8 @@ Public Class Job_times
                 If cboEmployee.Items.Count = 0 Then
                     btnNewTime.Visible = False
                     cboEmployee.Visible = False
+                Else
+                    cboEmployee.SelectedValue = Master.UserId
                 End If
 
                 Master.ActiveTab(6)

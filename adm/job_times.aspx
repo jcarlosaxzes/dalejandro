@@ -86,7 +86,7 @@
                                             <a href='<%# LocalAPI.GetSharedLink_URL(4,Eval("invoiceId"))%>' target="_blank" title="view invoice"><%# Eval("InvoiceNumber")%></a>
                                         </div>
                                         <div style="text-align: center">
-                                            <%# Eval("TimeInvoice")%> <%# iif(Eval("invoiceId")>0,"  x  ","") %> <%# Eval("RateInvoice")%>
+                                            <%# Eval("TimeInvoice")%> <%# iif(Eval("invoiceId")>0,"  x  ","") %> <%# Eval("RateInvoice", "{0:N2}")%>
                                         </div>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>

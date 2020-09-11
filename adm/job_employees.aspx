@@ -18,7 +18,7 @@
                 <asp:LinkButton ID="btnSetEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Assin Employees">
                         Add Employee
                 </asp:LinkButton>
-                <asp:LinkButton ID="btnPrivate" runat="server" ToolTip="Private/Public mode" Text="Public"
+                <asp:LinkButton ID="btnPrivate" runat="server" ToolTip="Private/Public mode" Text="Public Mode"
                     CssClass="btn btn-danger btn" UseSubmitBehavior="false">
                 </asp:LinkButton>
             </span>
@@ -31,6 +31,13 @@
                     <Columns>
                         <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
                         </telerik:GridBoundColumn>
+                        <telerik:GridTemplateColumn HeaderStyle-Width="25px" HeaderText="" ItemStyle-HorizontalAlign="Center" UniqueName="AddTime">
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkButton14" runat="server" UseSubmitBehavior="false" CommandName="AddTime" CommandArgument='<%# Eval("employeeId")%>' ToolTip="Add Time">
+                                    <i class="fas fa-user-clock"></i>
+                                </asp:LinkButton>
+                            </ItemTemplate>
+                        </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn DataField="employeeId" DataType="System.Int32" HeaderText="Employee" SortExpression="employeeId" UniqueName="employeeId" Aggregate="Count"
                             FooterAggregateFormatString="{0:N0}" ReadOnly="true">
                             <ItemTemplate>
@@ -42,7 +49,7 @@
                         </telerik:GridTemplateColumn>
                         <telerik:GridBoundColumn UniqueName="Position" HeaderText="Position" DataField="Position">
                         </telerik:GridBoundColumn>
-                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Hourly Rate" ItemStyle-HorizontalAlign="Right" SortExpression="HourRate" UniqueName="HourRate">
+                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Hourly Rate" ItemStyle-HorizontalAlign="Center" SortExpression="HourRate" UniqueName="HourRate">
                             <ItemTemplate>
                                 <%# Eval("HourRate", "{0:N2}") %>
                             </ItemTemplate>
@@ -50,20 +57,15 @@
                         <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope">
                         </telerik:GridBoundColumn>
                         <telerik:GridNumericColumn Aggregate="Sum" DataField="Hours" HeaderText="Hours" UniqueName="Freight" HeaderTooltip="Assigned Hours"
-                            HeaderStyle-Width="120px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                            HeaderStyle-Width="110px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
                         </telerik:GridNumericColumn>
                         <telerik:GridBoundColumn DataField="HoursWorked" HeaderText="H. Worked" ReadOnly="True" SortExpression="HoursWorked" UniqueName="HoursWorked"
                             DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}" FooterStyle-Font-Bold="true" HeaderTooltip="Hours Worked"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
+                            Aggregate="Sum" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="110px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
-
-                        <%--       <telerik:GridBoundColumn DataField="EstimatedTotal" HeaderText="Estimated Total" ReadOnly="True" SortExpression="EstimatedTotal" UniqueName="EstimatedTotal"
-                                DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}"
-                                Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
-                            </telerik:GridBoundColumn>--%>
-                        <telerik:GridTemplateColumn DataField="PercentET" HeaderText="E.Total Used(%)" ReadOnly="True" SortExpression="PercentET" UniqueName="PercentET"
+                        <telerik:GridTemplateColumn DataField="PercentET" HeaderText="H. Used(%)" ReadOnly="True" SortExpression="PercentET" UniqueName="PercentET"
                             FooterAggregateFormatString="{0:N1}"
-                            Aggregate="Avg" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="130px" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right">
+                            Aggregate="Avg" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="110px" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:Label ID="lblPercentET" runat="server" Text='<%# Eval("PercentET", "{0:N1}") %>' ForeColor='<%# GetPercentETForeColor(Eval("PercentET"))%>' Font-Bold='<%# GetPercentETFontBold(Eval("PercentET"))%>'>
                                 </asp:Label>
@@ -135,7 +137,8 @@
                                                 Update
                                         </asp:LinkButton>
                                         &nbsp;&nbsp;&nbsp;
-                                            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
+                                           
+                                        <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
                                                 Cancel
                                             </asp:LinkButton>
 
