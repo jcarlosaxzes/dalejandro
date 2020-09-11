@@ -8,7 +8,7 @@ Public Class employeenewtime
             Master.PageTitle = "Employee New Time"
             If Not IsPostBack Then
                 lblCompanyId.Text = Session("companyId")
-                lblLogedEmployeeId.text = Master.UserId
+                lblLogedEmployeeId.Text = Master.UserId
 
                 If Not Session("employeefortime") Is Nothing Then
                     lblEmployeeId.Text = Session("employeefortime")
