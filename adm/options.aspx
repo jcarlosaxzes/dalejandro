@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="options.aspx.vb" Inherits="pasconcept20.options" Async="true"  %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/ADM_Main_Responsive.master" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -271,7 +272,7 @@
 
                             <telerik:GridTemplateColumn DataField="Url" HeaderText="Distribution Page Link" UniqueName="Download">
                                 <ItemTemplate>
-                                    <a href='<%# iif(Eval("Platform") = "iPhone", "https://www.pasconcept.com/Distribution/iphone.aspx", "https://www.pasconcept.com/Distribution/android.aspx") %>' target="_blank"><%#String.Concat("PASconcept Mobile App Distribution page for ", Eval("Platform"))%></a>
+                                    <a href='<%#IIf(Eval("Platform") = "iPhone", LocalAPI.GetHostAppSite() & "/distribution/iphone.aspx", LocalAPI.GetHostAppSite() & "/distribution/android.aspx") %>' target="_blank"><%#String.Concat("PASconcept Mobile App Distribution page for ", Eval("Platform"))%></a>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                         </Columns>
