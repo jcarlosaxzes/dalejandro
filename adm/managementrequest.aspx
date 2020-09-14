@@ -1,6 +1,7 @@
-﻿<%@ Page Title="Management Request" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="managementrequest.aspx.vb" Inherits="pasconcept20.managementrequest" %>
+﻿<%@ Page Title="Management Request" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="managementrequest.aspx.vb" Inherits="pasconcept20.managementrequest" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
+<%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadFormDecorator ID="FormDecorator1" runat="server" DecoratedControls="all" DecorationZoneID="decorationZone" Skin="Bootstrap"></telerik:RadFormDecorator>
     <div id="decorationZone">

@@ -4,6 +4,7 @@ Public Class managementrequest
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
+            lblCompanyId.Text = Session("companyId")
             Master.PageTitle = "Management Request"
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Management Request"
             lblEmployeeEmail.Text = Master.UserEmail
