@@ -37,9 +37,7 @@ Public Class proposals
                 cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(employeeId, "FilterProposal_Month")
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
-                If Not Request.QueryString("restoreFilter") Is Nothing Then
-                    RestoreFilter()
-                End If
+
 
                 RefreshRecordset()
 
@@ -47,7 +45,13 @@ Public Class proposals
                     lblProposalIdFromRfp.Text = LocalAPI.CreateProposalFromRFP(Request.QueryString("rfpGUID"), employeeId, lblCompanyId.Text)
                 End If
 
+                If Not Request.QueryString("restoreFilter") Is Nothing Then
+                    RestoreFilter()
+                End If
+
             End If
+
+
 
             RadWindowManager1.EnableViewState = False
             'If RadWindowManager1.Windows.Count > 0 Then
