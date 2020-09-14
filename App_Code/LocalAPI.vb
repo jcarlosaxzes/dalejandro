@@ -13004,44 +13004,44 @@ Public Class LocalAPI
 
         End Try
     End Function
-    Public Shared Function LeerStatementTemplate(statementId As Integer, companyId As Integer, ByRef Subject As String, ByRef Body As String) As Boolean
-        Try
-            ' Variables
-            Dim sClienteName = LocalAPI.GetStatementProperty(statementId, "[Clients].[Name]")
-            'Dim sSign = LocalAPI.GetCompanySign(companyId)
-            Dim statementNumber As String = LocalAPI.GetStatementNumber(statementId)
+    'Public Shared Function LeerStatementTemplate(statementId As Integer, companyId As Integer, ByRef Subject As String, ByRef Body As String) As Boolean
+    '    Try
+    '        ' Variables
+    '        Dim sClienteName = LocalAPI.GetStatementProperty(statementId, "[Clients].[Name]")
+    '        'Dim sSign = LocalAPI.GetCompanySign(companyId)
+    '        Dim statementNumber As String = LocalAPI.GetStatementNumber(statementId)
 
-            Subject = "Statement of Invoices Number [Statement Number]"
-            Subject = Replace(Subject, "[Statement Number]", statementNumber)
+    '        Subject = "Statement of Invoices Number [Statement Number]"
+    '        Subject = Replace(Subject, "[Statement Number]", statementNumber)
 
-            If Body.Length = 0 Then
-                Dim sBody As New System.Text.StringBuilder
-                sBody.Append("Dear <strong>[Client Name]</strong>,")
-                sBody.Append("<br />")
-                sBody.Append("<br />")
-                sBody.Append("<a href=" & """" & "[StatementUrl]" & """" & ">Click here</a> to review statement [Statement Number] for Services rendered in the project(s) referenced within.")
-                sBody.Append("<br />")
-                sBody.Append("If you have any inquiries concerning it, please do not hesitate to contact our office.")
-                sBody.Append("<br />")
-                sBody.Append("<br />")
-                sBody.Append("Thank you very much,")
-                sBody.Append("<br />")
-                sBody.Append("[Sign]")
-                Body = sBody.ToString
-            End If
+    '        If Body.Length = 0 Then
+    '            Dim sBody As New System.Text.StringBuilder
+    '            sBody.Append("Dear <strong>[Client Name]</strong>,")
+    '            sBody.Append("<br />")
+    '            sBody.Append("<br />")
+    '            sBody.Append("<a href=" & """" & "[StatementUrl]" & """" & ">Click here</a> to review statement [Statement Number] for Services rendered in the project(s) referenced within.")
+    '            sBody.Append("<br />")
+    '            sBody.Append("If you have any inquiries concerning it, please do not hesitate to contact our office.")
+    '            sBody.Append("<br />")
+    '            sBody.Append("<br />")
+    '            sBody.Append("Thank you very much,")
+    '            sBody.Append("<br />")
+    '            sBody.Append("[Sign]")
+    '            Body = sBody.ToString
+    '        End If
 
-            Body = Replace(Body, "[Statement Number]", statementNumber)
-            Body = Replace(Body, "[Client Name]", sClienteName)
-            'Body = Replace(Body, "[Sign]", sSign)
+    '        Body = Replace(Body, "[Statement Number]", statementNumber)
+    '        Body = Replace(Body, "[Client Name]", sClienteName)
+    '        'Body = Replace(Body, "[Sign]", sSign)
 
-            Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
-            Body = Replace(Body, "[StatementUrl]", sURL)
+    '        Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
+    '        Body = Replace(Body, "[StatementUrl]", sURL)
 
-            Return True
-        Catch ex As Exception
+    '        Return True
+    '    Catch ex As Exception
 
-        End Try
-    End Function
+    '    End Try
+    'End Function
     Public Shared Function LeerInvoiceRemainderTemplate(invoiceId As Integer) As String
         Try
             Dim sMsg As New System.Text.StringBuilder
