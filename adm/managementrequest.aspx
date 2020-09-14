@@ -1,96 +1,79 @@
-﻿<%@ Page Title="Management Request" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="managementrequest.aspx.vb" Inherits="pasconcept20.managementrequest" %>
+﻿<%@ Page Title="Management Request" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="managementrequest.aspx.vb" Inherits="pasconcept20.managementrequest" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+<%@ Import Namespace="pasconcept20" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadFormDecorator ID="FormDecorator1" runat="server" DecoratedControls="all" DecorationZoneID="decorationZone" Skin="Bootstrap"></telerik:RadFormDecorator>
-    <div id="decorationZone">
-        <telerik:RadDataForm runat="server" ID="RadDataForm1" DataKeyNames="Id" DataSourceID="SqlDataSource1" Skin="Bootstrap">
-            <ItemTemplate>
-                <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
-                    <Rows>
-                        <telerik:LayoutRow>
-                            <Columns>
-                                <telerik:LayoutColumn Span="12">
-                                    <h1>Time off request</h1>
-                                </telerik:LayoutColumn>
-                            </Columns>
-                        </telerik:LayoutRow>
-                        <telerik:LayoutRow>
-                            <Columns>
-                                <telerik:LayoutColumn Span="6">
-                                    <div>
 
-                                        <h4 style="border: none">The following time off request has been submitted</h4>
-                                        <h4 style="border: none">for the employee&nbsp;<b><%# Eval("EmployeeFullName") %></b></h4>
-                                        <h4 style="border: none">Reason for request:&nbsp;<b><%# Eval("TypeName") %></b></h4>
-                                        <h4 style="border: none">Date Request:&nbsp;<%# Eval("DateRequest", "{0:d}")%>&nbsp;&nbsp;&nbsp;Status:&nbsp;<b><%# Eval("StatusName") %></b></h4>
-                                        <h4 style="border: none"><%# IIf(Eval("DateFrom") = Eval("DateTo"), "", String.Concat("Number of days requested:&nbsp;<b>", Eval("nDays"), "</b>"))%></h4>
-                                        <h5 style="border: none">Dates of absence, From &nbsp;<b><%# Eval("DateFrom", "{0:d}") %></b>&nbsp;to&nbsp; <b><%# Eval("DateTo", "{0:d}") %></b></h5>
-                                        <h5 style="border: none">Hours of absence, each day:&nbsp;<%# Eval("Hours") %></h5>
-                                        <h5 style="border: none">Employee Explanation:&nbsp;<%# Eval("Notes") %></h5>
-                                    </div>
-                                </telerik:LayoutColumn>
-                                <telerik:LayoutColumn Span="6">
-                                    <div>
-                                        <table class="table-sm" style="width:100%">
-                                            <tr>
-                                                <td style="width:25%;text-align:center"><b>Benfits</b></td>
-                                                <td style="width:25%;text-align:center"><b>Assined</b></td>
-                                                <td style="width:25%;text-align:center"><b>Used</b></td>
-                                                <td style="width:25%;text-align:center"><b>Balance</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align:center">Vacations</td>
-                                                <td style="text-align:center"><%# Eval("Benefits_vacations") %></td>
-                                                <td style="text-align:center"><%# Eval("used_vacations") %></td>
-                                                <td style="text-align:center"><%# Eval("Benefits_vacations")-Eval("used_vacations") %></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align:center">Personal/Sick</td>
-                                                <td style="text-align:center"><%# Eval("Benefits_personals") %></td>
-                                                <td style="text-align:center"><%# Eval("used_personals") %></td>
-                                                <td style="text-align:center"><%# Eval("Benefits_personals")-Eval("used_personals") %></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </telerik:LayoutColumn>
-                            </Columns>
-                        </telerik:LayoutRow>
-                        <telerik:LayoutRow>
-                            <Columns>
-                                <telerik:LayoutColumn Span="12">
-                                    <h3>Response Explanation:&nbsp;</h3>
+    <div class="pasconcept-bar noprint">
+        <span class="pasconcept-pagetitle">Time off request</span>
+    </div>
+
+    <div id="decorationZone">
+        <telerik:RadDataForm runat="server" ID="RadDataForm1" DataKeyNames="Id" DataSourceID="SqlDataSource1">
+            <ItemTemplate>
+                <table class="table-sm" style="width: 100%">
+                    <tr>
+                        <td style="width: 50%;vertical-align:top">
+                            <h4 style="border: none">The following time off request has been submitted</h4>
+                            <h4 style="border: none">for the employee&nbsp;<b><%# Eval("EmployeeFullName") %></b></h4>
+                            <h4 style="border: none">Reason for request:&nbsp;<b><%# Eval("TypeName") %></b></h4>
+                            <h4 style="border: none">Date Request:&nbsp;<%# Eval("DateRequest", "{0:d}")%>&nbsp;&nbsp;&nbsp;Status:&nbsp;<b><%# Eval("StatusName") %></b></h4>
+                            <h4 style="border: none"><%# IIf(Eval("DateFrom") = Eval("DateTo"), "", String.Concat("Number of days requested:&nbsp;<b>", Eval("nDays"), "</b>"))%></h4>
+                            <h5 style="border: none">Dates of absence, From &nbsp;<b><%# Eval("DateFrom", "{0:d}") %></b>&nbsp;to&nbsp; <b><%# Eval("DateTo", "{0:d}") %></b></h5>
+                            <h5 style="border: none">Hours of absence, each day:&nbsp;<%# Eval("Hours") %></h5>
+                            <h5 style="border: none">Employee Explanation:&nbsp;<%# Eval("Notes") %></h5>
+                        </td>
+                        <td style="vertical-align:top">
+                            <table class="table-sm" style="width: 100%">
+                                <tr>
+                                    <td style="width: 25%; text-align: center"><b>Benfits</b></td>
+                                    <td style="width: 25%; text-align: center"><b>Assined</b></td>
+                                    <td style="width: 25%; text-align: center"><b>Used</b></td>
+                                    <td style="width: 25%; text-align: center"><b>Balance</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">Vacations</td>
+                                    <td style="text-align: center"><%# Eval("Benefits_vacations") %></td>
+                                    <td style="text-align: center"><%# Eval("used_vacations") %></td>
+                                    <td style="text-align: center"><%# Eval("Benefits_vacations") - Eval("used_vacations") %></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">Personal/Sick</td>
+                                    <td style="text-align: center"><%# Eval("Benefits_personals") %></td>
+                                    <td style="text-align: center"><%# Eval("used_personals") %></td>
+                                    <td style="text-align: center"><%# Eval("Benefits_personals") - Eval("used_personals") %></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <h3>Response Explanation:&nbsp;</h3>
                                     <telerik:RadTextBox ID="txtExplanation" runat="server" Text='<%# Bind("NotesResponse")%>' Enabled='<%# Eval("Status") = 0%>' Width="100%"></telerik:RadTextBox>
-                                </telerik:LayoutColumn>
-                            </Columns>
-                        </telerik:LayoutRow>
-                        <telerik:LayoutRow>
-                            <Columns>
-                                <telerik:LayoutColumn Span="12">
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtExplanation" Text="(*) Response Explanation can not be empty" SetFocusOnError="true">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align:center">
+                             <asp:LinkButton ID="btnSign" runat="server" Visible='<%# Eval("Status") = 0%>' CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" OnClick="btnAccept_Click" CausesValidation="true">
+                                            Accept
+                                        </asp:LinkButton>
+                            &nbsp;&nbsp;&nbsp;
+                            <asp:LinkButton ID="btnDecline" runat="server" Visible='<%# Eval("Status") = 0%>' CssClass="btn btn-danger btn-lg" UseSubmitBehavior="false" OnClick="btnDecline_Click" CausesValidation="true">
+                                            Decline
+                                        </asp:LinkButton>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtExplanation" Text="(*) Response Explanation can not be empty" SetFocusOnError="true" ForeColor="Red">
                                     </asp:RequiredFieldValidator>
-                                </telerik:LayoutColumn>
-                            </Columns>
-                        </telerik:LayoutRow>
-                        <telerik:LayoutRow>
-                            <Columns>
-                                <telerik:LayoutColumn Span="3">
-                                    <div style="padding-bottom:10px">
-                                        <telerik:RadButton ID="btnSign" runat="server" Text="Accept" Enabled='<%# Eval("Status") = 0%>' OnClick="btnAccept_Click" Width="120px" CausesValidation="true" />
-                                    </div>
-                                </telerik:LayoutColumn>
-                                <telerik:LayoutColumn Span="3">
-                                    <div style="padding-bottom:10px">
-                                        <telerik:RadButton ID="btnDecline" runat="server" Text="Decline" Enabled='<%# Eval("Status") = 0%>' OnClick="btnDecline_Click" Width="120px" CausesValidation="true" />
-                                    </div>
-                                </telerik:LayoutColumn>
-                            </Columns>
-                        </telerik:LayoutRow>
-                        <telerik:LayoutRow>
-                            <Columns>
-                                <telerik:LayoutColumn Span="12">
-                                    <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" OverflowBehavior="Auto" SelectedView="MonthView" RenderMode="Auto" 
-                                        AllowDelete="false" AllowEdit="false" AllowInsert="false" 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" OverflowBehavior="Auto" SelectedView="MonthView" RenderMode="Auto"
+                                        AllowDelete="false" AllowEdit="false" AllowInsert="false"
                                         DataDescriptionField="Description"
                                         DataEndField="End"
                                         DataKeyField="Id"
@@ -102,7 +85,6 @@
                                         DataSubjectField="Subject"
                                         DayEndTime="21:00:00"
                                         EditFormDateFormat="MM/dd/yyyy"
-                                        
                                         WorkDayEndTime="21:00:00"
                                         FirstDayOfWeek="Monday">
                                         <DayView UserSelectable="True" />
@@ -110,19 +92,18 @@
                                         <TimelineView UserSelectable="False" />
                                         <MonthView UserSelectable="True" AdaptiveRowHeight="true" />
                                     </telerik:RadScheduler>
-                                </telerik:LayoutColumn>
-                            </Columns>
-                        </telerik:LayoutRow>
-                    </Rows>
-                </telerik:RadPageLayout>
+                        </td>
+                    </tr>
+                </table>
+
             </ItemTemplate>
         </telerik:RadDataForm>
 
     </div>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Employee_NonJobTime_Request_SELECT" SelectCommandType="StoredProcedure" 
-        UpdateCommand="Employee_DeclineRequestNonJobTime" UpdateCommandType="StoredProcedure" 
+        SelectCommand="Employee_NonJobTime_Request_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="Employee_DeclineRequestNonJobTime" UpdateCommandType="StoredProcedure"
         InsertCommand="Employee_AcceptRequestNonJobTime" InsertCommandType="StoredProcedure">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
@@ -157,6 +138,6 @@
     <asp:Label ID="lblRequestId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
 
-    <asp:Label ID="lblCompanyId" runat="server" Visible="False" ></asp:Label>
+    <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
 </asp:Content>
 
