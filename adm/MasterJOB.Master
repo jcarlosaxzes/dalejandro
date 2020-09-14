@@ -22,13 +22,6 @@
         });
         </script>
 
-    <%--FreshDesk--%>
-    <script>
-        window.fwSettings = { 'widget_id': 66000000640 };
-        !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
-    </script>
-    <script type='text/javascript' src='https://widget.freshworks.com/widgets/66000000640.js' async defer></script>
-
     <%-- Favicons and the like --%>
     <link rel="apple-touch-icon" sizes="180x180" href="~/Content/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="~/Content/favicons/favicon-32x32.png" />
