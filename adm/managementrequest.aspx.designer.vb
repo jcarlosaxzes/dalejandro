@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class managementrequest
 
     '''<summary>
-    '''FormDecorator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FormDecorator1 As Global.Telerik.Web.UI.RadFormDecorator
-
-    '''<summary>
     '''RadDataForm1 control.
     '''</summary>
     '''<remarks>

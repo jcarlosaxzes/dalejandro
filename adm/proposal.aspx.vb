@@ -708,5 +708,12 @@ Public Class proposal
     Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
         ConfigUploadPanels()
     End Sub
+
+    Private Sub FormViewProp1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormViewProp1.ItemCommand
+        Select Case e.CommandName
+            Case "ViewJob"
+                Response.Redirect("~/adm/Job_job.aspx?JobId=" & e.CommandArgument)
+        End Select
+    End Sub
 End Class
 
