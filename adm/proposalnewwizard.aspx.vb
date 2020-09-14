@@ -741,7 +741,7 @@ Public Class proposalnewwizard
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/proposals.aspx")
+        Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
     End Sub
 
     Private Sub SqlDataSourcePS_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourcePS.Updating

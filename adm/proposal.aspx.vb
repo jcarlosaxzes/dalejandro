@@ -204,7 +204,7 @@ Public Class proposal
 
     Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
         LocalAPI.EliminarProposal(lblProposalId.Text)
-        Response.Redirect("~/adm/proposals.aspx")
+        Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
     End Sub
 
     Protected Sub btnCancelDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDelete.Click
