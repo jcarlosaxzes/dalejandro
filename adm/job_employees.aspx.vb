@@ -19,20 +19,20 @@ Public Class job_employees
         End Try
     End Sub
 
-    Protected Sub RadGridAssignedEmployees_PreRender(sender As Object, e As EventArgs) Handles RadGridAssignedEmployees.PreRender
-        RadGridAssignedEmployees.MasterTableView.GetColumn("HourRate").Visible = (btnPrivate.Text = "Private")
-    End Sub
-    Private Sub btnPrivate_Click(sender As Object, e As EventArgs) Handles btnPrivate.Click
-        Select Case btnPrivate.Text
-            Case "Private Mode"
-                RadGridAssignedEmployees.MasterTableView.GetColumn("HourRate").Visible = True
-                btnPrivate.Text = "Public Mode"
-            Case "Public Mode"
-                RadGridAssignedEmployees.MasterTableView.GetColumn("HourRate").Visible = btnPrivate.Visible = False
-                btnPrivate.Text = "Private Mode"
-        End Select
-        RadGridAssignedEmployees.DataBind()
-    End Sub
+    'Protected Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
+    '    RadGrid1.MasterTableView.GetColumn("HourRate").Visible = (btnPrivate.Text = "Private")
+    'End Sub
+    'Private Sub btnPrivate_Click(sender As Object, e As EventArgs) Handles btnPrivate.Click
+    '    Select Case btnPrivate.Text
+    '        Case "Private Mode"
+    '            RadGrid1.MasterTableView.GetColumn("HourRate").Visible = True
+    '            btnPrivate.Text = "Public Mode"
+    '        Case "Public Mode"
+    '            RadGrid1.MasterTableView.GetColumn("HourRate").Visible = False
+    '            btnPrivate.Text = "Private Mode"
+    '    End Select
+    '    RadGrid1.DataBind()
+    'End Sub
     Protected Sub btnSetEmployee_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetEmployee.Click
         CreateRadWindows("SetEmployee", "~/ADM/JobAssignEmployee.aspx?JobId=" & lblJobId.Text, 960, 700, False, "OnClientClose")
     End Sub
@@ -77,7 +77,7 @@ Public Class job_employees
             Return True
         End If
     End Function
-    Protected Sub RadGridAssignedEmployees_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridAssignedEmployees.ItemCommand
+    Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "NotifyEmployee"
