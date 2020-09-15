@@ -356,23 +356,40 @@ Public Class billingmanager
                     statementId = dataItem("Id").Text
                     Subject = ""
                     Body = ""
-                    If LocalAPI.LeerStatementTemplate(statementId, lblCompanyId.Text, Subject, Body) Then
-                        LocalAPI.ActualizarEmittedStatetment(statementId)
-                        LocalAPI.SetInvoiceEmittedFromStatement(statementId)
 
-                        Dim clientId As Integer = LocalAPI.GetStatementProperty(statementId, "clientId")
-                        emailTo = LocalAPI.GetClientEmail(clientId)
-                        Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
-                        If Not LocalAPI.ValidEmail(AccountantEmail) Then
-                            AccountantEmail = AccountantEmail
-                        End If
+                    Dim clientId As Integer = LocalAPI.GetStatementProperty(statementId, "clientId")
+                    Dim sClienteName = LocalAPI.GetStatementProperty(statementId, "[Clients].[Name]")
+                    Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
+                    Dim statementNumber As String = LocalAPI.GetStatementNumber(statementId)
 
-                        SendGrid.Email.SendMail(emailTo, "", AccountantEmail, Subject, Body, lblCompanyId.Text, clientId, 0,, lblEmployeeName.Text, lblEmployeeEmail.Text, lblEmployeeName.Text)
 
-                        LocalAPI.NewAutomaticStatementReminderFromEmitted(statementId, lblEmployeeId.Text, lblCompanyId.Text)
+                    Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
+                    DictValues.Add("[Project_Name]", sClienteName)
+                    DictValues.Add("[Sign]", sSign)
+                    DictValues.Add("[Statement_Number]", statementNumber)
+                    DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-                        dataItem.Selected = False
+                    ' Leer subjet y body template
+                    Subject = LocalAPI.GetMessageTemplateSubject("Statement", lblCompanyId.Text, DictValues)
+                    Body = LocalAPI.GetMessageTemplateBody("Statement", lblCompanyId.Text, DictValues)
+
+                    LocalAPI.ActualizarEmittedStatetment(statementId)
+                    LocalAPI.SetInvoiceEmittedFromStatement(statementId)
+
+
+                    emailTo = LocalAPI.GetClientEmail(clientId)
+                    Dim AccountantEmail As String = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "AccountantEmail")
+                    If Not LocalAPI.ValidEmail(AccountantEmail) Then
+                        AccountantEmail = AccountantEmail
                     End If
+
+                    SendGrid.Email.SendMail(emailTo, "", AccountantEmail, Subject, Body, lblCompanyId.Text, clientId, 0,, lblEmployeeName.Text, lblEmployeeEmail.Text, lblEmployeeName.Text)
+
+                    LocalAPI.NewAutomaticStatementReminderFromEmitted(statementId, lblEmployeeId.Text, lblCompanyId.Text)
+
+                    dataItem.Selected = False
+
+
                 End If
 
             Next
