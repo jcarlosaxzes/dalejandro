@@ -5,9 +5,20 @@
     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
         <script type="text/javascript">
             function OnClientClose(sender, args) {
-                var masterTable = $find("<%= RadGridAssignedEmployees.ClientID%>").get_masterTableView();
+                var masterTable = $find("<%= RadGrid1.ClientID%>").get_masterTableView();
                 masterTable.rebind();
             }
+            $(document).on("click", ".toggle-on", function (event) {
+                var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+                var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
+                masterTableView.hideColumn(columnIndex);
+            });
+
+            $(document).on("click", ".toggle-off", function (event) {
+              var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+                var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
+                masterTableView.showColumn(columnIndex);
+            });
         </script>
     </telerik:RadCodeBlock>
     <div class="container">
@@ -18,13 +29,13 @@
                 <asp:LinkButton ID="btnSetEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Assin Employees">
                         Add Employee
                 </asp:LinkButton>
-                <asp:LinkButton ID="btnPrivate" runat="server" ToolTip="Private/Public mode" Text="Public Mode"
-                    CssClass="btn btn-danger btn" UseSubmitBehavior="false">
-                </asp:LinkButton>
+                 <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">
+                    <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-style="ios"/>
+            </asp:LinkButton>
             </span>
         </div>
         <div style="padding-top: 10px">
-            <telerik:RadGrid ID="RadGridAssignedEmployees" runat="server" DataSourceID="SqlDataSourceAssignedEmployees"
+            <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceAssignedEmployees"
                 AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
                 ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
                 <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceAssignedEmployees" EditMode="EditForms">
