@@ -364,7 +364,7 @@ Public Class billingmanager
 
 
                     Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
-                    DictValues.Add("[Project_Name]", sClienteName)
+                    DictValues.Add("[Client_Name]", sClienteName)
                     DictValues.Add("[Sign]", sSign)
                     DictValues.Add("[Statement_Number]", statementNumber)
                     DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
