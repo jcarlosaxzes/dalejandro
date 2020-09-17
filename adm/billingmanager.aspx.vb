@@ -361,13 +361,14 @@ Public Class billingmanager
                     Dim sClienteName = LocalAPI.GetStatementProperty(statementId, "[Clients].[Name]")
                     Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
                     Dim statementNumber As String = LocalAPI.GetStatementNumber(statementId)
-
+                    Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, statementId)
 
                     Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
-                    DictValues.Add("[Project_Name]", sClienteName)
+                    DictValues.Add("[Client_Name]", sClienteName)
                     DictValues.Add("[Sign]", sSign)
                     DictValues.Add("[Statement_Number]", statementNumber)
                     DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+                    DictValues.Add("[StatementUrl]", sURL)
 
                     ' Leer subjet y body template
                     Subject = LocalAPI.GetMessageTemplateSubject("Statement", lblCompanyId.Text, DictValues)

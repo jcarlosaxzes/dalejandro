@@ -44,12 +44,14 @@
         Dim sClienteName = LocalAPI.GetStatementProperty(lblStatementId.Text, "[Clients].[Name]")
         Dim sSign As String = LocalAPI.GetEmployeesSign(lblEmployeeId.Text)
         Dim statementNumber As String = LocalAPI.GetStatementNumber(lblStatementId.Text)
+        Dim sURL As String = LocalAPI.GetSharedLink_URL(5555, lblStatementId.Text)
 
         Dim DictValues As Dictionary(Of String, String) = New Dictionary(Of String, String)
-        DictValues.Add("[Project_Name]", sClienteName)
+        DictValues.Add("[Client_Name]", sClienteName)
         DictValues.Add("[Sign]", sSign)
         DictValues.Add("[Statement_Number]", statementNumber)
         DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
+        DictValues.Add("[StatementUrl]", sURL)
 
         ' Leer subjet y body template
         txtSubject.Text = LocalAPI.GetMessageTemplateSubject("Statement", lblCompanyId.Text, DictValues)
