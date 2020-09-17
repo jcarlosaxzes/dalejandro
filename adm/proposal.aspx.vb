@@ -67,6 +67,16 @@ Public Class proposal
 
                 ConfigUploadPanels()
 
+                ' Phases
+                If LocalAPI.GetCompanyPhasesCount(lblCompanyId.Text) = 0 Then
+                    RadWizardStepPhases.CssClass = "wizardStepHidden"
+                    RadWizardStepPhaseSchedule.CssClass = "wizardStepHidden"
+                Else
+                    If Not Request.QueryString("TabPhase") Is Nothing Then
+                        RadWizardStepPhases.Active = True
+                    End If
+                End If
+
             End If
             'RadWindowDataProcessing.NavigateUrl = "~/ADM/DataProcessing.aspx?ProposalId=" & lblProposalId.Text
             'RadWindowManager2.EnableViewState = False
@@ -88,6 +98,7 @@ Public Class proposal
                 CType(WStep.FindControl("btnGeneratePaymentSchedules"), LinkButton).Visible = True
                 btnNewTask.Visible = True
             End If
+
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
@@ -121,17 +132,18 @@ Public Class proposal
 
     End Sub
     Private Sub EnabledProposal()
-        Dim Allow_EditAcceptedProposal As Boolean = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_EditAcceptedProposal")
-        If Allow_EditAcceptedProposal Then
-            btnUpdate1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal")
-            btnDeleteProposal.Enabled = btnUpdate1.Enabled
-        Else
-            btnUpdate1.Enabled = lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2 ' diferente de Revised
-            btnDeleteProposal.Enabled = lblOriginalStatus.Text <> 2 ' diferente de Acepted
-        End If
+
+        ' If Proposal Acepted, special Permit to change
+        btnUpdateStatus.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_EditAcceptedProposal")
+
+        btnUpdate1.Enabled = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
+        btnDeleteProposal.Enabled = (lblOriginalStatus.Text <> 2) ' diferente de Acepted
+
         btnNewTask.Enabled = btnUpdate1.Enabled
         RadGrid1.AllowAutomaticUpdates = btnUpdate1.Enabled
         RadGrid1.AllowAutomaticDeletes = btnUpdate1.Enabled
+        RadGridPhases.AllowAutomaticDeletes = btnUpdate1.Enabled
+
         FormViewTC.Enabled = btnUpdate1.Enabled
 
         ' Otras acciones
@@ -347,10 +359,10 @@ Public Class proposal
         GuardarProposal(False)
     End Sub
     Protected Sub btnNewPhase_Click(sender As Object, e As EventArgs) Handles btnNewPhase.Click
-        Response.Redirect("~/adm/newpropsalphase.aspx?Id=" & lblProposalId.Text)
+        Response.Redirect("~/adm/proposalphase.aspx?proposalId=" & lblProposalId.Text)
     End Sub
     Protected Sub btnPivotPhases_Click(sender As Object, e As EventArgs) Handles btnPivotPhases.Click
-        Response.Redirect("~/adm/proposalphases.aspx?Id=" & lblProposalId.Text)
+        Response.Redirect("~/adm/proposalpivotphases.aspx?proposalId=" & lblProposalId.Text)
     End Sub
 
     Protected Sub btnSchedule_Click(sender As Object, e As EventArgs) Handles btnSchedule.Click
@@ -374,7 +386,7 @@ Public Class proposal
     Private Sub RadGridPhases_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPhases.ItemCommand
         Select Case e.CommandName
             Case "EditPhase"
-                Response.Redirect("~/adm/editproposalphase.aspx?Id=" & e.CommandArgument)
+                Response.Redirect("~/adm/proposalphase.aspx?Id=" & e.CommandArgument & "&proposalId=" & lblProposalId.Text)
         End Select
 
     End Sub

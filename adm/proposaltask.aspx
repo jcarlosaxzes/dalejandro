@@ -18,21 +18,16 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
 
-    <div class="pasconcept-bar">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td style="width: 120px">
-                    <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back
-                    </asp:LinkButton>
-                </td>
-                <td style="text-align: center">
-                    <h3 style="margin: 0">Proposal Task</h3>
-                </td>
 
-            </tr>
-        </table>
+    <div class="pasconcept-bar">
+        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back
+        </asp:LinkButton>
+
+        <span class="pasconcept-pagetitle">  Proposal Task</span>
+
     </div>
+
     <div class="pasconcept-bar">
         <table class="table-sm" style="width: 99%;">
             <tr>

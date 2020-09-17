@@ -11,44 +11,26 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class proposalphases
-    
+Partial Public Class proposalpivotphases
+
     '''<summary>
-    '''RadAjaxManager1 control.
+    '''btnBack control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
-    
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
+
     '''<summary>
-    '''RadAjaxLoadingPanel1 control.
+    '''lblProposal control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-    
-    '''<summary>
-    '''btnExcel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnExcel As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''btnCancel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancel As Global.Telerik.Web.UI.RadButton
-    
+    Protected WithEvents lblProposal As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''RadPivotGrid1 control.
     '''</summary>
@@ -57,7 +39,7 @@ Partial Public Class proposalphases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadPivotGrid1 As Global.Telerik.Web.UI.RadPivotGrid
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -66,7 +48,7 @@ Partial Public Class proposalphases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -75,7 +57,7 @@ Partial Public Class proposalphases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblproposalId control.
     '''</summary>
@@ -84,16 +66,4 @@ Partial Public Class proposalphases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblproposalId As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Master property.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated property.
-    '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.BasicMasterPage
-        Get
-            Return CType(MyBase.Master,pasconcept20.BasicMasterPage)
-        End Get
-    End Property
 End Class

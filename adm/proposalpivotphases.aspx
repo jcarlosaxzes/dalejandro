@@ -1,29 +1,16 @@
-﻿<%@ Page Title="Proposal Phases" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="proposalphases.aspx.vb" Inherits="pasconcept20.proposalphases" %>
-
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposalpivotphases.aspx.vb" Inherits="pasconcept20.proposalpivotphases" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" DefaultLoadingPanelID="RadAjaxLoadingPanel1">
-        <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="RadPivotGrid1">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadPivotGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-        </AjaxSettings>
-    </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
-    
-    <div style="text-align: right; padding-right: 50px; padding-top: 10px;padding-bottom:10px" class="pasconcept-bar">
-        <telerik:RadButton ID="btnExcel" runat="server" Text="Export to Excel" UseSubmitBehavior="false">
-        </telerik:RadButton>
-        &nbsp;&nbsp;&nbsp;
-        <telerik:RadButton ID="btnCancel" runat="server" Text="Back" Width="150px" CausesValidation="false">
-            <Icon PrimaryIconCssClass=" rbPrevious" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
-        </telerik:RadButton>
+    <div class="pasconcept-bar">
+        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+            Back
+        </asp:LinkButton>
+
+        <span class="pasconcept-pagetitle">&nbsp;&nbsp;Proposal Phase Pivot View:&nbsp;<asp:Label ID="lblProposal" runat="server"></asp:Label></span>
+
     </div>
 
-    <div style="text-align: left; width: 860px; padding-top: 15px;height:660px" >
-        <telerik:RadPivotGrid ID="RadPivotGrid1" runat="server" DataSourceID="SqlDataSource1" Height="650px"
+    <div class="pasconcept-bar">
+        <telerik:RadPivotGrid ID="RadPivotGrid1" runat="server" DataSourceID="SqlDataSource1"
             ShowColumnHeaderZone="false" ShowFilterHeaderZone="false" ShowRowHeaderZone="false" ShowDataHeaderZone="false"
             RowTableLayout="Compact"
             AllowPaging="false">
@@ -54,4 +41,3 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblproposalId" runat="server" Visible="false"></asp:Label>
 </asp:Content>
-

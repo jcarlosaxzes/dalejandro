@@ -365,13 +365,13 @@ Partial Public Class proposal
     Protected WithEvents RadGridFiles As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''RadWizardStep22 control.
+    '''RadWizardStepPhases control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStep22 As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadWizardStepPhases As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
     '''btnNewPhase control.
@@ -401,13 +401,13 @@ Partial Public Class proposal
     Protected WithEvents RadGridPhases As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''RadWizardStep23 control.
+    '''RadWizardStepPhaseSchedule control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStep23 As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadWizardStepPhaseSchedule As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
     '''btnSchedule control.

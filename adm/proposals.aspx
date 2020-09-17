@@ -130,16 +130,14 @@
                         </telerik:RadComboBox>
                     </td>
                     <td>
-                        <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceStatus"
-                            DataTextField="Status" DataValueField="Id" Width="100%"
-                            AppendDataBoundItems="True">
+                        <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl" MarkFirstMatch="True" ToolTip="Select Proposal By - Prepared By Employee"
+                            Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
+                                <telerik:RadComboBoxItem runat="server" Text="(All Proposal By or Prepared By...)" Value="0" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-
-
+                    <td></td>
                 </tr>
                 <tr>
                     <td colspan="3">
@@ -152,12 +150,21 @@
                         </telerik:RadComboBox>
                     </td>
                     <td>
+                        <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourceStatus"
+                            DataTextField="Status" DataValueField="Id" Width="100%"
+                            AppendDataBoundItems="True">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                    <td>
                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech"
                             EmptyMessage="Search for Proposal Number, Name,..."
                             Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="text-align: right;">
+                    <td style="text-align: right; width:180px">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -433,7 +440,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceProp" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="PROPOSAL_v20_SELECT" DeleteCommand="Proposal_DELETE" DeleteCommandType="StoredProcedure"
+        SelectCommand="Proposals_v20_SELECT" DeleteCommand="Proposal_DELETE" DeleteCommandType="StoredProcedure"
         SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
@@ -441,6 +448,7 @@
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboStatus" Name="StatusId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboDepartments" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboEmployee" Name="EmployeeId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
@@ -476,6 +484,12 @@
             <asp:ControlParameter ControlID="cboDepartments" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceEmpl" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="EMPLOYEES2_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
 
