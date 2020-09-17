@@ -83,6 +83,11 @@
                 height: auto;
                 width: auto;
             }
+
+            .wizardStepHidden {
+                height: 100%;
+                display: none !important;
+            }
         </style>
 
     </telerik:RadCodeBlock>
@@ -205,7 +210,7 @@
                                                 <td style="width: 75px; text-align: right">Job:</td>
                                                 <td>
                                                     <asp:LinkButton ID="btnViewJob" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" CommandName="ViewJob" CommandArgument='<%# Eval("JobId")%>'
-                                                        ToolTip="View Job of Proposal" Text='<%# Eval("JobCode")%>' ></asp:LinkButton>
+                                                        ToolTip="View Job of Proposal" Text='<%# Eval("JobCode")%>'></asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </table>
@@ -1032,49 +1037,50 @@
                     </div>
                 </telerik:RadWizardStep>
                 <%--Phases--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep22" Title="Phases" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepPhases" Title="Phases" StepType="Step">
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
-                        <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add Phase">
-                                   <i class="fas fa-plus"></i> Phase
+                        <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Phase for Proposal">
+                                   Add Proposal Phase
                         </asp:LinkButton>
 
                         &nbsp;&nbsp;&nbsp;
                        
-                        <asp:LinkButton ID="btnPivotPhases" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Add Phase">
-                                   <i class="fas fa-plus"></i> Project Phases
+                        <asp:LinkButton ID="btnPivotPhases" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
+                                   Pivot Phases View
                         </asp:LinkButton>
                     </div>
                     <div style="padding-top: 12px; padding-left: 18px; padding-bottom: 10px">
                         <telerik:RadGrid ID="RadGridPhases" runat="server" DataSourceID="SqlDataSourcePhases" GridLines="None" AllowAutomaticDeletes="true"
-                            AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
+                            AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
                             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePhases">
                                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                                 <BatchEditingSettings EditType="Cell" />
                                 <CommandItemSettings ShowAddNewRecordButton="false" />
                                 <Columns>
-                                    <telerik:GridTemplateColumn DataField="Code" HeaderStyle-Width="100px"
-                                        FilterControlAltText="Filter Code column" HeaderText="Code" SortExpression="Code" UniqueName="Code" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
+                                    <telerik:GridBoundColumn DataField="nOrder" HeaderStyle-Width="100px" HeaderText="Order" SortExpression="nOrder" UniqueName="nOrder" ItemStyle-HorizontalAlign="Center">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridTemplateColumn DataField="Code" HeaderStyle-Width="100px" HeaderText="Code" SortExpression="Code" UniqueName="Code">
                                         <ItemTemplate>
                                             <asp:LinkButton ID="lnkPhaseEdit" runat="server" CommandName="EditPhase" CommandArgument='<%# Eval("Id") %>'
                                                 Text='<%# Eval("Code")%>' ToolTip="Click to Edit Phase"></asp:LinkButton>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
-                                    <telerik:GridBoundColumn DataField="Name"
-                                        FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left" ItemStyle-Width="300px">
-                                        <ColumnValidationSettings EnableRequiredFieldValidation="true">
-                                            <RequiredFieldValidator ForeColor="Red" Text="*" Display="Dynamic">
-                                            </RequiredFieldValidator>
-                                        </ColumnValidationSettings>
+                                    <telerik:GridBoundColumn DataField="Name" HeaderText="Name" SortExpression="Name" UniqueName="Name">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Period" HeaderStyle-Width="180px"
-                                        FilterControlAltText="Filter Period column" HeaderText="Period" SortExpression="Period" UniqueName="Period" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left">
+                                    <telerik:GridBoundColumn DataField="Period" HeaderStyle-Width="180px" HeaderText="Period" SortExpression="Period" UniqueName="Period" ItemStyle-HorizontalAlign="Left">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="Task" HeaderText="Task" ReadOnly="True" SortExpression="Task" DataFormatString="{0:N0}" UniqueName="Task" Aggregate="Sum"
-                                        FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                    <telerik:GridBoundColumn DataField="DateFrom" HeaderText="DateFrom" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}"  HeaderStyle-Width="100px" >
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="DateTo" HeaderText="DateTo" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}"  HeaderStyle-Width="100px" >
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="Progress" HeaderText="Progress" SortExpression="Progress" DataFormatString="{0:N0}" UniqueName="Progress" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="Task" HeaderText="Task" SortExpression="Task" DataFormatString="{0:N0}" UniqueName="Task" Aggregate="Sum"
+                                        FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Total" HeaderText="Total" ReadOnly="True" SortExpression="Total" DataFormatString="{0:N2}" UniqueName="Total" Aggregate="Sum"
-                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this phase?"
                                         ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
@@ -1088,7 +1094,7 @@
 
                 </telerik:RadWizardStep>
                 <%--Schedule--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep23" Title="Schedule" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepPhaseSchedule" Title="Schedule" StepType="Step" Visible='<%#IIf(LocalAPI.GetCompanyPhasesCount(lblCompanyId.Text) > 0, True, False)%>'>
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
                         <asp:LinkButton ID="btnSchedule" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                              Project Schedule
@@ -1158,7 +1164,7 @@
                                                
                                                     <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" CommandName="Cancel" CausesValidation="False">
                                                     Cancel
-                                                </asp:LinkButton>
+                                                    </asp:LinkButton>
                                                 </td>
                                             </tr>
                                             <tr>

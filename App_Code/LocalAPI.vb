@@ -5656,6 +5656,89 @@ Public Class LocalAPI
         Return GetStringEscalar("SELECT isnull([" & sProperty & "],'') FROM Proposal_phases_template WHERE Id=" & phaselId)
     End Function
 
+    Public Shared Function ProposalPhases_INSERT(ByVal proposalId As Integer, ByVal Order As Integer, ByVal Code As String, Name As String, Description As String, Period As String, ByVal DateFrom As DateTime, DateTo As DateTime, Progress As Double) As Boolean
+        Dim cnn1 As SqlConnection = GetConnection()
+        Try
+
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "PROPOSAL_phases_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@proposalId", proposalId)
+            cmd.Parameters.AddWithValue("@Order", Order)
+            cmd.Parameters.AddWithValue("@Code", Code)
+            cmd.Parameters.AddWithValue("@Name", Name)
+            cmd.Parameters.AddWithValue("@Description", Description)
+            cmd.Parameters.AddWithValue("@Period", Period)
+
+            If Not (DateFrom = Nothing) Then
+                cmd.Parameters.AddWithValue("@DateFrom", DateFrom)
+            Else
+                cmd.Parameters.AddWithValue("@DateFrom", DBNull.Value)
+            End If
+            If Not (DateTo = Nothing) Then
+                cmd.Parameters.AddWithValue("@DateTo", DateTo)
+            Else
+                cmd.Parameters.AddWithValue("@DateTo", DBNull.Value)
+            End If
+
+            cmd.Parameters.AddWithValue("@Progress", Progress)
+
+            cmd.ExecuteNonQuery()
+
+            Return True
+
+        Catch ex As Exception
+            ' Evita tratamiento de error
+            Return False
+        Finally
+            cnn1.Close()
+        End Try
+
+    End Function
+    Public Shared Function ProposalPhases_UPDATE(ByVal phaseId As Integer, ByVal Order As Integer, ByVal Code As String, Name As String, Description As String, Period As String, ByVal DateFrom As DateTime, DateTo As DateTime, Progress As Double) As Boolean
+        Dim cnn1 As SqlConnection = GetConnection()
+        Try
+
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "PROPOSAL_phases_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@Order", Order)
+            cmd.Parameters.AddWithValue("@Code", Code)
+            cmd.Parameters.AddWithValue("@Name", Name)
+            cmd.Parameters.AddWithValue("@Description", Description)
+            cmd.Parameters.AddWithValue("@Period", Period)
+
+            If Not (DateFrom = Nothing) Then
+                cmd.Parameters.AddWithValue("@DateFrom", DateFrom)
+            Else
+                cmd.Parameters.AddWithValue("@DateFrom", DBNull.Value)
+            End If
+            If Not (DateTo = Nothing) Then
+                cmd.Parameters.AddWithValue("@DateTo", DateTo)
+            Else
+                cmd.Parameters.AddWithValue("@DateTo", DBNull.Value)
+            End If
+            cmd.Parameters.AddWithValue("@Progress", Progress)
+
+            cmd.Parameters.AddWithValue("@Id", phaseId)
+
+            cmd.ExecuteNonQuery()
+
+            Return True
+
+        Catch ex As Exception
+            ' Evita tratamiento de error
+            Return False
+        Finally
+            cnn1.Close()
+        End Try
+
+    End Function
+
     Public Shared Function GetProposalTypename(ByVal lId As Long) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -11770,6 +11853,10 @@ Public Class LocalAPI
     Public Shared Function GetProposalPhasesCount(proposalId As Integer) As Integer
         Return GetNumericEscalar(String.Format("select count(*) from [Proposal_phases] where proposalId={0}", proposalId))
     End Function
+    Public Shared Function GetCompanyPhasesCount(companyId As Integer) As Integer
+        Return GetNumericEscalar($"select count(*) from [Proposal_phases_template] where companyId={companyId}")
+    End Function
+
     Public Shared Function GetScopeOfWork(proposalId As Integer, ByRef sb As StringBuilder) As Boolean
         Dim cnn1 As SqlConnection = GetConnection()
         Dim cmd As New SqlCommand("SELECT Proposal_details.Description, ISNULL(Proposal_details.DescriptionPlus, '') AS DescriptionPlus, Proposal_phases.Code as PhaseCode, Proposal_phases.Name as PhaseName FROM Proposal_details INNER JOIN Proposal_tasks ON Proposal_details.TaskId = Proposal_tasks.Id LEFT OUTER JOIN Proposal_phases ON Proposal_details.phaseId = Proposal_phases.Id WHERE (Proposal_details.ProposalId = " & proposalId & ") AND (Proposal_tasks.taskcode<>'999') AND (Proposal_details.taskId<>3457) ORDER BY Proposal_phases.nOrder, Proposal_details.OrderBy", cnn1)

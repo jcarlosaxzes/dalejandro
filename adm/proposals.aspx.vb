@@ -37,6 +37,11 @@ Public Class proposals
                 cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(employeeId, "FilterProposal_Month")
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Allow_OtherEmployeeJobs") Then
+                    cboEmployee.DataBind()
+                    cboEmployee.SelectedValue = employeeId
+                    cboEmployee.Enabled = False
+                End If
 
 
                 RefreshRecordset()

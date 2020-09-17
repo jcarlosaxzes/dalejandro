@@ -54,7 +54,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 250px"><span class="label badge-danger">Allow Private Mode Permissions</span>:</td>
+                                        <td><span class="label badge-danger">Allow Private Mode Permissions</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="RadCheckBox1" runat="server" Checked='<%# Bind("Allow_PrivateMode") %>' />
                                         </td>
@@ -66,13 +66,13 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge badge-secondary">Allow Inactivate Job</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Inactivate Status of Job</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_InactivateJobCheckBox" runat="server" Checked='<%# Bind("Allow_InactivateJob") %>' />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge badge-secondary">Allow Other Employee Jobs</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Proposals/Jobs of Other Employees</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_OtherEmployeeJobsCheckBox" runat="server" Checked='<%# Bind("Allow_OtherEmployeeJobs") %>' />
                                         </td>
@@ -672,13 +672,13 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge badge-secondary">Allow Inactivate Job</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Inactivate Status of Job</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_InactivateJobCheckBox" runat="server" Checked='<%# Bind("Allow_InactivateJob") %>' Enabled="false"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><span class="badge badge-secondary">Allow Other Employee Jobs</span>:</td>
+                                        <td><span class="badge badge-secondary">Allow Proposals/Jobs of Other Employees</span>:</td>
                                         <td>
                                             <telerik:RadCheckBox ID="Allow_OtherEmployeeJobsCheckBox" runat="server" Checked='<%# Bind("Allow_OtherEmployeeJobs") %>' Enabled="false"/>
                                         </td>
