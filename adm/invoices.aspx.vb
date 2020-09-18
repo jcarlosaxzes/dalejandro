@@ -138,10 +138,6 @@ Public Class invoices
     '    End While
     'End Sub
 
-
-
-
-
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
         RadWindowManager1.Windows.Clear()
         Dim window1 As RadWindow = New RadWindow()
@@ -241,9 +237,15 @@ Public Class invoices
             Select Case e.CommandName
                 Case "EditInvoice"
                     lblInvoiceId.Text = e.CommandArgument
-                    FormViewInvoice.DataBind()
-                    RadToolTipEditInvoice.Visible = True
-                    RadToolTipEditInvoice.Show()
+                    If LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "InvoiceType") = 3 Then
+                        ' Progress Invoice
+                        Dim JobId As Integer = LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "JobId")
+                        Response.Redirect($"~/adm/invoicesprogress?jobId={JobId}&invoiceId={lblInvoiceId.Text}&backpage=invoices")
+                    Else
+                        FormViewInvoice.DataBind()
+                        RadToolTipEditInvoice.Visible = True
+                        RadToolTipEditInvoice.Show()
+                    End If
 
                 Case "InvoiceRDLC7"
                     'sUrl = "~/ADMCLI/InvoiceRDLC.aspx?InvoiceNo=" & e.CommandArgument & "&Origen=7"

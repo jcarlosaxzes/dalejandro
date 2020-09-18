@@ -12,8 +12,10 @@ Public Class _Default1
                 Master.Help = "http://blog.pasconcept.com/2015/04/home.html"
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Control Panel"
                 lblCompanyId.Text = Session("companyId")
-                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+
                 lblUserEmail.Text = Master.UserEmail
+
+                lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblUserEmail.Text, lblCompanyId.Text)
 
                 If LocalAPI.GetEmployeePermission(Master.UserId, "Deny_Analytics") Then
                     ' User con Permiso al Administrator PORTAL

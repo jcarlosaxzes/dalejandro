@@ -175,9 +175,14 @@ Public Class Job_accounting
     End Sub
 
     Private Sub InvoiceDlg()
-        FormViewInvoice.DataBind()
-        RadToolTipEditInvoice.Visible = True
-        RadToolTipEditInvoice.Show()
+        If LocalAPI.GetInvoiceProperty(lblInvoiceId.Text, "InvoiceType") = 3 Then
+            ' Progress Invoice
+            Response.Redirect($"~/adm/invoicesprogress?jobId={lblJobId.Text}&invoiceId={lblInvoiceId.Text}&backpage=job_accounting")
+        Else
+            FormViewInvoice.DataBind()
+            RadToolTipEditInvoice.Visible = True
+            RadToolTipEditInvoice.Show()
+        End If
     End Sub
 
     Protected Sub SqlDataSourceInvoices_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceInvoices.Deleted
@@ -262,6 +267,9 @@ Public Class Job_accounting
             Master.ErrorMessage("The discount could not be applied. The Amount or Percent must be different from zero!")
         End If
 
+    End Sub
+    Private Sub btnNewProgressInvoice_Click(sender As Object, e As EventArgs) Handles btnNewProgressInvoice.Click
+        Response.Redirect("~/adm/invoicesprogress?jobId=" & lblJobId.Text)
     End Sub
 
 #End Region
@@ -375,5 +383,6 @@ Public Class Job_accounting
         SqlDataSourceClientBalance.DataBind()
         FormViewClientBalance.DataBind()
     End Function
+
 #End Region
 End Class
