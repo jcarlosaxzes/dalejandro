@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Job_accounting
-    
+
     '''<summary>
     '''FormViewClientBalance control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewClientBalance As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''FormViewStatus control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewStatus As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''cboInvoiceFilterCode control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboInvoiceFilterCode As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboInvoicesType control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboInvoicesType As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''btnInvoice control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnInvoice As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnNewInvoice control.
     '''</summary>
@@ -66,7 +66,16 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNewInvoice As Global.System.Web.UI.WebControls.LinkButton
-    
+
+    '''<summary>
+    '''btnNewProgressInvoice control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNewProgressInvoice As Global.System.Web.UI.WebControls.LinkButton
+
     '''<summary>
     '''btnDiscount control.
     '''</summary>
@@ -75,7 +84,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnDiscount As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGridIncoices control.
     '''</summary>
@@ -84,7 +93,106 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridIncoices As Global.Telerik.Web.UI.RadGrid
-    
+
+    '''<summary>
+    '''lnkEditInvoice control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkEditInvoice As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''lblAction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblAction As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''RadToolTipAction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipAction As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''btnAction1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAction1 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton1 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton4 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton5 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton3 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton2 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''AmountLabelInv control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AmountLabelInv As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblEmitted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmitted As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''RadGridPayments control.
     '''</summary>
@@ -93,7 +201,52 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridPayments As Global.Telerik.Web.UI.RadGrid
-    
+
+    '''<summary>
+    '''lnkEditPayment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkEditPayment As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''PaymentMethodLabel_paym control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PaymentMethodLabel_paym As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''AmountLabel_paym control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AmountLabel_paym As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''PanelUploadButon control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelUploadButon As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''btnReconciledBank control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnReconciledBank As Global.System.Web.UI.WebControls.LinkButton
+
     '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
@@ -102,7 +255,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-    
+
     '''<summary>
     '''RadToolTipInsertPayment control.
     '''</summary>
@@ -111,7 +264,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipInsertPayment As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''RadDatePickerPayment control.
     '''</summary>
@@ -120,7 +273,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePickerPayment As Global.Telerik.Web.UI.RadDatePicker
-    
+
     '''<summary>
     '''cboPaymentMethod_paym control.
     '''</summary>
@@ -129,7 +282,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboPaymentMethod_paym As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''txtAmountPayment control.
     '''</summary>
@@ -138,7 +291,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtAmountPayment As Global.Telerik.Web.UI.RadNumericTextBox
-    
+
     '''<summary>
     '''txtPaymentNotes control.
     '''</summary>
@@ -147,7 +300,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPaymentNotes As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnInsertPayment control.
     '''</summary>
@@ -156,7 +309,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnInsertPayment As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelPayment control.
     '''</summary>
@@ -165,7 +318,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelPayment As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''PanelUpload control.
     '''</summary>
@@ -174,7 +327,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PanelUpload As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''RadCloudUpload1 control.
     '''</summary>
@@ -183,7 +336,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
-    
+
     '''<summary>
     '''RadToolTipEditInvoice control.
     '''</summary>
@@ -192,7 +345,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipEditInvoice As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''FormViewInvoice control.
     '''</summary>
@@ -201,7 +354,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewInvoice As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''btnUpdateInvoice control.
     '''</summary>
@@ -210,7 +363,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdateInvoice As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelInvoice control.
     '''</summary>
@@ -219,7 +372,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelInvoice As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadToolTipEditPayment control.
     '''</summary>
@@ -228,7 +381,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipEditPayment As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''FormViewPayment control.
     '''</summary>
@@ -237,7 +390,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewPayment As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''Panel2 control.
     '''</summary>
@@ -246,7 +399,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Panel2 As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''RadCloudUpload2 control.
     '''</summary>
@@ -255,7 +408,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCloudUpload2 As Global.Telerik.Web.UI.RadCloudUpload
-    
+
     '''<summary>
     '''btnUpdatePayment control.
     '''</summary>
@@ -264,7 +417,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdatePayment As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelUpdatePayment control.
     '''</summary>
@@ -273,7 +426,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelUpdatePayment As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadToolTipInvoicesDiscount control.
     '''</summary>
@@ -282,7 +435,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipInvoicesDiscount As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''txtDiscountPercent control.
     '''</summary>
@@ -291,7 +444,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtDiscountPercent As Global.Telerik.Web.UI.RadNumericTextBox
-    
+
     '''<summary>
     '''txtDiscountAmount control.
     '''</summary>
@@ -300,7 +453,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtDiscountAmount As Global.Telerik.Web.UI.RadNumericTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator4 control.
     '''</summary>
@@ -309,7 +462,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''txtDiscountNotes control.
     '''</summary>
@@ -318,7 +471,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtDiscountNotes As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnApplyDiscount control.
     '''</summary>
@@ -327,7 +480,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnApplyDiscount As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''SqlDataSourceInvoices control.
     '''</summary>
@@ -336,7 +489,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceInvoices As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceInvoice control.
     '''</summary>
@@ -345,7 +498,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceInvoice As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceInvoicesTypes control.
     '''</summary>
@@ -354,7 +507,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceInvoicesTypes As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePayments control.
     '''</summary>
@@ -363,7 +516,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePayments As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePaymentMethod control.
     '''</summary>
@@ -372,7 +525,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePaymentMethod As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePayment control.
     '''</summary>
@@ -381,7 +534,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePayment As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceJobStatus control.
     '''</summary>
@@ -390,7 +543,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobStatus As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceJob control.
     '''</summary>
@@ -399,7 +552,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJob As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceClientBalance control.
     '''</summary>
@@ -408,7 +561,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClientBalance As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -417,7 +570,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblJobId control.
     '''</summary>
@@ -426,7 +579,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblClientId control.
     '''</summary>
@@ -435,7 +588,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblClientId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblInvoiceId control.
     '''</summary>
@@ -444,7 +597,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblInvoiceId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPaymentId control.
     '''</summary>
@@ -453,7 +606,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPaymentId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeId control.
     '''</summary>
@@ -462,7 +615,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeEmail control.
     '''</summary>
@@ -471,7 +624,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblOriginalFileName control.
     '''</summary>
@@ -480,7 +633,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblOriginalFileName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblKeyName control.
     '''</summary>
@@ -489,7 +642,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblKeyName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblContentBytes control.
     '''</summary>
@@ -498,7 +651,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblContentBytes As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblContentType control.
     '''</summary>
@@ -507,7 +660,7 @@ Partial Public Class Job_accounting
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblContentType As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -516,7 +669,7 @@ Partial Public Class Job_accounting
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.MasterJOB
         Get
-            Return CType(MyBase.Master,pasconcept20.MasterJOB)
+            Return CType(MyBase.Master, pasconcept20.MasterJOB)
         End Get
     End Property
 End Class

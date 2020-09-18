@@ -168,6 +168,9 @@
                         <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Add Invoice Simple Charge">
                                                                      Add Invoice
                         </asp:LinkButton>
+                        <asp:LinkButton ID="btnNewProgressInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Add Progress Invoice">
+                                                                     Add Progress Invoice
+                        </asp:LinkButton>
 
                         <asp:LinkButton ID="btnDiscount" runat="server" CssClass="btn btn-danger btn-sm" UseSubmitBehavior="false" CausesValidation="false">
                                 Apply Discount
@@ -268,14 +271,8 @@
                                     </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="InvoiceType" DataType="System.Int32" ReadOnly="true"
-                                FilterControlAltText="Filter InvoiceType column" HeaderText="Type" SortExpression="InvoiceType"
-                                UniqueName="InvoiceType"
-                                ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20px">
-                                <ItemTemplate>
-                                    <asp:Label ID="typeLabelInv" runat="server" Text='<%#IIf(Eval("InvoiceType") = 1, "hr", "sc") %>'></asp:Label>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
+                            <telerik:GridBoundColumn DataField="InvoiceTypeLabel" ReadOnly="true" HeaderText="Type" SortExpression="InvoiceTypeLabel" UniqueName="InvoiceTypeLabel" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20px"> 
+                            </telerik:GridBoundColumn>
                             <telerik:GridDateTimeColumn DataField="InvoiceDate" DataFormatString="{0:MM/dd/yy}"
                                 FilterControlAltText="Filter InvoiceDate column" HeaderText="Date Created" SortExpression="InvoiceDate" Display="false"
                                 UniqueName="InvoiceDate" ItemStyle-HorizontalAlign="Right">
@@ -300,9 +297,8 @@
                             <telerik:GridTemplateColumn HeaderText="Invoice Description" UniqueName="InvoiceNotes"
                                 DataField="InvoiceNotes" SortExpression="InvoiceNotes">
                                 <ItemTemplate>
-                                    <asp:Label ID="InvoiceNotesLabelInv" runat="server" Text='<%# Eval("InvoiceNotes") %>'></asp:Label>
+                                    <%# Eval("InvoiceNotes") %>
                                 </ItemTemplate>
-                                <HeaderStyle HorizontalAlign="Center" />
                             </telerik:GridTemplateColumn>
 
                             <telerik:GridCheckBoxColumn DataField="BadDebt" HeaderText="Bad Debt" UniqueName="BadDebt" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
@@ -376,7 +372,7 @@
                                                 <%# Eval("CollectedNotes")%>
                                             </td>
                                             <td>
-                                                <asp:Panel ID="PanelUpload" runat="server" Visible='<%# len(Eval("Download_url"))>0 %>'>
+                                                <asp:Panel ID="PanelUploadButon" runat="server" Visible='<%# len(Eval("Download_url"))>0 %>'>
                                                     &nbsp;<a class="fas fa-cloud-download-alt" href='<%# Eval("Download_url")%>' target="_blank"></a>
                                                 </asp:Panel>
                                             </td>

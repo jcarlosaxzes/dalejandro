@@ -205,6 +205,31 @@
                                 </div>
                                 <h4>Invoice Description:</h4>
                                 <%# Eval("Notes") %>
+                                <asp:Panel runat="server" ID="InvoicesItems" Visible='<%# Eval("InvoiceType") = 3 %>'>
+                                    <br />
+                                    <h4>Invoice Items</h4>
+                                    <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="false" Skin="Office2010Silver" 
+                                        AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoiceItems" CellSpacing="0" Width="100%" HeaderStyle-HorizontalAlign="Center" >
+                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceItems" >
+                                            <Columns>
+                                                <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn DataField="Item" HeaderText="Item" SortExpression="Item" UniqueName="Item" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridNumericColumn DataField="Amount" HeaderText="Amount" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right">
+                                                </telerik:GridNumericColumn>
+                                                <telerik:GridNumericColumn DataField="Previous" HeaderText="Previous %" SortExpression="Previous" UniqueName="Previous" HeaderStyle-Width="100px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
+                                                </telerik:GridNumericColumn>
+                                                <telerik:GridNumericColumn DataField="Progress" HeaderText="Progress %" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="100px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
+                                                </telerik:GridNumericColumn>
+                                                <telerik:GridBoundColumn DataField="Total" HeaderText="Total" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right">
+                                                </telerik:GridBoundColumn>
+                                            </Columns>
+                                        </MasterTableView>
+                                    </telerik:RadGrid>
+                                </asp:Panel>
                             </td>
                         </tr>
                     </table>
@@ -346,7 +371,12 @@
             <asp:ControlParameter ControlID="lblInvoiceId" Name="InvoiceId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
-
+    <asp:SqlDataSource ID="SqlDataSourceInvoiceItems" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Invoices_progress_details_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblInvoiceId" Name="invoicelId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblInvoiceId" runat="server" Visible="False"></asp:Label>

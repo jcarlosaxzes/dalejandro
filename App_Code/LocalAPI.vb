@@ -14446,5 +14446,84 @@ Public Class LocalAPI
     End Function
 
 #End Region
+
+#Region "Progress Invoices"
+    Public Shared Function GetInvoices_progress_detailsProperty(Invoices_progress_detailsId As Integer, sProperty As String) As String
+        Return GetStringEscalar($"SELECT isnull([" & sProperty & "],'') FROM Invoices_progress_details WHERE Id={Invoices_progress_details}")
+    End Function
+
+    Public Shared Function NuevoInvoiceProgress(ByVal lJob As Integer,
+                                    ByVal sInvoiceDate As DateTime,
+                                    ByVal dAmount As Double,
+                                    ByVal sInvoiceNotes As String,
+                                    Optional employeeId As Integer = 0) As Integer
+        Try
+
+            Dim Number As Integer = GetInvoiceNumber(lJob)
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "INVOICE_Progress_v20_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@JobId", lJob)
+            cmd.Parameters.AddWithValue("@InvoiceDate", sInvoiceDate)
+            cmd.Parameters.AddWithValue("@Amount", FormatearNumero2Tsql(dAmount))
+            cmd.Parameters.AddWithValue("@InvoiceNotes", sInvoiceNotes)
+            cmd.Parameters.AddWithValue("@Number", Number)
+            cmd.Parameters.AddWithValue("@employeeId", employeeId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+
+            Return GetNumericEscalar("SELECT TOP 1 [Id] FROM [Invoices] where [JobId]=" & lJob & " order by Id desc")
+
+            'Dim companyId As Integer = GetCompanyIdFromJob(lJob)
+            'LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewInvoice, companyId, sInvoiceNotes)
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function ProgressInvoices_INSERT(ByVal jobId As Integer, ByVal SourceId As Integer, InvoiceDate As DateTime, MaturityDate As DateTime, InvoiceNotes As String, employeeId As Integer) As Integer
+        Dim cnn1 As SqlConnection = GetConnection()
+        Try
+
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+            Dim Number As Integer = GetInvoiceNumber(jobId)
+
+            cmd.CommandText = "INVOICE_Progress_v20_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@JobId", jobId)
+            cmd.Parameters.AddWithValue("@InvoiceDate", InvoiceDate)
+            If Not (MaturityDate = Nothing) Then
+                cmd.Parameters.AddWithValue("@MaturityDate", MaturityDate)
+            Else
+                cmd.Parameters.AddWithValue("@MaturityDate", DBNull.Value)
+            End If
+            cmd.Parameters.AddWithValue("@InvoiceNotes", InvoiceNotes)
+            cmd.Parameters.AddWithValue("@Number", Number)
+            cmd.Parameters.AddWithValue("@employeeId", employeeId)
+            cmd.Parameters.AddWithValue("@sourceId", SourceId)
+
+            cmd.ExecuteNonQuery()
+
+            Return GetNumericEscalar($"SELECT TOP 1 [Id] FROM [Invoices] where [JobId]={jobId} and InvoiceType=3 order by Id desc")
+
+        Catch ex As Exception
+            ' Evita tratamiento de error
+            Return 0
+        Finally
+            cnn1.Close()
+        End Try
+
+    End Function
+
+#End Region
 End Class
 
