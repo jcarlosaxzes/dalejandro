@@ -32,14 +32,15 @@ Public Class employeenewtime
                     Master.HideMasterMenu()
                     btnBack.Visible = False
                 End If
+                If Not Request.QueryString("HideMenu") Is Nothing Then
+                    Master.HideMasterMenu()
+                End If
 
                 If Not Request.QueryString("backpage") Is Nothing Then
                     Session("employeenewtimebackpage") = Request.QueryString("backpage")
                 Else
                     Session("employeenewtimebackpage") = ""
                 End If
-
-
 
                 InitDialog()
 
@@ -217,8 +218,10 @@ Public Class employeenewtime
         Select Case type
             Case 1  ' Solo Time
                 btnInsertTimeAndInvoice.Visible = False
+                btnInsertTime.Visible = True
             Case 2  ' Solo Time+Invoices
                 btnInsertTime.Visible = False
+                btnInsertTimeAndInvoice.Visible = True
             Case Else
 
                 ' Case 2: FROM JOB BillType
@@ -226,8 +229,10 @@ Public Class employeenewtime
                 Select Case type
                     Case 1  ' Solo Time
                         btnInsertTimeAndInvoice.Visible = False
+                        btnInsertTime.Visible = True
                     Case 2  ' Solo Time+Invoices
                         btnInsertTime.Visible = False
+                        btnInsertTimeAndInvoice.Visible = True
                     Case Else
                         If divProposalTask.Visible Then
                             If cboMulticolumnTask.Value > 0 Then
@@ -236,11 +241,13 @@ Public Class employeenewtime
                                 Select Case type
                                     Case 1  ' Solo Time
                                         btnInsertTimeAndInvoice.Visible = False
+                                        btnInsertTime.Visible = True
                                     Case 2  ' Solo Time+Invoices
                                         btnInsertTime.Visible = False
+                                        btnInsertTimeAndInvoice.Visible = True
                                     Case Else
                                         ' 0 Billiable=False
-                                        btnInsertTimeAndInvoice.Visible = False
+                                        btnInsertTimeAndInvoice.Visible = True
                                         btnInsertTime.Visible = True
                                 End Select
                             End If

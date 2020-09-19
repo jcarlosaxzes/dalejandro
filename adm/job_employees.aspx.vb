@@ -90,7 +90,7 @@ Public Class job_employees
 
             Case "AddTime"
                 Session("employeefortime") = e.CommandArgument
-                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & lblJobId.Text & "&backpage=job_employees")
+                Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & lblJobId.Text & "&backpage=job_employees&HideMenu=1")
 
         End Select
     End Sub
