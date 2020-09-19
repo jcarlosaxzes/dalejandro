@@ -35,12 +35,12 @@ Public Class Job_times
 
             Case "NewHrInvoice"
                 lblTimeId.Text = e.CommandArgument
-                txtTimeSel.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "Time")
-                'txtRate.DbValue = LocalAPI.GetTimeProperty(lblTimeId.Text, "HourRate")
-                Dim emloyeeId As Integer = LocalAPI.GetTimeProperty(lblTimeId.Text, "Employee")
-                txtRate.DbValue = LocalAPI.GetEmployeeAssignedHourRate(lblJobId.Text, emloyeeId)
+                Dim Employees_timeObject = LocalAPI.GetRecord(lblTimeId.Text, "Employees_time_SELECT")
+                txtTimeSel.DbValue = Employees_timeObject("Time")           ' LocalAPI.GetTimeProperty(lblTimeId.Text, "Time")
+                'Dim emloyeeId As Integer = LocalAPI.GetTimeProperty(lblTimeId.Text, "Employee")
+                txtRate.DbValue = Employees_timeObject("BillingRate")           'LocalAPI.GetEmployeeAssignedHourRate(lblJobId.Text, emloyeeId)
 
-                txtTimeDescription.Text = LocalAPI.GetTimeProperty(lblTimeId.Text, "Description")
+                txtTimeDescription.Text = Employees_timeObject("Description")    ' LocalAPI.GetTimeProperty(lblTimeId.Text, "Description")
                 NewHrInvoiceDlg()
 
             Case "DeleteHrInvoice"
@@ -119,6 +119,6 @@ Public Class Job_times
 
     Private Sub btnNewTime_Click(sender As Object, e As EventArgs) Handles btnNewTime.Click
         Session("employeefortime") = cboEmployee.SelectedValue
-        Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & lblJobId.Text & "&backpage=job_times")
+        Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & lblJobId.Text & "&backpage=job_times&HideMenu=1")
     End Sub
 End Class

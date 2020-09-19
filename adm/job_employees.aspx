@@ -12,11 +12,15 @@
                 var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
                 var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("BudgetUsed").get_element().cellIndex;
+                masterTableView.hideColumn(columnIndex);
             });
 
             $(document).on("click", ".toggle-off", function (event) {
               var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
                 var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
+                masterTableView.showColumn(columnIndex);
+                columnIndex = masterTableView.getColumnByUniqueName("BudgetUsed").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
             });
         </script>
@@ -60,7 +64,7 @@
                         </telerik:GridTemplateColumn>
                         <telerik:GridBoundColumn UniqueName="Position" HeaderText="Position" DataField="Position">
                         </telerik:GridBoundColumn>
-                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Hourly Rate" ItemStyle-HorizontalAlign="Center" SortExpression="HourRate" UniqueName="HourRate">
+                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Position Rate" ItemStyle-HorizontalAlign="Center" SortExpression="HourRate" UniqueName="HourRate" Display="false">
                             <ItemTemplate>
                                 <%# Eval("HourRate", "{0:N2}") %>
                             </ItemTemplate>
@@ -82,7 +86,7 @@
                                 </asp:Label>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
-                        <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed"
+                        <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" Display="false"
                             DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}"
                             Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
