@@ -20,7 +20,7 @@
         <asp:Label ID="lblProposalId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblJobId" runat="server" Visible="False"></asp:Label>
 
-        <div class="btn-toolbar mt-lg hidden-print print-buttons">
+        <div class="btn-toolbar mt-lg hidden-print print-buttons noprint">
             <button class="btn btn-danger" runat="server" onserverclick="Pdf_ServerClick">
                 <i class="fa fa-file-pdf"></i>
                 &nbsp;&nbsp;

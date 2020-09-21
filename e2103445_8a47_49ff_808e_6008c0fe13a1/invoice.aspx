@@ -319,7 +319,7 @@
 
 
             <%-- Fixed Btns --%>
-            <asp:Panel ID="pnlSideTools" runat="server" CssClass="row hidden-print" Visible="false">
+            <asp:Panel ID="pnlSideTools" runat="server" CssClass="row hidden-print noprint" Visible="false">
                 <div class="col-lg-12" style="margin-top: 10px">
                     <div class="row">
                         <div class="col-lg-6 col-lg-offset-6">
