@@ -33,10 +33,17 @@ Public Class proposaltask
                     lblBackSource.Text = 1
                 End If
 
-                cboPhase.Visible = IIf(LocalAPI.GetProposalPhasesCount(lblproposalId.Text) = 0, False, True)
-
                 btnUpdate.Visible = EnabledProposal()
                 btnUpdateAndBack.Visible = btnUpdate.Visible
+
+                ' Phase settings............
+                PanelPhases.Visible = IIf(LocalAPI.GetProposalPhasesCount(lblproposalId.Text) = 0, False, True)
+                If Not Request.QueryString("phaseId") Is Nothing And PanelPhases.Visible Then
+                    cboPhase.DataBind()
+                    cboPhase.SelectedValue = Request.QueryString("phaseId")
+                    cboPhase.Enabled = (cboPhase.SelectedValue = 0)
+                End If
+
             End If
 
         Catch ex As Exception

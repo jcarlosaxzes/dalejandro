@@ -359,7 +359,7 @@ Public Class proposal
         GuardarProposal(False)
     End Sub
     Protected Sub btnNewPhase_Click(sender As Object, e As EventArgs) Handles btnNewPhase.Click
-        Response.Redirect("~/adm/proposalphase.aspx?proposalId=" & lblProposalId.Text)
+        Response.Redirect($"~/adm/proposalphase.aspx?proposalId={lblProposalId.Text}&backpage=proposal")
     End Sub
     Protected Sub btnPivotPhases_Click(sender As Object, e As EventArgs) Handles btnPivotPhases.Click
         Response.Redirect("~/adm/proposalpivotphases.aspx?proposalId=" & lblProposalId.Text)
@@ -386,7 +386,7 @@ Public Class proposal
     Private Sub RadGridPhases_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPhases.ItemCommand
         Select Case e.CommandName
             Case "EditPhase"
-                Response.Redirect("~/adm/proposalphase.aspx?Id=" & e.CommandArgument & "&proposalId=" & lblProposalId.Text)
+                Response.Redirect($"~/adm/proposalphase.aspx?Id={e.CommandArgument}&proposalId={lblProposalId.Text}&backpage=proposal")
         End Select
 
     End Sub

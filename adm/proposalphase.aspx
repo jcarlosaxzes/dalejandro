@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="pasconcept-bar">
         <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-            Cancel
+            Back
         </asp:LinkButton>
 
         <span class="pasconcept-pagetitle">&nbsp;&nbsp;Proposal Phase:&nbsp;<asp:Label ID="lblProposal" runat="server"></asp:Label></span>
@@ -76,7 +76,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Periodo:
+                <td style="text-align: right">Period:
                     </td>
                 <td>
                     <telerik:RadTextBox ID="PeriodoTextBox" runat="server" MaxLength="50" Width="100%" EmptyMessage="Period, ex .: (two weeks)"></telerik:RadTextBox>
@@ -84,7 +84,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Periodo From:
+                <td style="text-align: right">Period From:
                     </td>
                 <td>
                     <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Culture="en-us">
@@ -92,7 +92,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Periodo To:
+                <td style="text-align: right">Period To:
                     </td>
                 <td>
                     <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" Culture="en-us">
@@ -111,6 +111,9 @@
                 <td colspan="2" style="text-align: right">
                     <asp:LinkButton ID="btnNewUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="NewPhase" Text="Add Phase">
                         </asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:LinkButton ID="btnUpdateAndBack" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="NewPhase" UseSubmitBehavior="false" Text="Update and Back">
+                    </asp:LinkButton>
                 </td>
             </tr>
         </table>

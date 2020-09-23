@@ -611,7 +611,7 @@
                         <tr>
                             <td>
                                 <asp:LinkButton ID="btnNewTask" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ValidationGroup="ProposalDetail">
-                                   Add Fee
+                                   Add Task
                                 </asp:LinkButton>
 
                             </td>
@@ -626,38 +626,16 @@
                                         <Columns>
                                             <telerik:GridBoundColumn DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
                                             </telerik:GridBoundColumn>
-                                            <telerik:GridTemplateColumn DataField="phaseId" FilterControlAltText="Filter PhaseCode column"
-                                                HeaderText="Phase" SortExpression="PhaseCode" UniqueName="phaseId" HeaderStyle-Width="80px">
+                                            <telerik:GridTemplateColumn DataField="phaseId" HeaderText="Phase" SortExpression="PhaseCode" UniqueName="phaseId" HeaderStyle-Width="80px">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblphaseId" runat="server" Text='<%# Eval("PhaseCode") %>' ToolTip='<%# Eval("PhaseName") %>'></asp:Label>
                                                 </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <div>
-                                                        <telerik:RadDropDownList runat="server" ID="PhaseDropDown" DataValueField="Id" Width="95%" DataTextField="Code" DataSourceID="SqlDataSourcePhases"
-                                                            AppendDataBoundItems="true" DropDownWidth="150px">
-                                                            <Items>
-                                                                <telerik:DropDownListItem Text="?" Value="0" />
-                                                            </Items>
-                                                        </telerik:RadDropDownList>
-                                                    </div>
-                                                </EditItemTemplate>
                                             </telerik:GridTemplateColumn>
 
-                                            <telerik:GridTemplateColumn DataField="positionId" FilterControlAltText="Filter positionCode column" Display="false"
-                                                HeaderText="Position" SortExpression="positionCode" UniqueName="positionId" HeaderStyle-Width="100px">
+                                            <telerik:GridTemplateColumn DataField="positionId" Display="false" HeaderText="Position" SortExpression="positionCode" UniqueName="positionId" HeaderStyle-Width="100px">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblpositionId" runat="server" Text='<%# Eval("Position") %>'></asp:Label>
                                                 </ItemTemplate>
-                                                <EditItemTemplate>
-                                                    <div>
-                                                        <telerik:RadDropDownList runat="server" ID="positionDropDown" DataValueField="Id" Width="95%" DataTextField="Name" DataSourceID="SqlDataSourcePositions"
-                                                            AppendDataBoundItems="true" DropDownWidth="400px">
-                                                            <Items>
-                                                                <telerik:DropDownListItem Text="?" Value="0" />
-                                                            </Items>
-                                                        </telerik:RadDropDownList>
-                                                    </div>
-                                                </EditItemTemplate>
                                             </telerik:GridTemplateColumn>
 
                                             <telerik:GridTemplateColumn DataField="taskcode" HeaderText="Task" ReadOnly="True" SortExpression="taskcode"
@@ -1040,7 +1018,7 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepPhases" Title="Phases" StepType="Step">
                     <div style="width: 100%; padding-left: 18px; padding-top: 12px">
                         <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Phase for Proposal">
-                                   Add Proposal Phase
+                                   Add Phase
                         </asp:LinkButton>
 
                         &nbsp;&nbsp;&nbsp;

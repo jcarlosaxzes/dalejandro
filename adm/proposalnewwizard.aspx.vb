@@ -66,13 +66,13 @@ Public Class proposalnewwizard
                         'FeesTab
                         RadWizardStepFees.Active = True
                     End If
-                    Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
-                    If statusId > 1 Then
+                    lblProposalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+                    If lblProposalStatus.Text > 1 Then
                         btnNewFeeOk.Visible = False
                         cboPaymentSchedules.Visible = False
                         btnUpdatePS.Visible = False
                     Else
-                        btnNewFeeOk.Visible = True
+                        btnNewFeeOk.Visible = (LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0)
                         cboPaymentSchedules.Visible = True
                         btnUpdatePS.Visible = True
                     End If
@@ -92,6 +92,15 @@ Public Class proposalnewwizard
                 RadGridFiles.Visible = Not RadListViewFiles.Visible
                 btnGridPage.Visible = Not RadListViewFiles.Visible
                 btnTablePage.Visible = RadListViewFiles.Visible
+
+                ' Phases Panel
+                If LocalAPI.GetCompanyPhasesCount(lblCompanyId.Text) > 0 Then
+                    PanelPhases.Visible = True
+                    btnNewPhase.Visible = (lblProposalStatus.Text <> 4 And lblProposalStatus.Text <> 2)
+                    RadGridPhases.Enabled = btnNewPhase.Visible
+                Else
+                    PanelPhases.Visible = False
+                End If
 
             End If
             RadWindowManagerJob.EnableViewState = False
@@ -750,6 +759,7 @@ Public Class proposalnewwizard
     End Sub
 
     Private Sub RadGridFees_PreRender(sender As Object, e As EventArgs) Handles RadGridFees.PreRender
+        RadGridFees.MasterTableView.GetColumn("phaseId").Display = IIf(LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0, False, True)
         If lblCompanyId.Text = 260962 Then
             ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
             RadGridFees.MasterTableView.GetColumn("Estimated").Visible = False
@@ -842,5 +852,18 @@ Public Class proposalnewwizard
 
     Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
         ConfigUploadPanels()
+    End Sub
+
+    Private Sub btnNewPhase_Click(sender As Object, e As EventArgs) Handles btnNewPhase.Click
+        Response.Redirect($"~/adm/proposalphase.aspx?proposalId={lblProposalId.Text}&backpage=proposalnewwizard")
+    End Sub
+    Private Sub RadGridPhases_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPhases.ItemCommand
+        Select Case e.CommandName
+            Case "EditPhase"
+                Response.Redirect($"~/adm/proposalphase.aspx?Id={e.CommandArgument}&proposalId={lblProposalId.Text}&backpage=proposalnewwizard")
+            Case "AddTaskInPhase"
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&fromwizard=1&phaseId={e.CommandArgument}")
+        End Select
+
     End Sub
 End Class
