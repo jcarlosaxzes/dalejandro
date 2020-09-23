@@ -300,7 +300,7 @@
                                 <asp:Panel ID="Panel2" runat="server" Visible='<%# Eval("IsPhases") = 0%>' CssClass="row mb-lg">
                                     <div class="row mb-lg">
                                         <section class="col-md-12 col-print-12">
-                                            <h4><span class="fw-semi-bold">cope of Work</h4>
+                                            <h4><span class="fw-semi-bold">Scope of Work</h4>
                                             <asp:Repeater ID="rptrScopeOfWork" runat="server" DataSourceID="SqlDataSourceSCOPEOFWORK">
                                                 <ItemTemplate>
                                                     <h5 class="company-name m-t-1"><%# IIf(Len(Eval("PhaseCode")) > 0, String.Concat(Eval("PhaseCode"), "  ", Eval("Description")), Eval("Description"))  %></h5>
