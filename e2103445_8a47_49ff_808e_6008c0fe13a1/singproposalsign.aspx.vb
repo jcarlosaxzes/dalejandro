@@ -488,10 +488,19 @@ Public Class singproposalsign
         Response.Redirect(url, False)
     End Sub
 
-    Protected  Sub btnPrint_Click(sender As Object, e As EventArgs)
+    Protected Sub btnPrint_Click(sender As Object, e As EventArgs)
         Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
         Session("PrintUrl") = ProposalUrl
         Session("PrintName") = "Proposal_" & LocalAPI.ProposalNumber(lblProposalId.Text) & ".pdf"
         Response.Redirect("~/ADM/pdf_print.aspx")
+    End Sub
+
+    Public Sub rptrPhases_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
+        'Dim e1 As String = DataBinder.Eval(e.Item.DataItem, "phaseId")
+        If e.Item.ItemType = ListItemType.Item OrElse e.Item.ItemType = ListItemType.AlternatingItem Then
+            Dim ADSChild As SqlDataSource = e.Item.FindControl("SqlDataSourceScopeOfWorkByPhase")
+            ADSChild.SelectParameters(2).DefaultValue = DataBinder.Eval(e.Item.DataItem, "phaseId")
+        End If
+
     End Sub
 End Class

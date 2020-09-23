@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/e2103445_8a47_49ff_808e_6008c0fe13a1/singclientportal.master" CodeBehind="singproposalsign.aspx.vb" Inherits="pasconcept20.singproposalsign" Async="true" %>
+
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/e2103445_8a47_49ff_808e_6008c0fe13a1/SingClientPortal.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
@@ -22,9 +23,11 @@
         }
 
         @media print {
-                .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+            .pagebreak {
+                page-break-before: always;
             }
-
+            /* page-break-after works, as well */
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
@@ -101,22 +104,23 @@
 
     <asp:Panel ID="pnlPrint" runat="server" CssClass="hidden-print noprint">
         <div class="fixed-action-btn-print hidden-print  .d-sm-none .d-md-block hidden-lg-down">
-        <div class="btn-toolbar mt-lg hidden-print print-buttons">
-            <button class="btn btn-inverse print" style="display: block;">
-                <i class="fa fa-print"></i>
-                &nbsp;&nbsp;Print
-            </button>
-            <div class="d-none d-xl-block col-xl-2 bd-toc" style="margin-top:5px;">
-                <ul class="section-nav list-unstyled" style="font-size: 1rem;width: 150px;">
-		            <li><a href="#ScopeofWork" class="hidden-print">Scope of Work</a></li>
-		            <li><a href="#ServiceFee" class="hidden-print">Service Fee(s)</a></li>
-		            <li><a href="#PaymentsSchedule" class="hidden-print">Payments Schedule</a></li>
-		            <li><a href="#TermsConditions" class="hidden-print">Terms and Conditions</a></li>
-		            <li><a href="#Signature" class="hidden-print">Signature</a></li>
-	            </ul>
+            <div class="btn-toolbar mt-lg hidden-print print-buttons">
+                <button class="btn btn-inverse print" style="display: block;">
+                    <i class="fa fa-print"></i>
+                    &nbsp;&nbsp;Print
+                </button>
+                <div class="d-none d-xl-block col-xl-2 bd-toc" style="margin-top: 5px;">
+                    <ul class="section-nav list-unstyled" style="font-size: 1rem; width: 150px;">
+                        <li><a href="#" class="hidden-print">Top</a></li>
+                        <li><a href="#ScopeofWork" class="hidden-print">Scope of Work</a></li>
+                        <li><a href="#ServiceFee" class="hidden-print">Service Fee(s)</a></li>
+                        <li><a href="#PaymentsSchedule" class="hidden-print">Payments Schedule</a></li>
+                        <li><a href="#TermsConditions" class="hidden-print">Terms and Conditions</a></li>
+                        <li><a href="#Signature" class="hidden-print">Signature</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     </asp:Panel>
     <%-- Fixed print Btn --%>
     <%-- End of Fixed print Btn --%>
@@ -251,52 +255,77 @@
                             </div>
 
                             <%--Project Phases Hide?--%>
-                            <div class="row mb-lg">
-                                <section class="col-md-12 col-print-12">
-                                    <asp:Panel ID="PanelPhase" runat="server" Visible='<%# Eval("IsPhases") = 1%>' CssClass="row mb-lg">
+                            <div id="ScopeofWork">
+                                <asp:Panel ID="PanelPhase" runat="server" Visible='<%# Eval("IsPhases") = 1%>' CssClass="row mb-lg">
+                                    <div class="row mb-lg">
                                         <section class="col-md-12 col-print-12">
-                                            <h4 class="company-name m-t-1">Project Phases</h4>
-                                            <asp:Repeater ID="rptrPhases" runat="server" DataSourceID="SqlDataSourcePHASES">
+                                            <section class="col-md-12 col-print-12">
+                                                <h4><span class="fw-semi-bold">Scope of Work for Phases</h4>
+                                                <asp:Repeater ID="rptrPhases" runat="server" DataSourceID="SqlDataSourcePHASES" OnItemDataBound="rptrPhases_ItemDataBound">
+                                                    <ItemTemplate>
+                                                        <h4 class="company-name m-t-1"><%# Eval("Code")%>&nbsp;&nbsp;<%# Eval("Name")%></h4>
+                                                        <span class="fw-semi-bold">
+                                                            <%# Eval("Period")%>
+                                                        </span>
+                                                        <%# Eval("Description")%>
+                                                        <div style="padding-left:25px">
+                                                            <asp:Repeater ID="rptrScopeOfWorkByPhase" runat="server" DataSourceID="SqlDataSourceScopeOfWorkByPhase">
+                                                                <ItemTemplate>
+                                                                    <h5 class="company-name m-t-1"><%# Eval("Description") %></h5>
+                                                                    <%# Eval("DescriptionPlus")%>
+                                                                    <hr />
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+                                                        <asp:SqlDataSource ID="SqlDataSourceScopeOfWorkByPhase" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+                                                            SelectCommand="Proposal_ScopeOfWorkByPhase_Select" SelectCommandType="StoredProcedure">
+                                                            <SelectParameters>
+                                                                <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+                                                                <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
+                                                                <asp:Parameter Name="PhaseId" />
+                                                            </SelectParameters>
+                                                        </asp:SqlDataSource>
+
+
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+
+                                            </section>
+
+                                        </section>
+                                    </div>
+                                </asp:Panel>
+
+                                <%--Scope of Work No Phases Hide?--%>
+                                <asp:Panel ID="Panel2" runat="server" Visible='<%# Eval("IsPhases") = 0%>' CssClass="row mb-lg">
+                                    <div class="row mb-lg">
+                                        <section class="col-md-12 col-print-12">
+                                            <h4><span class="fw-semi-bold">cope of Work</h4>
+                                            <asp:Repeater ID="rptrScopeOfWork" runat="server" DataSourceID="SqlDataSourceSCOPEOFWORK">
                                                 <ItemTemplate>
-                                                    <h4 class="company-name m-t-1"><%# Eval("Code")%>&nbsp;&nbsp;<%# Eval("Name")%></h4>
-                                                    <span class="fw-semi-bold">
-                                                        <%# Eval("Period")%>
-                                                    </span>
-                                                    <%# Eval("Description")%>
+                                                    <h5 class="company-name m-t-1"><%# IIf(Len(Eval("PhaseCode")) > 0, String.Concat(Eval("PhaseCode"), "  ", Eval("Description")), Eval("Description"))  %></h5>
+                                                    <%# Eval("DescriptionPlus")%>
                                                 </ItemTemplate>
                                             </asp:Repeater>
+
                                         </section>
-                                    </asp:Panel>
-                                </section>
+                                    </div>
+                                </asp:Panel>
+
                             </div>
-
-                            <%--Scope of Work--%>
-                            <div class="row mb-lg">
-                                <section class="col-md-12 col-print-12">
-                                    <h4 class="company-name m-t-1" id="ScopeofWork">Scope of Work</h4>
-                                    <asp:Repeater ID="rptrScopeOfWork" runat="server" DataSourceID="SqlDataSourceSCOPEOFWORK">
-                                        <ItemTemplate>
-                                            <h5 class="company-name m-t-1"><%# IIf(Len(Eval("PhaseCode")) > 0, String.Concat(Eval("PhaseCode"), "  ", Eval("Description")), Eval("Description"))  %></h5>
-                                            <%# Eval("DescriptionPlus")%>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-
-                                </section>
-                            </div>
-
                             <%--Service Fee(s)--%>
                             <div class="row mb-lg pagebreak">
                                 <section class="col-md-12 col-print-12">
-                                    <h4 class="company-name m-t-1" id="ServiceFee">Service Fee(s)</h4>
+                                    <h4 class="fw-semi-bold" id="ServiceFee">Service Fee(s)</h4>
                                     <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails"
                                         HeaderStyle-HorizontalAlign="Center" ShowFooter="true" Width="100%"
                                         RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
                                             <FooterStyle BorderStyle="None" />
                                             <Columns>
-                                                <%-- <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="" UniqueName="Phase"
+                                                <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="" UniqueName="Phase"
                                                     HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
-                                                </telerik:GridBoundColumn>--%>
+                                                </telerik:GridBoundColumn>
                                                 <telerik:GridBoundColumn DataField="taskcode" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
                                                     HeaderText="ID" SortExpression="taskcode" UniqueName="taskcode">
                                                 </telerik:GridBoundColumn>
@@ -340,7 +369,7 @@
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
                                     <asp:Panel ID="Panel1" runat="server" Visible='<%# Eval("IsPaymentSchedule") %>' Width="100%">
-                                        <h4 class="company-name m-t-1" id="PaymentsSchedule">Payments Schedule</h4>
+                                        <h4 class="fw-semi-bold" id="PaymentsSchedule">Payments Schedule</h4>
                                         <telerik:RadGrid ID="RadGridPS" runat="server"
                                             AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center" Width="100%"
                                             RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
@@ -405,13 +434,13 @@
                         <div class="widget-body">
                             <div class="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h4 class="company-name m-t-1" id="TermsConditions">Terms and Conditions</h4>
+                                    <h4 class="fw-semi-bold" id="TermsConditions">Terms and Conditions</h4>
                                     <%# Eval("Agreements") %>
                                 </section>
                             </div>
                             <asp:Panel ID="pnlSharedPublicLinks" runat="server" Visible='<%# ShareDocumentsPanelVisible(Eval("IsSharePublicLinks")) %>' CssClass="row mb-lg">
                                 <section class="col-md-12 col-print-12">
-                                    <h4 class="company-name m-t-1" id="Documents" >Documents</h3>
+                                    <h4 class="fw-semi-bold" id="Documents">Documents</h3>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <asp:Repeater ID="rptrSharedPublicLinks" runat="server" DataSourceID="SqlDataSourceAzureuploads">
@@ -468,6 +497,7 @@
         </ItemTemplate>
     </asp:FormView>
     <%-- End of Main Content --%>
+
 
     <%-- SqlDataSources --%>
     <asp:SqlDataSource ID="SqlDataSourceProp1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
