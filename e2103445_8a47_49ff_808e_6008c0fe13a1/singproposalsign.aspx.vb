@@ -503,4 +503,5 @@ Public Class singproposalsign
         End If
 
     End Sub
+
 End Class
