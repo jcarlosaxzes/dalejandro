@@ -12,10 +12,16 @@
                 If Val(lblphaseId.Text) = 0 Then
                     ' Insert
                     btnNewUpdate.Text = "Add Phase"
+                    btnUpdateAndBack.Visible = False
                 Else
                     'Update
                     btnNewUpdate.Text = "Update Phase"
+                    btnUpdateAndBack.Visible = True
                     ReadDetails()
+                End If
+
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    Session("pphasebackpage") = Request.QueryString("backpage")
                 End If
 
 
@@ -25,7 +31,6 @@
 
         End Try
     End Sub
-
     Private Sub ReadDetails()
         Dim phaseObject = LocalAPI.GetRecord(lblphaseId.Text, "PROPOSAL_phase_SELECT")
 
@@ -48,7 +53,13 @@
     End Sub
 
     Protected Sub Back()
-        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&TabPhase=1")
+        Select Case Session("pphasebackpage")
+            Case "proposalnewwizard"
+                Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & lblproposalId.Text & "&FeesTab=1")
+            Case Else
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&TabPhase=1")
+        End Select
+
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Back()
@@ -60,10 +71,14 @@
                 Back()
             End If
         Else
-            If LocalAPI.ProposalPhases_UPDATE(lblphaseId.Text, txtOrder.DbValue, CodeTextBox.Text, NameTextBox.Text, DescriptionEditor.Content, PeriodoTextBox.Text, RadDatePickerFrom.DbSelectedDate, RadDatePickerTo.DbSelectedDate, txtProgress.DbValue) Then
-                Back()
-            End If
+            LocalAPI.ProposalPhases_UPDATE(lblphaseId.Text, txtOrder.DbValue, CodeTextBox.Text, NameTextBox.Text, DescriptionEditor.Content, PeriodoTextBox.Text, RadDatePickerFrom.DbSelectedDate, RadDatePickerTo.DbSelectedDate, txtProgress.DbValue)
         End If
     End Sub
 
+    Private Sub btnUpdateAndBack_Click(sender As Object, e As EventArgs) Handles btnUpdateAndBack.Click
+        If LocalAPI.ProposalPhases_UPDATE(lblphaseId.Text, txtOrder.DbValue, CodeTextBox.Text, NameTextBox.Text, DescriptionEditor.Content, PeriodoTextBox.Text, RadDatePickerFrom.DbSelectedDate, RadDatePickerTo.DbSelectedDate, txtProgress.DbValue) Then
+            Back()
+        End If
+
+    End Sub
 End Class

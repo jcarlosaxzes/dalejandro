@@ -68,6 +68,24 @@ Partial Public Class proposaltask
     Protected WithEvents cboMulticolumnTask As Global.Telerik.Web.UI.RadMultiColumnComboBox
 
     '''<summary>
+    '''PanelPhases control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelPhases As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lblPhaseLabel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblPhaseLabel As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''cboPhase control.
     '''</summary>
     '''<remarks>
@@ -230,24 +248,6 @@ Partial Public Class proposaltask
     Protected WithEvents RadGridEstaimator As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''txtHoursForEstimateEdit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHoursForEstimateEdit As Global.Telerik.Web.UI.RadNumericTextBox
-
-    '''<summary>
-    '''lblRates control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblRates As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''ValidationSummaryTaskUpdate control.
     '''</summary>
     '''<remarks>
@@ -264,6 +264,15 @@ Partial Public Class proposaltask
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''ComparevalidatorPhase control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ComparevalidatorPhase As Global.System.Web.UI.WebControls.CompareValidator
 
     '''<summary>
     '''SqlDataSource1 control.

@@ -24,7 +24,7 @@
                        Back
         </asp:LinkButton>
 
-        <span class="pasconcept-pagetitle">  Proposal Task</span>
+        <span class="pasconcept-pagetitle">Proposal Task</span>
 
     </div>
 
@@ -36,7 +36,7 @@
                 </td>
                 <td>
                     <asp:Panel ID="pnlTemplate" runat="server">
-                        <telerik:RadMultiColumnComboBox ID="cboMulticolumnTask" runat="server" DataSourceID="SqlDataSource1" DataTextField="Description" DataValueField="Id" AutoPostBack="true"
+                        <telerik:RadMultiColumnComboBox ID="cboMulticolumnTask" runat="server" DataSourceID="SqlDataSource1" DataTextField="Description" DataValueField="Id" AutoPostBack="true" Skin="Material"
                             Width="800px" DropDownWidth="800" MarkFirstMatch="True" Filter="Contains" AutoFilter="True" Height="300px"
                             FilterFields="taskcode, Description">
                             <ColumnsCollection>
@@ -51,19 +51,29 @@
 
                 </td>
             </tr>
+        </table>
+        <hr />
+        <asp:Panel runat="server" ID="PanelPhases">
+            <table class="table-sm" style="width: 99%;">
+                <tr>
+                    <td style="text-align: right; width: 200px">
+                        <asp:Label ID="lblPhaseLabel" runat="server" Text="Phase:"></asp:Label>
+                    </td>
+                    <td>
+                        <telerik:RadComboBox runat="server" ID="cboPhase" DataValueField="Id" Width="95%" Height="250px"
+                            DataTextField="Name" DataSourceID="SqlDataSourcePhases" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="(Select phase...)" Value="0" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <table class="table-sm" style="width: 99%;">
             <tr>
-                <td style="text-align: right"></td>
-                <td>
-                    <telerik:RadComboBox runat="server" ID="cboPhase" DataValueField="Id" Width="95%" Height="250px"
-                        DataTextField="Name" DataSourceID="SqlDataSourcePhases" AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem Text="(Select phase...)" Value="0" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">Position (optional):
+                <td style="text-align: right; width: 200px">
+                    Position (optional):
                 </td>
                 <td>
                     <telerik:RadComboBox runat="server" ID="cboPosition" DataValueField="Id" Width="95%" Height="250px" AutoPostBack="true" CausesValidation="false"
@@ -85,7 +95,7 @@
                 <td style="text-align: right; vertical-align: top">Description:
                 </td>
                 <td>
-                    <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="250px" 
+                    <telerik:RadEditor ID="txtDescriptionPlus" runat="server" Content='<%# Bind("DescriptionPlus")%>' Height="250px"
                         AllowScripts="True" Width="95%"
                         ToolbarMode="Default" ToolsFile="~/BasicTools.xml" EditModes="Design,Preview" RenderMode="Auto">
                     </telerik:RadEditor>
@@ -261,8 +271,9 @@
         </div>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtName" ValidationGroup="TaskUpdate" ErrorMessage="Define Task Name" Display="None">
         </asp:RequiredFieldValidator>
-
-
+        <asp:CompareValidator runat="server" ID="ComparevalidatorPhase" ValueToCompare="(Select phase...)" Display="None" 
+            Operator="NotEqual" ControlToValidate="cboPhase" ErrorMessage="<span><b>Phase</b> is required</span>" ValidationGroup="TaskUpdate">
+        </asp:CompareValidator>
     </div>
 
 

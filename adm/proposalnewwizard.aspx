@@ -148,7 +148,6 @@
             height: auto;
             width: auto;
         }
-
     </style>
 
     <div class="pasconcept-bar">
@@ -566,145 +565,218 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepFees" Title="Fees & Scope" Enabled="false" StepType="Step">
                     <fieldset>
                         <legend>Service Fee(s)</legend>
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td>
-                                    <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
-                                        Add Fee
-                                    </asp:LinkButton>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <telerik:RadGrid ID="RadGridFees" runat="server" AllowAutomaticDeletes="True"
-                                        AutoGenerateColumns="False" DataSourceID="SqlDataSourceServiceFees" CellSpacing="0" Width="100%"
-                                        HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
-                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceServiceFees" ShowFooter="true">
-                                            <Columns>
-                                                <telerik:GridBoundColumn DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
-                                                </telerik:GridBoundColumn>
 
-                                                <telerik:GridTemplateColumn DataField="taskcode" HeaderText="Task" ReadOnly="True" SortExpression="taskcode"
-                                                    UniqueName="taskcode" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="160px" HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="btnEditDetail" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
-                                                            ToolTip="Click to Edit detail">
+                        <%--Panel Phases--%>
+                        <asp:Panel runat="server" ID="PanelPhases">
+                            <div class="pasconcept-bar noprint">
+                                <span class="pasconcept-pagetitle">Proposal Phases</span>
+
+                                <span style="float: right; vertical-align: middle;">
+
+                                    <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Phase for Proposal">
+                                            Add Phase
+                                    </asp:LinkButton>
+
+                                </span>
+                            </div>
+                            <telerik:RadGrid ID="RadGridPhases" runat="server" DataSourceID="SqlDataSourcePhases" GridLines="None" AllowAutomaticDeletes="true"
+                                AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
+                                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                                <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePhases">
+                                    <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                                    <BatchEditingSettings EditType="Cell" />
+                                    <CommandItemSettings ShowAddNewRecordButton="false" />
+                                    <Columns>
+                                        <telerik:GridBoundColumn DataField="nOrder" HeaderStyle-Width="100px" HeaderText="Order" SortExpression="nOrder" UniqueName="nOrder" ItemStyle-HorizontalAlign="Center">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridTemplateColumn DataField="Code" HeaderStyle-Width="150px" HeaderText="Code" SortExpression="Code" UniqueName="Code">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lnkPhaseEdit" runat="server" CommandName="EditPhase" CommandArgument='<%# Eval("Id") %>'
+                                                    Text='<%# Eval("Code")%>' ToolTip="Click to Edit Phase"></asp:LinkButton>
+                                                &nbsp;&nbsp;
+                                                <asp:LinkButton ID="btnNewTaskInPhase" runat="server" CssClass="btn btn-primary btn-sm" CommandName="AddTaskInPhase" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
+                                                                ToolTip="Add New Task for this Pahse">
+                                                    Add Task
+                                                </asp:LinkButton>
+                                            </ItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridBoundColumn DataField="Name" HeaderText="Name" SortExpression="Name" UniqueName="Name">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Period" HeaderStyle-Width="180px" HeaderText="Period" SortExpression="Period" UniqueName="Period" ItemStyle-HorizontalAlign="Left">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="DateFrom" HeaderText="DateFrom" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="100px">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="DateTo" HeaderText="DateTo" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}" HeaderStyle-Width="100px">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Progress" HeaderText="Progress" SortExpression="Progress" DataFormatString="{0:N0}" UniqueName="Progress" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Task" HeaderText="Task" SortExpression="Task" DataFormatString="{0:N0}" UniqueName="Task" Aggregate="Sum"
+                                            FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Total" HeaderText="Total" ReadOnly="True" SortExpression="Total" DataFormatString="{0:N2}" UniqueName="Total" Aggregate="Sum"
+                                            FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this phase?"
+                                            ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                                            UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
+                                            ItemStyle-Width="50px" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                                        </telerik:GridButtonColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </asp:Panel>
+
+                        <%--Proposal Tasks--%>
+                        <div class="pasconcept-bar noprint">
+                            <span class="pasconcept-pagetitle">Proposal Tasks</span>
+
+                            <span style="float: right; vertical-align: middle;">
+
+                                <asp:LinkButton ID="btnNewFeeOk" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                        Add Task
+                                </asp:LinkButton>
+
+                            </span>
+                        </div>
+                        <telerik:RadGrid ID="RadGridFees" runat="server" AllowAutomaticDeletes="True"
+                            AutoGenerateColumns="False" DataSourceID="SqlDataSourceServiceFees" CellSpacing="0" Width="100%"
+                            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
+                            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceServiceFees" ShowFooter="true">
+                                <Columns>
+                                    <telerik:GridBoundColumn DataField="Id" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id" Display="False">
+                                    </telerik:GridBoundColumn>
+
+                                    <telerik:GridTemplateColumn DataField="phaseId" HeaderText="Phase" SortExpression="PhaseCode" UniqueName="phaseId" HeaderStyle-Width="100px">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblphaseId" runat="server" Text='<%# Eval("PhaseCode") %>' ToolTip='<%# Eval("PhaseName") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="taskcode" HeaderText="Task" ReadOnly="True" SortExpression="taskcode"
+                                        UniqueName="taskcode" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnEditDetail" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
+                                                ToolTip="Click to Edit detail">
                                                                 <%# Eval("taskcode")%>
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
+                                            &nbsp;
                                                         <asp:LinkButton ID="btnOrderDown" runat="server" CommandName="OrderDown" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Order Down">
                                                                 <i class="fas fa-arrow-down"></i>
                                                         </asp:LinkButton>
+                                            &nbsp;
                                                         <asp:LinkButton ID="btnOrderUp" runat="server" CommandName="OrderUp" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
                                                             ToolTip="Click to Order Up">
                                                                 <i class="fas fa-arrow-up"></i>
                                                         </asp:LinkButton>
+                                            &nbsp;
                                                         <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false" CausesValidation="false"
                                                             ToolTip="Click to duplicate record">
                                                                 <i class="far fa-clone"></i>
                                                         </asp:LinkButton>
 
-                                                    </ItemTemplate>
-                                                </telerik:GridTemplateColumn>
-                                                <telerik:GridTemplateColumn DataField="Description" FilterControlAltText="Filter Description column"
-                                                    HeaderText="Name" SortExpression="Description" UniqueName="Description" HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <%# Eval("Description") %>
-                                                    </ItemTemplate>
-                                                </telerik:GridTemplateColumn>
-                                                <telerik:GridTemplateColumn DataField="Amount" DataType="System.Double" HeaderText="Quantity"
-                                                    SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Amount", "{0:N4}") %>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </telerik:GridTemplateColumn>
-                                                <telerik:GridTemplateColumn DataField="Hours" DataType="System.Double" HeaderText="Hours"
-                                                    SortExpression="Hours" UniqueName="Hours" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblHours" runat="server" Text='<%# Eval("Hours", "{0:N2}") %>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </telerik:GridTemplateColumn>
-                                                <telerik:GridTemplateColumn DataField="Rates" DataType="System.Double" HeaderText="Rates"
-                                                    SortExpression="Rates" UniqueName="Rates" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
-                                                    HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblRates" runat="server" Text='<%# Eval("Rates", "{0:N2}")%>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </telerik:GridTemplateColumn>
-                                                <telerik:GridBoundColumn DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" UniqueName="BillType" HeaderStyle-Width="180px">
-                                                </telerik:GridBoundColumn>
-                                                <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True"
-                                                    SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimated" Aggregate="Sum"
-                                                    FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
-                                                    HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
-                                                </telerik:GridBoundColumn>
-                                                <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True"
-                                                    SortExpression="TotalRow" DataFormatString="{0:N2}" UniqueName="TotalRow" Aggregate="Sum"
-                                                    FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
-                                                    HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
-                                                </telerik:GridBoundColumn>
-                                                <telerik:GridTemplateColumn DataField="Paymentschedule" FilterControlAltText="Filter Paymentschedule column" ItemStyle-HorizontalAlign="Center"
-                                                    HeaderText="Payment Shedule" SortExpression="Paymentschedule" UniqueName="Paymentschedule" HeaderStyle-HorizontalAlign="Center">
-                                                    <ItemTemplate>
-                                                        <%# Eval("Paymentschedule") %>
-                                                    </ItemTemplate>
-                                                </telerik:GridTemplateColumn>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+                                    <telerik:GridTemplateColumn DataField="Description" FilterControlAltText="Filter Description column"
+                                        HeaderText="Name" SortExpression="Description" UniqueName="Description" HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <%# Eval("Description") %>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+                                    <telerik:GridTemplateColumn DataField="Amount" DataType="System.Double" HeaderText="Quantity"
+                                        SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
+                                        HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblAmount" runat="server" Text='<%# Eval("Amount", "{0:N4}") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+                                    <telerik:GridTemplateColumn DataField="Hours" DataType="System.Double" HeaderText="Hours"
+                                        SortExpression="Hours" UniqueName="Hours" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
+                                        HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblHours" runat="server" Text='<%# Eval("Hours", "{0:N2}") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+                                    <telerik:GridTemplateColumn DataField="Rates" DataType="System.Double" HeaderText="Rates"
+                                        SortExpression="Rates" UniqueName="Rates" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
+                                        HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblRates" runat="server" Text='<%# Eval("Rates", "{0:N2}")%>'></asp:Label>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+                                    <telerik:GridBoundColumn DataField="BillType" HeaderText="Bill Type" SortExpression="BillType" UniqueName="BillType" HeaderStyle-Width="180px">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="Estimator" HeaderText="Estimated" ReadOnly="True"
+                                        SortExpression="Estimator" DataFormatString="{0:N2}" UniqueName="Estimated" Aggregate="Sum"
+                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
+                                        HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridBoundColumn DataField="TotalRow" HeaderText="Total" ReadOnly="True"
+                                        SortExpression="TotalRow" DataFormatString="{0:N2}" UniqueName="TotalRow" Aggregate="Sum"
+                                        FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right"
+                                        HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridTemplateColumn DataField="Paymentschedule" FilterControlAltText="Filter Paymentschedule column" ItemStyle-HorizontalAlign="Center"
+                                        HeaderText="Payment Shedule" SortExpression="Paymentschedule" UniqueName="Paymentschedule" HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <%# Eval("Paymentschedule") %>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
 
-                                                <telerik:GridButtonColumn ConfirmDialogType="Classic" ConfirmText="Delete this row?"
-                                                    ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                                                    UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
-                                                    HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
-                                                </telerik:GridButtonColumn>
-                                            </Columns>
+                                    <telerik:GridButtonColumn ConfirmDialogType="Classic" ConfirmText="Delete this row?"
+                                        ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                                        UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
+                                        HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
+                                    </telerik:GridButtonColumn>
+                                </Columns>
 
-                                        </MasterTableView>
-                                    </telerik:RadGrid>
-                                </td>
-                            </tr>
-                        </table>
+                            </MasterTableView>
+                        </telerik:RadGrid>
 
-                        <hr style="margin-top: 35px; margin-bottom: 0px" />
-                        <legend>Project History</legend>
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td style="width: 200px">
-                                    <telerik:RadComboBox ID="cboClientRatios" runat="server" AppendDataBoundItems="True"
-                                        Width="100%" CausesValidation="false" RenderMode="Lightweight" Skin="Material">
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(Current client...)" Value="0" />
-                                            <telerik:RadComboBoxItem runat="server" Text="(All clients...)" Value="1" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                </td>
-                                <td style="width: 200px">
-                                    <telerik:RadComboBox ID="cboDatesRates" runat="server" AppendDataBoundItems="True"
-                                        Width="100%" CausesValidation="false" RenderMode="Lightweight" Skin="Material">
-                                        <Items>
-                                            <telerik:RadComboBoxItem runat="server" Text="(From 01-01-2000)" Value="0" />
-                                            <telerik:RadComboBoxItem runat="server" Text="(Last 3 Years)" Value="1" />
-                                        </Items>
-                                    </telerik:RadComboBox>
-                                </td>
-                                <td>
-                                    <asp:Label runat="server" ID="lblMeasureAndUnits"></asp:Label>
-                                </td>
-
-                                <td style="text-align: right">
-                                    <telerik:RadNumericTextBox ID="txtRatio" runat="server" Text='<%# Bind("Name") %>' Width="200px" Label="Ration:">
-                                    </telerik:RadNumericTextBox>
-                                </td>
-                                <td style="width: 250px; text-align: right">
-                                    <telerik:RadTextBox ID="txtEstimatedTotal" runat="server" Font-Bold="true" Text='<%# Bind("Name") %>' Width="100%" Label="Estimate Total:" ReadOnly="true" Skin="Material"></telerik:RadTextBox>
-                                </td>
-                                <td style="width: 150px; text-align: right">
-                                    <asp:LinkButton ID="btnRefreshRatios" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false" CausesValidation="false">
+                        <hr />
+                        <%--Project History--%>
+                        <div class="pasconcept-bar noprint">
+                            <span class="pasconcept-pagetitle">Project History
+                            </span>
+                            <span style="float: right; vertical-align: middle;">
+                                <asp:LinkButton ID="btnRefreshRatios" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false" CausesValidation="false">
                                         <i class="fas fa-redo"></i>&nbsp;&nbsp;Refresh
-                                    </asp:LinkButton>
-                                </td>
-                            </tr>
-                        </table>
+                                </asp:LinkButton>
+
+                            </span>
+                        </div>
+                        <table class="table-sm" style="width: 100%">
+                                <tr>
+                                    <td style="width: 200px">
+                                        <telerik:RadComboBox ID="cboClientRatios" runat="server" AppendDataBoundItems="True"
+                                            Width="100%" CausesValidation="false" RenderMode="Lightweight" Skin="Material">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(Current client...)" Value="0" />
+                                                <telerik:RadComboBoxItem runat="server" Text="(All clients...)" Value="1" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+                                    <td style="width: 200px">
+                                        <telerik:RadComboBox ID="cboDatesRates" runat="server" AppendDataBoundItems="True"
+                                            Width="100%" CausesValidation="false" RenderMode="Lightweight" Skin="Material">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(From 01-01-2000)" Value="0" />
+                                                <telerik:RadComboBoxItem runat="server" Text="(Last 3 Years)" Value="1" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+                                    <td style="width: 200px;">
+                                        <telerik:RadNumericTextBox ID="txtRatio" runat="server" Text='<%# Bind("Name") %>' Width="100%" Label="Ration:" RenderMode="Lightweight" Skin="Material">
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                    <td style="width: 250px;">
+                                        <telerik:RadTextBox ID="txtEstimatedTotal" runat="server" Font-Bold="true" Text='<%# Bind("Name") %>' Width="100%" Label="Estimate Total:" ReadOnly="true" Skin="Material"></telerik:RadTextBox>
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblMeasureAndUnits"></asp:Label>
+                                    </td>
+                                </tr>
+                            </table>
                         <div>
                             <script>
                                 function OnClientClose(sender, args) {
@@ -712,7 +784,7 @@
                                     masterTable.rebind();
                                 }
                             </script>
-                            <telerik:RadGrid ID="RadGridRatios" runat="server" DataSourceID="SqlDataSourceRatios"
+                            <telerik:RadGrid ID="RadGridRatios" runat="server" DataSourceID="SqlDataSourceRatios" Width="100%"
                                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-HorizontalAlign="Center"
                                 AutoGenerateColumns="False" AllowPaging="True" PageSize="25" AllowSorting="True">
                                 <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRatios">
@@ -988,7 +1060,7 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepAttachments" Title="Attachments" Enabled="false" StepType="Step">
                     <div class="pas-container" style="width: 100%">
                         <asp:Panel ID="PanelUpload" runat="server">
-                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
+                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                                 <tr>
                                     <td style="width: 550px; text-align: right">
                                         <asp:LinkButton ID="btnListFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnListFiles_Click">
@@ -1022,7 +1094,7 @@
                                                 </tr>
                                             </table>
                                             <div class="uploadfiles-canvas">
-                                            <%--<telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"          CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576">
+                                                <%--<telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" OnFileUploaded="RadCloudUpload1_FileUploaded"          CssClass="fileUploadRad" DropZones=".uploadfiles-canvas,#UploadPanel" ProviderType="Azure" MaxFileSize="1048576">
                                                     <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
                                                 </telerik:RadCloudUpload>
                                                 <p style="text-align: center; vertical-align: middle; padding-top: 100px; font-size: 36px">Upload your files</p>--%>
@@ -1036,8 +1108,8 @@
                                                     <br />
                                                     <span style="font-size: 36px">
                                                         <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" ProviderType="Azure" MaxFileSize="1048576"
-                                                            OnFileUploaded="RadCloudUpload1_FileUploaded" 
-                                                            CssClass="fileUploadRad" 
+                                                            OnFileUploaded="RadCloudUpload1_FileUploaded"
+                                                            CssClass="fileUploadRad"
                                                             DropZones=".uploadfiles-canvas,#UploadPanel">
                                                             <Localization SelectButtonText="Select Files" />
                                                         </telerik:RadCloudUpload>
@@ -1054,7 +1126,7 @@
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepFiles" Title="Files" StepType="Step">
                                     <div>
                                         <asp:Panel ID="pnlFind" runat="server">
-                                            <table class="table-sm pasconcept-bar noprint" style="width:100%">
+                                            <table class="table-sm pasconcept-bar noprint" style="width: 100%">
                                                 <tr>
                                                     <td style="width: 550px; text-align: right">
                                                         <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click">
@@ -1611,6 +1683,17 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="PROPOSAL_phases_SELECT" SelectCommandType="StoredProcedure"
+        DeleteCommand="PROPOSAL_phases_DELETE" DeleteCommandType="StoredProcedure">
+        <DeleteParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:Parameter Name="Id" Type="Int32" />
+        </DeleteParameters>
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblClientId" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblProposalId" runat="server" Visible="False" Text="0"></asp:Label>
@@ -1621,5 +1704,6 @@
     <asp:Label ID="lblExcludeJobsList" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblSelectedId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedName" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblProposalStatus" runat="server" Visible="False" Text="0"></asp:Label>
 </asp:Content>
 

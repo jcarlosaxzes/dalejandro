@@ -131,6 +131,15 @@ Partial Public Class proposalphase
     Protected WithEvents btnNewUpdate As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''btnUpdateAndBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpdateAndBack As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''RequiredFieldValidator1 control.
     '''</summary>
     '''<remarks>

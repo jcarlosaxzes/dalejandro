@@ -168,7 +168,7 @@
                         <asp:LinkButton ID="btnNewInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Add Invoice Simple Charge">
                                                                      Add Invoice
                         </asp:LinkButton>
-                        <asp:LinkButton ID="btnNewProgressInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Add Progress Invoice">
+                        <asp:LinkButton ID="btnNewProgressInvoice" runat="server" CssClass="btn btn-primary btn-sm" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Add Progress Invoice" Visible="false">
                                                                      Add Progress Invoice
                         </asp:LinkButton>
 
