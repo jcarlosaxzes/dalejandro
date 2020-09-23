@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class singproposalsign
-    
+
     '''<summary>
     '''pnlModals control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlModals As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''btnDenyProposal control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnDenyProposal As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''txtSignName control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSignName As Global.System.Web.UI.WebControls.TextBox
-    
+
     '''<summary>
     '''btnSign control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSign As Global.System.Web.UI.HtmlControls.HtmlButton
-    
+
     '''<summary>
     '''pnlPrint control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlPrint As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''pnlSideTools control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlSideTools As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''RadBarcode1 control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadBarcode1 As Global.Telerik.Web.UI.RadBarcode
-    
+
     '''<summary>
     '''mainProposalFormView control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents mainProposalFormView As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''SqlDataSourceProp1 control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceProp1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceSCOPEOFWORK control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceSCOPEOFWORK As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePHASES control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePHASES As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePropDetails control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePropDetails As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceAzureuploads control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceAzureuploads As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePS control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePS As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblGuiId control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblGuiId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblProposalId control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class singproposalsign
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblProposalId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class singproposalsign
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.singclientportal
         Get
-            Return CType(MyBase.Master,pasconcept20.singclientportal)
+            Return CType(MyBase.Master, pasconcept20.singclientportal)
         End Get
     End Property
 End Class
