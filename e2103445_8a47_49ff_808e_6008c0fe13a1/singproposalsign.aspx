@@ -267,6 +267,7 @@
                                                         <span class="fw-semi-bold">
                                                             <%# Eval("Period")%>
                                                         </span>
+                                                        <br />
                                                         <%# Eval("Description")%>
                                                         <div style="padding-left:25px">
                                                             <asp:Repeater ID="rptrScopeOfWorkByPhase" runat="server" DataSourceID="SqlDataSourceScopeOfWorkByPhase">
@@ -317,14 +318,14 @@
                             <div class="row mb-lg pagebreak">
                                 <section class="col-md-12 col-print-12">
                                     <h4 class="fw-semi-bold" id="ServiceFee">Service Fee(s)</h4>
-                                    <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails"
+                                    <telerik:RadGrid ID="RadGridTask" runat="server" DataSourceID="SqlDataSourcePropDetails" OnPreRender="RadGridFees_PreRender"
                                         HeaderStyle-HorizontalAlign="Center" ShowFooter="true" Width="100%"
                                         RenderMode="Lightweight" Skin="" GridLines="None" CssClass="table-responsive">
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
                                             <FooterStyle BorderStyle="None" />
                                             <Columns>
-                                                <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="" UniqueName="Phase" 
-                                                    HeaderStyle-Width="1px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                                <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="Phase" UniqueName="Phase" 
+                                                    HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridBoundColumn DataField="taskcode" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
                                                     HeaderText="ID" SortExpression="taskcode" UniqueName="taskcode">

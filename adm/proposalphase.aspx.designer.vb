@@ -77,15 +77,6 @@ Partial Public Class proposalphase
     Protected WithEvents NameTextBox As Global.Telerik.Web.UI.RadTextBox
 
     '''<summary>
-    '''DescriptionEditor control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DescriptionEditor As Global.Telerik.Web.UI.RadEditor
-
-    '''<summary>
     '''PeriodoTextBox control.
     '''</summary>
     '''<remarks>
@@ -93,6 +84,15 @@ Partial Public Class proposalphase
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PeriodoTextBox As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''DescriptionEditor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DescriptionEditor As Global.Telerik.Web.UI.RadEditor
 
     '''<summary>
     '''RadDatePickerFrom control.

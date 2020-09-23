@@ -67,20 +67,20 @@
                 </td>
             </tr>
             <tr>
+                <td style="text-align: right">Phase Subtitle:
+                    </td>
+                <td>
+                    <telerik:RadTextBox ID="PeriodoTextBox" runat="server" MaxLength="50" Width="100%" EmptyMessage="(i.e. Two Weeks, Off-Site, etc)"></telerik:RadTextBox>
+
+                </td>
+            </tr>
+            <tr>
                 <td style="text-align: right">Phase Description:
                     </td>
                 <td style="text-align: left">
                     <telerik:RadEditor ID="DescriptionEditor" runat="server" ToolsFile="~/BasicTools.xml" RenderMode="Auto" EmptyMessage="Description"
                         Height="250px" AllowScripts="True" Width="100%">
                     </telerik:RadEditor>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">Period:
-                    </td>
-                <td>
-                    <telerik:RadTextBox ID="PeriodoTextBox" runat="server" MaxLength="50" Width="100%" EmptyMessage="Period, ex .: (two weeks)"></telerik:RadTextBox>
-
                 </td>
             </tr>
             <tr>
