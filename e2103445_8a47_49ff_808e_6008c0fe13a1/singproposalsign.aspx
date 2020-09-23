@@ -260,7 +260,7 @@
                                     <div class="row mb-lg">
                                         <section class="col-md-12 col-print-12">
                                             <section class="col-md-12 col-print-12">
-                                                <h4><span class="fw-semi-bold">Scope of Work for Phases</h4>
+                                                <h4><span class="fw-semi-bold">Scope of Work</h4>
                                                 <asp:Repeater ID="rptrPhases" runat="server" DataSourceID="SqlDataSourcePHASES" OnItemDataBound="rptrPhases_ItemDataBound">
                                                     <ItemTemplate>
                                                         <h4 class="company-name m-t-1"><%# Eval("Code")%>&nbsp;&nbsp;<%# Eval("Name")%></h4>
@@ -323,8 +323,8 @@
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
                                             <FooterStyle BorderStyle="None" />
                                             <Columns>
-                                                <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="" UniqueName="Phase"
-                                                    HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
+                                                <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="" UniqueName="Phase" 
+                                                    HeaderStyle-Width="1px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridBoundColumn DataField="taskcode" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
                                                     HeaderText="ID" SortExpression="taskcode" UniqueName="taskcode">

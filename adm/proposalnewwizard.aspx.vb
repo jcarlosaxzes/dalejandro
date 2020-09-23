@@ -866,4 +866,10 @@ Public Class proposalnewwizard
         End Select
 
     End Sub
+
+    Private Sub SqlDataSourcePhases_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePhases.Deleted
+        RadGridFees.DataBind()
+    End Sub
+
+
 End Class
