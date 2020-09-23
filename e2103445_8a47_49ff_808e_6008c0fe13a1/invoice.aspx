@@ -210,7 +210,7 @@
                                     <h4>Invoice Items</h4>
                                     <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" ShowFooter="false" Skin="Office2010Silver" 
                                         AutoGenerateColumns="False" DataSourceID="SqlDataSourceInvoiceItems" CellSpacing="0" Width="100%" HeaderStyle-HorizontalAlign="Center" >
-                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceItems" >
+                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceInvoiceItems" ShowFooter="true" >
                                             <Columns>
                                                 <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
                                                 </telerik:GridBoundColumn>
@@ -218,13 +218,15 @@
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridBoundColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description">
                                                 </telerik:GridBoundColumn>
-                                                <telerik:GridNumericColumn DataField="Amount" HeaderText="Amount" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right">
+                                                <telerik:GridNumericColumn DataField="Amount" HeaderText="Total Fee" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridNumericColumn DataField="Previous" HeaderText="Previous %" SortExpression="Previous" UniqueName="Previous" HeaderStyle-Width="100px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
+                                                <telerik:GridNumericColumn DataField="AmountPrev" HeaderText="Amount Previous Invoiced" SortExpression="AmountPrev" UniqueName="AmountPrev" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridNumericColumn DataField="Progress" HeaderText="Progress %" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="100px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
+                                                <telerik:GridNumericColumn DataField="Progress" HeaderText="Percent Complete<br/>To Date" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="150px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridBoundColumn DataField="Total" HeaderText="Total" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right">
+                                                <telerik:GridBoundColumn DataField="Total" HeaderText="Amount Due <br/>This Invoice" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn DataField="Balance" HeaderText="Balance To<br/>Complete" SortExpression="Balance" DataFormatString="{0:C2}" UniqueName="Balance" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridBoundColumn>
                                             </Columns>
                                         </MasterTableView>

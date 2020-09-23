@@ -1,4 +1,6 @@
 ﻿Imports System.Threading.Tasks
+Imports Telerik.Web.UI
+
 Public Class singproposalsign
     Inherits System.Web.UI.Page
 
@@ -504,4 +506,8 @@ Public Class singproposalsign
 
     End Sub
 
+    Public Sub RadGridFees_PreRender(sender As Object, e As EventArgs)
+        Dim masterTable As GridTableView = (CType(sender, RadGrid)).MasterTableView
+        masterTable.GetColumn("Phase").Display = IIf(LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0, False, True)
+    End Sub
 End Class

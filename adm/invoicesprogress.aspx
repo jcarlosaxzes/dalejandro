@@ -127,16 +127,20 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description">
                     </telerik:GridBoundColumn>
-                    <telerik:GridNumericColumn DataField="Amount" HeaderText="Amount" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right">
+                    <telerik:GridNumericColumn DataField="Amount" HeaderText="Total Fee" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right"
+                        Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridNumericColumn>
-                    <telerik:GridNumericColumn DataField="Previous" HeaderText="Previous %" SortExpression="Previous" UniqueName="Previous" HeaderStyle-Width="150px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridNumericColumn DataField="Previous" HeaderText="Previously Invoiced Percent" SortExpression="Previous" UniqueName="Previous" HeaderStyle-Width="150px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridNumericColumn>
-                    <telerik:GridNumericColumn DataField="Progress" HeaderText="Progress %" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="150px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridNumericColumn DataField="AmountPrev" HeaderText="Amount Previous Invoiced" ReadOnly="True" SortExpression="AmountPrev" UniqueName="AmountPrev" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridNumericColumn>
-                    <telerik:GridBoundColumn DataField="Total" HeaderText="Total" ReadOnly="True" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" Aggregate="Sum"
-                        FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right">
+                    <telerik:GridNumericColumn DataField="Progress" HeaderText="Percent Complete<br/>To Date" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="180px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridNumericColumn>
+                    <telerik:GridBoundColumn DataField="Total" HeaderText="Amount Due <br/>This Invoice" ReadOnly="True" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum"
+                        FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                     </telerik:GridBoundColumn>
-
+                    <telerik:GridBoundColumn DataField="Balance" HeaderText="Balance To<br/>Complete" ReadOnly="True" SortExpression="Balance" DataFormatString="{0:C2}" UniqueName="Balance" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
+                    </telerik:GridBoundColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                         CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
