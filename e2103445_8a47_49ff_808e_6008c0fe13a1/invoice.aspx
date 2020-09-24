@@ -222,8 +222,11 @@
                                                 </telerik:GridNumericColumn>
                                                 <telerik:GridNumericColumn DataField="AmountPrev" HeaderText="Amount Previous Invoiced" SortExpression="AmountPrev" UniqueName="AmountPrev" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridNumericColumn DataField="Progress" HeaderText="Percent Complete<br/>To Date" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="150px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
-                                                </telerik:GridNumericColumn>
+                                                <telerik:GridTemplateColumn DataField="Progress" HeaderText="Percent Complete<br/>To Date" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                                                    <ItemTemplate>
+                                                        <%# Eval("Progress") %><span style="color:dimgray;">%</span>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>
                                                 <telerik:GridBoundColumn DataField="Total" HeaderText="Amount Due <br/>This Invoice" SortExpression="Total" DataFormatString="{0:C2}" UniqueName="Total" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridBoundColumn DataField="Balance" HeaderText="Balance To<br/>Complete" SortExpression="Balance" DataFormatString="{0:C2}" UniqueName="Balance" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">

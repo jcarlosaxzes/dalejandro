@@ -514,25 +514,37 @@
                                 CellSpacing="0" Width="100%">
                                 <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePS" ShowFooter="true">
                                     <Columns>
-                                        <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False">
+                                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                                            HeaderText="" HeaderStyle-Width="50px">
+                                        </telerik:GridEditCommandColumn>
+                                        <telerik:GridBoundColumn DataField="Id" HeaderText="ID" SortExpression="Id" UniqueName="Id" Display="False" ReadOnly="true">
                                         </telerik:GridBoundColumn>
 
-                                        <telerik:GridBoundColumn DataField="Order" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
+                                        <telerik:GridBoundColumn DataField="Order" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" ReadOnly="true"
                                             HeaderText="Order" SortExpression="Order" UniqueName="Order">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
+                                        <telerik:GridTemplateColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description" >
+                                            <ItemTemplate>
+                                                <%# Eval("Description") %>
+                                            </ItemTemplate>
+                                            <EditItemTemplate>
+                                                <telerik:RadTextBox Width="960px" ID="txtPSDescrip" runat="server" MaxLength="512" RenderMode="Lightweight" TextMode="MultiLine" Rows="2" Text='<%# Bind("Description") %>'>
+                                                </telerik:RadTextBox>
+                                            </EditItemTemplate>
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" ReadOnly="true"
                                             HeaderText="(%)" SortExpression="Percentage" UniqueName="Percentage">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Description"
-                                            HeaderText="Description" SortExpression="Description" UniqueName="Description">
-                                        </telerik:GridBoundColumn>
-
-                                        <telerik:GridBoundColumn DataField="Amount" HeaderText="Total" ReadOnly="True"
+                                        <telerik:GridBoundColumn DataField="Amount" HeaderText="Total" ReadOnly="True" 
                                             SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum"
                                             FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
                                             HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
                                         </telerik:GridBoundColumn>
                                     </Columns>
+                                    <EditFormSettings EditColumn-ItemStyle-Width="900px">
+                                        <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                                        </EditColumn>
+                                    </EditFormSettings>
                                 </MasterTableView>
                             </telerik:RadGrid>
 
@@ -1699,14 +1711,22 @@
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblClientId" Name="ClientId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
-
     </asp:SqlDataSource>
+
     <asp:SqlDataSource ID="SqlDataSourcePS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Proposal_PaymentSchedule_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="Proposal_PS_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="Proposal_PaymentScheduleDescription_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="Description" />
+            <asp:Parameter Name="Id" Type="Int32" />
+        </UpdateParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceProposalPSUpdate" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        UpdateCommand="Proposal_PS_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <UpdateParameters>
             <asp:ControlParameter ControlID="lblPaymentSchedules" Name="paymentscheduleId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />

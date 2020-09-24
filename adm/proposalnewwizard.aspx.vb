@@ -477,7 +477,7 @@ Public Class proposalnewwizard
 
     Private Sub btnUpdatePS_Click(sender As Object, e As EventArgs) Handles btnUpdatePS.Click
         ' New code 6-3-2020
-        SqlDataSourcePS.Update()
+        SqlDataSourceProposalPSUpdate.Update()
         RadGridPS.DataBind()
         RadGridFees.DataBind()
         TotalsAnalisis()
@@ -871,5 +871,7 @@ Public Class proposalnewwizard
         RadGridFees.DataBind()
     End Sub
 
-
+    Private Sub RadGridPS_PreRender(sender As Object, e As EventArgs) Handles RadGridPS.PreRender
+        RadGridPS.MasterTableView.GetColumn("EditCommandColumn").Display = (lblProposalStatus.Text <> 4 And lblProposalStatus.Text <> 2)
+    End Sub
 End Class

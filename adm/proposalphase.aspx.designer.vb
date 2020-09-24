@@ -113,15 +113,6 @@ Partial Public Class proposalphase
     Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
 
     '''<summary>
-    '''txtProgress control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtProgress As Global.Telerik.Web.UI.RadNumericTextBox
-
-    '''<summary>
     '''btnNewUpdate control.
     '''</summary>
     '''<remarks>
@@ -165,6 +156,15 @@ Partial Public Class proposalphase
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''txtProgress control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtProgress As Global.Telerik.Web.UI.RadNumericTextBox
 
     '''<summary>
     '''lblCompanyId control.
