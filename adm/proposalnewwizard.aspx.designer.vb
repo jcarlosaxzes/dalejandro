@@ -1364,6 +1364,15 @@ Partial Public Class proposalnewwizard
     Protected WithEvents SqlDataSourcePS As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''SqlDataSourceProposalPSUpdate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceProposalPSUpdate As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''SqlDataSourcePaymentSchedules control.
     '''</summary>
     '''<remarks>

@@ -100,14 +100,6 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Progress (0 to 100)%:
-                    </td>
-                <td>
-                    <telerik:RadNumericTextBox ID="txtProgress" runat="server">
-                    </telerik:RadNumericTextBox>
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2" style="text-align: right">
                     <asp:LinkButton ID="btnNewUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="NewPhase" Text="Add Phase">
                         </asp:LinkButton>
@@ -134,7 +126,8 @@
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-
+    <telerik:RadNumericTextBox ID="txtProgress" runat="server" Visible="false">
+                    </telerik:RadNumericTextBox>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblproposalId" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblphaseId" runat="server" Visible="false"></asp:Label>

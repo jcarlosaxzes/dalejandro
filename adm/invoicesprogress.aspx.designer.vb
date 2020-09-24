@@ -86,15 +86,6 @@ Partial Public Class invoicesprogress
     Protected WithEvents txtInvoiceNotes As Global.Telerik.Web.UI.RadTextBox
 
     '''<summary>
-    '''btnUpdate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
     '''panelInsert control.
     '''</summary>
     '''<remarks>
@@ -165,6 +156,24 @@ Partial Public Class invoicesprogress
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''btnUpdate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnUpdateAndBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpdateAndBack As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''SqlDataSource1 control.

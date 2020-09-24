@@ -38,8 +38,7 @@
 
         End Try
     End Sub
-
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+    Private Sub Back()
         Select Case Request.QueryString("backpage")
             Case "invoices"
                 Response.Redirect("~/adm/invoices.aspx")
@@ -47,6 +46,9 @@
                 Response.Redirect("~/adm/job_accounting.aspx?jobId=" & lblJobId.Text)
         End Select
 
+    End Sub
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Back()
     End Sub
 
     Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
@@ -90,6 +92,19 @@
         Catch ex As Exception
         End Try
     End Sub
+    Private Sub btnUpdateAndBack_Click(sender As Object, e As EventArgs) Handles btnUpdateAndBack.Click
+        Try
+            If RadDatePickerMaturityDate.DbSelectedDate = Nothing Then
+                LocalAPI.ExecuteNonQuery($"UPDATE [Invoices] SET [InvoiceNotes]='{txtInvoiceNotes.Text}',InvoiceDate='{RadDatePicker1.DbSelectedDate}', [MaturityDate]=Null WHERE Id={lblinvoicelId.Text}")
+            Else
+                LocalAPI.ExecuteNonQuery($"UPDATE [Invoices] SET [InvoiceNotes]='{txtInvoiceNotes.Text}',InvoiceDate='{RadDatePicker1.DbSelectedDate}', [MaturityDate]='{RadDatePickerMaturityDate.DbSelectedDate}' WHERE Id={lblinvoicelId.Text}")
+
+            End If
+            Back()
+        Catch ex As Exception
+        End Try
+
+    End Sub
 
     Private Sub SqlDataSource1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Updated
         ReadInvoice()
@@ -102,4 +117,5 @@
     Private Sub SqlDataSource1_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Deleted
         ReadInvoice()
     End Sub
+
 End Class

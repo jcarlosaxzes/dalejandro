@@ -291,7 +291,7 @@ Public Class proposal
         If cboPayment.SelectedValue > 0 Then
             lblPaymentSchedules.Text = cboPayment.SelectedValue
             GuardarProposal(False)
-            SqlDataSourcePS.Update()
+            SqlDataSourceProposalPSUpdate.Update()
             FormViewProp1.DataBind()
 
             'Update Fees List
