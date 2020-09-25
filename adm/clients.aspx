@@ -153,7 +153,7 @@
                                                     <td>
                                                         <a href='<%# "clientfiles?client=" & Eval("guid").ToString()%>' class="dropdown-item">
                                                             <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload Files
-                                                         </a>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -172,7 +172,7 @@
                                                     <td>
                                                         <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="SendAcknowledgment" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Acknowledgment Email to Client
-                                                </asp:LinkButton>
+                                                        </asp:LinkButton>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -180,6 +180,14 @@
                                                         <a href='<%# LocalAPI.GetSharedLink_URL(3001, Eval("Id"))%>' target="_blank" class="dropdown-item">
                                                             <i class="far fa-check-square"></i>&nbsp;&nbsp;View Client Acknowledgment
                                                         </a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="btnToAgile" runat="server" UseSubmitBehavior="false" CommandName="ClientToAgile" CommandArgument='<%# Eval("Id")%>'
+                                                            CssClass="dropdown-item" Visible='<%# lblCompanyId.Text = "260962" %>'>
+                                                                Send Client to Agile CRM
+                                                        </asp:LinkButton>
                                                     </td>
                                                 </tr>
                                             </table>

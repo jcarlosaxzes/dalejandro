@@ -112,6 +112,9 @@ Public Class clients
                     Master.InfoMessage("The acknowledgment email was sent to the client!", 0)
                 End If
 
+            Case "ClientToAgile"
+                LocalAPI.PASconceptClientToAgile(e.CommandArgument, "EEG_Client", Master.UserId)
+
         End Select
     End Sub
 

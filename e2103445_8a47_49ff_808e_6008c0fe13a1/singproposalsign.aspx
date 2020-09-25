@@ -263,7 +263,7 @@
                                                 <h4><span class="fw-semi-bold">Scope of Work</h4>
                                                 <asp:Repeater ID="rptrPhases" runat="server" DataSourceID="SqlDataSourcePHASES" OnItemDataBound="rptrPhases_ItemDataBound">
                                                     <ItemTemplate>
-                                                        <h4 class="company-name m-t-1"><%# Eval("Name")%>&nbsp;&nbsp;<b>(<%# Eval("Code")%>)</b></h4>
+                                                        <h4 class="company-name m-t-1"><%# Eval("Name")%>&nbsp;&nbsp;(<%# Eval("Code")%>)</h4>
                                                         <span class="fw-semi-bold">
                                                             <%# Eval("Period")%>
                                                         </span>

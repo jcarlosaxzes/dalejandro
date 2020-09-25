@@ -14445,6 +14445,87 @@ Public Class LocalAPI
 
     End Function
 
+    Public Shared Function PASconceptClientToAgile(clientId As Integer, Tag As String, employeeId As Integer) As Boolean
+
+        Try
+            Dim companyId As Integer = 260973     ' Axzes
+            Dim LeadObject = GetRecord(clientId, "ClientForAgile_SELECT")
+
+            If Not Agile.IsContact(LeadObject("Email"), companyId) Then
+                Dim AgileRet As String
+                'Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
+                '                                                "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                '                                                "{""type"":""SYSTEM"", ""name"": ""address"", ""value"":" & "{\""address\"":\""address_value\"",\""city\"":\""city_value\"",\""state\"":\""state_value\"",\""zip\"":\""zip_value\"",\""country\"":\""US\""}}," &
+                '                                                "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}" &
+                '                                                "]}"
+
+                '{"subtype":null,"name":"address","type":"SYSTEM","value":"{\"country\":\"US\",\"city\":\"doral\",\"latitude\":\"25.819542\",\"countryname\":\"United States\",\"state\":\"fl\",\"longitude\":\"-80.355330\"}"}
+                Dim jsonContactInfo As String = "{""tags"":[""tag_value""], ""properties"":[" &
+                    "{""type"":""SYSTEM"", ""name"":""email"",""value"":""email_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""first_name"", ""value"":""first_name_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""last_name"", ""value"":""last_name_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""company"", ""value"":""company_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""phone"", ""value"":""phone_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""website"", ""value"":""website_value""}," &
+                    "{""type"":""SYSTEM"", ""name"":""title"", ""value"":""title_value""}," &
+                    "{""type"":""CUSTOM"", ""name"":""Source"", ""value"":""source_value""}," &
+                    "{""type"":""CUSTOM"", ""name"":""Notes"", ""value"":""notes_value""}," &
+                    "{""subtype"":null,""name"":""address"",""type"":""SYSTEM"",""value"":""{\""zip\"":\""zip_value\"",\""country\"":\""US\"",\""address\"":\""address_value\"",\""city\"":\""city_value\"",\""countryname\"":\""United States\"",\""state\"":\""state_value\""}""}" &
+                    "]}"
+
+                ' -- SYSTEM FIELDS
+
+                jsonContactInfo = Replace(jsonContactInfo, "email_value", LeadObject("Email"))
+                jsonContactInfo = Replace(jsonContactInfo, "first_name_value", LeadObject("FirstName"))
+                jsonContactInfo = Replace(jsonContactInfo, "last_name_value", LeadObject("LastName"))
+                jsonContactInfo = Replace(jsonContactInfo, "company_value", LeadObject("Company"))
+                jsonContactInfo = Replace(jsonContactInfo, "phone_value", LeadObject("Phone"))
+                jsonContactInfo = Replace(jsonContactInfo, "website_value", LeadObject("WebSite"))
+                jsonContactInfo = Replace(jsonContactInfo, "title_value", LeadObject("Position"))
+                jsonContactInfo = Replace(jsonContactInfo, "address_value", LeadObject("AddressLine1"))
+                jsonContactInfo = Replace(jsonContactInfo, "city_value", LeadObject("City"))
+                jsonContactInfo = Replace(jsonContactInfo, "state_value", LeadObject("State"))
+                jsonContactInfo = Replace(jsonContactInfo, "zip_value", LeadObject("ZipCode"))
+
+                jsonContactInfo = Replace(jsonContactInfo, "source_value", LeadObject("Source"))
+                jsonContactInfo = Replace(jsonContactInfo, "notes_value", LeadObject("JobTitle"))
+
+                jsonContactInfo = Replace(jsonContactInfo, "tag_value", Tag)
+
+                ' Others...........................
+                'InAgile Check Column No visible por defecto
+                '"Off" Field No visible por defecto
+                'Agile Custom Field "Source"
+                'Agile Custom Field "Notes" <- JobTitle/Capabilities
+                'Agile Standard ?Field "WebSite"
+                'Agile Custom Field "State"
+                'Agile Custom Field "City"
+                'Agile Custom Field "ZipCode"
+
+
+                AgileRet = Agile.CreateContact(jsonContactInfo, companyId)
+
+            Else
+                ' Add new Tag only
+                Agile.AddTags(LeadObject("Email"), Tag, companyId)
+
+            End If
+
+            LocalAPI.Clients_activities_INSERT(clientId, "A", "Clients", "Clients", employeeId)
+
+            Return True
+
+        Catch ex As Exception
+
+        End Try
+
+    End Function
 #End Region
 
 #Region "Progress Invoices"
