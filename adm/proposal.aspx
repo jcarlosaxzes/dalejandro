@@ -111,6 +111,7 @@
                        Back to List
             </asp:LinkButton>
             Proposal
+            <asp:Label ID="lblProposalNumber" runat="server"></asp:Label>
         </span>
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
@@ -138,9 +139,12 @@
             <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                        View Summary
             </asp:LinkButton>
-            <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
-                <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
-            </a>
+            ;&nbsp;
+            <asp:Panel runat="server" ID="panelViewProposalPage" style="float: right; vertical-align: middle;">
+                <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
+                    <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
+                </a>
+            </asp:Panel>
         </span>
     </div>
     <div id="collapseTotals">
