@@ -209,7 +209,7 @@
                             <div class="row mb-lg">
                                 <section class="col-sm-6 col-print-6">
                                     <div>
-                                        <h4><span class="fw-semi-bold">Client: <%# Eval("ClientName") %></span></h4>
+                                        <h4><span class="fw-semi-bold"><%# Eval("ClientName") %></span></h4>
                                     </div>
                                     <div class="text-muted">
                                         <%# Eval("ClientCompany") %>
@@ -225,7 +225,7 @@
                                 </section>
                                 <section class="col-sm-6 col-print-6 text-sm-right text-xs-left">
                                     <div>
-                                        <h4><span class="fw-semi-bold">Project: <%# Eval("ProjectName") %></span></h4>
+                                        <h4><span class="fw-semi-bold"><%# Eval("ProjectName") %></span></h4>
                                     </div>
                                     <address runat="server" visible='<%# Not String.IsNullOrEmpty(Eval("ProjectLocation")) %>' style="margin-bottom: 0;">
                                         <i class="fa fa-map-marker" aria-hidden="true"></i>

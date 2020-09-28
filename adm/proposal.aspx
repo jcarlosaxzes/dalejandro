@@ -139,7 +139,7 @@
             <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                        View Summary
             </asp:LinkButton>
-            ;&nbsp;
+            &nbsp;
             <asp:Panel runat="server" ID="panelViewProposalPage" style="float: right; vertical-align: middle;">
                 <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
                     <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
