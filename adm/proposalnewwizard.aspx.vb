@@ -22,6 +22,7 @@ Public Class proposalnewwizard
 
                 If Request.QueryString("proposalId") Is Nothing Then
                     ' New Proposal.....................
+                    panelViewProposalPage.Visible = False
                     SqlDataSourceClient.DataBind()
 
                     SqlDataSourceEmployees.DataBind()
@@ -47,6 +48,8 @@ Public Class proposalnewwizard
                 Else
                     ' Edit Proposal....................
                     lblProposalId.Text = Request.QueryString("proposalId")
+                    panelViewProposalPage.Visible = True
+                    panelViewProposalPage.DataBind()
                     lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
 
                     ReadPaymentSchedule()
@@ -216,6 +219,9 @@ Public Class proposalnewwizard
             ProposalItemsDataBind()
 
             ReadPaymentSchedule()
+
+            panelViewProposalPage.Visible = (lblProposalId.Text > 0)
+            panelViewProposalPage.DataBind()
 
             Return (lblProposalId.Text > 0)
         Else

@@ -281,7 +281,7 @@
                                         &nbsp;
                                                                 <telerik:RadMaskedTextBox ID="RadMaskedTextBox2" runat="server" Text='<%# Bind("Cellular") %>' Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" ToolTip="Cell" />
                                         &nbsp;
-                                                                <telerik:RadMaskedTextBox ID="RadMaskedTextBox3" runat="server" Text='<%# Bind("Fax") %>' Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" ToolTip="Facsimile" />
+                                                                <telerik:RadMaskedTextBox ID="RadMaskedTextBox3" runat="server" Text='<%# Bind("Fax") %>' Mask="(###) ###-####" SelectionOnFocus="SelectAll" ToolTip="Facsimile" />
                                     </td>
                                 </tr>
                                 <tr>

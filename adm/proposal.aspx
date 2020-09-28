@@ -112,8 +112,6 @@
             </asp:LinkButton>
             Proposal
         </span>
-
-
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
                              Update
@@ -135,11 +133,14 @@
             </asp:LinkButton>
             <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
                 ToolTip="Export PDF">
-                             Export PDF
+                             PDF
             </asp:LinkButton>
             <asp:LinkButton ID="btnTotals" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false">
                        View Summary
             </asp:LinkButton>
+            <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
+                <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
+            </a>
         </span>
     </div>
     <div id="collapseTotals">
@@ -523,7 +524,7 @@
                                         <telerik:GridBoundColumn DataField="Order" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" ReadOnly="true"
                                             HeaderText="Order" SortExpression="Order" UniqueName="Order">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridTemplateColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description" >
+                                        <telerik:GridTemplateColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description">
                                             <ItemTemplate>
                                                 <%# Eval("Description") %>
                                             </ItemTemplate>
@@ -535,7 +536,7 @@
                                         <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" ReadOnly="true"
                                             HeaderText="(%)" SortExpression="Percentage" UniqueName="Percentage">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Amount" HeaderText="Total" ReadOnly="True" 
+                                        <telerik:GridBoundColumn DataField="Amount" HeaderText="Total" ReadOnly="True"
                                             SortExpression="Amount" DataFormatString="{0:N2}" UniqueName="Amount" Aggregate="Sum"
                                             FooterAggregateFormatString="{0:N2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
                                             HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right">
@@ -1060,9 +1061,9 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Period" HeaderStyle-Width="180px" HeaderText="Period" SortExpression="Period" UniqueName="Period" ItemStyle-HorizontalAlign="Left" Display="false">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="DateFrom" HeaderText="DateFrom" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}"  HeaderStyle-Width="100px" >
+                                    <telerik:GridBoundColumn DataField="DateFrom" HeaderText="DateFrom" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="100px">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="DateTo" HeaderText="DateTo" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}"  HeaderStyle-Width="100px" >
+                                    <telerik:GridBoundColumn DataField="DateTo" HeaderText="DateTo" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}" HeaderStyle-Width="100px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Progress" HeaderText="Progress" SortExpression="Progress" DataFormatString="{0:N0}" UniqueName="Progress" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center">
                                     </telerik:GridBoundColumn>
