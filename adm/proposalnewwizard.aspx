@@ -158,6 +158,13 @@
             Proposal
             <asp:Label ID="lblProposalNumber" runat="server"></asp:Label>
         </span>
+        <span style="float: right; vertical-align: middle;">
+            <asp:Panel runat="server" ID="panelViewProposalPage">
+                <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
+                    <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
+                </a>
+            </asp:Panel>
+        </span>
     </div>
 
 
@@ -1014,7 +1021,7 @@
                                         <telerik:GridBoundColumn DataField="taskcode" ItemStyle-HorizontalAlign="Center" ReadOnly="true" HeaderStyle-Width="150px"
                                             HeaderText="Task" SortExpression="taskcode" UniqueName="taskcode">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridTemplateColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description" >
+                                        <telerik:GridTemplateColumn DataField="Description" HeaderText="Description" SortExpression="Description" UniqueName="Description">
                                             <ItemTemplate>
                                                 <%# Eval("Description") %>
                                             </ItemTemplate>
