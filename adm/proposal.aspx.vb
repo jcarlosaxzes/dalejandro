@@ -11,6 +11,9 @@ Public Class proposal
             If (Not Page.IsPostBack) Then
 
                 lblProposalId.Text = Me.Request.QueryString("proposalId")
+                lblProposalNumber.Text = LocalAPI.ProposalNumber(lblProposalId.Text)
+
+                panelViewProposalPage.DataBind()
 
                 ' Si no tiene permiso, la dirijo a message
                 If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/default.aspx")
