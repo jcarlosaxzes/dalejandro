@@ -68,6 +68,15 @@ Partial Public Class proposal
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''lblProposalNumber control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblProposalNumber As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''btnUpdate1 control.
     '''</summary>
     '''<remarks>
@@ -129,6 +138,15 @@ Partial Public Class proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''panelViewProposalPage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents panelViewProposalPage As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
     '''FormViewClientBalance control.
