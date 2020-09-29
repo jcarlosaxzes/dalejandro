@@ -1,7 +1,17 @@
-﻿<%@ Page Title="Save Proposal As" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="saveproposalas.aspx.vb" Inherits="pasconcept20.saveproposalas" %>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="pas-container" style="padding-left: 50px">
-        <h2>Save Proposal As</h2>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="proposal_save_copy.aspx.vb" Inherits="pasconcept20.proposal_save_copy" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
+<%@ Import Namespace="pasconcept20" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">
+            <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
+                       Back to Proposal
+            </asp:LinkButton>
+            Save Proposal As
+        </span>
+    </div>   
+    
+    <div class="pas-container" style="padding-left: 50px">        
         <table class="table-sm" style="width: 800px">
             <tr>
                 <td>Proposal Number:&nbsp;<asp:Label ID="lblProposalNumber" CssClass="Titulo4Negrita" runat="server" Width="250px"></asp:Label>
@@ -33,13 +43,14 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: center">
-                    <telerik:RadButton ID="btnOk" runat="server" Text="Ok" Primary="true">
-                        <Icon PrimaryIconCssClass="rbOk"></Icon>
-                    </telerik:RadButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <telerik:RadButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False">
-                        </telerik:RadButton>
+                <td style="text-align: start">
+                      <asp:LinkButton ID="btnOk" CssClass="btn-success btn-lg"
+                           Text="Save" runat="server" ></asp:LinkButton>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                   &nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
         </table>

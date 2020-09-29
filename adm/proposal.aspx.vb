@@ -424,10 +424,10 @@ Public Class proposal
     End Sub
 
     Protected Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
-        Response.Redirect("~/adm/saveproposalas.aspx?ProposalId=" & lblProposalId.Text)
+        Response.Redirect("~/adm/proposal_save_copy.aspx?ProposalId=" & lblProposalId.Text)
     End Sub
     Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
-        Response.Redirect("~/adm/saveproposalastemplate.aspx?ProposalId=" & lblProposalId.Text)
+        Response.Redirect("~/adm/proposal_save_as_template.aspx?ProposalId=" & lblProposalId.Text)
     End Sub
     Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
         Try
