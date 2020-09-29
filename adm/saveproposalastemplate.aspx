@@ -41,7 +41,7 @@
     <asp:Label ID="lblOption" runat="server" Visible="False" Text="0"></asp:Label>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="PROPOSAL_SaveAsTEMPLATE" InsertCommandType="StoredProcedure">
+        InsertCommand="PROPOSAL_SaveAsTEMPLATE_Task" InsertCommandType="StoredProcedure">
         <InsertParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />

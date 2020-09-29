@@ -29,7 +29,6 @@ Public Class proposaltemplate
         Dim PreProjectInfo = LocalAPI.GetRecord(lblTemplateId.Text, "Proposal_type_SELECT")
 
         NameTextBox.Text = PreProjectInfo("Name")
-        TaskIdListTextBox.Text = PreProjectInfo("TaskIdList")
         PaymentsScheduleListTextBox.Text = PreProjectInfo("PaymentsScheduleList")
         PaymentsTextListTextBox.Text = PreProjectInfo("PaymentsTextList")
         TextBeginTextBox.Text = PreProjectInfo("TextBegin")
@@ -60,15 +59,15 @@ Public Class proposaltemplate
 
     Private Sub btnAddTaskID_Click(sender As Object, e As EventArgs) Handles btnAddTaskID.Click
         Try
-            TaskIdListTextBox.Text = ""
+
             Dim collection2 As IList(Of RadComboBoxItem) = cboTask.CheckedItems
             If (collection2.Count <> 0) Then
 
                 For Each item As RadComboBoxItem In collection2
-                    TaskIdListTextBox.Text = TaskIdListTextBox.Text + item.Value + ","
+                    lblTaskCode.Text = item.Value
+                    SqlDataSourceServiceFees.Insert()
                 Next
-                ' Quitar la ultima coma
-                TaskIdListTextBox.Text = Left(TaskIdListTextBox.Text, Len(TaskIdListTextBox.Text) - 1)
+
             End If
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
