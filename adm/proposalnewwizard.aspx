@@ -159,7 +159,15 @@
             <asp:Label ID="lblProposalNumber" runat="server"></asp:Label>
         </span>
         <span style="float: right; vertical-align: middle;">
-            <asp:Panel runat="server" ID="panelViewProposalPage">
+            <asp:Panel runat="server" ID="panelProposalCreated">
+                <asp:LinkButton ID="btnSaveAs" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As New Propsal">
+                                 Save As
+                </asp:LinkButton>
+                &nbsp;
+                <asp:LinkButton ID="btnSaveAsTemplate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As Proposal Template">
+                                 Save Template
+                </asp:LinkButton>
+                &nbsp;
                 <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
                     <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
                 </a>

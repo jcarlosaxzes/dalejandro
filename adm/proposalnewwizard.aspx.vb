@@ -22,7 +22,7 @@ Public Class proposalnewwizard
 
                 If Request.QueryString("proposalId") Is Nothing Then
                     ' New Proposal.....................
-                    panelViewProposalPage.Visible = False
+                    panelProposalCreated.Visible = False
                     SqlDataSourceClient.DataBind()
 
                     SqlDataSourceEmployees.DataBind()
@@ -48,8 +48,8 @@ Public Class proposalnewwizard
                 Else
                     ' Edit Proposal....................
                     lblProposalId.Text = Request.QueryString("proposalId")
-                    panelViewProposalPage.Visible = True
-                    panelViewProposalPage.DataBind()
+                    panelProposalCreated.Visible = True
+                    panelProposalCreated.DataBind()
                     lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
 
                     ReadPaymentSchedule()
@@ -220,8 +220,8 @@ Public Class proposalnewwizard
 
             ReadPaymentSchedule()
 
-            panelViewProposalPage.Visible = (lblProposalId.Text > 0)
-            panelViewProposalPage.DataBind()
+            panelProposalCreated.Visible = (lblProposalId.Text > 0)
+            panelProposalCreated.DataBind()
 
             Return (lblProposalId.Text > 0)
         Else
@@ -880,4 +880,12 @@ Public Class proposalnewwizard
     Private Sub RadGridPS_PreRender(sender As Object, e As EventArgs) Handles RadGridPS.PreRender
         RadGridPS.MasterTableView.GetColumn("EditCommandColumn").Display = (lblProposalStatus.Text <> 4 And lblProposalStatus.Text <> 2)
     End Sub
+
+    Protected Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
+        Response.Redirect($"~/adm/proposal_save_copy.aspx?ProposalId={lblProposalId.Text}&backpage=proposalnewwizard")
+    End Sub
+    Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
+        Response.Redirect($"~/adm/proposal_save_as_template.aspx?ProposalId={lblProposalId.Text}&backpage=proposalnewwizard")
+    End Sub
+
 End Class
