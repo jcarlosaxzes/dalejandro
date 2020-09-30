@@ -8,6 +8,13 @@ Public Class proposal_save_copy
             lblCompanyId.Text = Session("companyId")
             lblProposalId.Text = Request.QueryString("ProposalId")
             lblProposalNumber.Text = LocalAPI.ProposalNumber(lblProposalId.Text)
+
+            If Not Request.QueryString("backpage") Is Nothing Then
+                Session("proposalsavecopybackpage") = Request.QueryString("backpage")
+            Else
+                Session("proposalsavecopybackpage") = ""
+            End If
+
             ProposalName()
 
             lblEmployeeId.Text = LocalAPI.GetEmployeeId(Context.User.Identity.GetUserName(), lblCompanyId.Text)
@@ -35,7 +42,7 @@ Public Class proposal_save_copy
         Dim Id As String = e.Command.Parameters("@ProposalId").Value
         If Val(Id) > 0 Then
             'Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/proposal.aspx?proposalId=" & Id & "';</script>")
-            Response.Redirect("~/adm/proposal.aspx?proposalId=" & Id)
+            Back(Id)
         End If
     End Sub
 
@@ -48,6 +55,20 @@ Public Class proposal_save_copy
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
+        Back(lblProposalId.Text)
     End Sub
+
+    Private Sub Back(proposalId As Integer)
+        Select Case Session("proposalsavecopybackpage")
+            Case "proposal"
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & proposalId)
+            Case "proposalnewwizard"
+                Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & proposalId)
+            Case "proposals"
+                Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
+            Case Else
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & proposalId)
+        End Select
+    End Sub
+
 End Class

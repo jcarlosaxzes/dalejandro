@@ -23,6 +23,15 @@ Partial Public Class proposal_save_as_template
     Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''btnOk control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnOk As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''lblProposalNumber control.
     '''</summary>
     '''<remarks>
@@ -48,15 +57,6 @@ Partial Public Class proposal_save_as_template
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''btnOk control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnOk As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''lblProposalId control.

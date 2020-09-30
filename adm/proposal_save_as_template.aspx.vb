@@ -6,6 +6,13 @@
             lblCompanyId.Text = Session("companyId")
             lblProposalId.Text = Request.QueryString("ProposalId")
             lblProposalNumber.Text = LocalAPI.ProposalNumber(lblProposalId.Text)
+
+            If Not Request.QueryString("backpage") Is Nothing Then
+                Session("proposalsaveastemplatebackpage") = Request.QueryString("backpage")
+            Else
+                Session("proposalsaveastemplatebackpage") = ""
+            End If
+
             TemplateName()
         End If
 
@@ -28,12 +35,22 @@
     End Sub
 
     Protected Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
-        'Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/proposal.aspx?proposalId=" & lblProposalId.Text & "';</script>")
-
-        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
+        Back(lblProposalId.Text)
     End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
+        Back(lblProposalId.Text)
     End Sub
 
+    Private Sub Back(proposalId As Integer)
+        Select Case Session("proposalsaveastemplatebackpage")
+            Case "proposal"
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & proposalId)
+            Case "proposalnewwizard"
+                Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & proposalId)
+            Case "proposals"
+                Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
+            Case Else
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & proposalId)
+        End Select
+    End Sub
 End Class

@@ -6,10 +6,18 @@
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">
             <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back to Proposal
+                       Back
             </asp:LinkButton>
             Save Proposal As Template
         </span>
+        <span style="float: right; vertical-align: middle;">
+
+            <asp:LinkButton ID="btnOk" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
+                    Save and Back
+            </asp:LinkButton>
+
+        </span>
+
     </div>
      <div class="pas-container" style="padding-left: 50px">
         
@@ -32,17 +40,6 @@
             <tr>
                 <td>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName" ErrorMessage="! Template Name is required"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: start">
-                      <asp:LinkButton ID="btnOk" CssClass="btn-success btn-lg"
-                           Text="Save" runat="server" ></asp:LinkButton>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                   &nbsp;&nbsp;&nbsp;
                 </td>
             </tr>
         </table>

@@ -23,6 +23,15 @@ Partial Public Class proposal_save_copy
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''btnOk control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnOk As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''lblProposalNumber control.
     '''</summary>
     '''<remarks>
@@ -66,15 +75,6 @@ Partial Public Class proposal_save_copy
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents opcRevisar As Global.System.Web.UI.WebControls.RadioButton
-
-    '''<summary>
-    '''btnOk control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnOk As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''lblProposalId control.

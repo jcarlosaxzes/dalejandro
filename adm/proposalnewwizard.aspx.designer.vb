@@ -41,13 +41,31 @@ Partial Public Class proposalnewwizard
     Protected WithEvents lblProposalNumber As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''panelViewProposalPage control.
+    '''panelProposalCreated control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents panelViewProposalPage As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents panelProposalCreated As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''btnSaveAs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSaveAs As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnSaveAsTemplate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSaveAsTemplate As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''RadWizard1 control.

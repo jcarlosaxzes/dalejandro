@@ -5,9 +5,16 @@
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">
             <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back to Proposal
+                       Back
             </asp:LinkButton>
             Save Proposal As
+        </span>
+        <span style="float: right; vertical-align: middle;">
+
+            <asp:LinkButton ID="btnOk" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
+                    Save and Back
+            </asp:LinkButton>
+
         </span>
     </div>   
     
@@ -34,23 +41,12 @@
             </tr>
             <tr>
                 <td>
-                    <asp:RadioButton ID="opcCopiar" runat="server" Text="Create an identical copy and modify it later" Checked="True" GroupName="1" AutoPostBack="True" />
+                    <asp:RadioButton ID="opcCopiar" runat="server" Text="&nbsp;&nbsp;Create an identical copy and modify it later" Checked="True" GroupName="1" AutoPostBack="True" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <asp:RadioButton ID="opcRevisar" runat="server" Text="Reviewing a previously approved Proposal" GroupName="1" AutoPostBack="True" />
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: start">
-                      <asp:LinkButton ID="btnOk" CssClass="btn-success btn-lg"
-                           Text="Save" runat="server" ></asp:LinkButton>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                   &nbsp;&nbsp;&nbsp;
+                    <asp:RadioButton ID="opcRevisar" runat="server" Text="&nbsp;&nbsp;Reviewing a previously approved Proposal" GroupName="1" AutoPostBack="True" />
                 </td>
             </tr>
         </table>

@@ -299,6 +299,25 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 24px">
+                                                <asp:LinkButton runat="server" ID="btnSaveAs1" CommandName="SaveProposalAs" CommandArgument='<%# Eval("Id") %>' CssClass="dropdown-item">
+                                                    Save Proposal As...
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 24px">
+                                                <asp:LinkButton runat="server" ID="btnSaveAs2" CommandName="SaveProposalAsTemplate" CommandArgument='<%# Eval("Id") %>' CssClass="dropdown-item">
+                                                    Save Proposal As Proposal Template...
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </telerik:RadToolTip>
                             </div>
