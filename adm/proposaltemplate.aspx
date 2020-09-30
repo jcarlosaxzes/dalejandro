@@ -424,6 +424,17 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="lblTemplateId" Name="Proposal_typeId" PropertyName="Text" />
         </SelectParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="phaseId"  />
+            <asp:Parameter Name="taskId" />
+            <asp:Parameter Name="Description" Type="String" />
+            <asp:Parameter Name="DescriptionPlus" Type="String" />
+            <asp:Parameter Name="Amount" Type="String" />
+            <asp:Parameter Name="Hours" Type="String" />
+            <asp:Parameter Name="Rates" Type="String" />
+            <asp:Parameter Name="BillTypeId" Type="String" />
+            <asp:Parameter Name="Id" Type="String" />
+        </UpdateParameters>
         <InsertParameters>
             <asp:ControlParameter ControlID="cboPhase" Name="phaseId" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
