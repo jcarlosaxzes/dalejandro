@@ -11,8 +11,17 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class saveproposalas
-    
+Partial Public Class proposal_save_copy
+
+    '''<summary>
+    '''btnCancel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.LinkButton
+
     '''<summary>
     '''lblProposalNumber control.
     '''</summary>
@@ -21,7 +30,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblProposalNumber As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''txtName control.
     '''</summary>
@@ -30,7 +39,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtName As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator1 control.
     '''</summary>
@@ -39,7 +48,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''opcCopiar control.
     '''</summary>
@@ -48,7 +57,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents opcCopiar As Global.System.Web.UI.WebControls.RadioButton
-    
+
     '''<summary>
     '''opcRevisar control.
     '''</summary>
@@ -57,7 +66,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents opcRevisar As Global.System.Web.UI.WebControls.RadioButton
-    
+
     '''<summary>
     '''btnOk control.
     '''</summary>
@@ -65,17 +74,8 @@ Partial Public Class saveproposalas
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnOk As Global.Telerik.Web.UI.RadButton
-    
-    '''<summary>
-    '''btnCancel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancel As Global.Telerik.Web.UI.RadButton
-    
+    Protected WithEvents btnOk As Global.System.Web.UI.WebControls.LinkButton
+
     '''<summary>
     '''lblProposalId control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblProposalId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblOption control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblOption As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeId control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -120,4 +120,16 @@ Partial Public Class saveproposalas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+        Get
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
+        End Get
+    End Property
 End Class

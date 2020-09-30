@@ -1,4 +1,4 @@
-﻿Public Class saveproposalastemplate
+﻿Public Class proposal_save_as_template
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -29,9 +29,10 @@
 
     Protected Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         'Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/proposal.aspx?proposalId=" & lblProposalId.Text & "';</script>")
+
         Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
     End Sub
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
     End Sub
 

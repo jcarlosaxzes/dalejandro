@@ -696,6 +696,8 @@
     <Content Include="adm\proposalschedule.aspx" />
     <Content Include="adm\proposaltask.aspx" />
     <Content Include="adm\proposaltemplate.aspx" />
+    <Content Include="adm\proposal_save_as_template.aspx" />
+    <Content Include="adm\proposal_save_copy.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
     <Content Include="adm\qb_disconnect.aspx" />
@@ -711,8 +713,6 @@
     <Content Include="adm\rfps.aspx" />
     <Content Include="adm\roles.aspx" />
     <Content Include="adm\role_permissions_form.aspx" />
-    <Content Include="adm\saveproposalas.aspx" />
-    <Content Include="adm\saveproposalastemplate.aspx" />
     <Content Include="adm\schedule.aspx" />
     <Content Include="adm\scopeofwork.aspx" />
     <Content Include="adm\sendinvoice.aspx" />
@@ -3895,6 +3895,20 @@
       <DependentUpon>proposaltemplate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\proposal_save_as_template.aspx.designer.vb">
+      <DependentUpon>proposal_save_as_template.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposal_save_as_template.aspx.vb">
+      <DependentUpon>proposal_save_as_template.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\proposal_save_copy.aspx.designer.vb">
+      <DependentUpon>proposal_save_copy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\proposal_save_copy.aspx.vb">
+      <DependentUpon>proposal_save_copy.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\proposal_tasks.aspx.designer.vb">
       <DependentUpon>proposal_tasks.aspx</DependentUpon>
     </Compile>
@@ -3998,20 +4012,6 @@
     </Compile>
     <Compile Include="adm\role_permissions_form.aspx.vb">
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adm\saveproposalas.aspx.designer.vb">
-      <DependentUpon>saveproposalas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\saveproposalas.aspx.vb">
-      <DependentUpon>saveproposalas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="adm\saveproposalastemplate.aspx.designer.vb">
-      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\saveproposalastemplate.aspx.vb">
-      <DependentUpon>saveproposalastemplate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">

@@ -5236,7 +5236,7 @@ Public Class LocalAPI
             Dim SharePublicLinks As Boolean = IsAzureStorage(companyId)
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "Proposal_v20_INSERT"
+            cmd.CommandText = "Proposal_v20_INSERT_Phases_Tasks"
             cmd.CommandType = CommandType.StoredProcedure
             Dim taskId As String
 
@@ -5283,24 +5283,24 @@ Public Class LocalAPI
             proposalId = parId.Value
 
             Dim sArr As String()
-            If Len("" & parTaskIdList.Value) > 0 Then
-                sArr = Split(Trim(parTaskIdList.Value), ",")
-                If sArr.Length > 0 Then
+            'If Len("" & parTaskIdList.Value) > 0 Then
+            '    sArr = Split(Trim(parTaskIdList.Value), ",")
+            '    If sArr.Length > 0 Then
 
-                    Dim i As Int16
-                    For i = 0 To sArr.Length - 1
-                        If Len(sArr(i).ToString) > 0 Then
-                            ' Limpiar caracteres no deseados
-                            sArr(i) = Replace(sArr(i), vbLf, "")
-                            sArr(i) = Replace(sArr(i), " ", "")
-                            taskId = GetTaskIdFromTaskcode(sArr(i), companyId)
-                            If Len("" & taskId) > 0 Then
-                                NewDetailProposal(proposalId, taskId)
-                            End If
-                        End If
-                    Next
-                End If
-            End If
+            '        Dim i As Int16
+            '        For i = 0 To sArr.Length - 1
+            '            If Len(sArr(i).ToString) > 0 Then
+            '                ' Limpiar caracteres no deseados
+            '                sArr(i) = Replace(sArr(i), vbLf, "")
+            '                sArr(i) = Replace(sArr(i), " ", "")
+            '                taskId = GetTaskIdFromTaskcode(sArr(i), companyId)
+            '                If Len("" & taskId) > 0 Then
+            '                    NewDetailProposal(proposalId, taskId)
+            '                End If
+            '            End If
+            '        Next
+            '    End If
+            'End If
 
             If Len("" & parPaymentsScheduleList.Value) > 0 Then
                 ' Insertar ScheduleList
