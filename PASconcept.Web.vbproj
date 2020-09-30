@@ -2378,6 +2378,7 @@
     <Content Include="Images\toolbar\orgchart-icon.png" />
     <Content Include="Images\uploadfilesbackground.png" />
     <Content Include="jscript.min.js" />
+    <Content Include="landingpages\40yearsreqquote.aspx" />
     <Content Include="master\activeusers.aspx" />
     <Content Include="master\AzureStorages.aspx" />
     <Content Include="master\billingplans.aspx" />
@@ -4557,6 +4558,13 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="landingpages\40yearsreqquote.aspx.designer.vb">
+      <DependentUpon>40yearsreqquote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="landingpages\40yearsreqquote.aspx.vb">
+      <DependentUpon>40yearsreqquote.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="master\activeusers.aspx.designer.vb">
       <DependentUpon>activeusers.aspx</DependentUpon>
     </Compile>
@@ -4962,7 +4970,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

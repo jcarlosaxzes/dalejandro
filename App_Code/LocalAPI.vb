@@ -14528,6 +14528,65 @@ Public Class LocalAPI
     End Function
 #End Region
 
+
+#Region "40 years app"
+    Public Shared Function SendMail40year(ByVal sTo As String, ByVal sCC As String, ByVal sCCO As String, ByVal sSubtject As String, ByVal sBody As String,
+                                    Optional ByVal sFromMail As String = "", Optional ByVal sFromDisplay As String = "") As Boolean
+        Try
+
+            Dim host As String
+            Dim fromAddr As String
+            Dim sUserName As String
+            Dim sPassword As String
+            Dim EnableSsl As Integer
+            Dim Port As Integer
+
+            ' Si existe credenciales de envio de email desde una company, se utilizan
+            host = "smtp.office365.com"
+            fromAddr = "admin@easterneg.com"
+            sUserName = "admin@easterneg.com"
+            sPassword = "ViejaLind@"
+            EnableSsl = "1"
+            Port = 587
+
+            Dim smtp As New SmtpClient(host)
+            smtp.UseDefaultCredentials = False
+            smtp.Credentials = New System.Net.NetworkCredential(sUserName, sPassword)
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network
+            smtp.EnableSsl = EnableSsl
+            smtp.Port = Port
+            'smtp.Timeout = 10000
+
+            Dim message As New MailMessage()
+            'message.To.Add(sTo)
+            If Len(sTo) > 0 Then MessageAddEmailList(message, sTo, "To")
+            If Len(sCC) > 0 Then MessageAddEmailList(message, sCC, "CC")
+            If Len(sCCO) > 0 Then MessageAddEmailList(message, sCCO, "CCO")
+
+            message.Subject = sSubtject
+            message.IsBodyHtml = True
+            message.Body = sBody
+
+            Dim sFrom As String = sFromMail
+            If sFrom.Length = 0 Then sFrom = fromAddr
+            message.From = New MailAddress(sFrom, "Eastern Engineering Group")
+
+            smtp.Send(message)
+
+
+            Dim sAdresses As String = sTo
+            If Len(sCC) > 0 And sTo <> sCC Then
+                sAdresses = sAdresses & ";" & sCC
+            End If
+
+            Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+#End Region
+
 #Region "Progress Invoices"
     Public Shared Function GetInvoices_progress_detailsProperty(Invoices_progress_detailsId As Integer, sProperty As String) As String
         Return GetStringEscalar($"SELECT isnull([" & sProperty & "],'') FROM Invoices_progress_details WHERE Id={Invoices_progress_details}")
