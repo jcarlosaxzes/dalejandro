@@ -713,7 +713,6 @@
     <Content Include="adm\rfps.aspx" />
     <Content Include="adm\roles.aspx" />
     <Content Include="adm\role_permissions_form.aspx" />
-    <Content Include="adm\saveproposalas.aspx" />
     <Content Include="adm\schedule.aspx" />
     <Content Include="adm\scopeofwork.aspx" />
     <Content Include="adm\sendinvoice.aspx" />
@@ -4014,13 +4013,6 @@
       <DependentUpon>role_permissions_form.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adm\saveproposalas.aspx.designer.vb">
-      <DependentUpon>saveproposalas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\saveproposalas.aspx.vb">
-      <DependentUpon>saveproposalas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="adm\schedule.aspx.designer.vb">
       <DependentUpon>schedule.aspx</DependentUpon>
     </Compile>
@@ -4970,7 +4962,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
