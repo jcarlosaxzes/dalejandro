@@ -4,18 +4,17 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td>
-                    <asp:LinkButton ID="btnNewPropsal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Proposals</span>
+            <span style="float: right; vertical-align: middle;">
+                <asp:LinkButton ID="btnNewPropsal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
                                                             Add Proposal (Change Order)
                     </asp:LinkButton>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadGrid ID="RadGridProposals" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposals" GridLines="None" ShowFooter="True">
+            </span>
+        </div>
+
+      <div>
+          <telerik:RadGrid ID="RadGridProposals" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposals" GridLines="None" ShowFooter="True">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceProposals" HeaderStyle-HorizontalAlign="Center"
                             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
                             <Columns>
@@ -124,9 +123,8 @@
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
-                </td>
-            </tr>
-        </table>
+      </div>
+              
 
         <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
         </telerik:RadWindowManager>

@@ -16,7 +16,10 @@
                     Panel16Type.Visible = False
                 End If
 
+
+
                 PanelNo16Type.Visible = Not Panel16Type.Visible
+                btnNewReview.Visible = PanelNo16Type.Visible
                 Master.ActiveTab(9)
             End If
 
@@ -27,8 +30,7 @@
     End Sub
     Protected Sub btnNewReview_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewReview.Click
         Try
-            SqlDataSourceReviewsPermits.Insert()
-            RadGridReviewsPermits.DataBind()
+            RadGridReviewsPermits.MasterTableView.InsertItem()
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
         End Try
