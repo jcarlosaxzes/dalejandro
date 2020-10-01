@@ -3,14 +3,17 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-        <table class="table-sm" style="width: 100%">
-            <tr>
-                <td>
-                    <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Notes</span>
+            <span style="float: right; vertical-align: middle;">
+                 <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
                             Add Note
                     </asp:LinkButton>
-                </td>
-            </tr>
+            </span>
+        </div>
+
+        <table class="table-sm" style="width: 100%">
+            
             <tr>
                 <td>
                     <telerik:RadGrid ID="RadGridNotes" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowAutomaticInserts="true"
@@ -56,11 +59,10 @@
 
         </table>
 
-
-    </div>
-    <br />
-    <div class="container">
-          <h4>Messages </h4>
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Messages</span>
+        </div>
+    
                     <table style="width: 100%">
                         <tr>
                             <td class="PanelFilter">
