@@ -39,11 +39,19 @@
             }
         </script>
     </telerik:RadCodeBlock>
+    <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">View/Edit Job</span>
+        <span style="float: right; vertical-align: middle;">
+            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update Active Job" ValidationGroup="JobUpdate">
+                Update
+        </asp:LinkButton>
+        </span>
+    </div>
     <div>
         <asp:ValidationSummary ID="ValidationSummaryJobUpdate" runat="server"
             Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="JobUpdate" />
         <div class="row">
-            <div class="col-12" style="padding-top:15px">
+            <div class="col-12" style="padding-top: 15px">
 
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceJob" DefaultMode="Edit" Width="98%">
                     <EditItemTemplate>
@@ -77,23 +85,22 @@
                                 </td>
                             </tr>
                             <tr>
-                                 <td style="text-align: right">Location:
+                                <td style="text-align: right">Location:
                                 </td>
                                 <td>
                                     <telerik:RadTextBox ID="txtProjectLocation" runat="server" Text='<%# Bind("ProjectLocation") %>' Width="100%" MaxLength="80"
                                         CssClass="input-address-2">
                                     </telerik:RadTextBox>
                                 </td>
-                                <td style="text-align: right">
-                                    Allow Open Budget:
+                                <td style="text-align: right">Allow Open Budget:
                                 </td>
                                 <td>
-                                    <telerik:RadCheckBox ID="chkAllowOpenBudget" runat="server" Checked='<%# Bind("AllowOpenBudget") %>' 
+                                    <telerik:RadCheckBox ID="chkAllowOpenBudget" runat="server" Checked='<%# Bind("AllowOpenBudget") %>'
                                         ToolTip="Automatically update the Budget when Invoices are inserted or updated. Budget=SUM(Invoices.Amount)" />
                                 </td>
                             </tr>
                             <tr>
-                               <td style="text-align: right">
+                                <td style="text-align: right">
                                     <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Client...)"
                                         Operator="NotEqual" ControlToValidate="cboCliente" Text="*" ErrorMessage="Define Client" SetFocusOnError="true" ValidationGroup="JobUpdate"> </asp:CompareValidator>
                                     Client:
@@ -236,28 +243,26 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right">
-                                    Bill Type:
+                                <td style="text-align: right">Bill Type:
                                 </td>
                                 <td>
                                     <telerik:RadComboBox ID="cboBillType" runat="server" SelectedValue='<%# Bind("BillType") %>' Width="100%">
-                                                    <Items>
-                                                        <telerik:RadComboBoxItem runat="server" Text="Defined Per Task" Value="0" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Lump Sum" Value="1" />
-                                                        <telerik:RadComboBoxItem runat="server" Text="Hourly" Value="2" />
-                                                    </Items>
-                                                </telerik:RadComboBox>
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="Defined Per Task" Value="0" />
+                                            <telerik:RadComboBoxItem runat="server" Text="Lump Sum" Value="1" />
+                                            <telerik:RadComboBoxItem runat="server" Text="Hourly" Value="2" />
+                                        </Items>
+                                    </telerik:RadComboBox>
                                 </td>
-                                <td style="text-align: right">
-                                    Measure:
+                                <td style="text-align: right">Measure:
                                 </td>
                                 <td>
                                     <telerik:RadComboBox ID="cboMeasure" runat="server" SelectedValue='<%# Bind("Measure") %>'
-                                                    DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True">
-                                                    <Items>
-                                                        <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
-                                                    </Items>
-                                                </telerik:RadComboBox>
+                                        DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True">
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
+                                        </Items>
+                                    </telerik:RadComboBox>
                                 </td>
                             </tr>
                             <tr>
@@ -324,22 +329,19 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <table style="width:98%">
+                <table style="width: 98%">
                     <tr>
-                        <td style="width: 150px; text-align: right;vertical-align:top">
-                            Tags: 
+                        <td style="width: 150px; text-align: right; vertical-align: top">Tags: 
                         </td>
-                        <td style="text-align:left">
+                        <td style="text-align: left">
                             <asp:Label ID="lblTags" runat="server"></asp:Label>
                         </td>
-                        <td style="width:150px;text-align:right;vertical-align:top">
-                             <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update Active Job" ValidationGroup="JobUpdate">
-                                 Update
-                            </asp:LinkButton>
-                        </td>
+                        <td></td>
                     </tr>
                 </table>
-               <br /><br /><br />
+                <br />
+                <br />
+                <br />
             </div>
         </div>
     </div>

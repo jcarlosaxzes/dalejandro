@@ -3,29 +3,37 @@
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container">
-        <div class="row">
-            <div class="form-group">
-                <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" Enabled="false"
-                    DataValueField="Id" Width="450px" AppendDataBoundItems="true" AutoPostBack="true" Label="Department:">
-                </telerik:RadComboBox>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="form-group">
-                <telerik:RadComboBox ID="cboPreExistingTags" runat="server" DataSourceID="SqlDataSourceDepartment_USED_tags" DataTextField="Tag" DataValueField="Tag" Width="450px" AppendDataBoundItems="true"
-                    MarkFirstMatch="True" Filter="Contains" Height="450px" AutoPostBack ="true" Label="Pre-Existing Tag:">
-                    <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="(Select Pre-Existing Tag...)" Value="-1" Selected="true" />
-                    </Items>
-                </telerik:RadComboBox>
-            </div>
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Tags</span>
         </div>
+        <table class="table-sm" style="width: 100%">
+            <tr>
+                <td style="text-align: right; width: 180px">Department:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" Enabled="false"
+                        DataValueField="Id" Width="450px" AppendDataBoundItems="true" AutoPostBack="true">
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align: right">Pre-Existing Tag:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboPreExistingTags" runat="server" DataSourceID="SqlDataSourceDepartment_USED_tags" DataTextField="Tag" DataValueField="Tag" Width="450px" AppendDataBoundItems="true"
+                        MarkFirstMatch="True" Filter="Contains" Height="450px" AutoPostBack="true">
+                        <Items>
+                            <telerik:RadComboBoxItem runat="server" Text="(Select Pre-Existing Tag...)" Value="-1" Selected="true" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+        </table>
+
         <asp:Panel runat="server" ID="panelCategoryTags">
-            <div class="row">
-                <div class="form-group">
-                    <h4>Or Create One, Selecting Tags by Category</h4>
-                </div>
+            <div>
+                <h4>Or Create One, Selecting Tags by Category</h4>
             </div>
             <div>
                 <table class="table-sm" style="width: 100%">
@@ -136,29 +144,26 @@
             </asp:LinkButton>
         </div>
 
-        <div class="row">
-            <div class="form-group">
-                <h4>Job Tags List</h4>
-                <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceTagOfJob" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderWidth="1"
-                    BorderStyle="Solid">
-                    <LayoutTemplate>
-                        <fieldset style="width: 100%">
-                            <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
-                        </fieldset>
+        <div>
+            <h4>Job Tags List</h4>
+            <telerik:RadListView ID="RadListView1" runat="server" DataSourceID="SqlDataSourceTagOfJob" DataKeyNames="Id" ItemPlaceholderID="Container1" BorderWidth="1"
+                BorderStyle="Solid">
+                <LayoutTemplate>
+                    <fieldset style="width: 100%">
+                        <asp:PlaceHolder ID="Container1" runat="server"></asp:PlaceHolder>
+                    </fieldset>
 
-                    </LayoutTemplate>
-                    <ItemTemplate>
-                        <telerik:RadButton ID="btnTag" runat="server" Text='<%# Eval("Tag")%>' CommandArgument='<%# Eval("Tag")%>' CssClass="btn-success" CommandName="DeleteTAG">
-                            <ConfirmSettings ConfirmText="Are you sure to delete TAG from Job?" Title="Confirm Delete TAG" Width="300" />
-                        </telerik:RadButton>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <telerik:RadButton ID="btnTag" runat="server" Text='<%# Eval("Tag")%>' CommandArgument='<%# Eval("Tag")%>' CssClass="btn-success" CommandName="DeleteTAG">
+                        <ConfirmSettings ConfirmText="Are you sure to delete TAG from Job?" Title="Confirm Delete TAG" Width="300" />
+                    </telerik:RadButton>
 
-                    </ItemTemplate>
-                </telerik:RadListView>
-                <small>Click Tag to Delete from List</small>
-            </div>
+                </ItemTemplate>
+            </telerik:RadListView>
+            <small>Click Tag to Delete from List</small>
         </div>
     </div>
-
     <asp:SqlDataSource ID="SqlDataSourceCRUD" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM [Jobs_tags] WHERE [jobId] = @jobId and Tag=@Tag"
         InsertCommand="Jobs_tags_INSERT" InsertCommandType="StoredProcedure"

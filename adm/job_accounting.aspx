@@ -14,7 +14,9 @@
 
     </script>
     <div class="container">
-
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Invoices/Payments</span>
+        </div>
         <div class="row">
             <div class="col-12">
                 <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%">
@@ -22,10 +24,10 @@
 
                         <table class="table-sm" style="width: 100%">
                             <tr>
-                                <td style="text-align: left; vertical-align: top; width: 33%">
-                                    <h3 style="margin: 0; text-align: center">
-                                        <span class="navbar navbar-expand-md bg-dark text-white">Client</span>
-                                    </h3>
+                                <td style="text-align: left; vertical-align: top; width: 33%;border:solid;border-width:thin;border-color:gainsboro">
+                                    <h4 style="margin: 0;">
+                                        <span class="navbar navbar-expand-md bg-light">Client</span>
+                                    </h4>
                                     <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td>
@@ -49,32 +51,36 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td style="width: 33%; text-align: center; vertical-align: top">
-                                    <h3 style="margin: 0; text-align: center"><span class="navbar navbar-expand-md bg-dark text-white">Projects</span></h3>
-                                    </h3>
-                                        <table class="table-sm" style="width: 100%">
-                                            <tr>
-                                                <td style="text-align: right"># Pending Proposals:</td>
-                                                <td style="width: 120px; text-align: right">
-                                                    <b><%# Eval("NumberPendingProposal", "{0:N0}") %></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right">Accepted Proposals:</td>
-                                                <td style="text-align: right">
-                                                    <b><%# Eval("ProposalAmount", "{0:C2}") %></b>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="text-align: right;">Jobs Total Amount:</td>
-                                                <td style="text-align: right">
-                                                    <b><%# Eval("ContractAmount", "{0:C2}") %></b>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                <td style="width: 33%; text-align: center; vertical-align: top;border:solid;border-width:thin;border-color:gainsboro">
+                                    <h4 style="margin: 0; text-align: center">
+                                        <span class="navbar navbar-expand-md bg-light">Projects</span>
+                                    </h4>
+
+                                    <table class="table-sm" style="width: 100%">
+                                        <tr>
+                                            <td style="text-align: right"># Pending Proposals:</td>
+                                            <td style="width: 120px; text-align: right">
+                                                <b><%# Eval("NumberPendingProposal", "{0:N0}") %></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Accepted Proposals:</td>
+                                            <td style="text-align: right">
+                                                <b><%# Eval("ProposalAmount", "{0:C2}") %></b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right;">Jobs Total Amount:</td>
+                                            <td style="text-align: right">
+                                                <b><%# Eval("ContractAmount", "{0:C2}") %></b>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td style="text-align: right; vertical-align: top">
-                                    <h3 style="margin: 0; text-align: center"><span class="navbar navbar-expand-md bg-dark text-white">Balance</span></h3>
+                                <td style="text-align: right; vertical-align: top;border:solid;border-width:thin;border-color:gainsboro">
+                                    <h4 style="margin: 0; text-align: center">
+                                        <span class="navbar navbar-expand-md bg-light">Balance</span>
+                                    </h4>
                                     <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td style="text-align: right;">Amount Paid:</td>
@@ -271,7 +277,7 @@
                                     </div>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridBoundColumn DataField="InvoiceTypeLabel" ReadOnly="true" HeaderText="Type" SortExpression="InvoiceTypeLabel" UniqueName="InvoiceTypeLabel" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20px"> 
+                            <telerik:GridBoundColumn DataField="InvoiceTypeLabel" ReadOnly="true" HeaderText="Type" SortExpression="InvoiceTypeLabel" UniqueName="InvoiceTypeLabel" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="20px">
                             </telerik:GridBoundColumn>
                             <telerik:GridDateTimeColumn DataField="InvoiceDate" DataFormatString="{0:MM/dd/yy}"
                                 FilterControlAltText="Filter InvoiceDate column" HeaderText="Date Created" SortExpression="InvoiceDate" Display="false"
@@ -316,8 +322,7 @@
                                     <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") <= 0,"display:none","display:normal")%>'>
                                         <img src="../Images/C2QB_green_btn_sm_default.png" height="14" />
                                     </span>
-                                     <span title="Invoice Pending Synced with QuickBooks" style='<%# "color:red;" & IIf(Eval("qbInvoiceId ") = -1,"display:normal","display:none")%>'>
-                                        qb
+                                    <span title="Invoice Pending Synced with QuickBooks" style='<%# "color:red;" & IIf(Eval("qbInvoiceId ") = -1,"display:normal","display:none")%>'>qb
                                     </span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>

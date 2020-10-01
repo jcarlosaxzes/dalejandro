@@ -14,7 +14,13 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
     </telerik:RadAjaxLoadingPanel>
 
-    <div>
+    <div class="container">
+
+        <div class="pasconcept-bar">
+            <span class="pasconcept-pagetitle">Calendar</span>
+        </div>
+
+
         <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" RenderMode="Auto" OverflowBehavior="Auto" Width="100%"
             DataDescriptionField="Description"
             DataEndField="End"
