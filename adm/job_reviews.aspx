@@ -30,8 +30,11 @@
                                             </telerik:RadTextBox>
                                         </EditItemTemplate>
                                     </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn DataField="url" FilterControlAltText="Filter url column" Display="false"
+                                    <telerik:GridTemplateColumn DataField="url" FilterControlAltText="Filter url column" Display="True"
                                         HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderText="Process URL" SortExpression="url" UniqueName="url">
+                                         <ItemTemplate>
+                                             <a href="<%# Eval("url") %>" style='<%# IIf(len(Eval("url")) = 0,"display:none","display:normal")%>'>View Site</a>                                           
+                                        </ItemTemplate>
                                         <EditItemTemplate>
                                             <telerik:RadTextBox ID="txturl2" runat="server" Text='<%# Bind("url") %>' Width="600px" MaxLength="128">
                                             </telerik:RadTextBox>
@@ -238,7 +241,7 @@
     <asp:SqlDataSource ID="SqlDataSourceReviewsPermits" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="DELETE FROM Jobs_PlanReview_and_Permits WHERE Id=@Id"
         SelectCommand="Jobs_PlanReview_and_Permits_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="INSERT INTO [Jobs_PlanReview_and_Permits] ([jobId], [DateSubmit], [DateOut], statusId) VALUES (@jobId, DateAdd(hour,-4,GetDate()), DateAdd(hour,-4,GetDate()), 0)"
+        InsertCommand="INSERT INTO [Jobs_PlanReview_and_Permits] ([Code],[jobId], [DateSubmit], [DateOut], statusId) VALUES ('000000',@jobId, DateAdd(hour,-4,GetDate()), DateAdd(hour,-4,GetDate()), 0)"
         UpdateCommand="Jobs_PlanReview_and_Permits_UPDATE" UpdateCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
