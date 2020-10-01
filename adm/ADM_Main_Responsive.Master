@@ -478,13 +478,6 @@
                                                         LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>
-
-
-                                            <telerik:NavigationNode NavigateUrl="https://old.pasconcept.com/adm/default.aspx" Text="Previous Version" ToolTip="Go to Old PASconcept Version">
-                                                <NodeTemplate>
-                                                    <a class="TopRightMenuClass" href="https://old.pasconcept.com/adm/default.aspx">Previous Version</a>
-                                                </NodeTemplate>
-                                            </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
                                 </Nodes>
