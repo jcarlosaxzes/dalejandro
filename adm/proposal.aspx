@@ -214,8 +214,8 @@
                                                 </td>
                                                 <td style="width: 75px; text-align: right">Job:</td>
                                                 <td>
-                                                    <asp:LinkButton ID="btnViewJob" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" CommandName="ViewJob" CommandArgument='<%# Eval("JobId")%>'
-                                                        ToolTip="View Job of Proposal" Text='<%# Eval("JobCode")%>'></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnViewJob" runat="server" Visible='<%# Len(Eval("JobCode")) > 0 %>' CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" CommandName="ViewJob" CommandArgument='<%# Eval("JobId")%>'
+                                                        ToolTip="View Job of Proposal" Text='<%#  Eval("JobCode")%>'></asp:LinkButton>
                                                 </td>
                                             </tr>
                                         </table>
@@ -1348,7 +1348,7 @@
                                 </telerik:RadComboBox>
                             </td>
                             <td>
-                                <asp:LinkButton ID="btnModifyJob" runat="server" CssClass="btn btn-success" Enabled="False" UseSubmitBehavior="false" ToolTip="Set Assigned Job" CausesValidation="false">
+                                <asp:LinkButton ID="btnModifyJob" runat="server" CssClass="btn btn-success" Enabled="True" UseSubmitBehavior="false" ToolTip="Set Assigned Job" CausesValidation="false">
                                      Update
                                 </asp:LinkButton>
 

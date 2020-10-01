@@ -322,13 +322,14 @@ Public Class proposal
     End Sub
 
     Protected Sub SqlDataSourceProp1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProp1.Updating
-        If Val(lblSelectedJobId.Text) > 0 Then
-            e.Command.Parameters("@JobId").Value = lblSelectedJobId.Text
-        Else
-            If Val("" & LocalAPI.GetProposalData(lblProposalId.Text, "JobId")) > 0 Then
-                e.Command.Parameters("@JobId").Value = LocalAPI.GetProposalData(lblProposalId.Text, "JobId")
-            End If
-        End If
+        'Allow unlink Job from Proposal
+        'If Val(lblSelectedJobId.Text) > 0 Then
+        e.Command.Parameters("@JobId").Value = Val(lblSelectedJobId.Text)
+        'Else
+        '    If Val("" & LocalAPI.GetProposalData(lblProposalId.Text, "JobId")) > 0 Then
+        '        e.Command.Parameters("@JobId").Value = LocalAPI.GetProposalData(lblProposalId.Text, "JobId")
+        '    End If
+        'End If
     End Sub
 
     Protected Sub SqlDataSourceProp1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceProp1.Updated
@@ -355,7 +356,7 @@ Public Class proposal
         lblSelectedJobId.Text = cboJobs.SelectedValue
         'PanelJobAsociado()
         GuardarProposal(True)
-        btnModifyJob.Enabled = False
+        'btnModifyJob.Enabled = False
     End Sub
 
     Private Sub RadGrid1_EditCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.EditCommand
