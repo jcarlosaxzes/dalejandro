@@ -25,41 +25,45 @@
             LocalAPI.GetScopeOfWork(lblProposalId.Text, sb)
             lblContent.Text = sb.ToString
             txtHTML.Content = sb.ToString
+
+            If Not Request.QueryString("Print") Is Nothing Then
+                Response.Write("<script>window.print();</script>")
+            End If
         End If
     End Sub
 
 
-    Private Sub Previous()
-        Try
-            'Dim attachment As String = "attachment; filename=" & LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.docx"
-            Dim attachment As String = "attachment; filename=" & "19-001" & "__ScopeOfWork.txt"
-            HttpContext.Current.Response.Clear()
-            HttpContext.Current.Response.ClearHeaders()
-            HttpContext.Current.Response.ClearContent()
-            HttpContext.Current.Response.AddHeader("Content-Disposition", attachment)
-            HttpContext.Current.Response.ContentType = "text/csv"
-            HttpContext.Current.Response.AddHeader("axzes", "public")
-            Dim sb = New StringBuilder()
+    'Private Sub Previous()
+    '    Try
+    '        'Dim attachment As String = "attachment; filename=" & LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.docx"
+    '        Dim attachment As String = "attachment; filename=" & "19-001" & "__ScopeOfWork.txt"
+    '        HttpContext.Current.Response.Clear()
+    '        HttpContext.Current.Response.ClearHeaders()
+    '        HttpContext.Current.Response.ClearContent()
+    '        HttpContext.Current.Response.AddHeader("Content-Disposition", attachment)
+    '        HttpContext.Current.Response.ContentType = "text/csv"
+    '        HttpContext.Current.Response.AddHeader("axzes", "public")
+    '        Dim sb = New StringBuilder()
 
-            sb.AppendLine(txtHTML.Text.Replace("<br/>", "\r\n"))
+    '        sb.AppendLine(txtHTML.Text.Replace("<br/>", "\r\n"))
 
-            HttpContext.Current.Response.Write(sb.ToString())
-            HttpContext.Current.Response.End()
+    '        HttpContext.Current.Response.Write(sb.ToString())
+    '        HttpContext.Current.Response.End()
 
-        Catch ex As Exception
-        End Try
-    End Sub
+    '    Catch ex As Exception
+    '    End Try
+    'End Sub
 
-    Protected Async Sub Pdf_ServerClick(sender As Object, e As EventArgs)
-        Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork"
-        Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
-        Dim pdf As PdfApi = New PdfApi()
-        Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, lblJobId.Text)
-        Dim response As HttpResponse = HttpContext.Current.Response
-        response.ContentType = "application/pdf"
-        response.AddHeader("Content-Disposition", "attachment; filename=" & FileName)
-        response.ClearContent()
-        response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
-        response.Flush()
-    End Sub
+    'Protected Async Sub Pdf_ServerClick(sender As Object, e As EventArgs)
+    '    Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork"
+    '    Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
+    '    Dim pdf As PdfApi = New PdfApi()
+    '    Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, lblJobId.Text)
+    '    Dim response As HttpResponse = HttpContext.Current.Response
+    '    response.ContentType = "application/pdf"
+    '    response.AddHeader("Content-Disposition", "attachment; filename=" & FileName)
+    '    response.ClearContent()
+    '    response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+    '    response.Flush()
+    'End Sub
 End Class
