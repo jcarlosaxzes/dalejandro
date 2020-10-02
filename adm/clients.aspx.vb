@@ -92,7 +92,7 @@ Public Class clients
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditClient"
-                Response.Redirect("~/ADM/Client.aspx?clientId=" & e.CommandArgument & "&FullPage=1")
+                Response.Redirect($"~/adm/client.aspx?clientId={e.CommandArgument}&backpage=clients")
 
             Case "EditPhoto"
                 'sUrl = "~/ADM/EditAvatar.aspx?Id=" & e.CommandArgument & "&Entity=Client"
@@ -162,6 +162,6 @@ Public Class clients
 
     Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         ' Duplicate client
-        Response.Redirect("~/ADM/Client.aspx?clientId=" & e.Command.Parameters("@Id_OUT").Value)
+        Response.Redirect($"~/ADM/Client.aspx?clientId={e.Command.Parameters("@Id_OUT").Value}&backpage=clients")
     End Sub
 End Class

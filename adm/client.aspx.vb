@@ -25,10 +25,12 @@ Public Class client
                 SqlDataSource1.DataBind()
                 FormView1.DataBind()
 
-                If Request.QueryString("FullPage") Is Nothing Then
-                    Master.HideMasterMenu()
-                    btnBack.Visible = False
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    Session("clientbackpage") = Request.QueryString("backpage")
                 End If
+
+
+
                 SqlDataSourceMessages.DataBind()
                 RadGridMessages.DataBind()
             End If
@@ -108,11 +110,14 @@ Public Class client
     End Sub
 
     Private Sub Back()
-        If lblBackSource.Text = 1 Then
-            Response.Redirect("~/adm/contacts.aspx?restoreFilter=true")
-        Else
-            Response.Redirect("~/adm/clients.aspx?restoreFilter=true")
-        End If
+        Select Case Session("clientbackpage")
+            Case "clients"
+                Response.Redirect("~/adm/clients.aspx?restoreFilter=true")
+            Case "clientmanagement"
+                Response.Redirect("~/adm/clientmanagement.aspx?restoreFilter=true")
+            Case "contacts"
+                Response.Redirect("~/adm/contacts.aspx?restoreFilter=true")
+        End Select
 
     End Sub
 

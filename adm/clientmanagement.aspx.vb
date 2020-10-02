@@ -33,8 +33,7 @@ Public Class clientmanagement
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 750)
+                Response.Redirect($"~/ADM/Client.aspx?clientId={e.CommandArgument}&backpage=clientmanagement")
 
             Case "EditAvailability"
                 lblClientSelectdId.Text = e.CommandArgument
