@@ -43,4 +43,8 @@
     Private Sub btnAddModule_Click(sender As Object, e As EventArgs) Handles btnAddModule.Click
         RadGridLocationModule.MasterTableView.InsertItem()
     End Sub
+
+    Private Sub SqlDataSourceReviewsPermits_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceReviewsPermits.Inserting
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
 End Class

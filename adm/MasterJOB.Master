@@ -29,7 +29,16 @@
     <link rel="manifest" href="~/Content/favicons/site.webmanifest" />
 
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <title></title>
+
+
+     <%--FreshDesk--%>
+    <script>
+        window.fwSettings = { 'widget_id': 66000000640 };
+        !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/66000000640.js' async defer></script>
+
+    <title>PASconcept. Job</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
