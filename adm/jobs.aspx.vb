@@ -430,8 +430,8 @@ Public Class jobs
                     If cboEmployee.SelectedValue > 0 Then
                         Session("employeefortime") = cboEmployee.SelectedValue
                     End If
-                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&Dialog=1"
-                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
             End Select
         Catch ex As Exception

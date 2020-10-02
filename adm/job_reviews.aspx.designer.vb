@@ -113,24 +113,6 @@ Partial Public Class job_reviews
     Protected WithEvents SqlDataSourceReviewer As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceReviewCity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceReviewCity As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceReviewDepartment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceReviewDepartment As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
     '''SqlDataSourceAppName control.
     '''</summary>
     '''<remarks>

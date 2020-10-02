@@ -263,6 +263,10 @@ Public Class employeenewtime
     Private Sub BackPage()
         Dim sUrl As String
         Select Case Session("employeenewtimebackpage")
+
+            Case "jobs"
+                Response.Redirect("~/adm/jobs.aspx?restoreFilter=true")
+
             Case "activejobsdashboad"
                 Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
 
