@@ -64,7 +64,8 @@ Public Class scopeofwork
         Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.pdf"
         Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
         Dim pdf As PdfApi = New PdfApi()
-        Dim url As String = LocalAPI.GetHostAppSite() & "/adm/scopeofwork.aspx" & "?guid=" & Request.QueryString("guid")
+        ' Link to free page (no password)
+        Dim url As String = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/scopeofwork.aspx" & "?guid=" & Request.QueryString("guid")
         Dim pdfBytes = Await pdf.GetConvertApiPdf(url)
         Dim response As HttpResponse = HttpContext.Current.Response
         response.ContentType = "application/pdf"

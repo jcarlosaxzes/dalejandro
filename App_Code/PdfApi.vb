@@ -9,10 +9,10 @@ Public Class PdfApi
 
     Public Property ConvertApi_BaseUrl As String = "https://v2.convertapi.com/convert/web/to/pdf"
 
-    Public Property ConvertApi_Secret As String = "inTjL4nf0ZeuvVzH"
+    Public Property ConvertApi_Secret As String = "Ti9IuT0RxllZNss2"
     Public Property Key As String = "bdb8ab512d5daeb626aab7ce5a325b81ccf3f836b6ccfcb198bde8599a315c61"
     Public Property Secret As String = "764342337400f71b36d3e555779eb8f4f161626a76f1b16e73100cb844b116ca"
-    Public Property Workspace As String = "info@axzes.com"
+    Public Property Workspace As String = "axzesllc@gmail.com"
 
     Public Async Function GetConvertApiPdf(ByVal Url As String) As Task(Of Byte())
         Try
