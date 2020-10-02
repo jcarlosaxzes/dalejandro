@@ -813,8 +813,8 @@ Public Class proposalnewwizard
     Private Sub RadGridRatios_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridRatios.ItemCommand
         Select Case e.CommandName
             Case "EditJob"
-                Dim sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, True)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument)
+                Response.Redirect(sUrl)
 
             Case "RemoveRow"
                 lblExcludeJobsList.Text = lblExcludeJobsList.Text & IIf(Len(lblExcludeJobsList.Text) > 0, ",", "") & e.CommandArgument

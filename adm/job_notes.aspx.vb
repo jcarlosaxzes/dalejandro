@@ -8,7 +8,7 @@ Public Class job_notes
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 lblEmployeeId.Text = Master.UserId
                 Master.ActiveTab(5)

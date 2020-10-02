@@ -12,7 +12,7 @@ Public Class Job_job
                 lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeId.Text = Master.UserId
 
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 btnUpdate.Visible = LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_NewJob")
 

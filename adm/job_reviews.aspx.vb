@@ -6,7 +6,7 @@
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                     ' Programmers/Computer/IT

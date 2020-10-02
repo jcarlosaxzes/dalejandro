@@ -14,13 +14,13 @@
             }
         </script>
         <style>
-            .card-body {
+            /*.card-body {
                 padding: 0.25rem;
             }
 
             .card-header {
                 padding: 0 .50rem;
-            }
+            }*/
 
             img {
                 max-height: 96px;

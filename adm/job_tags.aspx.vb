@@ -7,7 +7,7 @@ Public Class job_tags
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 Dim DepartmentId As Integer = LocalAPI.GetJobProperty(lblJobId.Text, "DepartmentId")
                 If DepartmentId > 0 Then

@@ -26,10 +26,13 @@ Public Class Job_accounting
                 lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeId.Text = Master.UserId
 
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_BillingMenu") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_BillingMenu") Then
+                    Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, lblJobId.Text)
+                    Response.Redirect(sUrl)
+                End If
 
 
                 lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")

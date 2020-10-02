@@ -233,7 +233,9 @@ Public Class sendproposal
                 Response.RedirectPermanent("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
             Case "job_proposals"
                 Dim jobId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
-                Response.Redirect("~/adm/job_proposals.aspx?jobId=" & jobId)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8004, jobId)
+                Response.Redirect(sUrl)
+
             Case "proposalnewwizard"
                 Response.RedirectPermanent("~/adm/proposals.aspx?restoreFilter=true")
             Case Else

@@ -123,8 +123,8 @@ Public Class proposals
                 Response.Redirect("~/adm/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument & "&AttachmentsTab=1")
 
             Case "EditJob"
-                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True)
+                sUrl = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
 
             Case "EditClient"
                 sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument

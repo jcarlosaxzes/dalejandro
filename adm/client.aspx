@@ -522,7 +522,7 @@
                                     UniqueName="JobCode" ItemStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
                                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                                     <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# Eval("JobId", "~/ADM/Job_job.aspx?JobId={0}&Origen=2")%>'
+                                        <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# String.Concat(LocalAPI.GetSharedLink_URL(8001, Eval("JobId")), "backpage=client")%>'
                                             Text='<%# Eval("JobCode") %>' ToolTip="Click to edit job in new tab" Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
@@ -541,7 +541,7 @@
                                     SortExpression="Code" UniqueName="Code" ItemStyle-Width="60px" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px"
                                     FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}" ReadOnly="true">
                                     <ItemTemplate>
-                                        <asp:HyperLink ID="hlkJobedit" runat="server" Text='<%# Eval("Code")%>' NavigateUrl='<%# Eval("Id", "~/ADM/Job_job.aspx?JobId={0}")%>'
+                                        <asp:HyperLink ID="hlkJobedit" runat="server" Text='<%# Eval("Code")%>' NavigateUrl='<%# String.Concat(LocalAPI.GetSharedLink_URL(8001, Eval("Id")), "backpage=client")%>'
                                             ToolTip="Click to edit job in new tab" Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
