@@ -10638,6 +10638,34 @@ Public Class LocalAPI
                     Case 3001  'Client Acknowledgment Page
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/acknowledgment.aspx?clientguid=" & LocalAPI.GetClientProperty(objId, "guid")
 
+
+                    ' Job_ pages............................................
+
+                    Case 8001
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_job.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8002
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_accounting.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8003
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_employees.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8004
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_proposals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8005
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_rfps.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8006
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_notes.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8007
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_times.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8008
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_links.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8009
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_schedule.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8010
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_reviews.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8011
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_tags.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8012
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_transmittals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+
                 End Select
                 If PrintParameter Then
                     url = url & "&Print=1"

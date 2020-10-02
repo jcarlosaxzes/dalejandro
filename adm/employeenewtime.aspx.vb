@@ -261,15 +261,22 @@ Public Class employeenewtime
     End Sub
 
     Private Sub BackPage()
+        Dim sUrl As String
         Select Case Session("employeenewtimebackpage")
             Case "activejobsdashboad"
                 Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
+
             Case "time"
                 Response.Redirect("~/adm/time.aspx?restoreFilter=true")
+
             Case "job_times"
-                Response.Redirect("~/adm/job_times.aspx?JobId=" & lblSelectedJob.Text)
+                sUrl = LocalAPI.GetSharedLink_URL(8007, lblSelectedJob.Text)
+                Response.Redirect(sUrl)
+
             Case "job_employees"
-                Response.Redirect("~/adm/job_employees.aspx?JobId=" & lblSelectedJob.Text)
+                sUrl = LocalAPI.GetSharedLink_URL(8003, lblSelectedJob.Text)
+                Response.Redirect(sUrl)
+
             Case Else
                 Response.Redirect("~/adm/default.aspx")
         End Select

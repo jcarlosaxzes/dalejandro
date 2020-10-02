@@ -152,7 +152,9 @@ Public Class transmittal1
             Case "transmittals"
                 Response.Redirect("~/adm/transmittals.aspx")
             Case "job_transmittals"
-                Response.Redirect("~/adm/job_transmittals.aspx?jobId=" & lblJobId.Text)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8012, lblJobId.Text)
+                Response.Redirect(sUrl)
+
         End Select
 
     End Sub

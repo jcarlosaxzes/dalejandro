@@ -489,7 +489,9 @@ Public Class proposal
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Select Case Session("propsalbackpage")
             Case "job_proposals"
-                Response.Redirect("~/adm/job_proposals.aspx?jobId=" & lblSelectedJobId.Text)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, lblSelectedJobId.Text)
+                Response.Redirect(sUrl)
+
             Case Else
                 Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
         End Select
@@ -728,7 +730,9 @@ Public Class proposal
     Private Sub FormViewProp1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormViewProp1.ItemCommand
         Select Case e.CommandName
             Case "ViewJob"
-                Response.Redirect("~/adm/Job_job.aspx?JobId=" & e.CommandArgument)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument)
+                Response.Redirect(sUrl)
+
         End Select
     End Sub
 End Class

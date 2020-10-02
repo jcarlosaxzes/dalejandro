@@ -93,8 +93,9 @@ Public Class rfps
                     RadToolTipAccept.Show()
 
                 Case "ViewJobPage"
-                    sUrl = "~/adm/Job_rfps.aspx?JobId=" & e.CommandArgument
-                    CreateRadWindows(e.CommandName, sUrl, 960, 820, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8005, e.CommandArgument) & "&backpage=rfps"
+                    Response.Redirect(sUrl)
+
 
             End Select
         Catch ex As Exception

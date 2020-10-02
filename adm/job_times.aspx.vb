@@ -7,10 +7,13 @@ Public Class Job_times
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProjectTimeEntries") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProjectTimeEntries") Then
+                    Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, lblJobId.Text)
+                    Response.Redirect(sUrl)
+                End If
 
                 cboEmployee.DataBind()
                 If cboEmployee.Items.Count = 0 Then

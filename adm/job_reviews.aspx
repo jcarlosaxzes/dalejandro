@@ -60,7 +60,7 @@
 
                                         </EditItemTemplate>
                                     </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn DataField="deparmentId" FilterControlAltText="Filter Department column" Display="false"
+                                    <telerik:GridTemplateColumn DataField="deparmentId" FilterControlAltText="Filter Department column"
                                         HeaderStyle-Width="150px" HeaderText="Department" SortExpression="Department" UniqueName="deparmentId">
                                         <ItemTemplate>
                                             <%# Eval("Department") %>

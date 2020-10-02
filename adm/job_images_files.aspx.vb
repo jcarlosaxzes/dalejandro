@@ -7,7 +7,8 @@ Public Class Job_images_files
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
+
                 imgGoogleStreetview.DataBind()
                 '!!!RadBinaryImageJob.DataValue = LocalAPI.JobGetImage(lblJobId.Text)
                 Master.ActiveTab(12)
@@ -64,7 +65,7 @@ Public Class Job_images_files
 
     'Protected Sub btnDeleteImage_Click(sender As Object, e As EventArgs) Handles btnDeleteImage.Click
     '    LocalAPI.JobDeleteImages(lblJobId.Text)
-    '    Response.Redirect("~/ADM/Job_images_files.aspx?JobId=" & lblJobId.Text)
+    '    Response.Redirect("~/ADM/Jobxxxx_xxxxximages_files.aspx?JobId=" & lblJobId.Text)
     'End Sub
 
     'Protected Sub RadAsyncUpload1_FileUploaded(sender As Object, e As Telerik.Web.UI.FileUploadedEventArgs)

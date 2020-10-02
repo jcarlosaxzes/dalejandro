@@ -103,8 +103,8 @@ Public Class timesheet
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "EditJob"
-                sUrl = "~/ADM/Job_job.aspx?JobId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 960, 820, True, False)
+                sUrl = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument)
+                Response.Redirect(sUrl)
 
         End Select
     End Sub

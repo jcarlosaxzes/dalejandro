@@ -6,7 +6,7 @@ Public Class jobs
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
 
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Jobs List"
+            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Jobs"
             If (Not Page.IsPostBack) Then
 
                 ' Si no tiene permiso, la dirijo a message
@@ -78,20 +78,6 @@ Public Class jobs
             panelSubbar.Visible = True
         End If
 
-    End Sub
-
-
-    Private Sub jobs_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
-        If lblJobIdInput.Text > 0 Then
-            Dim sUrl As String
-            If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") Then
-                sUrl = "~/adm/Job_accounting.aspx?JobId=" & lblJobIdInput.Text
-            Else
-                sUrl = "~/adm/Job_job.aspx?JobId=" & lblJobIdInput.Text
-            End If
-            lblJobIdInput.Text = "0"
-            CreateRadWindows("Job", sUrl, 960, 820, True, True)
-        End If
     End Sub
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)
@@ -369,52 +355,52 @@ Public Class jobs
             Dim sUrl As String
             Select Case CommandName
                 Case "View/Edit Info"
-                    sUrl = "~/ADM/Job_job.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8001, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Billing"
-                    sUrl = "~/ADM/Job_accounting.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8002, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Employees"
-                    sUrl = "~/ADM/Job_employees.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8003, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Proposal(s)"
-                    sUrl = "~/ADM/job_proposals.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8004, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Expenses"
-                    sUrl = "~/ADM/job_rfps.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8005, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Notes"
-                    sUrl = "~/ADM/Job_notes.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8006, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Time Entries"
-                    sUrl = "~/ADM/Job_times.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8007, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Files"
-                    sUrl = "~/ADM/Job_links.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8008, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View Schedule"
-                    sUrl = "~/ADM/job_schedule.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8009, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Revisions"
-                    sUrl = "~/ADM/job_reviews.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8010, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Tags"
-                    sUrl = "~/ADM/Job_tags.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8011, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Transmittals"
-                    sUrl = "~/ADM/job_transmittals.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8012, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "Update Status"
                     lblSelectedJobId.Text = JobId
