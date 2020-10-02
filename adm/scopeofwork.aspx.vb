@@ -1,4 +1,6 @@
-﻿Public Class scopeofwork
+﻿Imports Intuit.Ipp.Core.Configuration
+
+Public Class scopeofwork
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -62,7 +64,8 @@
         Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.pdf"
         Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
         Dim pdf As PdfApi = New PdfApi()
-        Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, lblJobId.Text)
+        Dim url As String = LocalAPI.GetHostAppSite() & "/adm/scopeofwork.aspx" & "?guid=" & Request.QueryString("guid")
+        Dim pdfBytes = Await pdf.GetConvertApiPdf(url)
         Dim response As HttpResponse = HttpContext.Current.Response
         response.ContentType = "application/pdf"
         response.AddHeader("Content-Disposition", "attachment; filename=" & FileName)
