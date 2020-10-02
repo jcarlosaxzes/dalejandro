@@ -2200,6 +2200,7 @@
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\mtransmittal.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\paymenthistory.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\PrintPDF.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\scopeofwork.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_accountsreceivable.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_jobstatus.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_jobsyoy.aspx" />
@@ -4422,6 +4423,13 @@
       <DependentUpon>PrintPDF.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\scopeofwork.aspx.designer.vb">
+      <DependentUpon>scopeofwork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\scopeofwork.aspx.vb">
+      <DependentUpon>scopeofwork.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\smarth\dashboard_accountsreceivable.aspx.designer.vb">
       <DependentUpon>dashboard_accountsreceivable.aspx</DependentUpon>
     </Compile>
@@ -4970,7 +4978,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
