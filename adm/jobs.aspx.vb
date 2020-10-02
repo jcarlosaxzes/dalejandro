@@ -334,9 +334,9 @@ Public Class jobs
     End Function
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
-        Dim sUrl As String = ""
+
         Select Case e.CommandName
-            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Transmittals", "Update Status", "Add Time"
+            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Tickets", "View/Edit Transmittals", "Update Status", "Add Time"
                 FireJobCommand(e.CommandName, e.CommandArgument)
 
             Case "Hide Client"
@@ -393,6 +393,9 @@ Public Class jobs
                 Case "View/Edit Revisions"
                     sUrl = LocalAPI.GetSharedLink_URL(8010, JobId) & "&backpage=jobs"
                     Response.Redirect(sUrl)
+
+                Case "View/Edit Tickets"
+                    Response.Redirect($"~/adm/JobTickets.aspx?JobId={JobId}")
 
                 Case "View/Edit Tags"
                     sUrl = LocalAPI.GetSharedLink_URL(8011, JobId) & "&backpage=jobs"

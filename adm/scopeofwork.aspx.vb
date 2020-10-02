@@ -13,13 +13,16 @@
             '!!! lblProposalId.Text = 21164
 
             Dim sb = New StringBuilder()
-            sb.AppendLine("Proposal Number: <b>" & LocalAPI.ProposalNumber(lblProposalId.Text) & "</b>")
+            sb.AppendLine("Project: <b>" & LocalAPI.GetJobCodeName(lblJobId.Text) & "</b>")
             sb.AppendLine("<br/>")
-            sb.AppendLine("Proposal By: <b>" & LocalAPI.GetJobProposalBy(lblJobId.Text) & "</b>")
             sb.AppendLine("<br/>")
             sb.AppendLine("Client Name: <b>" & LocalAPI.GetClientProperty(CustomerID, "Name") & "</b>")
             sb.AppendLine("<br/>")
             sb.AppendLine("Company: <b>" & LocalAPI.GetClientProperty(CustomerID, "Company") & "</b>")
+            sb.AppendLine("<br/>")
+            sb.AppendLine("Proposal Number: <b>" & LocalAPI.ProposalNumber(lblProposalId.Text) & "</b>")
+            sb.AppendLine("<br/>")
+            sb.AppendLine("Proposal By: <b>" & LocalAPI.GetJobProposalBy(lblJobId.Text) & "</b>")
             sb.AppendLine("<br/>")
             sb.AppendLine("<br/>")
             LocalAPI.GetScopeOfWork(lblProposalId.Text, sb)
@@ -27,7 +30,8 @@
             txtHTML.Content = sb.ToString
 
             If Not Request.QueryString("Print") Is Nothing Then
-                Response.Write("<script>window.print();</script>")
+                'Response.Write("<script>window.print();</script>")
+                Pdf_ServerClick()
             End If
         End If
     End Sub
@@ -54,16 +58,16 @@
     '    End Try
     'End Sub
 
-    'Protected Async Sub Pdf_ServerClick(sender As Object, e As EventArgs)
-    '    Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork"
-    '    Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
-    '    Dim pdf As PdfApi = New PdfApi()
-    '    Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, lblJobId.Text)
-    '    Dim response As HttpResponse = HttpContext.Current.Response
-    '    response.ContentType = "application/pdf"
-    '    response.AddHeader("Content-Disposition", "attachment; filename=" & FileName)
-    '    response.ClearContent()
-    '    response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
-    '    response.Flush()
-    'End Sub
+    Protected Async Sub Pdf_ServerClick()
+        Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.pdf"
+        Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
+        Dim pdf As PdfApi = New PdfApi()
+        Dim pdfBytes = Await pdf.CreateWorkScopePdfBytes(companyId, lblJobId.Text)
+        Dim response As HttpResponse = HttpContext.Current.Response
+        response.ContentType = "application/pdf"
+        response.AddHeader("Content-Disposition", "attachment; filename=" & FileName)
+        response.ClearContent()
+        response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+        response.Flush()
+    End Sub
 End Class
