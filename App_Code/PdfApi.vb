@@ -589,6 +589,7 @@ Public Class PdfApi
         End Try
 
         Dim jsonWorkScope As JObject = New JObject()
+        jsonWorkScope.Add("Project", LocalAPI.GetJobCodeName(JobId))
         jsonWorkScope.Add("ProposalNumber", LocalAPI.ProposalNumber(ProposalId))
         jsonWorkScope.Add("ProposalBy", LocalAPI.GetJobProposalBy(JobId))
         jsonWorkScope.Add("ClientName", LocalAPI.GetClientProperty(CustomerID, "Name"))
