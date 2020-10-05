@@ -18,8 +18,7 @@
                 <td>
                     <telerik:RadGrid ID="RadGridNotes" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowAutomaticInserts="true"
                         AutoGenerateColumns="False" DataSourceID="SqlDataSourceNotes" GridLines="None">
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes"
-                            ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-Font-Size="Small" EditMode="PopUp">
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="Edit" HeaderStyle-Width="30px" UniqueName="EditCommandColumn">
                                 </telerik:GridEditCommandColumn>
@@ -27,17 +26,17 @@
                                     ReadOnly="True" SortExpression="Id" UniqueName="Id">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridDateTimeColumn DataField="Date" DataFormatString="{0:MM/dd/yyyy}" FilterControlAltText="Filter Date column" ReadOnly="true"
-                                    HeaderText="Date" SortExpression="Date" UniqueName="Date" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right">
+                                    HeaderText="Date" SortExpression="Date" UniqueName="Date" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                                 </telerik:GridDateTimeColumn>
                                 <telerik:GridTemplateColumn DataField="Note" HeaderText="Note" SortExpression="Note"
                                     UniqueName="Note" HeaderStyle-HorizontalAlign="Center">
                                     <EditItemTemplate>
                                         <telerik:RadTextBox ID="NoteTextBox" runat="server" MaxLength="1024" Text='<%# Bind("Note") %>'
-                                            TextMode="MultiLine" Rows="8" Width="350px">
+                                            TextMode="MultiLine" Rows="8" Width="800px">
                                         </telerik:RadTextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="NoteLabel" runat="server" Text='<%# Eval("Note") %>'></asp:Label>
+                                        <%# Eval("Note") %>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
 
