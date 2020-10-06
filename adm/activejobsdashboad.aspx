@@ -421,20 +421,6 @@
                         </asp:LinkButton>
 
                     </div>
-                    <div runat="server" class="card-footer text-muted" visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>'>
-                        <asp:LinkButton ID="btnAddReview" runat="server" UseSubmitBehavior="false" ToolTip='<% GetAddRevisionToolTip() %>'
-                            CommandName="AddReview" CommandArgument='<%# Eval("Id")%>'>
-                                                <small><span class="fas fa-plus"></small>
-                        </asp:LinkButton>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:LinkButton ID="btnEditReviews" runat="server" UseSubmitBehavior="false" ToolTip='<%# GetViewEditRevisionToolTip() %>'
-                            CommandName="EditReviews" CommandArgument='<%# Eval("Id")%>'>
-                                                    <%# GetRevisionOrTicketLabel() %>&nbsp;<span class="badge badge-pill badge-danger"> <%#Eval("ReviewsCount")%></span>
-                        </asp:LinkButton>
-
-
-
-                    </div>
                 </div>
 
             </ItemTemplate>
@@ -578,125 +564,6 @@
         </div>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipReview" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Skin="Default">
-
-        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Add Revision
-            </span>
-        </h2>
-
-        <asp:ValidationSummary ID="ValidationSummaryJobUpdate" runat="server"
-            Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="review_insert" />
-
-        <table class="table-sm" style="width: 500px">
-            <tr>
-                <td style="text-align: right; width: 150px">Process Number:</td>
-                <td>
-                    <telerik:RadTextBox ID="txtReviewCode" runat="server" Width="50%" MaxLength="32" ValidationGroup="review_insert">
-                    </telerik:RadTextBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">Revision URL:</td>
-                <td>
-                    <telerik:RadTextBox ID="txtReviewURL" runat="server" Width="100%" MaxLength="128">
-                    </telerik:RadTextBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">City:</td>
-                <td>
-                    <telerik:RadComboBox ID="cboReviewCity" runat="server" DataSourceID="SqlDataSourceReviewCity" DataTextField="Name" DataValueField="Id"
-                        Filter="Contains" MarkFirstMatch="True" Width="100%" ZIndex="50001" Height="300px"
-                        AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(Select City...)" Value="0" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">Department:</td>
-                <td>
-                    <telerik:RadComboBox ID="cboReviewDepartment" runat="server" DataSourceID="SqlDataSourceReviewDepartment" DataTextField="Name" DataValueField="Id"
-                        Filter="Contains" MarkFirstMatch="True" Width="100%" ZIndex="50001" Height="300px"
-                        AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="0" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">App. Date:</td>
-                <td>
-                    <telerik:RadDatePicker ID="RadDatePickerReviewSubmit" runat="server"
-                        DateFormat="MM/dd/yyyy"
-                        Culture="en-US"
-                        ZIndex="50001"
-                        Width="50%">
-                    </telerik:RadDatePicker>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">Status:</td>
-                <td>
-                    <telerik:RadComboBox ID="cboPlanReview_status" runat="server" Width="100%" ZIndex="50001"
-                        DataSourceID="SqlDataSourcePlanReview_status" DataTextField="Name" DataValueField="Id">
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">Disp. Date:</td>
-                <td>
-                    <telerik:RadDatePicker ID="RadDatePickerDateOut" runat="server"
-                        DateFormat="MM/dd/yyyy"
-                        Culture="en-US"
-                        ZIndex="50001"
-                        Width="50%">
-                    </telerik:RadDatePicker>
-
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">Reviewed by:</td>
-                <td>
-                    <telerik:RadComboBox ID="cboReviewer" runat="server" DataSourceID="SqlDataSourceReviewer" DataTextField="Name" DataValueField="Id"
-                        Filter="Contains" MarkFirstMatch="True" Width="100%" ZIndex="50001" Height="300px"
-                        AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(Select Reviewer...)" Value="0" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right">Notes:</td>
-                <td>
-                    <telerik:RadTextBox ID="txtRewiewNotes" runat="server" Width="100%" Rows="3" TextMode="MultiLine">
-                    </telerik:RadTextBox>
-                </td>
-            </tr>
-        </table>
-
-        <br />
-        <table style="width: 100%">
-            <tr>
-                <td style="text-align: center">
-                    <asp:LinkButton ID="btnNewReview" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="review_insert">
-                        Add Rewiew
-                    </asp:LinkButton>
-                </td>
-            </tr>
-        </table>
-
-    </telerik:RadToolTip>
-
-    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtReviewCode" ErrorMessage="(*) Process Number is required"
-        ValidationGroup="review_insert"></asp:RequiredFieldValidator>
-
-
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
@@ -729,34 +596,6 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
-    </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceReviewCity" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, Name FROM PlanReview_Cities ORDER BY Name"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceReviewDepartment" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, Name FROM PlanReview_Departments ORDER BY Name"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourcePlanReview_status" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Id], [Name] FROM [PlanReview_status]"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceReviewer" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Id], [Name] FROM [Contacts] WHERE companyId=@companyId ORDER BY [Name]">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourceJobsReviews" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="JobReview_INSERT" InsertCommandType="StoredProcedure">
-        <InsertParameters>
-            <asp:ControlParameter ControlID="lblSelectedJob" Name="jobId" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="txtReviewCode" Name="Code" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtReviewURL" Name="url" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="cboReviewCity" Name="cityId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboReviewDepartment" Name="deparmentId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="RadDatePickerReviewSubmit" Name="DateSubmit" PropertyName="SelectedDate" Type="DateTime" />
-            <asp:ControlParameter ControlID="RadDatePickerDateOut" Name="DateOut" PropertyName="SelectedDate" Type="DateTime" />
-            <asp:ControlParameter ControlID="cboPlanReview_status" Name="statusId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="txtRewiewNotes" Name="Notes" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="cboReviewer" Name="contactId" PropertyName="SelectedValue" Type="Int32" />
-        </InsertParameters>
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceDateWORKHOURS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

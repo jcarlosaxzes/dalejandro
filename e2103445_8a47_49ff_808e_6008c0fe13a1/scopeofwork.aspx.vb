@@ -29,8 +29,30 @@
             lblContent.Text = sb.ToString
             txtHTML.Content = sb.ToString
 
+            If Not Request.QueryString("Print") Is Nothing Then
+                'Response.Write("<script>window.print();</script>")
+                Pdf_ServerClick()
+
+                'Response.Redirect($"~/adm/titleblock?guid={Request.QueryString("guid")}")
+            End If
+
+
         End If
     End Sub
 
+    Protected Async Sub Pdf_ServerClick()
+        Dim FileName As String = LocalAPI.GetJobCode(lblJobId.Text) & "_ScopeOfWork.pdf"
+        Dim companyId = LocalAPI.GetJobProperty(lblJobId.Text, "companyId")
+        Dim pdf As PdfApi = New PdfApi()
+        ' Link to free page (no password)
+        Dim url As String = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/scopeofwork.aspx" & "?guid=" & Request.QueryString("guid")
+        Dim pdfBytes = Await pdf.GetConvertApiPdf(url)
+        Dim response As HttpResponse = HttpContext.Current.Response
+        response.ContentType = "application/pdf"
+        response.AddHeader("Content-Disposition", "attachment; filename=" & FileName)
+        response.ClearContent()
+        response.OutputStream.Write(pdfBytes, 0, pdfBytes.Length)
+        response.Flush()
+    End Sub
 
 End Class
