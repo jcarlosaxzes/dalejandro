@@ -11034,7 +11034,7 @@ Public Class LocalAPI
                 Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
                 Dim bRetainer As Boolean
 
-                If jobId = 0 Then
+                If jobId <= 0 Then
                     '2.1 -  Crear job Asociado
                     ' No Aceptado y sin JobId creado
 

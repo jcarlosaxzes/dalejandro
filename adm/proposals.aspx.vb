@@ -20,55 +20,56 @@ Public Class proposals
                 Master.Help = "http://blog.pasconcept.com/2012/04/fee-proposal-proposals-list-page.html"
 
                 lblCompanyId.Text = Session("companyId")
-                Dim employeeId As Integer = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
-
+                lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
 
                 cboDepartments.DataBind()
-                cboDepartments.SelectedValue = LocalAPI.GetEmployeeProperty(employeeId, "FilterProposal_Department")
+                cboDepartments.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterProposal_Department")
 
                 cboStatus.DataBind()
                 cboClients.DataBind()
 
-                If Not Request.QueryString("Buscar") Is Nothing Then
-                    txtFind.Text = Request.QueryString("Buscar")
-                End If
-
                 cboPeriod.DataBind()
-                cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(employeeId, "FilterProposal_Month")
-                IniciaPeriodo(cboPeriod.SelectedValue)
 
                 If Not LocalAPI.GetEmployeePermission(Master.UserId, "Allow_OtherEmployeeJobs") Then
                     cboEmployee.DataBind()
-                    cboEmployee.SelectedValue = employeeId
+                    cboEmployee.SelectedValue = lblEmployeeId.Text
                     cboEmployee.Enabled = False
                 End If
 
-
                 RefreshRecordset()
-
-                If Not Request.QueryString("rfpGUID") Is Nothing Then
-                    lblProposalIdFromRfp.Text = LocalAPI.CreateProposalFromRFP(Request.QueryString("rfpGUID"), employeeId, lblCompanyId.Text)
-                End If
 
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
+                Else
+                    DefaultFilters()
                 End If
+                IniciaPeriodo(cboPeriod.SelectedValue)
 
             End If
 
-
-
             RadWindowManager1.EnableViewState = False
-            'If RadWindowManager1.Windows.Count > 0 Then
-            '    RadWindowManager1.Windows.Clear()
-            '    'RadGrid1.DataBind()
-            'End If
 
         Catch ex As Exception
 
         End Try
     End Sub
+    Private Sub DefaultFilters()
+        Try
+            If Not Request.QueryString("Buscar") Is Nothing Then
+                txtFind.Text = Request.QueryString("Buscar")
+            End If
 
+            cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterProposal_Month")
+
+
+            If Not Request.QueryString("rfpGUID") Is Nothing Then
+                lblProposalIdFromRfp.Text = LocalAPI.CreateProposalFromRFP(Request.QueryString("rfpGUID"), lblEmployeeId.Text, lblCompanyId.Text)
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Sub Administradores_Proposals_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
         If lblProposalIdFromRfp.Text > 0 Then
             lblProposalIdFromRfp.Text = "0"

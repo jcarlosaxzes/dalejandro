@@ -275,6 +275,15 @@ Partial Public Class proposals
     Protected WithEvents lblProposalIdFromRfp As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''lblEmployeeId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Master property.
     '''</summary>
     '''<remarks>
