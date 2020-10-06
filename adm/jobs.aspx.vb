@@ -24,10 +24,6 @@ Public Class jobs
 
                 LocalAPI.RefreshYearsList()
 
-                cboPeriod.DataBind()
-                cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterJob_Month")
-                IniciaPeriodo(cboPeriod.SelectedValue)
-
                 cboEmployee.DataBind()
                 If Len(Session("Employee")) Then
                     cboEmployee.SelectedValue = Session("Employee")
@@ -52,11 +48,10 @@ Public Class jobs
 
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
+                Else
+                    DefaultFilterPage()
                 End If
-
-                If Not Request.QueryString("JobIdInput") Is Nothing Then
-                    lblJobIdInput.Text = Request.QueryString("JobIdInput")
-                End If
+                IniciaPeriodo(cboPeriod.SelectedValue)
 
                 EEGvertical()
 
@@ -73,6 +68,13 @@ Public Class jobs
         End Try
     End Sub
 
+    Private Sub DefaultFilterPage()
+        cboPeriod.DataBind()
+        cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterJob_Month")
+        If Not Request.QueryString("JobIdInput") Is Nothing Then
+            lblJobIdInput.Text = Request.QueryString("JobIdInput")
+        End If
+    End Sub
     Private Sub EEGvertical()
         If lblCompanyId.Text = 260962 Then
             panelSubbar.Visible = True
@@ -156,6 +158,7 @@ Public Class jobs
     Private Sub SaveFilter()
         Session("Filter_Jpbs_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
         Session("Filter_Jpbs_RadDatePickerTo") = RadDatePickerTo.SelectedDate
+        Session("Filter_Jpbs_cboPeriod") = cboPeriod.SelectedValue
         Session("Filter_Jpbs_cboEmployee") = cboEmployee.SelectedValue
         Session("Filter_Jpbs_cboStatus") = cboStatus.SelectedValue
         Session("Filter_Jpbs_cboClients") = cboClients.SelectedValue
@@ -171,16 +174,26 @@ Public Class jobs
         Try
             RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
             RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
+            cboPeriod.DataBind()
+            cboPeriod.SelectedValue = Session("Filter_Jpbs_cboPeriod")
             cboEmployee.SelectedValue = Session("Filter_Jpbs_cboEmployee")
+            cboStatus.DataBind()
             cboStatus.SelectedValue = Session("Filter_Jpbs_cboStatus")
+            cboClients.DataBind()
             cboClients.SelectedValue = Session("Filter_Jpbs_cboClients")
             lblDepartmentIdIN_List.Text = Session("Filter_Jpbs_lblDepartmentIdIN_List")
+            cboJobType.DataBind()
             cboJobType.SelectedValue = Session("Filter_Jpbs_cboJobType")
             lblExcludeClientId_List.Text = Session("Filter_Jpbs_lblExcludeClientId_List")
+            cboBalanceStatus.DataBind()
             cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
             lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
             txtFind.Text = Session("Filter_Jpbs_txtFind")
+
+            Refresh()
+
         Catch ex As Exception
+            Dim e1 As String = ex.Message
         End Try
     End Sub
     'Protected Sub RadGrid1_BatchEditCommand(sender As Object, e As Telerik.Web.UI.GridBatchEditingEventArgs) Handles RadGrid1.BatchEditCommand

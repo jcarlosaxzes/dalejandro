@@ -90,10 +90,6 @@ Public Class activejobsdashboad
             Case "AddNewTime"
                 Response.Redirect("~/adm/employeenewtime.aspx?JobId=" & e.CommandArgument & "&backpage=activejobsdashboad")
 
-            Case "AddReview"
-                lblSelectedJob.Text = e.CommandArgument
-                ShowNewReviewDlg()
-
             Case "EditReviews"
                 If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                     ' Programmers/Computer/IT
@@ -251,7 +247,7 @@ Public Class activejobsdashboad
             Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)
             Dim sBody As String = LocalAPI.GetMessageTemplateBody("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)
 
-            Return SendGrid.Email.SendMail(sTo, "", "", sSubject, sBody, lblCompanyId.Text,0, lblSelectedJob.Text)
+            Return SendGrid.Email.SendMail(sTo, "", "", sSubject, sBody, lblCompanyId.Text, 0, lblSelectedJob.Text)
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
@@ -282,32 +278,6 @@ Public Class activejobsdashboad
         End Try
     End Sub
 
-
-#Region "Review"
-    Private Sub ShowNewReviewDlg()
-        ' Init fields
-        txtReviewCode.Text = ""
-        txtReviewURL.Text = ""
-        cboReviewCity.SelectedValue = 0
-        cboReviewDepartment.SelectedValue = 0
-        RadDatePickerReviewSubmit.DbSelectedDate = Date.Today
-        cboPlanReview_status.SelectedValue = 0
-        cboReviewer.SelectedValue = 0
-        txtRewiewNotes.Text = ""
-
-        RadToolTipReview.Visible = True
-        RadToolTipReview.Show()
-        txtReviewCode.Focus()
-
-    End Sub
-
-    Private Sub btnNewReview_Click(sender As Object, e As EventArgs) Handles btnNewReview.Click
-        RadToolTipReview.Visible = False
-        SqlDataSourceJobsReviews.Insert()
-        RadListView1.DataBind()
-
-    End Sub
-
     Public Function GetDateOfWeekStyle(Date1 As DateTime) As String
         Select Case Date1.DayOfWeek
             Case 1, 2, 3, 4, 5 ' Monday to Friday
@@ -321,38 +291,6 @@ Public Class activejobsdashboad
                 Return "font-style:italic;color:lightgray"
         End Select
     End Function
-
-    Private Sub SqlDataSourceJobs_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceJobs.Selecting
-        Dim e1 As String = e.Command.Parameters("@StatusIdIN_List").Value
-    End Sub
-    Public Function GetRevisionOrTicketLabel() As String
-        If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
-            ' Programmers/Computer/IT
-            Return "View Tickets"
-        Else
-            Return "View Revisions"
-        End If
-    End Function
-
-    Public Function GetAddRevisionToolTip() As String
-        If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
-            ' Programmers/Computer/IT
-            Return "Add Ticket"
-        Else
-            Return "Add Revision Record"
-        End If
-    End Function
-    Public Function GetViewEditRevisionToolTip() As String
-        If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
-            ' Programmers/Computer/IT
-            Return "View/Edit Ticket List. The amount represents the tickets in status 'Ready for Development', 'In Progress' or 'Development Closed"
-        Else
-            Return "View/Edit Revisions List"
-        End If
-    End Function
-
-
-#End Region
 
     Private Sub SaveFilter()
         Session("Filter_ActiveJobs_Employee") = cboEmployee.SelectedValue

@@ -29,6 +29,10 @@
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
                     <telerik:AjaxUpdatedControl ControlID="cboEmployee" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatus" />
+                    <telerik:AjaxUpdatedControl ControlID="cboClients" />
+                    <telerik:AjaxUpdatedControl ControlID="cboJobType" />
+                    <telerik:AjaxUpdatedControl ControlID="cboBalanceStatus" />
                     <telerik:AjaxUpdatedControl ControlID="cboDepartments" />
                     <telerik:AjaxUpdatedControl ControlID="lblDepartmentIdIN_List" />
                     <telerik:AjaxUpdatedControl ControlID="lblExcludeClientId_List" />
@@ -536,7 +540,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid"), "&Print=1") %>' class="dropdown-item" target="_blank" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                                             <i class="fas fa-th-list"></i>&nbsp;&nbsp; Download Scope of Work
                                                         </a>
                                                     </td>
@@ -573,11 +577,12 @@
                                     <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                         <%#Eval("JobUploadFiles")%>
                                     </span>
-                                    <a title="Click here to view Download Scope of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid"), "&Print=1") %>' target="_blank"
+                                    <%--href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>'--%>
+                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-th-list"></i>
                                     </a>
-                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
+                                    <a title="Click here to Download Scope of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid"), "&Print=1") %>' target="_blank"
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </a>

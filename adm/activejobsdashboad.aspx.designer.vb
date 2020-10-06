@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class activejobsdashboad
-    
+
     '''<summary>
     '''RadCodeBlock control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
-    
+
     '''<summary>
     '''cboEmployee control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboEmployee As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboJobs control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboJobs As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''btnNew control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnNewMiscellaneousTime control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnNewMiscellaneousTime As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''pnlFind control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''cboStatus control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''txtFind control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnRefresh control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadHtmlChartTimeSheet control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartTimeSheet As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadHtmlChartTimeUsed control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartTimeUsed As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadGridFooter control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridFooter As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''RadListView1 control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
-    
+
     '''<summary>
     '''PanelLegend control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PanelLegend As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''lblTotalWeekHours control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblTotalWeekHours As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblRemaining control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRemaining As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''RadToolTipMiscellaneous control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipMiscellaneous As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''cboType control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboType As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''txtMiscellaneousHours control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMiscellaneousHours As Global.Telerik.Web.UI.RadNumericTextBox
-    
+
     '''<summary>
     '''RadDatePickerFrom control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePickerFrom As Global.Telerik.Web.UI.RadDatePicker
-    
+
     '''<summary>
     '''RadDatePickerTo control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
-    
+
     '''<summary>
     '''txtNotes control.
     '''</summary>
@@ -210,7 +210,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtNotes As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnOkNewMiscellaneousTime control.
     '''</summary>
@@ -219,7 +219,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnOkNewMiscellaneousTime As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RequiredFieldValidator2 control.
     '''</summary>
@@ -228,7 +228,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''lblVac1 control.
     '''</summary>
@@ -237,7 +237,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblVac1 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblVac2 control.
     '''</summary>
@@ -246,7 +246,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblVac2 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblVac3 control.
     '''</summary>
@@ -255,7 +255,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblVac3 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPer1 control.
     '''</summary>
@@ -264,7 +264,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPer1 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPer2 control.
     '''</summary>
@@ -273,7 +273,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPer2 As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblPer3 control.
     '''</summary>
@@ -282,124 +282,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblPer3 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''RadToolTipReview control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadToolTipReview As Global.Telerik.Web.UI.RadToolTip
-    
-    '''<summary>
-    '''ValidationSummaryJobUpdate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ValidationSummaryJobUpdate As Global.System.Web.UI.WebControls.ValidationSummary
-    
-    '''<summary>
-    '''txtReviewCode control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtReviewCode As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
-    '''txtReviewURL control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtReviewURL As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
-    '''cboReviewCity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboReviewCity As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''cboReviewDepartment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboReviewDepartment As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''RadDatePickerReviewSubmit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadDatePickerReviewSubmit As Global.Telerik.Web.UI.RadDatePicker
-    
-    '''<summary>
-    '''cboPlanReview_status control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboPlanReview_status As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''RadDatePickerDateOut control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadDatePickerDateOut As Global.Telerik.Web.UI.RadDatePicker
-    
-    '''<summary>
-    '''cboReviewer control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboReviewer As Global.Telerik.Web.UI.RadComboBox
-    
-    '''<summary>
-    '''txtRewiewNotes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRewiewNotes As Global.Telerik.Web.UI.RadTextBox
-    
-    '''<summary>
-    '''btnNewReview control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNewReview As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''RequiredFieldValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
@@ -408,7 +291,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-    
+
     '''<summary>
     '''SqlDataSourceJobs control.
     '''</summary>
@@ -417,7 +300,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobs As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceActiveJob control.
     '''</summary>
@@ -426,7 +309,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceActiveJob As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceJobActiveStatus control.
     '''</summary>
@@ -435,7 +318,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobActiveStatus As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceMiscellaneousType control.
     '''</summary>
@@ -444,52 +327,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceMiscellaneousType As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceReviewCity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceReviewCity As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceReviewDepartment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceReviewDepartment As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourcePlanReview_status control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourcePlanReview_status As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceReviewer control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceReviewer As Global.System.Web.UI.WebControls.SqlDataSource
-    
-    '''<summary>
-    '''SqlDataSourceJobsReviews control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceJobsReviews As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDateWORKHOURS control.
     '''</summary>
@@ -498,7 +336,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDateWORKHOURS As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceTimeSheet control.
     '''</summary>
@@ -507,7 +345,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceTimeSheet As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceTimeUsed control.
     '''</summary>
@@ -516,7 +354,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceTimeUsed As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceEmpl_activos control.
     '''</summary>
@@ -525,7 +363,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEmpl_activos As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblStatusIdIN_List control.
     '''</summary>
@@ -534,7 +372,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblStatusIdIN_List As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblLogedEmployeeId control.
     '''</summary>
@@ -543,7 +381,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblLogedEmployeeId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -552,7 +390,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblSelectedJob control.
     '''</summary>
@@ -561,7 +399,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectedJob As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblUserEmail control.
     '''</summary>
@@ -570,7 +408,7 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblUserEmail As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -579,7 +417,7 @@ Partial Public Class activejobsdashboad
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class
