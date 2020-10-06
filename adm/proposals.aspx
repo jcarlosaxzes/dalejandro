@@ -514,5 +514,6 @@
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblProposalIdFromRfp" runat="server" Visible="False" Text="0"></asp:Label>
-
+    <asp:Label ID="lblEmployeeId" runat="server" Visible="False" Text="0"></asp:Label>
+    
 </asp:Content>
