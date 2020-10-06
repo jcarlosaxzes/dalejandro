@@ -2,6 +2,7 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadScheduler1">
@@ -15,8 +16,22 @@
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipCRM" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
+            <telerik:AjaxSetting >
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadToolTipAppointment" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
+
+  <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+        <script type="text/javascript">
+            function RedirectPage(url) {
+                window.location = url;
+            }
+        </script>
+    </telerik:RadCodeBlock>
+    
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
     </telerik:RadAjaxLoadingPanel>
 
@@ -93,8 +108,10 @@
             WorkDayEndTime="23:59:59"
             FirstDayOfWeek="Monday"
             LastDayOfWeek="Sunday"
-            StartInsertingInAdvancedForm="True"
-            CustomAttributeNames="Location">
+            StartInsertingInAdvancedForm="False"
+            StartEditingInAdvancedForm ="False"
+            CustomAttributeNames="Location"
+            OnFormCreating="RadScheduler1_FormCreating">
             <ResourceTypes>
                 <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceType"></telerik:ResourceType>
                 <telerik:ResourceType KeyField="ID" Name="Assign to User" TextField="Name" ForeignKeyField="EmployeeId" DataSourceID="SqlDataSourceEmployees"></telerik:ResourceType>
@@ -237,7 +254,81 @@
             </tr>
         </table>
     </telerik:RadToolTip>
+
+    <%--Appointment Form--%>
+    <telerik:RadToolTip ID="RadToolTipAppointment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Appointment
+            </span>
+        </h2>
+        <table class="table-sm" style="width: 600px">
+           <%-- <tr>
+                <td>
+                    <telerik:RadComboBox ID="RadComboBox1" runat="server" DataSourceID="SqlDataSourceType" ZIndex="50001"
+                        DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="(Select Activity Type...)" Value="-1" />
+                        </Items>
+                    </telerik:RadComboBox>
+                    <asp:CompareValidator runat="server" ID="Comparevalidator3" ValueToCompare="(Select Activity Type...)" ValidationGroup="NewClientActivity"
+                        Operator="NotEqual" ControlToValidate="cboActivityType" ErrorMessage="(*) You must select activity type!">
+                    </asp:CompareValidator>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <telerik:RadComboBox ID="RadComboBox2" runat="server" DataSourceID="SqlDataSourceClients" ZIndex="50001"
+                        DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="(Select Clients...)" Value="-1" />
+                        </Items>
+                    </telerik:RadComboBox>
+                    <asp:CompareValidator runat="server" ID="Comparevalidator4" ValueToCompare="(Select Clients...)" ValidationGroup="NewClientActivity"
+                        Operator="NotEqual" ControlToValidate="cboClient" ErrorMessage="(*) You must select client!">
+                    </asp:CompareValidator>
+
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 45px; vertical-align: top">
+                    <telerik:RadComboBox ID="RadComboBox3" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" ZIndex="50001"
+                        Width="100%" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains" EmptyMessage="(Select CC...)">
+                        <Localization AllItemsCheckedString="All Items Checked" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
+                    </telerik:RadComboBox>
+                </td>
+            </tr>--%>
+            <tr>
+                <td>
+                    <telerik:RadTextBox ID="txtAppoimentSubject" runat="server" EmptyMessage="Subject" Width="100%" MaxLength="255">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>
+            <%--<tr>
+                <td>
+                    <telerik:RadTextBox ID="RadTextBox2" runat="server" EmptyMessage="Description" Width="100%" MaxLength="1024" TextMode="MultiLine" Rows="6">
+                    </telerik:RadTextBox>
+                </td>
+            </tr>--%>
+            <tr>
+                <td style="text-align: right; padding-right: 25px; padding-top: 15px">
+                    <telerik:RadButton ID="RadButton1" runat="server" Text="Insert" Width="125px" ValidationGroup="NewClientActivity">
+                        <Icon PrimaryIconCssClass="rbAdd" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
+                    </telerik:RadButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <telerik:RadButton ID="RadButton2" runat="server" Text="Cancel" Width="125px" CausesValidation="false">
+                        <Icon PrimaryIconCssClass="rbCancel" PrimaryIconLeft="4" PrimaryIconTop="4"></Icon>
+                    </telerik:RadButton>
+                </td>
+            </tr>
+        </table>
+    </telerik:RadToolTip>
+
+    
     <asp:Label runat="server" ID="AppointmentsCount" Font-Size="Small"></asp:Label>
+
+
+
 
     <asp:SqlDataSource ID="SqlDataSourceAppointments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Appointment_DELETE" DeleteCommandType="StoredProcedure"
@@ -346,5 +437,8 @@
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
+
+    
+
 </asp:Content>
 

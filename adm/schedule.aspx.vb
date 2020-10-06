@@ -3,6 +3,34 @@ Imports Telerik.Web.UI
 Public Class schedule
     Inherits System.Web.UI.Page
 
+    Private Property EditedAppointmentID() As Object
+        Get
+            Return ViewState("EditedAppointmentID")
+        End Get
+        Set(value As Object)
+            ViewState("EditedAppointmentID") = value
+        End Set
+    End Property
+
+    Private Property EditedAppointmentParentID() As Object
+        Get
+            Return ViewState("EditedAppointmentParentID")
+        End Get
+        Set(value As Object)
+            ViewState("EditedAppointmentParentID") = value
+        End Set
+    End Property
+
+    Private Property EditedAppointment() As Telerik.Web.UI.Appointment
+        Get
+            Return If((EditedAppointmentID IsNot Nothing), RadScheduler1.Appointments.FindByID(EditedAppointmentID), Nothing)
+        End Get
+        Set(value As Telerik.Web.UI.Appointment)
+            EditedAppointmentID = value.ID
+            EditedAppointmentParentID = value.RecurrenceParentID
+        End Set
+    End Property
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             Master.PageTitle = "Schedule"
@@ -272,5 +300,80 @@ Public Class schedule
         End Try
     End Function
 
+    Protected Sub RadScheduler1_FormCreating(sender As Object, e As SchedulerFormCreatingEventArgs)
+
+
+        If e.Mode <> SchedulerFormMode.Hidden Then
+            EditedAppointment = e.Appointment
+            e.Cancel = True
+        End If
+
+        Dim appointmentToEdit = RadScheduler1.PrepareToEdit(e.Appointment, RadScheduler1.EditingRecurringSeries)
+        Session("appointment_start") = appointmentToEdit.Start.ToString("yyyy-MM-dd HH:mm:ss")
+        Session("appointment_end") = appointmentToEdit.End.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim Id = appointmentToEdit.ID
+        Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}"
+        ScriptManager.RegisterStartupScript(Page, [GetType](), "formScript", $"RedirectPage('{url}');", True)
+        PopulateEditForm(appointmentToEdit)
+        'RadToolTipCRM.Visible = True
+        'RadToolTipCRM.Show()
+    End Sub
+
+    Private Sub PopulateEditForm(editedAppointment As Telerik.Web.UI.Appointment)
+        Dim appointmentToEdit As Telerik.Web.UI.Appointment = RadScheduler1.PrepareToEdit(editedAppointment, RadScheduler1.EditingRecurringSeries)
+        txtAppoimentSubject.Text = appointmentToEdit.Subject
+
+        'StartTime.SelectedDate = RadScheduler1.UtcToDisplay(appointmentToEdit.Start)
+        'EndTime.SelectedDate = RadScheduler1.UtcToDisplay(appointmentToEdit.[End])
+
+        'If (appointmentToEdit.Reminders.Count = 0) OrElse (ReminderDropDown.SelectedValue = "") Then
+        '    ReminderDropDown.SelectedValue = ""
+        'Else
+        '    ReminderDropDown.SelectedValue = appointmentToEdit.Reminders(0).Trigger.TotalMinutes.ToString()
+        'End If
+
+        'Dim user As Resource = appointmentToEdit.Resources.GetResourceByType("User")
+        'If user IsNot Nothing Then
+        '    UserDropDown.SelectedValue = user.Key.ToString()
+        'End If
+
+        'RadSchedulerRecurrenceEditor1.StartDate = appointmentToEdit.Start
+        'RadSchedulerRecurrenceEditor1.EndDate = appointmentToEdit.[End]
+
+        'RecurrenceRuleText = appointmentToEdit.RecurrenceRule
+    End Sub
+
+    Protected Sub SubmitButton_Click(sender As Object, e As EventArgs)
+        'If EditedAppointment Is Nothing Then
+        '    ' Insert Appointment
+        '    Dim aptToInsert As Appointment = PopulateBasicAppointmentPropertiesFromForm()
+
+        '    RadScheduler1.InsertAppointment(aptToInsert)
+        'Else
+        '    If Not RadScheduler1.EditingRecurringSeries AndAlso (EditedAppointmentParent IsNot Nothing OrElse EditedAppointment.RecurrenceState = RecurrenceState.Master) Then
+        '        ' Create Exception Appointment
+        '        Dim aptOccurence = EditedAppointment
+        '        Dim aptException = PopulateBasicAppointmentPropertiesFromForm(RadScheduler1.PrepareToEdit(aptOccurence, RadScheduler1.EditingRecurringSeries))
+
+        '        RadScheduler1.UpdateAppointment(aptException)
+        '    Else
+        '        ' Update Appointment
+        '        Dim aptOriginal As Appointment = EditedAppointment
+
+        '        If RadScheduler1.EditingRecurringSeries AndAlso (aptOriginal.RecurrenceState = RecurrenceState.Occurrence OrElse aptOriginal.RecurrenceState = RecurrenceState.Exception) Then
+        '            aptOriginal = EditedAppointmentParent
+        '        End If
+
+        '        Dim aptToUpdate As Appointment = PopulateBasicAppointmentPropertiesFromForm(aptOriginal.Clone())
+
+        '        RadScheduler1.UpdateAppointment(aptToUpdate, aptOriginal)
+        '    End If
+        'End If
+
+        'EditedAppointmentID = ""
+        'EditedAppointmentParentID = ""
+
+        'RadDock1.Closed = True
+    End Sub
 End Class
 

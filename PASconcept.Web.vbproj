@@ -592,6 +592,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="adm\activejobsdashboad.aspx" />
+    <Content Include="adm\appointment.aspx" />
     <Content Include="adm\avgeemployeesprofit.aspx" />
     <Content Include="adm\azurestorage_client.aspx" />
     <Content Include="adm\baddebt.aspx" />
@@ -676,6 +677,7 @@
     <Content Include="adm\newsubconsultant.aspx" />
     <Content Include="adm\newvendor.aspx" />
     <Content Include="adm\nojobstimetypes.aspx" />
+    <Content Include="adm\notificationsnew.aspx" />
     <Content Include="adm\options.aspx" />
     <Content Include="adm\orgchartbydepartment.aspx" />
     <Content Include="adm\paiddaylist.aspx" />
@@ -3153,6 +3155,13 @@
       <DependentUpon>ADM_Main_Responsive.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\appointment.aspx.designer.vb">
+      <DependentUpon>appointment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\appointment.aspx.vb">
+      <DependentUpon>appointment.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\avgeemployeesprofit.aspx.designer.vb">
       <DependentUpon>avgeemployeesprofit.aspx</DependentUpon>
     </Compile>
@@ -3754,6 +3763,13 @@
     <Compile Include="adm\nojobstimetypes.aspx.vb">
       <DependentUpon>nojobstimetypes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\notificationsnew.aspx.designer.vb">
+      <DependentUpon>notificationsnew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\notificationsnew.aspx.vb">
+      <DependentUpon>notificationsnew.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\options.aspx.designer.vb">
       <DependentUpon>options.aspx</DependentUpon>

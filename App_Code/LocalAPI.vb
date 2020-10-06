@@ -456,6 +456,30 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function GetRecordFromQuery(sql As String) As Dictionary(Of String, Object)
+        ' Devuelve un objeto con todos los valores del SELECT
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand(sql, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            result.Add(reader.GetName(lp), reader.GetValue(lp))
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+
     Public Shared Function sys_error_INSERT(ByVal companyId As Integer, userEmail As String, Message As String, Source As String, StackTrace As String) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
