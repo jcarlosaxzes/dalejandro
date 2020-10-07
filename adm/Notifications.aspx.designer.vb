@@ -11,61 +11,52 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class job_schedule
+Partial Public Class Notifications
 
     '''<summary>
-    '''RadAjaxManager1 control.
+    '''pnlFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
+    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''RadCodeBlock1 control.
+    '''cboTimeFrame control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
+    Protected WithEvents cboTimeFrame As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''RadAjaxLoadingPanel1 control.
+    '''txtFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+    Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
 
     '''<summary>
-    '''RadScheduler1 control.
+    '''btnFind control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadScheduler1 As Global.Telerik.Web.UI.RadScheduler
+    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''SqlDataSourceAppointments control.
+    '''RadGrid1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceAppointments As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceType control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceType As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
     '''SqlDataSourceEmployees control.
@@ -77,22 +68,13 @@ Partial Public Class job_schedule
     Protected WithEvents SqlDataSourceEmployees As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''lblEmployeeId control.
+    '''SqlDataSourceNotifications control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''lblJobId control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblJobId As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents SqlDataSourceNotifications As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.
@@ -109,9 +91,9 @@ Partial Public Class job_schedule
     '''<remarks>
     '''Auto-generated property.
     '''</remarks>
-    Public Shadows ReadOnly Property Master() As pasconcept20.MasterJOB
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master, pasconcept20.MasterJOB)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

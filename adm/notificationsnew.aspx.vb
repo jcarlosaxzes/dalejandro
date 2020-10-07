@@ -50,6 +50,27 @@ Public Class notificationsnew
 
 
             End If
+
+            If (lblEntityType.Text = "Notifications") Then
+                lblNotificationsId.Text = lblEntityId.Text
+
+                Dim Notifications = LocalAPI.GetRecordFromQuery($"SELECT TOP 1 [Id]
+				                          ,[Subject]
+				                          ,[Body]
+				                          ,[SendDate]
+				                          ,[EntityType]
+				                          ,[EntityId]
+                                          ,[EmployeesId]
+                                          ,[TargetEmails]
+			                          FROM [dbo].[Notifications] where Id =  " + lblNotificationsId.Text)
+
+                UpdateControls(Notifications("Subject"),
+                                    Notifications("Body"),
+                                    Notifications("SendDate"),
+                                    Notifications("EmployeesId"))
+                btnSave.Text = "Update Notification"
+
+            End If
         End If
     End Sub
 
@@ -65,6 +86,12 @@ Public Class notificationsnew
     End Sub
 
     Protected Sub btnBack_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBack.Click
+        If Request.QueryString("backpage") = "Notifications" Then
+            Response.Redirect("~/adm/Notifications.aspx")
+            Return
+        End If
+
+
         Response.Redirect("~/adm/schedule.aspx")
     End Sub
 
@@ -88,6 +115,12 @@ Public Class notificationsnew
             SqlDataSourceNotifications.Update()
         Else
             SqlDataSourceNotifications.Insert()
+        End If
+
+
+        If Request.QueryString("backpage") = "Notifications" Then
+            Response.Redirect("~/adm/Notifications.aspx")
+            Return
         End If
 
         Response.Redirect($"~/adm/schedule.aspx")

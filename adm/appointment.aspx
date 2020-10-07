@@ -9,7 +9,7 @@
         </asp:LinkButton>
         <span style="float: right; vertical-align: middle;">
                 <asp:LinkButton ID="btnSave" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Save Appointment">
-                        Save Appointment
+                        Save Event
                 </asp:LinkButton>
             </span>
 
@@ -132,7 +132,9 @@
                     </td>
                     <td>
                         Repeat every 
-                        <telerik:RadNumericTextBox ID="txtRecurrenceFrecuency" runat="server" Width="100px" MaxLength="80"   Text='<%# Bind("RecurrenceFrequency") %>'>
+                        <telerik:RadNumericTextBox ID="txtRecurrenceFrecuency" runat="server" Width="100px" MaxLength="80"  
+                            NumberFormat-DecimalDigits="0" MinValue="0" MaxValue="100"  Text='<%# Bind("RecurrenceFrequency") %>' >
+                            
                         </telerik:RadNumericTextBox>
                         <telerik:RadComboBox ID="cboRecurrenceInterval" runat="server" 
                              Width="100px"  AppendDataBoundItems="true"  Height="300px"   SelectedValue='<%# Bind("RecurrenceInterval") %>' >

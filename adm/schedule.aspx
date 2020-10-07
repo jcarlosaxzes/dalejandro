@@ -50,8 +50,8 @@
                         Export to PDF
             </asp:LinkButton>
 
-            <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Insert a record of client activity (phone call, meeting, quote, ...)">
-                            Add Activity
+            <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add new Event">
+                            Add Event
             </asp:LinkButton>
         </span>
 

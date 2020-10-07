@@ -203,9 +203,10 @@ Public Class schedule
     End Sub
 
     Protected Sub btnCRM_Click(sender As Object, e As EventArgs) Handles btnCRM.Click
-        InitActivityForm()
-        RadToolTipCRM.Visible = True
-        RadToolTipCRM.Show()
+        'InitActivityForm()
+        'RadToolTipCRM.Visible = True
+        'RadToolTipCRM.Show()
+        Response.Redirect($"~/adm/appointment?backpage=calendar")
 
     End Sub
     Protected Sub btnCRMOk_Click(sender As Object, e As EventArgs) Handles btnCRMOk.Click

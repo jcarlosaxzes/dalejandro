@@ -48,18 +48,17 @@ Public Class job_schedule
 
     End Sub
 
-    Protected Sub RadScheduler1_FormCreated(sender As Object, e As SchedulerFormCreatedEventArgs) Handles RadScheduler1.FormCreated
-        If (e.Container.Mode = SchedulerFormMode.AdvancedEdit) OrElse (e.Container.Mode = SchedulerFormMode.AdvancedInsert) Then
-            CType(e.Container.FindControl("ResActivity Type"), RadDropDownList).Width = 450
-            CType(e.Container.FindControl("ResActivity Type"), RadDropDownList).ZIndex = 7004
+    Protected Sub RadScheduler1_FormCreating(sender As Object, e As SchedulerFormCreatingEventArgs)
 
-            CType(e.Container.FindControl("ResAssign to User"), RadDropDownList).Width = 450
-            CType(e.Container.FindControl("ResAssign to User"), RadDropDownList).ZIndex = 7004
+        Dim appointmentToEdit = RadScheduler1.PrepareToEdit(e.Appointment, RadScheduler1.EditingRecurringSeries)
+        Session("appointment_start") = appointmentToEdit.Start.ToString("yyyy-MM-dd HH:mm:ss")
+        Session("appointment_end") = appointmentToEdit.End.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim Id = appointmentToEdit.ID
+        Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}"
+        ScriptManager.RegisterStartupScript(Page, [GetType](), "formScript", $"RedirectPage('{url}');", True)
 
-
-
-        End If
     End Sub
+
 
 
     Protected Sub SqlDataSourceAppointments_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceAppointments.Selecting

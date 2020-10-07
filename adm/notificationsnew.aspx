@@ -16,6 +16,7 @@
 
     <div class="pasconcept-bar">
         <h4>Notifications</h4>
+        <span>All notifications are sent between 6am-9am, Monday-Friday</span>
             <table class="table-sm" style="width: 90%">
                 <tr>
                     <td style="width: 200px; text-align: right">Subject:
@@ -40,7 +41,7 @@
                     <td style="width: 200px; text-align: right">Send Date: 
                     </td>
                     <td>
-                        <telerik:RadDatePicker ID="dtpSendDate" runat="server" >
+                        <telerik:RadDatePicker ID="dtpSendDate" runat="server" MinDate='<%# DateTime.Now.AddDays(1) %>'  MaxDate='<%# DateTime.Parse("2029-12-31") %>'>
                         </telerik:RadDatePicker>
                     </td>
                 </tr>

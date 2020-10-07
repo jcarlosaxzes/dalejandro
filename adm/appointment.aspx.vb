@@ -21,7 +21,7 @@ Public Class appointment
             dtpEnd.SelectedDate = en
             lblEmployee.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
             lblAppointmentid.Text = Val(Request.QueryString("Id"))
-            btnSave.Text = IIf(Val(Request.QueryString("Id")) > 0, "Update Appointment", "Create Appointment")
+            btnSave.Text = IIf(Val(Request.QueryString("Id")) > 0, "Update Event", "Create Event")
         End If
     End Sub
 

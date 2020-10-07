@@ -412,6 +412,9 @@
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="Use & Occupancy Classification" NavigateUrl="~/adm/jobuse"
                                                 Visible='<%# EmployeePermission("Deny_UseClassification") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
+                                            </telerik:NavigationNode>                                            
+                                            <telerik:NavigationNode NavigateUrl="~/adm/Notifications" Text="Notifications"
+                                                Visible='<%# EmployeePermission("Deny_HistoryLog") And VersionCaracteristica(802)%>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/Messages" Text="Email History Log"
                                                 Visible='<%# EmployeePermission("Deny_HistoryLog") And VersionCaracteristica(802)%>'>

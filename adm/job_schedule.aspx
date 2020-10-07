@@ -11,6 +11,13 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
+      <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+        <script type="text/javascript">
+            function RedirectPage(url) {
+                window.location = url;
+            }
+        </script>
+    </telerik:RadCodeBlock>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
     </telerik:RadAjaxLoadingPanel>
 
@@ -37,8 +44,10 @@
             WorkDayEndTime="23:59:59"
             FirstDayOfWeek="Monday"
             LastDayOfWeek="Sunday"
-            StartInsertingInAdvancedForm="True"
-            CustomAttributeNames="Location">
+            StartInsertingInAdvancedForm="False"
+            StartEditingInAdvancedForm ="False"
+            CustomAttributeNames="Location"
+            OnFormCreating="RadScheduler1_FormCreating">
             <ResourceTypes>
                 <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceType"></telerik:ResourceType>
                 <telerik:ResourceType KeyField="ID" Name="Assign to User" TextField="Name" ForeignKeyField="EmployeeId" DataSourceID="SqlDataSourceEmployees"></telerik:ResourceType>
