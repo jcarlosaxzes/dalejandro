@@ -96,7 +96,9 @@ Public Class sendinvoice
             Case "104"
                 Response.Redirect("~/adm/editjob.aspx?Job=" & jobId & "#invoices")
             Case "1103"
-                Response.Redirect("~/adm/Job_accounting.aspx?JobId=" & jobId) '& "#invoices")
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8002, jobId)
+                Response.Redirect(sUrl)
+
         End Select
     End Sub
 #End Region

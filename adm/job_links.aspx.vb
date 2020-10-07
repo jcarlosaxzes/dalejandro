@@ -8,7 +8,7 @@ Public Class job_links
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
                 lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
 
                 lblproposalId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "proposalId")

@@ -10662,6 +10662,34 @@ Public Class LocalAPI
                     Case 3001  'Client Acknowledgment Page
                         url = LocalAPI.GetHostAppSite() & "/e2103445_8a47_49ff_808e_6008c0fe13a1/acknowledgment.aspx?clientguid=" & LocalAPI.GetClientProperty(objId, "guid")
 
+
+                    ' Job_ pages............................................
+
+                    Case 8001
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_job.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8002
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_accounting.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8003
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_employees.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8004
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_proposals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8005
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_rfps.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8006
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_notes.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8007
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_times.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8008
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_links.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8009
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_schedule.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8010
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_reviews.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8011
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_tags.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8012
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_transmittals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+
                 End Select
                 If PrintParameter Then
                     url = url & "&Print=1"
@@ -11148,6 +11176,148 @@ Public Class LocalAPI
                 'pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
                 Return jobId
             End If
+
+        Catch ex As Exception
+            Return jobId
+            Throw ex
+        End Try
+    End Function
+
+
+    Public Shared Function ProposalCreateJob(ByVal proposalId As Long, ByVal companyId As Integer) As Integer
+        Dim jobId As Integer = 0
+        Try
+
+            'If GetProposalProperty(proposalId, "StatusId") < 2 Then
+
+                '1.- Pasarlo a statusId=2 para que no vuelva por esta rama
+                'ProposalStatus2Accepted(proposalId)
+
+                '0.- Es un primer Proposal o es un Change Order (ya tiene JobId)
+                Dim dProposalTotal As Double = GetProposalTotal(proposalId)
+
+                jobId = GetProposalProperty(proposalId, "JobId")
+                Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
+                Dim bRetainer As Boolean
+
+            If jobId <= 0 Then
+                '2.1 -  Crear job Asociado
+                ' No Aceptado y sin JobId creado
+
+                ' Leer Otros datos para el Job
+                Dim ProposalObject = LocalAPI.GetRecord(proposalId, "PROPOSAL_FOR_Aceptance_SELECT")
+
+                '.....................................Aceprtar Proposal inicial, (No tiene Job asignado, hay que crearlo.....................)
+                '2.2 - Obtener datos del Proposal
+                Dim sJobCode As String = GetNextJobCode(Right(Year(GetDateTime()), 2), companyId)
+
+                If Len(sJobCode) > 0 Then
+                    Dim sJobName As String = ProposalObject("ProjectName")
+                    Dim sClientId As String = ProposalObject("ClientId")
+                    Dim ProjectManagerId As String = "0"
+                    Dim sJobType As String = ProposalObject("ProjectType")
+                    Dim nJobSector As Integer = ProposalObject("ProjectSector")
+                    Dim sJobUse As String = ProposalObject("ProjectUse")
+                    Dim sJobUse2 As String = ProposalObject("ProjectUse2")
+                    Dim sProjLocation As String = ProposalObject("ProjectLocation")
+                    Dim sProjArea As String = ProposalObject("ProjectArea")
+                    Dim sOwner As String = ProposalObject("Owner")
+                    Dim Dpto As String = ProposalObject("DepartmentId")
+                    Dim sProposalType As String = ProposalObject("Type")
+                    Dim nWorkingDays As Integer = ProposalObject("Workdays")
+                    Dim DeadLine As DateTime = ProposalObject("Deadline")
+                    Dim StartDay As DateTime
+
+                    bRetainer = ProposalObject("Retainer")
+
+                    '2.3 -.- Get Job Code
+                    ' Verificar que no existe el Nombre
+                    jobId = GetJobId(sJobName, companyId)
+                    Dim i As Integer = 0
+                    While jobId > 0
+                        i = i + 1
+                        sJobName = sJobName & " (" & i & ")"
+                        jobId = GetJobId(sJobName, companyId)
+                    End While
+
+                    '2.4 - Crear Job asociado
+                    jobId = NuevoJob(sJobCode, sJobName, GetDateTime(), sClientId, dProposalTotal, sProposalType, sJobType, ProjectManagerId, sProjLocation, sProjArea, nJobSector, sJobUse, sJobUse2, Dpto, sOwner, 0, 0, companyId)
+
+                    '2.5 - Update parametros del Proposal
+                    ExecuteNonQuery($"UPDATE [Proposal] Set JobId={jobId} WHERE Id={proposalId}")
+
+                    '2.6 - New Job Note acceptande
+                    NewJobNote(jobId, "Log: Job created by the acceptance of the Proposal " & ProposalNumber(proposalId), 0)
+
+                    '2.7 - Setting Dates attributes of Job
+                    If Year(DeadLine) = 1980 Then
+                        ' Fecha de fin sin definir, se calcula a partir de los WorkinDays
+                        If nWorkingDays = 0 Then
+                            nWorkingDays = 1
+                        End If
+                        ' Un dia mas, pues se supon que no se empieza a trabajar el mismo dia de aceptacion
+                        DeadLine = AddWorkDays(GetDateTime(), nWorkingDays + 1)
+                    End If
+                    StartDay = AddWorkDays(GetDateTime(), 1)
+                    ExecuteNonQuery("UPDATE [Jobs] set [StartDay]=" & GetFecha_102(StartDay) & ", [EndDay]=" & GetFecha_102(DeadLine) & ", Workdays=" & nWorkingDays & " WHERE Id=" & jobId)
+                    ' Otros atributos del Proposal->Job
+                    ExecuteNonQuery($"UPDATE [Jobs] set [Unit]=(select Unit from Proposal where Id={proposalId}), [Measure]=(select Measure from Proposal where Id={proposalId}) WHERE Id={jobId}")
+
+                    If Len(sProjLocation) > 2 Then
+                        Dim Latitude As String = ""
+                        Dim Longitude As String = ""
+                        LocalAPI.GetLatitudeLongitude(sProjLocation, Latitude, Longitude)
+                        LocalAPI.SetJobLatitudeLongitude(jobId, Latitude, Longitude)
+                    End If
+
+                End If
+            Else
+                '2.1 -Proposal Change Order
+                ' Ya existe JobId, es un Aditional change.......................................................................................
+                If dProposalTotal <> 0 Then
+                        '2.2.- Incrementar el Jobs.Budget=+Proposal.Total)
+                        ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{dProposalTotal} WHERE Id={jobId}")
+                        NewJobNote(jobId, "$Log: job Budget modified (+" & dProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
+
+                        ''2.3 Simple Charge, and ..., se esta duplicando en 3. - Invoices from PaymentSchedule
+                        'NuevoInvoiceSimpleCharge(jobId, GetDateTime(), dProposalTotal, "Proposal (Additional Charge): " & ProposalNumber(proposalId))
+
+                        '2.4 Mandatory Retainer
+                        bRetainer = True
+                    End If
+
+                    '2.2 - Update parametros del Proposal
+                    ExecuteNonQuery("UPDATE [Proposal] SET AceptedDate=" & GetFecha_102(Today.Date) & ", [StatusId]=2 WHERE Id=" & proposalId.ToString)
+                End If
+
+                '3. - Invoices from PaymentSchedule
+                If jobId > 0 And dProposalTotal > 0 Then CreateInvoicesFromPaymentSchedule(proposalId, jobId)
+
+                '4. -' Retainer..............
+                If jobId > 0 And bRetainer Then
+                    ' Se emite el Invoice por 100% al client
+                    Dim invoiceId As Integer = GetNumericEscalar($"select top 1 Id from Invoices where JobId={jobId} and [Emitted]=0 order by Number")
+                    If invoiceId > 0 Then
+                        InvoiceAutomatictToClient(invoiceId, companyId)
+                        NewJobNote(jobId, "Log: New Automatic Invoice for Reatiner by the acceptance of the Proposal : " & ProposalNumber(proposalId), 0)
+                    End If
+                End If
+
+                '5. - TAGuear al cliente en Agile
+                If companyId = 260962 Then
+                    Task.Run(Function() ProposalTAGAgile(proposalId, companyId, "Accepted"))
+                End If
+
+                '6. - Log................... End
+                LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.AceptProposal, companyId, proposalId)
+
+                '7. Create Signed PDF
+                'Dim pdf As PdfApi = New PdfApi()
+                'Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
+                'Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
+                'pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
+                Return jobId
+            'End If
 
         Catch ex As Exception
             Return jobId

@@ -8,9 +8,7 @@ Public Class job_schedule
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblEmployeeId.Text = Master.UserId
-
-                lblJobId.Text = Request.QueryString("JobId")
-
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 Dim ViewMode As Integer = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "RadScheduler_JobEdit_View")
                 RadScheduler1.SelectedView = IIf(ViewMode = -1, 1, ViewMode)

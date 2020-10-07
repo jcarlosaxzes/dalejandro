@@ -20,7 +20,7 @@
                 /* ...Other Configuration Options... */
             }
         });
-        </script>
+    </script>
 
     <%-- Favicons and the like --%>
     <link rel="apple-touch-icon" sizes="180x180" href="~/Content/favicons/apple-touch-icon.png" />
@@ -29,7 +29,16 @@
     <link rel="manifest" href="~/Content/favicons/site.webmanifest" />
 
     <meta name="viewport" content="width=device-width, user-scalable=no" />
-    <title></title>
+
+
+     <%--FreshDesk--%>
+    <script>
+        window.fwSettings = { 'widget_id': 66000000640 };
+        !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
+    </script>
+    <script type='text/javascript' src='https://widget.freshworks.com/widgets/66000000640.js' async defer></script>
+
+    <title>PASconcept. Job</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -51,6 +60,16 @@
             padding-left: 50px;
             padding-right: 50px;
         }
+        .imglogo {
+            vertical-align: middle;
+            border-style: none;
+            border-width:0;
+            max-height: 42px !important;
+            max-width: 110px !important;
+            height: auto;
+            width: auto;
+        }
+
     </style>
 
 </head>
@@ -60,72 +79,96 @@
         </telerik:RadScriptManager>
 
         <div class="container">
-            <div style="width: 100%; text-align: center">
-                <telerik:RadNavigation ID="RadNavigationJob" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material">
-                    <Nodes>
-                        <telerik:NavigationNode ID="NavigationNodejob_job"
-                            Text="Job Info"
-                            NavigateUrl='<%# String.Concat("~/adm/job_job.aspx?jobId=", lblJobId.Text)%>'>
-                        </telerik:NavigationNode>
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                   <td class="noprint" style="width: 180px">
+                        <a href="/">
+                            <img class="imglogo" src="../Images/logo/pas_horizontal_logo.png" height="42"  />
+                        </a>
+                    </td>
+                    <td style="text-align:center">
+                        <span class="pasconcept-pagetitle"><asp:Label runat="server" ID="lblJobName"></asp:Label></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="noprint">
+                        <asp:LinkButton runat="server" ID="btnMasterClose" CssClass="btn btn-dark btn-lg">
+                            <i class="fas fa-arrow-left"></i>&nbsp;Exit Job
+                        </asp:LinkButton>
+                    </td>
+                    <td style="text-align: center">
+                        <telerik:RadNavigation ID="RadNavigationJob" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material">
+                            <Nodes>
+                                <telerik:NavigationNode ID="NavigationNodejob_job"
+                                    Text="Job Info"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8001, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Billing" ID="NavigationNodejob_accounting"
-                            NavigateUrl='<%# String.Concat("~/adm/job_accounting.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Billing" ID="NavigationNodejob_accounting"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8002, lblJobId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Employees" ID="NavigationNodejob_employees"
-                            NavigateUrl='<%# String.Concat("~/adm/job_employees.aspx?jobId=", lblJobId.Text)%>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Employees" ID="NavigationNodejob_employees"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8003, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Proposals" ID="NavigationNodejob_proposals"
-                            NavigateUrl='<%# String.Concat("~/adm/job_proposals.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Proposals" ID="NavigationNodejob_proposals"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8004, lblJobId.Text)%>' 
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Expenses" ID="NavigationNodejob_rfps"
-                            NavigateUrl='<%# String.Concat("~/adm/job_rfps.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Expenses" ID="NavigationNodejob_rfps"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8005, lblJobId.Text)%>' 
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Notes" ID="NavigationNodejob_notes"
-                            NavigateUrl='<%# String.Concat("~/adm/job_notes.aspx?jobId=", lblJobId.Text)%>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Notes" ID="NavigationNodejob_notes"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8006, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Times" ID="NavigationNodejob_times"
-                            NavigateUrl='<%# String.Concat("~/adm/job_times.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Times" ID="NavigationNodejob_times"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8007, lblJobId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Files" ID="NavigationNodejob_links"
-                            NavigateUrl='<%# String.Concat("~/adm/job_links.aspx?jobId=", lblJobId.Text)%>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Files" ID="NavigationNodejob_links"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8008, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Schedule" ID="NavigationNodejob_schedule"
-                            NavigateUrl='<%# String.Concat("~/adm/job_schedule.aspx?jobId=", lblJobId.Text)%>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Schedule" ID="NavigationNodejob_schedule"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8009, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Revisions" ID="NavigationNodejob_reviews"
-                            NavigateUrl='<%# String.Concat("~/adm/job_reviews.aspx?jobId=", lblJobId.Text)%>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Revisions" ID="NavigationNodejob_reviews"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8010, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Tags" ID="NavigationNodejob_tags"
-                            NavigateUrl='<%# String.Concat("~/adm/job_tags.aspx?jobId=", lblJobId.Text)%>'>
-                        </telerik:NavigationNode>
+                                <telerik:NavigationNode
+                                    Text="Tags" ID="NavigationNodejob_tags"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8011, lblJobId.Text)%>'>
+                                </telerik:NavigationNode>
 
-                        <telerik:NavigationNode
-                            Text="Transmittals" ID="NavigationNodejob_trasmittals"
-                            NavigateUrl='<%# String.Concat("~/adm/job_transmittals.aspx?jobId=", lblJobId.Text)%>' Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
-                        </telerik:NavigationNode>
-                    </Nodes>
-                </telerik:RadNavigation>
-            </div>
-            <div class="pas-container" style="margin: 25px">
+                                <telerik:NavigationNode
+                                    Text="Transmittals" ID="NavigationNodejob_trasmittals"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8012, lblJobId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
+                                </telerik:NavigationNode>
+                            </Nodes>
+                        </telerik:RadNavigation>
+                    </td>
+                </tr>
+            </table>
+            <div class="pas-container" style="margin-left: 10px;margin-right:10px;margin-top:0">
 
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>

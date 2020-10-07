@@ -6,7 +6,7 @@ Public Class jobs
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
 
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Jobs List"
+            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Jobs"
             If (Not Page.IsPostBack) Then
 
                 ' Si no tiene permiso, la dirijo a message
@@ -23,10 +23,6 @@ Public Class jobs
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
 
                 LocalAPI.RefreshYearsList()
-
-                cboPeriod.DataBind()
-                cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterJob_Month")
-                IniciaPeriodo(cboPeriod.SelectedValue)
 
                 cboEmployee.DataBind()
                 If Len(Session("Employee")) Then
@@ -52,11 +48,10 @@ Public Class jobs
 
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
+                Else
+                    DefaultFilterPage()
                 End If
-
-                If Not Request.QueryString("JobIdInput") Is Nothing Then
-                    lblJobIdInput.Text = Request.QueryString("JobIdInput")
-                End If
+                IniciaPeriodo(cboPeriod.SelectedValue)
 
                 EEGvertical()
 
@@ -73,25 +68,18 @@ Public Class jobs
         End Try
     End Sub
 
+    Private Sub DefaultFilterPage()
+        cboPeriod.DataBind()
+        cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterJob_Month")
+        If Not Request.QueryString("JobIdInput") Is Nothing Then
+            lblJobIdInput.Text = Request.QueryString("JobIdInput")
+        End If
+    End Sub
     Private Sub EEGvertical()
         If lblCompanyId.Text = 260962 Then
             panelSubbar.Visible = True
         End If
 
-    End Sub
-
-
-    Private Sub jobs_PreRender(sender As Object, e As EventArgs) Handles Me.PreRender
-        If lblJobIdInput.Text > 0 Then
-            Dim sUrl As String
-            If LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_InvoicesList") Then
-                sUrl = "~/adm/Job_accounting.aspx?JobId=" & lblJobIdInput.Text
-            Else
-                sUrl = "~/adm/Job_job.aspx?JobId=" & lblJobIdInput.Text
-            End If
-            lblJobIdInput.Text = "0"
-            CreateRadWindows("Job", sUrl, 960, 820, True, True)
-        End If
     End Sub
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)
@@ -170,6 +158,7 @@ Public Class jobs
     Private Sub SaveFilter()
         Session("Filter_Jpbs_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
         Session("Filter_Jpbs_RadDatePickerTo") = RadDatePickerTo.SelectedDate
+        Session("Filter_Jpbs_cboPeriod") = cboPeriod.SelectedValue
         Session("Filter_Jpbs_cboEmployee") = cboEmployee.SelectedValue
         Session("Filter_Jpbs_cboStatus") = cboStatus.SelectedValue
         Session("Filter_Jpbs_cboClients") = cboClients.SelectedValue
@@ -185,16 +174,26 @@ Public Class jobs
         Try
             RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
             RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
+            cboPeriod.DataBind()
+            cboPeriod.SelectedValue = Session("Filter_Jpbs_cboPeriod")
             cboEmployee.SelectedValue = Session("Filter_Jpbs_cboEmployee")
+            cboStatus.DataBind()
             cboStatus.SelectedValue = Session("Filter_Jpbs_cboStatus")
+            cboClients.DataBind()
             cboClients.SelectedValue = Session("Filter_Jpbs_cboClients")
             lblDepartmentIdIN_List.Text = Session("Filter_Jpbs_lblDepartmentIdIN_List")
+            cboJobType.DataBind()
             cboJobType.SelectedValue = Session("Filter_Jpbs_cboJobType")
             lblExcludeClientId_List.Text = Session("Filter_Jpbs_lblExcludeClientId_List")
+            cboBalanceStatus.DataBind()
             cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
             lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
             txtFind.Text = Session("Filter_Jpbs_txtFind")
+
+            Refresh()
+
         Catch ex As Exception
+            Dim e1 As String = ex.Message
         End Try
     End Sub
     'Protected Sub RadGrid1_BatchEditCommand(sender As Object, e As Telerik.Web.UI.GridBatchEditingEventArgs) Handles RadGrid1.BatchEditCommand
@@ -348,9 +347,9 @@ Public Class jobs
     End Function
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
-        Dim sUrl As String = ""
+
         Select Case e.CommandName
-            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Transmittals", "Update Status", "Add Time"
+            Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Tickets", "View/Edit Transmittals", "Update Status", "Add Time"
                 FireJobCommand(e.CommandName, e.CommandArgument)
 
             Case "Hide Client"
@@ -369,52 +368,55 @@ Public Class jobs
             Dim sUrl As String
             Select Case CommandName
                 Case "View/Edit Info"
-                    sUrl = "~/ADM/Job_job.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8001, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Billing"
-                    sUrl = "~/ADM/Job_accounting.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8002, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Employees"
-                    sUrl = "~/ADM/Job_employees.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8003, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Proposal(s)"
-                    sUrl = "~/ADM/job_proposals.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8004, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Expenses"
-                    sUrl = "~/ADM/job_rfps.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8005, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Notes"
-                    sUrl = "~/ADM/Job_notes.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8006, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Time Entries"
-                    sUrl = "~/ADM/Job_times.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8007, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Files"
-                    sUrl = "~/ADM/Job_links.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8008, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View Schedule"
-                    sUrl = "~/ADM/job_schedule.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8009, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Revisions"
-                    sUrl = "~/ADM/job_reviews.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8010, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
+
+                Case "View/Edit Tickets"
+                    Response.Redirect($"~/adm/JobTickets.aspx?JobId={JobId}")
 
                 Case "View/Edit Tags"
-                    sUrl = "~/ADM/Job_tags.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8011, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "View/Edit Transmittals"
-                    sUrl = "~/ADM/job_transmittals.aspx?JobId=" & JobId
-                    CreateRadWindows(CommandName, sUrl, 960, 820, True, False)
+                    sUrl = LocalAPI.GetSharedLink_URL(8012, JobId) & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
                 Case "Update Status"
                     lblSelectedJobId.Text = JobId
@@ -444,8 +446,8 @@ Public Class jobs
                     If cboEmployee.SelectedValue > 0 Then
                         Session("employeefortime") = cboEmployee.SelectedValue
                     End If
-                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&Dialog=1"
-                    CreateRadWindows(CommandName, sUrl, 1024, 820, True, False)
+                    sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&backpage=jobs"
+                    Response.Redirect(sUrl)
 
             End Select
         Catch ex As Exception

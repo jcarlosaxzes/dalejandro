@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class titleblock
+Partial Public Class scopeofwork1
 
     '''<summary>
     '''form1 control.
@@ -21,6 +21,33 @@ Partial Public Class titleblock
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
+    '''lblContent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblContent As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txtHTML control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHTML As Global.Telerik.Web.UI.RadEditor
+
+    '''<summary>
+    '''lblProposalId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblProposalId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblJobId control.

@@ -43,7 +43,8 @@
             Case "invoices"
                 Response.Redirect("~/adm/invoices.aspx")
             Case Else
-                Response.Redirect("~/adm/job_accounting.aspx?jobId=" & lblJobId.Text)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8002, lblJobId.Text)
+                Response.Redirect(sUrl)
         End Select
 
     End Sub

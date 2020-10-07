@@ -29,6 +29,10 @@
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
                     <telerik:AjaxUpdatedControl ControlID="cboEmployee" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatus" />
+                    <telerik:AjaxUpdatedControl ControlID="cboClients" />
+                    <telerik:AjaxUpdatedControl ControlID="cboJobType" />
+                    <telerik:AjaxUpdatedControl ControlID="cboBalanceStatus" />
                     <telerik:AjaxUpdatedControl ControlID="cboDepartments" />
                     <telerik:AjaxUpdatedControl ControlID="lblDepartmentIdIN_List" />
                     <telerik:AjaxUpdatedControl ControlID="lblExcludeClientId_List" />
@@ -508,8 +512,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-left: 24px">
+                                                        <asp:LinkButton ID="LinkButton13" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Tickets" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 %>'>
+                                                            View/Edit Tickets
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="padding-left: 24px">
                                                         <asp:LinkButton ID="LinkButton11" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Transmittals" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
-                                                            Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
+                                                            Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") And LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                                             View/Edit Transmittals
                                                         </asp:LinkButton>
                                                     </td>
@@ -528,8 +540,8 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid"), "&Print=1") %>' class="dropdown-item" target="_blank">
-                                                            <i class="fas fa-th-list"></i>&nbsp;&nbsp; Scope of Work Print View
+                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                                            <i class="fas fa-th-list"></i>&nbsp;&nbsp; Download Scope of Work
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -565,11 +577,12 @@
                                     <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("JobUploadFiles")=0,"display:none","display:normal")%>'>
                                         <%#Eval("JobUploadFiles")%>
                                     </span>
-                                    <a title="Click here to view Scope Of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid"), "&Print=1") %>' target="_blank"
+                                    <%--href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>'--%>
+                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-th-list"></i>
                                     </a>
-                                    <a title="Click here to download titlebox file" href='<%#String.Concat("../adm/titleblock.aspx?guid=", Eval("guid")) %>' target="_blank"
+                                    <a title="Click here to Download Scope of Work" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid"), "&Print=1") %>' target="_blank"
                                         style='<%# IIf(Eval("companyId")=260962,"display:normal;font-size:x-small","display:none")%>'>
                                         <i class="fas fa-cloud-download-alt"></i>
                                     </a>

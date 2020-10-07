@@ -6,12 +6,16 @@ Public Class job_rfps
         Try
 
             If (Not Page.IsPostBack) Then
-                lblJobId.Text = Request.QueryString("JobId")
                 lblCompanyId.Text = Session("companyId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
+
                 lblJob.Text = LocalAPI.GetJobCodeName(lblJobId.Text)
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_RequestsProposalsList") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_RequestsProposalsList") Then
+                    Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, lblJobId.Text)
+                    Response.Redirect(sUrl)
+                End If
 
                 RadGridReport.DataBind()
 

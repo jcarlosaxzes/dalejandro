@@ -7,14 +7,16 @@ Public Class job_proposals
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
-                lblJobId.Text = Request.QueryString("JobId")
-
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/job_job.aspx?JobId=" & lblJobId.Text)
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then
+                    Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, lblJobId.Text)
+                    Response.Redirect(sUrl)
+                End If
 
                 Master.ActiveTab(3)
             End If

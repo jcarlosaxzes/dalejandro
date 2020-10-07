@@ -46,36 +46,25 @@
                                         </EditItemTemplate>
 
                                     </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn DataField="cityId" FilterControlAltText="Filter City column" HeaderStyle-Width="180px" HeaderText="City" SortExpression="City" UniqueName="cityId">
+                                    <telerik:GridTemplateColumn DataField="City" HeaderStyle-Width="180px" HeaderText="City/County" SortExpression="City" UniqueName="City">
                                         <ItemTemplate>
                                             <%# Eval("City") %>
                                         </ItemTemplate>
                                         <EditItemTemplate>
-                                            <telerik:RadComboBox ID="cboCity2" runat="server" DataSourceID="SqlDataSourceReviewCity" DataTextField="Name" DataValueField="Id"
-                                                Filter="Contains" MarkFirstMatch="True" SelectedValue='<%# Bind("cityId") %>' AppendDataBoundItems="true" Width="400px" Height="250px">
-                                                <Items>
-                                                    <telerik:RadComboBoxItem runat="server" Text="(Select City...)" Value="0" />
-                                                </Items>
-                                            </telerik:RadComboBox>
-
+                                            <telerik:RadTextBox ID="txtCity" runat="server" Text='<%# Bind("City") %>' Width="800px" MaxLength="80">
+                                            </telerik:RadTextBox>
                                         </EditItemTemplate>
                                     </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn DataField="deparmentId" FilterControlAltText="Filter Department column" Display="false"
-                                        HeaderStyle-Width="150px" HeaderText="Department" SortExpression="Department" UniqueName="deparmentId">
+                                    <telerik:GridTemplateColumn DataField="Department" HeaderStyle-Width="180px" HeaderText="Department" SortExpression="Department" UniqueName="Department">
                                         <ItemTemplate>
                                             <%# Eval("Department") %>
                                         </ItemTemplate>
                                         <EditItemTemplate>
-                                            <telerik:RadComboBox ID="cboDepartment2" runat="server" DataSourceID="SqlDataSourceReviewDepartment" DataTextField="Name" DataValueField="Id"
-                                                Filter="Contains" MarkFirstMatch="True" Width="400px"
-                                                SelectedValue='<%# Bind("deparmentId") %>' AppendDataBoundItems="true">
-                                                <Items>
-                                                    <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="0" />
-                                                </Items>
-                                            </telerik:RadComboBox>
+                                            <telerik:RadTextBox ID="txtDepartment" runat="server" Text='<%# Bind("Department") %>' Width="800px" MaxLength="80">
+                                            </telerik:RadTextBox>
                                         </EditItemTemplate>
                                     </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn DataField="DateSubmit" HeaderStyle-Width="100px" FilterControlAltText="Filter DateSubmit column" HeaderText="Submit" SortExpression="DateSubmit" UniqueName="DateSubmit">
+                                    <telerik:GridTemplateColumn DataField="DateSubmit" HeaderStyle-Width="100px" FilterControlAltText="Filter DateSubmit column" HeaderText="Submitted" SortExpression="DateSubmit" UniqueName="DateSubmit">
                                         <ItemTemplate>
                                             <%# Eval("DateSubmit", "{0:d}") %>
                                         </ItemTemplate>
@@ -86,7 +75,7 @@
                                         </EditItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridTemplateColumn DataField="statusId" FilterControlAltText="Filter Status column"
-                                        HeaderStyle-Width="100px" HeaderText="Status"
+                                        HeaderStyle-Width="180px" HeaderText="Status"
                                         SortExpression="Status" UniqueName="statusId" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
                                             <span class="label badge-<%# IIf(Eval("statusId") = 0, "warning", IIf(Eval("statusId") = 1, "success", "danger")) %>"><%# Eval("Status") %>
@@ -250,8 +239,8 @@
             <asp:ControlParameter ControlID="lblJobId" Name="jobId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="Code" Type="String" />
             <asp:Parameter Name="url" Type="String" />
-            <asp:Parameter Name="cityId" Type="Int16" />
-            <asp:Parameter Name="deparmentId" Type="Int16" />
+            <asp:Parameter Name="City" Type="String" />
+            <asp:Parameter Name="Department" Type="String" />
             <asp:Parameter Name="DateSubmit" Type="DateTime" />
             <asp:Parameter Name="DateOut" Type="DateTime" />
             <asp:Parameter Name="statusId" Type="Int16" />
@@ -262,8 +251,8 @@
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:Parameter Name="Code" Type="String" />
             <asp:Parameter Name="url" Type="String" />
-            <asp:Parameter Name="cityId" Type="Int16" />
-            <asp:Parameter Name="deparmentId" Type="Int16" />
+            <asp:Parameter Name="City" Type="String" />
+            <asp:Parameter Name="Department" Type="String" />
             <asp:Parameter Name="DateSubmit" Type="DateTime" />
             <asp:Parameter Name="DateOut" Type="DateTime" />
             <asp:Parameter Name="statusId" Type="Int16" />
@@ -283,11 +272,6 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourceReviewCity" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, Name FROM PlanReview_Cities ORDER BY Name"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceReviewDepartment" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Id, Name FROM PlanReview_Departments ORDER BY Name"></asp:SqlDataSource>
 
     <%--IT Company--%>
 

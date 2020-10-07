@@ -93,7 +93,9 @@
                 Response.RedirectPermanent("~/adm/Transmittal.aspx?transmittalId=" & lblTransmittalId.Text & "&BackPage=transmittals")
             Case "job_transmittals"
                 Dim JobId As Integer = LocalAPI.GetTransmittalProperty(lblTransmittalId.Text, "JobId")
-                Response.RedirectPermanent("~/adm/job_transmittals.aspx?JobId=" & JobId)
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8012, JobId)
+                Response.Redirect(sUrl)
+
             Case Else
                 Response.RedirectPermanent("~/adm/Transmittal.aspx?transmittalId=" & lblTransmittalId.Text)
         End Select

@@ -275,8 +275,8 @@ Public Class invoices
                     End If
 
                 Case "EditJobBilling"
-                    sUrl = "~/adm/Job_accounting.aspx?JobId=" & e.CommandArgument
-                    CreateRadWindows(e.CommandName, sUrl, 850, 820, True)
+                    sUrl = LocalAPI.GetSharedLink_URL(8002, e.CommandArgument) & "&backpage=invoices"
+                    Response.Redirect(sUrl)
 
                 Case "PDF"
                     lblInvoiceId.Text = e.CommandArgument

@@ -45,7 +45,7 @@ Public Class contacts
                 sUrl = "~/ADM/Contact.aspx?ContactId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 850, 700)
             Case "c"
-                Response.Redirect("~/adm/client.aspx?clientId=" & e.CommandArgument & "&fromcontacts=1")
+                Response.Redirect($"~/ADM/Client.aspx?clientId={e.CommandArgument}&backpage=contacts")
             Case "e"
                 Response.Redirect("~/adm/employee.aspx?employeeId=" & e.CommandArgument & "&fromcontacts=1")
             Case "s"

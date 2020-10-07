@@ -6,7 +6,7 @@
 
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = Request.QueryString("JobId")
+                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
 
                 If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                     ' Programmers/Computer/IT
@@ -42,5 +42,9 @@
 
     Private Sub btnAddModule_Click(sender As Object, e As EventArgs) Handles btnAddModule.Click
         RadGridLocationModule.MasterTableView.InsertItem()
+    End Sub
+
+    Private Sub SqlDataSourceReviewsPermits_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceReviewsPermits.Inserting
+        Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
 End Class
