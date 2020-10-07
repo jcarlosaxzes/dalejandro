@@ -47,7 +47,7 @@ Public Class proposal
                 lblEmployeeName.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "EmployeeName")
                 lblEmailDate.Text = Left(LocalAPI.GetProposalProperty(lblProposalId.Text, "EmailDate"), 16)
                 lblSelectedJobId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
-                If Val(lblSelectedJobId.Text) = 0 Then lblSelectedJobId.Text = -1
+                ' error.... If Val(lblSelectedJobId.Text) = 0 Then lblSelectedJobId.Text = -1
 
                 ' Datos de Acceptance
                 Dim sFirmado As String = LocalAPI.GetProposalProperty(lblProposalId.Text, "AceptanceName")
