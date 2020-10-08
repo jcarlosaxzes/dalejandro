@@ -11043,9 +11043,8 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function ProposalStatus2Acept(ByVal proposalId As Long, ByVal companyId As Integer) As Integer
-        Dim jobId As Integer = 0
+        Dim jobId As Integer = GetProposalProperty(proposalId, "JobId")
         Try
-
             If GetProposalProperty(proposalId, "StatusId") < 2 Then
 
                 '1.- Pasarlo a statusId=2 para que no vuelva por esta rama
@@ -11054,11 +11053,10 @@ Public Class LocalAPI
                 '0.- Es un primer Proposal o es un Change Order (ya tiene JobId)
                 Dim dProposalTotal As Double = GetProposalTotal(proposalId)
 
-                jobId = GetProposalProperty(proposalId, "JobId")
                 Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
                 Dim bRetainer As Boolean
 
-                If jobId = 0 Then
+                If jobId <= 0 Then
                     '2.1 -  Crear job Asociado
                     ' No Aceptado y sin JobId creado
 
@@ -11174,6 +11172,8 @@ Public Class LocalAPI
                 'Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
                 'Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
                 'pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
+                Return jobId
+            Else
                 Return jobId
             End If
 
