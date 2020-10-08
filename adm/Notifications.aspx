@@ -60,7 +60,7 @@
 
     <div class="pasconcept-bar">
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceNotifications" Width="100%" AutoGenerateColumns="False" AllowSorting="True"
-            AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowPaging="True" PageSize="50" Height="800px"
+            AllowAutomaticInserts="True" AllowAutomaticDeletes="True" AllowPaging="True" PageSize="50" Height="800px" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
             HeaderStyle-HorizontalAlign="Center">
             <ClientSettings Selecting-AllowRowSelect="true">
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -84,8 +84,8 @@
                         HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                     </telerik:GridEditCommandColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
-                        CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText=""
-                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                        CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText="" 
+                        HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridButtonColumn>
                 </Columns>
             </MasterTableView>
