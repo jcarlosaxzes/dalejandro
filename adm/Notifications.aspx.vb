@@ -14,7 +14,7 @@ Public Class Notifications
         Select Case e.CommandName
             Case "Edit"
                 Dim id = e.Item.OwnerTableView.DataKeyValues(e.Item.ItemIndex)("Id").ToString()
-                Response.Redirect($"~/adm/notificationsnew.aspx?id={id}&EntityType=Notifications&backpage=Notifications")
+                Response.Redirect($"~/adm/notificationsnew.aspx?EntityId={id}&EntityType=Notifications&backpage=Notifications")
         End Select
     End Sub
 

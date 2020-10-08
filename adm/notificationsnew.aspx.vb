@@ -11,8 +11,29 @@ Public Class notificationsnew
             lblAppointmentId.Text = Val(Request.QueryString("AppointmentId"))
             lblNotificationsId.Text = ""
 
-            If Val(lblAppointmentId.Text) > 0 Then
-                Dim Appointments = LocalAPI.GetRecordFromQuery($"SELECT TOP 1 [Id]
+            If (lblEntityType.Text = "Notifications") Then
+                lblNotificationsId.Text = lblEntityId.Text
+
+                Dim Notifications = LocalAPI.GetRecordFromQuery($"SELECT TOP 1 [Id]
+                              ,[Subject]
+                              ,[Body]
+                              ,[SendDate]
+                              ,[EntityType]
+                              ,[EntityId]
+                                          ,[EmployeesId]
+                                          ,[TargetEmails]
+                             FROM [dbo].[Notifications] where Id =  " & lblNotificationsId.Text)
+
+                UpdateControls(Notifications("Subject"),
+                                    Notifications("Body"),
+                                    Notifications("SendDate"),
+                                    Notifications("EmployeesId"))
+                btnSave.Text = "Update Notification"
+
+            Else
+
+                If Val(lblAppointmentId.Text) > 0 Then
+                    Dim Appointments = LocalAPI.GetRecordFromQuery($"SELECT TOP 1 [Id]
                                       ,[Subject]
                                       ,[Description]
                                       ,[Start]
@@ -22,7 +43,7 @@ Public Class notificationsnew
                                       ,[AllDay]
                                   FROM [dbo].[Appointments] where id = " & lblAppointmentId.Text)
 
-                Dim Notifications = LocalAPI.GetRecordFromQuery($"SELECT TOP 1 [Id]
+                    Dim Notifications = LocalAPI.GetRecordFromQuery($"SELECT TOP 1 [Id]
 				                          ,[Subject]
 				                          ,[Body]
 				                          ,[SendDate]
@@ -32,24 +53,24 @@ Public Class notificationsnew
                                           ,[TargetEmails]
 			                          FROM [dbo].[Notifications] where AppointmentId = {lblAppointmentId.Text} ")
 
-                If IsNothing(Notifications) Or Notifications.Count = 0 Then
+                    If IsNothing(Notifications) Or Notifications.Count = 0 Then
 
-                    UpdateControls(Appointments("Subject"),
+                        UpdateControls(Appointments("Subject"),
                                 Appointments("Description") & " Location: " & Appointments("Location"),
                                 Appointments("Start"),
                                 "")
-                    btnSave.Text = "Create Notification"
-                Else
-                    lblNotificationsId.Text = Notifications("Id")
-                    UpdateControls(Notifications("Subject"),
+                        btnSave.Text = "Create Notification"
+                    Else
+                        lblNotificationsId.Text = Notifications("Id")
+                        UpdateControls(Notifications("Subject"),
                                 Notifications("Body"),
                                 Notifications("SendDate"),
                                 Notifications("EmployeesId"))
-                    btnSave.Text = "Update Notification"
+                        btnSave.Text = "Update Notification"
+                    End If
+
                 End If
-
             End If
-
             'If (lblEntityType.Text = "Appointment") Then
 
             '    lblEntityId.Text = AppointmentId
@@ -94,33 +115,7 @@ Public Class notificationsnew
 
             'End If
 
-            'If (lblEntityType.Text = "Notifications") Then
-            '    lblNotificationsId.Text = lblEntityId.Text
 
-            '    Dim Notifications = LocalAPI.GetRecordFromQuery($"SELECT TOP 1 [Id]
-            '                  ,[Subject]
-            '                  ,[Body]
-            '                  ,[SendDate]
-            '                  ,[EntityType]
-            '                  ,[EntityId]
-            '                              ,[EmployeesId]
-            '                              ,[TargetEmails]
-            '                 FROM [dbo].[Notifications] where Id =  " & lblNotificationsId.Text)
-
-            '    UpdateControls(Notifications("Subject"),
-            '                        Notifications("Body"),
-            '                        Notifications("SendDate"),
-            '                        Notifications("EmployeesId"))
-            '    btnSave.Text = "Update Notification"
-
-            'End If
-
-            'If (lblEntityType.Text = "Client" Or lblEntityType.Text = "Job") Then
-
-
-
-
-            'End If
 
 
         End If
