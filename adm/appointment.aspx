@@ -19,7 +19,7 @@
         <div>
             <asp:Label runat="server" ID="lblError" ForeColor="Red" Text=""></asp:Label>
         </div>
-        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceAppointments" Width="100%" DefaultMode="Edit">
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceAppointments" Width="100%" DefaultMode="Edit" OnDataBound="FormView1_DataBound">
             <EditItemTemplate>
             <table class="table-sm" style="width: 90%">
                 <tr>
@@ -251,5 +251,7 @@
     <asp:Label ID="lblEndDate" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblAppointmentid" runat="server" Visible="False"></asp:Label>
     <telerik:RadTimePicker ID="dtpStart" runat="server" Visible="false">  </telerik:RadTimePicker>
-    <telerik:RadTimePicker ID="dtpEnd" runat="server" Visible="false">  </telerik:RadTimePicker>
+    <telerik:RadTimePicker ID="dtpEnd" runat="server" Visible="false">  </telerik:RadTimePicker>    
+    <asp:Label ID="lblEntityType" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblEntityId" runat="server" Visible="False"></asp:Label>
 </asp:Content>

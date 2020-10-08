@@ -202,11 +202,9 @@ Public Class schedule
 
     End Sub
 
-    Protected Sub btnCRM_Click(sender As Object, e As EventArgs) Handles btnCRM.Click
-        'InitActivityForm()
-        'RadToolTipCRM.Visible = True
-        'RadToolTipCRM.Show()
-        Response.Redirect($"~/adm/appointment?backpage=calendar")
+    Protected Sub btnAddEvent_Click(sender As Object, e As EventArgs) Handles btnAddEvent.Click
+
+        Response.Redirect($"~/adm/appointment?Id=&EntityType=Appointment&EntityId=&backpage=Schedule")
 
     End Sub
     Protected Sub btnCRMOk_Click(sender As Object, e As EventArgs) Handles btnCRMOk.Click
@@ -313,7 +311,7 @@ Public Class schedule
         Session("appointment_start") = appointmentToEdit.Start.ToString("yyyy-MM-dd HH:mm:ss")
         Session("appointment_end") = appointmentToEdit.End.ToString("yyyy-MM-dd HH:mm:ss")
         Dim Id = appointmentToEdit.ID
-        Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}"
+        Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}&EntityType=Appointment&EntityId={Id}&backpage=Schedule"
         ScriptManager.RegisterStartupScript(Page, [GetType](), "formScript", $"RedirectPage('{url}');", True)
         PopulateEditForm(appointmentToEdit)
         'RadToolTipCRM.Visible = True

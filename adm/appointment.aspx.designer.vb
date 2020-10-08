@@ -158,6 +158,24 @@ Partial Public Class appointment
     Protected WithEvents dtpEnd As Global.Telerik.Web.UI.RadTimePicker
 
     '''<summary>
+    '''lblEntityType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEntityType As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblEntityId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEntityId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Master property.
     '''</summary>
     '''<remarks>

@@ -337,6 +337,7 @@
                     <asp:LinkButton ID="btnShare" runat="server" UseSubmitBehavior="false" ToolTip="Share">
                     <i class="far fa-share-square" style="padding-right:10px"></i>
                     </asp:LinkButton>
+
                 </td>
             </tr>
         </table>
@@ -549,6 +550,23 @@
                                                     <td>
                                                         <asp:LinkButton ID="LinkButton15" runat="server" UseSubmitBehavior="false" CommandName="Hide Client" CommandArgument='<%# Eval("ClientID")%>' CssClass="dropdown-item" Visible='<%# lblCompanyId.Text = 260962 %>'>
                                                             <i class="fas fa-eye-slash"></i>&nbsp;&nbsp; Hide Client
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="btnAddEvent" runat="server" UseSubmitBehavior="false" CommandName="AddCalendar" CommandArgument='<%# Eval("Id")%>'
+                                                            CssClass="dropdown-item">
+                                                                 <i class="far fa-calendar"></i>&nbsp;&nbsp;Add Calendar Event
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td >
+                                                        <asp:LinkButton ID="btnAddNotification" runat="server" UseSubmitBehavior="false" CommandName="AddNotifications" CommandArgument='<%# Eval("Id")%>'
+                                                            CssClass="dropdown-item" >
+                                                                 <i class="far fa-bell"></i>&nbsp;&nbsp; Add Notification
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>

@@ -351,6 +351,11 @@ Public Class jobs
         Select Case e.CommandName
             Case "View/Edit Info", "View/Edit Billing", "View/Edit Client Profile", "View/Edit Employees", "View/Edit Proposal(s)", "View/Edit Expenses", "View/Edit Notes", "View/Edit Time Entries", "View/Edit Files", "View Schedule", "View/Edit Revisions", "View/Edit Tickets", "View/Edit Transmittals", "Update Status", "Add Time"
                 FireJobCommand(e.CommandName, e.CommandArgument)
+            Case "AddCalendar"
+                Response.Redirect($"~/adm/appointment?Id=&EntityType=Job&EntityId={e.CommandArgument}&backpage=Jobs")
+
+            Case "AddNotifications"
+                Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId=&EntityType=Job&EntityId={e.CommandArgument}&backpage=Jobs")
 
             Case "Hide Client"
                 Dim ClientId As Integer = e.CommandArgument
@@ -448,6 +453,9 @@ Public Class jobs
                     End If
                     sUrl = "~/ADM/EmployeeNewTime.aspx?JobId=" & JobId & "&backpage=jobs"
                     Response.Redirect(sUrl)
+
+
+
 
             End Select
         Catch ex As Exception

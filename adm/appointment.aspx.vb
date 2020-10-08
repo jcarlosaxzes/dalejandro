@@ -8,6 +8,11 @@ Public Class appointment
             lblCompanyId.Text = Session("companyId")
             lblStartDate.Text = Session("appointment_start")
             lblEndDate.Text = Session("appointment_end")
+
+
+            lblEntityType.Text = Request.QueryString("EntityType")
+            lblEntityId.Text = Request.QueryString("EntityId")
+
             Dim s = DateTime.Now
             If Len(lblStartDate.Text) > 0 Then
                 s = DateTime.Parse(lblStartDate.Text)
@@ -45,7 +50,7 @@ Public Class appointment
     End Sub
 
     Protected Sub btnBack_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/schedule.aspx")
+        BackPage()
     End Sub
 
     Protected Sub SqlDataSourceAppointments_Updated(sender As Object, e As SqlDataSourceStatusEventArgs)
@@ -53,9 +58,9 @@ Public Class appointment
         lblAppointmentid.Text = newId
 
         If CType(FormView1.FindControl("chNotify"), RadCheckBox).Checked Then
-            Response.Redirect($"~/adm/notificationsnew.aspx?id={newId}&EntityType=Appointment&backpage=schedule")
+            Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId={newId}&EntityType={lblEntityType.Text}&EntityId={lblEntityId.Text}&backpage={Request.QueryString("backpage")}")
         Else
-            Response.Redirect("~/adm/schedule.aspx")
+            BackPage()
         End If
     End Sub
 
@@ -65,6 +70,67 @@ Public Class appointment
 
     Protected Sub SqlDataSourceAppointments_Selected(sender As Object, e As SqlDataSourceStatusEventArgs)
         ' Dim newId = e.AffectedRows.
+    End Sub
+
+    Protected Sub BackPage()
+        If (lblEntityType.Text = "Appointment") Then
+            Response.Redirect("~/adm/schedule.aspx")
+            Return
+        End If
+
+        If Request.QueryString("backpage") = "Notifications" Then
+            Response.Redirect("~/adm/Notifications.aspx")
+            Return
+        End If
+
+        If Request.QueryString("backpage") = "Job" Then
+            Dim jobGuid = LocalAPI.GetJobProperty(lblEntityId.Text, "guid")
+            Response.Redirect($"~/adm/job_schedule?guid={jobGuid}")
+            Return
+        End If
+
+        If Request.QueryString("backpage") = "Client" Then
+            Response.Redirect($"~/adm/Client?clientId={lblEntityId.Text}&FullPage=1&tab=schedule")
+            Return
+        End If
+
+        If Request.QueryString("backpage") = "Clients" Then
+            Response.Redirect($"~/adm/Clients?restoreFilter=true")
+            Return
+        End If
+
+        If Request.QueryString("backpage") = "Jobs" Then
+            Response.Redirect($"~/adm/Jobs?restoreFilter=true")
+            Return
+        End If
+
+        Response.Redirect($"~/adm/schedule.aspx")
+    End Sub
+
+
+
+    Protected Sub FormView1_DataBound(sender As Object, e As EventArgs)
+        If lblEntityType.Text = "Job" Then
+
+            CType(FormView1.FindControl("txtSubject"), RadTextBox).Text = LocalAPI.GetJobProperty(lblEntityId.Text, "Code") & " " & LocalAPI.GetJobProperty(lblEntityId.Text, "Job")
+            Dim clientId = LocalAPI.GetJobProperty(lblEntityId.Text, "Client")
+            Dim cboJob = CType(FormView1.FindControl("cboJob"), RadComboBox)
+            cboJob.SelectedValue = lblEntityId.Text
+            cboJob.Enabled = False
+
+            Dim cboClient = CType(FormView1.FindControl("cboClient"), RadComboBox)
+            cboClient.SelectedValue = clientId
+            cboClient.Enabled = False
+
+        End If
+
+        If lblEntityType.Text = "Client" Then
+
+            Dim cboClient = CType(FormView1.FindControl("cboClient"), RadComboBox)
+            cboClient.SelectedValue = lblEntityId.Text
+            cboClient.Enabled = False
+
+        End If
     End Sub
 End Class
 

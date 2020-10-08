@@ -23,8 +23,15 @@
 
     <div class="container">
 
-        <div class="pasconcept-bar">
+        <div class="pasconcept-bar noprint">
             <span class="pasconcept-pagetitle">Calendar</span>
+
+            <span style="float: right; vertical-align: middle;">
+                <asp:LinkButton ID="btnAddEvent" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add new Event">
+                     Add Event
+                </asp:LinkButton>
+            </span>
+
         </div>
 
 

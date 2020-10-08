@@ -50,7 +50,7 @@
                         Export to PDF
             </asp:LinkButton>
 
-            <asp:LinkButton ID="btnCRM" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add new Event">
+            <asp:LinkButton ID="btnAddEvent" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add new Event">
                             Add Event
             </asp:LinkButton>
         </span>

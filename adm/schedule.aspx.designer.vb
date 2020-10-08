@@ -59,13 +59,13 @@ Partial Public Class schedule
     Protected WithEvents btnPDF As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''btnCRM control.
+    '''btnAddEvent control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCRM As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnAddEvent As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''pnlFind control.

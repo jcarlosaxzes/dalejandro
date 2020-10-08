@@ -86,6 +86,7 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblEmployeesId" Name="EmployeesId" PropertyName="Text"></asp:ControlParameter>
             <asp:ControlParameter ControlID="lblTargetEmails" Name="TargetEmails" PropertyName="Text"></asp:ControlParameter>
+            <asp:ControlParameter ControlID="lblAppointmentId" Name="AppointmentId" PropertyName="Text" Type="Int32"></asp:ControlParameter>
         </InsertParameters>
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
@@ -110,8 +111,10 @@
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblNotificationsId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEntityType" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEntityId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeesId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblTargetEmails" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblAppointmentId" runat="server" Visible="False"></asp:Label>
 </asp:Content>

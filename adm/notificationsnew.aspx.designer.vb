@@ -113,6 +113,15 @@ Partial Public Class notificationsnew
     Protected WithEvents lblNotificationsId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''lblId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''lblEntityType control.
     '''</summary>
     '''<remarks>
@@ -147,6 +156,15 @@ Partial Public Class notificationsnew
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblTargetEmails As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblAppointmentId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblAppointmentId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

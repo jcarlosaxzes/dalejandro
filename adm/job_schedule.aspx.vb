@@ -57,7 +57,7 @@ Public Class job_schedule
         Session("appointment_end") = appointmentToEdit.End.ToString("yyyy-MM-dd HH:mm:ss")
         Dim Id = appointmentToEdit.ID
 
-        Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}&EntityType=Job&EntityId={lblJobId.Text}&backpage=Notifications$"
+        Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}&EntityType=Job&EntityId={lblJobId.Text}&backpage=Job"
         'adm/job_schedule?guid=421a0ab6-db23-44f9-a516-847511e5c75e
         '                Response.Redirect($"~/adm/notificationsnew.aspx?id={id}&EntityType=Notifications&backpage=Notifications")
         '       Response.Redirect($"~/adm/appointment?backpage=calendar")
@@ -66,13 +66,16 @@ Public Class job_schedule
     End Sub
 
 
-    Protected Sub RadScheduler1_FormCreated(sender As Object, e As SchedulerFormCreatedEventArgs) Handles RadScheduler1.FormCreated
-
-    End Sub
 
     Protected Sub SqlDataSourceAppointments_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceAppointments.Selecting
         e.Command.Parameters("@RangeStart").Value = RadScheduler1.VisibleRangeStart
         e.Command.Parameters("@RangeEnd").Value = RadScheduler1.VisibleRangeEnd
+    End Sub
+
+    Protected Sub btnAddEvent_Click(sender As Object, e As EventArgs) Handles btnAddEvent.Click
+
+        Response.Redirect($"~/adm/appointment?Id=&EntityType=Job&EntityId={lblJobId.Text}&backpage=Job")
+
     End Sub
 
 End Class
