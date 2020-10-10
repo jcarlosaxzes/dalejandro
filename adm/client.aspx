@@ -56,6 +56,13 @@
             }
         </script>
     </telerik:RadCodeBlock>
+    <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+        <script type="text/javascript">
+            function RedirectPage(url) {
+                window.location = url;
+            }
+        </script>
+    </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
@@ -650,11 +657,18 @@
                     </telerik:RadGrid>
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Schedule" StepType="Step">
-                    <h4>Schedule</h4>
-                    <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" ToolTip="Press 'Double-Click' to insert/edit client's appointment"
-                        Height="950px"
-                        SelectedView="MonthView"
-                        ShowFooter="false"
+                    
+                    <div class="pasconcept-bar noprint">
+                        <span class="pasconcept-pagetitle">Schedule</span>
+
+                        <span style="float: right; vertical-align: middle;">
+                            <asp:LinkButton ID="btnAddEvent" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add new Event">
+                                Add Event
+                            </asp:LinkButton>
+                        </span>
+
+                    </div>
+                    <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" RenderMode="Auto" OverflowBehavior="Auto" Width="100%"
                         DataDescriptionField="Description"
                         DataEndField="End"
                         DataKeyField="Id"
@@ -664,19 +678,23 @@
                         DataSourceID="SqlDataSourceAppointments"
                         DataStartField="Start"
                         DataSubjectField="Subject"
-                        DayEndTime="23:59:59"
+                        DayEndTime="21:00:00"
                         EditFormDateFormat="MM/dd/yyyy"
+                        Height="600px"
                         WorkDayEndTime="23:59:59"
-                        FirstDayOfWeek="Monday" LastDayOfWeek="Sunday"
-                        StartInsertingInAdvancedForm="True"
-                        RowHeight="15px" Width="100%">
-                        <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" />
+                        FirstDayOfWeek="Monday"
+                        LastDayOfWeek="Sunday"
+                        StartInsertingInAdvancedForm="False"
+                        StartEditingInAdvancedForm ="False"
+                        CustomAttributeNames="Location"
+                        OnFormCreating="RadScheduler1_FormCreating">
+                        <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" Width="800px" EnableCustomAttributeEditing="true" EnableResourceEditing="true" />
                         <DayView UserSelectable="True" />
                         <WeekView UserSelectable="True" />
-                        <MonthView UserSelectable="True" />
+                        <MonthView UserSelectable="True" AdaptiveRowHeight="true" />
                         <TimelineView UserSelectable="True" />
                         <MultiDayView UserSelectable="True" />
-                        <AgendaView UserSelectable="True" TimeColumnWidth="100px" DateColumnWidth="150px" ResourceMarkerType="Bar" />
+                        <AgendaView UserSelectable="True" TimeColumnWidth="150px" DateColumnWidth="150px" ResourceMarkerType="Bar" />
                         <Reminders Enabled="true"></Reminders>
                         <ResourceTypes>
                             <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceActivityType"></telerik:ResourceType>

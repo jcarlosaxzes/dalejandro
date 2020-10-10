@@ -11,13 +11,27 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
+      <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+        <script type="text/javascript">
+            function RedirectPage(url) {
+                window.location = url;
+            }
+        </script>
+    </telerik:RadCodeBlock>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
     </telerik:RadAjaxLoadingPanel>
 
     <div class="container">
 
-        <div class="pasconcept-bar">
+        <div class="pasconcept-bar noprint">
             <span class="pasconcept-pagetitle">Calendar</span>
+
+            <span style="float: right; vertical-align: middle;">
+                <asp:LinkButton ID="btnAddEvent" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add new Event">
+                     Add Event
+                </asp:LinkButton>
+            </span>
+
         </div>
 
 
@@ -37,8 +51,10 @@
             WorkDayEndTime="23:59:59"
             FirstDayOfWeek="Monday"
             LastDayOfWeek="Sunday"
-            StartInsertingInAdvancedForm="True"
-            CustomAttributeNames="Location">
+            StartInsertingInAdvancedForm="False"
+            StartEditingInAdvancedForm ="False"
+            CustomAttributeNames="Location"
+            OnFormCreating="RadScheduler1_FormCreating">
             <ResourceTypes>
                 <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceType"></telerik:ResourceType>
                 <telerik:ResourceType KeyField="ID" Name="Assign to User" TextField="Name" ForeignKeyField="EmployeeId" DataSourceID="SqlDataSourceEmployees"></telerik:ResourceType>

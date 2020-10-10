@@ -115,6 +115,12 @@ Public Class clients
             Case "ClientToAgile"
                 LocalAPI.PASconceptClientToAgile(e.CommandArgument, "EEG_Client", Master.UserId)
 
+            Case "AddCalendar"
+                Response.Redirect($"~/adm/appointment?Id=&EntityType=Client&EntityId={e.CommandArgument}&backpage=Clients")
+
+            Case "AddNotifications"
+                Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId=&EntityType=Client&EntityId={e.CommandArgument}&backpage=Clients")
+
         End Select
     End Sub
 

@@ -23,6 +23,15 @@ Partial Public Class client
     Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
 
     '''<summary>
+    '''RadCodeBlock1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
+
+    '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
     '''<remarks>
@@ -147,6 +156,15 @@ Partial Public Class client
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizardStep4 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''btnAddEvent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddEvent As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''RadScheduler1 control.

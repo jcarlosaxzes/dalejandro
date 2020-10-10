@@ -59,6 +59,7 @@ Public Class MasterJOB
         Return lblJobId.Text
     End Function
     Private Sub Back()
+        'What is this ?
         Session("jobmasterpageback") = ""
         Select Case Session("jobmasterpageback")
             Case "jobs"
