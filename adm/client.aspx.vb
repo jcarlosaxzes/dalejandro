@@ -29,10 +29,18 @@ Public Class client
                     Session("clientbackpage") = Request.QueryString("backpage")
                 End If
 
-
+                If Not Request.QueryString("tab") Is Nothing Then
+                    If Request.QueryString("tab") = "schedule" Then
+                        RadWizard1.WizardSteps(3).Active = True
+                    End If
+                End If
 
                 SqlDataSourceMessages.DataBind()
                 RadGridMessages.DataBind()
+
+                Dim ViewMode As Integer = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "RadScheduler_JobEdit_View")
+                RadScheduler1.SelectedView = IIf(ViewMode = -1, 1, ViewMode)
+
             End If
             RadWindowManager1.EnableViewState = False
         Catch ex As Exception
@@ -129,4 +137,27 @@ Public Class client
     Protected Sub btnFindMessages_Click(sender As Object, e As EventArgs)
         RadGridMessages.DataBind()
     End Sub
+
+    Protected Sub RadScheduler1_FormCreating(sender As Object, e As SchedulerFormCreatingEventArgs)
+
+        If e.Mode <> SchedulerFormMode.Hidden Then
+            e.Cancel = True
+        End If
+
+        Dim appointmentToEdit = RadScheduler1.PrepareToEdit(e.Appointment, RadScheduler1.EditingRecurringSeries)
+        Session("appointment_start") = appointmentToEdit.Start.ToString("yyyy-MM-dd HH:mm:ss")
+        Session("appointment_end") = appointmentToEdit.End.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim Id = appointmentToEdit.ID
+
+        Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}&EntityType=Client&EntityId={lblClientId.Text}&backpage=Client"
+        ScriptManager.RegisterStartupScript(Page, [GetType](), "formScript", $"RedirectPage('{url}');", True)
+
+    End Sub
+
+    Protected Sub btnAddEvent_Click(sender As Object, e As EventArgs) Handles btnAddEvent.Click
+
+        Response.Redirect($"~/adm/appointment?Id=&EntityType=Client&EntityId={lblClientId.Text}&backpage=Client")
+
+    End Sub
+
 End Class

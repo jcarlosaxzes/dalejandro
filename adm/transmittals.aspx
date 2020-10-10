@@ -264,8 +264,7 @@
                     <telerik:GridTemplateColumn DataField="nStatus" HeaderText="Status" SortExpression="nStatus" ReadOnly="true"
                         UniqueName="nStatus" ItemStyle-HorizontalAlign="Center" AllowFiltering="true" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <div style="font-size: 12px; width: 100%"
-                                class='<%# LocalAPI.GetTransmittalStatusLabelCSS(Eval("Status")) %>'>
+                            <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetTransmittalStatusLabelCSS(Eval("Status")) %>'>
                                 <%# Eval("nStatus") %>
                             </div>
                         </ItemTemplate>

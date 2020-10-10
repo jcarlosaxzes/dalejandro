@@ -190,6 +190,23 @@
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
+                                                
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="btnAddEvent" runat="server" UseSubmitBehavior="false" CommandName="AddCalendar" CommandArgument='<%# Eval("Id")%>'
+                                                            CssClass="dropdown-item">
+                                                                 <i class="far fa-calendar"></i>&nbsp;&nbsp;Add Calendar Event
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td >
+                                                        <asp:LinkButton ID="btnAddNotification" runat="server" UseSubmitBehavior="false" CommandName="AddNotifications" CommandArgument='<%# Eval("Id")%>'
+                                                            CssClass="dropdown-item" >
+                                                                 <i class="far fa-bell"></i>&nbsp;&nbsp; Add Notification
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </telerik:RadToolTip>
 
