@@ -10,12 +10,10 @@
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
-           
             </button>
         </span>
 
     </div>
-
     <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm pasconcept-bar" style="width: 100%">
@@ -255,7 +253,6 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-
 
     <asp:Label ID="lblCompanyId" runat="server" Text="0" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
