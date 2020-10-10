@@ -11726,6 +11726,17 @@ Public Class LocalAPI
         End Select
 
     End Function
+    Public Shared Function GetRevisionsStatusLabelCSS(ByVal statusId As String) As String
+        Select Case statusId
+            Case 0, "Under Revision"
+                Return "badge badge-danger statuslabel"
+            Case 1, "Approved"
+                Return "badge badge-success statuslabel"
+            Case Else
+                Return "badge badge-secondary statuslabel"
+        End Select
+
+    End Function
 
 
     Public Shared Function EmailJobInactive(ByVal jobId As Integer, employeeId As Integer, ByVal companyId As Integer) As Boolean

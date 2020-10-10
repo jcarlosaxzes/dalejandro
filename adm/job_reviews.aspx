@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile  ="~/adm/MasterJOB.Master" CodeBehind="job_reviews.aspx.vb" Inherits="pasconcept20.job_reviews" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterJOB.Master" CodeBehind="job_reviews.aspx.vb" Inherits="pasconcept20.job_reviews" %>
 
 <%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
@@ -74,11 +74,11 @@
                                             </telerik:RadDatePicker>
                                         </EditItemTemplate>
                                     </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn DataField="statusId" FilterControlAltText="Filter Status column"
-                                        HeaderStyle-Width="180px" HeaderText="Status"
-                                        SortExpression="Status" UniqueName="statusId" ItemStyle-HorizontalAlign="Center">
+                                    <telerik:GridTemplateColumn DataField="statusId" HeaderStyle-Width="180px" HeaderText="Status" SortExpression="Status" UniqueName="statusId" ItemStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <span class="label badge-<%# IIf(Eval("statusId") = 0, "warning", IIf(Eval("statusId") = 1, "success", "danger")) %>"><%# Eval("Status") %>
+                                            <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetRevisionsStatusLabelCSS(Eval("StatusId")) %>'>
+                                                <%# Eval("Status") %>
+                                            </div>
                                         </ItemTemplate>
                                         <EditItemTemplate>
                                             <telerik:RadComboBox ID="cboPlanReview_status2" runat="server" DataSourceID="SqlDataSourcePlanReview_status"
