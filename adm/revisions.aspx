@@ -67,7 +67,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="text-align: right">Searh:
+                    <td style="text-align: right">Search:
                     </td>
                     <td>
                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Text=""
