@@ -10835,16 +10835,20 @@ Public Class LocalAPI
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
-            Dim query As String = String.Format("SELECT [Id] FROM [Jobs] WHERE [companyId]={0} AND [Job]='{1}'", companyId, sName)
+            Dim query As String = String.Format("SELECT [Id] FROM [Jobs] WHERE [companyId]={0} AND [Job]=@ProjectName", companyId, sName)
             Dim cmd As New SqlCommand(query, cnn1)
             Dim rdr As SqlDataReader
+
+            cmd.Parameters.AddWithValue("@ProjectName", sName)
+
             rdr = cmd.ExecuteReader
             rdr.Read()
             IsProposalOrJobName = rdr.HasRows
             rdr.Close()
             If Not IsProposalOrJobName Then
-                query = String.Format("SELECT [Id] FROM [Proposal] WHERE [companyId]={0} AND [ProjectName]='{1}'", companyId, sName)
+                query = String.Format("SELECT [Id] FROM [Proposal] WHERE [companyId]={0} AND [ProjectName]=@ProjectName", companyId, sName)
                 Dim cmd1 As New SqlCommand(query, cnn1)
+                cmd1.Parameters.AddWithValue("@ProjectName", sName)
                 rdr = cmd1.ExecuteReader
                 rdr.Read()
                 IsProposalOrJobName = rdr.HasRows
