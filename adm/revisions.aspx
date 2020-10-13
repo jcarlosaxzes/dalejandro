@@ -1,11 +1,11 @@
-﻿<%@ Page Title="Revisions" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="revisions.aspx.vb" Inherits="pasconcept20.revisions" %>
+﻿<%@ Page Title="Permit Tracker" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="revisions.aspx.vb" Inherits="pasconcept20.revisions" %>
 
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle">Revisions & Permits</span>
+        <span class="pasconcept-pagetitle">Permit Tracker</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
@@ -67,7 +67,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="text-align: right">Searh:
+                    <td style="text-align: right">Search:
                     </td>
                     <td>
                         <telerik:RadTextBox ID="txtFind" runat="server" x-webkit-speech="x-webkit-speech" Text=""
