@@ -49,7 +49,7 @@
                     <td>
                         <telerik:RadComboBox ID="cboStatus" runat="server" DataSourceID="SqlDataSourcePlanReview_status" DataTextField="Name" DataValueField="Id" Width="300px" AppendDataBoundItems="true">
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="1000" />
+                                <telerik:RadComboBoxItem runat="server" Text="(All Status...)" Value="-1" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
