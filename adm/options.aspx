@@ -140,21 +140,24 @@
                                         <td style="text-align: left">
                                             <telerik:RadComboBox ID="RadComboBox1" runat="server" Width="250px" SelectedValue='<%# Bind("MyHomePage")%>'>
                                                 <Items>
-                                                    <telerik:RadComboBoxItem runat="server" Text="Time Activity" Value="activejobsdashboad.aspx" />
                                                     <telerik:RadComboBoxItem runat="server" Text="Job List" Value="Jobs.aspx" />
                                                     <telerik:RadComboBoxItem runat="server" Text="Proposal List" Value="Proposals.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Company Overview" Value="Default.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Job Calendar" Value="~/ADM/Schedule.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Requests for Proposals" Value="RequestForProposals.aspx" />
+
+                                                    <telerik:RadComboBoxItem runat="server" Text="Calendar" Value="schedule.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Timesheet" Value="TimeSheet.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Time Activity" Value="activejobsdashboad.aspx" />
                                                     <telerik:RadComboBoxItem runat="server" Text="Invoices" Value="Invoices.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Statements" Value="Jobs.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Statements" Value="statement.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Payments" Value="payments.aspx" />
                                                     <telerik:RadComboBoxItem runat="server" Text="Client List" Value="Clients.aspx" />
                                                     <telerik:RadComboBoxItem runat="server" Text="Client Management" Value="ClientManagement.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Requests for Proposals" Value="RequestForProposals.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Timesheet" Value="TimeSheet.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Company Insights" Value="Dashboard.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Project Schedule" Value="ProjectSchedule.aspx" />
-                                                    <telerik:RadComboBoxItem runat="server" Text="Project Map" Value="ProjectMap.aspx" />
+
+                                                    <telerik:RadComboBoxItem runat="server" Text="Company Overview" Value="Default.aspx" />
+                                                    <telerik:RadComboBoxItem runat="server" Text="Company Insights" Value="dashboard.aspx" />
                                                     <telerik:RadComboBoxItem runat="server" Text="Top ten" Value="TopTen.aspx" />
+
+                                                    <telerik:RadComboBoxItem runat="server" Text="Permit Tracker" Value="revisions.aspx" />
                                                 </Items>
                                             </telerik:RadComboBox>
                                         </td>
