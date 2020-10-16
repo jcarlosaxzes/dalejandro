@@ -251,4 +251,15 @@ Public Class proposals
         Response.Redirect("~/adm/ProposalNewWizard.aspx")
     End Sub
 
+    Private Sub SqlDataSourceProp_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceProp.Deleted
+    End Sub
+
+    Private Sub SqlDataSourceProp_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProp.Deleting
+        Try
+            Dim proposalId As Integer = e.Command.Parameters("@Id").Value
+            Dim Notes As String = LocalAPI.ProposalNumber(proposalId) & " " & LocalAPI.GetProposalProperty(proposalId, "ProjectName")
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteProposal, lblCompanyId.Text, "Delete Proposal: " & Notes)
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

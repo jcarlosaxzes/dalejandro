@@ -19,6 +19,8 @@ Public Class employees
             RadSchedulerVacation.SelectedDate = CDate("01/01/" & Date.Today.Year)
             RadSchedulerLive.SelectedDate = CDate("01/01/" & Date.Today.Year)
 
+            ActivateTechnicalSupportButton()
+
         End If
         RadWindowManager1.EnableViewState = False
         'If RadWindowManager1.Windows.Count > 0 Then
@@ -179,4 +181,36 @@ Public Class employees
 
     End Function
 
+    Private Sub btnTechnicalSupport_Click(sender As Object, e As EventArgs) Handles btnTechnicalSupport.Click
+        If btnTechnicalSupport.Text = "Activate Technical Support" Then
+            RadToolTipTechnicalSupport.Visible = True
+            RadToolTipTechnicalSupport.Show()
+        Else
+            ' Deactivate Employee of Technical Support
+            LocalAPI.DeactivateTechnicalSupportEmployee(Master.UserEmail, lblCompanyId.Text)
+            RadGrid1.DataBind()
+        End If
+    End Sub
+
+    Private Sub btnConfirmActivateTechnicalSupport_Click(sender As Object, e As EventArgs) Handles btnConfirmActivateTechnicalSupport.Click
+        If (Page.IsValid) Then
+            LocalAPI.ActivateTechnicalSupportEmployee(Master.UserEmail, lblCompanyId.Text)
+            RadGrid1.DataBind()
+            ActivateTechnicalSupportButton()
+        End If
+    End Sub
+
+    Private Sub ActivateTechnicalSupportButton()
+        If LocalAPI.IsTechnicalSupportEmployee(lblCompanyId.Text) Then
+            btnTechnicalSupport.Text = "Deactivate Technical Support"
+            btnTechnicalSupport.ToolTip = "Deactivate Employee of Technical Support"
+        Else
+            btnTechnicalSupport.Text = "Activate Technical Support"
+            btnTechnicalSupport.ToolTip = "Activate Employee for Technical Support"
+        End If
+    End Sub
+
+    Protected Sub CheckBoxRequired_ServerValidate(sender As Object, e As ServerValidateEventArgs)
+        e.IsValid = chkAuthorizeTS.Checked
+    End Sub
 End Class
