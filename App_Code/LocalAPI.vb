@@ -48,12 +48,16 @@ Public Class LocalAPI
         DeleteProposal = 202
         AceptProposal = 205
         NewEmployee = 301
+        InactiveEmployee = 302
         NewClient = 401
         NewPaid = 601
         NewJobLink = 901
         NewRFP = 1001
         NewJobNote = 1101
         NewInvoice = 1201
+        DeleteInvoice = 1202
+        NewStatement = 1203
+        DeleteStatement = 1204
         NewPaidDay = 1301
         NewTime = 1401
         NewNonJobTime = 1501
@@ -8760,6 +8764,64 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function ActivateTechnicalSupportEmployee(UserEmail As String, companyId As Integer) As Boolean
+        Try
+            'InicializeEmployeeOfJob(lEmployee, lJob)
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "ActivateTechnicalSupportEmployee"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.NewEmployee, companyId, "Activate Technical Support Employee")
+
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function DeactivateTechnicalSupportEmployee(UserEmail As String, companyId As Integer) As Boolean
+        Try
+            'InicializeEmployeeOfJob(lEmployee, lJob)
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "DeactivateTechnicalSupportEmployee"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            sys_log_Nuevo(UserEmail, LocalAPI.sys_log_AccionENUM.InactiveEmployee, companyId, "Dectivate Technical Support Employee")
+
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function IsTechnicalSupportEmployee(ByVal companyId As Integer) As Boolean
+        Return (GetNumericEscalar($"SELECT count(*) FROM Employees WHERE companyId={companyId} AND Email='support@pasconcept.com' and isnull(Inactive,0)=0") > 0)
+    End Function
+
     Public Shared Function NewExpense(ByRef companyId As Integer, ExpDate As DateTime, ExpType As String, Reference As String, Amount As Double, Category As String, Vendor As String, Memo As String) As Boolean
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -8854,10 +8916,6 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-
-
-
-
     Public Shared Function NewEmployee(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
                                          ByVal sAddress As String, ByVal sAddress2 As String, ByVal sCity As String, ByVal sSate As String,
                                             ByVal sZipCode As String, ByVal sPhone As String, ByVal sCellular As String,
@@ -8923,81 +8981,6 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function NuevoEmpleado_obsolete(ByVal sName As String, sLastName As String, ByVal PositionId As Integer, ByVal sEmployee_Code As String,
-                                         ByVal sAddress As String, ByVal sAddress2 As String, ByVal sCity As String, ByVal sSate As String,
-                                            ByVal sZipCode As String, ByVal sPhone As String, ByVal sCellular As String,
-                                            ByVal sEmail As String, ByVal sHourRate As String, ByVal sNotes As String,
-                                            ByVal companyId As Integer) As Integer
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As SqlCommand = cnn1.CreateCommand()
-            If PositionId > 0 Then
-                cmd.CommandText = "INSERT INTO [Employees] (Name,LastName,PositionId,Employee_Code,Address,Address2,City,Estate,ZipCode,Phone,Cellular,Email,HourRate, companyId, starting_Date, Notes) " &
-                                                    "VALUES ('" & sName & "','" &
-                                                        sLastName & "'," &
-                                                        PositionId & ",'" &
-                                                        sEmployee_Code & "','" &
-                                                        sAddress & "','" &
-                                                        sAddress2 & "','" &
-                                                        sCity & "','" &
-                                                        sSate & "','" &
-                                                        sZipCode & "','" &
-                                                        sPhone & "','" &
-                                                        sCellular & "','" &
-                                                        sEmail & "', " &
-                                                        FormatearNumero2Tsql(sHourRate) & ", " &
-                                                        companyId & ", " & GetDateUTHlocal() & ",'" &
-                                                        sNotes & "'" &
-                                                        ")"
-            Else
-                cmd.CommandText = "INSERT INTO [Employees] (Name,LastName,Employee_Code,Address,Address2,City,Estate,ZipCode,Phone,Cellular,Email,HourRate, companyId, starting_Date, Notes) " &
-                                                    "VALUES ('" & sName & "','" &
-                                                        sLastName & "','" &
-                                                        sEmployee_Code & "','" &
-                                                        sAddress & "','" &
-                                                        sAddress2 & "','" &
-                                                        sCity & "','" &
-                                                        sSate & "','" &
-                                                        sZipCode & "','" &
-                                                        sPhone & "','" &
-                                                        sCellular & "','" &
-                                                        sEmail & "', " &
-                                                        FormatearNumero2Tsql(sHourRate) & ", " &
-                                                        companyId & ", " & GetDateUTHlocal() & ",'" &
-                                                        sNotes & "'" &
-                                                        ")"
-            End If
-            cmd.ExecuteNonQuery()
-
-
-
-
-            ' Evitar Employee code vacio
-            If sEmployee_Code.Length = 0 Then
-                cmd.CommandText = "UPDATE Employees SET [Employee_Code]= " &
-                                                    "SUBSTRING([Name], 1, 1) + SUBSTRING([Name], PATINDEX('% %', [Name]) + 1, 1) " &
-                                                    "WHERE ISNULL([Employee_Code],'')=''"
-                cmd.ExecuteNonQuery()
-            End If
-            cnn1.Close()
-
-            'Dim lEmplId  As Integer = GetEmployeeId(sEmail)
-            'If lEmplId > 0 Then AddEmployeeToUser(sEmail, lEmplId, bAdministrator, True, companyId)
-            RefrescarUsuarioVinculadoAsync(sEmail, "Empleados")
-
-
-            ' Set algunos perminos de inicio
-            Dim employeeId As Integer = GetEmployeeId(sEmail, companyId)
-            ExecuteNonQuery("UPDATE [Employees] SET [Allow_OtherEmployeeJobs]=1 WHERE Id=" & employeeId)
-
-            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewEmployee, companyId, sName)
-
-            Return GetEmployeeId(sEmail, companyId)
-
-        Catch ex As Exception
-            Throw ex
-        End Try
-    End Function
 
     Public Shared Function IsEmployeeEmail(ByVal sEmail As String, ByVal companyId As Integer) As Boolean
         Return (GetNumericEscalar("SELECT COUNT(*) FROM Employees WHERE companyId=" & companyId & " AND ISNULL(Email,'')='" & sEmail & "'") > 0)

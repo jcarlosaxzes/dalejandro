@@ -9,6 +9,13 @@
             padding-bottom: .05rem;
         }
     </style>
+    <telerik:RadCodeBlock ID="RadCodeBlock2" runat="server">
+                        <script type="text/javascript">
+                            function CheckBoxRequired_ClientValidate(sender, e) {
+                                e.IsValid = jQuery(".AcceptedAgreement input:checkbox").is(':checked');
+                            }
+                        </script>
+                    </telerik:RadCodeBlock>
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
@@ -48,8 +55,12 @@
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
+           
             </button>
-            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+            <asp:LinkButton ID="btnTechnicalSupport" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Activate Employee for Technical Support" CausesValidation="false"
+                Text="Activate Technical Support">
+            </asp:LinkButton>
+            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="false">
                         Add Employee
             </asp:LinkButton>
         </span>
@@ -75,7 +86,7 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="width: 150px; text-align: right">
-                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
                                                 <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
@@ -106,7 +117,7 @@
                                 <telerik:GridTemplateColumn HeaderText="Photo" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                                     <ItemTemplate>
 
-                                        <asp:LinkButton ID="btnEditEmpl2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to Edit Employee Photo"
+                                        <asp:LinkButton ID="btnEditEmpl2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to Edit Employee Photo"  CausesValidation="false"
                                             CommandName="EditPhoto" UseSubmitBehavior="false">
                                             <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>' CssClass="photo50"
                                                 runat="server" AlternateText=""></asp:Image>
@@ -121,7 +132,7 @@
                                         <div>
                                             <strong>
                                                 <asp:LinkButton ID="btnEditEmpl" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Employee"
-                                                    CommandName="EditEmployee" Text='<%# Eval("FullName") & Eval("Suffix") %>' UseSubmitBehavior="false">
+                                                    CommandName="EditEmployee" Text='<%# Eval("FullName") & Eval("Suffix") %>' UseSubmitBehavior="false"  CausesValidation="false">
                                                 </asp:LinkButton>
 
                                             </strong>
@@ -203,20 +214,20 @@
                                         <table style="width: 100%">
                                             <tr>
                                                 <td style="width: 33%; text-align: center">
-                                                    <asp:LinkButton runat="server" ID="btnInactive" CommandName="UpdateStatus" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# iif(Eval("Inactive"), "Inactive Status. Click to change", "Active Status. Click to change") %>'
+                                                    <asp:LinkButton runat="server" ID="btnInactive" CommandName="UpdateStatus" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# iif(Eval("Inactive"), "Inactive Status. Click to change", "Active Status. Click to change") %>'  CausesValidation="false"
                                                         ForeColor='<%# GetStatusColor(Eval("Inactive")) %>'>
                                                             <span class='<%# ActiveInactiveIcon(Eval("Inactive")) %>'></span>
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td style="width: 33%; text-align: center">
                                                     <asp:LinkButton runat="server" ID="btnCredentials" CommandName="SendCredentials" CommandArgument='<%# Eval("Id") %>'
-                                                        ToolTip="Send Email with login credentials">
+                                                        ToolTip="Send Email with login credentials"  CausesValidation="false">
                                                                 <i class="far fa-envelope"></i>
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td style="text-align: center">
                                                     <asp:LinkButton runat="server" ID="btnPermits" CommandName="Permits" CommandArgument='<%# Eval("Id") %>'
-                                                        ToolTip="Employee Permits">
+                                                        ToolTip="Employee Permits"  CausesValidation="false">
                                                                 <i class="fas fa-cog"></i>
                                                     </asp:LinkButton>
                                                 </td>
@@ -247,6 +258,7 @@
                 <table width="100%">
                     <tr>
                         <td class="PanelFilter">&nbsp;&nbsp;&nbsp;Year:&nbsp;
+                           
                             <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear" AutoPostBack="true"
                                 DataValueField="Year" Width="100px">
                             </telerik:RadComboBox>
@@ -278,6 +290,7 @@
                 <table width="100%">
                     <tr>
                         <td class="PanelFilter">&nbsp;&nbsp;&nbsp;Year:&nbsp;
+                           
                             <telerik:RadComboBox ID="cboYear2" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear" AutoPostBack="true"
                                 DataValueField="Year" Width="100px">
                             </telerik:RadComboBox>
@@ -310,10 +323,10 @@
 
 
     <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 500px">
+        <h3 style="margin: 0; text-align: center; color: white; width: 500px">
             <span class="navbar navbar-expand-md bg-dark text-white">Delete employee
             </span>
-        </h2>
+        </h3>
         <table class="table-sm" style="width: 450px">
             <tr>
                 <td class="Titulo4">&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label32" runat="server" Text="Action to remove the employee involved:"></asp:Label>
@@ -347,12 +360,46 @@
             <tr>
                 <td align="center">
 
-                    <asp:LinkButton runat="server" ID="btnConfirmDelete" CssClass="btn btn-danger btn-lg">
+                    <asp:LinkButton runat="server" ID="btnConfirmDelete" CssClass="btn btn-danger btn-lg"  CausesValidation="false">
                              Confirm Delete Employee
                     </asp:LinkButton>
                 </td>
             </tr>
         </table>
+    </telerik:RadToolTip>
+
+    <telerik:RadToolTip ID="RadToolTipTechnicalSupport" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h3 style="margin: 0; text-align: center; color: white; width: 600px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Activate Technical Support
+            </span>
+        </h3>
+        <br />
+        <table class="table-sm" style="width: 600px">
+            <tr>
+                <td>
+                    PASconcept Technical Support can provide assistance with company set-up, training, and technical issues. 
+                    <br /><br />
+                    By activating, you are granting PASconcept Technical Support access to your company's instance of PASconcept.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br /><br />
+                    <asp:CheckBox ID="chkAuthorizeTS" runat="server" CssClass="AcceptedAgreement" Text="&nbsp;&nbsp;I authorize the activation of PASconcept Technical Support User."></asp:CheckBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="text-align:center">
+                    <br /><br />
+                    <asp:LinkButton runat="server" ID="btnConfirmActivateTechnicalSupport" CssClass="btn btn-success btn-lg" ValidationGroup="ConfirmActivateTechnicalSupport">
+                             Activate Technical Support
+                    </asp:LinkButton>
+                </td>
+            </tr>
+        </table>
+        <asp:CustomValidator runat="server" ID="CheckBoxRequired" EnableClientScript="true" ForeColor="Red" ValidationGroup="ConfirmActivateTechnicalSupport"
+            OnServerValidate="CheckBoxRequired_ServerValidate"
+            ClientValidationFunction="CheckBoxRequired_ClientValidate">You must select authorize the activation box.</asp:CustomValidator>
     </telerik:RadToolTip>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"

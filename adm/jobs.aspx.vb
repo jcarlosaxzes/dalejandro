@@ -697,4 +697,12 @@ Public Class jobs
 
     End Sub
 
+    Private Sub SqlDataSourceJobs_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceJobs.Deleting
+        Try
+            Dim jobId As Integer = e.Command.Parameters("@Id").Value
+            Dim Notes As String = LocalAPI.GetJobCodeName(jobId)
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteProposal, lblCompanyId.Text, "Delete Job: " & Notes)
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

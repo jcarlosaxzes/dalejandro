@@ -443,7 +443,7 @@ Public Class proposal
         btnUpdateStatus.Enabled = (cboStatus.SelectedValue <> lblOriginalStatus.Text)
     End Sub
 
-    Private Sub f(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
+    Private Sub btnUpdateStatus_Click(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
         If cboStatus.SelectedValue <> lblOriginalStatus.Text Then
             Select Case cboStatus.SelectedValue
 
