@@ -189,6 +189,7 @@ Public Class employees
             ' Deactivate Employee of Technical Support
             LocalAPI.DeactivateTechnicalSupportEmployee(Master.UserEmail, lblCompanyId.Text)
             RadGrid1.DataBind()
+            ActivateTechnicalSupportButton()
         End If
     End Sub
 

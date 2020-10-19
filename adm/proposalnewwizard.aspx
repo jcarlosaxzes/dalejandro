@@ -399,7 +399,7 @@
                                 </td>
                                 <td style="width: 16px; text-align: right"></td>
                                 <td>
-                                    <asp:Label ID="Label16" runat="server" Text="Area/Units - Measure:" Font-Bold="true"></asp:Label>
+                                    <asp:Label ID="Label16" runat="server" Text="Quantity - Units:" Font-Bold="true"></asp:Label>
                                     <br />
                                     <telerik:RadNumericTextBox ID="txtUnit" runat="server" MaxLength="128" Width="45%"
                                         RenderMode="Lightweight" Skin="Material">

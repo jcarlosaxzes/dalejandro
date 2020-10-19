@@ -204,13 +204,13 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Unit:
+                <td style="text-align: right">Quantity:
                 </td>
                 <td>
                     <telerik:RadNumericTextBox ID="txtUnit" runat="server" Width="100%">
                     </telerik:RadNumericTextBox>
                 </td>
-                <td style="text-align: right">Measure:
+                <td style="text-align: right">Units
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="180px" AppendDataBoundItems="True">

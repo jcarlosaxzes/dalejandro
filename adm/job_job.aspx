@@ -234,7 +234,7 @@
                                                 </telerik:RadNumericTextBox></td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: right">Unit:</td>
+                                            <td style="text-align: right">Quantity:</td>
                                             <td>
                                                 <telerik:RadNumericTextBox ID="txtUnit" runat="server" DbValue='<%# Bind("Unit") %>' Width="100%">
                                                 </telerik:RadNumericTextBox></td>
@@ -254,7 +254,7 @@
                                         </Items>
                                     </telerik:RadComboBox>
                                 </td>
-                                <td style="text-align: right">Measure:
+                                <td style="text-align: right">Units
                                 </td>
                                 <td>
                                     <telerik:RadComboBox ID="cboMeasure" runat="server" SelectedValue='<%# Bind("Measure") %>'

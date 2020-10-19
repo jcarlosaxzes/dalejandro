@@ -49,7 +49,7 @@ Public Class jobs
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
                 Else
-                    DefaultFilterPage()
+                    DefaultUserAccountFilters()
                 End If
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
@@ -68,7 +68,7 @@ Public Class jobs
         End Try
     End Sub
 
-    Private Sub DefaultFilterPage()
+    Private Sub DefaultUserAccountFilters()
         cboPeriod.DataBind()
         cboPeriod.SelectedValue = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterJob_Month")
         If Not Request.QueryString("JobIdInput") Is Nothing Then
@@ -156,9 +156,9 @@ Public Class jobs
     End Sub
 
     Private Sub SaveFilter()
+        Session("Filter_Jpbs_cboPeriod") = cboPeriod.SelectedValue
         Session("Filter_Jpbs_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
         Session("Filter_Jpbs_RadDatePickerTo") = RadDatePickerTo.SelectedDate
-        Session("Filter_Jpbs_cboPeriod") = cboPeriod.SelectedValue
         Session("Filter_Jpbs_cboEmployee") = cboEmployee.SelectedValue
         Session("Filter_Jpbs_cboStatus") = cboStatus.SelectedValue
         Session("Filter_Jpbs_cboClients") = cboClients.SelectedValue
@@ -172,10 +172,12 @@ Public Class jobs
 
     Private Sub RestoreFilter()
         Try
-            RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
-            RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
             cboPeriod.DataBind()
             cboPeriod.SelectedValue = Session("Filter_Jpbs_cboPeriod")
+            If cboPeriod.SelectedValue = 99 Then   ' Custom
+                RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
+                RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
+            End If
             cboEmployee.SelectedValue = Session("Filter_Jpbs_cboEmployee")
             cboStatus.DataBind()
             cboStatus.SelectedValue = Session("Filter_Jpbs_cboStatus")
@@ -190,7 +192,7 @@ Public Class jobs
             lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
             txtFind.Text = Session("Filter_Jpbs_txtFind")
 
-            Refresh()
+            'Refresh()
 
         Catch ex As Exception
             Dim e1 As String = ex.Message

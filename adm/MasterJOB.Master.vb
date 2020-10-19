@@ -13,7 +13,6 @@ Public Class MasterJOB
             If Not Request.QueryString("backpage") Is Nothing Then
                 Session("jobmasterpageback") = Request.QueryString("backpage")
             End If
-            btnMasterClose.Visible = (Len("" & Session("jobmasterpageback")) > 0)
 
         Catch ex As Exception
             '!!! Posible perdida de session
@@ -60,8 +59,8 @@ Public Class MasterJOB
     End Function
     Private Sub Back()
         'What is this ?
-        Session("jobmasterpageback") = ""
-        Select Case Session("jobmasterpageback")
+        'Session("jobmasterpageback") = ""
+        Select Case "" & Session("jobmasterpageback")
             Case "jobs"
                 Response.Redirect("~/adm/jobs?restoreFilter=1")
             Case "proposals"
