@@ -275,7 +275,7 @@
 
 
 
-                                    <td style="text-align: right">Units:
+                                    <td style="text-align: right">Quantity:
                                     </td>
                                     <td>
                                         <telerik:RadNumericTextBox ID="txtUnit" runat="server" Width="200px" Text='<%# Bind("Unit")%>' ToolTip='<%# Eval("ProjectArea")%>'>
@@ -294,7 +294,7 @@
 
 
 
-                                    <td style="text-align: right">Measure:
+                                    <td style="text-align: right">Units
                                     </td>
                                     <td>
                                         <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id"
