@@ -22,8 +22,8 @@ Public Class appointment
                 en = DateTime.Parse(lblEndDate.Text)
             End If
 
-            dtpStart.SelectedDate = s
-            dtpEnd.SelectedDate = en
+            uStart.DbSelectedDate = s
+            uEnd.DbSelectedDate = en
             lblEmployee.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
             lblAppointmentid.Text = Val(Request.QueryString("Id"))
             btnSave.Text = IIf(Val(Request.QueryString("Id")) > 0, "Update Event", "Create Event")
@@ -37,14 +37,7 @@ Public Class appointment
             Return
         End If
 
-        If CType(FormView1.FindControl("dtpStart"), RadDatePicker).SelectedDate >= CType(FormView1.FindControl("dtpEnd"), RadDatePicker).SelectedDate Then
-            If CType(FormView1.FindControl("tpStart"), RadTimePicker).SelectedDate >= CType(FormView1.FindControl("tpEnd"), RadTimePicker).SelectedDate Then
-                lblError.Text = "End Date must be grate than Start Date"
-                Return
-            End If
-        End If
-
-            FormView1.UpdateItem(False)
+        FormView1.UpdateItem(False)
 
 
     End Sub
@@ -53,15 +46,39 @@ Public Class appointment
         BackPage()
     End Sub
 
+    Private Sub ShowSendCalendar()
+        Try
+
+            lblSelectedJob.Text = LocalAPI.GetAppointmentsProperty(lblAppointmentid.Text, "JobId")
+
+            If lblSelectedJob.Text > 0 Then
+                cboTask.DataBind()
+
+                panelProposalTask.Visible = (cboTask.Items.Count > 0)
+                If panelProposalTask.Visible Then
+                    Dim proposaldetalleId As Integer = LocalAPI.GetAppointmentsProperty(lblAppointmentid.Text, "proposaldetalleId")
+                    If proposaldetalleId > 0 Then
+                        cboTask.SelectedValue = proposaldetalleId
+                    End If
+                End If
+            Else
+                panelProposalTask.Visible = False
+            End If
+
+            RadToolTipSend.Visible = True
+            RadToolTipSend.Show()
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Protected Sub SqlDataSourceAppointments_Updated(sender As Object, e As SqlDataSourceStatusEventArgs)
         Dim newId = e.Command.Parameters("@ReturnId").Value.ToString()
         lblAppointmentid.Text = newId
 
-        If CType(FormView1.FindControl("chNotify"), RadCheckBox).Checked Then
-            Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId={newId}&EntityType={lblEntityType.Text}&EntityId={lblEntityId.Text}&backpage={Request.QueryString("backpage")}")
-        Else
-            BackPage()
-        End If
+        ShowSendCalendar()
+
     End Sub
 
     Protected Sub SqlDataSourceAppointments_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs)
@@ -130,6 +147,67 @@ Public Class appointment
             cboClient.SelectedValue = lblEntityId.Text
             cboClient.Enabled = False
 
+        End If
+    End Sub
+
+    Protected Sub btnSendCalendar_Click(sender As Object, e As EventArgs) Handles btnSendCalendar.Click
+        If panelProposalTask.Visible Then
+
+            LocalAPI.UpdateProposaltaskIdAppointment(lblAppointmentid.Text, cboTask.SelectedValue)
+        End If
+
+        If SendCalendar() Then
+            RadToolTipSend.Visible = False
+        End If
+
+        If CType(FormView1.FindControl("chNotify"), RadCheckBox).Checked Then
+            Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId={lblAppointmentid.Text}&EntityType={lblEntityType.Text}&EntityId={lblEntityId.Text}&backpage={Request.QueryString("backpage")}")
+        Else
+            BackPage()
+        End If
+    End Sub
+
+
+
+
+    Private Function SendCalendar() As Boolean
+        Try
+
+            Dim sEmailTo As String = Master.UserEmail
+            Dim ue As New ASCIIEncoding()
+            Dim fileData As Byte() = ue.GetBytes(CType(FormView1.FindControl("txtDescription"), RadTextBox).Text)
+            Dim sCCO As String
+
+            Dim collection As IList(Of RadComboBoxItem) = cboMultiEmployees.CheckedItems
+            If (collection.Count <> 0) Then
+
+                For Each item As RadComboBoxItem In collection
+                    sCCO = sCCO + LocalAPI.GetEmployeeEmail(lId:=item.Value) + ","
+                Next
+                ' Quitar la ultima coma
+                sCCO = Left(sCCO, Len(sCCO) - 1)
+            End If
+
+            Return LocalAPI.SendMailAndAttachmentExt(sEmailTo, sCCO, CType(FormView1.FindControl("txtSubject"), RadTextBox).Text, fileData, CType(FormView1.FindControl("txtSubject"), RadTextBox).Text & ".ics", lblCompanyId.Text, 0, 0)
+
+            Master.InfoMessage("Appointment '" & CType(FormView1.FindControl("txtSubject"), RadTextBox).Text & "' was sent")
+        Catch ex As Exception
+            Master.ErrorMessage("Error. " & ex.Message)
+        End Try
+
+
+    End Function
+
+
+    Private Sub SqlDataSourceAppointments_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAppointments.Updating
+        Dim e1 As String = e.Command.Parameters("@Start").Value
+    End Sub
+
+    Private Sub btnCancelSendCalendar_Click(sender As Object, e As EventArgs) Handles btnCancelSendCalendar.Click
+        If CType(FormView1.FindControl("chNotify"), RadCheckBox).Checked Then
+            Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId={lblAppointmentid.Text}&EntityType={lblEntityType.Text}&EntityId={lblEntityId.Text}&backpage={Request.QueryString("backpage")}")
+        Else
+            BackPage()
         End If
     End Sub
 End Class

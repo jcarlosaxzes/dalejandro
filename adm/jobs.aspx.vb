@@ -15,6 +15,7 @@ Public Class jobs
 
                 btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
                 spanViewSummary.Visible = btnPrivate.Visible
+                btnExport.Visible = btnPrivate.Visible
 
                 Master.PageTitle = "Jobs/Jobs List"
                 Master.Help = "http://blog.pasconcept.com/2012/04/jobs-jobs-listhome-page.html"
@@ -76,7 +77,7 @@ Public Class jobs
         End If
     End Sub
     Private Sub EEGvertical()
-        If lblCompanyId.Text = 260962 Then
+        If lblCompanyId.Text = 260962 Or lblCompanyId.Text = 99 Then
             panelSubbar.Visible = True
         End If
 
@@ -465,10 +466,19 @@ Public Class jobs
         End Try
     End Sub
 
+    Private Sub ConfigureExport_csv()
+        RadGridToPrint.AllowPaging = False
+        RadGridToPrint.ExportSettings.FileName = "PASConcept_Jobs_" & Format(Date.Today, "MM-dd-yyyy")
+        RadGridToPrint.ExportSettings.ExportOnlyData = True
+        RadGridToPrint.ExportSettings.IgnorePaging = True
+        RadGridToPrint.ExportSettings.OpenInNewWindow = True
+    End Sub
 
-    Protected Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        CopyFilterToEmployeeClipboard(lblEmployeeId.Text)
-        PrintPopUp()
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
+
+        ConfigureExport_csv()
+        RadGridToPrint.MasterTableView.ExportToCSV()
+
     End Sub
 
     Private Sub PrintPopUp()

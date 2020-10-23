@@ -53,7 +53,7 @@
             <telerik:AjaxSetting AjaxControlID="btnApplyStatus">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                     <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatusLotes" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnNew">
@@ -166,6 +166,10 @@
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
+            
+            <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Excel file format (.CSV)">
+                <i class="fas fa-cloud-download-alt"></i> Export
+            </asp:LinkButton>
 
             <span id="spanViewSummary" runat="server">
                 <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary" title="Show/Hide Summary panel">
@@ -302,9 +306,9 @@
 
     </div>
     <div runat="server" id="panelSubbar" class="pasconcept-bar" visible="false">
-        <table style="width:100%">
+        <table style="width: 100%">
             <tr>
-                <td style="width:180px">
+                <td style="width: 180px">
                     <telerik:RadComboBox ID="cboStatusLotes" runat="server" DataSourceID="SqlDataSourceJobStatus" ToolTip="Update Job Status to selected records"
                         Width="100%" DataTextField="Name" DataValueField="Id" Height="200px" AppendDataBoundItems="true" RenderMode="Lightweight">
                         <Items>
@@ -317,10 +321,8 @@
                           Update Status
                     </asp:LinkButton>
                 </td>
-                <td style="text-align:right">
-                    <asp:LinkButton ID="btnPrint" runat="server" UseSubmitBehavior="false">
-                                                    <i class="fas fa-print" style="padding-right:10px"></i>
-                    </asp:LinkButton>
+                <td style="text-align: right">
+                    
 
                     <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Stop hiding clients Filter">
                     <i class="fas fa-eye" style="padding-right:10px"></i>
@@ -541,7 +543,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank" Visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
+                                                        <a runat="server" href='<%#String.Concat("../adm/scopeofwork.aspx?guid=", Eval("guid")) %>' class="dropdown-item" target="_blank" visible='<%# LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") <> 16 %>'>
                                                             <i class="fas fa-th-list"></i>&nbsp;&nbsp; Download Scope of Work
                                                         </a>
                                                     </td>
@@ -563,9 +565,9 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td >
+                                                    <td>
                                                         <asp:LinkButton ID="btnAddNotification" runat="server" UseSubmitBehavior="false" CommandName="AddNotifications" CommandArgument='<%# Eval("Id")%>'
-                                                            CssClass="dropdown-item" >
+                                                            CssClass="dropdown-item">
                                                                  <i class="far fa-bell"></i>&nbsp;&nbsp; Add Notification
                                                         </asp:LinkButton>
                                                     </td>
@@ -723,7 +725,7 @@
                                 UniqueName="Status" AllowFiltering="true" HeaderStyle-Width="150px">
                                 <ItemTemplate>
 
-                                    <asp:LinkButton ID="lnkUpdateStatus" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id") %>' >
+                                    <asp:LinkButton ID="lnkUpdateStatus" runat="server" UseSubmitBehavior="false" CommandName="Update Status" CommandArgument='<%# Eval("Id") %>'>
                                         <div title="Clic to edit Job Status" class='<%# LocalAPI.GetJobStatusLabelCSS(Eval("StatusId")) %>' style="font-size: 12px; width: 120px"><%# Eval("Status") %></div>
                                     </asp:LinkButton>
                                 </ItemTemplate>
@@ -740,9 +742,9 @@
 
                                                 <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Size="12px" ToolTip="Budget Used"></asp:Label>
                                             </td>
-                                            <td style=" text-align: center">of
+                                            <td style="text-align: center">of
                                             </td>
-                                            <td style="width: 47%;text-align: right">
+                                            <td style="width: 47%; text-align: right">
                                                 <asp:Label ID="lblBudget" runat="server" Text='<%# Eval("Budget", "{0:C0}")%>' Font-Size="12px" ToolTip="Job Budget"></asp:Label>
                                             </td>
                                         </tr>
@@ -841,6 +843,58 @@
                         </Columns>
                     </MasterTableView>
                 </telerik:RadGrid>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+
+                <div class="container">
+                    <div style="height: 1px; width: 300px; overflow: hidden">
+                        <asp:Panel ID="ExportPanel" runat="server" Height="1px">
+                            <telerik:RadGrid ID="RadGridToPrint" runat="server" DataSourceID="SqlDataSourceJobs" Width="300px" Culture="en-US">
+                                <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceJobs" AutoGenerateColumns="False">
+                                    <Columns>
+                                        <telerik:GridBoundColumn DataField="Code" FilterControlAltText="Filter Name column" HeaderText="Code" SortExpression="Code" UniqueName="Code" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Open_date" FilterControlAltText="Filter Open_date column" HeaderText="Date" SortExpression="Open_date" UniqueName="Open_date" ReadOnly="True" DataFormatString="{0:MM/dd/yyy}">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Job" FilterControlAltText="Filter Job column" HeaderText="Job" SortExpression="Job" UniqueName="Job" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="ProjectLocation" FilterControlAltText="Location" HeaderText="Location" SortExpression="ProjectLocation" UniqueName="ProjectLocation" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="JobType" FilterControlAltText="JobType" HeaderText="Type" SortExpression="JobType" UniqueName="JobType" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="ClientName" FilterControlAltText="ClientName" HeaderText="Client" SortExpression="ClientName" UniqueName="ClientName" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Company" FilterControlAltText="Company" HeaderText="Company" SortExpression="Company" UniqueName="Company" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Tags" FilterControlAltText="Tags" HeaderText="Tags" SortExpression="Tags" UniqueName="Tags" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="EmployeeName" FilterControlAltText="EmployeeName" HeaderText="PM-Employee" SortExpression="EmployeeName" UniqueName="EmployeeName" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Budget" FilterControlAltText="Budget" HeaderText="Budget" SortExpression="Budget" UniqueName="Budget" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Collected" FilterControlAltText="Collected" HeaderText="Collected" SortExpression="Collected" UniqueName="Collected" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Profit" FilterControlAltText="Profit" HeaderText="Profit" SortExpression="Profit" UniqueName="Profit" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Status" FilterControlAltText="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="AmountBilled" FilterControlAltText="AmountBilled" HeaderText="Amount Billed" SortExpression="AmountBilled" UniqueName="AmountBilled" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Balance" FilterControlAltText="Balance" HeaderText="Balance" SortExpression="Balance" UniqueName="Balance" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="SubFees" FilterControlAltText="SubFees" HeaderText="SubFees" SortExpression="SubFees" UniqueName="SubFees" ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </asp:Panel>
+                    </div>
+                </div>
+
             </td>
         </tr>
     </table>
