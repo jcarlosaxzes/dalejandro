@@ -70,8 +70,8 @@
                     <div>
                         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" DefaultMode="Edit">
                             <EditItemTemplate>
-                                <div style="text-align: center">
-                                    <asp:LinkButton ID="btnUpdateSubconsultant1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
+                                <div style="text-align: right">
+                                    <asp:LinkButton ID="btnUpdateSubconsultant1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                          Update
                                     </asp:LinkButton>
 
@@ -280,11 +280,10 @@
                                     </tr>
                                 </table>
 
-                                <div style="text-align: center">
-                                    <asp:LinkButton ID="btnUpdateSubconsultant2" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
+                                <div style="text-align: right">
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                          Update
                                     </asp:LinkButton>
-
                                 </div>
                             </EditItemTemplate>
 

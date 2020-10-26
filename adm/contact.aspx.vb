@@ -1,5 +1,6 @@
 ﻿Imports Telerik.Web.UI
-Public Class contact1
+
+Public Class contact
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -8,7 +9,7 @@ Public Class contact1
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblContactId.Text = Request.QueryString("ContactId")
-                Master.PageTitle = "Contact/Edit Contact: " & LocalAPI.GetContactProperty(lblContactId.Text, "Name")
+                If LocalAPI.IsCompanyViolation(lblContactId.Text, "Contacts", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
 
                 FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
             End If
@@ -17,7 +18,6 @@ Public Class contact1
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
     End Sub
-
     Protected Sub FormView1_ItemUpdating(sender As Object, e As FormViewUpdateEventArgs) Handles FormView1.ItemUpdating
         e.NewValues("Subtype") = CType(FormView1.FindControl("cboSubtype"), RadComboBox).SelectedValue
     End Sub

@@ -3353,7 +3353,7 @@
     </Compile>
     <Compile Include="adm\contact.aspx.vb">
       <DependentUpon>contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\contacts.aspx.designer.vb">
       <DependentUpon>contacts.aspx</DependentUpon>
@@ -3731,7 +3731,7 @@
     </Compile>
     <Compile Include="adm\newcontact.aspx.vb">
       <DependentUpon>newcontact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\newemployee.aspx.designer.vb">
       <DependentUpon>newemployee.aspx</DependentUpon>
@@ -5018,7 +5018,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,7 +1,8 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="newcontact.aspx.vb" Inherits="pasconcept20.newcontact" %>
+﻿<%@ Page Title="New Contact" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="newcontact.aspx.vb" Inherits="pasconcept20.newcontact" %>
 
-<%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLuxW5zYQh_ClJfDEBpTLlT_tf8JVcxf0&libraries=places&callback=initAutocomplete"
             async defer></script>
@@ -55,28 +56,25 @@
             }
         </script>
     </telerik:RadCodeBlock>
+    <div>
+            <asp:ValidationSummary ID="vsClient" runat="server" ValidationGroup="Contact" ForeColor="Red"
+                HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
+                                        There were this errors:"></asp:ValidationSummary>
+        </div>
 
-    <table style="width: 100%" class="table-sm">
-        <tr>
-            <td style="text-align: center; padding-top: 15px; padding-bottom: 15px; width: 125px">
-                <asp:Image ID="Image8" runat="server"
-                    ImageUrl="~/Images/Toolbar/new-client-256.png" Width="64px" />
-            </td>
-            <td class="Titulo3" style="padding-left: 25px">Enter New Contact Details
-                <br />
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName"
-                    ErrorMessage="(*) Name is Required" Display="Dynamic"></asp:RequiredFieldValidator>
-                &nbsp;
-               <%-- <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtEmail"
-                    runat="server" ErrorMessage="(*) Enter an valid email address" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                    Display="Dynamic"></asp:RegularExpressionValidator>--%>
-                &nbsp;
-               <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtEmail"
-                    ErrorMessage="(*) Email is Required" Display="Dynamic"></asp:RequiredFieldValidator>--%>
-                <br />
-            </td>
-        </tr>
-    </table>
+    <span class="pasconcept-pagetitle">
+        <a href="contacts.aspx" class="btn btn-dark">Cancel
+        </a>
+        New Contact
+    </span>
+
+    <span style="float: right; vertical-align: middle;">
+        <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ValidationGroup="Contact" CausesValidation="true" >
+                                        Add Contact
+                </asp:LinkButton>
+    </span>
+
+
     <table style="width: 100%" class="table-sm">
         <tr>
             <td class="Normal" style="width: 140px; text-align: right">(*) Full Name:
@@ -172,7 +170,7 @@
                 <telerik:RadMaskedTextBox ID="txtCellular" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="200px" ToolTip="Cell" />
             </td>
         </tr>
-        BusinessPhone
+        
         <tr>
             <td style="text-align: right" class="Normal">Web Page:
             </td>
@@ -193,13 +191,15 @@
             <td style="text-align: right" class="Normal">&nbsp;
             </td>
             <td>
-                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
-                                        <i class="fas fa-plus"></i> Contact
-                </asp:LinkButton>
+                
             </td>
         </tr>
     </table>
 
+    <div>
+         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName" ErrorMessage="Name is Required" Display="None"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ErrorMessage="Invalid Format" ValidationGroup="Contact"></asp:RegularExpressionValidator>
+    </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"
         ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         InsertCommand="Contact_INSERT" InsertCommandType="StoredProcedure">
@@ -242,5 +242,4 @@
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
-
 </asp:Content>

@@ -42,8 +42,7 @@ Public Class contacts
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "o"
-                sUrl = "~/ADM/Contact.aspx?ContactId=" & e.CommandArgument
-                CreateRadWindows(e.CommandName, sUrl, 850, 700)
+                Response.Redirect($"~/ADM/contact.aspx?contactId={e.CommandArgument}&backpage=contacts")
             Case "c"
                 Response.Redirect($"~/ADM/Client.aspx?clientId={e.CommandArgument}&backpage=contacts")
             Case "e"

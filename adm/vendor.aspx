@@ -39,15 +39,6 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"></telerik:RadAjaxLoadingPanel>
 
     <div class="pasconcept-bar">
-        <span class="pasconcept-pagetitle">
-            <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
-                       Back to List
-            </asp:LinkButton>
-            Vendor
-        </span>
-    </div>
-
-    <div class="pasconcept-bar">
         <div>
             <asp:ValidationSummary ID="vsClient" runat="server" ValidationGroup="UpdateVendor" ForeColor="Red"
                 HeaderText="<button aria-hidden='true' data-dismiss='alert' class='close' type='button'>×</button>
@@ -55,13 +46,21 @@
         </div>
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" DefaultMode="Edit">
             <EditItemTemplate>
-                <div style="text-align: center">
-                    <br />
-                    <asp:LinkButton ID="btnUpdateVendor1" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="UpdateVendor">
-                     Update
-                    </asp:LinkButton>
-                    <hr style="margin: 0" />
+
+                <div class="pasconcept-bar">
+                    <span class="pasconcept-pagetitle">
+                        <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False" OnClick="btnBack_Click">
+                            Back to List
+                        </asp:LinkButton>
+                        Vendor
+                    </span>
+                     <span style="float: right; vertical-align: middle;">
+                        <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="Update" ValidationGroup="UpdateVendor">
+                            Update
+                        </asp:LinkButton>
+                    </span>
                 </div>
+                
                 <table class="table-sm" style="width: 100%">
                     <tr>
                         <td style="text-align: right; width: 180px">Name:
@@ -228,13 +227,6 @@
                         </td>
                     </tr>
                 </table>
-
-                <div style="text-align: center">
-                    <hr style="margin: 0" />
-                    <asp:LinkButton ID="btnUpdateVendor2" runat="server" CommandName="Update" CausesValidation="True" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="UpdateVendor">
-                     Update
-                    </asp:LinkButton>
-                </div>
 
                 <div>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtVendorName" ValidationGroup="UpdateVendor"
