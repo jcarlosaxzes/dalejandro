@@ -94,7 +94,7 @@ Public Class contacts
     End Sub
 
     Protected Sub btnNewContact_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewContact.Click
-        CreateRadWindows("NewContact", "~/ADM/NewContact.aspx", 850, 700)
+        Response.Redirect("~/adm/newcontact.aspx")
     End Sub
 
     Private Sub SaveFilter()
