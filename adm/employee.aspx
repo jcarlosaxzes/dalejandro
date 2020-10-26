@@ -164,12 +164,10 @@
                                                             <i class="fas fa-user"></i> Employee Photo
                                                     </asp:LinkButton>
                                                 </td>
-                                                <td style="text-align: center;">
-                                                    <asp:LinkButton ID="btnUpdateEmployee1" runat="server" CommandName="Update" ToolTip="Upload Last Changes"
-                                                        CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
-                                                             Update Employee
+                                                <td style="text-align: right;">
+                                                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="Update" ValidationGroup="Contact">
+                                                        Update
                                                     </asp:LinkButton>
-
                                                 </td>
                                             </tr>
                                         </table>
@@ -342,6 +340,7 @@
                                         &nbsp;&nbsp;&nbsp;
                                         Cell Phone:
                                         &nbsp;
+                                       
                                         <telerik:RadMaskedTextBox ID="CellularTextBox" runat="server" Text='<%# Bind("Cellular") %>' Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" />
                                     </td>
                                 </tr>
@@ -354,6 +353,7 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         Work Ext:
                                         &nbsp;
+                                       
                                         <telerik:RadTextBox ID="txtExt" runat="server" Text='<%# Bind("Ext") %>' Width="100px"
                                             MaxLength="4">
                                         </telerik:RadTextBox>
@@ -517,12 +517,10 @@
 
                                 <tr>
                                     <td></td>
-                                    <td style="text-align: center;">
-                                        <asp:LinkButton ID="btnUpdate3" runat="server" CommandName="Update" ToolTip="Upload Last Changes"
-                                            CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
-                                                    Update Employee
+                                    <td style="text-align: right;">
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="Update" ValidationGroup="Contact">
+                                              Update
                                         </asp:LinkButton>
-
                                     </td>
 
                                 </tr>

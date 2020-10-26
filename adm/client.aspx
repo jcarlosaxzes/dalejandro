@@ -153,12 +153,12 @@
                                             <Icon PrimaryIconCssClass=" rbUpload"></Icon>
                                         </telerik:RadButton>
                                     </td>
-                                    <td style="text-align: center">
-                                        <asp:LinkButton ID="btnUpdateClient1" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false">
-                                            Update Client
+                                    <td style="text-align: right;">
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="UpdateClient" ValidationGroup="Contact">
+                                              Update
                                         </asp:LinkButton>
-                                        <td></td>
-                                        <td></td>
+                                    </td>
+
                                 </tr>
                             </table>
 
@@ -463,15 +463,14 @@
                                     </td>
                                 </tr>
 
-
+                             <td style="text-align: right;">
+                                    </td>
                             </table>
 
-                            <div style="text-align: center">
-                                <asp:LinkButton ID="btnUpdateClient2" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="UpdateClient">
-                                     Update Client
-                                </asp:LinkButton>
-                                <br />
-                                <br />
+                            <div style="text-align: right">
+                                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="UpdateClient" ValidationGroup="Contact">
+                                              Update
+                                        </asp:LinkButton>
                             </div>
                             <div>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtClientName" ValidationGroup="UpdateClient"

@@ -22,7 +22,7 @@
         End Try
     End Sub
 
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+    Public Sub btnBack_Click(sender As Object, e As EventArgs)
         Back()
     End Sub
     Protected Sub FormView1_ItemUpdated(sender As Object, e As FormViewUpdatedEventArgs) Handles FormView1.ItemUpdated
