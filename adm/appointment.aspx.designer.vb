@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class appointment
 
     '''<summary>
+    '''RadAjaxManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
+
+    '''<summary>
+    '''RadAjaxLoadingPanel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+
+    '''<summary>
     '''btnBack control.
     '''</summary>
     '''<remarks>
@@ -48,6 +66,60 @@ Partial Public Class appointment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
+
+    '''<summary>
+    '''RadToolTipSend control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipSend As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''panelProposalTask control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents panelProposalTask As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''cboTask control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboTask As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''cboMultiEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboMultiEmployees As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''btnSendCalendar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSendCalendar As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnCancelSendCalendar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCancelSendCalendar As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''SqlDataSourceEmployees control.
@@ -95,6 +167,15 @@ Partial Public Class appointment
     Protected WithEvents SqlDataSourceAppointments As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''SqlDataSourceProposalTask control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceProposalTask As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -140,22 +221,22 @@ Partial Public Class appointment
     Protected WithEvents lblAppointmentid As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''dtpStart control.
+    '''uStart control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents dtpStart As Global.Telerik.Web.UI.RadTimePicker
+    Protected WithEvents uStart As Global.Telerik.Web.UI.RadDateTimePicker
 
     '''<summary>
-    '''dtpEnd control.
+    '''uEnd control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents dtpEnd As Global.Telerik.Web.UI.RadTimePicker
+    Protected WithEvents uEnd As Global.Telerik.Web.UI.RadDateTimePicker
 
     '''<summary>
     '''lblEntityType control.
@@ -174,6 +255,15 @@ Partial Public Class appointment
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEntityId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblSelectedJob control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelectedJob As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

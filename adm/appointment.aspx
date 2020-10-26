@@ -3,6 +3,20 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadScheduler1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadToolTipSend"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+
+      <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
+    </telerik:RadAjaxLoadingPanel>
+
     <div class="pasconcept-bar">
         <asp:LinkButton ID="btnBack" runat="server" CssClass="btn btn-dark" UseSubmitBehavior="false" CausesValidation="False">
             Back
@@ -34,22 +48,16 @@
                     <td style="width: 200px; text-align: right">Start Date: 
                     </td>
                     <td>
-                        <telerik:RadDatePicker ID="dtpStart" runat="server" DbSelectedDate='<%# Bind("Start") %>'>
-                        </telerik:RadDatePicker>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Start Time: 
-                    <telerik:RadTimePicker ID="tpStart" runat="server" DbSelectedDate='<%# Bind("Start") %>'>
-                    </telerik:RadTimePicker>
+                        <telerik:RadDateTimePicker ID="dtpStart" runat="server" DbSelectedDate='<%# Bind("Start") %>' Width="250px">
+                        </telerik:RadDateTimePicker>
                     </td>
                 </tr>
                 <tr>
                     <td style="width: 200px; text-align: right">End Date: 
                     </td>
                     <td>
-                        <telerik:RadDatePicker ID="dtpEnd" runat="server" DbSelectedDate='<%# Bind("End") %>'>
-                        </telerik:RadDatePicker>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End Time: 
-                    <telerik:RadTimePicker ID="tpEnd" runat="server" DbSelectedDate='<%# Bind("End") %>'>
-                    </telerik:RadTimePicker>
+                        <telerik:RadDateTimePicker ID="dtpEnd" runat="server" DbSelectedDate='<%# Bind("End") %>'  Width="250px">
+                        </telerik:RadDateTimePicker>
                     </td>
                 </tr>
                 <tr>
@@ -166,6 +174,53 @@
         </asp:FormView>
     </div>
 
+    
+    <telerik:RadToolTip ID="RadToolTipSend" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+        <h2 style="margin: 0; text-align: center; color: white; width: 650px">
+            <span class="navbar navbar-expand-md bg-dark text-white">Proposal Task & Share Event
+            </span>
+        </h2>
+        <asp:Panel runat="server" ID="panelProposalTask">
+            <table class="table-sm" style="width: 650px">
+
+                <tr>
+                    <td style="width: 180px">Proposal Task:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" ZIndex="50001" Sort="Descending"
+                            DataTextField="Description" DataValueField="Id" Width="100%" CausesValidation="false">
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
+        <table class="table-sm" style="width: 650px">
+            <tr>
+                <td style="width: 180px">Employees for notify this event:
+                </td>
+                <td>
+                    <telerik:RadComboBox ID="cboMultiEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" ZIndex="50001"
+                        Width="100%" CheckBoxes="true" Height="200px" EnableCheckAllItemsCheckBox="false" MarkFirstMatch="True" Filter="Contains">
+                    </telerik:RadComboBox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right; padding-right: 10px; padding-top: 200px">
+                    <asp:LinkButton ID="btnSendCalendar" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                        Accept
+                    </asp:LinkButton>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                     <asp:LinkButton ID="btnCancelSendCalendar" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" CausesValidation="false">
+                                     Cancel
+                     </asp:LinkButton>
+                </td>
+
+            </tr>
+        </table>
+    </telerik:RadToolTip>
+
+
     <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [FullName] as Name FROM [Employees] WHERE companyId=@companyId and isnull(Inactive,0)=0 ORDER BY [Name]">
         <SelectParameters>
@@ -199,7 +254,8 @@
         <InsertParameters>
             <asp:Parameter Name="Subject" Type="String" />
             <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="Start" Type="DateTime" />
+            <asp:Parameter Name="Start" Type="DateTime" />            
+            <asp:ControlParameter ControlID="dtpSendDate" Name="SendDate" PropertyName="SelectedDate" Type="DateTime" />
             <asp:Parameter Name="End" Type="DateTime" />
             <asp:Parameter Name="RecurrenceRule" Type="String" DefaultValue=""/>
             <asp:Parameter Name="RecurrenceParentID" Type="Int32" DefaultValue="" />
@@ -216,17 +272,17 @@
         </InsertParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblAppointmentid" Name="Id" PropertyName="Text"></asp:ControlParameter>
-            <asp:ControlParameter ControlID="dtpStart" Name="start" PropertyName="SelectedDate" Type="DateTime" />
-            <asp:ControlParameter ControlID="dtpEnd" Name="end" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="uStart" Name="start" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="uEnd" Name="end" PropertyName="SelectedDate" Type="DateTime" />
             <%--<asp:ControlParameter ControlID="lblStartDate" Name="start" PropertyName="Text" Type="String"></asp:ControlParameter>
             <asp:ControlParameter ControlID="lblEndDate" Name="end" PropertyName="Text" Type="DateTime"></asp:ControlParameter>--%>
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="ReturnId" Type="Int32" Direction="Output" />
             <asp:Parameter Name="Subject" Type="String" />
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="Start" Type="DateTime" />
-            <asp:Parameter Name="End" Type="DateTime" />
+            <asp:Parameter Name="Description" Type="String" />  
+            <asp:Parameter Name="Start" Type="DateTime" />  
+            <asp:Parameter Name="End" Type="DateTime" />            
             <asp:Parameter Name="RecurrenceRule" Type="String" />
             <asp:Parameter Name="RecurrenceParentID" Type="Int32" />
             <asp:Parameter Name="Reminder" Type="String" />
@@ -245,13 +301,22 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceProposalTask" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="ProposalTaskAppoitment_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblStartDate" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEndDate" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblAppointmentid" runat="server" Visible="False"></asp:Label>
-    <telerik:RadTimePicker ID="dtpStart" runat="server" Visible="false">  </telerik:RadTimePicker>
-    <telerik:RadTimePicker ID="dtpEnd" runat="server" Visible="false">  </telerik:RadTimePicker>    
+    <telerik:RadDateTimePicker  ID="uStart" runat="server" Visible="false">  </telerik:RadDateTimePicker>
+    <telerik:RadDateTimePicker  ID="uEnd" runat="server" Visible="false">  </telerik:RadDateTimePicker>    
     <asp:Label ID="lblEntityType" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEntityId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblSelectedJob" runat="server" Visible="False"></asp:Label>
 </asp:Content>
