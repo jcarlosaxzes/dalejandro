@@ -44,12 +44,13 @@ Public Class jobs
                     btnPasteF.Enabled = False
                 End If
 
-                ShowCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
+
 
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
                 Else
                     DefaultUserAccountFilters()
+                    ShowCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
                 End If
                 IniciaPeriodo(cboPeriod.SelectedValue)
 
@@ -162,6 +163,7 @@ Public Class jobs
         Session("Filter_Jpbs_cboEmployee") = cboEmployee.SelectedValue
         Session("Filter_Jpbs_cboStatus") = cboStatus.SelectedValue
         Session("Filter_Jpbs_cboClients") = cboClients.SelectedValue
+        ShowCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
         Session("Filter_Jpbs_lblDepartmentIdIN_List") = lblDepartmentIdIN_List.Text
         Session("Filter_Jpbs_cboJobType") = cboJobType.SelectedValue
         Session("Filter_Jpbs_lblExcludeClientId_List") = lblExcludeClientId_List.Text
@@ -184,6 +186,7 @@ Public Class jobs
             cboClients.DataBind()
             cboClients.SelectedValue = Session("Filter_Jpbs_cboClients")
             lblDepartmentIdIN_List.Text = Session("Filter_Jpbs_lblDepartmentIdIN_List")
+            SetCheckedOneItem(lblDepartmentIdIN_List, cboDepartments)
             cboJobType.DataBind()
             cboJobType.SelectedValue = Session("Filter_Jpbs_cboJobType")
             lblExcludeClientId_List.Text = Session("Filter_Jpbs_lblExcludeClientId_List")
@@ -198,6 +201,29 @@ Public Class jobs
             Dim e1 As String = ex.Message
         End Try
     End Sub
+
+    Private Sub SetCheckedOneItem(LabelIN_List As Label, Combo1 As RadComboBox)
+        Try
+            If Len(LabelIN_List.Text) > 0 Then
+                Dim sArrValues As String() = Split(LabelIN_List.Text, ",")
+                Dim nValues As Integer = sArrValues.Length
+                Dim collection As IList(Of RadComboBoxItem) = Combo1.Items
+                If (collection.Count <> 0) Then
+                    For Each item As RadComboBoxItem In collection
+                        For i = 0 To nValues - 1
+                            If item.Value = sArrValues(i) Then
+                                item.Checked = True
+                                Exit For
+                            End If
+                        Next
+                    Next
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     'Protected Sub RadGrid1_BatchEditCommand(sender As Object, e As Telerik.Web.UI.GridBatchEditingEventArgs) Handles RadGrid1.BatchEditCommand
     '    For Each command As GridBatchEditingCommand In e.Commands
     '        If command.Type = GridBatchEditingCommandType.Update Then
