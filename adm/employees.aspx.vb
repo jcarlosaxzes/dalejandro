@@ -52,7 +52,11 @@ Public Class employees
 
     Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
         Dim CurrentInactive As Integer = IIf(LocalAPI.GetEmployeeProperty(lblSelected.Text, "Inactive"), 1, 0)
+        Dim EmployeeName As String = LocalAPI.GetEmployeeProperty(lblSelected.Text, "FullName")
         If LocalAPI.EliminarEmployee(CInt(lblSelected.Text)) Then
+
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteEmployee, lblCompanyId.Text, "Delete Employee: " & EmployeeName)
+
             OcultarConfirmDelete()
             Master.InfoMessage("The employee was deleted.")
             lblSelected.Text = ""

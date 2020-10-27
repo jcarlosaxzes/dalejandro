@@ -195,4 +195,13 @@ Public Class statement
     Private Sub SqlDataSource1_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Inserting
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
+
+    Private Sub SqlDataSource1_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Deleting
+        Try
+            lblStatementId.Text = e.Command.Parameters("@Id").Value
+            Dim Notes As String = LocalAPI.GetStatementNumber(lblStatementId.Text)
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteStatement, lblCompanyId.Text, "Delete Statement: " & Notes)
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class

@@ -39,6 +39,7 @@ Public Class LocalAPI
         AdminLogin = 1
         EmployeeLogin = 2
         ClientLogin = 3
+        DeleteClient = 33
         SubconsultanLogin = 4
         SMS_send = 7
         EmailCampaign = 8
@@ -49,10 +50,13 @@ Public Class LocalAPI
         AceptProposal = 205
         NewEmployee = 301
         InactiveEmployee = 302
+        DeleteEmployee = 303
         NewClient = 401
         NewPaid = 601
+        DeletePaid = 602
         NewJobLink = 901
         NewRFP = 1001
+        DeleteRFP = 1002
         NewJobNote = 1101
         NewInvoice = 1201
         DeleteInvoice = 1202
