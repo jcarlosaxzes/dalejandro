@@ -117,7 +117,7 @@
                     </tr>
 
                     <tr>
-                        <td style="width: 150px" style="text-align: right">Class:
+                        <td style="text-align: right">Class:
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboClass" runat="server" DataSourceID="SqlDataSourceClass"
@@ -127,7 +127,7 @@
                     </tr>
 
                     <tr>
-                        <td style="width: 150px" style="text-align: right">Type:
+                        <td style="text-align: right">Type:
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceTypes"
@@ -139,7 +139,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 150px" style="text-align: right">Subtype:
+                        <td style="text-align: right">Subtype:
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboSubtype" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceSubtypes" DataTextField="Name" DataValueField="Id"

@@ -80,7 +80,7 @@
             <td class="Normal" style="width: 140px; text-align: right">(*) Full Name:
             </td>
             <td>
-                <telerik:RadTextBox ID="txtName" runat="server" MaxLength="80" Width="400px" EmptyMessage="Required">
+                <telerik:RadTextBox ID="txtName" runat="server" MaxLength="80" Width="100%" EmptyMessage="Required">
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -88,7 +88,7 @@
             <td class="Normal" style="text-align: right">Position:
             </td>
             <td>
-                <telerik:RadTextBox ID="txtPosition" runat="server" Width="400px" MaxLength="80">
+                <telerik:RadTextBox ID="txtPosition" runat="server" Width="100%" MaxLength="80">
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -96,7 +96,7 @@
             <td style="text-align: right" class="Normal">Company:
             </td>
             <td>
-                <telerik:RadTextBox ID="txtCompany" runat="server" MaxLength="80" Width="400px">
+                <telerik:RadTextBox ID="txtCompany" runat="server" MaxLength="80" Width="100%">
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -104,7 +104,7 @@
             <td style="text-align: right" class="auto-style2">Email:
             </td>
             <td class="auto-style2">
-                <telerik:RadTextBox ID="txtEmail" runat="server" MaxLength="80" Width="400px" >
+                <telerik:RadTextBox ID="txtEmail" runat="server" MaxLength="80" Width="100%" >
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -112,7 +112,7 @@
             <td style="text-align: right" class="auto-style2">Business Email:
             </td>
             <td class="auto-style2">
-                <telerik:RadTextBox ID="txtBusinessEmail" runat="server" MaxLength="80" Width="400px" >
+                <telerik:RadTextBox ID="txtBusinessEmail" runat="server" MaxLength="80" Width="100%" >
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -127,7 +127,7 @@
                 </telerik:RadComboBox>
                 &nbsp;
                 <telerik:RadComboBox ID="cboSubtype" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceSubtypes" DataTextField="Name" DataValueField="Id"
-                    Width="195px">
+                    Width="200px">
                     <Items>
                         <telerik:RadComboBoxItem runat="server" Text="(Subtypes Not Defined...)" Value="0" />
                     </Items>
@@ -138,7 +138,7 @@
             <td style="text-align: right" class="Normal">Address Line 1:
             </td>
             <td>
-                <telerik:RadTextBox ID="txtAdress" runat="server" MaxLength="80" Width="400px" CssClass="input-address">
+                <telerik:RadTextBox ID="txtAdress" runat="server" MaxLength="80" Width="100%" CssClass="input-address">
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -146,7 +146,7 @@
             <td style="text-align: right" class="Normal">Address Line 2:
             </td>
             <td>
-                <telerik:RadTextBox ID="txtDireccion2" runat="server" Width="400px" MaxLength="80">
+                <telerik:RadTextBox ID="txtDireccion2" runat="server" Width="100%" MaxLength="80">
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -154,11 +154,11 @@
             <td style="text-align: right" class="Normal">City/State/Zip Code:
             </td>
             <td>
-                <telerik:RadTextBox ID="txtCity" runat="server" MaxLength="50" Width="200px" ToolTip="City" EmptyMessage="City" CssClass="input-city">
+                <telerik:RadTextBox ID="txtCity" runat="server" MaxLength="50" Width="50%" ToolTip="City" EmptyMessage="City" CssClass="input-city">
                 </telerik:RadTextBox>
-                <telerik:RadTextBox ID="txtState" runat="server" MaxLength="50" Width="100px" ToolTip="State" EmptyMessage="State" CssClass="input-state">
+                <telerik:RadTextBox ID="txtState" runat="server" MaxLength="50" Width="150px" ToolTip="State" EmptyMessage="State" CssClass="input-state">
                 </telerik:RadTextBox>
-                <telerik:RadTextBox ID="txtZipCode" runat="server" MaxLength="50" Width="100px" EmptyMessage="Zip Code" CssClass="input-zip">
+                <telerik:RadTextBox ID="txtZipCode" runat="server" MaxLength="50" Width="150px" EmptyMessage="Zip Code" CssClass="input-zip">
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -166,8 +166,8 @@
             <td style="text-align: right" class="Normal">Phone/Cell:
             </td>
             <td>
-                <telerik:RadMaskedTextBox ID="txtPhone" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="200px" ToolTip="Phone" />
-                <telerik:RadMaskedTextBox ID="txtCellular" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="200px" ToolTip="Cell" />
+                <telerik:RadMaskedTextBox ID="txtPhone" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="300px" ToolTip="Phone" />
+                <telerik:RadMaskedTextBox ID="txtCellular" runat="server" Mask="(###) ###-####" SelectionOnFocus="CaretToBeginning" Width="300px" ToolTip="Cell" />
             </td>
         </tr>
         
@@ -175,7 +175,7 @@
             <td style="text-align: right" class="Normal">Web Page:
             </td>
             <td>
-                <telerik:RadTextBox ID="txtWeb" runat="server" MaxLength="50" Width="400px">
+                <telerik:RadTextBox ID="txtWeb" runat="server" MaxLength="50" Width="100%">
                 </telerik:RadTextBox>
             </td>
         </tr>
@@ -183,7 +183,7 @@
             <td style="text-align: right" class="auto-style2">Notes:
             </td>
             <td class="auto-style2">
-                <telerik:RadTextBox ID="txtNotes" runat="server" MaxLength="80" Width="400px" >
+                <telerik:RadTextBox ID="txtNotes" runat="server" MaxLength="80" Width="100%" >
                 </telerik:RadTextBox>
             </td>
         </tr>
