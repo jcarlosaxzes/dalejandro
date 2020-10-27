@@ -317,4 +317,11 @@ Public Class rfps
         AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
+    Private Sub SqlDataSourceRFP_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceRFP.Deleting
+        Try
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteRFP, lblCompanyId.Text, "Delete RFP: " & LocalAPI.RFPNumber(e.Command.Parameters("@Id").Value))
+        Catch ex As Exception
+        End Try
+
+    End Sub
 End Class

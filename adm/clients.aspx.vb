@@ -170,4 +170,13 @@ Public Class clients
         ' Duplicate client
         Response.Redirect($"~/ADM/Client.aspx?clientId={e.Command.Parameters("@Id_OUT").Value}&backpage=clients")
     End Sub
+
+    Private Sub SqlDataSource1_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Deleting
+        Try
+            Dim Notes As String = LocalAPI.GetClientProperty(e.Command.Parameters("@Id").Value, "Name")
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteClient, lblCompanyId.Text, "Delete Client: " & Notes)
+        Catch ex As Exception
+        End Try
+
+    End Sub
 End Class

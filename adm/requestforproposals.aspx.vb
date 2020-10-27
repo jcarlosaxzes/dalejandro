@@ -293,5 +293,12 @@ Public Class requestforproposals
     Private Sub btnTreePage_Click(sender As Object, e As EventArgs) Handles btnTreePage.Click
         Response.RedirectPermanent("~/ADM/rfps.aspx")
     End Sub
+    Private Sub SqlDataSourceRFP_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceRFP.Deleting
+        Try
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteRFP, lblCompanyId.Text, "Delete RFP: " & LocalAPI.RFPNumber(e.Command.Parameters("@Id").Value))
+        Catch ex As Exception
+        End Try
+
+    End Sub
 
 End Class

@@ -188,6 +188,14 @@ Public Class Job_accounting
         End If
     End Sub
 
+    Private Sub SqlDataSourceInvoices_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceInvoices.Deleting
+        Try
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteInvoice, lblCompanyId.Text, "Delete Invoice: " & LocalAPI.InvoiceNumber(e.Command.Parameters("@Id").Value))
+        Catch ex As Exception
+        End Try
+
+    End Sub
+
     Protected Sub SqlDataSourceInvoices_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceInvoices.Deleted
         RadGridIncoices.DataBind()
         UpdateValues()
@@ -373,6 +381,12 @@ Public Class Job_accounting
     Private Sub SqlDataSourceInvoice_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceInvoice.Updating
         Dim e1 As String = e.Command.Parameters(5).Value
     End Sub
+    Private Sub SqlDataSourcePayments_Deleting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourcePayments.Deleting
+        Try
+            LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeletePaid, lblCompanyId.Text, "Delete Payment: " & e.Command.Parameters("@Id").Value)
+        Catch ex As Exception
+        End Try
+    End Sub
     Private Sub SqlDataSourcePayment_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayment.Deleted
         UpdateValues()
     End Sub
@@ -386,6 +400,7 @@ Public Class Job_accounting
         SqlDataSourceClientBalance.DataBind()
         FormViewClientBalance.DataBind()
     End Function
+
 
 #End Region
 End Class
