@@ -160,4 +160,7 @@ Public Class client
 
     End Sub
 
+    Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
+        Dim e1 As String = e.Command.Parameters("@SalesRep1").Value
+    End Sub
 End Class

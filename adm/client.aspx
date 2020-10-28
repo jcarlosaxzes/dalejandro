@@ -154,7 +154,7 @@
                                         </telerik:RadButton>
                                     </td>
                                     <td style="text-align: right;">
-                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="UpdateClient" ValidationGroup="Contact">
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="Update" ValidationGroup="UpdateClient">
                                               Update
                                         </asp:LinkButton>
                                     </td>
@@ -361,7 +361,7 @@
                                     </td>
                                     <td>
                                         <telerik:RadComboBox ID="cboSalesRep1" runat="server" AppendDataBoundItems="True"
-                                            DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id"
+                                            DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" Height="300px"
                                             MarkFirstMatch="True" Filter="Contains"
                                             SelectedValue='<%# Bind("SalesRep1")%>'
                                             Width="300px">
@@ -468,7 +468,7 @@
                             </table>
 
                             <div style="text-align: right">
-                                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="UpdateClient" ValidationGroup="Contact">
+                                        <asp:LinkButton ID="LinkButton2" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="Update" ValidationGroup="UpdateClient">
                                               Update
                                         </asp:LinkButton>
                             </div>
