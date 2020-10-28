@@ -43,6 +43,14 @@ Public Class requestforproposals
                 RadDatePickerFrom.DbSelectedDate = "01/01/2000"
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year
 
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
                 RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Day, 0 - nPeriodo, RadDatePickerTo.DbSelectedDate)
@@ -50,7 +58,9 @@ Public Class requestforproposals
             Case 14  ' This year...
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Date.Today.Year
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Date.Today.Year
-            Case 99 ' Custom
+            Case 99   'Custom
+                RadDatePickerFrom.Focus()
+                ' Allow RadDatePicker user Values...
 
         End Select
         cboPeriod.SelectedValue = nPeriodo
