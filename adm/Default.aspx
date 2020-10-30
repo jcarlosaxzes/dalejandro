@@ -44,6 +44,62 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockRates" runat="server" Title="Company Trends Over the Last 5 Years" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td></td>
+                                        <td style="width: 32px; text-align: center; vertical-align: top">
+                                            <asp:HyperLink runat="server" ID="lblInfo" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i class="fas fa-info"></i>
+                                            </asp:HyperLink>
+                                            <telerik:RadToolTip ID="RadToolTipRatioInfo" runat="server" TargetControlID="lblInfo" RelativeTo="Element"
+                                                RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                                Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
+                                                HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true">
+
+                                                <table class="table-borderless" style="width: 800px; font-size: medium">
+                                                    <tr>
+                                                        <td>
+
+                                                            <div class="pasconcept-bar noprint">
+                                                                <span class="pasconcept-pagetitle">Ratios Calculation Formulas</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Proposal Success Rate
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Return On Investment
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Direct Labor Rate
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Active Client Rate
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Billing Success Rate
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Employee Efficiency Rate
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </telerik:RadToolTip>
+                                        </td>
+                                    </tr>
+                                </table>
                                 <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceRates" Width="100%" Height="500px" Skin="Material">
                                     <PlotArea>
                                         <XAxis AxisCrossingValue="0" Color="black" MajorTickType="Outside" MinorTickType="Outside" Reversed="false" DataLabelsField="Year">
@@ -355,7 +411,7 @@
 
     </telerik:RadDockLayout>
 
-    <asp:Panel runat="server" class="pasconcept-bar noprint" ID="MobileQRPanel" style="text-align: right; vertical-align: middle;">
+    <asp:Panel runat="server" class="pasconcept-bar noprint" ID="MobileQRPanel" Style="text-align: right; vertical-align: middle;">
         <span class="pasconcept-pagetitle">Dashboard from your mobile device:</span>
         <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Height="140px" Width="140px" OutputType="EmbeddedPNG" ToolTip="Dashboard from your mobile device" Text="">
             <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />
@@ -371,18 +427,21 @@
         <p>
             PASconcept is a complete, functional and efficient tool for project administration services. 
             It is a web-based application designed to provide an all-inclusive management system for architectural and engineering firms that want to facilitate the interaction between administrators, employees, sub-consultants and customers.
+       
         </p>
         <br />
         <h3>Administrators
         </h3>
         <p>
             Oversee projects, subcontracts, clients, employees, fee proposals, billing and other administrative functions through an organized system of interactive data.
+       
         </p>
         <br />
 
         <h3>Employees</h3>
         <p>
             Keep track of projects, manage billing, receive personal productivity reports and complete project-specific timesheets with a single site for employee-specific needs.
+       
         </p>
         <asp:LinkButton ID="btnEmployeePortal" runat="server" CssClass="btn btn-info btn-lg"
             UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2">
