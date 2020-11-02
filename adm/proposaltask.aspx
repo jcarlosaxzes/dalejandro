@@ -69,11 +69,14 @@
                     </td>
                 </tr>
             </table>
+            <asp:CompareValidator runat="server" ID="ComparevalidatorPhase" ValueToCompare="(Select phase...)" Display="None"
+                Operator="NotEqual" ControlToValidate="cboPhase" ErrorMessage="<span><b>Phase</b> is required</span>" ValidationGroup="TaskUpdate">
+            </asp:CompareValidator>
+
         </asp:Panel>
         <table class="table-sm" style="width: 99%;">
             <tr>
-                <td style="text-align: right; width: 200px">
-                    Position (optional):
+                <td style="text-align: right; width: 200px">Position (optional):
                 </td>
                 <td>
                     <telerik:RadComboBox runat="server" ID="cboPosition" DataValueField="Id" Width="95%" Height="250px" AutoPostBack="true" CausesValidation="false"
@@ -271,9 +274,6 @@
         </div>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtName" ValidationGroup="TaskUpdate" ErrorMessage="Define Task Name" Display="None">
         </asp:RequiredFieldValidator>
-        <asp:CompareValidator runat="server" ID="ComparevalidatorPhase" ValueToCompare="(Select phase...)" Display="None" 
-            Operator="NotEqual" ControlToValidate="cboPhase" ErrorMessage="<span><b>Phase</b> is required</span>" ValidationGroup="TaskUpdate">
-        </asp:CompareValidator>
     </div>
 
 

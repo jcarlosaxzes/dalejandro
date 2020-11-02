@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class billingmanager
-    
+
     '''<summary>
     '''RadCodeBlock control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
-    
+
     '''<summary>
     '''pnlFind control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''cboClients control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboDepartments control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboStatus control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboPasDueStatus control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboPasDueStatus As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''txtFind control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtFind As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnRefresh control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadWizard1 control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
-    
+
     '''<summary>
     '''chkEmployeeRemaindersOnly control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkEmployeeRemaindersOnly As Global.System.Web.UI.WebControls.CheckBox
-    
+
     '''<summary>
     '''RadGridRemainders control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridRemainders As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''btnEmail control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnEmail As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnBadDebt control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnBadDebt As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnReceivePayment control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnReceivePayment As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnStatement control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnStatement As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''txtEmissionRecurrenceDays control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtEmissionRecurrenceDays As Global.Telerik.Web.UI.RadNumericTextBox
-    
+
     '''<summary>
     '''btnSchedule control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSchedule As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnClientInvoicesUnhide control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnClientInvoicesUnhide As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnExportInvoices control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnExportInvoices As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGridInvoices control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridInvoices As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''ExportPanel control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ExportPanel As Global.System.Web.UI.WebControls.Panel
-    
+
     '''<summary>
     '''RadGridInvoiceExport control.
     '''</summary>
@@ -210,7 +210,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridInvoiceExport As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''btnSendStatement control.
     '''</summary>
@@ -219,7 +219,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSendStatement As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnReceivePaymentStatement control.
     '''</summary>
@@ -228,7 +228,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnReceivePaymentStatement As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnClientStatementsUnhide control.
     '''</summary>
@@ -237,7 +237,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnClientStatementsUnhide As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGridStatements control.
     '''</summary>
@@ -246,7 +246,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridStatements As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''RadToolBillAction control.
     '''</summary>
@@ -255,7 +255,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolBillAction As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''lblActionMesage control.
     '''</summary>
@@ -264,7 +264,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblActionMesage As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnOk control.
     '''</summary>
@@ -273,7 +273,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnOk As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancel control.
     '''</summary>
@@ -282,7 +282,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadToolTipStatementAction control.
     '''</summary>
@@ -291,7 +291,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipStatementAction As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''lblActionMesageStatement control.
     '''</summary>
@@ -300,7 +300,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblActionMesageStatement As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btnOkStatement control.
     '''</summary>
@@ -309,7 +309,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnOkStatement As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelStatementDlg control.
     '''</summary>
@@ -318,7 +318,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelStatementDlg As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadToolTipInvoicesPayment control.
     '''</summary>
@@ -327,7 +327,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipInvoicesPayment As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''RadDatePickerPayment control.
     '''</summary>
@@ -336,7 +336,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePickerPayment As Global.Telerik.Web.UI.RadDatePicker
-    
+
     '''<summary>
     '''cboPaymentMethod_paym control.
     '''</summary>
@@ -345,7 +345,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboPaymentMethod_paym As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''txtPaymentNotes control.
     '''</summary>
@@ -354,7 +354,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPaymentNotes As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnInsertPayment control.
     '''</summary>
@@ -363,7 +363,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnInsertPayment As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelPayment control.
     '''</summary>
@@ -372,7 +372,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelPayment As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadToolTipStatementsPayment control.
     '''</summary>
@@ -381,7 +381,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipStatementsPayment As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''RadDatePickerPayment2 control.
     '''</summary>
@@ -390,7 +390,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePickerPayment2 As Global.Telerik.Web.UI.RadDatePicker
-    
+
     '''<summary>
     '''cboPaymentMethod_paym2 control.
     '''</summary>
@@ -399,7 +399,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboPaymentMethod_paym2 As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''txtPaymentNotes2 control.
     '''</summary>
@@ -408,7 +408,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPaymentNotes2 As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnInsertStatementPayments control.
     '''</summary>
@@ -417,7 +417,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnInsertStatementPayments As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelStatementPayments control.
     '''</summary>
@@ -426,7 +426,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelStatementPayments As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadToolTipEditInvoice control.
     '''</summary>
@@ -435,7 +435,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipEditInvoice As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''FormViewInvoice control.
     '''</summary>
@@ -444,7 +444,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewInvoice As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''btnUpdateInvoice control.
     '''</summary>
@@ -453,7 +453,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpdateInvoice As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelInvoice control.
     '''</summary>
@@ -462,7 +462,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelInvoice As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadToolTipInvoiceRemaider control.
     '''</summary>
@@ -471,7 +471,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipInvoiceRemaider As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''FormViewRemaider control.
     '''</summary>
@@ -480,7 +480,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewRemaider As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''RadDatePickerRemaider control.
     '''</summary>
@@ -489,7 +489,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePickerRemaider As Global.Telerik.Web.UI.RadDatePicker
-    
+
     '''<summary>
     '''RequiredFieldValidator1 control.
     '''</summary>
@@ -498,7 +498,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''txtRemainderContactName control.
     '''</summary>
@@ -507,7 +507,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRemainderContactName As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator2 control.
     '''</summary>
@@ -516,7 +516,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''txtRemaiderEmail control.
     '''</summary>
@@ -525,7 +525,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRemaiderEmail As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator3 control.
     '''</summary>
@@ -534,7 +534,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''txtRemainderNotes control.
     '''</summary>
@@ -543,7 +543,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRemainderNotes As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnInsertRemaider control.
     '''</summary>
@@ -552,7 +552,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnInsertRemaider As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelRemaider control.
     '''</summary>
@@ -561,7 +561,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelRemaider As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadToolTipStatementReminder control.
     '''</summary>
@@ -570,7 +570,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipStatementReminder As Global.Telerik.Web.UI.RadToolTip
-    
+
     '''<summary>
     '''FormViewStatementReminder control.
     '''</summary>
@@ -579,7 +579,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewStatementReminder As Global.System.Web.UI.WebControls.FormView
-    
+
     '''<summary>
     '''RadDatePickerReminder2 control.
     '''</summary>
@@ -588,7 +588,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePickerReminder2 As Global.Telerik.Web.UI.RadDatePicker
-    
+
     '''<summary>
     '''RequiredFieldValidator4 control.
     '''</summary>
@@ -597,7 +597,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''txtRemainderContactName2 control.
     '''</summary>
@@ -606,7 +606,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRemainderContactName2 As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator5 control.
     '''</summary>
@@ -615,7 +615,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''txtRemaiderEmail2 control.
     '''</summary>
@@ -624,7 +624,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRemaiderEmail2 As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator6 control.
     '''</summary>
@@ -633,7 +633,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator6 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''txtRemainderNotes2 control.
     '''</summary>
@@ -642,7 +642,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtRemainderNotes2 As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btnInsertStatementReminder control.
     '''</summary>
@@ -651,7 +651,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnInsertStatementReminder As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnCancelStatementReminder control.
     '''</summary>
@@ -660,7 +660,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelStatementReminder As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
@@ -669,7 +669,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-    
+
     '''<summary>
     '''SqlDataSourceRemainders control.
     '''</summary>
@@ -678,7 +678,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceRemainders As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceMainInvoice control.
     '''</summary>
@@ -687,7 +687,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceMainInvoice As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceMainInvoiceToExport control.
     '''</summary>
@@ -696,7 +696,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceMainInvoiceToExport As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceInvoicesDetails control.
     '''</summary>
@@ -705,7 +705,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceInvoicesDetails As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceEditInvoice control.
     '''</summary>
@@ -714,7 +714,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEditInvoice As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceInvoiceRemaider control.
     '''</summary>
@@ -723,7 +723,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceInvoiceRemaider As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceStatementReminder control.
     '''</summary>
@@ -732,7 +732,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceStatementReminder As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceClient control.
     '''</summary>
@@ -741,7 +741,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClient As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDepartments control.
     '''</summary>
@@ -750,7 +750,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceJobStatus control.
     '''</summary>
@@ -759,7 +759,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobStatus As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePayments control.
     '''</summary>
@@ -768,7 +768,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePayments As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourcePaymentMethod control.
     '''</summary>
@@ -777,7 +777,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePaymentMethod As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceStatements control.
     '''</summary>
@@ -786,7 +786,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceStatements As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblInvoiceId control.
     '''</summary>
@@ -795,7 +795,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblInvoiceId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblStatementId control.
     '''</summary>
@@ -804,7 +804,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblStatementId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''txtAmountPayment control.
     '''</summary>
@@ -813,7 +813,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtAmountPayment As Global.Telerik.Web.UI.RadNumericTextBox
-    
+
     '''<summary>
     '''lblEmployeeId control.
     '''</summary>
@@ -822,7 +822,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeEmail control.
     '''</summary>
@@ -831,7 +831,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblEmployeeName control.
     '''</summary>
@@ -840,7 +840,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -849,7 +849,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblClientToExport control.
     '''</summary>
@@ -858,7 +858,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblClientToExport As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblExcludeInvoiceClientId_List control.
     '''</summary>
@@ -867,7 +867,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblExcludeInvoiceClientId_List As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblExcludeStatementsClientId_List control.
     '''</summary>
@@ -876,7 +876,7 @@ Partial Public Class billingmanager
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblExcludeStatementsClientId_List As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -885,7 +885,7 @@ Partial Public Class billingmanager
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

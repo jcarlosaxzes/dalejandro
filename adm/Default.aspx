@@ -170,7 +170,7 @@
                                                         <td>
                                                             Company Multiplier Expenses ([Salary]+[Salary Tax]+[SubContracts]+[Others]) 
                                                             <hr style="margin-left:30px;margin-right:30px;margin-top:0;margin-bottom:0" />
-                                                            Inconmes([Client Payments]]
+                                                            Incomes([Client Payments]]
                                                         </td>
                                                     </tr>
                                                     <tr>
