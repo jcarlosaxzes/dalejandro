@@ -10,16 +10,16 @@
             }
             $(document).on("click", ".toggle-on", function (event) {
                 var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-                var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
-                masterTableView.hideColumn(columnIndex);
+                //var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
+                //masterTableView.hideColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("BudgetUsed").get_element().cellIndex;
                 masterTableView.hideColumn(columnIndex);
             });
 
             $(document).on("click", ".toggle-off", function (event) {
               var masterTableView = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-                var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
-                masterTableView.showColumn(columnIndex);
+                //var columnIndex = masterTableView.getColumnByUniqueName("HourRate").get_element().cellIndex;
+                //masterTableView.showColumn(columnIndex);
                 columnIndex = masterTableView.getColumnByUniqueName("BudgetUsed").get_element().cellIndex;
                 masterTableView.showColumn(columnIndex);
             });
@@ -33,7 +33,7 @@
                 <asp:LinkButton ID="btnSetEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Assin Employees">
                         Add Employee
                 </asp:LinkButton>
-                 <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false">
+                 <asp:LinkButton ID="btnPrivate" runat="server" UseSubmitBehavior="false" ToolTip="Private/Public Mode" Font-Underline="false" Visible="false">
                     <input type="checkbox" data-toggle="toggle" data-onstyle="danger" data-style="ios"/>
             </asp:LinkButton>
             </span>
@@ -64,11 +64,11 @@
                         </telerik:GridTemplateColumn>
                         <telerik:GridBoundColumn UniqueName="Position" HeaderText="Position" DataField="Position">
                         </telerik:GridBoundColumn>
-                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Position Rate" ItemStyle-HorizontalAlign="Center" SortExpression="HourRate" UniqueName="HourRate" Display="false">
+<%--                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Position Rate" ItemStyle-HorizontalAlign="Center" SortExpression="HourRate" UniqueName="HourRate" Visible="false">
                             <ItemTemplate>
                                 <%# Eval("HourRate", "{0:N2}") %>
                             </ItemTemplate>
-                        </telerik:GridTemplateColumn>
+                        </telerik:GridTemplateColumn>--%>
                         <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope">
                         </telerik:GridBoundColumn>
                         <telerik:GridNumericColumn Aggregate="Sum" DataField="Hours" HeaderText="Hours" UniqueName="Freight" HeaderTooltip="Assigned Hours"
@@ -129,14 +129,14 @@
                                         </telerik:RadNumericTextBox>
                                     </td>
                                 </tr>
-                                <tr>
+                               <%-- <tr>
                                     <td style="text-align: right">Hourly Rate:
                                     </td>
                                     <td>
-                                        <telerik:RadNumericTextBox ID="txtRate" runat="server" Width="200px" DbValue='<%# Bind("HourRate")%>'>
-                                        </telerik:RadNumericTextBox>
+                                        <telerik:RadTextBox ID="txtRate" runat="server" Width="200px" Text='<%# Bind("HourRate")%>' TextMode="Password">
+                                        </telerik:RadTextBox>
                                     </td>
-                                </tr>
+                                </tr>--%>
                                 <tr>
                                     <td style="text-align: right">Scope:
                                     </td>
@@ -185,12 +185,12 @@
             <asp:Parameter Name="positionId" Type="Int32" />
             <asp:Parameter Name="Scope" Type="String" />
             <asp:Parameter Name="Hours" Type="Double" />
-            <asp:Parameter Name="HourRate" Type="Double" />
+            <asp:Parameter Name="HourRate" Type="Double" DefaultValue="0" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourcePosition" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Select Id, Name=Name + ' $ ' + cast(HourRate as nvarchar(20)) from Employees_Position where companyId=@companyId Order By Name">
+        SelectCommand="Select Id, Name from Employees_Position where companyId=@companyId Order By Name">
         <SelectParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
