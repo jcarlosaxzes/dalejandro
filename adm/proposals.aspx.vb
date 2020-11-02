@@ -36,14 +36,12 @@ Public Class proposals
                     cboEmployee.Enabled = False
                 End If
 
-                RefreshRecordset()
-
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
                 Else
                     DefaultFilters()
                 End If
-                IniciaPeriodo(cboPeriod.SelectedValue)
+                RefreshRecordset()
 
             End If
 

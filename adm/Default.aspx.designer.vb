@@ -41,6 +41,15 @@ Partial Public Class _Default1
     Protected WithEvents RadDockRates As Global.Telerik.Web.UI.RadDock
 
     '''<summary>
+    '''RadHtmlChart1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
+
+    '''<summary>
     '''lblInfo control.
     '''</summary>
     '''<remarks>
@@ -57,15 +66,6 @@ Partial Public Class _Default1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadToolTipRatioInfo As Global.Telerik.Web.UI.RadToolTip
-
-    '''<summary>
-    '''RadHtmlChart1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
 
     '''<summary>
     '''RadDockProposals control.
