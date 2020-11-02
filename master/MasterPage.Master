@@ -18,7 +18,7 @@
             }
         });
     </script>
-
+    <link href="~/Content/pasconcept.min.css" rel="stylesheet" />
     <title>PASconcept</title>
 
     <%-- Favicons and the like --%>
@@ -51,10 +51,7 @@
             padding-left: 10px;
             padding-right: 10px;
         }
-
-        div {
-            text-align: center;
-        }
+       
 
         table {
             display: inline-table;

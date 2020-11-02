@@ -44,96 +44,182 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockRates" runat="server" Title="Company Trends Over the Last 5 Years" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceRates" Width="100%" Height="500px" Skin="Material">
-                                    <PlotArea>
-                                        <XAxis AxisCrossingValue="0" Color="black" MajorTickType="Outside" MinorTickType="Outside" Reversed="false" DataLabelsField="Year">
-                                            <TitleAppearance Visible="false" Position="Center" RotationAngle="0" Text="Years"></TitleAppearance>
-                                            <LabelsAppearance DataFormatString="{0}" Skip="0" Step="1">
-                                                <TextStyle FontSize="24px" Bold="true" />
-                                            </LabelsAppearance>
-                                            <MajorGridLines Visible="false"></MajorGridLines>
-                                            <MinorGridLines Visible="false"></MinorGridLines>
-                                        </XAxis>
+                                <table style="width: 100%" >
+                                    <tr>
+                                        <td>
+                                            <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceRates" Width="100%" Height="500px" Skin="Material">
+                                                <PlotArea>
+                                                    <XAxis AxisCrossingValue="0" Color="black" MajorTickType="Outside" MinorTickType="Outside" Reversed="false" DataLabelsField="Year">
+                                                        <TitleAppearance Visible="false" Position="Center" RotationAngle="0" Text="Years"></TitleAppearance>
+                                                        <LabelsAppearance DataFormatString="{0}" Skip="0" Step="1">
+                                                            <TextStyle FontSize="24px" Bold="true" />
+                                                        </LabelsAppearance>
+                                                        <MajorGridLines Visible="false"></MajorGridLines>
+                                                        <MinorGridLines Visible="false"></MinorGridLines>
+                                                    </XAxis>
 
-                                        <YAxis Name="LeftAxis">
-                                            <TitleAppearance Text="Rate" Visible="false"></TitleAppearance>
-                                            <LabelsAppearance DataFormatString="{0:N2}">
-                                                <TextStyle FontSize="14px" Bold="true" />
-                                            </LabelsAppearance>
-                                        </YAxis>
-                                        <Series>
-                                            <telerik:LineSeries DataFieldY="ProposalSuccessRate" Name="Proposal Success Rate">
-                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
-                                                </LabelsAppearance>
-                                                <Appearance>
-                                                    <FillStyle BackgroundColor="#7787A5" />
-                                                </Appearance>
-                                                <LineAppearance LineStyle="Smooth" Width="3" />
-                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
-                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                            </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="ReturnOnInvestment" Name="R O I">
-                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
-                                                </LabelsAppearance>
-                                                <Appearance>
-                                                    <FillStyle BackgroundColor="Red" />
-                                                </Appearance>
-                                                <LineAppearance LineStyle="Smooth" Width="3" />
-                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
-                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                            </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="DirectLaborRate" Name="Direct Labor Rate">
-                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
-                                                </LabelsAppearance>
-                                                <Appearance>
-                                                    <FillStyle BackgroundColor="Black" />
-                                                </Appearance>
-                                                <LineAppearance LineStyle="Smooth" Width="3" />
-                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
-                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                            </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="ActiveClientRate" Name="Active Clients Rate">
-                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
-                                                </LabelsAppearance>
-                                                <Appearance>
-                                                    <FillStyle BackgroundColor="DarkCyan" />
-                                                </Appearance>
-                                                <LineAppearance LineStyle="Smooth" Width="3" />
-                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
-                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                            </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="BillingSuccessRate" Name="Billing Success Rate">
-                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
-                                                </LabelsAppearance>
-                                                <Appearance>
-                                                    <FillStyle BackgroundColor="Orange" />
-                                                </Appearance>
-                                                <LineAppearance LineStyle="Smooth" Width="3" />
-                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
-                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                            </telerik:LineSeries>
-                                            <telerik:LineSeries DataFieldY="EmployeeEfficiencyRate" Name="Employee Efficiency Rate">
-                                                <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
-                                                </LabelsAppearance>
-                                                <Appearance>
-                                                    <FillStyle BackgroundColor="Blue" />
-                                                </Appearance>
-                                                <LineAppearance LineStyle="Smooth" Width="3" />
-                                                <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
-                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                            </telerik:LineSeries>
-                                        </Series>
-                                    </PlotArea>
-                                    <Legend>
-                                        <Appearance Visible="True" Position="Top">
-                                            <TextStyle FontSize="14" Bold="true" FontFamily="Sans-Serif" />
-                                            <ClientTemplate>
+                                                    <YAxis Name="LeftAxis">
+                                                        <TitleAppearance Text="Rate" Visible="false"></TitleAppearance>
+                                                        <LabelsAppearance DataFormatString="{0:N2}">
+                                                            <TextStyle FontSize="14px" Bold="true" />
+                                                        </LabelsAppearance>
+                                                    </YAxis>
+                                                    <Series>
+                                                        <telerik:LineSeries DataFieldY="ProposalSuccessRate" Name="Proposal Success Rate">
+                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                            </LabelsAppearance>
+                                                            <Appearance>
+                                                                <FillStyle BackgroundColor="#7787A5" />
+                                                            </Appearance>
+                                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                                        </telerik:LineSeries>
+                                                        <telerik:LineSeries DataFieldY="ReturnOnInvestment" Name="R O I">
+                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                            </LabelsAppearance>
+                                                            <Appearance>
+                                                                <FillStyle BackgroundColor="Red" />
+                                                            </Appearance>
+                                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                                        </telerik:LineSeries>
+                                                        <telerik:LineSeries DataFieldY="DirectLaborRate" Name="Direct Labor Rate">
+                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                            </LabelsAppearance>
+                                                            <Appearance>
+                                                                <FillStyle BackgroundColor="Black" />
+                                                            </Appearance>
+                                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                                        </telerik:LineSeries>
+                                                        <telerik:LineSeries DataFieldY="ActiveClientRate" Name="Active Clients Rate">
+                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                            </LabelsAppearance>
+                                                            <Appearance>
+                                                                <FillStyle BackgroundColor="DarkCyan" />
+                                                            </Appearance>
+                                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                                        </telerik:LineSeries>
+                                                        <telerik:LineSeries DataFieldY="BillingSuccessRate" Name="Billing Success Rate">
+                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                            </LabelsAppearance>
+                                                            <Appearance>
+                                                                <FillStyle BackgroundColor="Orange" />
+                                                            </Appearance>
+                                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                                        </telerik:LineSeries>
+                                                        <telerik:LineSeries DataFieldY="EmployeeEfficiencyRate" Name="Employee Efficiency Rate">
+                                                            <LabelsAppearance Visible="false" DataFormatString="{0:N2}">
+                                                            </LabelsAppearance>
+                                                            <Appearance>
+                                                                <FillStyle BackgroundColor="Blue" />
+                                                            </Appearance>
+                                                            <LineAppearance LineStyle="Smooth" Width="3" />
+                                                            <TooltipsAppearance DataFormatString="{0:N2}" Color="White"></TooltipsAppearance>
+                                                            <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                                        </telerik:LineSeries>
+                                                    </Series>
+                                                </PlotArea>
+                                                <Legend>
+                                                    <Appearance Visible="True" Position="Top">
+                                                        <TextStyle FontSize="14" Bold="true" FontFamily="Sans-Serif" />
+                                                        <ClientTemplate>
                                                 #= text #&nbsp;
-                                            </ClientTemplate>
-                                        </Appearance>
+                                                        </ClientTemplate>
+                                                    </Appearance>
 
-                                    </Legend>
-                                </telerik:RadHtmlChart>
+                                                </Legend>
+                                            </telerik:RadHtmlChart>
+                                        </td>
+                                        <td style="width: 20px; text-align: center; vertical-align: top">
+                                            <asp:HyperLink runat="server" ID="lblInfo" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i class="fas fa-info"></i>
+                                            </asp:HyperLink>
+                                            <telerik:RadToolTip ID="RadToolTipRatioInfo" runat="server" TargetControlID="lblInfo"
+                                                RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                                Position="Center" Modal="True" Title="" ShowEvent="OnClick"
+                                                HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true"
+                                                RelativeTo="BrowserWindow" ManualClose="true">
+
+                                                <div class="pasconcept-bar noprint">
+                                                    <span class="pasconcept-pagetitle">Company Trends (Ratios) Over the Last 5 Years</span>
+                                                </div>
+                                                <table class="table table-striped" style="width: 850px; font-size: medium;text-align:center;">
+                                                    <tr>
+                                                        <td style="width: 200px;">
+                                                            <span class="badge badge-secondary">Proposal Success Rate = </span>
+                                                        </td>
+                                                        <td>
+                                                            ([Total Amount of Proposal Accepted] + [Total Amount of Jobs without Proposals])
+                                                            <hr style="margin-left:30px;margin-right:30px;margin-top:0;margin-bottom:0" />
+                                                            ([Total Amount of Proposals] + [Total Amount of Jobs without Proposals])
+                                                            <br />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="badge badge-danger">Return On Investment = </span>
+                                                        </td>
+                                                        <td>
+                                                            Company Multiplier Expenses ([Salary]+[Salary Tax]+[SubContracts]+[Others]) 
+                                                            <hr style="margin-left:30px;margin-right:30px;margin-top:0;margin-bottom:0" />
+                                                            Inconmes([Client Payments]]
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="badge badge-dark">Direct Labor Rate = </span>
+                                                        </td>
+                                                        <td>
+                                                            [Company Multiplier Multiplier Productive Salary] 
+                                                            <hr style="margin-left:30px;margin-right:30px;margin-top:0;margin-bottom:0" />
+                                                            [Company Multiplier Multiplier Salary]
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="badge badge-success">Active Client Rate = </span>
+                                                        </td>
+                                                        <td>
+                                                            [Active Clients] 
+                                                            <hr style="margin-left:50px;margin-right:50px;margin-top:0;margin-bottom:0" />
+                                                            [Active Clients] + [Inactive Clients]
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="badge badge-warning">Billing Success Rate = </span>
+                                                        </td>
+                                                        <td>
+                                                            ([Invoice Amount Emitted] - [Invoice Amount Due Emitted])
+                                                            <hr style="margin-left:50px;margin-right:50px;margin-top:0;margin-bottom:0" />
+                                                            [Amount Emitted] 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <span class="badge badge-primary">Employee Efficiency Rate =</span>
+                                                        </td>
+                                                        <td>
+                                                               [Employees Hours Assigned]
+                                                            <hr style="margin-left:50px;margin-right:50px;margin-top:0;margin-bottom:0" />
+                                                                [Employees Worked]
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </telerik:RadToolTip>
+                                        </td>
+                                    </tr>
+                                </table>
+
                             </ContentTemplate>
                         </telerik:RadDock>
                         <telerik:RadDock RenderMode="Auto" ID="RadDockProposals" runat="server" Title="<a class='lnkGrid' href='Proposals' title='Go to Proposals List'>Proposals  / </a><a class='lnkGrid' href='Jobs' title='Go to Jobs List'>Jobs</a>" EnableAnimation="true"
@@ -355,7 +441,7 @@
 
     </telerik:RadDockLayout>
 
-    <asp:Panel runat="server" class="pasconcept-bar noprint" ID="MobileQRPanel" style="text-align: right; vertical-align: middle;">
+    <asp:Panel runat="server" class="pasconcept-bar noprint" ID="MobileQRPanel" Style="text-align: right; vertical-align: middle;">
         <span class="pasconcept-pagetitle">Dashboard from your mobile device:</span>
         <telerik:RadBarcode runat="server" ID="RadBarcode1" Type="QRCode" Height="140px" Width="140px" OutputType="EmbeddedPNG" ToolTip="Dashboard from your mobile device" Text="">
             <QRCodeSettings Version="5" DotSize="3" Mode="Byte" />
@@ -371,18 +457,21 @@
         <p>
             PASconcept is a complete, functional and efficient tool for project administration services. 
             It is a web-based application designed to provide an all-inclusive management system for architectural and engineering firms that want to facilitate the interaction between administrators, employees, sub-consultants and customers.
+       
         </p>
         <br />
         <h3>Administrators
         </h3>
         <p>
             Oversee projects, subcontracts, clients, employees, fee proposals, billing and other administrative functions through an organized system of interactive data.
+       
         </p>
         <br />
 
         <h3>Employees</h3>
         <p>
             Keep track of projects, manage billing, receive personal productivity reports and complete project-specific timesheets with a single site for employee-specific needs.
+       
         </p>
         <asp:LinkButton ID="btnEmployeePortal" runat="server" CssClass="btn btn-info btn-lg"
             UseSubmitBehavior="false" CommandName="Login" ValidationGroup="Login2">

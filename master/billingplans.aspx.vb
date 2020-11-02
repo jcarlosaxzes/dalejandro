@@ -8,4 +8,8 @@
         If Not IsPostBack() Then
         End If
     End Sub
+
+    Private Sub btnNewPlan_Click(sender As Object, e As EventArgs) Handles btnNewPlan.Click
+        RadGrid1.MasterTableView.InsertItem()
+    End Sub
 End Class

@@ -36,14 +36,12 @@ Public Class proposals
                     cboEmployee.Enabled = False
                 End If
 
-                RefreshRecordset()
-
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
                 Else
                     DefaultFilters()
                 End If
-                IniciaPeriodo(cboPeriod.SelectedValue)
+                RefreshRecordset()
 
             End If
 
@@ -88,6 +86,14 @@ Public Class proposals
             Case 15  ' (Last Years)
                 RadDatePickerFrom.DbSelectedDate = "01/01/" & Today.Year - 1
                 RadDatePickerTo.DbSelectedDate = "12/31/" & Today.Year - 1
+
+            Case 16  ' (This Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
+            Case 17  ' (Past Month)
+                RadDatePickerFrom.DbSelectedDate = Today.Month & "/01/" & Today.Year
+                RadDatePickerFrom.DbSelectedDate = DateAdd(DateInterval.Month, -1, RadDatePickerFrom.DbSelectedDate)
+                RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate))
 
             Case 30, 60, 90, 120, 180, 365 '   days....
                 RadDatePickerTo.DbSelectedDate = Date.Today
