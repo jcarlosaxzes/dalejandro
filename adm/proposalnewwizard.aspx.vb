@@ -134,11 +134,8 @@ Public Class proposalnewwizard
         btnGridPage.Visible = Not RadListViewFiles.Visible
         btnTablePage.Visible = RadListViewFiles.Visible
 
-        If lblCompanyId.Text = 260962 Then
-            ' EEG 10 Mb
-            RadCloudUpload1.MaxFileSize = 10485760
-        End If
-
+        RadCloudUpload1.MaxFileSize = LocalAPI.GetCompanyMaxFileSizeForUpload(lblCompanyId.Text)
+        lblMaxSize.Text = $"[Maximum upload size per file: {LocalAPI.FormatByteSize(RadCloudUpload1.MaxFileSize)}]"
     End Sub
 
     Private Sub ReadPaymentSchedule()

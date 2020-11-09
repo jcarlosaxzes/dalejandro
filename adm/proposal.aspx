@@ -140,7 +140,7 @@
                        View Summary
             </asp:LinkButton>
             &nbsp;
-            <asp:Panel runat="server" ID="panelViewProposalPage" style="float: right; vertical-align: middle;">
+            <asp:Panel runat="server" ID="panelViewProposalPage" Style="float: right; vertical-align: middle;">
                 <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
                     <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
                 </a>
@@ -774,7 +774,7 @@
                                                 <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
                                                     <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
                                                     <br />
-                                                    <span style="font-size: 36px">Drag & Drop Files here, or
+                                                    <span style="font-size: 36px">Drop Files here, or
                                                     </span>
                                                     <br />
                                                     <br />
@@ -787,6 +787,9 @@
                                                             <Localization SelectButtonText="Select Files" />
                                                         </telerik:RadCloudUpload>
                                                     </span>
+                                                </p>
+                                                <p style="text-align: center;margin:0">
+                                                    <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
                                                 </p>
 
                                             </div>
