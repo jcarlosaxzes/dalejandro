@@ -410,7 +410,7 @@
                         UniqueName="Total" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right"
                         FooterStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="160px">
+                    <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="170px">
                         <ItemTemplate>
                             <div style="font-size: 12px; width: 100%"
                                 class='<%# LocalAPI.GetProposalStatusLabelCSS(Eval("StatusId")) %>'>

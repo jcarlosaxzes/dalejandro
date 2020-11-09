@@ -206,6 +206,7 @@ Public Class proposals
     End Sub
 
     Private Sub SaveFilter()
+        Session("Filter_Proposals_cboPeriod") = cboPeriod.SelectedValue
         Session("Filter_Proposals_RadDatePickerFrom") = RadDatePickerFrom.SelectedDate
         Session("Filter_Proposals_RadDatePickerTo") = RadDatePickerTo.SelectedDate
         Session("Filter_Proposals_cboClients") = cboClients.SelectedValue
@@ -216,6 +217,8 @@ Public Class proposals
 
     Private Sub RestoreFilter()
         Try
+            cboPeriod.DataBind()
+            cboPeriod.SelectedValue = Session("Filter_Proposals_cboPeriod")
             RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerFrom"))
             RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Proposals_RadDatePickerTo"))
             cboClients.SelectedValue = Session("Filter_Proposals_cboClients")
