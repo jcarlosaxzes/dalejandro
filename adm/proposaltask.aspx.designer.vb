@@ -95,6 +95,15 @@ Partial Public Class proposaltask
     Protected WithEvents cboPhase As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
+    '''ComparevalidatorPhase control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ComparevalidatorPhase As Global.System.Web.UI.WebControls.CompareValidator
+
+    '''<summary>
     '''cboPosition control.
     '''</summary>
     '''<remarks>
@@ -264,15 +273,6 @@ Partial Public Class proposaltask
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''ComparevalidatorPhase control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ComparevalidatorPhase As Global.System.Web.UI.WebControls.CompareValidator
 
     '''<summary>
     '''SqlDataSource1 control.

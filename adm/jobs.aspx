@@ -389,8 +389,7 @@
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
-                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight" BorderStyle="None"
-                    AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
+                    PageSize="50" AllowPaging="true" Height="850px" RenderMode="Lightweight" AllowMultiRowSelection="True" AllowAutomaticDeletes="true"
                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                     FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
                     <ClientSettings Selecting-AllowRowSelect="true">
@@ -404,7 +403,7 @@
                             <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="20px">
                             </telerik:GridBoundColumn>
 
-                            <telerik:GridTemplateColumn DataField="Code" UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Code" ItemStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
+                            <telerik:GridTemplateColumn DataField="Code" UniqueName="Code" HeaderStyle-Width="120px" HeaderText="Number" ItemStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnEditJob" runat="server" CommandArgument='<%# Eval("Id")%>' ToolTip="Click to View/Edit Info" CommandName="View/Edit Info" UseSubmitBehavior="false" Font-Bold="true">
                                                 <%#Eval("Code")%> 
@@ -659,12 +658,12 @@
                             </telerik:GridTemplateColumn>
 
                             <%--PM - Employees--%>
-                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="PM - Employees" SortExpression="EmployeeName"
+                            <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="Project Manager - Team Members" SortExpression="EmployeeName"
                                 UniqueName="EmployeeName" AllowFiltering="true">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="lnkEmployeeName" runat="server" CommandName="View/Edit Employees" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# Eval("EmployeesSeparateComma") %>'>
-                                                    <span aria-hidden="true" style='<%# IIf(Left(Eval("EmployeeName"),2)="PM","color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
-                                                    <span class="badge badge-pill badge-primary" style='<%# IIf(Eval("OthersEmployeesCount")=0,"display:none","display:normal;font-size:x-small")%>'>
+                                                    <span aria-hidden="true" style='<%# IIf(Left(Eval("EmployeeName"),10)="Unassigned","color:red","color:#23527c")%>'><%# Eval("EmployeeName")%></span>
+                                                    <span title="Others Team Members" class="badge badge-pill badge-primary" style='<%# IIf(Eval("OthersEmployeesCount")=0,"display:none","display:normal;font-size:x-small")%>'>
                                                         +<%# Eval("OthersEmployeesCount") %>
                                                     </span>
                                     </asp:LinkButton>

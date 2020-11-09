@@ -166,7 +166,7 @@
                             Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="text-align: right; width:180px">
+                    <td style="text-align: right; width: 180px">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -429,16 +429,28 @@
 
                     <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" AllowFiltering="False" ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
-                            <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
-                                <%#Eval("ProposalUploadFiles")%>
-                            </span>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
-                                <%#Eval("Emitted")%>
-                            </span>
-                            <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("clientvisits")%>
-                            </span>
+                            <table style="width: 100%">
+                                <tr>
+                                    <%--<td style="text-align:center;width: 30px">
+                                        <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
+                                            <%#Eval("ProposalUploadFiles")%>
+                                        </span>
+                                    </td>--%>
+                                    <td style="text-align:right;width: 60px">
+                                        <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
+                                    </td>
+                                    <td style="text-align:center;width: 30px">
+                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
+                                            <%#Eval("Emitted")%>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                            <%#Eval("clientvisits")%>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -517,5 +529,5 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblProposalIdFromRfp" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False" Text="0"></asp:Label>
-    
+
 </asp:Content>

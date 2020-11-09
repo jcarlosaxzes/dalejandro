@@ -63,7 +63,7 @@
         <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnFind">
             <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td style="width:160px" >
+                    <td style="width: 160px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True">
                             <Items>
                                 <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
@@ -74,7 +74,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width:380px" >
+                    <td style="width: 380px">
                         <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClients"
                             Width="100%" DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains"
                             Height="300px" AppendDataBoundItems="true">
@@ -93,7 +93,7 @@
                             </Items>
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width:280px">
+                    <td style="width: 280px">
                         <telerik:RadComboBox ID="cboReconcile" runat="server" AppendDataBoundItems="true"
                             Filter="Contains" MarkFirstMatch="True" Width="100%">
                             <Items>
@@ -237,7 +237,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="padding-left:24px">
+                                            <td style="padding-left: 24px">
                                                 <asp:LinkButton runat="server" ID="LinkbtnInvoicePaymentutton1" CommandName="RecivePayment" CommandArgument='<%# Eval("Id") %>' Visible='<%# Eval("AmountDue") > 0 %>' CssClass="dropdown-item">
                                                     Receive Payments
                                                 </asp:LinkButton>
@@ -287,14 +287,19 @@
                     <telerik:GridTemplateColumn DataField="Emitted" HeaderText="Insights" SortExpression="Emitted" UniqueName="Emitted"
                         ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <asp:Label ID="EmittedLabel" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>' ToolTip="Emitted Date"></asp:Label>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("Emitted")%>
-                            </span>
-                            <span title="Number of times the Client has visited your Statement Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("clientvisits")%>
-                            </span>
-
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: right; width: 60px">
+                                        <span style="font-size: x-small" title="First Emission Date"><%# Eval("FirstEmission", "{0:d}")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'><%#Eval("Emitted")%></span>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span title="Number of times the Client has visited your Statement Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'><%#Eval("clientvisits")%></span>
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="InvoiceNotes" HeaderText="Notes" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small" UniqueName="InvoiceNotes">

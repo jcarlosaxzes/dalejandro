@@ -190,7 +190,7 @@
                                                         </asp:LinkButton>
                                                     </td>
                                                 </tr>
-                                                
+
                                                 <tr>
                                                     <td>
                                                         <asp:LinkButton ID="btnAddEvent" runat="server" UseSubmitBehavior="false" CommandName="AddCalendar" CommandArgument='<%# Eval("Id")%>'
@@ -200,9 +200,9 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td >
+                                                    <td>
                                                         <asp:LinkButton ID="btnAddNotification" runat="server" UseSubmitBehavior="false" CommandName="AddNotifications" CommandArgument='<%# Eval("Id")%>'
-                                                            CssClass="dropdown-item" >
+                                                            CssClass="dropdown-item">
                                                                  <i class="far fa-bell"></i>&nbsp;&nbsp; Add Notification
                                                         </asp:LinkButton>
                                                     </td>
@@ -249,15 +249,27 @@
                     </telerik:GridTemplateColumn>
 
                     <telerik:GridTemplateColumn DataField="LastDateActivity" HeaderTooltip="Last Activity, Proposals, Jobs, Files..."
-                        HeaderText="Insights" SortExpression="LastDateActivity" UniqueName="LastDateActivity" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                        HeaderText="Insights" SortExpression="LastDateActivity" UniqueName="LastDateActivity" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="230px">
                         <ItemTemplate>
-
-                            <span title='<%# Eval("EntityActivity")%>'><%# Eval("LastDateActivity", "{0:d}")%></span>
-                            <span title="Proposals of Client" class="badge badge-pill badge-dark" style='<%# IIf(Eval("Proposals ") = 0,"display:none","display:normal")%>'><%# Eval("Proposals")%></span>
-                            <span title="Jobs of Client" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Jobs ") = 0,"display:none","display:normal")%>'><%# Eval("Jobs")%></span>
-                            <span title="Uploaded files" class="badge badge-pill badge-secondary"><%# LocalAPI.ClientFilesCount(Eval("Id"))  %></span>
-                            <span title="Client linked to QuickBooks" class="badge badge-pill badge-success" style='<%# IIf(Eval("qbCustomerId ") = 0,"display:none","display:normal")%>'>qb</span>
-
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: right; width: 60px">
+                                        <span style="font-size: x-small" title='<%# Eval("EntityActivity")%>'><%# Eval("LastDateActivity", "{0:d}")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Proposals of Client" class="badge badge-pill badge-dark" style='<%# IIf(Eval("Proposals ") = 0,"display:none","display:normal")%>'><%# Eval("Proposals")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Jobs of Client" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Jobs ") = 0,"display:none","display:normal")%>'><%# Eval("Jobs")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Uploaded files" class="badge badge-pill badge-secondary"><%# LocalAPI.ClientFilesCount(Eval("Id"))  %></span>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span title="Client linked to QuickBooks" class="badge badge-pill badge-success" style='<%# IIf(Eval("qbCustomerId ") = 0,"display:none","display:normal")%>'>qb</span>
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
