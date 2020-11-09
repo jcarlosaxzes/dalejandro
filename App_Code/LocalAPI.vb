@@ -7322,6 +7322,37 @@ Public Class LocalAPI
 
     End Function
 
+    Public Shared Function CreateCalendarIcs(DateStart As DateTime, DateEnd As DateTime, Summary As String, Location As String, Description As String) As String
+
+        Dim FileName As String = "CalendarItem"
+        Dim sb As StringBuilder = New StringBuilder()
+        sb.AppendLine("BEGIN:VCALENDAR")
+        sb.AppendLine("VERSION:2.0")
+        sb.AppendLine("PRODID:pasconcept.com")
+        sb.AppendLine("CALSCALE:GREGORIAN")
+        sb.AppendLine("METHOD:PUBLISH")
+        'sb.AppendLine("BEGIN:VTIMEZONE")
+        'sb.AppendLine("TZID:Europe/Amsterdam")
+        'sb.AppendLine("BEGIN:STANDARD")
+        'sb.AppendLine("TZOFFSETTO:+0100")
+        'sb.AppendLine("TZOFFSETFROM:+0100")
+        'sb.AppendLine("END:STANDARD")
+        'sb.AppendLine("END:VTIMEZONE")
+        sb.AppendLine("BEGIN:VEVENT")
+        'sb.AppendLine("DTSTART;TZID=Europe/Amsterdam:" & DateStart.ToString("yyyyMMddTHHmm00"))
+        'sb.AppendLine("DTEND;TZID=Europe/Amsterdam:" & DateEnd.ToString("yyyyMMddTHHmm00"))
+        sb.AppendLine("DTSTART:" & DateStart.ToString("yyyyMMddTHHmm00"))
+        sb.AppendLine("DTEND:" & DateEnd.ToString("yyyyMMddTHHmm00"))
+        sb.AppendLine("SUMMARY:" & Summary & "")
+        sb.AppendLine("LOCATION:" & Location & "")
+        sb.AppendLine("DESCRIPTION:" & Description & "")
+        sb.AppendLine("PRIORITY:3")
+        sb.AppendLine("END:VEVENT")
+        sb.AppendLine("END:VCALENDAR")
+        Dim CalendarItem As String = sb.ToString()
+        Return CalendarItem
+
+    End Function
     Public Shared Function SendMailAndAttachmentExt(ByVal sTo As String, sCCO As String,
                                 ByVal sSubtject As String,
                                 fileData As Byte(), sFileName As String, ByVal companyId As Integer, clientId As Integer, jobId As Integer) As Boolean
