@@ -172,10 +172,18 @@ Public Class appointment
 
     Private Function SendCalendar() As Boolean
         Try
+            Dim subject = CType(FormView1.FindControl("txtSubject"), RadTextBox).Text
+            Dim start As DateTime = CType(CType(FormView1.FindControl("dtpStart"), RadDateTimePicker).DbSelectedDate, DateTime)
+            Dim EndD As DateTime = CType(CType(FormView1.FindControl("dtpEnd"), RadDateTimePicker).DbSelectedDate, DateTime)
+            Dim Description = CType(FormView1.FindControl("txtDescription"), RadTextBox).Text
+            Dim location = CType(FormView1.FindControl("txtLocation"), RadTextBox).Text
+
+
 
             Dim sEmailTo As String = Master.UserEmail
             Dim ue As New ASCIIEncoding()
-            Dim fileData As Byte() = ue.GetBytes(CType(FormView1.FindControl("txtDescription"), RadTextBox).Text)
+            Dim icsText = LocalAPI.CreateCalendarIcs(start, EndD, subject, location, Description)
+            Dim fileData As Byte() = ue.GetBytes(icsText)
             Dim sCCO As String
 
             Dim collection As IList(Of RadComboBoxItem) = cboMultiEmployees.CheckedItems
