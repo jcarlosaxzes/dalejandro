@@ -26,7 +26,10 @@
                         <li>Check/Uncheck Public</li>
                         <li>Press Upload</li>
                     </ol>
-                    <h4>Select or Drag and Drop files (up to 100Mb)</h4>
+                    <h4>Select or Drag and Drop files</h4>
+                    <p style="text-align: center; margin: 0">
+                        <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
+                    </p>
                 </asp:Panel>
             </td>
         </tr>
@@ -84,7 +87,7 @@
                             </asp:RequiredFieldValidator>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <a style="font-size:x-small" href='<%# Eval("url")%>' target="_blank"><%# String.Concat(Eval("Name"), " (", Eval("ContentType"), ")")%></a>
+                            <a style="font-size: x-small" href='<%# Eval("url")%>' target="_blank"><%# String.Concat(Eval("Name"), " (", Eval("ContentType"), ")")%></a>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="Date" FilterControlAltText="Filter Date column" HeaderText="Date" SortExpression="Date" UniqueName="Date"

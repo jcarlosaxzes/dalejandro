@@ -302,6 +302,15 @@ Partial Public Class proposal
     Protected WithEvents RadCloudUpload1 As Global.Telerik.Web.UI.RadCloudUpload
 
     '''<summary>
+    '''lblMaxSize control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMaxSize As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''RadWizardStepFiles control.
     '''</summary>
     '''<remarks>

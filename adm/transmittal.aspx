@@ -72,7 +72,9 @@
                                 <i style="font-size: medium" class="fas fa-print"></i></a>
                             </a>
 
-                                        <br />
+                                       
+
+                            <br />
                             <table class="table-sm" style="width: 100%; background-color: white">
                                 <tr>
                                     <td style="width: 65%; vertical-align: top">
@@ -107,7 +109,8 @@
                                                 <td style="text-align: left">
                                                     <asp:Label ID="Label9" runat="server" Text='<%# Eval("JobNo")%>' />
                                                     &nbsp;&nbsp;&nbsp;
-                                        <asp:Label ID="Label10" runat="server" Text='<%# Eval("JobName")%>' />
+                                       
+                                                    <asp:Label ID="Label10" runat="server" Text='<%# Eval("JobName")%>' />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -212,6 +215,7 @@
                                 Update
                             </asp:LinkButton>
                             &nbsp;
+                           
                             <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" CausesValidation="false" CommandName="Cancel">
                                 Cancel
                             </asp:LinkButton>
@@ -360,7 +364,8 @@
                                 <i class="far fa-envelope"></i>&nbsp;Send Email
                         </asp:LinkButton>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                         <asp:LinkButton ID="btnCancelMail" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="false">
+                        
+                        <asp:LinkButton ID="btnCancelMail" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="false">
                                 Cancel
                          </asp:LinkButton>
                     </td>
@@ -447,7 +452,8 @@
                                                 <tr>
                                                     <td style="font-size: 12px; padding: 0;">
                                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
-                                                                             <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                                                            
+                                                        <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -496,7 +502,8 @@
                                                 <tr>
                                                     <td style="font-size: 12px; padding: 0;">
                                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
-                                                                         <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                                                        
+                                                        <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -535,7 +542,8 @@
                                         <ItemTemplate>
                                             <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
                                                             &nbsp;&nbsp;
-                                                            <%# Eval("Name")%>
+                                                           
+                                            <%# Eval("Name")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
@@ -615,19 +623,23 @@
                     <asp:Panel ID="UploadPanel" runat="server">
                         <div class="pasconcept-bar noprint" style="font-size: small; vertical-align: middle; font-family: sans-serif">
                             File type: 
-                                        <telerik:RadComboBox ID="cboDocType" runat="server" DataSourceID="SqlDataSourceDocTypes" DataTextField="Name" DataValueField="Id" Width="250px">
-                                        </telerik:RadComboBox>
+                                       
+                            <telerik:RadComboBox ID="cboDocType" runat="server" DataSourceID="SqlDataSourceDocTypes" DataTextField="Name" DataValueField="Id" Width="250px">
+                            </telerik:RadComboBox>
                             &nbsp;&nbsp;
-                                        <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public:" ToolTip="Public or private" AutoPostBack="false" Checked="True" CssClass="checkRtl">
-                                        </telerik:RadCheckBox>
+                                       
+                            <telerik:RadCheckBox ID="chkPublic" runat="server" Text="Public:" ToolTip="Public or private" AutoPostBack="false" Checked="True" CssClass="checkRtl">
+                            </telerik:RadCheckBox>
                             &nbsp;&nbsp;
                                         Max Download:
-                                        <telerik:RadNumericTextBox ID="tbMaxDownload" runat="server" Width="50px" Value="0" MinValue="0" MaxValue="9999">
-                                            <NumberFormat DecimalDigits="0" />
-                                        </telerik:RadNumericTextBox>
+                                       
+                            <telerik:RadNumericTextBox ID="tbMaxDownload" runat="server" Width="50px" Value="0" MinValue="0" MaxValue="9999">
+                                <NumberFormat DecimalDigits="0" />
+                            </telerik:RadNumericTextBox>
                             Expiration Date:
-                                        <telerik:RadDatePicker ID="RadDatePickerExpiration" runat="server" ZIndex="50001">
-                                        </telerik:RadDatePicker>
+                                       
+                            <telerik:RadDatePicker ID="RadDatePickerExpiration" runat="server" ZIndex="50001">
+                            </telerik:RadDatePicker>
                             <span style="float: right; vertical-align: middle;">
                                 <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
                                                     <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
@@ -639,7 +651,7 @@
                             <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
                                 <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
                                 <br />
-                                <span style="font-size: 36px">Drag & Drop Files here, or
+                                <span style="font-size: 36px">Drop Files here, or
                                 </span>
                                 <br />
                                 <br />
@@ -652,6 +664,9 @@
                                         <Localization SelectButtonText="Select Files" />
                                     </telerik:RadCloudUpload>
                                 </span>
+                            </p>
+                            <p style="text-align: center; margin: 0">
+                                <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
                             </p>
 
                         </div>
@@ -780,6 +795,7 @@
                                     <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCance" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                                      Cancel
                     </asp:LinkButton>
@@ -805,6 +821,7 @@
                              Delete 
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCancelDeleteFiles" runat="server" CssClass="btn btn-secondary" Width="150px" UseSubmitBehavior="false">
                              Cancel
                     </asp:LinkButton>

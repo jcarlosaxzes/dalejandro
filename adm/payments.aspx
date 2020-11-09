@@ -295,6 +295,9 @@
                             DropZones=".uploadfiles-canvas">
                         </telerik:RadCloudUpload>
                         <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>
+                        <p style="text-align: center; margin: 0">
+                            <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
+                        </p>
                     </asp:Panel>
                 </td>
             </tr>

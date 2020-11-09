@@ -24,7 +24,7 @@
 
                         <table class="table-sm" style="width: 100%">
                             <tr>
-                                <td style="text-align: left; vertical-align: top; width: 33%;border:solid;border-width:thin;border-color:gainsboro">
+                                <td style="text-align: left; vertical-align: top; width: 33%; border: solid; border-width: thin; border-color: gainsboro">
                                     <h4 style="margin: 0;">
                                         <span class="navbar navbar-expand-md bg-light">Client</span>
                                     </h4>
@@ -51,7 +51,7 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td style="width: 33%; text-align: center; vertical-align: top;border:solid;border-width:thin;border-color:gainsboro">
+                                <td style="width: 33%; text-align: center; vertical-align: top; border: solid; border-width: thin; border-color: gainsboro">
                                     <h4 style="margin: 0; text-align: center">
                                         <span class="navbar navbar-expand-md bg-light">Projects</span>
                                     </h4>
@@ -77,7 +77,7 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td style="text-align: right; vertical-align: top;border:solid;border-width:thin;border-color:gainsboro">
+                                <td style="text-align: right; vertical-align: top; border: solid; border-width: thin; border-color: gainsboro">
                                     <h4 style="margin: 0; text-align: center">
                                         <span class="navbar navbar-expand-md bg-light">Balance</span>
                                     </h4>
@@ -482,7 +482,7 @@
                         <p style="text-align: center; vertical-align: middle; padding-top: 50px;">
                             <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
                             <br />
-                            <span style="font-size: 36px">Drag & Drop Files here, or
+                            <span style="font-size: 36px">Drop Files here, or
                             </span>
                             <br />
                             <br />
@@ -497,6 +497,10 @@
                                 </telerik:RadCloudUpload>
                             </span>
                         </p>
+                        <p style="text-align: center; margin: 0">
+                            <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
+                        </p>
+
                     </asp:Panel>
                 </td>
             </tr>

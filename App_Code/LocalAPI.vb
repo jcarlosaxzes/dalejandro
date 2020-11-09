@@ -1426,6 +1426,17 @@ Public Class LocalAPI
         Return IIf(Multiplier < 1, 1, Multiplier)
     End Function
 
+    Public Shared Function GetCompanyMaxFileSizeForUpload(ByVal companyId As Integer) As Integer
+        Dim MaxFileSize As Double = GetNumericEscalar($"SELECT ISNULL([MaxFileSize],0) FROM [Company] WHERE [companyId]={companyId}")
+        If MaxFileSize = 0 Then
+            ' Default MaxFileSize (1048576)
+            Return 1048576
+        Else
+            Return MaxFileSize
+        End If
+    End Function
+
+
     Public Shared Function IsCompanyTwilio(companyId As Integer) As Boolean
         Return IIf(GetNumericEscalar($"select count(*) from [Company_twiliosetting] where companyId={companyId} and Active=1") = 1, True, False)
     End Function
