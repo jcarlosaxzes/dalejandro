@@ -185,10 +185,8 @@ Public Class jobs
         Try
             cboPeriod.DataBind()
             cboPeriod.SelectedValue = Session("Filter_Jpbs_cboPeriod")
-            If cboPeriod.SelectedValue = 99 Then   ' Custom
-                RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
-                RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
-            End If
+            RadDatePickerFrom.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerFrom"))
+            RadDatePickerTo.SelectedDate = Convert.ToDateTime(Session("Filter_Jpbs_RadDatePickerTo"))
             cboEmployee.SelectedValue = Session("Filter_Jpbs_cboEmployee")
             cboStatus.DataBind()
             cboStatus.SelectedValue = Session("Filter_Jpbs_cboStatus")

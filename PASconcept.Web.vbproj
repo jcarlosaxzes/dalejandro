@@ -2244,6 +2244,7 @@
     <Content Include="Images\C2QB_white_btn_sm_hover.png" />
     <Content Include="Images\clients\Nophoto.jpg" />
     <Content Include="Images\employees\Nophoto.jpg" />
+    <Content Include="Images\logo\Logo-Animation.gif" />
     <Content Include="Images\logo\pas_horizontal_logo.png" />
     <Content Include="Images\logo\pas_horizontal_logo_big.png" />
     <Content Include="Images\logo\vertical logo on light bg.svg" />
@@ -5018,7 +5019,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
