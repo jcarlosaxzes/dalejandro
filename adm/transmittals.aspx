@@ -286,24 +286,16 @@
                             <%# Eval("RecordBy_Code")%>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                    <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <div>
-                                
-                                <span title="Number of Packages" class="badge badge-pill badge-light" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
-                                    <%#Eval("PackageContent")%>
-                                </span>
-                                <span title="Package Signed And Sealed Items" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("PackageContent")=0,"display:none","display:normal")%>'>
-                                    <%#Eval("SignedAndSealed")%>
-                                </span>
-                                <span title="Digital Package Items" class="badge badge-pill badge-dark" style='<%# IIf(Eval("DigitalPackage")=0,"display:none","display:normal")%>'>
-                                    <%#Eval("DigitalPackage")%>
-                                </span>
-                                <span title="Number of times the Client has visited the your Transmittal Page" class="badge badge-pill badge-warning">
-                                    <%#Eval("clientvisits")%>
-                                </span>
-
-                            </div>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: center; width: 30px"><span title="Number of Packages" class="badge badge-pill badge-light"><%#Eval("PackageContent")%></span></td>
+                                    <td style="text-align: center; width: 30px"><span title="Package Signed And Sealed Items" class="badge badge-pill badge-secondary"><%#Eval("SignedAndSealed")%></span></td>
+                                    <td style="text-align: center; width: 30px"><span title="Digital Package Items" class="badge badge-pill badge-dark"><%#Eval("DigitalPackage")%></span></td>
+                                    <td style="text-align: center;"><span title="Number of times the Client has visited the your Transmittal Page" class="badge badge-pill badge-warning"><%#Eval("clientvisits")%></span></td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <%-- <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
