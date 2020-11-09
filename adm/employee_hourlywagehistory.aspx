@@ -56,7 +56,7 @@
                                     <TitleAppearance Text="Date" Visible="false"></TitleAppearance>
                                     <MinorGridLines Visible="false"></MinorGridLines>
                                     <MajorGridLines Visible="false" />
-                                    <LabelsAppearance>
+                                    <LabelsAppearance RotationAngle="270">
                                         <TextStyle FontSize="10" />
                                     </LabelsAppearance>
                                 </XAxis>
@@ -74,7 +74,7 @@
                 <Tabs>
                     <telerik:RadTab Text="Current"></telerik:RadTab>
                     <telerik:RadTab Text="Review"></telerik:RadTab>
-                    <telerik:RadTab Text="History this Year"></telerik:RadTab>
+                    <telerik:RadTab Text="History"></telerik:RadTab>
                 </Tabs>
             </telerik:RadTabStrip>
 
@@ -331,8 +331,9 @@
                 <asp:Parameter Name="Id" />
             </DeleteParameters>
             <SelectParameters>
-                <asp:ControlParameter ControlID="lblYear" Name="Year" PropertyName="Text" />
+                <asp:Parameter Name="Year" DefaultValue="0" />
                 <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+                <asp:Parameter Name="orderasc" DefaultValue="0" />
             </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="Date" />
@@ -351,6 +352,8 @@
             <SelectParameters>
                 <asp:Parameter Name="Year" DefaultValue="0" />
                 <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+                <asp:Parameter Name="orderasc" DefaultValue="1" />
+
             </SelectParameters>
         </asp:SqlDataSource>
 

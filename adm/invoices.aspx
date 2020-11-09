@@ -58,14 +58,18 @@
                     <td style="width: 200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%">
                             <Items>
-                                <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" />
-                                <telerik:RadComboBoxItem Text="(Last 60 days)" Value="60" />
-                                <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
-                                <telerik:RadComboBoxItem Text="(Last 120 days)" Value="120" />
-                                <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
-                                <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" />
-                                <telerik:RadComboBoxItem Text="(This year)" Value="14" />
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30" />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                                <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                                <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                                <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
                                 <telerik:RadComboBoxItem Text="(All years...)" Value="13" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -335,23 +339,29 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn DataField="MaturityDate" DataType="System.DateTime" HeaderText="Insights"
-                        SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Center">
+                        SortExpression="MaturityDate" UniqueName="Date" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <asp:Label ID="lblEmitted" runat="server" Text='<%# Eval("FirstEmission", "{0:d}") %>'></asp:Label>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary">
-                                <%#Eval("Emitted")%>
-                            </span>
-                            <span title="Number of times the Client has visited your Invoice Page" class="badge badge-pill badge-warning">
-                                <%#Eval("clientvisits")%>
-                            </span>
-                            <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") <= 0,"display:none","display:normal")%>'>
-                                <img src="../Images/C2QB_green_btn_sm_default.png" height="14" />
-                            </span>
-                             <span title="Invoice Pending Synced with QuickBooks" style='<%# "color:red;" & IIf(Eval("qbInvoiceId ") = -1,"display:normal","display:none")%>'>
-                                qb
-                            </span>
-                            <br />
-                            <div title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></div>
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="text-align: right; width: 60px">
+                                        <span style="font-size: x-small" title="First Emission Date"><%# Eval("FirstEmission", "{0:d}")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary"><%#Eval("Emitted")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 30px">
+                                        <span title="Number of times the Client has visited your Invoice Page" class="badge badge-pill badge-warning"><%#Eval("clientvisits")%></span>
+                                    </td>
+                                    <td style="text-align: center; width: 50px">
+                                        <span title="Invoice Synced with QuickBooks" style='<%# IIf(Eval("qbInvoiceId ") <= 0,"display:none","display:normal")%>'>
+                                            <img src="../Images/C2QB_green_btn_sm_default.png" height="14" /></span>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span title="Invoice Pending Synced with QuickBooks" style='<%# "color:red;" & IIf(Eval("qbInvoiceId ") = -1,"display:normal","display:none")%>'>qb</span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <span title="Past Due Status" style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetInvoicePastDueLabelCSS(Eval("pastdue_status")) %>'><%# Eval("pastdue_status") %></span>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
                     <telerik:GridBoundColumn DataField="InvoiceNotes" HeaderText="Invoice Description" SortExpression="InvoiceNotes" ItemStyle-Font-Size="X-Small"

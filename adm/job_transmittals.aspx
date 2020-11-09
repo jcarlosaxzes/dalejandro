@@ -9,7 +9,7 @@
             <span style="float: right; vertical-align: middle;">
                 <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
                         Add Transmittal
-                    </asp:LinkButton>
+                </asp:LinkButton>
             </span>
         </div>
 
@@ -20,7 +20,7 @@
                         var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
                         masterTable.rebind();
                     }
-                        </script>
+                </script>
             </telerik:RadCodeBlock>
             <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceTransmittals" Width="100%"
                 AllowAutomaticDeletes="true" AllowPaging="True" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
@@ -33,13 +33,13 @@
                             <ItemTemplate>
                                 <asp:LinkButton ID="btnEditTransmittal" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Transmittal"
                                     CommandName="EditTransmittal" Text='<%# Eval("TransmittalID")%>'>
-                                        </asp:LinkButton>
+                                </asp:LinkButton>
 
                                 <div style="float: right; vertical-align: top; margin: 0;">
                                     <%--Three Point Action Menu--%>
                                     <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
                                                         <i title="Click to menu for this row" style="color:dimgray" class="fas fa-ellipsis-v"></i>
-                                            </asp:HyperLink>
+                                    </asp:HyperLink>
                                     <telerik:RadToolTip ID="RadToolTipAction" runat="server" TargetControlID="lblAction" RelativeTo="Element"
                                         RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
                                         Position="BottomRight" Modal="True" Title="" ShowEvent="OnClick"
@@ -49,28 +49,28 @@
                                                 <td>
                                                     <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="EditTransmittal" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                             <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Transmittal
-                                                            </asp:LinkButton>
+                                                    </asp:LinkButton>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <asp:LinkButton ID="btnSendEmailEmailEmailPickUp" runat="server" CommandName="EmailEmailPickUp" CommandArgument='<%# Eval("Id")%>' UseSubmitBehavior="false" Visible='<%# LocalAPI.IsTransmittalReadyToSigned(Eval("Id"))%>' CssClass="dropdown-item">
                                                         <i class="far fa-envelope"></i>&nbsp;&nbsp;Send 'Ready For Pick Up' to Client
-                                                            </asp:LinkButton>
+                                                    </asp:LinkButton>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <asp:LinkButton ID="btnSendEmailEmailDeliveryTransmittalDigital" runat="server" CommandName="EmailDeliveryTransmittalDigital" CommandArgument='<%# Eval("Id")%>' ToolTip="Send Email to Client with Transmittal Digital Delivery Notification" UseSubmitBehavior="false" Visible='<%# IIf(LocalAPI.GetTransmittalDigitalFilesCount(Eval("Id")) = 0, False, True)%>' CssClass="dropdown-item">
                                                        <i style="color:olivedrab" class="far fa-envelope"></i>&nbsp;&nbsp;Send 'Digital Delivery' to Client
-                                                            </asp:LinkButton>
+                                                    </asp:LinkButton>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <a href='<%# LocalAPI.GetSharedLink_URL(6, Eval("Id"))%>' target="_blank" class="dropdown-item">
                                                         <i class="far fa-share-square"></i>&nbsp;&nbsp;View Transmittal Client Page
-                                                            </a>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -101,23 +101,17 @@
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
 
-                        <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                        <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <div>
-
-                                    <span title="Number of Packages" class="badge badge-pill badge-light">
-                                        <%#Eval("PackageContent")%>
-                                            </span>
-                                    <span title="Package Signed And Sealed Items" class="badge badge-pill badge-secondary">
-                                        <%#Eval("SignedAndSealed")%>
-                                            </span>
-                                    <span title="Digital Package Items" class="badge badge-pill badge-dark">
-                                        <%#Eval("DigitalPackage")%>
-                                            </span>
-                                    <span title="Number of times the Client has visited the your Transmittal Page" class="badge badge-pill badge-warning">
-                                        <%#Eval("clientvisits")%>
-                                            </span>
-
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="text-align: center; width: 30px"><span title="Number of Packages" class="badge badge-pill badge-light"><%#Eval("PackageContent")%></span></td>
+                                            <td style="text-align: center; width: 30px"><span title="Package Signed And Sealed Items" class="badge badge-pill badge-secondary"><%#Eval("SignedAndSealed")%></span></td>
+                                            <td style="text-align: center; width: 30px"><span title="Digital Package Items" class="badge badge-pill badge-dark"><%#Eval("DigitalPackage")%></span></td>
+                                            <td style="text-align: center;"><span title="Number of times the Client has visited the your Transmittal Page" class="badge badge-pill badge-warning"><%#Eval("clientvisits")%></span></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>

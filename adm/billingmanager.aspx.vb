@@ -114,35 +114,35 @@ Public Class billingmanager
     Private Sub RadGridInvoices_ItemDataBound(sender As Object, e As GridItemEventArgs) Handles RadGridInvoices.ItemDataBound
         Try
 
-            If TypeOf e.Item Is GridDataItem Then
-                Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
-                Dim Label1 As Label = DirectCast(item.FindControl("lblAmountDue"), Label)
-                If DirectCast(item.FindControl("lblAmountDue"), Label).Text > 0 Then
-                    Dim jobId As Integer = item("Id").Text
-                    Dim lEmitted As Integer = LocalAPI.GetInvoiceEmmited(jobId)
-                    Select Case lEmitted
-                        Case 0  '"~/Images/Toolbar/white_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Blue
-                            Label1.ToolTip = "Blue. Amount Due<>0 and Emitted=0"
+            'If TypeOf e.Item Is GridDataItem Then
+            '    Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
+            '    Dim Label1 As Label = DirectCast(item.FindControl("lblAmountDue"), Label)
+            '    If DirectCast(item.FindControl("lblAmountDue"), Label).Text > 0 Then
+            '        Dim jobId As Integer = item("Id").Text
+            '        Dim lEmitted As Integer = LocalAPI.GetInvoiceEmmited(jobId)
+            '        Select Case lEmitted
+            '            Case 0  '"~/Images/Toolbar/white_circle.png"
+            '                Label1.BackColor = System.Drawing.Color.Blue
+            '                Label1.ToolTip = "Blue. Amount Due<>0 and Emitted=0"
 
-                        Case 1  '"~/Images/Toolbar/green_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Green
-                            Label1.ToolTip = "Green. Amount Due<>0 and Emitted=1"
+            '            Case 1  '"~/Images/Toolbar/green_circle.png"
+            '                Label1.BackColor = System.Drawing.Color.Green
+            '                Label1.ToolTip = "Green. Amount Due<>0 and Emitted=1"
 
-                        Case 2  '"~/Images/Toolbar/yellow_circle.png"
-                            Label1.BackColor = System.Drawing.Color.Orange
-                            Label1.ToolTip = "Orange. Amount Due<>0 and Emitted=2"
+            '            Case 2  '"~/Images/Toolbar/yellow_circle.png"
+            '                Label1.BackColor = System.Drawing.Color.Orange
+            '                Label1.ToolTip = "Orange. Amount Due<>0 and Emitted=2"
 
-                        Case Else   '"~/Images/Toolbar/red_circle.png"
-                            Label1.BackColor = System.Drawing.Color.OrangeRed
-                            Label1.ToolTip = "OrangeRed. Amount Due<>0 and Emitted>=3"
-                    End Select
-                Else
-                    ' AmountDue = 0
-                    Label1.BackColor = System.Drawing.Color.Black
-                    Label1.ToolTip = "Black. Close, Amount Due = 0"
-                End If
-            End If
+            '            Case Else   '"~/Images/Toolbar/red_circle.png"
+            '                Label1.BackColor = System.Drawing.Color.OrangeRed
+            '                Label1.ToolTip = "OrangeRed. Amount Due<>0 and Emitted>=3"
+            '        End Select
+            '    Else
+            '        ' AmountDue = 0
+            '        Label1.BackColor = System.Drawing.Color.Black
+            '        Label1.ToolTip = "Black. Close, Amount Due = 0"
+            '    End If
+            'End If
         Catch ex As Exception
 
         End Try

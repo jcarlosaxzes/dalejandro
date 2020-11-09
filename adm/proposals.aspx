@@ -100,14 +100,16 @@
                     <td style="width: 200px">
                         <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" MarkFirstMatch="True" DropDownAutoWidth="Enabled">
                             <Items>
-                                <telerik:RadComboBoxItem Text="(Last 30 days)" Value="30" Selected="true" />
-                                <telerik:RadComboBoxItem Text="(Last 60 days)" Value="60" />
-                                <telerik:RadComboBoxItem Text="(Last 90 days)" Value="90" />
-                                <telerik:RadComboBoxItem Text="(Last 120 days)" Value="120" />
-                                <telerik:RadComboBoxItem Text="(Last 180 days)" Value="180" />
-                                <telerik:RadComboBoxItem Text="(Last 365 days)" Value="365" />
-                                <telerik:RadComboBoxItem Text="(This year)" Value="14" />
-                                <telerik:RadComboBoxItem Text="(Last year)" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                                <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                                <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                                <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
                                 <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
                                 <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
                             </Items>
@@ -164,7 +166,7 @@
                             Width="100%">
                         </telerik:RadTextBox>
                     </td>
-                    <td style="text-align: right; width:180px">
+                    <td style="text-align: right; width: 180px">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -427,16 +429,28 @@
 
                     <telerik:GridTemplateColumn HeaderText="Insights" UniqueName="Insights" AllowFiltering="False" ItemStyle-HorizontalAlign="Left" HeaderStyle-Width="150px">
                         <ItemTemplate>
-                            <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
-                            <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
-                                <%#Eval("ProposalUploadFiles")%>
-                            </span>
-                            <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
-                                <%#Eval("Emitted")%>
-                            </span>
-                            <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
-                                <%#Eval("clientvisits")%>
-                            </span>
+                            <table style="width: 100%">
+                                <tr>
+                                    <%--<td style="text-align:center;width: 30px">
+                                        <span title="Number of files uploaded" class="badge badge-pill badge-light" style='<%# IIf(Eval("ProposalUploadFiles")=0,"display:none","display:normal")%>'>
+                                            <%#Eval("ProposalUploadFiles")%>
+                                        </span>
+                                    </td>--%>
+                                    <td style="text-align:right;width: 60px">
+                                        <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
+                                    </td>
+                                    <td style="text-align:center;width: 30px">
+                                        <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
+                                            <%#Eval("Emitted")%>
+                                        </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <span title="Number of times the Client has visited your Proposal Page" class="badge badge-pill badge-warning" style='<%# IIf(Eval("Emitted")=0,"display:none","display:normal")%>'>
+                                            <%#Eval("clientvisits")%>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -515,5 +529,5 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblProposalIdFromRfp" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False" Text="0"></asp:Label>
-    
+
 </asp:Content>

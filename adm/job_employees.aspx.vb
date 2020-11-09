@@ -9,7 +9,7 @@ Public Class job_employees
                 lblCompanyId.Text = Session("companyId")
                 lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
                 Master.ActiveTab(2)
-                btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
+                'btnPrivate.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_PrivateMode")
             End If
 
             RadWindowManager1.EnableViewState = False

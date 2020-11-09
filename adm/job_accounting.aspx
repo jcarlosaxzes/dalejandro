@@ -386,7 +386,7 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="ReconciledBank" HeaderText="R" SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="40px" ItemStyle-HorizontalAlign="Center">
+                            <telerik:GridTemplateColumn DataField="ReconciledBank" HeaderText="R" SortExpression="ReconciledBank" UniqueName="ReconciledBank" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnReconciledBank" runat="server" UseSubmitBehavior="false" ToolTip="Payment is reconciled with bank statement"
                                         CommandName="ReconciledBank" CommandArgument='<%# Eval("Id")%>'>

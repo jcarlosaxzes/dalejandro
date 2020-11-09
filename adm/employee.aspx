@@ -706,6 +706,7 @@
         <SelectParameters>
             <asp:Parameter Name="Year" DefaultValue="0" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+            <asp:Parameter Name="orderasc" DefaultValue="0" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceEmployeeBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
