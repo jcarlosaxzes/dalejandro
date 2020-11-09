@@ -63,7 +63,7 @@
                                         <td style="width: 30%;" rowspan="2">
                                             <asp:LinkButton ID="btnSaveUpload" runat="server" CssClass="btn btn-success btn float-right" UseSubmitBehavior="false" ToolTip="Upload and Save selected files">
                                                     <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp;Upload
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
                                         </td>
                                     </tr>
                                 </table>
@@ -71,8 +71,8 @@
                                     <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
                                         <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
                                         <br />
-                                        <span style="font-size: 36px">Drag & Drop Files here, or
-                                                    </span>
+                                        <span style="font-size: 36px">Drop Files here, or
+                                        </span>
                                         <br />
                                         <br />
                                         <br />
@@ -85,6 +85,10 @@
                                             </telerik:RadCloudUpload>
                                         </span>
                                     </p>
+                                    <p style="text-align: center; margin: 0">
+                                        <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
+                                    </p>
+
                                 </div>
 
 
@@ -101,21 +105,21 @@
                                         <td style="width: 550px; text-align: right">
                                             <asp:LinkButton ID="btnTablePage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click">
                                                                <i class="fas fa-align-justify"></i> Table
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
                                             <asp:LinkButton ID="btnGridPage" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Table view" OnClick="btnTablePage_Click" Visible="false">
                                                                <i class="fas fa-th"></i> Grid
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
                                             <asp:LinkButton ID="btnUploadFiles" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" OnClick="btnUploadFiles_Click">
                                                                <i class="fas fa-cloud-upload-alt"></i>&nbsp;&nbsp; Uploads
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
                                             <asp:LinkButton ID="btnBulkDelete" runat="server"
                                                 CssClass="btn btn-danger" UseSubmitBehavior="false">
                                                                <i class="fas fa-trash"></i>&nbsp;Bulk Delete
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
                                             <asp:LinkButton ID="btnBulkEdit" runat="server"
                                                 CssClass="btn btn-primary" UseSubmitBehavior="false">
                                                                <i class="fas fa-pencil-alt"></i>&nbsp; Bulk Update
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
                                         </td>
                                     </tr>
                                 </table>
@@ -132,13 +136,13 @@
                                         <div class="card-header">
                                             <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Select">
                                                                 <i class="far fa-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
 
                                             <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;" title="<%# Eval("Name")%> "><%# LocalAPI.TruncateString(Eval("Name"), 20)%> </b>
 
                                             <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Update">
                                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
                                         </div>
                                         <div class="card-body" style="padding: 0px; margin-top: -6px;">
                                             <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
@@ -146,23 +150,23 @@
                                                     <tr>
                                                         <td style="height: 108px; padding: 0px;">
                                                             <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
-                                                                    </td>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 12px; padding-top: 5px; padding-bottom: 0px;">
                                                             <%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%>
-                                                                    </td>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 12px; padding: 0;">
                                                             <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
                                                                             
                                                                         <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
-                                                                    </td>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 12px; padding: 0;">Type:   <%# Eval("nType")%>
-                                                                    </td>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 12px; padding: 0;">
@@ -186,13 +190,13 @@
                                         <div class="card-header">
                                             <asp:LinkButton ID="LinkButton1" CssClass="selectedButtons" runat="server" CommandName="Deselect">
                                                             <i class="fa fa-check-square" aria-hidden="true" style="float: left;margin-top: 10px;color: black;"></i>
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
 
                                             <b style="display: inline-block; height: 22px; overflow: hidden; margin-top: 5px; width: 80%;" title="<%# Eval("Name")%> "><%# LocalAPI.TruncateString(Eval("Name"), 20)%> </b>
 
                                             <asp:LinkButton ID="LinkButton2" CssClass="selectedButtons" runat="server" CommandName="Update">
                                                             <i class="far fa-edit" aria-hidden="true" style="float: right;margin-top: 10px;color: black;"></i>
-                                                        </asp:LinkButton>
+                                            </asp:LinkButton>
                                         </div>
                                         <div class="card-body" style="padding: 0px; margin-top: -6px;">
                                             <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
@@ -200,24 +204,24 @@
                                                     <tr>
                                                         <td style="height: 108px; padding: 0px;">
                                                             <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
-                                                                    </td>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 12px; padding-top: 5px; padding-bottom: 0px;">
                                                             <asp:Label ID="lblFileName" runat="server" Visible="False" Text='<%# Bind("Name") %>'></asp:Label>
                                                             <%# FormatSource(Eval("Source"))%>:&nbsp <%# Eval("Document")%>
-                                                                    </td>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 12px; padding: 0;">
                                                             <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
                                                                         
                                                                         <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
-                                                                    </td>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 12px; padding: 0;">Type:   <%# Eval("nType")%>
-                                                                    </td>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td style="font-size: 12px; padding: 0;">
@@ -301,14 +305,14 @@
                                                         <td>
                                                             <asp:LinkButton ID="btnEdit" runat="server" CommandName="Update" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit">
                                                                             <span class="fas fa-edit"></span>
-                                                                        </asp:LinkButton>
+                                                            </asp:LinkButton>
                                                         </td>
                                                         <td>&nbsp;&nbsp;
-                                                                    </td>
+                                                        </td>
                                                         <td>
                                                             <asp:LinkButton ID="btnDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("Id") %>' ToolTip="Edit">
                                                                             <span class="fas fa-trash"></span>
-                                                                        </asp:LinkButton>
+                                                            </asp:LinkButton>
                                                             <asp:Label ID="lblPubicHide" runat="server" Visible="False" Text='<%# Eval("Public") %>'></asp:Label>
                                                             <asp:Label ID="lblTypeHide" runat="server" Visible="False" Text='<%# Eval("Type") %>'></asp:Label>
                                                             <asp:Label ID="lblNameHide" runat="server" Visible="False" Text='<%# Eval("Name") %>'></asp:Label>
@@ -337,10 +341,10 @@
                 <asp:LinkButton ID="btnDropbox" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Upload or attached file" Visible="false"
                     OnClientClick="CallDropbox">
                                            Dropbox
-                            </asp:LinkButton>
+                </asp:LinkButton>
                 <asp:LinkButton ID="btnNewFileLink" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Attached uploaded file">
                                         Add Hyperlink
-                                </asp:LinkButton>
+                </asp:LinkButton>
             </span>
         </div>
         <div>

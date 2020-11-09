@@ -28,6 +28,7 @@
             Client Uploaded Files
         </span>
         <span style="float: right; vertical-align: middle;">Client: 
+           
             <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" AutoPostBack="true"
                 DataTextField="Name" DataValueField="Id" MarkFirstMatch="True" Filter="Contains" Width="400px" Height="300px"
                 AppendDataBoundItems="true">
@@ -66,23 +67,27 @@
                                     <FileListPanelSettings PanelContainerSelector=".uploadfiles-canvas" />
                                 </telerik:RadCloudUpload>
                                 <p style="text-align: center; vertical-align: middle; padding-top: 100px; font-size: 36px">Upload your files</p>--%>
-                                                <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
-                                                    <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
-                                                    <br />
-                                                    <span style="font-size: 36px">Drag & Drop Files here, or
+                                <p style="text-align: center; vertical-align: middle; padding-top: 150px;">
+                                    <i style="font-size: 96px" class="fas fa-cloud-upload-alt"></i>
+                                    <br />
+                                    <span style="font-size: 36px">Drop Files here, or
                                                     </span>
-                                                    <br />
-                                                    <br />
-                                                    <br />
-                                                    <span style="font-size: 36px">
-                                                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" ProviderType="Azure" MaxFileSize="1048576"
-                                                            OnFileUploaded="RadCloudUpload1_FileUploaded" 
-                                                            CssClass="fileUploadRad" 
-                                                            DropZones=".uploadfiles-canvas,#UploadPanel">
-                                                            <Localization SelectButtonText="Select Files" />
-                                                        </telerik:RadCloudUpload>
-                                                    </span>
-                                                </p>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <span style="font-size: 36px">
+                                        <telerik:RadCloudUpload ID="RadCloudUpload1" runat="server" RenderMode="Lightweight" MultipleFileSelection="Automatic" ProviderType="Azure" MaxFileSize="1048576"
+                                            OnFileUploaded="RadCloudUpload1_FileUploaded"
+                                            CssClass="fileUploadRad"
+                                            DropZones=".uploadfiles-canvas,#UploadPanel">
+                                            <Localization SelectButtonText="Select Files" />
+                                        </telerik:RadCloudUpload>
+                                    </span>
+                                </p>
+                                <p style="text-align: center; margin: 0">
+                                    <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
+                                </p>
+
                             </div>
 
 
@@ -170,7 +175,8 @@
                                                 <tr>
                                                     <td style="font-size: 12px; padding: 0;">
                                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
-                                                             <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                                            
+                                                        <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -224,7 +230,8 @@
                                                 <tr>
                                                     <td style="font-size: 12px; padding: 0;">
                                                         <%# Eval("Date", "{0:d}")%>,&nbsp;&nbsp;
-                                                         <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
+                                                        
+                                                        <%#  LocalAPI.FormatByteSize(Eval("ContentBytes"))%>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -264,6 +271,7 @@
                                         <ItemTemplate>
                                             <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
                                             &nbsp;&nbsp;
+                                           
                                             <%# Eval("Name")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
@@ -372,6 +380,7 @@
                                     <i class="fas fa-check"></i> Update
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCance" runat="server" CssClass="btn btn-secondary btn" CausesValidation="false" UseSubmitBehavior="false" Width="120px">
                                      Cancel
                     </asp:LinkButton>
@@ -396,6 +405,7 @@
                              Delete 
                     </asp:LinkButton>
                     &nbsp;&nbsp;&nbsp;&nbsp;
+                   
                     <asp:LinkButton ID="btnCancelDelete" runat="server" CssClass="btn btn-secondary" Width="150px" UseSubmitBehavior="false">
                              Cancel
                     </asp:LinkButton>
