@@ -57,7 +57,7 @@
                         <EditItemTemplate>
                             <table class="table-sm" style="width: 100%">
                                 <tr>
-                                    <td style="width=200px">Company ID:
+                                    <td style="width:250px">Company ID:
                                     </td>
                                     <td>
                                         <asp:Label ID="companyIdLabel" runat="server" Text='<%# Eval("companyId") %>' />
@@ -254,6 +254,15 @@
                                         <a href="https://central.clickatell.com/index" target="_blank">Clic to Login clickatell, username:axzes.com, Client ID: PJEY04 </a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>Maximum upload size per file:
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox3" runat="server" Text='<%# Bind("MaxFileSize")%>'
+                                            Width="200px"  />
+                                    </td>
+                                </tr>
+
                             </table>
                             <br />
                             <telerik:RadButton ID="UpdateButton" runat="server" CausesValidation="True" CommandName="Update"
@@ -270,7 +279,7 @@
                                     <td width="800px" valign="top">
                                         <table class="table-sm" style="width: 100%">
                                             <tr>
-                                                <td style="width: 200px">Company ID:
+                                                <td style="width: 250px">Company ID:
                                                 </td>
                                                 <td>
                                                     <asp:Label ID="companyIdLabel" runat="server" Text='<%# Eval("companyId") %>' />
@@ -453,6 +462,13 @@
                                                     <asp:Label ID="Label6" runat="server" Text='<%# Bind("SMS_api_id")%>' />
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>Maximum upload size per file:
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="Label8" runat="server" Text='<%# Bind("MaxFileSize")%>' />
+                                                </td>
+                                            </tr>
 
 
                                         </table>
@@ -557,8 +573,8 @@
         </UpdateParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Company.companyId, Company.Name, Company.Version, Company.billingExpirationDate, isnull(Company.Type,0) as Type, Company.Contact, Company.Address, Company.Address2, Company.City, Company.State, Company.ZipCode, Company.Phone, Company.Movile, Company.Fax, Company.Email, Company.StartDate, Company.EndDate, Company.imgLogo, Company.imgSign, Company.Inactive, Company.webEmailSMTP, Company.webEmailProfitWarningCC, Company.AppTitle, Company.AppWebTitle, Company.FileWebPath, Company.ProposalScrPath, Company.ProposalDestPath, Company.web, Company.EmailSign, Company.EmailSign2, Company.Telerik_Skin, isnull(Company.Billing_plan,0) as Billing_plan, Company_types.Name AS TypeName, Billing_plans.Name AS PlanName, sys_Versiones.Name AS VersionName, isnull(SMSservice,0) as SMSservice, SMS_api_id FROM Company LEFT OUTER JOIN sys_Versiones ON Company.Version = sys_Versiones.Id LEFT OUTER JOIN Billing_plans ON Company.Billing_plan = Billing_plans.Id LEFT OUTER JOIN Company_types ON Company.Type = Company_types.Id WHERE (Company.companyId = @companyId)"
-        UpdateCommand="UPDATE Company SET Name = @Name, Version = @Version, Type = @Type, billingExpirationDate=@billingExpirationDate,  Contact = @Contact, Address = @Address, Address2 = @Address2, City = @City, State = @State, ZipCode = @ZipCode, Phone = @Phone, Movile = @Movile, Fax = @Fax, Email = @Email, Inactive = @Inactive, webEmailSMTP = @webEmailSMTP, webEmailProfitWarningCC = @webEmailProfitWarningCC, web = @web, EmailSign = @EmailSign, EmailSign2 = @EmailSign2, Billing_plan = @Billing_plan, SMSservice = @SMSservice, SMS_api_id = @SMS_api_id WHERE (companyId = @companyId)"
+        SelectCommand="Company_Master_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="UPDATE Company SET Name = @Name, Version = @Version, Type = @Type, billingExpirationDate=@billingExpirationDate,  Contact = @Contact, Address = @Address, Address2 = @Address2, City = @City, State = @State, ZipCode = @ZipCode, Phone = @Phone, Movile = @Movile, Fax = @Fax, Email = @Email, Inactive = @Inactive, webEmailSMTP = @webEmailSMTP, webEmailProfitWarningCC = @webEmailProfitWarningCC, web = @web, EmailSign = @EmailSign, EmailSign2 = @EmailSign2, Billing_plan = @Billing_plan, SMSservice = @SMSservice, SMS_api_id = @SMS_api_id,MaxFileSize=@MaxFileSize  WHERE (companyId = @companyId)"
         DeleteCommand="Company_DELETE" DeleteCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
@@ -591,6 +607,7 @@
             <asp:Parameter Name="Billing_plan" />
             <asp:Parameter Name="SMSservice" />
             <asp:Parameter Name="SMS_api_id" />
+            <asp:Parameter Name="MaxFileSize" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
         </UpdateParameters>
