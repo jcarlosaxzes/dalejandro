@@ -2245,6 +2245,7 @@
     <Content Include="Images\clients\Nophoto.jpg" />
     <Content Include="Images\employees\Nophoto.jpg" />
     <Content Include="Images\logo\Logo-Animation.gif" />
+    <Content Include="Images\logo\Logo-Animation250x250.gif" />
     <Content Include="Images\logo\pas_horizontal_logo.png" />
     <Content Include="Images\logo\pas_horizontal_logo_big.png" />
     <Content Include="Images\logo\vertical logo on light bg.svg" />
@@ -5019,7 +5020,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
