@@ -157,10 +157,7 @@
                                                             <span class="badge badge-secondary">Proposal Success Rate = </span>
                                                         </td>
                                                         <td>
-                                                            ([Total Amount of Proposal Accepted] + [Total Amount of Jobs without Proposals])
-                                                            <hr style="margin-left:30px;margin-right:30px;margin-top:0;margin-bottom:0" />
-                                                            ([Total Amount of Proposals] + [Total Amount of Jobs without Proposals])
-                                                            <br />
+                                                            This rate demonstrates the proposals which have been successfully accepted in contrast to the total number of emitted proposals. This number is adjusted to include Jobs created without Proposals.
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -168,9 +165,7 @@
                                                             <span class="badge badge-danger">Return On Investment = </span>
                                                         </td>
                                                         <td>
-                                                            Company Multiplier Expenses ([Salary]+[Salary Tax]+[SubContracts]+[Others]) 
-                                                            <hr style="margin-left:30px;margin-right:30px;margin-top:0;margin-bottom:0" />
-                                                            Incomes([Client Payments]]
+                                                            This figure represents the total collected from projects contrasted against the total spent on the projects. The total spent on the projects includes all Salary, Salary Taxes, and other Project Expenses including Subcontractor Costs. The total spent is adjusted to include the Company Multiplier to provide the most accurate figure. 
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -178,9 +173,7 @@
                                                             <span class="badge badge-dark">Direct Labor Rate = </span>
                                                         </td>
                                                         <td>
-                                                            [Company Multiplier Multiplier Productive Salary] 
-                                                            <hr style="margin-left:30px;margin-right:30px;margin-top:0;margin-bottom:0" />
-                                                            [Company Multiplier Multiplier Salary]
+                                                            This rate is determined by observing the Salary of Productive Employees (employees directly related to the project) contrasted by the Total Salary expenses of the company. This figure is adjusted to include the Company Multiplier to provide the most accurate figure. 
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -188,9 +181,7 @@
                                                             <span class="badge badge-success">Active Client Rate = </span>
                                                         </td>
                                                         <td>
-                                                            [Active Clients] 
-                                                            <hr style="margin-left:50px;margin-right:50px;margin-top:0;margin-bottom:0" />
-                                                            [Active Clients] + [Inactive Clients]
+                                                            This rate is determined by observing the Salary of Productive Employees (employees directly related to the project) contrasted by the Total Salary expenses of the company. This figure is adjusted to include the Company Multiplier to provide the most accurate figure. 
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -198,9 +189,7 @@
                                                             <span class="badge badge-warning">Billing Success Rate = </span>
                                                         </td>
                                                         <td>
-                                                            ([Invoice Amount Emitted] - [Invoice Amount Due Emitted])
-                                                            <hr style="margin-left:50px;margin-right:50px;margin-top:0;margin-bottom:0" />
-                                                            [Amount Emitted] 
+                                                            This rate demonstrates the success of emitted invoices by contrasting the emitted past due invoices against the total emitted invoices.  
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -208,9 +197,7 @@
                                                             <span class="badge badge-primary">Employee Efficiency Rate =</span>
                                                         </td>
                                                         <td>
-                                                               [Employees Hours Assigned]
-                                                            <hr style="margin-left:50px;margin-right:50px;margin-top:0;margin-bottom:0" />
-                                                                [Employees Worked]
+                                                               This rate demonstrates the effectiveness of an employee by contrasting their assigned hours against their hours entered.
 
                                                         </td>
                                                     </tr>

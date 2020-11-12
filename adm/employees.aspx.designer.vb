@@ -140,60 +140,6 @@ Partial Public Class employees
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''btnEditEmpl2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnEditEmpl2 As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''ImageEmployeePhoto control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ImageEmployeePhoto As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''btnEditEmpl control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnEditEmpl As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnInactive control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnInactive As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnCredentials control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCredentials As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnPermits control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnPermits As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
     '''RadWizardStep2 control.
     '''</summary>
     '''<remarks>

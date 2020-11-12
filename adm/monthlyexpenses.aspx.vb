@@ -252,8 +252,10 @@ Public Class monthlyexpenses
                             Next
 
                             If bIsValidDataRow Then
-                                LocalAPI.NewPayroll(employeeId, CheckDate, NetAmount, TotalHours, TotalPay, TotalCost, EmployeeName, lblCompanyId.Text)
-                                nRecs = nRecs + 1
+                                If EmployeeName > 0 Then
+                                    LocalAPI.NewPayroll(employeeId, CheckDate, NetAmount, TotalHours, TotalPay, TotalCost, EmployeeName, lblCompanyId.Text)
+                                    nRecs = nRecs + 1
+                                End If
 
                             End If
 

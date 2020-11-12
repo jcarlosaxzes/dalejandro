@@ -69,12 +69,12 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <%--<telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="" >
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+   <%-- <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="" >
         <asp:Image  runat="server" AlternateText="Loading..." ImageUrl="~/Images/logo/Logo-Animation250x250.gif" style="border: 0px;padding-top:50px" />
         <br />
         <asp:Label ID="Label1" runat="server" Text="Fetching your data..." ForeColor="#039BE5" BackColor="White"></asp:Label>
-    </telerik:RadAjaxLoadingPanel>
+    </telerik:RadAjaxLoadingPanel>--%>
 
 
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
