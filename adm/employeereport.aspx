@@ -33,13 +33,13 @@
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
                     <td style="width:150px">
-                        <telerik:RadDropDownList ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear"
+                        <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear" Height="300px"
                             DataValueField="Year" Width="100%" CausesValidation="false" UseSubmitBehavior="false">
-                        </telerik:RadDropDownList>
+                        </telerik:RadComboBox>
                     </td>
                     <td>
                         <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees"
-                            DataTextField="Name" DataValueField="Id" Height="300px" Width="300px">
+                            DataTextField="Name" DataValueField="Id" Height="300px" Width="300px" MarkFirstMatch="True" Filter="Contains">
                         </telerik:RadComboBox>
 
                     </td>
@@ -59,15 +59,17 @@
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEmployee" RenderOuterTable="false">
             <ItemTemplate>
                 <div class="col-md-2">
-                    <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id")) %>' CssClass="photo150"
-                        runat="server" AlternateText="Employee Profile Picture"></asp:Image>
+                    <div style="padding-top:32px">
+                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id")) %>' CssClass="photo150"
+                            runat="server" AlternateText="Employee Profile Picture"></asp:Image>
+                    </div>
                 </div>
                 <div class="col-md-2">
                     <h4><%# Eval("Name") %></h4>
-                    <%# Eval("Position") %>
-                    <p><%# Eval("Address") %></p>
-                    <p><%# Eval("Email") %></p>
-                    <p><%#  LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")) %></p>
+                    <%# Eval("Position") %><br />
+                    <%# Eval("Address") %><br />
+                    <%# Eval("Email") %><br />
+                    <%#  LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")) %><br />
                     <p>Starting at: <%# Eval("starting_Date","{0:d}") %></p>
                 </div>
             </ItemTemplate>
@@ -149,17 +151,22 @@
                             <td style="text-align: center"><%# Eval("Sick") %></td>
                         </tr>
                         <tr>
+                            <td>Salary Hours</td>
+                            <td style="text-align: center"><%# Eval("Hours_1", "{0:N0}") %></td>
+                            <td style="text-align: center"><%# Eval("Hours", "{0:N0}") %></td>
+                        </tr>
+                        <tr>
                             <td>Salary Net ($)</td>
                             <td style="text-align: center"><%# Eval("NetAnnualSalary_1","{0:C2}") %></td>
                             <td style="text-align: center"><%# Eval("NetAnnualSalary","{0:C2}") %></td>
                         </tr>
                         <tr>
-                            <td>Gross Net ($)</td>
+                            <td>Salary Gross ($)</td>
                             <td style="text-align: center"><%# Eval("GrossAnnualSalary_1","{0:C2}") %></td>
                             <td style="text-align: center"><%# Eval("GrossAnnualSalary","{0:C2}") %></td>
                         </tr>
                         <tr>
-                            <td>Total Cost ($)</td>
+                            <td>Salary Total Cost ($)</td>
                             <td style="text-align: center"><%# Eval("TotalCostAnnualSalary_1","{0:C2}") %></td>
                             <td style="text-align: center"><%# Eval("TotalCostAnnualSalary","{0:C2}") %></td>
                         </tr>
@@ -184,12 +191,16 @@
                             <td style="text-align: center"><%# Eval("ProductivityRate","{0:p}") %></td>
                         </tr>
                     </table>
+                    <div style="margin:0;font-size:x-small;font-style:italic">
+                        (*) Salary Sources: Finances->Expenses->Payroll Details
+                    </div>
                 </div>
             </ItemTemplate>
         </asp:FormView>
+        
     </div>
 
-    <div class="row">
+    <div class="row" style="padding-top:24px">
         <div class="col-md-12">
             <h4>Jobs (Done or Inactive) Employee Efficiency</h4>
             <telerik:RadGrid ID="RadGridEfficiency" runat="server" DataSourceID="SqlDataSourceEfficiency"

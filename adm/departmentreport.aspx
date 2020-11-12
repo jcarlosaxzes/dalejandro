@@ -35,9 +35,8 @@
 
                     </td>
                     <td style="width: 150px; text-align: right">
-                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false"
-                            ToolTip="Refresh data" CausesValidation="false">
-                            <i class="fas fa-redo"></i> Refresh
+                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -55,10 +54,10 @@
                 <MasterTableView DataSourceID="SqlDataSourceEmployees" DataKeyNames="EmployeeId">
                     <PagerStyle Mode="Slider" AlwaysVisible="false" />
                     <Columns>
-                        <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
+                        <telerik:GridTemplateColumn HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                             <ItemTemplate>
                                 <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("EmployeeId"))%>'
-                                    runat="server" Width="45" CssClass="img-thumbnail"></asp:Image>
+                                    runat="server" CssClass="photo50"></asp:Image>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridTemplateColumn DataField="EmployeeName" HeaderText="Employee" SortExpression="" Aggregate="Count"
@@ -74,7 +73,7 @@
                         <telerik:GridTemplateColumn DataField="Department" HeaderText="Department" SortExpression="Department"
                             UniqueName="Department" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:Label ID="lblCompanyId" runat="server"
+                                <asp:Label ID="lblDepartmentColumn" runat="server"
                                     Text='<%# Eval("Department")%>'
                                     Font-Bold='<%# Eval("IsHead")%>'
                                     Font-Italic='<%# Eval("DD")=0 %>'>
