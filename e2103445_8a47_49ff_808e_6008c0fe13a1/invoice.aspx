@@ -41,7 +41,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="uxLoadingPanel" runat="server"></telerik:RadAjaxLoadingPanel>
+    <telerik:RadAjaxLoadingPanel ID="uxLoadingPanel" runat="server" EnableEmbeddedSkins="false"></telerik:RadAjaxLoadingPanel>
     <%-- Modals and the like --%>
     <div class="modal fade" id="modal-card">
         <div class="modal-dialog" role="document">

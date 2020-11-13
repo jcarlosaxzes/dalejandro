@@ -18,7 +18,7 @@
             }
         </script>
     </telerik:RadCodeBlock>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" >
     </telerik:RadAjaxLoadingPanel>
 
     <div class="container">

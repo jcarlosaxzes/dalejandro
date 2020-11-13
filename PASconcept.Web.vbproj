@@ -2142,7 +2142,6 @@
     <Content Include="Content\pasconcept.css" />
     <Content Include="Content\pasconcept.min.css" />
     <Content Include="Content\pasconceptSkins\Ajax.pasconceptLoading.css" />
-    <Content Include="Content\pasconceptSkins\ajaximages\Logo-Animation.gif" />
     <Content Include="Content\print-page.css" />
     <Content Include="Content\sing-theme\application-ie9-part2.css" />
     <Content Include="Content\sing-theme\application.css" />
@@ -4985,6 +4984,9 @@
       <Project>{2bb4dca2-6ab0-44a2-8684-f87ddbc86a3e}</Project>
       <Name>PASconcept.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\pasconceptSkins\ajaximages\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

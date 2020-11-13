@@ -13,7 +13,7 @@
         </script>
     </telerik:RadCodeBlock>
 
-    <%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -38,7 +38,7 @@
 
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />--%>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">Statements</span>
@@ -108,7 +108,7 @@
                         </telerik:RadTextBox>
                     </td>
                     <td style="text-align: right; width: 150px">
-                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                             <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
 

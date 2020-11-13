@@ -2,23 +2,19 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <script type="text/javascript">
-        function onClientUploadFailed(sender, eventArgs) {
-            alert(eventArgs.get_message())
-        }
-        function OnClientClose(sender, args) {
-            var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-            masterTable.rebind();
-        }
-    </script>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -28,6 +24,15 @@
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
+    <script type="text/javascript">
+        function onClientUploadFailed(sender, eventArgs) {
+            alert(eventArgs.get_message())
+        }
+        function OnClientClose(sender, args) {
+            var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
+            masterTable.rebind();
+        }
+    </script>
 
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Invoices</span>
@@ -374,45 +379,6 @@
                 </Columns>
             </MasterTableView>
         </telerik:RadGrid>
-
-        <%--        <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="lblBillingContact" RelativeTo="Element"
-            Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Billing Contact Information</b>" ShowEvent="OnClick"
-            HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
-            <table>
-                <tr>
-                    <td>Billing Contact:&nbsp;<b><%# Eval("BillingContact")%></b></td>
-                </tr>
-                <tr>
-                    <td>Client Name:&nbsp;<b><%# Eval("ClientName")%></b></td>
-                </tr>
-                <tr>
-                    <td>Phone:&nbsp;<b><%# Eval("Phone")%></b></td>
-                </tr>
-                <tr>
-                    <td>Cellular:&nbsp;<b><%# Eval("Cellular")%></b></td>
-                </tr>
-                <tr>
-                    <td>Email:&nbsp;<b><%# Eval("Email")%></b></td>
-                </tr>
-            </table>
-        </telerik:RadToolTip>
-
-        <telerik:RadToolTip ID="RadToolTipEmitted" runat="server" TargetControlID="lblEmitted" RelativeTo="Element"
-            Position="MiddleLeft" RenderInPageRoot="true" Modal="True" Title="<b>Emitted Information</b>" ShowEvent="OnClick"
-            HideDelay="300" HideEvent="LeaveTargetAndToolTip" IgnoreAltAttribute="true">
-            <table>
-                <tr>
-                    <td>Emitted:&nbsp;<b><%# Eval("Emitted")%></b>&nbsp;time(s)
-                    </td>
-                </tr>
-                <tr>
-                    <td>First time:&nbsp;<b><%# Eval("FirstEmission", "{0:d}")%></b></td>
-                </tr>
-                <tr>
-                    <td>Last time:&nbsp;<b><%# Eval("LatestEmission", "{0:d}")%></b></td>
-                </tr>
-            </table>
-        </telerik:RadToolTip>--%>
     </div>
 
     <telerik:RadToolTip ID="RadToolTipInsertPayment" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
