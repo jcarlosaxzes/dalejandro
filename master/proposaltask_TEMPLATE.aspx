@@ -22,7 +22,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
     <telerik:RadPageLayout ID="RadPageLayout1" runat="server" GridType="Fluid">
         <Rows>
             <telerik:LayoutRow>

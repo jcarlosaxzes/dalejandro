@@ -78,7 +78,7 @@
 
             </AjaxSettings>
         </telerik:RadAjaxManager>
-        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+        <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
         <%-- <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
             <script type="text/javascript">

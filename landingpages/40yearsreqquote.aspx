@@ -153,7 +153,7 @@
                     </telerik:AjaxSetting>
                 </AjaxSettings>
             </telerik:RadAjaxManager>
-            <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+            <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
             <telerik:RadWindowManager ID="RadWindowManager1" runat="server">
             </telerik:RadWindowManager>--%>
 
