@@ -273,33 +273,46 @@
             <h2>Customer/Client Summary</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            <h4>Average Customer Value:</h4>
-            <h5>
-                <asp:Label ID="lblCustomer1" runat="server" ToolTip="Total dollar value of all jobs related to this department divided by the total number of department customers"></asp:Label></h5>
-        </div>
-        <div class="col-md-3">
-            <h4>Average Customer Revenue:</h4>
-            <h5>
-                <asp:Label ID="lblCustomer2" runat="server" ToolTip="Total dollar value of all collected inviced related to this department divided by the total number of department customers"></asp:Label></h5>
-        </div>
-        <div class="col-md-2">
-            <h4>Total Number of Customer:</h4>
-            <h5>
-                <asp:Label ID="lblCustomer3" runat="server" ToolTip="Total number of customers of department"></asp:Label></h5>
-        </div>
-        <div class="col-md-2">
-            <h4>Total Number of New Clients: </h4>
-            <h5>
-                <asp:Label ID="lblCustomer4" runat="server" ToolTip="Total number of new customers of department" Text="0"></asp:Label></h5>
-        </div>
-        <div class="col-md-2">
-            <h4>Total Number of Recurrent Customers:</h4>
-            <h5>
-                <asp:Label ID="lblCustomer5" runat="server" ToolTip="Total number of recurrent customers of department" Text="0"></asp:Label></h5>
-        </div>
+    <div>
+        <table class="table-sm" style="width:100%;text-align:center">
+            <tr>
+                <td>
+                    <h4>Average Customer Value</h4>
+                </td>
+                <td>
+                    <h4>Average Customer Revenue</h4>
+                </td>
+                <td>
+                    <h4>Total Number of Customer</h4>
+                </td>
+                <td>
+                    <h4>Total Number of New Clients</h4>
+                </td>
+                <td>
+                    <h4>Total Number of Recurrent Customers</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:Label ID="lblCustomer1" runat="server" Font-Size="Larger" ToolTip="Total dollar value of all jobs related to this department divided by the total number of department customers"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblCustomer2" runat="server" Font-Size="Larger" ToolTip="Total dollar value of all collected inviced related to this department divided by the total number of department customers"></asp:Label></h5>
+                </td>
+                <td>
+                    <asp:Label ID="lblCustomer3" runat="server" Font-Size="Larger" ToolTip="Total number of customers of department"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblCustomer4" runat="server" Font-Size="Larger" ToolTip="Total number of new customers of department" Text="0"></asp:Label>
+                </td>
+                <td>
+                    <asp:Label ID="lblCustomer5" runat="server" Font-Size="Larger" ToolTip="Total number of recurrent customers of department" Text="0"></asp:Label>
+                </td>
+            </tr>
+
+        </table>
     </div>
+    
     <div class="row">
         <div class="col-md-12">
             <h2>Department Breakout</h2>
