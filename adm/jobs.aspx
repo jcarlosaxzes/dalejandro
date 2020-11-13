@@ -70,7 +70,7 @@
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-   <%-- <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="" >
+    <%-- <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="" >
         <asp:Image  runat="server" AlternateText="Loading..." ImageUrl="~/Images/logo/Logo-Animation250x250.gif" style="border: 0px;padding-top:50px" />
         <br />
         <asp:Label ID="Label1" runat="server" Text="Fetching your data..." ForeColor="#039BE5" BackColor="White"></asp:Label>
@@ -171,7 +171,7 @@
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
-            
+
             <asp:LinkButton ID="btnExport" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Excel file format (.CSV)">
                 <i class="fas fa-cloud-download-alt"></i> Export
             </asp:LinkButton>
@@ -329,7 +329,7 @@
                     </asp:LinkButton>
                 </td>
                 <td style="text-align: right">
-                    
+
 
                     <asp:LinkButton ID="btnClientUnhide" runat="server" UseSubmitBehavior="false" ToolTip="Stop hiding clients Filter">
                     <i class="fas fa-eye" style="padding-right:10px"></i>
@@ -414,7 +414,6 @@
                                                 <%#Eval("Code")%> 
                                     </asp:LinkButton>
                                     <div style="float: right; vertical-align: top; margin: 0;">
-
                                         <%--Three Point Action Menu--%>
                                         <asp:HyperLink runat="server" ID="lblAction" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
                                             <i title="Click to menu for this Job" style="color:dimgray" class="fas fa-ellipsis-v"></i>
@@ -854,7 +853,7 @@
         </tr>
         <tr>
             <td>
-                
+
 
                 <div class="container">
                     <div style="height: 1px; width: 300px; overflow: hidden">
@@ -912,7 +911,6 @@
                 <td colspan="2">
                     <h2 style="margin: 0; text-align: center; color: white; width: 600px">
                         <span class="navbar navbar-expand-md bg-dark text-white">Update Job Status</span>
-                        </>
                     </h2>
                 </td>
             </tr>

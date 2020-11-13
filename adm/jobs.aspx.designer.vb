@@ -338,6 +338,384 @@ Partial Public Class jobs
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''btnEditJob control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnEditJob As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''lblAction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblAction As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''RadToolTipAction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipAction As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''LinkButton1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton1 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton2 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton3 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton4 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton5 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton6 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton7 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton14 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton14 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton8 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton8 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton9 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton9 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton10 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton10 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton13 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton13 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton11 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton11 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton12 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton12 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''LinkButton15 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LinkButton15 As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnAddEvent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddEvent As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnAddNotification control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAddNotification As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''hlkLocation control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hlkLocation As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''InitialsLabel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents InitialsLabel As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''RadToolTipContact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipContact As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''btnEditCli control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnEditCli As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''PhoneTextBox control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PhoneTextBox As Global.Telerik.Web.UI.RadMaskedTextBox
+
+    '''<summary>
+    '''RadMaskedTextBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadMaskedTextBox1 As Global.Telerik.Web.UI.RadMaskedTextBox
+
+    '''<summary>
+    '''lnkEmployeeName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkEmployeeName As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadProgressBar98 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadProgressBar98 As Global.Telerik.Web.UI.RadProgressBar
+
+    '''<summary>
+    '''RadProgressBar99 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadProgressBar99 As Global.Telerik.Web.UI.RadProgressBar
+
+    '''<summary>
+    '''lnkUpdateStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkUpdateStatus As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Label1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblBudget control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBudget As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lnkTime control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkTime As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadProgressBar96 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadProgressBar96 As Global.Telerik.Web.UI.RadProgressBar
+
+    '''<summary>
+    '''lblCollected control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblCollected As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblJobBilledAmount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblJobBilledAmount As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblColectedPercent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblColectedPercent As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lnkBilling control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkBilling As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadProgressBar88 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadProgressBar88 As Global.Telerik.Web.UI.RadProgressBar
+
+    '''<summary>
+    '''lblBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBalance As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblBalanceSymbol control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblBalanceSymbol As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblSubFee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSubFee As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''ExportPanel control.
     '''</summary>
     '''<remarks>

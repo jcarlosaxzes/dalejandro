@@ -14,6 +14,10 @@
                     <telerik:AjaxUpdatedControl ControlID="btnExpensesImport" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="RadGridExpenses" />
                     <telerik:AjaxUpdatedControl ControlID="cboYear" />
+                    <telerik:AjaxUpdatedControl ControlID="RadListBoxImportError" />
+                    <telerik:AjaxUpdatedControl ControlID="RadUploadExpenses1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadToolTipImport" />
+
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnImportPayroll">
@@ -21,6 +25,9 @@
                     <telerik:AjaxUpdatedControl ControlID="btnImportPayroll" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="RadGridPayroll" />
                     <telerik:AjaxUpdatedControl ControlID="cboYear" />
+                    <telerik:AjaxUpdatedControl ControlID="RadListBoxImportError" />
+                    <telerik:AjaxUpdatedControl ControlID="RadAsyncUploadPayroll" />
+                    <telerik:AjaxUpdatedControl ControlID="RadToolTipImport" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
 
@@ -73,12 +80,15 @@
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
+           
             </button>
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseImport" aria-expanded="false" aria-controls="collapseImport" title="Show/Hide Import expenses panel">
                 Import Expenses
+           
             </button>
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseImportP" aria-expanded="false" aria-controls="collapseImportP" title="Show/Hide Import payroll panel">
                 Import Payroll
+           
             </button>
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
                     Add Expense
@@ -321,7 +331,7 @@
                         </td>
                         <td>
                             <telerik:RadGrid ID="RadGridMonthly" runat="server" Width="95%"
-                                ShowFooter="true" 
+                                ShowFooter="true"
                                 ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small"
                                 AutoGenerateColumns="False" DataSourceID="SqlDataSourceMonthly" AllowPaging="true" PageSize="12"
                                 HeaderStyle-HorizontalAlign="Center">
@@ -538,6 +548,7 @@
                         <div class="RadListView RadListView_<%# Container.Skin %>">
                             <div class="rlvEmpty">
                                 There are no items to be displayed.
+                           
                             </div>
                         </div>
                     </EmptyDataTemplate>
@@ -652,6 +663,29 @@
 
         </WizardSteps>
     </telerik:RadWizard>
+
+    <telerik:RadToolTip ID="RadToolTipImport" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+
+        <table class="table table-bordered" style="width: 600px">
+            <tr>
+                <td>
+                    <h2 style="text-align: center; color: white; width: 600px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">Import Results</span>
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td>Rows not imported:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <telerik:RadListBox ID="RadListBoxImportError" runat="server" Width="100%" ZIndex="50001">
+                    </telerik:RadListBox>
+                </td>
+            </tr>
+        </table>
+    </telerik:RadToolTip>
 
     <asp:SqlDataSource ID="SqlDataSourceExpenses" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Company_Expenses_SELECT" SelectCommandType="StoredProcedure"
