@@ -23,7 +23,7 @@
             <telerik:AjaxSetting></telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
         <h3 style="margin: 0">
             <asp:Label ID="lblJob" runat="server"></asp:Label>

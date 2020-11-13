@@ -35,7 +35,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Time Sheet</span>
         <span style="float: right; vertical-align: middle;">

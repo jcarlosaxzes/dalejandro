@@ -1,0 +1,18 @@
+﻿/*RadAjaxLoadingPanel MySkin Skin*/
+
+/*loading image - do not specify background-position or background-repeat*/
+.RadAjax_pasconceptLoading .raDiv {
+    background-image: url(ajaximages/Logo-Animation150.gif);
+}
+
+/*loading panel background color*/
+.RadAjax_pasconceptLoading .raColor {
+    background-color:white;
+}
+
+/*skin transparency level - the smaller the number, the more the transparency*/
+.RadAjax_pasconceptLoading .raTransp {
+    opacity: 0.3; /*non-IE browsers, 0-1*/
+    -moz-opacity: 0.3; /*old Mozilla browsers, 0-1*/
+    filter: alpha(opacity=30); /*IE, 0-100*/
+}
