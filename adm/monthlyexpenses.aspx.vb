@@ -168,7 +168,6 @@ Public Class monthlyexpenses
     Private Sub btnImportPayroll_Click(sender As Object, e As EventArgs) Handles btnImportPayroll.Click
         Try
             If cboImportPayrollMode.SelectedValue <> -1 Then
-
                 If cboImportPayrollMode.SelectedValue = 0 Then
                     'DELETE before all records for the selected year, and then Import
                     SqlDataSourceExpensesUtility.Update()
@@ -177,6 +176,10 @@ Public Class monthlyexpenses
                 ImportPayroll()
                 cboYear.SelectedValue = txtYearPayroll.Text
                 Refresh()
+                If RadListBoxImportError.Items.Count > 0 Then
+                    RadToolTipImport.Visible = True
+                    RadToolTipImport.Show()
+                End If
             End If
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
@@ -186,6 +189,8 @@ Public Class monthlyexpenses
     Private Sub ImportPayroll()
         Try
             'Company Expenses
+            RadListBoxImportError.Items.Clear()
+
             If RadAsyncUploadPayroll.UploadedFiles.Count > 0 Then
 
                 ' declare CsvDataReader object which will act as a source for data for SqlBulkCopy
@@ -252,9 +257,12 @@ Public Class monthlyexpenses
                             Next
 
                             If bIsValidDataRow Then
-                                If EmployeeName > 0 Then
+                                If employeeId > 0 Then
                                     LocalAPI.NewPayroll(employeeId, CheckDate, NetAmount, TotalHours, TotalPay, TotalCost, EmployeeName, lblCompanyId.Text)
                                     nRecs = nRecs + 1
+                                Else
+                                    Dim item1 As RadListBoxItem = New RadListBoxItem(EmployeeName & "  Date: " & CheckDate)
+                                    RadListBoxImportError.Items.Add(item1)
                                 End If
 
                             End If
