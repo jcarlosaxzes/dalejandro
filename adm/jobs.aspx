@@ -69,12 +69,12 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />
-    <%-- <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="" >
-        <asp:Image  runat="server" AlternateText="Loading..." ImageUrl="~/Images/logo/Logo-Animation250x250.gif" style="border: 0px;padding-top:50px" />
+    <%--<telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" />--%>
+     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Skin="" >
+        <asp:Image  runat="server" AlternateText="Loading..." ImageUrl="~/Images/logo/Logo-Animation.gif" style="border: 0px;padding-top:50px" Height="150" />
         <br />
         <asp:Label ID="Label1" runat="server" Text="Fetching your data..." ForeColor="#039BE5" BackColor="White"></asp:Label>
-    </telerik:RadAjaxLoadingPanel>--%>
+    </telerik:RadAjaxLoadingPanel>
 
 
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
@@ -745,7 +745,7 @@
                                         <tr>
                                             <td style="width: 47%; text-align: right">
 
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Size="12px" ToolTip="Budget Used"></asp:Label>
+                                                <asp:Label ID="lblBudgetUsedColumn" runat="server" Text='<%# Eval("BudgetUsed", "{0:C0}")%>' Font-Size="12px" ToolTip="Budget Used"></asp:Label>
                                             </td>
                                             <td style="text-align: center">of
                                             </td>

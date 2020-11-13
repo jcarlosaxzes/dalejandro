@@ -32,6 +32,15 @@ Partial Public Class jobs
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
 
     '''<summary>
+    '''Label1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''RadCodeBlock control.
     '''</summary>
     '''<remarks>
@@ -608,13 +617,13 @@ Partial Public Class jobs
     Protected WithEvents lnkUpdateStatus As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''Label1 control.
+    '''lblBudgetUsedColumn control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblBudgetUsedColumn As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblBudget control.
