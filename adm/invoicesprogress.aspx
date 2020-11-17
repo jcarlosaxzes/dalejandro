@@ -125,7 +125,7 @@
                         </telerik:GridNumericColumn>
                         <telerik:GridNumericColumn DataField="Previous" HeaderText="Previously Invoiced Percent" SortExpression="Previous" UniqueName="Previous" HeaderStyle-Width="150px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="AmountPrev" HeaderText="Amount Previous Invoiced" ReadOnly="True" SortExpression="AmountPrev" UniqueName="AmountPrev" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
+                        <telerik:GridNumericColumn DataField="AmountPrev" HeaderText="Amount Previously Invoiced" ReadOnly="True" SortExpression="AmountPrev" UniqueName="AmountPrev" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                         </telerik:GridNumericColumn>
                         <telerik:GridNumericColumn DataField="Progress" HeaderText="Percent Complete<br/>To Date" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="180px" MinValue="0" MaxValue="100" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridNumericColumn>
