@@ -29,10 +29,12 @@ Public Class client_sync_qb
             End If
         End If
 
-
-
         RadWindowManager1.EnableViewState = False
     End Sub
+
+#Region "Clients"
+
+
 
     Protected Sub btnGetCustomers_Click(sender As Object, e As EventArgs)
         If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
@@ -158,5 +160,118 @@ Public Class client_sync_qb
         End Try
     End Sub
 
+#End Region
 
+
+#Region "Employees"
+
+    Private Sub btnGetEmployees_Click(sender As Object, e As EventArgs) Handles btnGetEmployees.Click
+        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+            qbAPI.LoadQBEmployees(lblCompanyId.Text)
+            RadGridEmployees.DataBind()
+        Else
+            ' New Tab for QB Authentication
+            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+        End If
+    End Sub
+
+    Protected Sub RadGridEmployees_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridEmployees.ItemCommand
+
+        Select Case e.CommandName
+            Case "Link"
+                Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                Dim QBId As Integer = ids(0)
+                Dim EmployeId = ids(1)
+                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = {QBId} where Id = " & EmployeId)
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
+
+
+            Case "Search"
+                lblSelectEmployee.Text = e.CommandArgument
+                RadToolTipSearchEmployee.Visible = True
+                RadToolTipSearchEmployee.Show()
+        End Select
+    End Sub
+
+
+    Protected Sub RadGridSearhcEmployee_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridSearhcEmployee.ItemCommand
+
+        Select Case e.CommandName
+            Case "Link"
+                Dim QBId As Integer = lblSelectEmployee.Text
+                Dim EmployeId = e.CommandArgument
+                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = {QBId} where Id = " & EmployeId)
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
+
+        End Select
+    End Sub
+
+    Protected Sub RadGridLinkedEmployees_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridLinkedEmployees.ItemCommand
+
+        Select Case e.CommandName
+            Case "UnLink"
+                Dim EmployeId As Integer = e.CommandArgument
+                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = 0 where Id = " & EmployeId)
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
+        End Select
+    End Sub
+
+    Protected Sub btnFindEmployee_Click(sender As Object, e As EventArgs) Handles btnFindEmployee.Click
+        RadToolTipSearchEmployee.Visible = True
+        RadToolTipSearchEmployee.Show()
+        RadGridEmployees.Rebind()
+    End Sub
+
+
+
+    Private Sub btnBulkLinkEmployees_Click(sender As Object, e As EventArgs) Handles btnBulkLinkEmployees.Click
+        Dim nRecs As Integer
+        Try
+            If RadGridEmployees.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGridEmployees.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        If qbAPI.LinkCustomer(lblCompanyId.Text, Val(dataItem("Id").Text), Val(dataItem("QBId").Text)) Then
+                            nRecs = nRecs + 1
+                        End If
+                    End If
+                Next
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
+                Master.ErrorMessage(nRecs & " Records Linked")
+            Else
+                Master.ErrorMessage("Select (Mark) Records to Link")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnBulkCopyEmployees_Click(sender As Object, e As EventArgs) Handles btnBulkCopyEmployees.Click
+        Dim nRecs As Integer
+        Try
+            If RadGridEmployees.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGridEmployees.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        If qbAPI.CopyCustomer(lblCompanyId.Text, Val(dataItem("QBId").Text)) Then
+                            nRecs = nRecs + 1
+                        End If
+                    End If
+                Next
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
+                Master.ErrorMessage(nRecs & " Records Copied")
+            Else
+                Master.ErrorMessage("Select (Mark) Records to Copy")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+#End Region
 End Class

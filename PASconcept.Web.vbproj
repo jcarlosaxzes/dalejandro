@@ -633,6 +633,7 @@
     <Content Include="adm\employeenewtime.aspx" />
     <Content Include="adm\employeereport.aspx" />
     <Content Include="adm\employees.aspx" />
+    <Content Include="adm\employees_sync_qb.aspx" />
     <Content Include="adm\employee_hourlywagehistory.aspx" />
     <Content Include="adm\employee_permissions.aspx" />
     <Content Include="adm\employee_permissions_form.aspx" />
@@ -3456,6 +3457,13 @@
     <Compile Include="adm\employees.aspx.vb">
       <DependentUpon>employees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\employees_sync_qb.aspx.designer.vb">
+      <DependentUpon>employees_sync_qb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employees_sync_qb.aspx.vb">
+      <DependentUpon>employees_sync_qb.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\employee_hourlywagehistory.aspx.designer.vb">
       <DependentUpon>employee_hourlywagehistory.aspx</DependentUpon>
