@@ -366,6 +366,16 @@ Public Class qbAPI
         End If
     End Function
 
+    Public Shared Function CopyVendor(companyId As Integer, QBId As Integer) As Boolean
+        If QBId > 0 Then
+            Dim QBVendors = LocalAPI.GetqbVendors(QBId)
+            Dim VendorId = LocalAPI.Vendor_INSERT(QBVendors("DisplayName"), companyId, QBVendors("CompanyName"), QBVendors("PrimaryEmailAddr"), sCellular:=QBVendors("Mobile"), sPhone:=QBVendors("PrimaryPhone"))
+            LocalAPI.ExecuteNonQuery($"update Vendors set [qbVendorsId] = {QBId} where Id = " & VendorId)
+            Return True
+        End If
+    End Function
+
+
     Public Shared Function GetQBCompany(comapyId As String) As CompanyInfo
         Try
             Dim serviceContext = qbAPI.GetServiceContext(comapyId)

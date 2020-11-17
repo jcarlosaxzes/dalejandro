@@ -225,8 +225,6 @@ Public Class client_sync_qb
         RadGridEmployees.Rebind()
     End Sub
 
-
-
     Private Sub btnBulkLinkEmployees_Click(sender As Object, e As EventArgs) Handles btnBulkLinkEmployees.Click
         Dim nRecs As Integer
         Try
@@ -234,9 +232,8 @@ Public Class client_sync_qb
                 For Each dataItem As GridDataItem In RadGridEmployees.SelectedItems
                     If dataItem.Selected Then
                         dataItem.Selected = False
-                        If qbAPI.LinkCustomer(lblCompanyId.Text, Val(dataItem("Id").Text), Val(dataItem("QBId").Text)) Then
-                            nRecs = nRecs + 1
-                        End If
+                        LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = { Val(dataItem("QBId").Text)} where Id = " & Val(dataItem("Id").Text))
+                        nRecs = nRecs + 1
                     End If
                 Next
                 RadGridEmployees.Rebind()
@@ -250,20 +247,115 @@ Public Class client_sync_qb
         End Try
     End Sub
 
-    Private Sub btnBulkCopyEmployees_Click(sender As Object, e As EventArgs) Handles btnBulkCopyEmployees.Click
+#End Region
+
+
+
+
+
+#Region "Vendors"
+
+    Private Sub btnGetVendors_Click(sender As Object, e As EventArgs) Handles btnGetVendors.Click
+        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+            qbAPI.LoadQBVendors(lblCompanyId.Text)
+            RadGridVendors.DataBind()
+        Else
+            ' New Tab for QB Authentication
+            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+        End If
+    End Sub
+
+    Protected Sub RadGridVendors_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridVendors.ItemCommand
+
+        Select Case e.CommandName
+            Case "Link"
+                Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+                Dim QBId As Integer = ids(0)
+                Dim VendorsId = ids(1)
+                LocalAPI.ExecuteNonQuery($"update Vendors set [qbVendorsId] = {QBId} where Id = " & VendorsId)
+                RadGridVendors.Rebind()
+                RadGridLinkedVendors.Rebind()
+
+            Case "CreateNew"
+                Dim QBId As Integer = e.CommandArgument
+                qbAPI.CopyVendor(lblCompanyId.Text, QBId)
+                RadGridVendors.Rebind()
+                RadGridLinkedVendors.Rebind()
+
+            Case "Search"
+                lblSelectVendors.Text = e.CommandArgument
+                RadToolTipSearchVendors.Visible = True
+                RadToolTipSearchVendors.Show()
+        End Select
+    End Sub
+
+
+    Protected Sub RadGridSearhcVendors_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridSearhcVendors.ItemCommand
+
+        Select Case e.CommandName
+            Case "Link"
+                Dim QBId As Integer = lblSelectVendors.Text
+                Dim VendorsId = e.CommandArgument
+                LocalAPI.ExecuteNonQuery($"update Vendors set [qbVendorsId] = {QBId} where Id = " & VendorsId)
+                RadGridVendors.Rebind()
+                RadGridLinkedVendors.Rebind()
+
+        End Select
+    End Sub
+
+    Protected Sub RadGridLinkedVendors_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridLinkedVendors.ItemCommand
+
+        Select Case e.CommandName
+            Case "UnLink"
+                Dim VendorsId As Integer = e.CommandArgument
+                LocalAPI.ExecuteNonQuery($"update Vendors set [qbVendorsId] = 0 where Id = " & VendorsId)
+                RadGridVendors.Rebind()
+                RadGridLinkedVendors.Rebind()
+        End Select
+    End Sub
+
+    Protected Sub btnFindVendors_Click(sender As Object, e As EventArgs) Handles btnFindVendors.Click
+        RadToolTipSearchVendors.Visible = True
+        RadToolTipSearchVendors.Show()
+        RadGridVendors.Rebind()
+    End Sub
+
+
+    Private Sub btnBulkLinkVendors_Click(sender As Object, e As EventArgs) Handles btnBulkLinkVendors.Click
         Dim nRecs As Integer
         Try
-            If RadGridEmployees.SelectedItems.Count > 0 Then
-                For Each dataItem As GridDataItem In RadGridEmployees.SelectedItems
+            If RadGridVendors.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGridVendors.SelectedItems
                     If dataItem.Selected Then
                         dataItem.Selected = False
-                        If qbAPI.CopyCustomer(lblCompanyId.Text, Val(dataItem("QBId").Text)) Then
-                            nRecs = nRecs + 1
-                        End If
+                        LocalAPI.ExecuteNonQuery($"update Vendors set [qbVendorsId] = {Val(dataItem("QBId").Text)} where Id = " & Val(dataItem("Id").Text))
+                        nRecs = nRecs + 1
                     End If
                 Next
-                RadGridEmployees.Rebind()
-                RadGridLinkedEmployees.Rebind()
+                RadGridVendors.Rebind()
+                RadGridLinkedVendors.Rebind()
+                Master.ErrorMessage(nRecs & " Records Linked")
+            Else
+                Master.ErrorMessage("Select (Mark) Records to Link")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnBulkCopyVendors_Click(sender As Object, e As EventArgs) Handles btnBulkCopyVendors.Click
+        Dim nRecs As Integer
+        Try
+            If RadGridVendors.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGridVendors.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        qbAPI.CopyVendor(lblCompanyId.Text, Val(dataItem("QBId").Text))
+                        nRecs = nRecs + 1
+                    End If
+                Next
+                RadGridVendors.Rebind()
+                RadGridLinkedVendors.Rebind()
                 Master.ErrorMessage(nRecs & " Records Copied")
             Else
                 Master.ErrorMessage("Select (Mark) Records to Copy")

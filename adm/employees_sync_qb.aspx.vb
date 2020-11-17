@@ -30,6 +30,17 @@ Public Class employees_sync_qb
 
         RadWindowManager1.EnableViewState = False
     End Sub
+
+
+    Private Sub btnConnectToQuickBooks_Click(sender As Object, e As EventArgs) Handles btnConnectToQuickBooks.Click
+        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+    End Sub
+
+    Private Sub btnDisconnectFromQuickBooks_Click(sender As Object, e As EventArgs) Handles btnDisconnectFromQuickBooks.Click
+        Response.Redirect("~/adm/qb_disconnect")
+    End Sub
+
+
     Private Sub btnGetVendors_Click(sender As Object, e As EventArgs) Handles btnGetVendors.Click
         If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
             qbAPI.LoadQBVendors(lblCompanyId.Text)
@@ -90,15 +101,8 @@ Public Class employees_sync_qb
         RadGridVendors.Rebind()
     End Sub
 
-    Private Sub btnConnectToQuickBooks_Click(sender As Object, e As EventArgs) Handles btnConnectToQuickBooks.Click
-        Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
-    End Sub
 
-    Private Sub btnDisconnectFromQuickBooks_Click(sender As Object, e As EventArgs) Handles btnDisconnectFromQuickBooks.Click
-        Response.Redirect("~/adm/qb_disconnect")
-    End Sub
-
-    Private Sub btnBulkLink_Click(sender As Object, e As EventArgs) Handles btnBulkLinkVendors.Click
+    Private Sub btnBulkLinkVendors_Click(sender As Object, e As EventArgs) Handles btnBulkLinkVendors.Click
         Dim nRecs As Integer
         Try
             If RadGridVendors.SelectedItems.Count > 0 Then
@@ -121,7 +125,7 @@ Public Class employees_sync_qb
         End Try
     End Sub
 
-    Private Sub btnBulkCopy_Click(sender As Object, e As EventArgs) Handles btnBulkCopyVendors.Click
+    Private Sub btnBulkCopyVendors_Click(sender As Object, e As EventArgs) Handles btnBulkCopyVendors.Click
         Dim nRecs As Integer
         Try
             If RadGridVendors.SelectedItems.Count > 0 Then
