@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    
+
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadScheduler1">
@@ -16,23 +16,28 @@
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipCRM" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting >
+            <telerik:AjaxSetting>
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipAppointment" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
 
-  <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
+    <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
         <script type="text/javascript">
             function RedirectPage(url) {
                 window.location = url;
             }
         </script>
     </telerik:RadCodeBlock>
-    
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
+
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false">
     </telerik:RadAjaxLoadingPanel>
 
     <div class="pasconcept-bar noprint">
@@ -79,7 +84,7 @@
                                 </telerik:RadComboBox>
 
                     </td>
-                    <td style="width: 150px; text-align:right">
+                    <td style="width: 150px; text-align: right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -109,7 +114,7 @@
             FirstDayOfWeek="Monday"
             LastDayOfWeek="Sunday"
             StartInsertingInAdvancedForm="False"
-            StartEditingInAdvancedForm ="False"
+            StartEditingInAdvancedForm="False"
             CustomAttributeNames="Location"
             OnFormCreating="RadScheduler1_FormCreating">
             <ResourceTypes>
@@ -262,7 +267,7 @@
             </span>
         </h2>
         <table class="table-sm" style="width: 600px">
-           <%-- <tr>
+            <%-- <tr>
                 <td>
                     <telerik:RadComboBox ID="RadComboBox1" runat="server" DataSourceID="SqlDataSourceType" ZIndex="50001"
                         DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AppendDataBoundItems="true">
@@ -324,7 +329,7 @@
         </table>
     </telerik:RadToolTip>
 
-    
+
     <asp:Label runat="server" ID="AppointmentsCount" Font-Size="Small"></asp:Label>
 
 
@@ -438,7 +443,7 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
 
-    
+
 
 </asp:Content>
 

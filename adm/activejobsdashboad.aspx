@@ -1,8 +1,29 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="activejobsdashboad.aspx.vb" Inherits="pasconcept20.activejobsdashboad" %>
+﻿<%@ Page Title="Time Activity" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="activejobsdashboad.aspx.vb" Inherits="pasconcept20.activejobsdashboad" %>
 
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadListView1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadListView1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadListView1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="cboEmployee">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadListView1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
+
     <style>
         .panel-heading {
             padding: 10px 15px;
@@ -53,25 +74,27 @@
             <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" MarkFirstMatch="True" ToolTip="Select active Employye"
                 Width="300px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AutoPostBack="true">
             </telerik:RadComboBox>
-            
-            <span style="padding-right:150px">
-            <telerik:RadComboBox ID="cboJobs" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceActiveJob" AutoPostBack="true"
-                DataTextField="Code" DataValueField="Id"
-                Width="400px" MarkFirstMatch="True" Filter="Contains" Height="400px">
-                <Items>
-                    <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Other Active Jobs...)" Value="-1" />
-                </Items>
-            </telerik:RadComboBox>
-            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
+
+            <span style="padding-right: 150px">
+                <telerik:RadComboBox ID="cboJobs" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceActiveJob" AutoPostBack="true"
+                    DataTextField="Code" DataValueField="Id"
+                    Width="400px" MarkFirstMatch="True" Filter="Contains" Height="400px">
+                    <Items>
+                        <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Other Active Jobs...)" Value="-1" />
+                    </Items>
+                </telerik:RadComboBox>
+                <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-info btn" UseSubmitBehavior="false">
                     <i class="fas fa-plus"></i> Job to Employee
             </asp:LinkButton>
             </span>
-            
+
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
+           
             </button>
             <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseChart" aria-expanded="false" aria-controls="collapseChart" title="Show/Hide Chart panel">
                 <i class="fas fa-chart-bar"></i>&nbsp;Chart
+           
             </button>
 
             <asp:LinkButton ID="btnNewMiscellaneousTime" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Non-Productive Time">
@@ -279,6 +302,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage9")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage9") %>%;'>
                                                     <%# Eval("Hours9")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -287,6 +311,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage8")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage8") %>%;'>
                                                     <%# Eval("Hours8")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -295,6 +320,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage7")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage7") %>%;'>
                                                     <%# Eval("Hours7")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -303,6 +329,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage6")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage6") %>%;'>
                                                     <%# Eval("Hours6")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -311,6 +338,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage5")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage5") %>%;'>
                                                     <%# Eval("Hours5")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -319,6 +347,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage4")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage4") %>%;'>
                                                     <%# Eval("Hours4")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -327,6 +356,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage3")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage3") %>%;'>
                                                     <%# Eval("Hours3")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -335,6 +365,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage2")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage2") %>%;'>
                                                     <%# Eval("Hours2")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -343,6 +374,7 @@
                                                 <div class="progress-bar" role="progressbar" aria-valuenow='<%# Eval("HoursPercentage1")  %>' aria-valuemin="0" aria-valuemax="100"
                                                     style='width: <%# Eval("HoursPercentage1") %>%;'>
                                                     <%# Eval("Hours1")%> Hrs
+                                               
                                                 </div>
                                             </div>
                                         </td>
@@ -447,7 +479,8 @@
     <div>
         You have submitted <strong>
             <asp:Label ID="lblTotalWeekHours" Text="0" runat="server"></asp:Label></strong> hours this week. Remaining hours: 
-                                <asp:Label ID="lblRemaining" Text="0" Font-Bold="true" runat="server"></asp:Label>
+                               
+        <asp:Label ID="lblRemaining" Text="0" Font-Bold="true" runat="server"></asp:Label>
     </div>
 
     <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"

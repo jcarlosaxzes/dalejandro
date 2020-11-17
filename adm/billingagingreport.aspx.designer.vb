@@ -12,7 +12,25 @@ Option Explicit On
 
 
 Partial Public Class billingagingreport
-    
+
+    '''<summary>
+    '''RadAjaxManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
+
+    '''<summary>
+    '''RadAjaxLoadingPanel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+
     '''<summary>
     '''btnExport control.
     '''</summary>
@@ -21,7 +39,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''cboClients control.
     '''</summary>
@@ -30,7 +48,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboDepartment control.
     '''</summary>
@@ -39,7 +57,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboDepartment As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''btnRefresh control.
     '''</summary>
@@ -48,7 +66,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadGrid1 control.
     '''</summary>
@@ -57,7 +75,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -66,7 +84,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceClients control.
     '''</summary>
@@ -75,7 +93,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClients As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDepartments control.
     '''</summary>
@@ -84,7 +102,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -93,7 +111,7 @@ Partial Public Class billingagingreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -102,7 +120,7 @@ Partial Public Class billingagingreport
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

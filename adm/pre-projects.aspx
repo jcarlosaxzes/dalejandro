@@ -17,7 +17,12 @@
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
-        </AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="btnFind">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+       </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 

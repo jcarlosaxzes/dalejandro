@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <%--<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
                 <UpdatedControls>
@@ -16,7 +16,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />--%>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
     <style>
         .RadGrid td {
             word-wrap: break-word;

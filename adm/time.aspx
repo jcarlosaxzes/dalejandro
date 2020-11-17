@@ -3,6 +3,25 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
+        <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadGrid1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid2" LoadingPanelID="RadAjaxLoadingPanel1"/>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid2" LoadingPanelID="RadAjaxLoadingPanel1"/>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
+
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
             function PrintReport(sender, args) {
@@ -113,6 +132,8 @@
     </div>
     <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
+            
+            <%--Productive Time--%>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Productive Time" StepType="Step">
                 <asp:Panel ID="PanelAssignedEmployees" runat="server" class="noprint">
                     <asp:Label ID="lblPanelAssignedEmployees" runat="server" Text="Job's Assigned Employees"></asp:Label>
@@ -318,6 +339,8 @@
                     </telerik:RadGrid>
                 </div>
             </telerik:RadWizardStep>
+
+            <%--Non-Productive Time--%>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Non-Productive Time" StepType="Step">
                 <telerik:RadGrid ID="RadGrid2" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSource2" PageSize="50" AllowPaging="true"

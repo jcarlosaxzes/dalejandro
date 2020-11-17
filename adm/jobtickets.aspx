@@ -44,7 +44,7 @@
                                 </telerik:RadDropDownList>
 
                             </td>
-                            <td style="text-align: right; width: 120px"></td>
+                            <td style=" width: 150px"></td>
 
                         </tr>
                         <tr>

@@ -19,7 +19,7 @@
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+            <telerik:AjaxSetting AjaxControlID="btnFind">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1"></telerik:AjaxUpdatedControl>
@@ -98,7 +98,7 @@
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" GridLines="None" AllowPaging="True"
-            CellSpacing="0" AllowSorting="True" PageSize="25" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+            CellSpacing="0" AllowSorting="True" PageSize="15" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" CommandItemDisplay="None" ShowFooter="True" HeaderStyle-Font-Size="Small">
                 <PagerStyle Mode="Slider" AlwaysVisible="false" />
                 <Columns>

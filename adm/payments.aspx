@@ -3,6 +3,25 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadGridPayments">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPayments" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadToolTipEditPayment" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPayments" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
+
+
+
     <script type="text/javascript">
         function onClientUploadFailed(sender, eventArgs) {
             alert(eventArgs.get_message())
@@ -294,7 +313,7 @@
                             MaxFileSize="10145728"
                             DropZones=".uploadfiles-canvas">
                         </telerik:RadCloudUpload>
-                        <p style="text-align:center;vertical-align:middle;padding-top:100px;font-size:36px">Upload your files</p>
+                        <p style="text-align: center; vertical-align: middle; padding-top: 100px; font-size: 36px">Upload your files</p>
                         <p style="text-align: center; margin: 0">
                             <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
                         </p>
