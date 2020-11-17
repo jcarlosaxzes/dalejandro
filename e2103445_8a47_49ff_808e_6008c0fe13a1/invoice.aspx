@@ -41,7 +41,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="uxLoadingPanel" runat="server"></telerik:RadAjaxLoadingPanel>
+    <telerik:RadAjaxLoadingPanel ID="uxLoadingPanel" runat="server" EnableEmbeddedSkins="false"></telerik:RadAjaxLoadingPanel>
     <%-- Modals and the like --%>
     <div class="modal fade" id="modal-card">
         <div class="modal-dialog" role="document">
@@ -220,7 +220,7 @@
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridNumericColumn DataField="Amount" HeaderText="Total Fee" SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridNumericColumn DataField="AmountPrev" HeaderText="Amount Previous Invoiced" SortExpression="AmountPrev" UniqueName="AmountPrev" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
+                                                <telerik:GridNumericColumn DataField="AmountPrev" HeaderText="Amount Previously Invoiced" SortExpression="AmountPrev" UniqueName="AmountPrev" HeaderStyle-Width="150px" NumericType="Currency" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridNumericColumn>
                                                 <telerik:GridTemplateColumn DataField="Progress" HeaderText="Percent Complete<br/>To Date" SortExpression="Progress" UniqueName="Progress" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>

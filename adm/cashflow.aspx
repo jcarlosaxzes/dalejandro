@@ -4,18 +4,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
-            <telerik:AjaxSetting AjaxControlID="RadGridMonthly">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridMonthly" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly" />
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboYear">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridMonthly" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartMonthly" />
-                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChartYearly" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadHtmlChart1"  LoadingPanelID="RadAjaxLoadingPanel1"/>
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>

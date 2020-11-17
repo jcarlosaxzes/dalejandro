@@ -2143,7 +2143,7 @@
     <Content Include="Content\pasconcept.css" />
     <Content Include="Content\pasconcept.min.css" />
     <Content Include="Content\pasconceptSkins\Ajax.pasconceptLoading.css" />
-    <Content Include="Content\pasconceptSkins\ajaximages\Logo-Animation.gif" />
+    <Content Include="Content\pasconceptSkins\ajaximages\Logo-Animation150.gif" />
     <Content Include="Content\print-page.css" />
     <Content Include="Content\sing-theme\application-ie9-part2.css" />
     <Content Include="Content\sing-theme\application.css" />
@@ -4994,6 +4994,7 @@
       <Name>PASconcept.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -5030,7 +5031,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

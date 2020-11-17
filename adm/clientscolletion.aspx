@@ -3,6 +3,21 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="RadGrid1">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="btnFind">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
 
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Clients Colletion</span>
@@ -10,6 +25,7 @@
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
+           
             </button>
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Record">
                                     Add Client to Collection
@@ -79,7 +95,7 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" UniqueName="Status" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
-                            <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetCollectionStatusLabelCSS(Eval("Status")) %>'> <%# Eval("Status") %></div>
+                            <div style="font-size: 12px; width: 100%" class='<%# LocalAPI.GetCollectionStatusLabelCSS(Eval("Status")) %>'><%# Eval("Status") %></div>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -91,7 +107,8 @@
                                         <i class="far fa-envelope"></i>
                                 </asp:LinkButton>
                                 &nbsp;
-                                        <asp:LinkButton runat="server" ID="btnClose" CommandName="Close" CommandArgument='<%# Eval("Id") %>' ToolTip="Close/Re-Open Expedient">
+                                       
+                                <asp:LinkButton runat="server" ID="btnClose" CommandName="Close" CommandArgument='<%# Eval("Id") %>' ToolTip="Close/Re-Open Expedient">
                                         <i class="fas fa-folder-minus"></i>
                                         </asp:LinkButton>
                             </div>

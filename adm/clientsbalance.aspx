@@ -78,7 +78,7 @@
             AllowSorting="True" AllowPaging="True" PageSize="50" Skin="Bootstrap"
             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
             HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Right"
-            CellSpacing="0" AutoGenerateColumns="False" Height="1000px">
+            CellSpacing="0" AutoGenerateColumns="False" Height="850px">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>

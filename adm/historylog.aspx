@@ -55,7 +55,7 @@
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
-            Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowSorting="True" AllowPaging="True" PageSize="100" Height="1200px">
+            Width="100%" AutoGenerateColumns="False" CellSpacing="0" AllowSorting="True" AllowPaging="True" PageSize="100" Height="850px">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
             </ClientSettings>
