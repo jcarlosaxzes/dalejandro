@@ -257,6 +257,15 @@ Partial Public Class employeenewtime
     Protected WithEvents SqlDataSourceEmployeeDailyTimeWorked As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''RadDatePickerCalendar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerCalendar As Global.Telerik.Web.UI.RadDatePicker
+
+    '''<summary>
     '''lblEmployeeId control.
     '''</summary>
     '''<remarks>

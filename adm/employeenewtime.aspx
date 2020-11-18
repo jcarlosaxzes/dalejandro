@@ -98,7 +98,7 @@
                         <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td style="text-align: right; width: 250px">Proposal Task:
-                    </td>
+                                </td>
                                 <td style="text-align: left">
                                     <%--                        <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="90%" Sort="Descending"
                             DataTextField="Description" DataValueField="Id" CausesValidation="false">
@@ -205,8 +205,8 @@
                     FirstDayOfWeek="Monday"
                     LastDayOfWeek="Sunday"
                     StartInsertingInAdvancedForm="False"
-                    StartEditingInAdvancedForm="False" 
-                    SelectedView="MonthView" 
+                    StartEditingInAdvancedForm="False"
+                    SelectedView="MonthView"
                     ShowFooter="false" EnableDescriptionField="true">
                     <DayView UserSelectable="false" />
                     <WeekView UserSelectable="True" ReadOnly="true" />
@@ -352,12 +352,13 @@
     <asp:SqlDataSource ID="SqlDataSourceEmployeeDailyTimeWorked" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="EmployeeDailyTimeWorked_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="RadDatePicker1" Name="DateEntry" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="RadDatePickerCalendar" Name="DateEntry" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="EmployeeId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
 
-    
+    <telerik:RadDatePicker ID="RadDatePickerCalendar" runat="server" DateFormat="MM/dd/yyyy" Visible="false">
+    </telerik:RadDatePicker>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblLogedEmployeeId" runat="server" Visible="False"></asp:Label>
