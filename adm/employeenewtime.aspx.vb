@@ -62,6 +62,7 @@ Public Class employeenewtime
             txtTimeSel.Text = DefaultValuesObject("Hours")
 
             RadDatePicker1.DbSelectedDate = DefaultValuesObject("DateOfWork")
+            RefreshCalendar(RadDatePicker1.DbSelectedDate)
 
             If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                 ' Programmers/Computer/IT
@@ -285,6 +286,14 @@ Public Class employeenewtime
                 Response.Redirect("~/adm/default.aspx")
         End Select
 
+    End Sub
+    Private Sub RefreshCalendar(Date1 As DateTime)
+        RadDatePickerCalendar.DbSelectedDate = Date1.Date
+        'SqlDataSourceEmployeeDailyTimeWorked.DataBind()
+        RadScheduler1.DataBind()
+    End Sub
+    Private Sub RadScheduler1_NavigationCommand(sender As Object, e As SchedulerNavigationCommandEventArgs) Handles RadScheduler1.NavigationCommand
+        RefreshCalendar(e.SelectedDate)
     End Sub
 End Class
 

@@ -217,7 +217,7 @@
     </div>
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceProp" AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True"
-            PageSize="50" AllowPaging="true"
+            PageSize="50" AllowPaging="true" 
             Height="850px" RenderMode="Lightweight"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <ClientSettings>
@@ -329,7 +329,7 @@
                         HeaderText="Date" SortExpression="Date" UniqueName="Date"
                         ItemStyle-HorizontalAlign="Center" AllowFiltering="False" HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Project Name - Client"
+                    <telerik:GridTemplateColumn DataField="ProjectName" HeaderText="Project Name - Client" HeaderStyle-Width="300px"
                         SortExpression="ProjectName" UniqueName="ProjectName">
                         <ItemTemplate>
                             <asp:HyperLink ID="hlkLocation" runat="server" NavigateUrl='<%# LocalAPI.urlProjectLocationGmap(Eval("ProjectLocation"))%>'
@@ -437,7 +437,7 @@
                                         </span>
                                     </td>--%>
                                     <td style="text-align:right;width: 60px">
-                                        <spa style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></spa>
+                                        <span style="font-size: x-small" title="Emitted Date"><%# Eval("EmailDate", "{0:d}") %></span>
                                     </td>
                                     <td style="text-align:center;width: 30px">
                                         <span title="Number of times Sent to Client" class="badge badge-pill badge-secondary" style='<%# IIf(Eval("Emitted")=0,"display:none;vertical-align:middle","display:normal;vertical-align:middle")%>'>
