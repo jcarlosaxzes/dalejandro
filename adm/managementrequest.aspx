@@ -86,7 +86,8 @@
                                         DayEndTime="21:00:00"
                                         EditFormDateFormat="MM/dd/yyyy"
                                         WorkDayEndTime="21:00:00"
-                                        FirstDayOfWeek="Monday">
+                                        FirstDayOfWeek="Monday"
+                                        LastDayOfWeek="Sunday">
                                         <DayView UserSelectable="True" />
                                         <WeekView UserSelectable="True" />
                                         <TimelineView UserSelectable="False" />
@@ -123,15 +124,10 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceAppointments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Appointments_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="AppointmentsForRequest_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:Parameter Name="RangeStart" Type="DateTime" DefaultValue="1900/1/1"></asp:Parameter>
-            <asp:Parameter Name="RangeEnd" Type="DateTime" DefaultValue="2900/1/1"></asp:Parameter>
+            <asp:ControlParameter ControlID="lblRequestId" Name="AppoitmentId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-            <asp:Parameter DefaultValue="-1" Name="employeeId" Type="Int32" />
-            <asp:Parameter DefaultValue="-1" Name="ClientId" Type="Int32" />
-            <asp:Parameter DefaultValue="-1" Name="jobId" Type="Int32" />
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
 

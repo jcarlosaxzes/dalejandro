@@ -12,14 +12,25 @@
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnRefresh">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadListView1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridFooter" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadListView1"  />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboEmployee">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadListView1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridFooter" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadListView1" />
+                    
                 </UpdatedControls>
             </telerik:AjaxSetting>
+            
+            <telerik:AjaxSetting AjaxControlID="btnNewMiscellaneousTime">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadToolTipMiscellaneous" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+
+
         </AjaxSettings>
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />

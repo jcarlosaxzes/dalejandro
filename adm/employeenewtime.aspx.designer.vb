@@ -59,15 +59,6 @@ Partial Public Class employeenewtime
     Protected WithEvents FormViewViewSummary As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
-    '''txtTimeSel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtTimeSel As Global.Telerik.Web.UI.RadNumericTextBox
-
-    '''<summary>
     '''RadDatePicker1 control.
     '''</summary>
     '''<remarks>
@@ -75,6 +66,15 @@ Partial Public Class employeenewtime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePicker1 As Global.Telerik.Web.UI.RadDatePicker
+
+    '''<summary>
+    '''txtTimeSel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTimeSel As Global.Telerik.Web.UI.RadNumericTextBox
 
     '''<summary>
     '''divProposalTask control.
@@ -257,13 +257,13 @@ Partial Public Class employeenewtime
     Protected WithEvents SqlDataSourceEmployeeDailyTimeWorked As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''RadDatePickerCalendar control.
+    '''SqlDataSourceTimeType control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadDatePickerCalendar As Global.Telerik.Web.UI.RadDatePicker
+    Protected WithEvents SqlDataSourceTimeType As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblEmployeeId control.

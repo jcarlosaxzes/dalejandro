@@ -61,8 +61,7 @@ Public Class employeenewtime
 
             txtTimeSel.Text = DefaultValuesObject("Hours")
 
-            RadDatePicker1.DbSelectedDate = DefaultValuesObject("DateOfWork")
-            RefreshCalendar(RadDatePicker1.DbSelectedDate)
+            RefreshCalendar(DefaultValuesObject("DateOfWork"))
 
             If LocalAPI.GetCompanyProperty(lblCompanyId.Text, "Type") = 16 Then
                 ' Programmers/Computer/IT
@@ -288,12 +287,53 @@ Public Class employeenewtime
 
     End Sub
     Private Sub RefreshCalendar(Date1 As DateTime)
-        RadDatePickerCalendar.DbSelectedDate = Date1.Date
-        'SqlDataSourceEmployeeDailyTimeWorked.DataBind()
-        RadScheduler1.DataBind()
+        Try
+            RadDatePicker1.DbSelectedDate = Date1.Date
+            'SqlDataSourceEmployeeDailyTimeWorked.DataBind()
+            RadScheduler1.DataBind()
+        Catch ex As Exception
+        End Try
     End Sub
     Private Sub RadScheduler1_NavigationCommand(sender As Object, e As SchedulerNavigationCommandEventArgs) Handles RadScheduler1.NavigationCommand
-        RefreshCalendar(e.SelectedDate)
+        If e.SelectedDate > CDate("1-1-2000") Then
+            RefreshCalendar(e.SelectedDate)
+        End If
+
+    End Sub
+
+    Private Sub RadScheduler1_AppointmentDataBound(sender As Object, e As SchedulerEventArgs) Handles RadScheduler1.AppointmentDataBound
+        Select Case e.Appointment.Description
+            Case "Productive Time"
+                'e.Appointment.BackColor = System.Drawing.Color.Blue
+                'e.Appointment.BorderColor = System.Drawing.Color.Red
+                'e.Appointment.BorderStyle = BorderStyle.Dotted
+                'e.Appointment.BorderWidth = Unit.Pixel(2)
+                e.Appointment.CssClass = "rsCategoryBlue"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+            Case "Non Productive Time"
+                e.Appointment.CssClass = "rsCategoryPink"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+
+            Case "Holiday"
+                e.Appointment.CssClass = "rsCategoryGreen"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+        End Select
+    End Sub
+
+    Private Sub RadScheduler1_FormCreating(sender As Object, e As SchedulerFormCreatingEventArgs) Handles RadScheduler1.FormCreating
+
+        Select Case e.Mode
+            Case SchedulerFormMode.Edit, SchedulerFormMode.Insert
+                RadDatePicker1.DbSelectedDate = e.Appointment.Start
+        End Select
+        e.Cancel = True
+
+        Dim Hours As Double = LocalAPI.GetHoursEmployeeTimeCheckIn(lblEmployeeId.Text, RadDatePicker1.DbSelectedDate)
+        txtTimeSel.Text = IIf(Hours > 8, 1, 8 - Hours)
+        txtTimeSel.Focus()
     End Sub
 End Class
 

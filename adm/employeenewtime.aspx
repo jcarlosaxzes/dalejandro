@@ -74,23 +74,25 @@
                 <div>
                     <table class="table-sm" style="width: 100%">
                         <tr>
-                            <td style="width: 250px; text-align: right">Time Worked (in hours 0.25-24):
+                            <td style="width: 250px; text-align: right">Date of Work:
                             </td>
                             <td>
-                                <telerik:RadNumericTextBox ID="txtTimeSel" runat="server"
+                                <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Width="200px">
+                                </telerik:RadDatePicker>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Time Worked (in hours 0.25-24):
+                            </td>
+                            <td style="text-align: left;">
+
+
+                                 <telerik:RadNumericTextBox ID="txtTimeSel" runat="server"
                                     MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours"
                                     Value="1" Width="200px" MaxValue="24">
                                     <NumberFormat DecimalDigits="2" />
                                     <IncrementSettings Step="1" />
                                 </telerik:RadNumericTextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right">Date of Work:
-                            </td>
-                            <td style="text-align: left;">
-                                <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Width="200px">
-                                </telerik:RadDatePicker>
                             </td>
                         </tr>
                     </table>
@@ -173,7 +175,7 @@
                             <td colspan="2" style="text-align: center">
 
                                 <asp:LinkButton ID="btnInsertTime" runat="server" CssClass="btn btn-info btn-lg" UseSubmitBehavior="false" ValidationGroup="time_insert" Width="200px">
-                                    <i class="fas fa-plus"></i> Time
+                                    Add Time
                                 </asp:LinkButton>
                                 &nbsp;&nbsp;&nbsp;
                                
@@ -192,8 +194,8 @@
                 </div>
             </td>
             <td class="pasconcept-bar" style="vertical-align: top">
-                <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" RenderMode="Lightweight" OverflowBehavior="Auto" Skin="Material" Visible="false"
-                    DataDescriptionField="Description"
+                <telerik:RadScheduler ID="RadScheduler1" runat="server" RenderMode="Lightweight"  OverflowBehavior="Auto" Visible="false"
+                    DataDescriptionField="Description" AllowDelete="false"
                     DataEndField="End"
                     DataKeyField="Id"
                     DataSourceID="SqlDataSourceEmployeeDailyTimeWorked"
@@ -203,18 +205,28 @@
                     EditFormDateFormat="MM/dd/yyyy"
                     Height="600px"
                     FirstDayOfWeek="Monday"
-                    LastDayOfWeek="Sunday"
+                    LastDayOfWeek="Friday"
                     StartInsertingInAdvancedForm="False"
                     StartEditingInAdvancedForm="False"
                     SelectedView="MonthView"
                     ShowFooter="false" EnableDescriptionField="true">
                     <DayView UserSelectable="false" />
-                    <WeekView UserSelectable="True" ReadOnly="true" />
-                    <MonthView UserSelectable="True" MinimumRowHeight="4" ReadOnly="true" />
+                    <WeekView UserSelectable="True" />
+                    <MonthView UserSelectable="True" MinimumRowHeight="4"  />
                     <TimelineView UserSelectable="false" />
                     <MultiDayView UserSelectable="false" />
                     <AgendaView UserSelectable="false" />
                     <Reminders Enabled="false"></Reminders>
+
+                  <%--  <ResourceTypes>
+                        <telerik:ResourceType KeyField="Id" Name="TimeType" TextField="Name" ForeignKeyField="TimeTypeId" DataSourceID="SqlDataSourceTimeType"></telerik:ResourceType>
+                    </ResourceTypes>
+                  
+                    <ResourceStyles>
+                        <telerik:ResourceStyleMapping Type="TimeType" Text="Productive Time" ApplyCssClass="rsCategoryBlue"></telerik:ResourceStyleMapping>
+                        <telerik:ResourceStyleMapping Type="TimeType" Text="Non Productive Time" ApplyCssClass="rsCategoryOrange"></telerik:ResourceStyleMapping>
+                        <telerik:ResourceStyleMapping Type="TimeType" Text="Holiday" ApplyCssClass="rsCategoryGreen"></telerik:ResourceStyleMapping>
+                    </ResourceStyles>--%>
 
                 </telerik:RadScheduler>
             </td>
@@ -352,13 +364,16 @@
     <asp:SqlDataSource ID="SqlDataSourceEmployeeDailyTimeWorked" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="EmployeeDailyTimeWorked_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="RadDatePickerCalendar" Name="DateEntry" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="RadDatePicker1" Name="DateEntry" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="EmployeeId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
 
-    <telerik:RadDatePicker ID="RadDatePickerCalendar" runat="server" DateFormat="MM/dd/yyyy" Visible="false">
-    </telerik:RadDatePicker>
+    
+    <asp:SqlDataSource ID="SqlDataSourceTimeType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id]=0, [Name]='Productive Time' union all SELECT [Id]=1, [Name]='Non Productive Time' union all SELECT [Id]=2, [Name]='Holiday'">
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblLogedEmployeeId" runat="server" Visible="False"></asp:Label>
