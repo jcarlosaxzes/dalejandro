@@ -194,7 +194,7 @@
                 </div>
             </td>
             <td class="pasconcept-bar" style="vertical-align: top">
-                <telerik:RadScheduler ID="RadScheduler1" runat="server" RenderMode="Lightweight"  OverflowBehavior="Auto" Visible="false"
+                <telerik:RadScheduler ID="RadScheduler1" runat="server" RenderMode="Lightweight"  OverflowBehavior="Auto" 
                     DataDescriptionField="Description" AllowDelete="false"
                     DataEndField="End"
                     DataKeyField="Id"
@@ -217,16 +217,6 @@
                     <MultiDayView UserSelectable="false" />
                     <AgendaView UserSelectable="false" />
                     <Reminders Enabled="false"></Reminders>
-
-                  <%--  <ResourceTypes>
-                        <telerik:ResourceType KeyField="Id" Name="TimeType" TextField="Name" ForeignKeyField="TimeTypeId" DataSourceID="SqlDataSourceTimeType"></telerik:ResourceType>
-                    </ResourceTypes>
-                  
-                    <ResourceStyles>
-                        <telerik:ResourceStyleMapping Type="TimeType" Text="Productive Time" ApplyCssClass="rsCategoryBlue"></telerik:ResourceStyleMapping>
-                        <telerik:ResourceStyleMapping Type="TimeType" Text="Non Productive Time" ApplyCssClass="rsCategoryOrange"></telerik:ResourceStyleMapping>
-                        <telerik:ResourceStyleMapping Type="TimeType" Text="Holiday" ApplyCssClass="rsCategoryGreen"></telerik:ResourceStyleMapping>
-                    </ResourceStyles>--%>
 
                 </telerik:RadScheduler>
             </td>
