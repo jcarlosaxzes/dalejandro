@@ -109,7 +109,7 @@
             DataSubjectField="Subject"
             DayEndTime="21:00:00"
             EditFormDateFormat="MM/dd/yyyy"
-            Height="600px"
+            Height="700px"
             WorkDayEndTime="23:59:59"
             FirstDayOfWeek="Monday"
             LastDayOfWeek="Sunday"
@@ -135,7 +135,7 @@
             <AdvancedForm DateFormat="MM/dd/yyyy" Modal="true" Width="800px" EnableCustomAttributeEditing="true" EnableResourceEditing="true" />
             <DayView UserSelectable="True" />
             <WeekView UserSelectable="True" />
-            <MonthView UserSelectable="True" AdaptiveRowHeight="true" />
+            <MonthView UserSelectable="True" MinimumRowHeight="5"/>
             <TimelineView UserSelectable="True" />
             <MultiDayView UserSelectable="True" />
             <AgendaView UserSelectable="True" TimeColumnWidth="150px" DateColumnWidth="150px" ResourceMarkerType="Bar" />

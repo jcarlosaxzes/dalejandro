@@ -8736,6 +8736,9 @@ Public Class LocalAPI
     Public Shared Function GetHourlyWageHistoryLastRecord(ByRef EmployeeId As Integer, ByVal year As Integer) As Integer
         Return GetNumericEscalar(String.Format("SELECT TOP 1 Id FROM [Employee_HourlyWageHistory] where [employeeId]={0} And Year([Date])={1} order by [Date] desc", EmployeeId, year))
     End Function
+    Public Shared Function GetHoursEmployeeTimeCheckIn(ByRef EmployeeId As Integer, ByVal DateEntry As DateTime) As Double
+        Return GetNumericEscalar($"select dbo.EmployeeTimeCheckIn({EmployeeId},'{DateEntry}')")
+    End Function
 
 
     Public Shared Function EmployeeAddUpdatePhoto(Email As String, PhotoURL As String, ContentType As String, sDate As DateTime) As Boolean

@@ -2,11 +2,11 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" DefaultLoadingPanelID="RadAjaxLoadingPanel1">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="cboMulticolumnTask">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="txtName" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="txtName" />
                     <telerik:AjaxUpdatedControl ControlID="txtDescriptionPlus" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="txtTimeSel" />
                     <telerik:AjaxUpdatedControl ControlID="txtRates" />
