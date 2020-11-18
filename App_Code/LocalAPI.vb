@@ -12583,6 +12583,102 @@ Public Class LocalAPI
             Return result
         End Try
     End Function
+
+    Public Shared Function Vendor_INSERT(ByVal sName As String,
+                                        ByVal companyId As Integer,
+                                        Optional ByVal sEmail As String = "",
+                                        Optional ByVal sCompany As String = "",
+                                        Optional ByVal sAddress As String = "",
+                                        Optional ByVal sAddress2 As String = "",
+                                        Optional ByVal sCity As String = "",
+                                        Optional ByVal sState As String = "",
+                                        Optional ByVal sZipCode As String = "",
+                                        Optional ByVal sPhone As String = "",
+                                        Optional ByVal sCellular As String = "",
+                                        Optional ByVal sFax As String = "",
+                                        Optional ByVal sWeb As String = "",
+                                        Optional ByVal sPosition As String = "",
+                                        Optional ByVal sNotes As String = "",
+                                        Optional ByVal Type As Integer = 0,
+                                        Optional ByVal Subtype As Integer = 0,
+                                        Optional ByVal NAICS_code As String = "") As Integer
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Vendor_v20_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Name", sName)
+            cmd.Parameters.AddWithValue("@Position", sPosition)
+            cmd.Parameters.AddWithValue("@Company", sCompany)
+            cmd.Parameters.AddWithValue("@Type", Type)
+            cmd.Parameters.AddWithValue("@Subtype", Subtype)
+            cmd.Parameters.AddWithValue("@Address", sAddress)
+            cmd.Parameters.AddWithValue("@Address2", sAddress2)
+            cmd.Parameters.AddWithValue("@City", sCity)
+            cmd.Parameters.AddWithValue("@State", sState)
+            cmd.Parameters.AddWithValue("@ZipCode", sZipCode)
+            cmd.Parameters.AddWithValue("@Phone", sPhone)
+            cmd.Parameters.AddWithValue("@Cellular", sCellular)
+            cmd.Parameters.AddWithValue("@Fax", sFax)
+            cmd.Parameters.AddWithValue("@Email", sEmail)
+            cmd.Parameters.AddWithValue("@Web", sWeb)
+            cmd.Parameters.AddWithValue("@Notes", sNotes)
+            cmd.Parameters.AddWithValue("@NAICS_code", NAICS_code)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.ExecuteNonQuery()
+
+            Dim clientId As Integer = parOUT_ID.Value
+            cnn1.Close()
+
+            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.NewClient, companyId, sName)
+
+            ' Update Latitude, Longitude
+            LocalAPI.ClientGeolocationUpdate(clientId)
+
+            Return clientId
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function GetqbVendors(QBId As Integer) As Dictionary(Of String, Object)
+
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand("select * from [Vendors_SyncQB] where [QBId] = " & QBId, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            Dim val = reader.GetValue(lp)
+                            If TypeOf val Is DBNull Then
+                                val = ""
+                            End If
+                            result.Add(reader.GetName(lp), val)
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
     Public Shared Function SetqbAccessToken(companyId As Integer, AccessToken As String, AccessTokenExpiresIn As Long) As Boolean
         Try
 

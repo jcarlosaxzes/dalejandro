@@ -193,6 +193,146 @@ Public Class qbAPI
 
     End Sub
 
+    Public Shared Sub LoadQBEmployees(comapyId As String)
+        Dim dt As New DataTable()
+        dt.Columns.Add(New DataColumn("companyId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("QBId", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("DisplayName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("MiddleName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("FamilyName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("PrimaryEmailAddr", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("GivenName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("PrintOnCheckName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Mobile", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("PrimaryPhone", Type.GetType("System.String")))
+
+        Dim PrimaryKeyColumns As DataColumn() = New DataColumn(0) {}
+        PrimaryKeyColumns(0) = dt.Columns("DisplayName")
+        dt.PrimaryKey = PrimaryKeyColumns
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(comapyId)
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim employeeQueryService As QueryService(Of Intuit.Ipp.Data.Employee) = New QueryService(Of Intuit.Ipp.Data.Employee)(serviceContext)
+            Dim Employees = employeeQueryService.ExecuteIdsQuery("Select * From Employee")
+
+            LocalAPI.ExecuteNonQuery("delete [dbo].[Employees_SyncQB] where companyId = " & comapyId)
+
+
+
+            For Each Obj As Intuit.Ipp.Data.Employee In Employees
+
+                Dim row As DataRow = dt.NewRow()
+                row("companyId") = comapyId
+                row("QBId") = Obj.Id
+                row("DisplayName") = Obj.DisplayName
+                row("MiddleName") = Obj.MiddleName
+                row("FamilyName") = Obj.FamilyName
+                row("PrintOnCheckName") = Obj.PrintOnCheckName
+                row("GivenName") = Obj.GivenName
+                row("PrimaryEmailAddr") = Obj.PrimaryEmailAddr?.Address
+                row("Mobile") = Obj.Mobile?.FreeFormNumber
+                row("PrimaryPhone") = Obj.PrimaryPhone?.FreeFormNumber
+                dt.Rows.Add(row)
+
+            Next
+
+
+            'insert into SQL
+
+            Dim objbulk As SqlBulkCopy = New SqlBulkCopy(LocalAPI.GetConnection())
+            objbulk.ColumnMappings.Add("companyId", "companyId")
+            objbulk.ColumnMappings.Add("QBId", "QBId")
+            objbulk.ColumnMappings.Add("DisplayName", "DisplayName")
+            objbulk.ColumnMappings.Add("MiddleName", "MiddleName")
+            objbulk.ColumnMappings.Add("FamilyName", "FamilyName")
+            objbulk.ColumnMappings.Add("PrintOnCheckName", "PrintOnCheckName")
+            objbulk.ColumnMappings.Add("GivenName", "GivenName")
+            objbulk.ColumnMappings.Add("PrimaryEmailAddr", "PrimaryEmailAddr")
+            objbulk.ColumnMappings.Add("Mobile", "Mobile")
+            objbulk.ColumnMappings.Add("PrimaryPhone", "PrimaryPhone")
+
+            objbulk.DestinationTableName = "Employees_SyncQB"
+            objbulk.WriteToServer(dt)
+
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+
+    End Sub
+
+    Public Shared Sub LoadQBVendors(comapyId As String)
+        Dim dt As New DataTable()
+        dt.Columns.Add(New DataColumn("companyId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("QBId", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("DisplayName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("MiddleName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("FamilyName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("PrimaryEmailAddr", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("GivenName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("CompanyName", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Mobile", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("PrimaryPhone", Type.GetType("System.String")))
+
+        Dim PrimaryKeyColumns As DataColumn() = New DataColumn(0) {}
+        PrimaryKeyColumns(0) = dt.Columns("DisplayName")
+        dt.PrimaryKey = PrimaryKeyColumns
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(comapyId)
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim employeeQueryService As QueryService(Of Intuit.Ipp.Data.Vendor) = New QueryService(Of Intuit.Ipp.Data.Vendor)(serviceContext)
+            Dim Vendors = employeeQueryService.ExecuteIdsQuery("Select * From vendor")
+
+            LocalAPI.ExecuteNonQuery("delete Vendors_SyncQB where companyId = " & comapyId)
+
+
+
+            For Each Obj As Intuit.Ipp.Data.Vendor In Vendors
+
+                Dim row As DataRow = dt.NewRow()
+                row("companyId") = comapyId
+                row("QBId") = Obj.Id
+                row("DisplayName") = Obj.DisplayName
+                row("MiddleName") = Obj.MiddleName
+                row("FamilyName") = Obj.FamilyName
+                row("CompanyName") = Obj.CompanyName
+                row("GivenName") = Obj.GivenName
+                row("PrimaryEmailAddr") = Obj.PrimaryEmailAddr?.Address
+                row("Mobile") = Obj.Mobile?.FreeFormNumber
+                row("PrimaryPhone") = Obj.PrimaryPhone?.FreeFormNumber
+                dt.Rows.Add(row)
+
+            Next
+
+
+            'insert into SQL
+
+            Dim objbulk As SqlBulkCopy = New SqlBulkCopy(LocalAPI.GetConnection())
+            objbulk.ColumnMappings.Add("companyId", "companyId")
+            objbulk.ColumnMappings.Add("QBId", "QBId")
+            objbulk.ColumnMappings.Add("DisplayName", "DisplayName")
+            objbulk.ColumnMappings.Add("MiddleName", "MiddleName")
+            objbulk.ColumnMappings.Add("FamilyName", "FamilyName")
+            objbulk.ColumnMappings.Add("GivenName", "GivenName")
+            objbulk.ColumnMappings.Add("CompanyName", "CompanyName")
+            objbulk.ColumnMappings.Add("PrimaryEmailAddr", "PrimaryEmailAddr")
+            objbulk.ColumnMappings.Add("Mobile", "Mobile")
+            objbulk.ColumnMappings.Add("PrimaryPhone", "PrimaryPhone")
+
+            objbulk.DestinationTableName = "Vendors_SyncQB"
+            objbulk.WriteToServer(dt)
+
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+
+    End Sub
+
     Public Shared Function GetCustomer(comapyId As String, CustomerId As String) As Customer
         Try
 
@@ -225,6 +365,16 @@ Public Class qbAPI
             Return LocalAPI.ActualizarClient(ClientId, "qbCustomerId", QBId)
         End If
     End Function
+
+    Public Shared Function CopyVendor(companyId As Integer, QBId As Integer) As Boolean
+        If QBId > 0 Then
+            Dim QBVendors = LocalAPI.GetqbVendors(QBId)
+            Dim VendorId = LocalAPI.Vendor_INSERT(QBVendors("DisplayName"), companyId, QBVendors("CompanyName"), QBVendors("PrimaryEmailAddr"), sCellular:=QBVendors("Mobile"), sPhone:=QBVendors("PrimaryPhone"))
+            LocalAPI.ExecuteNonQuery($"update Vendors set [qbVendorsId] = {QBId} where Id = " & VendorId)
+            Return True
+        End If
+    End Function
+
 
     Public Shared Function GetQBCompany(comapyId As String) As CompanyInfo
         Try

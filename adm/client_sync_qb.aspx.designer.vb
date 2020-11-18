@@ -41,13 +41,22 @@ Partial Public Class client_sync_qb
     Protected WithEvents btnConnectToQuickBooks As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''btnGetCustomers control.
+    '''RadWizardFiles control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnGetCustomers As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents RadWizardFiles As Global.Telerik.Web.UI.RadWizard
+
+    '''<summary>
+    '''RadWizardStepClients control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepClients As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
     '''SyncPanel control.
@@ -57,6 +66,15 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SyncPanel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''btnGetCustomers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGetCustomers As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''btnBulkLink control.
@@ -140,6 +158,213 @@ Partial Public Class client_sync_qb
     Protected WithEvents RadGridSearhcClient As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''RadWizardStepEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepEmployees As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''SyncPanelEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SyncPanelEmployees As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''btnGetEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGetEmployees As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnBulkLinkEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkLinkEmployees As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridEmployees As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''RadGridLinkedEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridLinkedEmployees As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''RadToolTipSearchEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipSearchEmployee As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''pnlFindEMployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFindEMployees As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''txtFindEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtFindEmployees As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''btnFindEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFindEmployee As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridSearhcEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridSearhcEmployee As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''RadWizardStep1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''SyncPanelVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SyncPanelVendors As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''btnGetVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGetVendors As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnBulkLinkVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkLinkVendors As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnBulkCopyVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnBulkCopyVendors As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridVendors As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''RadGridLinkedVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridLinkedVendors As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''RadToolTipSearchVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipSearchVendors As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''pnlFindVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFindVendors As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''txtFindVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtFindVendors As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''btnFindVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnFindVendors As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridSearhcVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridSearhcVendors As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
     '''<remarks>
@@ -176,6 +401,60 @@ Partial Public Class client_sync_qb
     Protected WithEvents SqlDataSourceQBNotLinked As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''SqlDataSourceEmployeesPending control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceEmployeesPending As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceQBLinkedEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceQBLinkedEmployees As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceQBNotLinkedEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceQBNotLinkedEmployees As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceVendorsPending control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceVendorsPending As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceQBLinkedVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceQBLinkedVendors As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceQBNotLinkedVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceQBNotLinkedVendors As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -192,6 +471,24 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblSelectCustomer As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblSelectEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelectEmployee As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblSelectVendors control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelectVendors As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.
