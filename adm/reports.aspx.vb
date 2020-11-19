@@ -106,8 +106,8 @@ Public Class reports
                     boundColumn.HeaderStyle.Width = "100"
 
                 Case Else
-                    'boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Left
-
+                    boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Left
+                    boundColumn.HeaderStyle.Width = "250"
             End Select
 
             ' Hacer No Visible Columna Year

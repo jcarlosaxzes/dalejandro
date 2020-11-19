@@ -143,11 +143,14 @@ Public Class proposaltask
     Private Sub cboMulticolumnTask_SelectedIndexChanged(sender As Object, e As RadMultiColumnComboBoxSelectedIndexChangedEventArgs) Handles cboMulticolumnTask.SelectedIndexChanged
         If cboMulticolumnTask.Value > 0 Then
             Dim taskId As Integer = cboMulticolumnTask.Value
-            txtName.Text = LocalAPI.GetTaskProperty(taskId, "Description")
-            txtDescriptionPlus.Content = LocalAPI.GetTaskProperty(taskId, "DescriptionPlus")
-            txtTimeSel.Text = LocalAPI.GetTaskProperty(taskId, "Hours")
-            txtRates.Text = LocalAPI.GetTaskProperty(taskId, "Rates")
-            cboBillType.SelectedValue = IIf(LocalAPI.GetTaskProperty(taskId, "HourRatesService") = 0, 1, 2)
+            Dim RasksRecordObject = LocalAPI.GetRecord(taskId, "Proposal_tasks_Record_SELECT")
+
+
+            txtName.Text = RasksRecordObject("Description")
+            txtDescriptionPlus.Content = RasksRecordObject("DescriptionPlus")
+            txtTimeSel.Text = RasksRecordObject("Hours")
+            txtRates.Text = RasksRecordObject("Rates")
+            cboBillType.SelectedValue = IIf(RasksRecordObject("HourRatesService") = 0, 1, 2)
         End If
 
     End Sub
