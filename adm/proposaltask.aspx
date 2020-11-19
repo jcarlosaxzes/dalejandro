@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+<%--    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="cboMulticolumnTask">
                 <UpdatedControls>
@@ -16,7 +16,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" ></telerik:RadAjaxLoadingPanel>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" ></telerik:RadAjaxLoadingPanel>--%>
 
 
     <div class="pasconcept-bar">
@@ -280,7 +280,7 @@
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         InsertCommand="PROPOSAL_details_v20_INSERT" InsertCommandType="StoredProcedure"
         UpdateCommand="PROPOSAL_details_v20_UPDATE" UpdateCommandType="StoredProcedure"
-        SelectCommand="SELECT [Id], [taskcode], [Description], [Hours], [Rates], isnull(HourRatesService,0) AS HourRatesService FROM [Proposal_tasks] WHERE (companyId = @companyId) ORDER BY taskcode">
+        SelectCommand="SELECT [Id], [taskcode], [Description], isnull([Hours],0) as [Hours], isnull([Rates],0) as [Rates], isnull(HourRatesService,0) AS HourRatesService FROM [Proposal_tasks] WHERE (companyId = @companyId) ORDER BY taskcode">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="cboPhase" Name="phaseId" PropertyName="SelectedValue" Type="Int32" />

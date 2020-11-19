@@ -16,14 +16,14 @@
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboGroups">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="cboNames" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="cboNames"  />
                     <telerik:AjaxUpdatedControl ControlID="cboDepartment" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="cboTimeFrame">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo"  />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -70,7 +70,7 @@
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
                     <td style="width: 180px">
-                        <telerik:RadComboBox ID="cboTimeFrame" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" AutoPostBack="true" ToolTip="Select Timeframe">
+                        <telerik:RadComboBox ID="cboTimeFrame" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" ToolTip="Select Timeframe">
                             <Items>
                                 <telerik:RadComboBoxItem Text="All Years" Value="1" />
                                 <telerik:RadComboBoxItem Text="Last Year" Value="2" />
@@ -124,7 +124,7 @@
 
     <div>
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" DataSourceID="SqlDataSource1" RenderMode="Lightweight"
-            AllowPaging="True" PageSize="250" Height="1000px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
+            AllowPaging="True" PageSize="250" Height="850px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
             </ClientSettings>

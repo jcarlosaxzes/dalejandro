@@ -194,7 +194,7 @@
                 </div>
             </td>
             <td class="pasconcept-bar" style="vertical-align: top">
-                <telerik:RadScheduler ID="RadScheduler1" runat="server" RenderMode="Lightweight"  OverflowBehavior="Auto" 
+                <telerik:RadScheduler ID="RadScheduler1" runat="server" RenderMode="Lightweight"  OverflowBehavior="Auto" visible="false"
                     DataDescriptionField="Description" AllowDelete="false"
                     DataEndField="End"
                     DataKeyField="Id"
