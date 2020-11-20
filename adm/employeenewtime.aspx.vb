@@ -42,6 +42,8 @@ Public Class employeenewtime
                     Session("employeenewtimebackpage") = ""
                 End If
 
+                RadScheduler1.Visible = (lblCompanyId.Text = 260973 Or lblCompanyId.Text = 99)
+
                 InitDialog()
 
             End If
