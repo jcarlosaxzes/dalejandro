@@ -304,10 +304,6 @@ Public Class employeenewtime
     Private Sub RadScheduler1_AppointmentDataBound(sender As Object, e As SchedulerEventArgs) Handles RadScheduler1.AppointmentDataBound
         Select Case e.Appointment.Description
             Case "Productive Time"
-                'e.Appointment.BackColor = System.Drawing.Color.Blue
-                'e.Appointment.BorderColor = System.Drawing.Color.Red
-                'e.Appointment.BorderStyle = BorderStyle.Dotted
-                'e.Appointment.BorderWidth = Unit.Pixel(2)
                 e.Appointment.CssClass = "rsCategoryBlue"
                 e.Appointment.Font.Size = 10
                 e.Appointment.ForeColor = System.Drawing.Color.White
