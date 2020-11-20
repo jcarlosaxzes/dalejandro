@@ -41,7 +41,19 @@ Partial Public Class Login
 
                 Select Case result
                     Case SignInStatus.Success
-                        Dim companyId = Me._companiesRepository.GetDefaultCompanyId(UserName.Text)
+                        Dim hostName As String = LocalAPI.GetHostAppSite()
+                        Dim hostCompany As Integer = LocalAPI.GetStringEscalar($"Select isnull(companyId,0) As companyId from Company where SubDomain='{hostName}'")
+                        Dim companyId As Integer
+                        If hostCompany > 0 Then
+                            companyId = hostCompany
+                            Session("IsMultiCompany") = 0
+                        Else
+                            companyId = Me._companiesRepository.GetDefaultCompanyId(UserName.Text)
+                            Session("IsMultiCompany") = 1
+                        End If
+
+
+
                         Session("companyId") = companyId
                         If LocalAPI.IAgree(UserName.Text) Then
                             If IsNothing(Request.QueryString("ReturnUrl")) Then
