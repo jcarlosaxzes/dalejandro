@@ -17,7 +17,6 @@ Public Class employeenewtime
                 End If
 
                 lblSelectedJob.Text = Request.QueryString("JobId")
-                lblJobName.Text = LocalAPI.GetJobName(lblSelectedJob.Text)
                 lblEmployeeName.Text = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FullName")
 
                 lblClientId.Text = LocalAPI.GetJobProperty(lblSelectedJob.Text, "Client")
@@ -42,7 +41,7 @@ Public Class employeenewtime
                     Session("employeenewtimebackpage") = ""
                 End If
 
-                RadScheduler1.Visible = (lblCompanyId.Text = 260973 Or lblCompanyId.Text = 99)
+                'RadScheduler1.Visible = (lblCompanyId.Text = 260973 Or lblCompanyId.Text = 99)
 
                 InitDialog()
 
@@ -84,11 +83,11 @@ Public Class employeenewtime
             cboCategory.SelectedValue = DefaultValuesObject("CategoryId")
 
             If divProposalTask.Visible Then
-                'cboTask.DataBind()
-                'cboTask.SelectedValue = DefaultValuesObject("ProposalTaskId")
-                cboMulticolumnTask.DataBind()
-                cboMulticolumnTask.Value = DefaultValuesObject("ProposalTaskId")
-                cboMulticolumnTask.Focus()
+                cboTask.DataBind()
+                cboTask.SelectedValue = DefaultValuesObject("ProposalTaskId")
+                'cboMulticolumnTask.DataBind()
+                'cboMulticolumnTask.Value = DefaultValuesObject("ProposalTaskId")
+                'cboMulticolumnTask.Focus()
             Else
                 txtDescription.Focus()
             End If
@@ -141,10 +140,10 @@ Public Class employeenewtime
     End Sub
     Protected Sub LocalNewInvoice(TimeId As Integer)
         Dim dRate As Double = 0
-        'If Val(cboTask.SelectedValue) > 0 Then
-        'dRate = LocalAPI.GetProposalTaskRate(cboTask.SelectedValue)
-        If Val(cboMulticolumnTask.Value) > 0 Then
-            dRate = LocalAPI.GetProposalTaskRate(cboMulticolumnTask.Value)
+        If Val(cboTask.SelectedValue) > 0 Then
+            dRate = LocalAPI.GetProposalTaskRate(cboTask.SelectedValue)
+            'If Val(cboMulticolumnTask.Value) > 0 Then
+            '    dRate = LocalAPI.GetProposalTaskRate(cboMulticolumnTask.Value)
         Else
             ' Parche para Axzes a $35/Hour
             'If lblCompanyId.Text = 260973 Then
@@ -166,10 +165,10 @@ Public Class employeenewtime
             Dim taskId As Integer = 0
             Dim JobTicketId As Integer = 0
             If divProposalTask.Visible Then
-                'If cboTask.SelectedValue > 0 Then
-                '    taskId = cboTask.SelectedValue
-                If cboMulticolumnTask.Value > 0 Then
-                    taskId = cboMulticolumnTask.Value
+                If cboTask.SelectedValue > 0 Then
+                    taskId = cboTask.SelectedValue
+                    'If cboMulticolumnTask.Value > 0 Then
+                    '    taskId = cboMulticolumnTask.Value
 
                 End If
             End If
@@ -207,10 +206,6 @@ Public Class employeenewtime
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         BackPage()
     End Sub
-    Private Sub btnTotals_Click(sender As Object, e As EventArgs) Handles btnTotals.Click
-        FormViewViewSummary.Visible = Not FormViewViewSummary.Visible
-        lblJobName.Visible = Not FormViewViewSummary.Visible
-    End Sub
 
     Private Sub BotonesVisibles()
         ' Botones Time & TimeAndInvoices Visible????
@@ -237,9 +232,9 @@ Public Class employeenewtime
                         btnInsertTimeAndInvoice.Visible = True
                     Case Else
                         If divProposalTask.Visible Then
-                            If cboMulticolumnTask.Value > 0 Then
+                            If cboTask.SelectedValue > 0 Then
                                 ' Case 3: FROM Proposal_detail BillType
-                                type = LocalAPI.GetProposalDetailProperty(cboMulticolumnTask.Value, "BillType")
+                                type = LocalAPI.GetProposalDetailProperty(cboTask.SelectedValue, "BillType")
                                 Select Case type
                                     Case 1  ' Solo Time
                                         btnInsertTimeAndInvoice.Visible = False
@@ -258,9 +253,9 @@ Public Class employeenewtime
         End Select
 
     End Sub
-    Private Sub cboMulticolumnTask_SelectedIndexChanged(sender As Object, e As RadMultiColumnComboBoxSelectedIndexChangedEventArgs) Handles cboMulticolumnTask.SelectedIndexChanged
-        BotonesVisibles()
-    End Sub
+    'Private Sub cboMulticolumnTask_SelectedIndexChanged(sender As Object, e As RadMultiColumnComboBoxSelectedIndexChangedEventArgs) Handles cboMulticolumnTask.SelectedIndexChanged
+    '    BotonesVisibles()
+    'End Sub
 
     Private Sub BackPage()
         Dim sUrl As String
@@ -300,7 +295,17 @@ Public Class employeenewtime
         If e.SelectedDate > CDate("1-1-2000") Then
             RefreshCalendar(e.SelectedDate)
         End If
+        Select Case e.Command
+            Case SchedulerNavigationCommand.SwitchToDayView
+                e.Cancel = True
+        End Select
+    End Sub
 
+    Private Sub RadScheduler1_NavigationComplete(sender As Object, e As SchedulerNavigationCompleteEventArgs) Handles RadScheduler1.NavigationComplete
+        Select Case e.Command
+            Case SchedulerNavigationCommand.SwitchToSelectedDay And RadScheduler1.SelectedView = SchedulerViewType.DayView
+                RadScheduler1.SelectedView = SchedulerViewType.MonthView
+        End Select
     End Sub
 
     Private Sub RadScheduler1_AppointmentDataBound(sender As Object, e As SchedulerEventArgs) Handles RadScheduler1.AppointmentDataBound
@@ -333,5 +338,10 @@ Public Class employeenewtime
         txtTimeSel.Text = IIf(Hours > 8, 1, 8 - Hours)
         txtTimeSel.Focus()
     End Sub
+
+    Private Sub cboTask_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboTask.SelectedIndexChanged
+        BotonesVisibles()
+    End Sub
+
 End Class
 
