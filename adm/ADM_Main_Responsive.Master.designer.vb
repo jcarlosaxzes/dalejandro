@@ -68,13 +68,13 @@ Partial Public Class ADM_Main_Responsive
     Protected WithEvents RadNavigation1 As Global.Telerik.Web.UI.RadNavigation
 
     '''<summary>
-    '''lblCompanyName control.
+    '''btnCompanyName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblCompanyName As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnCompanyName As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''RadNavigation2 control.

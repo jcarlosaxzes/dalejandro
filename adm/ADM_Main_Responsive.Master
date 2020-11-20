@@ -438,7 +438,7 @@
                             </telerik:RadNavigation>
                         </td>
                         <td style="text-align: right">
-                            <asp:LinkButton ID="lblCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="TopRightMenuClass" CausesValidation="false">
+                            <asp:LinkButton ID="btnCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server" UseSubmitBehavior="false" Font-Size="16px" CssClass="TopRightMenuClass" CausesValidation="false">
                             </asp:LinkButton>
                         </td>
                         <td style="text-align: right; color: inherit;">
@@ -466,7 +466,7 @@
                                                     </a>
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode ID="SwitchCompany">
+                                            <telerik:NavigationNode ID="SwitchCompany" Visible='<%# Session("IsMultiCompany") = 1 %>'>
                                                 <NodeTemplate>
                                                     <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="TopRightMenuClass">
                                                             Switch Company
