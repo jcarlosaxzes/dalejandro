@@ -391,6 +391,9 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/Transmittals" Text="Transmittals"
                                                 Visible='<%# EmployeePermission("Deny_TransmittalList") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
                                             </telerik:NavigationNode>
+                                            <telerik:NavigationNode NavigateUrl="~/adm/revisions" Text="Revisions/Permits Tracker"
+                                                Visible='<%# EmployeePermission("Deny_AnalyticReports") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
+                                            </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
 
@@ -438,7 +441,7 @@
                             </telerik:RadNavigation>
                         </td>
                         <td style="text-align: right">
-                            <asp:LinkButton ID="btnCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server" UseSubmitBehavior="false" Font-Size="16px" CssClass="TopRightMenuClass" CausesValidation="false">
+                            <asp:LinkButton ID="btnCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server"  OnClick="btnSwitchCompany_Click" UseSubmitBehavior="false" Font-Size="16px" CssClass="TopRightMenuClass" CausesValidation="false">
                             </asp:LinkButton>
                         </td>
                         <td style="text-align: right; color: inherit;">

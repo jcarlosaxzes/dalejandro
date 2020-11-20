@@ -198,33 +198,32 @@ Public Class ADM_Main_Responsive
 
     End Function
     Public Sub btnSwitchCompany_Click(sender As Object, e As EventArgs)
-        RadToolTipSwitchCompany.Visible = True
-        RadToolTipSwitchCompany.Show()
-    End Sub
-
-    Private Sub btnSwitchCompanyConfirm_Click(sender As Object, e As EventArgs) Handles btnSwitchCompanyConfirm.Click, btnCompanyName.Click
-        ' Clear session Permissions
         If Session("IsMultiCompany") = 1 Then
-
-            Session.Contents.RemoveAll()
-
-            Session("companyId") = cboCompany.SelectedValue
-            lblCompanyId.Text = cboCompany.SelectedValue
-            Companyp = cboCompany.SelectedValue
-
-            If chkSetAsDefault.Checked Then
-                SqlDataSourceCompany.Update()
-            End If
-            LocalAPI.SetLastCompanyId(lblEmployeeId.Text, cboCompany.SelectedValue)
-
-            Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
-            btnCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
-
-            ' Navegate Default Page
-            Response.RedirectPermanent("~/adm/Start.aspx")
+            RadToolTipSwitchCompany.Visible = True
+            RadToolTipSwitchCompany.Show()
         Else
             btnCompanyName.Enabled = False
         End If
+    End Sub
+
+    Private Sub btnSwitchCompanyConfirm_Click(sender As Object, e As EventArgs) Handles btnSwitchCompanyConfirm.Click
+        ' Clear session Permissions
+        Session.Contents.RemoveAll()
+        Session("IsMultiCompany") = 1   ' En Login ya es multicompany
+        Session("companyId") = cboCompany.SelectedValue
+        lblCompanyId.Text = cboCompany.SelectedValue
+        Companyp = cboCompany.SelectedValue
+
+        If chkSetAsDefault.Checked Then
+            SqlDataSourceCompany.Update()
+        End If
+        LocalAPI.SetLastCompanyId(lblEmployeeId.Text, cboCompany.SelectedValue)
+
+        Session("Version") = LocalAPI.sys_VersionId(Session("companyId"))
+        btnCompanyName.Text = LocalAPI.GetCompanyName(cboCompany.SelectedValue)
+
+        ' Navegate Default Page
+        Response.RedirectPermanent("~/adm/Start.aspx")
     End Sub
     Public Function IsTicketsVisible() As Boolean
         ' Programmers/Computer/IT
