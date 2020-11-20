@@ -41,8 +41,10 @@ Partial Public Class Login
 
                 Select Case result
                     Case SignInStatus.Success
+
+                        ' Multicumpnay ability and Subdomain restrictio!!!!!!!!!!!!!!!!!!!!!!
                         Dim hostName As String = LocalAPI.GetHostAppSite()
-                        Dim hostCompany As Integer = LocalAPI.GetStringEscalar($"Select isnull(companyId,0) As companyId from Company where SubDomain='{hostName}'")
+                        Dim hostCompany As Integer = LocalAPI.GetNumericEscalar($"Select isnull(companyId,0) As companyId from Company where SubDomain='{hostName}'")
                         Dim companyId As Integer
                         If hostCompany > 0 Then
                             companyId = hostCompany
@@ -52,8 +54,7 @@ Partial Public Class Login
                             Session("IsMultiCompany") = 1
                         End If
 
-
-
+                        ' Selected default company'''''''''''''''''''''''''''''''''''''''''...
                         Session("companyId") = companyId
                         If LocalAPI.IAgree(UserName.Text) Then
                             If IsNothing(Request.QueryString("ReturnUrl")) Then

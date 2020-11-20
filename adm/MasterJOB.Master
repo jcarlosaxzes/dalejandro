@@ -149,7 +149,7 @@
                                 </telerik:NavigationNode>
 
                                 <telerik:NavigationNode
-                                    Text="Revisions" ID="NavigationNodejob_reviews"
+                                    Text="Revisions/Permits" ID="NavigationNodejob_reviews"
                                     NavigateUrl='<%# LocalAPI.GetSharedLink_URL(8010, lblJobId.Text)%>'>
                                 </telerik:NavigationNode>
 
