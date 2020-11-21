@@ -27,13 +27,13 @@
                                 <tr>
                                     <td style="width: 49%; text-align: center; background-color: #039be5">
                                         <span class="DashboardFont2">This Job</span><br />
-                                        <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# String.Concat(Eval("TotalJobHours", "{0:N0}"), " of ", Eval("HoursAssigned", "{0:N0}"), " hrs")  %>'></asp:Label><br />
+                                        <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# String.Concat(Eval("TotalJobHours", "{0:N0}"), " of ", Eval("HoursAssigned", "{0:N0}"), " hr")  %>'></asp:Label><br />
                                         <span class="DashboardFont3">Hours Entered of Assigned Time</span>
                                     </td>
                                     <td></td>
                                     <td style="width: 49%; text-align: center; background-color: #546e7a">
-                                        <span class="DashboardFont2">This Week</span><br />
-                                        <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# String.Concat(Eval("TotalWeekHours", "{0:N0}"), " of ", Eval("TotalWeekHours") + Eval("TotalWeekHoursRemaining"), " hrs") %>'></asp:Label><br />
+                                        <span class="DashboardFont2">Selected Week</span><br />
+                                        <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# String.Concat(Eval("TotalWeekHours", "{0:N0}"), " of ", Eval("TotalWeekHours") + Eval("TotalWeekHoursRemaining"), " hr") %>'></asp:Label><br />
                                         <span class="DashboardFont3">Total Hours Entered</span>
                                     </td>
                                 </tr>
@@ -90,7 +90,7 @@
                                 </td>
                                 <td style="text-align: left">
                                     <telerik:RadComboBox ID="cboActiveTickets" runat="server" DataSourceID="SqlDataSourceActiveTickets" Width="100%" AutoPostBack="true" Height="300px"
-                                        DataTextField="Title" DataValueField="Id" CausesValidation="false" AppendDataBoundItems="true">
+                                        DataTextField="Title" DataValueField="Id" CausesValidation="false" AppendDataBoundItems="true" MarkFirstMatch="True" Filter="Contains">
                                         <Items>
                                             <telerik:RadComboBoxItem Text="(Select Ticket...)" Value="0" />
                                         </Items>
@@ -106,9 +106,9 @@
                             </td>
                             <td style="text-align: left">
                                 <telerik:RadComboBox ID="cboCategory" runat="server" DataSourceID="SqlDataSourceCategory" ValidationGroup="time_insert" Height="300px"
-                                    DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true" CausesValidation="false">
+                                    DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="true" CausesValidation="false" MarkFirstMatch="True" Filter="Contains">
                                     <Items>
-                                        <telerik:RadComboBoxItem Text="(Select Time Sheet Category...)" Value="0" />
+                                        <telerik:RadComboBoxItem Text="(Select Category...)" Value="0" />
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
@@ -124,11 +124,12 @@
                         <tr>
                             <td style="text-align: right">Job Status:</td>
                             <td style="text-align: left">
-                                <telerik:RadComboBox ID="cboJobStatus" runat="server" Width="200px" AppendDataBoundItems="true" CausesValidation="false">
+                                <telerik:RadComboBox ID="cboJobStatus" runat="server" Width="200px" AppendDataBoundItems="true" CausesValidation="false" MarkFirstMatch="True" Filter="Contains" ValidationGroup="time_insert">
                                     <Items>
-                                        <telerik:RadComboBoxItem Text="No Status Change" Value="-1" />
+                                        <telerik:RadComboBoxItem Text="(Select Status...)" Value="-2" />
                                         <telerik:RadComboBoxItem Text="Done" Value="7" />
                                         <telerik:RadComboBoxItem Text="On Hold" Value="3" />
+                                        <telerik:RadComboBoxItem Text="No Status Change" Value="-1" />
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
@@ -142,7 +143,7 @@
                                 </asp:LinkButton>
 
                                 <asp:LinkButton ID="btnInsertTimeAndInvoice" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="time_insert" Width="200px">
-                                    <i class="fas fa-dollar-sign"></i> Billable (/hr)
+                                    Add Billable Time
                                 </asp:LinkButton>
                             </td>
                         </tr>
@@ -167,7 +168,7 @@
                     EditFormDateFormat="MM/dd/yyyy"
                     Height="600px"
                     FirstDayOfWeek="Monday"
-                    LastDayOfWeek="Friday"
+                    LastDayOfWeek="Sunday"
                     StartInsertingInAdvancedForm="False"
                     StartEditingInAdvancedForm="False"
                     SelectedView="MonthView"
@@ -221,7 +222,7 @@
                             <telerik:RadComboBox ID="cboCategory" runat="server" DataSourceID="SqlDataSourceCategory" SelectedValue='<%# Bind("categoryId")%>'
                                 DataTextField="Name" DataValueField="Id" Width="300px" AppendDataBoundItems="true">
                                 <Items>
-                                    <telerik:RadComboBoxItem Text="(Select Time Sheet Category...)" Value="0" />
+                                    <telerik:RadComboBoxItem Text="(Select Category...)" Value="0" />
                                 </Items>
                             </telerik:RadComboBox>
 
@@ -256,11 +257,14 @@
 
 
 
-    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDescription" ErrorMessage="(*) Notes can not be empty"
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDescription" ErrorMessage="Notes can not be empty!"
         ValidationGroup="time_insert" Display="None">
     </asp:RequiredFieldValidator>
-    <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Time Sheet Category...)"
-        Operator="NotEqual" ControlToValidate="cboCategory" ErrorMessage="(*) You must select Category!" ValidationGroup="time_insert" Display="None">
+    <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Category...)"
+        Operator="NotEqual" ControlToValidate="cboCategory" ErrorMessage="You must select Category!" ValidationGroup="time_insert" Display="None">
+    </asp:CompareValidator>
+    <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Status...)"
+        Operator="NotEqual" ControlToValidate="cboJobStatus" ErrorMessage="You must select Job Status!" ValidationGroup="time_insert" Display="None">
     </asp:CompareValidator>
 
 
@@ -305,11 +309,12 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceViewSummary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="EmployeeTime_Balance" SelectCommandType="StoredProcedure">
+        SelectCommand="EmployeeTime_v20_Balance" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="EmployeeId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblSelectedJob" Name="JobId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="RadDatePicker1" Name="DateOfWeek" PropertyName="SelectedDate" Type="DateTime" />
         </SelectParameters>
     </asp:SqlDataSource>
 

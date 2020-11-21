@@ -185,6 +185,15 @@ Partial Public Class employeenewtime
     Protected WithEvents Comparevalidator1 As Global.System.Web.UI.WebControls.CompareValidator
 
     '''<summary>
+    '''Comparevalidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator2 As Global.System.Web.UI.WebControls.CompareValidator
+
+    '''<summary>
     '''SqlDataSourceProposalTask control.
     '''</summary>
     '''<remarks>

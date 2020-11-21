@@ -106,7 +106,7 @@
                                     Client:
                                 </td>
                                 <td>
-                                    <telerik:RadComboBox ID="cboCliente" runat="server" SelectedValue='<%# Bind("Client") %>' DataSourceID="SqlDataSourceClientes"
+                                    <telerik:RadComboBox ID="cboCliente" runat="server" SelectedValue='<%# Bind("Client") %>' DataSourceID="SqlDataSourceClientes" Height="300px"
                                         DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True"
                                         MarkFirstMatch="True" Filter="Contains">
                                         <Items>
