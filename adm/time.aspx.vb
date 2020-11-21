@@ -99,6 +99,7 @@ Public Class time
     End Sub
     Private Sub RefrescarDatos()
         Try
+            IniciaPeriodo(cboPeriod.SelectedValue)
             btnNew.Visible = (cboJob.SelectedValue > 0)
 
             RadGrid1.DataBind()
