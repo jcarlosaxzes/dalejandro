@@ -21,8 +21,6 @@ Public Class employeenewtime
 
                 lblClientId.Text = LocalAPI.GetJobProperty(lblSelectedJob.Text, "Client")
 
-                cboCategory.DataBind()
-
                 If Not Request.QueryString("JobTicketId") Is Nothing Then
                     lblSelectedTicket.Text = Request.QueryString("JobTicketId")
                 End If
@@ -41,8 +39,6 @@ Public Class employeenewtime
                     Session("employeenewtimebackpage") = ""
                 End If
 
-                'RadScheduler1.Visible = (lblCompanyId.Text = 260973 Or lblCompanyId.Text = 99)
-
                 InitDialog()
 
             End If
@@ -54,7 +50,7 @@ Public Class employeenewtime
     Private Sub InitDialog()
         Try
             cboJobStatus.DataBind()
-            cboJobStatus.SelectedValue = -1
+            cboJobStatus.SelectedValue = -2
             txtDescription.Text = ""
 
             Dim DefaultValuesObject = LocalAPI.GetJobNewTimeDefaultValues(lblSelectedJob.Text, lblEmployeeId.Text)
@@ -80,7 +76,7 @@ Public Class employeenewtime
                 divProposalTask.Visible = LocalAPI.IsProposalTaskForJob(lblSelectedJob.Text)
             End If
 
-            cboCategory.SelectedValue = DefaultValuesObject("CategoryId")
+            ' Fdo, categoria a escoger cboCategory.SelectedValue = DefaultValuesObject("CategoryId")
 
             If divProposalTask.Visible Then
                 cboTask.DataBind()
@@ -287,7 +283,9 @@ Public Class employeenewtime
         Try
             RadDatePicker1.DbSelectedDate = Date1.Date
             'SqlDataSourceEmployeeDailyTimeWorked.DataBind()
+            FormViewViewSummary.DataBind()
             RadScheduler1.DataBind()
+
         Catch ex As Exception
         End Try
     End Sub
@@ -295,16 +293,16 @@ Public Class employeenewtime
         If e.SelectedDate > CDate("1-1-2000") Then
             RefreshCalendar(e.SelectedDate)
         End If
-        Select Case e.Command
-            Case SchedulerNavigationCommand.SwitchToDayView
-                e.Cancel = True
-        End Select
+        'Select Case e.Command
+        '    Case SchedulerNavigationCommand.SwitchToDayView
+        '        e.Cancel = True
+        'End Select
     End Sub
 
     Private Sub RadScheduler1_NavigationComplete(sender As Object, e As SchedulerNavigationCompleteEventArgs) Handles RadScheduler1.NavigationComplete
         Select Case e.Command
             Case SchedulerNavigationCommand.SwitchToSelectedDay And RadScheduler1.SelectedView = SchedulerViewType.DayView
-                RadScheduler1.SelectedView = SchedulerViewType.MonthView
+                RadScheduler1.SelectedView = SchedulerViewType.WeekView
         End Select
     End Sub
 
@@ -343,5 +341,8 @@ Public Class employeenewtime
         BotonesVisibles()
     End Sub
 
+    Private Sub SqlDataSourceEmployeeDailyTimeWorked_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceEmployeeDailyTimeWorked.Selecting
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
 End Class
 

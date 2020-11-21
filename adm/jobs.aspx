@@ -151,13 +151,13 @@
                 padding-bottom: .05rem;
             }
             /*Job Action Buttom*/
-            .RadComboBox_Material .rcbInner {
+            /*.RadComboBox_Material .rcbInner {
                 padding: 4px 20px 4px 4px;
             }
 
             .rcbActionButton {
                 padding-top: 0 !important;
-            }
+            }*/
         </style>
     </telerik:RadCodeBlock>
     <telerik:RadWindowManager ID="RadWindowManagerJob" runat="server" Skin="Outlook">
@@ -216,11 +216,11 @@
                         </telerik:RadComboBox>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date From for filter">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy"  Culture="en-US" ToolTip="Date From for filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 130px">
-                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" ToolTip="Date To for filter">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy"  Culture="en-US" ToolTip="Date To for filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 250px">
