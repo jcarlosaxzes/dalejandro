@@ -44,7 +44,7 @@
                     <td>From:
                     </td>
                     <td>
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" AutoPostBack="true" Width="130px"
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" AutoPostBack="true" Width="140px"
                             DateFormat="MM/dd/yyyy">
                         </telerik:RadDatePicker>
                     </td>

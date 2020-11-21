@@ -39,10 +39,10 @@
                         </telerik:RadComboBox>
 
                     </td>
-                    <td style="width: 280px;">
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
+                    <td style="width: 290px;">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="140px" Culture="en-US">
                         </telerik:RadDatePicker>
-                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="140px" Culture="en-US">
                         </telerik:RadDatePicker>
 
                     </td>

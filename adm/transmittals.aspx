@@ -396,9 +396,9 @@
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeName" runat="server" Visible="False"></asp:Label>
-    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Visible="false">
+    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Visible="false">
     </telerik:RadDatePicker>
-    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="120px" Culture="en-US" Visible="false">
+    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy"  Culture="en-US" Visible="false">
     </telerik:RadDatePicker>
 
 </asp:Content>
