@@ -16,6 +16,9 @@
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="RadGrid2" LoadingPanelID="RadAjaxLoadingPanel1"/>
+                    <telerik:AjaxUpdatedControl ControlID="cboPeriod" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
