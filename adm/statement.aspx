@@ -687,8 +687,8 @@
     <asp:Label ID="lblStatementId" runat="server"></asp:Label>
     <asp:Label ID="lblStatementClientId" runat="server"></asp:Label>
 
-    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" Visible="false" ToolTip="Date From of the filter">
+    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Visible="false" ToolTip="Date From of the filter">
     </telerik:RadDatePicker>
-    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="100%" Culture="en-US" Visible="false" ToolTip="Date To of the filter">
+    <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" Visible="false" ToolTip="Date To of the filter">
     </telerik:RadDatePicker>
 </asp:Content>

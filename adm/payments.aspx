@@ -49,11 +49,11 @@
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
                     <td style="width: 160px">From:
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US" ToolTip="Date From of the filter">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date From of the filter">
                         </telerik:RadDatePicker>
                     </td>
                     <td style="width: 160px">To:
-                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Width="130px" Culture="en-US">
+                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy"  Culture="en-US">
                                 </telerik:RadDatePicker>
 
                     </td>
