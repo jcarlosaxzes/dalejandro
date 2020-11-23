@@ -10,6 +10,7 @@ Imports Newtonsoft.Json
 Imports System.Data.SqlClient
 Imports System.Data
 Imports Intuit.Ipp.OAuth2PlatformClient
+Imports Intuit.Ipp.ReportService
 
 Public Class qbAPI
 
@@ -22,7 +23,7 @@ Public Class qbAPI
             'Create a ServiceContext with Auth tokens And realmId
             Dim serviceContext = New ServiceContext(qbComapny, IntuitServicesType.QBO, oauthValidator)
             serviceContext.IppConfiguration.MinorVersion.Qbo = "23"
-            serviceContext.IppConfiguration.BaseUrl.Qbo = "https://sandbox-quickbooks.api.intuit.com/"
+            serviceContext.IppConfiguration.BaseUrl.Qbo = ConfigurationManager.AppSettings("QB_Base_URL")
             Return serviceContext
 
         Catch ex As Exception
@@ -333,6 +334,295 @@ Public Class qbAPI
 
     End Sub
 
+    Public Shared Function GetPayment(companyId As String, paymentId As String) As Intuit.Ipp.Data.Payment
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(companyId)
+
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(companyId)
+            Dim ObjQueryService As QueryService(Of Intuit.Ipp.Data.Payment) = New QueryService(Of Intuit.Ipp.Data.Payment)(serviceContext)
+            Dim objects = ObjQueryService.ExecuteIdsQuery($"select * from Payment Where Id= '{paymentId}'")
+
+            For Each Obj As Intuit.Ipp.Data.Payment In objects
+                Return Obj
+            Next
+            Return Nothing
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+
+    End Function
+
+    Public Shared Sub SyncInvoicesPayment(companyId As String)
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(companyId)
+        Dim qbInvoiceSyncDate As DateTime = LocalAPI.GetDateTimeEscalar("SELECT ISNULL(qbInvoiceSyncDate,dbo.CurrentTime()) as qbInvoiceSyncDate FROM [Company] WHERE [companyId] =" & companyId)
+
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(companyId)
+            Dim ObjQueryService As QueryService(Of Intuit.Ipp.Data.Invoice) = New QueryService(Of Intuit.Ipp.Data.Invoice)(serviceContext)
+            Dim objects = ObjQueryService.ExecuteIdsQuery($"select * from Invoice where MetaData.LastUpdatedTime >= '{qbInvoiceSyncDate.ToString("yyyy-MM-dd")}'")
+
+
+            For Each Obj As Intuit.Ipp.Data.Invoice In objects
+                'Check if this invoice was send from PASconcept
+                Dim invoiceId = LocalAPI.GetNumericEscalar($"Select isnull(max(Invoices.Id), 0) as Id from Invoices inner join Jobs on Invoices.JobId = Jobs.Id where Jobs.companyId = {companyId} and ISNULL(Invoices.qbInvoiceId, 0) = {Obj.Id}")
+                If invoiceId > 0 Then
+                    ' loop over all linked objet to this QB Invoices
+                    For Each link In Obj.LinkedTxn
+                        If link.TxnType = "Payment" Then
+                            Dim existPayment = LocalAPI.GetNumericEscalar($"select count(ivp.id) as total from Invoices_payments ivp inner join Invoices iv on (iv.Id= ivp.InvoiceId) inner join Jobs on iv.JobId = Jobs.Id where Jobs.companyId = {companyId} and ivp.qbpaymentId = {link.TxnId}")
+                            ' If not Exist Payment Insert payment from QB
+                            If existPayment = 0 Then
+                                Dim qbPayment = GetPayment(companyId, link.TxnId)
+                                If Not IsNothing(qbPayment) Then
+                                    Dim notes = "QuickBooks Payment -> " & IIf(IsNothing(qbPayment.DocNumber), "", "Doc Number:" & qbPayment.DocNumber) & " "
+                                    notes &= IIf(IsNothing(qbPayment.HeaderFull), "", " Header:" & qbPayment.HeaderFull) & " "
+                                    notes &= IIf(IsNothing(qbPayment.PaymentType), "", " Payment Type:" & qbPayment.PaymentType.ToString("F"))
+                                    notes &= IIf(IsNothing(qbPayment.PaymentRefNum), "", " Payment Ref Num:" & qbPayment.PaymentRefNum) & " "
+                                    notes &= IIf(IsNothing(qbPayment.PrivateNote), "", " Notes:" & qbPayment.PrivateNote) & " "
+
+                                    LocalAPI.INVOICE_PAYMENTS_QB_INSERT(invoiceId, qbPayment.TxnDate, 13, qbPayment.TotalAmt, notes, qbPayment.Id)
+                                    LocalAPI.ExecuteNonQuery("update Company set qbInvoiceSyncDate = DATEADD(Day, -1, dbo.CurrentTime())  WHERE [companyId] =" & companyId)
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
+
+            Next
+
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+
+    End Sub
+
+    Public Shared Sub LoadQBExpenses(comapyId As String, dateFrom As DateTime, dateTo As DateTime)
+        Dim dt As New DataTable()
+
+        dt.Columns.Add(New DataColumn("companyId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("QBId", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("ExpDate", Type.GetType("System.DateTime")))
+        dt.Columns.Add(New DataColumn("Type", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Reference", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Amount", Type.GetType("System.Double")))
+        dt.Columns.Add(New DataColumn("Category", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("VendorId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("Memo", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("OriginalReference", Type.GetType("System.String")))
+
+        Dim PrimaryKeyColumns As DataColumn() = New DataColumn(0) {}
+        PrimaryKeyColumns(0) = dt.Columns("DisplayName")
+        dt.PrimaryKey = PrimaryKeyColumns
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(comapyId)
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim employeeQueryService As QueryService(Of Intuit.Ipp.Data.Purchase) = New QueryService(Of Intuit.Ipp.Data.Purchase)(serviceContext)
+            Dim objects = employeeQueryService.ExecuteIdsQuery($"Select * From Purchase where TxnDate >= '{dateFrom.ToString("yyyy-MM-dd")}' and TxnDate <= '{dateTo.ToString("yyyy-MM-dd")}'")
+
+            LocalAPI.ExecuteNonQuery($"delete Company_Expenses where companyId = {comapyId} and ExpDate >= '{dateFrom.ToString("yyyy-MM-dd")}' and ExpDate <= '{dateTo.ToString("yyyy-MM-dd")}' and isnull([QBId], 0 ) >  0")
+
+
+
+            For Each Obj As Intuit.Ipp.Data.Purchase In objects
+
+                Dim row As DataRow = dt.NewRow()
+                row("companyId") = comapyId
+                row("QBId") = Obj.Id
+                row("ExpDate") = Obj.TxnDate
+                If IsNothing(Obj.EntityRef) Then
+                    row("Type") = ""
+                    row("OriginalReference") = ""
+                Else
+                    row("Type") = Obj.EntityRef.type
+                    row("OriginalReference") = Obj.EntityRef.name
+                    row("Reference") = Obj.EntityRef.Value
+                    If Obj.EntityRef.type = "Vendor" Then
+                        row("VendorId") = Val(Obj.EntityRef.Value)
+                    End If
+                End If
+
+                Dim category As String = ""
+                For Each line In Obj.Line
+                    If line.DetailType = LineDetailTypeEnum.AccountBasedExpenseLineDetail Then
+                        Dim detail As AccountBasedExpenseLineDetail = CType(line.AnyIntuitObject, AccountBasedExpenseLineDetail)
+                        category &= detail.AccountRef.name
+                    End If
+
+                    If line.DetailType = LineDetailTypeEnum.ItemBasedExpenseLineDetail Then
+                        Dim detail As ItemBasedExpenseLineDetail = CType(line.AnyIntuitObject, ItemBasedExpenseLineDetail)
+                        category &= detail.ItemRef.name
+                    End If
+
+                Next
+
+                row("Category") = category
+
+                row("Amount") = Obj.TotalAmt
+                row("Memo") = "Payment Type: " & Obj.PaymentType.ToString("F") & " " & Obj.PrivateNote
+                dt.Rows.Add(row)
+
+                Next
+
+
+                'insert into SQL
+
+                Dim objbulk As SqlBulkCopy = New SqlBulkCopy(LocalAPI.GetConnection())
+            objbulk.ColumnMappings.Add("companyId", "companyId")
+            objbulk.ColumnMappings.Add("QBId", "QBId")
+            objbulk.ColumnMappings.Add("ExpDate", "ExpDate")
+            objbulk.ColumnMappings.Add("Type", "Type")
+            objbulk.ColumnMappings.Add("OriginalReference", "OriginalReference")
+            objbulk.ColumnMappings.Add("Reference", "Reference")
+            objbulk.ColumnMappings.Add("VendorId", "VendorId")
+            objbulk.ColumnMappings.Add("Amount", "Amount")
+            objbulk.ColumnMappings.Add("Memo", "Memo")
+            objbulk.ColumnMappings.Add("Category", "Category")
+
+            objbulk.DestinationTableName = "Company_Expenses"
+            objbulk.WriteToServer(dt)
+
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+
+    End Sub
+
+
+
+    Public Shared Sub LoadQBTransactionList(comapyId As String, dateFrom As DateTime, dateTo As DateTime)
+        Dim dt As New DataTable()
+
+        dt.Columns.Add(New DataColumn("companyId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("QBId", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("ExpDate", Type.GetType("System.DateTime")))
+        dt.Columns.Add(New DataColumn("Type", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Reference", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Amount", Type.GetType("System.Double")))
+        dt.Columns.Add(New DataColumn("Category", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("VendorId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("Memo", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("OriginalReference", Type.GetType("System.String")))
+
+        Dim PrimaryKeyColumns As DataColumn() = New DataColumn(0) {}
+        PrimaryKeyColumns(0) = dt.Columns("DisplayName")
+        dt.PrimaryKey = PrimaryKeyColumns
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(comapyId)
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim employeeQueryService As QueryService(Of Intuit.Ipp.Data.TransactionList) = New QueryService(Of Intuit.Ipp.Data.TransactionList)(serviceContext)
+            Dim Vendors = employeeQueryService.ExecuteIdsQuery($"Select * From TransactionList")
+
+            'LocalAPI.ExecuteNonQuery($"delete Company_Expenses where companyId = {comapyId} and ExpDate >= '{dateFrom.ToString("yyyy-MM-dd")}' and ExpDate <= '{dateTo.ToString("yyyy-MM-dd")}'")
+
+
+
+            For Each Obj As Intuit.Ipp.Data.TransactionList In Vendors
+
+                Dim row As DataRow = dt.NewRow()
+                row("companyId") = comapyId
+                row("QBId") = Obj.VendorField
+                'row("ExpDate") = Obj.TxnDate
+                'If IsNothing(Obj.EntityRef) Then
+                '    row("Type") = ""
+                '    row("OriginalReference") = ""
+                'Else
+                '    row("Type") = Obj.EntityRef.type
+                '    row("OriginalReference") = Obj.EntityRef.name
+                '    row("Reference") = Obj.EntityRef.Value
+                '    If Obj.EntityRef.type = "Vendor" Then
+                '        row("VendorId") = Val(Obj.EntityRef.Value)
+                '    End If
+                'End If
+
+                'row("Amount") = Obj.TotalAmt
+                'row("Memo") = Obj.PrivateNote
+                'row("Category") = Obj.PaymentType
+                'dt.Rows.Add(row)
+
+            Next
+
+
+            'insert into SQL
+
+            Dim objbulk As SqlBulkCopy = New SqlBulkCopy(LocalAPI.GetConnection())
+            objbulk.ColumnMappings.Add("companyId", "companyId")
+            objbulk.ColumnMappings.Add("QBId", "QBId")
+            objbulk.ColumnMappings.Add("ExpDate", "ExpDate")
+            objbulk.ColumnMappings.Add("Type", "Type")
+            objbulk.ColumnMappings.Add("OriginalReference", "OriginalReference")
+            objbulk.ColumnMappings.Add("Reference", "Reference")
+            objbulk.ColumnMappings.Add("VendorId", "VendorId")
+            objbulk.ColumnMappings.Add("Amount", "Amount")
+            objbulk.ColumnMappings.Add("Memo", "Memo")
+            objbulk.ColumnMappings.Add("Category", "Category")
+
+            objbulk.DestinationTableName = "Company_Expenses"
+            objbulk.WriteToServer(dt)
+
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+
+    End Sub
+
+    Public Shared Sub LoadQBReport(comapyId As String, dateFrom As DateTime, dateTo As DateTime)
+        Dim dt As New DataTable()
+
+        dt.Columns.Add(New DataColumn("companyId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("QBId", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("ExpDate", Type.GetType("System.DateTime")))
+        dt.Columns.Add(New DataColumn("Type", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Reference", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("Amount", Type.GetType("System.Double")))
+        dt.Columns.Add(New DataColumn("Category", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("VendorId", Type.GetType("System.Int32")))
+        dt.Columns.Add(New DataColumn("Memo", Type.GetType("System.String")))
+        dt.Columns.Add(New DataColumn("OriginalReference", Type.GetType("System.String")))
+
+        Dim PrimaryKeyColumns As DataColumn() = New DataColumn(0) {}
+        PrimaryKeyColumns(0) = dt.Columns("DisplayName")
+        dt.PrimaryKey = PrimaryKeyColumns
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(comapyId)
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(comapyId)
+            Dim service As ReportService = New ReportService(serviceContext)
+            service.start_date = "2020-01-01"
+            service.end_date = "2020-12-31"
+
+
+            Dim report As Report = service.ExecuteReport("ProfitAndLossDetail")
+
+            Dim json = report.ToString()
+
+            For index = 0 To report.Rows.Length - 1
+                Dim row = report.Rows(index)
+                Dim value = row.AnyIntuitObjects(0)
+            Next
+
+
+
+
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+
+    End Sub
+
+
     Public Shared Function GetCustomer(comapyId As String, CustomerId As String) As Customer
         Try
 
@@ -380,9 +670,9 @@ Public Class qbAPI
         Try
             Dim serviceContext = qbAPI.GetServiceContext(comapyId)
             Dim CompanyQueryService As QueryService(Of CompanyInfo) = New QueryService(Of CompanyInfo)(serviceContext)
-        Dim Result = CompanyQueryService.ExecuteIdsQuery("SELECT * FROM CompanyInfo").First()
+            Dim Result = CompanyQueryService.ExecuteIdsQuery("SELECT * FROM CompanyInfo").First()
 
-        Return Result
+            Return Result
         Catch ex As Exception
             Throw ex
         End Try

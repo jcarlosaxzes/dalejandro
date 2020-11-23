@@ -148,5 +148,14 @@ Public Class employees_sync_qb
         End Try
     End Sub
 
-
+    Private Sub btnGetExpenses_Click(sender As Object, e As EventArgs) Handles btnGetExpenses.Click
+        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+            qbAPI.SyncInvoicesPayment(lblCompanyId.Text)
+            'qbAPI.LoadQBTransactionList(lblCompanyId.Text, New DateTime(2020, 1, 1), New DateTime(2020, 9, 30))
+            RadGridVendors.DataBind()
+        Else
+            ' New Tab for QB Authentication
+            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+        End If
+    End Sub
 End Class

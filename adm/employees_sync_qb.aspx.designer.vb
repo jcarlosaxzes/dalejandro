@@ -50,6 +50,15 @@ Partial Public Class employees_sync_qb
     Protected WithEvents btnGetVendors As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''btnGetExpenses control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGetExpenses As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''SyncPanelVendors control.
     '''</summary>
     '''<remarks>
