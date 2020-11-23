@@ -246,4 +246,13 @@ Partial Public Class ADM_Main_Responsive
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblIsMultiCompany control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblIsMultiCompany As Global.System.Web.UI.WebControls.Label
 End Class

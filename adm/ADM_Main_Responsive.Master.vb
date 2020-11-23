@@ -19,6 +19,8 @@ Public Class ADM_Main_Responsive
                 Session("LastPage") = ""
             End If
 
+            lblIsMultiCompany.Text = Session("IsMultiCompany")
+
             Dim versionId As Integer = LocalAPI.sys_VersionId(Session("companyId"))
             Session("Version") = versionId
 
@@ -198,18 +200,17 @@ Public Class ADM_Main_Responsive
 
     End Function
     Public Sub btnSwitchCompany_Click(sender As Object, e As EventArgs)
-        If Session("IsMultiCompany") = 1 Then
+        If lblIsMultiCompany.Text = 1 Then
             RadToolTipSwitchCompany.Visible = True
             RadToolTipSwitchCompany.Show()
         Else
-            btnCompanyName.Enabled = False
+            ErrorMessage("Current subdomain does not allow switch company!")
         End If
     End Sub
 
     Private Sub btnSwitchCompanyConfirm_Click(sender As Object, e As EventArgs) Handles btnSwitchCompanyConfirm.Click
         ' Clear session Permissions
         Session.Contents.RemoveAll()
-        Session("IsMultiCompany") = 1   ' En Login ya es multicompany
         Session("companyId") = cboCompany.SelectedValue
         lblCompanyId.Text = cboCompany.SelectedValue
         Companyp = cboCompany.SelectedValue

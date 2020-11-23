@@ -446,11 +446,12 @@
                                             RenderMode="Lightweight"
                                             Height="18px" ShowLabel="false"
                                             BarType="Value"
-                                            Skin="Metro"
+                                            Skin="Material"
                                             MaxValue='<%# Eval("HoursAssigned")%>'
                                             Value='<%# Eval("HoursUsed")%>'
                                             Width="100%"
-                                            Visible='<%# Eval("HoursUsed") > 0%>'>
+                                            Visible='<%# Eval("HoursUsed") > 0%>'
+                                            CssClass='<%# LocalAPI.GetBudgetUsedCss(Eval("HourUsedPercent"))%>'>
                                             <AnimationSettings Duration="0" />
                                         </telerik:RadProgressBar>
 
