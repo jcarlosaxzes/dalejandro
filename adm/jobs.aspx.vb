@@ -322,20 +322,6 @@ Public Class jobs
         End If
     End Sub
 
-    Public Function GetBudgetUsedCss(ByVal dPercent As Double) As String
-        If dPercent < 25 Then
-            Return "GreenYellowProgressBar"
-        ElseIf dPercent < 50 Then
-            Return "GreenProgressBar"
-        ElseIf dPercent < 75 Then
-            Return "OrangeProgressBar" 'System.Drawing.Color.Orange
-        ElseIf dPercent < 100 Then
-            Return "OrangeRedProgressBar" 'System.Drawing.Color.OrangeRed
-        Else
-            Return "RedProgressBar" 'System.Drawing.Color.DarkRed
-        End If
-    End Function
-
     Public Function GetCollectedPercent(ByVal dBudget As Double, dCollected As Double) As Double
         Dim dPercent As Double
         If dBudget > 0 Then
