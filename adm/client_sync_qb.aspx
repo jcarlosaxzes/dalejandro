@@ -413,7 +413,7 @@
                 </telerik:RadWizardStep>
 
                 <%--Vendors--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Vendors" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepVendors" Title="Vendors" StepType="Step">
                     <asp:Panel ID="SyncPanelVendors" runat="server">
                         <div class="pasconcept-bar">
                             <span class="pasconcept-pagetitle">Unlinked QuickBooks Vendors
@@ -609,6 +609,182 @@
 
                     </asp:Panel>
                 </telerik:RadWizardStep>
+
+                <%--Payments--%>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepPayments" Title="Payments" StepType="Step">
+                    <div class="pasconcept-bar noprint">
+                        <span class="pasconcept-pagetitle">Payments</span>
+
+                        <span style="float: right; vertical-align: middle;">
+                            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                                <i class="fas fa-filter"></i>&nbsp;Filter
+                            </button>
+                            <asp:LinkButton ID="btnSyncPayments" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Get payments">
+                                Get Payment From QuickBooks Online
+                            </asp:LinkButton>
+
+                        </span>
+
+                    </div>
+
+                    <div class="collapse" id="collapseFilter">
+                        <asp:Panel ID="Panel1" runat="server" DefaultButton="btnRefresh">
+                            <table class="table-sm pasconcept-bar" style="width: 100%">
+                                <tr>
+                                    <td style="width: 160px">From:
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date From of the filter">
+                        </telerik:RadDatePicker>
+                                    </td>
+                                    <td style="width: 160px">To:
+                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US">
+                                </telerik:RadDatePicker>
+
+                                    </td>
+                                    <td style="width: 300px">
+                                        <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
+                                            DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains"
+                                            Height="300px" MarkFirstMatch="True" Width="100%">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+
+                                    </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
+                                            DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="100%">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Clients...)" Value="-1" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+                                    <td>
+                                        <telerik:RadTextBox ID="RadTextBox1" runat="server" EmptyMessage="Search for Invoice, Job/Client, Notes..."
+                                            Width="100%" x-webkit-speech="x-webkit-speech">
+                                        </telerik:RadTextBox>
+                                    </td>
+                                    <td style="text-align: right; width: 150px">
+                                        <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+                                    <i class="fas fa-search"></i> Filter/Search
+                                        </asp:LinkButton>
+                                    </td>
+                                </tr>
+                            </table>
+                        </asp:Panel>
+                    </div>
+                    <div>
+                        <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSourcePayment" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true" AllowAutomaticDeletes="True"
+                            AllowMultiRowSelection="True"
+                            PageSize="50" AllowPaging="true"
+                            Height="850px" RenderMode="Lightweight"
+                            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                            <ClientSettings Selecting-AllowRowSelect="true">
+                                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+                            </ClientSettings>
+                            <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePayment" DataKeyNames="Id">
+                                <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
+                                <Columns>
+
+
+                                    <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Payment ID" ReadOnly="True"
+                                        HeaderStyle-Width="100px" SortExpression="Id" UniqueName="Id" ItemStyle-HorizontalAlign="Center">
+                                    </telerik:GridBoundColumn>
+
+
+
+
+                                    <telerik:GridTemplateColumn DataField="InvoiceNumber" HeaderText="Invoice" UniqueName="InvoiceNumber"
+                                        HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <asp:LinkButton ID="lnkEditPayment" runat="server" CommandName="EditPayment" CommandArgument='<%# Eval("Id") %>'
+                                                            Text='<%# Eval("InvoiceNumber") %>' ToolTip="Click to Edit Payment"></asp:LinkButton>
+                                                    </td>
+                                                    <td style="padding-left: 3px">
+                                                        <asp:Panel runat="server" Visible='<%# Eval("InvoicesId")>0 %>'>
+                                                            <a class="far fa-share-square" title="View Invoice"
+                                                                href='<%# LocalAPI.GetSharedLink_URL(4, Eval("InvoicesId"))%>'
+                                                                target="_blank" aria-hidden="true"></a>
+                                                        </asp:Panel>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </ItemTemplate>
+
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="PaymentDate" DataType="System.DateTime" FilterControlAltText="Filter PaymentDate column"
+                                        HeaderText="Date" SortExpression="PaymentDate" UniqueName="PaymentDate" AllowSorting="true"
+                                        HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Payment Date">
+                                        <ItemTemplate>
+                                            <%# Eval("PaymentDate","{0:d}")%>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="ClientName" HeaderText="Client - Job - Notes" UniqueName="ClientName"
+                                        ItemStyle-HorizontalAlign="Left">
+                                        <ItemTemplate>
+                                            <div>
+                                                <b><%# Eval("ClientName")%></b> (<%# Eval("JobName")%>)
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <small><%# Eval("InvoiceNotes")%></small>
+                                                </div>
+                                            </div>
+
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridBoundColumn DataField="InvoiceAmount" HeaderText="Amount" UniqueName="InvoiceAmount" AllowSorting="true"
+                                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" DataFormatString="{0:C}"
+                                        FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                    </telerik:GridBoundColumn>
+
+                                    <telerik:GridBoundColumn DataField="PaymentAmount" HeaderText="Amount Paid" UniqueName="PaymentAmount" AllowSorting="true"
+                                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" DataFormatString="{0:C}"
+                                        FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                    </telerik:GridBoundColumn>
+
+                                    <telerik:GridTemplateColumn DataField="AmountDue" HeaderText="Amount Due" UniqueName="AmountDue" AllowSorting="true"
+                                        HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C2}"
+                                        FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+                                        <ItemTemplate>
+                                            <%# Eval("AmountDue", "{0:C}") %>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="PaymentMethod" HeaderText="Method" UniqueName="PaymentMethod" HeaderStyle-Width="180px" AllowSorting="true"
+                                        ItemStyle-HorizontalAlign="Left">
+                                        <ItemTemplate>
+                                            <div>
+                                                <b><%# Eval("PaymentMethod") %></b>
+                                                <span style="float: right; vertical-align: middle;">
+                                                    <asp:Panel ID="PanelUpload" runat="server" Visible='<%#Len(Eval("Download_url")) %>'>
+                                                        <a class="fas fa-cloud-download-alt" href='<%# Eval("Download_url")%>' target="_blank"></a>
+                                                    </asp:Panel>
+                                                </span>
+
+                                            </div>
+                                            <div>
+                                                <small><%# Eval("PaymentNotes")%></small>
+                                            </div>
+
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                </Columns>
+                            </MasterTableView>
+                        </telerik:RadGrid>
+                    </div>
+                </telerik:RadWizardStep>
+
             </WizardSteps>
         </telerik:RadWizard>
     </div>
@@ -681,6 +857,38 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
+    <%--Payments--%>
+
+    <asp:SqlDataSource ID="SqlDataSourcePayment" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Payments_v20_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="RadDatePickerFrom" Name="PaymentDateFrom" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="RadDatePickerTo" Name="PaymentDateTo" PropertyName="SelectedDate" Type="DateTime" />
+            <asp:ControlParameter ControlID="cboClients" Name="ClientId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboDepartments" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:Parameter Name="PaymentMethodId" DefaultValue="13" Type="Int32" />
+            <asp:Parameter Name="ReconciledId" DefaultValue="-1" Type="Int32" />
+            <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+
+    <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId ORDER BY [Name]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceClient" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [Client] As Name FROM [Clients]  WHERE companyId=@companyId ORDER BY [Name]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectCustomer" runat="server" Visible="False"></asp:Label>

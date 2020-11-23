@@ -22,6 +22,9 @@ Public Class monthlyexpenses
             cboCategory.DataBind()
             cboCategory.SelectedValue = -1
             cboVendors.DataBind()
+            DPFrom.DbSelectedDate = Date.Today.Month & "/01/" & Date.Today.Year
+            DPTo.DbSelectedDate = DateAdd(DateInterval.Month, 1, DPFrom.DbSelectedDate)
+            DPTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DPTo.DbSelectedDate)
             Refresh()
         End If
     End Sub
@@ -47,6 +50,7 @@ Public Class monthlyexpenses
             Master.ErrorMessage(ex.Message)
         End Try
     End Sub
+
 
 
 #Region "Expenses"
@@ -282,11 +286,24 @@ Public Class monthlyexpenses
     Private Sub SqlDataSourceExpenses_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceExpenses.Selecting
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
+
+
 #End Region
 
+    Private Sub btnExpensesImportQb_Click(sender As Object, e As EventArgs) Handles btnExpensesImportQb.Click
+        RadToolTipQBExpenses.Visible = True
+        RadToolTipQBExpenses.Show()
+    End Sub
 
-
-
-
-
+    Private Sub btnImportExpensesQB_Click(sender As Object, e As EventArgs) Handles btnImportExpensesQB.Click
+        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+            If Not IsNothing(DPFrom.DbSelectedDate) And Not IsNothing(DPTo.DbSelectedDate) Then
+                qbAPI.LoadQBExpenses(lblCompanyId.Text, DPFrom.DbSelectedDate, DPTo.DbSelectedDate)
+                Refresh()
+            End If
+        Else
+                ' New Tab for QB Authentication
+                Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+        End If
+    End Sub
 End Class

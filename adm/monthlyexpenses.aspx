@@ -44,7 +44,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
     <style>
         .RadListView .rlvFloated {
             display: block;
@@ -197,9 +197,16 @@
                                      <i class="fas fa-upload"></i>&nbsp;Import Expenses
                         </asp:LinkButton>
                     </td>
+                    <td style="padding-left: 50px; vertical-align: bottom">
+
+                        <asp:LinkButton ID="btnExpensesImportQb" runat="server" ToolTip="Import Expenses from Quickbooks"
+                            CssClass="btn btn-info btn" UseSubmitBehavior="false" >
+                                     <i class="fas fa-upload"></i>&nbsp;Import Expenses from Quickbooks
+                        </asp:LinkButton>
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="4">
                         <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Import Mode...)" ForeColor="Red"
                             Operator="NotEqual" ControlToValidate="cboImportMode" Display="Dynamic" ErrorMessage="Select Import Mode" SetFocusOnError="true" ValidationGroup="Import">
                         </asp:CompareValidator>
@@ -682,6 +689,42 @@
                 <td>
                     <telerik:RadListBox ID="RadListBoxImportError" runat="server" Width="100%" ZIndex="50001">
                     </telerik:RadListBox>
+                </td>
+            </tr>
+        </table>
+    </telerik:RadToolTip>
+
+    <telerik:RadToolTip ID="RadToolTipQBExpenses" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+
+        <table class="table table-bordered" style="width: 600px">
+            <tr>
+                <td colspan="2">
+                    <h2 style="text-align: center; color: white; width: 600px">
+                        <span class="navbar navbar-expand-md bg-dark text-white">Import Period Expenses</span>
+                    </h2>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 200px;">Date From
+                </td>
+                <td>
+                    <telerik:RadDatePicker ID="DPFrom" runat="server" Width="100%" ZIndex="50001">
+                    </telerik:RadDatePicker>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 200px;">Date To
+                </td>
+                <td>
+                    <telerik:RadDatePicker ID="DPTo" runat="server" Width="100%" ZIndex="50001">
+                    </telerik:RadDatePicker>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <asp:LinkButton ID="btnImportExpensesQB" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
+                    Import Expenses
+                    </asp:LinkButton>
                 </td>
             </tr>
         </table>

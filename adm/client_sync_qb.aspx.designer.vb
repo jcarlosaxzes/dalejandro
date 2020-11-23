@@ -257,13 +257,13 @@ Partial Public Class client_sync_qb
     Protected WithEvents RadGridSearhcEmployee As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''RadWizardStep1 control.
+    '''RadWizardStepVendors control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadWizardStepVendors As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
     '''SyncPanelVendors control.
@@ -365,6 +365,96 @@ Partial Public Class client_sync_qb
     Protected WithEvents RadGridSearhcVendors As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''RadWizardStepPayments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepPayments As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''btnSyncPayments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSyncPayments As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Panel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Panel1 As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''RadDatePickerFrom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerFrom As Global.Telerik.Web.UI.RadDatePicker
+
+    '''<summary>
+    '''RadDatePickerTo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
+
+    '''<summary>
+    '''cboDepartments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''cboClients control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''RadTextBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadTextBox1 As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''btnRefresh control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridPayments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridPayments As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''RadWindowManager1 control.
     '''</summary>
     '''<remarks>
@@ -453,6 +543,33 @@ Partial Public Class client_sync_qb
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceQBNotLinkedVendors As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourcePayment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourcePayment As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceDepartments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceClient As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.

@@ -30,6 +30,10 @@ Public Class client_sync_qb
         End If
 
         RadWindowManager1.EnableViewState = False
+        RadDatePickerFrom.DbSelectedDate = Date.Today.Month & "/01/" & Date.Today.Year
+        RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Month, 1, RadDatePickerFrom.DbSelectedDate)
+        RadDatePickerTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, RadDatePickerTo.DbSelectedDate)
+
     End Sub
 
 #Region "Clients"
@@ -365,5 +369,17 @@ Public Class client_sync_qb
         End Try
     End Sub
 
+
 #End Region
+
+    Private Sub btnSyncPayments_Click(sender As Object, e As EventArgs) Handles btnSyncPayments.Click
+        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+            qbAPI.SyncInvoicesPayment(lblCompanyId.Text)
+            RadGridPayments.DataBind()
+        Else
+            ' New Tab for QB Authentication
+            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+        End If
+    End Sub
+
 End Class

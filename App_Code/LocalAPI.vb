@@ -15001,6 +15001,29 @@ Public Class LocalAPI
 
     End Function
 
+    Public Shared Sub INVOICE_PAYMENTS_QB_INSERT(InvoiceId As Integer, CollectedDate As DateTime, Method As Integer, Amount As Double, CollectedNotes As String, qbPaymentId As Integer)
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            cmd.CommandText = "INVOICE_PAYMENTS_QB_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@InvoiceId", InvoiceId)
+            cmd.Parameters.AddWithValue("@CollectedDate", CollectedDate)
+            cmd.Parameters.AddWithValue("@Method", Method)
+            cmd.Parameters.AddWithValue("@Amount", Amount)
+            cmd.Parameters.AddWithValue("@CollectedNotes", CollectedNotes)
+            cmd.Parameters.AddWithValue("@qbPaymentId", qbPaymentId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
 #End Region
 End Class
 
