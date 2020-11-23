@@ -23,7 +23,7 @@ Public Class qbAPI
             'Create a ServiceContext with Auth tokens And realmId
             Dim serviceContext = New ServiceContext(qbComapny, IntuitServicesType.QBO, oauthValidator)
             serviceContext.IppConfiguration.MinorVersion.Qbo = "23"
-            serviceContext.IppConfiguration.BaseUrl.Qbo = "https://sandbox-quickbooks.api.intuit.com/"
+            serviceContext.IppConfiguration.BaseUrl.Qbo = ConfigurationManager.AppSettings("QB_Base_URL")
             Return serviceContext
 
         Catch ex As Exception
