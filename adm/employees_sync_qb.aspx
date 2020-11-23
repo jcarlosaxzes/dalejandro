@@ -16,6 +16,7 @@
                 <img src="../Images/C2QB_green_btn_lg_default.png" height="40" />
             </asp:LinkButton>
             <asp:Button ID="btnGetVendors" runat="server" Text="Get Vendors from QuickBooks Online " CssClass="btn btn-success" />
+            <asp:Button ID="btnGetExpenses" runat="server" Text="Get Expenses from QuickBooks Online " CssClass="btn btn-success" />
         </span>
         </asp:Panel>
     </div>

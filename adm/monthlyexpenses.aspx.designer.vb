@@ -140,6 +140,15 @@ Partial Public Class monthlyexpenses
     Protected WithEvents btnExpensesImport As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''btnExpensesImportQb control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExpensesImportQb As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''Comparevalidator2 control.
     '''</summary>
     '''<remarks>
@@ -248,78 +257,6 @@ Partial Public Class monthlyexpenses
     Protected WithEvents FloatedTilesListView As Global.Telerik.Web.UI.RadListView
 
     '''<summary>
-    '''lblAlternatingCategory control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblAlternatingCategory As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''RainfallChart control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RainfallChart As Global.Telerik.Web.UI.RadHtmlChart
-
-    '''<summary>
-    '''SqlDataSourceItemAlternating control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceItemAlternating As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''lblItemCategory control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblItemCategory As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''SunshineChart control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SunshineChart As Global.Telerik.Web.UI.RadHtmlChart
-
-    '''<summary>
-    '''SqlDataSourceItem control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceItem As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''itemPlaceholder control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents itemPlaceholder As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''RadDataPager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadDataPager1 As Global.Telerik.Web.UI.RadDataPager
-
-    '''<summary>
     '''RadGridExpenses control.
     '''</summary>
     '''<remarks>
@@ -327,15 +264,6 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridExpenses As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''cboVendorEdit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboVendorEdit As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
     '''RadGridPayroll control.
@@ -363,6 +291,42 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadListBoxImportError As Global.Telerik.Web.UI.RadListBox
+
+    '''<summary>
+    '''RadToolTipQBExpenses control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipQBExpenses As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''DPFrom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DPFrom As Global.Telerik.Web.UI.RadDatePicker
+
+    '''<summary>
+    '''DPTo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DPTo As Global.Telerik.Web.UI.RadDatePicker
+
+    '''<summary>
+    '''btnImportExpensesQB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnImportExpensesQB As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''SqlDataSourceExpenses control.
