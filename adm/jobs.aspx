@@ -713,7 +713,7 @@
                                                     ToolTip="Budget Used"
                                                     Value='<%# Eval("Profit")%>'
                                                     Width="100%"
-                                                    CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
+                                                    CssClass='<%# LocalAPI.GetBudgetUsedCss(Eval("Profit"))%>'>
                                                     <AnimationSettings Duration="0" />
                                                 </telerik:RadProgressBar>
                                             </td>
@@ -768,7 +768,7 @@
                                                         ToolTip="Budget Used. Click to View/Edit Time Entries"
                                                         Value='<%# Eval("Profit")%>'
                                                         Width="100%"
-                                                        CssClass='<%# GetBudgetUsedCss(Eval("Profit"))%>'>
+                                                        CssClass='<%#LocalAPI.GetBudgetUsedCss(Eval("Profit"))%>'>
                                                         <AnimationSettings Duration="0" />
                                                     </telerik:RadProgressBar>
                                                 </asp:LinkButton>

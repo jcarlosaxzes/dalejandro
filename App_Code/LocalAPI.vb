@@ -1706,7 +1706,7 @@ Public Class LocalAPI
 
 #End Region
 
-#Region "Job"
+#Region "Jobs"
 
     Public Shared Function GetJobStatusLabelCSS(ByVal statusId As Integer) As String
         '        0   Not in Progress		"default"
@@ -1735,6 +1735,25 @@ Public Class LocalAPI
             Case 7  ' Done
                 Return "badge badge-dark statuslabel"
         End Select
+    End Function
+
+    Public Shared Function GetBudgetUsedCss(ByVal dPercent As Double) As String
+        Try
+
+            If dPercent < 25 Then
+                Return "GreenYellowProgressBar"
+            ElseIf dPercent < 50 Then
+                Return "GreenProgressBar"
+            ElseIf dPercent < 75 Then
+                Return "OrangeProgressBar" 'System.Drawing.Color.Orange
+            ElseIf dPercent < 100 Then
+                Return "OrangeRedProgressBar" 'System.Drawing.Color.OrangeRed
+            Else
+                Return "RedProgressBar" 'System.Drawing.Color.DarkRed
+            End If
+        Catch ex As Exception
+            Return "GreenYellowProgressBar"
+        End Try
     End Function
 
 
