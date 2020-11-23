@@ -425,7 +425,7 @@ Public Class qbAPI
             Dim employeeQueryService As QueryService(Of Intuit.Ipp.Data.Purchase) = New QueryService(Of Intuit.Ipp.Data.Purchase)(serviceContext)
             Dim objects = employeeQueryService.ExecuteIdsQuery($"Select * From Purchase where TxnDate >= '{dateFrom.ToString("yyyy-MM-dd")}' and TxnDate <= '{dateTo.ToString("yyyy-MM-dd")}'")
 
-            LocalAPI.ExecuteNonQuery($"delete Company_Expenses where companyId = {comapyId} and ExpDate >= '{dateFrom.ToString("yyyy-MM-dd")}' and ExpDate <= '{dateTo.ToString("yyyy-MM-dd")}'")
+            LocalAPI.ExecuteNonQuery($"delete Company_Expenses where companyId = {comapyId} and ExpDate >= '{dateFrom.ToString("yyyy-MM-dd")}' and ExpDate <= '{dateTo.ToString("yyyy-MM-dd")}' and isnull([QBId], 0 ) >  0")
 
 
 
