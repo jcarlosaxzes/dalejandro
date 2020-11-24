@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class avgeemployeesprofit
-    
+
     '''<summary>
     '''cboYear control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboYear As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboClients control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''cboDepartments control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''btnRefresh control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''RadWizard1 control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
-    
+
     '''<summary>
     '''RadWizardStep1 control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
-    
+
     '''<summary>
     '''RadHtmlChart1 control.
     '''</summary>
@@ -75,7 +75,25 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
-    
+
+    '''<summary>
+    '''lblInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblInfo As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''RadToolTipRatioInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipRatioInfo As Global.Telerik.Web.UI.RadToolTip
+
     '''<summary>
     '''RadWizardStep2 control.
     '''</summary>
@@ -84,7 +102,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
-    
+
     '''<summary>
     '''RadHtmlChart2 control.
     '''</summary>
@@ -93,7 +111,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChart2 As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadWizardStep3 control.
     '''</summary>
@@ -102,7 +120,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
-    
+
     '''<summary>
     '''RadGrid1 control.
     '''</summary>
@@ -111,7 +129,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
@@ -120,7 +138,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceYear control.
     '''</summary>
@@ -129,7 +147,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceYear As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceClients control.
     '''</summary>
@@ -138,7 +156,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClients As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceDepartments control.
     '''</summary>
@@ -147,7 +165,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -156,7 +174,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblDepartmentIdIN_List control.
     '''</summary>
@@ -165,7 +183,7 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDepartmentIdIN_List As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -174,7 +192,7 @@ Partial Public Class avgeemployeesprofit
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class

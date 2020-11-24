@@ -395,7 +395,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Hourly Rate ($/hour):
+                                    <td>Pay Rate ($/hour):
                                     </td>
                                     <td>
                                         <telerik:RadTextBox ID="HourRateTextBox" runat="server" Text='<%# Bind("HourRate") %>'>
