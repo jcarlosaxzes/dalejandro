@@ -53,6 +53,17 @@ Public Class qbAPI
         IsValidRefreshToken = False
     End Function
 
+    Public Shared Function IsValidAccessOrRefreshToken(companyId As String) As Boolean
+        If qbAPI.IsValidAccessToken(companyId) Then
+            Return True
+        ElseIf qbAPI.IsValidRefreshToken(companyId) Then
+            Threading.Tasks.Task.Run(Function() qbAPI.UpdateAccessTokenAsync(companyId))
+            Return True
+        End If
+
+        Return False
+    End Function
+
     Public Shared Async Function UpdateAccessTokenAsync(companyId As String) As Threading.Tasks.Task(Of Boolean)
         Try
             Dim clientid = ConfigurationManager.AppSettings("clientid")
