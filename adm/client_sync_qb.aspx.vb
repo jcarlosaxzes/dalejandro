@@ -41,7 +41,8 @@ Public Class client_sync_qb
 
 
     Protected Sub btnGetCustomers_Click(sender As Object, e As EventArgs)
-        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+            System.Threading.Thread.Sleep(3000)
             qbAPI.LoadQBCustomers(lblCompanyId.Text)
             RadGrid1.DataBind()
         Else
@@ -170,7 +171,8 @@ Public Class client_sync_qb
 #Region "Employees"
 
     Private Sub btnGetEmployees_Click(sender As Object, e As EventArgs) Handles btnGetEmployees.Click
-        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+            System.Threading.Thread.Sleep(3000)
             qbAPI.LoadQBEmployees(lblCompanyId.Text)
             RadGridEmployees.DataBind()
         Else
@@ -260,7 +262,8 @@ Public Class client_sync_qb
 #Region "Vendors"
 
     Private Sub btnGetVendors_Click(sender As Object, e As EventArgs) Handles btnGetVendors.Click
-        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+            System.Threading.Thread.Sleep(3000)
             qbAPI.LoadQBVendors(lblCompanyId.Text)
             RadGridVendors.DataBind()
         Else
@@ -373,7 +376,8 @@ Public Class client_sync_qb
 #End Region
 
     Private Sub btnSyncPayments_Click(sender As Object, e As EventArgs) Handles btnSyncPayments.Click
-        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+            System.Threading.Thread.Sleep(3000)
             qbAPI.SyncInvoicesPayment(lblCompanyId.Text)
             RadGridPayments.DataBind()
         Else

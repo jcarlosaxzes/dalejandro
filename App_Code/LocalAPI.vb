@@ -934,6 +934,25 @@ Public Class LocalAPI
 
 
     End Function
+    Public Shared Function GetCompanyBySubDomain() As Integer
+        If HttpContext.Current.Session("IsMultiCompany") = "Verdadero" Then
+            Return 0
+        End If
+
+        If HttpContext.Current.Session("IsMultiCompany") = "Falso" Then
+            Return HttpContext.Current.Session("IsMultiCompanyId")
+        End If
+
+        Dim hostName As String = LocalAPI.GetHostAppSite()
+        Dim hostCompany As Integer = LocalAPI.GetNumericEscalar($"Select isnull(companyId,0) As companyId from Company where SubDomain='{hostName}'")
+        If hostCompany = 0 Then
+            HttpContext.Current.Session("IsMultiCompany") = "Verdadero"
+        Else
+            HttpContext.Current.Session("IsMultiCompany") = "Falso"
+            HttpContext.Current.Session("IsMultiCompanyId") = hostCompany
+        End If
+        Return hostCompany
+    End Function
 
     Public Shared Function GetSubscriberDatabase(ByVal sSubscriberCode As String) As String
         Dim cnn1 As OleDbConnection

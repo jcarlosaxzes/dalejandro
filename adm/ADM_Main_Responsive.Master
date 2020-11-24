@@ -471,7 +471,7 @@
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode ID="SwitchCompany">
                                                 <NodeTemplate>
-                                                    <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="TopRightMenuClass">
+                                                    <asp:LinkButton ID="btnSwitchCompany" runat="server" UseSubmitBehavior="false" OnClick="btnSwitchCompany_Click" Font-Size="16px" CssClass="TopRightMenuClass" Visible='<%# LocalAPI.GetCompanyBySubDomain() = 0 %>'>
                                                             Switch Company
                                                     </asp:LinkButton>
                                                 </NodeTemplate>
@@ -839,7 +839,6 @@
         <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblPageTitle" runat="server" Visible="false"></asp:Label>
         <asp:Label ID="lblUserName" runat="server" Visible="false"></asp:Label>
-        <asp:Label ID="lblIsMultiCompany" runat="server" Visible="false"></asp:Label>
 
     </form>
 
