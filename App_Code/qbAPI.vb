@@ -412,6 +412,54 @@ Public Class qbAPI
 
     End Sub
 
+
+    Public Shared Function CreatePayment(companyId As String, TotalAmt As Double, qbCustomerId As Integer, qbInvoiceId As String, paymentType As PaymentTypeEnum, TxnDate As DateTime) As String
+
+        Dim qbCompanyId = LocalAPI.GetqbCompanyID(companyId)
+
+        Try
+            Dim serviceContext = qbAPI.GetServiceContext(companyId)
+
+            Dim ObjPayment As Payment = New Payment()
+            ObjPayment.PaymentTypeSpecified = True
+            ObjPayment.PaymentType = paymentType
+
+            ObjPayment.TotalAmtSpecified = True
+            ObjPayment.TotalAmt = TotalAmt
+            ObjPayment.CustomerRef = New ReferenceType()
+            ObjPayment.CustomerRef.Value = qbCustomerId
+            ObjPayment.TxnDateSpecified = True
+            ObjPayment.TxnDate = TxnDate
+            ObjPayment.CurrencyRef = New ReferenceType With {.name = "US Dollar", .Value = "USD"}
+            Dim link As LinkedTxn = New LinkedTxn With {
+                .TxnId = qbInvoiceId, .TxnType = "Invoice"
+                }
+
+            ObjPayment.LinkedTxn = New LinkedTxn() {link}
+
+            'Dim li = New Line With {.Amount = TotalAmt,
+            '                  .AmountSpecified = True,
+            '                  .DetailType = LineDetailTypeEnum.PaymentLineDetail,
+            '                  .DetailTypeSpecified = True
+            '}
+            'Dim link As LinkedTxn = New LinkedTxn With {.TxnId = qbInvoiceId, .TxnType = "Invoice"}
+            'li.LinkedTxn = New LinkedTxn() {link}
+            'ObjPayment.Line = New Line() {li}
+
+            Dim dataSrv = New DataService(serviceContext)
+            Dim itemAdded = dataSrv.Add(Of Payment)(ObjPayment)
+
+            Return itemAdded.Id
+
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+        Return "0"
+
+    End Function
+
     Public Shared Sub LoadQBExpenses(comapyId As String, dateFrom As DateTime, dateTo As DateTime)
         Dim dt As New DataTable()
 

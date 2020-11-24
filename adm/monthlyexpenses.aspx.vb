@@ -296,7 +296,8 @@ Public Class monthlyexpenses
     End Sub
 
     Private Sub btnImportExpensesQB_Click(sender As Object, e As EventArgs) Handles btnImportExpensesQB.Click
-        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+            System.Threading.Thread.Sleep(3000)
             If Not IsNothing(DPFrom.DbSelectedDate) And Not IsNothing(DPTo.DbSelectedDate) Then
                 qbAPI.LoadQBExpenses(lblCompanyId.Text, DPFrom.DbSelectedDate, DPTo.DbSelectedDate)
                 Refresh()
