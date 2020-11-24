@@ -195,7 +195,7 @@ Public Class invoices
                 If invoice("qbInvoiceId") > 0 Then
                     Dim qbClietId As String = LocalAPI.GetClientProperty(invoice("clientId"), "qbCustomerId")
                     If Val(qbClietId) > 0 Then
-                        Dim qbPaymentId = qbAPI.CreatePayment(lblCompanyId.Text, txtAmountPayment.Text, qbClietId, invoice("qbInvoiceId"), PaymentTypeEnum.Other, DateTime.Now)
+                        Dim qbPaymentId = qbAPI.CreatePayment(lblCompanyId.Text, txtAmountPayment.Text, qbClietId, invoice("qbInvoiceId"), PaymentTypeEnum.Other, DateTime.Now, txtPaymentNotes.Text)
                         LocalAPI.ExecuteNonQuery($"update Invoices_payments set qbpaymentId = {qbPaymentId} where id = {paymentId}")
                     End If
                 End If

@@ -25,6 +25,7 @@ Public Class monthlyexpenses
             DPFrom.DbSelectedDate = Date.Today.Month & "/01/" & Date.Today.Year
             DPTo.DbSelectedDate = DateAdd(DateInterval.Month, 1, DPFrom.DbSelectedDate)
             DPTo.DbSelectedDate = DateAdd(DateInterval.Day, -1, DPTo.DbSelectedDate)
+            btnExpensesImportQb.Visible = LocalAPI.IsQuickBookModule(lblCompanyId.Text)
             Refresh()
         End If
     End Sub
