@@ -19,7 +19,6 @@ Public Class ADM_Main_Responsive
                 Session("LastPage") = ""
             End If
 
-            lblIsMultiCompany.Text = Session("IsMultiCompany")
 
             Dim versionId As Integer = LocalAPI.sys_VersionId(Session("companyId"))
             Session("Version") = versionId
@@ -85,6 +84,8 @@ Public Class ADM_Main_Responsive
                 Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)
                 Task.Run(Function() LocalAPI.EmployeePageTracking(UserId, Session("LastPage")))
             End If
+
+            btnCompanyName.Enabled = (LocalAPI.GetCompanyBySubDomain() = 0)
         End If
     End Sub
 
@@ -200,7 +201,7 @@ Public Class ADM_Main_Responsive
 
     End Function
     Public Sub btnSwitchCompany_Click(sender As Object, e As EventArgs)
-        If lblIsMultiCompany.Text = 1 Then
+        If btnCompanyName.Enabled Then
             RadToolTipSwitchCompany.Visible = True
             RadToolTipSwitchCompany.Show()
         Else

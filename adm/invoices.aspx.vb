@@ -187,7 +187,21 @@ Public Class invoices
         Try
             RadGrid1.DataBind()
             RadToolTipInsertPayment.Visible = False
-            Master.ErrorMessage("The payment has been confirmed successfully!!!")
+            'sync with QuickBooks
+            If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+                System.Threading.Thread.Sleep(3000)
+                Dim paymentId As Integer = e.Command.Parameters("@paymentId").Value
+                Dim invoice = LocalAPI.GetRecordFromQuery($"Select isNull(max(qbInvoiceId),0) as qbInvoiceId ,  isNull(max(Jobs.Client),0) as clientId from [dbo].[Invoices] left join Jobs on (Jobs.id = [Invoices].JobId) where Invoices.Id= {lblInvoiceId.Text}")
+                If invoice("qbInvoiceId") > 0 Then
+                    Dim qbClietId As String = LocalAPI.GetClientProperty(invoice("clientId"), "qbCustomerId")
+                    If Val(qbClietId) > 0 Then
+                        Dim qbPaymentId = qbAPI.CreatePayment(lblCompanyId.Text, txtAmountPayment.Text, qbClietId, invoice("qbInvoiceId"), PaymentTypeEnum.Other, DateTime.Now, txtPaymentNotes.Text)
+                        LocalAPI.ExecuteNonQuery($"update Invoices_payments set qbpaymentId = {qbPaymentId} where id = {paymentId}")
+                    End If
+                End If
+            End If
+
+                Master.ErrorMessage("The payment has been confirmed successfully!!!")
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
@@ -314,7 +328,8 @@ Public Class invoices
 
                         RadGrid1.Rebind()
                     Else
-                        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+                            System.Threading.Thread.Sleep(3000)
                             Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                             Dim qbCustomerId As Integer = ids(1)
                             lblInvoiceId.Text = ids(0)

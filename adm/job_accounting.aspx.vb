@@ -145,7 +145,8 @@ Public Class Job_accounting
 
                         RadGridIncoices.Rebind()
                     Else
-                        If qbAPI.IsValidAccessToken(lblCompanyId.Text) Then
+                        If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
+                            System.Threading.Thread.Sleep(3000)
                             Dim ids As String() = CType(e.CommandArgument, String).Split(",")
                             Dim qbCustomerId As Integer = ids(1)
                             lblInvoiceId.Text = ids(0)

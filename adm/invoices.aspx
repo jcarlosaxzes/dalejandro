@@ -264,8 +264,9 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
-                                                            <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Invoice Email to Client
+                                                <asp:LinkButton ID="LinkButton6" runat="server" UseSubmitBehavior="false" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
+                                                    Visible='<%#IIf(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") <> 0, False, True) %>'>
+                                                        <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Invoice Email to Client
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -696,7 +697,7 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourcePayments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="INVOICE_PAYMENTS3_INSERT" InsertCommandType="StoredProcedure">
+        InsertCommand="INVOICE_PAYMENTS_v20_INSERT" InsertCommandType="StoredProcedure">
         <InsertParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblInvoiceId" Name="InvoiceId" PropertyName="Text" Type="Int32" />
@@ -709,6 +710,8 @@
             <asp:ControlParameter ControlID="lblKeyName" Name="KeyName" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="lblContentBytes" Name="ContentBytes" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblContentType" Name="ContentType" PropertyName="Text" Type="String" />
+            <asp:Parameter Name="paymentId" Direction="Output" Type="Int32" DefaultValue="0" />
+            
         </InsertParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceViewSummary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
