@@ -183,15 +183,20 @@ Public Class client_sync_qb
 
     Protected Sub RadGridEmployees_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridEmployees.ItemCommand
 
+        Dim ids As String() = CType(e.CommandArgument, String).Split(",")
+        Dim QBId As Integer = ids(0)
+        Dim EmployeeId = ids(1)
+
         Select Case e.CommandName
             Case "Link"
-                Dim ids As String() = CType(e.CommandArgument, String).Split(",")
-                Dim QBId As Integer = ids(0)
-                Dim EmployeId = ids(1)
-                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = {QBId} where Id = " & EmployeId)
+                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = {QBId} where Id = " & EmployeeId)
                 RadGridEmployees.Rebind()
                 RadGridLinkedEmployees.Rebind()
-
+            Case "QBUpdate"
+                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = {QBId} where Id = " & EmployeeId)
+                LocalAPI.ExecuteNonQuery($"UPDATE EP SET EP.[Address] = QE.[Address],EP.[Address2] = QE.[Address2],EP.[City] = QE.[City],EP.[Estate] = QE.[Estate],EP.[ZipCode] = QE.[ZipCode],EP.[Phone] = QE.PrimaryPhone,EP.[Cellular] = QE.Mobile,EP.[starting_Date] = QE.[starting_Date],EP.[HourRate] = QE.[HourRate],EP.[SS] = QE.[SS],EP.[DOB] = QE.[DOB],EP.[Gender] =case when QE.[Gender]= 'Male' then 'M' else 'F' End FROM [Employees] as EP INNER JOIN [Employees_SyncQB] As QE ON EP.qbEmployeeId = QE.QBId WHERE EP.id = {EmployeeId}")
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
 
             Case "Search"
                 lblSelectEmployee.Text = e.CommandArgument
@@ -206,8 +211,8 @@ Public Class client_sync_qb
         Select Case e.CommandName
             Case "Link"
                 Dim QBId As Integer = lblSelectEmployee.Text
-                Dim EmployeId = e.CommandArgument
-                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = {QBId} where Id = " & EmployeId)
+                Dim EmployeeId = e.CommandArgument
+                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = {QBId} where Id = " & EmployeeId)
                 RadGridEmployees.Rebind()
                 RadGridLinkedEmployees.Rebind()
 
@@ -216,10 +221,14 @@ Public Class client_sync_qb
 
     Protected Sub RadGridLinkedEmployees_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGridLinkedEmployees.ItemCommand
 
+        Dim EmployeeId As Integer = e.CommandArgument
         Select Case e.CommandName
             Case "UnLink"
-                Dim EmployeId As Integer = e.CommandArgument
-                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = 0 where Id = " & EmployeId)
+                LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = 0 where Id = " & EmployeeId)
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
+            Case "QBUpdate"
+                LocalAPI.ExecuteNonQuery($"UPDATE EP SET EP.[Address] = QE.[Address],EP.[Address2] = QE.[Address2],EP.[City] = QE.[City],EP.[Estate] = QE.[Estate],EP.[ZipCode] = QE.[ZipCode],EP.[Phone] = QE.PrimaryPhone,EP.[Cellular] = QE.Mobile,EP.[starting_Date] = QE.[starting_Date],EP.[HourRate] = QE.[HourRate],EP.[SS] = QE.[SS],EP.[DOB] = QE.[DOB],EP.[Gender] =case when QE.[Gender]= 'Male' then 'M' else 'F' End FROM [Employees] as EP INNER JOIN [Employees_SyncQB] As QE ON EP.qbEmployeeId = QE.QBId WHERE EP.id = {EmployeeId}")
                 RadGridEmployees.Rebind()
                 RadGridLinkedEmployees.Rebind()
         End Select
@@ -252,7 +261,30 @@ Public Class client_sync_qb
             Master.ErrorMessage(ex.Message)
         End Try
     End Sub
+    Private Sub btnBulkLinkUpdateEmployees_Click(sender As Object, e As EventArgs) Handles btnBulkLinkUpdateEmployees.Click
+        Dim nRecs As Integer
+        Try
+            If RadGridEmployees.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGridEmployees.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        Dim EmployeeId = Val(dataItem("Id").Text)
+                        LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = { Val(dataItem("QBId").Text)} where Id = " & EmployeeId)
+                        LocalAPI.ExecuteNonQuery($"UPDATE EP SET EP.[Address] = QE.[Address],EP.[Address2] = QE.[Address2],EP.[City] = QE.[City],EP.[Estate] = QE.[Estate],EP.[ZipCode] = QE.[ZipCode],EP.[Phone] = QE.PrimaryPhone,EP.[Cellular] = QE.Mobile,EP.[starting_Date] = QE.[starting_Date],EP.[HourRate] = QE.[HourRate],EP.[SS] = QE.[SS],EP.[DOB] = QE.[DOB],EP.[Gender] =case when QE.[Gender]= 'Male' then 'M' else 'F' End FROM [Employees] as EP INNER JOIN [Employees_SyncQB] As QE ON EP.qbEmployeeId = QE.QBId WHERE EP.id = {EmployeeId}")
 
+                        nRecs = nRecs + 1
+                    End If
+                Next
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
+                Master.ErrorMessage(nRecs & " Records Linked")
+            Else
+                Master.ErrorMessage("Select (Mark) Records to Link")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
 #End Region
 
 
