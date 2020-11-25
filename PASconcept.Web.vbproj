@@ -652,6 +652,7 @@
     <Content Include="adm\jobtypes.aspx" />
     <Content Include="adm\jobuse.aspx" />
     <Content Include="adm\job_accounting.aspx" />
+    <Content Include="adm\job_addemployee.aspx" />
     <Content Include="adm\job_employees.aspx" />
     <Content Include="adm\job_images_files.aspx" />
     <Content Include="adm\job_job.aspx" />
@@ -3592,6 +3593,13 @@
       <DependentUpon>job_accounting.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\job_addemployee.aspx.designer.vb">
+      <DependentUpon>job_addemployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\job_addemployee.aspx.vb">
+      <DependentUpon>job_addemployee.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\job_employees.aspx.designer.vb">
       <DependentUpon>job_employees.aspx</DependentUpon>
     </Compile>
@@ -5032,7 +5040,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

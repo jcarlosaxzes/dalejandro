@@ -87,10 +87,10 @@
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
                         <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" Display="false"
-                            DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}"
+                            DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
                             Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE(%)" ReadOnly="True" SortExpression="FTE" UniqueName="FTE" Display="false"
+                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE(%)" ReadOnly="True" SortExpression="FTE" UniqueName="FTE"
                             DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
                             Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>

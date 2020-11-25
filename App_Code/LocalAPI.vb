@@ -10759,6 +10759,8 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/adm/job_tags.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
                     Case 8012
                         url = LocalAPI.GetHostAppSite() & "/adm/job_transmittals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8014
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_addemployee.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
 
                 End Select
                 If PrintParameter Then

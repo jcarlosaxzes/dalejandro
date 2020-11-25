@@ -34,7 +34,10 @@ Public Class job_employees
     '    RadGrid1.DataBind()
     'End Sub
     Protected Sub btnSetEmployee_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetEmployee.Click
-        CreateRadWindows("SetEmployee", "~/ADM/JobAssignEmployee.aspx?JobId=" & lblJobId.Text, 960, 700, False, "OnClientClose")
+        'CreateRadWindows("SetEmployee", "~/ADM/JobAssignEmployee.aspx?JobId=" & lblJobId.Text, 960, 700, False, "OnClientClose")
+        Dim sUrl As String = LocalAPI.GetSharedLink_URL(8014, lblJobId.Text)
+        Response.Redirect(sUrl)
+
     End Sub
 
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean, OnClientCloseFn As String)
@@ -98,7 +101,7 @@ Public Class job_employees
         Dim sFullBody As New System.Text.StringBuilder
         sFullBody.Append("You had been assigned Job " & JobCodeName)
         sFullBody.Append("<br />")
-        sFullBody.Append("Hours (remaining): " & dHourds)
+        sFullBody.Append("Hours (remaining) :  " & dHourds)
         sFullBody.Append("<br />")
 
         LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' asigned", sFullBody, lblCompanyId.Text)
