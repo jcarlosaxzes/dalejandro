@@ -28,7 +28,7 @@
     <div class="container">
 
         <div class="pasconcept-bar">
-            <span class="pasconcept-pagetitle">Assigned Employees</span>
+            <span class="pasconcept-pagetitle">Team Members</span>
             <span style="float: right; vertical-align: middle;">
                 <asp:LinkButton ID="btnSetEmployee" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Assin Employees">
                         Add Employee

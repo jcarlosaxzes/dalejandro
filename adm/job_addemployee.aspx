@@ -90,7 +90,7 @@
 
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 60%; vertical-align: top">
+                <td style="width: 50%; vertical-align: top">
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td style="width: 180px; text-align: right">Department:</td>

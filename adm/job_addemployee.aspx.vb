@@ -70,7 +70,7 @@ Public Class job_addemployee
     Private Sub DefineHoursPerBudget()
         Dim riskValue As Double = sliderUsedBudget.Value / 100
         If Val(cboMulticolumnEmployee.Value) > 0 Then
-            Dim dJobBudget = LocalAPI.GetJobProperty(lblJobId.Text, "Budget")
+            Dim dJobBudget = LocalAPI.GetJobProperty(lblJobId.Text, "Budget") - LocalAPI.GetJobSubContractedFees(lblJobId.Text)
             Dim dRate As Double
             If dJobBudget > 0 Then
                 dRate = LocalAPI.GetEmployeeHourRate(cboMulticolumnEmployee.Value)
