@@ -2513,6 +2513,25 @@ Public Class LocalAPI
 
     End Function
 
+    Public Shared Function GetJobSubContractedFees(ByVal jobId As Long) As Double
+        Try
+            '************COSTE POR HORA DEL EMPLOYEE x MULTIPLIER ************************
+            Return GetNumericEscalar(String.Format("select dbo.JobSubContracted({0})", jobId))
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+    Public Shared Function GetJobBudgetUsed(ByVal jobId As Long) As Double
+        Try
+            Return GetNumericEscalar(String.Format("select dbo.JobCoste({0})", jobId))
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+
     Public Shared Function GetJobStreeViewImage(ByRef jobId As Integer, Optional Resolution As String = "1024x768") As String
         Dim Address As String = GetStringEscalar("SELECT isnull(ProjectLocation,'') FROM [Jobs] where [Id]=" & jobId)
         Return "https://maps.googleapis.com/maps/api/streetview?size=" & Resolution & "&location=" & Address & "&key=AIzaSyAqYC89QG6cp_vv1UnQIo-wgVpRV4wzX3A"
@@ -10759,6 +10778,8 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/adm/job_tags.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
                     Case 8012
                         url = LocalAPI.GetHostAppSite() & "/adm/job_transmittals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+                    Case 8014
+                        url = LocalAPI.GetHostAppSite() & "/adm/job_addemployee.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
 
                 End Select
                 If PrintParameter Then

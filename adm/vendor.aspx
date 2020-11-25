@@ -72,7 +72,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: right">Compamy:
+                        <td style="text-align: right">Company:
                         </td>
                         <td>
                             <telerik:RadTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("Company")%>'

@@ -10,110 +10,158 @@
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
+           
             </button>
         </span>
     </div>
 
     <div class="collapse" id="collapseFilter">
-    <table class="table-sm pasconcept-bar" style="width:100%">
-        <tr>
-            <td style="width: 150px;">
-                <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear"
-                    DataTextField="nYear" DataValueField="Year" Width="100%" AppendDataBoundItems="True">
-                    <Items>
-                        <telerik:RadComboBoxItem Selected="True" runat="server" Text="(All Years... )" Value="-1" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-            <td style="width: 400px">
-                <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="True"
-                    DataSourceID="SqlDataSourceClients" DataTextField="Name" DataValueField="Id"
-                    Width="100%">
-                    <Items>
-                        <telerik:RadComboBoxItem Selected="True" runat="server" Text="(All Clients... )"
-                            Value="-1" />
-                    </Items>
-                </telerik:RadComboBox>
-            </td>
-            <td style="width: 350px">
-                <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id"
-                    Width="100%" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
-                    <Localization AllItemsCheckedString="All Departments Checked" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
-                </telerik:RadComboBox>
-            </td>
-            <td style="text-align: right">
-                <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
+        <table class="table-sm pasconcept-bar" style="width: 100%">
+            <tr>
+                <td style="width: 150px;">
+                    <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear"
+                        DataTextField="nYear" DataValueField="Year" Width="100%" AppendDataBoundItems="True">
+                        <Items>
+                            <telerik:RadComboBoxItem Selected="True" runat="server" Text="(All Years... )" Value="-1" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+                <td style="width: 400px">
+                    <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="True"
+                        DataSourceID="SqlDataSourceClients" DataTextField="Name" DataValueField="Id"
+                        Width="100%">
+                        <Items>
+                            <telerik:RadComboBoxItem Selected="True" runat="server" Text="(All Clients... )"
+                                Value="-1" />
+                        </Items>
+                    </telerik:RadComboBox>
+                </td>
+                <td style="width: 350px">
+                    <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id"
+                        Width="100%" CheckBoxes="true" Height="300px" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
+                        <Localization AllItemsCheckedString="All Departments Checked" CheckAllString="Check All..." ItemsCheckedString="items checked"></Localization>
+                    </telerik:RadComboBox>
+                </td>
+                <td style="text-align: right">
+                    <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                 </asp:LinkButton>
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="pasconcept-bar">
         <telerik:RadWizard ID="RadWizard1" runat="server" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Average Chart" StepType="Step">
-                    <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
-                        <ChartTitle Text="Average Budget Used(%) by Employee">
-                            <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
-                        </ChartTitle>
-                        <PlotArea>
-                            <Series>
-                                <telerik:ColumnSeries DataFieldY="ConsistencyPercent" Name="Consistency %" AxisName="LeftAxis">
-                                    <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                    </LabelsAppearance>
-                                    <Appearance>
-                                        <FillStyle BackgroundColor="MediumSeaGreen" />
-                                    </Appearance>
-                                    <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                                </telerik:ColumnSeries>
-                                <telerik:ColumnSeries DataFieldY="EfficiencyPercent" Name="Efficiency %" AxisName="LeftAxis">
-                                    <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                    </LabelsAppearance>
-                                    <Appearance>
-                                        <FillStyle BackgroundColor="YellowGreen" />
-                                    </Appearance>
-                                    <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                                </telerik:ColumnSeries>
-                            </Series>
-                            <Series>
-                                <telerik:LineSeries DataFieldY="Jobs_Count" Name="Jobs_Count" AxisName="RightAxis">
-                                    <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
-                                    </LabelsAppearance>
-                                    <Appearance>
-                                        <FillStyle BackgroundColor="Red" />
-                                    </Appearance>
-                                    <LineAppearance LineStyle="Smooth" Width="2" />
-                                    <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
-                                    <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                </telerik:LineSeries>
-                            </Series>
-                            <YAxis Name="LeftAxis" MajorTickSize="4" MajorTickType="Outside" MinorTickSize="1" Step="25" Color="MediumSeaGreen" Width="3">
-                                <TitleAppearance Text="% Budget Used"></TitleAppearance>
-                                <LabelsAppearance DataFormatString="{0:N0}"></LabelsAppearance>
-                                <MinorGridLines Visible="false"></MinorGridLines>
-                            </YAxis>
-                            <AdditionalYAxes>
-                                <telerik:AxisY Name="RightAxis" Color="Red" Width="3">
-                                    <TitleAppearance Text="# Jobs"></TitleAppearance>
-                                </telerik:AxisY>
-                            </AdditionalYAxes>
-                            <XAxis DataLabelsField="EmployeeName">
-                                <TitleAppearance Text="Employee"></TitleAppearance>
-                                <MinorGridLines Visible="false"></MinorGridLines>
-                                <LabelsAppearance RotationAngle="315"></LabelsAppearance>
-                                <AxisCrossingPoints>
-                                    <telerik:AxisCrossingPoint Value="0" />
-                                    <telerik:AxisCrossingPoint Value="9999" />
-                                </AxisCrossingPoints>
-                            </XAxis>
-                        </PlotArea>
-                        <Legend>
-                            <Appearance Visible="True" Position="Top"></Appearance>
-                        </Legend>
 
-                    </telerik:RadHtmlChart>
+                    <table style="width: 100%">
+                        <tr>
+                            <td>
+
+                                <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
+                                    <ChartTitle Text="Average Budget Used(%) by Employee">
+                                        <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
+                                    </ChartTitle>
+                                    <PlotArea>
+                                        <Series>
+                                            <telerik:ColumnSeries DataFieldY="ConsistencyPercent" Name="Consistency %" AxisName="LeftAxis">
+                                                <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
+                                                </LabelsAppearance>
+                                                <Appearance>
+                                                    <FillStyle BackgroundColor="MediumSeaGreen" />
+                                                </Appearance>
+                                                <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
+                                            </telerik:ColumnSeries>
+                                            <telerik:ColumnSeries DataFieldY="EfficiencyPercent" Name="Efficiency %" AxisName="LeftAxis">
+                                                <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
+                                                </LabelsAppearance>
+                                                <Appearance>
+                                                    <FillStyle BackgroundColor="YellowGreen" />
+                                                </Appearance>
+                                                <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
+                                            </telerik:ColumnSeries>
+                                        </Series>
+                                        <Series>
+                                            <telerik:LineSeries DataFieldY="Jobs_Count" Name="Number of Jobs" AxisName="RightAxis">
+                                                <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
+                                                </LabelsAppearance>
+                                                <Appearance>
+                                                    <FillStyle BackgroundColor="Red" />
+                                                </Appearance>
+                                                <LineAppearance LineStyle="Smooth" Width="2" />
+                                                <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
+                                                <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                            </telerik:LineSeries>
+                                        </Series>
+                                        <YAxis Name="LeftAxis" MajorTickSize="4" MajorTickType="Outside" MinorTickSize="1" Step="25" Color="MediumSeaGreen" Width="3">
+                                            <TitleAppearance Text="% Budget Used"></TitleAppearance>
+                                            <LabelsAppearance DataFormatString="{0:N0}"></LabelsAppearance>
+                                            <MinorGridLines Visible="false"></MinorGridLines>
+                                        </YAxis>
+                                        <AdditionalYAxes>
+                                            <telerik:AxisY Name="RightAxis" Color="Red" Width="3">
+                                                <TitleAppearance Text="# Jobs"></TitleAppearance>
+                                            </telerik:AxisY>
+                                        </AdditionalYAxes>
+                                        <XAxis DataLabelsField="EmployeeName">
+                                            <TitleAppearance Text="Employee"></TitleAppearance>
+                                            <MinorGridLines Visible="false"></MinorGridLines>
+                                            <LabelsAppearance RotationAngle="315"></LabelsAppearance>
+                                            <AxisCrossingPoints>
+                                                <telerik:AxisCrossingPoint Value="0" />
+                                                <telerik:AxisCrossingPoint Value="9999" />
+                                            </AxisCrossingPoints>
+                                        </XAxis>
+                                    </PlotArea>
+                                    <Legend>
+                                        <Appearance Visible="True" Position="Top"></Appearance>
+                                    </Legend>
+
+                                </telerik:RadHtmlChart>
+                            </td>
+                            <td style="width: 20px; text-align: center; vertical-align: top">
+                                <asp:HyperLink runat="server" ID="lblInfo" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i class="fas fa-info"></i>
+                                </asp:HyperLink>
+                                <telerik:RadToolTip ID="RadToolTipRatioInfo" runat="server" TargetControlID="lblInfo"
+                                    RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                    Position="Center" Modal="True" Title="" ShowEvent="OnClick"
+                                    HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true"
+                                    RelativeTo="BrowserWindow" ManualClose="true">
+
+                                    <div class="pasconcept-bar noprint">
+                                        <span class="pasconcept-pagetitle">Employees Efficiency Chart</span>
+                                    </div>
+                                    <table class="table table-striped" style="width: 850px; font-size: medium; text-align: center;">
+                                        <tr>
+                                            <td style="width: 200px;">
+                                                <span class="badge badge-secondary">Consistency % = </span>
+                                            </td>
+                                            <td>Consistency expression.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="badge badge-danger">Efficiency % = </span>
+                                            </td>
+                                            <td>
+                                                Efficiency % expression
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="badge badge-dark">Number of Jobs = </span>
+                                            </td>
+                                            <td>Number of Jobs in which the employee has participated in the selected Year / Client. 
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </telerik:RadToolTip>
+                            </td>
+                        </tr>
+                    </table>
                 </telerik:RadWizardStep>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Profit Chart" StepType="Step">
                     <telerik:RadHtmlChart ID="RadHtmlChart2" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
@@ -244,7 +292,7 @@
         </telerik:RadWizard>
     </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="YearStadistic_EMPLOYES_PROFIT3" SelectCommandType="StoredProcedure">
+        SelectCommand="YearStadistic_v20_EMPLOYES_PROFIT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" />
