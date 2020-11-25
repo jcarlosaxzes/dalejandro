@@ -13,6 +13,42 @@ Imports Intuit.Ipp.OAuth2PlatformClient
 Imports Intuit.Ipp.ReportService
 
 Public Class qbAPI
+    Public Shared Function GetAppEnvironment() As String
+        If HttpContext.Current.Session("companyId") = 99 Then
+            Return "sandbox"
+        End If
+        Return ConfigurationManager.AppSettings("appEnvironment")
+    End Function
+
+    Public Shared Function GetClientId() As String
+        If HttpContext.Current.Session("companyId") = 99 Then
+            Return "ABwMje9uSyeIpk7Xpeuovbn9SqhDWRkZ6HG3tt6aiNpLutuyGV"
+        End If
+        Return ConfigurationManager.AppSettings("clientid")
+    End Function
+
+    Public Shared Function GetClientSecret() As String
+        If HttpContext.Current.Session("companyId") = 99 Then
+            Return "jUCh3Wu32CB3l0oqGJ9L2Pqs2Hpd2EUgEPBwWXmc"
+        End If
+        Return ConfigurationManager.AppSettings("clientsecret")
+    End Function
+
+    Public Shared Function GetRedirectUrl() As String
+        If HttpContext.Current.Session("companyId") = 99 Then
+            Return LocalAPI.GetHostAppSite() & "adm/qb_refreshtoken.aspx"
+        End If
+        Return ConfigurationManager.AppSettings("redirectUrl")
+    End Function
+
+    Public Shared Function GetBaseURL() As String
+        If HttpContext.Current.Session("companyId") = 99 Then
+            Return "https://sandbox-quickbooks.api.intuit.com/"
+        End If
+        Return ConfigurationManager.AppSettings("QB_Base_URL")
+    End Function
+
+
 
     Public Shared Function GetServiceContext(companyId As String) As ServiceContext
         Try
@@ -23,7 +59,7 @@ Public Class qbAPI
             'Create a ServiceContext with Auth tokens And realmId
             Dim serviceContext = New ServiceContext(qbComapny, IntuitServicesType.QBO, oauthValidator)
             serviceContext.IppConfiguration.MinorVersion.Qbo = "23"
-            serviceContext.IppConfiguration.BaseUrl.Qbo = ConfigurationManager.AppSettings("QB_Base_URL")
+            serviceContext.IppConfiguration.BaseUrl.Qbo = qbAPI.GetBaseURL()
             Return serviceContext
 
         Catch ex As Exception
@@ -66,10 +102,10 @@ Public Class qbAPI
 
     Public Shared Async Function UpdateAccessTokenAsync(companyId As String) As Threading.Tasks.Task(Of Boolean)
         Try
-            Dim clientid = ConfigurationManager.AppSettings("clientid")
-            Dim clientsecret = ConfigurationManager.AppSettings("clientsecret")
-            Dim redirectUrl = ConfigurationManager.AppSettings("redirectUrl")
-            Dim environment = ConfigurationManager.AppSettings("appEnvironment")
+            Dim clientid = qbAPI.GetClientId()
+            Dim clientsecret = qbAPI.GetClientSecret()
+            Dim redirectUrl = qbAPI.GetRedirectUrl()
+            Dim environment = qbAPI.GetAppEnvironment()
             Dim auth2Client As OAuth2Client = New OAuth2Client(clientid, clientsecret, redirectUrl, environment)
 
             Dim tokenResp = Await auth2Client.RefreshTokenAsync(LocalAPI.GetqbAccessTokenSecret(companyId))
@@ -89,10 +125,10 @@ Public Class qbAPI
 
     Public Shared Async Function RevokeDisconnectTokenAsync(companyId As String) As Threading.Tasks.Task(Of Boolean)
         Try
-            Dim clientid = ConfigurationManager.AppSettings("clientid")
-            Dim clientsecret = ConfigurationManager.AppSettings("clientsecret")
-            Dim redirectUrl = ConfigurationManager.AppSettings("redirectUrl")
-            Dim environment = ConfigurationManager.AppSettings("appEnvironment")
+            Dim clientid = qbAPI.GetClientId()
+            Dim clientsecret = qbAPI.GetClientSecret()
+            Dim redirectUrl = qbAPI.GetRedirectUrl()
+            Dim environment = qbAPI.GetAppEnvironment()
             Dim auth2Client As OAuth2Client = New OAuth2Client(clientid, clientsecret, redirectUrl, environment)
             Dim qbCurrentToken As String = LocalAPI.GetCompanyProperty(companyId, "qbAccessToken")
             Dim tokenResp = Await auth2Client.RevokeTokenAsync(qbCurrentToken)

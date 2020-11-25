@@ -52,10 +52,10 @@ Public Class qb_refreshtoken
             'https://developer.intuit.com/app/developer/dashboard
             'user:jcarlos@axzes.com
             '
-            Dim clientid = ConfigurationManager.AppSettings("clientid")
-            Dim clientsecret = ConfigurationManager.AppSettings("clientsecret")
-            Dim redirectUrl = ConfigurationManager.AppSettings("redirectUrl")
-            Dim environment = ConfigurationManager.AppSettings("appEnvironment")
+            Dim clientid = qbAPI.GetClientId()
+            Dim clientsecret = qbAPI.GetClientSecret()
+            Dim redirectUrl = qbAPI.GetRedirectUrl()
+            Dim environment = qbAPI.GetAppEnvironment()
             Dim auth2Client As OAuth2Client = New OAuth2Client(clientid, clientsecret, redirectUrl, environment)
 
             Dim tokenResponse = Await auth2Client.GetBearerTokenAsync(code)
@@ -83,10 +83,10 @@ Public Class qb_refreshtoken
             Dim scopes As New List(Of OidcScopes)
             scopes.Add(OidcScopes.Accounting)
 
-            Dim clientid = ConfigurationManager.AppSettings("clientid")
-            Dim clientsecret = ConfigurationManager.AppSettings("clientsecret")
-            Dim redirectUrl = ConfigurationManager.AppSettings("redirectUrl")
-            Dim environment = ConfigurationManager.AppSettings("appEnvironment")
+            Dim clientid = qbAPI.GetClientId()
+            Dim clientsecret = qbAPI.GetClientSecret()
+            Dim redirectUrl = qbAPI.GetRedirectUrl()
+            Dim environment = qbAPI.GetAppEnvironment()
 
             Dim auth2Client As OAuth2Client = New OAuth2Client(clientid, clientsecret, redirectUrl, environment)
 
