@@ -232,7 +232,11 @@
                                 <asp:Button ID="btnGetEmployees" runat="server" Text="Get Employees from QuickBooks Online " CssClass="btn btn-success" />
 
                                 <asp:LinkButton ID="btnBulkLinkEmployees" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Link all selected QuickBook Employees to PASconcept">
-                    Bulk Link
+                                Bulk Link
+                                </asp:LinkButton>
+
+                                <asp:LinkButton ID="btnBulkLinkUpdateEmployees" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Update all selected Employee Info from QuickBook to PASconcept">
+                                Bulk Link & Update
                                 </asp:LinkButton>
                             </span>
                         </div>

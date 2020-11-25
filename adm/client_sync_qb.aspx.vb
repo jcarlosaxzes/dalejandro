@@ -261,7 +261,30 @@ Public Class client_sync_qb
             Master.ErrorMessage(ex.Message)
         End Try
     End Sub
+    Private Sub btnBulkLinkUpdateEmployees_Click(sender As Object, e As EventArgs) Handles btnBulkLinkUpdateEmployees.Click
+        Dim nRecs As Integer
+        Try
+            If RadGridEmployees.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGridEmployees.SelectedItems
+                    If dataItem.Selected Then
+                        dataItem.Selected = False
+                        Dim EmployeeId = Val(dataItem("Id").Text)
+                        LocalAPI.ExecuteNonQuery($"update Employees set [qbEmployeeId] = { Val(dataItem("QBId").Text)} where Id = " & EmployeeId)
+                        LocalAPI.ExecuteNonQuery($"UPDATE EP SET EP.[Address] = QE.[Address],EP.[Address2] = QE.[Address2],EP.[City] = QE.[City],EP.[Estate] = QE.[Estate],EP.[ZipCode] = QE.[ZipCode],EP.[Phone] = QE.PrimaryPhone,EP.[Cellular] = QE.Mobile,EP.[starting_Date] = QE.[starting_Date],EP.[HourRate] = QE.[HourRate],EP.[SS] = QE.[SS],EP.[DOB] = QE.[DOB],EP.[Gender] =case when QE.[Gender]= 'Male' then 'M' else 'F' End FROM [Employees] as EP INNER JOIN [Employees_SyncQB] As QE ON EP.qbEmployeeId = QE.QBId WHERE EP.id = {EmployeeId}")
 
+                        nRecs = nRecs + 1
+                    End If
+                Next
+                RadGridEmployees.Rebind()
+                RadGridLinkedEmployees.Rebind()
+                Master.ErrorMessage(nRecs & " Records Linked")
+            Else
+                Master.ErrorMessage("Select (Mark) Records to Link")
+            End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
 #End Region
 
 
