@@ -278,7 +278,12 @@
                                         <ItemTemplate>
                                             <asp:LinkButton ID="btnLink" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
                                                 ToolTip="Link to PASconcept Client" Visible='<%# IIf(TypeOf Eval("Name") Is DBNull, "False", "True") %>' CommandName="Link" CommandArgument='<%# String.Concat(Eval("QBId"), ",", Eval("Id")) %>'>
-                                <i class="fas fa-link" aria-hidden="true" ></i>
+                                                <i class="fas fa-link" aria-hidden="true" ></i>
+                                            </asp:LinkButton>
+                                            &nbsp;
+                                            <asp:LinkButton ID="btnLincUpdateemp" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
+                                                ToolTip="Update Employee Info from Quickbooks" CommandName="QBUpdate" CommandArgument='<%# String.Concat(Eval("QBId"), ",", Eval("Id")) %>' Visible='<%# IIf(TypeOf Eval("Name") Is DBNull, "False", "True") %>'>
+                                                <i class="fas fa-download" aria-hidden="true"></i>
                                             </asp:LinkButton>
                                             &nbsp;
                             <asp:LinkButton ID="btnSearch" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
@@ -333,6 +338,11 @@
                                             <asp:LinkButton ID="btnLink" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
                                                 ToolTip="Unlink from Quickbooks" CommandName="UnLink" CommandArgument='<%# Eval("Id")%>'>
                                 <i class="fas fa-unlink" aria-hidden="true"></i>
+                                            </asp:LinkButton>
+                                            &nbsp;
+                                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
+                                                ToolTip="Update Employee Info from Quickbooks" CommandName="QBUpdate" CommandArgument='<%# Eval("Id")%>'>
+                                                <i class="fas fa-download" aria-hidden="true"></i>
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
