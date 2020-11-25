@@ -131,6 +131,24 @@ Partial Public Class avgeemployeesprofit
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''lblInfoGrid1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblInfoGrid1 As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''RadToolTipGrid1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipGrid1 As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
