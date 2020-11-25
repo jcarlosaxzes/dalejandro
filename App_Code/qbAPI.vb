@@ -251,11 +251,28 @@ Public Class qbAPI
                 dt.Columns.Add(New DataColumn("Mobile", Type.GetType("System.String")))
                 dt.Columns.Add(New DataColumn("PrimaryPhone", Type.GetType("System.String")))
 
+                dt.Columns.Add(New DataColumn("Address", Type.GetType("System.String")))
+                dt.Columns.Add(New DataColumn("Address2", Type.GetType("System.String")))
+                dt.Columns.Add(New DataColumn("City", Type.GetType("System.String")))
+                dt.Columns.Add(New DataColumn("Estate", Type.GetType("System.String")))
+                dt.Columns.Add(New DataColumn("ZipCode", Type.GetType("System.String")))
+                dt.Columns.Add(New DataColumn("starting_Date", Type.GetType("System.DateTime")))
+                dt.Columns.Add(New DataColumn("HourRate", Type.GetType("System.Double")))
+                dt.Columns.Add(New DataColumn("SS", Type.GetType("System.String")))
+                dt.Columns.Add(New DataColumn("DOB", Type.GetType("System.DateTime")))
+                dt.Columns.Add(New DataColumn("Gender", Type.GetType("System.String")))
+
+
+
                 Dim PrimaryKeyColumns As DataColumn() = New DataColumn(0) {}
                 PrimaryKeyColumns(0) = dt.Columns("DisplayName")
                 dt.PrimaryKey = PrimaryKeyColumns
 
                 For Each Obj As Intuit.Ipp.Data.Employee In Employees
+
+                    'Obj.PrimaryAddr.CountrySubDivisionCode
+                    'PostalCode'City'Line1    'WebAddr'Title'SSN'PrimaryPhone'PrimaryEmailAddr'PrimaryAddr'OtherAddr'Mobile'HiredDate 'Gender'Fax
+
 
                     Dim row As DataRow = dt.NewRow()
                     row("companyId") = comapyId
@@ -268,6 +285,19 @@ Public Class qbAPI
                     row("PrimaryEmailAddr") = Obj.PrimaryEmailAddr?.Address
                     row("Mobile") = Obj.Mobile?.FreeFormNumber
                     row("PrimaryPhone") = Obj.PrimaryPhone?.FreeFormNumber
+
+
+                    row("Address") = Obj.PrimaryAddr?.Line1
+                    row("Address2") = Obj.PrimaryAddr?.Line2
+                    row("City") = Obj.PrimaryAddr?.City
+                    row("Estate") = Obj.PrimaryAddr?.CountrySubDivisionCode
+                    row("ZipCode") = Obj.PrimaryAddr?.PostalCode
+                    row("starting_Date") = IIf(IsNothing(Obj.HiredDate) Or Obj.HiredDate.Year < 1900, DBNull.Value, Obj.HiredDate)
+                    row("HourRate") = Obj.BillRate
+                    row("SS") = Obj.SSN
+                    row("DOB") = IIf(IsNothing(Obj.BirthDate) Or Obj.BirthDate.Year < 1900, DBNull.Value, Obj.BirthDate)
+                    row("Gender") = Obj.Gender
+
                     dt.Rows.Add(row)
 
                 Next
@@ -286,6 +316,17 @@ Public Class qbAPI
                 objbulk.ColumnMappings.Add("PrimaryEmailAddr", "PrimaryEmailAddr")
                 objbulk.ColumnMappings.Add("Mobile", "Mobile")
                 objbulk.ColumnMappings.Add("PrimaryPhone", "PrimaryPhone")
+
+                objbulk.ColumnMappings.Add("Address", "Address")
+                objbulk.ColumnMappings.Add("Address2", "Address2")
+                objbulk.ColumnMappings.Add("City", "City")
+                objbulk.ColumnMappings.Add("Estate", "Estate")
+                objbulk.ColumnMappings.Add("ZipCode", "ZipCode")
+                objbulk.ColumnMappings.Add("starting_Date", "starting_Date")
+                objbulk.ColumnMappings.Add("HourRate", "HourRate")
+                objbulk.ColumnMappings.Add("SS", "SS")
+                objbulk.ColumnMappings.Add("DOB", "DOB")
+                objbulk.ColumnMappings.Add("Gender", "Gender")
 
                 objbulk.DestinationTableName = "Employees_SyncQB"
                 objbulk.WriteToServer(dt)
