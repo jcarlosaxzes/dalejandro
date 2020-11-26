@@ -372,7 +372,6 @@
         InsertCommand="Proposal_type_v20_INSERT" InsertCommandType="StoredProcedure">
         <UpdateParameters>
             <asp:ControlParameter ControlID="NameTextBox" Name="Name" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="TaskIdListTextBox" Name="TaskIdList" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="PaymentsScheduleListTextBox" Name="PaymentsScheduleList" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="PaymentsTextListTextBox" Name="PaymentsTextList" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextBeginTextBox" Name="TextBegin" PropertyName="Text" Type="String" />
@@ -383,7 +382,6 @@
         </UpdateParameters>
         <InsertParameters>
             <asp:ControlParameter ControlID="NameTextBox" Name="Name" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="TaskIdListTextBox" Name="TaskIdList" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="PaymentsScheduleListTextBox" Name="PaymentsScheduleList" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="PaymentsTextListTextBox" Name="PaymentsTextList" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="TextBeginTextBox" Name="TextBegin" PropertyName="Text" Type="String" />
