@@ -36,7 +36,7 @@ Public Class qbAPI
 
     Public Shared Function GetRedirectUrl() As String
         If HttpContext.Current.Session("companyId") = 99 Then
-            Return LocalAPI.GetHostAppSite() & "adm/qb_refreshtoken.aspx"
+            Return LocalAPI.GetHostAppSite() & "/adm/qb_refreshtoken.aspx"
         End If
         Return ConfigurationManager.AppSettings("redirectUrl")
     End Function
