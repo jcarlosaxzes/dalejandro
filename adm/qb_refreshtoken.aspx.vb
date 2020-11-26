@@ -20,7 +20,7 @@ Public Class qb_refreshtoken
                     Dim code = Request.QueryString("code")
                     Dim realmId = Request.QueryString("realmId")
 
-                    Threading.Tasks.Task.Run(Function() GetAuthTokensAsync(code, realmId))
+                    Threading.Tasks.Task.Run(Function() GetAuthTokensAsync(code, realmId, Session("companyId")))
                     PanelInstructions.Visible = False
                     PanelSuccess.Visible = True
                     btnConnect.Visible = False
@@ -42,7 +42,7 @@ Public Class qb_refreshtoken
 
     End Sub
 
-    Private Async Function GetAuthTokensAsync(ByVal code As String, ByVal realmId As String) As Threading.Tasks.Task
+    Private Async Function GetAuthTokensAsync(ByVal code As String, ByVal realmId As String, companyId As Integer) As Threading.Tasks.Task
         If realmId IsNot Nothing Then
             Session("realmId") = realmId
         End If
@@ -52,10 +52,10 @@ Public Class qb_refreshtoken
             'https://developer.intuit.com/app/developer/dashboard
             'user:jcarlos@axzes.com
             '
-            Dim clientid = qbAPI.GetClientId()
-            Dim clientsecret = qbAPI.GetClientSecret()
-            Dim redirectUrl = qbAPI.GetRedirectUrl()
-            Dim environment = qbAPI.GetAppEnvironment()
+            Dim clientid = qbAPI.GetClientId(companyId)
+            Dim clientsecret = qbAPI.GetClientSecret(companyId)
+            Dim redirectUrl = qbAPI.GetRedirectUrl(companyId)
+            Dim environment = qbAPI.GetAppEnvironment(companyId)
             Dim auth2Client As OAuth2Client = New OAuth2Client(clientid, clientsecret, redirectUrl, environment)
 
             Dim tokenResponse = Await auth2Client.GetBearerTokenAsync(code)

@@ -13,36 +13,61 @@ Imports Intuit.Ipp.OAuth2PlatformClient
 Imports Intuit.Ipp.ReportService
 
 Public Class qbAPI
-    Public Shared Function GetAppEnvironment() As String
-        If HttpContext.Current.Session("companyId") = 99 Then
+    Public Shared Function GetAppEnvironment(Optional companyId As Integer = 0) As String
+        If companyId = 0 Then
+            If Not IsNothing(HttpContext.Current) Then
+                companyId = Val(HttpContext.Current.Session("companyId"))
+            End If
+        End If
+        If companyId = 99 Then
             Return "sandbox"
         End If
         Return ConfigurationManager.AppSettings("appEnvironment")
     End Function
 
-    Public Shared Function GetClientId() As String
-        If HttpContext.Current.Session("companyId") = 99 Then
+    Public Shared Function GetClientId(Optional companyId As Integer = 0) As String
+        If companyId = 0 Then
+            If Not IsNothing(HttpContext.Current) Then
+                companyId = Val(HttpContext.Current.Session("companyId"))
+            End If
+        End If
+        If companyId = 99 Then
             Return "ABwMje9uSyeIpk7Xpeuovbn9SqhDWRkZ6HG3tt6aiNpLutuyGV"
         End If
         Return ConfigurationManager.AppSettings("clientid")
     End Function
 
-    Public Shared Function GetClientSecret() As String
-        If HttpContext.Current.Session("companyId") = 99 Then
+    Public Shared Function GetClientSecret(Optional companyId As Integer = 0) As String
+        If companyId = 0 Then
+            If Not IsNothing(HttpContext.Current) Then
+                companyId = Val(HttpContext.Current.Session("companyId"))
+            End If
+        End If
+        If companyId = 99 Then
             Return "jUCh3Wu32CB3l0oqGJ9L2Pqs2Hpd2EUgEPBwWXmc"
         End If
         Return ConfigurationManager.AppSettings("clientsecret")
     End Function
 
-    Public Shared Function GetRedirectUrl() As String
-        If HttpContext.Current.Session("companyId") = 99 Then
+    Public Shared Function GetRedirectUrl(Optional companyId As Integer = 0) As String
+        If companyId = 0 Then
+            If Not IsNothing(HttpContext.Current) Then
+                companyId = Val(HttpContext.Current.Session("companyId"))
+            End If
+        End If
+        If companyId = 99 Then
             Return LocalAPI.GetHostAppSite() & "/adm/qb_refreshtoken.aspx"
         End If
         Return ConfigurationManager.AppSettings("redirectUrl")
     End Function
 
-    Public Shared Function GetBaseURL() As String
-        If HttpContext.Current.Session("companyId") = 99 Then
+    Public Shared Function GetBaseURL(Optional companyId As Integer = 0) As String
+        If companyId = 0 Then
+            If Not IsNothing(HttpContext.Current) Then
+                companyId = Val(HttpContext.Current.Session("companyId"))
+            End If
+        End If
+        If companyId = 99 Then
             Return "https://sandbox-quickbooks.api.intuit.com/"
         End If
         Return ConfigurationManager.AppSettings("QB_Base_URL")
