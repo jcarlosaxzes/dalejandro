@@ -304,8 +304,8 @@ Public Class monthlyexpenses
                 Refresh()
             End If
         Else
-                ' New Tab for QB Authentication
-                Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=client_sync_qb")
+            ' New Tab for QB Authentication
+            Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=monthlyexpenses")
         End If
     End Sub
 End Class
