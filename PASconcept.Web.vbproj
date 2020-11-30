@@ -709,6 +709,7 @@
     <Content Include="adm\qb_refreshtoken.aspx" />
     <Content Include="adm\QueicBooksTestPages.aspx" />
     <Content Include="adm\reports.aspx" />
+    <Content Include="adm\reports_list.aspx" />
     <Content Include="adm\requestforproposals.aspx" />
     <Content Include="adm\resultbymonth.aspx" />
     <Content Include="adm\resultbyyear.aspx" />
@@ -3998,6 +3999,13 @@
     <Compile Include="adm\reports.aspx.vb">
       <DependentUpon>reports.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\reports_list.aspx.designer.vb">
+      <DependentUpon>reports_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\reports_list.aspx.vb">
+      <DependentUpon>reports_list.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\requestforproposals.aspx.designer.vb">
       <DependentUpon>requestforproposals.aspx</DependentUpon>
