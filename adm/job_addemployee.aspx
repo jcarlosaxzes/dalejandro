@@ -111,11 +111,10 @@
                                     Width="100%" DropDownWidth="700" MarkFirstMatch="True" Filter="Contains" AutoFilter="True"
                                     FilterFields="Name" Placeholder="(Select Employee...)">
                                     <ColumnsCollection>
-                                        <telerik:MultiColumnComboBoxColumn Field="Name" Title="Code" />
-                                        <telerik:MultiColumnComboBoxColumn Field="Experience" Title="Experience" Width="100px" />
-                                        <telerik:MultiColumnComboBoxColumn Field="WorkLoad" Title="WorkLoad" Width="100px" />
-                                        <telerik:MultiColumnComboBoxColumn Field="EfficiencyAsPM" Title="Eff.As PM" Width="100px" />
-                                        <telerik:MultiColumnComboBoxColumn Field="EfficiencyAsTM" Title="Eff.As TM" Width="100px" />
+                                        <telerik:MultiColumnComboBoxColumn Field="Name" Title="Employee" />
+                                        <telerik:MultiColumnComboBoxColumn Field="OpenWorkload" Title="Open WorkLoad (hrs)" Width="160px" />
+                                        <telerik:MultiColumnComboBoxColumn Field="OpenJobs" Title="Open Jobs" Width="100px" />
+                                        <telerik:MultiColumnComboBoxColumn Field="Experience" Title="Job Type Experience (hrs)" Width="180px" />
                                     </ColumnsCollection>
                                 </telerik:RadMultiColumnComboBox>
                             </td>
@@ -284,7 +283,7 @@
 
     </div>
     <asp:SqlDataSource ID="SqlDataSourceEmpl_activos" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="JobAssignEmployee_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="JobAssignEmployee_v20_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="JobId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboDepartment" Name="deparmentId" PropertyName="SelectedValue" Type="Int32" />

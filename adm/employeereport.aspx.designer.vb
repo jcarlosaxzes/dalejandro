@@ -77,15 +77,6 @@ Partial Public Class employeereport
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
-    '''RadGridDepartmentFTE control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridDepartmentFTE As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
     '''FormView2 control.
     '''</summary>
     '''<remarks>

@@ -31,4 +31,8 @@
     Public Function GetMemoryUrl() As String
         Return "~/adm/memory.aspx?companyId=" & lblCompanyId.Text & "&year=" & cboYear.SelectedValue & "&employeeId=" & cboEmployees.SelectedValue
     End Function
+
+    Private Sub SqlDataSourceDepartmentFTE_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceDepartmentFTE.Selecting
+        Dim e1 As String = e.Command.Parameters(0).Value
+    End Sub
 End Class
