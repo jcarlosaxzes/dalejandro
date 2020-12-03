@@ -722,6 +722,17 @@
                 </td>
             </tr>
             <tr>
+                <td style="width: 200px;">Ignore Category
+                </td>
+                <td>
+                    <telerik:RadCheckBox ID="chIgnore" runat="server" Checked="true" >
+                     </telerik:RadCheckBox>
+                    <telerik:RadTextBox ID="txtIgnore" runat="server" EmptyMessage="Ignore category"
+                            Width="200px" x-webkit-speech="x-webkit-speech" Text="Payroll">
+                     </telerik:RadTextBox>
+                </td>
+            </tr>
+            <tr>
                 <td colspan="2">
                     <asp:LinkButton ID="btnImportExpensesQB" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
                     Import Expenses

@@ -609,7 +609,7 @@ Public Class qbAPI
 
     End Function
 
-    Public Shared Sub LoadQBExpenses(companyId As String, dateFrom As DateTime, dateTo As DateTime)
+    Public Shared Sub LoadQBExpenses(companyId As String, dateFrom As DateTime, dateTo As DateTime, ignoreCategory As String)
         Dim dt As New DataTable()
 
         dt.Columns.Add(New DataColumn("companyId", Type.GetType("System.Int32")))
@@ -659,9 +659,14 @@ Public Class qbAPI
 
 
                 Dim category As String = ""
+                Dim ignore As Boolean = False
                 For Each line In Obj.Line
                     If line.DetailType = LineDetailTypeEnum.AccountBasedExpenseLineDetail Then
                         Dim detail As AccountBasedExpenseLineDetail = CType(line.AnyIntuitObject, AccountBasedExpenseLineDetail)
+                        If Not String.IsNullOrEmpty(detail.AccountRef.name) AndAlso detail.AccountRef.name = ignoreCategory Then
+                            ignore = True
+                        End If
+
                         category &= detail.AccountRef.name
                     End If
 
@@ -678,7 +683,9 @@ Public Class qbAPI
                 row("Memo") = "Payment Type: " & Obj.PaymentType.ToString("F") & " " & Obj.Memo
 
                 row("Reference") = Obj.PrivateNote
-                dt.Rows.Add(row)
+                If Not ignore Then
+                    dt.Rows.Add(row)
+                End If
 
             Next
 

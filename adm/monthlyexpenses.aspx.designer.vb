@@ -320,6 +320,24 @@ Partial Public Class monthlyexpenses
     Protected WithEvents DPTo As Global.Telerik.Web.UI.RadDatePicker
 
     '''<summary>
+    '''chIgnore control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chIgnore As Global.Telerik.Web.UI.RadCheckBox
+
+    '''<summary>
+    '''txtIgnore control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtIgnore As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
     '''btnImportExpensesQB control.
     '''</summary>
     '''<remarks>
