@@ -659,7 +659,17 @@
                                                 <ItemTemplate>
                                                     <asp:LinkButton ID="lnkDetailId" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' ValidationGroup="ProposalDetail" UseSubmitBehavior="false"
                                                         Text='<%# Eval("taskcode")%>' ToolTip="Click to Edit detail"></asp:LinkButton>
-
+                                                    &nbsp;
+                                                        <asp:LinkButton ID="btnOrderDown" runat="server" CommandName="OrderDown" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
+                                                            ToolTip="Click to Order Down">
+                                                                <i class="fas fa-arrow-down"></i>
+                                                        </asp:LinkButton>
+                                                    &nbsp;
+                                                        <asp:LinkButton ID="btnOrderUp" runat="server" CommandName="OrderUp" CommandArgument='<%# Eval("Id") %>' CausesValidation="false"
+                                                            ToolTip="Click to Order Up">
+                                                                <i class="fas fa-arrow-up"></i>
+                                                        </asp:LinkButton>
+                                                    &nbsp;
                                                     <asp:LinkButton ID="btnDuplicate" runat="server" CommandName="DetailDuplicate" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
                                                         ToolTip="Click to duplicate record">
                                                     <i class="far fa-clone"></i>
@@ -787,7 +797,7 @@
                                                         </telerik:RadCloudUpload>
                                                     </span>
                                                 </p>
-                                                <p style="text-align: center;margin:0">
+                                                <p style="text-align: center; margin: 0">
                                                     <asp:Label runat="server" ID="lblMaxSize" ForeColor="Gray" Font-Size="Small" Text="[Maximum upload size per file: 1MB]"></asp:Label>
                                                 </p>
 

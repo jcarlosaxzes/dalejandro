@@ -21,7 +21,7 @@ Public Class options
                 lblEmployeeEmail.Text = Master.UserEmail
 
                 Master.Help = "http://blog.pasconcept.com/2015/08/othersmy-account.html"
-                Image1.ImageUrl = LocalAPI.GetEmployeePhotoURL(Email:=lblEmployeeEmail.Text)
+                Image1.ImageUrl = LocalAPI.GetEmployeePhotoURL(lblEmployeeEmail.Text)
             End If
 
         Catch ex As Exception

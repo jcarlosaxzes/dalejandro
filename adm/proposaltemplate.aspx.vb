@@ -66,8 +66,9 @@ Public Class proposaltemplate
                 For Each item As RadComboBoxItem In collection2
                     lblTaskCode.Text = item.Value
                     SqlDataSourceServiceFees.Insert()
+                    item.Checked = False
                 Next
-
+                RadGridFees.DataBind()
             End If
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

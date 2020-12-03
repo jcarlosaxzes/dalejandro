@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="options.aspx.vb" Inherits="pasconcept20.options" Async="true"  %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="options.aspx.vb" Inherits="pasconcept20.options" Async="true" %>
 
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/ADM_Main_Responsive.master" %>
@@ -18,7 +18,7 @@
         }
     </style>
 
-    <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayCancelButton="false" 
+    <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayCancelButton="false"
         RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
         <WizardSteps>
             <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Employee Profile" StepType="Step">
@@ -40,10 +40,8 @@
                         </tr>
                         <tr>
                             <td>
-                               <telerik:RadAsyncUpload ID="RadAsyncUpload1" runat="server" RenderMode="Classic"
-                                    AllowedFileExtensions=".jpeg,.jpg,.png"
-                                    MaxFileInputsCount="1"
-                                    Width="100%" InputSize="45" ControlObjectsVisibility="None" MaxFileSize="524288">
+                                <telerik:RadAsyncUpload ID="RadAsyncUpload1" runat="server" RenderMode="Auto" AllowedFileExtensions=".jpeg,.jpg,.png"
+                                    MaxFileInputsCount="1" Width="100%" InputSize="45" ControlObjectsVisibility="None" MaxFileSize="524288">
                                 </telerik:RadAsyncUpload>
                             </td>
                             <td>
@@ -102,7 +100,7 @@
                                             </telerik:RadTextBox>
                                         </td>
                                         <td>
-                                            <telerik:RadButton ID="btnOk" runat="server" OnClick="btnOk_Click" Text="Update Password" >
+                                            <telerik:RadButton ID="btnOk" runat="server" OnClick="btnOk_Click" Text="Update Password">
                                                 <Icon PrimaryIconCssClass="rbSave"></Icon>
                                             </telerik:RadButton>
                                         </td>
@@ -122,8 +120,8 @@
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Page Settings" StepType="Step">
                 <fieldset style="width: 800px; height: 520px;">
                     <legend>
-                        <h3>
-                        Page Settings</h3></legend>
+                        <h3>Page Settings</h3>
+                    </legend>
                     <div>
                         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" DefaultMode="Edit" Width="100%">
                             <EditItemTemplate>
@@ -270,7 +268,7 @@
                         <Columns>
                             <telerik:GridBoundColumn UniqueName="Platform" HeaderText="Platform" DataField="Platform" HeaderStyle-Width="200px">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn UniqueName="VersionNumber" HeaderText="Version" DataField="VersionNumber" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Center" >
+                            <telerik:GridBoundColumn UniqueName="VersionNumber" HeaderText="Version" DataField="VersionNumber" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Center">
                             </telerik:GridBoundColumn>
 
                             <telerik:GridTemplateColumn DataField="Url" HeaderText="Distribution Page Link" UniqueName="Download">
@@ -320,8 +318,7 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceMobile" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Platform]=case when [Platform]=1 then 'iPhone' else 'Android' end ,[VersionNumber],[Url]  FROM [dbo].[MobileAppVersions] WHERE [Latest]=1">
-    </asp:SqlDataSource>
+        SelectCommand="SELECT [Platform]=case when [Platform]=1 then 'iPhone' else 'Android' end ,[VersionNumber],[Url]  FROM [dbo].[MobileAppVersions] WHERE [Latest]=1"></asp:SqlDataSource>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
