@@ -4,6 +4,7 @@ Public Class reports
     Inherits System.Web.UI.Page
 
     Dim QueryGropu As String
+    Dim ReportId As Integer
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
@@ -13,6 +14,19 @@ Public Class reports
             Title = ConfigurationManager.AppSettings("Titulo") & ". Reports"
             Master.PageTitle = "Analytics/Reports"
             lblCompanyId.Text = Session("companyId")
+
+            If Not Request.QueryString("Id") Is Nothing Then
+                ReportId = Val(Request.QueryString("Id"))
+                Dim rep = LocalAPI.GetRecordFromQuery($"SELECT  [Id],[Name],[RPTGroup],[SQLSource],[Description] FROM [dbo].[Reports] Where Id = {ReportId} ")
+                If Not IsNothing(rep) Then
+                    QueryGropu = rep("RPTGroup")
+                End If
+            Else
+                If Not Request.QueryString("group") Is Nothing Then
+                    QueryGropu = Request.QueryString("group")
+                End If
+            End If
+
             InitNamesReports()
             Master.Help = "http://blog.pasconcept.com/2015/04/analyticsreports.html"
 
@@ -26,9 +40,7 @@ Public Class reports
             '    cboDepartment.SelectedValue = nDefaultDep
             '    cboDepartment.Enabled = False
             'End If
-            If Not Request.QueryString("group") Is Nothing Then
-                QueryGropu = Request.QueryString("group")
-            End If
+
 
             TimeFrame(3)
         End If
@@ -216,6 +228,22 @@ Public Class reports
 
     End Sub
 
+
+    Private Sub cboNames_DataBound(sender As Object, e As EventArgs) Handles cboNames.DataBound
+        If ReportId > 0 Then
+            Dim item = cboNames.FindItemByValue(ReportId)
+            If Not IsNothing(item) Then
+                item.Selected = True
+                Master.PageTitle = "Analytics/Reports (" & cboNames.Text & ")"
+                RadGrid1.Visible = True
+                SqlDataSource1.DataBind()
+                RadGrid1.DataBind()
+            End If
+        End If
+
+    End Sub
+
+
     Private Sub SqlDataSource1_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSource1.Selecting
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
@@ -223,4 +251,5 @@ Public Class reports
     Private Sub SqlDataSource1_Selected(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Selected
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
+
 End Class
