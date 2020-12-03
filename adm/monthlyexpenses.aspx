@@ -660,7 +660,7 @@
                             <telerik:GridBoundColumn DataField="GrossAmount" DataType="System.Double" HeaderText="Gross Amount" SortExpression="GrossAmount" UniqueName="GrossAmount" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Gross Salary"
                                 HeaderStyle-Width="150px">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="TotalCost" DataType="System.Double" HeaderText="Gross Amount" SortExpression="TotalCost" UniqueName="TotalCost" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Total Cost"
+                            <telerik:GridBoundColumn DataField="TotalCost" DataType="System.Double" HeaderText="Total Cost" SortExpression="TotalCost" UniqueName="TotalCost" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Total Cost"
                                 HeaderStyle-Width="150px">
                             </telerik:GridBoundColumn>
                         </Columns>

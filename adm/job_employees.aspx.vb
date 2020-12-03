@@ -34,7 +34,6 @@ Public Class job_employees
     '    RadGrid1.DataBind()
     'End Sub
     Protected Sub btnSetEmployee_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSetEmployee.Click
-        'CreateRadWindows("SetEmployee", "~/ADM/JobAssignEmployee.aspx?JobId=" & lblJobId.Text, 960, 700, False, "OnClientClose")
         Dim sUrl As String = LocalAPI.GetSharedLink_URL(8014, lblJobId.Text)
         Response.Redirect(sUrl)
 

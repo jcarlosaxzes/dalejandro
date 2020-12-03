@@ -646,7 +646,6 @@
     <Content Include="adm\invoices.aspx" />
     <Content Include="adm\invoicesprogress.aspx" />
     <Content Include="adm\invoicestypes.aspx" />
-    <Content Include="adm\jobassignemployee.aspx" />
     <Content Include="adm\jobs.aspx" />
     <Content Include="adm\jobtickets.aspx" />
     <Content Include="adm\jobtypes.aspx" />
@@ -3551,13 +3550,6 @@
       <DependentUpon>invoicestypes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adm\jobassignemployee.aspx.designer.vb">
-      <DependentUpon>jobassignemployee.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\jobassignemployee.aspx.vb">
-      <DependentUpon>jobassignemployee.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="adm\jobs.aspx.designer.vb">
       <DependentUpon>jobs.aspx</DependentUpon>
     </Compile>
@@ -5040,7 +5032,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -30,7 +30,7 @@
                                 DataFormatString="{0:N0}" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="TRUE" FooterStyle-Font-Size="Large">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ActiveUsers" DataType="System.Int32" FilterControlAltText="Filter ActiveUsers column" HeaderText="Active Users" ReadOnly="True" SortExpression="ActiveUsers" UniqueName="ActiveUsers"
+                            <telerik:GridBoundColumn DataField="ActiveUsers" FilterControlAltText="Filter ActiveUsers column" HeaderText="Active Users" ReadOnly="True" SortExpression="ActiveUsers" UniqueName="ActiveUsers"
                                 DataFormatString="{0:N0}" FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Center" FooterStyle-Width="100px" FooterStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="TRUE" FooterStyle-Font-Size="Large">
                             </telerik:GridBoundColumn>
@@ -55,11 +55,11 @@
                                 Aggregate="Sum" DataFormatString="{0:N0}" FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Center" FooterStyle-Width="150px" FooterStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="TRUE" FooterStyle-Font-Size="Large">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ActiveNotRepeatedUsers" DataType="System.Int32" FilterControlAltText="Filter ActiveNotRepeatedUsers column" HeaderText="Active (not repeated) Users" ReadOnly="True" SortExpression="ActiveNotRepeatedUsers" UniqueName="ActiveNotRepeatedUsers"
+                            <telerik:GridBoundColumn DataField="ActiveNotRepeatedUsers" HeaderText="Active (not repeated) Users" ReadOnly="True" SortExpression="ActiveNotRepeatedUsers" UniqueName="ActiveNotRepeatedUsers"
                                 Aggregate="Sum" DataFormatString="{0:N0}" FooterAggregateFormatString="{0:N0}" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Center" FooterStyle-Width="150px" FooterStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="TRUE" FooterStyle-Font-Size="Large">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="ActiveUsersMonthlyBill" FilterControlAltText="Filter ActiveUsersMonthlyBill column" HeaderText="Monthly Bill" ReadOnly="True" SortExpression="ActiveUsersMonthlyBill" UniqueName="ActiveUsersMonthlyBill"
+                            <telerik:GridBoundColumn DataField="ActiveUsersMonthlyBill" HeaderText="Monthly Bill" ReadOnly="True" SortExpression="ActiveUsersMonthlyBill" UniqueName="ActiveUsersMonthlyBill"
                                 Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" HeaderStyle-Width="200px" HeaderStyle-HorizontalAlign="Center"
                                 ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="TRUE" FooterStyle-Font-Size="Large">
                             </telerik:GridBoundColumn>
