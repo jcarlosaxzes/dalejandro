@@ -113,8 +113,8 @@
                 <td style="text-align: right;">
                     <asp:Label ID="lblPhaseLabel" runat="server" Text="Phase:"></asp:Label>
                 </td>
-                <td>
-                    <telerik:RadComboBox runat="server" ID="cboPhase" DataValueField="Id" Width="250px" Height="250px"
+                <td style="width:350px">
+                    <telerik:RadComboBox runat="server" ID="cboPhase" DataValueField="Id" Width="100%" Height="250px"
                         DataTextField="Name" DataSourceID="SqlDataSourcePhases" AppendDataBoundItems="true">
                         <Items>
                             <telerik:RadComboBoxItem Text="(Select phase...)" Value="0" />
@@ -123,10 +123,10 @@
                 </td>
                 <td style="text-align: right">Related Task ID:
                 </td>
-                <td style="vertical-align: top">
+                <td style="vertical-align: top;width:450px">
                     <telerik:RadComboBox ID="cboTask" runat="server" Height="350px" ToolTip="To find out the 'task id' codes, show 'Task List'"
                         DataSourceID="SqlDataSourceTask" DataTextField="Description" DataValueField="TaskId" EmptyMessage="Select Task and Add to List..."
-                        Width="350px" CheckBoxes="true" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
+                        Width="100%" CheckBoxes="true" EnableCheckAllItemsCheckBox="true" MarkFirstMatch="True" Filter="Contains">
                         <Localization AllItemsCheckedString="All Task Checked" CheckAllString="Check All..." ItemsCheckedString="task checked"></Localization>
                     </telerik:RadComboBox>
                 </td>

@@ -277,72 +277,53 @@
                                         </Columns>
                                     </MasterTableView>
                                 </telerik:RadGrid>
-                                <td style="width: 20px; text-align: center; vertical-align: top">
-                                    <asp:HyperLink runat="server" ID="lblInfoGrid1" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                            </td>
+                            <td style="width: 20px; text-align: center; vertical-align: top">
+                                <asp:HyperLink runat="server" ID="lblInfoGrid1" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
                                             <i class="fas fa-info"></i>
-                                    </asp:HyperLink>
-                                    <telerik:RadToolTip ID="RadToolTipGrid1" runat="server" TargetControlID="lblInfo"
-                                        RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
-                                        Position="Center" Modal="True" Title="" ShowEvent="OnClick"
-                                        HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true"
-                                        RelativeTo="BrowserWindow" ManualClose="true">
+                                </asp:HyperLink>
+                                <telerik:RadToolTip ID="RadToolTipGrid1" runat="server" TargetControlID="lblInfoGrid1"
+                                    RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                    Position="Center" Modal="True" Title="" ShowEvent="OnClick"
+                                    HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true"
+                                    RelativeTo="BrowserWindow" ManualClose="true">
 
-                                        <div class="pasconcept-bar noprint">
-                                            <span class="pasconcept-pagetitle">Employees Efficiency Data Sheet</span>
-                                        </div>
-                                        <table class="table table-striped" style="width: 850px; font-size: medium; text-align: center;">
-                                            <tr>
-                                                <td style="width: 200px;">
-                                                    <span class="badge badge-secondary">Job (#)</span>
-                                                </td>
-                                                <td>Number of Jobs as Team Member in the time period.
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="badge badge-danger">Uptime = </span>
-                                                </td>
-                                                <td>Number of hours (Productive Time) entered in Jobs
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="badge badge-dark">Downtime</span>
-                                                </td>
-                                                <td>Number of hours (Non-Productive Time) entered. 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="badge badge-dark">Efficiency (%)</span>
-                                                </td>
-                                                <td>Percentage of Average Profit obtained in Jobs as a member of the team affected by the FTE (Time * Hourly Rate) / (Budged - SubFees)*FTE * 100)
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="badge badge-dark"> </span>
-                                                </td>
-                                                <td>. 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="badge badge-dark"> </span>
-                                                </td>
-                                                <td>. 
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <span class="badge badge-dark"> </span>
-                                                </td>
-                                                <td>. 
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </telerik:RadToolTip>
-                                </td>
+                                    <div class="pasconcept-bar noprint">
+                                        <span class="pasconcept-pagetitle">Employees Efficiency Data Sheet</span>
+                                    </div>
+                                    <table class="table table-striped" style="width: 850px; font-size: medium; text-align: center;">
+                                        <tr>
+                                            <td style="width: 200px;">
+                                                <span class="badge badge-secondary">Job (#)</span>
+                                            </td>
+                                            <td>Number of Jobs as Team Member in the time period.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="badge badge-danger">Uptime = </span>
+                                            </td>
+                                            <td>Number of hours (Productive Time) entered in Jobs
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="badge badge-dark">Downtime</span>
+                                            </td>
+                                            <td>Number of hours (Non-Productive Time) entered. 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="badge badge-dark">Efficiency (%)</span>
+                                            </td>
+                                            <td>Percentage of Average Profit obtained in Jobs as a member of the team affected by the FTE (Time * Hourly Rate) / (Budged - SubFees)*FTE * 100)
+                                            </td>
+                                        </tr>
+                                        
+                                    </table>
+                                </telerik:RadToolTip>
+                            </td>
                         </tr>
                     </table>
                 </telerik:RadWizardStep>
