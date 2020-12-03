@@ -14,11 +14,11 @@
             <asp:HyperLink ID="btnView" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false"
                 NavigateUrl='<%# GetMemoryUrl() %>' Target="_blank"
                 ToolTip="View page of employee year memory" CausesValidation="false">
-                            <i class="far fa-eye"></i>View
+                            <i class="far fa-eye"></i>&nbsp;View
             </asp:HyperLink>
             <asp:LinkButton ID="btnMemory" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
                 ToolTip="Send year memory link to employee" CausesValidation="false">
-                            <i class="far fa-envelope"></i> Send
+                            <i class="far fa-envelope"></i>&nbsp;Send
             </asp:LinkButton>
 
 
@@ -32,7 +32,7 @@
 
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
-                    <td style="width:150px">
+                    <td style="width: 150px">
                         <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear" Height="300px"
                             DataValueField="Year" Width="100%" CausesValidation="false" UseSubmitBehavior="false">
                         </telerik:RadComboBox>
@@ -54,73 +54,132 @@
         </asp:Panel>
     </div>
 
-    
-    <div class="row">
+
+    <div>
+
         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEmployee" RenderOuterTable="false">
             <ItemTemplate>
-                <div class="col-md-2">
-                    <div style="padding-top:32px">
-                        <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id")) %>' CssClass="photo150"
-                            runat="server" AlternateText="Employee Profile Picture"></asp:Image>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <h4><%# Eval("Name") %></h4>
-                    <%# Eval("Position") %><br />
-                    <%# Eval("Address") %><br />
-                    <%# Eval("Email") %><br />
-                    <%#  LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")) %><br />
-                    <p>Starting at: <%# Eval("starting_Date","{0:d}") %></p>
-                </div>
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <div style="width: 160px">
+                                <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%# LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id")) %>' CssClass="photo150"
+                                    runat="server" AlternateText="Employee Profile Picture"></asp:Image>
+                            </div>
+                        </td>
+                        <td style="width: 300px;vertical-align:top">
+                            <h4><%# Eval("Name") %></h4>
+                            <%# Eval("Position") %><br />
+                            <%# Eval("Address") %><br />
+                            <%# Eval("Email") %><br />
+                            <%#  LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")) %><br />
+                            <p>Starting at: <%# Eval("starting_Date", "{0:d}") %></p>
+                        </td>
+                        <td style="vertical-align:top">
+                            <telerik:RadGrid ID="RadGridDepartmentFTE" runat="server" DataSourceID="SqlDataSourceDepartmentFTE"
+                                GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
+                                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
+                                <MasterTableView DataSourceID="SqlDataSourceDepartmentFTE" DataKeyNames="DepartmentId">
+
+                                    <Columns>
+                                        <telerik:GridTemplateColumn DataField="Department" HeaderText="Department" SortExpression="Department"
+                                            UniqueName="Department" HeaderStyle-HorizontalAlign="Center">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblCompanyId" runat="server"
+                                                    Text='<%# Eval("Department")%>'>
+                                                </asp:Label>
+                                            </ItemTemplate>
+                                        </telerik:GridTemplateColumn>
+
+                                        <telerik:GridBoundColumn DataField="OpenWorkload" HeaderText="Open Workload" HeaderTooltip="Pending hours assigned to projects"
+                                            SortExpression="OpenWorkload" UniqueName="OpenWorkload" DataFormatString="{0:N0}"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" HeaderTooltip="Hours Assigned x HourlyRate x Multipler"
+                                            SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" DataFormatString="{0:C0}"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Center">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" HeaderTooltip="Hours x HourlyRate"
+                                            SortExpression="BudgetUsed" UniqueName="BudgetUsed" DataFormatString="{0:C0}"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Center">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE" HeaderTooltip="Full-Time Equivalent %"
+                                            SortExpression="FTE" UniqueName="FTE" DataFormatString="{0:p}"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" HeaderTooltip="Hours x HourlyRate"
+                                            SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:C0}"
+                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
+                                            Aggregate="Sum" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Center">
+                                        </telerik:GridBoundColumn>
+
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </td>
+                        <td style="width: 20px; text-align: center; vertical-align: top">
+                            <asp:HyperLink runat="server" ID="lblInfo" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i class="fas fa-info"></i>
+                            </asp:HyperLink>
+                            <telerik:RadToolTip ID="RadToolTipRatioInfo" runat="server" TargetControlID="lblInfo"
+                                RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                Position="Center" Modal="True" Title="" ShowEvent="OnClick"
+                                HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true"
+                                RelativeTo="BrowserWindow" ManualClose="true">
+
+                                <div class="pasconcept-bar noprint">
+                                    <span class="pasconcept-pagetitle">Employee Statistics for Project/Departments</span>
+                                </div>
+                                <table class="table table-striped" style="width: 850px; font-size: medium; text-align: center;">
+                                    <tr>
+                                        <td style="width: 200px;">
+                                            <span class="badge badge-secondary">Open Workload = </span>
+                                        </td>
+                                        <td>The remaining number of hours budgeted to Active Jobs.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="badge badge-danger">Budget Assigned = </span>
+                                        </td>
+                                        <td>Hours Assigned By Job x Position HourlyRate 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="badge badge-dark">Budget Used = </span>
+                                        </td>
+                                        <td>Hours Worked x Employee Houly Rate x Multiplier
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="badge badge-success">FTE = </span>
+                                        </td>
+                                        <td>Full-time percent equivalent of Employee by Department
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="badge badge-warning">Profit = </span>
+                                        </td>
+                                        <td>Profit...  
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </telerik:RadToolTip>
+                        </td>
+                    </tr>
+                </table>
             </ItemTemplate>
         </asp:FormView>
-        <div class="col-md-8">
-            <%--This chart should list each department this employee has entered hours for, their FTE, their total workload for that department, and the percet of that workload completed.--%>
-            <telerik:RadGrid ID="RadGridDepartmentFTE" runat="server" DataSourceID="SqlDataSourceDepartmentFTE"
-                GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
-                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-                <MasterTableView DataSourceID="SqlDataSourceDepartmentFTE" DataKeyNames="DepartmentId">
 
-                    <Columns>
-                        <telerik:GridTemplateColumn DataField="Department" HeaderText="Department" SortExpression="Department"
-                            UniqueName="Department" HeaderStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
-                                <asp:Label ID="lblCompanyId" runat="server"
-                                    Text='<%# Eval("Department")%>'>
-                                </asp:Label>
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
 
-                        <telerik:GridBoundColumn DataField="workload" HeaderText="Workload" HeaderTooltip="Workload in Hours"
-                            SortExpression="workload" UniqueName="workload" DataFormatString="{0:N0}"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
-                            Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Revenue" HeaderText="Revenue" HeaderTooltip="Hours x HourlyRate x Efficiency"
-                            SortExpression="Revenue" UniqueName="Revenue" DataFormatString="{0:N0}"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
-                            Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Overhead" HeaderText="Overhead" HeaderTooltip="Hours x HourlyRate"
-                            SortExpression="Overhead" UniqueName="Overhead" DataFormatString="{0:N0}"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
-                            Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE" HeaderTooltip="Full-Time Equivalent %"
-                            SortExpression="FTE" UniqueName="FTE" DataFormatString="{0:p}"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
-                            Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" HeaderTooltip="Hours x HourlyRate"
-                            SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N0}"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
-                            Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-
-                    </Columns>
-                </MasterTableView>
-            </telerik:RadGrid>
-        </div>
     </div>
 
     <div class="row">
@@ -131,7 +190,7 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th style="text-align: center"><%# Eval("year")-1 %></th>
+                                <th style="text-align: center"><%# Eval("year") - 1 %></th>
                                 <th style="text-align: center"><%# Eval("year") %></th>
                             </tr>
                         </thead>
@@ -157,51 +216,51 @@
                         </tr>
                         <tr>
                             <td>Salary Net ($)</td>
-                            <td style="text-align: center"><%# Eval("NetAnnualSalary_1","{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("NetAnnualSalary","{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("NetAnnualSalary_1", "{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("NetAnnualSalary", "{0:C2}") %></td>
                         </tr>
                         <tr>
                             <td>Salary Gross ($)</td>
-                            <td style="text-align: center"><%# Eval("GrossAnnualSalary_1","{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("GrossAnnualSalary","{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("GrossAnnualSalary_1", "{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("GrossAnnualSalary", "{0:C2}") %></td>
                         </tr>
                         <tr>
                             <td>Salary Total Cost ($)</td>
-                            <td style="text-align: center"><%# Eval("TotalCostAnnualSalary_1","{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("TotalCostAnnualSalary","{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("TotalCostAnnualSalary_1", "{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("TotalCostAnnualSalary", "{0:C2}") %></td>
                         </tr>
                         <tr>
                             <td>Bi-Weekly ($)</td>
-                            <td style="text-align: center"><%# Eval("BiWeeklySalary_1","{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("BiWeeklySalary","{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("BiWeeklySalary_1", "{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("BiWeeklySalary", "{0:C2}") %></td>
                         </tr>
                         <tr>
                             <td>Hourly Wage ($)</td>
-                            <td style="text-align: center"><%# Eval("HourlyWage_1","{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("HourlyWage","{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("HourlyWage_1", "{0:C2}") %></td>
+                            <td style="text-align: center"><%# Eval("HourlyWage", "{0:C2}") %></td>
                         </tr>
                         <tr>
                             <td>Efficiency (%)</td>
-                            <td style="text-align: center"><%# Eval("Efficiency_1","{0:p}") %></td>
-                            <td style="text-align: center"><%# Eval("Efficiency","{0:p}") %></td>
+                            <td style="text-align: center"><%# Eval("Efficiency_1", "{0:p}") %></td>
+                            <td style="text-align: center"><%# Eval("Efficiency", "{0:p}") %></td>
                         </tr>
                         <tr>
                             <td>Productivity Rate (%)</td>
-                            <td style="text-align: center"><%# Eval("ProductivityRate_1","{0:p}") %></td>
-                            <td style="text-align: center"><%# Eval("ProductivityRate","{0:p}") %></td>
+                            <td style="text-align: center"><%# Eval("ProductivityRate_1", "{0:p}") %></td>
+                            <td style="text-align: center"><%# Eval("ProductivityRate", "{0:p}") %></td>
                         </tr>
                     </table>
-                    <div style="margin:0;font-size:x-small;font-style:italic">
+                    <div style="margin: 0; font-size: x-small; font-style: italic">
                         (*) Salary Sources: Finances->Expenses->Payroll Details
                     </div>
                 </div>
             </ItemTemplate>
         </asp:FormView>
-        
+
     </div>
 
-    <div class="row" style="padding-top:24px">
-        <div class="col-md-12">
+    <div style="padding-top: 24px">
+        
             <h4>Jobs (Done or Inactive) Employee Efficiency</h4>
             <telerik:RadGrid ID="RadGridEfficiency" runat="server" DataSourceID="SqlDataSourceEfficiency"
                 GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
@@ -236,7 +295,7 @@
                     </Columns>
                 </MasterTableView>
             </telerik:RadGrid>
-        </div>
+        
     </div>
 
     <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -265,7 +324,7 @@
 
 
     <asp:SqlDataSource ID="SqlDataSourceDepartmentFTE" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="YearStadistic_EmployeeDepartmentsList" SelectCommandType="StoredProcedure">
+        SelectCommand="YearStadistic_v20_EmployeeDepartmentsList" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboEmployees" DefaultValue="" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
