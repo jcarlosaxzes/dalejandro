@@ -300,7 +300,7 @@ Public Class monthlyexpenses
         If qbAPI.IsValidAccessOrRefreshToken(lblCompanyId.Text) Then
             System.Threading.Thread.Sleep(3000)
             If Not IsNothing(DPFrom.DbSelectedDate) And Not IsNothing(DPTo.DbSelectedDate) Then
-                qbAPI.LoadQBExpenses(lblCompanyId.Text, DPFrom.DbSelectedDate, DPTo.DbSelectedDate)
+                qbAPI.LoadQBExpenses(lblCompanyId.Text, DPFrom.DbSelectedDate, DPTo.DbSelectedDate, IIf(chIgnore.Checked, txtIgnore.Text, "IncludeAllNotIgnore"))
                 Refresh()
             End If
         Else
