@@ -73,7 +73,7 @@ cfg: { // Application Insights Configuration
                             <div class="form-group" style="margin-top: 1em">
                                 <h3 style="color: red;">An Error has Occurred</h3>
                                 <p>
-                                    An unexcepted error has occurred on our webapp. The website administrator has been notified.<br />
+                                    An unexpected error has occurred on our webapp. The website administrator has been notified.<br />
                                     Please, <a href="Default.aspx">click here </a> to continue with PASconcept
                                 </p>
                             </div>

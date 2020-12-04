@@ -136,7 +136,7 @@ Public Class job_addemployee
         sFullBody.Append("Hours (remaining): " & dHourds)
         sFullBody.Append("<br />")
 
-        LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' asigned", sFullBody, lblCompanyId.Text)
+        LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' assigned", sFullBody, lblCompanyId.Text)
         Master.InfoMessage("Employee notified")
     End Sub
 
