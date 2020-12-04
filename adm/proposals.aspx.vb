@@ -196,13 +196,13 @@ Public Class proposals
             SqlDataSourceProp.DataBind()
             RadGrid1.DataBind()
             FormViewViewSummary.DataBind()
+            SaveFilter()
         Catch ex As Exception
         End Try
     End Sub
 
     Protected Sub btnRefresh_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
         RefreshRecordset()
-        SaveFilter()
     End Sub
 
     Private Sub SaveFilter()

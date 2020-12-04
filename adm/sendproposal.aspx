@@ -14,7 +14,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
 
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">
@@ -125,7 +125,7 @@
                     <hr style="margin: 0" />
                     <table class="table-sm" style="width: 100%">
                         <tr>
-                            <td style="width: 300px; text-align: right">Proposal By:
+                            <td style="width: 350px; text-align: right">Proposal By:
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboProjectManagerId" runat="server" ValidationGroup="Confirmation"
@@ -191,36 +191,34 @@
                                 </telerik:RadComboBox>
                             </td>
                         </tr>
-                        <tr style="text-align: right">
-                            <td>Totals:
-                            </td>
-                            <td>
-                                <table style="width: 400px">
-                                    <tr>
-                                        <td style="text-align: center; width: 50%">Proposal Total
-                                        </td>
-                                        <td style="text-align: center;">Payment Schedule Total
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: center">
-                                            <asp:Label ID="lblProposalTotal" runat="server"></asp:Label>
-                                        </td>
-                                        <td style="text-align: center">
-                                            <asp:Label ID="lblScheduleTotal" runat="server"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="text-align: center">
-                                            <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"></asp:Label>
-                                        </td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
                     </table>
+                    <asp:Panel runat="server" ID="PanelTotals" Visible="false">
+                        <table class="table-sm" style="width: 100%">
+                            <tr>
+                                <td colspan="2" style="padding-left:200px">
+                                    <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 350px; text-align: right">Project Totals Issue, continue? (Yes):
+                                </td>
+                                <td>
+                                    <telerik:RadComboBox ID="cboTotalsQuestion" runat="server" Width="150px" ValidationGroup="Confirmation">
+                                        <Items>
+                                            <telerik:RadComboBoxItem Text="?" Value="-1" Selected="true" />
+                                            <telerik:RadComboBoxItem Text="Yes" Value="1" />
+                                        </Items>
+                                    </telerik:RadComboBox>
+                                </td>
+                            </tr>
+                        </table>
+                        <asp:CompareValidator runat="server" ID="Comparevalidator6" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
+                            ControlToValidate="cboTotalsQuestion" Display="None" ForeColor="Red"
+                            ErrorMessage="Project Totals Issue, continue? (Yes)">
+                        </asp:CompareValidator>
+
+                    </asp:Panel>
+
                     <div>
                         <asp:CompareValidator runat="server" ID="Comparevalidator5" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
                             ControlToValidate="cboRetainer" Display="None" ForeColor="Red"

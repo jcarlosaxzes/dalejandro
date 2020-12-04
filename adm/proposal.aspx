@@ -129,7 +129,7 @@
             </asp:LinkButton>
             <asp:LinkButton ID="btnPrintProposal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
                 ToolTip="Print/Send Email with Proposal Information">
-                             View/Send
+                             Send to Client
             </asp:LinkButton>
             <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
                 ToolTip="Export PDF">
@@ -636,7 +636,7 @@
                             <td style="padding-top: 10px; padding-bottom: 10px">
                                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceProposalDetails"
                                     CellSpacing="0" ValidationGroup="ProposalDetail" HeaderStyle-HorizontalAlign="Center"
-                                    ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                                    ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceProposalDetails" ShowFooter="true" CommandItemDisplay="None">
                                         <BatchEditingSettings EditType="Cell" />
                                         <Columns>
@@ -681,7 +681,8 @@
                                             <telerik:GridTemplateColumn DataField="Description" FilterControlAltText="Filter Description column"
                                                 HeaderText="Name" SortExpression="Description" UniqueName="Description" ItemStyle-HorizontalAlign="Left">
                                                 <ItemTemplate>
-                                                    <asp:Label ID="lblDescrip" runat="server" Text='<%# Eval("Description") %>' ToolTip='<%# Eval("DescriptionPlus") %>'></asp:Label>
+                                                    <asp:LinkButton ID="lnklblDescrip" runat="server" CommandName="EditTask" CommandArgument='<%# Eval("Id") %>' UseSubmitBehavior="false"
+                                                        Text='<%# Eval("Description")%>' ToolTip="Click to Edit detail"></asp:LinkButton>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
                                             <telerik:GridTemplateColumn DataField="Amount" DataType="System.Double" HeaderText="Qty"

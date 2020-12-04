@@ -53,19 +53,32 @@ Public Class sendproposal
         End If
     End Sub
     Private Sub TotalsAnalisis()
-        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
-        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
-        lblProposalTotal.Text = FormatCurrency(bTotal)
-        lblScheduleTotal.Text = FormatCurrency(bPSTotal)
-        If bTotal = 0 Then
-            lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
-            RadWizard1.DisplayNavigationButtons = False
+        Dim dTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+        Dim dPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+
+        If dTotal = 0 Then
+            PanelTotals.Visible = True
+            lblTotalAlert.Text = "Alert. The Project Total is zero !"
         Else
-            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
-                lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
-                RadWizard1.DisplayNavigationButtons = False
+            If (Math.Round(dTotal, 0) <> Math.Round(dPSTotal, 0)) Then
+                PanelTotals.Visible = True
+                lblTotalAlert.Text = $"Your Project Total ({FormatCurrency(dTotal)}) and your Payment Schedule Total ({FormatCurrency(dPSTotal)}) do not match !"
+            Else
+                PanelTotals.Visible = False
             End If
         End If
+
+        'lblProposalTotal.Text = FormatCurrency(bTotal)
+        'lblScheduleTotal.Text = FormatCurrency(bPSTotal)
+        'If bTotal = 0 Then
+        '    lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
+        '    RadWizard1.DisplayNavigationButtons = False
+        'Else
+        '    If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
+        '        lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+        '        RadWizard1.DisplayNavigationButtons = False
+        '    End If
+        'End If
 
     End Sub
 #Region "RadWizard Step Buttons"

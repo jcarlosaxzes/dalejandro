@@ -172,21 +172,21 @@ Public Class proposal
 
     Private Function TotalsAnalisis() As Boolean
         Try
-            Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
-            Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+            Dim dTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+            Dim dPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
             Dim RadWizard1 As RadWizard = CType(FormViewProp1.FindControl("RadWizard1"), RadWizard)
 
             Dim WStep As RadWizardStep = RadWizard1.WizardSteps(1)
 
-            CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(bTotal)
-            CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(bPSTotal)
+            CType(WStep.FindControl("lblProposalTotal"), Label).Text = FormatCurrency(dTotal)
+            CType(WStep.FindControl("lblScheduleTotal"), Label).Text = FormatCurrency(dPSTotal)
 
-            If bTotal = 0 Then
-                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It is mandatory that [Proposal Total] is greater than zero !"
+            If dTotal = 0 Then
+                CType(WStep.FindControl("lblTotalAlert"), Label).Text = "Alert. The Project Total is zero !"
                 Return False
             Else
-                If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
-                    CType(WStep.FindControl("lblTotalAlert"), Label).Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+                If dPSTotal > 0 And (Math.Round(dTotal, 0) <> Math.Round(dPSTotal, 0)) Then
+                    CType(WStep.FindControl("lblTotalAlert"), Label).Text = $"Your Project Total ({dTotal}) and your Payment Schedule Total ({dPSTotal}) do not match !"
                     Return False
                 Else
                     CType(WStep.FindControl("lblTotalAlert"), Label).Text = ""

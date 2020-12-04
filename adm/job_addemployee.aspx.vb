@@ -131,7 +131,7 @@ Public Class job_addemployee
 
     Protected Sub NotifyEmployee(employeeId As Integer, JobCodeName As String, dHourds As Double)
         Dim sFullBody As New System.Text.StringBuilder
-        sFullBody.Append("You had been assigned Job " & JobCodeName)
+        sFullBody.Append("You have been assigned Job " & JobCodeName)
         sFullBody.Append("<br />")
         sFullBody.Append("Hours (remaining): " & dHourds)
         sFullBody.Append("<br />")
