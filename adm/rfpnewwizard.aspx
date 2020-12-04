@@ -172,7 +172,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right; vertical-align: top">Introductory Text:
+                                <td style="text-align: right; vertical-align: top">Opening Text:
                                 </td>
                                 <td colspan="3">
                                     <telerik:RadTextBox ID="txtIntroductoryText" runat="server" Width="100%" MaxLength="512" TextMode="MultiLine"
