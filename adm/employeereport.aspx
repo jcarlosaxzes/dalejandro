@@ -274,46 +274,114 @@
 
     </div>
 
-    <div style="padding-top: 24px">
+    <div>
 
-        <h4>Jobs (Done or Inactive) Employee Efficiency</h4>
-        <telerik:RadGrid ID="RadGridEfficiency" runat="server" DataSourceID="SqlDataSourceEfficiency"
-            GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
-            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Bold="true" FooterStyle-Font-Size="Small"
-            HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
-            <MasterTableView DataSourceID="SqlDataSourceEfficiency" DataKeyNames="jobId">
+        <table style="width: 100%">
+            <tr>
+                <td>
+                    <h4>Jobs Employee Efficiency</h4>
+                    <telerik:RadGrid ID="RadGridEfficiency" runat="server" DataSourceID="SqlDataSourceEfficiency"
+                        GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
+                        HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Bold="true" FooterStyle-Font-Size="Small"
+                        HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                        <MasterTableView DataSourceID="SqlDataSourceEfficiency" DataKeyNames="jobId">
 
-                <Columns>
-                    <telerik:GridTemplateColumn DataField="JobName" HeaderText="Job Name" SortExpression="JobName"
-                        UniqueName="JobName">
-                        <ItemTemplate>
-                            <asp:Label ID="lblCompanyId" runat="server"
-                                Text='<%# Eval("JobName")%>'>
-                            </asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                    <telerik:GridBoundColumn DataField="JobStatus" HeaderText="Status" HeaderTooltip="Job Status" SortExpression="JobStatus" UniqueName="JobStatus" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="AssignedHours" HeaderText="Assigned Hours" HeaderTooltip="AssignedHours"
-                        SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" >
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
-                        Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" SortExpression="BudgetUsed" UniqueName="BudgetUsed" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" 
-                        Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="BudgetBalance" HeaderText="Budget Balance" SortExpression="BudgetBalance" UniqueName="BudgetBalance" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
-                    </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
-                        Aggregate="Avg" FooterAggregateFormatString="{0:P0}">
-                    </telerik:GridBoundColumn>
+                            <Columns>
+                                <telerik:GridTemplateColumn DataField="JobName" HeaderText="Job Name" SortExpression="JobName"
+                                    UniqueName="JobName">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblCompanyId" runat="server"
+                                            Text='<%# Eval("JobName")%>'>
+                                        </asp:Label>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+                                <telerik:GridBoundColumn DataField="JobStatus" HeaderText="Status" HeaderTooltip="Job Status" SortExpression="JobStatus" UniqueName="JobStatus" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="AssignedHours" HeaderText="Assigned Hours" HeaderTooltip="AssignedHours"
+                                    SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" SortExpression="BudgetUsed" UniqueName="BudgetUsed" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                                    Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="BudgetBalance" HeaderText="Budget Balance" SortExpression="BudgetBalance" UniqueName="BudgetBalance" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                                    Aggregate="Avg" FooterAggregateFormatString="{0:P0}">
+                                </telerik:GridBoundColumn>
 
-                </Columns>
-            </MasterTableView>
-        </telerik:RadGrid>
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
+                </td>
+                <td style="width: 20px; text-align: center; vertical-align: top">
+                    <asp:HyperLink runat="server" ID="lblEfficiency" NavigateUrl="javascript:void(0);" Style="text-decoration: none;">
+                                            <i class="fas fa-info"></i>
+                    </asp:HyperLink>
+                    <telerik:RadToolTip ID="RadToolTipRatioJobsEfficiency" runat="server" TargetControlID="lblEfficiency"
+                        RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                        Position="Center" Modal="True" Title="" ShowEvent="OnClick"
+                        HideDelay="100" HideEvent="LeaveToolTip" IgnoreAltAttribute="true"
+                        RelativeTo="BrowserWindow" ManualClose="true">
+
+                        <div class="pasconcept-bar noprint">
+                            <span class="pasconcept-pagetitle">Jobs Employee Efficiency</span>
+                        </div>
+                        <table class="table table-striped" style="width: 850px; font-size: medium; text-align: center;">
+                            <tr>
+                                <td style="width: 200px;">
+                                    <span class="badge badge-secondary">Assigned Hours = </span>
+                                </td>
+                                <td>Hours assigned to the employee in this Job.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge badge-danger">Worked Hours = </span>
+                                </td>
+                                <td>Hours recorded in the Employee's TimeSheet in this Job. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge badge-dark">Budget Assigned = </span>
+                                </td>
+                                <td>'Assigned Hours' x 'Horly Rate' of the employee's position in the Job.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge badge-success">Budget Used = </span>
+                                </td>
+                                <td>'Worked Hours' x 'Horly Rate' of the employee in the Job.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge badge-warning">Budget Balance = </span>
+                                </td>
+                                <td> 
+                                    Budget Assigned - Budget Used
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge badge-warning">Profit = </span>
+                                </td>
+                                <td>  
+                                    Budget Assigned / Budget Used (%)
+                                </td>
+                            </tr>
+
+                        </table>
+                    </telerik:RadToolTip>
+                </td>
+            </tr>
+        </table>
 
     </div>
 
