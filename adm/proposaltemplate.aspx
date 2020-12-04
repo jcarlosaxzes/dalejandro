@@ -67,10 +67,10 @@
                 </td>
             </tr>
             <tr>
-                <td style="text-align: right">Proposal Introductory Text:
+                <td style="text-align: right">Proposal Opening Text:
                 </td>
                 <td>
-                    <telerik:RadTextBox ID="TextBeginTextBox" runat="server" EmptyMessage="Proposal Introductory Text"
+                    <telerik:RadTextBox ID="TextBeginTextBox" runat="server" EmptyMessage="Proposal Opening Text"
                         TextMode="MultiLine" Rows="3" Width="100%">
                     </telerik:RadTextBox>
                 </td>
@@ -78,11 +78,11 @@
             </tr>
 
             <tr>
-                <td style="text-align: right">Proposal Concluding Text:
+                <td style="text-align: right">Proposal Closing Text:
                 </td>
                 <td>
                     <telerik:RadTextBox ID="TextEndTextBox" runat="server"
-                        TextMode="MultiLine" Rows="3" Width="100%" EmptyMessage="Proposal Concluding Text">
+                        TextMode="MultiLine" Rows="3" Width="100%" EmptyMessage="Proposal Closing Text">
                     </telerik:RadTextBox>
                 </td>
 
