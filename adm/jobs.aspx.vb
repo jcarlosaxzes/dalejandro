@@ -145,7 +145,6 @@ Public Class jobs
     End Sub
 
     Protected Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        SaveFilter()
         Refresh()
     End Sub
 
@@ -158,6 +157,7 @@ Public Class jobs
             ShowCheckedOneItemByText(lblTagIN_List, cboFilterTags)
 
             RadGrid1.DataBind()
+            SaveFilter()
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

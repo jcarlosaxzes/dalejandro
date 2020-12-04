@@ -489,15 +489,15 @@ Public Class proposalnewwizard
     End Sub
 
     Private Sub TotalsAnalisis()
-        Dim bTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
-        Dim bPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
-        lblProposalTotal.Text = FormatCurrency(bTotal)
-        lblScheduleTotal.Text = FormatCurrency(bPSTotal)
-        If bTotal = 0 Then
-            lblTotalAlert.Text = "It is mandatory that [Proposal Total] is greater than zero !"
+        Dim dTotal As Double = LocalAPI.GetProposalTotal(lblProposalId.Text)
+        Dim dPSTotal As Double = LocalAPI.GetProposalPSTotal(lblProposalId.Text)
+        lblProposalTotal.Text = FormatCurrency(dTotal)
+        lblScheduleTotal.Text = FormatCurrency(dPSTotal)
+        If dTotal = 0 Then
+            lblTotalAlert.Text = "Alert. The Project Total is zero !"
         Else
-            If bPSTotal > 0 And (Math.Round(bTotal, 0) <> Math.Round(bPSTotal, 0)) Then
-                lblTotalAlert.Text = "It Is mandatory that [Proposal Total] = [Payment Schedule Total] ! "
+            If dPSTotal > 0 And (Math.Round(dTotal, 0) <> Math.Round(dPSTotal, 0)) Then
+                lblTotalAlert.Text = $"Your Project Total ({FormatCurrency(dTotal)}) and your Payment Schedule Total ({FormatCurrency(dPSTotal)}) do not match !"
             Else
                 lblTotalAlert.Text = ""
             End If
