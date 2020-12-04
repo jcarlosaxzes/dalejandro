@@ -343,7 +343,7 @@
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <telerik:RadTextBox ID="TextBeginTextBox" runat="server" Text='<%# Bind("TextBegin") %>'
-                                                                    TextMode="MultiLine" Rows="4" MaxLength="512" Width="650px">
+                                                                    TextMode="MultiLine" Rows="4" Width="650px">
                                                                 </telerik:RadTextBox>
                                                             </EditItemTemplate>
                                                         </telerik:GridTemplateColumn>
@@ -354,7 +354,7 @@
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <telerik:RadTextBox ID="TextEndTextBox" runat="server" Height="75px" Text='<%# Bind("TextEnd") %>'
-                                                                    TextMode="MultiLine" Rows="4" MaxLength="512" Width="650px">
+                                                                    TextMode="MultiLine" Rows="4" Width="650px">
                                                                 </telerik:RadTextBox>
                                                             </EditItemTemplate>
                                                         </telerik:GridTemplateColumn>

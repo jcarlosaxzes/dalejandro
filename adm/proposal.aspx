@@ -591,7 +591,7 @@
                                     <td>
                                         <h4>Introductory Text:</h4>
                                         <telerik:RadTextBox ID="RadTextBoxBegin" runat="server" Text='<%# Bind("TextBegin") %>'
-                                            TextMode="MultiLine" Rows="6" MaxLength="1024" Width="100%">
+                                            TextMode="MultiLine" Rows="6" Width="100%">
                                         </telerik:RadTextBox>
                                     </td>
                                 </tr>
@@ -599,7 +599,7 @@
                                     <td>
                                         <h4>Concluding Text:</h4>
                                         <telerik:RadTextBox ID="RadTextBoxEnd" runat="server" Text='<%# Bind("TextEnd") %>'
-                                            TextMode="MultiLine" Rows="6" MaxLength="1024" Width="100%">
+                                            TextMode="MultiLine" Rows="6" Width="100%">
                                         </telerik:RadTextBox>
                                     </td>
                                 </tr>

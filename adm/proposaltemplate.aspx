@@ -71,7 +71,7 @@
                 </td>
                 <td>
                     <telerik:RadTextBox ID="TextBeginTextBox" runat="server" EmptyMessage="Proposal Introductory Text"
-                        TextMode="MultiLine" Rows="3" MaxLength="1024" Width="100%">
+                        TextMode="MultiLine" Rows="3" Width="100%">
                     </telerik:RadTextBox>
                 </td>
 
@@ -82,7 +82,7 @@
                 </td>
                 <td>
                     <telerik:RadTextBox ID="TextEndTextBox" runat="server"
-                        TextMode="MultiLine" Rows="3" MaxLength="1024" Width="100%" EmptyMessage="Proposal Concluding Text">
+                        TextMode="MultiLine" Rows="3" Width="100%" EmptyMessage="Proposal Concluding Text">
                     </telerik:RadTextBox>
                 </td>
 
