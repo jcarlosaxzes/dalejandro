@@ -585,11 +585,11 @@
                         </telerik:RadWizardStep>
 
                         <%--Begin and Concluding Text--%>
-                        <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Begin and Concluding Text" StepType="Step">
+                        <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Opening and Closing Text" StepType="Step">
                             <table class="table-sm" style="width: 100%;">
                                 <tr>
                                     <td>
-                                        <h4>Introductory Text:</h4>
+                                        <h4>Opening Text:</h4>
                                         <telerik:RadTextBox ID="RadTextBoxBegin" runat="server" Text='<%# Bind("TextBegin") %>'
                                             TextMode="MultiLine" Rows="6" Width="100%">
                                         </telerik:RadTextBox>
@@ -597,7 +597,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <h4>Concluding Text:</h4>
+                                        <h4>Closing Text:</h4>
                                         <telerik:RadTextBox ID="RadTextBoxEnd" runat="server" Text='<%# Bind("TextEnd") %>'
                                             TextMode="MultiLine" Rows="6" Width="100%">
                                         </telerik:RadTextBox>
