@@ -113,6 +113,24 @@ Partial Public Class employeereport
     Protected WithEvents RadGridEfficiency As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''lblEfficiency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEfficiency As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''RadToolTipRatioJobsEfficiency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipRatioJobsEfficiency As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
     '''SqlDataSourceEmployees control.
     '''</summary>
     '''<remarks>
