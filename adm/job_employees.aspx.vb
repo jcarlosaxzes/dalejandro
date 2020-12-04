@@ -103,7 +103,7 @@ Public Class job_employees
         sFullBody.Append("Hours (remaining) :  " & dHourds)
         sFullBody.Append("<br />")
 
-        LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' asigned", sFullBody, lblCompanyId.Text)
+        LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' assigned", sFullBody, lblCompanyId.Text)
     End Sub
 
     Private Sub SqlDataSourceAssignedEmployees_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAssignedEmployees.Updating
