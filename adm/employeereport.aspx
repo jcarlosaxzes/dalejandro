@@ -3,6 +3,21 @@
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="btnRefresh">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="FormView1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridDepartmentFTE" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="FormView2"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridEfficiency"></telerik:AjaxUpdatedControl>
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
+
+
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Employee Report</span>
 
@@ -67,7 +82,7 @@
                                     runat="server" AlternateText="Employee Profile Picture"></asp:Image>
                             </div>
                         </td>
-                        <td style="width: 300px;vertical-align:top">
+                        <td style="width: 300px; vertical-align: top">
                             <h4><%# Eval("Name") %></h4>
                             <%# Eval("Position") %><br />
                             <%# Eval("Address") %><br />
@@ -75,7 +90,7 @@
                             <%#  LocalAPI.PhoneHTML(Request.UserAgent, Eval("Phone")) %><br />
                             <p>Starting at: <%# Eval("starting_Date", "{0:d}") %></p>
                         </td>
-                        <td style="vertical-align:top">
+                        <td style="vertical-align: top">
                             <telerik:RadGrid ID="RadGridDepartmentFTE" runat="server" DataSourceID="SqlDataSourceDepartmentFTE"
                                 GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
                                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
@@ -182,120 +197,124 @@
 
     </div>
 
-    <div class="row">
+    <div>
         <asp:FormView ID="FormView2" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEmployee" RenderOuterTable="false">
             <ItemTemplate>
-                <div class="col-md-12">
-                    <table class="table  table-sm table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th style="text-align: center"><%# Eval("year") - 1 %></th>
-                                <th style="text-align: center"><%# Eval("year") %></th>
-                            </tr>
-                        </thead>
+
+                <table class="table  table-sm table-striped table-bordered">
+                    <thead>
                         <tr>
-                            <td>Vacations (days)</td>
-                            <td style="text-align: center"><%# Eval("Vacations_1") %></td>
-                            <td style="text-align: center"><%# Eval("Vacations") %></td>
+                            <th></th>
+                            <th style="text-align: center"><%# Eval("year") - 1 %></th>
+                            <th style="text-align: center"><%# Eval("year") %></th>
                         </tr>
-                        <tr>
-                            <td>Holidays (days)</td>
-                            <td style="text-align: center"><%# Eval("EmployeeHollidays_1") %></td>
-                            <td style="text-align: center"><%# Eval("EmployeeHollidays") %></td>
-                        </tr>
-                        <tr>
-                            <td>Personal/Sick (days)</td>
-                            <td style="text-align: center"><%# Eval("Sick_1") %></td>
-                            <td style="text-align: center"><%# Eval("Sick") %></td>
-                        </tr>
-                        <tr>
-                            <td>Salary Hours</td>
-                            <td style="text-align: center"><%# Eval("Hours_1", "{0:N0}") %></td>
-                            <td style="text-align: center"><%# Eval("Hours", "{0:N0}") %></td>
-                        </tr>
-                        <tr>
-                            <td>Salary Net ($)</td>
-                            <td style="text-align: center"><%# Eval("NetAnnualSalary_1", "{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("NetAnnualSalary", "{0:C2}") %></td>
-                        </tr>
-                        <tr>
-                            <td>Salary Gross ($)</td>
-                            <td style="text-align: center"><%# Eval("GrossAnnualSalary_1", "{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("GrossAnnualSalary", "{0:C2}") %></td>
-                        </tr>
-                        <tr>
-                            <td>Salary Total Cost ($)</td>
-                            <td style="text-align: center"><%# Eval("TotalCostAnnualSalary_1", "{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("TotalCostAnnualSalary", "{0:C2}") %></td>
-                        </tr>
-                        <tr>
-                            <td>Bi-Weekly ($)</td>
-                            <td style="text-align: center"><%# Eval("BiWeeklySalary_1", "{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("BiWeeklySalary", "{0:C2}") %></td>
-                        </tr>
-                        <tr>
-                            <td>Hourly Wage ($)</td>
-                            <td style="text-align: center"><%# Eval("HourlyWage_1", "{0:C2}") %></td>
-                            <td style="text-align: center"><%# Eval("HourlyWage", "{0:C2}") %></td>
-                        </tr>
-                        <tr>
-                            <td>Efficiency (%)</td>
-                            <td style="text-align: center"><%# Eval("Efficiency_1", "{0:p}") %></td>
-                            <td style="text-align: center"><%# Eval("Efficiency", "{0:p}") %></td>
-                        </tr>
-                        <tr>
-                            <td>Productivity Rate (%)</td>
-                            <td style="text-align: center"><%# Eval("ProductivityRate_1", "{0:p}") %></td>
-                            <td style="text-align: center"><%# Eval("ProductivityRate", "{0:p}") %></td>
-                        </tr>
-                    </table>
-                    <div style="margin: 0; font-size: x-small; font-style: italic">
-                        (*) Salary Sources: Finances->Expenses->Payroll Details
-                    </div>
+                    </thead>
+                    <tr>
+                        <td>Vacations (days)</td>
+                        <td style="text-align: center"><%# Eval("Vacations_1") %></td>
+                        <td style="text-align: center"><%# Eval("Vacations") %></td>
+                    </tr>
+                    <tr>
+                        <td>Holidays (days)</td>
+                        <td style="text-align: center"><%# Eval("EmployeeHollidays_1") %></td>
+                        <td style="text-align: center"><%# Eval("EmployeeHollidays") %></td>
+                    </tr>
+                    <tr>
+                        <td>Personal/Sick (days)</td>
+                        <td style="text-align: center"><%# Eval("Sick_1") %></td>
+                        <td style="text-align: center"><%# Eval("Sick") %></td>
+                    </tr>
+                    <tr>
+                        <td>Salary Hours</td>
+                        <td style="text-align: center"><%# Eval("Hours_1", "{0:N0}") %></td>
+                        <td style="text-align: center"><%# Eval("Hours", "{0:N0}") %></td>
+                    </tr>
+                    <tr>
+                        <td>Salary Net ($)</td>
+                        <td style="text-align: center"><%# Eval("NetAnnualSalary_1", "{0:C2}") %></td>
+                        <td style="text-align: center"><%# Eval("NetAnnualSalary", "{0:C2}") %></td>
+                    </tr>
+                    <tr>
+                        <td>Salary Gross ($)</td>
+                        <td style="text-align: center"><%# Eval("GrossAnnualSalary_1", "{0:C2}") %></td>
+                        <td style="text-align: center"><%# Eval("GrossAnnualSalary", "{0:C2}") %></td>
+                    </tr>
+                    <tr>
+                        <td>Salary Total Cost ($)</td>
+                        <td style="text-align: center"><%# Eval("TotalCostAnnualSalary_1", "{0:C2}") %></td>
+                        <td style="text-align: center"><%# Eval("TotalCostAnnualSalary", "{0:C2}") %></td>
+                    </tr>
+                    <tr>
+                        <td>Bi-Weekly ($)</td>
+                        <td style="text-align: center"><%# Eval("BiWeeklySalary_1", "{0:C2}") %></td>
+                        <td style="text-align: center"><%# Eval("BiWeeklySalary", "{0:C2}") %></td>
+                    </tr>
+                    <tr>
+                        <td>Hourly Wage ($)</td>
+                        <td style="text-align: center"><%# Eval("HourlyWage_1", "{0:C2}") %></td>
+                        <td style="text-align: center"><%# Eval("HourlyWage", "{0:C2}") %></td>
+                    </tr>
+                    <tr>
+                        <td>Efficiency (%)</td>
+                        <td style="text-align: center"><%# Eval("Efficiency_1", "{0:p}") %></td>
+                        <td style="text-align: center"><%# Eval("Efficiency", "{0:p}") %></td>
+                    </tr>
+                    <tr>
+                        <td>Productivity Rate (%)</td>
+                        <td style="text-align: center"><%# Eval("ProductivityRate_1", "{0:p}") %></td>
+                        <td style="text-align: center"><%# Eval("ProductivityRate", "{0:p}") %></td>
+                    </tr>
+                </table>
+                <div style="margin: 0; font-size: x-small; font-style: italic">
+                    (*) Salary Sources: Finances->Expenses->Payroll Details
                 </div>
+
             </ItemTemplate>
         </asp:FormView>
 
     </div>
 
     <div style="padding-top: 24px">
-        
-            <h4>Jobs (Done or Inactive) Employee Efficiency</h4>
-            <telerik:RadGrid ID="RadGridEfficiency" runat="server" DataSourceID="SqlDataSourceEfficiency"
-                GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
-                HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-                <MasterTableView DataSourceID="SqlDataSourceEfficiency" DataKeyNames="jobId">
 
-                    <Columns>
-                        <telerik:GridTemplateColumn DataField="JobName" HeaderText="Job Name" SortExpression="JobName"
-                            UniqueName="JobName" HeaderStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
-                                <asp:Label ID="lblCompanyId" runat="server"
-                                    Text='<%# Eval("JobName")%>'>
-                                </asp:Label>
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
+        <h4>Jobs (Done or Inactive) Employee Efficiency</h4>
+        <telerik:RadGrid ID="RadGridEfficiency" runat="server" DataSourceID="SqlDataSourceEfficiency"
+            GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
+            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Bold="true" FooterStyle-Font-Size="Small"
+            HeaderStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+            <MasterTableView DataSourceID="SqlDataSourceEfficiency" DataKeyNames="jobId">
 
-                        <telerik:GridBoundColumn DataField="AssignedHours" HeaderText="Assigned Hours" HeaderTooltip="AssignedHours"
-                            SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
-                            Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours"
-                            SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
-                            Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Efficiency" HeaderText="Efficiency" HeaderTooltip="Efficiency is calculated by comparing the hours assigned vs hours worked as it pertains to Jobs listed as done or inactive"
-                            SortExpression="Efficiency" UniqueName="Efficiency" DataFormatString="{0:p}"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
-                        </telerik:GridBoundColumn>
+                <Columns>
+                    <telerik:GridTemplateColumn DataField="JobName" HeaderText="Job Name" SortExpression="JobName"
+                        UniqueName="JobName">
+                        <ItemTemplate>
+                            <asp:Label ID="lblCompanyId" runat="server"
+                                Text='<%# Eval("JobName")%>'>
+                            </asp:Label>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridBoundColumn DataField="JobStatus" HeaderText="Status" HeaderTooltip="Job Status" SortExpression="JobStatus" UniqueName="JobStatus" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="AssignedHours" HeaderText="Assigned Hours" HeaderTooltip="AssignedHours"
+                        SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" >
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                        Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" SortExpression="BudgetUsed" UniqueName="BudgetUsed" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" 
+                        Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="BudgetBalance" HeaderText="Budget Balance" SortExpression="BudgetBalance" UniqueName="BudgetBalance" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                        Aggregate="Avg" FooterAggregateFormatString="{0:P0}">
+                    </telerik:GridBoundColumn>
 
-                    </Columns>
-                </MasterTableView>
-            </telerik:RadGrid>
-        
+                </Columns>
+            </MasterTableView>
+        </telerik:RadGrid>
+
     </div>
 
     <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -314,7 +333,7 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceEfficiency" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="YearStadistic_EmployeeJobEfficiency" SelectCommandType="StoredProcedure">
+        SelectCommand="YearStadistic_v20_EmployeeJobEfficiency" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboEmployees" DefaultValue="" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="year" PropertyName="SelectedValue" Type="Int32" />

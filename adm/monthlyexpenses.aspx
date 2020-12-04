@@ -84,11 +84,11 @@
            
             </button>
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseImport" aria-expanded="false" aria-controls="collapseImport" title="Show/Hide Import expenses panel">
-                Import Expenses
+                Expenses Panel
            
             </button>
             <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseImportP" aria-expanded="false" aria-controls="collapseImportP" title="Show/Hide Import payroll panel">
-                Import Payroll
+                Payroll Panel
            
             </button>
             <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
@@ -194,15 +194,15 @@
                     <td style="padding-left: 50px; vertical-align: bottom">
 
                         <asp:LinkButton ID="btnExpensesImport" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
-                            CssClass="btn btn-info btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Import">
-                                     <i class="fas fa-upload"></i>&nbsp;Import Expenses
+                            CssClass="btn btn-info" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Import">
+                                     Import Expenses (csv)
                         </asp:LinkButton>
                     </td>
                     <td style="padding-left: 50px; vertical-align: bottom">
 
                         <asp:LinkButton ID="btnExpensesImportQb" runat="server" ToolTip="Import Expenses from Quickbooks"
-                            CssClass="btn btn-info btn" UseSubmitBehavior="false" >
-                                     <i class="fas fa-upload"></i>&nbsp;Import Expenses from Quickbooks
+                            CssClass="btn btn-primary" UseSubmitBehavior="false" >
+                                     Import Expenses from Quickbooks
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -255,7 +255,7 @@
 
                         <asp:LinkButton ID="btnImportPayroll" runat="server" ToolTip="Import Company Overhead.CSV files with columns(Date, Category, Amount)"
                             CssClass="btn btn-info btn" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="ImportPayroll">
-                                     <i class="fas fa-upload"></i>&nbsp;Import Payroll
+                                     Import Payroll (csv)
                         </asp:LinkButton>
                     </td>
                 </tr>
@@ -697,43 +697,46 @@
 
     <telerik:RadToolTip ID="RadToolTipQBExpenses" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-        <table class="table table-bordered" style="width: 600px">
+        <table class="table-sm" style="width: 600px">
             <tr>
-                <td colspan="2">
+                <td colspan="3">
                     <h2 style="text-align: center; color: white; width: 600px">
                         <span class="navbar navbar-expand-md bg-dark text-white">Import Period Expenses</span>
                     </h2>
                 </td>
             </tr>
             <tr>
-                <td style="width: 200px;">Date From
+                <td style="width: 100px;">Date From
                 </td>
-                <td>
-                    <telerik:RadDatePicker ID="DPFrom" runat="server" Width="100%" ZIndex="50001">
+                <td colspan="2">
+                    <telerik:RadDatePicker ID="DPFrom" runat="server" Width="150px" ZIndex="50001">
                     </telerik:RadDatePicker>
                 </td>
             </tr>
             <tr>
-                <td style="width: 200px;">Date To
+                <td>Date To
                 </td>
-                <td>
-                    <telerik:RadDatePicker ID="DPTo" runat="server" Width="100%" ZIndex="50001">
+                <td colspan="2">
+                    <telerik:RadDatePicker ID="DPTo" runat="server" Width="150px" ZIndex="50001">
                     </telerik:RadDatePicker>
                 </td>
             </tr>
             <tr>
-                <td style="width: 200px;">Ignore Category
-                </td>
-                <td>
+                <td style="vertical-align:top">Ignore Category
+                </td >
+                <td style="width: 30px;vertical-align:top">
                     <telerik:RadCheckBox ID="chIgnore" runat="server" Checked="true" >
                      </telerik:RadCheckBox>
+                </td>
+                <td style="vertical-align:top">
                     <telerik:RadTextBox ID="txtIgnore" runat="server" EmptyMessage="Ignore category"
-                            Width="200px" x-webkit-speech="x-webkit-speech" Text="Payroll">
+                            Width="100%" x-webkit-speech="x-webkit-speech" Text="Payroll Expenses">
                      </telerik:RadTextBox>
+                    <small>Example: Payroll Expenses associated with employees (not vendors)</small>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="3" style="text-align:right">
                     <asp:LinkButton ID="btnImportExpensesQB" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
                     Import Expenses
                     </asp:LinkButton>

@@ -22,6 +22,10 @@
     End Sub
 
     Private Sub RefreshPage()
+        FormView1.DataBind()
+        FormView2.DataBind()
+        SqlDataSourceDepartmentFTE.DataBind()
+        RadGridEfficiency.DataBind()
         btnView.DataBind()
     End Sub
 
