@@ -278,9 +278,9 @@
                         </tr>
                     </table>
                 </telerik:RadWizardStep>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Profit Chart" StepType="Step">
+               <%-- <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Profit Chart" StepType="Step">
                     <telerik:RadHtmlChart ID="RadHtmlChart2" runat="server" DataSourceID="SqlDataSource1" Height="630px" Width="100%">
-                        <ChartTitle Text="Profit Chart by Employee">
+                        <ChartTitle Text="Budget Assigned/Used Chart by Employee">
                             <Appearance Align="Center" BackgroundColor="White" Position="Top"></Appearance>
                         </ChartTitle>
                         <PlotArea>
@@ -293,7 +293,7 @@
                                     </Appearance>
                                     <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
                                 </telerik:ColumnSeries>
-                                <telerik:ColumnSeries DataFieldY="Profit" Name="Profit" GroupName="EmployeeId">
+                                <telerik:ColumnSeries DataFieldY="BudgetAssigned" Name="BudgetAssigned" GroupName="EmployeeId">
                                     <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
                                     </LabelsAppearance>
                                     <Appearance>
@@ -322,7 +322,7 @@
                         </Legend>
 
                     </telerik:RadHtmlChart>
-                </telerik:RadWizardStep>
+                </telerik:RadWizardStep>--%>
 
             </WizardSteps>
         </telerik:RadWizard>

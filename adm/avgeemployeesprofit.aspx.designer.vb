@@ -131,24 +131,6 @@ Partial Public Class avgeemployeesprofit
     Protected WithEvents RadToolTipRatioInfo As Global.Telerik.Web.UI.RadToolTip
 
     '''<summary>
-    '''RadWizardStep2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
-
-    '''<summary>
-    '''RadHtmlChart2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadHtmlChart2 As Global.Telerik.Web.UI.RadHtmlChart
-
-    '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
