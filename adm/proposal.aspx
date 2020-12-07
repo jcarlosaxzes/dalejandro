@@ -435,12 +435,6 @@
 
                                 <tr>
                                     <td style="text-align: right;">
-                                        <asp:CompareValidator runat="server" ID="Comparevalidator7" SetFocusOnError="true" Text="*" Operator="NotEqual"
-                                            ControlToValidate="cboProjectManager"
-                                            ErrorMessage="Proposal by is required"
-                                            ValueToCompare="(Not Defined...)"
-                                            ValidationGroup="Proposal">
-                                        </asp:CompareValidator>
                                         Proposal by:
                                     </td>
                                     <td>
@@ -451,15 +445,40 @@
                                                 <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="0" />
                                             </Items>
                                         </telerik:RadComboBox>
-                                        <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Not Defined...)"
-                                            Operator="NotEqual" ControlToValidate="cboProjectManager" Text="*" ErrorMessage="<span><b>Proposal by</b> is required</span>" ValidationGroup="Proposal">
-                                        </asp:CompareValidator>
+
+                                    </td>
+
+                                    <td style="text-align: right;">
+                                        Prepared by:
+                                    </td>
+                                    <td>
+                                        <telerik:RadComboBox ID="cboPreparedBy" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceEmployee"
+                                            DataTextField="Name" DataValueField="Id" Height="400px"
+                                            SelectedValue='<%# Bind("EmployeeAprovedId")%>' Width="350px" MarkFirstMatch="True" Filter="Contains">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="0" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align: right;">
+                                        Retainer:
+                                    </td>
+                                    <td>
+                                        <telerik:RadCheckBox ID="chkRetainer" runat="server" Checked='<%# Bind("Retainer")%>'
+                                            Text="On acceptance, the first invoice will be emitted"
+                                            ToolTip="If selected, upon the clients acceptance of the proposal, the first invoice of the payment schedule will be sent to the client"
+                                            AutoPostBack="false">
+                                        </telerik:RadCheckBox>
 
                                     </td>
 
                                     <td style="text-align: right;">Share with Client:</td>
                                     <td>
-                                        <telerik:RadCheckBox ID="chkSharePublicLinks" runat="server" Text="Public Upload Documents" Checked='<%# Bind("SharePublicLinks")%>'
+                                       <telerik:RadCheckBox ID="chkSharePublicLinks" runat="server" Text="Public Upload Documents" Checked='<%# Bind("SharePublicLinks")%>'
                                             ToolTip="Include file links in Proposal Acceptance" AutoPostBack="false">
                                         </telerik:RadCheckBox>
                                     </td>
@@ -467,13 +486,9 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="text-align: right;">Retainer:</td>
+                                    <td style="text-align: right;"></td>
                                     <td>
-                                        <telerik:RadCheckBox ID="chkRetainer" runat="server" Checked='<%# Bind("Retainer")%>'
-                                            Text="On acceptance, the first invoice will be emitted"
-                                            ToolTip="If selected, upon the clients acceptance of the proposal, the first invoice of the payment schedule will be sent to the client"
-                                            AutoPostBack="false">
-                                        </telerik:RadCheckBox>
+                                        
 
                                     </td>
                                     <td style="text-align: right;">Lump Sum:</td>
@@ -486,6 +501,32 @@
                                 </tr>
 
                             </table>
+
+                            <div>
+                                                                        
+                                        <asp:CompareValidator runat="server" ID="Comparevalidator7" SetFocusOnError="true" Text="*" Operator="NotEqual" Display="None"
+                                            ControlToValidate="cboProjectManager"
+                                            ErrorMessage="Proposal by is required"
+                                            ValueToCompare="(Not Defined...)"
+                                            ValidationGroup="Proposal">
+                                        </asp:CompareValidator>
+                                
+                                
+                                <asp:CompareValidator runat="server" ID="Comparevalidator8" SetFocusOnError="true" Text="*" Operator="NotEqual"
+                                            ControlToValidate="cboProjectManager"
+                                            ErrorMessage="Prepared by is required"
+                                            ValueToCompare="(Not Defined...)"
+                                            ValidationGroup="Proposal">
+                                        </asp:CompareValidator>
+
+                                        <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Not Defined...)"
+                                            Operator="NotEqual" ControlToValidate="cboProjectManager" Text="*" ErrorMessage="<span><b>Proposal by</b> is required</span>" ValidationGroup="Proposal">
+                                        </asp:CompareValidator>
+
+                                        <asp:CompareValidator runat="server" ID="Comparevalidator9" ValueToCompare="(Not Defined...)"
+                                            Operator="NotEqual" ControlToValidate="cboPreparedBy" Text="*" ErrorMessage="<span><b>Prepared by</b> is required</span>" ValidationGroup="Proposal">
+                                        </asp:CompareValidator>
+                            </div>
                         </telerik:RadWizardStep>
 
                         <%--Payment Schedules--%>
@@ -1500,7 +1541,7 @@
 
     <asp:SqlDataSource ID="SqlDataSourceProp1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="PROPOSAL_SIN_TC_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="PROPOSAL_v21_UPDATE" UpdateCommandType="StoredProcedure">
         <UpdateParameters>
             <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:Parameter Name="ClientId" Type="Int32" />
@@ -1547,6 +1588,7 @@
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
             <asp:Parameter Name="paymentscheduleId" Type="Int32" />
             <asp:Parameter Name="LumpSum" Type="Boolean" />
+            <asp:Parameter Name="EmployeeAprovedId" Type="Int32" />
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
         <SelectParameters>
