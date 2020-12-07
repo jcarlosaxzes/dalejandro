@@ -59,6 +59,42 @@ Partial Public Class avgeemployeesprofit
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
 
     '''<summary>
+    '''RadWizardStep3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''RadGrid1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''lblInfoGrid1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblInfoGrid1 As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''RadToolTipGrid1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadToolTipGrid1 As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
     '''RadWizardStep1 control.
     '''</summary>
     '''<remarks>
@@ -111,42 +147,6 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChart2 As Global.Telerik.Web.UI.RadHtmlChart
-
-    '''<summary>
-    '''RadWizardStep3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
-
-    '''<summary>
-    '''RadGrid1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''lblInfoGrid1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblInfoGrid1 As Global.System.Web.UI.WebControls.HyperLink
-
-    '''<summary>
-    '''RadToolTipGrid1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadToolTipGrid1 As Global.Telerik.Web.UI.RadToolTip
 
     '''<summary>
     '''SqlDataSource1 control.
