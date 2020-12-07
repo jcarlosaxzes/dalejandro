@@ -11,6 +11,9 @@
                     <telerik:AjaxUpdatedControl ControlID="RadGridDepartmentFTE" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="FormView2"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="RadGridEfficiency"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="cboYear"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="cboEmployees"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="btnView"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -22,21 +25,28 @@
         <span class="pasconcept-pagetitle">Employee Report</span>
 
         <span style="float: right; vertical-align: middle;">
-            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                <i class="fas fa-filter"></i>&nbsp;Filter
-            </button>
-
-            <asp:HyperLink ID="btnView" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false"
-                NavigateUrl='<%# GetMemoryUrl() %>' Target="_blank"
-                ToolTip="View page of employee year memory" CausesValidation="false">
+            <table>
+                <tr>
+                    <td>
+                        <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                            <i class="fas fa-filter"></i>&nbsp;Filter
+                        </button>
+                    </td>
+                    <td>
+                        <asp:HyperLink ID="btnView" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false"
+                            NavigateUrl='<%# String.Concat("~/adm/memory.aspx?companyId=", lblCompanyId.Text, "&year=", cboYear.SelectedValue, "&employeeId=", cboEmployees.SelectedValue) %>' Target="_blank"
+                            ToolTip="View page of employee year memory" CausesValidation="false">
                             <i class="far fa-eye"></i>&nbsp;View
-            </asp:HyperLink>
-            <asp:LinkButton ID="btnMemory" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
-                ToolTip="Send year memory link to employee" CausesValidation="false">
+                        </asp:HyperLink>
+                    </td>
+                    <td>
+                        <asp:LinkButton ID="btnMemory" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false"
+                            ToolTip="Send year memory link to employee" CausesValidation="false">
                             <i class="far fa-envelope"></i>&nbsp;Send
-            </asp:LinkButton>
-
-
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
         </span>
 
 
@@ -126,10 +136,10 @@
                                             ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
                                             Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" HeaderTooltip="Hours x HourlyRate"
-                                            SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:C0}"
+                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" 
+                                            SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P0}"
                                             ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
-                                            Aggregate="Sum" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Center">
+                                            Aggregate="Avg" FooterAggregateFormatString="{0:P0}" FooterStyle-HorizontalAlign="Center">
                                         </telerik:GridBoundColumn>
 
                                     </Columns>
@@ -149,40 +159,42 @@
                                 <div class="pasconcept-bar noprint">
                                     <span class="pasconcept-pagetitle">Employee Statistics for Project/Departments</span>
                                 </div>
-                                <table class="table table-striped" style="width: 850px; font-size: medium; text-align: center;">
+                                <table class="table table-striped" style="width: 850px; font-size: medium;">
                                     <tr>
-                                        <td style="width: 200px;">
+                                        <td style="width: 150px;text-align:right">
                                             <span class="badge badge-secondary">Open Workload = </span>
                                         </td>
-                                        <td>The remaining number of hours budgeted to Active Jobs.
+                                        <td>
+                                            The remaining number of hours budgeted to Active Jobs.
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <span class="badge badge-danger">Budget Assigned = </span>
+                                        <td style="text-align: right">
+                                            <span class="badge badge-success">Budget Assigned = </span>
                                         </td>
-                                        <td>Hours Assigned By Job x Position HourlyRate 
+                                        <td>Hours Assigned By Job x Position Hourly Rate
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <span class="badge badge-dark">Budget Used = </span>
+                                        <td style="text-align: right">
+                                            <span class="badge badge-danger">Budget Used = </span>
                                         </td>
                                         <td>Hours Worked x Employee Houly Rate x Multiplier
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td style="text-align: right">
                                             <span class="badge badge-success">FTE = </span>
                                         </td>
                                         <td>Full-time percent equivalent of Employee by Department
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <span class="badge badge-warning">Profit = </span>
+                                        <td style="text-align: right">
+                                            <span class="badge badge-warning">Efficiency = </span>
                                         </td>
-                                        <td>Profit...  
+                                        <td>
+                                            Net financial gain; rate between Budget assigned and amount spent (Budget Used)
                                         </td>
                                     </tr>
 
@@ -310,7 +322,7 @@
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="BudgetBalance" HeaderText="Budget Balance" SortExpression="BudgetBalance" UniqueName="BudgetBalance" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Profit" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
                                     Aggregate="Avg" FooterAggregateFormatString="{0:P0}">
                                 </telerik:GridBoundColumn>
 
@@ -331,49 +343,47 @@
                         <div class="pasconcept-bar noprint">
                             <span class="pasconcept-pagetitle">Jobs Employee Efficiency</span>
                         </div>
-                        <table class="table table-striped" style="width: 850px; font-size: medium; text-align: center;">
+                        <table class="table table-striped" style="width: 850px; font-size: medium; ">
                             <tr>
-                                <td style="width: 200px;">
+                                <td style="width: 150px;text-align:right">
                                     <span class="badge badge-secondary">Assigned Hours = </span>
                                 </td>
                                 <td>Hours assigned to the employee in this Job.
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style="text-align: right">
                                     <span class="badge badge-danger">Worked Hours = </span>
                                 </td>
                                 <td>Hours recorded in the Employee's TimeSheet in this Job. 
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span class="badge badge-dark">Budget Assigned = </span>
+                                <td style="text-align: right">
+                                    <span class="badge badge-success">Budget Assigned = </span>
                                 </td>
-                                <td>'Assigned Hours' x 'Horly Rate' of the employee's position in the Job.
+                                <td>Hours Assigned By Job x Position Hourly Rate
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span class="badge badge-success">Budget Used = </span>
+                                <td style="text-align: right">
+                                    <span class="badge badge-danger">Budget Used = </span>
                                 </td>
                                 <td>'Worked Hours' x 'Horly Rate' of the employee in the Job.
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td style="text-align: right">
                                     <span class="badge badge-warning">Budget Balance = </span>
                                 </td>
-                                <td> 
-                                    Budget Assigned - Budget Used
+                                <td>Budget Assigned - Budget Used
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <span class="badge badge-warning">Profit = </span>
+                                <td style="text-align: right">
+                                    <span class="badge badge-warning">Efficiency = </span>
                                 </td>
-                                <td>  
-                                    Budget Assigned / Budget Used (%)
+                                <td>Net financial gain; rate between Budget assigned and amount spent (Budget Used)
                                 </td>
                             </tr>
 
