@@ -253,27 +253,24 @@
                         </telerik:GridBoundColumn>
                         <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope">
                         </telerik:GridBoundColumn>
-                        <telerik:GridNumericColumn Aggregate="Sum" DataField="Hours" HeaderText="Hours" UniqueName="Freight" HeaderTooltip="Assigned Hours"
-                            HeaderStyle-Width="130px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                        <telerik:GridNumericColumn  DataField="Hours" HeaderText="Assigned Hours" UniqueName="Hours" HeaderTooltip="Assigned Hours"
+                            HeaderStyle-Width="150px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
                         </telerik:GridNumericColumn>
-                        <telerik:GridBoundColumn DataField="HoursWorked" HeaderText="H. Worked" ReadOnly="True" SortExpression="HoursWorked" UniqueName="HoursWorked"
+                        <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" ReadOnly="True" SortExpression="WorkedHours" UniqueName="WorkedHours"
                             DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}" FooterStyle-Font-Bold="true" HeaderTooltip="Hours Worked"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                             FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
-                        <telerik:GridTemplateColumn DataField="PercentET" HeaderText="H. Used(%)" ReadOnly="True" SortExpression="PercentET" UniqueName="PercentET"
-                            FooterAggregateFormatString="{0:N1}"
-                            Aggregate="Avg" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
-                                <%#Eval("PercentET", "{0:N1}")%> 
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE(%)" ReadOnly="True" SortExpression="FTE" UniqueName="FTE" ItemStyle-HorizontalAlign="Center"
-                            DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Center" FooterStyle-Width="130px" HeaderStyle-Width="130px">
+                        <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" ReadOnly="True" SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" Display="false" 
+                            DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
+                             FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="PercentBU" HeaderText="Budget Used(%)" ReadOnly="True" SortExpression="PercentBU" UniqueName="PercentBU"
-                            DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Center" FooterStyle-Width="130px" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                        <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" Display="false"
+                            DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
+                             FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" ReadOnly="True" SortExpression="Profit" UniqueName="Profit" 
+                            DataFormatString="{0:P2}" FooterAggregateFormatString="{0:P2}"
+                             FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
                     </Columns>
                 </MasterTableView>
@@ -311,7 +308,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceAssignedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Jobs_Employees_assigned_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="Job_Employees_assigned_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="jobId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
