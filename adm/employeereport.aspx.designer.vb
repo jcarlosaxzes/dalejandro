@@ -14,24 +14,6 @@ Option Explicit On
 Partial Public Class employeereport
 
     '''<summary>
-    '''RadAjaxManager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
-
-    '''<summary>
-    '''RadAjaxLoadingPanel1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
-
-    '''<summary>
     '''btnView control.
     '''</summary>
     '''<remarks>
@@ -77,6 +59,15 @@ Partial Public Class employeereport
     Protected WithEvents cboEmployees As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
+    '''cboJobStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboJobStatus As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
     '''btnRefresh control.
     '''</summary>
     '''<remarks>
@@ -95,22 +86,13 @@ Partial Public Class employeereport
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
-    '''FormView2 control.
+    '''RadGridDepartmentFTE control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormView2 As Global.System.Web.UI.WebControls.FormView
-
-    '''<summary>
-    '''RadGridEfficiency control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridEfficiency As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents RadGridDepartmentFTE As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
     '''lblEfficiency control.
@@ -131,6 +113,15 @@ Partial Public Class employeereport
     Protected WithEvents RadToolTipRatioJobsEfficiency As Global.Telerik.Web.UI.RadToolTip
 
     '''<summary>
+    '''RadGridEfficiency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridEfficiency As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''SqlDataSourceEmployees control.
     '''</summary>
     '''<remarks>
@@ -149,22 +140,22 @@ Partial Public Class employeereport
     Protected WithEvents SqlDataSourceEmployee As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceEfficiency control.
+    '''SqlDataSourceReportByJobs control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceEfficiency As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceReportByJobs As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceDepartmentFTE control.
+    '''SqlDataSourceReportByDepartment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceDepartmentFTE As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceReportByDepartment As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceYear control.

@@ -46,7 +46,7 @@
                                 we have calculated your <code>Productivity Rate</code> as <code><%# Eval("ProductivityRate","{0:p}") %></code>. 
                                
                                 <br />
-                                We have calculated your <code>Efficiency</code> of <code><%# Eval("Efficiency","{0:p}") %></code> measures of the relation between Assigned hours account the Worked in projects this year.
+                                We have calculated your <code>Efficiency</code> of <code><%# Eval("Efficiency", "{0:P0}") %></code> measures of the relation between Budget Assigned account the Budget Used in projects this year.
                            
                             </p>
 
@@ -73,10 +73,10 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <h4>Hours by Departments</h4>
+                            <h4>Departments Employee Efficiency</h4>
                             <telerik:RadGrid ID="RadGridDepartmentFTE" runat="server" DataSourceID="SqlDataSourceDepartmentFTE" AutoGenerateColumns="False" ShowFooter="true" Skin="" RenderMode="Lightweight"
                                 FooterStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="true">
-                                <MasterTableView DataSourceID="SqlDataSourceDepartmentFTE" DataKeyNames="DepartmentId">
+                                <MasterTableView DataSourceID="SqlDataSourceDepartmentFTE">
 
                                     <Columns>
                                         <telerik:GridTemplateColumn DataField="Department" HeaderText="Department" SortExpression="Department"
@@ -89,30 +89,13 @@
                                             <FooterTemplate><b>Totals</b></FooterTemplate>
                                         </telerik:GridTemplateColumn>
 
-                                        <telerik:GridBoundColumn DataField="OpenWorkload" HeaderText="Open Workload" HeaderTooltip="OpenWorkload in Hours"
-                                            SortExpression="OpenWorkload" UniqueName="OpenWorkload" DataFormatString="{0:N0}"
-                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="130px"
-                                            Aggregate="Sum" FooterAggregateFormatString="{0:N0}" FooterStyle-HorizontalAlign="Center">
+                                        <telerik:GridBoundColumn DataField="AssignedHours" HeaderText="Assigned Hours" HeaderTooltip="AssignedHours"
+                                            SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                                             Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" HeaderTooltip="Hours Assigned x HourlyRate x Multipler"
-                                            SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" DataFormatString="{0:C0}"
-                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="130px"
-                                            Aggregate="Sum" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Center">
+                                        <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" HeaderTooltip="Hours x HourlyRate"
-                                            SortExpression="BudgetUsed" UniqueName="BudgetUsed" DataFormatString="{0:C0}"
-                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="130px"
-                                            Aggregate="Sum" FooterAggregateFormatString="{0:C0}" FooterStyle-HorizontalAlign="Center">
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE" HeaderTooltip="Full-Time Equivalent %"
-                                            SortExpression="FTE" UniqueName="FTE" DataFormatString="{0:p}"
-                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
-                                            Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Center">
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" HeaderTooltip="Hours x HourlyRate"
-                                            SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P0}"
-                                            ItemStyle-HorizontalAlign="Center" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="120px"
-                                            Aggregate="Sum" FooterAggregateFormatString="{0:P0}" FooterStyle-HorizontalAlign="Center">
+                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                                         </telerik:GridBoundColumn>
 
                                     </Columns>
@@ -131,7 +114,7 @@
 
                                     <Columns>
                                         <telerik:GridTemplateColumn DataField="JobName" HeaderText="Job Name" SortExpression="JobName"
-                                            UniqueName="JobName" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="450px" >
+                                            UniqueName="JobName" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="400px" >
                                             <ItemTemplate>
                                                 <asp:Label ID="lblCompanyId" runat="server"
                                                     Text='<%# Eval("JobName")%>'>
@@ -147,8 +130,7 @@
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
-                                            Aggregate="Avg" FooterAggregateFormatString="{0:P0}">
+                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                                         </telerik:GridBoundColumn>
                                     </Columns>
                                 </MasterTableView>
@@ -172,32 +154,34 @@
 
         </div>
         <asp:SqlDataSource ID="SqlDataSourceEmployee" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_EmployeeReport_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="EmployeeReport_SELECT" SelectCommandType="StoredProcedure">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
                 <asp:ControlParameter ControlID="lblYear" Name="year" PropertyName="Text" />
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+                <asp:ControlParameter ControlID="lblJobStatusIN_List" Name="JobStatusIN_List" PropertyName="Text" />
             </SelectParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceDepartmentFTE" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_v20_EmployeeDepartmentsList" SelectCommandType="StoredProcedure">
-            <SelectParameters>
-                <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-                <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
-                <asp:ControlParameter ControlID="lblYear" Name="year" PropertyName="Text" />
-            </SelectParameters>
+            SelectCommand="EmployeeReportByDepartment_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblYear" Name="year" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblJobStatusIN_List" Name="JobStatusIN_List" PropertyName="Text" />
+        </SelectParameters>
         </asp:SqlDataSource>
         <asp:SqlDataSource ID="SqlDataSourceEfficiency" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-            SelectCommand="YearStadistic_v20_EmployeeJobEfficiency" SelectCommandType="StoredProcedure">
+            SelectCommand="EmployeeReportByJobs_SELECT" SelectCommandType="StoredProcedure">
             <SelectParameters>
                 <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
                 <asp:ControlParameter ControlID="lblYear" Name="year" PropertyName="Text" />
+                <asp:ControlParameter ControlID="lblJobStatusIN_List" Name="JobStatusIN_List" PropertyName="Text" />
             </SelectParameters>
         </asp:SqlDataSource>
 
         <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblYear" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblEmployeeId" runat="server" Visible="False" Text="0"></asp:Label>
+        <asp:Label ID="lblJobStatusIN_List" runat="server" Visible="False" Text="1"></asp:Label>
     </form>
 </body>
 </html>
