@@ -152,9 +152,7 @@
                                                 </telerik:GridBoundColumn>
 
                                                 <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" HeaderStyle-Width="150px" HeaderTooltip="Net financial gain; difference between Budget assigned and amount spent (Budget Used)"
-                                                    SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P2}"
-                                                    ItemStyle-HorizontalAlign="Center"
-                                                    Aggregate="Avg" FooterAggregateFormatString="{0:P2}" FooterStyle-HorizontalAlign="Center">
+                                                    SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P2}" ItemStyle-HorizontalAlign="Center">
                                                 </telerik:GridBoundColumn>
                                             </Columns>
                                         </MasterTableView>
@@ -288,14 +286,14 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right">
-                                    <span class="badge badge-success">Hours Assigned = </span>
+                                    <span class="badge badge-success">Assigned Hours= </span>
                                 </td>
                                 <td>Number of hours assigned as members of Jobs
                                 </td>
                             </tr>
                             <tr>
                                 <td style="text-align: right">
-                                    <span class="badge badge-danger">Hours Worked = </span>
+                                    <span class="badge badge-danger">Worked Hours= </span>
                                 </td>
                                 <td>Number of hours (Productive Time) entered in Jobs
                                 </td>

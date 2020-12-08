@@ -16,6 +16,12 @@
                 If Not Request.QueryString("employeeId") Is Nothing Then
                     lblEmployeeId.Text = Request.QueryString("employeeId")
                 End If
+                If Not Request.QueryString("JobStatusIN_List") Is Nothing Then
+                    lblJobStatusIN_List.Text = Request.QueryString("JobStatusIN_List")
+                End If
+
+
+
             End If
         End If
     End Sub

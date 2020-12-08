@@ -1,4 +1,6 @@
-﻿Public Class employeereport
+﻿Imports Telerik.Web.UI
+
+Public Class employeereport
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -23,7 +25,7 @@
 
     Private Sub RefreshPage()
         FormView1.DataBind()
-        FormView2.DataBind()
+        RadGridDepartmentFTE.DataBind()
         RadGridEfficiency.DataBind()
         btnView.DataBind()
     End Sub
@@ -32,7 +34,31 @@
         LocalAPI.EmployeeEmailMemory(cboEmployees.SelectedValue, lblCompanyId.Text, cboYear.SelectedValue)
     End Sub
 
-    Private Sub SqlDataSourceDepartmentFTE_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceDepartmentFTE.Selecting
-        Dim e1 As String = e.Command.Parameters(0).Value
+    Private Sub SqlDataSourceReportByDepartment_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceReportByDepartment.Selecting
+        e.Command.Parameters("@JobStatusIN_List").Value = GetMultiCheckInList(cboJobStatus)
     End Sub
+
+    Private Sub SqlDataSourceReportByJobs_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceReportByJobs.Selecting
+        e.Command.Parameters("@JobStatusIN_List").Value = GetMultiCheckInList(cboJobStatus)
+    End Sub
+
+    Private Sub SqlDataSourceEmployee_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceEmployee.Selecting
+        e.Command.Parameters("@JobStatusIN_List").Value = GetMultiCheckInList(cboJobStatus)
+    End Sub
+
+    Public Function GetMultiCheckInList(Combo1 As RadComboBox) As String
+        ' Companies...............................
+        Dim ResultList As String = ""
+        Dim collection As IList(Of RadComboBoxItem) = Combo1.CheckedItems
+        If (collection.Count <> 0) Then
+
+            For Each item As RadComboBoxItem In collection
+                ResultList = ResultList + item.Value + ","
+            Next
+            ' Quitar la ultima coma
+            ResultList = Left(ResultList, Len(ResultList) - 1)
+            Return ResultList
+        End If
+    End Function
+
 End Class
