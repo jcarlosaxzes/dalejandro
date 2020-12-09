@@ -46,8 +46,9 @@
                                 we have calculated your <code>Productivity Rate</code> as <code><%# Eval("ProductivityRate","{0:p}") %></code>. 
                                
                                 <br />
-                                We have calculated your <code>Efficiency</code> of <code><%# Eval("Efficiency", "{0:P0}") %></code> measures of the relation between Budget Assigned account the Budget Used in projects this year.
-                           
+                                We have calculated your <code>Budget Efficiency</code> of <code><%# Eval("Efficiency", "{0:P0}") %></code> measures of the relation between Budget Assigned account the Budget Used in projects this year.
+                                 <br />
+                                Your <code>Time Efficiency</code> is <code><%# Eval("TimeEfficiency", "{0:P0}") %></code> measures of the relation between Hours Assigned account the Hours Worket in projects this year.
                             </p>
 
                             <p>
