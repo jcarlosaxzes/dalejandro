@@ -80,15 +80,19 @@
                         </telerik:GridBoundColumn>
                         <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" ReadOnly="True" SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" Display="false" 
                             DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
-                             FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
                         <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" Display="false"
                             DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
-                             FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" ReadOnly="True" SortExpression="Profit" UniqueName="Profit" 
+                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Budget Efficiency" ReadOnly="True" SortExpression="Profit" UniqueName="Profit" 
                             DataFormatString="{0:P2}" FooterAggregateFormatString="{0:P2}"
-                             FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
+                        </telerik:GridBoundColumn>
+                        <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" ReadOnly="True" SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" 
+                            DataFormatString="{0:P2}" FooterAggregateFormatString="{0:P2}"
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
                         <%--
                         <telerik:GridBoundColumn DataField="PercentBU" HeaderText="Budget Used(%)" ReadOnly="True" SortExpression="PercentBU" UniqueName="PercentBU"

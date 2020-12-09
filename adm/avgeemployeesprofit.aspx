@@ -151,8 +151,11 @@
                                                     Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right">
                                                 </telerik:GridBoundColumn>
 
-                                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" HeaderStyle-Width="150px" HeaderTooltip="Net financial gain; difference between Budget assigned and amount spent (Budget Used)"
+                                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Budget Efficiency" HeaderStyle-Width="150px" 
                                                     SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P2}" ItemStyle-HorizontalAlign="Center">
+                                                </telerik:GridBoundColumn>
+                                                <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" HeaderStyle-Width="150px" 
+                                                    SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" DataFormatString="{0:P2}" ItemStyle-HorizontalAlign="Center">
                                                 </telerik:GridBoundColumn>
                                             </Columns>
                                         </MasterTableView>
@@ -167,11 +170,19 @@
                                         </ChartTitle>
                                         <PlotArea>
                                             <Series>
-                                                <telerik:ColumnSeries DataFieldY="Profit" Name="Efficiency" AxisName="LeftAxis">
+                                                <telerik:ColumnSeries DataFieldY="Profit" Name="Budget Efficiency" AxisName="LeftAxis">
                                                     <LabelsAppearance Visible="false" DataFormatString="{0:P0}">
                                                     </LabelsAppearance>
                                                     <Appearance>
-                                                        <FillStyle BackgroundColor="YellowGreen" />
+                                                        <FillStyle BackgroundColor="Red" />
+                                                    </Appearance>
+                                                    <TooltipsAppearance DataFormatString="{0:P0}"></TooltipsAppearance>
+                                                </telerik:ColumnSeries>
+                                                <telerik:ColumnSeries DataFieldY="TimeEfficiency" Name="Time Efficiency" AxisName="LeftAxis">
+                                                    <LabelsAppearance Visible="false" DataFormatString="{0:P0}">
+                                                    </LabelsAppearance>
+                                                    <Appearance>
+                                                        <FillStyle BackgroundColor="Blue" />
                                                     </Appearance>
                                                     <TooltipsAppearance DataFormatString="{0:P0}"></TooltipsAppearance>
                                                 </telerik:ColumnSeries>
@@ -181,7 +192,7 @@
                                                     <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
                                                     </LabelsAppearance>
                                                     <Appearance>
-                                                        <FillStyle BackgroundColor="Red" />
+                                                        <FillStyle BackgroundColor="Green" />
                                                     </Appearance>
                                                     <LineAppearance LineStyle="Smooth" Width="2" />
                                                     <TooltipsAppearance DataFormatString="{0:N0}"></TooltipsAppearance>
@@ -345,7 +356,7 @@
 
     </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="YearStadistic_v21_EMPLOYES_PROFIT" SelectCommandType="StoredProcedure">
+        SelectCommand="YearStadistic_v20_EMPLOYES_PROFIT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" />
