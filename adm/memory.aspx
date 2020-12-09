@@ -90,12 +90,14 @@
                                         </telerik:GridTemplateColumn>
 
                                         <telerik:GridBoundColumn DataField="AssignedHours" HeaderText="Assigned Hours" HeaderTooltip="AssignedHours"
-                                            SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                                            SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
                                              Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Budget Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" DataFormatString="{0:P0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                                         </telerik:GridBoundColumn>
 
                                     </Columns>
@@ -123,14 +125,16 @@
                                             <FooterTemplate><b>Totals</b></FooterTemplate>
                                         </telerik:GridTemplateColumn>
 
-                                        <telerik:GridBoundColumn DataField="JobStatus" HeaderText="Status" HeaderTooltip="Job Status" SortExpression="JobStatus" UniqueName="JobStatus" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                        <telerik:GridBoundColumn DataField="JobStatus" HeaderText="Status" HeaderTooltip="Job Status" SortExpression="JobStatus" UniqueName="JobStatus" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="120px">
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="AssignedHours" HeaderText="Assigned Hours" HeaderTooltip="AssignedHours"
-                                            SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"  Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                                            SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"  Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                                        <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Budget Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" DataFormatString="{0:P0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                                         </telerik:GridBoundColumn>
                                     </Columns>
                                 </MasterTableView>
