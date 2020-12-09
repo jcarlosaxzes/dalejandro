@@ -165,12 +165,21 @@
                                                 <td style="text-align: center; font-weight: bold"><%# Eval("HourlyWage", "{0:C2}") %></td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align: right"><b>Efficiency</b></td>
+                                                <td style="text-align: right"><b>Budget Efficiency</b></td>
                                                 <td style="text-align: center">
                                                     <div class="badge badge-secondary" style="font-size: 20px; width: 150px"><%# Eval("Efficiency_1", "{0:P0}") %></div>
                                                 </td>
                                                 <td style="text-align: center;">
-                                                    <div class="badge badge-warning" style="font-size: 20px; width: 150px"><%# Eval("Efficiency", "{0:P0}") %></div>
+                                                    <div class="badge badge-danger" style="font-size: 20px; width: 150px"><%# Eval("Efficiency", "{0:P0}") %></div>
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td style="text-align: right"><b>Time Efficiency</b></td>
+                                                <td style="text-align: center">
+                                                    <div class="badge badge-secondary" style="font-size: 20px; width: 150px"><%# Eval("TimeEfficiency_1", "{0:P0}") %></div>
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <div class="badge badge-primary" style="font-size: 20px; width: 150px"><%# Eval("TimeEfficiency", "{0:P0}") %></div>
                                                 </td>
                                             </tr>
                                         </table>
@@ -187,7 +196,7 @@
                         Transitions="true">
                         <PlotArea>
                             <Series>
-                                <telerik:LineSeries DataFieldY="Efficiency" Name="Efficiency">
+                                <telerik:LineSeries DataFieldY="Efficiency" Name="Time Efficiency">
                                     <TooltipsAppearance DataFormatString="{0:P0}"></TooltipsAppearance>
                                     <Appearance>
                                         <FillStyle BackgroundColor="Red" />
@@ -195,6 +204,17 @@
                                     <LineAppearance LineStyle="Smooth" Width="2" />
                                     <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                     <LabelsAppearance Color="Red" Position="Above"  DataFormatString="{0:P0}">
+                                        <TextStyle FontSize="10" />
+                                    </LabelsAppearance>
+                                </telerik:LineSeries>
+                                <telerik:LineSeries DataFieldY="TimeEfficiency" Name="Budget Efficiency">
+                                    <TooltipsAppearance DataFormatString="{0:P0}"></TooltipsAppearance>
+                                    <Appearance>
+                                        <FillStyle BackgroundColor="Blue" />
+                                    </Appearance>
+                                    <LineAppearance LineStyle="Smooth" Width="2" />
+                                    <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                    <LabelsAppearance Color="Blue" Position="Below"  DataFormatString="{0:P0}">
                                         <TextStyle FontSize="10" />
                                     </LabelsAppearance>
                                 </telerik:LineSeries>
@@ -216,7 +236,7 @@
                             </XAxis>
                         </PlotArea>
                         <Legend>
-                            <Appearance Visible="false" Position="Top"></Appearance>
+                            <Appearance Visible="true" Position="Bottom"></Appearance>
                         </Legend>
                     </telerik:RadHtmlChart>
                 </td>
@@ -232,13 +252,13 @@
                 <td>
                     <h4>Department Employee Efficiency</h4>
                     <telerik:RadGrid ID="RadGridDepartmentFTE" runat="server" DataSourceID="SqlDataSourceReportByDepartment"
-                        GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
+                        GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"  HeaderStyle-HorizontalAlign="Center"
                         HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true" FooterStyle-HorizontalAlign="Center">
                         <MasterTableView DataSourceID="SqlDataSourceReportByDepartment">
 
                             <Columns>
                                 <telerik:GridTemplateColumn DataField="Department" HeaderText="Department" SortExpression="Department"
-                                    UniqueName="Department" HeaderStyle-HorizontalAlign="Center">
+                                    UniqueName="Department">
                                     <ItemTemplate>
                                         <asp:Label ID="lblCompanyId" runat="server"
                                             Text='<%# Eval("Department")%>'>
@@ -260,7 +280,9 @@
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="BudgetBalance" HeaderText="Budget Balance" SortExpression="BudgetBalance" UniqueName="BudgetBalance" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Budget Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                                 </telerik:GridBoundColumn>
                             </Columns>
                         </MasterTableView>
@@ -317,9 +339,16 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right">
-                                    <span class="badge badge-warning">Efficiency = </span>
+                                    <span class="badge badge-danger">Budget Efficiency = </span>
                                 </td>
-                                <td>Net financial gain; rate between Budget assigned and amount spent (Budget Used)
+                                <td>Net financial gain; rate between Budget Assigned and amount spent (Budget Used)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">
+                                    <span class="badge badge-success">Time Efficiency = </span>
+                                </td>
+                                <td>Net financial gain; rate between Hours Assigned and amount used (Worked Hours)
                                 </td>
                             </tr>
 
@@ -351,13 +380,13 @@
                                         </asp:Label>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>
-                                <telerik:GridBoundColumn DataField="JobStatus" HeaderText="Status" HeaderTooltip="Job Status" SortExpression="JobStatus" UniqueName="JobStatus" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                <telerik:GridBoundColumn DataField="JobStatus" HeaderText="Status" HeaderTooltip="Job Status" SortExpression="JobStatus" UniqueName="JobStatus" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="AssignedHours" HeaderText="Assigned Hours" HeaderTooltip="AssignedHours"
-                                    SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
+                                    SortExpression="AssignedHours" UniqueName="AssignedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
                                     Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
+                                <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" HeaderTooltip="WorkedHours" SortExpression="WorkedHours" UniqueName="WorkedHours" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px"
                                     Aggregate="Sum" FooterAggregateFormatString="{0:C2}">
@@ -368,6 +397,8 @@
                                 <telerik:GridBoundColumn DataField="BudgetBalance" HeaderText="Budget Balance" SortExpression="BudgetBalance" UniqueName="BudgetBalance" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                </telerik:GridBoundColumn>
+                                <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                                 </telerik:GridBoundColumn>
 
                             </Columns>
