@@ -51,7 +51,7 @@
     <div>
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
 
-            <table class="table-sm pasconcept-bar" style="width: 100%" >
+            <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
                     <td style="width: 175px">
                         <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear" Height="300px"
@@ -94,7 +94,7 @@
     <div>
         <table style="width: 100%">
             <tr>
-                <td style="width:975px; vertical-align: top">
+                <td style="width: 975px; vertical-align: top">
                     <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceEmployee" RenderOuterTable="false">
                         <ItemTemplate>
                             <table style="width: 100%">
@@ -167,19 +167,28 @@
                                             <tr>
                                                 <td style="text-align: right"><b>Budget Efficiency</b></td>
                                                 <td style="text-align: center">
-                                                    <div class="badge badge-secondary" style="font-size: 20px; width: 150px"><%# Eval("Efficiency_1", "{0:P0}") %></div>
+                                                    <div class="badge badge-secondary" style="font-size: 16px; width: 150px"><%# Eval("Efficiency_1", "{0:P0}") %></div>
                                                 </td>
                                                 <td style="text-align: center;">
-                                                    <div class="badge badge-danger" style="font-size: 20px; width: 150px"><%# Eval("Efficiency", "{0:P0}") %></div>
+                                                    <div class="badge badge-danger" style="font-size: 16px; width: 150px"><%# Eval("Efficiency", "{0:P0}") %></div>
                                                 </td>
                                             </tr>
-                                             <tr>
+                                            <tr>
                                                 <td style="text-align: right"><b>Time Efficiency</b></td>
                                                 <td style="text-align: center">
-                                                    <div class="badge badge-secondary" style="font-size: 20px; width: 150px"><%# Eval("TimeEfficiency_1", "{0:P0}") %></div>
+                                                    <div class="badge badge-secondary" style="font-size: 16px; width: 150px"><%# Eval("TimeEfficiency_1", "{0:P0}") %></div>
                                                 </td>
                                                 <td style="text-align: center;">
-                                                    <div class="badge badge-primary" style="font-size: 20px; width: 150px"><%# Eval("TimeEfficiency", "{0:P0}") %></div>
+                                                    <div class="badge badge-primary" style="font-size: 16px; width: 150px"><%# Eval("TimeEfficiency", "{0:P0}") %></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right"><b>Productive Time Rate</b></td>
+                                                <td style="text-align: center">
+                                                    <div class="badge badge-secondary" style="font-size: 16px; width: 150px"><%# Eval("ProductiveRate_1", "{0:P0}") %></div>
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <div class="badge badge-success" style="font-size: 16px; width: 150px"><%# Eval("ProductiveRate", "{0:P0}") %></div>
                                                 </td>
                                             </tr>
                                         </table>
@@ -203,7 +212,7 @@
                                     </Appearance>
                                     <LineAppearance LineStyle="Smooth" Width="2" />
                                     <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                    <LabelsAppearance Color="Red" Position="Above"  DataFormatString="{0:P0}">
+                                    <LabelsAppearance Color="Red" Position="Above" Visible="False" DataFormatString="{0:P0}">
                                         <TextStyle FontSize="10" />
                                     </LabelsAppearance>
                                 </telerik:LineSeries>
@@ -214,7 +223,18 @@
                                     </Appearance>
                                     <LineAppearance LineStyle="Smooth" Width="2" />
                                     <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
-                                    <LabelsAppearance Color="Blue" Position="Below"  DataFormatString="{0:P0}">
+                                    <LabelsAppearance Color="Blue" Position="Below" Visible="False" DataFormatString="{0:P0}">
+                                        <TextStyle FontSize="10" />
+                                    </LabelsAppearance>
+                                </telerik:LineSeries>
+                                <telerik:LineSeries DataFieldY="ProductiveRate" Name="Productive Time Rate">
+                                    <TooltipsAppearance DataFormatString="{0:P0}"></TooltipsAppearance>
+                                    <Appearance>
+                                        <FillStyle BackgroundColor="Green" />
+                                    </Appearance>
+                                    <LineAppearance LineStyle="Smooth" Width="2" />
+                                    <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
+                                    <LabelsAppearance Color="Green" Position="Below" Visible="False" DataFormatString="{0:P0}">
                                         <TextStyle FontSize="10" />
                                     </LabelsAppearance>
                                 </telerik:LineSeries>
@@ -226,8 +246,8 @@
                                 </LabelsAppearance>
                                 <MinorGridLines Visible="false"></MinorGridLines>
                             </YAxis>
-                             <XAxis DataLabelsField="Year">
-                                <TitleAppearance Text="Year"></TitleAppearance>
+                            <XAxis DataLabelsField="Year">
+                                <TitleAppearance Text="Year" Visible="False"></TitleAppearance>
                                 <MinorGridLines Visible="false"></MinorGridLines>
                                 <AxisCrossingPoints>
                                     <telerik:AxisCrossingPoint Value="0" />
@@ -252,7 +272,7 @@
                 <td>
                     <h4>Department Employee Efficiency</h4>
                     <telerik:RadGrid ID="RadGridDepartmentFTE" runat="server" DataSourceID="SqlDataSourceReportByDepartment"
-                        GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"  HeaderStyle-HorizontalAlign="Center"
+                        GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true" HeaderStyle-HorizontalAlign="Center"
                         HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true" FooterStyle-HorizontalAlign="Center">
                         <MasterTableView DataSourceID="SqlDataSourceReportByDepartment">
 
@@ -358,13 +378,14 @@
             </tr>
         </table>
     </div>
-
-    <div>
-
+    <br />
+    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Details panel">
+        <i class="fas fa-list"></i>&nbsp;Jobs Employee Efficiency
+    </button>
+    <div class="collapse" id="collapseFilter">
         <table style="width: 100%">
             <tr>
                 <td>
-                    <h4>Jobs Employee Efficiency</h4>
                     <telerik:RadGrid ID="RadGridEfficiency" runat="server" DataSourceID="SqlDataSourceReportByJobs"
                         GridLines="None" AllowSorting="True" AutoGenerateColumns="False" CellSpacing="0" ShowFooter="true"
                         HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Bold="true" FooterStyle-Font-Size="Small"
@@ -396,7 +417,7 @@
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="BudgetBalance" HeaderText="Budget Balance" SortExpression="BudgetBalance" UniqueName="BudgetBalance" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px" Aggregate="Sum" FooterAggregateFormatString="{0:N0}">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
+                                <telerik:GridBoundColumn DataField="Profit" HeaderText="Budget Efficiency" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" DataFormatString="{0:P1}" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="180px">
                                 </telerik:GridBoundColumn>
