@@ -86,6 +86,15 @@ Partial Public Class employeereport
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
+    '''RadHtmlChart1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
+
+    '''<summary>
     '''RadGridDepartmentFTE control.
     '''</summary>
     '''<remarks>
@@ -165,6 +174,15 @@ Partial Public Class employeereport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceYear As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceEfficiencyHistory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceEfficiencyHistory As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.

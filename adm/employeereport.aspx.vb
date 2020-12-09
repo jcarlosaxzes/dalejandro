@@ -28,6 +28,8 @@ Public Class employeereport
         RadGridDepartmentFTE.DataBind()
         RadGridEfficiency.DataBind()
         btnView.DataBind()
+        SqlDataSourceEfficiencyHistory.DataBind()
+        RadHtmlChart1.DataBind()
     End Sub
 
     Protected Sub btnMemory_Click(sender As Object, e As EventArgs) Handles btnMemory.Click
@@ -61,4 +63,7 @@ Public Class employeereport
         End If
     End Function
 
+    Private Sub SqlDataSourceEfficiencyHistory_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceEfficiencyHistory.Selecting
+        e.Command.Parameters("@JobStatusIN_List").Value = GetMultiCheckInList(cboJobStatus)
+    End Sub
 End Class
