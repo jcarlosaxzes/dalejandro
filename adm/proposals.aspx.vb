@@ -43,6 +43,7 @@ Public Class proposals
                 End If
                 RefreshRecordset()
 
+                SaveFilter()
             End If
 
             RadWindowManager1.EnableViewState = False
