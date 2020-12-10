@@ -167,6 +167,8 @@
             <asp:Parameter Name="billing_baseusers" />
             <asp:Parameter Name="billing_otheruser" Type="Double" />
             <asp:Parameter Name="billing_period_Id" />
+            <asp:Parameter Name="Custom" Type="Boolean" />
+            <asp:Parameter Name="Inactive" Type="Boolean" />
         </InsertParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="cboStatus" Name="StatusId" PropertyName="SelectedValue" Type="Int32" />

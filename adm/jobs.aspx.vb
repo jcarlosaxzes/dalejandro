@@ -58,6 +58,8 @@ Public Class jobs
                 EEGvertical()
 
                 RadGrid1.DataBind()
+
+                SaveFilter()
             End If
 
             'If RadWindowManagerJob.Windows.Count > 0 Then
@@ -201,8 +203,6 @@ Public Class jobs
             cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
             lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
             txtFind.Text = Session("Filter_Jpbs_txtFind")
-
-            'Refresh()
 
         Catch ex As Exception
             Dim e1 As String = ex.Message
