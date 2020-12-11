@@ -94,16 +94,11 @@
                             DataFormatString="{0:P2}" FooterAggregateFormatString="{0:P2}"
                              FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
-                        <%--
-                        <telerik:GridBoundColumn DataField="PercentBU" HeaderText="Budget Used(%)" ReadOnly="True" SortExpression="PercentBU" UniqueName="PercentBU"
-                            DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
-                             FooterStyle-HorizontalAlign="Right" FooterStyle-Width="130px" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right">
-                        </telerik:GridBoundColumn>
                         <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="To delete row, H.Worked must be '0'. Delete this row?"
                             ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
                             UniqueName="DeleteColumn" HeaderText=""
                             ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="60px">
-                        </telerik:GridButtonColumn>--%>
+                        </telerik:GridButtonColumn>
                     </Columns>
                     <EditFormSettings CaptionFormatString="Edit Assigned Employee" EditFormType="Template" FormStyle-Width="600px">
                         <FormTemplate>
