@@ -146,6 +146,9 @@ Public Class reports
                     'boundColumn.HeaderStyle.Width = "180"
                 Case "JOB", "NAME", "COMPANY", "JOBNAME", "PROJECTNAME", "EMPLOYEE", "CONCEPT", "CLIENTNAME"
                     boundColumn.HeaderStyle.Width = "280"
+
+                Case "MULTIPLIER"
+                    boundColumn.DataFormatString = "{0:N6}"
             End Select
 
             ' Ajustar el ancho del filtro
