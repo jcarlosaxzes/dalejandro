@@ -98,12 +98,12 @@ Public Class job_employees
     End Sub
     Protected Sub NotifyEmployee(employeeId As Integer, JobCodeName As String, dHourds As Double)
         Dim sFullBody As New System.Text.StringBuilder
-        sFullBody.Append("You had been assigned Job " & JobCodeName)
+        sFullBody.Append("You have been assigned Job " & JobCodeName)
         sFullBody.Append("<br />")
         sFullBody.Append("Hours (remaining) :  " & dHourds)
         sFullBody.Append("<br />")
 
-        LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' asigned", sFullBody, lblCompanyId.Text)
+        LocalAPI.EmailToEmployee(employeeId, "Job: '" & JobCodeName & "' assigned", sFullBody, lblCompanyId.Text)
     End Sub
 
     Private Sub SqlDataSourceAssignedEmployees_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAssignedEmployees.Updating

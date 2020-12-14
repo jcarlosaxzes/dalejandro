@@ -186,7 +186,7 @@
         </tr>
     </table>
     <div style="margin-left: 10px; margin-right: 10px">
-        <h3>Job Time Entry Log</h3>
+        <h4>Job Time Entry Log (Last Records)</h4>
         <telerik:RadGrid ID="RadGridTimes" runat="server" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true" AllowSorting="True" DataSourceID="SqlDataSourceTimes"
             Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" Height="500px"
             HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">

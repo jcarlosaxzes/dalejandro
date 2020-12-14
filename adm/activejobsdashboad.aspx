@@ -495,120 +495,6 @@
         <asp:Label ID="lblRemaining" Text="0" Font-Bold="true" runat="server"></asp:Label>
     </div>
 
-    <telerik:RadToolTip ID="RadToolTipMiscellaneous" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode"
-        Skin="Default" Width="600px">
-
-
-        <h2 style="margin: 0; text-align: center; color: white; width: 100%">
-            <span class="navbar navbar-expand-md bg-dark text-white">Non-Productive Time
-            </span>
-        </h2>
-
-        <div style="font-size: medium">
-
-            <table class="table-sm" style="width: 600px">
-                <tr>
-                    <td style="width: 120px; text-align: right">Category:
-                    </td>
-                    <td>
-                        <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name" ZIndex="50001"
-                            DataValueField="Id" Width="90%" MarkFirstMatch="True" Filter="Contains" Height="300px">
-                        </telerik:RadComboBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right">Time (hrs per day):
-                    </td>
-                    <td>
-                        <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
-                            MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours for each day"
-                            Value="1" Width="150px" MaxValue="24">
-                            <NumberFormat DecimalDigits="2" />
-                            <IncrementSettings Step="1" />
-                        </telerik:RadNumericTextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right">Date From:
-                    </td>
-                    <td>
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server"
-                            DateFormat="MM/dd/yyyy"
-                            Culture="en-US"
-                            ZIndex="50001"
-                            Width="150px">
-                        </telerik:RadDatePicker>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right">Date To:
-                    </td>
-                    <td>
-                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server"
-                            DateFormat="MM/dd/yyyy"
-                            Culture="en-US"
-                            ZIndex="50001"
-                            Width="150px">
-                        </telerik:RadDatePicker>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align: right">Notes:
-                    </td>
-                    <td>
-                        <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="2" Width="90%"
-                            MaxLength="256">
-                        </telerik:RadTextBox>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td></td>
-                    <td>
-                        <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddNonRecord" Width="180px" CausesValidation="true">
-                            Add Time
-                        </asp:LinkButton>
-                    </td>
-                </tr>
-
-            </table>
-
-            <div>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtNotes" Text="* Notes is required" ForeColor="Red"
-                    SetFocusOnError="true" ValidationGroup="AddNonRecord" Display="Dynamic">
-                </asp:RequiredFieldValidator>
-            </div>
-
-            <table style="width: 100%; border: 1px solid #aeaeaf;">
-                <tr>
-                    <td style="width: 25%; padding-left: 10px"><b>Benefits</b></td>
-                    <td style="width: 25%; text-align: center"><b>Assigned</b></td>
-                    <td style="width: 25%; text-align: center"><b>Used</b></td>
-                    <td style="width: 25%; text-align: center"><b>Balance</b></td>
-                </tr>
-                <tr>
-                    <td style="padding-left: 10px">Vacations</td>
-                    <td style="text-align: center">
-                        <asp:Label ID="lblVac1" runat="server" Text="0"></asp:Label></td>
-                    <td style="text-align: center">
-                        <asp:Label ID="lblVac2" runat="server" Text="0"></asp:Label></td>
-                    <td style="text-align: center">
-                        <asp:Label ID="lblVac3" runat="server" Text="0"></asp:Label></td>
-                </tr>
-                <tr>
-                    <td style="padding-left: 10px">Personal/Sick</td>
-                    <td style="text-align: center">
-                        <asp:Label ID="lblPer1" runat="server" Text="0"></asp:Label></td>
-                    <td style="text-align: center">
-                        <asp:Label ID="lblPer2" runat="server" Text="0"></asp:Label></td>
-                    <td style="text-align: center">
-                        <asp:Label ID="lblPer3" runat="server" Text="0"></asp:Label></td>
-
-                </tr>
-            </table>
-        </div>
-    </telerik:RadToolTip>
-
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
     </telerik:RadWindowManager>
 
@@ -635,13 +521,6 @@
 
     <asp:SqlDataSource ID="SqlDataSourceJobActiveStatus" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Jobs_status] WHERE Id in(0,2,3,4,5,7) ORDER BY [OrderBy]"></asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourceMiscellaneousType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="MiscellaneousType_SELECT" SelectCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceDateWORKHOURS" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="WORKHOURS_SELECT" SelectCommandType="StoredProcedure">

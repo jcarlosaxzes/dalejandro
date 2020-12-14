@@ -2049,7 +2049,7 @@ Public Class LocalAPI
 
                     Dim sCodejobClientType As String = sCode & "-" & GetClientInitials(lClient) & "-" & sType
                     Dim sFullBody As New System.Text.StringBuilder
-                    sFullBody.Append("You had been assigned Job " & sCode & ", '" & sJob & "', on " & FormatDateTime(sOpen_date, DateFormat.ShortDate) & "")
+                    sFullBody.Append("You have been assigned Job " & sCode & ", '" & sJob & "', on " & FormatDateTime(sOpen_date, DateFormat.ShortDate) & "")
                     sFullBody.Append("<br />")
                     sFullBody.Append("Client: '" & GetClientName(lClient) & "'")
                     sFullBody.Append("<br />")

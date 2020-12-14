@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class avgeemployeesprofit
 
     '''<summary>
+    '''RadAjaxManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
+
+    '''<summary>
+    '''RadAjaxLoadingPanel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
+
+    '''<summary>
     '''cboYear control.
     '''</summary>
     '''<remarks>
@@ -21,6 +39,15 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboYear As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''cboJobStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboJobStatus As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
     '''cboClients control.
@@ -59,60 +86,6 @@ Partial Public Class avgeemployeesprofit
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
 
     '''<summary>
-    '''RadWizardStep1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
-
-    '''<summary>
-    '''RadHtmlChart1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
-
-    '''<summary>
-    '''lblInfo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblInfo As Global.System.Web.UI.WebControls.HyperLink
-
-    '''<summary>
-    '''RadToolTipRatioInfo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadToolTipRatioInfo As Global.Telerik.Web.UI.RadToolTip
-
-    '''<summary>
-    '''RadWizardStep2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
-
-    '''<summary>
-    '''RadHtmlChart2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadHtmlChart2 As Global.Telerik.Web.UI.RadHtmlChart
-
-    '''<summary>
     '''RadWizardStep3 control.
     '''</summary>
     '''<remarks>
@@ -129,6 +102,24 @@ Partial Public Class avgeemployeesprofit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''RadWizardStep1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''RadHtmlChart1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
 
     '''<summary>
     '''lblInfoGrid1 control.

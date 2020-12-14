@@ -71,32 +71,28 @@
                         </telerik:GridTemplateColumn>--%>
                         <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope">
                         </telerik:GridBoundColumn>
-                        <telerik:GridNumericColumn Aggregate="Sum" DataField="Hours" HeaderText="Hours" UniqueName="Freight" HeaderTooltip="Assigned Hours"
-                            HeaderStyle-Width="110px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                        <telerik:GridNumericColumn  DataField="Hours" HeaderText="Assigned Hours" UniqueName="Hours" HeaderTooltip="Assigned Hours"
+                            HeaderStyle-Width="150px" FooterStyle-Font-Bold="true" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
                         </telerik:GridNumericColumn>
-                        <telerik:GridBoundColumn DataField="HoursWorked" HeaderText="H. Worked" ReadOnly="True" SortExpression="HoursWorked" UniqueName="HoursWorked"
+                        <telerik:GridBoundColumn DataField="WorkedHours" HeaderText="Worked Hours" ReadOnly="True" SortExpression="WorkedHours" UniqueName="WorkedHours"
                             DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}" FooterStyle-Font-Bold="true" HeaderTooltip="Hours Worked"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="110px" ItemStyle-HorizontalAlign="Center">
+                             FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
-                        <telerik:GridTemplateColumn DataField="PercentET" HeaderText="H. Used(%)" ReadOnly="True" SortExpression="PercentET" UniqueName="PercentET"
-                            FooterAggregateFormatString="{0:N1}"
-                            Aggregate="Avg" FooterStyle-HorizontalAlign="Center" HeaderStyle-Width="110px" ItemStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
-                                <asp:Label ID="lblPercentET" runat="server" Text='<%# Eval("PercentET", "{0:N1}") %>' ForeColor='<%# GetPercentETForeColor(Eval("PercentET"))%>' Font-Bold='<%# GetPercentETFontBold(Eval("PercentET"))%>'>
-                                </asp:Label>
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
+                        <telerik:GridBoundColumn DataField="BudgetAssigned" HeaderText="Budget Assigned" ReadOnly="True" SortExpression="BudgetAssigned" UniqueName="BudgetAssigned" Display="false" 
+                            DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                        </telerik:GridBoundColumn>
                         <telerik:GridBoundColumn DataField="BudgetUsed" HeaderText="Budget Used" ReadOnly="True" SortExpression="BudgetUsed" UniqueName="BudgetUsed" Display="false"
                             DataFormatString="{0:N2}" FooterAggregateFormatString="{0:N2}"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
                         </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="FTE" HeaderText="FTE(%)" ReadOnly="True" SortExpression="FTE" UniqueName="FTE"
-                            DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="120px" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                        <telerik:GridBoundColumn DataField="Profit" HeaderText="Budget Efficiency" ReadOnly="True" SortExpression="Profit" UniqueName="Profit" 
+                            DataFormatString="{0:P2}" FooterAggregateFormatString="{0:P2}"
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
-                        <telerik:GridBoundColumn DataField="PercentBU" HeaderText="Budget Used(%)" ReadOnly="True" SortExpression="PercentBU" UniqueName="PercentBU"
-                            DataFormatString="{0:N1}" FooterAggregateFormatString="{0:N1}"
-                            Aggregate="Sum" FooterStyle-HorizontalAlign="Right" FooterStyle-Width="130px" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Right">
+                        <telerik:GridBoundColumn DataField="TimeEfficiency" HeaderText="Time Efficiency" ReadOnly="True" SortExpression="TimeEfficiency" UniqueName="TimeEfficiency" 
+                            DataFormatString="{0:P2}" FooterAggregateFormatString="{0:P2}"
+                             FooterStyle-HorizontalAlign="Right"  HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center">
                         </telerik:GridBoundColumn>
                         <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="To delete row, H.Worked must be '0'. Delete this row?"
                             ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
@@ -173,7 +169,7 @@
 
     <asp:SqlDataSource ID="SqlDataSourceAssignedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Jobs_Employees_assigned_DELETE" DeleteCommandType="StoredProcedure"
-        SelectCommand="Jobs_Employees_assigned_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Job_Employees_assigned_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Jobs_Employees_v20_assigned_UPDATE" UpdateCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />

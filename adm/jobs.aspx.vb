@@ -58,6 +58,8 @@ Public Class jobs
                 EEGvertical()
 
                 RadGrid1.DataBind()
+
+                SaveFilter()
             End If
 
             'If RadWindowManagerJob.Windows.Count > 0 Then
@@ -145,7 +147,6 @@ Public Class jobs
     End Sub
 
     Protected Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        SaveFilter()
         Refresh()
     End Sub
 
@@ -158,6 +159,7 @@ Public Class jobs
             ShowCheckedOneItemByText(lblTagIN_List, cboFilterTags)
 
             RadGrid1.DataBind()
+            SaveFilter()
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
@@ -201,8 +203,6 @@ Public Class jobs
             cboBalanceStatus.SelectedValue = Session("Filter_Jpbs_cboBalanceStatus")
             lblTagIN_List.Text = Session("Filter_Jpbs_lblTagIN_List")
             txtFind.Text = Session("Filter_Jpbs_txtFind")
-
-            'Refresh()
 
         Catch ex As Exception
             Dim e1 As String = ex.Message
