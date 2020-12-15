@@ -211,7 +211,7 @@ Public Class employeenewdowntime
             DictValues.Add("[UrlDetails]", LocalAPI.GetHostAppSite() & "/adm/ManagementRequest.aspx?Id=" & requestId & "&guid=" & LocalAPI.GetCompanyGUID(lblCompanyId.Text))
             DictValues.Add("[PASSign]", LocalAPI.GetPASSign())
 
-            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)
+            Dim sSubject As String = LocalAPI.GetMessageTemplateSubject("Add_Non_Productive_Time", lblCompanyId.Text, DictValues) & ". " & lblEmployeeName.Text
             Dim sBody As String = LocalAPI.GetMessageTemplateBody("Add_Non_Productive_Time", lblCompanyId.Text, DictValues)
 
             Return SendGrid.Email.SendMail(sTo, "", "", sSubject, sBody, lblCompanyId.Text, 0, 0)

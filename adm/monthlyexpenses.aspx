@@ -277,7 +277,7 @@
     <telerik:RadWizard ID="RadWizard1" runat="server" Width="100%" Height="1200px" DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false" Skin="Silk">
         <WizardSteps>
 
-            <telerik:RadWizardStep Title="Monthly/Yearly Charts">
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Monthly/Yearly Charts">
                 <table class="table-sm" style="width: 100%">
                     <tr>
                         <td colspan="2">
@@ -453,7 +453,7 @@
 
             </telerik:RadWizardStep>
 
-            <telerik:RadWizardStep Title="Monthly Category Chart">
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Monthly Category Chart">
                 <telerik:RadListView runat="server" ID="FloatedTilesListView" RenderMode="Lightweight" AllowPaging="True"
                     DataKeyNames="Category" DataSourceID="SqlDataSourceGroupByCategory">
                     <AlternatingItemTemplate>
@@ -580,7 +580,7 @@
 
             </telerik:RadWizardStep>
 
-            <telerik:RadWizardStep Title="Expenses Details">
+            <telerik:RadWizardStep runat="server" ID="RadWizardStepExpenses" Title="Expenses Details">
 
                 <telerik:RadGrid ID="RadGridExpenses" runat="server" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center"
                     AlternatingItemStyle-Font-Size="Small" AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" ShowFooter="true"
@@ -639,7 +639,7 @@
                 </telerik:RadGrid>
             </telerik:RadWizardStep>
 
-            <telerik:RadWizardStep Title="Payroll Details">
+            <telerik:RadWizardStep runat="server" ID="RadWizardStepPayroll" Title="Payroll Details">
                 <telerik:RadGrid ID="RadGridPayroll" runat="server" DataSourceID="SqlDataSourcePayroll"
                     AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true"
                     ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" AlternatingItemStyle-Font-Size="Small"

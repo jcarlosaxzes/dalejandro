@@ -163,9 +163,21 @@ Public Class monthlyexpenses
     End Sub
 
     Private Sub btnAddExpense_Click(sender As Object, e As EventArgs) Handles btnAddExpense.Click
+        RadWizardStepExpenses.Active = True
         RadGridExpenses.MasterTableView.InsertItem()
     End Sub
 
+    Private Sub SqlDataSourceExpenses_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceExpenses.Updated
+        Refresh()
+    End Sub
+
+    Private Sub SqlDataSourceExpenses_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceExpenses.Inserted
+        Refresh()
+    End Sub
+
+    Private Sub SqlDataSourceExpenses_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceExpenses.Deleted
+        Refresh()
+    End Sub
 
 #End Region
 
@@ -289,8 +301,22 @@ Public Class monthlyexpenses
     End Sub
 
     Private Sub btbAddPayroll_Click(sender As Object, e As EventArgs) Handles btbAddPayroll.Click
+        RadWizardStepPayroll.Active = True
         RadGridPayroll.MasterTableView.InsertItem()
     End Sub
+
+    Private Sub SqlDataSourcePayroll_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayroll.Inserted
+        Refresh()
+    End Sub
+
+    Private Sub SqlDataSourcePayroll_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayroll.Updated
+        Refresh()
+    End Sub
+
+    Private Sub SqlDataSourcePayroll_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePayroll.Deleted
+        Refresh()
+    End Sub
+
 
 #End Region
 
