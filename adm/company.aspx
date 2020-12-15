@@ -29,7 +29,7 @@
             <td>
                 <asp:FormView ID="FormView1" runat="server" DataKeyNames="companyId" DataSourceID="SqlDataSource1" Width="100%">
                     <ItemTemplate>
-                        <telerik:RadWizard ID="RadWizard1" runat="server" Height="720px" DisplayCancelButton="false"
+                        <telerik:RadWizard ID="RadWizard1" runat="server" Height="730px" DisplayCancelButton="false"
                             RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
                             <WizardSteps>
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepsCompanyInfo" Title="Company Information" ValidationGroup="Company" StepType="Start">
@@ -50,132 +50,132 @@
 
                                     <table class="table-sm">
                                         <tr>
-                                            <td width="160px">Company ID:
+                                            <td style="width:250px; text-align:right">Company ID:
                                             </td>
                                             <td>
-                                                <asp:Label ID="companyIdLabel" runat="server" Text='<%# Eval("companyId") %>' />
+                                                <%# Eval("companyId") %>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Company Name:
+                                            <td style="text-align:right">Company Name:
                                             </td>
                                             <td>
-                                                <asp:Label ID="NameLabel0" runat="server" Text='<%# Eval("Name")%>' />
+                                                <%# Eval("Name")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="160px">Administrator Email:
+                                            <td style="text-align:right">Administrator Name:
                                             </td>
                                             <td>
-                                                <asp:Label ID="EmailLabel" runat="server" Text='<%# Eval("Email")%>' />
+                                                <%# Eval("Contact")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Company Type:
+                                            <td style="text-align:right">Administrator Email:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("TypeName") %>' />
+                                                <%# Eval("Email")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Representative:
+                                            <td style="text-align:right">Company Type:
                                             </td>
                                             <td>
-                                                <asp:Label ID="ContactLabel" runat="server" Text='<%# Eval("Contact")%>' />
+                                                <%# Eval("TypeName") %>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Address Line 1:
+                                            <td style="text-align:right">Address Line 1:
                                             </td>
                                             <td>
-                                                <asp:Label ID="AddressLabel" runat="server" Text='<%# Eval("Address")%>' />
+                                                <%# Eval("Address")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Address Line 2:
+                                            <td style="text-align:right">Address Line 2:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label4" runat="server" Text='<%# Eval("Address2")%>' />
+                                                <%# Eval("Address2")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>City:
+                                            <td style="text-align:right">City:
                                             </td>
                                             <td>
-                                                <asp:Label ID="CityLabel" runat="server" Text='<%# Eval("City")%>' />
+                                                <%# Eval("City")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>State:
+                                            <td style="text-align:right">State:
                                             </td>
                                             <td>
-                                                <asp:Label ID="StateLabel" runat="server" Text='<%# Eval("State")%>' />
+                                                <%# Eval("State")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Zip Code:
+                                            <td style="text-align:right">Zip Code:
                                             </td>
                                             <td>
-                                                <asp:Label ID="ZipCodeLabel" runat="server" Text='<%# Eval("ZipCode")%>' />
+                                                <%# Eval("ZipCode")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Telephone:
+                                            <td style="text-align:right">Telephone:
                                             </td>
                                             <td>
-                                                <asp:Label ID="PhoneLabel" runat="server" Text='<%# Eval("Phone")%>' />
+                                                <%# Eval("Phone")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Cell Phone:
+                                            <td style="text-align:right">Cell Phone:
                                             </td>
                                             <td>
-                                                <asp:Label ID="MovileLabel" runat="server" Text='<%# Eval("Movile")%>' />
+                                                <%# Eval("Movile")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Fax:
+                                            <td style="text-align:right">Fax:
                                             </td>
                                             <td>
-                                                <asp:Label ID="FaxLabel" runat="server" Text='<%# Eval("Fax")%>' />
+                                                <%# Eval("Fax")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Website:
+                                            <td style="text-align:right">Website:
                                             </td>
                                             <td>
                                                 <asp:HyperLink ID="webLabel" runat="server" Target="_blank" Text='<%# Eval("web")%>' NavigateUrl='<%# Eval("web")%>'></asp:HyperLink>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Language</td>
+                                            <td style="text-align:right">Language</td>
                                             <td>
-                                                <asp:Label ID="LanguageLabel" runat="server" Text='<%# Eval("Language")%>' />
+                                                <%# Eval("Language")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Accountant's Email:
+                                            <td style="text-align:right">Accounting Email:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("AccountantEmail")%>' ToolTip="Email of the Accountant for send BCC Invoices and Statements copy" />
+                                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("AccountantEmail")%>' ToolTip="This email will receive BCC copies of invoices" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>HR Manager Name:
+                                            <td style="text-align:right">Human Resources Manager Name:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label7" runat="server" Text='<%# Eval("HR_Name")%>' ToolTip="Human Resource manager" />
+                                                <%# Eval("HR_Name")%>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>HR Manager's Email:
+                                            <td style="text-align:right">Human Resources Manager Email:
                                             </td>
                                             <td>
                                                 <asp:Label ID="Label8" runat="server" Text='<%# Eval("HR_Email")%>' ToolTip="Email of Time off Request (Vacations/Personal days)" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Expiration Date:
+                                            <td style="text-align:right">Expiration Date:
                                             </td>
                                             <td>
                                                 <asp:Label ID="Label2" runat="server" Text='<%# Eval("billingExpirationDate", "{0:d}")%>' ToolTip="Due Date to renove your PASconcept subscription." />
@@ -202,7 +202,7 @@
 
                                     <table class="table-sm">
                                         <tr>
-                                            <td style="width: 220px">Outgoing Email From:
+                                            <td style="width: 250px">Outgoing Email From:
                                             </td>
                                             <td>
                                                 <asp:Label ID="labelwebEmailUserNameTextBox" runat="server" Text='<%# Eval("webEmailUserName")%>' ToolTip="Outgoing account name (username@company_domain.com)"></asp:Label>
@@ -261,7 +261,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 220px">Active/Inactive:
+                                            <td style="width: 250px">Active/Inactive:
                                             </td>
                                             <td>
                                                 <asp:CheckBox ID="CheckBox15" runat="server" Checked='<%# Eval("Active")%>' Enabled="false" />
@@ -287,7 +287,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="width: 220px">Number of Files:
+                                            <td style="width: 250px">Number of Files:
                                             </td>
                                             <td>
                                                 <%# Eval("StorageFiles")%>
@@ -687,7 +687,7 @@
                     </ItemTemplate>
 
                     <EditItemTemplate>
-                        <telerik:RadWizard ID="RadWizard2" runat="server" Height="720px" DisplayCancelButton="false"
+                        <telerik:RadWizard ID="RadWizard2" runat="server" Height="750px" DisplayCancelButton="false"
                             RenderMode="Lightweight" Skin="Silk" DisplayNavigationButtons="false" DisplayProgressBar="false">
                             <WizardSteps>
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepsCompanyInfo2" Title="Company Information" ValidationGroup="Company" StepType="Start">
@@ -712,28 +712,29 @@
                                     </table>
                                     <table class="table-sm">
                                         <tr>
-                                            <td>Company ID:
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="companyIdLabel" runat="server" Text='<%# Eval("companyId") %>' />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Company Name:
+                                            <td style="width:250px; text-align:right">Company Name:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="NameTextBox" runat="server" Text='<%# Bind("Name") %>' Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Administrator Email:
+                                            <td style="text-align:right">Administrator Name:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="ContactTextBox" runat="server" Text='<%# Bind("Contact")%>'
+                                                    Width="500px" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Administrator Email:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="EmailTextBox" runat="server" Text='<%# Bind("Email")%>' MaxLength="128" Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Company Type:
+                                            <td style="text-align:right">Company Type:
                                             </td>
                                             <td>
                                                 <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceTypes"
@@ -746,15 +747,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Representative:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="ContactTextBox" runat="server" Text='<%# Bind("Contact")%>'
-                                                    Width="500px" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address Line 1:
+                                            <td style="text-align:right">Address Line 1:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="AddressTextBox" runat="server" Text='<%# Bind("Address")%>'
@@ -762,7 +755,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Address Line 2:
+                                            <td style="text-align:right">Address Line 2:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="RadTextBox1" runat="server" Text='<%# Bind("Address2")%>'
@@ -770,56 +763,77 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>City:
+                                            <td style="text-align:right">City:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="CityTextBox" runat="server" Text='<%# Bind("City")%>' Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>State:
+                                            <td style="text-align:right">State:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="StateTextBox" runat="server" Text='<%# Bind("State")%>' Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Zip Code:
+                                            <td style="text-align:right">Zip Code:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="ZipCodeTextBox" runat="server" Text='<%# Bind("ZipCode") %>' />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Telephone:
+                                            <td style="text-align:right">Telephone:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="PhoneTextBox" runat="server" Text='<%# Bind("Phone")%>' />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Cell Phone:
+                                            <td style="text-align:right">Cell Phone:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="MovileTextBox" runat="server" Text='<%# Bind("Movile")%>' />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Fax:
+                                            <td style="text-align:right">Fax:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="FaxTextBox" runat="server" Text='<%# Bind("Fax")%>' />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Website:
+                                            <td style="text-align:right">Website:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="webTextBox" runat="server" Text='<%# Bind("web")%>' Width="500px" />
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Language</td>
+                                            <td style="text-align:right">Accounting Email:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="txtAccountantEmail" runat="server" Text='<%# Bind("AccountantEmail")%>' MaxLength="128" Width="500px" ToolTip="This email will receive BCC copies of invoices" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Human Resources Manager Name:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("HR_Name")%>' MaxLength="80" Width="500px" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Human Resources Manager Email:
+                                            </td>
+                                            <td>
+                                                <telerik:RadTextBox ID="RadTextBox5" runat="server" Text='<%# Bind("HR_Email")%>' MaxLength="128" Width="500px" EmptyMessage="Email to send Time off Request" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align:right">Language</td>
                                             <td>
                                                 <telerik:RadComboBox ID="cboLanguage" runat="server" Width="150px" SelectedValue='<%# Bind("Language")%>'>
                                                     <Items>
@@ -828,27 +842,6 @@
                                                     </Items>
                                                 </telerik:RadComboBox>
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="160px">Accountant's Email:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="txtAccountantEmail" runat="server" Text='<%# Bind("AccountantEmail")%>' MaxLength="128" Width="500px" EmptyMessage="Email to send BCC invoices copy" ToolTip="Email of the Accountant for send BCC Invoices and Statements copy" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="160px">HR Manager Name:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="RadTextBox4" runat="server" Text='<%# Bind("HR_Name")%>' MaxLength="80" Width="500px" EmptyMessage="Human Resource manager Name" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="160px">HR Manager's Email:
-                                            </td>
-                                            <td>
-                                                <telerik:RadTextBox ID="RadTextBox5" runat="server" Text='<%# Bind("HR_Email")%>' MaxLength="128" Width="500px" EmptyMessage="Email to send Time off Request" />
                                             </td>
                                         </tr>
                                     </table>
@@ -876,7 +869,7 @@
                                     </table>
                                     <table class="table-sm">
                                         <tr>
-                                            <td style="width: 220px">Outgoing Email From:
+                                            <td style="width: 250px">Outgoing Email From:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="webEmailUserNameTextBox" runat="server" Text='<%# Bind("webEmailUserName")%>' ToolTip="Outgoing account name (username@company_domain.com)"
@@ -953,7 +946,7 @@
                                             </td>
                                         </tr>
                                          <tr>
-                                            <td style="width: 220px">Account SID:
+                                            <td style="width: 250px">Account SID:
                                             </td>
                                             <td>
                                                 <telerik:RadTextBox ID="RadTextBox12" runat="server" Text='<%# Bind("accountSid")%>' 

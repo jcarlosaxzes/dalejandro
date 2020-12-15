@@ -90,7 +90,7 @@
                                         <br />
                                         <b>Estimated Income:</b> [Total Estimated Expenses] + [$ Desired Profit]
                                         <br />
-                                        <b>Actual Income:</b> [Colleted invoices] of Year(Jobs Date)
+                                        <b>Actual Income:</b> [Collected invoices] of Year(Jobs Date)
                                     </small>
                                 </td>
 
