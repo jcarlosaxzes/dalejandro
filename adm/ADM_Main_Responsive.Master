@@ -355,37 +355,37 @@
                                     <%--Reports menu--%>
                                     <telerik:NavigationNode Text="Reports" Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                         <Nodes>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Clients" Text="Clients"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Clients" Text="Clients"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Company" Text="Company"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Company" Text="Company"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Cost" Text="Cost"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Cost" Text="Cost"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Departments" Text="Departments"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Departments" Text="Departments"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Employees" Text="Employees"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Employees" Text="Employees"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Expenses" Text="Expenses"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Expenses" Text="Expenses"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Jobs" Text="Jobs"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Jobs" Text="Jobs"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Marketing" Text="Marketing"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Marketing" Text="Marketing"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Mobile App" Text="Mobile App"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Mobile App" Text="Mobile App"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=Proposal" Text="Proposal"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=Proposal" Text="Proposal"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list?group=QB Report" Text="QB Report"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports?group=QB Report" Text="QB Report"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/transmittals" Text="Transmittals"
@@ -393,6 +393,9 @@
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/revisions" Text="Revisions/Permits Tracker"
                                                 Visible='<%# EmployeePermission("Deny_AnalyticReports") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
+                                            </telerik:NavigationNode>
+                                            <telerik:NavigationNode NavigateUrl="~/adm/reports_list" Text="All Reports"
+                                                Visible='<%# EmployeePermission("Deny_AnalyticReports") %>'>
                                             </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
