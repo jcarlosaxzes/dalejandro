@@ -6306,24 +6306,25 @@ Public Class LocalAPI
 
                     sFullBody.Append("<br />")
                     sFullBody.Append("<br />")
-                    sFullBody.Append("wellcome to PASconcept. ")
+                    sFullBody.Append("Welcome to PASconcept!")
                     sFullBody.Append("<br />")
-                    sFullBody.Append("You can set a new password")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> here</a>")
+                    sFullBody.Append("It is with great pride and excitement that we take this time to personally welcome you to PASconcept. Please use the following links to set-up your password.")
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Account/ResetPasswordConfirmation.aspx?guid=" & userGuid & """> Set-Up Password Here</a>")
+                    sFullBody.Append("<br />")
                     sFullBody.Append("<br />")
 
 
-                    sFullBody.Append("Or you can got to Employee Site")
+                    sFullBody.Append("We strive to provide you with the necessary support and resource materials to begin utilizing the your new  platform. Should you experience any issues or have any questions, we are here to help!")
                     sFullBody.Append("<br />")
-                    sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/Default.aspx" & """" & ">Link to Employee Site</a>")
-
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("Best Regards,")
+                    'sFullBody.Append("<a href=" & """" & GetHostAppSite() & "/default.aspx" & """" & ">Link to Employee Site</a>")
+                    sFullBody.Append("<br />")
+                    sFullBody.Append("PasConcept Technical Support")
 
                     Try
-                        If ConfigurationManager.AppSettings("Debug") = "1" Then
-                            SendGrid.Email.SendMail("jcarlos@axzes.com", "fernando@easterneg.com", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
-                        Else
-                            SendGrid.Email.SendMail(rdr("Email").ToString, "", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
-                        End If
+                        SendGrid.Email.SendMail(rdr("Email").ToString, "", "", ConfigurationManager.AppSettings("Titulo") & ". Credentials", sFullBody.ToString, companyId, 0, 0)
                         EmployeeEmailCredentials = True
                     Finally
                     End Try

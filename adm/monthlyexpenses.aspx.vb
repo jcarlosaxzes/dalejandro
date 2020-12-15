@@ -162,7 +162,7 @@ Public Class monthlyexpenses
         End Try
     End Sub
 
-    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+    Private Sub btnAddExpense_Click(sender As Object, e As EventArgs) Handles btnAddExpense.Click
         RadGridExpenses.MasterTableView.InsertItem()
     End Sub
 
@@ -288,6 +288,9 @@ Public Class monthlyexpenses
         Dim e1 As String = e.Command.Parameters(0).Value
     End Sub
 
+    Private Sub btbAddPayroll_Click(sender As Object, e As EventArgs) Handles btbAddPayroll.Click
+        RadGridPayroll.MasterTableView.InsertItem()
+    End Sub
 
 #End Region
 
@@ -308,4 +311,5 @@ Public Class monthlyexpenses
             Response.Redirect("~/adm/qb_refreshtoken.aspx?QBAuthBackPage=monthlyexpenses")
         End If
     End Sub
+
 End Class

@@ -24,12 +24,8 @@ Public Class sendproposal
                 SMS_Init()
                 Dim clientId As Integer = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
 
-                If (lblCompanyId.Text = 260962) Then
-                    cboAgile.Visible = True
-                Else
-                    cboAgile.SelectedValue = 0
-                    cboAgile.Enabled = False
-                End If
+                PanelAgile.Visible = (lblCompanyId.Text = 260962)
+
                 cboNotification.SelectedValue = 1
                 If Not LocalAPI.IsCompanySMSservice(lblCompanyId.Text) Then
                     cboNotification.Enabled = False
@@ -177,9 +173,10 @@ Public Class sendproposal
                 End If
 
             End If
-
-            If cboAgile.SelectedValue = 1 Then
-                LocalAPI.ProposalToAgile(lblProposalId.Text, lblCompanyId.Text)
+            If PanelAgile.Visible Then
+                If cboAgile.SelectedValue = 1 Then
+                    LocalAPI.ProposalToAgile(lblProposalId.Text, lblCompanyId.Text)
+                End If
             End If
 
             If Len(sInfo) > 0 Then InfoMessage(sInfo)

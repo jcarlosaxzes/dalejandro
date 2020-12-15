@@ -113,6 +113,15 @@ Partial Public Class sendproposal
     Protected WithEvents cboAttached As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
+    '''PanelAgile control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelAgile As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''cboAgile control.
     '''</summary>
     '''<remarks>
@@ -120,6 +129,15 @@ Partial Public Class sendproposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboAgile As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''Comparevalidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator2 As Global.System.Web.UI.WebControls.CompareValidator
 
     '''<summary>
     '''PanelTotals control.
@@ -174,15 +192,6 @@ Partial Public Class sendproposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Comparevalidator1 As Global.System.Web.UI.WebControls.CompareValidator
-
-    '''<summary>
-    '''Comparevalidator2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Comparevalidator2 As Global.System.Web.UI.WebControls.CompareValidator
 
     '''<summary>
     '''Comparevalidator3 control.
