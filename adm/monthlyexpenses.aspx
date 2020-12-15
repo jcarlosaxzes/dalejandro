@@ -91,8 +91,11 @@
                 Payroll Panel
            
             </button>
-            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
+            <asp:LinkButton ID="btnAddExpense" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
                     Add Expense
+            </asp:LinkButton>
+            <asp:LinkButton ID="btbAddPayroll" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
+                    Add Payroll
             </asp:LinkButton>
         </span>
     </div>
@@ -201,7 +204,7 @@
                     <td style="padding-left: 50px; vertical-align: bottom">
 
                         <asp:LinkButton ID="btnExpensesImportQb" runat="server" ToolTip="Import Expenses from Quickbooks"
-                            CssClass="btn btn-primary" UseSubmitBehavior="false" >
+                            CssClass="btn btn-primary" UseSubmitBehavior="false">
                                      Import Expenses from Quickbooks
                         </asp:LinkButton>
                     </td>
@@ -638,6 +641,7 @@
 
             <telerik:RadWizardStep Title="Payroll Details">
                 <telerik:RadGrid ID="RadGridPayroll" runat="server" DataSourceID="SqlDataSourcePayroll"
+                    AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true"
                     ItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center" AlternatingItemStyle-Font-Size="Small"
                     AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="900px" ShowFooter="true" HeaderStyle-Font-Size="Small">
                     <ClientSettings>
@@ -645,11 +649,28 @@
                     </ClientSettings>
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayroll">
                         <Columns>
-                            <telerik:GridBoundColumn DataField="SalaryDate" DataType="System.DateTime" FilterControlAltText="Filter SalaryDate column" HeaderText="Date" SortExpression="SalaryDate" UniqueName="SalaryDate" DataFormatString="{0:d}" ItemStyle-HorizontalAlign="Center"
+                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                                HeaderText="" HeaderStyle-Width="40px">
+                            </telerik:GridEditCommandColumn>
+                            <telerik:GridDateTimeColumn DataField="SalaryDate" PickerType="DatePicker" HeaderText="Date" SortExpression="SalaryDate" UniqueName="SalaryDate" DataFormatString="{0:d}" ItemStyle-HorizontalAlign="Center"
                                 HeaderStyle-Width="150px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Employee" FilterControlAltText="Filter Employee column" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee" Aggregate="CountDistinct" FooterAggregateFormatString="{0:N0}">
-                            </telerik:GridBoundColumn>
+                            </telerik:GridDateTimeColumn>
+
+                            <telerik:GridTemplateColumn DataField="EmployeeId" HeaderText="Employee" SortExpression="EmployeeId" UniqueName="EmployeeId" Aggregate="CountDistinct" FooterAggregateFormatString="{0:N0}">
+                                <EditItemTemplate>
+                                    <telerik:RadComboBox ID="cboEmployeeEdit" runat="server" SelectedValue='<%# Bind("EmployeeId") %>' DataSourceID="SqlDataSourceEmployees"
+                                        DataTextField="Name" DataValueField="Id" Width="350px" AppendDataBoundItems="True" Height="300px"
+                                        MarkFirstMatch="True" Filter="Contains">
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="(Select Employee...)" Value="0" />
+                                        </Items>
+                                    </telerik:RadComboBox>
+                                </EditItemTemplate>
+                                <ItemTemplate>
+                                    <%# Eval("Employee") %>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
                             <telerik:GridBoundColumn DataField="OriginalReference" HeaderText="Original Reference" SortExpression="OriginalReference" UniqueName="OriginalReference">
                             </telerik:GridBoundColumn>
                             <telerik:GridBoundColumn DataField="Hours" DataType="System.Double" HeaderText="Hours" SortExpression="Hours" UniqueName="Hours" Aggregate="Sum" ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center" FooterAggregateFormatString="{0:N1}"
@@ -664,7 +685,16 @@
                             <telerik:GridBoundColumn DataField="TotalCost" DataType="System.Double" HeaderText="Total Cost" SortExpression="TotalCost" UniqueName="TotalCost" Aggregate="Sum" DataFormatString="{0:C2}" FooterAggregateFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderTooltip="Total Cost"
                                 HeaderStyle-Width="150px">
                             </telerik:GridBoundColumn>
+                            <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
+                                ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="50px"
+                                CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
+                            </telerik:GridButtonColumn>
                         </Columns>
+                         <EditFormSettings>
+                            <PopUpSettings Modal="true" Width="800px" />
+                            <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                            </EditColumn>
+                        </EditFormSettings>
                     </MasterTableView>
                 </telerik:RadGrid>
             </telerik:RadWizardStep>
@@ -722,21 +752,21 @@
                 </td>
             </tr>
             <tr>
-                <td style="vertical-align:top">Ignore Category
-                </td >
-                <td style="width: 30px;vertical-align:top">
-                    <telerik:RadCheckBox ID="chIgnore" runat="server" Checked="true" >
-                     </telerik:RadCheckBox>
+                <td style="vertical-align: top">Ignore Category
                 </td>
-                <td style="vertical-align:top">
+                <td style="width: 30px; vertical-align: top">
+                    <telerik:RadCheckBox ID="chIgnore" runat="server" Checked="true">
+                    </telerik:RadCheckBox>
+                </td>
+                <td style="vertical-align: top">
                     <telerik:RadTextBox ID="txtIgnore" runat="server" EmptyMessage="Ignore category"
-                            Width="100%" x-webkit-speech="x-webkit-speech" Text="Payroll Expenses">
-                     </telerik:RadTextBox>
+                        Width="100%" x-webkit-speech="x-webkit-speech" Text="Payroll Expenses">
+                    </telerik:RadTextBox>
                     <small>Example: Payroll Expenses associated with employees (not vendors)</small>
                 </td>
             </tr>
             <tr>
-                <td colspan="3" style="text-align:right">
+                <td colspan="3" style="text-align: right">
                     <asp:LinkButton ID="btnImportExpensesQB" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" CausesValidation="true">
                     Import Expenses
                     </asp:LinkButton>
@@ -744,42 +774,6 @@
             </tr>
         </table>
     </telerik:RadToolTip>
-
-    <asp:SqlDataSource ID="SqlDataSourceExpenses" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Company_Expenses_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="Company_Expenses_INSERT" InsertCommandType="StoredProcedure"
-        DeleteCommand="Company_Expenses_DELETE" DeleteCommandType="StoredProcedure"
-        UpdateCommand="Company_Expenses_UPDATE" UpdateCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboCategory" Name="Category" PropertyName="Text" />
-            <asp:ControlParameter ControlID="cboVendors" Name="VendorId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-        <DeleteParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-        </DeleteParameters>
-        <InsertParameters>
-            <asp:Parameter Name="ExpDate" />
-            <asp:Parameter Name="Type" />
-            <asp:Parameter Name="Reference" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="Category" />
-            <asp:Parameter Name="VendorId" />
-            <asp:Parameter Name="Memo" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="ExpDate" />
-            <asp:Parameter Name="Type" />
-            <asp:Parameter Name="Reference" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="Category" />
-            <asp:Parameter Name="VendorId" />
-            <asp:Parameter Name="Memo" />
-            <asp:Parameter Name="Id" Type="Int32" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceMonthly" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Company_ExpensesMonthlyView_SELECT" SelectCommandType="StoredProcedure">
@@ -826,6 +820,80 @@
         </UpdateParameters>
     </asp:SqlDataSource>
 
+
+
+    <asp:SqlDataSource ID="SqlDataSourceExpenses" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Company_Expenses_SELECT" SelectCommandType="StoredProcedure"
+        InsertCommand="Company_Expenses_INSERT" InsertCommandType="StoredProcedure"
+        DeleteCommand="Company_Expenses_DELETE" DeleteCommandType="StoredProcedure"
+        UpdateCommand="Company_Expenses_UPDATE" UpdateCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboCategory" Name="Category" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboVendors" Name="VendorId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+        <DeleteParameters>
+            <asp:Parameter Name="Id" Type="Int32" />
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="ExpDate" />
+            <asp:Parameter Name="Type" />
+            <asp:Parameter Name="Reference" />
+            <asp:Parameter Name="Amount" />
+            <asp:Parameter Name="Category" />
+            <asp:Parameter Name="VendorId" />
+            <asp:Parameter Name="Memo" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </InsertParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="ExpDate" />
+            <asp:Parameter Name="Type" />
+            <asp:Parameter Name="Reference" />
+            <asp:Parameter Name="Amount" />
+            <asp:Parameter Name="Category" />
+            <asp:Parameter Name="VendorId" />
+            <asp:Parameter Name="Memo" />
+            <asp:Parameter Name="Id" Type="Int32" />
+        </UpdateParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourcePayroll" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Employee_Payroll_SELECT" SelectCommandType="StoredProcedure"
+        InsertCommand="Employee_Payroll_INSERT" InsertCommandType="StoredProcedure" 
+        UpdateCommand="Employee_Payroll_UPDATE" UpdateCommandType="StoredProcedure" 
+        DeleteCommand="Employee_Payroll_DELETE" DeleteCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
+            <asp:ControlParameter ControlID="cboEmployees" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+        <InsertParameters>
+            <asp:Parameter Name="employeeId" />
+            <asp:Parameter Name="SalaryDate" />
+            <asp:Parameter Name="NetAmount" />
+            <asp:Parameter Name="Hours" />
+            <asp:Parameter Name="GrossAmount" />
+            <asp:Parameter Name="TotalCost" />
+            <asp:Parameter Name="OriginalReference" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </InsertParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="employeeId" />
+            <asp:Parameter Name="SalaryDate" />
+            <asp:Parameter Name="NetAmount" />
+            <asp:Parameter Name="Hours" />
+            <asp:Parameter Name="GrossAmount" />
+            <asp:Parameter Name="TotalCost" />
+            <asp:Parameter Name="OriginalReference" />
+            <asp:Parameter Name="Id" Type="Int32" />
+        </UpdateParameters>
+        <DeleteParameters>
+            <asp:Parameter Name="Id" Type="Int32" />
+        </DeleteParameters>
+    </asp:SqlDataSource>
+
+
     <asp:SqlDataSource ID="SqlDataSourceVendors" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, Name FROM Vendors WHERE companyId=@companyId ORDER BY Name">
         <SelectParameters>
@@ -837,20 +905,6 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
-    </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourcePayroll" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Employee_Payroll_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="PayrollInitialize_INSERT" InsertCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
-            <asp:ControlParameter ControlID="cboEmployees" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-        </SelectParameters>
-        <InsertParameters>
-            <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-        </InsertParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId and isnull(Productive,0)=1 ORDER BY [Name]">

@@ -32,13 +32,22 @@ Partial Public Class monthlyexpenses
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
 
     '''<summary>
-    '''btnNew control.
+    '''btnAddExpense control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnNew As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnAddExpense As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btbAddPayroll control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btbAddPayroll As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''pnlFind control.
@@ -347,15 +356,6 @@ Partial Public Class monthlyexpenses
     Protected WithEvents btnImportExpensesQB As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''SqlDataSourceExpenses control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceExpenses As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
     '''SqlDataSourceMonthly control.
     '''</summary>
     '''<remarks>
@@ -401,6 +401,24 @@ Partial Public Class monthlyexpenses
     Protected WithEvents SqlDataSourceExpensesUtility As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''SqlDataSourceExpenses control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceExpenses As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourcePayroll control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourcePayroll As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''SqlDataSourceVendors control.
     '''</summary>
     '''<remarks>
@@ -417,15 +435,6 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceCategory As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourcePayroll control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourcePayroll As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceDepartments control.

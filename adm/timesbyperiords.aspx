@@ -401,7 +401,7 @@
 
     <asp:SqlDataSource ID="SqlDataSourceSalary" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, SalaryDate, NetAmount, Hours,GrossAmount FROM Employee_Payroll WHERE employeeId=@employeeId and SalaryDate between @From and @To ORDER BY SalaryDate DESC"
-        InsertCommand="Employee_Payroll_INSERT" InsertCommandType="StoredProcedure"
+        InsertCommand="Employee_Payroll_prev_INSERT" InsertCommandType="StoredProcedure"
         DeleteCommand="DELETE FROM Employee_Payroll WHERE Id=@Id"
         UpdateCommand="UPDATE Employee_Payroll SET SalaryDate=@SalaryDate, NetAmount=@NetAmount, GrossAmount=@GrossAmount, Hours=@Hours WHERE Id=@Id">
         <SelectParameters>

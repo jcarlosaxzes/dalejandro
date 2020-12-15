@@ -179,23 +179,36 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">Sent to Agile Campaign (Yes or No):
-                            </td>
-                            <td>
-                                <telerik:RadComboBox ID="cboAgile" runat="server" Width="150px" ValidationGroup="Confirmation">
-                                    <Items>
-                                        <telerik:RadComboBoxItem Text="?" Value="-1" Selected="true" />
-                                        <telerik:RadComboBoxItem Text="Yes" Value="1" />
-                                        <telerik:RadComboBoxItem Text="No" Value="0" />
-                                    </Items>
-                                </telerik:RadComboBox>
-                            </td>
+                            <td style="text-align: right"></td>
+                            <td></td>
                         </tr>
                     </table>
+                    <asp:Panel runat="server" ID="PanelAgile" Visible="false">
+                        <table class="table-sm" style="width: 100%">
+                            <tr>
+                                <td style="width: 350px; text-align: right">Sent to Agile Campaign (Yes or No):
+                                </td>
+                                <td>
+                                    <telerik:RadComboBox ID="cboAgile" runat="server" Width="150px" ValidationGroup="Confirmation">
+                                        <Items>
+                                            <telerik:RadComboBoxItem Text="?" Value="-1" Selected="true" />
+                                            <telerik:RadComboBoxItem Text="Yes" Value="1" />
+                                            <telerik:RadComboBoxItem Text="No" Value="0" />
+                                        </Items>
+                                    </telerik:RadComboBox>
+
+                                </td>
+                            </tr>
+                        </table>
+                        <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
+                            ControlToValidate="cboAgile" Display="None" ForeColor="Red"
+                            ErrorMessage="Define Sent to Agile Campaign (Yes or No)">
+                        </asp:CompareValidator>
+                    </asp:Panel>
                     <asp:Panel runat="server" ID="PanelTotals" Visible="false">
                         <table class="table-sm" style="width: 100%">
                             <tr>
-                                <td colspan="2" style="padding-left:200px">
+                                <td colspan="2" style="padding-left: 200px">
                                     <asp:Label ID="lblTotalAlert" runat="server" ForeColor="Red"></asp:Label>
                                 </td>
                             </tr>
@@ -227,10 +240,6 @@
                         <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
                             ControlToValidate="cboAttached" Display="None" ForeColor="Red"
                             ErrorMessage="Define Share Attached Documents (Yes or No)">
-                        </asp:CompareValidator>
-                        <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
-                            ControlToValidate="cboAgile" Display="None" ForeColor="Red"
-                            ErrorMessage="Define Sent to Agile Campaign (Yes or No)">
                         </asp:CompareValidator>
                         <asp:CompareValidator runat="server" ID="Comparevalidator3" ValueToCompare="?" ValidationGroup="Confirmation" Operator="NotEqual" SetFocusOnError="true"
                             ControlToValidate="cboProjectManagerId" Display="None" ForeColor="Red"
