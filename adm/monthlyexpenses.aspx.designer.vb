@@ -221,6 +221,15 @@ Partial Public Class monthlyexpenses
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
 
     '''<summary>
+    '''RadWizardStep1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
     '''RadHtmlChartMonthly control.
     '''</summary>
     '''<remarks>
@@ -257,6 +266,15 @@ Partial Public Class monthlyexpenses
     Protected WithEvents RadGridYearly As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''RadWizardStep2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
     '''FloatedTilesListView control.
     '''</summary>
     '''<remarks>
@@ -266,6 +284,15 @@ Partial Public Class monthlyexpenses
     Protected WithEvents FloatedTilesListView As Global.Telerik.Web.UI.RadListView
 
     '''<summary>
+    '''RadWizardStepExpenses control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepExpenses As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
     '''RadGridExpenses control.
     '''</summary>
     '''<remarks>
@@ -273,6 +300,15 @@ Partial Public Class monthlyexpenses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridExpenses As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''RadWizardStepPayroll control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepPayroll As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
     '''RadGridPayroll control.
