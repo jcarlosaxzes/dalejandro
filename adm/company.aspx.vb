@@ -23,10 +23,10 @@ Public Class company
                             CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 2
                         Case "3", "Paypal"
                             CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 3
-                        Case "4", "Logo"
+                        Case "4"
                             CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
-                        Case "5"
-                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 4
+                        Case "5", "Logo"
+                            CType(FormView1.FindControl("RadWizard1"), RadWizard).ActiveStepIndex = 5
                     End Select
                 End If
 

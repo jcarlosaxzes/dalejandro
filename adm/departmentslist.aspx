@@ -65,7 +65,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="Head" HeaderText="Empl. Head" SortExpression="Head" UniqueName="Head" HeaderTooltip="Employee Head"
+                    <telerik:GridTemplateColumn DataField="Head" HeaderText="Empl. Head" SortExpression="Head" UniqueName="Head" HeaderTooltip="Head Employee"
                         ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="200px">
                         <ItemTemplate>
                             <%# Eval("EmployeeHead")%>

@@ -18,8 +18,6 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel2" runat="server" />
-
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Non-Productive Time Categories</span>
 
