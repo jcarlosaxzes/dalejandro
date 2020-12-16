@@ -141,7 +141,7 @@ Public Class AzureStorageApi
             blockBlob.UploadFromByteArray(fileData, 0, fileData.LongLength)
 
             blockBlob.FetchAttributes()
-            LocalAPI.AzureStorage_Insert(EntityId, 0, fileName, keyName, False, fileData.LongLength, contentType, companyId, EntityType)
+            LocalAPI.AzureStorage_Insert(EntityId, EntityType, 0, fileName, keyName, False, fileData.LongLength, contentType, companyId)
 
 
             Return blockBlob.Uri.AbsoluteUri
