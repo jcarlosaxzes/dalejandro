@@ -109,173 +109,6 @@
         DisplayProgressBar="false" DisplayCancelButton="false" DisplayNavigationButtons="false">
         <WizardSteps>
 
-            <telerik:RadWizardStep runat="server" Title="Employee Hourly Wage">
-                <div class="container" style="width: 100% !important">
-                    <div class="row">
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td style="width: 140px;">
-
-                                    <asp:LinkButton ID="btnAddHourlyWage" runat="server" ToolTip="Add Hourly Wage Record "
-                                        CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                    <i class="fas fa-plus"></i> New Record
-                                    </asp:LinkButton>
-
-                                </td>
-                                <td style="width: 200px">
-                                    <asp:LinkButton ID="btnInitialize" runat="server" ToolTip="Initialize(insert) all Active Employees for this year"
-                                        CssClass="btn btn-info btn" UseSubmitBehavior="false">
-                                     Initialize
-                                    </asp:LinkButton>
-                                </td>
-                                <td></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="row">
-                        <telerik:RadGrid ID="RadGridHourlyWage" runat="server" DataSourceID="SqlDataSourceHourlyWage"
-                            AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="600px" ShowFooter="true"
-                            AllowAutomaticDeletes="true" AllowAutomaticInserts="true" AllowAutomaticUpdates="true"
-                            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
-                            <ClientSettings>
-                                <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
-                            </ClientSettings>
-                            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWage">
-                                <PagerStyle Mode="Slider" AlwaysVisible="false" />
-                                <Columns>
-                                    <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id"
-                                        HeaderStyle-Width="40px" Display="false">
-                                    </telerik:GridBoundColumn>
-                                    <telerik:GridTemplateColumn DataField="employeeId" FilterControlAltText="Filter Employee column"
-                                        HeaderText="Employee" SortExpression="Employee" UniqueName="employeeId" HeaderStyle-HorizontalAlign="Center">
-                                        <ItemTemplate>
-                                            <asp:LinkButton runat="server" ID="lblName" CommandName="Edit"
-                                                ForeColor='<%# iif(Eval("Status")="Inactive",System.Drawing.Color.LightGray,System.Drawing.Color.DarkBlue) %>'> 
-                                                <%# Eval("Employee") %>
-                                                <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear") %></span>
-                                            </asp:LinkButton>
-                                        </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <telerik:RadComboBox ID="cboEmployees2" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" HeaderStyle-HorizontalAlign="Center"
-                                                Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true"
-                                                SelectedValue='<%# Bind("employeeId") %>'>
-                                                <Items>
-                                                    <telerik:RadComboBoxItem runat="server" Text="(Select Employees...)" Value="0" />
-                                                </Items>
-                                            </telerik:RadComboBox>
-                                        </EditItemTemplate>
-
-                                    </telerik:GridTemplateColumn>
-
-                                    <telerik:GridTemplateColumn DataField="Department" FilterControlAltText="Filter Department column" HeaderText="Department" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="Department" UniqueName="Department" ReadOnly="true">
-                                        <ItemTemplate>
-                                            <small><%# Eval("Department") %></small>
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-
-                                    <telerik:GridTemplateColumn DataField="Date" FilterControlAltText="Filter Date column" HeaderText="Date From" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="Date" UniqueName="Date" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Display="false">
-                                        <ItemTemplate>
-                                            <%# Eval("Date","{0:d}") %>
-                                        </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <telerik:RadDatePicker ID="RadDatePicker1" runat="server" Culture="en-US" DbSelectedDate='<%# Bind("Date") %>'>
-                                            </telerik:RadDatePicker>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-
-                                    <telerik:GridTemplateColumn DataField="DateEnd" FilterControlAltText="Filter DateEnd column" HeaderText="Date To" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Display="false">
-                                        <ItemTemplate>
-                                            <%# Eval("DateEnd", "{0:d}") %>
-                                        </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <telerik:RadDatePicker ID="RadDatePicker2" runat="server" Culture="en-US" DbSelectedDate='<%# Bind("DateEnd") %>'>
-                                            </telerik:RadDatePicker>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-
-                                    <telerik:GridTemplateColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="$/Hour" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
-                                        HeaderTooltip="Hourly Wage Rate">
-                                        <ItemTemplate>
-                                            <%# Eval("Amount","{0:C2}") %>
-                                        </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <telerik:RadNumericTextBox ID="txtAmount" runat="server" DbValue='<%# Bind("Amount") %>'>
-                                            </telerik:RadNumericTextBox>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-
-                                    <telerik:GridTemplateColumn DataField="HourPerWeek" FilterControlAltText="Filter HourPerWeek column" HeaderText="Hours per Week" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" Display="false">
-                                        <EditItemTemplate>
-                                            <telerik:RadNumericTextBox ID="txtHourPerWeek" runat="server" DbValue='<%# Bind("HourPerWeek") %>'>
-                                            </telerik:RadNumericTextBox>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn DataField="Benefits_vacations" FilterControlAltText="Filter Benefits_vacations column" HeaderText="Vacations(hours)" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="Benefits_vacations" UniqueName="Benefits_vacations" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" Display="false">
-                                        <EditItemTemplate>
-                                            <telerik:RadNumericTextBox ID="txtBenefits_vacations" runat="server" DbValue='<%# Bind("Benefits_vacations") %>'>
-                                            </telerik:RadNumericTextBox>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-                                    <telerik:GridTemplateColumn DataField="Benefits_personals" FilterControlAltText="Filter Benefits_personals column" HeaderText="Personals(hours)" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="Benefits_personals" UniqueName="Benefits_personals" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" Display="false">
-                                        <EditItemTemplate>
-                                            <telerik:RadNumericTextBox ID="txtBenefits_personals" runat="server" DbValue='<%# Bind("Benefits_personals") %>'>
-                                            </telerik:RadNumericTextBox>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-
-                                    <telerik:GridNumericColumn DataField="AnnualSalary" FilterControlAltText="Filter AnnualSalary column" HeaderText="Annual" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="AnnualSalary" UniqueName="AnnualSalary" DataFormatString="{0:N0}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" ReadOnly="true"
-                                        HeaderTooltip="Annual Salary Calculated">
-                                    </telerik:GridNumericColumn>
-                                    <telerik:GridTemplateColumn DataField="ProductiveSalary" FilterControlAltText="Filter ProductiveSalary column" HeaderText="Productive" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" ReadOnly="true"
-                                        HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
-                                        <ItemTemplate>
-                                            <%# Eval("ProductiveSalary","{0:N0}") %>
-                                            <span style="font-size: x-small" class="badge badge-pill badge-danger" title="productive weeks this year"><%# Eval("productiveweekthisyear","{0:N0}") %></span>
-                                        </ItemTemplate>
-                                    </telerik:GridTemplateColumn>
-
-                                    <telerik:GridTemplateColumn DataField="Increase" FilterControlAltText="Filter Increase column" HeaderText="Increase" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="Increase" UniqueName="Increase" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
-                                        HeaderTooltip="Planned increase ($/Hours) for next year">
-                                        <ItemTemplate>
-                                            <%# Eval("Increase","{0:C2}") %>
-                                        </ItemTemplate>
-                                        <EditItemTemplate>
-                                            <telerik:RadNumericTextBox ID="txtIncrease" runat="server" DbValue='<%# Bind("Increase") %>'>
-                                            </telerik:RadNumericTextBox>
-                                        </EditItemTemplate>
-                                    </telerik:GridTemplateColumn>
-
-                                    <telerik:GridNumericColumn DataField="Producer" FilterControlAltText="Filter Producer column" HeaderText="Producer" HeaderStyle-HorizontalAlign="Center"
-                                        SortExpression="Producer" UniqueName="Producer" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center" Display="false">
-                                    </telerik:GridNumericColumn>
-
-                                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ButtonType="ImageButton"
-                                        HeaderText="" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
-                                        HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
-                                    </telerik:GridButtonColumn>
-                                </Columns>
-                                <EditFormSettings>
-                                    <PopUpSettings Modal="true" Width="600px" />
-                                    <EditColumn ButtonType="PushButton" UniqueName="EditCommandColumn1">
-                                    </EditColumn>
-                                </EditFormSettings>
-                            </MasterTableView>
-                        </telerik:RadGrid>
-
-                    </div>
-                </div>
-            </telerik:RadWizardStep>
-
             <telerik:RadWizardStep runat="server" Title="Payroll Calendar">
                 <div class="container" style="width: 100% !important">
                     <div class="row">
@@ -343,6 +176,173 @@
                                 </td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+            </telerik:RadWizardStep>
+
+            <telerik:RadWizardStep runat="server" Title="Employee Hourly Wage">
+                <div class="container" style="width: 100% !important">
+                    <div class="row">
+                        <table class="table-sm" style="width: 100%">
+                            <tr>
+                                <td style="width: 140px;">
+
+                                    <asp:LinkButton ID="btnAddHourlyWage" runat="server" ToolTip="Add Hourly Wage Record "
+                                        CssClass="btn btn-info btn" UseSubmitBehavior="false">
+                                    <i class="fas fa-plus"></i> New Record
+                                    </asp:LinkButton>
+
+                                </td>
+                                <td style="width: 200px">
+                                    <asp:LinkButton ID="btnInitialize" runat="server" ToolTip="Initialize(insert) all Active Employees for this year"
+                                        CssClass="btn btn-info btn" UseSubmitBehavior="false">
+                                     Initialize
+                                    </asp:LinkButton>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <telerik:RadGrid ID="RadGridHourlyWage" runat="server" DataSourceID="SqlDataSourceHourlyWage"
+                            AutoGenerateColumns="False" AllowPaging="True" PageSize="50" AllowSorting="True" Height="600px" ShowFooter="true"
+                            AllowAutomaticDeletes="true" AllowAutomaticInserts="true" AllowAutomaticUpdates="true"
+                            HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+                            <ClientSettings>
+                                <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
+                            </ClientSettings>
+                            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWage">
+                                <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                                <Columns>
+                                    <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="Id" ReadOnly="True" UniqueName="Id"
+                                        HeaderStyle-Width="40px" Display="false">
+                                    </telerik:GridBoundColumn>
+                                    <telerik:GridTemplateColumn DataField="employeeId" FilterControlAltText="Filter Employee column"
+                                        HeaderText="Employee" SortExpression="Employee" UniqueName="employeeId" HeaderStyle-HorizontalAlign="Center">
+                                        <ItemTemplate>
+                                            <asp:LinkButton runat="server" ID="lblName" CommandName="Edit"
+                                                ForeColor='<%# iif(Eval("Status") = "Inactive", System.Drawing.Color.LightGray, System.Drawing.Color.DarkBlue) %>'> 
+                                                <%# Eval("Employee") %>
+                                                <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear") %></span>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <telerik:RadComboBox ID="cboEmployees2" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" HeaderStyle-HorizontalAlign="Center"
+                                                Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true"
+                                                SelectedValue='<%# Bind("employeeId") %>'>
+                                                <Items>
+                                                    <telerik:RadComboBoxItem runat="server" Text="(Select Employees...)" Value="0" />
+                                                </Items>
+                                            </telerik:RadComboBox>
+                                        </EditItemTemplate>
+
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="Department" FilterControlAltText="Filter Department column" HeaderText="Department" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="Department" UniqueName="Department" ReadOnly="true">
+                                        <ItemTemplate>
+                                            <small><%# Eval("Department") %></small>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="Date" FilterControlAltText="Filter Date column" HeaderText="Date From" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="Date" UniqueName="Date" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Display="false">
+                                        <ItemTemplate>
+                                            <%# Eval("Date", "{0:d}") %>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <telerik:RadDatePicker ID="RadDatePicker1" runat="server" Culture="en-US" DbSelectedDate='<%# Bind("Date") %>'>
+                                            </telerik:RadDatePicker>
+                                        </EditItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="DateEnd" FilterControlAltText="Filter DateEnd column" HeaderText="Date To" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Display="false">
+                                        <ItemTemplate>
+                                            <%# Eval("DateEnd", "{0:d}") %>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <telerik:RadDatePicker ID="RadDatePicker2" runat="server" Culture="en-US" DbSelectedDate='<%# Bind("DateEnd") %>'>
+                                            </telerik:RadDatePicker>
+                                        </EditItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="$/Hour" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
+                                        HeaderTooltip="Hourly Wage Rate">
+                                        <ItemTemplate>
+                                            <%# Eval("Amount", "{0:C2}") %>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <telerik:RadNumericTextBox ID="txtAmount" runat="server" DbValue='<%# Bind("Amount") %>'>
+                                            </telerik:RadNumericTextBox>
+                                        </EditItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="HourPerWeek" FilterControlAltText="Filter HourPerWeek column" HeaderText="Hours per Week" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" Display="false">
+                                        <EditItemTemplate>
+                                            <telerik:RadNumericTextBox ID="txtHourPerWeek" runat="server" DbValue='<%# Bind("HourPerWeek") %>'>
+                                            </telerik:RadNumericTextBox>
+                                        </EditItemTemplate>
+                                    </telerik:GridTemplateColumn>
+                                    <telerik:GridTemplateColumn DataField="Benefits_vacations" FilterControlAltText="Filter Benefits_vacations column" HeaderText="Vacations(hours)" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="Benefits_vacations" UniqueName="Benefits_vacations" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" Display="false">
+                                        <EditItemTemplate>
+                                            <telerik:RadNumericTextBox ID="txtBenefits_vacations" runat="server" DbValue='<%# Bind("Benefits_vacations") %>'>
+                                            </telerik:RadNumericTextBox>
+                                        </EditItemTemplate>
+                                    </telerik:GridTemplateColumn>
+                                    <telerik:GridTemplateColumn DataField="Benefits_personals" FilterControlAltText="Filter Benefits_personals column" HeaderText="Personals(hours)" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="Benefits_personals" UniqueName="Benefits_personals" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" Display="false">
+                                        <EditItemTemplate>
+                                            <telerik:RadNumericTextBox ID="txtBenefits_personals" runat="server" DbValue='<%# Bind("Benefits_personals") %>'>
+                                            </telerik:RadNumericTextBox>
+                                        </EditItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridNumericColumn DataField="AnnualSalary" FilterControlAltText="Filter AnnualSalary column" HeaderText="Annual" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="AnnualSalary" UniqueName="AnnualSalary" DataFormatString="{0:N0}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" ReadOnly="true"
+                                        HeaderTooltip="Annual Salary Calculated">
+                                    </telerik:GridNumericColumn>
+                                    <telerik:GridTemplateColumn DataField="ProductiveSalary" FilterControlAltText="Filter ProductiveSalary column" HeaderText="Productive" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" ReadOnly="true"
+                                        HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
+                                        <ItemTemplate>
+                                            <%# Eval("ProductiveSalary", "{0:N0}") %>
+                                            <span style="font-size: x-small" class="badge badge-pill badge-danger" title="productive weeks this year"><%# Eval("productiveweekthisyear", "{0:N0}") %></span>
+                                        </ItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridTemplateColumn DataField="Increase" FilterControlAltText="Filter Increase column" HeaderText="Increase" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="Increase" UniqueName="Increase" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
+                                        HeaderTooltip="Planned increase ($/Hours) for next year">
+                                        <ItemTemplate>
+                                            <%# Eval("Increase", "{0:C2}") %>
+                                        </ItemTemplate>
+                                        <EditItemTemplate>
+                                            <telerik:RadNumericTextBox ID="txtIncrease" runat="server" DbValue='<%# Bind("Increase") %>'>
+                                            </telerik:RadNumericTextBox>
+                                        </EditItemTemplate>
+                                    </telerik:GridTemplateColumn>
+
+                                    <telerik:GridNumericColumn DataField="Producer" FilterControlAltText="Filter Producer column" HeaderText="Producer" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="Producer" UniqueName="Producer" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center" Display="false">
+                                    </telerik:GridNumericColumn>
+
+                                    <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ButtonType="ImageButton"
+                                        HeaderText="" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
+                                        HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                                    </telerik:GridButtonColumn>
+                                </Columns>
+                                <EditFormSettings>
+                                    <PopUpSettings Modal="true" Width="600px" />
+                                    <EditColumn ButtonType="PushButton" UniqueName="EditCommandColumn1">
+                                    </EditColumn>
+                                </EditFormSettings>
+                            </MasterTableView>
+                        </telerik:RadGrid>
+
                     </div>
                 </div>
             </telerik:RadWizardStep>
