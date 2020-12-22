@@ -50,6 +50,15 @@ Partial Public Class payments
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
+    '''cboPeriod control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboPeriod As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
     '''RadDatePickerFrom control.
     '''</summary>
     '''<remarks>
