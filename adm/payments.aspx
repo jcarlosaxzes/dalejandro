@@ -13,7 +13,16 @@
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnRefresh">
                 <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="cboPeriod" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
                     <telerik:AjaxUpdatedControl ControlID="RadGridPayments" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="cboPeriod">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
+                    <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -48,16 +57,35 @@
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnRefresh">
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
-                    <td style="width: 160px">From:
-                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ToolTip="Date From of the filter">
-                        </telerik:RadDatePicker>
-                    </td>
-                    <td style="width: 160px">To:
-                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy"  Culture="en-US">
-                                </telerik:RadDatePicker>
+                    <td style="width: 200px">
+                        <telerik:RadComboBox ID="cboPeriod" runat="server" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="Last 30 days" Value="30" Selected="true" />
+                                <telerik:RadComboBoxItem Text="Last 60 days" Value="60" />
+                                <telerik:RadComboBoxItem Text="Last 90 days" Value="90" />
+                                <telerik:RadComboBoxItem Text="Last 120 days" Value="120" />
+                                <telerik:RadComboBoxItem Text="Last 180 days" Value="180" />
+                                <telerik:RadComboBoxItem Text="Last 365 days" Value="365" />
+                                <telerik:RadComboBoxItem Text="This year" Value="14" />
+                                <telerik:RadComboBoxItem Text="This month" Value="16" />
+                                <telerik:RadComboBoxItem Text="Last year" Value="15" />
+                                <telerik:RadComboBoxItem Text="Last month" Value="17" />
+                                <telerik:RadComboBoxItem Text="(All years...)" Value="13" />
+                                <telerik:RadComboBoxItem Text="Custom Range..." Value="99" />
+                            </Items>
+                        </telerik:RadComboBox>
+
 
                     </td>
-                    <td style="width: 300px">
+                    <td style="width: 130px">
+                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy"  Culture="en-US" ToolTip="Date From for filter">
+                        </telerik:RadDatePicker>
+                    </td>
+                    <td style="width: 130px">
+                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" DateFormat="MM/dd/yyyy"  Culture="en-US" ToolTip="Date To for filter">
+                        </telerik:RadDatePicker>
+                    </td>
+                    <td style="width: 350px">
                         <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
                             DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains"
                             Height="300px" MarkFirstMatch="True" Width="100%">
@@ -67,7 +95,7 @@
                         </telerik:RadComboBox>
 
                     </td>
-                    <td style="width: 250px">
+                    <td>
                         <telerik:RadComboBox ID="cboPaymentMethod" runat="server" AppendDataBoundItems="true"
                             DataSourceID="SqlDataSourcePaymentMethod" DataTextField="Name" DataValueField="Id"
                             Filter="Contains" MarkFirstMatch="True" Width="100%" Height="300px">
@@ -81,7 +109,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <telerik:RadComboBox ID="cboClients" runat="server" AppendDataBoundItems="true" DataSourceID="SqlDataSourceClient" ToolTip="Clients"
                             DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" MarkFirstMatch="True" Width="100%">
                             <Items>
@@ -115,7 +143,7 @@
         </asp:Panel>
     </div>
     <div>
-        <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%" Skin="Bootstrap" AllowSorting="true" AllowAutomaticDeletes="True"
+        <telerik:RadGrid ID="RadGridPayments" runat="server" DataSourceID="SqlDataSource1" ShowFooter="true" Width="100%"  AllowSorting="true" AllowAutomaticDeletes="True"
             AllowMultiRowSelection="True"
             PageSize="50" AllowPaging="true"
             Height="850px" RenderMode="Lightweight"
@@ -135,6 +163,13 @@
                     </telerik:GridBoundColumn>
 
 
+                    <telerik:GridTemplateColumn DataField="PaymentDate" DataType="System.DateTime" HeaderText="Date" SortExpression="PaymentDate" UniqueName="PaymentDate" AllowSorting="true"
+                        HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Payment Date">
+                        <ItemTemplate>
+                            <%# Eval("PaymentDate", "{0:d}")%>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+
                     <telerik:GridTemplateColumn DataField="StatementNumber" HeaderText="Statement" UniqueName="StatementNumber"
                         HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
                         <ItemTemplate>
@@ -144,9 +179,9 @@
                                         <%# Eval("StatementNumber")%>
                                     </td>
                                     <td style="padding-left: 3px">
-                                        <asp:Panel runat="server" Visible='<%# Eval("statementId")>0 %>'>
+                                        <asp:Panel runat="server" Visible='<%# Eval("statementId") %>'>
                                             <a class="far fa-share-square" title="View Invoice"
-                                                href='<%# LocalAPI.GetSharedLink_URL(55,Eval("statementId"))%>'
+                                                href='<%# LocalAPI.GetSharedLink_URL(55, Eval("statementId"))%>'
                                                 target="_blank" aria-hidden="true"></a>
                                         </asp:Panel>
                                     </td>
@@ -166,9 +201,9 @@
                                             Text='<%# Eval("InvoiceNumber") %>' ToolTip="Click to Edit Payment"></asp:LinkButton>
                                     </td>
                                     <td style="padding-left: 3px">
-                                        <asp:Panel runat="server" Visible='<%# Eval("InvoicesId")>0 %>'>
+                                        <asp:Panel runat="server" Visible='<%# Eval("InvoicesId") %>'>
                                             <a class="far fa-share-square" title="View Invoice"
-                                                href='<%# LocalAPI.GetSharedLink_URL(4,Eval("InvoicesId"))%>'
+                                                href='<%# LocalAPI.GetSharedLink_URL(4, Eval("InvoicesId"))%>'
                                                 target="_blank" aria-hidden="true"></a>
                                         </asp:Panel>
                                     </td>
@@ -178,13 +213,6 @@
 
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="PaymentDate" DataType="System.DateTime" FilterControlAltText="Filter PaymentDate column"
-                        HeaderText="Date" SortExpression="PaymentDate" UniqueName="PaymentDate" AllowSorting="true"
-                        HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Payment Date">
-                        <ItemTemplate>
-                            <%# Eval("PaymentDate","{0:d}")%>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
 
                     <telerik:GridTemplateColumn DataField="ClientName" HeaderText="Client - Job - Notes" UniqueName="ClientName"
                         ItemStyle-HorizontalAlign="Left">
@@ -219,7 +247,7 @@
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn DataField="PaymentMethod" HeaderText="Method" UniqueName="PaymentMethod" HeaderStyle-Width="180px" AllowSorting="true"
+                    <telerik:GridTemplateColumn DataField="PaymentMethod" HeaderText="Method" UniqueName="PaymentMethod" AllowSorting="true"
                         ItemStyle-HorizontalAlign="Left">
                         <ItemTemplate>
                             <div>
