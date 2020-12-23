@@ -295,19 +295,21 @@
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockEmployeeStatistics" runat="server" Title="<a class='lnkGrid' href='TimesByPeriords' title='Go to Times By Periords'>Employee Historical Statistics</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
-                                <telerik:RadGrid ID="RadGridEmployeeStatistics" runat="server" DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%" AutoGenerateColumns="False"
+                                <telerik:RadGrid ID="RadGridEmployeeStatistics" runat="server" DataSourceID="SqlDataSourceEmployeeStatistics" Width="100%" AutoGenerateColumns="False"
                                     AllowPaging="False" RenderMode="Lightweight" HeaderStyle-HorizontalAlign="Center" Height="400px">
                                     <ClientSettings Selecting-AllowRowSelect="true">
                                         <Scrolling AllowScroll="True"></Scrolling>
                                     </ClientSettings>
 
-                                    <MasterTableView DataSourceID="SqlDataSourceProposalEmployeeStatistics" Width="100%">
+                                    <MasterTableView DataSourceID="SqlDataSourceEmployeeStatistics" Width="100%">
                                         <Columns>
                                             <telerik:GridTemplateColumn DataField="Name" UniqueName="Name" ItemStyle-CssClass="CONCEPT">
                                                 <ItemTemplate>
                                                     <asp:Label ID="NameLabel07" runat="server" CssClass="GridRow" Text='<%# Eval("Name")%>'></asp:Label>
                                                 </ItemTemplate>
                                             </telerik:GridTemplateColumn>
+                                            <telerik:GridBoundColumn DataField="Jobs" UniqueName="Jobs" HeaderText="Jobs" HeaderStyle-Width="250px" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Total Jobs assigned as member team">
+                                            </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn DataField="Workload" UniqueName="Workload" HeaderText="Workload" HeaderStyle-Width="250px" DataFormatString="{0:N0}" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Total Hours assigned to active projects">
                                             </telerik:GridBoundColumn>
                                             <telerik:GridBoundColumn DataField="ProductivityRate" UniqueName="ProductivityRate" HeaderText="Productivity Rate" HeaderStyle-Width="250px" DataFormatString="{0:P2}" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Productive Time vs Personal/Vacations/Non-Productive Time">
@@ -365,6 +367,7 @@
                                 </telerik:RadGrid>
                             </ContentTemplate>
                         </telerik:RadDock>
+
                         <telerik:RadDock RenderMode="Lightweight" ID="RadDockSubconsultants" runat="server" Title="<a class='lnkGrid' href='SubConsultans' title='Go to SubConsultants List'>Subconsultants Over the Last 5 Years</a>" EnableAnimation="true"
                             EnableRoundedCorners="true" CommandsAutoPostBack="false">
                             <ContentTemplate>
@@ -485,7 +488,7 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceProposalEmployeeStatistics" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+    <asp:SqlDataSource ID="SqlDataSourceEmployeeStatistics" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="EmployeeStatistics_20_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />

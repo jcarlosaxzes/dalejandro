@@ -147,15 +147,5 @@ Public Class _Default1
         e.Command.CommandTimeout = 0
     End Sub
 
-    Private Sub SqlDataSourceProposalEmployeeStatistics_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceProposalEmployeeStatistics.Selecting
-        e.Command.CommandTimeout = 0
-    End Sub
 
-    Private Sub SqlDataSourceProposalJobs_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceProposalJobs.Selecting
-        e.Command.CommandTimeout = 0
-    End Sub
-
-    Private Sub SqlDataSourceSubConsultants_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceSubConsultants.Selecting
-        e.Command.CommandTimeout = 0
-    End Sub
 End Class
