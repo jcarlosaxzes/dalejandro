@@ -53,8 +53,20 @@ Public Class ADM_Main_Responsive
 
     Private Function CheckbillingExpirationDate(companyId As Integer) As Boolean
         '!!!! Check Billing Expiracion Date
-        If LocalAPI.GetCompanybillingExpirationDate(companyId) <= Date.Today Then
+        Dim record = LocalAPI.GetRecordFromQuery($"select Name, billingExpirationDate , ISNULL( AlertMasterSubscriptionExpired, 0) as AlertMasterSubscriptionExpired, isnull(BlockSubcriptionExpired, 0 ) as BlockSubcriptionExpired from company where companyId = {companyId}")
+        Dim companyName As String = record("Name")
+        Dim billingExpirationDate As Date = record("billingExpirationDate")
+        Dim AlertMasterSubscriptionExpired As Boolean = record("AlertMasterSubscriptionExpired")
+        Dim BlockSubcriptionExpired As Boolean = record("BlockSubcriptionExpired")
 
+        'Send notifications to Masters 30 days before Subscription Expired
+        If billingExpirationDate <= Date.Today.AddDays(30) And Not AlertMasterSubscriptionExpired Then
+
+            SendGrid.Email.SendMail("daniel.work.2006@gmail.com", "", "", "PASconcept Subscription Expired", $" Subscription Expire for Company {companyName}", companyId, 0, 0)
+            LocalAPI.ExecuteNonQuery($"update Company set AlertMasterSubscriptionExpired = 1 where companyId = {companyId}")
+        End If
+
+        If billingExpirationDate <= Date.Today And BlockSubcriptionExpired Then
             If LocalAPI.GetCompanyBillingAmount(companyId) > 0 Then
                 ' Payment subscriptor Page
                 Response.Redirect("~/adm/subscribe/pro.aspx")

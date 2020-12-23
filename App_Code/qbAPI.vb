@@ -56,6 +56,9 @@ Public Class qbAPI
             End If
         End If
         If companyId = 99 Then
+            If LocalAPI.GetHostAppSite().Contains("localhost") Then
+                Return "https://stag.pasconcept.com/adm/qb_refreshtoken.aspx"
+            End If
             Return LocalAPI.GetHostAppSite() & "/adm/qb_refreshtoken.aspx"
         End If
         Return ConfigurationManager.AppSettings("redirectUrl")
