@@ -59,24 +59,6 @@ Partial Public Class departmentreport
     Protected WithEvents RadGridEmpls As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''ImageEmployeePhoto control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ImageEmployeePhoto As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''lblDepartmentColumn control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblDepartmentColumn As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''FunnelChart1 control.
     '''</summary>
     '''<remarks>
@@ -255,24 +237,6 @@ Partial Public Class departmentreport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridDetailedEmployees As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''ImageEmployeePhoto2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ImageEmployeePhoto2 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''lnkEdit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkEdit As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''SqlDataSourceFunnelChart control.

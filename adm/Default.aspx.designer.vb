@@ -239,13 +239,13 @@ Partial Public Class _Default1
     Protected WithEvents SqlDataSourceSubConsultants As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceProposalEmployeeStatistics control.
+    '''SqlDataSourceEmployeeStatistics control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceProposalEmployeeStatistics As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceEmployeeStatistics As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceRates control.
