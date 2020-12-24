@@ -7136,18 +7136,20 @@ Public Class LocalAPI
 
             'find all <a href=""></> nodes ?
             Dim hrefValue As String
-            For Each linkNode As HtmlNode In htmlDoc.DocumentNode.SelectNodes("//a[@href]")
+            If Not IsNothing(htmlDoc.DocumentNode.SelectNodes("//a[@href]")) Then
+                For Each linkNode As HtmlNode In htmlDoc.DocumentNode.SelectNodes("//a[@href]")
 
-                ' Get url
-                hrefValue = linkNode.GetAttributeValue("href", String.Empty)
+                    ' Get url
+                    hrefValue = linkNode.GetAttributeValue("href", String.Empty)
 
-                ' Insert child node with plain url Text
-                If linkNode.ChildNodes.Count > 0 Then
-                    linkNode.ReplaceChild(htmlDoc.CreateTextNode(" " & hrefValue), linkNode.ChildNodes.First())
-                Else
-                    linkNode.AppendChild(htmlDoc.CreateTextNode(" " & hrefValue))
-                End If
-            Next
+                    ' Insert child node with plain url Text
+                    If linkNode.ChildNodes.Count > 0 Then
+                        linkNode.ReplaceChild(htmlDoc.CreateTextNode(" " & hrefValue), linkNode.ChildNodes.First())
+                    Else
+                        linkNode.AppendChild(htmlDoc.CreateTextNode(" " & hrefValue))
+                    End If
+                Next
+            End If
 
             Return htmlDoc.DocumentNode.InnerText
 
