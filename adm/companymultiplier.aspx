@@ -196,6 +196,10 @@
                                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
                                                 </telerik:GridButtonColumn>
                                             </Columns>
+                                            <EditFormSettings>
+                                                <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                                                </EditColumn>
+                                            </EditFormSettings>
                                         </MasterTableView>
                                     </telerik:RadGrid>
                                 </td>
@@ -350,6 +354,10 @@
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                             </Columns>
+                                            <EditFormSettings>
+                                                <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                                                </EditColumn>
+                                            </EditFormSettings>
                                         </MasterTableView>
                                     </telerik:RadGrid>
                                 </telerik:RadCodeBlock>
@@ -460,6 +468,10 @@
                                     </telerik:GridBoundColumn>
 
                                 </Columns>
+                                <EditFormSettings>
+                                    <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                                    </EditColumn>
+                                </EditFormSettings>
 
                             </MasterTableView>
                         </telerik:RadGrid>
