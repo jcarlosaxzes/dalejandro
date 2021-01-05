@@ -249,6 +249,9 @@
                                  <%#Eval("Employee")%> 
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
+                        <telerik:GridCheckBoxColumn  DataField="IsProjectManager" HeaderText="Job PM" UniqueName="IsProjectManager" HeaderTooltip="Job's Porject Manager"
+                            HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                        </telerik:GridCheckBoxColumn>
                         <telerik:GridBoundColumn UniqueName="Position" HeaderText="Position" DataField="Position">
                         </telerik:GridBoundColumn>
                         <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope">

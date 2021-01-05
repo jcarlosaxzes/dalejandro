@@ -61,19 +61,23 @@ Public Class _Default1
 
 
     Private Sub RadGridHeader(RadGrid1 As RadGrid)
-        Dim Y0 As Integer = Today.Year
-        Dim StartYear As Integer = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "StartYear")
-        RadGrid1.MasterTableView.GetColumn("year").HeaderText = Y0
-        For i = 1 To 4
-            Y0 = Y0 - 1
-            If Y0 >= StartYear Then
-                RadGrid1.MasterTableView.GetColumn("year-" & i).HeaderText = Y0
-            Else
-                RadGrid1.MasterTableView.GetColumn("year-" & i).Visible = False
-            End If
-        Next
-        RadGrid1.MasterTableView.DataBind()
+        Try
+            Dim Y0 As Integer = Today.Year
+            Dim StartYear As Integer = LocalAPI.GetCompanyProperty(lblCompanyId.Text, "StartYear")
+            RadGrid1.MasterTableView.GetColumn("year").HeaderText = Y0
+            For i = 1 To 4
+                Y0 = Y0 - 1
+                If Y0 >= StartYear Then
+                    RadGrid1.MasterTableView.GetColumn("year-" & i).HeaderText = Y0
+                Else
+                    RadGrid1.MasterTableView.GetColumn("year-" & i).Visible = False
+                End If
+            Next
+            RadGrid1.MasterTableView.DataBind()
 
+        Catch ex As Exception
+            Master.ErrorMessage("Error. " & ex.Message)
+        End Try
     End Sub
 
     Private Sub RadDockProposals_Command(sender As Object, e As DockCommandEventArgs) Handles RadDockProposals.Command

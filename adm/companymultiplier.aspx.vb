@@ -14,7 +14,18 @@ Public Class companymultiplier
                 lblCompanyId.Text = Session("companyId")
 
                 cboYear.DataBind()
-                cboYear.SelectedValue = Year(Now())
+                If Not Request.QueryString("year") Is Nothing Then
+                    cboYear.SelectedValue = Request.QueryString("year")
+                Else
+                    cboYear.SelectedValue = Year(Now())
+                End If
+
+                cboDepartments.DataBind()
+                If Not Request.QueryString("departmentId") Is Nothing Then
+                    cboDepartments.SelectedValue = Request.QueryString("departmentId")
+                    RadWizardStepEmployeeHourlyWage.Active = True
+                End If
+
 
                 SqlDataSourceDptoTarget.DataBind()
                 'ReadCompanyRates()
@@ -76,7 +87,9 @@ Public Class companymultiplier
     Private Sub RadGridHourlyWage_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridHourlyWage.ItemCommand
         Select Case e.CommandName
             Case "EditHourlyWage"
-                CreateRadWindows(e.CommandName, "~/ADM/Employee_HourlyWageHistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose")
+                '!!! CreateRadWindows(e.CommandName, "~/ADM/Employee_HourlyWageHistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose")
+                Dim guid As String = LocalAPI.GetEmployeeProperty(e.CommandArgument, "guid")
+                Response.Redirect($"~/adm/employeehourlywage.aspx?guid={guid}&year={cboYear.SelectedValue}&departmentId={cboDepartments.SelectedValue}")
         End Select
 
     End Sub
@@ -99,7 +112,9 @@ Public Class companymultiplier
     Private Sub RadGridMonthlySalaryCalculation_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridMonthlySalaryCalculation.ItemCommand
         Select Case e.CommandName
             Case "EditHourlyWage"
-                CreateRadWindows(e.CommandName, "~/ADM/Employee_HourlyWageHistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose1")
+                '!!!CreateRadWindows(e.CommandName, "~/ADM/employee_hourlywagehistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose1")
+                Dim guid As String = LocalAPI.GetEmployeeProperty(e.CommandArgument, "guid")
+                Response.Redirect($"~/adm/employeehourlywage.aspx?guid={guid}&year={cboYear.SelectedValue}&departmentId={cboDepartments.SelectedValue}")
         End Select
     End Sub
 

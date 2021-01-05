@@ -9290,6 +9290,16 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
+
+    Public Shared Function GetEmployeeIdFromGUID(EmployeeGUID As String) As Integer
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT ISNULL(Id,0) FROM [Employees] WHERE [guid]=@guid", cnn1)
+        cmd.Parameters.AddWithValue("@guid", EmployeeGUID)
+        GetEmployeeIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
+    End Function
+
+
     Public Shared Function GetEmployeeIdFromLastFirstName(ByVal FirstName As String, ByVal LastName As String, ByVal companyId As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
