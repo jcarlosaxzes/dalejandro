@@ -73,40 +73,39 @@
             </tr>
         </table>
         <div>
-
             <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceHourlyWageDetail" AllowAutomaticDeletes="true" AllowAutomaticUpdates="true"
                 AutoGenerateColumns="False" AllowSorting="True" ShowFooter="true"
                 HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
                 <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWageDetail" CommandItemDisplay="Top">
                     <CommandItemSettings ShowAddNewRecordButton="false" />
                     <Columns>
-                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
+                        <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" ItemStyle-HorizontalAlign="Center"
                             HeaderText="" HeaderStyle-Width="50px">
                         </telerik:GridEditCommandColumn>
-                        <telerik:GridDateTimeColumn DataField="Date" FilterControlAltText="Filter Date column" HeaderText="Date From" HeaderStyle-HorizontalAlign="Center"
+                        <telerik:GridDateTimeColumn DataField="Date" HeaderText="Date From" HeaderStyle-HorizontalAlign="Center"
                             SortExpression="Date" UniqueName="Date" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="center" PickerType="DatePicker" DataFormatString="{0:d}">
                         </telerik:GridDateTimeColumn>
                         <telerik:GridDateTimeColumn DataField="DateEnd" FilterControlAltText="Filter DateEnd column" HeaderText="Date To" HeaderStyle-HorizontalAlign="Center"
                             SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="center" PickerType="DatePicker" DataFormatString="{0:d}">
                         </telerik:GridDateTimeColumn>
-                        <telerik:GridNumericColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="$/Hour" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Hourly Wage Rate"
+                        <telerik:GridNumericColumn DataField="Amount" HeaderText="$/Hour" HeaderStyle-HorizontalAlign="Center"
+                            SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
                             DecimalDigits="2" MinValue="0">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="HourPerWeek" FilterControlAltText="Filter HourPerWeek column" HeaderText="Hours per Week" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right"
+                        <telerik:GridNumericColumn DataField="HourPerWeek" HeaderText="Hours per Week" HeaderStyle-HorizontalAlign="Center"
+                            SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="2" MinValue="0" MaxValue="40">
                         </telerik:GridNumericColumn>
                         <telerik:GridNumericColumn DataField="Benefits_vacations" FilterControlAltText="Filter Benefits_vacations column" HeaderText="Vacations(hours)" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Benefits_vacations" UniqueName="Benefits_vacations" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
+                            SortExpression="Benefits_vacations" UniqueName="Benefits_vacations" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="0" MinValue="0" MaxValue="80">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="Benefits_personals" FilterControlAltText="Filter Benefits_personals column" HeaderText="Personals(hours)" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Benefits_personals" UniqueName="Benefits_personals" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right"
+                        <telerik:GridNumericColumn DataField="Benefits_personals" HeaderText="Personals(hours)" HeaderStyle-HorizontalAlign="Center"
+                            SortExpression="Benefits_personals" UniqueName="Benefits_personals" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="0" MinValue="0" MaxValue="32">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="Producer" FilterControlAltText="Filter Producer column" HeaderText="P.Rate" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Producer" UniqueName="Producer" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Right" HeaderTooltip="Producer Rate 0 to 1"
+                        <telerik:GridNumericColumn DataField="Producer" HeaderText="P.Rate" HeaderStyle-HorizontalAlign="Center"
+                            SortExpression="Producer" UniqueName="Producer" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Producer Rate 0 to 1"
                             DecimalDigits="2" MinValue="0" MaxValue="1">
                         </telerik:GridNumericColumn>
 
@@ -115,7 +114,10 @@
                             HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                         </telerik:GridButtonColumn>
                     </Columns>
-
+                    <EditFormSettings>
+                        <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
+                        </EditColumn>
+                    </EditFormSettings>
                 </MasterTableView>
             </telerik:RadGrid>
         </div>
@@ -136,7 +138,7 @@
                 <td style="width: 180px">Date From:
                 </td>
                 <td>
-                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US">
+                    <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" DateFormat="MM/dd/yyyy" Culture="en-US" ZIndex="50001">
                     </telerik:RadDatePicker>
                 </td>
                 <td class="small">Date From (in selected year) to apply this settings.
@@ -273,6 +275,6 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblMonthUpdated" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblDepartmentId" runat="server" Visible="False"></asp:Label>
-    
+
 
 </asp:Content>
