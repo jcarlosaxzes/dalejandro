@@ -62,13 +62,17 @@
                                 </asp:LinkButton>
                             </ItemTemplate>
                         </telerik:GridTemplateColumn>
+                        <telerik:GridCheckBoxColumn  DataField="IsProjectManager" HeaderText="Job PM" UniqueName="IsProjectManager" HeaderTooltip="Job's Porject Manager"
+                            HeaderStyle-Width="100px"  ItemStyle-HorizontalAlign="Center" FooterStyle-HorizontalAlign="Center">
+                        </telerik:GridCheckBoxColumn>
+
                         <telerik:GridBoundColumn UniqueName="Position" HeaderText="Position" DataField="Position">
                         </telerik:GridBoundColumn>
-<%--                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Position Rate" ItemStyle-HorizontalAlign="Center" SortExpression="HourRate" UniqueName="HourRate" Visible="false">
-                            <ItemTemplate>
-                                <%# Eval("HourRate", "{0:N2}") %>
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>--%>
+                        <%--                        <telerik:GridTemplateColumn DataField="HourRate" HeaderStyle-Width="120px" HeaderText="Position Rate" ItemStyle-HorizontalAlign="Center" SortExpression="HourRate" UniqueName="HourRate" Visible="false">
+                                                    <ItemTemplate>
+                                                        <%# Eval("HourRate", "{0:N2}") %>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>--%>
                         <telerik:GridBoundColumn DataField="Scope" HeaderText="Scope of Work" SortExpression="Scope" UniqueName="Scope">
                         </telerik:GridBoundColumn>
                         <telerik:GridNumericColumn  DataField="Hours" HeaderText="Assigned Hours" UniqueName="Hours" HeaderTooltip="Assigned Hours"
@@ -105,7 +109,7 @@
                             <br />
                             <table style="width: 100%; font-size: small">
                                 <tr>
-                                    <td style="width: 100px; text-align: right">Position:
+                                    <td style="width: 180px; text-align: right">Position:
                                     </td>
                                     <td>
                                         <telerik:RadComboBox ID="cboPosition" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourcePosition"
@@ -118,10 +122,18 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td style="text-align: right">Is Project Manager (of Job):
+                                    </td>
+                                    <td>
+                                        <telerik:RadCheckBox ID="RadCheckBox1" runat="server" Checked='<%# Bind("IsProjectManager")%>'>
+                                        </telerik:RadCheckBox>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td style="text-align: right">Hours:
                                     </td>
                                     <td>
-                                        <telerik:RadNumericTextBox ID="RadNumericTextBox1" runat="server" Width="200px" DbValue='<%# Bind("Hours")%>'>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextBox2" runat="server" Width="200px" DbValue='<%# Bind("Hours")%>'>
                                         </telerik:RadNumericTextBox>
                                     </td>
                                 </tr>
@@ -170,7 +182,7 @@
     <asp:SqlDataSource ID="SqlDataSourceAssignedEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Jobs_Employees_assigned_DELETE" DeleteCommandType="StoredProcedure"
         SelectCommand="Job_Employees_assigned_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="Jobs_Employees_v20_assigned_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="Jobs_Employees_v21_assigned_UPDATE" UpdateCommandType="StoredProcedure">
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
@@ -178,6 +190,7 @@
             <asp:ControlParameter ControlID="lblJobId" Name="jobId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
+            <asp:Parameter Name="IsProjectManager" />
             <asp:Parameter Name="positionId" Type="Int32" />
             <asp:Parameter Name="Scope" Type="String" />
             <asp:Parameter Name="Hours" Type="Double" />
