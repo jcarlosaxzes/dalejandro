@@ -95,73 +95,76 @@ Public Class reports
 
     Protected Sub RadGrid1_ColumnCreated(ByVal sender As Object, ByVal e As Telerik.Web.UI.GridColumnCreatedEventArgs) Handles RadGrid1.ColumnCreated
         Try
-            Dim boundColumn As GridBoundColumn = CType(e.Column, GridBoundColumn)
+            If TypeOf e.Column Is GridBoundColumn Then
 
-            boundColumn.HeaderStyle.HorizontalAlign = HorizontalAlign.Center
-            boundColumn.AllowFiltering = False
+                Dim boundColumn As GridBoundColumn = CType(e.Column, GridBoundColumn)
 
-            Select Case boundColumn.DataTypeName
-                Case "System.Double", "System.Decimal"
-                    boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Right
-                    boundColumn.DataFormatString = "{0:N2}"
-                    boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Sum
-                    boundColumn.FooterStyle.HorizontalAlign = HorizontalAlign.Right
-                    boundColumn.HeaderStyle.Width = "120"
-                Case "System.Int32"
-                    boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Right
-                    boundColumn.DataFormatString = "{0:N0}"
-                    boundColumn.HeaderStyle.Width = "100"
+                boundColumn.HeaderStyle.HorizontalAlign = HorizontalAlign.Center
+                boundColumn.AllowFiltering = False
+
+                Select Case boundColumn.DataTypeName
+                    Case "System.Double", "System.Decimal"
+                        boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Right
+                        boundColumn.DataFormatString = "{0:N2}"
+                        boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Sum
+                        boundColumn.FooterStyle.HorizontalAlign = HorizontalAlign.Right
+                        boundColumn.HeaderStyle.Width = "120"
+                    Case "System.Int32"
+                        boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Right
+                        boundColumn.DataFormatString = "{0:N0}"
+                        boundColumn.HeaderStyle.Width = "100"
                     'boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Sum
-                Case "System.DateTime"
-                    boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Right
-                    boundColumn.DataFormatString = "{0:d}"
-                    boundColumn.HeaderStyle.Width = "100"
+                    Case "System.DateTime"
+                        boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Right
+                        boundColumn.DataFormatString = "{0:d}"
+                        boundColumn.HeaderStyle.Width = "100"
 
-                Case Else
-                    boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Left
-                    boundColumn.HeaderStyle.Width = "250"
-            End Select
+                    Case Else
+                        boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Left
+                        boundColumn.HeaderStyle.Width = "250"
+                End Select
 
-            ' Hacer No Visible Columna Year
-            Select Case UCase(boundColumn.DataField)
-                Case "YEAR"
-                    boundColumn.Visible = cboGroups.SelectedValue = "COMPANY"
-                Case "YEAR", "ISRATE", "FORMATSTRING"
-                    boundColumn.Visible = False
-                Case "INVOICENUMBER"
-                    boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Count
-                    boundColumn.FooterStyle.HorizontalAlign = HorizontalAlign.Center
-                    boundColumn.FooterAggregateFormatString = "{0:N0}"
-                    boundColumn.HeaderStyle.Width = "140"
-                Case "CODE", "ID"
-                    boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Count
-                    boundColumn.FooterStyle.HorizontalAlign = HorizontalAlign.Center
-                    boundColumn.FooterAggregateFormatString = "{0:N0}"
-                    boundColumn.HeaderStyle.Width = "80"
-                Case "STATUS", "AVAILABILITY", "SOURCE"
-                    boundColumn.HeaderStyle.Width = "140"
-                    boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Center
+                ' Hacer No Visible Columna Year
+                Select Case UCase(boundColumn.DataField)
+                    Case "YEAR"
+                        boundColumn.Visible = cboGroups.SelectedValue = "COMPANY"
+                    Case "YEAR", "ISRATE", "FORMATSTRING"
+                        boundColumn.Visible = False
+                    Case "INVOICENUMBER"
+                        boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Count
+                        boundColumn.FooterStyle.HorizontalAlign = HorizontalAlign.Center
+                        boundColumn.FooterAggregateFormatString = "{0:N0}"
+                        boundColumn.HeaderStyle.Width = "140"
+                    Case "CODE", "ID"
+                        boundColumn.Aggregate = Telerik.Web.UI.GridAggregateFunction.Count
+                        boundColumn.FooterStyle.HorizontalAlign = HorizontalAlign.Center
+                        boundColumn.FooterAggregateFormatString = "{0:N0}"
+                        boundColumn.HeaderStyle.Width = "80"
+                    Case "STATUS", "AVAILABILITY", "SOURCE"
+                        boundColumn.HeaderStyle.Width = "140"
+                        boundColumn.ItemStyle.HorizontalAlign = HorizontalAlign.Center
                     'Case "JOBNAME", "PROJECTNAME", "EMPLOYEE", "NAME", "CONCEPT", "CLIENTNAME", "PM"
                     'boundColumn.AllowFiltering = True
                     'boundColumn.HeaderStyle.Width = "180"
-                Case "JOB", "NAME", "COMPANY", "JOBNAME", "PROJECTNAME", "EMPLOYEE", "CONCEPT", "CLIENTNAME"
-                    boundColumn.HeaderStyle.Width = "280"
+                    Case "JOB", "NAME", "COMPANY", "JOBNAME", "PROJECTNAME", "EMPLOYEE", "CONCEPT", "CLIENTNAME"
+                        boundColumn.HeaderStyle.Width = "280"
 
-                Case "MULTIPLIER"
-                    boundColumn.DataFormatString = "{0:N6}"
-            End Select
+                    Case "MULTIPLIER"
+                        boundColumn.DataFormatString = "{0:N6}"
+                End Select
 
-            ' Ajustar el ancho del filtro
-            'If boundColumn.AllowFiltering Then
-            '    Select Case UCase(boundColumn.DataField)
-            '        Case "STATUS"
-            '            boundColumn.FilterControlWidth = "100"
-            '        Case "JOBNAME", "PROJECTNAME", "EMPLOYEE", "NAME", "CONCEPT", "CLIENTNAME"
-            '            boundColumn.FilterControlWidth = "200"
-            '    End Select
-            'End If
+                ' Ajustar el ancho del filtro
+                'If boundColumn.AllowFiltering Then
+                '    Select Case UCase(boundColumn.DataField)
+                '        Case "STATUS"
+                '            boundColumn.FilterControlWidth = "100"
+                '        Case "JOBNAME", "PROJECTNAME", "EMPLOYEE", "NAME", "CONCEPT", "CLIENTNAME"
+                '            boundColumn.FilterControlWidth = "200"
+                '    End Select
+                'End If
 
 
+            End If
 
         Catch ex As Exception
         End Try

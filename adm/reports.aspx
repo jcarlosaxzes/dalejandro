@@ -30,7 +30,7 @@
     </telerik:RadAjaxManager>
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
-    <div class="pasconcept-bar noprint">
+    <div class="pasconcept-bar noprint" style="margin: 0px;">
         <span class="pasconcept-pagetitle">Reports</span>
         <table style="float: right; vertical-align: middle;">
             <tr>
@@ -122,12 +122,13 @@
 
     </div>
 
-    <div>
+    <div class="container" style="padding:0px;">
         <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" DataSourceID="SqlDataSource1" RenderMode="Lightweight"
             AllowPaging="True" PageSize="250" Height="850px" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True"></Scrolling>
             </ClientSettings>
+
             <MasterTableView DataSourceID="SqlDataSource1" ShowFooter="True" CssClass="table-sm">
                 <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
             </MasterTableView>

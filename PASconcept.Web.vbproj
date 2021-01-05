@@ -763,6 +763,7 @@
     <Content Include="adm\subconsultants.aspx" />
     <Content Include="adm\subscribe\pro.aspx" />
     <Content Include="adm\subscribe\subscribesuccess.aspx" />
+    <Content Include="adm\subscribe\subscriptionexpired.aspx" />
     <Content Include="adm\tagcloud.aspx" />
     <Content Include="adm\tandctemplates.aspx" />
     <Content Include="adm\tandctemplate_form.aspx" />
@@ -4224,6 +4225,13 @@
     <Compile Include="adm\subscribe\subscribesuccess.aspx.vb">
       <DependentUpon>subscribesuccess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\subscribe\subscriptionexpired.aspx.designer.vb">
+      <DependentUpon>subscriptionexpired.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\subscribe\subscriptionexpired.aspx.vb">
+      <DependentUpon>subscriptionexpired.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\tagcloud.aspx.designer.vb">
       <DependentUpon>tagcloud.aspx</DependentUpon>
