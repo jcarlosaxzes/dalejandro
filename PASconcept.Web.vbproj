@@ -656,6 +656,7 @@
     <Content Include="adm\department_form.aspx" />
     <Content Include="adm\discipline.aspx" />
     <Content Include="adm\employee.aspx" />
+    <Content Include="adm\employeehourlywage.aspx" />
     <Content Include="adm\employeenewdowntime.aspx" />
     <Content Include="adm\employeenewtime.aspx" />
     <Content Include="adm\employeereport.aspx" />
@@ -3468,6 +3469,13 @@
       <DependentUpon>employee.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\employeehourlywage.aspx.designer.vb">
+      <DependentUpon>employeehourlywage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employeehourlywage.aspx.vb">
+      <DependentUpon>employeehourlywage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\employeenewdowntime.aspx.designer.vb">
       <DependentUpon>employeenewdowntime.aspx</DependentUpon>
     </Compile>
@@ -5083,7 +5091,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

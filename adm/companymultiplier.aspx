@@ -21,17 +21,10 @@
 
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Company Multiplier</span>
-
-        <span style="float: right; vertical-align: middle;">
-            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
-                <i class="fas fa-filter"></i>&nbsp;Filter
-            </button>
-        </span>
     </div>
 
 
-    <div class="collapse" id="collapseFilter">
-
+    <div>
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
@@ -276,7 +269,7 @@
 
                     </div>
                 </telerik:RadWizardStep>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Employee Hourly Wage" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepEmployeeHourlyWage" Title="Employee Hourly Wage" StepType="Step">
 
                     <table class="table-sm" style="width: 100%">
                         <tr>
@@ -313,15 +306,16 @@
                                                 <telerik:GridTemplateColumn DataField="employeeId" FilterControlAltText="Filter Employee column"
                                                     HeaderText="Employee" SortExpression="Employee" UniqueName="employeeId" HeaderStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                                     <ItemTemplate>
-
-                                                        <asp:LinkButton ID="btnEdit"
+                                                        <asp:LinkButton ID="LinkButton1"
                                                             runat="server" ToolTip="Click to View/Edit Employee Hourly Wage"
                                                             CommandArgument='<%# Eval("employeeId") %>'
                                                             CommandName="EditHourlyWage"
-                                                            Text='<%# Eval("Employee")%>' UseSubmitBehavior="false"
-                                                            ForeColor='<%#IIf(Eval("Inactive"), System.Drawing.Color.LightGray, System.Drawing.Color.DarkBlue) %>'>
-                                                                <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear", "{0:N1}") %></span>
+                                                            UseSubmitBehavior="false">
+                                                                <i class="fas fa-user-edit"></i>&nbsp;
                                                         </asp:LinkButton>
+                                                        <%# Eval("Employee")%>
+                                                        <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear", "{0:N1}") %></span>
+                                                        
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn DataField="Department" FilterControlAltText="Filter Department column" HeaderText="Department" HeaderStyle-HorizontalAlign="Center"
@@ -413,19 +407,18 @@
                                     <telerik:GridTemplateColumn DataField="employeeId" FilterControlAltText="Filter Employee column"
                                         HeaderText="Employee" SortExpression="Employee" UniqueName="employeeId" HeaderStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                         <ItemTemplate>
-
-                                            <asp:LinkButton ID="btnEdit"
-                                                runat="server" ToolTip="Click to View/Edit Employee Hourly Wage"
-                                                CommandArgument='<%# Eval("employeeId") %>'
-                                                CommandName="EditHourlyWage"
-                                                Text='<%# Eval("Employee")%>' UseSubmitBehavior="false">
-                                            </asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkButton1"
+                                                            runat="server" ToolTip="Click to View/Edit Employee Hourly Wage"
+                                                            CommandArgument='<%# Eval("employeeId") %>'
+                                                            CommandName="EditHourlyWage"
+                                                            UseSubmitBehavior="false">
+                                                                <i class="fas fa-user-edit"></i>&nbsp;
+                                                        </asp:LinkButton>
+                                                        
+                                                        <%# Eval("Employee")%>
+                                            <%# Eval("Employee")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
-
-
-
-
                                     <telerik:GridBoundColumn DataField="Month" HeaderText="Month" SortExpression="Month" UniqueName="Month"
                                         ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
