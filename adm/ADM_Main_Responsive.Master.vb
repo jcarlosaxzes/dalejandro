@@ -69,7 +69,7 @@ Public Class ADM_Main_Responsive
         If billingExpirationDate <= Date.Today And BlockSubcriptionExpired Then
             If LocalAPI.GetCompanyBillingAmount(companyId) > 0 Then
                 ' Payment subscriptor Page
-                Response.Redirect("~/adm/subscribe/pro.aspx")
+                Response.Redirect("~/adm/subscribe/subscriptionexpired.aspx")
             Else
                 ' If Free Plan (Amount=0), extend 'Expiracion Date'
                 LocalAPI.CompanyExpirationDateUpdate(companyId, DateAdd(DateInterval.Year, 1, Date.Today))
