@@ -125,7 +125,7 @@
 
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
-                                HeaderStyle-Width="90px" ItemStyle-HorizontalAlign="Center">
+                                HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
                                     <table style="text-align: center; width: 100%">
                                         <tr>
@@ -133,6 +133,14 @@
                                                 <asp:LinkButton ID="btnSentEmail" runat="server" CommandName="SendEmail" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
                                                     ToolTip="Send Email with Subscription Expired">
                                                     <i class="far fa-envelope"></i>
+                                                </asp:LinkButton>
+                                            </td>
+                                            <td style="width: 30px">
+                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandName="BillingHistory" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
+                                                    ToolTip="View/Create Invoices">
+
+                                                    <i class="fas fa-file-invoice-dollar"></i>
+                                                                    
                                                 </asp:LinkButton>
                                             </td>
                                             <td style="width: 30px">

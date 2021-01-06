@@ -404,7 +404,7 @@
                         </telerik:RadCodeBlock>
                         <telerik:RadGrid ID="RadGridMonthlySalaryCalculation" runat="server" DataSourceID="SqlDataSourceMonthlySalaryCalculation"
                             AutoGenerateColumns="False" AllowSorting="True" ShowFooter="true"
-                            HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" FooterStyle-Font-Size="X-Small" HeaderStyle-Font-Size="X-Small" FooterStyle-HorizontalAlign="Center">
+                            HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Center">
                             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceMonthlySalaryCalculation" CommandItemDisplay="Top">
                                 <CommandItemSettings ShowAddNewRecordButton="false" />
                                 <Columns>
