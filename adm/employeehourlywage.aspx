@@ -96,15 +96,15 @@
                             SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="2" MinValue="0" MaxValue="40">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="Benefits_vacations" FilterControlAltText="Filter Benefits_vacations column" HeaderText="Vacations(hours)" HeaderStyle-HorizontalAlign="Center"
+                        <telerik:GridNumericColumn DataField="Benefits_vacations" HeaderText="Vacations (hours)" HeaderStyle-HorizontalAlign="Center"
                             SortExpression="Benefits_vacations" UniqueName="Benefits_vacations" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="0" MinValue="0" MaxValue="80">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="Benefits_personals" HeaderText="Personals(hours)" HeaderStyle-HorizontalAlign="Center"
+                        <telerik:GridNumericColumn DataField="Benefits_personals" HeaderText="Personals (hours)" HeaderStyle-HorizontalAlign="Center"
                             SortExpression="Benefits_personals" UniqueName="Benefits_personals" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="0" MinValue="0" MaxValue="32">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="Producer" HeaderText="P.Rate" HeaderStyle-HorizontalAlign="Center"
+                        <telerik:GridNumericColumn DataField="Producer" HeaderText="Producer Rate" HeaderStyle-HorizontalAlign="Center"
                             SortExpression="Producer" UniqueName="Producer" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Producer Rate 0 to 1"
                             DecimalDigits="2" MinValue="0" MaxValue="1">
                         </telerik:GridNumericColumn>
@@ -127,7 +127,7 @@
     <telerik:RadToolTip ID="RadToolTipReview" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <table class="table-sm" style="width: 800px">
             <tr>
-                <td style="text-align: center">
+                <td style="text-align: center" colspan="2">
                     <h3 style="margin: 0; text-align: center; color: white;">
                         <span class="navbar navbar-expand-md bg-dark text-white">Review Salary
                         </span>
