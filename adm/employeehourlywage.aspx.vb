@@ -19,7 +19,7 @@
         Response.Redirect($"~/adm/companymultiplier.aspx?year={lblYear.Text}&departmentId={lblDepartmentId.Text}")
     End Sub
 
-    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
+    Private Sub btnReviewSalary_Click(sender As Object, e As EventArgs) Handles btnReviewSalary.Click
         ' Read Last Record
         lblHourlyWageHistoryId.Text = LocalAPI.GetHourlyWageHistoryLastRecord(lblEmployeeId.Text, lblYear.Text)
         Dim HourlyWageObject = LocalAPI.GetRecord(lblHourlyWageHistoryId.Text, "Employee_HourlyWageHistory_SELECT")
@@ -35,28 +35,28 @@
         RadToolTipReview.Show()
     End Sub
 
-    Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
+    Private Sub btnReviewSalaryConfirmed_Click(sender As Object, e As EventArgs) Handles btnReviewSalaryConfirmed.Click
         Try
-            SqlDataSource1.Insert()
+            SqlDataSourceHourlyWage.Insert()
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
 
     End Sub
 
-    Private Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
+    Private Sub SqlDataSourceHourlyWage_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceHourlyWage.Inserted
         RadHtmlChart1.DataBind()
-        RadGrid1.DataBind()
+        RadGridHourlyWage.DataBind()
         Master.InfoMessage("The record were inserted successfully!")
     End Sub
 
-    Private Sub SqlDataSource1_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Deleted
+    Private Sub SqlDataSourceHourlyWage_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceHourlyWage.Deleted
         RadHtmlChart1.DataBind()
-        RadGrid1.DataBind()
+        RadGridHourlyWage.DataBind()
     End Sub
 
-    Private Sub SqlDataSource1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Updated
+    Private Sub SqlDataSourceHourlyWage_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceHourlyWage.Updated
         RadHtmlChart1.DataBind()
-        RadGrid1.DataBind()
+        RadGridHourlyWage.DataBind()
     End Sub
 End Class
