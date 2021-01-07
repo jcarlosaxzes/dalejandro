@@ -136,12 +136,12 @@
                                                 </asp:LinkButton>
                                             </td>
                                             <td style="width: 30px">
-                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandName="BillingHistory" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
+                                                <asp:HyperLink ID="LinkButton1" runat="server" Target="_blank" NavigateUrl='<%# "~/master/companySubscriptionInvoices?companyId=" + Eval("companyId").ToString() %>' UseSubmitBehavior="false"
                                                     ToolTip="View/Create Invoices">
 
                                                     <i class="fas fa-file-invoice-dollar"></i>
                                                                     
-                                                </asp:LinkButton>
+                                                </asp:HyperLink>
                                             </td>
                                             <td style="width: 30px">
                                                 <asp:LinkButton ID="btnBlockCompany" runat="server" CommandName="BlockCompany" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
