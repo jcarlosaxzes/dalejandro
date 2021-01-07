@@ -87,7 +87,6 @@ Public Class companymultiplier
     Private Sub RadGridHourlyWage_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridHourlyWage.ItemCommand
         Select Case e.CommandName
             Case "EditHourlyWage"
-                '!!! CreateRadWindows(e.CommandName, "~/ADM/Employee_HourlyWageHistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose")
                 Dim guid As String = LocalAPI.GetEmployeeProperty(e.CommandArgument, "guid")
                 Response.Redirect($"~/adm/employeehourlywage.aspx?guid={guid}&year={cboYear.SelectedValue}&departmentId={cboDepartments.SelectedValue}")
         End Select
@@ -112,7 +111,6 @@ Public Class companymultiplier
     Private Sub RadGridMonthlySalaryCalculation_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridMonthlySalaryCalculation.ItemCommand
         Select Case e.CommandName
             Case "EditHourlyWage"
-                '!!!CreateRadWindows(e.CommandName, "~/ADM/employee_hourlywagehistory.aspx?employeeId=" & e.CommandArgument & "&year=" & cboYear.SelectedValue, 850, 700, "OnClientClose1")
                 Dim guid As String = LocalAPI.GetEmployeeProperty(e.CommandArgument, "guid")
                 Response.Redirect($"~/adm/employeehourlywage.aspx?guid={guid}&year={cboYear.SelectedValue}&departmentId={cboDepartments.SelectedValue}")
         End Select

@@ -13,13 +13,13 @@
             Employee Hourly Wage
         </span>
         <span style="float: right; vertical-align: middle;">
-            <asp:LinkButton ID="btnNew" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
+            <asp:LinkButton ID="btnReviewSalary" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false">
                    Review Salary
             </asp:LinkButton>
         </span>
     </div>
 
-    <div>
+    <div class="pasconcept-bar">
         <table class="table-sm" style="width: 100%">
             <tr>
                 <td style="text-align: center">
@@ -43,7 +43,7 @@
                                     <LineAppearance LineStyle="Smooth" Width="2" />
                                     <MarkersAppearance MarkersType="Circle" BackgroundColor="White"></MarkersAppearance>
                                     <LabelsAppearance Color="Red" Position="Above">
-                                        <TextStyle FontSize="10" />
+                                        <TextStyle FontSize="12" />
                                     </LabelsAppearance>
 
                                 </telerik:LineSeries>
@@ -73,10 +73,10 @@
             </tr>
         </table>
         <div>
-            <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceHourlyWageDetail" AllowAutomaticDeletes="true" AllowAutomaticUpdates="true"
+            <telerik:RadGrid ID="RadGridHourlyWage" runat="server" DataSourceID="SqlDataSourceHourlyWage" AllowAutomaticDeletes="true" AllowAutomaticUpdates="true"
                 AutoGenerateColumns="False" AllowSorting="True" ShowFooter="true"
                 HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
-                <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWageDetail" CommandItemDisplay="Top">
+                <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWage" CommandItemDisplay="Top">
                     <CommandItemSettings ShowAddNewRecordButton="false" />
                     <Columns>
                         <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" ItemStyle-HorizontalAlign="Center"
@@ -122,7 +122,6 @@
             </telerik:RadGrid>
         </div>
     </div>
-
 
     <telerik:RadToolTip ID="RadToolTipReview" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <table class="table-sm" style="width: 800px">
@@ -204,25 +203,38 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center">
-                    <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" Text="Insert" ToolTip="Insert New Record" ValidationGroup="Insert">
+                    <asp:LinkButton ID="btnReviewSalaryConfirmed" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" Text="Insert" ToolTip="Insert New Record" ValidationGroup="Insert">
                     </asp:LinkButton>
                 </td>
             </tr>
         </table>
 
 
-        </table>
+        
     </telerik:RadToolTip>
 
-
-
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server"
-        ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Employee_HourlyWageHistory_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="Employee_HourlyWageHistoryExt_INSERT" InsertCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="SqlDataSourceHourlyWage" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        DeleteCommand="Employee_HourlyWageHistory_v21_DELETE" DeleteCommandType="StoredProcedure"
+        SelectCommand="Employee_HourlyWageHistory_v21_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="Employee_HourlyWageHistory_v21_UPDATE" UpdateCommandType="StoredProcedure"
+        InsertCommand="Employee_HourlyWageHistory_v21_INSERT" InsertCommandType="StoredProcedure">
+        <DeleteParameters>
+            <asp:Parameter Name="Id" />
+        </DeleteParameters>
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblHourlyWageHistoryId" Name="Id" PropertyName="Text" />
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
         </SelectParameters>
+        <UpdateParameters>
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+            <asp:Parameter Name="Date" />
+            <asp:Parameter Name="DateEnd" />
+            <asp:Parameter Name="Amount" />
+            <asp:Parameter Name="HourPerWeek" />
+            <asp:Parameter Name="Producer" />
+            <asp:Parameter Name="Benefits_vacations" />
+            <asp:Parameter Name="Benefits_personals" />
+            <asp:Parameter Name="Id" />
+        </UpdateParameters>
         <InsertParameters>
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="Date" PropertyName="SelectedDate" Type="DateTime" />
@@ -235,46 +247,18 @@
         </InsertParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceHourlyWageDetail" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="DELETE FROM [Employee_HourlyWageHistory] WHERE Id = @Id"
-        SelectCommand="Employee_HourlyWageHistoryDetailsExt_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="Employee_HourlyWageHistory_UPDATE" UpdateCommandType="StoredProcedure">
-        <DeleteParameters>
-            <asp:Parameter Name="Id" />
-        </DeleteParameters>
-        <SelectParameters>
-            <asp:Parameter Name="Year" DefaultValue="0" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
-            <asp:Parameter Name="orderasc" DefaultValue="0" />
-        </SelectParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Date" />
-            <asp:Parameter Name="DateEnd" />
-            <asp:Parameter Name="Amount" />
-            <asp:Parameter Name="HourPerWeek" />
-            <asp:Parameter Name="Producer" />
-            <asp:Parameter Name="Benefits_vacations" />
-            <asp:Parameter Name="Benefits_personals" />
-            <asp:Parameter Name="Id" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
-
     <asp:SqlDataSource ID="SqlDataSourceChart" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Employee_HourlyWageHistoryDetailsExt_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="Employee_HourlyWageHistoryChart_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:Parameter Name="Year" DefaultValue="0" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
-            <asp:Parameter Name="orderasc" DefaultValue="1" />
-
         </SelectParameters>
     </asp:SqlDataSource>
 
-    <asp:Label ID="lblHourlyWageHistoryId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblMonthUpdated" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblDepartmentId" runat="server" Visible="False"></asp:Label>
-
+    <asp:Label ID="lblHourlyWageHistoryId" runat="server" Visible="False"></asp:Label>
 
 </asp:Content>
