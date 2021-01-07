@@ -2425,6 +2425,7 @@
     <Content Include="master\companylist.aspx" />
     <Content Include="master\companypendingbills.aspx" />
     <Content Include="master\companySubscription.aspx" />
+    <Content Include="master\companySubscriptionInvoices.aspx" />
     <Content Include="master\companytypes.aspx" />
     <Content Include="master\CreateCompany.aspx" />
     <Content Include="master\CreateJobFromProposal.aspx" />
@@ -4718,6 +4719,13 @@
     </Compile>
     <Compile Include="master\companySubscription.aspx.vb">
       <DependentUpon>companySubscription.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="master\companySubscriptionInvoices.aspx.designer.vb">
+      <DependentUpon>companySubscriptionInvoices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="master\companySubscriptionInvoices.aspx.vb">
+      <DependentUpon>companySubscriptionInvoices.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="master\companytypes.aspx.designer.vb">
