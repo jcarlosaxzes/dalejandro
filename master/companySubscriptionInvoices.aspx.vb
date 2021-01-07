@@ -48,7 +48,7 @@ Public Class companySubscriptionInvoices
         If cboBillingPeriod.SelectedValue = 1 Then
             Dim dueDate As DateTime = dpFrom.DbSelectedDate
             While dueDate < dpTo.DbSelectedDate
-                LocalAPI.Invoice_INSERT(lblJobId.Text, DateTime.Now, txtperiodAmount.Text, $"{txtInvoiceNotes.Text} {dueDate.ToString("MMMM")}-{dueDate.Year}", dueDate)
+                LocalAPI.Invoice_INSERT(lblJobId.Text, DateTime.Now, txtperiodAmount.Text, $"{txtInvoiceNotes.Text} Q{DatePart("q", dueDate)}-{dueDate.Year}", dueDate)
                 dueDate = dueDate.AddMonths(3)
             End While
         End If
@@ -61,6 +61,7 @@ Public Class companySubscriptionInvoices
             End While
         End If
 
+        RadGridInvoices.DataBind()
 
     End Sub
 
