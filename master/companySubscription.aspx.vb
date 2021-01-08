@@ -71,6 +71,7 @@ Public Class companySubscription
     Private Sub btnSendEmail_Click(sender As Object, e As EventArgs) Handles btnSendEmail.Click
         SendGrid.Email.SendMail(txtTo.Text, "", "", txtSubject.Text, txtEmail.Content, lblSelectedCompanyId.Text, 0, 0)
         LocalAPI.ExecuteNonQuery($"update company set SendRenewSubscription = isnull(SendRenewSubscription,0)+1 where companyId = {lblSelectedCompanyId.Text}")
+        RadGrid1.DataBind()
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click

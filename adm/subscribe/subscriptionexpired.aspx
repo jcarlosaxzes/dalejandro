@@ -51,7 +51,8 @@
 
                                     <form>
                                         <div class="form-group" style="margin-top: 1em">
-                                            <p><H3>Your Subscription has Expired. Please contact Us to Renew your Subscription </p>  <a href="mailto:info@pasconcept.com">info@pasconcept.com</a></H3>                                  
+                                            <p><H3>To access PASconcept your company must renew its subscription. 
+                                                Please contact us to renew your subscription </p>  <a href="mailto:info@pasconcept.com">info@pasconcept.com</a></H3>                                  
                                         </div>                                       
                                     </form>
                                 </div>
