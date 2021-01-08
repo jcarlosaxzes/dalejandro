@@ -104,12 +104,19 @@
                                     <table style="width: 100%">
                                         <tr>
                                             <td>
-                                                <span title='<%# Eval("Email") %> , <%# Eval("Phone") %>'><%# Eval("Contact") %></span>
+                                                <span title='<%# Eval("Email") %> , <%# Eval("Phone") %>'> <%# Eval("Contact") %></span>
                                             </td>
                                         </tr>
                                     </table>
                                 </ItemTemplate>
 
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn HeaderText="Job" UniqueName="AxzesJobCode" SortExpression="AxzesJobCode"
+                                ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="PequenaNegrita" Target="_blank" NavigateUrl='<%# Eval("guid", "~/adm/job_accounting?guid={0}&backpage=jobs") %>'
+                                        Text='<%# Eval("AxzesJobId") %>'></asp:HyperLink>
+                                </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="SendRenewSubscription"
                                 HeaderText="Count Email Send" UniqueName="Contact" HeaderStyle-HorizontalAlign="Center" SortExpression="Contact">
@@ -136,12 +143,12 @@
                                                 </asp:LinkButton>
                                             </td>
                                             <td style="width: 30px">
-                                                <asp:LinkButton ID="LinkButton1" runat="server" CommandName="BillingHistory" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"
+                                                <asp:HyperLink ID="LinkButton1" runat="server" Target="_blank" NavigateUrl='<%# "~/master/companySubscriptionInvoices?companyId=" + Eval("companyId").ToString() %>' UseSubmitBehavior="false"
                                                     ToolTip="View/Create Invoices">
 
                                                     <i class="fas fa-file-invoice-dollar"></i>
                                                                     
-                                                </asp:LinkButton>
+                                                </asp:HyperLink>
                                             </td>
                                             <td style="width: 30px">
                                                 <asp:LinkButton ID="btnBlockCompany" runat="server" CommandName="BlockCompany" CommandArgument='<%# Eval("companyId") %>' UseSubmitBehavior="false"

@@ -1628,7 +1628,8 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function CompanyExpirationDateUpdate(ByVal companyId As Integer, NewExpirationDate As DateTime) As Boolean
-        Return ExecuteNonQuery(String.Format("UPDATE [Company] SET [billingExpirationDate]={0} WHERE [companyId]={1}", GetFecha_102(NewExpirationDate), companyId))
+
+        Return ExecuteNonQuery(String.Format("UPDATE [Company] SET [billingExpirationDate]={0} ,AlertMasterSubscriptionExpired = 0, SendRenewSubscription = 0 WHERE [companyId]={1}", GetFecha_102(NewExpirationDate), companyId))
     End Function
 
     Public Shared Function GetCompanyHRemail(ByVal companyId As Long) As String
