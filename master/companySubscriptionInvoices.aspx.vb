@@ -61,6 +61,8 @@ Public Class companySubscriptionInvoices
             End While
         End If
 
+        LocalAPI.CompanyExpirationDateUpdate(lblCompanyId.Text, dpTo.SelectedDate)
+
         RadGridInvoices.DataBind()
 
     End Sub
