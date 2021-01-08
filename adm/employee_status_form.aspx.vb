@@ -77,8 +77,8 @@
             lblCurrentAnualPSalary.ForeColor = System.Drawing.Color.Gray
 
             '4- Recalculate Multiplier
-
             LocalAPI.CompanyCalculateMultiplier(lblCompanyId.Text, Year(Today))
+
             Dim dbMultiplier As Double = LocalAPI.GetCompanyMultiplier(lblCompanyId.Text, Year(Today))
             LocalAPI.DeparmentBudgetByBaseSalaryForMultiplierFromThisMonth(lblCompanyId.Text, dbMultiplier, Year(Today), Month(Today))
             lblNewMultiplier.Text = "New Multiplier: " & FormatNumber(dbMultiplier, 2)
