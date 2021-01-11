@@ -11,70 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class companymultiplier
+Partial Public Class multiplierwizard
 
     '''<summary>
-    '''RadWindowManager1 control.
+    '''btnBack control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
-
-    '''<summary>
-    '''btnNewMultiplier control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNewMultiplier As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''pnlFind control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''cboYear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboYear As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''cboDepartments control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''cboEmployees control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboEmployees As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''btnFind control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''RadWizard1 control.
@@ -86,6 +32,159 @@ Partial Public Class companymultiplier
     Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
 
     '''<summary>
+    '''RadWizardStepYearInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepYearInfo As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''ValidationSummary1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ValidationSummary1 As Global.System.Web.UI.WebControls.ValidationSummary
+
+    '''<summary>
+    '''txtYear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtYear As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''txtSalary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSalary As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''txtTaxPercent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTaxPercent As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''cboAutoSalary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboAutoSalary As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''txtProductiveSalary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtProductiveSalary As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''cboAutoProductiveSalary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboAutoProductiveSalary As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''txtSubContracts control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSubContracts As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''txtRent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtRent As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''txtOthers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtOthers As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''txtProfit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtProfit As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''RequiredFieldValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''RadWizardStepConfirmation control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStepConfirmation As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''cboInitializeEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboInitializeEmployee As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''cboCalculateBudgetDepartment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboCalculateBudgetDepartment As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''cboStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
     '''RadWizardStep1 control.
     '''</summary>
     '''<remarks>
@@ -95,211 +194,49 @@ Partial Public Class companymultiplier
     Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
-    '''RadGridMultiplier control.
+    '''lblPreviousMultiplier control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGridMultiplier As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents lblPreviousMultiplier As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''RadHtmlChart1 control.
+    '''lblFinalMultiplier control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
+    Protected WithEvents lblFinalMultiplier As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''RadWizardStepEmployeeHourlyWage control.
+    '''RadGridMultiplier_log control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStepEmployeeHourlyWage As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadGridMultiplier_log As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''btnInitialize control.
+    '''SqlDataSourceMultiplier_log control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnInitialize As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents SqlDataSourceMultiplier_log As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''RadCodeBlock1 control.
+    '''lblEmployeeId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
-
-    '''<summary>
-    '''RadGridHourlyWage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridHourlyWage As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''RadWizardStep3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
-
-    '''<summary>
-    '''cboMonthSalary control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboMonthSalary As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''RadCodeBlock2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCodeBlock2 As Global.Telerik.Web.UI.RadCodeBlock
-
-    '''<summary>
-    '''RadGridMonthlySalaryCalculation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridMonthlySalaryCalculation As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''RadWizardStep4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStep4 As Global.Telerik.Web.UI.RadWizardStep
-
-    '''<summary>
-    '''RadGridDptoTarget control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridDptoTarget As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''RadToolTipInitialize control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadToolTipInitialize As Global.Telerik.Web.UI.RadToolTip
-
-    '''<summary>
-    '''txtInitializeYear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtInitializeYear As Global.Telerik.Web.UI.RadNumericTextBox
-
-    '''<summary>
-    '''btnInitializeOk control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnInitializeOk As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''SqlDataSourceMultiplier control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceMultiplier As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceHourlyWageGroup control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceHourlyWageGroup As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceDepartments control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceEmployees control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceEmployees As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceYears control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceYears As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceMonthlySalaryCalculation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceMonthlySalaryCalculation As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceDptoTarget control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceDptoTarget As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceInit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceInit As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblCompanyId control.
@@ -309,6 +246,15 @@ Partial Public Class companymultiplier
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblMultiplierId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMultiplierId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

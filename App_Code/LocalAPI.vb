@@ -1441,7 +1441,7 @@ Public Class LocalAPI
         Return IIf(GetNumericEscalar(String.Format("select count(*) from [{0}] where Id={1} and [companyId]={2}", Entity, entityId, companyId)) = 0, True, False)
     End Function
     Public Shared Function GetCompanyMultiplier(ByVal companyId As Integer, Year As Integer) As Double
-        Dim Multiplier As Double = GetNumericEscalar("SELECT ISNULL([Multiplier],0) FROM [Company_MultiplierByYear] WHERE [companyId]=" & companyId & " and [Year]=" & Year)
+        Dim Multiplier As Double = GetNumericEscalar($"SELECT ISNULL([Multiplier],0) FROM [Company_MultiplierByYear] WHERE [companyId]={companyId} and [Year]={Year}")
         Return IIf(Multiplier < 1, 1, Multiplier)
     End Function
 
@@ -1573,25 +1573,127 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
-
-    Public Shared Function CompanyCalculateMultiplier(ByVal companyId As Integer, Year As Integer) As Boolean
+    Public Shared Function CompanyMultiplier_INSERT(companyId As Integer, Year As Integer, Salary As Double, TaxPercent As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
         Try
+
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
-            cmd.CommandText = "CompanyCalculateMultiplier_UPDATE"
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CompanyMultiplierRecord_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
-            cmd.Parameters.AddWithValue("@year", Year)
+
+            ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@Year", Year)
+            cmd.Parameters.AddWithValue("@Salary", Salary)
+            cmd.Parameters.AddWithValue("@TaxPercent", TaxPercent)
+            cmd.Parameters.AddWithValue("@SubContracts", SubContracts)
+            cmd.Parameters.AddWithValue("@Rent", Rent)
+            cmd.Parameters.AddWithValue("@Others", Others)
+            cmd.Parameters.AddWithValue("@ProductiveSalary", ProductiveSalary)
+            cmd.Parameters.AddWithValue("@Profit", Profit)
+            cmd.Parameters.AddWithValue("@CalculateSalary", CalculateSalary)
+            cmd.Parameters.AddWithValue("@CalculateProductiveSalary", CalculateProductiveSalary)
+            cmd.Parameters.AddWithValue("@InitializeEmployee", InitializeEmployee)
+            cmd.Parameters.AddWithValue("@CalculateBudgetDepartment", CalculateBudgetDepartment)
+            cmd.Parameters.AddWithValue("@Closed", Closed)
 
             cmd.ExecuteNonQuery()
-
             cnn1.Close()
+
             Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+    Public Shared Function CompanyMultiplier_UPDATE(Id As Integer, Salary As Double, TaxPercent As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CompanyMultiplierRecord_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Salary", Salary)
+            cmd.Parameters.AddWithValue("@TaxPercent", TaxPercent)
+            cmd.Parameters.AddWithValue("@SubContracts", SubContracts)
+            cmd.Parameters.AddWithValue("@Rent", Rent)
+            cmd.Parameters.AddWithValue("@Others", Others)
+            cmd.Parameters.AddWithValue("@ProductiveSalary", ProductiveSalary)
+            cmd.Parameters.AddWithValue("@Profit", Profit)
+            cmd.Parameters.AddWithValue("@CalculateSalary", CalculateSalary)
+            cmd.Parameters.AddWithValue("@CalculateProductiveSalary", CalculateProductiveSalary)
+            cmd.Parameters.AddWithValue("@InitializeEmployee", InitializeEmployee)
+            cmd.Parameters.AddWithValue("@CalculateBudgetDepartment", CalculateBudgetDepartment)
+            cmd.Parameters.AddWithValue("@Closed", Closed)
+            cmd.Parameters.AddWithValue("@Id", Id)
+
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+
+            Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Function CompanyCalculateMultiplier(ByVal companyId As Integer, YearValue As Integer) As Double
+        Try
+            Dim MultiplierId As Integer = GetNumericEscalar($"select top 1 Id from Company_MultiplierByYear WHERE companyId={companyId} and [Year]={YearValue}")
+            Dim RecordObject = LocalAPI.GetRecord(MultiplierId, "CompanyMultiplierRecord_SELECT")
+
+            ' If Closed?
+            If RecordObject("Closed") = 0 Then
+                If RecordObject("InitializeEmployee") = 1 Then
+                    ' Before Calculate
+                    EmployeesHourlyWage_INSERT(YearValue, companyId)
+
+                    ' Calculate....................................................................
+                    Dim cnn1 As SqlConnection = GetConnection()
+                    Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+                    cmd.CommandText = "CompanyCalculateMultiplier_CALCULATE"
+                    cmd.CommandType = CommandType.StoredProcedure
+                    cmd.Parameters.AddWithValue("@year", YearValue)
+                    cmd.Parameters.AddWithValue("@companyId", companyId)
+
+                    cmd.ExecuteNonQuery()
+
+                    cnn1.Close()
+
+                    ' After Calculate
+                    If RecordObject("CalculateBudgetDepartment") = 1 Then
+                        DeparmentBudgetByBaseSalaryForMultiplierFromThisMonth(companyId, RecordObject("Multiplier"), YearValue, IIf(YearValue = Year(Today), Month(Today), 1))
+                    End If
+                End If
+            End If
+
+            Return GetCompanyMultiplier(companyId, YearValue)
+
         Catch ex As Exception
 
         End Try
     End Function
+
+    Public Shared Function GetMaxYearOfCompanyMultiplier(ByVal companyId As Integer) As Integer
+        Dim MaxYear As Integer = GetNumericEscalar($"SELECT max([Year]) FROM [Company_MultiplierByYear] WHERE [companyId]={companyId}")
+        If MaxYear > 0 Then
+            Return MaxYear
+        Else
+            Return GetCompanyProperty(companyId, "StartYear")
+        End If
+    End Function
+
+
+
 
     Public Shared Function EmployeesUpdateHourlyRate(ByVal companyId As Integer, Multiplier As Double) As Boolean
         Try
@@ -8752,6 +8854,30 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function EmployeesHourlyWage_INSERT(year As Integer, companyId As Integer) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "PayrollInitialize_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@year", year)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
+
     Public Shared Function GetCompanyProductiveSalary(companyId As Integer, year As Integer) As Double
         Return GetNumericEscalar("select dbo.CompanyProductiveSalary(" & year & "," & companyId & ")")
     End Function
@@ -11299,15 +11425,15 @@ Public Class LocalAPI
 
             'If GetProposalProperty(proposalId, "StatusId") < 2 Then
 
-                '1.- Pasarlo a statusId=2 para que no vuelva por esta rama
-                'ProposalStatus2Accepted(proposalId)
+            '1.- Pasarlo a statusId=2 para que no vuelva por esta rama
+            'ProposalStatus2Accepted(proposalId)
 
-                '0.- Es un primer Proposal o es un Change Order (ya tiene JobId)
-                Dim dProposalTotal As Double = GetProposalTotal(proposalId)
+            '0.- Es un primer Proposal o es un Change Order (ya tiene JobId)
+            Dim dProposalTotal As Double = GetProposalTotal(proposalId)
 
-                jobId = GetProposalProperty(proposalId, "JobId")
-                Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
-                Dim bRetainer As Boolean
+            jobId = GetProposalProperty(proposalId, "JobId")
+            Dim statusId As Integer = GetProposalProperty(proposalId, "StatusId")
+            Dim bRetainer As Boolean
 
             If jobId <= 0 Then
                 '2.1 -  Crear job Asociado
@@ -11384,48 +11510,48 @@ Public Class LocalAPI
                 '2.1 -Proposal Change Order
                 ' Ya existe JobId, es un Aditional change.......................................................................................
                 If dProposalTotal <> 0 Then
-                        '2.2.- Incrementar el Jobs.Budget=+Proposal.Total)
-                        ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{dProposalTotal} WHERE Id={jobId}")
-                        NewJobNote(jobId, "$Log: job Budget modified (+" & dProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
+                    '2.2.- Incrementar el Jobs.Budget=+Proposal.Total)
+                    ExecuteNonQuery($"UPDATE [Jobs] SET Budget=Budget+{dProposalTotal} WHERE Id={jobId}")
+                    NewJobNote(jobId, "$Log: job Budget modified (+" & dProposalTotal & ") by the acceptance of the Proposal (Aditional Change): " & ProposalNumber(proposalId), 0)
 
-                        ''2.3 Simple Charge, and ..., se esta duplicando en 3. - Invoices from PaymentSchedule
-                        'NuevoInvoiceSimpleCharge(jobId, GetDateTime(), dProposalTotal, "Proposal (Additional Charge): " & ProposalNumber(proposalId))
+                    ''2.3 Simple Charge, and ..., se esta duplicando en 3. - Invoices from PaymentSchedule
+                    'NuevoInvoiceSimpleCharge(jobId, GetDateTime(), dProposalTotal, "Proposal (Additional Charge): " & ProposalNumber(proposalId))
 
-                        '2.4 Mandatory Retainer
-                        bRetainer = True
-                    End If
-
-                    '2.2 - Update parametros del Proposal
-                    ExecuteNonQuery("UPDATE [Proposal] SET AceptedDate=" & GetFecha_102(Today.Date) & ", [StatusId]=2 WHERE Id=" & proposalId.ToString)
+                    '2.4 Mandatory Retainer
+                    bRetainer = True
                 End If
 
-                '3. - Invoices from PaymentSchedule
-                If jobId > 0 And dProposalTotal > 0 Then CreateInvoicesFromPaymentSchedule(proposalId, jobId)
+                '2.2 - Update parametros del Proposal
+                ExecuteNonQuery("UPDATE [Proposal] SET AceptedDate=" & GetFecha_102(Today.Date) & ", [StatusId]=2 WHERE Id=" & proposalId.ToString)
+            End If
 
-                '4. -' Retainer..............
-                If jobId > 0 And bRetainer Then
-                    ' Se emite el Invoice por 100% al client
-                    Dim invoiceId As Integer = GetNumericEscalar($"select top 1 Id from Invoices where JobId={jobId} and [Emitted]=0 order by Number")
-                    If invoiceId > 0 Then
-                        InvoiceAutomatictToClient(invoiceId, companyId)
-                        NewJobNote(jobId, "Log: New Automatic Invoice for Reatiner by the acceptance of the Proposal : " & ProposalNumber(proposalId), 0)
-                    End If
+            '3. - Invoices from PaymentSchedule
+            If jobId > 0 And dProposalTotal > 0 Then CreateInvoicesFromPaymentSchedule(proposalId, jobId)
+
+            '4. -' Retainer..............
+            If jobId > 0 And bRetainer Then
+                ' Se emite el Invoice por 100% al client
+                Dim invoiceId As Integer = GetNumericEscalar($"select top 1 Id from Invoices where JobId={jobId} and [Emitted]=0 order by Number")
+                If invoiceId > 0 Then
+                    InvoiceAutomatictToClient(invoiceId, companyId)
+                    NewJobNote(jobId, "Log: New Automatic Invoice for Reatiner by the acceptance of the Proposal : " & ProposalNumber(proposalId), 0)
                 End If
+            End If
 
-                '5. - TAGuear al cliente en Agile
-                If companyId = 260962 Then
-                    Task.Run(Function() ProposalTAGAgile(proposalId, companyId, "Accepted"))
-                End If
+            '5. - TAGuear al cliente en Agile
+            If companyId = 260962 Then
+                Task.Run(Function() ProposalTAGAgile(proposalId, companyId, "Accepted"))
+            End If
 
-                '6. - Log................... End
-                LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.AceptProposal, companyId, proposalId)
+            '6. - Log................... End
+            LocalAPI.sys_log_Nuevo("", LocalAPI.sys_log_AccionENUM.AceptProposal, companyId, proposalId)
 
-                '7. Create Signed PDF
-                'Dim pdf As PdfApi = New PdfApi()
-                'Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
-                'Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
-                'pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
-                Return jobId
+            '7. Create Signed PDF
+            'Dim pdf As PdfApi = New PdfApi()
+            'Dim newName = "Companies/" & companyId & $"/{Guid.NewGuid().ToString()}.pdf"
+            'Task.Run(Function() pdf.CreateProposalSignedPdfAsync(proposalId, newName))
+            'pdfUrl = "https://pasconceptstorage.blob.core.windows.net/documents/" & newName
+            Return jobId
             'End If
 
         Catch ex As Exception

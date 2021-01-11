@@ -21,6 +21,11 @@
 
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Company Multiplier</span>
+        <span style="float: right; vertical-align: middle;">
+             <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
+                    Initialize Year
+            </asp:LinkButton>
+        </span>
     </div>
 
 
@@ -65,36 +70,17 @@
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="Company Multiplier" StepType="Step">
                     <div>
+                        <small>
+                            <b>Multiplier:</b>[Total Estimated Expenses] * [Desired Profit] / [Estimate Productive Salary] for each year
+                            <br />
+                            <b>Estimated Income:</b> [Total Estimated Expenses] + [$ Desired Profit]
+                            <br />
+                            <b>Actual Income:</b> [Collected invoices] of Year(Jobs Date)
+                        </small>
                         <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
-                                    <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-info" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
-                                        <i class="fas fa-plus"></i> Year
-                                    </asp:LinkButton>
-                                </td>
-                                <td>
-                                    <asp:LinkButton ID="btnCalculateMultiplier" runat="server" CssClass="btn btn-danger" UseSubmitBehavior="false" ToolTip="Calculate">
-                                        Calculate
-                                    </asp:LinkButton>
-                                </td>
-                                <td>
-                                    <small>
-                                        <b>Calculate:</b> Estimate Salary and Productive Salary from Employees Profile Information, Calculate Multiplier=[Total Estimated Expenses] * [Desired Profit] / [Estimate Productive Salary] for selected year
-                                        <br />
-                                        <b>Estimated Income:</b> [Total Estimated Expenses] + [$ Desired Profit]
-                                        <br />
-                                        <b>Actual Income:</b> [Collected invoices] of Year(Jobs Date)
-                                    </small>
-                                </td>
-
-                            </tr>
-                        </table>
-                        <table class="table-sm" style="width: 100%">
-                            <tr>
-                                <td>
-                                    <telerik:RadGrid ID="RadGridMultiplier" GridLines="None" runat="server" AllowAutomaticDeletes="True"
-                                        AllowAutomaticInserts="True" AllowAutomaticUpdates="True"
-                                        AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier" ItemStyle-Font-Size="X-Small" AlternatingItemStyle-Font-Size="X-Small" HeaderStyle-HorizontalAlign="Center">
+                                    <telerik:RadGrid ID="RadGridMultiplier" GridLines="None" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
                                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceMultiplier" AutoGenerateColumns="False" CommandItemDisplay="Top">
                                             <CommandItemSettings ShowAddNewRecordButton="false" />
                                             <ColumnGroups>
@@ -103,15 +89,13 @@
                                                 <telerik:GridColumnGroup HeaderText="Desired Profit" Name="ProfitGroup" HeaderStyle-HorizontalAlign="Center">
                                                 </telerik:GridColumnGroup>
                                             </ColumnGroups>
-
-
                                             <Columns>
 
                                                 <telerik:GridTemplateColumn DataField="Year" HeaderStyle-Width="60px" HeaderText="Year"
                                                     SortExpression="Year" UniqueName="Year" ItemStyle-HorizontalAlign="Center">
                                                     <ItemTemplate>
-                                                        <asp:LinkButton ID="btnYear" runat="server" ToolTip="Click to Edit Row" CommandName="Edit" UseSubmitBehavior="false">
-                                            <%#Eval("Year")%> 
+                                                        <asp:LinkButton ID="btnYear" runat="server" ToolTip="Click to Edit Row" CommandName="EditMultiplier" UseSubmitBehavior="false" CommandArgument='<%# Bind("Id") %>'>
+                                                            <%#Eval("Year")%> 
                                                         </asp:LinkButton>
                                                     </ItemTemplate>
                                                     <EditItemTemplate>
@@ -120,47 +104,47 @@
                                                 </telerik:GridTemplateColumn>
 
                                                 <telerik:GridNumericColumn DataField="Salary" HeaderText="Salary"
-                                                    SortExpression="Salary" UniqueName="Salary" DataFormatString="{0:N2}" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="Salary" UniqueName="Salary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
                                                 <telerik:GridNumericColumn DataField="SalaryTax" HeaderText="Salary Tax"
-                                                    SortExpression="SalaryTax" UniqueName="SalaryTax" DataFormatString="{0:N2}" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="SalaryTax" UniqueName="SalaryTax" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="ProductiveSalary" HeaderText="Productive S"
-                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" DataFormatString="{0:N2}" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
+                                                <telerik:GridNumericColumn DataField="ProductiveSalary" HeaderText="Productive Salary"
+                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
                                                 <telerik:GridNumericColumn DataField="SubContracts" HeaderText="SubContracts"
-                                                    SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
                                                 <telerik:GridNumericColumn DataField="Rent" HeaderText="Rent"
-                                                    SortExpression="Rent" UniqueName="Rent" DataFormatString="{0:N2}" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="Rent" UniqueName="Rent" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
                                                 <telerik:GridNumericColumn DataField="Others" HeaderText="Others"
-                                                    SortExpression="Others" UniqueName="Others" DataFormatString="{0:N2}" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="Others" UniqueName="Others" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
                                                 <telerik:GridNumericColumn DataField="Total" HeaderText="Total"
-                                                    SortExpression="Total" UniqueName="Total" DataFormatString="{0:N2}" ReadOnly="true" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="Total" UniqueName="Total" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
                                                 <telerik:GridNumericColumn DataField="Profit" HeaderStyle-Width="80px" HeaderText="(%)"
-                                                    SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N1}" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center"
+                                                    SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center"
                                                     ColumnGroupName="ProfitGroup">
                                                 </telerik:GridNumericColumn>
 
                                                 <telerik:GridNumericColumn DataField="DesiredProfitAmount" HeaderText="($)"
-                                                    SortExpression="DesiredProfitAmount" UniqueName="DesiredProfitAmount" DataFormatString="{0:N2}" ReadOnly="true" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="DesiredProfitAmount" UniqueName="DesiredProfitAmount" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="ProfitGroup">
                                                 </telerik:GridNumericColumn>
 
@@ -196,10 +180,6 @@
                                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
                                                 </telerik:GridButtonColumn>
                                             </Columns>
-                                            <EditFormSettings>
-                                                <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
-                                                </EditColumn>
-                                            </EditFormSettings>
                                         </MasterTableView>
                                     </telerik:RadGrid>
                                 </td>
@@ -424,7 +404,6 @@
                                                         </asp:LinkButton>
                                                         
                                                         <%# Eval("Employee")%>
-                                            <%# Eval("Employee")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridBoundColumn DataField="Month" HeaderText="Month" SortExpression="Month" UniqueName="Month"
@@ -591,110 +570,15 @@
         </table>
     </telerik:RadToolTip>
 
-    <telerik:RadToolTip ID="RadToolTipCalculateMultiplier" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-sm" style="width: 650px">
-            <tr>
-                <td style="text-align: center">
-                    <h2 style="margin: 0; text-align: center; color: white;">
-                        <span class="navbar navbar-expand-md bg-dark text-white">Calculate Multiplier
-                        </span>
-                    </h2>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p>
-                        Update the Salary, Salary Tax and Productive Salary columns calculated from 'Employee Hourly Wage', on row of selected year. 
-                        <br />
-                        These changes affect the company's Multiplier column. 
-                    </p>
-                    <p>
-                        The remaining columns (SubContracts, Rent and Others) must be edited to change their values.
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>These changes affect Department Monthly Target. 
-                    <br />
-                    Select the month since this condition will occur:
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadComboBox ID="cboMonth" runat="server" MarkFirstMatch="True" ZIndex="50001"
-                        Width="250px" Filter="Contains" AppendDataBoundItems="true">
-                        <Items>
-                            <telerik:RadComboBoxItem Text="January" Value="1" />
-                            <telerik:RadComboBoxItem Text="February" Value="2" />
-                            <telerik:RadComboBoxItem Text="March" Value="3" />
-                            <telerik:RadComboBoxItem Text="April" Value="4" />
-                            <telerik:RadComboBoxItem Text="May" Value="5" />
-                            <telerik:RadComboBoxItem Text="June" Value="6" />
-                            <telerik:RadComboBoxItem Text="July" Value="7" />
-                            <telerik:RadComboBoxItem Text="August" Value="8" />
-                            <telerik:RadComboBoxItem Text="September" Value="9" />
-                            <telerik:RadComboBoxItem Text="October" Value="10" />
-                            <telerik:RadComboBoxItem Text="November" Value="11" />
-                            <telerik:RadComboBoxItem Text="December" Value="12" />
-                        </Items>
-                    </telerik:RadComboBox>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadNumericTextBox ID="txtMultiplierYear" runat="server" Label="Year:"
-                        MinValue="2010" MaxValue="2029">
-                        <NumberFormat DecimalDigits="0" GroupSeparator="" />
-                    </telerik:RadNumericTextBox>
-
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; padding-right: 10px; padding-top: 50px">
-                    <asp:LinkButton ID="btnCalculateMultiplierOk" runat="server" ToolTip="Update Salary and Productive Salary"
-                        CssClass="btn btn-warning btn" UseSubmitBehavior="false">
-                                     Confirm Calculate
-                    </asp:LinkButton>
-                </td>
-
-            </tr>
-        </table>
-    </telerik:RadToolTip>
-
     <asp:SqlDataSource ID="SqlDataSourceMultiplier" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CompanyMultiplier_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="INSERT INTO Company_MultiplierByYear([Year],[Salary],[SalaryTax],[SubContracts],[Rent],[Others],[ProductiveSalary],[Profit],[companyId]) 
-                                            VALUES (@Year,@Salary,@SalaryTax,@SubContracts,@Rent,@Others,@ProductiveSalary,@Profit,@companyId)"
-        DeleteCommand="DELETE FROM Company_MultiplierByYear WHERE Id=@Id"
-        UpdateCommand="UPDATE Company_MultiplierByYear SET [Year] = @Year,[Salary] = @Salary, [SalaryTax]=@SalaryTax, [SubContracts] = @SubContracts,[Rent] = @Rent,[Others] = @Others,[ProductiveSalary] = @ProductiveSalary,[Profit] = @Profit WHERE Id=@Id">
+        DeleteCommand="CompanyMultiplierRecord_DELETE" DeleteCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <DeleteParameters>
             <asp:Parameter Name="Id" Type="Int32" />
         </DeleteParameters>
-        <InsertParameters>
-            <asp:Parameter Name="Year" />
-            <asp:Parameter Name="Salary" />
-            <asp:Parameter Name="SalaryTax" />
-            <asp:Parameter Name="SubContracts" />
-            <asp:Parameter Name="Rent" />
-            <asp:Parameter Name="Others" />
-            <asp:Parameter Name="ProductiveSalary" />
-            <asp:Parameter Name="Profit" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-            <asp:Parameter Name="Year" />
-            <asp:Parameter Name="Salary" />
-            <asp:Parameter Name="SalaryTax" />
-            <asp:Parameter Name="SubContracts" />
-            <asp:Parameter Name="Rent" />
-            <asp:Parameter Name="Others" />
-            <asp:Parameter Name="ProductiveSalary" />
-            <asp:Parameter Name="Profit" />
-        </UpdateParameters>
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceHourlyWageGroup" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -734,11 +618,12 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceMonthlySalaryCalculation" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="MonthlySalaryCalculation_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="MonthlySalaryCalculation_v21_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="cboMonthSalary" Name="Month" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="cboDepartments" Name="departmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboEmployees" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
