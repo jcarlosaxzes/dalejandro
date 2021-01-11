@@ -401,11 +401,9 @@
                                 <td>
                                     <asp:Label ID="Label16" runat="server" Text="Quantity - Units:" Font-Bold="true"></asp:Label>
                                     <br />
-                                    <telerik:RadNumericTextBox ID="txtUnit" runat="server" MaxLength="128" Width="45%"
-                                        RenderMode="Lightweight" Skin="Material">
+                                    <telerik:RadNumericTextBox ID="txtUnit" runat="server" MaxLength="128" Width="45%" RenderMode="Lightweight" Skin="Material">
                                     </telerik:RadNumericTextBox>
-                                    <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id"
-                                        Width="40%"
+                                    <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="40%"
                                         RenderMode="Lightweight" Skin="Material">
                                         <Items>
                                             <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />

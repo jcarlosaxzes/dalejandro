@@ -38,20 +38,10 @@ Public Class companymultiplier
 
         End Try
     End Sub
-    Protected Sub btnCalculateMultiplier_Click(sender As Object, e As EventArgs) Handles btnCalculateMultiplier.Click
-        txtMultiplierYear.Text = cboYear.SelectedValue
-        If cboYear.SelectedValue = Year(Today) Then
-            cboMonth.SelectedValue = Month(Today)
-        Else
-            cboMonth.SelectedValue = 1
-        End If
-
-        RadToolTipCalculateMultiplier.Visible = True
-        RadToolTipCalculateMultiplier.Show()
-    End Sub
 
     Private Sub btnNewMultiplier_Click(sender As Object, e As EventArgs) Handles btnNewMultiplier.Click
-        RadGridMultiplier.MasterTableView.InsertItem()
+        '!!!RadGridMultiplier.MasterTableView.InsertItem()
+        Response.Redirect("~/adm/multiplierwizard.aspx")
     End Sub
 
     Private Sub btnInitialize_Click(sender As Object, e As EventArgs) Handles btnInitialize.Click
@@ -69,19 +59,6 @@ Public Class companymultiplier
         Catch ex As Exception
 
         End Try
-    End Sub
-
-    Private Sub btnCalculateMultiplierOk_Click(sender As Object, e As EventArgs) Handles btnCalculateMultiplierOk.Click
-        If txtMultiplierYear.Text > 1999 Then
-            LocalAPI.CompanyCalculateMultiplier(lblCompanyId.Text, txtMultiplierYear.Text)
-            Dim dbMultiplier As Double = LocalAPI.GetCompanyMultiplier(lblCompanyId.Text, cboYear.SelectedValue)
-            LocalAPI.DeparmentBudgetByBaseSalaryForMultiplierFromThisMonth(lblCompanyId.Text, dbMultiplier, cboYear.SelectedValue, cboMonth.SelectedValue)
-            RadGridMultiplier.DataBind()
-            RadGridDptoTarget.DataBind()
-            Master.InfoMessage("Multiplier Updated for " & txtMultiplierYear.Text)
-        Else
-            Master.ErrorMessage("Define Year before Calculate")
-        End If
     End Sub
 
     Private Sub RadGridHourlyWage_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridHourlyWage.ItemCommand
@@ -120,9 +97,21 @@ Public Class companymultiplier
         RadGridMultiplier.DataBind()
         RadGridDptoTarget.DataBind()
         RadGridHourlyWage.DataBind()
+        RadGridMonthlySalaryCalculation.DataBind()
     End Sub
 
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         Refresh()
+    End Sub
+
+    Private Sub RadGridMultiplier_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridMultiplier.ItemCommand
+        Select Case e.CommandName
+            Case "EditMultiplier"
+                Response.Redirect($"~/adm/multiplierwizard.aspx?Id={e.CommandArgument}")
+        End Select
+
+
+
+
     End Sub
 End Class

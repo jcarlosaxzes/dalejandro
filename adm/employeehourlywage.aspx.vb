@@ -62,7 +62,10 @@
             RadGridHourlyWage.DataBind()
 
             ' Afectaciones al Multiplier y Department Target
-            LocalAPI.CompanyCalculateMultiplier(lblCompanyId.Text, Year(Today))
+            If lblYear.Text = Year(Today) Then
+                LocalAPI.CompanyCalculateMultiplier(lblCompanyId.Text, Year(Today))
+            End If
+
             Master.InfoMessage("The Record and Multiplier were updated successfully!!")
 
         Catch ex As Exception
