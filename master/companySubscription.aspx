@@ -4,7 +4,7 @@
 <%@ MasterType VirtualPath="~/master/MasterPage.Master" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <table class="table-sm" style="width: 100%">
-       
+
         <tr>
             <td style="width: 180px; text-align: right">Subcription Status:
             </td>
@@ -23,9 +23,9 @@
             <td style="width: 290px;">
                 <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true">
                     <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="Active When Subcription Expired" Value="0"/>
+                        <telerik:RadComboBoxItem runat="server" Text="Active When Subcription Expired" Value="0" />
                         <telerik:RadComboBoxItem runat="server" Text="Lock When Subcription Expired" Value="1" />
-                        <telerik:RadComboBoxItem runat="server" Text="(All)" Value="-1"  Selected="true"  />
+                        <telerik:RadComboBoxItem runat="server" Text="(All)" Value="-1" Selected="true" />
                     </Items>
                 </telerik:RadComboBox>
             </td>
@@ -55,6 +55,19 @@
                                         Text='<%# Eval("companyId") %>'></asp:HyperLink>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="billingStartDate" SortExpression="billingStartDate"
+                                HeaderText="Start Date" UniqueName="billingStartDate" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
+                                <ItemTemplate>
+                                    <%# Eval("billingStartDate", "{0:d}")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="billingExpirationDate" SortExpression="billingExpirationDate"
+                                HeaderText="Expiration Date" UniqueName="billingExpirationDate" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
+                                <ItemTemplate>
+                                    <%# Eval("billingExpirationDate", "{0:d}")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" SortExpression="Name"
                                 HeaderText="Name -- Type" UniqueName="Name" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Left"
                                 FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
@@ -62,24 +75,27 @@
                                     <b><%# Eval("Name") %></b> -- <%# Eval("TypeName") %>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="Contact" FilterControlAltText="Filter Contact column"
+                                HeaderText="Contact info" UniqueName="Contact" HeaderStyle-HorizontalAlign="Center" SortExpression="Contact">
+                                <ItemTemplate>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td>
+                                                <span title='<%# Eval("Email") %> , <%# Eval("Phone") %>'><%# Eval("Contact") %></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="billingExpirationDate" SortExpression="billingExpirationDate"
                                 HeaderText="Status" UniqueName="status" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
                                 <ItemTemplate>
-
-                                    <span title='<%# IIf(Eval("billingExpirationDate") < DateTime.Today, "Subscritption Expired", "Subscritption Active") %>' class="label badge-<%# IIf(Eval("billingExpirationDate") >= DateTime.Today, "success", IIf(Eval("BlockSubcriptionExpired") =  0 , "warning", "danger")) %>"> 
-                                            <%# IIf(Eval("billingExpirationDate") < DateTime.Today, "Subscritption Expired", "Subscritption Active") %>
-                                   </span>
-                                                        
-
+                                    <span title='<%# IIf(Eval("billingExpirationDate") < DateTime.Today, "Subscritption Expired", "Subscritption Active") %>' class="label badge-<%# IIf(Eval("billingExpirationDate") >= DateTime.Today, "success", IIf(Eval("BlockSubcriptionExpired") = 0, "warning", "danger")) %>">
+                                        <%# IIf(Eval("billingExpirationDate") < DateTime.Today, "Subscritption Expired", "Subscritption Active") %>
+                                    </span>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridTemplateColumn DataField="billingExpirationDate" SortExpression="billingExpirationDate"
-                                HeaderText="Expiration Date" UniqueName="billingExpirationDate" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
-                                <ItemTemplate>
-                                    <%# Eval("billingExpirationDate", "{0:d}")%>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="BillingPlan" FilterControlAltText="Filter Contact column" SortExpression="BillingPlan"
                                 HeaderText="Billing Plan" UniqueName="BillingPlan" HeaderStyle-HorizontalAlign="Center" ReadOnly="true">
                                 <ItemTemplate>
@@ -98,26 +114,32 @@
                                     <%# Eval("ActiveUsers")%>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
-                            <telerik:GridTemplateColumn DataField="Contact" FilterControlAltText="Filter Contact column"
-                                HeaderText="Contact info" UniqueName="Contact" HeaderStyle-HorizontalAlign="Center" SortExpression="Contact">
+                            <telerik:GridTemplateColumn DataField="LastSubscriptionPaymentDate" FilterControlAltText="Filter Contact column" SortExpression="LastSubscriptionPaymentDate"
+                                HeaderText="Last Payment" UniqueName="LastSubscriptionPaymentDate" HeaderStyle-HorizontalAlign="Center" ReadOnly="true" HeaderStyle-Width="70px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <table style="width: 100%">
-                                        <tr>
-                                            <td>
-                                                <span title='<%# Eval("Email") %> , <%# Eval("Phone") %>'> <%# Eval("Contact") %></span>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <%# Eval("LastSubscriptionPaymentDate", "{0:d}")%>     <%# Eval("LastSubscriptionPaymentAmount")%>$
                                 </ItemTemplate>
-
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="InvoicesCount" FilterControlAltText="Filter Contact column" SortExpression="InvoicesCount"
+                                HeaderText="Invoices" UniqueName="InvoicesCount" HeaderStyle-HorizontalAlign="Center" ReadOnly="true" HeaderStyle-Width="70px" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <%# Eval("InvoicesCount")%>/<%# Eval("InvoicesCountPaid")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                            <telerik:GridTemplateColumn DataField="NextPaymentAmount" FilterControlAltText="Filter Contact column" SortExpression="NextPaymentAmount"
+                                HeaderText="Next Payment" UniqueName="NextPaymentAmount" HeaderStyle-HorizontalAlign="Center" ReadOnly="true" HeaderStyle-Width="70px" ItemStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <%# Eval("NextPaymentDate", "{0:d}")%>     <%# Eval("NextPaymentAmount")%>$
+                                </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="Job" UniqueName="AxzesJobCode" SortExpression="AxzesJobCode"
                                 ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <asp:HyperLink ID="HyperLink1" runat="server" CssClass="PequenaNegrita" Target="_blank" NavigateUrl='<%# Eval("guid", "~/adm/job_accounting?guid={0}&backpage=jobs") %>'
+                                    <asp:HyperLink ID="HyperLink2" runat="server" CssClass="PequenaNegrita" Target="_blank" NavigateUrl='<%# Eval("guid", "~/adm/job_accounting?guid={0}&backpage=jobs") %>'
                                         Text='<%# Eval("AxzesJobId") %>'></asp:HyperLink>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
+
                             <telerik:GridTemplateColumn DataField="SendRenewSubscription"
                                 HeaderText="Count Email Send" UniqueName="Contact" HeaderStyle-HorizontalAlign="Center" SortExpression="Contact">
                                 <ItemTemplate>
