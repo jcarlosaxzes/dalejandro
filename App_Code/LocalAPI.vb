@@ -1573,6 +1573,18 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
+    Public Shared Function GetCompanyMultiplierStatusLabelCSS(ByVal status As String) As String
+        Select Case UCase(status)
+            Case "OPEN"
+                Return "badge badge-success statuslabel"
+            Case Else   ' Close'
+                Return "badge badge-danger statuslabel"
+        End Select
+
+    End Function
+
+
+
     Public Shared Function CompanyMultiplier_INSERT(companyId As Integer, Year As Integer, Salary As Double, TaxPercent As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
         Try
 

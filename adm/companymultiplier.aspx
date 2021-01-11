@@ -22,8 +22,8 @@
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Company Multiplier</span>
         <span style="float: right; vertical-align: middle;">
-             <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
-                    Initialize Year
+            <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
+                    Add Multiplier Year
             </asp:LinkButton>
         </span>
     </div>
@@ -33,13 +33,13 @@
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
             <table class="table-sm pasconcept-bar" style="width: 100%">
                 <tr>
-                    <td style="width:200px">
+                    <td style="width: 200px">
                         <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYears"
                             DataTextField="nYear" DataValueField="Year" Width="100%">
                         </telerik:RadComboBox>
                     </td>
-                    <td style="width:350px">
-                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" MarkFirstMatch="True" 
+                    <td style="width: 350px">
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" MarkFirstMatch="True"
                             Width="100%" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="(Select Department...)" Value="-1" Selected="true" />
@@ -47,7 +47,7 @@
                         </telerik:RadComboBox>
                     </td>
                     <td>
-                        <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True" 
+                        <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" MarkFirstMatch="True"
                             Width="350px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AppendDataBoundItems="true">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="-1" Selected="true" />
@@ -172,6 +172,15 @@
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
+                                                <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                                                    <ItemTemplate>
+                                                        <div style="font-size: 12px; width: 100%"
+                                                            class='<%# LocalAPI.GetCompanyMultiplierStatusLabelCSS(Eval("Status")) %>'>
+                                                            <%# Eval("Status") %>
+                                                        </div>
+                                                    </ItemTemplate>
+                                                </telerik:GridTemplateColumn>
+
                                                 <telerik:GridNumericColumn DataField="Multiplier" HeaderStyle-Width="80px" HeaderText="Multiplier"
                                                     SortExpression="Multiplier" UniqueName="Multiplier" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" ItemStyle-Font-Bold="true">
                                                 </telerik:GridNumericColumn>
@@ -179,6 +188,7 @@
                                                     ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="30px"
                                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
                                                 </telerik:GridButtonColumn>
+
                                             </Columns>
                                         </MasterTableView>
                                     </telerik:RadGrid>
@@ -298,8 +308,8 @@
                                                                 <i class="fas fa-user-edit"></i>&nbsp;
                                                         </asp:LinkButton>
                                                         <%# Eval("Employee")%>
-                                                        <span style="font-size:x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear", "{0:N1}") %></span>
-                                                        
+                                                        <span style="font-size: x-small" class="badge badge-pill badge-danger" title="weeks this year"><%# Eval("weekthisyear", "{0:N1}") %></span>
+
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
                                                 <telerik:GridTemplateColumn DataField="Department" FilterControlAltText="Filter Department column" HeaderText="Department" HeaderStyle-HorizontalAlign="Center"
@@ -395,15 +405,15 @@
                                     <telerik:GridTemplateColumn DataField="employeeId" FilterControlAltText="Filter Employee column"
                                         HeaderText="Employee" SortExpression="Employee" UniqueName="employeeId" HeaderStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                         <ItemTemplate>
-                                                        <asp:LinkButton ID="LinkButton1"
-                                                            runat="server" ToolTip="Click to View/Edit Employee Hourly Wage"
-                                                            CommandArgument='<%# Eval("employeeId") %>'
-                                                            CommandName="EditHourlyWage"
-                                                            UseSubmitBehavior="false">
+                                            <asp:LinkButton ID="LinkButton1"
+                                                runat="server" ToolTip="Click to View/Edit Employee Hourly Wage"
+                                                CommandArgument='<%# Eval("employeeId") %>'
+                                                CommandName="EditHourlyWage"
+                                                UseSubmitBehavior="false">
                                                                 <i class="fas fa-user-edit"></i>&nbsp;
-                                                        </asp:LinkButton>
-                                                        
-                                                        <%# Eval("Employee")%>
+                                            </asp:LinkButton>
+
+                                            <%# Eval("Employee")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridBoundColumn DataField="Month" HeaderText="Month" SortExpression="Month" UniqueName="Month"
