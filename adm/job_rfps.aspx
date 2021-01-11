@@ -228,7 +228,7 @@
         </telerik:RadGrid>
 
         <div class="pasconcept-bar">
-            <span class="pasconcept-pagetitle">Expenses Report</span>
+            <span class="pasconcept-pagetitle">Expense Report</span>
         </div>
         <telerik:RadGrid ID="RadGridReport" runat="server" AutoGenerateColumns="true" DataSourceID="SqlDataSourceJobsExpenses"
             ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center"

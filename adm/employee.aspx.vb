@@ -107,18 +107,29 @@ Public Class employee
     End Sub
 
     Private Sub SqlDataSourceHourlyWage_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceHourlyWage.Inserted
-        RadHtmlChart1.DataBind()
-        RadGridHourlyWage.DataBind()
-        Master.InfoMessage("The record were inserted successfully!")
+        RefreshInfo()
     End Sub
 
     Private Sub SqlDataSourceHourlyWage_Deleted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceHourlyWage.Deleted
-        RadHtmlChart1.DataBind()
-        RadGridHourlyWage.DataBind()
+        RefreshInfo()
     End Sub
 
     Private Sub SqlDataSourceHourlyWage_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceHourlyWage.Updated
-        RadHtmlChart1.DataBind()
-        RadGridHourlyWage.DataBind()
+        RefreshInfo()
     End Sub
+
+    Private Sub RefreshInfo()
+        Try
+            RadHtmlChart1.DataBind()
+            RadGridHourlyWage.DataBind()
+
+            ' Afectaciones al Multiplier y Department Target
+            LocalAPI.CompanyCalculateMultiplier(lblCompanyId.Text, Year(Today))
+            Master.InfoMessage("The Record and Multiplier were updated successfully!!")
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
 End Class
