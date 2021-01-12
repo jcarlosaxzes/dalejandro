@@ -16,7 +16,7 @@
     <div class="pasconcept-bar">
         <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" RenderMode="Lightweight" Skin="Material">
             <WizardSteps>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStepYearInfo" Title="Year Information" ValidationGroup="YearInformation" StepType="Start">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepYearInfo" Title="Year Setup" ValidationGroup="YearInformation" StepType="Start">
                     <%-- Year Information --%>
 
                     <div>
@@ -26,7 +26,7 @@
                     </div>
 
                     <div>
-                        Update or Calculate Expense Information for the Year
+                        <h4>Define Expense Information and Options for the Year</h4>
 
                         <table class="table-sm" style="width: 100%">
                             <tr>
@@ -48,18 +48,18 @@
                                     <telerik:RadNumericTextBox Width="95%" ID="txtSalary" runat="server">
                                     </telerik:RadNumericTextBox>
                                 </td>
-                                <td>Net Salary Expected this year
+                                <td>Total Gross Salary to be paid to employees throughout the selected year
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right">Salary Tax Percent:
+                                <td style="text-align: right">Employer Payroll Tax Percentage:
 
                                 </td>
                                 <td>
                                     <telerik:RadNumericTextBox Width="95%" ID="txtTaxPercent" runat="server" MaxValue="99">
                                     </telerik:RadNumericTextBox>
                                 </td>
-                                <td>Used to calculate Gross Salary
+                                <td>Total Local, State and Federal tax percentage
                                 </td>
                             </tr>
                             <tr>
@@ -74,7 +74,7 @@
                                         </Items>
                                     </telerik:RadComboBox>
                                 </td>
-                                <td>Automatically calculate salary on background operations. New/Inactivate/Update Benefits of any Employee.
+                                <td>Automatically calculate salary on background operations. New/Inactivate/Update Benefits of any Employee
                                 </td>
                             </tr>
                             <tr>
@@ -105,16 +105,16 @@
                             </tr>
 
 
-                            <%--SubContracts--%>
+                            <%--Sub Fees--%>
                             <tr>
-                                <td style="text-align: right">Expected Total SubContracts:
+                                <td style="text-align: right">Expected Total Sub Fees:
 
                                 </td>
                                 <td>
                                     <telerik:RadNumericTextBox Width="95%" ID="txtSubContracts" runat="server">
                                     </telerik:RadNumericTextBox>
                                 </td>
-                                <td>Expected Expenses on Subcontracts this year
+                                <td>Expected Expenses on Sub Fees this year
                                 </td>
                             </tr>
 
@@ -140,7 +140,7 @@
                                     <telerik:RadNumericTextBox Width="95%" ID="txtOthers" runat="server">
                                     </telerik:RadNumericTextBox>
                                 </td>
-                                <td>Expected Others Expenses this year, than Salary, SubContracts and Rent
+                                <td>Expected Others Expenses this year, than Salary, Sub Fees and Rent
                                 </td>
                             </tr>
 
@@ -153,7 +153,7 @@
                                     <telerik:RadNumericTextBox Width="95%" ID="txtProfit" runat="server">
                                     </telerik:RadNumericTextBox>
                                 </td>
-                                <td>Total others expenses than this year, than Salary, SubContracts and Rent
+                                <td>Total others expenses than this year, than Salary, Sub Fees and Rent
                                 </td>
                             </tr>
 
@@ -252,7 +252,7 @@
                                                 <telerik:GridNumericColumn DataField="ProductiveSalary" HeaderText="Productive Salary" SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="SubContracts" HeaderText="SubContracts" SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                                <telerik:GridNumericColumn DataField="SubContracts" HeaderText="Sub Fees" SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
                                                 </telerik:GridNumericColumn>
 
                                                 <telerik:GridNumericColumn DataField="Rent" HeaderText="Rent" SortExpression="Rent" UniqueName="Rent" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">

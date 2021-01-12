@@ -23,7 +23,7 @@
         <span class="pasconcept-pagetitle">Company Multiplier</span>
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnNewMultiplier" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ToolTip="Add Multiplier Record">
-                    Add Multiplier Year
+                    Initiate Year
             </asp:LinkButton>
         </span>
     </div>
@@ -118,7 +118,7 @@
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="SubContracts" HeaderText="SubContracts"
+                                                <telerik:GridNumericColumn DataField="SubContracts" HeaderText="Sub Fees"
                                                     SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
@@ -263,12 +263,12 @@
 
                     </div>
                 </telerik:RadWizardStep>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStepEmployeeHourlyWage" Title="Employee Hourly Wage" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepEmployeeHourlyWage" Title="Employee Wages" StepType="Step">
 
                     <table class="table-sm" style="width: 100%">
                         <tr>
                             <td>
-                                <h3>Employee Hourly Wage</h3>
+                                <h3>Employee Wages</h3>
                             </td>
                             <td>
                                 <asp:LinkButton ID="btnInitialize" runat="server" ToolTip="Selected year for Initialize Hourly Wage for all Active Employees"
@@ -331,15 +331,15 @@
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
-                                                <telerik:GridNumericColumn DataField="AnnualSalary" FilterControlAltText="Filter AnnualSalary column" HeaderText="Annual" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="AnnualSalary" UniqueName="AnnualSalary" DataFormatString="{0:N0}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" ReadOnly="true"
+                                                <telerik:GridNumericColumn DataField="AnnualSalary" HeaderText="Annual" HeaderStyle-HorizontalAlign="Center"
+                                                    SortExpression="AnnualSalary" UniqueName="AnnualSalary" DataFormatString="{0:C0}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
                                                     HeaderTooltip="Annual Salary Calculated">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridTemplateColumn DataField="ProductiveSalary" FilterControlAltText="Filter ProductiveSalary column" HeaderText="Productive" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:N0}" ReadOnly="true"
+                                                <telerik:GridTemplateColumn DataField="ProductiveSalary" HeaderText="Productive" HeaderStyle-HorizontalAlign="Center"
+                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
                                                     HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
                                                     <ItemTemplate>
-                                                        <%# Eval("ProductiveSalary", "{0:N0}") %>
+                                                        <%# Eval("ProductiveSalary", "{0:C0}") %>
                                                         <span style="font-size: x-small" class="badge badge-pill badge-danger" title="productive weeks this year"><%# Eval("productiveweekthisyear", "{0:N1}") %></span>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
@@ -356,12 +356,12 @@
                     </table>
 
                 </telerik:RadWizardStep>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Monthly Salary Calculation" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Monthly Wage Calculation" StepType="Step">
                     <div>
                         <table class="table-sm" style="width: 100%">
                             <tr>
                                 <td>
-                                    <h3>Monthly Salary Calculation</h3>
+                                    <h3>Monthly Wage Calculation</h3>
                                 </td>
                                 <td>
                                     <telerik:RadComboBox ID="cboMonthSalary" runat="server" MarkFirstMatch="True" AutoPostBack="true"
@@ -417,43 +417,43 @@
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
                                     <telerik:GridBoundColumn DataField="Month" HeaderText="Month" SortExpression="Month" UniqueName="Month"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:N0}" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="StarDate" HeaderText="Star Date" SortExpression="StarDate" UniqueName="StarDate"
+                                    <telerik:GridBoundColumn DataField="StarDate" HeaderText="Start Date" SortExpression="StarDate" UniqueName="StarDate"
                                         DataFormatString="{0:d}" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="EndDate" HeaderText="End Date" SortExpression="EndDate" UniqueName="EndDate"
                                         DataFormatString="{0:d}" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="ProductiveDays" HeaderText="Prod.Days" SortExpression="ProductiveDays" UniqueName="ProductiveDays"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N0}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:N0}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
-                                    <telerik:GridBoundColumn DataField="NonProductiveDays" HeaderText="NonProd.Days" SortExpression="NonProductiveDays" UniqueName="NonProductiveDays"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                    <telerik:GridBoundColumn DataField="NonProductiveDays" HeaderText="Non-Prod.Days" SortExpression="NonProductiveDays" UniqueName="NonProductiveDays"
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Personal" HeaderText="Pers." SortExpression="Personal" UniqueName="Personal"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Vac" HeaderText="Vac." SortExpression="Vac" UniqueName="Vac"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Holliday" HeaderText="Holl." SortExpression="Holliday" UniqueName="Holliday"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="$/Hour" SortExpression="Amount" UniqueName="Amount"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:C2}" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="80px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="HourPerDay" FilterControlAltText="Filter HourPerDay column" HeaderText="Hours/Day" SortExpression="HourPerDay" UniqueName="HourPerDay"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="ProducerRate" FilterControlAltText="Filter ProducerRate column" HeaderText="P.Rate" SortExpression="ProducerRate" UniqueName="ProducerRate" HeaderTooltip="Producer Rate (0 to 1): 0:Administrative, 1:Producer "
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Avg" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Center" DataFormatString="{0:N2}" Aggregate="Avg" FooterAggregateFormatString="{0:N2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Productive" HeaderText="Productive" SortExpression="Productive" UniqueName="Productive"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:C2}" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="80px">
                                     </telerik:GridBoundColumn>
                                     <telerik:GridBoundColumn DataField="Salary" HeaderText="Salary" SortExpression="Salary" UniqueName="Salary"
-                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:N2}" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="70px">
+                                        ItemStyle-HorizontalAlign="Right" DataFormatString="{0:C2}" Aggregate="Sum" FooterAggregateFormatString="{0:C2}" FooterStyle-HorizontalAlign="Right" HeaderStyle-Width="80px">
                                     </telerik:GridBoundColumn>
 
                                 </Columns>
@@ -621,7 +621,7 @@
         </InsertParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceYears" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT Year, nYear FROM Years ORDER BY Year DESC">
+        SelectCommand="SELECT Year, nYear FROM (select Year, nYear from Years union all select Year,Year as nYear from Company_MultiplierByYear where companyId=@companyId)T GROUP BY Year, nYear ORDER BY Year DESC">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
