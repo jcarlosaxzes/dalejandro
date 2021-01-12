@@ -117,7 +117,7 @@
                             <telerik:GridTemplateColumn DataField="LastSubscriptionPaymentDate" FilterControlAltText="Filter Contact column" SortExpression="LastSubscriptionPaymentDate"
                                 HeaderText="Last Payment" UniqueName="LastSubscriptionPaymentDate" HeaderStyle-HorizontalAlign="Center" ReadOnly="true" HeaderStyle-Width="70px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <%# Eval("LastSubscriptionPaymentDate", "{0:d}")%>     <%# Eval("LastSubscriptionPaymentAmount")%>$
+                                    <%# Eval("LastSubscriptionPaymentDate", "{0:d}")%>     <%# Eval("LastSubscriptionPaymentAmount", "{0:C2}")%>$
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn DataField="InvoicesCount" FilterControlAltText="Filter Contact column" SortExpression="InvoicesCount"
@@ -129,7 +129,7 @@
                             <telerik:GridTemplateColumn DataField="NextPaymentAmount" FilterControlAltText="Filter Contact column" SortExpression="NextPaymentAmount"
                                 HeaderText="Next Payment" UniqueName="NextPaymentAmount" HeaderStyle-HorizontalAlign="Center" ReadOnly="true" HeaderStyle-Width="70px" ItemStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <%# Eval("NextPaymentDate", "{0:d}")%>     <%# Eval("NextPaymentAmount")%>$
+                                    <%# Eval("NextPaymentDate", "{0:d}")%>     <%# Eval("NextPaymentAmount", "{0:C2}")%>$
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
                             <telerik:GridTemplateColumn HeaderText="Job" UniqueName="AxzesJobCode" SortExpression="AxzesJobCode"
