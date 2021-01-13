@@ -73,7 +73,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; 2009 <%: DateTime.Now.Year %> - - All rights reserved - PASconcept is a trademark property of <a href="https://axzes.com/" target="_blank">Axzes LLC</a></p>
+                <p>&copy; 2009 <%: DateTime.Now.Year %> - All rights reserved - PASconcept is a trademark property of <a href="https://axzes.com/" target="_blank">Axzes LLC</a></p>
             </footer>
         </div>
     </form>

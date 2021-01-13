@@ -184,7 +184,7 @@
                                                 <telerik:GridNumericColumn DataField="Multiplier" HeaderStyle-Width="80px" HeaderText="Multiplier"
                                                     SortExpression="Multiplier" UniqueName="Multiplier" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" ItemStyle-Font-Bold="true">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridButtonColumn ConfirmText="Delete this record?" ConfirmDialogType="RadWindow"
+                                                <telerik:GridButtonColumn ConfirmText="Delete this Multiplier year?" ConfirmDialogType="RadWindow"
                                                     ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="30px"
                                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
                                                 </telerik:GridButtonColumn>
