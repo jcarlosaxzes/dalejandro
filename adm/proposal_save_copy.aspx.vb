@@ -38,6 +38,9 @@ Public Class proposal_save_copy
         SqlDataSource1.Insert()
     End Sub
 
+    Private Sub SqlDataSource1_Inserting(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Inserting
+        e.Command.Parameters("@copytaskdetails").Value = IIf(chkCopytaskdetails.Checked, 1, 0)
+    End Sub
     Protected Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Dim Id As String = e.Command.Parameters("@ProposalId").Value
         If Val(Id) > 0 Then

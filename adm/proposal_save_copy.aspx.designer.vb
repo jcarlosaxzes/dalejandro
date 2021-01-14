@@ -50,6 +50,15 @@ Partial Public Class proposal_save_copy
     Protected WithEvents txtName As Global.Telerik.Web.UI.RadTextBox
 
     '''<summary>
+    '''chkCopytaskdetails control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkCopytaskdetails As Global.Telerik.Web.UI.RadCheckBox
+
+    '''<summary>
     '''RequiredFieldValidator1 control.
     '''</summary>
     '''<remarks>

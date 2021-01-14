@@ -184,7 +184,7 @@
                                         </telerik:RadNumericTextBox>
                                     </td>
                                     <td>
-                                        Anticipated expenses outside of Salary, Sub Fees and Rent for <%# lblTitleYear.Text %> 
+                                        The desired profit margin for <%# lblTitleYear.Text %> 
                                         <br /><small>In <%# lblPastYear.Text %>, this was listed as <asp:Label ID="lblPastProfit" runat="server"></asp:Label>%</small>
                                         
                                         
@@ -285,15 +285,13 @@
 
                 <%-- Complete --%>
                 <telerik:RadWizardStep runat="server" Title="Confirmation" ID="RadWizardStep1" StepType="Complete">
-                    <div style="padding-top: 25px; padding-left: 150px" class="alert alert-danger" role="alert">
-                        <h5 class="alert-heading">Previous Multiplier Value:
-                            <asp:Label ID="lblPreviousMultiplier" runat="server" Text="0"></asp:Label></h5>
-                    </div>
                     <div style="padding-top: 25px; padding-left: 150px" class="alert alert-success" role="alert">
                         <h2 class="alert-heading">Updated Multiplier Value:
                             <asp:Label ID="lblFinalMultiplier" runat="server" Text=""></asp:Label></h2>
+                        <h5>Previous Multiplier Value:
+                            <asp:Label ID="lblPreviousMultiplier" runat="server" Text="0"></asp:Label></h5>
                     </div>
-                   <h4>Historical Log (Last 50 changes)</h4>
+                   <h4>Historical Log (Last 10 changes)</h4>
                         <telerik:RadGrid ID="RadGridMultiplier_log" GridLines="None" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier_log">
                             <MasterTableView DataSourceID="SqlDataSourceMultiplier_log" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center"
                         ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">

@@ -32,6 +32,12 @@
             </tr>
             <tr>
                 <td>
+                    <telerik:RadCheckBox runat="server" ID="chkCopytaskdetails" Checked="True" Text="&nbsp;&nbsp;Copy Task Details to saved Proposal" ></telerik:RadCheckBox>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtName" ErrorMessage="! Project Name is required"></asp:RequiredFieldValidator>
                 </td>
             </tr>
@@ -57,7 +63,7 @@
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="ProposalSaveAsExt" InsertCommandType="StoredProcedure">
+        InsertCommand="Proposal_v21_SaveAs" InsertCommandType="StoredProcedure">
         <InsertParameters>
             <asp:Parameter DefaultValue="" Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblProposalId" Name="ProposalSourceId" PropertyName="Text" Type="Int32" />
@@ -65,6 +71,7 @@
             <asp:ControlParameter ControlID="lblOption" Name="Option" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+            <asp:Parameter  Name="copytaskdetails" />
             <asp:Parameter Name="ProposalId" Type="Int32" Direction="InputOutput" />
         </InsertParameters>
     </asp:SqlDataSource>

@@ -172,7 +172,7 @@
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
-                                                <telerik:GridTemplateColumn DataField="Status" HeaderText="Status" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                                                <telerik:GridTemplateColumn DataField="Status" HeaderText="Automatic" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                                                     <ItemTemplate>
                                                         <div style="font-size: 12px; width: 100%"
                                                             class='<%# LocalAPI.GetCompanyMultiplierStatusLabelCSS(Eval("Status")) %>'>
