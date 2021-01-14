@@ -68,7 +68,7 @@ Public Class employee_permissions
         Dim sUrl As String = ""
         Select Case e.CommandName
             Case "Permits"
-                Response.Redirect("~/ADM/Employee_Permissions_form.aspx?employeeId=" & e.CommandArgument & "&Entity=Employee")
+                Response.Redirect($"~/adm/employee_Permissions_form.aspx?employeeId={e.CommandArgument}&Entity=Employee&backpage=employee_permissions")
         End Select
     End Sub
     Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, bRefreshOnClientClose As Boolean)

@@ -17,12 +17,10 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
 
-            <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel"
+            <asp:LinkButton ID="btnExport" runat="server" ToolTip="Export records to Excel" Visible="false"
                 CssClass="btn btn-secondary btn" UseSubmitBehavior="false">
                                     <i class="fas fa-download"></i> Export
             </asp:LinkButton>
-
-
         </span>
     </div>
 
@@ -63,15 +61,6 @@
 
     <div class="row" style="padding-top: 5px">
         <div class="col-md-12">
-            <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
-                <script type="text/javascript">
-                    function OnClientClose(sender, args) {
-                        var masterTable = $find("<%= RadGrid1.ClientID %>").get_masterTableView();
-                        masterTable.rebind();
-                        $find("<%= cboSourceRole.ClientID %>").rebind();
-                    }
-                </script>
-            </telerik:RadCodeBlock>
             <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSource1" AllowMultiRowSelection="True" ShowFooter="true"
                 Width="100%" AutoGenerateColumns="False" AllowPaging="True" PageSize="100" AllowSorting="True" GroupPanelPosition="Top"
                 HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
@@ -108,20 +97,6 @@
 
 
                     </Columns>
-                    <EditFormSettings ColumnNumber="4" CaptionDataField="Name" CaptionFormatString="Edit Permissions of <b>{0}</b>" FormCaptionStyle-ForeColor="#ff8c00">
-                        <PopUpSettings Modal="true" Width="800px" />
-                        <FormTableItemStyle Wrap="False"></FormTableItemStyle>
-                        <FormCaptionStyle CssClass="EditFormHeader"></FormCaptionStyle>
-                        <FormMainTableStyle GridLines="None" CellSpacing="0" CellPadding="3" Width="100%" />
-                        <FormTableStyle GridLines="Horizontal" CellSpacing="0" CellPadding="2" BackColor="White"
-                            Width="100%" />
-                        <FormTableAlternatingItemStyle Wrap="False"></FormTableAlternatingItemStyle>
-                        <FormStyle Width="100%" BackColor="#eef2ea"></FormStyle>
-                        <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1"
-                            CancelText="Cancel">
-                        </EditColumn>
-                        <FormTableButtonRowStyle HorizontalAlign="Left" CssClass="EditFormButtonRow"></FormTableButtonRowStyle>
-                    </EditFormSettings>
                 </MasterTableView>
             </telerik:RadGrid>
         </div>
@@ -130,7 +105,10 @@
                 <asp:Panel ID="ExportPanel" runat="server" Height="1px">
                     <telerik:RadGrid ID="RadGridToPrint" runat="server" DataSourceID="SqlDataSource1" Width="100%" Culture="en-US">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource1" AutoGenerateColumns="False">
-                            <Columns>
+
+                            <%--Bug. Muchas columnas desbordan el scroll--%> 
+
+                            <%--<Columns>
                                 <telerik:GridBoundColumn DataField="Id" HeaderText="Id" SortExpression="Id" UniqueName="Id" DataType="System.Int32" ReadOnly="True">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridBoundColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Name" SortExpression="Name" UniqueName="Name" ReadOnly="True">
@@ -243,7 +221,7 @@
                                 </telerik:GridCheckBoxColumn>
                                 <telerik:GridCheckBoxColumn DataField="Allow_BadDebt" HeaderText="Allow_BadDebt" SortExpression="Allow_BadDebt" UniqueName="Allow_BadDebt">
                                 </telerik:GridCheckBoxColumn>
-                            </Columns>
+                            </Columns>--%>
                         </MasterTableView>
                     </telerik:RadGrid>
                 </asp:Panel>

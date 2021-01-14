@@ -50,7 +50,13 @@ Public Class employeenewtime
     Private Sub InitDialog()
         Try
             cboJobStatus.DataBind()
-            cboJobStatus.SelectedValue = -2
+
+            If lblCompanyId.Text <> 260962 Then ' EEG
+                cboJobStatus.SelectedValue = -2
+            Else
+                cboJobStatus.SelectedValue = -1
+            End If
+
             txtDescription.Text = ""
 
             Dim DefaultValuesObject = LocalAPI.GetJobNewTimeDefaultValues(lblSelectedJob.Text, lblEmployeeId.Text)

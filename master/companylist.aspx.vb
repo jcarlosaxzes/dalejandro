@@ -105,7 +105,7 @@ Public Class companylist
 
     Private Sub ReloadComboJobs()
         cboJob.Items.Clear()
-        cboJob.Items.Insert(0, New RadComboBoxItem("(Create NEW Axzes Job...)", 0))
+        'cboJob.Items.Insert(0, New RadComboBoxItem("(Create NEW Axzes Job...)", 0))
         cboJob.DataBind()
         cboJob.SelectedValue = LocalAPI.GetCompanyProperty(lblSelectedCompanyId.Text, "AxzesJobId")
     End Sub

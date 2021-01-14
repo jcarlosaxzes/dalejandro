@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Pre-Project" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="pre-project.aspx.vb" Inherits="pasconcept20.pre_project" %>
+﻿<%@ Page Title="Pre-Proposal" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/BasicMasterPage.Master" CodeBehind="pre-project.aspx.vb" Inherits="pasconcept20.pre_project" %>
 
 <%@ MasterType VirtualPath="~/ADM/BasicMasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -53,7 +53,7 @@
     </telerik:RadCodeBlock>
 
     <div class="container">
-        <h2>Pre-Project #:
+        <h2>Pre-Proposal #:
         <asp:Label ID="lblPre_ProjectNumber" runat="server"></asp:Label>
         </h2>
         <div>
@@ -63,11 +63,7 @@
         </div>
         <table class="table-sm" style="width: 100%">
             <tr>
-                <td style="width: 150px">
-                    <asp:RequiredFieldValidator ID="rName"
-                        ControlToValidate="txtName" Display="None" runat="server" Text="*"
-                        ErrorMessage="<span><b>Pre-Project Name</b> is required</span>" SetFocusOnError="true" ValidationGroup="Pre_Project">
-                    </asp:RequiredFieldValidator>
+                <td style="width: 150px;text-align:right">
                     Name:
                 </td>
                 <td>
@@ -77,10 +73,7 @@
 
             </tr>
             <tr>
-                <td>
-                    <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Client...)"
-                        Operator="NotEqual" ControlToValidate="cboCliente" Text="*" ErrorMessage="<span><b>Client</b> is required</span>" SetFocusOnError="true"
-                        ValidationGroup="Pre_Project"> </asp:CompareValidator>
+                <td style="text-align:right">
                     Client:
                 </td>
                 <td>
@@ -95,7 +88,7 @@
             </tr>
 
             <tr>
-                <td>Prepared By:
+                <td style="text-align:right">Prepared By:
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboPreparedBy" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name"
@@ -104,7 +97,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Proposal By:
+                <td style="text-align:right">Proposal By:
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboProposalBy" runat="server" DataSourceID="SqlDataSourceEmployees" DataTextField="Name"
@@ -113,7 +106,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Department:
+                <td style="text-align:right">Department:
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboDepartment" runat="server" DataSourceID="SqlDataSourceDepartments" DataTextField="Name"
@@ -124,10 +117,7 @@
             </tr>
 
             <tr>
-                <td>
-                    <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Project Type...)"
-                        Operator="NotEqual" ControlToValidate="cboType" Text="*" ErrorMessage="<span><b>Project Type</b> is required</span>" SetFocusOnError="true"
-                        ValidationGroup="Pre_Project"> </asp:CompareValidator>
+                <td style="text-align:right">
                     Project Type:
                 </td>
                 <td>
@@ -141,11 +131,7 @@
 
             </tr>
             <tr>
-                <td>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
-                        ControlToValidate="txtProjectLocation" Display="None" runat="server" Text="*"
-                        ErrorMessage="<span><b>Location</b> is required</span>" SetFocusOnError="true" ValidationGroup="Pre_Project">
-                    </asp:RequiredFieldValidator>
+                <td style="text-align:right">
                     Location:
                 </td>
                 <td>
@@ -156,7 +142,7 @@
 
             </tr>
             <tr>
-                <td>Description:
+                <td style="text-align:right;vertical-align:top">Description:
                 </td>
                 <td>
                     <telerik:RadTextBox Width="100%" ID="txtDescription" runat="server" MaxLength="255" Rows="2" TextMode="MultiLine">
@@ -165,7 +151,7 @@
 
             </tr>
             <tr>
-                <td>Status:
+                <td style="text-align:right">Status:
                 </td>
                 <td>
                     <telerik:RadComboBox ID="cboStatus" runat="server" Width="50%" AppendDataBoundItems="True">
@@ -201,6 +187,24 @@
             </tr>
         </table>
 
+        <div>
+                    <asp:RequiredFieldValidator ID="rName"
+                        ControlToValidate="txtName" Display="None" runat="server" Text="*"
+                        ErrorMessage="<span><b>Pre-Project Name</b> is required</span>" SetFocusOnError="true" ValidationGroup="Pre_Project">
+                    </asp:RequiredFieldValidator>
+                                <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Select Client...)"
+                        Operator="NotEqual" ControlToValidate="cboCliente" Text="*" ErrorMessage="<span><b>Client</b> is required</span>" SetFocusOnError="true"
+                        ValidationGroup="Pre_Project"> </asp:CompareValidator>
+                    <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Project Type...)"
+                        Operator="NotEqual" ControlToValidate="cboType" Text="*" ErrorMessage="<span><b>Project Type</b> is required</span>" SetFocusOnError="true"
+                        ValidationGroup="Pre_Project"> </asp:CompareValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
+                        ControlToValidate="txtProjectLocation" Display="None" runat="server" Text="*"
+                        ErrorMessage="<span><b>Location</b> is required</span>" SetFocusOnError="true" ValidationGroup="Pre_Project">
+                    </asp:RequiredFieldValidator>
+
+
+        </div>
     </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         UpdateCommand="Pre_Project_UPDATE" UpdateCommandType="StoredProcedure"
