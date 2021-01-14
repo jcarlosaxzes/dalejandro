@@ -284,15 +284,6 @@ Partial Public Class multiplierwizard
     Protected WithEvents RadWizardStep1 As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
-    '''lblPreviousMultiplier control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblPreviousMultiplier As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''lblFinalMultiplier control.
     '''</summary>
     '''<remarks>
@@ -300,6 +291,15 @@ Partial Public Class multiplierwizard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFinalMultiplier As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblPreviousMultiplier control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblPreviousMultiplier As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''RadGridMultiplier_log control.

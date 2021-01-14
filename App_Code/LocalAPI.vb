@@ -1575,9 +1575,9 @@ Public Class LocalAPI
     End Function
     Public Shared Function GetCompanyMultiplierStatusLabelCSS(ByVal status As String) As String
         Select Case UCase(status)
-            Case "OPEN"
+            Case "YES"
                 Return "badge badge-success statuslabel"
-            Case Else   ' Close'
+            Case Else   ' NO'
                 Return "badge badge-danger statuslabel"
         End Select
 
