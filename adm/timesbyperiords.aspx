@@ -44,7 +44,7 @@
 
     <div class="pasconcept-bar noprint">
 
-        <span class="pasconcept-pagetitle">Time By Periods</span>
+        <span class="pasconcept-pagetitle">Time By Period</span>
 
         <span style="float: right; vertical-align: middle;">
             <table class="table-sm">
@@ -53,7 +53,7 @@
                         <telerik:RadDropDownList ID="cboPeriod" runat="server" AutoPostBack="true" Width="150px">
                             <Items>
                                 <telerik:DropDownListItem Text="By Periods" Value="0" />
-                                <telerik:DropDownListItem Text="By Moths" Value="1" />
+                                <telerik:DropDownListItem Text="By Months" Value="1" />
                                 <telerik:DropDownListItem Text="By Years" Value="2" />
                             </Items>
                         </telerik:RadDropDownList>

@@ -177,7 +177,7 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/time" Text="Time Entries"
                                                 Visible='<%# EmployeePermission("Deny_ProjectTimeEntries") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/timesbyperiords" Text="Times by Periods"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/timesbyperiords" Text="Times by Period"
                                                 Visible='<%# EmployeePermission("Deny_TimesbyPeriods")%>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/jobtickets" Text="Tickets"
@@ -751,7 +751,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: center" class="enlacepie noprint ">&copy; 2009-2020 - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">Axzes LLC</a>
+                        <td style="text-align: center" class="enlacepie noprint ">&copy; 2009-<%: DateTime.Now.Year %> - All rights reserved - <b>PASconcept</b> is a trademark property of <a href="http://axzes.com" target="_blank">Axzes LLC</a>
                         </td>
                     </tr>
                 </table>

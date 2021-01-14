@@ -1584,8 +1584,7 @@ Public Class LocalAPI
     End Function
 
 
-
-    Public Shared Function CompanyMultiplier_INSERT(companyId As Integer, Year As Integer, Salary As Double, TaxPercent As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
+    Public Shared Function CompanyMultiplier_INSERT(companyId As Integer, Year As Integer, Salary As Double, TaxPercent As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Integer
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
@@ -1614,13 +1613,12 @@ Public Class LocalAPI
             cmd.ExecuteNonQuery()
             cnn1.Close()
 
-            Return True
+            Return GetNumericEscalar($"select Id from Company_MultiplierByYear where companyId={companyId} and year={Year}")
 
         Catch ex As Exception
             Throw ex
         End Try
     End Function
-
 
     Public Shared Function CompanyMultiplier_UPDATE(Id As Integer, Salary As Double, TaxPercent As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
         Try
@@ -1646,6 +1644,30 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@CalculateBudgetDepartment", CalculateBudgetDepartment)
             cmd.Parameters.AddWithValue("@Closed", Closed)
             cmd.Parameters.AddWithValue("@Id", Id)
+
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+
+            Return True
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+    Public Shared Function CompanyMultiplier_DELETE(companyId As Integer, Year As Integer) As Boolean
+        Try
+
+            Dim MultiplierId As Integer = LocalAPI.GetNumericEscalar($"select Id from Company_MultiplierByYear where companyId={companyId} and year={Year}")
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CompanyMultiplierRecord_DELETE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Id", MultiplierId)
 
             cmd.ExecuteNonQuery()
             cnn1.Close()
