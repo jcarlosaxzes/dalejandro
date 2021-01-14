@@ -225,9 +225,6 @@
                     <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJobs"
                         DataTextField="Name" DataValueField="Id" Width="100%" AppendDataBoundItems="True" ZIndex="50001" Height="350px"
                         MarkFirstMatch="True" Filter="Contains">
-                        <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(Create NEW Axzes Job...)" Value="0" />
-                        </Items>
                     </telerik:RadComboBox>
                 </td>
             </tr>

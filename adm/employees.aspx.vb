@@ -113,8 +113,7 @@ Public Class employees
                 End If
 
             Case "Permits"
-                sUrl = "~/ADM/Employee_Permissions_form.aspx?employeeId=" & e.CommandArgument & "&Entity=Employee"
-                CreateRadWindows(e.CommandName, sUrl, 960, 800, False)
+                Response.Redirect($"~/ADM/Employee_Permissions_form.aspx?employeeId={e.CommandArgument}&Entity=Employee&backpage=employees")
 
             Case "UpdateStatus"
                 sUrl = "~/ADM/Employee_Status_form.aspx?employeeId=" & e.CommandArgument

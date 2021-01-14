@@ -81,12 +81,11 @@
                             <tr>
                                 <td>
                                     <telerik:RadGrid ID="RadGridMultiplier" GridLines="None" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-HorizontalAlign="Center">
-                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceMultiplier" AutoGenerateColumns="False" CommandItemDisplay="Top">
-                                            <CommandItemSettings ShowAddNewRecordButton="false" />
+                                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceMultiplier" AutoGenerateColumns="False">
                                             <ColumnGroups>
-                                                <telerik:GridColumnGroup HeaderText="Estimated Expenses" Name="EstimatedGroup" HeaderStyle-HorizontalAlign="Center">
+                                                <telerik:GridColumnGroup HeaderText="Estimated Expenses" Name="EstimatedGroup" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Bold="true">
                                                 </telerik:GridColumnGroup>
-                                                <telerik:GridColumnGroup HeaderText="Desired Profit" Name="ProfitGroup" HeaderStyle-HorizontalAlign="Center">
+                                                <telerik:GridColumnGroup HeaderText="Desired Profit" Name="ProfitGroup" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Bold="true">
                                                 </telerik:GridColumnGroup>
                                             </ColumnGroups>
                                             <Columns>
@@ -98,47 +97,44 @@
                                                             <%#Eval("Year")%> 
                                                         </asp:LinkButton>
                                                     </ItemTemplate>
-                                                    <EditItemTemplate>
-                                                        <telerik:RadTextBox ID="txtYearMult" runat="server" Text='<%# Bind("Year") %>' />
-                                                    </EditItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
-                                                <telerik:GridNumericColumn DataField="Salary" HeaderText="Salary"
-                                                    SortExpression="Salary" UniqueName="Salary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
+                                                <telerik:GridNumericColumn DataField="Salary" HeaderText="Salary" HeaderStyle-Width="140px"
+                                                    SortExpression="Salary" UniqueName="Salary" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="SalaryTax" HeaderText="Salary Tax"
-                                                    SortExpression="SalaryTax" UniqueName="SalaryTax" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
+                                                <telerik:GridNumericColumn DataField="SalaryTax" HeaderText="Employer Payroll Taxes" HeaderStyle-Width="140px"
+                                                    SortExpression="SalaryTax" UniqueName="SalaryTax" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="ProductiveSalary" HeaderText="Productive Salary"
-                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
+                                                <telerik:GridNumericColumn DataField="ProductiveSalary" HeaderText="Productive Salary" HeaderStyle-Width="140px"
+                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="SubContracts" HeaderText="Sub Fees"
-                                                    SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
+                                                <telerik:GridNumericColumn DataField="SubContracts" HeaderText="Sub Fees" HeaderStyle-Width="140px"
+                                                    SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:C2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="Rent" HeaderText="Rent"
+                                                <telerik:GridNumericColumn DataField="Rent" HeaderText="Rent" HeaderStyle-Width="140px"
                                                     SortExpression="Rent" UniqueName="Rent" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="Others" HeaderText="Others"
+                                                <telerik:GridNumericColumn DataField="Others" HeaderText="Others" HeaderStyle-Width="140px"
                                                     SortExpression="Others" UniqueName="Others" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="Total" HeaderText="Total"
+                                                <telerik:GridNumericColumn DataField="Total" HeaderText="Expenses Total" HeaderStyle-Width="140px"
                                                     SortExpression="Total" UniqueName="Total" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Right"
                                                     ColumnGroupName="EstimatedGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridNumericColumn DataField="Profit" HeaderStyle-Width="80px" HeaderText="(%)"
+                                                <telerik:GridNumericColumn DataField="Profit" HeaderStyle-Width="60px" HeaderText="(%)"
                                                     SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center"
                                                     ColumnGroupName="ProfitGroup">
                                                 </telerik:GridNumericColumn>
@@ -148,23 +144,23 @@
                                                     ColumnGroupName="ProfitGroup">
                                                 </telerik:GridNumericColumn>
 
-                                                <telerik:GridTemplateColumn DataField="TotalAndProfit" HeaderText="Necesary Income<br/>Estimated:....<br/>Actual:.......%"
+                                                <telerik:GridTemplateColumn DataField="TotalAndProfit" HeaderText="Actual ($).......(%)<br/>Necesary Income"
                                                     SortExpression="TotalAndProfit" UniqueName="TotalAndProfit" ReadOnly="true" ItemStyle-HorizontalAlign="Right">
                                                     <ItemTemplate>
                                                         <table style="width: 100%">
                                                             <tr>
-                                                                <td style="font-size: small; text-align: center; font-weight: bold">
-                                                                    <%#Eval("TotalAndProfit", "{0:N2}")%>
-                                                                    <hr style="margin: 0" />
-                                                                </td>
-                                                                <td></td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td style="font-size: small; color: darkgreen; text-align: center; font-weight: bold">
-                                                                    <%#Eval("ActualIncome", "{0:N2}")%> 
+                                                                    <%#Eval("ActualIncome", "{0:C2}")%> 
                                                                 </td>
                                                                 <td style="font-size: smaller; text-align: right">
                                                                     <%#Eval("IncomePercent", "{0:N0}") %> %
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" style="font-size: small; text-align: center; font-weight: bold">
+                                                                    <hr style="margin: 0" />
+                                                                    <%#Eval("TotalAndProfit", "{0:N2}")%>
+                                                                    
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -172,7 +168,7 @@
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
-                                                <telerik:GridTemplateColumn DataField="Status" HeaderText="Automatic" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                                                <telerik:GridTemplateColumn DataField="Status" HeaderText="Automatic" SortExpression="Status" UniqueName="Status" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px" Display="false">
                                                     <ItemTemplate>
                                                         <div style="font-size: 12px; width: 100%"
                                                             class='<%# LocalAPI.GetCompanyMultiplierStatusLabelCSS(Eval("Status")) %>'>
@@ -182,7 +178,7 @@
                                                 </telerik:GridTemplateColumn>
 
                                                 <telerik:GridNumericColumn DataField="Multiplier" HeaderStyle-Width="80px" HeaderText="Multiplier"
-                                                    SortExpression="Multiplier" UniqueName="Multiplier" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" ItemStyle-Font-Bold="true">
+                                                    SortExpression="Multiplier" UniqueName="Multiplier" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Medium" ItemStyle-Font-Bold="true">
                                                 </telerik:GridNumericColumn>
                                                 <telerik:GridButtonColumn ConfirmText="Delete this Multiplier year?" ConfirmDialogType="RadWindow"
                                                     ConfirmTitle="Delete" HeaderText="" HeaderStyle-Width="30px"
@@ -323,7 +319,7 @@
                                                     HeaderTooltip="Producer Rate 0 to 1">
                                                 </telerik:GridNumericColumn>
                                                 <telerik:GridTemplateColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="$/Hour" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Right"
                                                     HeaderTooltip="Hourly Wage Rate">
                                                     <ItemTemplate>
                                                         <%# Eval("Amount", "{0:C2}") %>
@@ -332,11 +328,11 @@
                                                 </telerik:GridTemplateColumn>
 
                                                 <telerik:GridNumericColumn DataField="AnnualSalary" HeaderText="Annual" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="AnnualSalary" UniqueName="AnnualSalary" DataFormatString="{0:C0}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
+                                                    SortExpression="AnnualSalary" UniqueName="AnnualSalary" DataFormatString="{0:C0}" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
                                                     HeaderTooltip="Annual Salary Calculated">
                                                 </telerik:GridNumericColumn>
                                                 <telerik:GridTemplateColumn DataField="ProductiveSalary" HeaderText="Productive" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
+                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
                                                     HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
                                                     <ItemTemplate>
                                                         <%# Eval("ProductiveSalary", "{0:C0}") %>
