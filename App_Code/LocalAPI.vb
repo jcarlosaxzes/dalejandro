@@ -1584,7 +1584,7 @@ Public Class LocalAPI
     End Function
 
 
-    Public Shared Function CompanyMultiplier_INSERT(companyId As Integer, Year As Integer, Salary As Double, TaxPercent As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Integer
+    Public Shared Function CompanyMultiplier_INSERT(companyId As Integer, Year As Integer, Salary As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Integer
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
@@ -1598,7 +1598,6 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@companyId", companyId)
             cmd.Parameters.AddWithValue("@Year", Year)
             cmd.Parameters.AddWithValue("@Salary", Salary)
-            cmd.Parameters.AddWithValue("@TaxPercent", TaxPercent)
             cmd.Parameters.AddWithValue("@SubContracts", SubContracts)
             cmd.Parameters.AddWithValue("@Rent", Rent)
             cmd.Parameters.AddWithValue("@Others", Others)
@@ -1620,7 +1619,7 @@ Public Class LocalAPI
         End Try
     End Function
 
-    Public Shared Function CompanyMultiplier_UPDATE(Id As Integer, Salary As Double, TaxPercent As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
+    Public Shared Function CompanyMultiplier_UPDATE(Id As Integer, Salary As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
@@ -1632,7 +1631,6 @@ Public Class LocalAPI
 
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@Salary", Salary)
-            cmd.Parameters.AddWithValue("@TaxPercent", TaxPercent)
             cmd.Parameters.AddWithValue("@SubContracts", SubContracts)
             cmd.Parameters.AddWithValue("@Rent", Rent)
             cmd.Parameters.AddWithValue("@Others", Others)

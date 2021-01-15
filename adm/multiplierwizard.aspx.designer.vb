@@ -122,24 +122,6 @@ Partial Public Class multiplierwizard
     Protected WithEvents lblPastSalary As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtSalaryTax control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSalaryTax As Global.Telerik.Web.UI.RadNumericTextBox
-
-    '''<summary>
-    '''lblSalaryTax control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblSalaryTax As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''txtProductiveSalary control.
     '''</summary>
     '''<remarks>
@@ -230,15 +212,6 @@ Partial Public Class multiplierwizard
     Protected WithEvents lblPastProfit As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''cboStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
     '''cboAutoSalary control.
     '''</summary>
     '''<remarks>
@@ -273,6 +246,15 @@ Partial Public Class multiplierwizard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboCalculateBudgetDepartment As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''cboStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
     '''RadWizardStep1 control.

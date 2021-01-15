@@ -49,6 +49,10 @@
                                     SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
                                     DecimalDigits="2" MinValue="0">
                                 </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="EmployerPayrollTaxPercentage" HeaderText="Payroll Tax(%)" HeaderStyle-HorizontalAlign="Center"
+                                    SortExpression="EmployerPayrollTaxPercentage" UniqueName="EmployerPayrollTaxPercentage" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Employer Payroll Tax Percentage"
+                                    DecimalDigits="2" MinValue="0">
+                                </telerik:GridNumericColumn>
                                 <telerik:GridNumericColumn DataField="HourPerWeek" HeaderText="Hours per Week"
                                     SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center"
                                     DecimalDigits="2" MinValue="0" MaxValue="40">
@@ -97,19 +101,6 @@
                                     <td>The total salary to be paid to employees throughout <%# lblTitleYear.Text %>
                                         <br />
                                         <small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblPastSalary" runat="server"></asp:Label></small>
-                                        
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: right">Employer Payroll Tax:
-
-                                    </td>
-                                    <td style="padding-top:15px;padding-bottom:15px">
-                                        <telerik:RadNumericTextBox Width="95%" ID="txtSalaryTax" runat="server" MaxValue="99">
-                                        </telerik:RadNumericTextBox>
-                                    </td>
-                                    <td>Total Local, State and Federal Tax for <%# lblTitleYear.Text %>
-                                        <br /><small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblSalaryTax" runat="server"></asp:Label></small>
                                         
                                     </td>
                                 </tr>
@@ -190,24 +181,6 @@
                                         
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="text-align: right">Automatic Multiplier:
-
-                                    </td>
-                                    <td style="padding-top:15px;padding-bottom:15px">
-                                        <telerik:RadComboBox ID="cboStatus" runat="server" Width="95%">
-                                            <Items>
-                                                <telerik:RadComboBoxItem runat="server" Text="Yes" Value="0" Selected="true" />
-                                                <telerik:RadComboBoxItem runat="server" Text="No" Value="1" />
-                                            </Items>
-                                        </telerik:RadComboBox>
-                                    </td>
-
-                                    <td>Do you want changes made to Employee Salaries throughout the year to automatically affect the multiplier value?
-                                        <br /><small>An increase in an employees salary will cause in an automatic increase in the company multiplier factor if this field is set to "Yes".</small>
-
-                                    </td>
-                                </tr>
 
                             </table>
                         </asp:Panel>
@@ -276,6 +249,24 @@
                                 <td>Update Budgets by Departments on background operations. New/Inactivate/Update Benefits of any Employee.
                                 </td>
                             </tr>
+                                <tr>
+                                    <td style="text-align: right">Automatic Multiplier:
+
+                                    </td>
+                                    <td style="padding-top:15px;padding-bottom:15px">
+                                        <telerik:RadComboBox ID="cboStatus" runat="server" Width="95%">
+                                            <Items>
+                                                <telerik:RadComboBoxItem runat="server" Text="Yes" Value="0" Selected="true" />
+                                                <telerik:RadComboBoxItem runat="server" Text="No" Value="1" />
+                                            </Items>
+                                        </telerik:RadComboBox>
+                                    </td>
+
+                                    <td>Do you want changes made to Employee Salaries throughout the year to automatically affect the multiplier value?
+                                        <br /><small>An increase in an employees salary will cause in an automatic increase in the company multiplier factor if this field is set to "Yes".</small>
+
+                                    </td>
+                                </tr>
 
                         </table>
                     </div>
@@ -366,6 +357,7 @@
             <asp:Parameter Name="Date" />
             <asp:Parameter Name="DateEnd" />
             <asp:Parameter Name="Amount" />
+            <asp:Parameter Name="EmployerPayrollTaxPercentage" />
             <asp:Parameter Name="HourPerWeek" />
             <asp:Parameter Name="Producer" />
             <asp:Parameter Name="Benefits_vacations" />
