@@ -475,12 +475,11 @@
                                     <h4 style="margin: 0">Logo & Signature Setting</h3>
                                     <table class="table-sm">
                                         <tr>
-                                            <td>Picture quality recommended for company letter head: 1700 x 225 pixels, 200 dpi resolution equivalent to 8,5" x 1,5"
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width: 50%; vertical-align: top">
+                                            <td style="width: 60%; vertical-align: top">
                                                 <h3>Company Logo</h3>
+                                                <small>
+                                                    The Company Logo is used in the header of client communication pages, such as Proposal, Invoices, Statements
+                                                </small>
                                                 <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridLogo" DataSourceID="SqlDataSourceLogo" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true">
                                                     <MasterTableView DataKeyNames="companyId" DataSourceID="SqlDataSourceLogo">
                                                         <Columns>
@@ -515,6 +514,9 @@
                                         <tr>
                                             <td style="vertical-align: top">
                                                 <h3>Signature Pictures</h3>
+                                                <small>
+                                                    Signature is used in Proposals sent to clients
+                                                </small>
                                                 <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridSign" DataSourceID="SqlDataSourceSign" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true">
                                                     <MasterTableView DataKeyNames="companyId" DataSourceID="SqlDataSourceSign">
                                                         <Columns>

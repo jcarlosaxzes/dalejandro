@@ -92,6 +92,10 @@
                             SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
                             DecimalDigits="2" MinValue="0">
                         </telerik:GridNumericColumn>
+                        <telerik:GridNumericColumn DataField="EmployerPayrollTaxPercentage" HeaderText="Employer Payroll Tax(%)" HeaderStyle-HorizontalAlign="Center"
+                            SortExpression="EmployerPayrollTaxPercentage" UniqueName="EmployerPayrollTaxPercentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Employer Payroll Tax Percentage"
+                            DecimalDigits="2" MinValue="0">
+                        </telerik:GridNumericColumn>
                         <telerik:GridNumericColumn DataField="HourPerWeek" HeaderText="Hours per Week" HeaderStyle-HorizontalAlign="Center"
                             SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="2" MinValue="0" MaxValue="40">
