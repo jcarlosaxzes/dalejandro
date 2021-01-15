@@ -25,6 +25,7 @@
         Dim HourlyWageObject = LocalAPI.GetRecord(lblHourlyWageHistoryId.Text, "Employee_HourlyWageHistory_SELECT")
         RadDatePickerFrom.DbSelectedDate = Date.Today
         txtHourlyRate.DbValue = HourlyWageObject("Amount")
+        txtEmployerPayrollTaxPercentage.DbValue = HourlyWageObject("EmployerPayrollTaxPercentage")
         RadNumericHour.DbValue = HourlyWageObject("HourPerWeek")
         RadNumericProducer.DbValue = HourlyWageObject("Producer")
         txtBenefits_vacations.DbValue = HourlyWageObject("Benefits_vacations")

@@ -266,15 +266,9 @@
                             <td>
                                 <h3>Employee Wages</h3>
                             </td>
-                            <td>
-                                <asp:LinkButton ID="btnInitialize" runat="server" ToolTip="Selected year for Initialize Hourly Wage for all Active Employees"
-                                    CssClass="btn btn-danger" UseSubmitBehavior="false">
-                                     Initialize All Employee
-                                </asp:LinkButton>
-                            </td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td>
                                 <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
                                     <script type="text/javascript">
                                         function OnClientClose(sender, args) {
@@ -535,46 +529,7 @@
         </telerik:RadWizard>
 
     </div>
-    <telerik:RadToolTip ID="RadToolTipInitialize" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <table class="table-sm" style="width: 650px">
-            <tr>
-                <td style="text-align: center">
-                    <h2 style="margin: 0; text-align: center; color: white;">
-                        <span class="navbar navbar-expand-md bg-dark text-white">Hourly Wage for Selected Year
-                        </span>
-                    </h2>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p>
-                        Initialize the records of all active employees, based on their history of the year prior to the one selected. using the 'Increase' parameter to define their Salary($/Hour)
-                    </p>
-                    <p>
-                        This procedure does not overwrite records of existing employees in the selected year
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <telerik:RadNumericTextBox ID="txtInitializeYear" runat="server" Label="Year:"
-                        MinValue="2015" MaxValue="2029">
-                        <NumberFormat DecimalDigits="0" GroupSeparator="" />
-                    </telerik:RadNumericTextBox>
-
-                </td>
-            </tr>
-            <tr>
-                <td style="text-align: right; padding-right: 10px; padding-top: 50px">
-                    <asp:LinkButton ID="btnInitializeOk" runat="server" ToolTip="Initialize(insert) all Active Employees for selected year"
-                        CssClass="btn btn-warning btn" UseSubmitBehavior="false">
-                                     Confirm Initialize
-                    </asp:LinkButton>
-                </td>
-
-            </tr>
-        </table>
-    </telerik:RadToolTip>
+   
 
     <asp:SqlDataSource ID="SqlDataSourceMultiplier" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CompanyMultiplier_SELECT" SelectCommandType="StoredProcedure"
@@ -605,16 +560,11 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Id], [Name]=[FullName]+case when isnull(Inactive,0)=1 then ' (I)' else '' end FROM [Employees] WHERE companyId=@companyId and DepartmentId=case when @DepartmentId>0 then @DepartmentId else DepartmentId end ORDER BY isnull(Inactive,0), [Name]"
-        InsertCommand="PayrollInitialize_INSERT" InsertCommandType="StoredProcedure">
+        SelectCommand="SELECT [Id], [Name]=[FullName]+case when isnull(Inactive,0)=1 then ' (I)' else '' end FROM [Employees] WHERE companyId=@companyId and DepartmentId=case when @DepartmentId>0 then @DepartmentId else DepartmentId end ORDER BY isnull(Inactive,0), [Name]">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboDepartments" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
-        <InsertParameters>
-            <asp:ControlParameter ControlID="txtInitializeYear" Name="Year" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-        </InsertParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceYears" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Year, nYear FROM (select Year, nYear from Years union all select Year,Year as nYear from Company_MultiplierByYear where companyId=@companyId)T GROUP BY Year, nYear ORDER BY Year DESC">

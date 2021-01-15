@@ -12,7 +12,6 @@ Public Class multiplierwizard
                 ' New Record
                 lblModeInsert.Text = 1
                 lblYear.Text = LocalAPI.GetMaxYearOfCompanyMultiplier(lblCompanyId.Text) + 1
-                txtTaxPercent.Text = 7
             Else
                 ' Edit Record
                 lblModeInsert.Text = 0
@@ -42,7 +41,7 @@ Public Class multiplierwizard
             ' Salary
             lblYear.Text = RecordObject("Year")
             txtSalary.Text = RecordObject("Salary")
-            txtTaxPercent.Text = RecordObject("TaxPercent")
+            txtSalaryTax.Text = RecordObject("SalaryTax")
             cboAutoSalary.SelectedValue = RecordObject("CalculateSalary")
 
             ' Productive Salary
@@ -80,7 +79,7 @@ Public Class multiplierwizard
                 ' Salary
                 lblPastYear.Text = RecordObject("Year")
                 lblPastSalary.Text = FormatNumber(RecordObject("Salary"), 2)
-                lblPastTaxPercent.Text = RecordObject("TaxPercent")
+                lblSalaryTax.Text = RecordObject("SalaryTax")
 
                 ' Productive Salary
                 lblPastProductiveSalary.Text = FormatNumber(RecordObject("ProductiveSalary"), 2)
@@ -105,7 +104,7 @@ Public Class multiplierwizard
 
             If lblMultiplierId.Text = 0 Then
                 ' Insert New Record before calculate....
-                lblMultiplierId.Text = LocalAPI.CompanyMultiplier_INSERT(lblCompanyId.Text, lblYear.Text, txtSalary.DbValue, txtTaxPercent.DbValue, txtSubContracts.DbValue, txtRent.DbValue, txtOthers.DbValue, txtProductiveSalary.DbValue, txtProfit.DbValue, cboAutoSalary.SelectedValue, cboAutoProductiveSalary.SelectedValue, cboInitializeEmployee.SelectedValue, cboCalculateBudgetDepartment.SelectedValue, cboStatus.SelectedValue)
+                lblMultiplierId.Text = LocalAPI.CompanyMultiplier_INSERT(lblCompanyId.Text, lblYear.Text, txtSalary.DbValue, 7, txtSubContracts.DbValue, txtRent.DbValue, txtOthers.DbValue, txtProductiveSalary.DbValue, txtProfit.DbValue, cboAutoSalary.SelectedValue, cboAutoProductiveSalary.SelectedValue, cboInitializeEmployee.SelectedValue, cboCalculateBudgetDepartment.SelectedValue, cboStatus.SelectedValue)
             End If
 
             ' Calculate Firt Time
@@ -122,7 +121,7 @@ Public Class multiplierwizard
     Private Sub RadWizard1_FinishButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.FinishButtonClick
         Try
             ' Update Record AGAIN....
-            LocalAPI.CompanyMultiplier_UPDATE(lblMultiplierId.Text, txtSalary.DbValue, txtTaxPercent.DbValue, txtSubContracts.DbValue, txtRent.DbValue, txtOthers.DbValue, txtProductiveSalary.DbValue, txtProfit.DbValue, cboAutoSalary.SelectedValue, cboAutoProductiveSalary.SelectedValue, cboInitializeEmployee.SelectedValue, cboCalculateBudgetDepartment.SelectedValue, cboStatus.SelectedValue)
+            LocalAPI.CompanyMultiplier_UPDATE(lblMultiplierId.Text, txtSalary.DbValue, 7, txtSubContracts.DbValue, txtRent.DbValue, txtOthers.DbValue, txtProductiveSalary.DbValue, txtProfit.DbValue, cboAutoSalary.SelectedValue, cboAutoProductiveSalary.SelectedValue, cboInitializeEmployee.SelectedValue, cboCalculateBudgetDepartment.SelectedValue, cboStatus.SelectedValue)
 
             ' Re-Calculate AGAIN
             Dim dbMultiplier As Double = LocalAPI.CompanyCalculateMultiplier(lblCompanyId.Text, lblYear.Text)

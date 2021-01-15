@@ -158,6 +158,17 @@
                 </td>
             </tr>
             <tr>
+                <td>Employer Payroll Tax  (%):
+                </td>
+                <td style="width: 180px;">
+                    <telerik:RadNumericTextBox ID="txtEmployerPayrollTaxPercentage" runat="server" MinValue="0" MaxValue="100" Width="160">
+                        <NumberFormat DecimalDigits="2" />
+                    </telerik:RadNumericTextBox>
+                </td>
+                <td class="small">Total Local, State and Federal Tax Percentage.
+                </td>
+            </tr>
+            <tr>
                 <td>Producer Rate (0 to 1):
                 </td>
                 <td>
@@ -229,6 +240,7 @@
             <asp:Parameter Name="Date" />
             <asp:Parameter Name="DateEnd" />
             <asp:Parameter Name="Amount" />
+            <asp:Parameter Name="EmployerPayrollTaxPercentage" />
             <asp:Parameter Name="HourPerWeek" />
             <asp:Parameter Name="Producer" />
             <asp:Parameter Name="Benefits_vacations" />
@@ -239,6 +251,7 @@
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="Date" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="txtHourlyRate" Name="Amount" PropertyName="Value" />
+            <asp:ControlParameter ControlID="txtEmployerPayrollTaxPercentage" Name="EmployerPayrollTaxPercentage" PropertyName="Value" />
             <asp:ControlParameter ControlID="RadNumericHour" Name="HourPerWeek" PropertyName="Value" />
             <asp:ControlParameter ControlID="RadNumericProducer" Name="Producer" PropertyName="Value" />
             <asp:ControlParameter ControlID="txtBenefits_vacations" Name="Benefits_vacations" PropertyName="Value" />

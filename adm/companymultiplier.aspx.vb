@@ -44,23 +44,6 @@ Public Class companymultiplier
         Response.Redirect("~/adm/multiplierwizard.aspx")
     End Sub
 
-    Private Sub btnInitialize_Click(sender As Object, e As EventArgs) Handles btnInitialize.Click
-        txtInitializeYear.Text = cboYear.SelectedValue
-        RadToolTipInitialize.Visible = True
-        RadToolTipInitialize.Show()
-    End Sub
-
-    Private Sub btnInitializeOk_Click(sender As Object, e As EventArgs) Handles btnInitializeOk.Click
-        Try
-            SqlDataSourceEmployees.Insert()
-            cboYear.SelectedValue = txtInitializeYear.Text
-            Master.InfoMessage("Hourly Wage for Selected Year Updated for " & txtInitializeYear.Text)
-            RadGridHourlyWage.DataBind()
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
     Private Sub RadGridHourlyWage_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridHourlyWage.ItemCommand
         Select Case e.CommandName
             Case "EditHourlyWage"

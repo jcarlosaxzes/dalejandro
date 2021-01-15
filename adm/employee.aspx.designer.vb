@@ -158,6 +158,15 @@ Partial Public Class employee
     Protected WithEvents txtHourlyRate As Global.Telerik.Web.UI.RadNumericTextBox
 
     '''<summary>
+    '''txtEmployerPayrollTaxPercentage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmployerPayrollTaxPercentage As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
     '''RadNumericProducer control.
     '''</summary>
     '''<remarks>
