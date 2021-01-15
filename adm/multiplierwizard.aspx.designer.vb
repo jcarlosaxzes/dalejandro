@@ -122,22 +122,22 @@ Partial Public Class multiplierwizard
     Protected WithEvents lblPastSalary As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''txtTaxPercent control.
+    '''txtSalaryTax control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtTaxPercent As Global.Telerik.Web.UI.RadNumericTextBox
+    Protected WithEvents txtSalaryTax As Global.Telerik.Web.UI.RadNumericTextBox
 
     '''<summary>
-    '''lblPastTaxPercent control.
+    '''lblSalaryTax control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblPastTaxPercent As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblSalaryTax As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''txtProductiveSalary control.

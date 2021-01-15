@@ -597,6 +597,10 @@
                                         SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
                                         DecimalDigits="2" MinValue="0">
                                     </telerik:GridNumericColumn>
+                                    <telerik:GridNumericColumn DataField="EmployerPayrollTaxPercentage" HeaderText="Employer Payroll Tax(%)" HeaderStyle-HorizontalAlign="Center"
+                                        SortExpression="EmployerPayrollTaxPercentage" UniqueName="EmployerPayrollTaxPercentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Employer Payroll Tax Percentage"
+                                        DecimalDigits="2" MinValue="0">
+                                    </telerik:GridNumericColumn>
                                     <telerik:GridNumericColumn DataField="HourPerWeek" HeaderText="Hours per Week" HeaderStyle-HorizontalAlign="Center"
                                         SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
                                         DecimalDigits="2" MinValue="0" MaxValue="40">
@@ -656,7 +660,7 @@
                 <td>Hourly Rate ($/hour):
                 </td>
                 <td style="width: 180px;">
-                    <telerik:RadNumericTextBox ID="txtHourlyRate" runat="server" MinValue="0" MaxValue="80" Width="160"
+                    <telerik:RadNumericTextBox ID="txtHourlyRate" runat="server" MinValue="0" MaxValue="1000" Width="160"
                         ShowSpinButtons="True"
                         ButtonsPosition="Right">
                         <NumberFormat DecimalDigits="2" />
@@ -666,6 +670,21 @@
                 <td class="small">Amount of money that is paid for every hour worked.
                 </td>
             </tr>
+
+            <tr>
+                <td>Employer Payroll Tax  (%):
+                </td>
+                <td style="width: 180px;">
+                    <telerik:RadNumericTextBox ID="txtEmployerPayrollTaxPercentage" runat="server" MinValue="0" MaxValue="100" Width="160">
+                        <NumberFormat DecimalDigits="2" />
+                    </telerik:RadNumericTextBox>
+                </td>
+                <td class="small">Total Local, State and Federal Tax Percentage.
+                </td>
+            </tr>
+
+
+
             <tr>
                 <td>Producer Rate (0 to 1):
                 </td>
@@ -802,6 +821,7 @@
             <asp:Parameter Name="Date" />
             <asp:Parameter Name="DateEnd" />
             <asp:Parameter Name="Amount" />
+            <asp:Parameter Name="EmployerPayrollTaxPercentage" />
             <asp:Parameter Name="HourPerWeek" />
             <asp:Parameter Name="Producer" />
             <asp:Parameter Name="Benefits_vacations" />
@@ -812,6 +832,7 @@
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="Date" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="txtHourlyRate" Name="Amount" PropertyName="Value" />
+            <asp:ControlParameter ControlID="txtEmployerPayrollTaxPercentage" Name="EmployerPayrollTaxPercentage" PropertyName="Value" />
             <asp:ControlParameter ControlID="RadNumericHour" Name="HourPerWeek" PropertyName="Value" />
             <asp:ControlParameter ControlID="RadNumericProducer" Name="Producer" PropertyName="Value" />
             <asp:ControlParameter ControlID="txtBenefits_vacations" Name="Benefits_vacations" PropertyName="Value" />

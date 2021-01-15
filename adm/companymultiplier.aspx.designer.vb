@@ -122,15 +122,6 @@ Partial Public Class companymultiplier
     Protected WithEvents RadWizardStepEmployeeHourlyWage As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
-    '''btnInitialize control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnInitialize As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
     '''RadCodeBlock1 control.
     '''</summary>
     '''<remarks>
@@ -201,33 +192,6 @@ Partial Public Class companymultiplier
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadGridDptoTarget As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''RadToolTipInitialize control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadToolTipInitialize As Global.Telerik.Web.UI.RadToolTip
-
-    '''<summary>
-    '''txtInitializeYear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtInitializeYear As Global.Telerik.Web.UI.RadNumericTextBox
-
-    '''<summary>
-    '''btnInitializeOk control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnInitializeOk As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''SqlDataSourceMultiplier control.

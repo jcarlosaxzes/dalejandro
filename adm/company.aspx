@@ -481,7 +481,7 @@
                                         <tr>
                                             <td style="width: 50%; vertical-align: top">
                                                 <h3>Company Logo</h3>
-                                                <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridLogo" DataSourceID="SqlDataSourceLogo" AllowAutomaticUpdates="True">
+                                                <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridLogo" DataSourceID="SqlDataSourceLogo" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true">
                                                     <MasterTableView DataKeyNames="companyId" DataSourceID="SqlDataSourceLogo">
                                                         <Columns>
                                                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
@@ -490,6 +490,11 @@
                                                             <telerik:GridBinaryImageColumn DataField="shortLogo" HeaderText="Proposal/Invoice Logo" UniqueName="shortLogo"
                                                                 ImageAlign="NotSet" ImageWidth="180px" ImageHeight="170px" ResizeMode="Fit">
                                                             </telerik:GridBinaryImageColumn>
+                                                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Remove Company Logo Image?" ConfirmTitle="Delete"
+                                                                ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
+                                                                HeaderText="Remove" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"
+                                                                ItemStyle-HorizontalAlign="Center">
+                                                            </telerik:GridButtonColumn>
                                                         </Columns>
                                                         <EditFormSettings CaptionFormatString="Edit Proposal/Invoice Logo" FormCaptionStyle-ForeColor="#ff8c00">
                                                             <FormTableItemStyle Wrap="False"></FormTableItemStyle>
@@ -502,6 +507,7 @@
                                                             </EditColumn>
                                                             <FormTableButtonRowStyle HorizontalAlign="Left" CssClass="EditFormButtonRow"></FormTableButtonRowStyle>
                                                         </EditFormSettings>
+
                                                     </MasterTableView>
                                                 </telerik:RadGrid>
                                             </td>
@@ -509,7 +515,7 @@
                                         <tr>
                                             <td style="vertical-align: top">
                                                 <h3>Signature Pictures</h3>
-                                                <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridSign" DataSourceID="SqlDataSourceSign" AllowAutomaticUpdates="True">
+                                                <telerik:RadGrid runat="server" AutoGenerateColumns="False" ID="RadGridSign" DataSourceID="SqlDataSourceSign" AllowAutomaticUpdates="True" AllowAutomaticDeletes="true">
                                                     <MasterTableView DataKeyNames="companyId" DataSourceID="SqlDataSourceSign">
                                                         <Columns>
                                                             <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="Edit"
@@ -518,6 +524,11 @@
                                                             <telerik:GridBinaryImageColumn DataField="imgSign" HeaderText="Proposal Signature" UniqueName="imgSign"
                                                                 ImageAlign="NotSet" ImageHeight="180px" ImageWidth="180px" ResizeMode="Fit">
                                                             </telerik:GridBinaryImageColumn>
+                                                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Remove Company Signature Pictures?" ConfirmTitle="Delete"
+                                                                ButtonType="ImageButton" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
+                                                                HeaderText="Remove" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px"
+                                                                ItemStyle-HorizontalAlign="Center">
+                                                            </telerik:GridButtonColumn>
                                                         </Columns>
                                                         <EditFormSettings CaptionFormatString="Edit Proposal Signature" FormCaptionStyle-ForeColor="#ff8c00">
                                                             <FormTableItemStyle Wrap="False"></FormTableItemStyle>
@@ -1316,36 +1327,25 @@
 
     <asp:SqlDataSource ID="SqlDataSourceLogo" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT companyId, shortLogo FROM [Company] WHERE ([companyId] = @companyId)"
-        UpdateCommand="UPDATE [Company] SET [shortLogo] = @shortLogo WHERE [companyId] = @companyId"
+        UpdateCommand="UPDATE [Company] SET [shortLogo] = @shortLogo WHERE [companyId] = @companyId" 
+        DeleteCommand="UPDATE [Company] SET [shortLogo] = Null WHERE [companyId] = @companyId" 
         ProviderName="<%$ ConnectionStrings:cnnProjectsAccounting.ProviderName %>">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:Parameter Name="shortLogo" DbType="Binary" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
+        <DeleteParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </DeleteParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceLetterHead" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT companyId, imgLogo FROM [Company] WHERE ([companyId] = @companyId)"
-        UpdateCommand="UPDATE [Company] SET [imgLogo] = @imgLogo WHERE [companyId] = @companyId"
-        ProviderName="<%$ ConnectionStrings:cnnProjectsAccounting.ProviderName %>">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
-        </SelectParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="imgLogo" DbType="Binary" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
-                Type="Int32" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceSign" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT companyId, imgSign  FROM [Company] WHERE ([companyId] = @companyId)"
         UpdateCommand="UPDATE [Company] SET [imgSign] = @imgSign  WHERE [companyId] = @companyId"
+        DeleteCommand="UPDATE [Company] SET [imgSign] = Null WHERE [companyId] = @companyId" 
         ProviderName="<%$ ConnectionStrings:cnnProjectsAccounting.ProviderName %>">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
@@ -1355,6 +1355,9 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
         </UpdateParameters>
+        <DeleteParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </DeleteParameters>
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

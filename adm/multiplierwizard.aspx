@@ -101,15 +101,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: right">Employer Payroll Tax Percentage:
+                                    <td style="text-align: right">Employer Payroll Tax:
 
                                     </td>
                                     <td style="padding-top:15px;padding-bottom:15px">
-                                        <telerik:RadNumericTextBox Width="95%" ID="txtTaxPercent" runat="server" MaxValue="99">
+                                        <telerik:RadNumericTextBox Width="95%" ID="txtSalaryTax" runat="server" MaxValue="99">
                                         </telerik:RadNumericTextBox>
                                     </td>
-                                    <td>Total Local, State and Federal Tax Percentage for <%# lblTitleYear.Text %>
-                                        <br /><small>In <%# lblPastYear.Text %>, this was listed as <asp:Label ID="lblPastTaxPercent" runat="server"></asp:Label>%</small>
+                                    <td>Total Local, State and Federal Tax for <%# lblTitleYear.Text %>
+                                        <br /><small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblSalaryTax" runat="server"></asp:Label></small>
                                         
                                     </td>
                                 </tr>
