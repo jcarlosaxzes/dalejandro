@@ -20,7 +20,7 @@
                 <telerik:RadTextBox ID="txtCampaignName" runat="server" MaxLength="80" Width="90%"></telerik:RadTextBox>
             </td>
             <td style="width: 150px">
-                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false" ToolTip="Update Campaign">
+                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update Campaign">
                     Update Title
                 </asp:LinkButton>
             </td>
