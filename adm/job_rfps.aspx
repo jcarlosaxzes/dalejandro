@@ -122,13 +122,13 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="text-align: right; padding-right: 50px; padding-top: 30px; padding-bottom: 15px">
-                                        <asp:LinkButton ID="btnInsertRFP" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false"
+                                        <asp:LinkButton ID="btnInsertRFP" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false"
                                             ValidationGroup="InsertFee" CausesValidation="true"
                                             CommandName='<%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "PerformInsert", "Update")%>'>
                                                         <i class="fas fa-plus"></i> <%# IIf((TypeOf (Container) Is GridEditFormInsertItem), "Insert", "Update")%>
                                         </asp:LinkButton>
                                         &nbsp;&nbsp;
-                                                    <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel">
+                                                    <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel" CssClass="btn btn-secondary btn-lg">
                                                     </asp:LinkButton>
                                     </td>
                                 </tr>

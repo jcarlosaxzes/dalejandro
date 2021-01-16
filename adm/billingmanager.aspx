@@ -197,9 +197,9 @@
 
                                                 &nbsp;&nbsp;&nbsp;
                                                
-                                                <asp:LinkButton ID="btnUpdate" Text="Update" runat="server" CommandName="Update"></asp:LinkButton>&nbsp;
+                                                <asp:LinkButton ID="btnUpdate" Text="Update" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg"></asp:LinkButton>&nbsp;
                                                
-                                                <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel"></asp:LinkButton>
+                                                <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel" CssClass="btn btn-secondary btn-lg"></asp:LinkButton>
 
                                             </td>
 

@@ -162,7 +162,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: center">
-                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" CausesValidation="true">
+                                <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="true">
                                                 Update
                                 </asp:LinkButton>
 

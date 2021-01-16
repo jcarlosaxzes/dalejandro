@@ -165,7 +165,7 @@
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td style="text-align: right;">
-                                                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="True" CommandName="Update" ValidationGroup="Contact">
+                                                    <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CausesValidation="True" CommandName="Update" ValidationGroup="Contact">
                                                         Update
                                                     </asp:LinkButton>
                                                 </td>

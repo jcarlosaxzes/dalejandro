@@ -20,7 +20,8 @@
 
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Employee Wages" StepType="Start">
                     <div>
-                        <h4>Wage Modifications for <asp:Label ID="lblYearTab1" runat="server" ></asp:Label></h4>
+                        <h4>Wage Modifications for
+                            <asp:Label ID="lblYearTab1" runat="server"></asp:Label></h4>
                     </div>
                     <div class="pasconcept-bar">
                         <telerik:RadComboBox ID="cboDepartments" runat="server" DataSourceID="SqlDataSourceDepartments" MarkFirstMatch="True" Label="Departement: "
@@ -32,7 +33,7 @@
                     </div>
                     <telerik:RadGrid ID="RadGridHourlyWage" runat="server" DataSourceID="SqlDataSourceHourlyWage" AllowAutomaticDeletes="true" AllowAutomaticUpdates="true"
                         AutoGenerateColumns="False" AllowSorting="True" ShowFooter="true" HeaderStyle-HorizontalAlign="Center">
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWage" >
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWage">
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" ItemStyle-HorizontalAlign="Center"
                                     HeaderText="" HeaderStyle-Width="50px">
@@ -40,10 +41,10 @@
                                 <telerik:GridBoundColumn DataField="Employee" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee" ReadOnly="true">
                                 </telerik:GridBoundColumn>
                                 <telerik:GridDateTimeColumn DataField="Date" HeaderText="Date From"
-                                    SortExpression="Date" UniqueName="Date" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" PickerType="DatePicker" DataFormatString="{0:d}">
+                                    SortExpression="Date" UniqueName="Date" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" DataFormatString="{0:d}">
                                 </telerik:GridDateTimeColumn>
-                                <telerik:GridDateTimeColumn DataField="DateEnd" FilterControlAltText="Filter DateEnd column" HeaderText="Date To"
-                                    SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" PickerType="DatePicker" DataFormatString="{0:d}">
+                                <telerik:GridDateTimeColumn DataField="DateEnd" HeaderText="Date To"
+                                    SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" DataFormatString="{0:d}">
                                 </telerik:GridDateTimeColumn>
                                 <telerik:GridNumericColumn DataField="Amount" HeaderText="$/Hour"
                                     SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
@@ -75,9 +76,111 @@
                                     ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                                 </telerik:GridButtonColumn>
                             </Columns>
-                            <EditFormSettings>
-                                <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
-                                </EditColumn>
+                            <EditFormSettings EditFormType="Template">
+                                <FormTemplate>
+                                    <table class="table-sm" style="width: 100%">
+                                        <tr>
+                                            <td style="width: 180px; text-align: right">Date From:
+                                            </td>
+                                            <td style="width: 250px;">
+                                                <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Width="90%" DbSelectedDate='<%# Bind("Date")%>'>
+                                                    </telerik:RadDatePicker>
+                                            </td>
+                                            <td>
+                                                Beginning of the Period Date with the same benefits
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style=" text-align: right">Date To:
+                                            </td>
+                                            <td>
+                                                <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" Width="90%" DbSelectedDate='<%# Bind("DateEnd")%>'>
+                                                    </telerik:RadDatePicker>
+                                            </td>
+                                            <td>
+                                                Estimated End of Period Date with the same benefits
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Hourly Wage Rate:
+                                            </td>
+                                            <td>
+                                                <telerik:RadNumericTextBox ID="RadNumericTextAmount" runat="server" DbValue='<%# Bind("Amount")%>' Width="90%">
+                                                </telerik:RadNumericTextBox>
+                                            </td>
+                                            <td>
+                                                Rate Value employer agrees to pay employee per hour worked
+                                                <br />
+                                                <small>Previous period, this was listed as <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Amount") %> $/Hrs.</b></small>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Payroll Tax(%):
+                                            </td>
+                                            <td>
+                                                <telerik:RadNumericTextBox ID="RadNumericTextBoxPayrollTax" runat="server" DbValue='<%# Bind("EmployerPayrollTaxPercentage")%>' Width="90%" MaxValue="99">
+                                                </telerik:RadNumericTextBox>
+                                            </td>
+                                            <td>
+                                                Employer Payroll Tax Percentage is the sum of Local, State and Federal Tax Percentage
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Housr Per Week:
+                                            </td>
+                                            <td>
+                                                <telerik:RadNumericTextBox ID="RadNumericTextBox2" runat="server" DbValue='<%# Bind("HourPerWeek")%>' Width="90%" MaxValue="168">
+                                                </telerik:RadNumericTextBox>
+                                            </td>
+                                            <td>
+                                                The number of hours employee may spend doing work for his or her employer without being entitled to overtime pay
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Vacations (hours):
+                                            </td>
+                                            <td>
+                                                <telerik:RadNumericTextBox ID="RadNumericTextBox1" runat="server" DbValue='<%# Bind("Benefits_vacations")%>' Width="90%" MaxValue="999">
+                                                </telerik:RadNumericTextBox>
+                                            </td>
+                                            <td>
+                                                Accrued time off is time off an employee has earned
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Personals (hours):
+                                            </td>
+                                            <td>
+                                                <telerik:RadNumericTextBox ID="RadNumericTextBox3" runat="server" DbValue='<%# Bind("Benefits_personals")%>' Width="90%" MaxValue="999">
+                                                </telerik:RadNumericTextBox>
+                                            </td>
+                                            <td>
+                                                Paid personal hours constitute paid time off from work that an organization voluntarily provides employees as a benefit.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: right">Producer Rate:
+                                            </td>
+                                            <td>
+                                                <telerik:RadNumericTextBox ID="RadNumericTextBox4" runat="server" DbValue='<%# Bind("Producer")%>' Width="90%" MaxValue="1" MinValue="0">
+                                                </telerik:RadNumericTextBox>
+                                            </td>
+                                            <td>
+                                                Factor (between 0 and 1) of time that the employee is carrying out productive activities (associated with jobss)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td colspan="2">
+                                                <asp:LinkButton ID="btnUpdate" Text="Update" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg"></asp:LinkButton>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel" CssClass="btn btn-secondary btn-lg"></asp:LinkButton>
+
+                                            </td>
+
+                                        </tr>
+                                    </table>
+                                </FormTemplate>
                             </EditFormSettings>
                         </MasterTableView>
                     </telerik:RadGrid>
@@ -88,34 +191,36 @@
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepYearInfo" Title="Year Setup" StepType="Finish">
                     <%-- Year Information --%>
                     <div>
-                        <h4>Expense Information and Options for <asp:Label ID="lblYear" runat="server" ></asp:Label></h4>
+                        <h4>Expense Information and Options for
+                            <asp:Label ID="lblYear" runat="server"></asp:Label></h4>
                         <asp:Panel runat="server" ID="panelRecord">
                             <table class="table-sm" style="width: 100%">
                                 <tr>
-                                    <td style="width: 250px;text-align: right">Expected Total Salary:
+                                    <td style="width: 250px; text-align: right">Expected Total Salary:
                                     </td>
-                                    <td style="width: 250px;padding-top:12px;padding-bottom:12px">
+                                    <td style="width: 250px; padding-top: 12px; padding-bottom: 12px">
                                         <telerik:RadNumericTextBox Width="95%" ID="txtSalary" runat="server">
                                         </telerik:RadNumericTextBox>
                                     </td>
                                     <td>The total salary to be paid to employees throughout <%# lblTitleYear.Text %>
                                         <br />
                                         <small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblPastSalary" runat="server"></asp:Label></small>
-                                        
+
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: right">Expected Productive Salary:
 
                                     </td>
-                                    <td style="padding-top:15px;padding-bottom:15px">
+                                    <td style="padding-top: 15px; padding-bottom: 15px">
                                         <telerik:RadNumericTextBox Width="95%" ID="txtProductiveSalary" runat="server">
                                         </telerik:RadNumericTextBox>
                                     </td>
                                     <td>Anticipated Salary dedicated exclusively to Job Based Activities in <%# lblTitleYear.Text %>
                                         <br />
-                                        <small>In <%# lblPastYear.Text %>, this was listed as <asp:Label ID="lblPastProductiveSalary" runat="server"></asp:Label></small>
-                                        
+                                        <small>In <%# lblPastYear.Text %>, this was listed as
+                                            <asp:Label ID="lblPastProductiveSalary" runat="server"></asp:Label></small>
+
                                     </td>
                                 </tr>
 
@@ -125,13 +230,14 @@
                                     <td style="text-align: right">Expected Total Sub Fees:
 
                                     </td>
-                                    <td style="padding-top:15px;padding-bottom:15px">
+                                    <td style="padding-top: 15px; padding-bottom: 15px">
                                         <telerik:RadNumericTextBox Width="95%" ID="txtSubContracts" runat="server">
                                         </telerik:RadNumericTextBox>
                                     </td>
-                                    <td>Anticipated expenses on Sub Fees for <%# lblTitleYear.Text %> 
-                                        <br /><small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblPastSubContracts" runat="server"></asp:Label></small>
-                                        
+                                    <td>Anticipated expenses on Sub Fees for <%# lblTitleYear.Text %>
+                                        <br />
+                                        <small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblPastSubContracts" runat="server"></asp:Label></small>
+
                                     </td>
                                 </tr>
 
@@ -140,13 +246,14 @@
                                     <td style="text-align: right">Expected Total Rent:
 
                                     </td>
-                                    <td style="padding-top:15px;padding-bottom:15px">
+                                    <td style="padding-top: 15px; padding-bottom: 15px">
                                         <telerik:RadNumericTextBox Width="95%" ID="txtRent" runat="server">
                                         </telerik:RadNumericTextBox>
                                     </td>
-                                    <td>Anticipated expenses on Rent for <%# lblTitleYear.Text %> 
-                                        <br /><small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblPastRent" runat="server"></asp:Label></small>
-                                        
+                                    <td>Anticipated expenses on Rent for <%# lblTitleYear.Text %>
+                                        <br />
+                                        <small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblPastRent" runat="server"></asp:Label></small>
+
                                     </td>
                                 </tr>
 
@@ -155,13 +262,14 @@
                                     <td style="text-align: right">Other Expected Expenses:
 
                                     </td>
-                                    <td style="padding-top:15px;padding-bottom:15px">
+                                    <td style="padding-top: 15px; padding-bottom: 15px">
                                         <telerik:RadNumericTextBox Width="95%" ID="txtOthers" runat="server">
                                         </telerik:RadNumericTextBox>
                                     </td>
-                                    <td>Anticipated expenses outside of Salary, Sub Fees and Rent for <%# lblTitleYear.Text %>  
-                                        <br /><small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblPastOthers" runat="server"></asp:Label></small>
-                                        
+                                    <td>Anticipated expenses outside of Salary, Sub Fees and Rent for <%# lblTitleYear.Text %>
+                                        <br />
+                                        <small>In <%# lblPastYear.Text %>, this was listed as $<asp:Label ID="lblPastOthers" runat="server"></asp:Label></small>
+
                                     </td>
                                 </tr>
 
@@ -170,15 +278,16 @@
                                     <td style="text-align: right">Desired Profit Margin:
 
                                     </td>
-                                    <td style="padding-top:15px;padding-bottom:15px">
+                                    <td style="padding-top: 15px; padding-bottom: 15px">
                                         <telerik:RadNumericTextBox Width="95%" ID="txtProfit" runat="server">
                                         </telerik:RadNumericTextBox>
                                     </td>
-                                    <td>
-                                        The desired profit margin for <%# lblTitleYear.Text %> 
-                                        <br /><small>In <%# lblPastYear.Text %>, this was listed as <asp:Label ID="lblPastProfit" runat="server"></asp:Label>%</small>
-                                        
-                                        
+                                    <td>The desired profit margin for <%# lblTitleYear.Text %>
+                                        <br />
+                                        <small>In <%# lblPastYear.Text %>, this was listed as
+                                            <asp:Label ID="lblPastProfit" runat="server"></asp:Label>%</small>
+
+
                                     </td>
                                 </tr>
 
@@ -249,24 +358,25 @@
                                 <td>Update Budgets by Departments on background operations. New/Inactivate/Update Benefits of any Employee.
                                 </td>
                             </tr>
-                                <tr>
-                                    <td style="text-align: right">Automatic Multiplier:
+                            <tr>
+                                <td style="text-align: right">Automatic Multiplier:
 
-                                    </td>
-                                    <td style="padding-top:15px;padding-bottom:15px">
-                                        <telerik:RadComboBox ID="cboStatus" runat="server" Width="95%">
-                                            <Items>
-                                                <telerik:RadComboBoxItem runat="server" Text="Yes" Value="0" Selected="true" />
-                                                <telerik:RadComboBoxItem runat="server" Text="No" Value="1" />
-                                            </Items>
-                                        </telerik:RadComboBox>
-                                    </td>
+                                </td>
+                                <td style="padding-top: 15px; padding-bottom: 15px">
+                                    <telerik:RadComboBox ID="cboStatus" runat="server" Width="95%">
+                                        <Items>
+                                            <telerik:RadComboBoxItem runat="server" Text="Yes" Value="0" Selected="true" />
+                                            <telerik:RadComboBoxItem runat="server" Text="No" Value="1" />
+                                        </Items>
+                                    </telerik:RadComboBox>
+                                </td>
 
-                                    <td>Do you want changes made to Employee Salaries throughout the year to automatically affect the multiplier value?
-                                        <br /><small>An increase in an employees salary will cause in an automatic increase in the company multiplier factor if this field is set to "Yes".</small>
+                                <td>Do you want changes made to Employee Salaries throughout the year to automatically affect the multiplier value?
+                                        <br />
+                                    <small>An increase in an employees salary will cause in an automatic increase in the company multiplier factor if this field is set to "Yes".</small>
 
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
 
                         </table>
                     </div>
@@ -282,51 +392,51 @@
                         <h5>Previous Multiplier Value:
                             <asp:Label ID="lblPreviousMultiplier" runat="server" Text="0"></asp:Label></h5>
                     </div>
-                   <h4>Historical Log (Last 10 changes)</h4>
-                        <telerik:RadGrid ID="RadGridMultiplier_log" GridLines="None" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier_log">
-                            <MasterTableView DataSourceID="SqlDataSourceMultiplier_log" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center"
-                        ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
-                                <Columns>
+                    <h4>Historical Log (Last 10 changes)</h4>
+                    <telerik:RadGrid ID="RadGridMultiplier_log" GridLines="None" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier_log">
+                        <MasterTableView DataSourceID="SqlDataSourceMultiplier_log" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center"
+                            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
+                            <Columns>
 
-                                    <telerik:GridNumericColumn DataField="UpdatedDate" HeaderText="Updated Date" SortExpression="UpdatedDate" UniqueName="UpdatedDate">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="UpdatedDate" HeaderText="Updated Date" SortExpression="UpdatedDate" UniqueName="UpdatedDate">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="Year" HeaderText="Year" HeaderStyle-Width="130px" SortExpression="Year" UniqueName="Year" ItemStyle-HorizontalAlign="Center">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="Year" HeaderText="Year" HeaderStyle-Width="130px" SortExpression="Year" UniqueName="Year" ItemStyle-HorizontalAlign="Center">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="Salary" HeaderText="Salary" SortExpression="Salary" UniqueName="Salary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="Salary" HeaderText="Salary" SortExpression="Salary" UniqueName="Salary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="SalaryTax" HeaderText="Salary Tax" SortExpression="SalaryTax" UniqueName="SalaryTax" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="SalaryTax" HeaderText="Salary Tax" SortExpression="SalaryTax" UniqueName="SalaryTax" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="ProductiveSalary" HeaderText="Productive Salary" SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="ProductiveSalary" HeaderText="Productive Salary" SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="SubContracts" HeaderText="Sub Fees" SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="SubContracts" HeaderText="Sub Fees" SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="Rent" HeaderText="Rent" SortExpression="Rent" UniqueName="Rent" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="Rent" HeaderText="Rent" SortExpression="Rent" UniqueName="Rent" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="Others" HeaderText="Others" SortExpression="Others" UniqueName="Others" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="Others" HeaderText="Others" SortExpression="Others" UniqueName="Others" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="Total" HeaderText="Total" SortExpression="Total" UniqueName="Total" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Right">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="Total" HeaderText="Total" SortExpression="Total" UniqueName="Total" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="Profit" HeaderStyle-Width="130px" HeaderText="(%)" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="Profit" HeaderStyle-Width="130px" HeaderText="(%)" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="Multiplier" HeaderStyle-Width="130px" HeaderText="Multiplier" SortExpression="Multiplier" UniqueName="Multiplier" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Bold="true">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="Multiplier" HeaderStyle-Width="130px" HeaderText="Multiplier" SortExpression="Multiplier" UniqueName="Multiplier" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Bold="true">
+                                </telerik:GridNumericColumn>
 
-                                    <telerik:GridNumericColumn DataField="Action" HeaderText="Action" SortExpression="Action" UniqueName="Action" ItemStyle-HorizontalAlign="Center">
-                                    </telerik:GridNumericColumn>
+                                <telerik:GridNumericColumn DataField="Action" HeaderText="Action" SortExpression="Action" UniqueName="Action" ItemStyle-HorizontalAlign="Center">
+                                </telerik:GridNumericColumn>
 
-                                </Columns>
-                            </MasterTableView>
-                        </telerik:RadGrid>
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
                 </telerik:RadWizardStep>
             </WizardSteps>
         </telerik:RadWizard>
@@ -386,5 +496,5 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblMultiplierId" runat="server" Visible="False" Text="0"></asp:Label>
     <asp:Label ID="lblModeInsert" runat="server" Visible="False" Text="0"></asp:Label>
-    <asp:Label ID="lblPastYear" runat="server"  Visible="False"></asp:Label>
+    <asp:Label ID="lblPastYear" runat="server" Visible="False"></asp:Label>
 </asp:Content>

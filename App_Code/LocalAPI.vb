@@ -8952,6 +8952,10 @@ Public Class LocalAPI
     Public Shared Function GetEmployee_HourlyWageHistoryProperty(ByRef Employee_HourlyWageHistoryId As Integer, ByVal sProperty As String) As String
         Return GetStringEscalar("SELECT TOP 1 [" & sProperty & "] FROM [Employee_HourlyWageHistory] where [Id]=" & Employee_HourlyWageHistoryId)
     End Function
+    Public Shared Function GetEmployee_HourlyWageHistoryPreviousPeriodProperty(ByRef Employee_HourlyWageHistoryId As Integer, ByVal sProperty As String) As String
+        Return GetStringEscalar($"SELECT TOP 1 {sProperty} FROM [Employee_HourlyWageHistory] HW where [Id]<{Employee_HourlyWageHistoryId} and HW.employeeId=(select employeeId from [Employee_HourlyWageHistory] where Id={Employee_HourlyWageHistoryId}) order by Date desc")
+    End Function
+
     Public Shared Function GetHourlyWageHistoryLastRecord(ByRef EmployeeId As Integer, ByVal year As Integer) As Integer
         Return GetNumericEscalar(String.Format("SELECT TOP 1 Id FROM [Employee_HourlyWageHistory] where [employeeId]={0} And Year([Date])={1} order by [Date] desc", EmployeeId, year))
     End Function

@@ -156,12 +156,12 @@
                                 <tr>
                                     <td style="text-align: center" colspan="2">
                                         <br />
-                                        <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CommandName="Update">
+                                        <asp:LinkButton ID="btnInsert" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" CommandName="Update">
                                                 Update
                                         </asp:LinkButton>
                                         &nbsp;&nbsp;&nbsp;
                                            
-                                        <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel">
+                                        <asp:LinkButton ID="btnCancel" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" CausesValidation="False" CommandName="Cancel" >
                                                 Cancel
                                             </asp:LinkButton>
 
