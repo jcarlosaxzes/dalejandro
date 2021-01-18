@@ -14,8 +14,6 @@
 
                 lblEmployeeId.Text = Master.UserId
 
-                LocalAPI.RefreshYearsList()
-
                 cboPeriod.DataBind()
                 IniciaPeriodo(cboPeriod.SelectedValue)
 

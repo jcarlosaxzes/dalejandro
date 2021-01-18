@@ -35,7 +35,10 @@ Public Class employee_permissions
                     SqlDataSource1.DataBind()
                     RadGrid1.DataBind()
                     Master.InfoMessage("The Role " & cboSourceRole.Text & " was applied to the selected employees!")
+                Else
+                    Master.ErrorMessage("Select Employee(s)!")
                 End If
+
             Else
                 Master.ErrorMessage("Select Role!")
                 cboSourceRole.Focus()
@@ -89,15 +92,26 @@ Public Class employee_permissions
 
     Private Sub btnApplyIPv4toRole_Click(sender As Object, e As EventArgs) Handles btnApplyIPv4toRole.Click
         Try
-            If cboSourceRole.SelectedValue > 0 Then
+            '    If cboSourceRole.SelectedValue > 0 Then
 
-                SqlDataSourceRoles.Update()
+            '        SqlDataSourceRoles.Update()
+            '        RadGrid1.DataBind()
+            '    Else
+            '        Master.ErrorMessage("Select Role!")
+            '        cboSourceRole.Focus()
+            '    End If
+
+            If RadGrid1.SelectedItems.Count > 0 Then
+                For Each dataItem As GridDataItem In RadGrid1.SelectedItems
+                    If dataItem.Selected Then
+                        LocalAPI.SetEmployee_IPv4_UPDATE(dataItem("Id").Text, txtIPv4.Text)
+                    End If
+                Next
                 RadGrid1.DataBind()
+                Master.InfoMessage("The IP restrictions addresses was applied to the selected employees!")
             Else
-                Master.ErrorMessage("Select Role!")
-                cboSourceRole.Focus()
+                Master.ErrorMessage("Select Employee(s)!")
             End If
-
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)

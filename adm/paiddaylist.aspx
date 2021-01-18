@@ -423,7 +423,7 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="Employee_Payroll_SELECT" SelectCommandType="StoredProcedure"
-        InsertCommand="PayrollInitialize_INSERT" InsertCommandType="StoredProcedure">
+        InsertCommand="Employee_HourlyWageInitializeYear_INSERT" InsertCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboYear" Name="Year" PropertyName="SelectedValue" />
             <asp:ControlParameter ControlID="cboEmployees" Name="employeeId" PropertyName="SelectedValue" Type="Int32" />
