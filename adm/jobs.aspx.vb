@@ -23,8 +23,6 @@ Public Class jobs
                 lblCompanyId.Text = Session("companyId")
                 lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployee.Text, lblCompanyId.Text)
 
-                LocalAPI.RefreshYearsList()
-
                 cboEmployee.DataBind()
                 If Len(Session("Employee")) Then
                     cboEmployee.SelectedValue = Session("Employee")
