@@ -524,6 +524,54 @@
                         </telerik:RadGrid>
                     </div>
                 </telerik:RadWizardStep>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Historical Multiplier Log" StepType="Step">
+                    <div>
+                        <telerik:RadGrid ID="RadGridMultiplier_log" GridLines="None" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier_log">
+                        <MasterTableView DataSourceID="SqlDataSourceMultiplier_log" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center"
+                            ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
+                            <Columns>
+
+                                <telerik:GridNumericColumn DataField="UpdatedDate" HeaderText="Updated Date" SortExpression="UpdatedDate" UniqueName="UpdatedDate">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="Year" HeaderText="Year" HeaderStyle-Width="130px" SortExpression="Year" UniqueName="Year" ItemStyle-HorizontalAlign="Center">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="Salary" HeaderText="Salary" SortExpression="Salary" UniqueName="Salary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="SalaryTax" HeaderText="Salary Tax" SortExpression="SalaryTax" UniqueName="SalaryTax" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="ProductiveSalary" HeaderText="Productive Salary" SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="SubContracts" HeaderText="Sub Fees" SortExpression="SubContracts" UniqueName="SubContracts" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="Rent" HeaderText="Rent" SortExpression="Rent" UniqueName="Rent" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="Others" HeaderText="Others" SortExpression="Others" UniqueName="Others" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="Total" HeaderText="Total" SortExpression="Total" UniqueName="Total" DataFormatString="{0:N2}" ReadOnly="true" ItemStyle-HorizontalAlign="Right">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="Profit" HeaderStyle-Width="130px" HeaderText="(%)" SortExpression="Profit" UniqueName="Profit" DataFormatString="{0:N1}" ItemStyle-HorizontalAlign="Center">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="Multiplier" HeaderStyle-Width="130px" HeaderText="Multiplier" SortExpression="Multiplier" UniqueName="Multiplier" DataFormatString="{0:N2}" ItemStyle-HorizontalAlign="Center" ItemStyle-Font-Bold="true">
+                                </telerik:GridNumericColumn>
+
+                                <telerik:GridNumericColumn DataField="Action" HeaderText="Action" SortExpression="Action" UniqueName="Action" ItemStyle-HorizontalAlign="Center">
+                                </telerik:GridNumericColumn>
+
+                            </Columns>
+                        </MasterTableView>
+                    </telerik:RadGrid>
+                    </div>
+                </telerik:RadWizardStep>
             </WizardSteps>
         </telerik:RadWizard>
 
@@ -614,6 +662,14 @@
             <asp:Parameter Name="Dec" />
             <asp:Parameter Name="Id" />
         </UpdateParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceMultiplier_log" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="CompanyMultiplier_log_SELECT" SelectCommandType="StoredProcedure"
+        DeleteCommand="DELETE FROM Company_MultiplierByYear WHERE Id=@Id">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceInit" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"

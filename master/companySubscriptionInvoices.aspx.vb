@@ -24,7 +24,7 @@ Public Class companySubscriptionInvoices
                 cboBillingPeriod.DataBind()
                 cboBillingPeriod.SelectedValue = If(record.ContainsKey("billing_period_Id"), record("billing_period_Id"), 0)
                 txtperiodAmount.Text = txtyearAmount.Text
-                txtInvoiceNotes.Text = "PASconcept Annual Supscription"
+                txtInvoiceNotes.Text = "PASconcept Annual Subscription"
 
 
             End If
@@ -71,7 +71,7 @@ Public Class companySubscriptionInvoices
         If cboBillingPeriod.SelectedValue = 0 Then
 
             txtperiodAmount.Text = txtyearAmount.Text
-            txtInvoiceNotes.Text = "PASconcept Annual Supscription"
+            txtInvoiceNotes.Text = "PASconcept Annual Subscription"
             RadToolTipCreateInvoice.Visible = True
             RadToolTipCreateInvoice.Show()
         End If
@@ -79,7 +79,7 @@ Public Class companySubscriptionInvoices
         If cboBillingPeriod.SelectedValue = 1 Then
 
             txtperiodAmount.Text = Val(txtyearAmount.Text) / 4
-            txtInvoiceNotes.Text = "PASconcept Quarterly Supscription"
+            txtInvoiceNotes.Text = "PASconcept Quarterly Subscription"
             RadToolTipCreateInvoice.Visible = True
             RadToolTipCreateInvoice.Show()
         End If
@@ -87,7 +87,7 @@ Public Class companySubscriptionInvoices
         If cboBillingPeriod.SelectedValue = 2 Then
 
             txtperiodAmount.Text = Val(txtyearAmount.Text) / 12
-            txtInvoiceNotes.Text = "PASconcept Monthly Supscription"
+            txtInvoiceNotes.Text = "PASconcept Monthly Subscription"
             RadToolTipCreateInvoice.Visible = True
             RadToolTipCreateInvoice.Show()
         End If
