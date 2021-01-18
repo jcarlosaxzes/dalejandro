@@ -194,6 +194,24 @@ Partial Public Class companymultiplier
     Protected WithEvents RadGridDptoTarget As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''RadWizardStep2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''RadGridMultiplier_log control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridMultiplier_log As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''SqlDataSourceMultiplier control.
     '''</summary>
     '''<remarks>
@@ -255,6 +273,15 @@ Partial Public Class companymultiplier
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDptoTarget As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceMultiplier_log control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceMultiplier_log As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceInit control.

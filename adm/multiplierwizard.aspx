@@ -87,7 +87,7 @@
                                                     </telerik:RadDatePicker>
                                             </td>
                                             <td>
-                                                Beginning of the Period Date with the same benefits
+                                                The starting date for the benefits entered below
                                             </td>
                                         </tr>
                                         <tr>
@@ -98,7 +98,9 @@
                                                     </telerik:RadDatePicker>
                                             </td>
                                             <td>
-                                                Estimated End of Period Date with the same benefits
+                                                The end date for the benefits entered below
+                                                <br />
+                                                <small>The benefits below will be applied beyond this date if no changes are made</small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -109,9 +111,9 @@
                                                 </telerik:RadNumericTextBox>
                                             </td>
                                             <td>
-                                                Rate Value employer agrees to pay employee per hour worked
+                                                The amount of money that is earned by an employee for every hour worked
                                                 <br />
-                                                <small>Previous period, this was listed as <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Amount") %> $/Hrs.</b></small>
+                                                <small>Previously this employee earned $<b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Amount") %> per hour</b></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -122,7 +124,11 @@
                                                 </telerik:RadNumericTextBox>
                                             </td>
                                             <td>
-                                                Employer Payroll Tax Percentage is the sum of Local, State and Federal Tax Percentage
+                                                Employer Payroll Tax Percentage is the sum of all Local, State and Federal Taxes the Employer is responsible for (e.g. Medicare, Unemployment, etc)
+                                                <br />
+                                                <small>
+                                                    Previously this value was <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "EmployerPayrollTaxPercentage") %></b>
+                                                </small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -133,7 +139,9 @@
                                                 </telerik:RadNumericTextBox>
                                             </td>
                                             <td>
-                                                The number of hours employee may spend doing work for his or her employer without being entitled to overtime pay
+                                                The total number of hours this employee is to work before being entitled to overtime (e.g 40 Hours may be considered standard full-time employment)
+                                                <br />
+                                                <small>Previously this employee was listed as working <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "HourPerWeek") %></b> Hours per week.</small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -144,7 +152,9 @@
                                                 </telerik:RadNumericTextBox>
                                             </td>
                                             <td>
-                                                Accrued time off is time off an employee has earned
+                                                This is the total number of Vacation Hours this employee can take in the defined time range
+                                                <br />
+                                                <small>This employee had <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Benefits_vacations") %></b> Vacation hours in the previous period</small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -155,7 +165,9 @@
                                                 </telerik:RadNumericTextBox>
                                             </td>
                                             <td>
-                                                Paid personal hours constitute paid time off from work that an organization voluntarily provides employees as a benefit.
+                                                This is the total Personal Time off in Hours that this employee is allotted in the defined time range
+                                                <br />
+                                                <small>This employee had <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Benefits_personals") %></b> hours of Personal Time allotted to them in the previous period</small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -166,7 +178,9 @@
                                                 </telerik:RadNumericTextBox>
                                             </td>
                                             <td>
-                                                Factor (between 0 and 1) of time that the employee is carrying out productive activities (associated with jobss)
+                                                This factor, from 0.0 to 1.0, defines the percentage of time this employee works directly on Jobs/Projects (e.g. If an employee, on average, spends 50% of their working hours working directory on project tasks for which there is a budget then this value would be set to .50)
+                                                <br />
+                                                <small>This employee's Producer Rate was previously listed as <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Producer") %></b></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -392,6 +406,7 @@
                         <h5>Previous Multiplier Value:
                             <asp:Label ID="lblPreviousMultiplier" runat="server" Text="0"></asp:Label></h5>
                     </div>
+                    <br />
                     <h4>Historical Log (Last 10 changes)</h4>
                     <telerik:RadGrid ID="RadGridMultiplier_log" GridLines="None" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier_log">
                         <MasterTableView DataSourceID="SqlDataSourceMultiplier_log" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center"
@@ -441,6 +456,7 @@
             </WizardSteps>
         </telerik:RadWizard>
     </div>
+
     <asp:SqlDataSource ID="SqlDataSourceMultiplier_log" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CompanyMultiplier_log_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="DELETE FROM Company_MultiplierByYear WHERE Id=@Id">
