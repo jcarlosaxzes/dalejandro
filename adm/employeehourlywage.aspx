@@ -26,6 +26,15 @@
                     <h3>
                         <asp:Label ID="lblEmployeeName" runat="server"></asp:Label><br />
                         (<asp:Label ID="lblYear" runat="server"></asp:Label>)</h3>
+                    <br />
+                    <telerik:RadComboBox ID="cboFilter" runat="server" AutoPostBack="true" Label=" View: "
+                        Width="400px" Filter="Contains" AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="Last Employee Record Update for year" Value="0" />
+                            <telerik:RadComboBoxItem Text="All Records" Value="1" />
+                        </Items>
+                    </telerik:RadComboBox>
+
                 </td>
                 <td>
                     <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceChart" Height="170px" Width="100%"
@@ -330,12 +339,12 @@
         </table>
 
 
-        
+
     </telerik:RadToolTip>
 
     <asp:SqlDataSource ID="SqlDataSourceHourlyWage" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Employee_HourlyWageHistory_v21_DELETE" DeleteCommandType="StoredProcedure"
-        SelectCommand="Employee_HourlyWageHistory_v21_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Employee_HourlyWageHistory_v21_1_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Employee_HourlyWageHistory_v21_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Employee_HourlyWageHistory_v21_INSERT" InsertCommandType="StoredProcedure">
         <DeleteParameters>
@@ -343,6 +352,7 @@
         </DeleteParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboFilter" Name="detailed" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />

@@ -50,6 +50,15 @@ Partial Public Class employeehourlywage
     Protected WithEvents lblYear As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''cboFilter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboFilter As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
     '''RadHtmlChart1 control.
     '''</summary>
     '''<remarks>
