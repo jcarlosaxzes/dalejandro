@@ -32,9 +32,9 @@
                         </telerik:RadComboBox>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <telerik:RadComboBox ID="cboFilter" runat="server" AutoPostBack="true" Label=" View: "
-                            Width="350px" Filter="Contains" AppendDataBoundItems="true">
+                            Width="400px" Filter="Contains" AppendDataBoundItems="true">
                             <Items>
-                                <telerik:RadComboBoxItem Text="Last Review by employee" Value="0" />
+                                <telerik:RadComboBoxItem Text="Last Employee Record Update for year" Value="0" />
                                 <telerik:RadComboBoxItem Text="All Records" Value="1" />
                             </Items>
                         </telerik:RadComboBox>
