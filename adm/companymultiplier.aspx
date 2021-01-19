@@ -308,7 +308,7 @@
                                                     SortExpression="Producer" UniqueName="Producer" DataFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" Aggregate="Avg" FooterAggregateFormatString="{0:N2}" ReadOnly="true"
                                                     HeaderTooltip="Producer Rate 0 to 1">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridTemplateColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="$/Hour" HeaderStyle-HorizontalAlign="Center"
+                                                <telerik:GridTemplateColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="Hourly Rate" HeaderStyle-HorizontalAlign="Center"
                                                     SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Right"
                                                     HeaderTooltip="Hourly Wage Rate">
                                                     <ItemTemplate>
