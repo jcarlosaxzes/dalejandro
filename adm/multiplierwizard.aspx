@@ -46,7 +46,7 @@
                                 <telerik:GridDateTimeColumn DataField="DateEnd" HeaderText="Date To"
                                     SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" DataFormatString="{0:d}">
                                 </telerik:GridDateTimeColumn>
-                                <telerik:GridNumericColumn DataField="Amount" HeaderText="$/Hour"
+                                <telerik:GridNumericColumn DataField="Amount" HeaderText="Hourly Rate"
                                     SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
                                     DecimalDigits="2" MinValue="0">
                                 </telerik:GridNumericColumn>
