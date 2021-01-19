@@ -301,15 +301,15 @@
                                                 <telerik:GridTemplateColumn DataField="Department" FilterControlAltText="Filter Department column" HeaderText="Department" HeaderStyle-HorizontalAlign="Center"
                                                     SortExpression="Department" UniqueName="Department" ReadOnly="true">
                                                     <ItemTemplate>
-                                                        <small><%# Eval("Department") %></small>
+                                                        <%# Eval("Department") %>
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
-                                                <telerik:GridNumericColumn DataField="Producer" FilterControlAltText="Filter Producer column" HeaderText="P.Rate" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="Producer" UniqueName="Producer" DataFormatString="{0:N2}" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Right" Aggregate="Avg" FooterAggregateFormatString="{0:N2}" ReadOnly="true"
+                                                <telerik:GridNumericColumn DataField="Producer" HeaderText="Producer Rate" HeaderStyle-HorizontalAlign="Center"
+                                                    SortExpression="Producer" UniqueName="Producer" DataFormatString="{0:N2}" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center" Aggregate="Avg" FooterAggregateFormatString="{0:N2}" ReadOnly="true"
                                                     HeaderTooltip="Producer Rate 0 to 1">
                                                 </telerik:GridNumericColumn>
                                                 <telerik:GridTemplateColumn DataField="Amount" FilterControlAltText="Filter Amount column" HeaderText="Hourly Rate" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Right"
+                                                    SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Right"
                                                     HeaderTooltip="Hourly Wage Rate">
                                                     <ItemTemplate>
                                                         <span style='<%# IIf(Eval("NumberOfRecords") <= 1, "display:none;font-size:x-small", "display:normal;font-size:x-small")%>' class="badge badge-pill badge-success" title="Salary Modifications this Year">
@@ -319,12 +319,12 @@
                                                     </ItemTemplate>
                                                 </telerik:GridTemplateColumn>
 
-                                                <telerik:GridNumericColumn DataField="AnnualSalary" HeaderText="Annual" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="AnnualSalary" UniqueName="AnnualSalary" DataFormatString="{0:C0}" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
+                                                <telerik:GridNumericColumn DataField="AnnualSalary" HeaderText="Annual Salary" HeaderStyle-HorizontalAlign="Center"
+                                                    SortExpression="AnnualSalary" UniqueName="AnnualSalary" DataFormatString="{0:C0}" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
                                                     HeaderTooltip="Annual Salary Calculated">
                                                 </telerik:GridNumericColumn>
-                                                <telerik:GridTemplateColumn DataField="ProductiveSalary" HeaderText="Productive" HeaderStyle-HorizontalAlign="Center"
-                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" HeaderStyle-Width="140px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
+                                                <telerik:GridTemplateColumn DataField="ProductiveSalary" HeaderText="Productive Salary" HeaderStyle-HorizontalAlign="Center"
+                                                    SortExpression="ProductiveSalary" UniqueName="ProductiveSalary" HeaderStyle-Width="180px" ItemStyle-HorizontalAlign="Right" Aggregate="Sum" FooterAggregateFormatString="{0:C0}" ReadOnly="true"
                                                     HeaderTooltip="Annual Salary - (Non-productive hours)*$/Hour">
                                                     <ItemTemplate>
                                                         <span style="font-size: x-small" class="badge badge-pill badge-danger" title="productive weeks this year">
