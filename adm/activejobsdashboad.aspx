@@ -154,14 +154,14 @@
                     <telerik:RadHtmlChart ID="RadHtmlChartTimeSheet" runat="server" DataSourceID="SqlDataSourceTimeSheet" Width="100%">
                         <PlotArea>
                             <Series>
-                                <telerik:ColumnSeries DataFieldY="WorkHours" Name="Work Time" GroupName="Date">
+                                <telerik:ColumnSeries DataFieldY="WorkHours" Name="Productive Time" GroupName="Date">
                                     <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
                                     </LabelsAppearance>
                                     <Appearance>
                                         <FillStyle BackgroundColor="DarkGreen" />
                                     </Appearance>
                                 </telerik:ColumnSeries>
-                                <telerik:ColumnSeries DataFieldY="NonWorkHours" Name="Other Time" GroupName="Date">
+                                <telerik:ColumnSeries DataFieldY="NonWorkHours" Name="Productive Time" GroupName="Date">
                                     <LabelsAppearance Visible="false" DataFormatString="{0:N0}">
                                     </LabelsAppearance>
                                     <Appearance>

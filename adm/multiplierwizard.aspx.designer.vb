@@ -68,6 +68,15 @@ Partial Public Class multiplierwizard
     Protected WithEvents cboDepartments As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
+    '''cboFilter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboFilter As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
     '''RadGridHourlyWage control.
     '''</summary>
     '''<remarks>
