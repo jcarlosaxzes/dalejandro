@@ -27,7 +27,7 @@ Public Class job_links
     End Sub
 
     Protected Sub ConfigUploadPanels()
-        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblJobId.Text, "Jobs")
+        Dim ExistingFiles As Integer = LocalAPI.GetAzureFilesCount(lblClientId.Text, lblproposalId.Text, lblJobId.Text)
 
         If ExistingFiles = 0 Then
             RadWizardStepUpload.Active = True

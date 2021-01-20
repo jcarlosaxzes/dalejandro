@@ -9799,17 +9799,17 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetWeeklyHoursByEmp(ByVal employeeId As Integer, companyId As Integer) As Double
-        Return GetNumericEscalar("SELECT dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & ",dbo.CurrentTime())")
+        Return GetNumericEscalar($"SELECT dbo.WeeklyHoursByEmp({employeeId},{companyId},dbo.CurrentTimeZone({companyId}))")
     End Function
     Public Shared Function GetWeeklyHoursByEmpExt(ByVal employeeId As Integer, companyId As Integer, DateInWeek As Date) As Double
-        Return GetNumericEscalar("SELECT dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & "," & GetFecha_102(DateInWeek) & ")")
+        Return GetNumericEscalar("Select dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & "," & GetFecha_102(DateInWeek) & ")")
     End Function
     Public Shared Function GetBiWeeklyHoursByEmp(ByVal employeeId As Integer, companyId As Integer) As Double
-        Return GetNumericEscalar("SELECT dbo.BiWeeklyHoursByEmp(" & employeeId & "," & companyId & ",dbo.CurrentTime())")
+        Return GetNumericEscalar($"Select dbo.BiWeeklyHoursByEmp({employeeId},{companyId},dbo.CurrentTimeZone({companyId}))")
     End Function
 
     Public Shared Function GetEmployeeRoleId(ByVal RoleName As String, companyId As Integer) As Integer
-        Return GetNumericEscalar("select top 1 Id from [Employees_roles] where [Name]='" & RoleName & "' and companyId=" & companyId)
+        Return GetNumericEscalar("Select top 1 Id from [Employees_roles] where [Name]='" & RoleName & "' and companyId=" & companyId)
     End Function
 
     Public Shared Function SetEmployee_IPv4_UPDATE(ByVal lId As Long, IPv4 As String) As Boolean
@@ -13004,6 +13004,13 @@ Public Class LocalAPI
 
     Public Shared Function GetEntityAzureFilesCount(entityId As Integer, EntityLabel As String) As Integer
         Return GetNumericEscalar($"SELECT count(*) FROM [Azure_Uploads] where EntityType= '{EntityLabel}' and EntityId={entityId}")
+    End Function
+    Public Shared Function GetAzureFilesCount(clientId As Integer, proposalId As Integer, jobId As Integer) As Integer
+        Return GetNumericEscalar($"SELECT count(*) FROM (select au.Id from Azure_Uploads au where [Deleted] = 0 and {clientId}>0 and au.EntityType='Clients' and au.EntityId = {clientId}
+			union all
+			select au.Id from [Azure_Uploads] au where  {proposalId}>0 and au.EntityType='Proposal' and au.EntityId = {proposalId} 
+			union all
+			select au.Id from [Azure_Uploads] au where {jobId}>0 and au.EntityType='Jobs' and au.EntityId = {jobId})F")
     End Function
 
 
