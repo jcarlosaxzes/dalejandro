@@ -745,5 +745,9 @@ Public Class proposal
 
         End Select
     End Sub
+
+    Protected Sub btnNewNote_Click(sender As Object, e As EventArgs) Handles btnNewNote.Click
+        RadGridNotes.MasterTableView.InsertItem()
+    End Sub
 End Class
 
