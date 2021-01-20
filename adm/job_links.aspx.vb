@@ -14,11 +14,6 @@ Public Class job_links
                 lblproposalId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "proposalId")
                 Master.ActiveTab(7)
 
-                RadListViewFiles.Visible = False
-                RadGridFiles.Visible = Not RadListViewFiles.Visible
-                btnGridPage.Visible = Not RadListViewFiles.Visible
-                btnTablePage.Visible = RadListViewFiles.Visible
-
                 ConfigUploadPanels()
 
             End If
@@ -40,10 +35,11 @@ Public Class job_links
             RadListViewFiles.Visible = False
             RadGridFiles.Visible = False
         Else
+            RadWizardStepUpload.Active = False
             RadWizardStepFiles.Active = True
             PanelUpload.Visible = False
             RadListViewFiles.Visible = False
-            RadGridFiles.Visible = Not RadListViewFiles.Visible
+            RadGridFiles.Visible = True
             RadGridFiles.DataBind()
             RadListViewFiles.DataBind()
         End If
