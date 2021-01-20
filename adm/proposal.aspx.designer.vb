@@ -203,6 +203,24 @@ Partial Public Class proposal
     Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''btnNewNote control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnNewNote As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridNotes As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''RadWizardStep4 control.
     '''</summary>
     '''<remarks>
@@ -903,6 +921,15 @@ Partial Public Class proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceProposalPSUpdate As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceNotes As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''btnDataProcecing control.
