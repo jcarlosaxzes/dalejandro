@@ -78,7 +78,7 @@ Public Class jobs
         End If
     End Sub
     Private Sub EEGvertical()
-        If lblCompanyId.Text = 260962 Or lblCompanyId.Text = 99 Then
+        If lblCompanyId.Text = 260962 Then
             panelSubbar.Visible = True
         End If
 
