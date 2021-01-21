@@ -156,15 +156,12 @@ Public Class paiddaylist
         RadGridHourlyWage.DataBind()
     End Sub
     Private Sub btnInicializeCalendar_Click(sender As Object, e As EventArgs) Handles btnInicializeCalendar.Click
-        Dim dDate As DateTime = LocalAPI.GetLastPaidDay(lblCompanyId.Text)
 
-        While dDate.Year <= cboYear.SelectedValue
-            dDate = DateAdd(DateInterval.Day, 14, dDate)
-            LocalAPI.NuevoPaidDay(dDate, lblCompanyId.Text)
-        End While
-        RadGrid1.DataBind()
-        RadScheduler1.DataBind()
-        Master.InfoMessage("Payroll Calendar was Inicialized!!!")
+        If LocalAPI.CompanyPayrollCallendar_InitYear(cboYear.SelectedValue, lblCompanyId.Text) Then
+            RadGrid1.DataBind()
+            RadScheduler1.DataBind()
+            Master.InfoMessage("Payroll Calendar was Inicialized!!!")
+        End If
 
     End Sub
 
