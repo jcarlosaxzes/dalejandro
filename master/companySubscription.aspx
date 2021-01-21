@@ -11,20 +11,20 @@
             <td style="width: 220px;">
                 <telerik:RadComboBox ID="cboExpired" runat="server" Width="100%" AppendDataBoundItems="true">
                     <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="Subcription Expired" Value="0" Selected="true" />
-                        <telerik:RadComboBoxItem runat="server" Text="Subcription Active" Value="1" />
+                        <telerik:RadComboBoxItem runat="server" Text="Subcription Expired" Value="0"  />
+                        <telerik:RadComboBoxItem runat="server" Text="Subcription Active" Value="1" Selected="true"/>
                         <telerik:RadComboBoxItem runat="server" Text="All Subcription" Value="-1" />
                     </Items>
                 </telerik:RadComboBox>
             </td>
 
-            <td style="width: 120px; text-align: right">Active / Lock :
+            <td style="width: 120px; text-align: right">Active / Lock Account:
             </td>
             <td style="width: 290px;">
                 <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true">
                     <Items>
-                        <telerik:RadComboBoxItem runat="server" Text="Active When Subcription Expired" Value="0" />
-                        <telerik:RadComboBoxItem runat="server" Text="Lock When Subcription Expired" Value="1" />
+                        <telerik:RadComboBoxItem runat="server" Text="Active Account" Value="0" />
+                        <telerik:RadComboBoxItem runat="server" Text="Lock Account" Value="1" />
                         <telerik:RadComboBoxItem runat="server" Text="(All)" Value="-1" Selected="true" />
                     </Items>
                 </telerik:RadComboBox>

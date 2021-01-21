@@ -30,6 +30,15 @@
                                 <telerik:RadComboBoxItem runat="server" Text="(All Department...)" Value="-1" Selected="true" />
                             </Items>
                         </telerik:RadComboBox>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <telerik:RadComboBox ID="cboFilter" runat="server" AutoPostBack="true" Label=" View: "
+                            Width="400px" Filter="Contains" AppendDataBoundItems="true">
+                            <Items>
+                                <telerik:RadComboBoxItem Text="Last Employee Record Update for year" Value="0" />
+                                <telerik:RadComboBoxItem Text="All Records" Value="1" />
+                            </Items>
+                        </telerik:RadComboBox>
+
                     </div>
                     <telerik:RadGrid ID="RadGridHourlyWage" runat="server" DataSourceID="SqlDataSourceHourlyWage" AllowAutomaticDeletes="true" AllowAutomaticUpdates="true"
                         AutoGenerateColumns="False" AllowSorting="True" ShowFooter="true" HeaderStyle-HorizontalAlign="Center">
@@ -38,7 +47,7 @@
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" ItemStyle-HorizontalAlign="Center"
                                     HeaderText="" HeaderStyle-Width="50px">
                                 </telerik:GridEditCommandColumn>
-                                <telerik:GridBoundColumn DataField="Employee" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee" ReadOnly="true">
+                                <telerik:GridBoundColumn DataField="Employee" HeaderText="Employee" SortExpression="Employee" UniqueName="Employee" ReadOnly="true" Aggregate="Count" FooterAggregateFormatString="{0:N0}" >
                                 </telerik:GridBoundColumn>
                                 <telerik:GridDateTimeColumn DataField="Date" HeaderText="Date From"
                                     SortExpression="Date" UniqueName="Date" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" DataFormatString="{0:d}">
@@ -46,7 +55,7 @@
                                 <telerik:GridDateTimeColumn DataField="DateEnd" HeaderText="Date To"
                                     SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" DataFormatString="{0:d}">
                                 </telerik:GridDateTimeColumn>
-                                <telerik:GridNumericColumn DataField="Amount" HeaderText="$/Hour"
+                                <telerik:GridNumericColumn DataField="Amount" HeaderText="Hourly Rate"
                                     SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
                                     DecimalDigits="2" MinValue="0">
                                 </telerik:GridNumericColumn>
@@ -84,21 +93,21 @@
                                             </td>
                                             <td style="width: 250px;">
                                                 <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Width="90%" DbSelectedDate='<%# Bind("Date")%>'>
-                                                    </telerik:RadDatePicker>
+                                                </telerik:RadDatePicker>
                                             </td>
-                                            <td>
-                                                Beginning of the Period Date with the same benefits
+                                            <td>The starting date for the benefits entered below
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style=" text-align: right">Date To:
+                                            <td style="text-align: right">Date To:
                                             </td>
                                             <td>
                                                 <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" Width="90%" DbSelectedDate='<%# Bind("DateEnd")%>'>
-                                                    </telerik:RadDatePicker>
+                                                </telerik:RadDatePicker>
                                             </td>
-                                            <td>
-                                                Estimated End of Period Date with the same benefits
+                                            <td>The end date for the benefits entered below
+                                                <br />
+                                                <small>The benefits below will be applied beyond this date if no changes are made</small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -108,10 +117,9 @@
                                                 <telerik:RadNumericTextBox ID="RadNumericTextAmount" runat="server" DbValue='<%# Bind("Amount")%>' Width="90%">
                                                 </telerik:RadNumericTextBox>
                                             </td>
-                                            <td>
-                                                Rate Value employer agrees to pay employee per hour worked
+                                            <td>The amount of money that is earned by an employee for every hour worked
                                                 <br />
-                                                <small>Previous period, this was listed as <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Amount") %> $/Hrs.</b></small>
+                                                <small>Previously this employee earned $<b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Amount") %> per hour</b></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,8 +129,10 @@
                                                 <telerik:RadNumericTextBox ID="RadNumericTextBoxPayrollTax" runat="server" DbValue='<%# Bind("EmployerPayrollTaxPercentage")%>' Width="90%" MaxValue="99">
                                                 </telerik:RadNumericTextBox>
                                             </td>
-                                            <td>
-                                                Employer Payroll Tax Percentage is the sum of Local, State and Federal Tax Percentage
+                                            <td>Employer Payroll Tax Percentage is the sum of all Local, State and Federal Taxes the Employer is responsible for (e.g. Medicare, Unemployment, etc)
+                                                <br />
+                                                <small>Previously this value was <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "EmployerPayrollTaxPercentage") %></b>
+                                                </small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -132,8 +142,9 @@
                                                 <telerik:RadNumericTextBox ID="RadNumericTextBox2" runat="server" DbValue='<%# Bind("HourPerWeek")%>' Width="90%" MaxValue="168">
                                                 </telerik:RadNumericTextBox>
                                             </td>
-                                            <td>
-                                                The number of hours employee may spend doing work for his or her employer without being entitled to overtime pay
+                                            <td>The total number of hours this employee is to work before being entitled to overtime (e.g 40 Hours may be considered standard full-time employment)
+                                                <br />
+                                                <small>Previously this employee was listed as working <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "HourPerWeek") %></b> Hours per week.</small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -143,8 +154,9 @@
                                                 <telerik:RadNumericTextBox ID="RadNumericTextBox1" runat="server" DbValue='<%# Bind("Benefits_vacations")%>' Width="90%" MaxValue="999">
                                                 </telerik:RadNumericTextBox>
                                             </td>
-                                            <td>
-                                                Accrued time off is time off an employee has earned
+                                            <td>This is the total number of Vacation Hours this employee can take in the defined time range
+                                                <br />
+                                                <small>This employee had <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Benefits_vacations") %></b> Vacation hours in the previous period</small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -154,8 +166,9 @@
                                                 <telerik:RadNumericTextBox ID="RadNumericTextBox3" runat="server" DbValue='<%# Bind("Benefits_personals")%>' Width="90%" MaxValue="999">
                                                 </telerik:RadNumericTextBox>
                                             </td>
-                                            <td>
-                                                Paid personal hours constitute paid time off from work that an organization voluntarily provides employees as a benefit.
+                                            <td>This is the total Personal Time off in Hours that this employee is allotted in the defined time range
+                                                <br />
+                                                <small>This employee had <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Benefits_personals") %></b> hours of Personal Time allotted to them in the previous period</small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -165,8 +178,9 @@
                                                 <telerik:RadNumericTextBox ID="RadNumericTextBox4" runat="server" DbValue='<%# Bind("Producer")%>' Width="90%" MaxValue="1" MinValue="0">
                                                 </telerik:RadNumericTextBox>
                                             </td>
-                                            <td>
-                                                Factor (between 0 and 1) of time that the employee is carrying out productive activities (associated with jobss)
+                                            <td>This factor, from 0.0 to 1.0, defines the percentage of time this employee works directly on Jobs/Projects (e.g. If an employee, on average, spends 50% of their working hours working directory on project tasks for which there is a budget then this value would be set to .50)
+                                                <br />
+                                                <small>This employee's Producer Rate was previously listed as <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Producer") %></b></small>
                                             </td>
                                         </tr>
                                         <tr>
@@ -392,6 +406,7 @@
                         <h5>Previous Multiplier Value:
                             <asp:Label ID="lblPreviousMultiplier" runat="server" Text="0"></asp:Label></h5>
                     </div>
+                    <br />
                     <h4>Historical Log (Last 10 changes)</h4>
                     <telerik:RadGrid ID="RadGridMultiplier_log" GridLines="None" runat="server" AllowAutomaticDeletes="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceMultiplier_log">
                         <MasterTableView DataSourceID="SqlDataSourceMultiplier_log" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center"
@@ -441,6 +456,7 @@
             </WizardSteps>
         </telerik:RadWizard>
     </div>
+
     <asp:SqlDataSource ID="SqlDataSourceMultiplier_log" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CompanyMultiplier_log_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="DELETE FROM Company_MultiplierByYear WHERE Id=@Id">
@@ -451,7 +467,7 @@
 
     <asp:SqlDataSource ID="SqlDataSourceHourlyWage" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Employee_HourlyWageHistory_v21_DELETE" DeleteCommandType="StoredProcedure"
-        SelectCommand="Employees_HourlyWageHistory_v21_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="EmployeesHourlyWageHistory_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Employee_HourlyWageHistory_v21_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Employee_HourlyWageHistory_v21_INSERT" InsertCommandType="StoredProcedure">
         <DeleteParameters>
@@ -461,6 +477,8 @@
             <asp:ControlParameter ControlID="lblYear" Name="year" PropertyName="Text" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="cboDepartments" Name="departmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:ControlParameter ControlID="cboFilter" Name="detailed" PropertyName="SelectedValue" Type="Int32" />
+            
         </SelectParameters>
         <UpdateParameters>
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />

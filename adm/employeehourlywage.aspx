@@ -26,6 +26,15 @@
                     <h3>
                         <asp:Label ID="lblEmployeeName" runat="server"></asp:Label><br />
                         (<asp:Label ID="lblYear" runat="server"></asp:Label>)</h3>
+                    <br />
+                    <telerik:RadComboBox ID="cboFilter" runat="server" AutoPostBack="true" Label=" View: "
+                        Width="400px" Filter="Contains" AppendDataBoundItems="true">
+                        <Items>
+                            <telerik:RadComboBoxItem Text="Last Employee Record Update for year" Value="0" />
+                            <telerik:RadComboBoxItem Text="All Records" Value="1" />
+                        </Items>
+                    </telerik:RadComboBox>
+
                 </td>
                 <td>
                     <telerik:RadHtmlChart ID="RadHtmlChart1" runat="server" DataSourceID="SqlDataSourceChart" Height="170px" Width="100%"
@@ -74,53 +83,158 @@
         </table>
         <div>
             <telerik:RadGrid ID="RadGridHourlyWage" runat="server" DataSourceID="SqlDataSourceHourlyWage" AllowAutomaticDeletes="true" AllowAutomaticUpdates="true"
-                AutoGenerateColumns="False" AllowSorting="True" ShowFooter="true"
-                HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
-                <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWage" CommandItemDisplay="Top">
-                    <CommandItemSettings ShowAddNewRecordButton="false" />
+                AutoGenerateColumns="False" AllowSorting="True" ShowFooter="true" HeaderStyle-HorizontalAlign="Center">
+                <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceHourlyWage">
                     <Columns>
                         <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" ItemStyle-HorizontalAlign="Center"
                             HeaderText="" HeaderStyle-Width="50px">
                         </telerik:GridEditCommandColumn>
-                        <telerik:GridDateTimeColumn DataField="Date" HeaderText="Date From" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Date" UniqueName="Date" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="center" PickerType="DatePicker" DataFormatString="{0:d}">
+                        <telerik:GridDateTimeColumn DataField="Date" HeaderText="Date From"
+                            SortExpression="Date" UniqueName="Date" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" DataFormatString="{0:d}">
                         </telerik:GridDateTimeColumn>
-                        <telerik:GridDateTimeColumn DataField="DateEnd" FilterControlAltText="Filter DateEnd column" HeaderText="Date To" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="center" PickerType="DatePicker" DataFormatString="{0:d}">
+                        <telerik:GridDateTimeColumn DataField="DateEnd" HeaderText="Date To"
+                            SortExpression="DateEnd" UniqueName="DateEnd" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="center" DataFormatString="{0:d}">
                         </telerik:GridDateTimeColumn>
-                        <telerik:GridNumericColumn DataField="Amount" HeaderText="$/Hour" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
+                        <telerik:GridNumericColumn DataField="Amount" HeaderText="$/Hour"
+                            SortExpression="Amount" UniqueName="Amount" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Hourly Wage Rate"
                             DecimalDigits="2" MinValue="0">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="EmployerPayrollTaxPercentage" HeaderText="Employer Payroll Tax(%)" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="EmployerPayrollTaxPercentage" UniqueName="EmployerPayrollTaxPercentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Employer Payroll Tax Percentage"
+                        <telerik:GridNumericColumn DataField="EmployerPayrollTaxPercentage" HeaderText="Payroll Tax(%)" HeaderStyle-HorizontalAlign="Center"
+                            SortExpression="EmployerPayrollTaxPercentage" UniqueName="EmployerPayrollTaxPercentage" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Employer Payroll Tax Percentage"
                             DecimalDigits="2" MinValue="0">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="HourPerWeek" HeaderText="Hours per Week" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center"
+                        <telerik:GridNumericColumn DataField="HourPerWeek" HeaderText="Hours per Week"
+                            SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="2" MinValue="0" MaxValue="40">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="Benefits_vacations" HeaderText="Vacations (hours)" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Benefits_vacations" UniqueName="Benefits_vacations" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
+                        <telerik:GridNumericColumn DataField="Benefits_vacations" HeaderText="Vacations (hours)"
+                            SortExpression="Benefits_vacations" UniqueName="Benefits_vacations" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="0" MinValue="0" MaxValue="80">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="Benefits_personals" HeaderText="Personals (hours)" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Benefits_personals" UniqueName="Benefits_personals" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center"
+                        <telerik:GridNumericColumn DataField="Benefits_personals" HeaderText="Personals (hours)"
+                            SortExpression="Benefits_personals" UniqueName="Benefits_personals" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center"
                             DecimalDigits="0" MinValue="0" MaxValue="32">
                         </telerik:GridNumericColumn>
-                        <telerik:GridNumericColumn DataField="Producer" HeaderText="Producer Rate" HeaderStyle-HorizontalAlign="Center"
-                            SortExpression="Producer" UniqueName="Producer" HeaderStyle-Width="80px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Producer Rate 0 to 1"
+                        <telerik:GridNumericColumn DataField="Producer" HeaderText="Producer Rate"
+                            SortExpression="Producer" UniqueName="Producer" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center" HeaderTooltip="Producer Rate 0 to 1"
                             DecimalDigits="2" MinValue="0" MaxValue="1">
                         </telerik:GridNumericColumn>
 
                         <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ButtonType="ImageButton"
                             HeaderText="" CommandName="Delete" Text="Delete" UniqueName="DeleteColumn"
-                            HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                         </telerik:GridButtonColumn>
                     </Columns>
-                    <EditFormSettings>
-                        <EditColumn ButtonType="PushButton" UpdateText="Update" UniqueName="EditCommandColumn1" CancelText="Cancel">
-                        </EditColumn>
+                    <EditFormSettings EditFormType="Template">
+                        <FormTemplate>
+                            <table class="table-sm" style="width: 100%">
+                                <tr>
+                                    <td style="width: 180px; text-align: right">Date From:
+                                    </td>
+                                    <td style="width: 250px;">
+                                        <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server" Width="90%" DbSelectedDate='<%# Bind("Date")%>'>
+                                        </telerik:RadDatePicker>
+                                    </td>
+                                    <td>The starting date for the benefits entered below
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Date To:
+                                    </td>
+                                    <td>
+                                        <telerik:RadDatePicker ID="RadDatePickerTo" runat="server" Width="90%" DbSelectedDate='<%# Bind("DateEnd")%>'>
+                                        </telerik:RadDatePicker>
+                                    </td>
+                                    <td>The end date for the benefits entered below
+                                                <br />
+                                        <small>The benefits below will be applied beyond this date if no changes are made</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Hourly Wage Rate:
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextAmount" runat="server" DbValue='<%# Bind("Amount")%>' Width="90%">
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                    <td>The amount of money that is earned by an employee for every hour worked
+                                                <br />
+                                        <small>Previously this employee earned $<b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Amount") %> per hour</b></small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Payroll Tax(%):
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextBoxPayrollTax" runat="server" DbValue='<%# Bind("EmployerPayrollTaxPercentage")%>' Width="90%" MaxValue="99">
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                    <td>Employer Payroll Tax Percentage is the sum of all Local, State and Federal Taxes the Employer is responsible for (e.g. Medicare, Unemployment, etc)
+                                                <br />
+                                        <small>Previously this value was <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "EmployerPayrollTaxPercentage") %></b>
+                                        </small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Housr Per Week:
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextBox2" runat="server" DbValue='<%# Bind("HourPerWeek")%>' Width="90%" MaxValue="168">
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                    <td>The total number of hours this employee is to work before being entitled to overtime (e.g 40 Hours may be considered standard full-time employment)
+                                                <br />
+                                        <small>Previously this employee was listed as working <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "HourPerWeek") %></b> Hours per week.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Vacations (hours):
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextBox1" runat="server" DbValue='<%# Bind("Benefits_vacations")%>' Width="90%" MaxValue="999">
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                    <td>This is the total number of Vacation Hours this employee can take in the defined time range
+                                                <br />
+                                        <small>This employee had <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Benefits_vacations") %></b> Vacation hours in the previous period</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Personals (hours):
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextBox3" runat="server" DbValue='<%# Bind("Benefits_personals")%>' Width="90%" MaxValue="999">
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                    <td>This is the total Personal Time off in Hours that this employee is allotted in the defined time range
+                                                <br />
+                                        <small>This employee had <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Benefits_personals") %></b> hours of Personal Time allotted to them in the previous period</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Producer Rate:
+                                    </td>
+                                    <td>
+                                        <telerik:RadNumericTextBox ID="RadNumericTextBox4" runat="server" DbValue='<%# Bind("Producer")%>' Width="90%" MaxValue="1" MinValue="0">
+                                        </telerik:RadNumericTextBox>
+                                    </td>
+                                    <td>This factor, from 0.0 to 1.0, defines the percentage of time this employee works directly on Jobs/Projects (e.g. If an employee, on average, spends 50% of their working hours working directory on project tasks for which there is a budget then this value would be set to .50)
+                                                <br />
+                                        <small>This employee's Producer Rate was previously listed as <b><%#LocalAPI.GetEmployee_HourlyWageHistoryPreviousPeriodProperty(Eval("Id"), "Producer") %></b></small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td colspan="2">
+                                        <asp:LinkButton ID="btnUpdate" Text="Update" runat="server" CommandName="Update" CssClass="btn btn-success btn-lg"></asp:LinkButton>
+                                        &nbsp;&nbsp;&nbsp;
+                                                <asp:LinkButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False" CommandName="Cancel" CssClass="btn btn-secondary btn-lg"></asp:LinkButton>
+
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </FormTemplate>
                     </EditFormSettings>
                 </MasterTableView>
             </telerik:RadGrid>
@@ -225,12 +339,12 @@
         </table>
 
 
-        
+
     </telerik:RadToolTip>
 
     <asp:SqlDataSource ID="SqlDataSourceHourlyWage" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         DeleteCommand="Employee_HourlyWageHistory_v21_DELETE" DeleteCommandType="StoredProcedure"
-        SelectCommand="Employee_HourlyWageHistory_v21_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Employee_HourlyWageHistory_v21_1_SELECT" SelectCommandType="StoredProcedure"
         UpdateCommand="Employee_HourlyWageHistory_v21_UPDATE" UpdateCommandType="StoredProcedure"
         InsertCommand="Employee_HourlyWageHistory_v21_INSERT" InsertCommandType="StoredProcedure">
         <DeleteParameters>
@@ -238,6 +352,7 @@
         </DeleteParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboFilter" Name="detailed" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
         <UpdateParameters>
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />

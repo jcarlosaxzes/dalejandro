@@ -42,27 +42,35 @@ Public Class activejobsdashboad
     End Sub
 
     Private Sub RefrescarDatos()
-        lblStatusIdIN_List.Text = ""
-        Dim collection As IList(Of RadComboBoxItem) = cboStatus.CheckedItems
-        If (collection.Count <> 0) Then
-            For Each item As RadComboBoxItem In collection
-                lblStatusIdIN_List.Text = lblStatusIdIN_List.Text + item.Value + ","
-            Next
-            ' Quitar la ultima coma
-            lblStatusIdIN_List.Text = Left(lblStatusIdIN_List.Text, Len(lblStatusIdIN_List.Text) - 1)
-        End If
+        Try
 
-        RadListView1.DataBind()
+            lblStatusIdIN_List.Text = ""
+            Dim collection As IList(Of RadComboBoxItem) = cboStatus.CheckedItems
+            If (collection.Count <> 0) Then
+                For Each item As RadComboBoxItem In collection
+                    lblStatusIdIN_List.Text = lblStatusIdIN_List.Text + item.Value + ","
+                Next
+                ' Quitar la ultima coma
+                lblStatusIdIN_List.Text = Left(lblStatusIdIN_List.Text, Len(lblStatusIdIN_List.Text) - 1)
+            End If
 
-        RadGridFooter.DataBind()
-        PanelLegend.DataBind()
-        Dim dValue As Double = LocalAPI.GetWeeklyHoursByEmp(cboEmployee.SelectedValue, lblCompanyId.Text)
-        lblTotalWeekHours.Text = FormatNumber(dValue, 1)
-        lblRemaining.Text = FormatNumber(40 - dValue, 1)
+            RadListView1.DataBind()
 
-        '----------------------------------
-        Session("employeefortime") = cboEmployee.SelectedValue
+            RadGridFooter.DataBind()
+            PanelLegend.DataBind()
+            Dim dValue As Double = LocalAPI.GetWeeklyHoursByEmp(cboEmployee.SelectedValue, lblCompanyId.Text)
+            lblTotalWeekHours.Text = FormatNumber(dValue, 1)
+            lblRemaining.Text = FormatNumber(40 - dValue, 1)
 
+            '----------------------------------
+            Session("employeefortime") = cboEmployee.SelectedValue
+
+            RadHtmlChartTimeSheet.DataBind()
+            RadHtmlChartTimeUsed.DataBind()
+
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Protected Sub cboJobs_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboJobs.SelectedIndexChanged

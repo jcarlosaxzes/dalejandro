@@ -434,8 +434,7 @@
 
 
                                 <tr>
-                                    <td style="text-align: right;">
-                                        Proposal by:
+                                    <td style="text-align: right;">Proposal by:
                                     </td>
                                     <td>
                                         <telerik:RadComboBox ID="cboProjectManager" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceEmployee"
@@ -448,8 +447,7 @@
 
                                     </td>
 
-                                    <td style="text-align: right;">
-                                        Prepared by:
+                                    <td style="text-align: right;">Prepared by:
                                     </td>
                                     <td>
                                         <telerik:RadComboBox ID="cboPreparedBy" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceEmployee"
@@ -464,8 +462,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td style="text-align: right;">
-                                        Retainer:
+                                    <td style="text-align: right;">Retainer:
                                     </td>
                                     <td>
                                         <telerik:RadCheckBox ID="chkRetainer" runat="server" Checked='<%# Bind("Retainer")%>'
@@ -478,7 +475,7 @@
 
                                     <td style="text-align: right;">Share with Client:</td>
                                     <td>
-                                       <telerik:RadCheckBox ID="chkSharePublicLinks" runat="server" Text="Public Upload Documents" Checked='<%# Bind("SharePublicLinks")%>'
+                                        <telerik:RadCheckBox ID="chkSharePublicLinks" runat="server" Text="Public Upload Documents" Checked='<%# Bind("SharePublicLinks")%>'
                                             ToolTip="Include file links in Proposal Acceptance" AutoPostBack="false">
                                         </telerik:RadCheckBox>
                                     </td>
@@ -487,10 +484,7 @@
 
                                 <tr>
                                     <td style="text-align: right;"></td>
-                                    <td>
-                                        
-
-                                    </td>
+                                    <td></td>
                                     <td style="text-align: right;">Lump Sum:</td>
                                     <td>
                                         <telerik:RadCheckBox ID="chkLumpSum" runat="server" Text="Detail Totals" Checked='<%# Bind("LumpSum")%>'
@@ -503,29 +497,29 @@
                             </table>
 
                             <div>
-                                                                        
-                                        <asp:CompareValidator runat="server" ID="Comparevalidator7" SetFocusOnError="true" Text="*" Operator="NotEqual" Display="None"
-                                            ControlToValidate="cboProjectManager"
-                                            ErrorMessage="Proposal by is required"
-                                            ValueToCompare="(Not Defined...)"
-                                            ValidationGroup="Proposal">
-                                        </asp:CompareValidator>
-                                
-                                
+
+                                <asp:CompareValidator runat="server" ID="Comparevalidator7" SetFocusOnError="true" Text="*" Operator="NotEqual" Display="None"
+                                    ControlToValidate="cboProjectManager"
+                                    ErrorMessage="Proposal by is required"
+                                    ValueToCompare="(Not Defined...)"
+                                    ValidationGroup="Proposal">
+                                </asp:CompareValidator>
+
+
                                 <asp:CompareValidator runat="server" ID="Comparevalidator8" SetFocusOnError="true" Text="*" Operator="NotEqual"
-                                            ControlToValidate="cboProjectManager"
-                                            ErrorMessage="Prepared by is required"
-                                            ValueToCompare="(Not Defined...)"
-                                            ValidationGroup="Proposal">
-                                        </asp:CompareValidator>
+                                    ControlToValidate="cboProjectManager"
+                                    ErrorMessage="Prepared by is required"
+                                    ValueToCompare="(Not Defined...)"
+                                    ValidationGroup="Proposal">
+                                </asp:CompareValidator>
 
-                                        <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Not Defined...)"
-                                            Operator="NotEqual" ControlToValidate="cboProjectManager" Text="*" ErrorMessage="<span><b>Proposal by</b> is required</span>" ValidationGroup="Proposal">
-                                        </asp:CompareValidator>
+                                <asp:CompareValidator runat="server" ID="Comparevalidator2" ValueToCompare="(Not Defined...)"
+                                    Operator="NotEqual" ControlToValidate="cboProjectManager" Text="*" ErrorMessage="<span><b>Proposal by</b> is required</span>" ValidationGroup="Proposal">
+                                </asp:CompareValidator>
 
-                                        <asp:CompareValidator runat="server" ID="Comparevalidator9" ValueToCompare="(Not Defined...)"
-                                            Operator="NotEqual" ControlToValidate="cboPreparedBy" Text="*" ErrorMessage="<span><b>Prepared by</b> is required</span>" ValidationGroup="Proposal">
-                                        </asp:CompareValidator>
+                                <asp:CompareValidator runat="server" ID="Comparevalidator9" ValueToCompare="(Not Defined...)"
+                                    Operator="NotEqual" ControlToValidate="cboPreparedBy" Text="*" ErrorMessage="<span><b>Prepared by</b> is required</span>" ValidationGroup="Proposal">
+                                </asp:CompareValidator>
                             </div>
                         </telerik:RadWizardStep>
 
@@ -663,7 +657,7 @@
         <telerik:RadWizard ID="RadWizard2" runat="server" DisplayCancelButton="false" DisplayProgressBar="false" DisplayNavigationButtons="false" RenderMode="Lightweight" Skin="Silk">
             <WizardSteps>
                 <%--Task Compemsation--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Task Compensation" StepType="Step">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep21" Title="Task Compensation / Notes" StepType="Step">
                     <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td>
@@ -778,7 +772,62 @@
                                 </telerik:RadGrid>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <hr />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:LinkButton ID="btnNewNote" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                    Add Note
+                                </asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <telerik:RadGrid ID="RadGridNotes" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowAutomaticInserts="true"
+                                    AutoGenerateColumns="False" DataSourceID="SqlDataSourceNotes" HeaderStyle-HorizontalAlign="Center">
+                                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
+                                        <Columns>
+                                            <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="" HeaderStyle-Width="50px" UniqueName="EditCommandColumn">
+                                            </telerik:GridEditCommandColumn>
+                                            <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" Display="False" HeaderText="ID" ReadOnly="True" SortExpression="Id" UniqueName="Id">
+                                            </telerik:GridBoundColumn>
+                                            <telerik:GridDateTimeColumn DataField="Date" DataFormatString="{0:MM/dd/yyyy}" ReadOnly="true" HeaderText="Date" SortExpression="Date" UniqueName="Date" HeaderStyle-Width="120px" ItemStyle-HorizontalAlign="Right">
+                                            </telerik:GridDateTimeColumn>
+                                            <telerik:GridTemplateColumn DataField="Note" HeaderText="Note" SortExpression="Note"
+                                                UniqueName="Note">
+                                                <EditItemTemplate>
+                                                    <telerik:RadTextBox ID="NoteTextBox" runat="server" MaxLength="1024" Text='<%# Bind("Note") %>'
+                                                        TextMode="MultiLine" Rows="8" Width="800px">
+                                                    </telerik:RadTextBox>
+                                                </EditItemTemplate>
+                                                <ItemTemplate>
+                                                    <%# Eval("Note") %>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridTemplateColumn DataField="NoteBy" HeaderText="Note By" SortExpression="NoteBy" UniqueName="NoteBy" ReadOnly="true">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="NoteByLabel" runat="server" Text='<%# Eval("NoteBy") %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
+                                            <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this note?"
+                                                ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
+                                                UniqueName="DeleteColumn" HeaderText="" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                                            </telerik:GridButtonColumn>
+                                        </Columns>
+                                         <EditFormSettings >
+                                            <EditColumn ButtonType="PushButton">
+                                            </EditColumn>
+                                        </EditFormSettings>
+                                    </MasterTableView>
+                                </telerik:RadGrid>
+                            </td>
+                        </tr>
                     </table>
+
+
                 </telerik:RadWizardStep>
                 <%--Documents--%>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Documents" StepType="Step">
@@ -1791,6 +1840,28 @@
             <asp:ControlParameter ControlID="lblPaymentSchedules" Name="paymentscheduleId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
         </UpdateParameters>
+    </asp:SqlDataSource>
+
+    <asp:SqlDataSource ID="SqlDataSourceNotes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        DeleteCommand="DELETE FROM [Proposal_notes] WHERE [Id] = @Id"
+        SelectCommand="SELECT [Proposal_notes].Id, ProposalId, Date, Note, Employees.Name as NoteBy FROM [Proposal_notes] left outer join Employees on [Proposal_notes].employeeId=Employees.Id WHERE ([ProposalId] = @ProposalId) ORDER BY [Proposal_notes].[Id] desc"
+        UpdateCommand="UPDATE [Proposal_notes] SET  [Note] = @Note WHERE [Id] = @Id"
+        InsertCommand="INSERT INTO Proposal_notes([ProposalId],[Date],[Note], [employeeId]) VALUES(@ProposalId, dbo.CurrentTime(),@Note, @employeeId)">
+        <DeleteParameters>
+            <asp:Parameter Name="Id" Type="Int32" />
+        </DeleteParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="Id" Type="Int32" />
+            <asp:Parameter Name="Note" />
+        </UpdateParameters>
+        <InsertParameters>
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
+            <asp:Parameter Name="Note" />
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" />
+        </InsertParameters>
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblProposalId" DefaultValue="0" Name="ProposalId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
     </asp:SqlDataSource>
 
     <telerik:RadButton ID="btnDataProcecing" runat="server" Text="Processing" OnClientClicked="DataProcessing" AutoPostBack="false" UseSubmitBehavior="false" CausesValidation="false" Width="120px" Visible="false">

@@ -18,7 +18,6 @@ Public Class transmittals
                 lblEmployeeName.Text = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
                 lblEmployeeEmail.Text = Master.UserEmail
 
-                LocalAPI.RefreshYearsList()
                 lblCompanyId.Text = Session("companyId")
 
                 cboPeriod.DataBind()

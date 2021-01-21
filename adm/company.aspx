@@ -181,6 +181,14 @@
                                                 <asp:Label ID="Label2" runat="server" Text='<%# Eval("billingExpirationDate", "{0:d}")%>' ToolTip="Due Date to renove your PASconcept subscription." />
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="text-align:right">Time Zone (UTC):
+                                            </td>
+                                            <td>
+                                                <%# Eval("TimeZone")%>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>hourly offset from GMT, example: ET Eastern Time UTC -5:00 / -4:00</small>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </telerik:RadWizardStep>
 
@@ -846,7 +854,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align:right">Language</td>
+                                            <td style="text-align:right">Language:</td>
                                             <td>
                                                 <telerik:RadComboBox ID="cboLanguage" runat="server" Width="150px" SelectedValue='<%# Bind("Language")%>'>
                                                     <Items>
@@ -857,6 +865,15 @@
 
                                             </td>
                                         </tr>
+
+                                        <tr>
+                                            <td style="text-align:right">Time Zone:</td>
+                                            <td>
+                                                <telerik:RadNumericTextBox ID="RadTextBox15" runat="server" Text='<%# Bind("TimeZone")%>' Width="150px" />
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>hourly offset from GMT, example: ET Eastern Time UTC -5:00 / -4:00</small>
+                                            </td>
+                                        </tr>
+
                                     </table>
                                 </telerik:RadWizardStep>
 
@@ -1343,7 +1360,7 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </DeleteParameters>
     </asp:SqlDataSource>
-
+    
     <asp:SqlDataSource ID="SqlDataSourceSign" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT companyId, imgSign  FROM [Company] WHERE ([companyId] = @companyId)"
         UpdateCommand="UPDATE [Company] SET [imgSign] = @imgSign  WHERE [companyId] = @companyId"
@@ -1424,6 +1441,8 @@
             <asp:Parameter Name="accountSid" />
             <asp:Parameter Name="authToken" />
             <asp:Parameter Name="TwilioPhone" />
+
+            <asp:Parameter Name="TimeZone" />
 
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />

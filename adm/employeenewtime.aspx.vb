@@ -51,7 +51,7 @@ Public Class employeenewtime
         Try
             cboJobStatus.DataBind()
 
-            If lblCompanyId.Text <> 260962 Then ' EEG
+            If lblCompanyId.Text = 260962 Then ' EEG
                 cboJobStatus.SelectedValue = -2
             Else
                 cboJobStatus.SelectedValue = -1
@@ -181,7 +181,7 @@ Public Class employeenewtime
                                   taskId, cboCategory.SelectedValue, lblCompanyId.Text, JobTicketId) Then
 
                 ' Actualizar el status del Job
-                If cboJobStatus.SelectedValue <> -1 Then
+                If cboJobStatus.SelectedValue > 0 Then
                     LocalAPI.SetJobStatus(lblSelectedJob.Text, cboJobStatus.SelectedValue, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text)
                     cboJobStatus.SelectedValue = -1
                 End If

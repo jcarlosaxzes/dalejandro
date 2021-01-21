@@ -973,34 +973,6 @@ Public Class LocalAPI
         End Try
 
     End Function
-    Public Shared Sub RefreshYearsList()
-        Try
-
-            Dim bExisteAnoaActual As Boolean
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT ISNULL(COUNT(*), 0) As Cantidad  FROM [Years] WHERE [Year]=" & Today.Year, cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                bExisteAnoaActual = (rdr("Cantidad") > 0)
-            End If
-            rdr.Close()
-
-            If Not bExisteAnoaActual Then
-                cmd.CommandText = "INSERT INTO [Years] ([Year], [nYear]) " &
-                                                        "VALUES (" & Today.Year & ", '" & Today.Year & "')"
-
-                cmd.ExecuteNonQuery()
-
-            End If
-            cnn1.Close()
-
-        Catch ex As Exception
-
-        End Try
-
-    End Sub
 
     Public Shared Function urlProjectLocationGmap(sProjectLocation As String) As String
         If Len(sProjectLocation) > 0 Then
@@ -8892,7 +8864,7 @@ Public Class LocalAPI
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "PayrollInitialize_INSERT"
+            cmd.CommandText = "Employee_HourlyWageInitializeYear_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
 
             ' Set up the input parameter 
@@ -8910,6 +8882,28 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function AllCompaniesEmployeesHourlyWage_INSERT(year As Integer) As Boolean
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "AllCompaniesEmployee_HourlyWageInitializeYear_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@year", year)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return True
+        Catch ex As Exception
+
+        End Try
+    End Function
     Public Shared Function GetCompanyProductiveSalary(companyId As Integer, year As Integer) As Double
         Return GetNumericEscalar("select dbo.CompanyProductiveSalary(" & year & "," & companyId & ")")
     End Function
@@ -9805,18 +9799,24 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetWeeklyHoursByEmp(ByVal employeeId As Integer, companyId As Integer) As Double
-        Return GetNumericEscalar("SELECT dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & ",dbo.CurrentTime())")
+        Return GetNumericEscalar($"SELECT dbo.WeeklyHoursByEmp({employeeId},{companyId},dbo.CurrentTimeZone({companyId}))")
     End Function
     Public Shared Function GetWeeklyHoursByEmpExt(ByVal employeeId As Integer, companyId As Integer, DateInWeek As Date) As Double
-        Return GetNumericEscalar("SELECT dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & "," & GetFecha_102(DateInWeek) & ")")
+        Return GetNumericEscalar("Select dbo.WeeklyHoursByEmp(" & employeeId & "," & companyId & "," & GetFecha_102(DateInWeek) & ")")
     End Function
     Public Shared Function GetBiWeeklyHoursByEmp(ByVal employeeId As Integer, companyId As Integer) As Double
-        Return GetNumericEscalar("SELECT dbo.BiWeeklyHoursByEmp(" & employeeId & "," & companyId & ",dbo.CurrentTime())")
+        Return GetNumericEscalar($"Select dbo.BiWeeklyHoursByEmp({employeeId},{companyId},dbo.CurrentTimeZone({companyId}))")
     End Function
 
     Public Shared Function GetEmployeeRoleId(ByVal RoleName As String, companyId As Integer) As Integer
-        Return GetNumericEscalar("select top 1 Id from [Employees_roles] where [Name]='" & RoleName & "' and companyId=" & companyId)
+        Return GetNumericEscalar("Select top 1 Id from [Employees_roles] where [Name]='" & RoleName & "' and companyId=" & companyId)
     End Function
+
+    Public Shared Function SetEmployee_IPv4_UPDATE(ByVal lId As Long, IPv4 As String) As Boolean
+        Return ExecuteNonQuery($"UPDATE [Employees] SET [URLFirewall]='{IPv4}' WHERE Id={lId}")
+    End Function
+
+
     Public Shared Function GetEmployeeProperty(ByVal lId As Long, ByRef sProperty As String) As String
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -13005,6 +13005,13 @@ Public Class LocalAPI
     Public Shared Function GetEntityAzureFilesCount(entityId As Integer, EntityLabel As String) As Integer
         Return GetNumericEscalar($"SELECT count(*) FROM [Azure_Uploads] where EntityType= '{EntityLabel}' and EntityId={entityId}")
     End Function
+    Public Shared Function GetAzureFilesCount(clientId As Integer, proposalId As Integer, jobId As Integer) As Integer
+        Return GetNumericEscalar($"SELECT count(*) FROM (select au.Id from Azure_Uploads au where [Deleted] = 0 and {clientId}>0 and au.EntityType='Clients' and au.EntityId = {clientId}
+			union all
+			select au.Id from [Azure_Uploads] au where  {proposalId}>0 and au.EntityType='Proposal' and au.EntityId = {proposalId} 
+			union all
+			select au.Id from [Azure_Uploads] au where {jobId}>0 and au.EntityType='Jobs' and au.EntityId = {jobId})F")
+    End Function
 
 
     Public Shared Function GetAzureFileKeyName(Id As Integer) As String
@@ -13378,12 +13385,39 @@ Public Class LocalAPI
         '[Authorization Token] = "Bearer 7497EE20-6811-4405-A2EE-471A8BFE3682"
         '[HttpMethod] = "POST"
 
-        LocalAPI.sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST DailyRecurrenceTasks")
+        sys_log_Nuevo("jcarlos@axzes.com", LocalAPI.sys_log_AccionENUM.azure_post, 260973, "POST DailyRecurrenceTasks")
+
+        RefreshYearsList()
+
         SendRecurrenceInvoices()
+
         SendDueDateInvoices()
+
         SendEEGProposalsNotEmitted()
+
         Return DeletePendingAzureFiles()
     End Function
+
+    Public Shared Sub RefreshYearsList()
+        Try
+            Dim CurrentYear As Integer = Today.Year
+            Dim bExisteAnoaActual As Boolean = (GetNumericEscalar($"select isnull(count(*), 0) from [Years] where [Year]= {CurrentYear}") > 0)
+
+            If Not bExisteAnoaActual Then
+                ExecuteNonQuery($"INSERT INTO [Years] ([Year], [nYear]) VALUES ({CurrentYear}, '{CurrentYear}')")
+                sys_Webhooks_INSERT("RefreshYearsList", 1, "")
+            Else
+                sys_Webhooks_INSERT("RefreshYearsList", 0, "")
+            End If
+
+            ' Update employees in year hourly wage table
+            AllCompaniesEmployeesHourlyWage_INSERT(CurrentYear)
+
+        Catch ex As Exception
+            sys_Webhooks_INSERT("RefreshYearsList", 0, ex.Message)
+        End Try
+
+    End Sub
 
     Public Shared Function SendRecurrenceInvoices() As Boolean
         ' Company.billingModule 

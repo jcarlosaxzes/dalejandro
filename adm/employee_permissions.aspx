@@ -48,11 +48,11 @@
         </asp:LinkButton>
         &nbsp;&nbsp;&nbsp;&nbsp;
             <telerik:RadTextBox ID="txtIPv4" runat="server" Width="300px"
-                MaxLength="80" EmptyMessage="Bulk IPv4 addresses separated by a comma" ToolTip="IP v4 to Apply Selected Role" Font-Size="Small">
+                MaxLength="255" EmptyMessage="Bulk IPv4 addresses separated by a comma" ToolTip="IP v4 to Apply Selected Records" Font-Size="Small">
             </telerik:RadTextBox>
         <asp:LinkButton ID="btnApplyIPv4toRole" runat="server"
             CssClass="btn btn-primary  btn-sm" UseSubmitBehavior="false">
-                                         Bulk IP Update to Selected Role
+                                         Bulk IP Update to Selected records
         </asp:LinkButton>
 
 
