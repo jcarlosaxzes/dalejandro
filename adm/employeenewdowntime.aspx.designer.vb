@@ -104,6 +104,15 @@ Partial Public Class employeenewdowntime
     Protected WithEvents txtMiscellaneousHours As Global.Telerik.Web.UI.RadNumericTextBox
 
     '''<summary>
+    '''txtDateFrom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDateFrom As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''RadDatePickerFrom control.
     '''</summary>
     '''<remarks>
@@ -113,6 +122,15 @@ Partial Public Class employeenewdowntime
     Protected WithEvents RadDatePickerFrom As Global.Telerik.Web.UI.RadDatePicker
 
     '''<summary>
+    '''txtDateTo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDateTo As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''RadDatePickerTo control.
     '''</summary>
     '''<remarks>
@@ -120,6 +138,15 @@ Partial Public Class employeenewdowntime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
+
+    '''<summary>
+    '''PanelDateRagePicker control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelDateRagePicker As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
     '''txtNotes control.
@@ -138,6 +165,24 @@ Partial Public Class employeenewdowntime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnOkNewMiscellaneousTime As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''lblNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblNotes As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblAprovedNote control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblAprovedNote As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''vsClient control.

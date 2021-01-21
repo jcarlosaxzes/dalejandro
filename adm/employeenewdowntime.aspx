@@ -4,6 +4,9 @@
 <%@ Import Namespace="pasconcept20" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <script src='<%= ResolveUrl("~/Scripts/date_range_picker/jquery.pickmeup.js") %>'></script>
+    <link rel="stylesheet" type="text/css" href='<%= ResolveUrl("~/Scripts/date_range_picker/pickmeup.css") %>' />
+
 
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">
@@ -50,16 +53,17 @@
                 <div>
                     <table class="table-sm" style="width: 100%">
                         <tr>
-                            <td style="width: 150px; text-align: right">Category:
+                            <td style="width: 100px; text-align: right">Category:
                             </td>
-                            <td>
-                                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name" ZIndex="50001"
-                                    DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
+                            <td style="width: 200px; text-align: right">
+                                <telerik:RadComboBox ID="cboType" runat="server"  AppendDataBoundItems="True" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name" ZIndex="50001"
+                                    DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AutoPostBack="true">
+                                    <Items>
+                                        <telerik:RadComboBoxItem runat="server" Selected="False" Text="Select Category..." Value="-1" />
+                                    </Items>
                                 </telerik:RadComboBox>
                             </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right">Time (hrs per day):
+                            <td style="width: 100px; text-align: right">Time (hrs):
                             </td>
                             <td>
                                 <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
@@ -71,7 +75,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">Date From:
+                            <td style="text-align: right">
+                                <asp:Label ID="txtDateFrom" Text="Date:" runat="server"/>  
                             </td>
                             <td>
                                 <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server"
@@ -79,39 +84,53 @@
                                     Culture="en-US"
                                     ZIndex="50001"
                                     Width="150px">
+                                    <ClientEvents OnDateSelected="RadDatePickerChange" />
                                 </telerik:RadDatePicker>
                             </td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right">Date To:
+                            <td style="text-align: right">
+                                <asp:Label ID="txtDateTo" Visible="false" Text="Date To:" runat="server"/>  
                             </td>
                             <td>
                                 <telerik:RadDatePicker ID="RadDatePickerTo" runat="server"
                                     DateFormat="MM/dd/yyyy"
                                     Culture="en-US"
                                     ZIndex="50001"
-                                    Width="150px">
+                                    Width="150px" Visible="false">
+                                    <ClientEvents OnDateSelected="RadDatePickerChange" />
                                 </telerik:RadDatePicker>
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">Notes:
-                            </td>
-                            <td>
-                                <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="2" Width="100%"
-                                    MaxLength="256">
-                                </telerik:RadTextBox>
+                            <td colspan="4" style="text-align:center;">
+                                <asp:Panel ID="PanelDateRagePicker" runat="server" Visible="false">                                    
+                                    <div id="DateRangeDiv" class="DateRangeDiv"></div>
+                                </asp:Panel>
                             </td>
                         </tr>
 
                         <tr>
-                            <td></td>
-                            <td>
-                                <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddNonRecord" Width="180px" CausesValidation="true">
+                            <td style="text-align: right" >Notes:
+                            </td>
+                            <td colspan="2">
+                                <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="1" Width="100%"
+                                    MaxLength="256">
+                                </telerik:RadTextBox>
+                            </td>
+                            <td colspan="1">
+                                <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddNonRecord"  CausesValidation="true">
                             Add Time
                                 </asp:LinkButton>
                             </td>
                         </tr>
+
+                        <tr>
+                             <td colspan="4" style="text-align:center;">
+                                <asp:Label ID="lblNotes" runat="server" Visible="false" Text="Selected date range will automatically exclude Holidays and Weekends." CssClass="badge badge-pill badge-warning"></asp:Label>
+                                 <br />
+                                 <asp:Label ID="lblAprovedNote" runat="server" Visible="false" Text="This Request need to be Approved by company managers " CssClass="badge badge-pill badge-warning"></asp:Label>
+                            </td> 
+                        </tr>
+                        
 
                     </table>
                     <div>
@@ -253,5 +272,47 @@
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblLogedEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+    
+     <script>
+         $(function () {
 
+             $('.DateRangeDiv').pickmeup({
+                 flat: true,
+                 mode: 'range',
+                 calendars: 2,
+                 format: 'Y-m-d',
+                 change: function (formatted_date) {
+                     //Update Coponents
+                     var RadDatePickerFrom = $find("<%= RadDatePickerFrom.ClientID %>");
+                     RadDatePickerFrom.set_selectedDate(new Date(formatted_date[0])); 
+
+                     var RadDatePickerTo = $find("<%= RadDatePickerTo.ClientID %>");
+                     RadDatePickerTo.set_selectedDate(new Date(formatted_date[1]));
+ 
+                 }
+             });
+
+         });
+
+         function updateRange() {
+             var RadDatePickerFrom = $find("<%= RadDatePickerFrom.ClientID %>");
+             var RadDatePickerTo = $find("<%= RadDatePickerTo.ClientID %>");
+             var dateFrom = RadDatePickerFrom.get_selectedDate();
+             var dateTo = RadDatePickerTo.get_selectedDate();
+             if (dateFrom) {
+                 if (dateTo) {
+                     if (dateFrom <= dateTo) {
+                         $('.DateRangeDiv').pickmeup('set_date', [dateFrom, dateTo], true);
+                         return;
+                     }
+                     $('.DateRangeDiv').pickmeup('set_date', dateFrom, true);
+                 }
+             }   
+         }
+
+
+         function RadDatePickerChange(obj, e) {
+             updateRange();
+         }
+     </script>
 </asp:Content>

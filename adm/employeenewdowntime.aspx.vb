@@ -84,7 +84,7 @@ Public Class employeenewdowntime
             lblPer3.Text = ""
         End If
 
-        cboType.Focus()
+        'cboType.Focus()
 
     End Sub
 
@@ -117,12 +117,14 @@ Public Class employeenewdowntime
     End Sub
 
 
+
+
 #Region "Add Record"
     Private Sub btnOkNewMiscellaneousTime_Click(sender As Object, e As EventArgs) Handles btnOkNewMiscellaneousTime.Click
         Try
             If LocalNewTMiscellaneousTime() Then
                 Master.InfoMessage("New non-productive time inserted")
-                BackPage()
+                ''BackPage()
             End If
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
@@ -148,7 +150,7 @@ Public Class employeenewdowntime
                             Master.InfoMessage("Your request for " & cboType.Text & " has been sended to HR Manager and is currently in progress. Thank you for your patience as your request is reviewed for approval", 10)
                         End If
                     Case Else
-                        bRet = LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerTo.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text)
+                        bRet = LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerFrom.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text)
                         If bRet Then Master.InfoMessage(cboType.Text & " time inserted")
 
                 End Select
@@ -168,7 +170,7 @@ Public Class employeenewdowntime
         Dim dSaldoFinal As String = 0
         Dim EntryTotalHours As Double = txtMiscellaneousHours.DbValue
         If RadDatePickerFrom.DbSelectedDate <> RadDatePickerTo.DbSelectedDate Then
-            EntryTotalHours = 8 * DateDiff(DateInterval.Day, RadDatePickerFrom.DbSelectedDate, RadDatePickerTo.DbSelectedDate)
+            EntryTotalHours = Double.Parse(txtMiscellaneousHours.DbValue) * DateDiff(DateInterval.Day, RadDatePickerFrom.DbSelectedDate, RadDatePickerTo.DbSelectedDate)
         End If
         Select Case cboType.SelectedValue
             Case 7  ' Vacations
@@ -268,6 +270,88 @@ Public Class employeenewdowntime
         e.Cancel = True
 
         cboType.Focus()
+    End Sub
+
+    Private Sub cboType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboType.SelectedIndexChanged
+        If cboType.SelectedValue = 7 Then
+            txtMiscellaneousHours.Text = "8"
+            lblNotes.Visible = True
+            txtNotes.Text = "Vacation"
+
+        Else
+            txtMiscellaneousHours.Text = "1"
+            lblNotes.Visible = False
+        End If
+
+        Select Case cboType.SelectedValue
+            Case 5, 6, 7
+                txtDateFrom.Text = "Date From:"
+                txtDateTo.Visible = True
+                RadDatePickerTo.Visible = True
+                lblAprovedNote.Visible = True
+                btnOkNewMiscellaneousTime.Text = "Request Time"
+                PanelDateRagePicker.Visible = True
+            Case Else
+                txtDateFrom.Text = "Date:"
+                txtDateTo.Visible = False
+                RadDatePickerTo.Visible = False
+                lblAprovedNote.Visible = False
+                btnOkNewMiscellaneousTime.Text = "Add Time"
+                PanelDateRagePicker.Visible = False
+
+
+        End Select
+        If cboType.SelectedValue <= 3 Or cboType.SelectedValue <= 4 Or cboType.SelectedValue <= 8 Or cboType.SelectedValue <= 3 Then
+
+        End If
+
+    End Sub
+
+    Private Sub RadGridLog_ItemDeleted(sender As Object, e As GridDeletedEventArgs) Handles RadGridLog.ItemDeleted
+        SqlDataSourceEmployeeDailyTimeWorked.DataBind()
+        RadScheduler1.DataBind()
+        RadScheduler1.Rebind()
+    End Sub
+
+    Private Sub RadGridLog_ItemDataBound(sender As Object, e As GridItemEventArgs) Handles RadGridLog.ItemDataBound
+
+
+        Dim hr_email = LocalAPI.GetCompanyHRemail(lblCompanyId.Text)
+        If Not String.IsNullOrEmpty(hr_email) AndAlso Master.UserEmail = hr_email Then
+            Return
+        End If
+
+        If LocalAPI.IsMasterUser(Master.UserEmail, lblCompanyId.Text) Then
+            Return
+        End If
+
+
+        If TypeOf e.Item Is GridDataItem Then
+            Dim TimeType = e.Item.DataItem.Row.ItemArray(2)
+            Dim _btnEdit = e.Item.FindControl("EditButton")
+
+            Dim _btnDelete = e.Item.FindControl("gbcDeleteColumn")
+
+            If TypeOf _btnEdit Is ImageButton Then
+                Dim btnEdit As ImageButton = CType(_btnEdit, ImageButton)
+                Dim btnDelete As ImageButton = CType(_btnDelete, ImageButton)
+                Select Case TimeType
+                    Case 5, 6, 7
+                        btnEdit.Visible = False
+                        btnEdit.Enabled = False
+                        btnDelete.Visible = False
+                        btnDelete.Enabled = False
+                    Case Else
+                        btnEdit.Visible = True
+                        btnEdit.Enabled = True
+                        btnDelete.Visible = True
+                        btnDelete.Enabled = True
+                End Select
+
+            End If
+
+        End If
+
     End Sub
 
 #End Region

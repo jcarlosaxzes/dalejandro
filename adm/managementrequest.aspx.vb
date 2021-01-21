@@ -82,4 +82,22 @@ Public Class managementrequest
     Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
         e.Command.Parameters(2).Value = CType(RadDataForm1.Items(0).FindControl("txtExplanation"), RadTextBox).Text
     End Sub
+
+    Protected Sub RadScheduler1_AppointmentDataBound(sender As Object, e As SchedulerEventArgs)
+        Select Case e.Appointment.Description
+            Case "Request Time"
+                e.Appointment.CssClass = "rsCategoryBlue"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+            Case "Non Productive Time"
+                e.Appointment.CssClass = "rsCategoryPink"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+
+            Case "Holiday"
+                e.Appointment.CssClass = "rsCategoryGreen"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+        End Select
+    End Sub
 End Class
