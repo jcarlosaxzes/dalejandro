@@ -1591,6 +1591,45 @@ Public Class LocalAPI
         End Try
     End Function
 
+    Public Shared Function CompanyPayrollCallendar_InitYear(year As Integer, companyId As Integer) As Boolean
+        Try
+
+            Dim dDate As DateTime = GetLastPaidDay(companyId)
+
+            While dDate.Year <= year
+                dDate = DateAdd(DateInterval.Day, 14, dDate)
+                NuevoPaidDay(dDate, companyId)
+            End While
+
+            Return True
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
+    Public Shared Function AllCompanyPayrollCallendar_InitYear(year As Integer) As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As New SqlCommand("select companyId from Company where ISNULL(Company.BlockSubcriptionExpired, 0)=0", cnn1)
+            Dim rdr As SqlDataReader
+            rdr = cmd.ExecuteReader
+
+            Do While rdr.Read()
+                If rdr.HasRows Then
+                    CompanyPayrollCallendar_InitYear(year,rdr("companyId"))
+                End If
+            Loop
+
+            rdr.Close()
+            cnn1.Close()
+
+        Catch ex As Exception
+
+        End Try
+    End Function
+
     Public Shared Function CompanyMultiplier_UPDATE(Id As Integer, Salary As Double, SubContracts As Double, Rent As Double, Others As Double, ProductiveSalary As Double, Profit As Double, CalculateSalary As Integer, CalculateProductiveSalary As Integer, InitializeEmployee As Integer, CalculateBudgetDepartment As Integer, Closed As Integer) As Boolean
         Try
 
@@ -13406,12 +13445,17 @@ Public Class LocalAPI
             If Not bExisteAnoaActual Then
                 ExecuteNonQuery($"INSERT INTO [Years] ([Year], [nYear]) VALUES ({CurrentYear}, '{CurrentYear}')")
                 sys_Webhooks_INSERT("RefreshYearsList", 1, "")
+
+                AllCompanyPayrollCallendar_InitYear(CurrentYear)
+
             Else
                 sys_Webhooks_INSERT("RefreshYearsList", 0, "")
             End If
 
             ' Update employees in year hourly wage table
             AllCompaniesEmployeesHourlyWage_INSERT(CurrentYear)
+
+            '
 
         Catch ex As Exception
             sys_Webhooks_INSERT("RefreshYearsList", 0, ex.Message)

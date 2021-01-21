@@ -530,7 +530,7 @@
                                                             </a>
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="PaidDayList" Text="Payroll" Visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
+                                                    <telerik:NavigationNode NavigateUrl="paiddaylist" Text="Payroll" Visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
                                                         <NodeTemplate>
                                                             <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
                                                                 <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
