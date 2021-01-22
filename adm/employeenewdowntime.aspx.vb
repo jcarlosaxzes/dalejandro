@@ -55,6 +55,14 @@ Public Class employeenewdowntime
 
         txtNotes.Text = ""
 
+        ShowSumaryBox()
+
+        'cboType.Focus()
+
+    End Sub
+
+
+    Public Sub ShowSumaryBox()
         Dim dFrom As DateTime = Year(RadDatePickerFrom.DbSelectedDate) & "-01-01"
         Dim dTo As DateTime = Year(RadDatePickerFrom.DbSelectedDate) & "-12-31 23:59"
         Dim dPermited As Double
@@ -83,9 +91,6 @@ Public Class employeenewdowntime
             lblPer1.Text = ""
             lblPer3.Text = ""
         End If
-
-        'cboType.Focus()
-
     End Sub
 
 
@@ -122,9 +127,20 @@ Public Class employeenewdowntime
 #Region "Add Record"
     Private Sub btnOkNewMiscellaneousTime_Click(sender As Object, e As EventArgs) Handles btnOkNewMiscellaneousTime.Click
         Try
+            If (cboType.SelectedValue = 5 Or cboType.SelectedValue = 6 Or cboType.SelectedValue = 7) And RadDatePickerFrom.DbSelectedDate > RadDatePickerTo.DbSelectedDate Then
+                dateValidator.Visible = True
+                Return
+            Else
+                dateValidator.Visible = False
+            End If
+
             If LocalNewTMiscellaneousTime() Then
                 Master.InfoMessage("New non-productive time inserted")
                 ''BackPage()
+                SqlDataSourceEmployeeDailyTimeWorked.DataBind()
+                RadScheduler1.DataBind()
+                RadScheduler1.Rebind()
+                ShowSumaryBox()
             End If
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)

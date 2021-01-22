@@ -640,31 +640,38 @@
 					if (this.pickmeup) {
 						var cal = this.pickmeup;
 						var options = cal.data('pickmeup');
-						options.date = date;
-						if (options.date.constructor == String) {
-							options.date = parseDate(options.date, options.format).setHours(0,0,0,0);
-						} else if (options.date.constructor == Date) {
-							options.date.setHours(0,0,0,0);
-						}
-						if (options.mode != 'single') {
-							if (options.date.constructor != Array) {
-								options.date = [options.date.valueOf()];
-								if (options.mode == 'range') {
-									options.date.push(((new Date(options.date[0])).setHours(23,59,59,0)).valueOf());
-								}
-							} else {
-								for (var i = 0; i < options.date.length; i++) {
-									options.date[i] = (parseDate(options.date[i], options.format).setHours(0,0,0,0)).valueOf();
-								}
-								if (options.mode == 'range') {
-									options.date[1] = ((new Date(options.date[1])).setHours(23,59,59,0)).valueOf();
-								}
-							}
-						} else {
-							options.date = options.date.valueOf();
-						}
-						options.current = new Date (options.mode != 'single' ? options.date[0] : options.date);
-						fill(cal);
+						
+						options.date[0] = date[0];
+						options.date[1] = date[1];
+						options.current = date[0].getMonth()< 12 ?  new Date(date[0].getFullYear(), date[0].getMonth()+1, 1, 0, 0, 0) :  new Date(date[0].getFullYear()+1, 1, 1, 0, 0, 0)
+						//options.change.apply(this.pickmeup, prepareDate(options));
+						
+						// options.date = date;
+						// if (options.date.constructor == String) {
+							// options.date = parseDate(options.date, options.format).setHours(0,0,0,0);
+						// } else if (options.date.constructor == Date) {
+							// options.date.setHours(0,0,0,0);
+						// }
+						// if (options.mode != 'single') {
+							// if (options.date.constructor != Array) {
+								// options.date = [options.date.valueOf()];
+								// if (options.mode == 'range') {
+									// options.date.push(((new Date(options.date[0])).setHours(23,59,59,0)).valueOf());
+								// }
+							// } else {
+								// for (var i = 0; i < options.date.length; i++) {
+									// options.date[i] = (parseDate(options.date[i], options.format).setHours(0,0,0,0)).valueOf();
+								// }
+								// if (options.mode == 'range') {
+									// options.date[1] = ((new Date(options.date[1])).setHours(23,59,59,0)).valueOf();
+								// }
+							// }
+						// } else {
+							// options.date = options.date.valueOf();
+						// }
+						// options.current = new Date (options.date.constructor != Array ? options.date : options.date[0]);
+						// //options.current = new Date (options.mode != 'single' ? options.date[0] : options.date);
+						 fill(cal);
 					}
 				});
 			},

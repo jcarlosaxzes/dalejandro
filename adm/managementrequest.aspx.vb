@@ -100,4 +100,20 @@ Public Class managementrequest
                 e.Appointment.ForeColor = System.Drawing.Color.White
         End Select
     End Sub
+
+    Private Sub RadDataForm1_ItemCreated(sender As Object, e As RadDataFormItemEventArgs) Handles RadDataForm1.ItemCreated
+
+        If e.Item.ItemType = RadDataFormItemType.DataItem Then
+            Dim item As RadDataFormDataItem = TryCast(e.Item, RadDataFormDataItem)
+            Dim scheduler As RadScheduler = CType(item.FindControl("RadScheduler1"), RadScheduler)
+            If Not Request.QueryString("Id") Is Nothing Then
+                Dim timeRequest = LocalAPI.GetRecordFromQuery($"select * from Employees_NonRegularHours_Request where Id = {Request.QueryString("Id")}")
+                Dim dateFrom As DateTime = timeRequest("DateFrom")
+                scheduler.SelectedDate = dateFrom
+            End If
+
+
+
+        End If
+    End Sub
 End Class

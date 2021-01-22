@@ -185,6 +185,15 @@ Partial Public Class employeenewdowntime
     Protected WithEvents lblAprovedNote As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''dateValidator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dateValidator As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''vsClient control.
     '''</summary>
     '''<remarks>
@@ -201,6 +210,15 @@ Partial Public Class employeenewdowntime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Comparevalidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Comparevalidator1 As Global.System.Web.UI.WebControls.CompareValidator
 
     '''<summary>
     '''RadScheduler1 control.

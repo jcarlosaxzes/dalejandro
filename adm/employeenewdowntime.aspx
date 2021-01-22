@@ -128,7 +128,10 @@
                                 <asp:Label ID="lblNotes" runat="server" Visible="false" Text="Selected date range will automatically exclude Holidays and Weekends." CssClass="badge badge-pill badge-warning"></asp:Label>
                                  <br />
                                  <asp:Label ID="lblAprovedNote" runat="server" Visible="false" Text="This Request need to be Approved by company managers " CssClass="badge badge-pill badge-warning"></asp:Label>
-                            </td> 
+                           <br />
+                                  <asp:Label id="dateValidator" ForeColor="Red" Text="Date From must be earlier or equal than end Date To" Visible="false" runat="server"></asp:Label>
+                                 
+                             </td> 
                         </tr>
                         
 
@@ -139,9 +142,15 @@
                                         There were this errors:"></asp:ValidationSummary>
                     </div>
                     <div>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNotes" Text="* Notes is required" ForeColor="Red"
-                            SetFocusOnError="true" ValidationGroup="AddNonRecord" Display="None">
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtNotes" ErrorMessage="* Notes is required" ForeColor="Red"
+                             ValidationGroup="AddNonRecord" Display="None">
                         </asp:RequiredFieldValidator>
+
+                        <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="Select Category..."
+                        Operator="NotEqual" ControlToValidate="cboType" ErrorMessage="You must select Category!" ValidationGroup="AddNonRecord" Display="None">
+                       
+
+                    </asp:CompareValidator>
                     </div>
                 </div>
             </td>
@@ -274,6 +283,7 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     
      <script>
+
          $(function () {
 
              $('.DateRangeDiv').pickmeup({
@@ -288,7 +298,9 @@
 
                      var RadDatePickerTo = $find("<%= RadDatePickerTo.ClientID %>");
                      RadDatePickerTo.set_selectedDate(new Date(formatted_date[1]));
- 
+
+                     return true;
+
                  }
              });
 
@@ -305,7 +317,7 @@
                          $('.DateRangeDiv').pickmeup('set_date', [dateFrom, dateTo], true);
                          return;
                      }
-                     $('.DateRangeDiv').pickmeup('set_date', dateFrom, true);
+                     $('.DateRangeDiv').pickmeup('set_date', [dateFrom, dateFrom], true);
                  }
              }   
          }
