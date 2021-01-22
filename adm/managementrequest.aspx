@@ -87,7 +87,8 @@
                                         EditFormDateFormat="MM/dd/yyyy"
                                         WorkDayEndTime="21:00:00"
                                         FirstDayOfWeek="Monday"
-                                        LastDayOfWeek="Sunday">
+                                        LastDayOfWeek="Sunday"
+                                        OnAppointmentDataBound="RadScheduler1_AppointmentDataBound">
                                         <DayView UserSelectable="True" />
                                         <WeekView UserSelectable="True" />
                                         <TimelineView UserSelectable="False" />
@@ -124,9 +125,9 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourceAppointments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="AppointmentsForRequest_SELECT" SelectCommandType="StoredProcedure">
+        SelectCommand="Employees_NonRegularHours_Request_Calendar_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblRequestId" Name="AppoitmentId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblRequestId" Name="RequestId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
