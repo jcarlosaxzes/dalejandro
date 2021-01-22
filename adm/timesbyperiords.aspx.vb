@@ -42,6 +42,12 @@ Public Class timesbyperiords
                 lblMesName.Text = RadDatePickerFrom.SelectedDate.Value.Year
         End Select
 
+        RadDatePickerFrom.Enabled = (cboPeriod.SelectedValue = 3)
+        RadDatePickerTo.Enabled = RadDatePickerFrom.Enabled
+
+        btnBack.Visible = (cboPeriod.SelectedValue <> 3)
+        btnNext.Visible = btnBack.Visible
+        btnRefresh.Visible = Not btnBack.Visible
     End Sub
 
     Private Sub SetFechaMes(sFecha As DateTime, ByRef sFechaDes As String, ByRef sFechaHas As String, nIncremento As Integer)
@@ -67,9 +73,9 @@ Public Class timesbyperiords
     End Sub
 
     Protected Sub btnBack_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnBack.Click
-        Dim sFecha As String
-        Dim sFechaDes As String
-        Dim sFechaHas As String
+        Dim sFecha As DateTime
+        Dim sFechaDes As DateTime
+        Dim sFechaHas As DateTime
 
         Select Case cboPeriod.SelectedValue
             Case 0  ' Periods
@@ -80,15 +86,19 @@ Public Class timesbyperiords
             Case 2  ' Años
                 sFechaDes = "01/01/" & RadDatePickerFrom.SelectedDate.Value.Year - 1
                 sFechaHas = "12/31/" & RadDatePickerFrom.SelectedDate.Value.Year - 1
+            Case 3  'Custom
+                sFechaDes = RadDatePickerFrom.DbSelectedDate
+                sFechaHas = RadDatePickerTo.DbSelectedDate
+
         End Select
         EstablecerFechas(sFechaDes, sFechaHas)
         SqlDataSource1.DataBind()
     End Sub
 
     Protected Sub btnNext_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNext.Click
-        Dim sFecha As String
-        Dim sFechaDes As String
-        Dim sFechaHas As String
+        Dim sFecha As DateTime
+        Dim sFechaDes As DateTime
+        Dim sFechaHas As DateTime
 
         Select Case cboPeriod.SelectedValue
             Case 0  ' Periods
@@ -99,6 +109,9 @@ Public Class timesbyperiords
             Case 2  ' Años
                 sFechaDes = "01/01/" & RadDatePickerFrom.SelectedDate.Value.Year + 1
                 sFechaHas = "12/31/" & RadDatePickerFrom.SelectedDate.Value.Year + 1
+            Case 3  'Custom
+                sFechaDes = RadDatePickerFrom.DbSelectedDate
+                sFechaHas = RadDatePickerTo.DbSelectedDate
         End Select
 
         EstablecerFechas(sFechaDes, sFechaHas)
@@ -107,9 +120,9 @@ Public Class timesbyperiords
 
 
     Private Sub IniciaPeriodo(nPeriodo As Integer)
-        Dim sFecha As String
-        Dim sFechaDes As String
-        Dim sFechaHas As String
+        Dim sFecha As DateTime
+        Dim sFechaDes As DateTime
+        Dim sFechaHas As DateTime
 
         Select Case nPeriodo
             Case 0  ' Periods
@@ -121,10 +134,18 @@ Public Class timesbyperiords
             Case 2  ' Años
                 sFechaDes = "01/01/" & RadDatePickerFrom.SelectedDate.Value.Year
                 sFechaHas = "12/31/" & RadDatePickerFrom.SelectedDate.Value.Year
+            Case 3  'Custom
+                sFechaHas = Date.Today
+                sFechaDes = DateAdd(DateInterval.Day, -14, sFechaHas)
+
         End Select
         EstablecerFechas(sFechaDes, sFechaHas)
         SqlDataSource1.DataBind()
 
+
+        If nPeriodo = 3 Then
+
+        End If
     End Sub
 
     Protected Sub cboPeriod_SelectedIndexChanged(sender As Object, e As DropDownListEventArgs) Handles cboPeriod.SelectedIndexChanged
