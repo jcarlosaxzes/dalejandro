@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterPROPOSAL.Master" CodeBehind="pro_proposal.aspx.vb" Inherits="pasconcept20.pro_proposal" %>
 
+<%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/MasterPROPOSAL.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
