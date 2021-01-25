@@ -30,4 +30,16 @@ Partial Public Class mobileapp
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceMobile As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
+        Get
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
+        End Get
+    End Property
 End Class

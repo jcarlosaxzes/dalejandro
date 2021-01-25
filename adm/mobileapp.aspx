@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="PASconcept Mobile App" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="mobileapp.aspx.vb" Inherits="pasconcept20.mobileapp" %>
 
+<%@ Import Namespace="pasconcept20" %>
+<%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">PASconcept Mobile App
