@@ -1,0 +1,172 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterPROPOSAL.master.vb" Inherits="pasconcept20.MasterPROPOSAL" %>
+
+<%@ Import Namespace="pasconcept20" %>
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+
+    <title>PASconcept. Proposal</title>
+
+
+    <%-- Favicons and the like --%>
+    <link rel="apple-touch-icon" sizes="1110x1110" href="~/Content/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Content/favicons/favicon-16x16.png" />
+    <link rel="manifest" href="~/Content/favicons/site.webmanifest" />
+
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <%--bootstrap/4.5.0--%>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <%--bootstrap4-toggle--%>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+    <link href="~/Content/fontawesome-free-5.1.1-web/css/all.css" rel="stylesheet" />
+    <link href="~/Content/pasconcept.min.css" rel="stylesheet" />
+
+
+    <style>
+        .container {
+            max-width: 1850px;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+
+        .imglogo {
+            vertical-align: middle;
+            border-style: none;
+            border-width: 0;
+            max-height: 42px !important;
+            max-width: 110px !important;
+            height: auto;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+         <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
+        </telerik:RadScriptManager>
+<div class="container">
+            <table class="table-sm" style="width: 100%">
+                <tr>
+                   <td class="noprint" style="width: 1110px">
+                        <a href="/">
+                            <img class="imglogo" src="../Images/logo/pas_horizontal_logo.png" height="42"  />
+                        </a>
+                    </td>
+                    <td style="text-align:center">
+                        <span class="pasconcept-pagetitle"><asp:Label runat="server" ID="lblProposalName"></asp:Label></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="noprint">
+                        <asp:LinkButton runat="server" ID="btnMasterClose" CssClass="btn btn-dark btn-lg">
+                            <i class="fas fa-arrow-left"></i>&nbsp;Exit Proposal
+                        </asp:LinkButton>
+                    </td>
+                    <td style="text-align: center">
+                        <telerik:RadNavigation ID="RadNavigationProposal" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material">
+                            <Nodes>
+                                <telerik:NavigationNode ID="NavigationNodepro_proposal"
+                                    Text="Proposal Info"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11001, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+<%--                                <telerik:NavigationNode
+                                    Text="Billing" ID="NavigationNodepro_accounting"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11002, lblProposalId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingMenu") %>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Employees" ID="NavigationNodepro_employees"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11003, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Proposals" ID="NavigationNodepro_proposals"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11004, lblProposalId.Text)%>' 
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") %>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Expenses" ID="NavigationNodepro_rfps"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11005, lblProposalId.Text)%>' 
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_RequestsProposalsList") %>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Notes" ID="NavigationNodepro_notes"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11006, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Times" ID="NavigationNodepro_times"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11007, lblProposalId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProjectTimeEntries") %>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Files" ID="NavigationNodepro_links"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11008, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Schedule" ID="NavigationNodepro_schedule"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11009, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Revisions/Permits" ID="NavigationNodepro_reviews"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11010, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Tags" ID="NavigationNodepro_tags"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11011, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Transmittals" ID="NavigationNodepro_trasmittals"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11012, lblProposalId.Text)%>'
+                                    Visible='<%# LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_TransmittalList") %>'>
+                                </telerik:NavigationNode>--%>
+                            </Nodes>
+                        </telerik:RadNavigation>
+                    </td>
+                </tr>
+            </table>
+            <div class="pas-container" style="margin-left: 10px;margin-right:10px;margin-top:0">
+
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+
+            </div>
+        </div>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
+            <ContentTemplate>
+                <telerik:RadNotification ID="RadNotificationWarning" runat="server"
+                    Animation="FlyIn" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="info" Text="Warning"
+                    Position="BottomRight" VisibleTitlebar="false" Opacity="75" Width="300px" Skin="Sunset">
+                </telerik:RadNotification>
+                <telerik:RadNotification ID="RadNotificationError" runat="server" Width="300px" Skin="Sunset"
+                    Animation="Fade" EnableRoundedCorners="true" EnableShadow="true"
+                    TitleIcon="deny" Text="Error" Position="TopCenter">
+                </telerik:RadNotification>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblProposalId" runat="server" Visible="False" Text="0"></asp:Label>
+        <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>    </form>
+</body>
+</html>

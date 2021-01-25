@@ -10968,7 +10968,6 @@ Public Class LocalAPI
 
 
                     ' Job_ pages............................................
-
                     Case 8001
                         url = LocalAPI.GetHostAppSite() & "/adm/job_job.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
                     Case 8002
@@ -10995,6 +10994,10 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/adm/job_transmittals.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
                     Case 8014
                         url = LocalAPI.GetHostAppSite() & "/adm/job_addemployee.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
+
+                    ' Job_ pages............................................
+                    Case 11001
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_proposal.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
 
                 End Select
                 If PrintParameter Then
@@ -11177,6 +11180,15 @@ Public Class LocalAPI
             Case Else
                 Return "badge badge-danger statuslabel"
         End Select
+
+    End Function
+
+    Public Shared Function GetProposalIdFromGUID(ByVal guid As String) As Integer
+        Dim cnn1 As SqlConnection = GetConnection()
+        Dim cmd As New SqlCommand("SELECT [Id] FROM [Proposal] where [guid]=@guid", cnn1)
+        cmd.Parameters.AddWithValue("@guid", guid)
+        GetProposalIdFromGUID = Convert.ToDouble(cmd.ExecuteScalar())
+        cnn1.Close()
 
     End Function
 
