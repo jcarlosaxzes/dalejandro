@@ -249,7 +249,7 @@
                                     <table class="table-borderless" style="width: 200px; font-size: medium">
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="EditProposal" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                     <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Proposal (Form Page)
                                                 </asp:LinkButton>
                                             </td>

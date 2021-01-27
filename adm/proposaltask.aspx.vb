@@ -29,9 +29,14 @@ Public Class proposaltask
                     btnUpdateAndBack.Text = "Insert and Back"
                     PanelEstimator.Visible = False
                 End If
-                If Not Request.QueryString("fromwizard") Is Nothing Then
-                    lblBackSource.Text = 1
+                'If Not Request.QueryString("fromwizard") Is Nothing Then
+                '    lblBackSource.Text = 1
+                'End If
+
+                If Not Request.QueryString("backpage") Is Nothing Then
+                    Session("proposaltaskbackpage") = Request.QueryString("backpage")
                 End If
+
 
                 btnUpdate.Visible = EnabledProposal()
                 btnUpdateAndBack.Visible = btnUpdate.Visible
@@ -155,8 +160,19 @@ Public Class proposaltask
 
     End Sub
     Private Sub Back()
+        Select Case Session("proposaltaskbackpage")
+            Case "proposal"
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text)
+            Case "proposalnewwizard"
+                Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & lblproposalId.Text & "&FeesTab=1")
+            Case "pro_proposal"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, lblproposalId.Text))
+        End Select
+
+
+
         If lblBackSource.Text = 1 Then
-            Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & lblproposalId.Text & "&FeesTab=1")
+
         Else
             Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text)
         End If

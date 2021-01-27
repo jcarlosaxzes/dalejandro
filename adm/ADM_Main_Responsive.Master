@@ -437,6 +437,8 @@
                                                     </telerik:NavigationNode>
                                                 </Nodes>
                                             </telerik:NavigationNode>
+                                            <telerik:NavigationNode NavigateUrl="~/adm/mobileapp" Text="Mobile App" >
+                                            </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
 
