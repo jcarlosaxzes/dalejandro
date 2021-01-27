@@ -85,7 +85,7 @@
                                 </telerik:NavigationNode>
 
                                 <telerik:NavigationNode
-                                    Text="Payment Schedules" ID="NavigationNodepro_openingclosing"
+                                    Text="Opening and Closing Text" ID="NavigationNodepro_openingclosing"
                                     NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11003, lblProposalId.Text)%>'>
                                 </telerik:NavigationNode>
 
