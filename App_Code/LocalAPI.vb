@@ -10995,9 +10995,14 @@ Public Class LocalAPI
                     Case 8014
                         url = LocalAPI.GetHostAppSite() & "/adm/job_addemployee.aspx?guid=" & LocalAPI.GetJobProperty(objId, "guid")
 
-                    ' Job_ pages............................................
+                    ' Proposal_ pages............................................
                     Case 11001
                         url = LocalAPI.GetHostAppSite() & "/adm/pro_proposal.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11002
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_paymentschedules.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11003
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_openingclosing.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+
 
                 End Select
                 If PrintParameter Then

@@ -11,115 +11,97 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MasterPROPOSAL
+Partial Public Class pro_paymentschedules
 
     '''<summary>
-    '''form1 control.
+    '''btnUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''RadScriptManager1 control.
+    '''cboPaymentSchedules control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadScriptManager1 As Global.Telerik.Web.UI.RadScriptManager
+    Protected WithEvents cboPaymentSchedules As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''lblProposalName control.
+    '''btnGeneratePaymentSchedules control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblProposalName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnGeneratePaymentSchedules As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''btnMasterClose control.
+    '''RadGridPS control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnMasterClose As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents RadGridPS As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''RadNavigationProposal control.
+    '''lblProposalTotal control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadNavigationProposal As Global.Telerik.Web.UI.RadNavigation
+    Protected WithEvents lblProposalTotal As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''NavigationNodepro_proposal control.
+    '''lblScheduleTotal control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NavigationNodepro_proposal As Global.Telerik.Web.UI.NavigationNode
+    Protected WithEvents lblScheduleTotal As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''NavigationNodepro_paymentschedules control.
+    '''lblTotalAlert control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NavigationNodepro_paymentschedules As Global.Telerik.Web.UI.NavigationNode
+    Protected WithEvents lblTotalAlert As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''NavigationNodepro_openingclosing control.
+    '''SqlDataSourcePaymentSchedules control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NavigationNodepro_openingclosing As Global.Telerik.Web.UI.NavigationNode
+    Protected WithEvents SqlDataSourcePaymentSchedules As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''MainContent control.
+    '''SqlDataSourcePS control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents SqlDataSourcePS As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''UpdatePanel1 control.
+    '''SqlDataSourceProposalPSUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
-
-    '''<summary>
-    '''RadNotificationWarning control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadNotificationWarning As Global.Telerik.Web.UI.RadNotification
-
-    '''<summary>
-    '''RadNotificationError control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadNotificationError As Global.Telerik.Web.UI.RadNotification
+    Protected WithEvents SqlDataSourceProposalPSUpdate As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.
@@ -149,11 +131,23 @@ Partial Public Class MasterPROPOSAL
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblEmployeeEmail control.
+    '''lblOriginalStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblOriginalStatus As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Master property.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated property.
+    '''</remarks>
+    Public Shadows ReadOnly Property Master() As pasconcept20.MasterPROPOSAL
+        Get
+            Return CType(MyBase.Master, pasconcept20.MasterPROPOSAL)
+        End Get
+    End Property
 End Class

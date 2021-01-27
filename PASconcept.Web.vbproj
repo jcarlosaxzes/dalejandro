@@ -733,6 +733,8 @@
     <Content Include="adm\proposal_save_copy.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
+    <Content Include="adm\pro_openingclosing.aspx" />
+    <Content Include="adm\pro_paymentschedules.aspx" />
     <Content Include="adm\pro_proposal.aspx" />
     <Content Include="adm\qb_disconnect.aspx" />
     <Content Include="adm\qb_refreshtoken.aspx" />
@@ -3482,7 +3484,7 @@
     </Compile>
     <Compile Include="adm\employeehourlywage.aspx.vb">
       <DependentUpon>employeehourlywage.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\employeenewdowntime.aspx.designer.vb">
       <DependentUpon>employeenewdowntime.aspx</DependentUpon>
@@ -3769,7 +3771,7 @@
     </Compile>
     <Compile Include="adm\mobileapp.aspx.vb">
       <DependentUpon>mobileapp.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\monthlyexpenses.aspx.designer.vb">
       <DependentUpon>monthlyexpenses.aspx</DependentUpon>
@@ -4007,7 +4009,7 @@
     </Compile>
     <Compile Include="adm\proposal_save_as_template.aspx.vb">
       <DependentUpon>proposal_save_as_template.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\proposal_save_copy.aspx.designer.vb">
       <DependentUpon>proposal_save_copy.aspx</DependentUpon>
@@ -4028,6 +4030,20 @@
     </Compile>
     <Compile Include="adm\proposal_types.aspx.vb">
       <DependentUpon>proposal_types.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_openingclosing.aspx.designer.vb">
+      <DependentUpon>pro_openingclosing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_openingclosing.aspx.vb">
+      <DependentUpon>pro_openingclosing.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_paymentschedules.aspx.designer.vb">
+      <DependentUpon>pro_paymentschedules.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_paymentschedules.aspx.vb">
+      <DependentUpon>pro_paymentschedules.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\pro_proposal.aspx.designer.vb">

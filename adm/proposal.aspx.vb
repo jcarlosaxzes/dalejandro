@@ -375,7 +375,7 @@ Public Class proposal
         Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         Select Case e.CommandName
             Case "EditTask"
-                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument)
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&detailId={e.CommandArgument}&backpage=proposal")
             Case "DetailDuplicate"
                 If cboStatus.SelectedValue <= 1 Then
                     lblDetailSelectedId.Text = e.CommandArgument
@@ -444,7 +444,7 @@ Public Class proposal
         Try
             GuardarProposal(False)
             'CreateRadWindows("Form", "~/ADM/NewProposalTask.aspx?Id=" & lblProposalId.Text, 1024, 768, False, "OnClientClose")
-            Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text)
+            Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=proposal")
         Catch ex As Exception
         End Try
     End Sub

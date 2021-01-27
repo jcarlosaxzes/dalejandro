@@ -107,7 +107,7 @@ Public Class pro_proposal
     Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
         Try
             GuardarProposal(False)
-            Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text)
+            Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=pro_proposal")
         Catch ex As Exception
         End Try
     End Sub
@@ -116,7 +116,7 @@ Public Class pro_proposal
         Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         Select Case e.CommandName
             Case "EditTask"
-                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument)
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&detailId={e.CommandArgument}&backpage=pro_proposal")
             Case "DetailDuplicate"
                 If lblOriginalStatus.Text <= 1 Then
                     lblDetailSelectedId.Text = e.CommandArgument

@@ -39,6 +39,8 @@
         </script>
     </telerik:RadCodeBlock>
     <div class="pasconcept-bar">
+        <span class="pasconcept-pagetitle">View/Edit Proposal</span>
+
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
                              Update
