@@ -11,88 +11,70 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class pro_paymentschedules
+Partial Public Class pro_termandconditions
 
     '''<summary>
-    '''cboPaymentSchedules control.
+    '''btnUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboPaymentSchedules As Global.Telerik.Web.UI.RadComboBox
+    Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''btnGeneratePaymentSchedules control.
+    '''cboTandCtemplates control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnGeneratePaymentSchedules As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents cboTandCtemplates As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''RadGridPS control.
+    '''btnGenerateTandC control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGridPS As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents btnGenerateTandC As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''lblProposalTotal control.
+    '''FormView1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblProposalTotal As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
-    '''lblScheduleTotal control.
+    '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblScheduleTotal As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents SqlDataSource1 As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''lblTotalAlert control.
+    '''SqlDataSourceTandCtemplates control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblTotalAlert As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents SqlDataSourceTandCtemplates As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourcePaymentSchedules control.
+    '''SqlDataSourceProposalTCUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourcePaymentSchedules As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourcePS control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourcePS As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceProposalPSUpdate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceProposalPSUpdate As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceProposalTCUpdate As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.

@@ -59,6 +59,42 @@ Partial Public Class MasterPROPOSAL
     Protected WithEvents RadNavigationProposal As Global.Telerik.Web.UI.RadNavigation
 
     '''<summary>
+    '''NavigationNodepro_proposal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_proposal As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
+    '''NavigationNodepro_paymentschedules control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_paymentschedules As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
+    '''NavigationNodepro_openingclosing control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_openingclosing As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
+    '''NavigationNodepro_termandconditions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_termandconditions As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
     '''MainContent control.
     '''</summary>
     '''<remarks>

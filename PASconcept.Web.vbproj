@@ -736,6 +736,7 @@
     <Content Include="adm\pro_openingclosing.aspx" />
     <Content Include="adm\pro_paymentschedules.aspx" />
     <Content Include="adm\pro_proposal.aspx" />
+    <Content Include="adm\pro_termandconditions.aspx" />
     <Content Include="adm\qb_disconnect.aspx" />
     <Content Include="adm\qb_refreshtoken.aspx" />
     <Content Include="adm\QueicBooksTestPages.aspx" />
@@ -4053,6 +4054,13 @@
       <DependentUpon>pro_proposal.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="adm\pro_termandconditions.aspx.designer.vb">
+      <DependentUpon>pro_termandconditions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_termandconditions.aspx.vb">
+      <DependentUpon>pro_termandconditions.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\qb_disconnect.aspx.designer.vb">
       <DependentUpon>qb_disconnect.aspx</DependentUpon>
     </Compile>
@@ -5150,7 +5158,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

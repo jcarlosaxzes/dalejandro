@@ -6,11 +6,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="pasconcept-bar">
         <span class="pasconcept-pagetitle">Payment Schedules</span>
-        <span style="float: right; vertical-align: middle;">
-            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update">
-                Update
-            </asp:LinkButton>
-        </span>
     </div>
     <div>
         <table class="table-sm" style="width: 100%;">
