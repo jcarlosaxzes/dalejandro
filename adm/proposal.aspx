@@ -625,17 +625,19 @@
                                 <tr>
                                     <td>
                                         <h4>Opening Text:</h4>
-                                        <telerik:RadTextBox ID="RadTextBoxBegin" runat="server" Text='<%# Bind("TextBegin") %>'
-                                            TextMode="MultiLine" Rows="6" Width="100%">
-                                        </telerik:RadTextBox>
+                                        <telerik:RadEditor ID="RadTextBoxBegin" runat="server" Content='<%# Bind("TextBegin") %>' Height="250px" 
+                                            ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto" Width="100%">
+                                        </telerik:RadEditor>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <h4>Closing Text:</h4>
-                                        <telerik:RadTextBox ID="RadTextBoxEnd" runat="server" Text='<%# Bind("TextEnd") %>'
-                                            TextMode="MultiLine" Rows="6" Width="100%">
-                                        </telerik:RadTextBox>
+                                        <telerik:RadEditor ID="radEditorEnd" runat="server" Content='<%# Bind("TextEnd") %>'
+                                            Height="250px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto"
+                                            Width="100%">
+                                        </telerik:RadEditor>
+
                                     </td>
                                 </tr>
                                 <tr>
