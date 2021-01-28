@@ -51,18 +51,19 @@
 </head>
 <body>
     <form id="form1" runat="server">
-         <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
+        <telerik:RadScriptManager ID="RadScriptManager1" EnableCdn="true" runat="server">
         </telerik:RadScriptManager>
-<div class="container">
+        <div class="container">
             <table class="table-sm" style="width: 100%">
                 <tr>
-                   <td class="noprint" style="width: 1110px">
+                    <td class="noprint" style="width: 180px">
                         <a href="/">
-                            <img class="imglogo" src="../Images/logo/pas_horizontal_logo.png" height="42"  />
+                            <img class="imglogo" src="../Images/logo/pas_horizontal_logo.png" height="42" />
                         </a>
                     </td>
-                    <td style="text-align:center">
-                        <span class="pasconcept-pagetitle"><asp:Label runat="server" ID="lblProposalName"></asp:Label></span>
+                    <td style="text-align: center">
+                        <span class="pasconcept-pagetitle">
+                            <asp:Label runat="server" ID="lblProposalName"></asp:Label></span>
                     </td>
                 </tr>
                 <tr>
@@ -89,13 +90,18 @@
                                     NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11003, lblProposalId.Text)%>'>
                                 </telerik:NavigationNode>
 
-                               
+                                <telerik:NavigationNode
+                                    Text="Term & Conditions" ID="NavigationNodepro_termandconditions"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11004, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+
                             </Nodes>
                         </telerik:RadNavigation>
                     </td>
                 </tr>
             </table>
-            <div class="pas-container" style="margin-left: 10px;margin-right:10px;margin-top:0">
+            <div class="pas-container" style="margin-left: 10px; margin-right: 10px; margin-top: 0">
 
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
@@ -119,6 +125,7 @@
         <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblProposalId" runat="server" Visible="False" Text="0"></asp:Label>
         <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
-        <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>    </form>
+        <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
+    </form>
 </body>
 </html>

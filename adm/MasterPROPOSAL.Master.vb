@@ -29,7 +29,7 @@ Public Class MasterPROPOSAL
                 Back()
             End If
 
-            lblProposalName.Text = LocalAPI.ProposalNumber(lblProposalId.Text)
+            lblProposalName.Text = LocalAPI.ProposalNumber(lblProposalId.Text) & " " & LocalAPI.GetProposalProperty(lblProposalId.Text, "ProjectName")
 
             ' Restore session value
             If Val(lblCompanyId.Text) = 0 Then
