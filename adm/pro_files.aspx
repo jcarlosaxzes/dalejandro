@@ -1,8 +1,9 @@
-﻿<%@ Page Title="Attachments" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterJOB.Master" CodeBehind="job_links.aspx.vb" Inherits="pasconcept20.job_links" %>
+﻿<%@ Page Title="Attachments" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterPROPOSAL.Master" CodeBehind="pro_files.aspx.vb" Inherits="pasconcept20.pro_files" %>
 
-<%@ MasterType VirtualPath="~/ADM/MasterJOB.master" %>
 <%@ Import Namespace="pasconcept20" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="Server">
+<%@ MasterType VirtualPath="~/adm/MasterPROPOSAL.Master" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <telerik:RadCodeBlock ID="RadCodeBlock" runat="server">
         <script type="text/javascript">
             function onClientUploadFailed(sender, eventArgs) {
@@ -29,7 +30,7 @@
 
     <div class="container">
         <div class="pasconcept-bar">
-            <span class="pasconcept-pagetitle">Attachments (Files, documents, images)</span>
+            <span class="pasconcept-pagetitle">Files</span>
 
             <span style="float: right; vertical-align: middle;">
                 <asp:Panel ID="PanelUpload" runat="server">
@@ -331,68 +332,6 @@
                 </WizardSteps>
             </telerik:RadWizard>
         </div>
-        <div class="pasconcept-bar">
-            <span class="pasconcept-pagetitle">Job Links</span>
-            <span style="float: right; vertical-align: middle;">
-                <asp:LinkButton ID="btnNewFileLink" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" ToolTip="Attached uploaded file">
-                                        Add Hyperlink
-                </asp:LinkButton>
-            </span>
-        </div>
-        <div>
-            <telerik:RadGrid ID="RadGridLinks" runat="server" DataSourceID="SqlDataSourceLinks" GridLines="None" AllowAutomaticInserts="true"
-                AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" CellSpacing="0">
-                <MasterTableView AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSourceLinks"
-                    ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
-                    <Columns>
-                        <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="" HeaderStyle-Width="40px" UniqueName="EditCommandColumn">
-                        </telerik:GridEditCommandColumn>
-                        <telerik:GridBoundColumn DataField="Id" DataType="System.Int32" HeaderText="ID" ReadOnly="True"
-                            SortExpression="Id" UniqueName="Id" Display="False">
-                        </telerik:GridBoundColumn>
-                        <telerik:GridTemplateColumn DataField="Title" FilterControlAltText="Filter Title column"
-                            HeaderText="Title" SortExpression="Title" UniqueName="Title" HeaderStyle-HorizontalAlign="Center">
-                            <EditItemTemplate>
-                                <telerik:RadTextBox ID="TitleTextBox" runat="server" Text='<%# Bind("Title") %>' MaxLength="80"></telerik:RadTextBox>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <a href='<%# Eval("link")%>' target="_blank"><%# Eval("Title")%></a>
-                            </ItemTemplate>
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn DataField="Descripciption" FilterControlAltText="Filter Descripciption column"
-                            HeaderText="Description" SortExpression="Descripciption" UniqueName="Descripciption" HeaderStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
-                                <%# Eval("Descripciption")%>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <telerik:RadTextBox ID="DescripciptionTextBox" runat="server" Rows="3" Text='<%# Bind("Descripciption") %>' Width="600px" MaxLength="1024"></telerik:RadTextBox>
-                            </EditItemTemplate>
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridTemplateColumn DataField="Link" FilterControlAltText="Filter Link column" Display="false"
-                            HeaderText="Link (url)" SortExpression="Link" UniqueName="Link" HeaderStyle-HorizontalAlign="Center">
-                            <ItemTemplate>
-                                <%# Eval("Link")%>
-                            </ItemTemplate>
-                            <EditItemTemplate>
-                                <telerik:RadTextBox ID="LinkTextBox" runat="server" Text='<%# Bind("Link") %>' Width="600px" MaxLength="256"></telerik:RadTextBox>
-                            </EditItemTemplate>
-                        </telerik:GridTemplateColumn>
-                        <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this link?"
-                            ConfirmTitle="Delete" ButtonType="ImageButton" CommandName="Delete" Text="Delete"
-                            UniqueName="DeleteColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center"
-                            ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
-                        </telerik:GridButtonColumn>
-                    </Columns>
-                    <EditFormSettings>
-                        <EditColumn FilterControlAltText="Filter EditCommandColumn1 column" ButtonType="PushButton"
-                            UniqueName="EditCommandColumn1">
-                        </EditColumn>
-                    </EditFormSettings>
-                </MasterTableView>
-            </telerik:RadGrid>
-        </div>
-
-
     </div>
 
     <telerik:RadToolTip ID="RadToolTipBulkEdit" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
@@ -456,15 +395,14 @@
         </table>
     </telerik:RadToolTip>
 
-
     <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="ClientProsalJob_azureuploads_v20_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="ClientProsalJob_azureuploads_v20_DELETE" DeleteCommandType="StoredProcedure"
         UpdateCommand="ClientProsalJob_azureuploads_v20_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="lblClientId" Name="clientId" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="lblproposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="lblJobId" Name="JobId" PropertyName="Text" Type="Int32" />
+            <asp:Parameter Name="clientId" DefaultValue="0" />
+            <asp:ControlParameter ControlID="lblProposalId" Name="proposalId" PropertyName="Text" Type="Int32" />
+            <asp:Parameter Name="JobId" DefaultValue="0" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
         <DeleteParameters>
@@ -482,39 +420,11 @@
     <asp:SqlDataSource ID="SqlDataSourceDocTypes" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Jobs_azureuploads_types] ORDER BY [Id]"></asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceLinks" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="DELETE FROM [Jobs_links] WHERE [Id] = @Id"
-        InsertCommand="INSERT INTO [Jobs_links] ([Job], [Title], [Descripciption], [Link]) VALUES (@Job, @Title, @Descripciption, @Link)"
-        SelectCommand="SELECT Id, Job, Title, Descripciption, Link FROM Jobs_links WHERE (Job = @Job) ORDER BY Title"
-        UpdateCommand="UPDATE [Jobs_links] SET  [Title] = @Title, [Descripciption] = @Descripciption, [Link] = @Link WHERE [Id] = @Id">
-        <DeleteParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-        </DeleteParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="Title" Type="String" />
-            <asp:Parameter Name="Descripciption" Type="String" />
-            <asp:Parameter Name="Link" Type="String" />
-            <asp:Parameter Name="Id" Type="Int32" />
-        </UpdateParameters>
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblJobId" DefaultValue="0" Name="Job" PropertyName="Text"
-                Type="Int32" />
-        </SelectParameters>
-        <InsertParameters>
-            <asp:ControlParameter ControlID="lblJobId" Name="Job" PropertyName="Text" Type="Int32" />
-            <asp:Parameter Name="Title" Type="String" />
-            <asp:Parameter Name="Descripciption" Type="String" />
-            <asp:Parameter Name="Link" Type="String" />
-        </InsertParameters>
-    </asp:SqlDataSource>
 
-
-    <asp:Label ID="lblJobId" runat="server" Visible="false" Text="0"></asp:Label>
-    <asp:Label ID="lblClientId" runat="server" Visible="false" Text="0"></asp:Label>
-    <asp:Label ID="lblproposalId" runat="server" Visible="false" Text="0"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblClientId" runat="server" Visible="false" Text="0"></asp:Label>
+    <asp:Label ID="lblProposalId" runat="server" Visible="false"></asp:Label>
+    <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelectedName" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblSelectedSource" runat="server" Visible="False"></asp:Label>
 </asp:Content>
-

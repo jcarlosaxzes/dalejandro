@@ -1324,16 +1324,16 @@
                     </div>
 
                 </telerik:RadWizardStep>
-                <%--Term & Conditions--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep24" Title="Term & Conditions" StepType="Step">
+                <%--Terms & Conditions--%>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep24" Title="Terms & Conditions" StepType="Step">
                     <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td>
                                 <asp:FormView ID="FormViewTC" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePropTC" Width="100%" EnableViewState="false">
                                     <ItemTemplate>
                                         <div style="padding-bottom: 5px">
-                                            <asp:LinkButton ID="btnEditTyC" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CommandName="Edit" ToolTip="Edit Term & Conditions" CausesValidation="false">
-                                                 Term & Conditions
+                                            <asp:LinkButton ID="btnEditTyC" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CommandName="Edit" ToolTip="Edit Terms & Conditions" CausesValidation="false">
+                                                 Terms & Conditions
                                             </asp:LinkButton>
 
                                         </div>

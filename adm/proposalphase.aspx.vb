@@ -56,6 +56,8 @@
         Select Case Session("pphasebackpage")
             Case "proposalnewwizard"
                 Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & lblproposalId.Text & "&FeesTab=1")
+            Case "pro_phases"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
             Case Else
                 Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&TabPhase=1")
         End Select

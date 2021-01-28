@@ -908,10 +908,10 @@
                     </fieldset>
                 </telerik:RadWizardStep>
 
-                <%-- Term & Conditions --%>
+                <%-- Terms & Conditions --%>
                 <telerik:RadWizardStep runat="server" ID="TC" Title="T&C" Enabled="false" StepType="Step">
                     <fieldset>
-                        <legend>Term & Conditions</legend>
+                        <legend>Terms & Conditions</legend>
                         <div id="divBtnTC" runat="server" class="divBtnTC">
                             <asp:LinkButton ID="btnEditTC" runat="server" CssClass="btn btn-success btn" UseSubmitBehavior="false">
                             <i class="far fa-edit"></i>&nbsp;&nbsp;Edit

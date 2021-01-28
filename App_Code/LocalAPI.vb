@@ -11004,8 +11004,12 @@ Public Class LocalAPI
                         url = LocalAPI.GetHostAppSite() & "/adm/pro_openingclosing.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
                     Case 11004
                         url = LocalAPI.GetHostAppSite() & "/adm/pro_termandconditions.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
-
-
+                    Case 11005
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_files.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11006
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_phases.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
+                    Case 11007
+                        url = LocalAPI.GetHostAppSite() & "/adm/pro_notes.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
 
                 End Select
                 If PrintParameter Then

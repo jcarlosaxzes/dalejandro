@@ -1,11 +1,11 @@
-﻿<%@ Page Title="Term & Conditions" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterPROPOSAL.Master" CodeBehind="pro_termandconditions.aspx.vb" Inherits="pasconcept20.pro_termandconditions" %>
+﻿<%@ Page Title="Terms & Conditions" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterPROPOSAL.Master" CodeBehind="pro_termandconditions.aspx.vb" Inherits="pasconcept20.pro_termandconditions" %>
 
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/MasterPROPOSAL.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="pasconcept-bar">
-        <span class="pasconcept-pagetitle">Term & Conditions</span>
+        <span class="pasconcept-pagetitle">Terms & Conditions</span>
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update">
                 Update
@@ -21,9 +21,9 @@
                     <telerik:RadComboBox ID="cboTandCtemplates" runat="server" DataSourceID="SqlDataSourceTandCtemplates"
                         DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" AppendDataBoundItems="true"
                         Filter="Contains"
-                        ToolTip="Select Term & Conditions to define first time or modify the current">
+                        ToolTip="Select Terms & Conditions to define first time or modify the current">
                         <Items>
-                            <telerik:RadComboBoxItem runat="server" Text="(Select other Term & Conditions...)" Value="0" />
+                            <telerik:RadComboBoxItem runat="server" Text="(Select other Terms & Conditions...)" Value="0" />
                         </Items>
                     </telerik:RadComboBox>
                 </td>

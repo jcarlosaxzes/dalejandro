@@ -7,7 +7,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <title>Term & Conditions</title>
+    <title>Terms & Conditions</title>
 </head>
 <body bgcolor="white" >
     <form id="form1" runat="server">
@@ -21,7 +21,7 @@
                         <br />
                         <asp:Label ID="lblTitle1" runat="server" Text="A new concept to provide Project Administration Services online" CssClass="NormalNegrita" />
                         <br />
-                        <asp:Label ID="lblTitle2" runat="server" Text="Please, read and <b>Agree</b> Term & Conditions" CssClass="Normal" />
+                        <asp:Label ID="lblTitle2" runat="server" Text="Please, read and <b>Agree</b> Terms & Conditions" CssClass="Normal" />
                     </div>
                     <div style="padding-left:50px">
                         <asp:Label ID="lblTerms" runat="server" />

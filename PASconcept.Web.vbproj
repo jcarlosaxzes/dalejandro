@@ -733,8 +733,11 @@
     <Content Include="adm\proposal_save_copy.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
+    <Content Include="adm\pro_files.aspx" />
+    <Content Include="adm\pro_notes.aspx" />
     <Content Include="adm\pro_openingclosing.aspx" />
     <Content Include="adm\pro_paymentschedules.aspx" />
+    <Content Include="adm\pro_phases.aspx" />
     <Content Include="adm\pro_proposal.aspx" />
     <Content Include="adm\pro_termandconditions.aspx" />
     <Content Include="adm\qb_disconnect.aspx" />
@@ -4033,6 +4036,20 @@
       <DependentUpon>proposal_types.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\pro_files.aspx.designer.vb">
+      <DependentUpon>pro_files.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_files.aspx.vb">
+      <DependentUpon>pro_files.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_notes.aspx.designer.vb">
+      <DependentUpon>pro_notes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_notes.aspx.vb">
+      <DependentUpon>pro_notes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\pro_openingclosing.aspx.designer.vb">
       <DependentUpon>pro_openingclosing.aspx</DependentUpon>
     </Compile>
@@ -4046,6 +4063,13 @@
     <Compile Include="adm\pro_paymentschedules.aspx.vb">
       <DependentUpon>pro_paymentschedules.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_phases.aspx.designer.vb">
+      <DependentUpon>pro_phases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_phases.aspx.vb">
+      <DependentUpon>pro_phases.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\pro_proposal.aspx.designer.vb">
       <DependentUpon>pro_proposal.aspx</DependentUpon>
@@ -5158,7 +5182,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
