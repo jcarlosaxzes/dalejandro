@@ -91,11 +91,24 @@
                                 </telerik:NavigationNode>
 
                                 <telerik:NavigationNode
-                                    Text="Term & Conditions" ID="NavigationNodepro_termandconditions"
+                                    Text="Terms & Conditions" ID="NavigationNodepro_termandconditions"
                                     NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11004, lblProposalId.Text)%>'>
                                 </telerik:NavigationNode>
 
+                                <telerik:NavigationNode
+                                    Text="Attachments" ID="NavigationNodepro_files"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11005, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
 
+                                <telerik:NavigationNode
+                                    Text="Phases" ID="NavigationNodepro_phases"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11006, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Notes" ID="NavigationNodepro_notes"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11007, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
                             </Nodes>
                         </telerik:RadNavigation>
                     </td>

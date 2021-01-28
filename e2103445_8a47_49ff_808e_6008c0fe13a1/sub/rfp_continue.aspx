@@ -186,8 +186,8 @@
                             </tr>
                         </table>
                     </telerik:RadWizardStep>
-                    <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="My Term & Conditions" StepType="Step">
-                        <h3 style="margin: 0">My Term & Conditions</h3>
+                    <telerik:RadWizardStep runat="server" ID="RadWizardStep1" Title="My Terms & Conditions" StepType="Step">
+                        <h3 style="margin: 0">My Terms & Conditions</h3>
                         <table style="width: 100%" class="table-sm">
                             <tr>
                                 <td>

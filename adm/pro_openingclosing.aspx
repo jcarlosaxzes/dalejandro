@@ -17,7 +17,7 @@
             <table class="table-sm" style="width: 100%;">
                 <tr>
                     <td>
-                        <h4>Opening Text:</h4>
+                        <h4>Opening Text</h4>
                         <telerik:RadEditor ID="radEditorBegin" runat="server" Content='<%# Bind("TextBegin") %>'
                             Height="350px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto"
                             Width="100%">
@@ -26,7 +26,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h4>Closing Text:</h4>
+                        <h4>Closing Text</h4>
                         <telerik:RadEditor ID="radEditorEnd" runat="server" Content='<%# Bind("TextEnd") %>'
                             Height="350px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto"
                             Width="100%">

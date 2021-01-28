@@ -112,6 +112,14 @@ Public Class pro_proposal
         End Try
     End Sub
 
+    Private Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
+        RadGrid1.MasterTableView.GetColumn("phaseId").Display = IIf(LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0, False, True)
+        If lblCompanyId.Text = 260962 Then
+            ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
+            RadGrid1.MasterTableView.GetColumn("Estimated").Visible = False
+        End If
+    End Sub
+
     Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         Select Case e.CommandName

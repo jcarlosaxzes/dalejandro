@@ -10,11 +10,11 @@
     <div>
         <table class="table-sm" style="width: 100%;">
             <tr>
-                <td style="text-align: right; width: 180px">Select first time or modify the current Payment Schedules:
+                <td style="text-align: right; width: 180px">Select Template:
                 </td>
                 <td style="width: 400px">
                     <telerik:RadComboBox ID="cboPaymentSchedules" runat="server" DataSourceID="SqlDataSourcePaymentSchedules"
-                        DataTextField="Name" DataValueField="Id" Width="400px" MarkFirstMatch="True" AppendDataBoundItems="true"
+                        DataTextField="Name" DataValueField="Id" Width="400px" MarkFirstMatch="True" AppendDataBoundItems="true" Height="300px"
                         Filter="Contains"
                         ToolTip="Select Payment Schedules to define first time or modify the current">
                         <Items>
@@ -25,7 +25,7 @@
                 <td>
                     <asp:LinkButton ID="btnGeneratePaymentSchedules" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false"
                         ToolTip="Define Payment Schedules" CausesValidation="false">
-                                            Update
+                                            Apply
                     </asp:LinkButton>
                 </td>
             </tr>

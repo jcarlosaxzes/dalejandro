@@ -95,6 +95,33 @@ Partial Public Class MasterPROPOSAL
     Protected WithEvents NavigationNodepro_termandconditions As Global.Telerik.Web.UI.NavigationNode
 
     '''<summary>
+    '''NavigationNodepro_files control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_files As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
+    '''NavigationNodepro_phases control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_phases As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
+    '''NavigationNodepro_notes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_notes As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
     '''MainContent control.
     '''</summary>
     '''<remarks>

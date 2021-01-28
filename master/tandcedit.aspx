@@ -4,7 +4,7 @@
 <%@ MasterType VirtualPath="~/master/MasterPage.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div style="padding-left:50px;padding-top:10px;padding-bottom:10px">
-        <telerik:RadButton ID="btnSave" runat="server" Text="Save Term & Conditions">
+        <telerik:RadButton ID="btnSave" runat="server" Text="Save Terms & Conditions">
         </telerik:RadButton>
     </div>
     <div>

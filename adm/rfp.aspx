@@ -369,7 +369,7 @@
                                         </table>
 
                                     </telerik:RadWizardStep>
-                                    <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Term & Conditions" StepType="Step">
+                                    <telerik:RadWizardStep runat="server" ID="RadWizardStep4" Title="Terms & Conditions" StepType="Step">
 
                                         <table style="width: 100%" class="table-sm">
                                             <tr>
