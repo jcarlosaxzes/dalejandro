@@ -13,6 +13,8 @@ Public Class pro_phases
 
                 lblProposalId.Text = LocalAPI.GetProposalIdFromGUID(Request.QueryString("guid"))
 
+                IsProposalReadOnly()
+
                 Master.ActiveTab(5)
 
             End If
@@ -35,5 +37,16 @@ Public Class pro_phases
 
     End Sub
 
+    Private Function IsProposalReadOnly() As Boolean
+        lblOriginalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+        If lblOriginalStatus.Text > 1 Then
+            btnNewPhase.Visible = False
+            RadGridPhases.AllowAutomaticDeletes = False
+            RadGridPhases.AllowAutomaticUpdates = False
+            Return True
+        Else
+            Return False
+        End If
+    End Function
 
 End Class
