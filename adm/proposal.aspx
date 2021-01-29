@@ -1221,7 +1221,7 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridTemplateColumn DataField="DateFrom" HeaderText="Date From" SortExpression="DateFrom" UniqueName="DateFrom" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblDateFrom" runat="server" Text='<%# Eval("DateFrom", "{0:d}")%>'></asp:Label>
+                                            <%# Eval("DateFrom", "{0:d}")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
