@@ -18,13 +18,9 @@ Public Class pro_proposal
                 lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
                 panelViewProposalPage.DataBind()
 
-                lblOriginalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
-
-                EnabledProposal()
-
+                IsProposalReadOnly()
 
                 Master.ActiveTab(0)
-
 
             End If
 
@@ -33,7 +29,7 @@ Public Class pro_proposal
         End Try
     End Sub
 
-    Private Sub EnabledProposal()
+    Private Function IsProposalReadOnly() As Boolean
 
         ' If Proposal Acepted, special Permit to change
         btnUpdate1.Enabled = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
@@ -43,8 +39,9 @@ Public Class pro_proposal
         RadGrid1.AllowAutomaticUpdates = btnUpdate1.Enabled
         RadGrid1.AllowAutomaticDeletes = btnUpdate1.Enabled
 
+        Return btnUpdate1.Enabled
 
-    End Sub
+    End Function
 
 #Region "ToolButtons Top"
     Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click

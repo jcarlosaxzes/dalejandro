@@ -32,6 +32,15 @@ Partial Public Class pro_phases
     Protected WithEvents RadGridPhases As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''lnkPhaseEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkPhaseEdit As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''SqlDataSourcePhases control.
     '''</summary>
     '''<remarks>
@@ -66,6 +75,15 @@ Partial Public Class pro_phases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblOriginalStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblOriginalStatus As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

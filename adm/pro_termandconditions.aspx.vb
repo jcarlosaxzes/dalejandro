@@ -11,6 +11,8 @@
 
                 lblProposalId.Text = LocalAPI.GetProposalIdFromGUID(Request.QueryString("guid"))
 
+                IsProposalReadOnly()
+
                 Master.ActiveTab(3)
 
 
@@ -36,4 +38,17 @@
         FormView1.UpdateItem(True)
         Master.InfoMessage("Proposal Updated!")
     End Sub
+
+    Private Function IsProposalReadOnly() As Boolean
+        lblOriginalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+        If lblOriginalStatus.Text > 1 Then
+            btnUpdate.Visible = False
+            btnGenerateTandC.Visible = False
+            cboTandCtemplates.Visible = False
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
 End Class

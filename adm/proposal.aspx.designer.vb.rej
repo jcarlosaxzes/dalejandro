@@ -1,0 +1,53 @@
+diff a/adm/proposal.aspx.designer.vb b/adm/proposal.aspx.designer.vb	(rejected hunks)
+@@ -634,6 +634,51 @@
+     '''</remarks>
+     Protected WithEvents RadGridFiles As Global.Telerik.Web.UI.RadGrid
+ 
++    '''<summary>
++    '''btnEdit control.
++    '''</summary>
++    '''<remarks>
++    '''Auto-generated field.
++    '''To modify move field declaration from designer file to code-behind file.
++    '''</remarks>
++    Protected WithEvents btnEdit As Global.System.Web.UI.WebControls.LinkButton
++
++    '''<summary>
++    '''btnDelete control.
++    '''</summary>
++    '''<remarks>
++    '''Auto-generated field.
++    '''To modify move field declaration from designer file to code-behind file.
++    '''</remarks>
++    Protected WithEvents btnDelete As Global.System.Web.UI.WebControls.LinkButton
++
++    '''<summary>
++    '''lblPubicHide control.
++    '''</summary>
++    '''<remarks>
++    '''Auto-generated field.
++    '''To modify move field declaration from designer file to code-behind file.
++    '''</remarks>
++    Protected WithEvents lblPubicHide As Global.System.Web.UI.WebControls.Label
++
++    '''<summary>
++    '''lblTypeHide control.
++    '''</summary>
++    '''<remarks>
++    '''Auto-generated field.
++    '''To modify move field declaration from designer file to code-behind file.
++    '''</remarks>
++    Protected WithEvents lblTypeHide As Global.System.Web.UI.WebControls.Label
++
++    '''<summary>
++    '''lblNameHide control.
++    '''</summary>
++    '''<remarks>
++    '''Auto-generated field.
++    '''To modify move field declaration from designer file to code-behind file.
++    '''</remarks>
++    Protected WithEvents lblNameHide As Global.System.Web.UI.WebControls.Label
++
+     '''<summary>
+     '''RadWizardStepPhases control.
+     '''</summary>

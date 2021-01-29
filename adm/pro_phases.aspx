@@ -70,4 +70,6 @@
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblProposalId" runat="server" Visible="false"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    <asp:Label ID="lblOriginalStatus" runat="server" Visible="false"></asp:Label>
+
 </asp:Content>

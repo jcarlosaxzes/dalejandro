@@ -24,6 +24,7 @@
                 End If
                 TotalsAnalisis()
 
+                IsProposalReadOnly()
                 Master.ActiveTab(1)
 
 
@@ -71,4 +72,17 @@
             Master.ErrorMessage(ex.Message)
         End Try
     End Function
+
+    Private Function IsProposalReadOnly() As Boolean
+        lblOriginalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+        If lblOriginalStatus.Text > 1 Then
+            btnGeneratePaymentSchedules.Visible = False
+            RadGridPS.AllowAutomaticDeletes = False
+            RadGridPS.AllowAutomaticUpdates = False
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
 End Class
