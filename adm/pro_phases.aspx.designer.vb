@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class pro_phases
 
     '''<summary>
+    '''PanelPhases control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelPhases As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''btnNewPhase control.
     '''</summary>
     '''<remarks>
@@ -32,13 +41,22 @@ Partial Public Class pro_phases
     Protected WithEvents RadGridPhases As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''lnkPhaseEdit control.
+    '''btnNewFee control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkPhaseEdit As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnNewFee As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''RadGridFees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridFees As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
     '''SqlDataSourcePhases control.
@@ -48,6 +66,24 @@ Partial Public Class pro_phases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourcePhases As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceServiceFees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceServiceFees As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceProposaldDetailDuplicate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceProposaldDetailDuplicate As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.
@@ -84,6 +120,15 @@ Partial Public Class pro_phases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblOriginalStatus As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblDetailSelectedId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDetailSelectedId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

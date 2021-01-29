@@ -30,6 +30,8 @@ Public Class MasterPROPOSAL
             End If
 
             lblProposalName.Text = LocalAPI.ProposalNumber(lblProposalId.Text) & " " & LocalAPI.GetProposalProperty(lblProposalId.Text, "ProjectName")
+            lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
+            panelViewProposalPage.DataBind()
 
             ' Restore session value
             If Val(lblCompanyId.Text) = 0 Then
@@ -42,6 +44,11 @@ Public Class MasterPROPOSAL
             '    Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)
             '    Task.Run(Function() LocalAPI.EmployeePageTracking(UserId, Session("LastPage")))
             'End If
+
+            If Session("proposalclientsummary") Is Nothing Then
+                Session("proposalclientsummary") = "0"
+            End If
+            FormViewClientBalance.Visible = IIf(Session("proposalclientsummary") = "1", True, False)
 
         End If
     End Sub
@@ -119,4 +126,28 @@ Public Class MasterPROPOSAL
         Return LocalAPI.GetEmployeePermission(lblEmployeeId.Text, sOpcion)
     End Function
 
+    Private Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
+        Response.Redirect($"~/adm/proposal_save_copy.aspx?ProposalId={lblProposalId.Text}&backpage=pro_proposal")
+    End Sub
+    Protected Sub btnSaveAsTemplate_Click(sender As Object, e As EventArgs) Handles btnSaveAsTemplate.Click
+        Response.Redirect($"~/adm/proposal_save_as_template.aspx?ProposalId={lblProposalId.Text}&backpage=pro_proposal")
+    End Sub
+    Protected Sub btnPrintProposal_Click(sender As Object, e As EventArgs) Handles btnPrintProposal.Click
+        If LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId") > 0 Then
+            Response.Redirect("~/adm/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&backpage=pro_proposal&HideMasterMenu=1")
+        Else
+            InfoMessage("You Must Specify the Client and Update Proposal")
+        End If
+    End Sub
+    Protected Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
+        Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
+        Session("PrintUrl") = ProposalUrl
+        Session("PrintName") = "Proposal_" & LocalAPI.ProposalNumber(lblProposalId.Text) & ".pdf"
+        Response.Redirect("~/ADM/pdf_print.aspx")
+    End Sub
+
+    Private Sub btnSummary_Click(sender As Object, e As EventArgs) Handles btnSummary.Click
+        Session("proposalclientsummary") = IIf(Session("proposalclientsummary") = "1", "0", "1")
+        FormViewClientBalance.Visible = IIf(Session("proposalclientsummary") = "1", True, False)
+    End Sub
 End Class

@@ -56,14 +56,80 @@
         <div class="container">
             <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td class="noprint" style="width: 180px">
+                    <td class="noprint" style="width: 180px; vertical-align: top">
                         <a href="/">
                             <img class="imglogo" src="../Images/logo/pas_horizontal_logo.png" height="42" />
                         </a>
                     </td>
                     <td style="text-align: center">
                         <span class="pasconcept-pagetitle">
-                            <asp:Label runat="server" ID="lblProposalName"></asp:Label></span>
+                            <asp:Label runat="server" ID="lblProposalName"></asp:Label>
+                        </span>
+                        <span style="float: right; vertical-align: middle;">
+                            <asp:LinkButton ID="btnSummary" runat="server" CssClass="btn btn-warning" UseSubmitBehavior="false" ToolTip="View Client Summary" CausesValidation="true" >
+                                Client Summary
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="btnSaveAs" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As New Propsal"
+                                CausesValidation="true" ValidationGroup="Proposal">
+                             Save As
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="btnSaveAsTemplate" runat="server" CssClass="btn btn-secondary" UseSubmitBehavior="false" ToolTip="Save Proposal As Proposal Template "
+                                CausesValidation="true" ValidationGroup="Proposal">
+                             Save Template
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="btnPrintProposal" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
+                                ToolTip="Print/Send Email with Proposal Information">
+                             Send to Client
+                            </asp:LinkButton>
+                            <asp:LinkButton ID="btnPdf" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="true" ValidationGroup="Proposal"
+                                ToolTip="Export PDF">
+                             PDF
+                            </asp:LinkButton>
+                            &nbsp;
+                            <asp:Panel runat="server" ID="panelViewProposalPage" Style="float: right; vertical-align: middle;">
+                                <a href='<%# LocalAPI.GetSharedLink_URL(111, lblProposalId.Text, False)%>' target="_blank" class="btn btn-primary">
+                                    <i class="far fa-share-square"></i>&nbsp;&nbsp;View Proposal
+                                </a>
+                            </asp:Panel>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" >
+                        <div style="text-align:center">
+                            <asp:FormView ID="FormViewClientBalance" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourceClientBalance" Width="100%" Visible="false">
+                                <ItemTemplate>
+                                    <table class="table-sm" style="width: 100%">
+                                        <tr>
+                                            <td style="width: 19%; text-align: center; background-color: #039be5">
+                                                <span class="DashboardFont2"># Pending Props.</span><br />
+                                                <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# Eval("NumberPendingProposal", "{0:N0}") %>'></asp:Label>
+                                            </td>
+                                            <td></td>
+                                            <td style="width: 19%; text-align: center; background-color: #546e7a">
+                                                <span class="DashboardFont2">Accepted Props.</span><br />
+                                                <asp:Label ID="lblTotalBilled" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ProposalAmount", "{0:C0}") %>'></asp:Label>
+                                            </td>
+                                            <td></td>
+                                            <td style="width: 19%; text-align: center; background-color: #43a047">
+                                                <span class="DashboardFont2">Jobs Budget</span><br />
+                                                <asp:Label ID="lblTotalCollected" runat="server" CssClass="DashboardFont1" Text='<%# Eval("ContractAmount", "{0:C0}") %>'></asp:Label>
+                                            </td>
+                                            <td></td>
+                                            <td style="width: 19%; text-align: center; background-color: #43a047">
+                                                <span class="DashboardFont2">Amount Paid</span><br />
+                                                <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# Eval("AmountPaid", "{0:C0}") %>'></asp:Label>
+                                            </td>
+                                            <td></td>
+                                            <td style="text-align: center; background-color: #e53935">
+                                                <span class="DashboardFont2">Remaining Balance</span><br />
+                                                <asp:Label ID="LabelblTotalBalance" runat="server" CssClass="DashboardFont1" Text='<%# Eval("Balance", "{0:C0}") %>'></asp:Label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ItemTemplate>
+                            </asp:FormView>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -76,18 +142,23 @@
                         <telerik:RadNavigation ID="RadNavigationProposal" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material">
                             <Nodes>
                                 <telerik:NavigationNode ID="NavigationNodepro_proposal"
-                                    Text="Proposal Info"
+                                    Text="Basic Info"
                                     NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11001, lblProposalId.Text)%>'>
-                                </telerik:NavigationNode>
-
-                                <telerik:NavigationNode
-                                    Text="Payment Schedules" ID="NavigationNodepro_paymentschedules"
-                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11002, lblProposalId.Text)%>'>
                                 </telerik:NavigationNode>
 
                                 <telerik:NavigationNode
                                     Text="Opening and Closing Text" ID="NavigationNodepro_openingclosing"
                                     NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11003, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Fees & Scope" ID="NavigationNodepro_phases"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11006, lblProposalId.Text)%>'>
+                                </telerik:NavigationNode>
+
+                                <telerik:NavigationNode
+                                    Text="Payment Schedule" ID="NavigationNodepro_paymentschedules"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11002, lblProposalId.Text)%>'>
                                 </telerik:NavigationNode>
 
                                 <telerik:NavigationNode
@@ -101,13 +172,13 @@
                                 </telerik:NavigationNode>
 
                                 <telerik:NavigationNode
-                                    Text="Phases" ID="NavigationNodepro_phases"
-                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11006, lblProposalId.Text)%>'>
+                                    Text="Notes" ID="NavigationNodepro_notes"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11007, lblProposalId.Text)%>'>
                                 </telerik:NavigationNode>
 
                                 <telerik:NavigationNode
-                                    Text="Notes" ID="NavigationNodepro_notes"
-                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11007, lblProposalId.Text)%>'>
+                                    Text="Preview" ID="NavigationNodepro_preview"
+                                    NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11008, lblProposalId.Text)%>'>
                                 </telerik:NavigationNode>
                             </Nodes>
                         </telerik:RadNavigation>
@@ -135,10 +206,19 @@
             </ContentTemplate>
         </asp:UpdatePanel>
 
+        <asp:SqlDataSource ID="SqlDataSourceClientBalance" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+            SelectCommand="Client_Balance" SelectCommandType="StoredProcedure">
+            <SelectParameters>
+                <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
+                <asp:ControlParameter ControlID="lblClientId" Name="ClientId" PropertyName="Text" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+
         <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblProposalId" runat="server" Visible="False" Text="0"></asp:Label>
         <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
         <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
+        <asp:Label ID="lblClientId" runat="server" Visible="False"></asp:Label>
     </form>
 </body>
 </html>

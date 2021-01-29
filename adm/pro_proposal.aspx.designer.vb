@@ -41,67 +41,13 @@ Partial Public Class pro_proposal
     Protected WithEvents btnDeleteProposal As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''btnSaveAs control.
+    '''btnActions control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnSaveAs As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnSaveAsTemplate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSaveAsTemplate As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnPrintProposal control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnPrintProposal As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnPdf control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnPdf As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnTotals control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnTotals As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''panelViewProposalPage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents panelViewProposalPage As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''FormViewClientBalance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FormViewClientBalance As Global.System.Web.UI.WebControls.FormView
+    Protected WithEvents btnActions As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''ValidationSummary1 control.
@@ -120,24 +66,6 @@ Partial Public Class pro_proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents FormViewProp1 As Global.System.Web.UI.WebControls.FormView
-
-    '''<summary>
-    '''btnNewTask control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNewTask As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''RadGrid1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
     '''RadToolTipDelete control.
@@ -239,13 +167,67 @@ Partial Public Class pro_proposal
     Protected WithEvents btnCancelDeleteFiles As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''SqlDataSourceClientBalance control.
+    '''RadToolTipActions control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceClientBalance As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents RadToolTipActions As Global.Telerik.Web.UI.RadToolTip
+
+    '''<summary>
+    '''cboStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''btnUpdateStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpdateStatus As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''cboProposalType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboProposalType As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''btnModifyType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnModifyType As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''cboJobs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboJobs As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''btnModifyJob control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnModifyJob As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''SqlDataSourceProp1 control.
@@ -255,15 +237,6 @@ Partial Public Class pro_proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceProp1 As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceProposalDetails control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceProposalDetails As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceDocTypes control.
@@ -365,6 +338,24 @@ Partial Public Class pro_proposal
     Protected WithEvents SqlDataSourceProposaldDetailDuplicate As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''SqlDataSourceJob control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceJob As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceProposalType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceProposalType As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -392,15 +383,6 @@ Partial Public Class pro_proposal
     Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblOriginalStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblOriginalStatus As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''lblClientId control.
     '''</summary>
     '''<remarks>
@@ -417,6 +399,33 @@ Partial Public Class pro_proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblDetailSelectedId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblOriginalStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblOriginalStatus As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblOriginalType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblOriginalType As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblOriginalJobId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblOriginalJobId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

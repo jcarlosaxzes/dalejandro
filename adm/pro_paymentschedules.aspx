@@ -1,11 +1,11 @@
-﻿<%@ Page Title="Payment Schedules" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterPROPOSAL.Master" CodeBehind="pro_paymentschedules.aspx.vb" Inherits="pasconcept20.pro_paymentschedules" %>
+﻿<%@ Page Title="Payment Schedule" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/MasterPROPOSAL.Master" CodeBehind="pro_paymentschedules.aspx.vb" Inherits="pasconcept20.pro_paymentschedules" %>
 
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/adm/MasterPROPOSAL.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="pasconcept-bar">
-        <span class="pasconcept-pagetitle">Payment Schedules</span>
+        <span class="pasconcept-pagetitle">Payment Schedule</span>
     </div>
     <div>
         <table class="table-sm" style="width: 100%;">

@@ -13,7 +13,7 @@
 
                 IsProposalReadOnly()
 
-                Master.ActiveTab(3)
+                Master.ActiveTab(4)
 
 
             End If

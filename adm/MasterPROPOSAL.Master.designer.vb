@@ -41,6 +41,69 @@ Partial Public Class MasterPROPOSAL
     Protected WithEvents lblProposalName As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''btnSummary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSummary As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnSaveAs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSaveAs As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnSaveAsTemplate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSaveAsTemplate As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnPrintProposal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnPrintProposal As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''btnPdf control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnPdf As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''panelViewProposalPage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents panelViewProposalPage As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''FormViewClientBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormViewClientBalance As Global.System.Web.UI.WebControls.FormView
+
+    '''<summary>
     '''btnMasterClose control.
     '''</summary>
     '''<remarks>
@@ -68,15 +131,6 @@ Partial Public Class MasterPROPOSAL
     Protected WithEvents NavigationNodepro_proposal As Global.Telerik.Web.UI.NavigationNode
 
     '''<summary>
-    '''NavigationNodepro_paymentschedules control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents NavigationNodepro_paymentschedules As Global.Telerik.Web.UI.NavigationNode
-
-    '''<summary>
     '''NavigationNodepro_openingclosing control.
     '''</summary>
     '''<remarks>
@@ -84,6 +138,24 @@ Partial Public Class MasterPROPOSAL
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NavigationNodepro_openingclosing As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
+    '''NavigationNodepro_phases control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_phases As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
+    '''NavigationNodepro_paymentschedules control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_paymentschedules As Global.Telerik.Web.UI.NavigationNode
 
     '''<summary>
     '''NavigationNodepro_termandconditions control.
@@ -104,15 +176,6 @@ Partial Public Class MasterPROPOSAL
     Protected WithEvents NavigationNodepro_files As Global.Telerik.Web.UI.NavigationNode
 
     '''<summary>
-    '''NavigationNodepro_phases control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents NavigationNodepro_phases As Global.Telerik.Web.UI.NavigationNode
-
-    '''<summary>
     '''NavigationNodepro_notes control.
     '''</summary>
     '''<remarks>
@@ -120,6 +183,15 @@ Partial Public Class MasterPROPOSAL
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NavigationNodepro_notes As Global.Telerik.Web.UI.NavigationNode
+
+    '''<summary>
+    '''NavigationNodepro_preview control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavigationNodepro_preview As Global.Telerik.Web.UI.NavigationNode
 
     '''<summary>
     '''MainContent control.
@@ -158,6 +230,15 @@ Partial Public Class MasterPROPOSAL
     Protected WithEvents RadNotificationError As Global.Telerik.Web.UI.RadNotification
 
     '''<summary>
+    '''SqlDataSourceClientBalance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceClientBalance As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''lblCompanyId control.
     '''</summary>
     '''<remarks>
@@ -192,4 +273,13 @@ Partial Public Class MasterPROPOSAL
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblEmployeeEmail As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblClientId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblClientId As Global.System.Web.UI.WebControls.Label
 End Class
