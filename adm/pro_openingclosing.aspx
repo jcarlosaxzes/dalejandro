@@ -12,7 +12,8 @@
             </asp:LinkButton>
         </span>
     </div>
-    <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSource1" Width="100%" EnableViewState="false">
+    <div>
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSource1" Width="100%" EnableViewState="false">
         <EditItemTemplate>
             <table class="table-sm" style="width: 100%;">
                 <tr>
@@ -42,7 +43,9 @@
                 </tr>
             </table>
         </EditItemTemplate>
-    </asp:FormView>
+        </asp:FormView>
+    </div>
+    
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="select Id, TextBegin, TextEnd, Link from Proposal where Id=@Id"

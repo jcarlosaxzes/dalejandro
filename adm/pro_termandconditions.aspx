@@ -37,7 +37,7 @@
         </table>
     </div>
     <div>
-        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSource1" Width="100%" EnableViewState="false">
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSource1" Width="98%" EnableViewState="false">
             <EditItemTemplate>
                 <div>
                     <telerik:RadEditor ID="radEditorTerms" runat="server" Content='<%# Bind("Agreements") %>'

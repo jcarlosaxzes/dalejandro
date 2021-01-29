@@ -372,7 +372,7 @@
 
                 </telerik:RadWizardStep>
                 <%-- Project Info --%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStepProposal" Title="Proposal" Enabled="false" StepType="Step" CausesValidation="true" ValidationGroup="Proposal">
+                <telerik:RadWizardStep runat="server" ID="RadWizardStepProposal" Title="Basic Info" Enabled="false" StepType="Step" CausesValidation="true" ValidationGroup="Proposal">
 
                     <div>
                         <asp:ValidationSummary ID="vsPoposal" runat="server" ValidationGroup="Proposal"

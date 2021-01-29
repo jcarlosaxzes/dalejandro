@@ -15,7 +15,7 @@ Public Class pro_phases
 
                 IsProposalReadOnly()
 
-                Master.ActiveTab(5)
+                Master.ActiveTab(2)
 
             End If
 
@@ -33,6 +33,8 @@ Public Class pro_phases
         Select Case e.CommandName
             Case "EditPhase"
                 Response.Redirect($"~/adm/proposalphase.aspx?Id={e.CommandArgument}&proposalId={lblProposalId.Text}&backpage=pro_phases")
+            Case "AddTaskInPhase"
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=proposalnewwizard&phaseId={e.CommandArgument}")
         End Select
 
     End Sub
@@ -43,10 +45,48 @@ Public Class pro_phases
             btnNewPhase.Visible = False
             RadGridPhases.AllowAutomaticDeletes = False
             RadGridPhases.AllowAutomaticUpdates = False
+
+            btnNewFee.Enabled = False
+            RadGridFees.AllowAutomaticDeletes = False
+            RadGridFees.AllowAutomaticDeletes = False
             Return True
         Else
             Return False
         End If
     End Function
+
+#Region "Fees_Step2"
+
+    Private Sub btnNewFee_Click(sender As Object, e As EventArgs) Handles btnNewFee.Click
+        Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&backpage=pro_phases")
+    End Sub
+
+    Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
+        Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+        Select Case e.CommandName
+            Case "EditTask"
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&detailId={e.CommandArgument}&backpage=pro_phases")
+            Case "OrderDown"
+                If statusId <= 1 Then
+                    LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
+                    RadGridFees.DataBind()
+                End If
+            Case "OrderUp"
+                If statusId <= 1 Then
+                    LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, -1)
+                    RadGridFees.DataBind()
+                End If
+
+            Case "DetailDuplicate"
+                If statusId <= 1 Then
+                    lblDetailSelectedId.Text = e.CommandArgument
+                    SqlDataSourceProposaldDetailDuplicate.Insert()
+                    RadGridFees.DataBind()
+                End If
+        End Select
+
+    End Sub
+
+#End Region
 
 End Class

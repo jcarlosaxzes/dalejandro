@@ -16,7 +16,6 @@ Public Class pro_proposal
 
                 lblProposalId.Text = LocalAPI.GetProposalIdFromGUID(Request.QueryString("guid"))
                 lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
-                panelViewProposalPage.DataBind()
 
                 IsProposalReadOnly()
 
@@ -30,14 +29,13 @@ Public Class pro_proposal
     End Sub
 
     Private Function IsProposalReadOnly() As Boolean
+        lblOriginalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
+        lblOriginalType.Text = LocalAPI.GetProposalData(lblProposalId.Text, "Proposal.Type")
+        lblOriginalJobId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
 
         ' If Proposal Acepted, special Permit to change
         btnUpdate1.Enabled = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
         btnDeleteProposal.Enabled = (lblOriginalStatus.Text <> 2) ' diferente de Acepted
-
-        btnNewTask.Enabled = btnUpdate1.Enabled
-        RadGrid1.AllowAutomaticUpdates = btnUpdate1.Enabled
-        RadGrid1.AllowAutomaticDeletes = btnUpdate1.Enabled
 
         Return btnUpdate1.Enabled
 
@@ -70,26 +68,11 @@ Public Class pro_proposal
         RadToolTipDelete.Visible = False
     End Sub
 
-    Protected Sub btnPrintProposal_Click(sender As Object, e As EventArgs) Handles btnPrintProposal.Click
-        If LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId") > 0 Then
-            Response.Redirect("~/adm/SendProposal.aspx?ProposalId=" & lblProposalId.Text & "&backpage=proposal&HideMasterMenu=1")
-        Else
-            Master.InfoMessage("You Must Specify the Client and Update Proposal")
-        End If
-
-    End Sub
-
-    Protected Sub btnPdf_Click(sender As Object, e As EventArgs) Handles btnPdf.Click
-        Dim ProposalUrl = LocalAPI.GetSharedLink_URL(11, lblProposalId.Text)
-        Session("PrintUrl") = ProposalUrl
-        Session("PrintName") = "Proposal_" & LocalAPI.ProposalNumber(lblProposalId.Text) & ".pdf"
-        Response.Redirect("~/ADM/pdf_print.aspx")
-    End Sub
-
     Private Sub GuardarProposal(bMsg As Boolean)
         Try
             Dim sMsg As String = "Proposal Successfully Updated"
             FormViewProp1.UpdateItem(False)
+
             If bMsg Then Master.InfoMessage(sMsg)
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
@@ -100,48 +83,66 @@ Public Class pro_proposal
 #End Region
 
 
-#Region "Task"
-    Protected Sub btnNewTask_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewTask.Click
-        Try
-            GuardarProposal(False)
-            Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=pro_proposal")
-        Catch ex As Exception
-        End Try
+#Region "Actions"
+    Private Sub btnActions_Click(sender As Object, e As EventArgs) Handles btnActions.Click
+        cboStatus.SelectedValue = lblOriginalStatus.Text
+        RadToolTipActions.Visible = True
+        RadToolTipActions.Show()
     End Sub
 
-    Private Sub RadGrid1_PreRender(sender As Object, e As EventArgs) Handles RadGrid1.PreRender
-        RadGrid1.MasterTableView.GetColumn("phaseId").Display = IIf(LocalAPI.GetProposalPhasesCount(lblProposalId.Text) = 0, False, True)
-        If lblCompanyId.Text = 260962 Then
-            ' 6/9/2020 Fernando y Raissa ddefinen que no es visible en EEG
-            RadGrid1.MasterTableView.GetColumn("Estimated").Visible = False
+    Private Sub SqlDataSourceProp1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProp1.Updating
+        'Allow unlink Job from Proposal
+        'If Val(lblOriginalJobId.Text) > 0 Then
+        e.Command.Parameters("@JobId").Value = Val(lblOriginalJobId.Text)
+        'Else
+        '    If Val("" & LocalAPI.GetProposalData(lblProposalId.Text, "JobId")) > 0 Then
+        '        e.Command.Parameters("@JobId").Value = LocalAPI.GetProposalData(lblProposalId.Text, "JobId")
+        '    End If
+        'End If
+    End Sub
+    Protected Sub SqlDataSourceProp1_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceProp1.Updated
+        IsProposalReadOnly()
+    End Sub
+    Protected Sub btnModifyJob_Click(sender As Object, e As EventArgs) Handles btnModifyJob.Click
+        lblOriginalJobId.Text = cboJobs.SelectedValue
+        GuardarProposal(True)
+    End Sub
+    Private Sub btnUpdateStatus_Click(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
+        If cboStatus.SelectedValue <> lblOriginalStatus.Text Then
+            Select Case cboStatus.SelectedValue
+
+                Case 0, 1 ' Not Emitted and Pending
+                    LocalAPI.SetProposalStatus(lblProposalId.Text, cboStatus.SelectedValue)
+                    lblOriginalStatus.Text = cboStatus.SelectedValue
+
+                Case 2  ' Acepted
+                    If (lblOriginalStatus.Text = 0 Or lblOriginalStatus.Text = 1) Then
+                        LocalAPI.ProposalStatus2Acept(lblProposalId.Text, lblCompanyId.Text)
+                        lblOriginalStatus.Text = cboStatus.SelectedValue
+                    End If
+
+                Case 3, 31, 32  ' Declined
+                    LocalAPI.ProposalStatus2Declined(lblProposalId.Text, lblCompanyId.Text, cboStatus.SelectedValue)
+                    lblOriginalStatus.Text = cboStatus.SelectedValue
+
+                Case 4  ' Hold
+                    LocalAPI.ProposalStatus2Hold(lblProposalId.Text)
+                    lblOriginalStatus.Text = cboStatus.SelectedValue
+
+            End Select
+
+            btnUpdateStatus.Enabled = (cboStatus.SelectedValue <> lblOriginalStatus.Text)
+            FormViewProp1.DataBind()
         End If
-    End Sub
-
-    Private Sub RadGrid1_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGrid1.ItemCommand
-        Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
-        Select Case e.CommandName
-            Case "EditTask"
-                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&detailId={e.CommandArgument}&backpage=pro_proposal")
-            Case "DetailDuplicate"
-                If lblOriginalStatus.Text <= 1 Then
-                    lblDetailSelectedId.Text = e.CommandArgument
-                    SqlDataSourceProposaldDetailDuplicate.Insert()
-                    RadGrid1.DataBind()
-                End If
-
-            Case "OrderDown"
-                If statusId <= 1 Then
-                    LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
-                    RadGrid1.DataBind()
-                End If
-            Case "OrderUp"
-                If statusId <= 1 Then
-                    LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, -1)
-                    RadGrid1.DataBind()
-                End If
-        End Select
 
     End Sub
+    Protected Sub btnModifyType_Click(sender As Object, e As EventArgs) Handles btnModifyType.Click
+        lblOriginalType.Text = cboProposalType.SelectedValue
+        LocalAPI.ModifyProposalType(lblProposalId.Text, cboProposalType.SelectedValue, lblCompanyId.Text)
+        ' Redirect to Fees
+        Response.Redirect(LocalAPI.GetSharedLink_URL(11002, lblProposalId.Text))
+    End Sub
+
 #End Region
 
 End Class

@@ -165,8 +165,8 @@ Public Class proposaltask
                 Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text)
             Case "proposalnewwizard"
                 Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & lblproposalId.Text & "&FeesTab=1")
-            Case "pro_proposal"
-                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, lblproposalId.Text))
+            Case "pro_phases"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
         End Select
 
 

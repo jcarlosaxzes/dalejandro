@@ -25,7 +25,8 @@
                 TotalsAnalisis()
 
                 IsProposalReadOnly()
-                Master.ActiveTab(1)
+
+                Master.ActiveTab(3)
 
 
             End If

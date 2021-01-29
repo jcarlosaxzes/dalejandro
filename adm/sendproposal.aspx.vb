@@ -239,6 +239,8 @@ Public Class sendproposal
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Select Case lblBackSource.Text
+            Case "pro_proposal"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, lblProposalId.Text))
             Case "proposal"
                 Response.RedirectPermanent("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
             Case "job_proposals"

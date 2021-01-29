@@ -124,7 +124,7 @@ Public Class proposals
 
             ' from 01/22/2021..........
             Case "View/Edit Proposal"
-                sUrl = LocalAPI.GetSharedLink_URL(11001, e.CommandArgument) & "&backpage=proposals"
+                sUrl = LocalAPI.GetSharedLink_URL(11006, e.CommandArgument) & "&backpage=proposals"
                 Response.Redirect(sUrl)
 
             ' obsoleto!!!!!!!!!!!!!!
