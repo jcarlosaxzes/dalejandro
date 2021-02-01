@@ -63,6 +63,8 @@ Public Class proposal_save_copy
 
     Private Sub Back(proposalId As Integer)
         Select Case Session("proposalsavecopybackpage")
+            Case "pro_proposal"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, proposalId))
             Case "proposal"
                 Response.Redirect("~/adm/proposal.aspx?proposalId=" & proposalId)
             Case "proposalnewwizard"

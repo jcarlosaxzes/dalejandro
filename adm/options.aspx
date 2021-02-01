@@ -262,24 +262,6 @@
 
                 </fieldset>
             </telerik:RadWizardStep>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Mobile App" StepType="Step">
-                <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceMobile" HeaderStyle-HorizontalAlign="Center">
-                    <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourceMobile">
-                        <Columns>
-                            <telerik:GridBoundColumn UniqueName="Platform" HeaderText="Platform" DataField="Platform" HeaderStyle-Width="200px">
-                            </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn UniqueName="VersionNumber" HeaderText="Version" DataField="VersionNumber" HeaderStyle-Width="200px" ItemStyle-HorizontalAlign="Center">
-                            </telerik:GridBoundColumn>
-
-                            <telerik:GridTemplateColumn DataField="Url" HeaderText="Distribution Page Link" UniqueName="Download">
-                                <ItemTemplate>
-                                    <a href='<%#IIf(Eval("Platform") = "iPhone", LocalAPI.GetHostAppSite() & "/distribution/iphone.aspx", LocalAPI.GetHostAppSite() & "/distribution/android.aspx") %>' target="_blank"><%#String.Concat("PASconcept Mobile App Distribution page for ", Eval("Platform"))%></a>
-                                </ItemTemplate>
-                            </telerik:GridTemplateColumn>
-                        </Columns>
-                    </MasterTableView>
-                </telerik:RadGrid>
-            </telerik:RadWizardStep>
         </WizardSteps>
     </telerik:RadWizard>
 
@@ -316,9 +298,6 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourceMobile" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Platform]=case when [Platform]=1 then 'iPhone' else 'Android' end ,[VersionNumber],[Url]  FROM [dbo].[MobileAppVersions] WHERE [Latest]=1"></asp:SqlDataSource>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>

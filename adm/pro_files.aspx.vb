@@ -1,30 +1,35 @@
 ﻿Imports Telerik.Web.UI
 
-Public Class job_links
+Public Class pro_files
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
 
             If (Not Page.IsPostBack) Then
-                lblCompanyId.Text = Session("companyId")
-                lblJobId.Text = LocalAPI.GetJobIdFromGUID(Request.QueryString("guid"))
-                lblClientId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "Client")
 
-                lblproposalId.Text = LocalAPI.GetJobProperty(lblJobId.Text, "proposalId")
-                Master.ActiveTab(7)
+                lblCompanyId.Text = Session("companyId")
+                lblEmployeeId.Text = Master.UserId
+
+                lblProposalId.Text = LocalAPI.GetProposalIdFromGUID(Request.QueryString("guid"))
+                lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
 
                 ConfigUploadPanels()
+
+                Master.ActiveTab(5)
+
 
             End If
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message & " code: " & lblCompanyId.Text)
         End Try
+
     End Sub
 
+
     Protected Sub ConfigUploadPanels()
-        Dim ExistingFiles As Integer = LocalAPI.GetAzureFilesCount(lblClientId.Text, lblproposalId.Text, lblJobId.Text)
+        Dim ExistingFiles As Integer = LocalAPI.GetEntityAzureFilesCount(lblProposalId.Text, "Proposal")
 
         If ExistingFiles = 0 Then
             RadWizardStepUpload.Active = True
@@ -56,14 +61,6 @@ Public Class job_links
 
     Private Sub SqlDataSourceAzureFiles_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAzureFiles.Updating
         Dim e1 As String = e.Command.Parameters(3).Value
-    End Sub
-    Protected Sub btnNewFileLink_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnNewFileLink.Click
-        Try
-
-            RadGridLinks.MasterTableView.InsertItem()
-        Catch ex As Exception
-            Master.ErrorMessage(ex.Message)
-        End Try
     End Sub
 
     Private Sub SqlDataSourceAzureFiles_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceAzureFiles.Selecting
@@ -230,12 +227,12 @@ Public Class job_links
             AzureStorageApi.DeleteFile(tempName)
 
             ' The uploaded files need to be removed from the storage by the control after a certain time.
-            e.IsValid = LocalAPI.AzureStorage_Insert(lblJobId.Text, "Jobs", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
+            e.IsValid = LocalAPI.AzureStorage_Insert(lblProposalId.Text, "Proposal", cboDocType.SelectedValue, e.FileInfo.OriginalFileName, newName, chkPublic.Checked, e.FileInfo.ContentLength, e.FileInfo.ContentType, lblCompanyId.Text)
             If e.IsValid Then
                 'RadListViewFiles.ClearSelectedItems()
                 'RadListViewFiles.DataBind()
                 'RadGridFiles.DataBind()
-                'RadWizardStepUpload.Active = True
+                'RadWizardFiles.ActiveStepIndex = 1
                 'PanelUpload.Visible = False
                 'Master.InfoMessage(e.FileInfo.OriginalFileName & " uploaded")
             Else
@@ -300,4 +297,6 @@ Public Class job_links
     Private Sub btnSaveUpload_Click(sender As Object, e As EventArgs) Handles btnSaveUpload.Click
         ConfigUploadPanels()
     End Sub
+
+
 End Class

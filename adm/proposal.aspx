@@ -625,17 +625,19 @@
                                 <tr>
                                     <td>
                                         <h4>Opening Text:</h4>
-                                        <telerik:RadTextBox ID="RadTextBoxBegin" runat="server" Text='<%# Bind("TextBegin") %>'
-                                            TextMode="MultiLine" Rows="6" Width="100%">
-                                        </telerik:RadTextBox>
+                                        <telerik:RadEditor ID="RadTextBoxBegin" runat="server" Content='<%# Bind("TextBegin") %>' Height="250px" 
+                                            ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto" Width="100%">
+                                        </telerik:RadEditor>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <h4>Closing Text:</h4>
-                                        <telerik:RadTextBox ID="RadTextBoxEnd" runat="server" Text='<%# Bind("TextEnd") %>'
-                                            TextMode="MultiLine" Rows="6" Width="100%">
-                                        </telerik:RadTextBox>
+                                        <telerik:RadEditor ID="radEditorEnd" runat="server" Content='<%# Bind("TextEnd") %>'
+                                            Height="250px" ToolsFile="~/BasicTools.xml" AllowScripts="True" EditModes="Design,Preview" RenderMode="Auto"
+                                            Width="100%">
+                                        </telerik:RadEditor>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -1219,7 +1221,7 @@
                                     </telerik:GridBoundColumn>
                                     <telerik:GridTemplateColumn DataField="DateFrom" HeaderText="Date From" SortExpression="DateFrom" UniqueName="DateFrom" HeaderStyle-Width="150px" HeaderStyle-HorizontalAlign="Center">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblDateFrom" runat="server" Text='<%# Eval("DateFrom", "{0:d}")%>'></asp:Label>
+                                            <%# Eval("DateFrom", "{0:d}")%>
                                         </ItemTemplate>
                                     </telerik:GridTemplateColumn>
 
@@ -1322,16 +1324,16 @@
                     </div>
 
                 </telerik:RadWizardStep>
-                <%--Term & Conditions--%>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStep24" Title="Term & Conditions" StepType="Step">
+                <%--Terms & Conditions--%>
+                <telerik:RadWizardStep runat="server" ID="RadWizardStep24" Title="Terms & Conditions" StepType="Step">
                     <table class="table-sm" style="width: 100%;">
                         <tr>
                             <td>
                                 <asp:FormView ID="FormViewTC" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSourcePropTC" Width="100%" EnableViewState="false">
                                     <ItemTemplate>
                                         <div style="padding-bottom: 5px">
-                                            <asp:LinkButton ID="btnEditTyC" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CommandName="Edit" ToolTip="Edit Term & Conditions" CausesValidation="false">
-                                                 Term & Conditions
+                                            <asp:LinkButton ID="btnEditTyC" runat="server" CssClass="btn btn-success" UseSubmitBehavior="false" CommandName="Edit" ToolTip="Edit Terms & Conditions" CausesValidation="false">
+                                                 Terms & Conditions
                                             </asp:LinkButton>
 
                                         </div>

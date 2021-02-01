@@ -121,6 +121,13 @@ Public Class proposals
                 Dim ObjGuid As String = LocalAPI.GetProposalProperty(e.CommandArgument, "guid")
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjGuid=" & ObjGuid
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
+
+            ' from 01/22/2021..........
+            Case "View/Edit Proposal"
+                sUrl = LocalAPI.GetSharedLink_URL(11006, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            ' obsoleto!!!!!!!!!!!!!!
             Case "EditProposal"
                 Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument)
 

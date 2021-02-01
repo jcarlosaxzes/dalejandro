@@ -191,7 +191,7 @@ Public Class proposalnewwizard
 
             RadGridFiles.DataBind()
 
-            iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&FromWizard=1"
+            iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&backpage=proposalnewwizard"
 
         End If
     End Sub
@@ -411,14 +411,14 @@ Public Class proposalnewwizard
 #Region "Fees_Step2"
 
     Private Sub btnNewFeeOk_Click(sender As Object, e As EventArgs) Handles btnNewFeeOk.Click
-        Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&fromwizard=1")
+        Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&backpage=proposalnewwizard")
     End Sub
 
     Private Sub RadGridFees_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridFees.ItemCommand
         Dim statusId As String = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         Select Case e.CommandName
             Case "EditTask"
-                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&fromwizard=1")
+                Response.Redirect("~/adm/proposaltask.aspx?proposalId=" & lblProposalId.Text & "&detailId=" & e.CommandArgument & "&backpage=proposalnewwizard")
             Case "OrderDown"
                 If statusId <= 1 Then
                     LocalAPI.ProposalDetail_OrderBy_UPDATE(e.CommandArgument, 1)
@@ -865,7 +865,7 @@ Public Class proposalnewwizard
             Case "EditPhase"
                 Response.Redirect($"~/adm/proposalphase.aspx?Id={e.CommandArgument}&proposalId={lblProposalId.Text}&backpage=proposalnewwizard")
             Case "AddTaskInPhase"
-                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&fromwizard=1&phaseId={e.CommandArgument}")
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=proposalnewwizard&phaseId={e.CommandArgument}")
         End Select
 
     End Sub

@@ -697,6 +697,7 @@
     <Content Include="adm\memory.aspx" />
     <Content Include="adm\messages.aspx" />
     <Content Include="adm\messagestemplates.aspx" />
+    <Content Include="adm\mobileapp.aspx" />
     <Content Include="adm\monthlyexpenses.aspx" />
     <Content Include="adm\multiplierwizard.aspx" />
     <Content Include="adm\naics_us_codes.aspx" />
@@ -734,6 +735,14 @@
     <Content Include="adm\proposal_save_copy.aspx" />
     <Content Include="adm\proposal_tasks.aspx" />
     <Content Include="adm\proposal_types.aspx" />
+    <Content Include="adm\pro_files.aspx" />
+    <Content Include="adm\pro_notes.aspx" />
+    <Content Include="adm\pro_openingclosing.aspx" />
+    <Content Include="adm\pro_paymentschedules.aspx" />
+    <Content Include="adm\pro_phases.aspx" />
+    <Content Include="adm\pro_preview.aspx" />
+    <Content Include="adm\pro_proposal.aspx" />
+    <Content Include="adm\pro_termandconditions.aspx" />
     <Content Include="adm\qb_disconnect.aspx" />
     <Content Include="adm\qb_refreshtoken.aspx" />
     <Content Include="adm\QueicBooksTestPages.aspx" />
@@ -2469,6 +2478,7 @@
     <Content Include="App_Data\QB_customer.json" />
     <Content Include="App_Data\QBTransaction.json" />
     <Content Include="ApplicationInsights.config" />
+    <Content Include="adm\MasterPROPOSAL.Master" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - ReadOnly - FTP.pubxml" />
     <None Include="My Project\PublishProfiles\pasconcept-staging - Web Deploy.pubxml" />
@@ -3495,7 +3505,7 @@
     </Compile>
     <Compile Include="adm\employeehourlywage.aspx.vb">
       <DependentUpon>employeehourlywage.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\employeenewdowntime.aspx.designer.vb">
       <DependentUpon>employeenewdowntime.aspx</DependentUpon>
@@ -3749,6 +3759,13 @@
       <DependentUpon>MasterJOB.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\MasterPROPOSAL.Master.designer.vb">
+      <DependentUpon>MasterPROPOSAL.Master</DependentUpon>
+    </Compile>
+    <Compile Include="adm\MasterPROPOSAL.Master.vb">
+      <DependentUpon>MasterPROPOSAL.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="adm\memory.aspx.designer.vb">
       <DependentUpon>memory.aspx</DependentUpon>
     </Compile>
@@ -3768,6 +3785,13 @@
     </Compile>
     <Compile Include="adm\messagestemplates.aspx.vb">
       <DependentUpon>messagestemplates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\mobileapp.aspx.designer.vb">
+      <DependentUpon>mobileapp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\mobileapp.aspx.vb">
+      <DependentUpon>mobileapp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\monthlyexpenses.aspx.designer.vb">
@@ -4006,7 +4030,7 @@
     </Compile>
     <Compile Include="adm\proposal_save_as_template.aspx.vb">
       <DependentUpon>proposal_save_as_template.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\proposal_save_copy.aspx.designer.vb">
       <DependentUpon>proposal_save_copy.aspx</DependentUpon>
@@ -4028,6 +4052,62 @@
     <Compile Include="adm\proposal_types.aspx.vb">
       <DependentUpon>proposal_types.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_files.aspx.designer.vb">
+      <DependentUpon>pro_files.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_files.aspx.vb">
+      <DependentUpon>pro_files.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_notes.aspx.designer.vb">
+      <DependentUpon>pro_notes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_notes.aspx.vb">
+      <DependentUpon>pro_notes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_openingclosing.aspx.designer.vb">
+      <DependentUpon>pro_openingclosing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_openingclosing.aspx.vb">
+      <DependentUpon>pro_openingclosing.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_paymentschedules.aspx.designer.vb">
+      <DependentUpon>pro_paymentschedules.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_paymentschedules.aspx.vb">
+      <DependentUpon>pro_paymentschedules.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_phases.aspx.designer.vb">
+      <DependentUpon>pro_phases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_phases.aspx.vb">
+      <DependentUpon>pro_phases.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_preview.aspx.designer.vb">
+      <DependentUpon>pro_preview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_preview.aspx.vb">
+      <DependentUpon>pro_preview.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_proposal.aspx.designer.vb">
+      <DependentUpon>pro_proposal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_proposal.aspx.vb">
+      <DependentUpon>pro_proposal.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="adm\pro_termandconditions.aspx.designer.vb">
+      <DependentUpon>pro_termandconditions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\pro_termandconditions.aspx.vb">
+      <DependentUpon>pro_termandconditions.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="adm\qb_disconnect.aspx.designer.vb">
       <DependentUpon>qb_disconnect.aspx</DependentUpon>
