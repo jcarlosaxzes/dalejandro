@@ -13039,6 +13039,200 @@ Public Class LocalAPI
 
 #End Region
 
+#Region "Ebillity Time Entries"
+    Public Shared Function IsEbilityModule(companyId As Integer) As Boolean
+        Return GetNumericEscalar("SELECT isnull([IsEbilityModule],0) FROM Company where companyId=" & companyId)
+    End Function
+
+    Public Shared Function GetEabillityAccessToken(companyId As Integer) As String
+        Return GetStringEscalar("SELECT isnull([EbillityAccessToken],'') FROM Company where companyId=" & companyId)
+    End Function
+    Public Shared Function GetEbillityClientLastSyncDate(companyId As Integer) As String
+        Return GetStringEscalar("SELECT isnull([EbillityClientLastSyncDate],0) FROM Company where companyId=" & companyId)
+    End Function
+    Public Shared Function SetEbillityClientLastSyncDate(companyId As Integer, LastSyncDate As Int64) As String
+        Return GetStringEscalar($"update Company set [EbillityClientLastSyncDate] = {LastSyncDate} where companyId=" & companyId)
+    End Function
+
+    Public Shared Function Client_Sync_Ebillity_Clone(companyId As Integer, ClientId As Integer) As Integer
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CLIENT_Sync_Ebillity_Clone"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+
+            ' Execute the stored procedure.
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.ExecuteNonQuery()
+
+            Dim NewClientId As Integer = parOUT_ID.Value
+            cnn1.Close()
+
+
+            Return NewClientId
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+    Public Shared Sub CLIENT_Sync_Ebillity_Link(companyId As Integer, ClientId As Integer, PC_Clientid As Integer)
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "CLIENT_Sync_Ebillity_Link"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@PC_CLientId", PC_Clientid)
+
+            ' Execute the stored procedure.
+
+            cmd.ExecuteNonQuery()
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+    Public Shared Sub CloneJobEbillity(ByRef ClientId As Integer, ByVal companyId As Integer)
+        Try
+            Dim record = LocalAPI.GetRecordFromQuery($"Select PC_ClientId, Case When (CHARINDEX(':', ClientName) > 0 ) then SUBSTRING(ClientName, CHARINDEX(':', ClientName)+1, 100 ) else ClientName end as ProjectName from [dbo].Clients_Sync_Ebillity where companyId = {companyId} and PC_ClientId is not null and ClientId = {ClientId}")
+            Dim JobId = LocalAPI.NuevoJobEbillity(record("ProjectName"), record("PC_ClientId"), companyId)
+            LocalAPI.ExecuteNonQuery($"update Clients_Sync_Ebillity set PC_JobId = {JobId} where ClientId = {ClientId}  and companyId={companyId}")
+            LocalAPI.Ebillity_Run_After_Sync(companyId)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+    Public Shared Function NuevoJobEbillity(
+                                        ByRef sJob As String,
+                                        ByRef ClientId As Integer,
+                                        ByVal companyId As Integer) As Long
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "JOB_EBillity_INSERT"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@JobName", sJob)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            ' Execute the stored procedure.
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+            cmd.ExecuteNonQuery()
+
+            Dim lJobId As Integer = parOUT_ID.Value
+            cnn1.Close()
+
+
+            Return lJobId
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    Public Shared Sub Activity_Sync_Ebillity_Clone(companyId As Integer, ActivityId As Integer)
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Time_Categories_Sync_Ebillity_Clone"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+            cmd.Parameters.AddWithValue("@ActivityId", ActivityId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+    Public Shared Sub Ebillity_Run_After_Sync(companyId As Integer)
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Ebillity_Run_Sync"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+    Public Shared Sub JobTimeEntries_Ebillity_Import(companyId As Integer)
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' ClienteEmail
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "JobTimeEntries_Ebillity_Import"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter )
+            cmd.Parameters.AddWithValue("@companyId", companyId)
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Sub
+
+
+#End Region
+
 #Region "FilterClipboard"
     Public Shared Function IsFilterClipboard(employeeId As Integer, companyId As Integer) As Boolean
         Dim nRecs As Integer = GetNumericEscalar("SELECT count(*) FROM [Employee_Filterclipboard] WHERE companyId=" & companyId & " and employeeId=" & employeeId)
