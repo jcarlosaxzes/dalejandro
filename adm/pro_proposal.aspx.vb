@@ -34,8 +34,8 @@ Public Class pro_proposal
         lblOriginalJobId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
 
         ' If Proposal Acepted, special Permit to change
-        btnUpdate1.Enabled = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
-        btnDeleteProposal.Enabled = (lblOriginalStatus.Text <> 2) ' diferente de Acepted
+        btnUpdate1.Visible = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
+        btnDeleteProposal.Visible = (lblOriginalStatus.Text <> 2) ' diferente de Acepted
 
         Return btnUpdate1.Enabled
 
