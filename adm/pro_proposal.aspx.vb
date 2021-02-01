@@ -37,7 +37,13 @@ Public Class pro_proposal
         btnUpdate1.Visible = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
         btnDeleteProposal.Visible = (lblOriginalStatus.Text <> 2) ' diferente de Acepted
 
-        Return btnUpdate1.Enabled
+        If lblOriginalStatus.Text > 1 Then
+            FormView1.DefaultMode = FormViewMode.ReadOnly
+            Return True
+        Else
+            FormView1.DefaultMode = FormViewMode.Edit
+            Return False
+        End If
 
     End Function
 
@@ -71,7 +77,7 @@ Public Class pro_proposal
     Private Sub GuardarProposal(bMsg As Boolean)
         Try
             Dim sMsg As String = "Proposal Successfully Updated"
-            FormViewProp1.UpdateItem(False)
+            FormView1.UpdateItem(False)
 
             If bMsg Then Master.InfoMessage(sMsg)
         Catch ex As Exception
@@ -132,7 +138,7 @@ Public Class pro_proposal
             End Select
 
             btnUpdateStatus.Enabled = (cboStatus.SelectedValue <> lblOriginalStatus.Text)
-            FormViewProp1.DataBind()
+            FormView1.DataBind()
         End If
 
     End Sub

@@ -23,6 +23,15 @@ Partial Public Class pro_termandconditions
     Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''panelActions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents panelActions As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''cboTandCtemplates control.
     '''</summary>
     '''<remarks>

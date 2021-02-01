@@ -46,7 +46,7 @@ Public Class pro_phases
             RadGridPhases.AllowAutomaticDeletes = False
             RadGridPhases.AllowAutomaticUpdates = False
 
-            btnNewFee.Enabled = False
+            btnNewFee.Visible = False
             RadGridFees.AllowAutomaticDeletes = False
             RadGridFees.AllowAutomaticDeletes = False
             Return True

@@ -13,7 +13,31 @@
         </span>
     </div>
     <div>
-        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSource1" Width="100%" EnableViewState="false">
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="100%" EnableViewState="false">
+        <ItemTemplate>
+            <table class="table-sm" style="width: 100%;">
+                <tr>
+                    <td>
+                        <h4>Opening Text</h4>
+                        <%# Eval("TextBegin") %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>Closing Text</h4>
+                        <%# Eval("TextEnd") %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h4>Additional Link with more info</h4>
+                        <a href='<%# Eval("Link") %>' target="_blank">
+                            <%# Eval("Link") %>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </ItemTemplate>
         <EditItemTemplate>
             <table class="table-sm" style="width: 100%;">
                 <tr>
@@ -36,7 +60,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h4>Additional Link with more info:</h4>
+                        <h4>Additional Link with more info</h4>
                         <telerik:RadTextBox ID="RadTextBox1" runat="server" Text='<%# Bind("Link") %>' Width="100%" MaxLength="150">
                         </telerik:RadTextBox>
                     </td>

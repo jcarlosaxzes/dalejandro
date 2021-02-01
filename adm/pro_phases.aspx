@@ -12,7 +12,7 @@
             <span class="pasconcept-pagetitle">Fees & Scope</span>
         </div>
         <div class="pasconcept-bar noprint">
-            <h4>Proposal Phases</h4>
+            <span class="h4">Proposal Phases</span>
 
             <span style="float: right; vertical-align: middle;">
                 <asp:LinkButton ID="btnNewPhase" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Add New Phase for Proposal">
@@ -79,7 +79,7 @@
 
     <%--Proposal Tasks--%>
     <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle">Proposal Tasks</span>
+        <span class="h4">Proposal Tasks</span>
 
         <span style="float: right; vertical-align: middle;">
 

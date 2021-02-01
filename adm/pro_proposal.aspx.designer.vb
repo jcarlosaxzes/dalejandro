@@ -59,13 +59,13 @@ Partial Public Class pro_proposal
     Protected WithEvents ValidationSummary1 As Global.System.Web.UI.WebControls.ValidationSummary
 
     '''<summary>
-    '''FormViewProp1 control.
+    '''FormView1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormViewProp1 As Global.System.Web.UI.WebControls.FormView
+    Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
     '''RadToolTipDelete control.

@@ -60,7 +60,265 @@
     </div>
 
     <div class="pas-container" style="width: 100%">
-        <asp:FormView ID="FormViewProp1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSourceProp1" Width="100%" EnableViewState="false">
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSourceProp1" Width="100%" EnableViewState="false">
+            <ItemTemplate>
+                <table class="table-sm" style="width: 100%;font-size:medium">
+
+                    <tr>
+                        <td style="text-align: right; width: 180px">Number:
+                        </td>
+                        <td style="width: 450px">
+                            <table>
+                                <tr>
+                                    <td style="width: 125px;font-weight:bold">
+                                        <%# Eval("ProposalNumber")%>
+                                    </td>
+                                    <td style="width: 75px; text-align: right">Job:</td>
+                                    <td>
+                                        <asp:LinkButton ID="btnViewJob" runat="server" Visible='<%# Len(Eval("JobCode")) > 0 %>' CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" CommandName="ViewJob" CommandArgument='<%# Eval("JobId")%>'
+                                            ToolTip="View Job of Proposal" Text='<%#  Eval("JobCode")%>'></asp:LinkButton>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <td style="text-align: right; width: 250px">Date Created:
+                        </td>
+                        <td>
+                            <%# Eval("Date", "{0:d}")%>
+                        </td>
+
+
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;">
+                            Name:
+                        </td>
+                        <td style="font-weight:bold">
+                            <%# Eval("ProjectName") %>
+                        </td>
+
+                        <td style="text-align: right">Status:
+                        </td>
+                        <td style="font-weight:bold">
+                            <%# Eval("Status")%>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;">
+                            Client:
+                        </td>
+                        <td style="font-weight:bold">
+                            <%# Eval("ClientName") %>
+                        </td>
+                        <td style="text-align: right">Quantity:
+                        </td>
+                        <td>
+                            <%# Eval("Unit")%>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;">Template:
+                        </td>
+                        <td>
+                            <%# Eval("Template")%>
+                        </td>
+
+
+
+                        <td style="text-align: right">Units
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Enabled="false"
+                                SelectedValue='<%# Eval("Measure")%>' Width="200px" AppendDataBoundItems="True">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;">
+                            <asp:CompareValidator runat="server" ID="Comparevalidator1" SetFocusOnError="true" Text="*" Operator="NotEqual"
+                                ControlToValidate="DropDownListProjectType"
+                                ErrorMessage="Job Type is required"
+                                ValueToCompare="(Not defined...)"
+                                ValidationGroup="Proposal">
+                            </asp:CompareValidator>
+                            Job Type:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="DropDownListProjectType" runat="server" AppendDataBoundItems="True" Enabled="false"
+                                DataSourceID="SqlDataSourceProjectType" DataTextField="Name" DataValueField="Id" SelectedValue='<%# Eval("ProjectType") %>' Width="100%" MarkFirstMatch="True"
+                                Filter="Contains" Height="400px">
+                            </telerik:RadComboBox>
+                        </td>
+
+
+
+                        <td style="text-align: right">
+                            <asp:CompareValidator runat="server" ID="Comparevalidator4" SetFocusOnError="true" Text="*" Operator="NotEqual"
+                                ControlToValidate="cboSector"
+                                ErrorMessage="Sector is required"
+                                ValueToCompare="(Not Defined...)"
+                                ValidationGroup="Proposal">
+                            </asp:CompareValidator>
+
+                            Sector:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cboSector" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceProjectSector" DataTextField="Name" DataValueField="Id" Enabled="false"
+                                SelectedValue='<%# Eval("ProjectSector")%>' Width="200px" MarkFirstMatch="True" Filter="Contains" Height="400px">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Not Defined...)" Value="0" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;">Owner Name:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="TextBoxOwner" runat="server" Width="100%" Text='<%# Eval("Owner")%>' MaxLength="80">
+                            </telerik:RadTextBox>
+                        </td>
+
+
+
+                        <td style="text-align: right">
+                            <asp:CompareValidator runat="server" ID="Comparevalidator5" SetFocusOnError="true" Text="*" Operator="NotEqual"
+                                ControlToValidate="cboUse"
+                                ErrorMessage="Use & Occupancy is required"
+                                ValueToCompare="(Not Defined...)"
+                                ValidationGroup="Proposal">
+                            </asp:CompareValidator>
+
+                            Use & Occupancy:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cboUse" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceProjectUse" DataTextField="Name" DataValueField="Id" Enabled="false"
+                                SelectedValue='<%# Eval("ProjectUse")%>' Width="200px" MarkFirstMatch="True" Filter="Contains" Height="400px">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Not Defined...)" Value="0" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;">Location:
+                        </td>
+                        <td>
+                            <%# Eval("ProjectLocation")%>
+                        </td>
+
+
+
+                        <td style="text-align: right">Client Deadline:
+                        </td>
+                        <td>
+                            <%# Eval("Deadline")%>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;">
+                            Department:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Enabled="false"
+                                SelectedValue='<%# Eval("DepartmentId")%>' Width="100%" MarkFirstMatch="True" Filter="Contains" Height="400px">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="0" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+
+
+
+                        <td style="text-align: right">Estimated Working Days:
+                        </td>
+                        <td>
+                            <%# Eval("Workdays")%>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td style="text-align: right;">Proposal by:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cboProjectManager" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceEmployee" Enabled="false"
+                                DataTextField="Name" DataValueField="Id" Height="400px"
+                                SelectedValue='<%# Eval("ProjectManagerId")%>' Width="100%" MarkFirstMatch="True" Filter="Contains">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="0" />
+                                </Items>
+                            </telerik:RadComboBox>
+
+                        </td>
+
+                        <td style="text-align: right;">Prepared by:
+                        </td>
+                        <td>
+                            <telerik:RadComboBox ID="cboPreparedBy" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceEmployee" Enabled="false"
+                                DataTextField="Name" DataValueField="Id" Height="400px"
+                                SelectedValue='<%# Eval("EmployeeAprovedId")%>' Width="350px" MarkFirstMatch="True" Filter="Contains">
+                                <Items>
+                                    <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="0" />
+                                </Items>
+                            </telerik:RadComboBox>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;">Retainer:
+                        </td>
+                        <td>
+                            <telerik:RadCheckBox ID="chkRetainer" runat="server" Checked='<%# Eval("Retainer")%>' Enabled="false"
+                                Text="On acceptance, the first invoice will be emitted"
+                                ToolTip="If selected, upon the clients acceptance of the proposal, the first invoice of the payment schedule will be sent to the client"
+                                AutoPostBack="false">
+                            </telerik:RadCheckBox>
+
+                        </td>
+
+                        <td style="text-align: right;">Share with Client:</td>
+                        <td>
+                            <telerik:RadCheckBox ID="chkSharePublicLinks" runat="server" Text="Public Upload Documents" Checked='<%# Eval("SharePublicLinks")%>' Enabled="false"
+                                ToolTip="Include file links in Proposal Acceptance" AutoPostBack="false">
+                            </telerik:RadCheckBox>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="text-align: right;"></td>
+                        <td></td>
+                        <td style="text-align: right;">Lump Sum:</td>
+                        <td>
+                            <telerik:RadCheckBox ID="chkLumpSum" runat="server" Text="Detail Totals" Checked='<%# Eval("LumpSum")%>' Enabled="false"
+                                ToolTip="Hide details Totals for Task in Client View" AutoPostBack="false">
+                            </telerik:RadCheckBox>
+                        </td>
+
+                    </tr>
+
+                </table>
+            </ItemTemplate>
             <EditItemTemplate>
                 <table class="table-sm" style="width: 100%;">
 
