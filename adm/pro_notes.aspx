@@ -14,8 +14,8 @@
     </div>
     <div>
         <telerik:RadGrid ID="RadGridNotes" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" AllowAutomaticInserts="true"
-            AutoGenerateColumns="False" DataSourceID="SqlDataSourceNotes" HeaderStyle-HorizontalAlign="Center">
-            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small">
+            AutoGenerateColumns="False" DataSourceID="SqlDataSourceNotes" HeaderStyle-HorizontalAlign="Center" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small">
+            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceNotes" >
                 <Columns>
                     <telerik:GridEditCommandColumn ButtonType="ImageButton" HeaderText="" HeaderStyle-Width="50px" UniqueName="EditCommandColumn">
                     </telerik:GridEditCommandColumn>

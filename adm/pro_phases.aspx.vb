@@ -46,7 +46,7 @@ Public Class pro_phases
             RadGridPhases.AllowAutomaticDeletes = False
             RadGridPhases.AllowAutomaticUpdates = False
 
-            btnNewFee.Enabled = False
+            btnNewFee.Visible = False
             RadGridFees.AllowAutomaticDeletes = False
             RadGridFees.AllowAutomaticDeletes = False
             Return True
@@ -54,6 +54,18 @@ Public Class pro_phases
             Return False
         End If
     End Function
+
+    Private Sub RadGridPhases_PreRender(sender As Object, e As EventArgs) Handles RadGridPhases.PreRender
+        If lblOriginalStatus.Text > 1 Then
+            RadGridPhases.MasterTableView.GetColumn("DeleteColumn").Visible = False
+            RadGridPhases.MasterTableView.GetColumn("Task").Visible = False
+        End If
+    End Sub
+    Private Sub RadGridFees_PreRender(sender As Object, e As EventArgs) Handles RadGridFees.PreRender
+        If lblOriginalStatus.Text > 1 Then
+            RadGridFees.MasterTableView.GetColumn("DeleteColumn").Visible = False
+        End If
+    End Sub
 
 #Region "Fees_Step2"
 
@@ -86,6 +98,7 @@ Public Class pro_phases
         End Select
 
     End Sub
+
 
 #End Region
 

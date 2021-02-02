@@ -231,7 +231,7 @@
                         HeaderStyle-Width="130px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Proposal"
-                                CommandName="EditProposal">
+                                CommandName="View/Edit Proposal">
                                 <%# Eval("ProposalNumber")%>
                             </asp:LinkButton>
 

@@ -12,7 +12,7 @@
             </asp:LinkButton>
         </span>
     </div>
-    <div>
+    <asp:Panel runat="server" ID="panelActions">
         <table class="table-sm" style="width: 100%;">
             <tr>
                 <td style="text-align: right; width: 180px">Select Template:
@@ -35,9 +35,14 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </asp:Panel>
     <div>
-        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSource1" Width="98%" EnableViewState="false">
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" Width="98%" EnableViewState="false">
+            <ItemTemplate>
+                <div style="margin:25px">
+                    <%# Eval("Agreements") %>
+                </div>
+            </ItemTemplate>
             <EditItemTemplate>
                 <div>
                     <telerik:RadEditor ID="radEditorTerms" runat="server" Content='<%# Bind("Agreements") %>'
@@ -47,7 +52,6 @@
                 </div>
             </EditItemTemplate>
         </asp:FormView>
-        
     </div>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT Id, Agreements FROM Proposal WHERE (Id = @Id)"
