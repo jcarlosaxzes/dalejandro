@@ -34,8 +34,8 @@ Public Class pro_proposal
         lblOriginalJobId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "JobId")
 
         ' If Proposal Acepted, special Permit to change
-        btnUpdate1.Visible = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
-        btnDeleteProposal.Visible = (lblOriginalStatus.Text <> 2) ' diferente de Acepted
+        btnUpdate.Visible = (lblOriginalStatus.Text <> 4 And lblOriginalStatus.Text <> 2) ' diferente de Revised
+        btnActions.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Allow_EditAcceptedProposal")
 
         If lblOriginalStatus.Text > 1 Then
             FormView1.DefaultMode = FormViewMode.ReadOnly
@@ -48,31 +48,11 @@ Public Class pro_proposal
     End Function
 
 #Region "ToolButtons Top"
-    Protected Sub btnConfirmDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnConfirmDelete.Click
-        LocalAPI.EliminarProposal(lblProposalId.Text)
-        Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
-    End Sub
 
-    Protected Sub btnCancelDelete_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnCancelDelete.Click
-        OcultarConfirmDelete()
-    End Sub
-
-    Protected Sub btnUpdate1_Click(sender As Object, e As System.EventArgs) Handles btnUpdate1.Click
+    Protected Sub btnUpdate_Click(sender As Object, e As System.EventArgs) Handles btnUpdate.Click
         GuardarProposal(True)
     End Sub
 
-    Protected Sub btnDeleteProposal_Click(sender As Object, e As System.EventArgs) Handles btnDeleteProposal.Click
-        MostrarConfirmDelete()
-    End Sub
-
-    Private Sub MostrarConfirmDelete()
-        RadToolTipDelete.Visible = True
-        RadToolTipDelete.Show()
-    End Sub
-
-    Private Sub OcultarConfirmDelete()
-        RadToolTipDelete.Visible = False
-    End Sub
 
     Private Sub GuardarProposal(bMsg As Boolean)
         Try
@@ -147,6 +127,15 @@ Public Class pro_proposal
         LocalAPI.ModifyProposalType(lblProposalId.Text, cboProposalType.SelectedValue, lblCompanyId.Text)
         ' Redirect to Fees
         Response.Redirect(LocalAPI.GetSharedLink_URL(11002, lblProposalId.Text))
+    End Sub
+
+    Private Sub FormView1_ItemCommand(sender As Object, e As FormViewCommandEventArgs) Handles FormView1.ItemCommand
+        Select Case e.CommandName
+            Case "ViewJob"
+                Dim sUrl As String = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument)
+                Response.Redirect(sUrl)
+
+        End Select
     End Sub
 
 #End Region

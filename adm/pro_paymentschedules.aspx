@@ -33,7 +33,7 @@
     </div>
     <div>
         <telerik:RadGrid ID="RadGridPS" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-            AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center"
+            AutoGenerateColumns="False" DataSourceID="SqlDataSourcePS" HeaderStyle-HorizontalAlign="Center" FooterStyle-Font-Bold="true"
             CellSpacing="0" Width="100%">
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePS" ShowFooter="true">
                 <Columns>
@@ -55,7 +55,7 @@
                             </telerik:RadTextBox>
                         </EditItemTemplate>
                     </telerik:GridTemplateColumn>
-                    <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="100px" ItemStyle-HorizontalAlign="Center" ReadOnly="true"
+                    <telerik:GridBoundColumn DataField="Percentage" HeaderStyle-Width="150px" ItemStyle-HorizontalAlign="Center" ReadOnly="true"
                         HeaderText="(%)" SortExpression="Percentage" UniqueName="Percentage">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Amount" HeaderText="Total" ReadOnly="True"
