@@ -501,7 +501,7 @@
                                     SortExpression="Id" UniqueName="Id" ItemStyle-HorizontalAlign="Center"
                                     HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                                     <ItemTemplate>
-                                        <asp:HyperLink ID="lnkPropEdit" runat="server" NavigateUrl='<%# Eval("Id", "~/adm/proposal.aspx?proposalId={0}&Origen=2")%>'
+                                        <asp:HyperLink ID="lnkPropEdit" runat="server" NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11001, Eval("Id"))%>'
                                             Text='<%# Eval("ProposalNumber")%>' ToolTip="Clic to View/Edit Proposal in new tab" Target="_blank"></asp:HyperLink>
                                     </ItemTemplate>
                                 </telerik:GridTemplateColumn>

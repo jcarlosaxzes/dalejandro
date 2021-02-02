@@ -161,21 +161,12 @@ Public Class proposaltask
     End Sub
     Private Sub Back()
         Select Case Session("proposaltaskbackpage")
-            Case "proposal"
-                Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text)
+            Case "pro_phases", "proposal"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
             Case "proposalnewwizard"
                 Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & lblproposalId.Text & "&FeesTab=1")
-            Case "pro_phases"
-                Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
         End Select
 
-
-
-        If lblBackSource.Text = 1 Then
-
-        Else
-            Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text)
-        End If
     End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Back()

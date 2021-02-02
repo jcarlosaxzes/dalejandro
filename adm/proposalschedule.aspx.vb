@@ -38,7 +38,7 @@
         End Try
     End Sub
     Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&Tab2=2")
+        Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
     End Sub
 
 End Class
