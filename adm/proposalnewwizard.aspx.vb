@@ -318,7 +318,7 @@ Public Class proposalnewwizard
 
     Private Sub RadWizard1_FinishButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.FinishButtonClick
         If lblProposalId.Text > 0 Then
-            Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblProposalId.Text)
+            Response.Redirect(LocalAPI.GetSharedLink_URL(11001, lblProposalId.Text) & "&backpage=proposals")
         End If
 
     End Sub

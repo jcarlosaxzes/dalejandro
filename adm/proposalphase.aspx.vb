@@ -59,7 +59,7 @@
             Case "pro_phases"
                 Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
             Case Else
-                Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&TabPhase=1")
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
         End Select
 
     End Sub

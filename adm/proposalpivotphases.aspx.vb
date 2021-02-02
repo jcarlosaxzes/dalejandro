@@ -17,6 +17,6 @@
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect("~/adm/proposal.aspx?proposalId=" & lblproposalId.Text & "&TabPhase=1")
+        Response.Redirect(LocalAPI.GetSharedLink_URL(11006, lblproposalId.Text))
     End Sub
 End Class

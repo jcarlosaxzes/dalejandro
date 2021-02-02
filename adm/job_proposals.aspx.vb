@@ -46,7 +46,8 @@ Public Class job_proposals
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjGuid=" & ObjGuid
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
             Case "EditProposal"
-                Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument & "&backpage=job_proposals&HideMasterMenu=1")
+                'Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument & "&backpage=job_proposals&HideMasterMenu=1")
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11006, e.CommandArgument) & "&backpage=job_proposals")
             Case "Delete"
         End Select
     End Sub
