@@ -196,6 +196,19 @@ Public Class LocalAPI
         Return DateAdd(DateInterval.Hour, -5, Date.Now)
     End Function
 
+    Public Shared Function UnixTimeStampToDateTime(unixTimeStamp As Int64) As DateTime
+        Dim dtDateTime As System.DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc)
+        dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime()
+        Return dtDateTime
+    End Function
+
+    Public Shared Function DateTimeToUnixTimeStamp(sdate As DateTime) As Int64
+        Dim epoch As DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()
+        Dim span As TimeSpan = (sdate.ToLocalTime() - epoch)
+        Return CType(span.TotalSeconds, Int64)
+    End Function
+
+
     Public Shared Function sys_VersionAndRevision(versionId As Integer) As String
         Dim sVerName As String = sys_VersionName(versionId)
         Return "Version: <b>" & sVerName & "</b>, Revision: 5.0.0 (Jan 15, 2020). Azure deployment"

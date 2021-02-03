@@ -289,10 +289,13 @@ Public Class employeenewdowntime
     End Sub
 
     Private Sub cboType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboType.SelectedIndexChanged
+
+        txtNotes.Text = cboType.SelectedItem.Text
+
         If cboType.SelectedValue = 7 Then
             txtMiscellaneousHours.Text = "8"
             lblNotes.Visible = True
-            txtNotes.Text = "Vacation"
+
 
         Else
             txtMiscellaneousHours.Text = "1"
@@ -307,6 +310,10 @@ Public Class employeenewdowntime
                 lblAprovedNote.Visible = True
                 btnOkNewMiscellaneousTime.Text = "Request Time"
                 PanelDateRagePicker.Visible = True
+                RadDatePickerFrom.Enabled = False
+                RadDatePickerTo.Enabled = False
+                lbTotlaDays.Visible = True
+
             Case Else
                 txtDateFrom.Text = "Date:"
                 txtDateTo.Visible = False
@@ -314,6 +321,10 @@ Public Class employeenewdowntime
                 lblAprovedNote.Visible = False
                 btnOkNewMiscellaneousTime.Text = "Add Time"
                 PanelDateRagePicker.Visible = False
+                RadDatePickerFrom.Enabled = True
+                RadDatePickerTo.Enabled = True
+                lbTotlaDays.Visible = True
+
 
 
         End Select
