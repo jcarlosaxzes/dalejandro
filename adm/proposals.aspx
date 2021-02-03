@@ -231,7 +231,7 @@
                         HeaderStyle-Width="130px" FooterStyle-HorizontalAlign="Center" Aggregate="Count" FooterAggregateFormatString="{0:N0}">
                         <ItemTemplate>
                             <asp:LinkButton ID="btnEditProp" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Proposal"
-                                CommandName="EditProposal">
+                                CommandName="Fees & Scope">
                                 <%# Eval("ProposalNumber")%>
                             </asp:LinkButton>
 
@@ -249,15 +249,8 @@
                                     <table class="table-borderless" style="width: 200px; font-size: medium">
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="View/Edit Proposal" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
-                                                    <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Proposal (Form Page)
-                                                </asp:LinkButton>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="EditWizard" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
-                                                      <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;View/Edit Proposal (Wizard Page)
+                                                <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="Basic Information" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                    <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Basic Information
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
@@ -267,16 +260,35 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>
+                                                <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="Attachments" UseSubmitBehavior="false" CssClass="dropdown-item">
+                                                                <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>&nbsp;&nbsp;Attachments
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td style="padding-left: 24px">
-                                                <asp:LinkButton ID="btnEditJob2" runat="server" CommandArgument='<%# Eval("JobId") %>' CommandName="EditJob" Visible='<%# iif(Eval("JobId") = 0, False, True) %>' CssClass="dropdown-item">
-                                                    View/Edit Job
+                                                <asp:LinkButton ID="LinkButton2" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="Notes" UseSubmitBehavior="false" CssClass="dropdown-item">
+                                                                Proposal Notes
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="btnUploadFiles" runat="server" CommandArgument='<%# Eval("Id")%>' CommandName="UploadFiles" UseSubmitBehavior="false" CssClass="dropdown-item">
-                                                                <span aria-hidden="true" class="fas fa-cloud-upload-alt"></span>&nbsp;&nbsp;Upload Files
+                                                <div class="dropdown-divider"></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="EditWizard" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                      <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Proposal Wizard Page
+                                                </asp:LinkButton>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-left: 24px">
+                                                <asp:LinkButton ID="btnEditJob2" runat="server" CommandArgument='<%# Eval("JobId") %>' CommandName="EditJob" Visible='<%# iif(Eval("JobId") = 0, False, True) %>' CssClass="dropdown-item">
+                                                    View/Edit Job
                                                 </asp:LinkButton>
                                             </td>
                                         </tr>

@@ -42,11 +42,8 @@
         <span class="pasconcept-pagetitle">View/Edit Proposal</span>
 
         <span style="float: right; vertical-align: middle;">
-            <asp:LinkButton ID="btnUpdate1" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
+            <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" ValidationGroup="Proposal" UseSubmitBehavior="false" ToolTip="Update Proposal">
                              Update
-            </asp:LinkButton>
-            <asp:LinkButton ID="btnDeleteProposal" runat="server" CssClass="btn btn-danger btn-lg" UseSubmitBehavior="false" ToolTip="Delete" CausesValidation="false">
-                             Delete
             </asp:LinkButton>
             <asp:LinkButton ID="btnActions" runat="server" CssClass="btn btn-secondary btn-lg" UseSubmitBehavior="false" ToolTip="Other actions">
                                 <i class="fas fa-cog"></i>
@@ -60,37 +57,213 @@
     </div>
 
     <div class="pas-container" style="width: 100%">
-        <asp:FormView ID="FormViewProp1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSourceProp1" Width="100%" EnableViewState="false">
+        <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DefaultMode="Edit" DataSourceID="SqlDataSourceProp1" Width="100%" EnableViewState="false">
+            <ItemTemplate>
+                <div style="font-size:22px !important">
+                    <table class="table-sm" style="width: 100%;">
+                        <tr>
+                            <td style="text-align: right;font-size:large; width: 200px;font-size:large">Number:
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td style="width: 125px; font-weight: bold">
+                                            <%# Eval("ProposalNumber")%>
+                                        </td>
+                                        <td style="width: 75px; text-align: right;font-size:large">Job:</td>
+                                        <td>
+                                            <asp:LinkButton ID="btnViewJob" runat="server" Visible='<%# Len(Eval("JobCode")) > 0 %>' UseSubmitBehavior="false" CausesValidation="false" CommandName="ViewJob" CommandArgument='<%# Eval("JobId")%>'
+                                                ToolTip="View Job of Proposal" Text='<%#  Eval("JobCode")%>'></asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td style="text-align: right;font-size:large; width: 200px;font-size:large">Date Created:
+                            </td>
+                            <td>
+                                <%# Eval("Date", "{0:d}")%>
+                            </td>
+
+
+
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Name:
+                            </td>
+                            <td style="font-weight: bold">
+                                <%# Eval("ProjectName") %>
+                            </td>
+
+                            <td style="text-align: right;font-size:large">Status:
+                            </td>
+                            <td style="font-weight: bold">
+                                <%# Eval("Status")%>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Client:
+                            </td>
+                            <td style="font-weight: bold">
+                                <%# Eval("ClientName") %>
+                            </td>
+                            <td style="text-align: right;font-size:large">Quantity:
+                            </td>
+                            <td>
+                                <%# Eval("Unit")%>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Template:
+                            </td>
+                            <td>
+                                <%# Eval("Template")%>
+                            </td>
+
+
+
+                            <td style="text-align: right;font-size:large">Units:
+                            </td>
+                            <td>
+                                <%# Eval("Units")%>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Job Type:
+                            </td>
+                            <td>
+                                <%# Eval("JobType")%>
+                            </td>
+
+
+
+                            <td style="text-align: right;font-size:large">Sector:
+                            </td>
+                            <td>
+                                <%# Eval("Sector")%>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Owner Name:
+                            </td>
+                            <td>
+                                <%# Eval("Owner")%>
+                            </td>
+
+
+
+                            <td style="text-align: right;font-size:large">Use & Occupancy:
+                            </td>
+                            <td>
+                                <%# Eval("PrjUse")%>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Location:
+                            </td>
+                            <td>
+                                <%# Eval("ProjectLocation")%>
+                            </td>
+                            <td style="text-align: right;font-size:large">Client Deadline:
+                            </td>
+                            <td>
+                                <%# Eval("Deadline")%>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Department:
+                            </td>
+                            <td>
+                                <%# Eval("Department")%>
+                            </td>
+                            <td style="text-align: right;font-size:large">Estimated Working Days:
+                            </td>
+                            <td>
+                                <%# Eval("Workdays")%>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Proposal by:
+                            </td>
+                            <td>
+                                <%# Eval("ProjectManager")%>
+
+                            </td>
+
+                            <td style="text-align: right;font-size:large">Prepared by:
+                            </td>
+                            <td>
+                                <%# Eval("EmployeeAproved")%>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large">Retainer:
+                            </td>
+                            <td>
+                                <telerik:RadCheckBox ID="chkRetainer" runat="server" Checked='<%# Eval("Retainer")%>' Enabled="false"
+                                    Text="On acceptance, the first invoice will be emitted"
+                                    ToolTip="If selected, upon the clients acceptance of the proposal, the first invoice of the payment schedule will be sent to the client"
+                                    AutoPostBack="false">
+                                </telerik:RadCheckBox>
+
+                            </td>
+
+                            <td style="text-align: right;font-size:large">Share with Client:</td>
+                            <td>
+                                <telerik:RadCheckBox ID="chkSharePublicLinks" runat="server" Text="Public Upload Documents" Checked='<%# Eval("SharePublicLinks")%>' Enabled="false"
+                                    ToolTip="Include file links in Proposal Acceptance" AutoPostBack="false">
+                                </telerik:RadCheckBox>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: right;font-size:large"></td>
+                            <td></td>
+                            <td style="text-align: right;font-size:large">Lump Sum:</td>
+                            <td>
+                                <telerik:RadCheckBox ID="chkLumpSum" runat="server" Text="Detail Totals" Checked='<%# Eval("LumpSum")%>' Enabled="false"
+                                    ToolTip="Hide details Totals for Task in Client View" AutoPostBack="false">
+                                </telerik:RadCheckBox>
+                            </td>
+
+                        </tr>
+
+                    </table>
+                </div>
+            </ItemTemplate>
             <EditItemTemplate>
                 <table class="table-sm" style="width: 100%;">
 
                     <tr>
-                        <td style="text-align: right; width: 180px">Number:
+                        <td style="text-align: right; width: 200px">Number:
                         </td>
-                        <td style="width: 450px">
-                            <table>
-                                <tr>
-                                    <td style="width: 125px">
-                                        <telerik:RadTextBox ID="txtProposalNumber" runat="server" Text='<%# Eval("ProposalNumber")%>' ReadOnly="true" Width="100%" Font-Bold="true" BackColor="#f1f1f1"></telerik:RadTextBox>
-                                    </td>
-                                    <td style="width: 75px; text-align: right">Job:</td>
-                                    <td>
-                                        <asp:LinkButton ID="btnViewJob" runat="server" Visible='<%# Len(Eval("JobCode")) > 0 %>' CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false" CommandName="ViewJob" CommandArgument='<%# Eval("JobId")%>'
-                                            ToolTip="View Job of Proposal" Text='<%#  Eval("JobCode")%>'></asp:LinkButton>
-                                    </td>
-                                </tr>
-                            </table>
+                        <td>
+                            <telerik:RadTextBox ID="txtProposalNumber" runat="server" Text='<%# Eval("ProposalNumber")%>' ReadOnly="true" Width="150px" Font-Bold="true" BackColor="#f1f1f1"></telerik:RadTextBox>
                         </td>
-
-                        <td style="text-align: right; width: 250px">Date Created:
+                        <td style="text-align: right; width: 200px">Date Created:
                         </td>
                         <td>
                             <telerik:RadTextBox ID="RadTextBox19" runat="server" Text='<%# Eval("Date", "{0:d}")%>' ReadOnly="true" Width="200px" Font-Bold="true" BackColor="#f1f1f1">
                             </telerik:RadTextBox>
                         </td>
-
-
-
                     </tr>
 
                     <tr>
@@ -155,7 +328,7 @@
 
 
 
-                        <td style="text-align: right">Units
+                        <td style="text-align: right">Units:
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id"
@@ -199,7 +372,7 @@
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboSector" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceProjectSector" DataTextField="Name" DataValueField="Id"
-                                SelectedValue='<%# Bind("ProjectSector")%>' Width="200px" MarkFirstMatch="True" Filter="Contains" Height="400px">
+                                SelectedValue='<%# Bind("ProjectSector")%>' Width="100%" MarkFirstMatch="True" Filter="Contains" Height="400px">
                                 <Items>
                                     <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Not Defined...)" Value="0" />
                                 </Items>
@@ -230,7 +403,7 @@
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboUse" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceProjectUse" DataTextField="Name" DataValueField="Id"
-                                SelectedValue='<%# Bind("ProjectUse")%>' Width="200px" MarkFirstMatch="True" Filter="Contains" Height="400px">
+                                SelectedValue='<%# Bind("ProjectUse")%>' Width="100%" MarkFirstMatch="True" Filter="Contains" Height="400px">
                                 <Items>
                                     <telerik:RadComboBoxItem runat="server" Selected="True" Text="(Not Defined...)" Value="0" />
                                 </Items>
@@ -314,7 +487,7 @@
                         <td>
                             <telerik:RadComboBox ID="cboPreparedBy" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceEmployee"
                                 DataTextField="Name" DataValueField="Id" Height="400px"
-                                SelectedValue='<%# Bind("EmployeeAprovedId")%>' Width="350px" MarkFirstMatch="True" Filter="Contains">
+                                SelectedValue='<%# Bind("EmployeeAprovedId")%>' Width="100%" MarkFirstMatch="True" Filter="Contains">
                                 <Items>
                                     <telerik:RadComboBoxItem runat="server" Text="(Not Defined...)" Value="0" />
                                 </Items>
@@ -387,34 +560,6 @@
         </asp:FormView>
     </div>
 
-
-    <%--RadToolTips Dialogs--%>
-    <telerik:RadToolTip ID="RadToolTipDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h2 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Delete Proposal
-            </span>
-        </h2>
-        <table class="table-sm" style="width: 600px">
-            <tr>
-                <td>Are you sure you want to delete the active Proposal?
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <asp:LinkButton ID="btnConfirmDelete" runat="server" CssClass="btn btn-danger" Width="150px" UseSubmitBehavior="false">
-                             Delete Proposal
-                    </asp:LinkButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                   
-                    <asp:LinkButton ID="btnCancelDelete" runat="server" CssClass="btn btn-secondary" Width="150px" UseSubmitBehavior="false">
-                             Cancel
-                    </asp:LinkButton>
-                </td>
-            </tr>
-        </table>
-    </telerik:RadToolTip>
-
-
     <telerik:RadToolTip ID="RadToolTipBulkEdit" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
         <table class="table table-bordered" style="width: 500px">
@@ -450,32 +595,6 @@
             </tr>
         </table>
     </telerik:RadToolTip>
-
-    <telerik:RadToolTip ID="RadToolTipBulkDelete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
-        <h3 style="margin: 0; text-align: center; color: white; width: 600px">
-            <span class="navbar navbar-expand-md bg-dark text-white">Delete Files
-            </span>
-        </h3>
-        <table class="table-sm" style="width: 600px">
-            <tr>
-                <td>Are you sure you want to delete selected Files?
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <asp:LinkButton ID="btnConfirmDeleteFiles" runat="server" CssClass="btn btn-danger" Width="150px" UseSubmitBehavior="false">
-                             Delete 
-                    </asp:LinkButton>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                   
-                    <asp:LinkButton ID="btnCancelDeleteFiles" runat="server" CssClass="btn btn-secondary" Width="150px" UseSubmitBehavior="false">
-                             Cancel
-                    </asp:LinkButton>
-                </td>
-            </tr>
-        </table>
-    </telerik:RadToolTip>
-
 
     <telerik:RadToolTip ID="RadToolTipActions" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 

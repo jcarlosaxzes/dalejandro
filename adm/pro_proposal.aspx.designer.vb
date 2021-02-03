@@ -23,22 +23,13 @@ Partial Public Class pro_proposal
     Protected WithEvents RadCodeBlock As Global.Telerik.Web.UI.RadCodeBlock
 
     '''<summary>
-    '''btnUpdate1 control.
+    '''btnUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnUpdate1 As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnDeleteProposal control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnDeleteProposal As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnUpdate As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''btnActions control.
@@ -59,40 +50,13 @@ Partial Public Class pro_proposal
     Protected WithEvents ValidationSummary1 As Global.System.Web.UI.WebControls.ValidationSummary
 
     '''<summary>
-    '''FormViewProp1 control.
+    '''FormView1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents FormViewProp1 As Global.System.Web.UI.WebControls.FormView
-
-    '''<summary>
-    '''RadToolTipDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadToolTipDelete As Global.Telerik.Web.UI.RadToolTip
-
-    '''<summary>
-    '''btnConfirmDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnConfirmDelete As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnCancelDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancelDelete As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
     '''RadToolTipBulkEdit control.
@@ -138,33 +102,6 @@ Partial Public Class pro_proposal
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCance As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''RadToolTipBulkDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadToolTipBulkDelete As Global.Telerik.Web.UI.RadToolTip
-
-    '''<summary>
-    '''btnConfirmDeleteFiles control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnConfirmDeleteFiles As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnCancelDeleteFiles control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCancelDeleteFiles As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''RadToolTipActions control.

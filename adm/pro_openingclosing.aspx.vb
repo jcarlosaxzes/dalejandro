@@ -32,8 +32,10 @@
         lblOriginalStatus.Text = LocalAPI.GetProposalData(lblProposalId.Text, "statusId")
         If lblOriginalStatus.Text > 1 Then
             btnUpdate.Visible = False
+            FormView1.DefaultMode = FormViewMode.ReadOnly
             Return True
         Else
+            FormView1.DefaultMode = FormViewMode.Edit
             Return False
         End If
     End Function

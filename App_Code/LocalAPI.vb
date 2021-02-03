@@ -14097,7 +14097,7 @@ Public Class LocalAPI
             sMsg.Append("<br />")
             sMsg.Append("<br />")
 
-            sMsg.Append("<a href=" & """" & LocalAPI.GetHostAppSite() & "/adm/proposal.aspx?proposalId=" & proposalId.ToString & """" & ">[ProposalNumber], [ProjectName]</a>")
+            sMsg.Append("<a href=" & """" & LocalAPI.GetSharedLink_URL(11001, proposalId.ToString) & """" & ">[ProposalNumber], [ProjectName]</a>")
 
             sMsg.Append("<br />")
             sMsg.Append("<br />")

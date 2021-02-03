@@ -237,8 +237,8 @@
                                     <div class="text-muted">
                                         Emitted Date: <span><%# Eval("Date", "{0:d}") %></span>
                                     </div>
-                                    <div class="text-muted">
-                                        Proposal # <span><%# Eval("ProposalNumber") %></span>
+                                    <div>
+                                        Proposal # <span><b><%# Eval("ProposalNumber") %></b></span>
                                     </div>
                                     <div class="text-muted">
                                         Proposal by: <span><%# Eval("Proposalby") %></span>

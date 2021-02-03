@@ -43,16 +43,14 @@
 
     Private Sub Back(proposalId As Integer)
         Select Case Session("proposalsaveastemplatebackpage")
-            Case "pro_proposal"
+            Case "pro_proposal", "proposal"
                 Response.Redirect(LocalAPI.GetSharedLink_URL(11001, proposalId))
-            Case "proposal"
-                Response.Redirect("~/adm/proposal.aspx?proposalId=" & proposalId)
             Case "proposalnewwizard"
                 Response.Redirect("~/adm/proposalnewwizard.aspx?proposalId=" & proposalId)
             Case "proposals"
                 Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
             Case Else
-                Response.Redirect("~/adm/proposal.aspx?proposalId=" & proposalId)
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, proposalId))
         End Select
     End Sub
 End Class

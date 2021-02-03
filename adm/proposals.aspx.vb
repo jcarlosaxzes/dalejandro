@@ -114,28 +114,33 @@ Public Class proposals
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
         Select Case e.CommandName
-            Case "EmailPrint"
-                Response.Redirect("~/adm/sendproposal.aspx?ProposalId=" & e.CommandArgument)
 
+
+            ' pro_XXXX pages..................................................................................
+            Case "Fees & Scope"
+                sUrl = LocalAPI.GetSharedLink_URL(11006, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            Case "Basic Information"
+                sUrl = LocalAPI.GetSharedLink_URL(11001, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            Case "Attachments"
+                sUrl = LocalAPI.GetSharedLink_URL(11005, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            Case "Notes"
+                sUrl = LocalAPI.GetSharedLink_URL(11007, e.CommandArgument) & "&backpage=proposals"
+                Response.Redirect(sUrl)
+
+            ' others options
             Case "GetSharedLink"
                 Dim ObjGuid As String = LocalAPI.GetProposalProperty(e.CommandArgument, "guid")
                 sUrl = "~/adm/sharelink.aspx?ObjType=11&ObjGuid=" & ObjGuid
                 CreateRadWindows(e.CommandName, sUrl, 520, 400, False)
 
-            ' from 01/22/2021..........
-            Case "View/Edit Proposal"
-                sUrl = LocalAPI.GetSharedLink_URL(11006, e.CommandArgument) & "&backpage=proposals"
-                Response.Redirect(sUrl)
-
-            ' obsoleto!!!!!!!!!!!!!!
-            Case "EditProposal"
-                Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument)
-
-            Case "EditWizard"
-                Response.Redirect("~/adm/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
-
-            Case "UploadFiles"
-                Response.Redirect("~/adm/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument & "&AttachmentsTab=1")
+            Case "EmailPrint"
+                Response.Redirect("~/adm/sendproposal.aspx?ProposalId=" & e.CommandArgument)
 
             Case "EditJob"
                 sUrl = LocalAPI.GetSharedLink_URL(8001, e.CommandArgument) & "&backpage=proposals"
@@ -150,6 +155,13 @@ Public Class proposals
 
             Case "SaveProposalAsTemplate"
                 Response.Redirect($"~/adm/proposal_save_as_template.aspx?ProposalId={e.CommandArgument}&backpage=proposals")
+
+            ' obsoleto!!!!!!!!!!!!!!
+            Case "EditProposal"
+                Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument)
+
+            Case "EditWizard"
+                Response.Redirect("~/adm/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
         End Select
     End Sub
 

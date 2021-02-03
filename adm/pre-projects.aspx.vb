@@ -22,7 +22,7 @@ Public Class pre_projects
                 CreateRadWindows(e.CommandName, sUrl, 800, 610, False, True)
 
             Case "EditProposal"
-                Response.Redirect("~/adm/proposal.aspx?proposalId=" & e.CommandArgument)
+                Response.Redirect(LocalAPI.GetSharedLink_URL(11001, e.CommandArgument) & "&backpage=job_proposals")
 
             Case "NewProposal"
                 Response.Redirect("~/ADM/ProposalNewWizard.aspx?preprojectId=" & e.CommandArgument)

@@ -142,7 +142,7 @@
                         <telerik:RadNavigation ID="RadNavigationProposal" runat="server" Style="z-index: 700" Width="100%" MenuButtonPosition="Right" Skin="Material">
                             <Nodes>
                                 <telerik:NavigationNode ID="NavigationNodepro_proposal"
-                                    Text="Basic Info"
+                                    Text="Basic Information"
                                     NavigateUrl='<%# LocalAPI.GetSharedLink_URL(11001, lblProposalId.Text)%>'>
                                 </telerik:NavigationNode>
 
