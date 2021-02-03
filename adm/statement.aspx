@@ -29,6 +29,7 @@
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerTo" />
                     <telerik:AjaxUpdatedControl ControlID="RadDatePickerFrom" />
                     <telerik:AjaxUpdatedControl ControlID="cboClients" />
+                    <telerik:AjaxUpdatedControl ControlID="cboStatus" />
                     <telerik:AjaxUpdatedControl ControlID="txtFind" />
                     <telerik:AjaxUpdatedControl ControlID="RadWindowManager1" />
                     <telerik:AjaxUpdatedControl ControlID="FormViewViewSummary" />
@@ -84,12 +85,12 @@
                         </telerik:RadComboBox>
                     </td>
                     <td style="width: 250px">
-                        <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" MarkFirstMatch="True">
+                         <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" CheckBoxes="true" EnableCheckAllItemsCheckBox="true" >
+                            <Localization AllItemsCheckedString="All status Checked" CheckAllString="Check All..." ItemsCheckedString="status checked"></Localization>
                             <Items>
-                                <telerik:RadComboBoxItem runat="server" Text="Pending Balance" Value="0" Selected="true" />
-                                <telerik:RadComboBoxItem runat="server" Text="Not Yet Emitted" Value="1" />
-                                <telerik:RadComboBoxItem runat="server" Text="Collected" Value="2" />
-                                <telerik:RadComboBoxItem runat="server" Text="(All Statements...)" Value="-1" />
+                                <telerik:RadComboBoxItem runat="server" Text="Pending Balance" Value="0" Checked="true" />
+                                <telerik:RadComboBoxItem runat="server" Text="Not Yet Emitted" Value="1" Checked="true"/>
+                                <telerik:RadComboBoxItem runat="server" Text="Collected" Value="2" Checked="false"/>
                             </Items>
                         </telerik:RadComboBox>
                     </td>
@@ -601,7 +602,7 @@
     </telerik:RadWindowManager>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         UpdateCommand="Statement_v20_UPDATE" UpdateCommandType="StoredProcedure"
-        SelectCommand="Statements_SELECT" SelectCommandType="StoredProcedure"
+        SelectCommand="Statements_v21_SELECT" SelectCommandType="StoredProcedure"
         DeleteCommand="STATEMENT_DELETE"
         InsertCommand="Statement_v20_INSERT" InsertCommandType="StoredProcedure"
         DeleteCommandType="StoredProcedure">
@@ -620,7 +621,7 @@
             <asp:ControlParameter ControlID="RadDatePickerFrom" Name="DateFrom" PropertyName="SelectedDate" Type="DateTime" DefaultValue="" />
             <asp:ControlParameter ControlID="RadDatePickerTo" Name="DateTo" PropertyName="SelectedDate" Type="DateTime" />
             <asp:ControlParameter ControlID="cboClients" Name="Client" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboStatus" Name="Status" PropertyName="SelectedValue" Type="Int32" />
+            <asp:Parameter  Name="Status" Type="String"  />
             <asp:ControlParameter ControlID="cboReconcile" Name="ReconciledId" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="txtFind" ConvertEmptyStringToNull="False" Name="Find" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"

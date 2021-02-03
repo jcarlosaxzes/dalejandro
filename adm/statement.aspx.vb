@@ -180,7 +180,19 @@ Public Class statement
     End Sub
 
     Private Sub SqlDataSource1_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSource1.Selecting
-        Dim e1 As String = e.Command.Parameters(0).Value
+        Dim statusList As String
+        Dim collection As IList(Of RadComboBoxItem) = cboStatus.CheckedItems
+        If (collection.Count <> 0) Then
+            For Each item As RadComboBoxItem In collection
+                statusList = statusList + item.Value + ","
+            Next
+            ' Quitar la ultima coma
+            statusList = Left(statusList, Len(statusList) - 1)
+        Else
+            statusList = ""
+        End If
+
+        e.Command.Parameters("@Status").Value = statusList
 
     End Sub
 
@@ -203,5 +215,9 @@ Public Class statement
             LocalAPI.sys_log_Nuevo(Master.UserEmail, LocalAPI.sys_log_AccionENUM.DeleteStatement, lblCompanyId.Text, "Delete Statement: " & Notes)
         Catch ex As Exception
         End Try
+    End Sub
+
+    Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        RadGrid1.DataBind()
     End Sub
 End Class

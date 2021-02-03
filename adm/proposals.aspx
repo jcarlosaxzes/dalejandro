@@ -215,10 +215,10 @@
             </ItemTemplate>
         </asp:FormView>
     </div>
-    <div>
+    <div style="margin-top:5px">
         <telerik:RadGrid ID="RadGrid1" runat="server" DataSourceID="SqlDataSourceProp" AutoGenerateColumns="False" AllowAutomaticDeletes="True" AllowSorting="True"
             PageSize="50" AllowPaging="true" 
-            Height="850px" RenderMode="Lightweight"
+            Height="850px" RenderMode="Lightweight" 
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <ClientSettings>
                 <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
@@ -252,11 +252,6 @@
                                                 <asp:LinkButton ID="btnEdit2" runat="server" UseSubmitBehavior="false" CommandName="Basic Information" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
                                                     <i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Basic Information
                                                 </asp:LinkButton>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="dropdown-divider"></div>
                                             </td>
                                         </tr>
                                         <tr>
