@@ -16,8 +16,6 @@ Public Class employees
             lblEmployee.Text = Master.UserEmail
             lblCompanyId.Text = Session("companyId")
             cboStatus.DataBind()
-            RadSchedulerVacation.SelectedDate = CDate("01/01/" & Date.Today.Year)
-            RadSchedulerLive.SelectedDate = CDate("01/01/" & Date.Today.Year)
 
             ActivateTechnicalSupportButton()
 
@@ -84,14 +82,6 @@ Public Class employees
         RadToolTipDelete.Visible = False
     End Sub
 
-
-    Protected Sub cboYear_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboYear.SelectedIndexChanged
-        RadSchedulerVacation.SelectedDate = CDate("01/01/" & cboYear.SelectedValue)
-    End Sub
-
-    Protected Sub cboYear2_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboYear2.SelectedIndexChanged
-        RadSchedulerLive.SelectedDate = CDate("01/01/" & cboYear2.SelectedValue)
-    End Sub
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
         Dim sUrl As String = ""
@@ -217,4 +207,41 @@ Public Class employees
     Protected Sub CheckBoxRequired_ServerValidate(sender As Object, e As ServerValidateEventArgs)
         e.IsValid = chkAuthorizeTS.Checked
     End Sub
+#Region "Vacations"
+    Private Sub RadScheduler1_AppointmentDataBound(sender As Object, e As SchedulerEventArgs) Handles RadScheduler1.AppointmentDataBound
+        Select Case e.Appointment.Description
+            Case "Vacation"
+                e.Appointment.CssClass = "rsCategoryPink"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+
+            Case "Holiday"
+                e.Appointment.CssClass = "rsCategoryGreen"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+        End Select
+    End Sub
+
+    Private Sub RadScheduler1_NavigationComplete(sender As Object, e As SchedulerNavigationCompleteEventArgs) Handles RadScheduler1.NavigationComplete
+        Select Case e.Command
+            Case SchedulerNavigationCommand.SwitchToSelectedDay And RadScheduler1.SelectedView = SchedulerViewType.DayView
+                RadScheduler1.SelectedView = SchedulerViewType.WeekView
+        End Select
+    End Sub
+
+#End Region
+
+#Region "Hiring Timeline"
+    Protected Sub TimelineOrders_ItemDataBound(ByVal sender As Object, ByVal e As RadTimelineItemEventArgs)
+    End Sub
+
+    Private Sub RadTimelineHiring_ItemDataBound(sender As Object, e As RadTimelineItemEventArgs) Handles RadTimelineHiring.ItemDataBound
+        Dim dataItem = TryCast(e.Item.DataItem, DataRowView)
+        Dim SrcPhoto = dataItem("SrcPhoto").ToString()
+        If String.IsNullOrEmpty(SrcPhoto) Then
+            SrcPhoto = "../Images/Employees/nophoto.jpg"
+        End If
+        e.Item.Images.Add(New TimelineItemImage() With {.Src = SrcPhoto})
+    End Sub
+#End Region
 End Class

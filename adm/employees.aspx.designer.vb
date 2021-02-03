@@ -149,22 +149,13 @@ Partial Public Class employees
     Protected WithEvents RadWizardStep2 As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
-    '''cboYear control.
+    '''RadScheduler1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboYear As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''RadSchedulerVacation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadSchedulerVacation As Global.Telerik.Web.UI.RadScheduler
+    Protected WithEvents RadScheduler1 As Global.Telerik.Web.UI.RadScheduler
 
     '''<summary>
     '''RadWizardStep3 control.
@@ -176,22 +167,13 @@ Partial Public Class employees
     Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
 
     '''<summary>
-    '''cboYear2 control.
+    '''RadTimelineHiring control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboYear2 As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''RadSchedulerLive control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadSchedulerLive As Global.Telerik.Web.UI.RadScheduler
+    Protected WithEvents RadTimelineHiring As Global.Telerik.Web.UI.RadTimeline
 
     '''<summary>
     '''RadToolTipDelete control.
@@ -284,22 +266,13 @@ Partial Public Class employees
     Protected WithEvents SqlDataSourceEmployeeVacation As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceEmployeeLive control.
+    '''SqlDataSourceEmployeesHiringTimeLine control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceEmployeeLive As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceYear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceYear As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceEmployeesHiringTimeLine As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.
