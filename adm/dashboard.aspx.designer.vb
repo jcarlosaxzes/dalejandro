@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class dashboard
-    
+
     '''<summary>
     '''RadHtmlChart1 control.
     '''</summary>
@@ -21,16 +21,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChart1 As Global.Telerik.Web.UI.RadHtmlChart
-    
-    '''<summary>
-    '''RadHtmlChartBillCollected control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadHtmlChartBillCollected As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadHtmlChartSector control.
     '''</summary>
@@ -39,7 +30,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartSector As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadHtmlChartUse control.
     '''</summary>
@@ -48,7 +39,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartUse As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadHtmlChartClientsByType control.
     '''</summary>
@@ -57,7 +48,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartClientsByType As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
     '''RadHtmlChartClientsByStatus control.
     '''</summary>
@@ -66,16 +57,16 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadHtmlChartClientsByStatus As Global.Telerik.Web.UI.RadHtmlChart
-    
+
     '''<summary>
-    '''SqlDataSourcePropJobs control.
+    '''SqlDataSourceCompanyHistory control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourcePropJobs As Global.System.Web.UI.WebControls.SqlDataSource
-    
+    Protected WithEvents SqlDataSourceCompanyHistory As Global.System.Web.UI.WebControls.SqlDataSource
+
     '''<summary>
     '''SqlDataSourceBillCollected control.
     '''</summary>
@@ -84,7 +75,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceBillCollected As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceJobsBySector control.
     '''</summary>
@@ -93,7 +84,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobsBySector As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceJobsByUse control.
     '''</summary>
@@ -102,7 +93,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceJobsByUse As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceClientsByType control.
     '''</summary>
@@ -111,7 +102,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClientsByType As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''SqlDataSourceClientsByStatus control.
     '''</summary>
@@ -120,7 +111,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceClientsByStatus As Global.System.Web.UI.WebControls.SqlDataSource
-    
+
     '''<summary>
     '''lblCompanyId control.
     '''</summary>
@@ -129,7 +120,7 @@ Partial Public Class dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Master property.
     '''</summary>
@@ -138,7 +129,7 @@ Partial Public Class dashboard
     '''</remarks>
     Public Shadows ReadOnly Property Master() As pasconcept20.ADM_Main_Responsive
         Get
-            Return CType(MyBase.Master,pasconcept20.ADM_Main_Responsive)
+            Return CType(MyBase.Master, pasconcept20.ADM_Main_Responsive)
         End Get
     End Property
 End Class
