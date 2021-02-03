@@ -34,6 +34,8 @@ Public Class employeenewdowntime
 
                 InitDlg(Date.Today, -1)
 
+                Dim recors = LocalAPI.GetRecordFromQuery($"SELECT Id, Holiday, Description FROM Company_hollidays WHERE ([companyId] = {lblCompanyId.Text}) ORDER BY Holiday DESC")
+
             End If
 
         Catch ex As Exception
