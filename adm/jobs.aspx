@@ -390,7 +390,7 @@
         </table>
     </div>
 
-    <table class="table-sm" style="width: 100%;">
+    <table class="table-sm" style="width: 100%;margin-top:5px">
         <tr>
             <td>
                 <telerik:RadGrid ID="RadGrid1" runat="server" AllowSorting="True" GroupingEnabled="false" AutoGenerateColumns="False" DataSourceID="SqlDataSourceJobs" Width="100%"
@@ -401,7 +401,7 @@
                         <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
                     </ClientSettings>
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceJobs" ShowFooter="True" CommandItemDisplay="None">
-                        <PagerStyle Mode="Slider" AlwaysVisible="false"></PagerStyle>
+                        <PagerStyle Mode="Slider" AlwaysVisible="false" PageSizeControlType="RadComboBox"></PagerStyle>
                         <Columns>
                             <telerik:GridClientSelectColumn ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="40px" UniqueName="ClientSelectColumn" Visible="false">
                             </telerik:GridClientSelectColumn>
