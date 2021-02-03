@@ -11,14 +11,6 @@
             Master.Help = "http://blog.pasconcept.com/2015/03/dashboard.html"
             lblCompanyId.Text = Session("companyId")
 
-
-            RadHtmlChart1.Navigator.RangeSelector.From = DateAdd(DateInterval.Year, -2, Date.Today)
-            RadHtmlChart1.Navigator.RangeSelector.[To] = Date.Today
-
-            RadHtmlChartBillCollected.Navigator.RangeSelector.From = DateAdd(DateInterval.Year, -1, Date.Today)
-            RadHtmlChartBillCollected.Navigator.RangeSelector.[To] = Date.Today
-
-
         End If
     End Sub
 
