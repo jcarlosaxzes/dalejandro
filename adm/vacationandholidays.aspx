@@ -51,8 +51,8 @@
     <div style="text-align: left">
         <b>Legend: </b>
         <ul>
-            <li><span style="background-color: deeppink; color: white">Vacations</span></li>
-            <li><span style="background-color: green; color: white">Holidays</span></li>
+            <li><span style="background-color: lightpink; color: white">Vacations</span></li>
+            <li><span style="background-color: limegreen; color: white">Holidays</span></li>
         </ul>
 
 
@@ -71,7 +71,8 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="z-index: 50001">
+                    <asp:Panel runat="server"></asp:Panel>
                     <telerik:RadGrid ID="RadGridHoliday" GridLines="None" runat="server" AllowAutomaticDeletes="True"
                         HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
                         AllowAutomaticInserts="True" AllowAutomaticUpdates="True" AllowPaging="True" AutoGenerateColumns="False" DataSourceID="SqlDataSourceHoliday"
@@ -85,11 +86,17 @@
                             <CommandItemSettings AddNewRecordText="Holiday" />
                             <Columns>
                                 <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                    HeaderText="" HeaderStyle-Width="40px">
+                                    HeaderText="" HeaderStyle-Width="50px">
                                 </telerik:GridEditCommandColumn>
-                                <telerik:GridDateTimeColumn DataField="Holiday" HeaderStyle-Width="180px" PickerType="DatePicker" HeaderText="Holiday"
-                                    SortExpression="Holiday" UniqueName="Holiday" DataFormatString="{0:d}">
-                                </telerik:GridDateTimeColumn>
+                                <telerik:GridTemplateColumn DataField="Holiday" HeaderStyle-Width="180px" HeaderText="Holiday" SortExpression="Holiday" UniqueName="Holiday">
+                                    <ItemTemplate>
+                                        <%# Eval("Holiday", "{0:d}") %>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <telerik:RadDatePicker ID="RadDatePickerHoliday" runat="server" DbSelectedDate='<%# Bind("Holiday") %>' ToolTip="Holiday" ZIndex="50001">
+                                        </telerik:RadDatePicker>
+                                    </EditItemTemplate>
+                                </telerik:GridTemplateColumn>
                                 <telerik:GridBoundColumn DataField="Description" HeaderText="Description"
                                     SortExpression="Description" UniqueName="Description">
                                 </telerik:GridBoundColumn>
@@ -98,15 +105,20 @@
                                     CommandName="Delete" Text="Delete" UniqueName="DeleteColumn">
                                 </telerik:GridButtonColumn>
                             </Columns>
+                            <EditFormSettings>
+                                <EditColumn FilterControlAltText="Filter EditCommandColumn1 column" ButtonType="PushButton"
+                                    UniqueName="EditCommandColumn1">
+                                </EditColumn>
+                            </EditFormSettings>
+
                         </MasterTableView>
                     </telerik:RadGrid>
                 </td>
             </tr>
             <tr>
-                <td style="text-align: center">
+                <td style="text-align: right">
                     <br />
-                    <br />
-                    <asp:LinkButton runat="server" ID="btnConfirmActivateTechnicalSupport" CssClass="btn btn-success btn-lg" ValidationGroup="ConfirmActivateTechnicalSupport">
+                    <asp:LinkButton runat="server" ID="btnCloseHoliday" CssClass="btn btn-success btn-lg">
                             Close Holiday
                     </asp:LinkButton>
                 </td>

@@ -68,13 +68,13 @@ Partial Public Class vacationandholidays
     Protected WithEvents RadGridHoliday As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''btnConfirmActivateTechnicalSupport control.
+    '''btnCloseHoliday control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnConfirmActivateTechnicalSupport As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnCloseHoliday As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''SqlDataSourceEmployeeVacation control.

@@ -53,10 +53,10 @@
                 <div>
                     <table class="table-sm" style="width: 100%">
                         <tr>
-                            <td style="width: 100px; text-align: right">Category:
+                            <td style="width: 80px; text-align: right">Category:
                             </td>
-                            <td style="width: 200px; text-align: right">
-                                <telerik:RadComboBox ID="cboType" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name" ZIndex="50001"
+                            <td>
+                                <telerik:RadComboBox ID="cboType" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name"
                                     DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px" AutoPostBack="true">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Selected="False" Text="Select Category..." Value="-1" />
@@ -65,14 +65,16 @@
                             </td>
                             <td style="width: 100px; text-align: right">Time (hrs):
                             </td>
-                            <td>
+                            <td style="width:100px">
                                 <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
                                     MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours for each day"
-                                    Value="1" Width="150px" MaxValue="24" AutoPostBack="false">
+                                    Value="1" Width="90px" MaxValue="24" AutoPostBack="false">
                                     <NumberFormat DecimalDigits="2" />
                                     <IncrementSettings Step="1" />
                                 </telerik:RadNumericTextBox>
-                                &nbsp; &nbsp;
+                                </td> 
+                                <td style="width:32px">
+
                                 <asp:LinkButton ID="btnUpdateHours" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
                                     ToolTip="Calculate Hours" Visible="false">
                                             <i class="fas fa-redo-alt" aria-hidden="true" ></i>
@@ -83,7 +85,7 @@
                             <td style="text-align: right">
                                 <asp:Label ID="txtDateFrom" Text="Date:" runat="server" />
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <telerik:RadDatePicker ID="RadDatePickerFrom" runat="server"
                                     DateFormat="MM/dd/yyyy"
                                     Culture="en-US"
@@ -102,16 +104,16 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align: center;">
+                            <td colspan="5" style="text-align: center;">
                                 <asp:Panel ID="PanelTotlaHOursSelected" runat="server" Visible="false">
                                     <asp:Label ID="lbTotlaDaysHours" Text="Total Days: 0 Total Hours: 0" runat="server" />
                                 </asp:Panel>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="text-align: center;">
+                            <td colspan="5" style="text-align: center;">
                                 <asp:Panel ID="PanelDateRagePicker" runat="server" Visible="false">
-                                    <telerik:RadCalendar RenderMode="Lightweight" ID="RadCalendar1" runat="server" MultiViewColumns="2" AutoPostBack="true"
+                                    <telerik:RadCalendar RenderMode="Lightweight" ID="RadCalendar1" runat="server" MultiViewColumns="2" AutoPostBack="true" Font-Size="Small" CalendarTableStyle-Font-Size="Small"
                                         MultiViewRows="1" RangeSelectionMode="ConsecutiveClicks" EnableViewSelector="true">
                                     </telerik:RadCalendar>
                                 </asp:Panel>
@@ -121,25 +123,26 @@
                         <tr>
                             <td style="text-align: right">Notes:
                             </td>
-                            <td colspan="2">
+                            <td colspan="4">
                                 <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="1" Width="100%"
                                     MaxLength="256">
                                 </telerik:RadTextBox>
                             </td>
-                            <td colspan="1">
-                                <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddNonRecord" CausesValidation="true">
-                            Add Time
-                                </asp:LinkButton>
-                            </td>
                         </tr>
 
                         <tr>
-                            <td colspan="4" style="text-align: center;">
-                                <asp:Label ID="lblNotes" runat="server" Visible="false" Text="Selected date range will automatically exclude Holidays and Weekends." CssClass="badge badge-pill badge-warning"></asp:Label>
+                            <td colspan="2" style="padding-left:10px;font-size:small; font-style:italic">
+                                <asp:Label ID="lblNotes" runat="server" Visible="false" Text="(*) Selected date range will automatically exclude Holidays and Weekends."></asp:Label>
                                 <br />
-                                <asp:Label ID="lblAprovedNote" runat="server" Visible="false" Text="This Request need to be Approved by company managers " CssClass="badge badge-pill badge-warning"></asp:Label>
+                                <asp:Label ID="lblAprovedNote" runat="server" Visible="false" Text="(*) This Request need to be Approved by company managers "></asp:Label>
                                 <br />
                                 <asp:Label ID="dateValidator" ForeColor="Red" Text="Date From must be earlier or equal than end Date To" Visible="false" runat="server"></asp:Label>
+
+                            </td>
+                            <td colspan="3" style="text-align: right;">
+                                <asp:LinkButton ID="btnOkNewMiscellaneousTime" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ValidationGroup="AddNonRecord" CausesValidation="true">
+                                    Add Time
+                                </asp:LinkButton>
 
                             </td>
                         </tr>

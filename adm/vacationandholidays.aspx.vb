@@ -55,5 +55,12 @@ Public Class vacationandholidays
         Response.Redirect("~/adm/employeenewdowntime.aspx?backpage=vacationandholidays&Category=Vacation")
     End Sub
 
+    Private Sub btnCloseHoliday_Click(sender As Object, e As EventArgs) Handles btnCloseHoliday.Click
+        RadScheduler1.DataBind()
+        RadScheduler1.Rebind()
+
+    End Sub
+
+
 #End Region
 End Class
