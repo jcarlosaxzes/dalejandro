@@ -185,15 +185,6 @@ Partial Public Class employeenewdowntime
     Protected WithEvents txtNotes As Global.Telerik.Web.UI.RadTextBox
 
     '''<summary>
-    '''btnOkNewMiscellaneousTime control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnOkNewMiscellaneousTime As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
     '''lblNotes control.
     '''</summary>
     '''<remarks>
@@ -219,6 +210,15 @@ Partial Public Class employeenewdowntime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents dateValidator As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''btnOkNewMiscellaneousTime control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnOkNewMiscellaneousTime As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''vsClient control.

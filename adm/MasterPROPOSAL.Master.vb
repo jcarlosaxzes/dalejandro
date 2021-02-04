@@ -6,9 +6,20 @@ Public Class MasterPROPOSAL
 
     Private Sub MasterPROPOSAL_Init(sender As Object, e As EventArgs) Handles Me.Init
         Try
-
-            lblCompanyId.Text = Session("companyId")
+            ' Para evitar perdida de session....
             lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
+            If Session("companyId") Is Nothing Then
+                Session("companyId") = LocalAPI.GetCompanyDefault(lblEmployeeEmail.Text)
+                Session("LastPage") = ""
+            End If
+
+            lblCompanyId.Text = Val("" & Session("companyId"))
+
+            ' Restore session value
+            If Val(lblCompanyId.Text) = 0 Then
+                RestoreLostVariables()
+            End If
+
             lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
             If Not Request.QueryString("backpage") Is Nothing Then

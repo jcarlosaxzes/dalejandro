@@ -33,7 +33,13 @@ Public Class employeenewdowntime
                     Session("employeenewnptimebackpage") = ""
                 End If
 
-                InitDlg(Date.Today, -1)
+                cboType.DataBind()
+                If Not Request.QueryString("Category") Is Nothing Then
+                    Dim nType As Integer = LocalAPI.GetNonRegularTypesFromName(lblCompanyId.Text, Request.QueryString("Category"))
+                    InitDlg(Date.Today, nType)
+                Else
+                    InitDlg(Date.Today, -1)
+                End If
 
                 Dim recors = LocalAPI.GetRecordFromQuery($"SELECT Id, Holiday, Description FROM Company_hollidays WHERE ([companyId] = {lblCompanyId.Text}) ORDER BY Holiday DESC")
 
@@ -46,21 +52,15 @@ Public Class employeenewdowntime
 
     Private Sub InitDlg(TimeDate As DateTime, nType As Integer)
 
-        ' Init fields
-        If nType > 0 Then
-            cboType.SelectedValue = nType
-        End If
-
-        txtMiscellaneousHours.Text = 1
-
         RadDatePickerFrom.DbSelectedDate = TimeDate
         RadDatePickerTo.DbSelectedDate = TimeDate
 
-        txtNotes.Text = ""
+        If nType > 0 Then
+            cboType.SelectedValue = nType
+            DefaultCategoryValues()
+        End If
 
         ShowSumaryBox()
-
-        'cboType.Focus()
 
     End Sub
 
@@ -99,13 +99,16 @@ Public Class employeenewdowntime
 
     Private Sub BackPage()
         Dim sUrl As String
-        Select Case Session("employeenewtimebackpage")
+        Select Case Session("employeenewnptimebackpage")
 
             Case "activejobsdashboad"
                 Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
 
             Case "time"
                 Response.Redirect("~/adm/time.aspx?restoreFilter=true")
+
+            Case "vacationandholidays"
+                Response.Redirect("~/adm/vacationandholidays.aspx")
 
             Case Else
                 Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
@@ -129,42 +132,40 @@ Public Class employeenewdowntime
 #Region "Add Record"
     Private Sub btnOkNewMiscellaneousTime_Click(sender As Object, e As EventArgs) Handles btnOkNewMiscellaneousTime.Click
         Try
-            If (cboType.SelectedValue = 5 Or cboType.SelectedValue = 6 Or cboType.SelectedValue = 7) And RadDatePickerFrom.DbSelectedDate > RadDatePickerTo.DbSelectedDate Then
-                dateValidator.Visible = True
-                Return
-            Else
-                dateValidator.Visible = False
-            End If
+            'If (cboType.SelectedValue = 5 Or cboType.SelectedValue = 6 Or cboType.SelectedValue = 7) And RadDatePickerFrom.DbSelectedDate > RadDatePickerTo.DbSelectedDate Then
+            '    dateValidator.Visible = True
+            '    Return
+            'Else
+            '    dateValidator.Visible = False
+            'End If
 
             If LocalNewTMiscellaneousTime() Then
-                If (cboType.SelectedValue = 5 Or cboType.SelectedValue = 6 Or cboType.SelectedValue = 7) Then
-                    Master.ErrorMessage("New non-productive time inserted")
-                End If
-                Master.InfoMessage("New non-productive time inserted")
+                Master.InfoMessage("New Time inserted")
                 ''BackPage()
-                SqlDataSourceEmployeeDailyTimeWorked.DataBind()
-                RadScheduler1.DataBind()
-                RadScheduler1.Rebind()
-                ShowSumaryBox()
+                'SqlDataSourceEmployeeDailyTimeWorked.DataBind()
+                'RadScheduler1.DataBind()
+                'RadScheduler1.Rebind()
+                'ShowSumaryBox()
             End If
 
-            cboType.SelectedValue = -1
-            txtMiscellaneousHours.Text = "1"
-            RadCalendar1.SelectedDates.Clear()
-            lbTotlaDaysHours.Text = "Total Work Days: 0 Total Hours: 0"
-            lbTotlaDaysHours.ForeColor = Drawing.Color.Black
-            txtNotes.Text = ""
-            RadDatePickerFrom.Visible = True
-            btnOkNewMiscellaneousTime.Text = "Add Time"
-            RadDatePickerFrom.Enabled = True
-            RadDatePickerTo.Enabled = True
-            txtDateFrom.Visible = True
-            PanelTotlaHOursSelected.Visible = False
-            PanelDateRagePicker.Visible = False
-            lblAprovedNote.Visible = False
-            btnUpdateHours.Visible = False
-            lblNotes.Visible = False
+            'cboType.SelectedValue = -1
+            'txtMiscellaneousHours.Text = "1"
+            'RadCalendar1.SelectedDates.Clear()
+            'lbTotlaDaysHours.Text = "Total Work Days: 0 Total Hours: 0"
+            'lbTotlaDaysHours.ForeColor = Drawing.Color.Black
+            'txtNotes.Text = ""
+            'RadDatePickerFrom.Visible = True
+            'btnOkNewMiscellaneousTime.Text = "Add Time"
+            'RadDatePickerFrom.Enabled = True
+            'RadDatePickerTo.Enabled = True
+            'txtDateFrom.Visible = True
+            'PanelTotlaHOursSelected.Visible = False
+            'PanelDateRagePicker.Visible = False
+            'lblAprovedNote.Visible = False
+            'btnUpdateHours.Visible = False
+            'lblNotes.Visible = False
 
+            BackPage()
 
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
@@ -326,7 +327,9 @@ Public Class employeenewdowntime
     End Sub
 
     Private Sub cboType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboType.SelectedIndexChanged
-
+        DefaultCategoryValues
+    End Sub
+    Private Sub DefaultCategoryValues()
         txtNotes.Text = cboType.SelectedItem.Text
         RadCalendar1.SelectedDates.Clear()
         lbTotlaDaysHours.Text = "Total Work Days: 0 Total Hours: 0"
@@ -366,8 +369,8 @@ Public Class employeenewdowntime
 
         End If
 
-    End Sub
 
+    End Sub
     Private Sub RadGridLog_ItemDeleted(sender As Object, e As GridDeletedEventArgs) Handles RadGridLog.ItemDeleted
         SqlDataSourceEmployeeDailyTimeWorked.DataBind()
         RadScheduler1.DataBind()

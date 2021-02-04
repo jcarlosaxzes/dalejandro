@@ -6,8 +6,14 @@ Public Class MasterJOB
     Private Sub MasterJOB_Init(sender As Object, e As EventArgs) Handles Me.Init
         Try
 
-            lblCompanyId.Text = Session("companyId")
+            ' Para evitar perdida de session....
             lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
+            If Session("companyId") Is Nothing Then
+                Session("companyId") = LocalAPI.GetCompanyDefault(lblEmployeeEmail.Text)
+                Session("LastPage") = ""
+            End If
+
+            lblCompanyId.Text = Session("companyId")
             lblEmployeeId.Text = LocalAPI.GetEmployeeId(lblEmployeeEmail.Text, lblCompanyId.Text)
 
             If Not Request.QueryString("backpage") Is Nothing Then

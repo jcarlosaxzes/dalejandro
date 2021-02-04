@@ -44,21 +44,21 @@
                     </ChartTitle>
                     <PlotArea>
                         <Series>
-                            <telerik:AreaSeries DataFieldY="ProposalTotal" Name="Proposal Total">
+                            <telerik:AreaSeries DataFieldY="ProposalTotal" Name="Proposal Value">
                                 <Appearance FillStyle-BackgroundColor="Blue"></Appearance>
                                 <LabelsAppearance DataFormatString="{0:N0}"></LabelsAppearance>
                                 <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
                             </telerik:AreaSeries>
                         </Series>
                         <Series>
-                            <telerik:AreaSeries DataFieldY="JobsTotal" Name="Jobs Total">
+                            <telerik:AreaSeries DataFieldY="JobsTotal" Name="Jobs Budget">
                                 <Appearance FillStyle-BackgroundColor="Red"></Appearance>
                                 <LabelsAppearance Visible="false"></LabelsAppearance>
                                 <TooltipsAppearance DataFormatString="{0:N0}" Color="White"></TooltipsAppearance>
                             </telerik:AreaSeries>
                         </Series>
                         <Series>
-                            <telerik:LineSeries DataFieldY="PaymentsTotal" Name="Received Payment">
+                            <telerik:LineSeries DataFieldY="PaymentsTotal" Name="Payment Collected">
                                 <LabelsAppearance Visible="false" DataFormatString="{0:C0}">
                                 </LabelsAppearance>
                                 <Appearance>

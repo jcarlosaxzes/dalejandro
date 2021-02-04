@@ -7069,21 +7069,7 @@ Public Class LocalAPI
     End Function
 
     Public Shared Function GetNonRegularTypesFromName(ByVal companyId As Long, ByVal sName As String) As Integer
-        Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim cmd As New SqlCommand("SELECT Id FROM  NonRegularHours_types " &
-                                        "WHERE companyId=" & companyId & " And Name='" & sName & "'", cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                GetNonRegularTypesFromName = "" & rdr(0).ToString()
-            End If
-            rdr.Close()
-            cnn1.Close()
-        Catch ex As Exception
-            Throw ex
-        End Try
+        Return GetNumericEscalar($"SELECT top 1 Id FROM  NonRegularHours_types WHERE companyId={companyId} And Name='{sName}'")
     End Function
 
     Public Shared Function GetEmployees_NonRegularHoursProperty(Id As Integer, sProperty As String) As String

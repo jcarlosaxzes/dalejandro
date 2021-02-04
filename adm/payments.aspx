@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Payments" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="payments.aspx.vb" Inherits="pasconcept20.payments" %>
+﻿<%@ Page Title="Receivable Payments" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="payments.aspx.vb" Inherits="pasconcept20.payments" %>
 
 <%@ Import Namespace="pasconcept20" %>
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
@@ -39,7 +39,7 @@
 
 
     <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle">Payments</span>
+        <span class="pasconcept-pagetitle">Receivable Payments</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">

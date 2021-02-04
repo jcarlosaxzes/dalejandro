@@ -146,7 +146,7 @@
             <div class="col-12">
 
                 <div class="pasconcept-bar noprint">
-                    <span style="font-size: 24px; font-weight: 500; margin: 0">Invoices(s)&nbsp;&nbsp;&nbsp;&nbsp; </span>
+                    <span style="font-size: 24px; font-weight: 500; margin: 0">Receivable Invoices(s)&nbsp;&nbsp;&nbsp;&nbsp; </span>
                     <span style="vertical-align: middle;">Invoices Filter:
                         <telerik:RadComboBox ID="cboInvoiceFilterCode" runat="server" Width="300px" RenderMode="Lightweight" AutoPostBack="true">
                             <Items>
@@ -340,7 +340,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <h4>&nbsp;&nbsp;Payment(s)</h4>
+                <h4>&nbsp;&nbsp;Receivable Payment(s)</h4>
                 <telerik:RadGrid ID="RadGridPayments" runat="server" AllowAutomaticDeletes="True" HeaderStyle-HorizontalAlign="Center"
                     AutoGenerateColumns="False" DataSourceID="SqlDataSourcePayments" ShowFooter="True">
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePayments" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" HeaderStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-Font-Bold="true">
