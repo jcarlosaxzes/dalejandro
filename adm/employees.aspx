@@ -10,12 +10,12 @@
         }
     </style>
     <telerik:RadCodeBlock ID="RadCodeBlock2" runat="server">
-                        <script type="text/javascript">
-                            function CheckBoxRequired_ClientValidate(sender, e) {
-                                e.IsValid = jQuery(".AcceptedAgreement input:checkbox").is(':checked');
-                            }
-                        </script>
-                    </telerik:RadCodeBlock>
+        <script type="text/javascript">
+            function CheckBoxRequired_ClientValidate(sender, e) {
+                e.IsValid = jQuery(".AcceptedAgreement input:checkbox").is(':checked');
+            }
+        </script>
+    </telerik:RadCodeBlock>
     <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadGrid1">
@@ -44,7 +44,7 @@
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
 
     <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Silk">
     </telerik:RadWindowManager>
@@ -107,6 +107,9 @@
                             }
                         </script>
                     </telerik:RadCodeBlock>
+                    <div class="pasconcept-bar noprint">
+                        <span class="h4">Employee List</span>
+                    </div>
                     <telerik:RadGrid ID="RadGrid1" runat="server" AllowPaging="True" CellSpacing="0" RenderMode="Auto"
                         DataSourceID="SqlDataSource1" GridLines="None" AllowAutomaticDeletes="True"
                         AllowSorting="True" AutoGenerateColumns="False" Culture="en-US" PageSize="10"
@@ -117,7 +120,7 @@
                                 <telerik:GridTemplateColumn HeaderText="Photo" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                                     <ItemTemplate>
 
-                                        <asp:LinkButton ID="btnEditEmpl2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to Edit Employee Photo"  CausesValidation="false"
+                                        <asp:LinkButton ID="btnEditEmpl2" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to Edit Employee Photo" CausesValidation="false"
                                             CommandName="EditPhoto" UseSubmitBehavior="false">
                                             <asp:Image ID="ImageEmployeePhoto" ImageUrl='<%#LocalAPI.GetEmployeePhotoURL(employeeId:=Eval("Id"))%>' CssClass="photo50"
                                                 runat="server" AlternateText=""></asp:Image>
@@ -132,7 +135,7 @@
                                         <div>
                                             <strong>
                                                 <asp:LinkButton ID="btnEditEmpl" runat="server" CommandArgument='<%# Eval("Id") %>' ToolTip="Click to View/Edit Employee"
-                                                    CommandName="EditEmployee" Text='<%# Eval("FullName") & Eval("Suffix") %>' UseSubmitBehavior="false"  CausesValidation="false">
+                                                    CommandName="EditEmployee" Text='<%# Eval("FullName") & Eval("Suffix") %>' UseSubmitBehavior="false" CausesValidation="false">
                                                 </asp:LinkButton>
 
                                             </strong>
@@ -214,20 +217,20 @@
                                         <table style="width: 100%">
                                             <tr>
                                                 <td style="width: 33%; text-align: center">
-                                                    <asp:LinkButton runat="server" ID="btnInactive" CommandName="UpdateStatus" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# iif(Eval("Inactive"), "Inactive Status. Click to change", "Active Status. Click to change") %>'  CausesValidation="false"
+                                                    <asp:LinkButton runat="server" ID="btnInactive" CommandName="UpdateStatus" CommandArgument='<%# Eval("Id") %>' ToolTip='<%# iif(Eval("Inactive"), "Inactive Status. Click to change", "Active Status. Click to change") %>' CausesValidation="false"
                                                         ForeColor='<%# GetStatusColor(Eval("Inactive")) %>'>
                                                             <span class='<%# ActiveInactiveIcon(Eval("Inactive")) %>'></span>
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td style="width: 33%; text-align: center">
                                                     <asp:LinkButton runat="server" ID="btnCredentials" CommandName="SendCredentials" CommandArgument='<%# Eval("Id") %>'
-                                                        ToolTip="Send Email with login credentials"  CausesValidation="false">
+                                                        ToolTip="Send Email with login credentials" CausesValidation="false">
                                                                 <i class="far fa-envelope"></i>
                                                     </asp:LinkButton>
                                                 </td>
                                                 <td style="text-align: center">
                                                     <asp:LinkButton runat="server" ID="btnPermits" CommandName="Permits" CommandArgument='<%# Eval("Id") %>'
-                                                        ToolTip="Employee Permits"  CausesValidation="false">
+                                                        ToolTip="Employee Permits" CausesValidation="false">
                                                                 <i class="fas fa-cog"></i>
                                                     </asp:LinkButton>
                                                 </td>
@@ -254,69 +257,83 @@
 
                 </div>
             </telerik:RadWizardStep>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Vacation Schedule" StepType="Step">
-                <table width="100%">
-                    <tr>
-                        <td class="PanelFilter">&nbsp;&nbsp;&nbsp;Year:&nbsp;
-                           
-                            <telerik:RadComboBox ID="cboYear" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear" AutoPostBack="true"
-                                DataValueField="Year" Width="100px">
-                            </telerik:RadComboBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="PanelFilter">
-                            <telerik:RadScheduler ID="RadSchedulerVacation" runat="server" Culture="en-US" Skin="Web20" AllowDelete="false" AllowEdit="false" AllowInsert="false"
-                                DataEndField="End"
-                                DataKeyField="Id"
-                                DataSourceID="SqlDataSourceEmployeeVacation"
-                                DataStartField="Start"
-                                DataSubjectField="Employee"
-                                DayEndTime="23:59:00"
-                                Height="750px"
-                                FirstDayOfWeek="Monday" SelectedView="TimelineView">
-                                <DayView UserSelectable="False" />
-                                <WeekView UserSelectable="False" />
-                                <MonthView UserSelectable="False" />
-                                <TimelineView UserSelectable="False" NumberOfSlots="53" ColumnHeaderDateFormat="MMM dd" HeaderDateFormat="d" SlotDuration="7.00:00:00" />
-                                <MultiDayView UserSelectable="False" />
-                                <AgendaView UserSelectable="False" />
-                            </telerik:RadScheduler>
-                        </td>
-                    </tr>
-                </table>
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Vacation & Holidays" StepType="Step">
+                <div class="pasconcept-bar noprint">
+                    <span class="h4">Employee Vacation & Holidays</span>
+                </div>
+                <div>
+                    <telerik:RadScheduler ID="RadScheduler1" runat="server" RenderMode="Lightweight" OverflowBehavior="Auto"
+                        DataDescriptionField="Description" AllowDelete="false" Font-Size="Smaller"
+                        DataEndField="End"
+                        DataKeyField="Id"
+                        DataSourceID="SqlDataSourceEmployeeVacation"
+                        DataStartField="Start"
+                        DataSubjectField="Subject"
+                        DayEndTime="21:00:00"
+                        EditFormDateFormat="MM/dd/yyyy"
+                        Height="700px"
+                        FirstDayOfWeek="Monday"
+                        LastDayOfWeek="Friday"
+                        StartInsertingInAdvancedForm="False"
+                        StartEditingInAdvancedForm="False"
+                        SelectedView="MonthView"
+                        ShowFooter="false" EnableDescriptionField="true">
+                        <DayView UserSelectable="false" />
+                        <WeekView UserSelectable="True" />
+                        <MonthView UserSelectable="false" MinimumRowHeight="4"  />
+                        <TimelineView UserSelectable="false" />
+                        <MultiDayView UserSelectable="false" />
+                        <AgendaView UserSelectable="false" />
+                        <Reminders Enabled="false"></Reminders>
+
+                    </telerik:RadScheduler>
+                </div>
             </telerik:RadWizardStep>
-            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Employee Live" StepType="Step">
-                <table width="100%">
-                    <tr>
-                        <td class="PanelFilter">&nbsp;&nbsp;&nbsp;Year:&nbsp;
-                           
-                            <telerik:RadComboBox ID="cboYear2" runat="server" DataSourceID="SqlDataSourceYear" DataTextField="nYear" AutoPostBack="true"
-                                DataValueField="Year" Width="100px">
-                            </telerik:RadComboBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="PanelFilter">
-                            <telerik:RadScheduler ID="RadSchedulerLive" runat="server" Culture="en-US" Skin="Web20" AllowDelete="false" AllowEdit="false" AllowInsert="false"
-                                DataEndField="End"
-                                DataKeyField="Id"
-                                DataSourceID="SqlDataSourceEmployeeLive"
-                                DataStartField="Start"
-                                DataSubjectField="Employee"
-                                DayEndTime="23:59:00"
-                                Height="750px"
-                                FirstDayOfWeek="Monday" SelectedView="TimelineView">
-                                <DayView UserSelectable="False" />
-                                <WeekView UserSelectable="False" />
-                                <MonthView UserSelectable="False" />
-                                <TimelineView UserSelectable="False" NumberOfSlots="53" ColumnHeaderDateFormat="MMM dd" HeaderDateFormat="d" SlotDuration="7.00:00:00" />
-                                <MultiDayView UserSelectable="False" />
-                                <AgendaView UserSelectable="False" />
-                            </telerik:RadScheduler>
-                        </td>
-                    </tr>
-                </table>
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Hiring Timeline" StepType="Step">
+                <div class="pasconcept-bar noprint">
+                    <span class="h4">Employee Hiring Timeline</span>
+                </div>
+                <div>
+                    <telerik:RadTimeline runat="server" ID="RadTimelineHiring"
+                        DataSourceID="SqlDataSourceEmployeesHiringTimeLine"
+                        DataTitleField="FullName"
+                        DataSubtitleField="Position"
+                        Orientation="Vertical"
+                        AlternatingMode="true"
+                        DataKeyNames="City,Country,Status,Department"
+                        DataDateField="HireDate">
+                        <EventTemplate>
+                <div class="k-card-header">
+                    <h4 class="k-card-title">#=data.FullName#</h4>
+                    #=data.Position# of <b>#=data.Department#</b>
+                </div>
+                <div class="k-card-body">
+                    <div class="k-card-description">
+                        <p>
+                            #=data.City#, #=data.Country#
+                        </p>
+                        # var images = data.images; 
+                        if(images && images.length > 0) { #
+                            <img src="#=images[0].src#" class="box-photo shadow-sm p-2 mb-2 bg-white rounded">
+                        # } #
+                    </div>
+                    <div>
+                        <h6>#=data.Status#</h6>
+                    </div>
+                </div>
+                        </EventTemplate>
+                        <WebServiceClientDataSource>
+                            <SortExpressions>
+                                <telerik:ClientDataSourceSortExpression FieldName="HireDate" SortOrder="Desc" />
+                            </SortExpressions>
+                            <Schema>
+                                <Model>
+                                    <telerik:ClientDataSourceModelField DataType="Date" FieldName="HireDate" />
+                                </Model>
+                            </Schema>
+                        </WebServiceClientDataSource>
+                    </telerik:RadTimeline>
+                </div>
             </telerik:RadWizardStep>
         </WizardSteps>
     </telerik:RadWizard>
@@ -360,7 +377,7 @@
             <tr>
                 <td align="center">
 
-                    <asp:LinkButton runat="server" ID="btnConfirmDelete" CssClass="btn btn-danger btn-lg"  CausesValidation="false">
+                    <asp:LinkButton runat="server" ID="btnConfirmDelete" CssClass="btn btn-danger btn-lg" CausesValidation="false">
                              Confirm Delete Employee
                     </asp:LinkButton>
                 </td>
@@ -376,21 +393,23 @@
         <br />
         <table class="table-sm" style="width: 600px">
             <tr>
-                <td>
-                    PASconcept Technical Support can provide assistance with company set-up, training, and technical issues. 
-                    <br /><br />
+                <td>PASconcept Technical Support can provide assistance with company set-up, training, and technical issues. 
+                    <br />
+                    <br />
                     By activating, you are granting PASconcept Technical Support access to your company's instance of PASconcept.
                 </td>
             </tr>
             <tr>
                 <td>
-                    <br /><br />
+                    <br />
+                    <br />
                     <asp:CheckBox ID="chkAuthorizeTS" runat="server" CssClass="AcceptedAgreement" Text="&nbsp;&nbsp;I authorize the activation of PASconcept Technical Support User."></asp:CheckBox>
                 </td>
             </tr>
             <tr>
-                <td style="text-align:center">
-                    <br /><br />
+                <td style="text-align: center">
+                    <br />
+                    <br />
                     <asp:LinkButton runat="server" ID="btnConfirmActivateTechnicalSupport" CssClass="btn btn-success btn-lg" ValidationGroup="ConfirmActivateTechnicalSupport">
                              Activate Technical Support
                     </asp:LinkButton>
@@ -413,23 +432,18 @@
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceEmployeeVacation" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="EMPLOYEES_ResultByActivity" SelectCommandType="StoredProcedure">
+        SelectCommand="EmployeeVacationAndHolidays_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
-            <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="cboYear" DefaultValue="" Name="Year" PropertyName="SelectedValue" Type="Int32" />
-            <asp:Parameter DefaultValue="3" Name="ActivityId" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceEmployeeLive" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="EMPLOYEES_ResultByLive" SelectCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="SqlDataSourceEmployeesHiringTimeLine" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="EmployeesHiringTimeLine_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:Parameter Name="RETURN_VALUE" Type="Int32" Direction="ReturnValue" />
             <asp:ControlParameter ControlID="lblCompanyId" DefaultValue="" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceYear" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Year], nYear FROM Years ORDER BY [Year] DESC"></asp:SqlDataSource>
+
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
 
