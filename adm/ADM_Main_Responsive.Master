@@ -191,13 +191,13 @@
                                     <%--Finances menu--%>
                                     <telerik:NavigationNode Text="Finances" Visible='<%# EmployeePermission("Deny_BillingMenu") %>'>
                                         <Nodes>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/invoices" Text="Invoices"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/invoices" Text="Receivable Invoices"
                                                 Visible='<%# EmployeePermission("Deny_InvoicesList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/statement" Text="Statements"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/statement" Text="Receivable Statements"
                                                 Visible='<%# EmployeePermission("Deny_StatementList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/payments" Text="Payments"
+                                            <telerik:NavigationNode NavigateUrl="~/adm/payments" Text="Receivable Payments"
                                                 Visible='<%# EmployeePermission("Deny_BillingManager") %>'>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/clientscolletion" Text="Client Collection"

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" %>
+﻿<%@ Page Title="Receivable Invoices" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="invoices.aspx.vb" Inherits="pasconcept20.invoices" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <%@ Import Namespace="pasconcept20" %>
@@ -35,7 +35,7 @@
     </script>
 
     <div class="pasconcept-bar noprint">
-        <span class="pasconcept-pagetitle">Invoices</span>
+        <span class="pasconcept-pagetitle">Receivable Invoices</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">

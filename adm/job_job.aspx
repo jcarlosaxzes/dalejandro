@@ -44,7 +44,7 @@
         <span style="float: right; vertical-align: middle;">
             <asp:LinkButton ID="btnUpdate" runat="server" CssClass="btn btn-success btn-lg" UseSubmitBehavior="false" ToolTip="Update Active Job" ValidationGroup="JobUpdate">
                 Update
-        </asp:LinkButton>
+            </asp:LinkButton>
         </span>
     </div>
     <div>
@@ -128,10 +128,10 @@
                                     <telerik:RadTextBox ID="txtOwnerName" runat="server" Text='<%# Bind("Owner") %>' Width="100%" MaxLength="80">
                                     </telerik:RadTextBox>
                                 </td>
-                                <td style="text-align: right">Opening Date:
+                                <td style="text-align: right">Signed Date:
                                 </td>
                                 <td>
-                                    <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DbSelectedDate='<%# Bind("Open_date") %>' Width="100%">
+                                    <telerik:RadDatePicker ID="RadDatePickerSigned" runat="server" DbSelectedDate='<%# Bind("SignedDate") %>' Width="100%" ToolTip="Signed Date">
                                     </telerik:RadDatePicker>
                                 </td>
                             </tr>
@@ -147,11 +147,12 @@
                                         </Items>
                                     </telerik:RadComboBox>
                                 </td>
-                                <td style="text-align: right">Start Date:
+                                <td style="text-align: right">Opening Date:
                                 </td>
                                 <td>
-                                    <telerik:RadDatePicker ID="RadDatePickerSignedDate" runat="server" DbSelectedDate='<%# Bind("StartDay") %>' Width="100%" ToolTip="Signed Date">
+                                    <telerik:RadDatePicker ID="RadDatePicker1" runat="server" DbSelectedDate='<%# Bind("Open_date") %>' Width="100%">
                                     </telerik:RadDatePicker>
+                                    
                                 </td>
                             </tr>
                             <tr>
@@ -172,10 +173,10 @@
                                         </Items>
                                     </telerik:RadComboBox>
                                 </td>
-                                <td style="text-align: right">Signed Date:
+                                <td style="text-align: right">Start Date:
                                 </td>
                                 <td>
-                                    <telerik:RadDatePicker ID="RadDatePickerSigned" runat="server" DbSelectedDate='<%# Bind("SignedDate") %>' Width="100%" ToolTip="Signed Date">
+                                    <telerik:RadDatePicker ID="RadDatePickerSignedDate" runat="server" DbSelectedDate='<%# Bind("StartDay") %>' Width="100%" ToolTip="Signed Date">
                                     </telerik:RadDatePicker>
                                 </td>
                             </tr>

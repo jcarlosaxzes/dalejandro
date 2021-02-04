@@ -824,6 +824,7 @@
     <Content Include="adm\transmittals.aspx" />
     <Content Include="adm\uploadphoto.aspx" />
     <Content Include="adm\useragree.aspx" />
+    <Content Include="adm\vacationandholidays.aspx" />
     <Content Include="adm\vendor.aspx" />
     <Content Include="adm\vendors.aspx" />
     <Content Include="adm\vendortypes.aspx" />
@@ -4484,6 +4485,13 @@
       <DependentUpon>useragree.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\vacationandholidays.aspx.designer.vb">
+      <DependentUpon>vacationandholidays.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\vacationandholidays.aspx.vb">
+      <DependentUpon>vacationandholidays.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\vendor.aspx.designer.vb">
       <DependentUpon>vendor.aspx</DependentUpon>
     </Compile>
@@ -5242,7 +5250,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

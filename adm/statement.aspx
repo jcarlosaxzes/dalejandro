@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Statements" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="statement.aspx.vb" Inherits="pasconcept20.statement" %>
+﻿<%@ Page Title="Receivable Statements" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="statement.aspx.vb" Inherits="pasconcept20.statement" %>
 
 <%@ Import Namespace="pasconcept20" %>
 
@@ -42,7 +42,7 @@
     <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server"  EnableEmbeddedSkins="false" />
 
     <div class="pasconcept-bar">
-        <span class="pasconcept-pagetitle">Statements</span>
+        <span class="pasconcept-pagetitle">Receivable Statements</span>
 
         <span style="float: right; vertical-align: middle;">
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
