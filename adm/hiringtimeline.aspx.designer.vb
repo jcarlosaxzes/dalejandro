@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class vacationandholidays
+Partial Public Class hiringtimeline
 
     '''<summary>
     '''RadAjaxManager1 control.
@@ -32,33 +32,6 @@ Partial Public Class vacationandholidays
     Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
 
     '''<summary>
-    '''cboEmployee control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboEmployee As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''btnNewVacation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnNewVacation As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''btnUpdateHolidays control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnUpdateHolidays As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
     '''pnlFind control.
     '''</summary>
     '''<remarks>
@@ -66,6 +39,15 @@ Partial Public Class vacationandholidays
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''cboStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
     '''cboDepartments control.
@@ -86,67 +68,22 @@ Partial Public Class vacationandholidays
     Protected WithEvents btnFind As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''RadScheduler1 control.
+    '''RadTimelineHiring control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadScheduler1 As Global.Telerik.Web.UI.RadScheduler
+    Protected WithEvents RadTimelineHiring As Global.Telerik.Web.UI.RadTimeline
 
     '''<summary>
-    '''RadToolTipHolidays control.
+    '''SqlDataSourceEmployeesHiringTimeLine control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadToolTipHolidays As Global.Telerik.Web.UI.RadToolTip
-
-    '''<summary>
-    '''RadGridHoliday control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridHoliday As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''btnCloseHoliday control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCloseHoliday As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''SqlDataSourceEmployeeVacation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceEmployeeVacation As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceEmpl_activos control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceEmpl_activos As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceHoliday control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceHoliday As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceEmployeesHiringTimeLine As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceDepartments control.
@@ -167,13 +104,13 @@ Partial Public Class vacationandholidays
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblLogedEmployeeId control.
+    '''lblEmployeeId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLogedEmployeeId As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblEmployeeId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

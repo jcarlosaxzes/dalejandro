@@ -701,6 +701,7 @@
     <Content Include="adm\employee_status_form.aspx" />
     <Content Include="adm\expenseschart.aspx" />
     <Content Include="adm\exportclientscsv.aspx" />
+    <Content Include="adm\hiringtimeline.aspx" />
     <Content Include="adm\historylog.aspx" />
     <Content Include="adm\importdata.aspx" />
     <Content Include="adm\importtickets.aspx" />
@@ -3610,6 +3611,13 @@
       <DependentUpon>exportclientscsv.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\hiringtimeline.aspx.designer.vb">
+      <DependentUpon>hiringtimeline.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\hiringtimeline.aspx.vb">
+      <DependentUpon>hiringtimeline.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\historylog.aspx.designer.vb">
       <DependentUpon>historylog.aspx</DependentUpon>
     </Compile>
@@ -5250,7 +5258,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
