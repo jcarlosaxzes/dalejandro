@@ -656,7 +656,6 @@
     <Content Include="adm\azurestorage_client.aspx" />
     <Content Include="adm\baddebt.aspx" />
     <Content Include="adm\balancedepartments.aspx" />
-    <Content Include="adm\BBtest.aspx" />
     <Content Include="adm\bill-collected-employees.aspx" />
     <Content Include="adm\billingactivity.aspx" />
     <Content Include="adm\billingagingreport.aspx" />
@@ -3295,13 +3294,6 @@
       <DependentUpon>BasicMasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adm\BBtest.aspx.designer.vb">
-      <DependentUpon>BBtest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\BBtest.aspx.vb">
-      <DependentUpon>BBtest.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="adm\bill-collected-employees.aspx.designer.vb">
       <DependentUpon>bill-collected-employees.aspx</DependentUpon>
     </Compile>
@@ -5250,7 +5242,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

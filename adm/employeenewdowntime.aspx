@@ -68,11 +68,15 @@
                             <td>
                                 <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
                                     MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours for each day"
-                                    Value="1" Width="150px" MaxValue="24">
+                                    Value="1" Width="150px" MaxValue="24" AutoPostBack="false">
                                     <NumberFormat DecimalDigits="2" />
                                     <IncrementSettings Step="1" />
-                                    <ClientEvents OnValueChanged="changeHours" />
                                 </telerik:RadNumericTextBox>
+                                &nbsp; &nbsp;
+                                <asp:LinkButton ID="btnUpdateHours" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
+                                    ToolTip="Calculate Hours" Visible="false">
+                                            <i class="fas fa-redo-alt" aria-hidden="true" ></i>
+                                </asp:LinkButton>
                             </td>
                         </tr>
                         <tr>
@@ -85,34 +89,30 @@
                                     Culture="en-US"
                                     ZIndex="50001"
                                     Width="150px">
-                                    <ClientEvents OnDateSelected="RadDatePickerChange" />
                                 </telerik:RadDatePicker>
-
-                                <asp:Label ID="txtDateTo" Visible="false" Text="Date To:" runat="server" />
-                           
-
                                 <telerik:RadDatePicker ID="RadDatePickerTo" runat="server"
                                     DateFormat="MM/dd/yyyy"
                                     Culture="en-US"
                                     ZIndex="50001"
                                     Width="150px" Visible="false">
-                                    <ClientEvents OnDateSelected="RadDatePickerChange" />
                                 </telerik:RadDatePicker>
 
-                                <asp:Label ID="lbTotlaDays" Visible="false" Text="Total Days:" runat="server" />
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align: center;">
+                                <asp:Panel ID="PanelTotlaHOursSelected" runat="server" Visible="false">
+                                    <asp:Label ID="lbTotlaDaysHours" Text="Total Days: 0 Total Hours: 0" runat="server" />
+                                </asp:Panel>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="4" style="text-align: center;">
                                 <asp:Panel ID="PanelDateRagePicker" runat="server" Visible="false">
-                                    <%--<div id="DateRangeDiv" class="DateRangeDiv"></div>--%>
-                                    <telerik:RadCalendar RenderMode="Lightweight" ID="RadCalendar1" runat="server" EnableWeekends="false" ShowRowHeaders="false"
-                                        FirstDayOfWeek="Monday" ShowOtherMonthsDays="false" ShowFastNavigationButtons="false">
-                                        <ClientEvents OnDateSelected="Cal1Change" />
-                                    </telerik:RadCalendar>
-                                    <telerik:RadCalendar RenderMode="Lightweight" ID="RadCalendar2" runat="server" EnableWeekends="false" ShowRowHeaders="false"
-                                        FirstDayOfWeek="Monday" ShowOtherMonthsDays="false" ShowFastNavigationButtons="false">
-                                        <ClientEvents OnDateSelected="Cal1Change" />
+                                    <telerik:RadCalendar RenderMode="Lightweight" ID="RadCalendar1" runat="server" MultiViewColumns="2" AutoPostBack="true"
+                                        MultiViewRows="1" RangeSelectionMode="ConsecutiveClicks" EnableViewSelector="true">
                                     </telerik:RadCalendar>
                                 </asp:Panel>
                             </td>
@@ -296,7 +296,7 @@
     <script type="text/javascript">
 
 
-        var cal1;
+<%--        var cal1;
         var cal2;
         var SelectedRange = true;
         var DateRange = Array();
@@ -332,6 +332,7 @@
             date.setDate(date.getDate() + days);
             return date;
         }
+
         function ClearSelections() {
             var selectedDates = cal1.get_selectedDates();
             cal1.unselectDates(selectedDates);
@@ -396,13 +397,13 @@
 
             disableCalEvents = false;
 
-        }
+        }--%>
 
-        
 
+ <%--
         $(function () {
 
-            cal1 = $find("<%= RadCalendar1.ClientID %>");
+           cal1 = $find("<%= RadCalendar1.ClientID %>");
                 cal2 = $find("<%= RadCalendar2.ClientID %>");
                 var date1 = new Date(<%= LocalAPI.DateTimeToUnixTimeStamp(DateTime.Now) * 1000 %>);
                 var date2 = new Date(<%= LocalAPI.DateTimeToUnixTimeStamp(DateTime.Now.AddMonths(1)) * 1000 %>);
@@ -414,11 +415,11 @@
                 cal1.navigateToDate(triplet1);
                 cal2.navigateToDate(triplet2);
 
-            });
+            });--%>
 
-      
 
-        function updateRange() {
+
+<%--        function updateRange() {
             disableCalEvents = true;
 
             var RadDatePickerFrom = $find("<%= RadDatePickerFrom.ClientID %>");
@@ -439,15 +440,15 @@
             }
 
             disableCalEvents = false;
-        }
+        }--%>
 
-        function changeHours(sender, eventArgs) {
-            updateTotlasHours();                
-        }
+        //function changeHours(sender, eventArgs) {
+        //    updateTotlasHours();                
+        //}
 
-        function RadDatePickerChange(obj, e) {
-            updateRange();
-            updateTotlasHours();
-        }
+        //function RadDatePickerChange(obj, e) {
+        //    updateRange();
+        //    updateTotlasHours();
+        //}
     </script>
 </asp:Content>

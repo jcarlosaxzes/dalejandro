@@ -104,6 +104,15 @@ Partial Public Class employeenewdowntime
     Protected WithEvents txtMiscellaneousHours As Global.Telerik.Web.UI.RadNumericTextBox
 
     '''<summary>
+    '''btnUpdateHours control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpdateHours As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''txtDateFrom control.
     '''</summary>
     '''<remarks>
@@ -122,15 +131,6 @@ Partial Public Class employeenewdowntime
     Protected WithEvents RadDatePickerFrom As Global.Telerik.Web.UI.RadDatePicker
 
     '''<summary>
-    '''txtDateTo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDateTo As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''RadDatePickerTo control.
     '''</summary>
     '''<remarks>
@@ -140,13 +140,22 @@ Partial Public Class employeenewdowntime
     Protected WithEvents RadDatePickerTo As Global.Telerik.Web.UI.RadDatePicker
 
     '''<summary>
-    '''lbTotlaDays control.
+    '''PanelTotlaHOursSelected control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbTotlaDays As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents PanelTotlaHOursSelected As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lbTotlaDaysHours control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbTotlaDaysHours As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''PanelDateRagePicker control.
@@ -165,15 +174,6 @@ Partial Public Class employeenewdowntime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCalendar1 As Global.Telerik.Web.UI.RadCalendar
-
-    '''<summary>
-    '''RadCalendar2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadCalendar2 As Global.Telerik.Web.UI.RadCalendar
 
     '''<summary>
     '''txtNotes control.
