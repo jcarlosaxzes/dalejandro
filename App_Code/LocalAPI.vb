@@ -196,6 +196,19 @@ Public Class LocalAPI
         Return DateAdd(DateInterval.Hour, -5, Date.Now)
     End Function
 
+    Public Shared Function UnixTimeStampToDateTime(unixTimeStamp As Int64) As DateTime
+        Dim dtDateTime As System.DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc)
+        dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime()
+        Return dtDateTime
+    End Function
+
+    Public Shared Function DateTimeToUnixTimeStamp(sdate As DateTime) As Int64
+        Dim epoch As DateTime = New DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime()
+        Dim span As TimeSpan = (sdate.ToLocalTime() - epoch)
+        Return CType(span.TotalSeconds, Int64)
+    End Function
+
+
     Public Shared Function sys_VersionAndRevision(versionId As Integer) As String
         Dim sVerName As String = sys_VersionName(versionId)
         Return "Version: <b>" & sVerName & "</b>, Revision: 5.0.0 (Jan 15, 2020). Azure deployment"
@@ -473,6 +486,31 @@ Public Class LocalAPI
                     comm.CommandType = CommandType.Text
 
                     Dim reader = comm.ExecuteReader()
+                    If reader.HasRows Then
+                        ' We only read one time (of course, its only one result :p)
+                        reader.Read()
+                        For lp As Integer = 0 To reader.FieldCount - 1
+                            result.Add(reader.GetName(lp), reader.GetValue(lp))
+                        Next
+                    End If
+                End Using
+            End Using
+            Return result
+        Catch e As Exception
+            Return result
+        End Try
+    End Function
+
+    Public Shared Function GetRecordAllFromQuery(sql As String) As Dictionary(Of String, Object)
+        ' Devuelve un objeto con todos los valores del SELECT
+        Dim result = New Dictionary(Of String, Object)()
+        Try
+            Using conn As SqlConnection = GetConnection()
+                Using comm As New SqlCommand(sql, conn)
+                    comm.CommandType = CommandType.Text
+
+                    Dim reader = comm.ExecuteReader()
+
                     If reader.HasRows Then
                         ' We only read one time (of course, its only one result :p)
                         reader.Read()

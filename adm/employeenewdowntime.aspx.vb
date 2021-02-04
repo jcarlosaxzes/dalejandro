@@ -1,4 +1,5 @@
 ﻿Imports Telerik.Web.UI
+Imports Telerik.Web.UI.Calendar
 
 Public Class employeenewdowntime
     Inherits System.Web.UI.Page
@@ -33,6 +34,8 @@ Public Class employeenewdowntime
                 End If
 
                 InitDlg(Date.Today, -1)
+
+                Dim recors = LocalAPI.GetRecordFromQuery($"SELECT Id, Holiday, Description FROM Company_hollidays WHERE ([companyId] = {lblCompanyId.Text}) ORDER BY Holiday DESC")
 
             End If
 
@@ -114,7 +117,6 @@ Public Class employeenewdowntime
         Try
             RadDatePickerFrom.DbSelectedDate = Date1.Date
             RadDatePickerTo.DbSelectedDate = Date1.Date
-
             RadScheduler1.DataBind()
 
         Catch ex As Exception
@@ -135,6 +137,9 @@ Public Class employeenewdowntime
             End If
 
             If LocalNewTMiscellaneousTime() Then
+                If (cboType.SelectedValue = 5 Or cboType.SelectedValue = 6 Or cboType.SelectedValue = 7) Then
+                    Master.ErrorMessage("New non-productive time inserted")
+                End If
                 Master.InfoMessage("New non-productive time inserted")
                 ''BackPage()
                 SqlDataSourceEmployeeDailyTimeWorked.DataBind()
@@ -142,6 +147,25 @@ Public Class employeenewdowntime
                 RadScheduler1.Rebind()
                 ShowSumaryBox()
             End If
+
+            cboType.SelectedValue = -1
+            txtMiscellaneousHours.Text = "1"
+            RadCalendar1.SelectedDates.Clear()
+            lbTotlaDaysHours.Text = "Total Work Days: 0 Total Hours: 0"
+            lbTotlaDaysHours.ForeColor = Drawing.Color.Black
+            txtNotes.Text = ""
+            RadDatePickerFrom.Visible = True
+            btnOkNewMiscellaneousTime.Text = "Add Time"
+            RadDatePickerFrom.Enabled = True
+            RadDatePickerTo.Enabled = True
+            txtDateFrom.Visible = True
+            PanelTotlaHOursSelected.Visible = False
+            PanelDateRagePicker.Visible = False
+            lblAprovedNote.Visible = False
+            btnUpdateHours.Visible = False
+            lblNotes.Visible = False
+
+
         Catch ex As Exception
             Master.ErrorMessage(ex.Message)
         End Try
@@ -156,23 +180,24 @@ Public Class employeenewdowntime
         Try
 
             Dim bRet As Boolean
-            If AnalisisDeBenefits() Then
-                Select Case cboType.SelectedValue
-                    Case 5, 6, 7
+
+            Select Case cboType.SelectedValue
+                Case 5, 6, 7
+                    If AnalisisDeBenefits() Then
                         Dim requestId As Integer = LocalAPI.NewNonJobTime_Request(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerTo.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, lblCompanyId.Text)
                         If requestId > 0 Then
                             bRet = True
                             MessageRequest(requestId)
                             Master.InfoMessage("Your request for " & cboType.Text & " has been sended to HR Manager and is currently in progress. Thank you for your patience as your request is reviewed for approval", 10)
                         End If
-                    Case Else
+
+                    End If
+                Case Else
                         bRet = LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerFrom.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text)
-                        If bRet Then Master.InfoMessage(cboType.Text & " time inserted")
+                    If bRet Then Master.InfoMessage(cboType.Text & " time inserted")
+            End Select
 
-                End Select
-
-                Return bRet
-            End If
+            Return bRet
 
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
@@ -182,27 +207,39 @@ Public Class employeenewdowntime
 
     Private Function AnalisisDeBenefits() As Boolean
         Dim dHours As Double
-        Dim dPermited As Double
         Dim dSaldoFinal As String = 0
         Dim EntryTotalHours As Double = txtMiscellaneousHours.DbValue
-        If RadDatePickerFrom.DbSelectedDate <> RadDatePickerTo.DbSelectedDate Then
-            EntryTotalHours = Double.Parse(txtMiscellaneousHours.DbValue) * DateDiff(DateInterval.Day, RadDatePickerFrom.DbSelectedDate, RadDatePickerTo.DbSelectedDate)
+
+        Dim fromDate As Date = RadDatePickerFrom.DbSelectedDate
+        Dim toDate As Date = RadDatePickerTo.DbSelectedDate
+
+        If fromDate < toDate Then
+            Dim record = LocalAPI.GetRecordFromQuery($"select dbo.GetWorkDaysFromTo({lblCompanyId.Text},'{fromDate.ToString("yyyy-MM-dd")}','{toDate.ToString("yyyy-MM-dd")}') as WorkDays")
+            EntryTotalHours = Val(record("WorkDays")) * EntryTotalHours
+        ElseIf fromDate = toDate Then
+            Dim record = LocalAPI.GetRecordFromQuery($"select dbo.GetWorkDaysFromTo({lblCompanyId.Text},'{fromDate.ToString("yyyy-MM-dd")}','{fromDate.ToString("yyyy-MM-dd")}') as WorkDays")
+            EntryTotalHours = Val(record("WorkDays")) * EntryTotalHours
+        Else
+            Master.ErrorMessage("Date From must be earlier or equal than end Date To")
+            Return False
         End If
+
+
         Select Case cboType.SelectedValue
             Case 7  ' Vacations
                 If lblVac1.Text <> "" Then
-                    dHours = lblVac2.Text
-                    dSaldoFinal = lblVac1.Text - lblVac2.Text - EntryTotalHours
+                    dHours = lblVac3.Text
                 End If
 
             Case 5, 6  ' Personal, Sick, 
                 If lblPer1.Text <> "" Then
-                    dSaldoFinal = lblPer1.Text - lblPer2.Text - EntryTotalHours
+                    dHours = lblPer3.Text
                 End If
+
         End Select
 
-        If dSaldoFinal < 0 Then
-            Master.ErrorMessage("Outstanding " & cboType.Text & " hours are " & dPermited - dHours, 0)
+        If dHours < EntryTotalHours Then
+            Master.ErrorMessage("Outstanding " & cboType.Text & " hours are " & EntryTotalHours - dHours, 0)
             Return False
         Else
             Return True
@@ -289,11 +326,15 @@ Public Class employeenewdowntime
     End Sub
 
     Private Sub cboType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboType.SelectedIndexChanged
-        If cboType.SelectedValue = 7 Then
+
+        txtNotes.Text = cboType.SelectedItem.Text
+        RadCalendar1.SelectedDates.Clear()
+        lbTotlaDaysHours.Text = "Total Work Days: 0 Total Hours: 0"
+        lbTotlaDaysHours.ForeColor = Drawing.Color.Black
+
+        If cboType.SelectedValue = 5 Or cboType.SelectedValue = 6 Or cboType.SelectedValue = 7 Then
             txtMiscellaneousHours.Text = "8"
             lblNotes.Visible = True
-            txtNotes.Text = "Vacation"
-
         Else
             txtMiscellaneousHours.Text = "1"
             lblNotes.Visible = False
@@ -302,19 +343,23 @@ Public Class employeenewdowntime
         Select Case cboType.SelectedValue
             Case 5, 6, 7
                 txtDateFrom.Text = "Date From:"
-                txtDateTo.Visible = True
-                RadDatePickerTo.Visible = True
                 lblAprovedNote.Visible = True
                 btnOkNewMiscellaneousTime.Text = "Request Time"
                 PanelDateRagePicker.Visible = True
+                PanelTotlaHOursSelected.Visible = True
+                btnUpdateHours.Visible = True
+                RadDatePickerFrom.Visible = False
+                txtDateFrom.Visible = False
             Case Else
-                txtDateFrom.Text = "Date:"
-                txtDateTo.Visible = False
-                RadDatePickerTo.Visible = False
-                lblAprovedNote.Visible = False
+                RadDatePickerFrom.Visible = True
                 btnOkNewMiscellaneousTime.Text = "Add Time"
+                RadDatePickerFrom.Enabled = True
+                RadDatePickerTo.Enabled = True
+                txtDateFrom.Visible = True
+                PanelTotlaHOursSelected.Visible = False
                 PanelDateRagePicker.Visible = False
-
+                lblAprovedNote.Visible = False
+                btnUpdateHours.Visible = False
 
         End Select
         If cboType.SelectedValue <= 3 Or cboType.SelectedValue <= 4 Or cboType.SelectedValue <= 8 Or cboType.SelectedValue <= 3 Then
@@ -368,6 +413,34 @@ Public Class employeenewdowntime
 
         End If
 
+    End Sub
+
+    Private Sub RadCalendar1_SelectionChanged(sender As Object, e As SelectedDatesEventArgs) Handles RadCalendar1.SelectionChanged
+        UpdateTotalHours()
+    End Sub
+
+    Private Sub UpdateTotalHours()
+
+        If RadCalendar1.SelectedDates.Count > 0 Then
+            RadScheduler1.SelectedDate = RadCalendar1.SelectedDates(0).Date
+            RadDatePickerFrom.SelectedDate = RadCalendar1.SelectedDates(0).Date
+            RadDatePickerTo.SelectedDate = RadCalendar1.SelectedDates(RadCalendar1.SelectedDates.Count - 1).Date
+            SqlDataSourceEmployeeDailyTimeWorked.DataBind()
+            RadScheduler1.DataBind()
+            RadScheduler1.Rebind()
+            Dim record = LocalAPI.GetRecordFromQuery($"select dbo.GetWorkDaysFromTo({lblCompanyId.Text},'{RadCalendar1.SelectedDates(0).Date.ToString("yyyy-MM-dd")}','{RadCalendar1.SelectedDates(RadCalendar1.SelectedDates.Count - 1).Date.ToString("yyyy-MM-dd")}') as WorkDays")
+            Dim WorkDays = Val(record("WorkDays"))
+            lbTotlaDaysHours.Text = $"Total Work Days: {WorkDays} Total Hours: {WorkDays * txtMiscellaneousHours.Value}"
+            lbTotlaDaysHours.ForeColor = IIf((WorkDays * txtMiscellaneousHours.Value > Double.Parse(lblVac3.Text)), Drawing.Color.Red, Drawing.Color.Black)
+        Else
+            lbTotlaDaysHours.Text = $"Total Work Days: 0 Total Hours: 0"
+            lbTotlaDaysHours.ForeColor = Drawing.Color.Black
+        End If
+
+    End Sub
+
+    Private Sub btnUpdateHours_Click(sender As Object, e As EventArgs) Handles btnUpdateHours.Click
+        UpdateTotalHours()
     End Sub
 
 #End Region
