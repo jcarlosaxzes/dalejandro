@@ -244,9 +244,25 @@
                                                     </telerik:NavigationNode>
                                                 </Nodes>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/employees" Text="Employees"
-                                                Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                            
+                                            <telerik:NavigationNode Text="Human Resources">
+                                                <Nodes>
+                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/employees" Text="Employees"
+                                                        Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                                    </telerik:NavigationNode>
+
+                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/vacationandholidays" Text="Vacation & Holidays"
+                                                        Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                                    </telerik:NavigationNode>
+
+                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/hiringtimeline" Text="Hiring Timeline"
+                                                        Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                                    </telerik:NavigationNode>
+                                                </Nodes>
                                             </telerik:NavigationNode>
+
+
+
                                             <telerik:NavigationNode Text="Subconsultants" NavigateUrl="~/adm/subconsultants"
                                                 Visible='<%# EmployeePermission("Deny_SubconsultantsList") %>'>
                                             </telerik:NavigationNode>

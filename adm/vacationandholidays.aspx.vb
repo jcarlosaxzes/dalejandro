@@ -61,6 +61,11 @@ Public Class vacationandholidays
 
     End Sub
 
+    Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        RadScheduler1.DataBind()
+        RadScheduler1.Rebind()
+    End Sub
+
 
 #End Region
 End Class

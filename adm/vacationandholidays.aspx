@@ -4,10 +4,26 @@
 <%@ Import Namespace="pasconcept20" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+        <AjaxSettings>
+            <telerik:AjaxSetting AjaxControlID="btnFind">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+        </AjaxSettings>
+    </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false" />
+
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Employee Vacation & Holidays</span>
 
         <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
+                <i class="fas fa-filter"></i>&nbsp;Filter
+            </button>
+
+
             <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" MarkFirstMatch="True" ToolTip="Select active Employye"
                 Width="300px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AutoPostBack="true">
             </telerik:RadComboBox>
@@ -21,7 +37,32 @@
         </span>
 
     </div>
-    <div>
+    <div class="collapse" id="collapseFilter">
+        <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
+            <table width="100%" class="pasconcept-bar noprint">
+                <tr>
+                    <td style="width: 100px; text-align: right">Department:</td>
+                    <td style="width: 400px">
+                        <telerik:RadComboBox ID="cboDepartments" runat="server" AppendDataBoundItems="true"
+                            DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Filter="Contains"
+                            Height="250px" MarkFirstMatch="True" Width="100%" EmptyMessage="(Select Department...)">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Selected="true" Text="(All Departments...)" Value="-1" />
+                            </Items>
+                        </telerik:RadComboBox>
+
+                    </td>
+                    <td style="text-align: right">
+                        <asp:LinkButton ID="btnFind" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" CausesValidation="false">
+                                                <i class="fas fa-search"></i> Filter/Search
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+
+    </div>
+    <div style="margin-top: 5px">
         <telerik:RadScheduler ID="RadScheduler1" runat="server" RenderMode="Lightweight" OverflowBehavior="Auto"
             DataDescriptionField="Description" AllowDelete="false" Font-Size="Smaller"
             DataEndField="End"
@@ -130,6 +171,7 @@
         SelectCommand="EmployeeVacationAndHolidays_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboDepartments" Name="departmentId" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceEmpl_activos" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
@@ -160,6 +202,12 @@
             <asp:Parameter Name="Holiday" />
             <asp:Parameter Name="Description" />
         </UpdateParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceDepartments" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId ORDER BY [Name]">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
     </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
