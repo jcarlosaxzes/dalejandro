@@ -30,8 +30,6 @@ Public Class company
                     End Select
                 End If
 
-
-
             End If
             RadWindowManager1.EnableViewState = False
         Catch ex As Exception

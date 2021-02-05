@@ -32,33 +32,6 @@ Partial Public Class company
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
-    '''RadWizard5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizard5 As Global.Telerik.Web.UI.RadWizard
-
-    '''<summary>
-    '''RadWizardStepsCompanyInfo2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadWizardStepsCompanyInfo2 As Global.Telerik.Web.UI.RadWizardStep
-
-    '''<summary>
-    '''RadGridHoliday control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridHoliday As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
     '''SqlDataSourceLogo control.
     '''</summary>
     '''<remarks>
@@ -93,15 +66,6 @@ Partial Public Class company
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceTypes As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceHoliday control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceHoliday As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.
