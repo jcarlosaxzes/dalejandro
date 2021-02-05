@@ -95,6 +95,15 @@ Partial Public Class vacationandholidays
     Protected WithEvents RadScheduler1 As Global.Telerik.Web.UI.RadScheduler
 
     '''<summary>
+    '''RadGridRequest control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridRequest As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''RadToolTipHolidays control.
     '''</summary>
     '''<remarks>
@@ -156,6 +165,15 @@ Partial Public Class vacationandholidays
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceRequest control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceRequest As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.
