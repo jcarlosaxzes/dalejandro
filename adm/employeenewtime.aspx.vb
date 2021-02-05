@@ -164,30 +164,37 @@ Public Class employeenewtime
     End Sub
     Protected Function LocalNewTime() As Boolean
         Try
-            Dim taskId As Integer = 0
-            Dim JobTicketId As Integer = 0
-            If divProposalTask.Visible Then
-                If cboTask.SelectedValue > 0 Then
-                    taskId = cboTask.SelectedValue
-                    'If cboMulticolumnTask.Value > 0 Then
-                    '    taskId = cboMulticolumnTask.Value
+            If txtTimeSel.Value > 0 Then
 
+                Dim taskId As Integer = 0
+                Dim JobTicketId As Integer = 0
+                If divProposalTask.Visible Then
+                    If cboTask.SelectedValue > 0 Then
+                        taskId = cboTask.SelectedValue
+                        'If cboMulticolumnTask.Value > 0 Then
+                        '    taskId = cboMulticolumnTask.Value
+
+                    End If
                 End If
-            End If
-            If divTickets.Visible Then
-                JobTicketId = cboActiveTickets.SelectedValue
-            End If
-            If LocalAPI.InsertNewTime(lblEmployeeId.Text, lblSelectedJob.Text, RadDatePicker1.SelectedDate, txtTimeSel.Value, txtDescription.Text,
-                                  taskId, cboCategory.SelectedValue, lblCompanyId.Text, JobTicketId) Then
-
-                ' Actualizar el status del Job
-                If cboJobStatus.SelectedValue > 0 Then
-                    LocalAPI.SetJobStatus(lblSelectedJob.Text, cboJobStatus.SelectedValue, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text)
-                    cboJobStatus.SelectedValue = -1
+                If divTickets.Visible Then
+                    JobTicketId = cboActiveTickets.SelectedValue
                 End If
+                If LocalAPI.InsertNewTime(lblEmployeeId.Text, lblSelectedJob.Text, RadDatePicker1.SelectedDate, txtTimeSel.Value, txtDescription.Text,
+                                      taskId, cboCategory.SelectedValue, lblCompanyId.Text, JobTicketId) Then
 
-                Return True
+                    ' Actualizar el status del Job
+                    If cboJobStatus.SelectedValue > 0 Then
+                        LocalAPI.SetJobStatus(lblSelectedJob.Text, cboJobStatus.SelectedValue, lblEmployeeId.Text, lblCompanyId.Text, lblEmployeeId.Text)
+                        cboJobStatus.SelectedValue = -1
+                    End If
+
+                    Return True
+                End If
+            Else
+                Master.ErrorMessage("The Hours Value must be Greater than Zero!")
+                txtTimeSel.Focus()
             End If
+
         Catch ex As Exception
             Throw ex
         End Try

@@ -105,8 +105,8 @@
 
     <div class="collapse" id="collapseRequest">
         <h4>Pending Requests</h4>
-        <telerik:RadGrid ID="RadGridRequest" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
-            AutoGenerateColumns="False" DataSourceID="SqlDataSourceRequest" PageSize="50" AllowPaging="true"
+        <telerik:RadGrid ID="RadGridRequest" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" 
+            AutoGenerateColumns="False" DataSourceID="SqlDataSourceRequest" PageSize="15" AllowPaging="true"
             Height="850px" RenderMode="Lightweight"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
             <ClientSettings Selecting-AllowRowSelect="true">
