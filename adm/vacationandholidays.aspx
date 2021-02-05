@@ -19,10 +19,14 @@
         <span class="pasconcept-pagetitle">Employee Vacation & Holidays</span>
 
         <span style="float: right; vertical-align: middle;">
+            <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseRequest" aria-expanded="false" aria-controls="collapseRequest" title="Show/Hide Request panel">
+                <i class="fas fa-list"></i>&nbsp;Requests
+            </button>
             <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter" title="Show/Hide Filter panel">
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
 
+            
 
             <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" MarkFirstMatch="True" ToolTip="Select active Employye"
                 Width="300px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AutoPostBack="true">
@@ -99,6 +103,45 @@
 
     </div>
 
+    <div class="collapse" id="collapseRequest">
+        <h4>Pending Requests</h4>
+        <telerik:RadGrid ID="RadGridRequest" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
+            AutoGenerateColumns="False" DataSourceID="SqlDataSourceRequest" PageSize="50" AllowPaging="true"
+            Height="850px" RenderMode="Lightweight"
+            HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
+            <ClientSettings Selecting-AllowRowSelect="true">
+                <Scrolling AllowScroll="True" UseStaticHeaders="True" SaveScrollPosition="true"></Scrolling>
+            </ClientSettings>
+            <PagerStyle Mode="Slider" AlwaysVisible="false" />
+            <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRequest">
+                <Columns>
+                    <telerik:GridBoundColumn DataField="Id" UniqueName="ID" HeaderText="Request ID" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" >
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="DateRequest" HeaderText="Date Request" SortExpression="DateRequest" UniqueName="DateRequest" DataFormatString="{0:d}" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridTemplateColumn DataField="EmployeeFullName" HeaderText="Employee" SortExpression="EmployeeFullName" UniqueName="EmployeeFullName" >
+                        <ItemTemplate>
+                            <a href='<%#String.Concat(LocalAPI.GetHostAppSite(), Eval("url")) %>' target="_blank">
+                                <i class="far fa-share-square" style="padding-right:10px"></i>
+                            </a>
+                            <%# Eval("EmployeeFullName") %>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+                    <telerik:GridBoundColumn DataField="DateFrom" HeaderText="From" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="DateTo" HeaderText="To" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="Hours" HeaderText="Hours" SortExpression="Hours" UniqueName="Hours" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="StatusName" HeaderText="Status" SortExpression="StatusName" UniqueName="StatusName" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" >
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="NotesResponse" HeaderText="Notes Response" SortExpression="NotesResponse" UniqueName="NotesResponse" >
+                    </telerik:GridBoundColumn>
+                </Columns>
+            </MasterTableView>
+        </telerik:RadGrid>
+
+    </div>
 
     <telerik:RadToolTip ID="RadToolTipHolidays" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
         <h3 style="margin: 0; text-align: center; color: white; width: 800px">
@@ -207,6 +250,17 @@
         SelectCommand="SELECT [Id], [Name] FROM [Company_Department] WHERE companyId=@companyId ORDER BY [Name]">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
+
+
+
+    <asp:SqlDataSource ID="SqlDataSourceRequest" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="NonJobTime_Request_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
+            <asp:ControlParameter ControlID="cboDepartments" Name="departmentId" PropertyName="SelectedValue" Type="Int32" />
+            <asp:Parameter Name="statusId" DefaultValue="0" />
         </SelectParameters>
     </asp:SqlDataSource>
 
