@@ -662,7 +662,7 @@
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Add-Ons" ValidationGroup="Add-Ons" StepType="Step" CssClass='<%# IIf(LocalAPI.IsQuickBookModule(lblCompanyId.Text), "wizardStep", "wizardStepHidden") %>'>
                                     <div class="pasconcept-bar" style="width: 98%">
                                         <h3>Available Modules </h3>
-
+                                        <br />
                                         <table class="table-sm">
                                             <tr>
                                                 <td style="width:20px">

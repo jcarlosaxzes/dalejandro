@@ -63,7 +63,7 @@
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
-                            <td style="width: 100px; text-align: right">Time (hrs):
+                            <td style="width: 100px; text-align: right">Time:
                             </td>
                             <td style="width:100px">
                                 <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
