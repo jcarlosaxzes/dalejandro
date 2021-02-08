@@ -649,7 +649,6 @@
     <Content Include="Account\ResetPasswordSuccess.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
-    <Content Include="adm\AATest.aspx" />
     <Content Include="adm\activejobsdashboad.aspx" />
     <Content Include="adm\appointment.aspx" />
     <Content Include="adm\avgeemployeesprofit.aspx" />
@@ -3233,13 +3232,6 @@
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adm\AATest.aspx.designer.vb">
-      <DependentUpon>AATest.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="adm\AATest.aspx.vb">
-      <DependentUpon>AATest.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="adm\activejobsdashboad.aspx.designer.vb">
       <DependentUpon>activejobsdashboad.aspx</DependentUpon>
     </Compile>
@@ -5258,7 +5250,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

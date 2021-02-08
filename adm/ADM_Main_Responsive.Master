@@ -23,14 +23,14 @@
             }
         });
     </script>
-    
+
     <%--FreshDesk--%>
     <script>
-        window.fwSettings = {'widget_id': 66000000640};
+        window.fwSettings = { 'widget_id': 66000000640 };
         !function () { if ("function" != typeof window.FreshworksWidget) { var n = function () { n.q.push(arguments) }; n.q = [], window.FreshworksWidget = n } }()
     </script>
     <script type='text/javascript' src='https://widget.freshworks.com/widgets/66000000640.js' async defer></script>
-    
+
     <title>PASconcept</title>
 
     <%--Bootstrap reference begin--%>
@@ -222,6 +222,35 @@
                                         </Nodes>
                                     </telerik:NavigationNode>
 
+                                    <%--Finances menu--%>
+                                    <telerik:NavigationNode Text="Human Resources" Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                        <Nodes>
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/employees" Text="Employees"
+                                                Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                            </telerik:NavigationNode>
+
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/vacationandholidays" Text="Vacation & Holidays"
+                                                Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                            </telerik:NavigationNode>
+
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/hiringtimeline" Text="Hiring Timeline"
+                                                Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                            </telerik:NavigationNode>
+
+                                            <telerik:NavigationNode NavigateUrl="paiddaylist" Text="Payroll Calendar" Visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
+                                                <NodeTemplate>
+                                                    <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
+                                                        <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
+                                                    </a>
+                                                </NodeTemplate>
+                                            </telerik:NavigationNode>
+
+
+
+                                        </Nodes>
+                                    </telerik:NavigationNode>
+
+
                                     <%--Contacts menu--%>
                                     <telerik:NavigationNode Text="Contacts" Visible='<%# EmployeePermission("Deny_ContactsMenu") %>'>
                                         <Nodes>
@@ -244,25 +273,6 @@
                                                     </telerik:NavigationNode>
                                                 </Nodes>
                                             </telerik:NavigationNode>
-                                            
-                                            <telerik:NavigationNode Text="Human Resources">
-                                                <Nodes>
-                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/employees" Text="Employees"
-                                                        Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
-                                                    </telerik:NavigationNode>
-
-                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/vacationandholidays" Text="Vacation & Holidays"
-                                                        Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
-                                                    </telerik:NavigationNode>
-
-                                                    <telerik:NavigationNode runat="server" NavigateUrl="~/adm/hiringtimeline" Text="Hiring Timeline"
-                                                        Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
-                                                    </telerik:NavigationNode>
-                                                </Nodes>
-                                            </telerik:NavigationNode>
-
-
-
                                             <telerik:NavigationNode Text="Subconsultants" NavigateUrl="~/adm/subconsultants"
                                                 Visible='<%# EmployeePermission("Deny_SubconsultantsList") %>'>
                                             </telerik:NavigationNode>
@@ -435,7 +445,7 @@
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode Text="Use & Occupancy Classification" NavigateUrl="~/adm/jobuse"
                                                 Visible='<%# EmployeePermission("Deny_UseClassification") And LocalAPI.GetCompanyProperty(Companyp, "Type") <> 16 %>'>
-                                            </telerik:NavigationNode>                                            
+                                            </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/notifications" Text="Notifications"
                                                 Visible='<%# EmployeePermission("Deny_HistoryLog") And VersionCaracteristica(802)%>'>
                                             </telerik:NavigationNode>
@@ -453,7 +463,7 @@
                                                     </telerik:NavigationNode>
                                                 </Nodes>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/mobileapp" Text="Mobile App" >
+                                            <telerik:NavigationNode NavigateUrl="~/adm/mobileapp" Text="Mobile App">
                                             </telerik:NavigationNode>
                                         </Nodes>
                                     </telerik:NavigationNode>
@@ -462,7 +472,7 @@
                             </telerik:RadNavigation>
                         </td>
                         <td style="text-align: right">
-                            <asp:LinkButton ID="btnCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server"  OnClick="btnSwitchCompany_Click" UseSubmitBehavior="false" Font-Size="16px" CssClass="TopRightMenuClass" CausesValidation="false">
+                            <asp:LinkButton ID="btnCompanyName" Font-Bold="true" Font-Names="Sans-Serif" runat="server" OnClick="btnSwitchCompany_Click" UseSubmitBehavior="false" Font-Size="16px" CssClass="TopRightMenuClass" CausesValidation="false">
                             </asp:LinkButton>
                         </td>
                         <td style="text-align: right; color: inherit;">
@@ -542,13 +552,6 @@
                                                         </NodeTemplate>
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="DepartmentsList" Text="Departments" Visible='<%# EmployeePermission("Deny_DepartmentsList") %>'>
-                                                        <NodeTemplate>
-                                                            <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
-                                                                <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
-                                                            </a>
-                                                        </NodeTemplate>
-                                                    </telerik:NavigationNode>
-                                                    <telerik:NavigationNode NavigateUrl="paiddaylist" Text="Payroll" Visible='<%# EmployeePermission("Deny_PayrollCalendar") %>'>
                                                         <NodeTemplate>
                                                             <a class="TopRightMenuClass" href="<%# DataBinder.Eval(Container, "NavigateUrl").ToString() %>">
                                                                 <span class="rnvText"><%# DataBinder.Eval(Container, "Text").ToString() %></span>
