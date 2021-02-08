@@ -32,6 +32,16 @@ Public Class vacationandholidays
                 e.Appointment.CssClass = "rsCategoryGreen"
                 e.Appointment.Font.Size = 10
                 e.Appointment.ForeColor = System.Drawing.Color.White
+
+            Case "Closure"
+                e.Appointment.CssClass = "rsCategoryDarkBlue"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
+
+            Case "Payday"
+                e.Appointment.CssClass = "rsCategoryDarkRed"
+                e.Appointment.Font.Size = 10
+                e.Appointment.ForeColor = System.Drawing.Color.White
         End Select
     End Sub
 
