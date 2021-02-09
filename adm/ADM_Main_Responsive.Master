@@ -245,6 +245,9 @@
                                                 </NodeTemplate>
                                             </telerik:NavigationNode>
 
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/employee_files" Text="Employee Documents"
+                                                Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
+                                            </telerik:NavigationNode>
 
 
                                         </Nodes>

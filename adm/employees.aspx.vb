@@ -109,6 +109,9 @@ Public Class employees
                 sUrl = "~/ADM/Employee_Status_form.aspx?employeeId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 800, 650, True)
 
+            Case "Uploads"
+                Response.Redirect("~/ADM/employee_files?employee=" & e.CommandArgument)
+
         End Select
     End Sub
 
