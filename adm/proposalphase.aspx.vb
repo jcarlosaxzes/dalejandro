@@ -22,6 +22,8 @@
 
                 If Not Request.QueryString("backpage") Is Nothing Then
                     Session("pphasebackpage") = Request.QueryString("backpage")
+                Else
+                    Session("pphasebackpage") = ""
                 End If
 
 

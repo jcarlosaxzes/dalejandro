@@ -69,9 +69,9 @@
 
     <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-            <table width="100%" class="pasconcept-bar noprint">
+            <table style="width: 100%" class="pasconcept-bar noprint">
                 <tr>
-                    <td align="right" width="100px">Status:</td>
+                    <td style="text-align: right; width: 100px">Status:</td>
                     <td style="width: 250px">
                         <telerik:RadComboBox ID="cboStatus" runat="server" Width="100%" AppendDataBoundItems="true">
                             <Items>
