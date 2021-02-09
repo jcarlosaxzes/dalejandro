@@ -11,7 +11,7 @@
 
                 lblProposalId.Text = LocalAPI.GetProposalIdFromGUID(Request.QueryString("guid"))
 
-                iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&backpage=proposalnewwizard"
+                iframeViewProposal.Src = LocalAPI.GetSharedLink_URL(111, lblProposalId.Text) & "&IsReadOnly=1&backpage=pro_phases"
 
                 Master.ActiveTab(7)
 

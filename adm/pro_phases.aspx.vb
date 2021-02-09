@@ -34,7 +34,7 @@ Public Class pro_phases
             Case "EditPhase"
                 Response.Redirect($"~/adm/proposalphase.aspx?Id={e.CommandArgument}&proposalId={lblProposalId.Text}&backpage=pro_phases")
             Case "AddTaskInPhase"
-                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=proposalnewwizard&phaseId={e.CommandArgument}")
+                Response.Redirect($"~/adm/proposaltask.aspx?proposalId={lblProposalId.Text}&backpage=pro_phases&phaseId={e.CommandArgument}")
         End Select
 
     End Sub

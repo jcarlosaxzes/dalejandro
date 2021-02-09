@@ -464,6 +464,8 @@
                                                     </telerik:NavigationNode>
                                                     <telerik:NavigationNode NavigateUrl="~/adm/client_sync_qb" Text="Intuit QuickBooks" Visible='<%# LocalAPI.IsQuickBookModule(Companyp)  %>'>
                                                     </telerik:NavigationNode>
+                                                    <telerik:NavigationNode NavigateUrl="~/adm/client_sync_Ebillity" Text="Ebillity" Visible='<%# LocalAPI.IsEbilityModule(Companyp)  %>'>
+                                                    </telerik:NavigationNode>
                                                 </Nodes>
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/mobileapp" Text="Mobile App">
