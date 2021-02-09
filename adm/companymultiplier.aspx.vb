@@ -48,7 +48,7 @@ Public Class companymultiplier
         Select Case e.CommandName
             Case "EditHourlyWage"
                 Dim guid As String = LocalAPI.GetEmployeeProperty(e.CommandArgument, "guid")
-                Response.Redirect($"~/adm/employeehourlywage.aspx?guid={guid}&year={cboYear.SelectedValue}&departmentId={cboDepartments.SelectedValue}")
+                Response.Redirect($"~/adm/employeehourlywage.aspx?guid={guid}&year={cboYear.SelectedValue}&departmentId={cboDepartments.SelectedValue}&backpage=companymultiplier")
         End Select
 
     End Sub

@@ -11,12 +11,30 @@
             lblEmployeeEmail.Text = LocalAPI.GetEmployeeEmail(lId:=lblEmployeeId.Text)
             lblEmployeeName.Text = LocalAPI.GetEmployeeFullName(lblEmployeeEmail.Text, lblCompanyId.Text)
 
+            If Not Request.QueryString("backpage") Is Nothing Then
+                Session("employeehourlywagebackpage") = Request.QueryString("backpage")
+            Else
+                Session("employeehourlywagebackpage") = ""
+            End If
+
         End If
 
     End Sub
+    Protected Sub Back()
+        Select Case Session("employeehourlywagebackpage")
+            Case "employeewages"
+                Response.Redirect($"~/adm/employeewages.aspx?year={lblYear.Text}&departmentId={lblDepartmentId.Text}")
 
+            Case "companymultiplier"
+                Response.Redirect($"~/adm/companymultiplier.aspx?year={lblYear.Text}&departmentId={lblDepartmentId.Text}")
+
+            Case Else
+                Response.Redirect($"~/adm/employeewages.aspx?year={lblYear.Text}&departmentId={lblDepartmentId.Text}")
+        End Select
+
+    End Sub
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Response.Redirect($"~/adm/companymultiplier.aspx?year={lblYear.Text}&departmentId={lblDepartmentId.Text}")
+        Back()
     End Sub
 
     Private Sub btnReviewSalary_Click(sender As Object, e As EventArgs) Handles btnReviewSalary.Click

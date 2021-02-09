@@ -664,6 +664,7 @@
     <Content Include="adm\cashflow.aspx" />
     <Content Include="adm\chartdepartments.aspx" />
     <Content Include="adm\client.aspx" />
+    <Content Include="adm\employeewages.aspx" />
     <Content Include="adm\employee_files.aspx" />
     <Content Include="adm\clientfiles.aspx" />
     <Content Include="adm\clientmanagement.aspx" />
@@ -3352,6 +3353,13 @@
       <DependentUpon>client.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="adm\employeewages.aspx.designer.vb">
+      <DependentUpon>employeewages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employeewages.aspx.vb">
+      <DependentUpon>employeewages.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="adm\employee_files.aspx.designer.vb">
       <DependentUpon>employee_files.aspx</DependentUpon>
     </Compile>
@@ -5258,7 +5266,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
