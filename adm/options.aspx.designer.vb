@@ -131,6 +131,24 @@ Partial Public Class options
     Protected WithEvents FormView1 As Global.System.Web.UI.WebControls.FormView
 
     '''<summary>
+    '''RadWizardStep3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWizardStep3 As Global.Telerik.Web.UI.RadWizardStep
+
+    '''<summary>
+    '''RadGridFiles control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadGridFiles As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''SqlDataSource1 control.
     '''</summary>
     '''<remarks>
@@ -165,6 +183,15 @@ Partial Public Class options
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceDepartments As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceAzureFiles control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceAzureFiles As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblEmployeeId control.

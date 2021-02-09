@@ -262,6 +262,48 @@
 
                 </fieldset>
             </telerik:RadWizardStep>
+
+            <telerik:RadWizardStep runat="server" ID="RadWizardStep3" Title="Documents (W2, Paychecks, Contracts, Agreements)" StepType="Step">
+                <h3>Employee Documents</h3>
+                <telerik:RadGrid ID="RadGridFiles" runat="server" DataSourceID="SqlDataSourceAzureFiles" GridLines="None"
+                    AllowPaging="True" PageSize="25" AutoGenerateColumns="False" HeaderStyle-HorizontalAlign="Center">
+                    <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceAzureFiles">
+                        <PagerStyle Mode="Slider" AlwaysVisible="false" />
+                        <Columns>
+                            <telerik:GridBoundColumn DataField="Id" HeaderText="Id" ReadOnly="True" UniqueName="Id" Display="false" HeaderStyle-Width="40px">
+                            </telerik:GridBoundColumn>
+
+                            <telerik:GridTemplateColumn HeaderText="" UniqueName="IconType" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 32)%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Name" HeaderText="File Name" UniqueName="Name" SortExpression="Name" ItemStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Left" HeaderStyle-HorizontalAlign="Left">
+                                <ItemTemplate>
+                                            <%# Eval("Name")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Type" HeaderText="Type" UniqueName="Type" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Center">
+                                <ItemTemplate>
+                                    <%# Eval("nType")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn DataField="Date" HeaderText="Date" UniqueName="Date" SortExpression="Date" ItemStyle-HorizontalAlign="Center"
+                                HeaderStyle-Width="180px" HeaderStyle-HorizontalAlign="Center" Aggregate="Count">
+                                <ItemTemplate>
+                                    <%# Eval("Date", "{0:d}")%>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                        </Columns>
+
+                    </MasterTableView>
+
+                </telerik:RadGrid>
+            </telerik:RadWizardStep>
         </WizardSteps>
     </telerik:RadWizard>
 
@@ -299,6 +341,14 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
+    <asp:SqlDataSource ID="SqlDataSourceAzureFiles" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Employee_azureuploads_SELECT" SelectCommandType="StoredProcedure"
+        DeleteCommand="azureuploads_DELETE" DeleteCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblEmployeeId" Name="EmployeeId" PropertyName="Text" Type="Int32" />
+            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
+        </SelectParameters>
+    </asp:SqlDataSource>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeEmail" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Text="0" Visible="False"></asp:Label>

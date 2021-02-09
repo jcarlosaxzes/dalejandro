@@ -69,5 +69,8 @@ Public Class options
             Label1.Text = ex.Message
         End Try
     End Sub
+    Public Function FormatSource(source As String)
+        Return source.Replace("1.-", "").Replace("2.-", "").Replace("3.-", "")
+    End Function
 
 End Class
