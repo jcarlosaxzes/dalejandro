@@ -664,6 +664,7 @@
     <Content Include="adm\cashflow.aspx" />
     <Content Include="adm\chartdepartments.aspx" />
     <Content Include="adm\client.aspx" />
+    <Content Include="adm\employee_files.aspx" />
     <Content Include="adm\clientfiles.aspx" />
     <Content Include="adm\clientmanagement.aspx" />
     <Content Include="adm\clients.aspx" />
@@ -3349,6 +3350,13 @@
     </Compile>
     <Compile Include="adm\client.aspx.vb">
       <DependentUpon>client.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adm\employee_files.aspx.designer.vb">
+      <DependentUpon>employee_files.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="adm\employee_files.aspx.vb">
+      <DependentUpon>employee_files.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="adm\clientfiles.aspx.designer.vb">

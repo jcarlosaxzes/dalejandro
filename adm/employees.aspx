@@ -220,7 +220,7 @@
                     </telerik:GridTemplateColumn>
 
                     <telerik:GridTemplateColumn HeaderText="Actions" UniqueName="Actions" HeaderStyle-HorizontalAlign="Center"
-                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="120px">
+                        ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="130px">
                         <ItemTemplate>
                             <table style="width: 100%">
                                 <tr>
@@ -240,6 +240,12 @@
                                         <asp:LinkButton runat="server" ID="btnPermits" CommandName="Permits" CommandArgument='<%# Eval("Id") %>'
                                             ToolTip="Employee Permits" CausesValidation="false">
                                                                 <i class="fas fa-cog"></i>
+                                        </asp:LinkButton>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <asp:LinkButton runat="server" ID="btnUploads" CommandName="Uploads" CommandArgument='<%# Eval("guid") %>'
+                                            ToolTip="Employee Documents" CausesValidation="false">
+                                                                <i class="fas fa-cloud-upload-alt"></i>
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
