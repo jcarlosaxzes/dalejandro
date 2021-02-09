@@ -26,7 +26,9 @@ Public Class client_sync_Ebillity
     Protected Sub btnGetCustomers_Click(sender As Object, e As EventArgs)
         System.Threading.Tasks.Task.Run(Function() EbillityApi.GetClientsAsync(lblCompanyId.Text))
 
+        RadGrid1.DataBind()
     End Sub
+
 
     Protected Sub RadGrid1_ItemCommand(sender As Object, e As Telerik.Web.UI.GridCommandEventArgs) Handles RadGrid1.ItemCommand
 
@@ -346,6 +348,11 @@ Public Class client_sync_Ebillity
 
     Private Sub btnGetTimeCategories_Click(sender As Object, e As EventArgs) Handles btnGetTimeCategories.Click
         System.Threading.Tasks.Task.Run(Function() EbillityApi.GetActivitiesAsync(lblCompanyId.Text))
+        RadGrid1.DataBind()
+        RadGridEmployees.DataBind()
+        RadGridProject.DataBind()
+        RadGridTimeCategories.DataBind()
+        RadGridTimeEntries.DataBind()
     End Sub
 
 
@@ -464,6 +471,15 @@ Public Class client_sync_Ebillity
 
     Private Sub btnGetTimeEntries_Click(sender As Object, e As EventArgs) Handles btnGetTimeEntries.Click
         System.Threading.Tasks.Task.Run(Function() EbillityApi.GetTimeEntriesAsync(lblCompanyId.Text))
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        RadGrid1.DataBind()
+        RadGridEmployees.DataBind()
+        RadGridProject.DataBind()
+        RadGridTimeCategories.DataBind()
+        RadGridTimeEntries.DataBind()
+
     End Sub
 
 

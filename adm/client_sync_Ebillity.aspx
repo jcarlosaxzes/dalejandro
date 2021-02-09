@@ -21,6 +21,8 @@
                             <span class="pasconcept-pagetitle">Unlinked Ebillity Clients
                             </span>
                             <span style="float: right; vertical-align: middle;">
+                                <asp:Button ID="btnRefresh" runat="server" Text="Refresh" CssClass="btn btn-primary" />
+
                                 <asp:Button ID="btnGetCustomers" runat="server" Text="Get Clients from Ebillity" CssClass="btn btn-success" OnClick="btnGetCustomers_Click" />
 
                                 <asp:LinkButton ID="btnBulkLink" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false" ToolTip="Link all selected Ebillity Client to PASconcept Clients">
