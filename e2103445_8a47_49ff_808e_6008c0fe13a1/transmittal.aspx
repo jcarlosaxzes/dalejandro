@@ -108,7 +108,7 @@
                             <ItemTemplate>
                                 <tr>
                                     <td>
-                                       <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                       <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 16)%>
                                         &nbsp;&nbsp;
                                         <%# String.Concat(Eval("Name"), " -- (", Eval("FileType"), ")")%>
                                     </td>
