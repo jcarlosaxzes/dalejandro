@@ -59,6 +59,42 @@ Partial Public Class pro_phases
     Protected WithEvents RadGridFees As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''PanelPhase control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelPhase As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''rptrPhases control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptrPhases As Global.System.Web.UI.WebControls.Repeater
+
+    '''<summary>
+    '''PanelNoPhases control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelNoPhases As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''rptrScopeOfWork control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptrScopeOfWork As Global.System.Web.UI.WebControls.Repeater
+
+    '''<summary>
     '''SqlDataSourcePhases control.
     '''</summary>
     '''<remarks>
@@ -84,6 +120,15 @@ Partial Public Class pro_phases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceProposaldDetailDuplicate As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceSCOPEOFWORK control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceSCOPEOFWORK As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblCompanyId control.

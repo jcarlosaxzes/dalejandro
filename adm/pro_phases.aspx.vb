@@ -15,6 +15,8 @@ Public Class pro_phases
 
                 IsProposalReadOnly()
 
+                rptrPhases.DataBind()
+
                 Master.ActiveTab(2)
 
             End If
@@ -97,6 +99,19 @@ Public Class pro_phases
                 End If
         End Select
 
+    End Sub
+    Public Sub rptrPhases_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
+        'Dim e1 As String = DataBinder.Eval(e.Item.DataItem, "phaseId")
+        If e.Item.ItemType = ListItemType.Item OrElse e.Item.ItemType = ListItemType.AlternatingItem Then
+            Dim ADSChild As SqlDataSource = e.Item.FindControl("SqlDataSourceScopeOfWorkByPhase")
+            ADSChild.SelectParameters(2).DefaultValue = DataBinder.Eval(e.Item.DataItem, "phaseId")
+        End If
+
+    End Sub
+
+    Private Sub SqlDataSourcePhases_Selected(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourcePhases.Selected
+        PanelPhase.Visible = LocalAPI.IsPhases(lblProposalId.Text) > 0
+        PanelNoPhases.Visible = Not PanelPhase.Visible
     End Sub
 
 

@@ -44,7 +44,6 @@ Public Class proposal_save_copy
     Protected Sub SqlDataSource1_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSource1.Inserted
         Dim Id As String = e.Command.Parameters("@ProposalId").Value
         If Val(Id) > 0 Then
-            'Response.Write("<script language='javascript' type='text/javascript'>parent.location.href='../adm/proposal.aspx?proposalId=" & Id & "';</script>")
             Back(Id)
         End If
     End Sub
