@@ -275,7 +275,7 @@
 
                             <telerik:GridTemplateColumn HeaderText="" UniqueName="IconType" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" HeaderStyle-HorizontalAlign="Center">
                                 <ItemTemplate>
-                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 32)%>
+                                    <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 32)%>
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 

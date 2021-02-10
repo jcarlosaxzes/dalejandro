@@ -146,7 +146,7 @@
                                                 <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                     <tr>
                                                         <td style="height: 108px; padding: 0px;">
-                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
+                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 96)%>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -200,7 +200,7 @@
                                                 <table style="width: 100%; flex-wrap: nowrap; text-overflow: ellipsis; overflow: hidden;">
                                                     <tr>
                                                         <td style="height: 108px; padding: 0px;">
-                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 96)%>
+                                                            <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 96)%>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -251,7 +251,7 @@
                                         <telerik:GridTemplateColumn DataField="Name" HeaderText="FileName" UniqueName="Name" SortExpression="Name" ItemStyle-HorizontalAlign="Left"
                                             HeaderStyle-Width="300px" HeaderStyle-HorizontalAlign="Left">
                                             <ItemTemplate>
-                                                <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("Name"), 16)%>
+                                                <%# LocalAPI.CreateIcon(Eval("ContentType"), Eval("url"), Eval("guid").ToString(), Eval("Name"), 16)%>
                                                             &nbsp;&nbsp;
                                                            
                                                             <%# Eval("Name")%>

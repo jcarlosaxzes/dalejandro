@@ -62,7 +62,7 @@ Public Class ADM_Main_Responsive
         'Send notifications to Masters 30 days before Subscription Expired
         If billingExpirationDate <= Date.Today.AddDays(30) And Not AlertMasterSubscriptionExpired Then
 
-            SendGrid.Email.SendMail("daniel.work.2006@gmail.com", "", "", "PASconcept Subscription Expired", $" Subscription Expire for Company {companyName}", companyId, 0, 0)
+            SendGrid.Email.SendMail("axzesllc@gmail.com", "jcarlo@axzes.com", "", "PASconcept Subscription Expired", $" Subscription Expire for Company {companyName}", companyId, 0, 0)
             LocalAPI.ExecuteNonQuery($"update Company set AlertMasterSubscriptionExpired = 1 where companyId = {companyId}")
         End If
 
