@@ -5507,12 +5507,7 @@ Public Class LocalAPI
     '          Nuevo registro en la tabla 'Proposal'. Inicializacion segun su tipo 
     ' Retorno: Id del nuevo proposal. 
     ' ................................................................................................................................
-    Public Shared Function CreateProposal(ByVal lType As Integer, ByVal ProjectName As String, employeeId As Integer, ByVal companyId As Integer,
-                                          activeEmployeeId As Integer,
-                                       Optional ProjectSector As Integer = 0, Optional ProjectUse As String = "", Optional ProjectUse2 As String = "",
-                                          Optional DepartmentId As Integer = 0, Optional Retainer As Boolean = True,
-                                          Optional ProjectLocation As String = "", Optional Unit As Double = 0, Optional Measure As Integer = 0,
-                                          Optional ProjectType As String = "", Optional clientId As Integer = 0, Optional ProjectManagerId As Integer = 0) As Integer
+    Public Shared Function Proposal_Wizard_INSERT(ByVal lType As Integer, ByVal ProjectName As String, employeeId As Integer, ByVal companyId As Integer, activeEmployeeId As Integer, ProjectSector As Integer, ProjectUse As String, ProjectUse2 As String, DepartmentId As Integer, Retainer As Boolean, ProjectLocation As String, Unit As Double, Measure As Integer, ProjectType As String, clientId As Integer, ProjectManagerId As Integer, Owner As String, TextBegin As String, TextEnd As String) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
             Dim cmd As SqlCommand = cnn1.CreateCommand()
@@ -5520,7 +5515,7 @@ Public Class LocalAPI
             Dim SharePublicLinks As Boolean = IsAzureStorage(companyId)
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "Proposal_v20_INSERT_Phases_Tasks"
+            cmd.CommandText = "Proposal_Wizard_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
             Dim taskId As String
 
@@ -5544,6 +5539,9 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@ProjectManagerId", ProjectManagerId)
             cmd.Parameters.AddWithValue("@employeeId", activeEmployeeId)
 
+            cmd.Parameters.AddWithValue("@Owner", Owner)
+            cmd.Parameters.AddWithValue("@TextBegin", TextBegin)
+            cmd.Parameters.AddWithValue("@TextEnd", TextEnd)
 
             ' Set up the output parameter 
             Dim parTaskIdList As SqlParameter = New SqlParameter("@TaskIdList", SqlDbType.NVarChar, 80)
@@ -5567,24 +5565,6 @@ Public Class LocalAPI
             proposalId = parId.Value
 
             Dim sArr As String()
-            'If Len("" & parTaskIdList.Value) > 0 Then
-            '    sArr = Split(Trim(parTaskIdList.Value), ",")
-            '    If sArr.Length > 0 Then
-
-            '        Dim i As Int16
-            '        For i = 0 To sArr.Length - 1
-            '            If Len(sArr(i).ToString) > 0 Then
-            '                ' Limpiar caracteres no deseados
-            '                sArr(i) = Replace(sArr(i), vbLf, "")
-            '                sArr(i) = Replace(sArr(i), " ", "")
-            '                taskId = GetTaskIdFromTaskcode(sArr(i), companyId)
-            '                If Len("" & taskId) > 0 Then
-            '                    NewDetailProposal(proposalId, taskId)
-            '                End If
-            '            End If
-            '        Next
-            '    End If
-            'End If
 
             If Len("" & parPaymentsScheduleList.Value) > 0 Then
                 ' Insertar ScheduleList
@@ -12143,6 +12123,12 @@ Public Class LocalAPI
     Public Shared Function ProposalNumber(ByVal Id As Integer) As String
         Return GetStringEscalar("SELECT dbo.ProposalNumber(" & Id & ")")
     End Function
+
+    Public Shared Function IsPhases(ByVal proposalId As Integer) As Integer
+        Return GetNumericEscalar($"select count(*) from Proposal_phases where proposalId={proposalId}")
+    End Function
+
+
     Public Shared Function Proposal_GeneratePaymentSchedules(proposalId As Integer, psId As Integer) As Boolean
         Try
             Dim psValues As String = GetStringEscalar("SELECT PaymentsScheduleList FROM Invoices_types WHERE [Id]=" & psId)

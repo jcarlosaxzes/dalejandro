@@ -260,7 +260,7 @@
                                     <div class="row mb-lg">
                                         <section class="col-md-12 col-print-12">
                                             <section class="col-md-12 col-print-12">
-                                                <h4><span class="fw-semi-bold">Scope of Work</h4>
+                                                <h4><span class="fw-semi-bold">Scope of Work</span></h4>
                                                 <asp:Repeater ID="rptrPhases" runat="server" DataSourceID="SqlDataSourcePHASES" OnItemDataBound="rptrPhases_ItemDataBound">
                                                     <ItemTemplate>
                                                         <h4 class="company-name m-t-1"><%# Eval("Name")%>&nbsp;&nbsp;(<%# Eval("Code")%>)</h4>
@@ -269,7 +269,7 @@
                                                         </span>
                                                         <br />
                                                         <%# Eval("Description")%>
-                                                        <div style="padding-left:25px">
+                                                        <div style="padding-left: 25px">
                                                             <asp:Repeater ID="rptrScopeOfWorkByPhase" runat="server" DataSourceID="SqlDataSourceScopeOfWorkByPhase">
                                                                 <ItemTemplate>
                                                                     <h5 class="company-name m-t-1"><%# Eval("Description") %></h5>
@@ -314,6 +314,7 @@
                                 </asp:Panel>
 
                             </div>
+
                             <%--Service Fee(s)--%>
                             <div class="row mb-lg pagebreak">
                                 <section class="col-md-12 col-print-12">
@@ -324,7 +325,7 @@
                                         <MasterTableView AutoGenerateColumns="False" DataSourceID="SqlDataSourcePropDetails" CssClass="table">
                                             <FooterStyle BorderStyle="None" />
                                             <Columns>
-                                                <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="Phase" UniqueName="Phase" 
+                                                <telerik:GridBoundColumn DataField="PhaseCode" HeaderText="Phase" UniqueName="Phase"
                                                     HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center">
                                                 </telerik:GridBoundColumn>
                                                 <telerik:GridBoundColumn DataField="taskcode" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center"
