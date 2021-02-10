@@ -106,6 +106,19 @@ Public Class AzureStorageApi
         End Try
     End Function
 
+    Public Shared Function GetCloudBlockBlob(KeyName As String) As CloudBlockBlob
+        Try
+            Dim containerName As String = "documents"
+            Dim storageAccount As CloudStorageAccount = CloudStorageAccount.Parse(GetConexion())
+            Dim blobClient As CloudBlobClient = storageAccount.CreateCloudBlobClient()
+            Dim container As CloudBlobContainer = blobClient.GetContainerReference(containerName)
+            Dim sourceBlockBlob As CloudBlockBlob = container.GetBlockBlobReference(KeyName)
+            Return sourceBlockBlob
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
 
     Public Shared Function UploadBytesData(fileName As String, fileData As Byte(), contentType As String) As String
         Try

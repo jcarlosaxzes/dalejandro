@@ -2277,6 +2277,7 @@
     <Content Include="distribution\iphone.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\acknowledgment.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\cp_jobs.aspx" />
+    <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\DownFiles.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\invoice.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\job.aspx" />
     <Content Include="e2103445_8a47_49ff_808e_6008c0fe13a1\jobprogressrollup.aspx" />
@@ -4647,6 +4648,13 @@
       <DependentUpon>cp_jobs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\DownFiles.aspx.designer.vb">
+      <DependentUpon>DownFiles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\DownFiles.aspx.vb">
+      <DependentUpon>DownFiles.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="e2103445_8a47_49ff_808e_6008c0fe13a1\invoice.aspx.designer.vb">
       <DependentUpon>invoice.aspx</DependentUpon>
     </Compile>
@@ -5266,7 +5274,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
