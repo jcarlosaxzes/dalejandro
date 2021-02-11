@@ -9,6 +9,17 @@
             <telerik:AjaxSetting AjaxControlID="btnFind">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridRequest" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="RadGridRequest">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridRequest" LoadingPanelID="RadAjaxLoadingPanel1" />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="cboStatus">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridRequest" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -33,7 +44,7 @@
                 <i class="fas fa-filter"></i>&nbsp;Filter
             </button>
 
-            
+
 
             <telerik:RadComboBox ID="cboEmployee" runat="server" DataSourceID="SqlDataSourceEmpl_activos" MarkFirstMatch="True" ToolTip="Select active Employye"
                 Width="300px" DataTextField="Name" DataValueField="Id" Filter="Contains" Height="300px" AutoPostBack="true">
@@ -50,7 +61,7 @@
     </div>
     <div class="collapse" id="collapseFilter">
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-            <table style="width:100%" class="pasconcept-bar noprint">
+            <table style="width: 100%" class="pasconcept-bar noprint">
                 <tr>
                     <td style="width: 100px; text-align: right">Department:</td>
                     <td style="width: 400px">
@@ -102,8 +113,21 @@
     </div>
 
     <div class="collapse" id="collapseRequest">
-        <h4>Pending Requests</h4>
-        <telerik:RadGrid ID="RadGridRequest" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" 
+
+        <div class="pasconcept-bar noprint">
+            <span style="vertical-align: middle;font-size:20px;font-weight:bold">Request</span>
+
+            <span style="float: right; vertical-align: middle;">Status:
+                <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="true" Width="250px" AutoPostBack="true">
+                    <Items>
+                        <telerik:RadComboBoxItem runat="server" Selected="true" Text="Pending" Value="0" />
+                        <telerik:RadComboBoxItem runat="server" Text="Accepted" Value="1" />
+                        <telerik:RadComboBoxItem runat="server" Text="Declined" Value="2" />
+                    </Items>
+                </telerik:RadComboBox>
+            </span>
+        </div>
+        <telerik:RadGrid ID="RadGridRequest" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True"
             AutoGenerateColumns="False" DataSourceID="SqlDataSourceRequest" PageSize="15" AllowPaging="true"
             Height="850px" RenderMode="Lightweight"
             HeaderStyle-HorizontalAlign="Center" HeaderStyle-Font-Size="Small" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" FooterStyle-Font-Size="Small" FooterStyle-HorizontalAlign="Right" FooterStyle-Font-Bold="true">
@@ -113,14 +137,14 @@
             <PagerStyle Mode="Slider" AlwaysVisible="false" />
             <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceRequest">
                 <Columns>
-                    <telerik:GridBoundColumn DataField="Id" UniqueName="ID" HeaderText="Request ID" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px" >
+                    <telerik:GridBoundColumn DataField="Id" UniqueName="ID" HeaderText="Request ID" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="DateRequest" HeaderText="Date Request" SortExpression="DateRequest" UniqueName="DateRequest" DataFormatString="{0:d}" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center">
                     </telerik:GridBoundColumn>
-                    <telerik:GridTemplateColumn DataField="EmployeeFullName" HeaderText="Employee" SortExpression="EmployeeFullName" UniqueName="EmployeeFullName" >
+                    <telerik:GridTemplateColumn DataField="EmployeeFullName" HeaderText="Employee" SortExpression="EmployeeFullName" UniqueName="EmployeeFullName">
                         <ItemTemplate>
                             <a href='<%#String.Concat(LocalAPI.GetHostAppSite(), Eval("url")) %>' target="_blank">
-                                <i class="far fa-share-square" style="padding-right:10px"></i>
+                                <i class="far fa-share-square" style="padding-right: 10px"></i>
                             </a>
                             <%# Eval("EmployeeFullName") %>
                         </ItemTemplate>
@@ -131,9 +155,9 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Hours" HeaderText="Hours" SortExpression="Hours" UniqueName="Hours" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="StatusName" HeaderText="Status" SortExpression="StatusName" UniqueName="StatusName" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px" >
+                    <telerik:GridBoundColumn DataField="StatusName" HeaderText="Status" SortExpression="StatusName" UniqueName="StatusName" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="150px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="NotesResponse" HeaderText="Notes Response" SortExpression="NotesResponse" UniqueName="NotesResponse" >
+                    <telerik:GridBoundColumn DataField="NotesResponse" HeaderText="Notes Response" SortExpression="NotesResponse" UniqueName="NotesResponse">
                     </telerik:GridBoundColumn>
                 </Columns>
             </MasterTableView>
@@ -257,7 +281,7 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
             <asp:ControlParameter ControlID="cboDepartments" Name="departmentId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:Parameter Name="statusId" DefaultValue="0" />
+            <asp:ControlParameter ControlID="cboStatus" Name="statusId" PropertyName="SelectedValue" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
 

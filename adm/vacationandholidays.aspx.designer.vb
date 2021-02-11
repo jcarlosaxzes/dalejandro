@@ -95,6 +95,15 @@ Partial Public Class vacationandholidays
     Protected WithEvents RadScheduler1 As Global.Telerik.Web.UI.RadScheduler
 
     '''<summary>
+    '''cboStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
     '''RadGridRequest control.
     '''</summary>
     '''<remarks>

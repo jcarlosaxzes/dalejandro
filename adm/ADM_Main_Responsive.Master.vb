@@ -248,9 +248,15 @@ Public Class ADM_Main_Responsive
     End Function
 
     Protected Sub Unnamed_LoggingOut(sender As Object, e As LoginCancelEventArgs)
-        Context.GetOwinContext().Authentication.SignOut()
-        Session.Contents.RemoveAll()
-        Session.Abandon()
+        Try
+            Session.Contents.RemoveAll()
+            Session.Abandon()
+            Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie)
+            'Context.GetOwinContext().Authentication.SignOut()
+            Response.Redirect("~/Account/login.aspx")
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Public Function HideMasterMenu() As Boolean

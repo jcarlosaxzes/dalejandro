@@ -13,17 +13,7 @@
             <ItemTemplate>
                 <table class="table-sm" style="width: 100%">
                     <tr>
-                        <td style="width: 50%;vertical-align:top">
-                            <h4 style="border: none">The following time off request has been submitted</h4>
-                            <h4 style="border: none">for the employee&nbsp;<b><%# Eval("EmployeeFullName") %></b></h4>
-                            <h4 style="border: none">Reason for request:&nbsp;<b><%# Eval("TypeName") %></b></h4>
-                            <h4 style="border: none">Date Request:&nbsp;<%# Eval("DateRequest", "{0:d}")%>&nbsp;&nbsp;&nbsp;Status:&nbsp;<b><%# Eval("StatusName") %></b></h4>
-                            <h4 style="border: none"><%# IIf(Eval("DateFrom") = Eval("DateTo"), "", String.Concat("Number of days requested:&nbsp;<b>", Eval("nDays"), "</b>"))%></h4>
-                            <h5 style="border: none">Dates of absence, From &nbsp;<b><%# Eval("DateFrom", "{0:d}") %></b>&nbsp;to&nbsp; <b><%# Eval("DateTo", "{0:d}") %></b></h5>
-                            <h5 style="border: none">Hours of absence, each day:&nbsp;<%# Eval("Hours") %></h5>
-                            <h5 style="border: none">Employee Explanation:&nbsp;<%# Eval("Notes") %></h5>
-                        </td>
-                        <td style="vertical-align:top">
+                        <td class="pasconcept-bar" style="width: 500px; vertical-align: top">
                             <table class="table-sm" style="width: 100%">
                                 <tr>
                                     <td style="width: 25%; text-align: center"><b>Benfits</b></td>
@@ -44,59 +34,129 @@
                                     <td style="text-align: center"><%# Eval("Benefits_personals") - Eval("used_personals") %></td>
                                 </tr>
                             </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <h3>Response Explanation:&nbsp;</h3>
-                                    <telerik:RadTextBox ID="txtExplanation" runat="server" Text='<%# Bind("NotesResponse")%>' Enabled='<%# Eval("Status") = 0%>' Width="100%"></telerik:RadTextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align:center">
-                             <asp:LinkButton ID="btnSign" runat="server" Visible='<%# Eval("Status") = 0%>' CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" OnClick="btnAccept_Click" CausesValidation="true">
-                                            Accept
-                                        </asp:LinkButton>
-                            &nbsp;&nbsp;&nbsp;
-                            <asp:LinkButton ID="btnDecline" runat="server" Visible='<%# Eval("Status") = 0%>' CssClass="btn btn-danger btn-lg" UseSubmitBehavior="false" OnClick="btnDecline_Click" CausesValidation="true">
-                                            Decline
-                                        </asp:LinkButton>
 
+                            <br />
+                            <b>The following time off request has been submitted</b>
+                            <table class="table-sm" style="width: 100%">
+                                <tr>
+                                    <td style="text-align: right; width: 180px">Employee:
+                                    </td>
+                                    <td>
+                                        <%# Eval("EmployeeFullName") %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right">Reason for Request:
+                                    </td>
+                                    <td>
+                                        <%# Eval("TypeName") %>
+                                    </td>
+                                    <tr>
+                                        <td style="text-align: right">Date of Request:
+                                        </td>
+                                        <td>
+                                            <%# Eval("DateRequest", "{0:d}")%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Status:
+                                        </td>
+                                        <td>
+                                            <%# Eval("StatusName") %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Days Requested:
+                                        </td>
+                                        <td>
+                                            <%# Eval("nDays") %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Dates of absence, From:
+                                        </td>
+                                        <td>
+                                            <%# Eval("DateFrom", "{0:d}") %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Dates of Absence, To:
+                                        </td>
+                                        <td>
+                                            <%# Eval("DateTo", "{0:d}") %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Hours of Absence per Day:
+                                        </td>
+                                        <td>
+
+                                            <%# Eval("Hours") %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Employee Notes:
+                                        </td>
+                                        <td>
+                                            <%# Eval("Notes") %>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <b>Response Explanation:</b>
+                                            <telerik:RadTextBox ID="txtExplanation" runat="server" Text='<%# Bind("NotesResponse")%>' ReadOnly='<%# Eval("Status") <> 0%>' Width="100%"></telerik:RadTextBox>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="2" style="text-align: center">
+                                            <asp:LinkButton ID="btnSign" runat="server" Visible='<%# Eval("Status") = 0%>' CssClass="btn btn-primary btn-lg" UseSubmitBehavior="false" OnClick="btnAccept_Click" CausesValidation="true">
+                                            Accept
+                                            </asp:LinkButton>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <asp:LinkButton ID="btnDecline" runat="server" Visible='<%# Eval("Status") = 0%>' CssClass="btn btn-danger btn-lg" UseSubmitBehavior="false" OnClick="btnDecline_Click" CausesValidation="true">
+                                                            Decline
+                                            </asp:LinkButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtExplanation" Text="(*) Response Explanation can not be empty" SetFocusOnError="true" ForeColor="Red">
+                                            </asp:RequiredFieldValidator>
+                                        </td>
+                                    </tr>
+                            </table>
                         </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtExplanation" Text="(*) Response Explanation can not be empty" SetFocusOnError="true" ForeColor="Red">
-                                    </asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
+                        <td class="pasconcept-bar" style="vertical-align: top">
                             <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" OverflowBehavior="Auto" SelectedView="MonthView" RenderMode="Auto"
-                                        AllowDelete="false" AllowEdit="false" AllowInsert="false"
-                                        DataDescriptionField="Description"
-                                        DataEndField="End"
-                                        DataKeyField="Id"
-                                        DataRecurrenceField="RecurrenceRule"
-                                        DataRecurrenceParentKeyField="RecurrenceParentID"
-                                        DataReminderField="Reminder"
-                                        DataSourceID="SqlDataSourceAppointments"
-                                        DataStartField="Start"
-                                        DataSubjectField="Subject"
-                                        DayEndTime="21:00:00"
-                                        EditFormDateFormat="MM/dd/yyyy"
-                                        WorkDayEndTime="21:00:00"
-                                        FirstDayOfWeek="Monday"
-                                        LastDayOfWeek="Sunday"
-                                        OnAppointmentDataBound="RadScheduler1_AppointmentDataBound">
-                                        <DayView UserSelectable="True" />
-                                        <WeekView UserSelectable="True" />
-                                        <TimelineView UserSelectable="False" />
-                                        <MonthView UserSelectable="True" AdaptiveRowHeight="true" />
-                                    </telerik:RadScheduler>
+                                AllowDelete="false" AllowEdit="false" AllowInsert="false"
+                                DataDescriptionField="Description"
+                                DataEndField="End"
+                                DataKeyField="Id"
+                                DataRecurrenceField="RecurrenceRule"
+                                DataRecurrenceParentKeyField="RecurrenceParentID"
+                                DataReminderField="Reminder"
+                                DataSourceID="SqlDataSourceAppointments"
+                                DataStartField="Start"
+                                DataSubjectField="Subject"
+                                DayEndTime="21:00:00"
+                                EditFormDateFormat="MM/dd/yyyy"
+                                WorkDayEndTime="21:00:00"
+                                FirstDayOfWeek="Monday"
+                                LastDayOfWeek="Friday"
+                                OnAppointmentDataBound="RadScheduler1_AppointmentDataBound">
+                                <DayView UserSelectable="True" />
+                                <WeekView UserSelectable="True" />
+                                <TimelineView UserSelectable="False" />
+                                <MonthView UserSelectable="True" AdaptiveRowHeight="true" />
+                            </telerik:RadScheduler>
                         </td>
                     </tr>
                 </table>
+
+
+
 
             </ItemTemplate>
         </telerik:RadDataForm>

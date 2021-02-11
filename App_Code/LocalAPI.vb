@@ -1433,7 +1433,7 @@ Public Class LocalAPI
                 Case "Multiplier"
                     Return GetCompanyMultiplier(companyId, GetDateTime().Year)
 
-                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials", "Custom"
+                Case "webEmailEnableSsl", "webEmailPort", "Inactive", "Billing_plan", "Version", "Type", "SMS_api_id", "PayHereMax", "AxzesClientId", "AxzesJobId", "webUseDefaultCredentials", "Custom", "HR_payfrequencyId"
                     Return GetNumericEscalar("SELECT ISNULL([" & sProperty & "],0) FROM [Company] WHERE [companyId]=" & companyId)
 
                 Case "StartYear"
@@ -1632,10 +1632,21 @@ Public Class LocalAPI
     Public Shared Function CompanyPayrollCallendar_InitYear(year As Integer, companyId As Integer) As Boolean
         Try
 
+            '   7  Every week
+            '   14  Every other week
+            '   1  Every month
+
+            Dim Payfrequency As Integer = GetCompanyProperty(companyId, "HR_payfrequencyId")
+            If Payfrequency = 0 Then Payfrequency = 14
             Dim dDate As DateTime = GetLastPaidDay(companyId)
 
             While dDate.Year <= year
-                dDate = DateAdd(DateInterval.Day, 14, dDate)
+                Select Case Payfrequency
+                    Case 7, 14
+                        dDate = DateAdd(DateInterval.Day, Payfrequency, dDate)
+                    Case 1
+                        dDate = DateAdd(DateInterval.Month, Payfrequency, dDate)
+                End Select
                 NuevoPaidDay(dDate, companyId)
             End While
 

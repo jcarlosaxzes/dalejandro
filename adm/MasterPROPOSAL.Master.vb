@@ -9,8 +9,9 @@ Public Class MasterPROPOSAL
             ' Para evitar perdida de session....
             lblEmployeeEmail.Text = Context.User.Identity.GetUserName()
             If Session("companyId") Is Nothing Then
-                Session("companyId") = LocalAPI.GetCompanyDefault(lblEmployeeEmail.Text)
-                Session("LastPage") = ""
+                'Session("companyId") = LocalAPI.GetCompanyDefault(lblEmployeeEmail.Text)
+                'Session("LastPage") = ""
+                Response.Redirect("~/Account/login.aspx")
             End If
 
             lblCompanyId.Text = Val("" & Session("companyId"))

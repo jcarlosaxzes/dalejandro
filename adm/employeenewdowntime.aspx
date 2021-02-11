@@ -63,11 +63,11 @@
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
-                            <td style="width: 100px; text-align: right">Time:
+                            <td style="width: 100px; text-align: right">Hrs/Day:
                             </td>
                             <td style="width:100px">
                                 <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
-                                    MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Time in hours for each day"
+                                    MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Hours for each day"
                                     Value="1" Width="90px" MaxValue="24" AutoPostBack="false">
                                     <NumberFormat DecimalDigits="2" />
                                     <IncrementSettings Step="1" />
