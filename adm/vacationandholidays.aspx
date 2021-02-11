@@ -9,6 +9,12 @@
             <telerik:AjaxSetting AjaxControlID="btnFind">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1" />
+                    <telerik:AjaxUpdatedControl ControlID="RadGridRequest"  />
+                </UpdatedControls>
+            </telerik:AjaxSetting>
+            <telerik:AjaxSetting AjaxControlID="RadGridRequest">
+                <UpdatedControls>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridRequest" LoadingPanelID="RadAjaxLoadingPanel1" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
@@ -102,7 +108,7 @@
     </div>
 
     <div class="collapse" id="collapseRequest">
-        <h4>Pending Requests</h4>
+        <h4>Requests</h4>
         <telerik:RadGrid ID="RadGridRequest" runat="server" AllowAutomaticDeletes="True" AllowAutomaticUpdates="True" 
             AutoGenerateColumns="False" DataSourceID="SqlDataSourceRequest" PageSize="15" AllowPaging="true"
             Height="850px" RenderMode="Lightweight"

@@ -233,7 +233,7 @@
                                                 Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
                                             </telerik:NavigationNode>
 
-                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/vacationandholidays" Text="Vacation & Holidays"
+                                            <telerik:NavigationNode runat="server" NavigateUrl="~/adm/vacationandholidays" Text="HR Calendar"
                                                 Visible='<%# EmployeePermission("Deny_EmployeesList") %>'>
                                             </telerik:NavigationNode>
 
