@@ -13632,12 +13632,12 @@ Public Class LocalAPI
 
             Case ".tiff", ".bmp", ".jpeg", ".gif", ".jpg", ".png"
                 If IconPixelsHeihgt > 16 Then
-                    Return $"<div class=""container-fluid px-0""><div class=""row""><div class=""col-md-12""><a title=""{FileName}""  href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank""><img src=""{sUrl}"" class=""img-fluid w-100"" style=""object-fit: cover;"" /></a></div></div></div>"
+                    Return $"<div class=""container-fluid px-0""><div class=""row""><div class=""col-md-12""><a title=""{FileName}""  href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank""><img src=""{sUrl}"" class=""img-fluid w-100"" style=""object-fit: cover;height: {IconPixelsHeihgt}px;"" /></a></div></div></div>"
                 Else
                     Return $"<a class=""far fa-file-image"" style=""color: red"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
                 End If
             Case Else
-                Return $"<a title=""{FileName}"" class=""far fa-file"" style=""color: darkgray"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
+                Return $"<a title=""{FileName}"" class=""far fa-file"" style=""{FontSizeStyle} color: darkgray"" title=""Click To View "" href='{LocalAPI.GetHostAppSite()}/e2103445_8a47_49ff_808e_6008c0fe13a1/DownFiles?guid={sGuid}' target=""_blank"" aria-hidden=""True""></a>"
         End Select
 
     End Function
