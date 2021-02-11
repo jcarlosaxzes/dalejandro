@@ -11,6 +11,7 @@
 
         .wizardStepHidden {
             height: 100%;
+            height: 100%;
             display: none !important;
         }
     </style>
@@ -659,53 +660,25 @@
                                     </div>
                                 </telerik:RadWizardStep>
 
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Add-Ons" ValidationGroup="Add-Ons" StepType="Step" CssClass='<%# IIf(LocalAPI.IsQuickBookModule(lblCompanyId.Text), "wizardStep", "wizardStepHidden") %>'>
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Add-Ons and Integration" ValidationGroup="Add-Ons" StepType="Step" CssClass='<%# IIf(LocalAPI.IsQuickBookModule(lblCompanyId.Text), "wizardStep", "wizardStepHidden") %>'>
                                     <div class="pasconcept-bar" style="width: 98%">
-                                        <h3>Available Modules </h3>
+                                        <h3>PASconcept Add-Ons and  Integrations</h3>
                                         <br />
                                         <table class="table-sm">
                                             <tr>
+                                                <td colspan="3">
+                                                    <hr />
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td style="width:20px">
-                                                    <telerik:RadCheckBox ID="chkPayPal" runat="server" Checked='<%# Eval("PayPalModule")%>' Enabled="false" />
-                                                </td>
-                                                <td style="width:300px">
-                                                    <h4>PayPal Connection</h4>
-                                                </td>
-                                                <td>
-                                                    Button 'Pay Here' on Client Invoice  and Statement pages
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <telerik:RadCheckBox ID="chkqbModule" runat="server" Checked='<%# Eval("qbModule")%>' Enabled="false" />
-                                                </td>
-                                                <td>
-                                                    <h4>Quick Book Connection</h4>
-                                                </td>
-                                                <td>
-                                                    Connect Clients, Employees, Invoices and Payments directly to QuickBook
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
                                                     <telerik:RadCheckBox ID="chkazureStorage" runat="server" Checked='<%# Eval("azureStorage")%>' Enabled="false" />
                                                 </td>
-                                                <td>
-                                                    <h4>Cloud Files Storage</h4>
+                                                <td style="width:400px">
+                                                    <h4>PASconcept Cloud Files Storage</h4>
                                                 </td>
                                                 <td>
-                                                    Allows to use Cloud Storage for Upload Files associated with Clients and Projects
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <telerik:RadCheckBox ID="chkSMSservice" runat="server" Checked='<%# Eval("SMSservice")%>' Enabled="false" />
-                                                </td>
-                                                <td>
-                                                    <h4>SMS Service</h4>
-                                                </td>
-                                                <td>
-                                                    Enable the service of Sending SMS to Clients
+                                                    Activating this Add-on allows PASconcept users to upload files directly to Jobs, Clients and Proposals.
                                                 </td>
                                             </tr>
                                             <tr>
@@ -713,10 +686,49 @@
                                                     <telerik:RadCheckBox ID="chkbillingModule" runat="server" Checked='<%# Eval("billingModule")%>' Enabled="false" />
                                                 </td>
                                                 <td>
-                                                    <h4>Additional Billing Options</h4>
+                                                    <h4>PASconcept Additional Billing Options</h4>
                                                 </td>
                                                 <td>
-                                                    Schedule Periodic Sending Invoices and other options
+                                                    Activating this Add-on opens PASconcept to include additional billing options such as periodic billing.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <hr />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <telerik:RadCheckBox ID="chkPayPal" runat="server" Checked='<%# Eval("PayPalModule")%>' Enabled="false" />
+                                                </td>
+                                                <td>
+                                                    <h4>PayPal Integration</h4>
+                                                </td>
+                                                <td>
+                                                    Activating the PayPal integrations allows your clients to process payment for invoices and statements though a 'Pay Here' button. Any payments made are tracked in PASconcept.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <telerik:RadCheckBox ID="chkqbModule" runat="server" Checked='<%# Eval("qbModule")%>' Enabled="false" />
+                                                </td>
+                                                <td>
+                                                    <h4>Quick Book Integration</h4>
+                                                </td>
+                                                <td>
+                                                    Activating this integration allows for an exchange of information between PASconcept and QuickBooks. This exchange of information includes Clients, Employees, Invoices and Payments.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <telerik:RadCheckBox ID="chkSMSservice" runat="server" Checked='<%# Eval("SMSservice")%>' Enabled="false" />
+                                                </td>
+                                                <td>
+                                                    <h4>Twillio Integration</h4>
+                                                </td>
+                                                <td>
+                                                    Activating this integration allows for PASconcept to sent messages via SMS to Clients and Users.
                                                 </td>
                                             </tr>
                                             <tr>
@@ -724,15 +736,23 @@
                                                     <telerik:RadCheckBox ID="RadCheckBox1" runat="server" Checked='<%# Eval("IsEbilityModule")%>' Enabled="false" />
                                                 </td>
                                                 <td>
-                                                    <h4>eBillity Connection</h4>
+                                                    <h4>eBillity Integrations</h4>
                                                 </td>
                                                 <td>
-                                                    Connect to ebillity app to Track time for payroll, billing and productivity
+                                                    Activating this integration allows for an exchange of information between PASconcept and eBillity. This exchange of information includes Clients, Employees, Projects, Time Entires and Time Activities.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <hr />
                                                 </td>
                                             </tr>
                                         </table>
-                                        <br /><br /><br />
-                                        <small>To contract any module, contact:  matt@axzes.com</small>
+                                        <br />
+                                        <small>To activate any of the above integrations or add-ons please contact Matthew Mur at <a href="mailto:matt@axzes.com" title="Mail to">matt@axzes.com</a></small>
+
+
+                                        
                                     </div>
                                 </telerik:RadWizardStep>
                             </WizardSteps>
