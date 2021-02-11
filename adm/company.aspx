@@ -170,9 +170,18 @@
                                             <td style="text-align:right">Human Resources Manager Email:
                                             </td>
                                             <td>
-                                                <asp:Label ID="Label8" runat="server" Text='<%# Eval("HR_Email")%>' ToolTip="Email of Time off Request (Vacations/Personal days)" />
+                                                <asp:Label ID="Label8" runat="server" Text='<%# Eval("HR_Email")%>' ToolTip="Human Resources Manager Email to Vacation Request" />
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="text-align:right">HR Pay Frequency:
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("HR_payfrequency")%>' ToolTip="Payment Frequency" />
+                                            </td>
+                                        </tr>
+
+
                                         <tr>
                                             <td style="text-align:right">Expiration Date:
                                             </td>
@@ -907,6 +916,21 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td style="text-align:right">HR Pay Frequency:
+                                            </td>
+                                            <td>
+                                                <telerik:RadComboBox ID="cboHR_payfrequency" runat="server" Width="300px" SelectedValue='<%# Bind("HR_payfrequencyId")%>'>
+                                                    <Items>
+                                                        <telerik:RadComboBoxItem runat="server" Text="Not defined" Value="0" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Every Week" Value="7" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Every Other Week" Value="14" />
+                                                        <telerik:RadComboBoxItem runat="server" Text="Every Month" Value="1" />
+                                                    </Items>
+                                                </telerik:RadComboBox>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
                                             <td style="text-align:right">Language:</td>
                                             <td>
                                                 <telerik:RadComboBox ID="cboLanguage" runat="server" Width="150px" SelectedValue='<%# Bind("Language")%>'>
@@ -1391,7 +1415,7 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="CompanyProfile_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="CompanyProfile_v20_UPDATE" UpdateCommandType="StoredProcedure">
+        UpdateCommand="CompanyProfile_v21_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
@@ -1453,6 +1477,7 @@
             <asp:Parameter Name="TwilioPhone" />
 
             <asp:Parameter Name="TimeZone" />
+            <asp:Parameter Name="HR_payfrequencyId" />
 
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text"
                 Type="Int32" />
