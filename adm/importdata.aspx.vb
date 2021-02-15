@@ -18,7 +18,7 @@ Public Class importdata
             Dim Source As String = "" & Request.QueryString("source")
 
             Select Case Source
-                Case "Clients", "Employees", "Subconsultants", "Contacts", "OutlookContacts", "ExportedContacts"
+                Case "Clients", "Employees", "Subconsultants", "Contacts", "OutlookContacts", "ExportedContacts", "Jobs"
                     cboDestino.SelectedValue = Source
                 Case Else
                     cboDestino.SelectedValue = "Contacts"
@@ -37,6 +37,8 @@ Public Class importdata
                     ImportOutlookContacts()
                 Case "ExportedContacts"
                     UpdateExportedContacts()
+                Case "Jobs"
+                    ImportJobs()
                 Case Else
                     nRecs = ImportCSV(cboSeparator.SelectedValue)
             End Select
@@ -44,6 +46,97 @@ Public Class importdata
             lblMsg.Text = "Select valid csv file."
         End If
     End Sub
+
+    Private Function ImportJobs() As Integer
+        Dim JobObject As LocalAPI.JobStruct
+        Try
+
+            ' declare CsvDataReader object which will act as a source for data for SqlBulkCopy
+            Dim StreamerObject As Stream = RadUpload1.UploadedFiles(0).InputStream
+            Dim nRecs As Integer
+
+            Using parser As TextFieldParser = New TextFieldParser(StreamerObject)
+
+                ' 1ra fila es cabecera 
+                '  Reference, JobName,JobDate,ClientName,Budget,Description,IsClosed
+                parser.SetDelimiters(",")
+                Dim iField As Integer
+                Dim fields As String() = parser.ReadFields()
+                Dim currentRow As String()
+                Dim bIsValidDataRow As Boolean
+
+                Dim i As Integer
+                ' Contact Data
+                Dim MaxRecords As Integer = 0   ' 0 importa todos los records
+
+                If Not fields Is Nothing Then
+                    While Not parser.EndOfData
+                        currentRow = parser.ReadFields()
+                        iField = 0
+                        Dim currentField As String
+                        For Each currentField In currentRow
+
+                            Select Case iField
+
+                                Case 0  'Reference
+                                    JobObject.Reference = Val("" & currentField)
+                                    bIsValidDataRow = (Len(JobObject.Reference) > 0)
+                                    If Not bIsValidDataRow Then
+                                        Exit For
+                                    End If
+
+                                Case 1  'JobName
+                                    JobObject.JobName = Trim("" & currentField)
+                                    bIsValidDataRow = (Len(JobObject.JobName) > 0)
+                                    If Not bIsValidDataRow Then
+                                        Exit For
+                                    End If
+
+                                Case 2  'JobDate
+                                    JobObject.JobDate = ("" & currentField)
+
+                                Case 3  'ClientName
+                                    JobObject.ClientName = "" & currentField
+
+                                Case 4  'Budget
+                                    JobObject.Budget = LocalAPI.GetAmount("" & currentField)
+
+                                Case 5 'Description
+                                    JobObject.Description = "" & currentField
+
+                                Case 6 'Contact Subtype
+                                    JobObject.IsClosed = Val("" & currentField)
+                                    Exit For
+                            End Select
+                            iField = iField + 1
+                        Next
+                        MaxRecords = MaxRecords - 1
+                        If bIsValidDataRow Then
+                            JobObject.ID = 0
+                            JobObject.ID = LocalAPI.Job_IMPORT(JobObject, lblCompanyId.Text)
+                            If JobObject.ID > 0 Then
+                                nRecs = nRecs + 1
+                            End If
+                            If MaxRecords = 0 Then
+                                Exit While
+                            End If
+                        End If
+
+                    End While
+                End If
+            End Using
+
+            lblMsg.Text = "'" & nRecs & "' Updated records. "
+            Return nRecs
+
+        Catch ex As Exception
+            RadUpload1.UploadedFiles.Clear()
+            lblMsg.Text = "Error importing Reference: " & JobObject.Reference & ". " & ex.Message
+
+        End Try
+
+    End Function
+
     Private Function UpdateExportedContacts() As Integer
         Dim ContactObject As LocalAPI.ContactStruct
         Try
@@ -143,7 +236,7 @@ Public Class importdata
                                     ContactObject.Notes = "" & currentField
                                 Case 24 'Referred By
                                     ContactObject.ReferredBy = "" & currentField
-
+                                    Exit For
                             End Select
                             iField = iField + 1
                         Next
@@ -311,7 +404,7 @@ Public Class importdata
                                     ContactObject.ContactSubtype = "" & currentField
                                 Case 17 'Referred By
                                     ContactObject.ReferredBy = "" & currentField
-
+                                    Exit For
                             End Select
                             iField = iField + 1
                         Next

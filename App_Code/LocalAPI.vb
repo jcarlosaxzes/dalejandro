@@ -115,7 +115,16 @@ Public Class LocalAPI
         Canceled = 0
     End Enum
 
-
+    Public Structure JobStruct
+        Public ID As Integer
+        Public JobName As String
+        Public JobDate As DateTime
+        Public ClientName As String
+        Public Budget As Double
+        Public Description As String
+        Public Reference As String
+        Public IsClosed As Boolean
+    End Structure
     Public Structure ContactStruct
         Public ID As Integer
         Public FirstName As String
@@ -2088,6 +2097,39 @@ Public Class LocalAPI
             sRet = sRet & "</td></tr></table>"
         End If
         Return sRet
+    End Function
+
+    Public Shared Function Job_IMPORT(JobObject As LocalAPI.JobStruct, CompanyId As Integer) As Integer
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+            cmd.CommandText = "JOB_Import"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            cmd.Parameters.AddWithValue("@JobName", JobObject.JobName)
+            cmd.Parameters.AddWithValue("@JobDate", JobObject.JobDate)
+            cmd.Parameters.AddWithValue("@ClientName", JobObject.ClientName)
+            cmd.Parameters.AddWithValue("@Budget", JobObject.Budget)
+            cmd.Parameters.AddWithValue("@Description", JobObject.Description)
+            cmd.Parameters.AddWithValue("@ExternalReference", JobObject.Reference)
+            cmd.Parameters.AddWithValue("@IsClosed", IIf(JobObject.IsClosed, 1, 0))
+
+            cmd.Parameters.AddWithValue("@CompanyId", CompanyId)
+
+            Dim parOUT_ID As New SqlParameter("@Id_OUT", SqlDbType.Int)
+            parOUT_ID.Direction = ParameterDirection.Output
+            cmd.Parameters.Add(parOUT_ID)
+
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+            Return parOUT_ID.Value
+
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Shared Function JobMailStatusChange(jobId As Integer, employeeId As Integer, statusName As String, companyId As Integer) As Boolean
