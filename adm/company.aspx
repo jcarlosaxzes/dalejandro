@@ -486,7 +486,6 @@
                                     </table>
                                 </telerik:RadWizardStep>
 
-
                                 <telerik:RadWizardStep runat="server" ID="RadWizardStepLogo" Title="Logo & Signature" StepType="Step">
                                     <h4 style="margin: 0">Logo & Signature Setting</h3>
                                     <table class="table-sm" style="width:100%">
@@ -669,7 +668,7 @@
                                     </div>
                                 </telerik:RadWizardStep>
 
-                                <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Add-Ons and Integration" ValidationGroup="Add-Ons" StepType="Step" CssClass='<%# IIf(LocalAPI.IsQuickBookModule(lblCompanyId.Text), "wizardStep", "wizardStepHidden") %>'>
+                                <telerik:RadWizardStep runat="server" ID="RadWizardStep5" Title="Add-Ons and Integration" ValidationGroup="Add-Ons" StepType="Step">
                                     <div class="pasconcept-bar" style="width: 98%">
                                         <h3>PASconcept Add-Ons and  Integrations</h3>
                                         <br />
