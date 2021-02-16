@@ -264,7 +264,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <asp:LinkButton ID="LinkButton6" runat="server" UseSubmitBehavior="false" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
+                                                <asp:LinkButton ID="LinkButton6" runat="server" UseSubmitBehavior="false" CommandName="SendInvoice" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item"
                                                     Visible='<%#IIf(Eval("qbCustomerId") <> 0 And Eval("qbInvoiceId ") <> 0, False, True) %>'>
                                                         <i class="far fa-envelope"></i>&nbsp;&nbsp;Send Invoice Email to Client
                                                 </asp:LinkButton>
