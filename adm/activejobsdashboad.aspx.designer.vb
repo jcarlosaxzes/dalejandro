@@ -86,15 +86,6 @@ Partial Public Class activejobsdashboad
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''cboStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboStatus As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
     '''txtFind control.
     '''</summary>
     '''<remarks>
@@ -149,6 +140,24 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadListView1 As Global.Telerik.Web.UI.RadListView
 
     '''<summary>
+    '''RadListView2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadListView2 As Global.Telerik.Web.UI.RadListView
+
+    '''<summary>
+    '''RadListView3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadListView3 As Global.Telerik.Web.UI.RadListView
+
+    '''<summary>
     '''PanelLegend control.
     '''</summary>
     '''<remarks>
@@ -185,13 +194,31 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
 
     '''<summary>
-    '''SqlDataSourceJobs control.
+    '''SqlDataSourceJobsNotInProgress control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceJobs As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceJobsNotInProgress As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceJobsInProgress control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceJobsInProgress As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
+    '''SqlDataSourceJobsOthers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceJobsOthers As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceActiveJob control.
@@ -201,15 +228,6 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceActiveJob As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourceJobActiveStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceJobActiveStatus As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceDateWORKHOURS control.
@@ -246,15 +264,6 @@ Partial Public Class activejobsdashboad
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SqlDataSourceEmpl_activos As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''lblStatusIdIN_List control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblStatusIdIN_List As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lblLogedEmployeeId control.

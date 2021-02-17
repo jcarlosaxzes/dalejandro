@@ -18,7 +18,6 @@ Public Class activejobsdashboad
                 cboEmployee.SelectedValue = Session("employeefortime")
 
                 lblCompanyId.Text = Session("companyId")
-                cboStatus.DataBind()
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
                 End If
@@ -30,9 +29,6 @@ Public Class activejobsdashboad
         End Try
     End Sub
 
-    Protected Sub cboStatus_ItemDataBound(sender As Object, e As RadComboBoxItemEventArgs) Handles cboStatus.ItemDataBound
-        e.Item.Checked = IIf(e.Item.Value = 0 Or e.Item.Value = 2, True, False)
-    End Sub
     Private Sub cboEmployee_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboEmployee.SelectedIndexChanged
         ' Refresh cboJobs
         cboJobs.Items.Clear()
@@ -44,17 +40,7 @@ Public Class activejobsdashboad
     Private Sub RefrescarDatos()
         Try
 
-            lblStatusIdIN_List.Text = ""
-            Dim collection As IList(Of RadComboBoxItem) = cboStatus.CheckedItems
-            If (collection.Count <> 0) Then
-                For Each item As RadComboBoxItem In collection
-                    lblStatusIdIN_List.Text = lblStatusIdIN_List.Text + item.Value + ","
-                Next
-                ' Quitar la ultima coma
-                lblStatusIdIN_List.Text = Left(lblStatusIdIN_List.Text, Len(lblStatusIdIN_List.Text) - 1)
-            End If
-
-            RadListView1.DataBind()
+            RadListViewRefresh()
 
             RadGridFooter.DataBind()
             PanelLegend.DataBind()
@@ -77,11 +63,18 @@ Public Class activejobsdashboad
         btnNew.Enabled = True
     End Sub
 
+    Private Sub RadListViewRefresh()
+        RadListView1.DataBind()
+        RadListView2.DataBind()
+        RadListView3.DataBind()
+    End Sub
+
+
     Protected Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         Try
             ' Anadir Employee al Job
             LocalAPI.Jobs_Employees_assigned_INSERT(cboJobs.SelectedValue, cboEmployee.SelectedValue)
-            RadListView1.DataBind()
+            RadListViewRefresh()
         Catch ex As Exception
             Master.ErrorMessage("Error. " & ex.Message)
         End Try
@@ -155,16 +148,8 @@ Public Class activejobsdashboad
 
     Private Sub SaveFilter()
         Session("Filter_ActiveJobs_Employee") = cboEmployee.SelectedValue
-        Session("Filter_ActiveJobs_StatusIdIN_List") = lblStatusIdIN_List.Text
         Session("Filter_ActiveJobs_companyId") = lblCompanyId.Text
         Session("Filter_ActiveJobs_Find") = txtFind.Text
-
-        Session("Filter_ActiveJobs_Status_0") = cboStatus.Items(0).Checked
-        Session("Filter_ActiveJobs_Status_1") = cboStatus.Items(1).Checked
-        Session("Filter_ActiveJobs_Status_2") = cboStatus.Items(2).Checked
-        Session("Filter_ActiveJobs_Status_3") = cboStatus.Items(3).Checked
-        Session("Filter_ActiveJobs_Status_4") = cboStatus.Items(4).Checked
-        Session("Filter_ActiveJobs_Status_5") = cboStatus.Items(5).Checked
 
     End Sub
 
@@ -173,16 +158,8 @@ Public Class activejobsdashboad
             Dim Filter_ActiveJobs_Employee = Session("Filter_ActiveJobs_Employee")
             If Filter_ActiveJobs_Employee IsNot Nothing Then
                 cboEmployee.SelectedValue = Session("Filter_ActiveJobs_Employee")
-                lblStatusIdIN_List.Text = Session("Filter_ActiveJobs_StatusIdIN_List")
                 lblCompanyId.Text = Session("Filter_ActiveJobs_companyId")
                 txtFind.Text = Session("Filter_ActiveJobs_Find")
-
-                cboStatus.Items(0).Checked = Session("Filter_ActiveJobs_Status_0")
-                cboStatus.Items(1).Checked = Session("Filter_ActiveJobs_Status_1")
-                cboStatus.Items(2).Checked = Session("Filter_ActiveJobs_Status_2")
-                cboStatus.Items(3).Checked = Session("Filter_ActiveJobs_Status_3")
-                cboStatus.Items(4).Checked = Session("Filter_ActiveJobs_Status_4")
-                cboStatus.Items(5).Checked = Session("Filter_ActiveJobs_Status_5")
             End If
         Catch ex As Exception
         End Try
