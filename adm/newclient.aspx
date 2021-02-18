@@ -221,7 +221,7 @@
                 <td style="text-align: right">Client Code:
                 </td>
                 <td>
-                    <telerik:RadTextBox ID="txtInitials" runat="server" MaxLength="7" Width="150px" EmptyMessage="Up to 7 characters">
+                    <telerik:RadTextBox ID="txtInitials" runat="server" MaxLength="16" Width="150px" EmptyMessage="Up to 16 characters">
                     </telerik:RadTextBox>
                 </td>
             </tr>

@@ -327,8 +327,8 @@
                                     <td style="text-align: right">Client Code:
                                     </td>
                                     <td>
-                                        <telerik:RadTextBox ID="txtCode" runat="server" Text='<%# Bind("Initials") %>' EmptyMessage="Up to 7 characters"
-                                            MaxLength="7">
+                                        <telerik:RadTextBox ID="txtCode" runat="server" Text='<%# Bind("Initials") %>' EmptyMessage="Up to 16 characters"
+                                            MaxLength="16">
                                         </telerik:RadTextBox>
                                     </td>
                                 </tr>
