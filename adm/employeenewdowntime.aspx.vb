@@ -354,6 +354,7 @@ Public Class employeenewdowntime
                 RadDatePickerFrom.Visible = False
                 txtDateFrom.Visible = False
             Case Else
+                txtDateFrom.Text = "Date:"
                 RadDatePickerFrom.Visible = True
                 btnOkNewMiscellaneousTime.Text = "Add Time"
                 RadDatePickerFrom.Enabled = True
