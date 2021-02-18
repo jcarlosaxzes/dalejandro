@@ -53,7 +53,7 @@
                 <div>
                     <table class="table-sm" style="width: 100%">
                         <tr>
-                            <td style="width: 80px; text-align: right">Category:
+                            <td style="width: 100px; text-align: right">Category:
                             </td>
                             <td>
                                 <telerik:RadComboBox ID="cboType" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceMiscellaneousType" DataTextField="Name"
@@ -121,10 +121,10 @@
                         </tr>
 
                         <tr>
-                            <td style="text-align: right">Notes:
+                            <td style="text-align: right;vertical-align:top">Notes:
                             </td>
                             <td colspan="4">
-                                <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="1" Width="100%"
+                                <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="3" Width="100%"
                                     MaxLength="256">
                                 </telerik:RadTextBox>
                             </td>
