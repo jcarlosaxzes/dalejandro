@@ -85,7 +85,7 @@ Public Class activejobsdashboad
         RefrescarDatos()
     End Sub
 
-    Private Sub RadListView1_ItemCommand(sender As Object, e As RadListViewCommandEventArgs) Handles RadListView1.ItemCommand
+    Private Sub RadListView1_ItemCommand(sender As Object, e As RadListViewCommandEventArgs) Handles RadListView1.ItemCommand, RadListView2.ItemCommand, RadListView3.ItemCommand
         Select Case e.CommandName
 
             Case "AddNewTime"
