@@ -45,7 +45,7 @@
                 <td style="text-align: right; width: 180px">Phase Code:
                     </td>
                 <td>
-                    <telerik:RadTextBox ID="CodeTextBox" runat="server" MaxLength="3" Width="250px" EmptyMessage="Code"></telerik:RadTextBox>
+                    <telerik:RadTextBox ID="CodeTextBox" runat="server" MaxLength="8" Width="250px" EmptyMessage="Code"></telerik:RadTextBox>
                 </td>
             </tr>
             <tr>
