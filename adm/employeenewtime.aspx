@@ -27,13 +27,13 @@
                                 <tr>
                                     <td style="width: 49%; text-align: center; background-color: #039be5">
                                         <span class="DashboardFont2">This Job</span><br />
-                                        <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# String.Concat(Eval("TotalJobHours", "{0:N0}"), " of ", Eval("HoursAssigned", "{0:N0}"), " hr")  %>'></asp:Label><br />
+                                        <asp:Label ID="lblTotalBudget" CssClass="DashboardFont1" runat="server" Text='<%# String.Concat(Eval("TotalJobHours", "{0:N0}"), " of ", Eval("HoursAssigned", "{0:N0}"), " hrs")  %>'></asp:Label><br />
                                         <span class="DashboardFont3">Hours Entered of Assigned Time</span>
                                     </td>
                                     <td></td>
                                     <td style="width: 49%; text-align: center; background-color: #546e7a">
                                         <span class="DashboardFont2">Selected Week</span><br />
-                                        <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# String.Concat(Eval("TotalWeekHours", "{0:N0}"), " of ", Eval("TotalWeekHours") + Eval("TotalWeekHoursRemaining"), " hr") %>'></asp:Label><br />
+                                        <asp:Label ID="lblTotalPending" runat="server" CssClass="DashboardFont1" Text='<%# String.Concat(Eval("TotalWeekHours", "{0:N0}"), " of ", Eval("TotalWeekHours") + Eval("TotalWeekHoursRemaining"), " hrs") %>'></asp:Label><br />
                                         <span class="DashboardFont3">Total Hours Entered</span>
                                     </td>
                                 </tr>
