@@ -34,7 +34,6 @@ Public Class schedule
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             Master.PageTitle = "Schedule"
-            Master.Help = "http://blog.pasconcept.com/2015/03/calendar.html"
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Calendar"
             lblCompanyId.Text = Session("companyId")
             lblEmployee.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
@@ -69,8 +68,6 @@ Public Class schedule
                 lblSelectedAppointmentId.Text = e.Container.Appointment.ID
                 lblTextAppointment.Text = RadScheduler.ExportToICalendar(e.Container.Appointment, aptStartOffset)
 
-                ShowSendCalendar()
-                'SendCalendar(RadScheduler.ExportToICalendar(e.Container.Appointment), e.Container.Appointment.Subject)
         End Select
     End Sub
 
@@ -80,86 +77,7 @@ Public Class schedule
         Dim aptStartOffset As TimeSpan = TimeZone.CurrentTimeZone.GetUtcOffset(aptStart) - RadScheduler1.TimeZoneOffset
         lblSelectedAppointmentId.Text = e.Appointment.ID
         lblTextAppointment.Text = RadScheduler.ExportToICalendar(e.Appointment, aptStartOffset)
-        ShowSendCalendar()
-        'SendCalendar(RadScheduler.ExportToICalendar(e.Appointment), e.Appointment.Subject)
     End Sub
-
-    Private Sub ShowSendCalendar()
-        Try
-
-            lblSelectedJob.Text = LocalAPI.GetAppointmentsProperty(lblSelectedAppointmentId.Text, "JobId")
-
-            If lblSelectedJob.Text > 0 Then
-                cboTask.DataBind()
-
-                panelProposalTask.Visible = (cboTask.Items.Count > 0)
-                If panelProposalTask.Visible Then
-                    Dim proposaldetalleId As Integer = LocalAPI.GetAppointmentsProperty(lblSelectedAppointmentId.Text, "proposaldetalleId")
-                    If proposaldetalleId > 0 Then
-                        cboTask.SelectedValue = proposaldetalleId
-                    End If
-                End If
-            End If
-
-            RadToolTipSend.Visible = True
-            RadToolTipSend.Show()
-
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Protected Sub btnSendCalendar_Click(sender As Object, e As EventArgs) Handles btnSendCalendar.Click
-        If panelProposalTask.Visible Then
-
-            LocalAPI.UpdateProposaltaskIdAppointment(lblSelectedAppointmentId.Text, cboTask.SelectedValue)
-        End If
-
-        If SendCalendar() Then
-            RadToolTipSend.Visible = False
-        End If
-    End Sub
-
-    Private Function SendCalendar() As Boolean
-        Try
-
-            Dim sEmailTo As String = Master.UserEmail
-            Dim ue As New ASCIIEncoding()
-            Dim fileData As Byte() = ue.GetBytes(lblTextAppointment.Text)
-            Dim sCCO As String
-
-            Dim collection As IList(Of RadComboBoxItem) = cboMultiEmployees.CheckedItems
-            If (collection.Count <> 0) Then
-
-                For Each item As RadComboBoxItem In collection
-                    sCCO = sCCO + LocalAPI.GetEmployeeEmail(lId:=item.Value) + ","
-                Next
-                ' Quitar la ultima coma
-                sCCO = Left(sCCO, Len(sCCO) - 1)
-            End If
-
-            Return LocalAPI.SendMailAndAttachmentExt(sEmailTo, sCCO, lblSelectedSubject.Text, fileData, lblSelectedSubject.Text & ".ics", lblCompanyId.Text, 0, 0)
-
-            Master.InfoMessage("Appointment '" & lblSelectedSubject.Text & "' was sent")
-        Catch ex As Exception
-            Master.ErrorMessage("Error. " & ex.Message)
-        End Try
-    End Function
-
-    Private Function SendCalendar_old(data As String, sSubject As String) As String
-        Try
-
-            Dim sEmailTo As String = Master.UserEmail
-            Dim ue As New ASCIIEncoding()
-            Dim fileData As Byte() = ue.GetBytes(data)
-            If ConfigurationManager.AppSettings("Debug") <> "1" Then
-                Task.Run(Function() LocalAPI.SendMailAndAttachment(sEmailTo, sSubject, fileData, sSubject & ".ics", lblCompanyId.Text))
-            End If
-            Master.InfoMessage("Appointment '" & sSubject & "' was sent to " & sEmailTo, 2)
-        Catch ex As Exception
-            Master.ErrorMessage("Error. " & ex.Message)
-        End Try
-    End Function
 
     Protected Sub SqlDataSourceAppointments_Selected(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointments.Selected
         AppointmentsCount.Text = "Appointments: " & e.AffectedRows
@@ -207,98 +125,6 @@ Public Class schedule
         Response.Redirect($"~/adm/appointment?Id=&EntityType=Appointment&EntityId=&backpage=Schedule")
 
     End Sub
-    Protected Sub btnCRMOk_Click(sender As Object, e As EventArgs) Handles btnCRMOk.Click
-        Try
-
-            SqlDataSourceClientActivity.Insert()
-
-        Catch ex As Exception
-            Master.ErrorMessage("Error. " & ex.Message)
-        End Try
-    End Sub
-
-    Protected Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        InitActivityForm()
-    End Sub
-
-    Private Sub SqlDataSourceClientActivity_Inserted(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceClientActivity.Inserted
-        If cboEmployees.CheckedItems.Count > 0 Then
-            SendEmployeeActivityEmails()
-        End If
-        Master.InfoMessage("New Client Activity Record was inserted ", 5)
-    End Sub
-
-    Private Sub InitActivityForm()
-        txtSubject.Text = ""
-        txtDescription.Text = ""
-        cboClient.SelectedValue = -1
-        cboActivityType.SelectedValue = -1
-
-        Dim collection As IList(Of RadComboBoxItem) = cboEmployees.CheckedItems
-        If (collection.Count <> 0) Then
-
-            For Each item As RadComboBoxItem In collection
-                item.Checked = False
-            Next
-        End If
-
-        RadToolTipCRM.Visible = False
-    End Sub
-
-    Private Function SendEmployeeActivityEmails() As Boolean
-        Try
-
-            Dim sEmailTo As String = ""
-            Dim collection As IList(Of RadComboBoxItem) = cboEmployees.CheckedItems
-            If (collection.Count <> 0) Then
-
-                For Each item As RadComboBoxItem In collection
-                    sEmailTo = sEmailTo & LocalAPI.GetEmployeeEmail(lId:=item.Value) & ","
-
-                    item.Checked = False
-                Next
-            End If
-            If Len(sEmailTo) Then
-                sEmailTo = Left(sEmailTo, Len(sEmailTo) - 1)
-
-                Dim sMsg As New System.Text.StringBuilder
-
-                sMsg.Append("This message is to notify the reception of client activity")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("Date: <b>" & LocalAPI.GetDateTime() & "</b>")
-                sMsg.Append("<br />")
-                sMsg.Append("Activity: <b>" & cboActivityType.Text & "</b>")
-                sMsg.Append("<br />")
-                sMsg.Append("Client: <b>" & cboClient.Text & "</b>")
-                sMsg.Append("<br />")
-                sMsg.Append("Subject: <b>" & txtSubject.Text & "</b>")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("Notes:")
-                sMsg.Append("<br />")
-                sMsg.Append(txtDescription.Text)
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("Thank you.")
-                sMsg.Append("<br />")
-                sMsg.Append("<br />")
-                sMsg.Append("PASconcept Notifications")
-                sMsg.Append("<br />")
-
-                Dim sBody As String = sMsg.ToString
-                Dim sSubject As String = "PASconcet client activity. " & cboClient.Text & ", [" & cboActivityType.Text & "]"
-
-                Task.Run(Function() SendGrid.Email.SendMail(sEmailTo, Master.UserEmail, "", sSubject, sBody, lblCompanyId.Text, cboClient.SelectedValue, 0))
-
-            End If
-            Return True
-        Catch ex As Exception
-            Master.ErrorMessage("Error. " & ex.Message)
-        End Try
-    End Function
-
     Protected Sub RadScheduler1_FormCreating(sender As Object, e As SchedulerFormCreatingEventArgs)
 
 
@@ -309,70 +135,21 @@ Public Class schedule
 
         Dim appointmentToEdit = RadScheduler1.PrepareToEdit(e.Appointment, RadScheduler1.EditingRecurringSeries)
         Session("appointment_start") = appointmentToEdit.Start.ToString("yyyy-MM-dd HH:mm:ss")
-        Session("appointment_end") = appointmentToEdit.End.ToString("yyyy-MM-dd HH:mm:ss")
+        Session("appointment_end") = DateAdd(DateInterval.Hour, 1, Session("appointment_start")) 'appointmentToEdit.End.ToString("yyyy-MM-dd HH:mm:ss")
         Dim Id = appointmentToEdit.ID
         Dim url = $"{LocalAPI.GetHostAppSite()}/adm/appointment?Id={Id}&EntityType=Appointment&EntityId={Id}&backpage=Schedule"
         ScriptManager.RegisterStartupScript(Page, [GetType](), "formScript", $"RedirectPage('{url}');", True)
-        PopulateEditForm(appointmentToEdit)
-        'RadToolTipCRM.Visible = True
-        'RadToolTipCRM.Show()
     End Sub
 
-    Private Sub PopulateEditForm(editedAppointment As Telerik.Web.UI.Appointment)
-        Dim appointmentToEdit As Telerik.Web.UI.Appointment = RadScheduler1.PrepareToEdit(editedAppointment, RadScheduler1.EditingRecurringSeries)
-        txtAppoimentSubject.Text = appointmentToEdit.Subject
+    Private Sub SqlDataSourceAppointments_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointments.Updated
+        Try
+            LocalAPI.Appointment_DragAndDrop_UPDATE(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Start").Value, e.Command.Parameters("@End").Value)
+            RadScheduler1.Rebind()
+            RadGridDueToday.DataBind()
+            RadGridPastDue.DataBind()
+        Catch ex As Exception
 
-        'StartTime.SelectedDate = RadScheduler1.UtcToDisplay(appointmentToEdit.Start)
-        'EndTime.SelectedDate = RadScheduler1.UtcToDisplay(appointmentToEdit.[End])
-
-        'If (appointmentToEdit.Reminders.Count = 0) OrElse (ReminderDropDown.SelectedValue = "") Then
-        '    ReminderDropDown.SelectedValue = ""
-        'Else
-        '    ReminderDropDown.SelectedValue = appointmentToEdit.Reminders(0).Trigger.TotalMinutes.ToString()
-        'End If
-
-        'Dim user As Resource = appointmentToEdit.Resources.GetResourceByType("User")
-        'If user IsNot Nothing Then
-        '    UserDropDown.SelectedValue = user.Key.ToString()
-        'End If
-
-        'RadSchedulerRecurrenceEditor1.StartDate = appointmentToEdit.Start
-        'RadSchedulerRecurrenceEditor1.EndDate = appointmentToEdit.[End]
-
-        'RecurrenceRuleText = appointmentToEdit.RecurrenceRule
-    End Sub
-
-    Protected Sub SubmitButton_Click(sender As Object, e As EventArgs)
-        'If EditedAppointment Is Nothing Then
-        '    ' Insert Appointment
-        '    Dim aptToInsert As Appointment = PopulateBasicAppointmentPropertiesFromForm()
-
-        '    RadScheduler1.InsertAppointment(aptToInsert)
-        'Else
-        '    If Not RadScheduler1.EditingRecurringSeries AndAlso (EditedAppointmentParent IsNot Nothing OrElse EditedAppointment.RecurrenceState = RecurrenceState.Master) Then
-        '        ' Create Exception Appointment
-        '        Dim aptOccurence = EditedAppointment
-        '        Dim aptException = PopulateBasicAppointmentPropertiesFromForm(RadScheduler1.PrepareToEdit(aptOccurence, RadScheduler1.EditingRecurringSeries))
-
-        '        RadScheduler1.UpdateAppointment(aptException)
-        '    Else
-        '        ' Update Appointment
-        '        Dim aptOriginal As Appointment = EditedAppointment
-
-        '        If RadScheduler1.EditingRecurringSeries AndAlso (aptOriginal.RecurrenceState = RecurrenceState.Occurrence OrElse aptOriginal.RecurrenceState = RecurrenceState.Exception) Then
-        '            aptOriginal = EditedAppointmentParent
-        '        End If
-
-        '        Dim aptToUpdate As Appointment = PopulateBasicAppointmentPropertiesFromForm(aptOriginal.Clone())
-
-        '        RadScheduler1.UpdateAppointment(aptToUpdate, aptOriginal)
-        '    End If
-        'End If
-
-        'EditedAppointmentID = ""
-        'EditedAppointmentParentID = ""
-
-        'RadDock1.Closed = True
+        End Try
     End Sub
 End Class
 
