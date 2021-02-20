@@ -147,7 +147,7 @@ Public Class sendproposal
             If cboNotification.SelectedValue = 1 Or cboNotification.SelectedValue = 2 Then
 
                 If LocalAPI.ValidEmail(txtTo.Text) Then
-                    txtBody.Content = txtBody.Content & LocalAPI.GetPASSign()
+                    'txtBody.Content = txtBody.Content & LocalAPI.GetPASSign()
                     LocalAPI.ProposalStatus2Emitted(lblProposalId.Text)
                     Dim HeadDepartmentEmail As String = LocalAPI.GetHeadDepartmentEmailFromProposal(lblProposalId.Text)
 

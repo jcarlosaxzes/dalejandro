@@ -169,7 +169,7 @@
                                             <telerik:NavigationNode NavigateUrl="~/adm/jobs" Text="Jobs"
                                                 Visible='<%# EmployeePermission("Deny_JobsList") %>'>
                                             </telerik:NavigationNode>
-                                            <telerik:NavigationNode NavigateUrl="~/adm/schedule" Text="Calendar">
+                                            <telerik:NavigationNode NavigateUrl="~/adm/schedule" Text="Activity Calendar">
                                             </telerik:NavigationNode>
                                             <telerik:NavigationNode NavigateUrl="~/adm/timeSheet" Text="Time Sheet"
                                                 Visible='<%# EmployeePermission("Deny_Timesheet") %>'>

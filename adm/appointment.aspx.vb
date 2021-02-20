@@ -26,16 +26,11 @@ Public Class appointment
             uEnd.DbSelectedDate = en
             lblEmployee.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
             lblAppointmentid.Text = Val(Request.QueryString("Id"))
-            btnSave.Text = IIf(Val(Request.QueryString("Id")) > 0, "Update Event", "Create Event")
+            btnSave.Text = IIf(Val(Request.QueryString("Id")) > 0, "Update Activity", "Create Activity")
         End If
     End Sub
 
     Protected Sub btnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSave.Click
-
-        If CType(FormView1.FindControl("txtSubject"), RadTextBox).Text.Length = 0 Then
-            lblError.Text = "Please enter Subject"
-            Return
-        End If
 
         FormView1.UpdateItem(False)
 
@@ -73,58 +68,28 @@ Public Class appointment
         End Try
     End Sub
 
-    Protected Sub SqlDataSourceAppointments_Updated(sender As Object, e As SqlDataSourceStatusEventArgs)
-        Dim newId = e.Command.Parameters("@ReturnId").Value.ToString()
-        lblAppointmentid.Text = newId
-
-        ShowSendCalendar()
-
-    End Sub
-
-    Protected Sub SqlDataSourceAppointments_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs)
-        Dim newId = e.Command.Parameters
-    End Sub
-
-    Protected Sub SqlDataSourceAppointments_Selected(sender As Object, e As SqlDataSourceStatusEventArgs)
-        ' Dim newId = e.AffectedRows.
-    End Sub
-
     Protected Sub BackPage()
         If (lblEntityType.Text = "Appointment") Then
             Response.Redirect("~/adm/schedule.aspx")
             Return
         End If
 
-        If Request.QueryString("backpage") = "Notifications" Then
-            Response.Redirect("~/adm/Notifications.aspx")
-            Return
-        End If
-
-        If Request.QueryString("backpage") = "Job" Then
-            Dim jobGuid = LocalAPI.GetJobProperty(lblEntityId.Text, "guid")
-            Response.Redirect($"~/adm/job_schedule?guid={jobGuid}")
-            Return
-        End If
-
-        If Request.QueryString("backpage") = "Client" Then
-            Response.Redirect($"~/adm/Client?clientId={lblEntityId.Text}&FullPage=1&tab=schedule")
-            Return
-        End If
-
-        If Request.QueryString("backpage") = "Clients" Then
-            Response.Redirect($"~/adm/Clients?restoreFilter=true")
-            Return
-        End If
-
-        If Request.QueryString("backpage") = "Jobs" Then
-            Response.Redirect($"~/adm/Jobs?restoreFilter=true")
-            Return
-        End If
-
-        Response.Redirect($"~/adm/schedule.aspx")
+        Select Case Request.QueryString("backpage")
+            Case "Job"
+                Dim jobGuid = LocalAPI.GetJobProperty(lblEntityId.Text, "guid")
+                Response.Redirect($"~/adm/job_schedule?guid={jobGuid}")
+            Case "Client"
+                Response.Redirect($"~/adm/Client?clientId={lblEntityId.Text}&FullPage=1&tab=schedule")
+            Case "Clients"
+                Response.Redirect($"~/adm/Clients?restoreFilter=true")
+            Case "Jobs"
+                Response.Redirect($"~/adm/Jobs?restoreFilter=true")
+            Case "Notifications"
+                Response.Redirect("~/adm/Notifications.aspx")
+            Case Else
+                Response.Redirect($"~/adm/schedule.aspx")
+        End Select
     End Sub
-
-
 
     Protected Sub FormView1_DataBound(sender As Object, e As EventArgs)
         If lblEntityType.Text = "Job" Then
@@ -167,9 +132,6 @@ Public Class appointment
         End If
     End Sub
 
-
-
-
     Private Function SendCalendar() As Boolean
         Try
             Dim subject = CType(FormView1.FindControl("txtSubject"), RadTextBox).Text
@@ -207,16 +169,36 @@ Public Class appointment
     End Function
 
 
-    Private Sub SqlDataSourceAppointments_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAppointments.Updating
-        Dim e1 As String = e.Command.Parameters("@Start").Value
-    End Sub
-
     Private Sub btnCancelSendCalendar_Click(sender As Object, e As EventArgs) Handles btnCancelSendCalendar.Click
         If CType(FormView1.FindControl("chNotify"), RadCheckBox).Checked Then
             Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId={lblAppointmentid.Text}&EntityType={lblEntityType.Text}&EntityId={lblEntityId.Text}&backpage={Request.QueryString("backpage")}")
         Else
             BackPage()
         End If
+    End Sub
+
+    Private Sub SqlDataSourceAppointment_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceAppointment.Selecting
+        Dim newId = e.Command.Parameters
+    End Sub
+
+    Private Sub SqlDataSourceAppointment_Selected(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointment.Selected
+        ' Dim newId = e.AffectedRows.
+    End Sub
+
+    Private Sub SqlDataSourceAppointment_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAppointment.Updating
+        Dim e1 As String = e.Command.Parameters("@Start").Value
+    End Sub
+
+    Private Sub SqlDataSourceAppointment_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointment.Updated
+        Dim newId = e.Command.Parameters("@ReturnId").Value.ToString()
+        lblAppointmentid.Text = newId
+
+        If e.Command.Parameters("@NotifyEmployee").Value Then
+            ShowSendCalendar()
+        Else
+            BackPage()
+        End If
+
     End Sub
 End Class
 

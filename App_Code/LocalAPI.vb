@@ -10640,6 +10640,30 @@ Public Class LocalAPI
     Public Shared Function UpdateProposaltaskIdAppointment(ByVal lId As Integer, proposaldetalleId As Integer) As Boolean
         Return ExecuteNonQuery("UPDATE [Appointments] SET proposaldetalleId=" & proposaldetalleId & " WHERE Id=" & lId)
     End Function
+
+
+    Public Shared Function Appointment_DragAndDrop_UPDATE(ByVal Id As Integer, StartDate As DateTime, EndDate As DateTime) As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Appointment_DragAndDrop_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Start", StartDate)
+            cmd.Parameters.AddWithValue("@End", EndDate)
+            cmd.Parameters.AddWithValue("@Id", Id)
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+    End Function
+
 #End Region
 
 #Region "Version"

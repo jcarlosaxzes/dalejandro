@@ -50,13 +50,13 @@ Partial Public Class appointment
     Protected WithEvents btnSave As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''lblError control.
+    '''ValidationSummary1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblError As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents ValidationSummary1 As Global.System.Web.UI.WebControls.ValidationSummary
 
     '''<summary>
     '''FormView1 control.
@@ -158,13 +158,13 @@ Partial Public Class appointment
     Protected WithEvents SqlDataSourceJob As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceAppointments control.
+    '''SqlDataSourceAppointment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceAppointments As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourceAppointment As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceProposalTask control.
