@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="Activity Calendar" Language="vb" AutoEventWireup="false" MasterPageFile="~/adm/ADM_Main_Responsive.Master" CodeBehind="schedule.aspx.vb" Inherits="pasconcept20.schedule" %>
 
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
+<%@ Import Namespace="pasconcept20" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
