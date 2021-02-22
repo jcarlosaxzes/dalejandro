@@ -65,7 +65,7 @@
                                 </telerik:GridNumericColumn>
                                 <telerik:GridNumericColumn DataField="HourPerWeek" HeaderText="Hours per Week"
                                     SortExpression="HourPerWeek" UniqueName="HourPerWeek" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center"
-                                    DecimalDigits="2" MinValue="0" MaxValue="40">
+                                    DecimalDigits="2" MinValue="0" MaxValue="168">
                                 </telerik:GridNumericColumn>
                                 <telerik:GridNumericColumn DataField="Benefits_vacations" HeaderText="Vacations (hours)"
                                     SortExpression="Benefits_vacations" UniqueName="Benefits_vacations" HeaderStyle-Width="130px" ItemStyle-HorizontalAlign="Center"

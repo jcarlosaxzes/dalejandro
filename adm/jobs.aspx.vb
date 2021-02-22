@@ -450,7 +450,7 @@ Public Class jobs
 
                 Case "View/Edit Client Profile"
                     Dim ClientId As Integer = LocalAPI.GetJobProperty(JobId, "Client")
-                    sUrl = "~/ADM/Client.aspx?clientId=" & ClientId
+                    sUrl = $"~/ADM/Client.aspx?clientId={ClientId}&Dialog=1"
                     CreateRadWindows(CommandName, sUrl, 970, 750, False, False)
 
                 Case "Job Print View"

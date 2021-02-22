@@ -23,6 +23,15 @@ Partial Public Class schedule
     Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
 
     '''<summary>
+    '''RadWindowManager1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadWindowManager1 As Global.Telerik.Web.UI.RadWindowManager
+
+    '''<summary>
     '''btnOutlook control.
     '''</summary>
     '''<remarks>
@@ -104,22 +113,13 @@ Partial Public Class schedule
     Protected WithEvents lblTitle As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''RadGridDueToday control.
+    '''RadGridPending control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGridDueToday As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''RadGridPastDue control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadGridPastDue As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents RadGridPending As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
     '''RadScheduler1 control.
@@ -194,22 +194,13 @@ Partial Public Class schedule
     Protected WithEvents SqlDataSourceClients As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceDueToday control.
+    '''SqlDataSourcePending control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SqlDataSourceDueToday As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
-    '''SqlDataSourcePastDue control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourcePastDue As Global.System.Web.UI.WebControls.SqlDataSource
+    Protected WithEvents SqlDataSourcePending As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''lblSelectedSubject control.

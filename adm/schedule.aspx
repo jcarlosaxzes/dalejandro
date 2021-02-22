@@ -3,35 +3,25 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-   <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadScheduler1">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipSend"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridDueToday"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridPastDue"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPending"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadGridDueToday">
+            <telerik:AjaxSetting AjaxControlID="RadGridPending">
                 <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridDueToday" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPending" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="RadScheduler1"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridPastDue"></telerik:AjaxUpdatedControl>
-                </UpdatedControls>
-            </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="RadGridPastDue">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridPastDue" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="RadScheduler1"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridDueToday"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnRefresh">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadGridDueToday"></telerik:AjaxUpdatedControl>
-                    <telerik:AjaxUpdatedControl ControlID="RadGridPastDue"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="RadGridPending"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="cboEmployee"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="lblTitle"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
@@ -49,6 +39,8 @@
             }
         </script>
     </telerik:RadCodeBlock>
+    <telerik:RadWindowManager ID="RadWindowManager1" runat="server" Skin="Outlook">
+    </telerik:RadWindowManager>
 
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Activity Calendar</span>
@@ -111,35 +103,88 @@
     <table class="table-sm" style="width: 100%; padding-top: 5px">
         <tr>
             <td style="width: 35%; vertical-align: top">
-                <asp:Label ID="lblTitle" runat="server" Font-Bold="true" Text="Activities Due Today and Past Due for all employees"></asp:Label>
+                <asp:Label ID="lblTitle" runat="server" Font-Bold="true" Text="Pending Activities for all employees"></asp:Label>
                 <div style="margin-top: 10px">
-                    <telerik:RadGrid ID="RadGridDueToday" runat="server" DataSourceID="SqlDataSourceDueToday" AutoGenerateColumns="False" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" RenderMode="Lightweight" Width="100%" Skin="Material">
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceDueToday">
+                    <telerik:RadGrid ID="RadGridPending" runat="server" DataSourceID="SqlDataSourcePending" AutoGenerateColumns="False" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" RenderMode="Lightweight" Width="100%" Skin="Material" ShowHeader="false">
+                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePending">
                             <NoRecordsTemplate>
-                                No Activity for Today
+                                No Pending Activities for Records
                             </NoRecordsTemplate>
                             <Columns>
                                 <telerik:GridBoundColumn DataField="Id" Display="False" UniqueName="Id" HeaderStyle-Width="50px">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Subject" HeaderText="Due Today" UniqueName="Subject" HeaderStyle-Font-Size="Large">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Complete this Activity?" ConfirmTitle="Complete" ButtonType="FontIconButton" CommandName="Update" Text=" " CommandArgument="" HeaderStyle-Width="50px"/>
-                            </Columns>
-                        </MasterTableView>
-                    </telerik:RadGrid>
-                </div>
-                <div style="margin-top: 20px">
-                    <telerik:RadGrid ID="RadGridPastDue" runat="server" DataSourceID="SqlDataSourcePastDue" AutoGenerateColumns="False" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" RenderMode="Lightweight" Width="100%"  Skin="Material">
-                        <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePastDue">
-                            <NoRecordsTemplate>
-                                There is no Activity past Due
-                            </NoRecordsTemplate>
-                            <Columns>
-                                <telerik:GridBoundColumn DataField="Id" Display="False" UniqueName="Id" HeaderStyle-Width="50px">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Subject" HeaderText="Past Today" UniqueName="Subject" ItemStyle-ForeColor="Red" HeaderStyle-Font-Size="Large">
-                                </telerik:GridBoundColumn>
-                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Complete this Activity?" ConfirmTitle="Complete" ButtonType="FontIconButton" CommandName="Update" Text=" " CommandArgument="" HeaderStyle-Width="50px" />
+
+                                <telerik:GridTemplateColumn  UniqueName="Subject">
+                                    <ItemTemplate>
+                                        <div>
+                                            <asp:Label ID="lblEmployee" runat="server" Text='<%# Eval("DueDate", "{0:d}") %>' ForeColor='<%# GetDueDateColor(Eval("DueDate")) %>'></asp:Label>
+                                            - <%# Eval("ActivityType") %> - <%# Eval("Subject") %>
+                                        </div>
+                                        <div>
+                                            <%# Eval("EmployeeName") %>,
+                                            <asp:HyperLink ID="InitialsLabel" runat="server" NavigateUrl="javascript:void(0);"><%# Eval("ClientandCompany") %></asp:HyperLink>
+                                            <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
+                                                RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
+                                                Position="BottomCenter" Modal="True" Title="" ShowEvent="OnClick"
+                                                HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
+                                                <table class="table-sm">
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("clientId") %>'
+                                                                CommandName="EditClient" Text='<%# Eval("ClientName")%>' UseSubmitBehavior="false" Font-Size="Medium"
+                                                                CssClass="badge badge-info ">
+                                                            </asp:LinkButton>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" style="margin-top: 10px">
+                                                            <%# Eval("Company") %>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 60px">Phone:
+                                                        </td>
+                                                        <td>
+                                                            <telerik:RadMaskedTextBox ID="PhoneTextBox" runat="server" ReadOnly="true"
+                                                                Text='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Phone")%>' Mask="(###) ###-####" BorderStyle="None" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Cellular:
+                                                        </td>
+                                                        <td>
+                                                            <telerik:RadMaskedTextBox ID="RadMaskedTextBox1" runat="server" ReadOnly="true"
+                                                                Text='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Cellular")%>' Mask="(###) ###-####" BorderStyle="None" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Email:
+                                                        </td>
+                                                        <td>
+                                                            <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </telerik:RadToolTip>
+
+                                        </div>
+                                        <div>
+                                            <a href='<%# LocalAPI.GetSharedLink_URL(Eval("SharedLink_URLId"), Eval("AdditionalEntityId")) %>' target="_blank">
+                                                <%# Eval("AdditionalEntityName") %>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <%# Eval("Description") %>
+                                        </div>
+                                        <div>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+
+
+                                <telerik:GridButtonColumn  ButtonType="FontIconButton" CommandName="Edit" Text=" "  HeaderStyle-Width="50px" >
+                                </telerik:GridButtonColumn>
+                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Complete this Activity?" ConfirmTitle="Complete" ButtonType="FontIconButton" CommandName="Update" Text=" " HeaderStyle-Width="50px" >
+                                </telerik:GridButtonColumn>
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
@@ -226,6 +271,7 @@
             <asp:Parameter Name="Id" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
+
     <asp:SqlDataSource ID="SqlDataSourceEmployees" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [FullName] as Name FROM [Employees] WHERE companyId=@companyId and isnull(Inactive,0)=0 ORDER BY [Name]">
         <SelectParameters>
@@ -254,17 +300,8 @@
     </asp:SqlDataSource>
 
 
-    <asp:SqlDataSource ID="SqlDataSourceDueToday" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Appointments_DueToday_SELECT" SelectCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="cboEmployee" Name="employeeId" PropertyName="SelectedValue" Type="Int32" DefaultValue="-1" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-
-    <asp:SqlDataSource ID="SqlDataSourcePastDue" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="Appointments_PastDue_SELECT" SelectCommandType="StoredProcedure">
+    <asp:SqlDataSource ID="SqlDataSourcePending" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+        SelectCommand="Appointments_Pending_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="cboEmployee" Name="employeeId" PropertyName="SelectedValue" Type="Int32" DefaultValue="-1" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />

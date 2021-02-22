@@ -100,7 +100,7 @@ Public Class transmittals
                 End If
 
             Case "EditClient"
-                sUrl = "~/adm/client.aspx?clientId=" & e.CommandArgument
+                sUrl = $"~/ADM/Client.aspx?clientId={e.CommandArgument}&Dialog=1"
                 CreateRadWindows("ClientW", sUrl, 970, 750, False)
 
             Case "EmailDeliveryTransmittalDigital"

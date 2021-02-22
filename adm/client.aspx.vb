@@ -35,6 +35,11 @@ Public Class client
                     End If
                 End If
 
+                If Not Request.QueryString("Dialog") Is Nothing Then
+                    Master.HideMasterMenu()
+                    btnBack.Visible = False
+                End If
+
                 SqlDataSourceMessages.DataBind()
                 RadGridMessages.DataBind()
 
