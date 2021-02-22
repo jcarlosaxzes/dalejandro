@@ -39,6 +39,8 @@ Public Class schedule
             lblEmployee.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
             Dim ViewMode As SchedulerViewType = LocalAPI.GetEmployeeProperty(lblEmployee.Text, "RadScheduler_Default_View")
             RadScheduler1.SelectedView = IIf(ViewMode = -1, 0, ViewMode)
+
+            RadWindowManager1.EnableViewState = False
         End If
 
     End Sub
@@ -152,34 +154,55 @@ Public Class schedule
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         If cboEmployee.SelectedValue > 0 Then
-            lblTitle.Text = "Activities Due Today and Past Due for " & cboEmployee.Text
+            lblTitle.Text = "Pending Activities for " & cboEmployee.Text
         Else
-            lblTitle.Text = "Activities Due Today and Past Due for all employees"
+            lblTitle.Text = "Pending Activities for all employees"
         End If
         RefreshData()
     End Sub
     Private Sub RefreshData()
-        RadGridDueToday.DataBind()
-        RadGridPastDue.DataBind()
+        RadGridPending.DataBind()
         RadScheduler1.Rebind()
         RadScheduler1.DataBind()
     End Sub
 
-    Private Sub RadGridPastDue_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPastDue.ItemCommand
+    Private Sub RadGridPending_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPending.ItemCommand
         Select Case e.CommandName
             Case "Update"
                 Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
                 LocalAPI.AppointmentComplete(item("Id").Text)
                 RefreshData()
-        End Select
-    End Sub
-    Private Sub RadGridDueToday_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridDueToday.ItemCommand
-        Select Case e.CommandName
-            Case "Update"
+            Case "Edit"
                 Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
-                LocalAPI.AppointmentComplete(item("Id").Text)
-                RefreshData()
+                Response.Redirect(LocalAPI.GetSharedLink_URL(12001, item("Id").Text))
+
+            Case "EditClient"
+                CreateRadWindows("ClientW", $"~/ADM/Client.aspx?clientId={e.CommandArgument}&Dialog=1", 970, 750, False)
+
         End Select
     End Sub
+    Private Sub CreateRadWindows(WindowsID As String, sUrl As String, Width As Integer, Height As Integer, Maximize As Boolean)
+        RadWindowManager1.Windows.Clear()
+        Dim window1 As RadWindow = New RadWindow()
+        window1.NavigateUrl = sUrl
+        window1.VisibleOnPageLoad = True
+        window1.VisibleStatusbar = False
+        window1.ID = WindowsID
+        If Maximize Then window1.InitialBehaviors = WindowBehaviors.Maximize
+        window1.Behaviors = WindowBehaviors.Close Or WindowBehaviors.Resize Or WindowBehaviors.Move Or WindowBehaviors.Maximize
+        window1.Width = Width
+        window1.Height = Height
+        window1.Modal = True
+        RadWindowManager1.Windows.Add(window1)
+    End Sub
+
+    Public Function GetDueDateColor(ByVal DueDate As DateTime) As System.Drawing.Color
+        If DueDate < Today Then
+            Return System.Drawing.Color.Red
+        Else
+            Return System.Drawing.Color.Black
+        End If
+    End Function
+
 End Class
 

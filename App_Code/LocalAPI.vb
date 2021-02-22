@@ -11098,6 +11098,10 @@ Public Class LocalAPI
                     Case 11008
                         url = LocalAPI.GetHostAppSite() & "/adm/pro_preview.aspx?guid=" & LocalAPI.GetProposalProperty(objId, "guid")
 
+                    ' Appoitment pages............................................
+                    Case 12001
+                        url = LocalAPI.GetHostAppSite() & $"/adm/appointment.aspx?Id={objId}EntityType=Appointment&EntityId={objId}&backpage=Schedule"
+
                 End Select
                 If PrintParameter Then
                     url = url & "&Print=1"

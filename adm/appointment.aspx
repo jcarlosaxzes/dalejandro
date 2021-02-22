@@ -46,30 +46,6 @@
             <EditItemTemplate>
                 <table class="table-sm" style="width: 90%">
                     <tr>
-                        <td style="width: 200px; text-align: right">Subject:
-                        </td>
-                        <td>
-                            <telerik:RadTextBox ID="txtSubject" runat="server" Text='<%# Bind("Subject") %>' Width="60%" MaxLength="80">
-                            </telerik:RadTextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 200px; text-align: right">Start Date: 
-                        </td>
-                        <td>
-                            <telerik:RadDateTimePicker ID="dtpStart" runat="server" DbSelectedDate='<%# Bind("Start") %>' Width="250px">
-                            </telerik:RadDateTimePicker>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 200px; text-align: right">End/Due Date: 
-                        </td>
-                        <td>
-                            <telerik:RadDateTimePicker ID="dtpEnd" runat="server" DbSelectedDate='<%# Bind("End") %>' Width="250px">
-                            </telerik:RadDateTimePicker>
-                        </td>
-                    </tr>
-                    <tr>
                         <td style="width: 200px; text-align: right">Activity Type:
                         </td>
                         <td>
@@ -83,7 +59,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 200px; text-align: right">Assign to Employee:
+                        <td style="text-align: right">Assign to Employee:
                         </td>
                         <td style="height: 45px; vertical-align: top">
                             <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" ZIndex="50001"
@@ -95,7 +71,31 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 200px; text-align: right">Client:
+                        <td style="text-align: right">Subject:
+                        </td>
+                        <td>
+                            <telerik:RadTextBox ID="txtSubject" runat="server" Text='<%# Bind("Subject") %>' Width="60%" MaxLength="80">
+                            </telerik:RadTextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Start Date: 
+                        </td>
+                        <td>
+                            <telerik:RadDateTimePicker ID="dtpStart" runat="server" DbSelectedDate='<%# Bind("Start") %>' Width="250px">
+                            </telerik:RadDateTimePicker>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">End/Due Date: 
+                        </td>
+                        <td>
+                            <telerik:RadDateTimePicker ID="dtpEnd" runat="server" DbSelectedDate='<%# Bind("End") %>' Width="250px">
+                            </telerik:RadDateTimePicker>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">Client:
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboClient" runat="server" DataSourceID="SqlDataSourceClients" ZIndex="50001"
@@ -108,7 +108,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 200px; text-align: right">Job:
+                        <td style="text-align: right">Job:
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJob" 
@@ -121,7 +121,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 200px; text-align: right">Description:
+                        <td style="text-align: right">Description:
                         </td>
                         <td>
                             <telerik:RadTextBox ID="txtDescription" runat="server"
@@ -130,7 +130,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 200px; text-align: right">Location:
+                        <td style="text-align: right">Location:
                         </td>
                         <td>
                             <telerik:RadTextBox ID="txtLocation" runat="server" Width="60%" MaxLength="80" Text='<%# Bind("Location") %>'>
@@ -138,7 +138,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 200px; text-align: right">Recurrence:
+                        <td style="text-align: right">Recurrence:
                         </td>
                         <td>Repeat every 
                         <telerik:RadNumericTextBox ID="txtRecurrenceFrecuency" runat="server" Width="100px" MaxLength="80"
@@ -160,13 +160,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 200px; text-align: right">Status:
+                        <td style="text-align: right">Status:
                         </td>
                         <td>
                             <telerik:RadComboBox ID="cboStatus" runat="server"
                                 Width="60%" AppendDataBoundItems="true" SelectedValue='<%# Bind("statusId") %>'>
                                 <Items>
-                                    <telerik:RadComboBoxItem Value="0" Text="N/A (Does not require moving to Completed status)" />
+                                    <telerik:RadComboBoxItem Value="0" Text="N/A (Does not require Completed status)" />
                                     <telerik:RadComboBoxItem Value="1" Text="Pending" />
                                     <telerik:RadComboBoxItem Value="2" Text="Completed" />
                                 </Items>
@@ -175,7 +175,7 @@
                     </tr>
 
                     <tr>
-                        <td style="width: 200px; text-align: right">Notify Employees:
+                        <td style="text-align: right">Notify Employees:
                         </td>
                         <td>
                             <telerik:RadCheckBox runat="server" ID="chNotify" TextAlign="Left" Text="" Checked='<%# Bind("NotifyEmployee") %>' />

@@ -147,7 +147,7 @@ Public Class proposals
                 Response.Redirect(sUrl)
 
             Case "EditClient"
-                sUrl = "~/ADM/Client.aspx?clientId=" & e.CommandArgument
+                sUrl = $"~/ADM/Client.aspx?clientId={e.CommandArgument}&Dialog=1"
                 CreateRadWindows("ClientW", sUrl, 970, 750, False)
 
             Case "SaveProposalAs"

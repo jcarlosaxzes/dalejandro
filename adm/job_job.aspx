@@ -311,9 +311,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="text-align: right"></td>
-                                <td></td>
-                                <td style="text-align: right"></td>
+                                <td style="text-align: right">
+                                    External Reference:
+                                </td>
+                                <td>
+                                    <telerik:RadTextBox ID="RadTextBox2" runat="server" Text='<%# Bind("ExternalReference") %>' MaxLength="80" Width="100%" ToolTip="Link reference used for Integration with other platforms"></telerik:RadTextBox>
+                                </td>
+                                <td style="text-align: right">
+                                </td>
                                 <telerik:RadComboBox ID="cboProposalType" Visible="false" runat="server" SelectedValue='<%# Bind("ProposalType") %>' DataSourceID="SqlDataSourceProposalType" DataTextField="Name"
                                     DataValueField="Id" Width="100%" AppendDataBoundItems="True" MarkFirstMatch="True" Filter="Contains" Height="300px">
                                     <Items>
@@ -337,7 +342,9 @@
                         <td style="text-align: left">
                             <asp:Label ID="lblTags" runat="server"></asp:Label>
                         </td>
-                        <td></td>
+                        <td>
+
+                        </td>
                     </tr>
                 </table>
                 <br />
@@ -348,8 +355,8 @@
     </div>
 
     <asp:SqlDataSource ID="SqlDataSourceJob" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="JOB_JOB_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="JOB_JOB_UPDATE" UpdateCommandType="StoredProcedure">
+        SelectCommand="JOB_JOB_v21_SELECT" SelectCommandType="StoredProcedure"
+        UpdateCommand="JOB_JOB_v21_UPDATE" UpdateCommandType="StoredProcedure">
         <SelectParameters>
             <asp:ControlParameter ControlID="lblJobId" Name="Id" PropertyName="Text" />
         </SelectParameters>
@@ -381,6 +388,9 @@
             <asp:Parameter Name="Workdays" Type="Int32" />
             <asp:Parameter Name="AllowOpenBudget" />
             <asp:Parameter Name="BillType" />
+
+            <asp:Parameter Name="ExternalReference" />
+
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
             <asp:ControlParameter ControlID="lblJobId" Name="Id" PropertyName="Text" />
         </UpdateParameters>
