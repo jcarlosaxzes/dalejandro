@@ -62,7 +62,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="width: 200px; text-align: right">End Date: 
+                        <td style="width: 200px; text-align: right">End/Due Date: 
                         </td>
                         <td>
                             <telerik:RadDateTimePicker ID="dtpEnd" runat="server" DbSelectedDate='<%# Bind("End") %>' Width="250px">

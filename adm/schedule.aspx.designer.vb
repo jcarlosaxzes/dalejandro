@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class schedule
 
     '''<summary>
-    '''RadAjaxManager1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadAjaxManager1 As Global.Telerik.Web.UI.RadAjaxManager
-
-    '''<summary>
     '''RadCodeBlock1 control.
     '''</summary>
     '''<remarks>
@@ -30,15 +21,6 @@ Partial Public Class schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadCodeBlock1 As Global.Telerik.Web.UI.RadCodeBlock
-
-    '''<summary>
-    '''RadAjaxLoadingPanel1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RadAjaxLoadingPanel1 As Global.Telerik.Web.UI.RadAjaxLoadingPanel
 
     '''<summary>
     '''btnOutlook control.
@@ -77,13 +59,13 @@ Partial Public Class schedule
     Protected WithEvents pnlFind As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''cboJob control.
+    '''cboEmployee control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboJob As Global.Telerik.Web.UI.RadComboBox
+    Protected WithEvents cboEmployee As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
     '''cboClients control.
@@ -95,13 +77,13 @@ Partial Public Class schedule
     Protected WithEvents cboClients As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''cboEmployee control.
+    '''cboJob control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboEmployee As Global.Telerik.Web.UI.RadComboBox
+    Protected WithEvents cboJob As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
     '''btnRefresh control.
@@ -111,6 +93,15 @@ Partial Public Class schedule
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnRefresh As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''lblTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTitle As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''RadGridDueToday control.

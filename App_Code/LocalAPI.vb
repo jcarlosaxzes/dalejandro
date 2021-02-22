@@ -10664,6 +10664,10 @@ Public Class LocalAPI
 
     End Function
 
+    Public Shared Function AppointmentComplete(ByVal Id As Integer) As Boolean
+        Return ExecuteNonQuery($"UPDATE [Appointments] SET statusId=2 WHERE Id={Id}")
+    End Function
+
 #End Region
 
 #Region "Version"
