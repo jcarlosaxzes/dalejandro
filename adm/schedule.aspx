@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/ADM/ADM_Main_Responsive.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+   <%-- <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
         <AjaxSettings>
             <telerik:AjaxSetting AjaxControlID="RadScheduler1">
                 <UpdatedControls>
@@ -32,10 +32,15 @@
                     <telerik:AjaxUpdatedControl ControlID="RadScheduler1" LoadingPanelID="RadAjaxLoadingPanel1" />
                     <telerik:AjaxUpdatedControl ControlID="RadGridDueToday"></telerik:AjaxUpdatedControl>
                     <telerik:AjaxUpdatedControl ControlID="RadGridPastDue"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="cboEmployee"></telerik:AjaxUpdatedControl>
+                    <telerik:AjaxUpdatedControl ControlID="lblTitle"></telerik:AjaxUpdatedControl>
                 </UpdatedControls>
             </telerik:AjaxSetting>
         </AjaxSettings>
     </telerik:RadAjaxManager>
+    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false">
+    </telerik:RadAjaxLoadingPanel>--%>
+
 
     <telerik:RadCodeBlock ID="RadCodeBlock1" runat="server">
         <script type="text/javascript">
@@ -44,9 +49,6 @@
             }
         </script>
     </telerik:RadCodeBlock>
-
-    <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" EnableEmbeddedSkins="false">
-    </telerik:RadAjaxLoadingPanel>
 
     <div class="pasconcept-bar noprint">
         <span class="pasconcept-pagetitle">Activity Calendar</span>
@@ -75,24 +77,26 @@
         <asp:Panel ID="pnlFind" runat="server" class="pasconcept-bar" DefaultButton="btnRefresh">
             <table class="table-sm" style="width: 100%">
                 <tr>
-                    <td>
+                    <td style="width: 300px">
+                        <telerik:RadComboBox ID="cboEmployee" runat="server" DropDownAutoWidth="Enabled"
+                            DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
+                            Width="100%" Height="300px" EmptyMessage="(All Employees...)">
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 300px">
+                        <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" DropDownAutoWidth="Enabled"
+                            DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True"
+                            Filter="Contains" Height="300px" EmptyMessage="(All Clients...)">
+                        </telerik:RadComboBox>
+                    </td>
+                    <td style="width: 300px;">
                         <telerik:RadComboBox ID="cboJob" runat="server" DataSourceID="SqlDataSourceJob" DropDownAutoWidth="Enabled"
-                            DataTextField="JobName" DataValueField="Id" Width="250px" MarkFirstMatch="True" Filter="Contains"
+                            DataTextField="JobName" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains"
                             Height="300px" EmptyMessage="(All Jobs...)">
                         </telerik:RadComboBox>
-                        &nbsp;
-                                <telerik:RadComboBox ID="cboClients" runat="server" DataSourceID="SqlDataSourceClient" DropDownAutoWidth="Enabled"
-                                    DataTextField="Name" DataValueField="Id" Width="250px" MarkFirstMatch="True"
-                                    Filter="Contains" Height="300px" EmptyMessage="(All Clients...)">
-                                </telerik:RadComboBox>
-                        &nbsp;
-                                <telerik:RadComboBox ID="cboEmployee" runat="server" DropDownAutoWidth="Enabled"
-                                    DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
-                                    Width="250px" Height="300px" EmptyMessage="(All calendar...)">
-                                </telerik:RadComboBox>
 
                     </td>
-                    <td style="width: 150px; text-align: right">
+                    <td style="text-align: right">
                         <asp:LinkButton ID="btnRefresh" runat="server" CssClass="btn btn-primary" UseSubmitBehavior="false">
                                     <i class="fas fa-search"></i> Filter/Search
                         </asp:LinkButton>
@@ -106,10 +110,10 @@
 
     <table class="table-sm" style="width: 100%; padding-top: 5px">
         <tr>
-            <td style="width: 300px; vertical-align: top">
-                <div style="margin-top:80px">
-                    <telerik:RadGrid ID="RadGridDueToday" runat="server" DataSourceID="SqlDataSourceDueToday" AutoGenerateColumns="False" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
-                        Skin="" GridLines="None" CssClass="table" RenderMode="Lightweight" Width="100%" HeaderStyle-Font-Size="Large">
+            <td style="width: 35%; vertical-align: top">
+                <asp:Label ID="lblTitle" runat="server" Font-Bold="true" Text="Activities Due Today and Past Due for all employees"></asp:Label>
+                <div style="margin-top: 10px">
+                    <telerik:RadGrid ID="RadGridDueToday" runat="server" DataSourceID="SqlDataSourceDueToday" AutoGenerateColumns="False" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" RenderMode="Lightweight" Width="100%" Skin="Material">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourceDueToday">
                             <NoRecordsTemplate>
                                 No Activity for Today
@@ -117,18 +121,15 @@
                             <Columns>
                                 <telerik:GridBoundColumn DataField="Id" Display="False" UniqueName="Id" HeaderStyle-Width="50px">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Subject" HeaderText="Due Today" UniqueName="Subject"
-                                    ItemStyle-CssClass="GridColumn">
+                                <telerik:GridBoundColumn DataField="Subject" HeaderText="Due Today" UniqueName="Subject" HeaderStyle-Font-Size="Large">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Complete this Activity?" ConfirmTitle="Complete" ButtonType="ImageButton" CommandName="Delete" Text="Complete Activity" UniqueName="DeleteColumn" HeaderText="" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridButtonColumn>
+                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Complete this Activity?" ConfirmTitle="Complete" ButtonType="FontIconButton" CommandName="Update" Text=" " CommandArgument="" HeaderStyle-Width="50px"/>
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
                 </div>
-                <div style="padding-top:30px">
-                    <telerik:RadGrid ID="RadGridPastDue" runat="server" DataSourceID="SqlDataSourcePastDue" AutoGenerateColumns="False" AllowAutomaticDeletes="True" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small"
-                        Skin="" GridLines="None" CssClass="table" RenderMode="Lightweight" Width="100%">
+                <div style="margin-top: 20px">
+                    <telerik:RadGrid ID="RadGridPastDue" runat="server" DataSourceID="SqlDataSourcePastDue" AutoGenerateColumns="False" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" RenderMode="Lightweight" Width="100%"  Skin="Material">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePastDue">
                             <NoRecordsTemplate>
                                 There is no Activity past Due
@@ -136,11 +137,9 @@
                             <Columns>
                                 <telerik:GridBoundColumn DataField="Id" Display="False" UniqueName="Id" HeaderStyle-Width="50px">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridBoundColumn DataField="Subject" HeaderText="Past Today" UniqueName="Subject" ItemStyle-ForeColor="Red"
-                                    ItemStyle-CssClass="GridColumn">
+                                <telerik:GridBoundColumn DataField="Subject" HeaderText="Past Today" UniqueName="Subject" ItemStyle-ForeColor="Red" HeaderStyle-Font-Size="Large">
                                 </telerik:GridBoundColumn>
-                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Complete this Activity?" ConfirmTitle="Complete" ButtonType="ImageButton" CommandName="Delete" Text="Complete Activity" UniqueName="DeleteColumn" HeaderText="" HeaderStyle-Width="50px" ItemStyle-HorizontalAlign="Center">
-                                </telerik:GridButtonColumn>
+                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Complete this Activity?" ConfirmTitle="Complete" ButtonType="FontIconButton" CommandName="Update" Text=" " CommandArgument="" HeaderStyle-Width="50px" />
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
@@ -149,7 +148,7 @@
 
             <td style="vertical-align: top">
                 <telerik:RadScheduler ID="RadScheduler1" runat="server" Culture="en-US" RenderMode="Auto" OverflowBehavior="Auto"
-                    DataDescriptionField="Description"
+                    DataDescriptionField="Description" Skin="Material"
                     DataEndField="End"
                     DataKeyField="Id"
                     Font-Size="Smaller"
@@ -256,11 +255,7 @@
 
 
     <asp:SqlDataSource ID="SqlDataSourceDueToday" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="Appointment_Completed_UPDATE" DeleteCommandType="StoredProcedure"
         SelectCommand="Appointments_DueToday_SELECT" SelectCommandType="StoredProcedure">
-        <DeleteParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-        </DeleteParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="cboEmployee" Name="employeeId" PropertyName="SelectedValue" Type="Int32" DefaultValue="-1" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
@@ -269,11 +264,7 @@
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSourcePastDue" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        DeleteCommand="Appointment_Completed_UPDATE" DeleteCommandType="StoredProcedure"
         SelectCommand="Appointments_PastDue_SELECT" SelectCommandType="StoredProcedure">
-        <DeleteParameters>
-            <asp:Parameter Name="Id" Type="Int32" />
-        </DeleteParameters>
         <SelectParameters>
             <asp:ControlParameter ControlID="cboEmployee" Name="employeeId" PropertyName="SelectedValue" Type="Int32" DefaultValue="-1" />
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />

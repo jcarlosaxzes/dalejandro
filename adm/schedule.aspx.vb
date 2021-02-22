@@ -80,7 +80,7 @@ Public Class schedule
     End Sub
 
     Protected Sub SqlDataSourceAppointments_Selected(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointments.Selected
-        AppointmentsCount.Text = "Appointments: " & e.AffectedRows
+        AppointmentsCount.Text = "Activities: " & e.AffectedRows
     End Sub
 
     Protected Sub SqlDataSourceAppointments_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceAppointments.Selecting
@@ -144,12 +144,42 @@ Public Class schedule
     Private Sub SqlDataSourceAppointments_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointments.Updated
         Try
             LocalAPI.Appointment_DragAndDrop_UPDATE(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Start").Value, e.Command.Parameters("@End").Value)
-            RadScheduler1.Rebind()
-            RadGridDueToday.DataBind()
-            RadGridPastDue.DataBind()
+            RefreshData()
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        If cboEmployee.SelectedValue > 0 Then
+            lblTitle.Text = "Activities Due Today and Past Due for " & cboEmployee.Text
+        Else
+            lblTitle.Text = "Activities Due Today and Past Due for all employees"
+        End If
+        RefreshData()
+    End Sub
+    Private Sub RefreshData()
+        RadGridDueToday.DataBind()
+        RadGridPastDue.DataBind()
+        RadScheduler1.Rebind()
+        RadScheduler1.DataBind()
+    End Sub
+
+    Private Sub RadGridPastDue_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPastDue.ItemCommand
+        Select Case e.CommandName
+            Case "Update"
+                Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
+                LocalAPI.AppointmentComplete(item("Id").Text)
+                RefreshData()
+        End Select
+    End Sub
+    Private Sub RadGridDueToday_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridDueToday.ItemCommand
+        Select Case e.CommandName
+            Case "Update"
+                Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
+                LocalAPI.AppointmentComplete(item("Id").Text)
+                RefreshData()
+        End Select
     End Sub
 End Class
 
