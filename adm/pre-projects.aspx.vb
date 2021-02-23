@@ -11,6 +11,8 @@ Public Class pre_projects
             Master.PageTitle = "Clients/Pre_Projects"
             lblCompanyId.Text = Session("companyId")
 
+            lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+
         End If
         RadWindowManager1.EnableViewState = False
     End Sub
@@ -20,6 +22,11 @@ Public Class pre_projects
             Case "EditPre_Project"
                 sUrl = "~/ADM/Pre-Project.aspx?preprojectsId=" & e.CommandArgument
                 CreateRadWindows(e.CommandName, sUrl, 800, 610, False, True)
+
+            Case "AddActivity"
+                lblSelected.Text = e.CommandArgument
+                lblSelectedClientId.Text = LocalAPI.GetPreProjectProperty(lblSelected.Text, "clientId")
+                NewClientActivityDlg(True)
 
             Case "EditProposal"
                 Response.Redirect(LocalAPI.GetSharedLink_URL(11001, e.CommandArgument) & "&backpage=job_proposals")
@@ -66,4 +73,60 @@ Public Class pre_projects
         Dim sUrl As String = "~/ADM/Pre-Project.aspx"
         CreateRadWindows("Windows1", sUrl, 800, 610, False, True)
     End Sub
+
+#Region "Activity"
+    Private Sub NewClientActivityDlg(bInitDlg As Boolean)
+        If bInitDlg Then
+            cboEmployees.SelectedValue = lblEmployeeId.Text
+            cboActivityType.SelectedValue = -1
+            lblClientName.Text = LocalAPI.GetClientProperty(lblSelectedClientId.Text, "Client")
+            txtSubject.Text = ""
+        End If
+
+        RadToolTipNewActivity.Visible = True
+        RadToolTipNewActivity.Show()
+    End Sub
+
+    Private Sub btnAddActivity_Click(sender As Object, e As EventArgs) Handles btnAddActivity.Click
+        Try
+            ' Insert new Activity
+            Dim EndDate As DateTime = DateAdd(DateInterval.Minute, CInt(cboDuration.SelectedValue), RadDateTimePicker1.DbSelectedDate)
+            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtSubject.Text, RadDateTimePicker1.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboEmployees.SelectedValue, lblSelectedClientId.Text, 0, 0, lblSelected.Text, lblCompanyId.Text, 1)
+            If chkMoreOptions.Checked Then
+                Response.Redirect($"~/adm/appointment?Id={ActivityId}&EntityType=Pre-Proposal&EntityId={lblSelected.Text}&backpage=pre-projects")
+            Else
+                Master.InfoMessage("The Activity was inserted successfully!")
+            End If
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+    'Private Sub cboActivityType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboActivityType.SelectedIndexChanged
+    '    Select Case cboActivityType.SelectedValue
+    '        Case 0  'Appointment
+    '            cboDuration.SelectedValue = 60
+    '            PanelLocation.Visible = True
+    '        Case 1  'Meeting
+    '            cboDuration.SelectedValue = 120
+    '            PanelLocation.Visible = True
+    '        Case 2  'Site Visit
+    '            cboDuration.SelectedValue = 240
+    '            PanelLocation.Visible = True
+    '        Case 3  'Email
+    '            cboDuration.SelectedValue = 15
+    '            PanelLocation.Visible = False
+    '        Case 4  'Call
+    '            cboDuration.SelectedValue = 15
+    '            PanelLocation.Visible = False
+    '        Case Else
+    '            cboDuration.SelectedValue = 60
+    '            PanelLocation.Visible = True
+
+    '    End Select
+
+    '    NewClientActivityDlg(False)
+    'End Sub
+#End Region
 End Class
