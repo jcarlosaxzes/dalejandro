@@ -214,30 +214,30 @@ Public Class clients
         End Try
     End Sub
 
-    Private Sub cboActivityType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboActivityType.SelectedIndexChanged
-        Select Case cboActivityType.SelectedValue
-            Case 0  'Appointment
-                cboDuration.SelectedValue = 60
-                PanelLocation.Visible = True
-            Case 1  'Meeting
-                cboDuration.SelectedValue = 120
-                PanelLocation.Visible = True
-            Case 2  'Site Visit
-                cboDuration.SelectedValue = 240
-                PanelLocation.Visible = True
-            Case 3  'Email
-                cboDuration.SelectedValue = 15
-                PanelLocation.Visible = False
-            Case 4  'Call
-                cboDuration.SelectedValue = 15
-                PanelLocation.Visible = False
-            Case Else
-                cboDuration.SelectedValue = 60
-                PanelLocation.Visible = True
+    'Private Sub cboActivityType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboActivityType.SelectedIndexChanged
+    '    Select Case cboActivityType.SelectedValue
+    '        Case 0  'Appointment
+    '            cboDuration.SelectedValue = 60
+    '            PanelLocation.Visible = True
+    '        Case 1  'Meeting
+    '            cboDuration.SelectedValue = 120
+    '            PanelLocation.Visible = True
+    '        Case 2  'Site Visit
+    '            cboDuration.SelectedValue = 240
+    '            PanelLocation.Visible = True
+    '        Case 3  'Email
+    '            cboDuration.SelectedValue = 15
+    '            PanelLocation.Visible = False
+    '        Case 4  'Call
+    '            cboDuration.SelectedValue = 15
+    '            PanelLocation.Visible = False
+    '        Case Else
+    '            cboDuration.SelectedValue = 60
+    '            PanelLocation.Visible = True
 
-        End Select
+    '    End Select
 
-        NewClientActivityDlg(False)
-    End Sub
+    '    NewClientActivityDlg(False)
+    'End Sub
 #End Region
 End Class

@@ -14,14 +14,6 @@
                     <telerik:AjaxUpdatedControl ControlID="RadToolTipNewActivity" />
                 </UpdatedControls>
             </telerik:AjaxSetting>
-            <telerik:AjaxSetting AjaxControlID="cboActivityType">
-                <UpdatedControls>
-                    <telerik:AjaxUpdatedControl ControlID="txtSubject" LoadingPanelID="RadAjaxLoadingPanel1" />
-                    <telerik:AjaxUpdatedControl ControlID="RadToolTipNewActivity" />
-                    <telerik:AjaxUpdatedControl ControlID="cboDuration" />
-                    <telerik:AjaxUpdatedControl ControlID="PanelLocation" />
-                </UpdatedControls>
-            </telerik:AjaxSetting>
             <telerik:AjaxSetting AjaxControlID="btnNewClient">
                 <UpdatedControls>
                     <telerik:AjaxUpdatedControl ControlID="RadGrid1" LoadingPanelID="RadAjaxLoadingPanel1" />
@@ -327,7 +319,7 @@
                     <td style="width: 180px; text-align: right">Activity Type:
                     </td>
                     <td>
-                        <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceActivityType" DataTextField="Name" DataValueField="Id" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity" AutoPostBack="true" CausesValidation="false">
+                        <telerik:RadComboBox ID="cboActivityType" runat="server" DataSourceID="SqlDataSourceActivityType" DataTextField="Name" DataValueField="Id" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity" CausesValidation="false">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="(Select Activity...)" Value="-1" />
                             </Items>
