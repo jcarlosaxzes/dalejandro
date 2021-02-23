@@ -258,7 +258,7 @@
                                             <tr>
                                                 <td>
                                                     <telerik:RadTextBox ID="Employee_CodeTextBox" runat="server" Text='<%# Bind("Employee_Code") %>'
-                                                        MaxLength="5" EmptyMessage="Required" Width="200px">
+                                                        MaxLength="16" EmptyMessage="Required" Width="200px">
                                                     </telerik:RadTextBox>
                                                 </td>
                                                 <td>Suffix:

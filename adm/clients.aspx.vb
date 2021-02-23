@@ -8,14 +8,17 @@ Public Class clients
 
             ' Si no tiene permiso, la dirijo a message
             If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+
+            lblCompanyId.Text = Session("companyId")
+            lblEmployee.Text = Master.UserEmail
+            lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+
+
             ' Si no tiene permiso New, boton.Visible=False
             btnNewClient.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
 
             Master.PageTitle = "Clients/Clients List"
-            Master.Help = "http://blog.pasconcept.com/2012/06/clients-list.html"
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Clients List"
-            lblEmployee.Text = Master.UserEmail
-            lblCompanyId.Text = Session("companyId")
 
             If Not Request.QueryString("restoreFilter") Is Nothing Then
                 RestoreFilter()
@@ -68,10 +71,10 @@ Public Class clients
         Try
             Dim ID As String = (CType(e.Item, GridDataItem)).OwnerTableView.DataKeyValues(e.Item.ItemIndex)("Id").ToString
             If Val(ID) > 0 Then
-                lblSelected.Text = ID
-                If LocalAPI.EliminarCliente(CInt(lblSelected.Text)) Then
+                lblSelectedClientId.Text = ID
+                If LocalAPI.EliminarCliente(CInt(lblSelectedClientId.Text)) Then
                     Master.InfoMessage("The client was deleted.")
-                    lblSelected.Text = ""
+                    lblSelectedClientId.Text = ""
 
                     ' Refrescar el grid
                     RadGrid1.DataBind()
@@ -105,7 +108,7 @@ Public Class clients
                 CreateRadWindows(e.CommandName, sUrl, 800, 600)
 
             Case "Duplicate"
-                lblSelected.Text = e.CommandArgument
+                lblSelectedClientId.Text = e.CommandArgument
                 SqlDataSource1.Insert()
 
             Case "SendAcknowledgment"
@@ -116,8 +119,9 @@ Public Class clients
             Case "ClientToAgile"
                 LocalAPI.PASconceptClientToAgile(e.CommandArgument, "EEG_Client", Master.UserId)
 
-            Case "AddCalendar"
-                Response.Redirect($"~/adm/appointment?Id=&EntityType=Client&EntityId={e.CommandArgument}&backpage=Clients")
+            Case "AddActivity"
+                lblSelectedClientId.Text = e.CommandArgument
+                NewClientActivityDlg(True)
 
             Case "AddNotifications"
                 Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId=&EntityType=Client&EntityId={e.CommandArgument}&backpage=Clients")
@@ -180,4 +184,60 @@ Public Class clients
         End Try
 
     End Sub
+
+#Region "Activity"
+    Private Sub NewClientActivityDlg(bInitDlg As Boolean)
+        If bInitDlg Then
+            cboEmployees.SelectedValue = lblEmployeeId.Text
+            cboActivityType.SelectedValue = -1
+            lblClientName.Text = LocalAPI.GetClientProperty(lblSelectedClientId.Text, "Client")
+            txtSubject.Text = ""
+        End If
+
+        RadToolTipNewActivity.Visible = True
+        RadToolTipNewActivity.Show()
+    End Sub
+
+    Private Sub btnAddActivity_Click(sender As Object, e As EventArgs) Handles btnAddActivity.Click
+        Try
+            ' Insert new Activity
+            Dim EndDate As DateTime = DateAdd(DateInterval.Minute, CInt(cboDuration.SelectedValue), RadDateTimePicker1.DbSelectedDate)
+            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtSubject.Text, RadDateTimePicker1.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboEmployees.SelectedValue, lblSelectedClientId.Text, 0, 0, 0, lblCompanyId.Text, 1)
+            If chkMoreOptions.Checked Then
+                Response.Redirect($"~/adm/appointment?Id={ActivityId}&EntityType=Client&EntityId={ActivityId}&backpage=Clients")
+            Else
+                Master.InfoMessage("The Activity was inserted successfully!")
+            End If
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub cboActivityType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboActivityType.SelectedIndexChanged
+        Select Case cboActivityType.SelectedValue
+            Case 0  'Appointment
+                cboDuration.SelectedValue = 60
+                PanelLocation.Visible = True
+            Case 1  'Meeting
+                cboDuration.SelectedValue = 120
+                PanelLocation.Visible = True
+            Case 2  'Site Visit
+                cboDuration.SelectedValue = 240
+                PanelLocation.Visible = True
+            Case 3  'Email
+                cboDuration.SelectedValue = 15
+                PanelLocation.Visible = False
+            Case 4  'Call
+                cboDuration.SelectedValue = 15
+                PanelLocation.Visible = False
+            Case Else
+                cboDuration.SelectedValue = 60
+                PanelLocation.Visible = True
+
+        End Select
+
+        NewClientActivityDlg(False)
+    End Sub
+#End Region
 End Class
