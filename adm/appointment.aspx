@@ -330,55 +330,6 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSourceAppointment" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        InsertCommand="Appointment_v21_INSERT" InsertCommandType="StoredProcedure"
-        UpdateCommand="Appointment_v21_UPDATE" UpdateCommandType="StoredProcedure">
-        <InsertParameters>
-            <asp:Parameter Name="Subject" Type="String" />
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="Start" Type="DateTime" />
-            <asp:ControlParameter ControlID="dtpSendDate" Name="SendDate" PropertyName="SelectedDate" Type="DateTime" />
-            <asp:Parameter Name="End" Type="DateTime" />
-            <asp:Parameter Name="RecurrenceRule" Type="String" DefaultValue="" />
-            <asp:Parameter Name="RecurrenceParentID" Type="Int32" DefaultValue="" />
-            <asp:Parameter Name="Reminder" Type="String" DefaultValue="" />
-            <asp:Parameter Name="Annotations" DefaultValue="" />
-            <asp:Parameter Name="ActivityId" Type="Int16" />
-            <asp:Parameter Name="ClientId" Type="Int32" />
-            <asp:Parameter Name="JobId" Type="Int32" />
-            <asp:Parameter Name="EmployeeId" Type="String" />
-            <asp:Parameter Name="Location" Type="String" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-            <asp:Parameter Name="NotifyEmployee" Type="Boolean" />
-            <asp:Parameter Name="statusId" Type="Int32" />
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-        </InsertParameters>
-        <UpdateParameters>
-            <asp:Parameter Name="ReturnId" Type="Int32" Direction="Output" />
-            <asp:Parameter Name="Subject" Type="String" />
-            <asp:Parameter Name="Description" Type="String" />
-            <asp:Parameter Name="Start" Type="DateTime" />
-            <asp:Parameter Name="End" Type="DateTime" />
-            <asp:Parameter Name="RecurrenceRule" Type="String" />
-            <asp:Parameter Name="RecurrenceParentID" Type="Int32" />
-            <asp:Parameter Name="Reminder" Type="String" />
-            <asp:Parameter Name="Annotations" Type="String" />
-            <asp:Parameter Name="ActivityId" Type="Int16" />
-            <asp:Parameter Name="ClientId" Type="Int32" />
-            <asp:Parameter Name="JobId" Type="Int32" />
-            <asp:Parameter Name="EmployeeId" Type="Int32" />
-            <asp:Parameter Name="Location" Type="String" />
-            <asp:Parameter Name="Id" Type="Int32" />
-            <asp:Parameter Name="RecurrenceFrequency" Type="Int32" />
-            <asp:Parameter Name="RecurrenceInterval" Type="Int32" />
-            <asp:Parameter Name="RecurrenceUntil" Type="DateTime" />
-            <asp:Parameter Name="NotifyEmployee" Type="Boolean" />
-            <asp:Parameter Name="AllDay" Type="Boolean" />
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
-            <asp:Parameter Name="statusId" Type="Int32" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
-
     <asp:SqlDataSource ID="SqlDataSourceProposalTask" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="ProposalTaskAppoitment_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>

@@ -383,15 +383,6 @@ Partial Public Class appointment
     Protected WithEvents SqlDataSourceProposal As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceAppointment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceAppointment As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
     '''SqlDataSourceProposalTask control.
     '''</summary>
     '''<remarks>

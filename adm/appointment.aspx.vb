@@ -134,14 +134,18 @@ Public Class appointment
     Protected Sub btnSave_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnSave.Click
         If lblAppointmentid.Text > 0 Then
             ' UpdateRecord
+            LocalAPI.Activity_UPDATE(lblAppointmentid.Text, txtSubject.Text, RadDateTimePickerStart.DbSelectedDate, RadDateTimePickerEnd.DbSelectedDate, cboActivity.SelectedValue, cboEmployee.SelectedValue, cboClient.SelectedValue, cboJob.SelectedValue, cboProposal.SelectedValue, cboPreProposal.SelectedValue, cboStatus.SelectedValue, txtDescription.Text, txtLocation.Text, chNotify.Checked, Val(txtRecurrenceFrecuency.Text), cboRecurrenceInterval.SelectedValue, dtpUntil.DbSelectedDate)
         Else
             ' Insert New Record
-            LocalAPI.Activity_INSERT(txtSubject.Text, RadDateTimePickerStart.DbSelectedDate, RadDateTimePickerEnd.DbSelectedDate, cboActivity.SelectedValue, cboEmployee.SelectedValue, cboClient.SelectedValue, cboJob.SelectedValue, cboProposal.SelectedValue, cboPreProposal.SelectedValue, lblCompanyId.Text, cboStatus.SelectedValue, txtDescription.Text, txtLocation.Text, txtRecurrenceFrecuency.Text, chNotify.Checked, Val(txtRecurrenceFrecuency.Text), cboRecurrenceInterval.SelectedValue, dtpUntil.DbSelectedDate)
+            LocalAPI.Activity_INSERT(txtSubject.Text, RadDateTimePickerStart.DbSelectedDate, RadDateTimePickerEnd.DbSelectedDate, cboActivity.SelectedValue, cboEmployee.SelectedValue, cboClient.SelectedValue, cboJob.SelectedValue, cboProposal.SelectedValue, cboPreProposal.SelectedValue, lblCompanyId.Text, cboStatus.SelectedValue, txtDescription.Text, txtLocation.Text, chNotify.Checked, Val(txtRecurrenceFrecuency.Text), cboRecurrenceInterval.SelectedValue, dtpUntil.DbSelectedDate)
         End If
-        'FormView1.UpdateItem(False)
 
+        If chNotify.Checked Then
+            ShowSendCalendar()
+        Else
+            BackPage()
+        End If
 
-        BackPage()
 
     End Sub
 
@@ -151,10 +155,7 @@ Public Class appointment
 
     Private Sub ShowSendCalendar()
         Try
-
-            lblSelectedJob.Text = LocalAPI.GetAppointmentsProperty(lblAppointmentid.Text, "JobId")
-
-            If lblSelectedJob.Text > 0 Then
+            If cboJob.SelectedValue > 0 Then
                 cboTask.DataBind()
 
                 panelProposalTask.Visible = (cboTask.Items.Count > 0)
@@ -204,29 +205,6 @@ Public Class appointment
         End Select
     End Sub
 
-    'Protected Sub FormView1_DataBound(sender As Object, e As EventArgs)
-    '    If lblEntityType.Text = "Job" Then
-
-    '        CType(FormView1.FindControl("txtSubject"), RadTextBox).Text = LocalAPI.GetJobProperty(lblEntityId.Text, "Code") & " " & LocalAPI.GetJobProperty(lblEntityId.Text, "Job")
-    '        Dim clientId = LocalAPI.GetJobProperty(lblEntityId.Text, "Client")
-    '        Dim cboJob = CType(FormView1.FindControl("cboJob"), RadComboBox)
-    '        cboJob.SelectedValue = lblEntityId.Text
-    '        cboJob.Enabled = False
-
-    '        Dim cboClient = CType(FormView1.FindControl("cboClient"), RadComboBox)
-    '        cboClient.SelectedValue = clientId
-    '        cboClient.Enabled = False
-
-    '    End If
-
-    '    If lblEntityType.Text = "Client" Then
-
-    '        Dim cboClient = CType(FormView1.FindControl("cboClient"), RadComboBox)
-    '        cboClient.SelectedValue = lblEntityId.Text
-    '        cboClient.Enabled = False
-
-    '    End If
-    'End Sub
 
     Protected Sub btnSendCalendar_Click(sender As Object, e As EventArgs) Handles btnSendCalendar.Click
         If panelProposalTask.Visible Then
@@ -284,29 +262,6 @@ Public Class appointment
         BackPage()
     End Sub
 
-    Private Sub SqlDataSourceAppointment_Selecting(sender As Object, e As SqlDataSourceSelectingEventArgs) Handles SqlDataSourceAppointment.Selecting
-        Dim newId = e.Command.Parameters
-    End Sub
-
-    Private Sub SqlDataSourceAppointment_Selected(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointment.Selected
-        ' Dim newId = e.AffectedRows.
-    End Sub
-
-    Private Sub SqlDataSourceAppointment_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAppointment.Updating
-        Dim e1 As String = e.Command.Parameters("@Start").Value
-    End Sub
-
-    Private Sub SqlDataSourceAppointment_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointment.Updated
-        Dim newId = e.Command.Parameters("@ReturnId").Value.ToString()
-        lblAppointmentid.Text = newId
-
-        If e.Command.Parameters("@NotifyEmployee").Value Then
-            ShowSendCalendar()
-        Else
-            BackPage()
-        End If
-
-    End Sub
 
     Private Sub cboClient_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboClient.SelectedIndexChanged
         If cboClient.SelectedValue > 0 Then
