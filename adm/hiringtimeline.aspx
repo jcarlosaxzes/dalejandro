@@ -70,7 +70,8 @@
             Orientation="Vertical"
             AlternatingMode="true"
             DataKeyNames="City,State,Status,Department"
-            DataDateField="HireDate">
+            DataDateField="HireDate"
+            Navigatable="true">
             <EventTemplate>
                 <div class="k-card-header">
                     <h4 class="k-card-title">#=data.FullName#</h4>

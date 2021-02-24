@@ -143,15 +143,6 @@ Public Class schedule
         ScriptManager.RegisterStartupScript(Page, [GetType](), "formScript", $"RedirectPage('{url}');", True)
     End Sub
 
-    Private Sub SqlDataSourceAppointments_Updated(sender As Object, e As SqlDataSourceStatusEventArgs) Handles SqlDataSourceAppointments.Updated
-        Try
-            LocalAPI.Appointment_DragAndDrop_UPDATE(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Start").Value, e.Command.Parameters("@End").Value)
-            RefreshData()
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         If cboEmployee.SelectedValue > 0 Then
             lblTitle.Text = "Pending Activities for " & cboEmployee.Text
@@ -204,5 +195,10 @@ Public Class schedule
         End If
     End Function
 
+    Private Sub SqlDataSourceAppointments_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAppointments.Updating
+        LocalAPI.Appointment_DragAndDrop_UPDATE(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Start").Value, e.Command.Parameters("@End").Value)
+        RefreshData()
+        e.Cancel = True
+    End Sub
 End Class
 

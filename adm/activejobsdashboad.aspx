@@ -485,7 +485,7 @@
                                     <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td style="text-align: left">
-                                                <h3 style="margin: 0"><%# Eval("Code")%></h3>
+                                                <h4 style="margin: 0"><%# Eval("Code")%></h4>
                                             </td>
                                             <td style="width: 32px; text-align: right; font-size: 24px;">
                                                 <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
@@ -561,7 +561,7 @@
                                         <table class="table-sm" style="width: 100%">
                                             <tr>
                                                 <td style="text-align: left">
-                                                    <h3 style="margin: 0"><%# Eval("Code")%></h3>
+                                                    <h4 style="margin: 0"><%# Eval("Code")%></h4>
                                                 </td>
                                                 <td style="width: 32px; text-align: right; font-size: 24px;">
                                                     <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
@@ -638,7 +638,7 @@
                                     <table class="table-sm" style="width: 100%">
                                         <tr>
                                             <td style="text-align: left">
-                                                <h3 style="margin: 0"><%# Eval("Code")%></h3>
+                                                <h4 style="margin: 0"><%# Eval("Code")%></h4>
                                             </td>
                                             <td style="width: 32px; text-align: right; font-size: 24px;">
                                                 <asp:LinkButton ID="btnNewTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
@@ -757,9 +757,6 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" Type="Int32" />
         </SelectParameters>
     </asp:SqlDataSource>
-
-
-
 
 
     <asp:SqlDataSource ID="SqlDataSourceActiveJob" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
