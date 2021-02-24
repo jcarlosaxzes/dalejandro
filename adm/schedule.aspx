@@ -55,7 +55,7 @@
             <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="far fa-calendar-alt"></i>&nbsp; Export to Outlook
             </asp:LinkButton>
-            <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
+            <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" visible="false">
                         Export to PDF
             </asp:LinkButton>
 
@@ -118,7 +118,7 @@
 
                                 <telerik:GridTemplateColumn  UniqueName="Subject">
                                     <ItemTemplate>
-                                        <div>
+                                        <div style="font-weight:bold">
                                             <asp:Label ID="lblEmployee" runat="server" Text='<%# Eval("DueDate", "{0:d}") %>' ForeColor='<%# GetDueDateColor(Eval("DueDate")) %>'></asp:Label>
                                             - <%# Eval("ActivityType") %> - <%# Eval("Subject") %>
                                         </div>

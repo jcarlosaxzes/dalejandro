@@ -2425,7 +2425,7 @@ Public Class LocalAPI
     End Function
     Public Shared Function GetJobCodeName(ByVal lJobId As Long) As String
         Try
-            Return GetStringEscalar("SELECT [Code]+' '+[Job] FROM [Jobs] WHERE [Id]=" & lJobId)
+            Return GetStringEscalar("SELECT case when len(isnull(ExternalReference,''))=0 then '' else '['+ExternalReference+'] ' end+[Code]+' '+[Job] FROM [Jobs] WHERE [Id]=" & lJobId)
         Catch ex As Exception
             Throw ex
         End Try
