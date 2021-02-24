@@ -10664,7 +10664,7 @@ Public Class LocalAPI
 
     End Function
 
-    Public Shared Function Activity_INSERT(Subject As String, StartDate As DateTime, EndDate As DateTime, ActivityId As Integer, EmployeeId As Integer, ClientId As Integer, JobId As Integer, ProposalId As Integer, PreprojectId As Integer, companyId As Integer, statusId As Integer, Optional Description As String = "", Optional Location As String = "", Optional RecurrenceRule As String = "", Optional RecurrenceParentID As Integer = 0, Optional NotifyEmployee As Boolean = 0, Optional RecurrenceFrequency As Integer = 0, Optional RecurrenceInterval As Integer = 0, Optional RecurrenceUntil As String = "") As Integer
+    Public Shared Function Activity_INSERT(Subject As String, StartDate As DateTime, EndDate As DateTime, ActivityId As Integer, EmployeeId As Integer, ClientId As Integer, JobId As Integer, ProposalId As Integer, PreprojectId As Integer, companyId As Integer, statusId As Integer, Optional Description As String = "", Optional Location As String = "", Optional NotifyEmployee As Boolean = 0, Optional RecurrenceFrequency As Integer = 0, Optional RecurrenceInterval As Integer = 0, Optional RecurrenceUntil As String = "") As Integer
         Try
 
             Dim cnn1 As SqlConnection = GetConnection()
@@ -10703,18 +10703,6 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@Description", Description)
             cmd.Parameters.AddWithValue("@Location", Location)
 
-
-            If Len(RecurrenceRule) > 0 Then
-                cmd.Parameters.AddWithValue("@RecurrenceRule", RecurrenceRule)
-            Else
-                cmd.Parameters.AddWithValue("@RecurrenceRule", DBNull.Value)
-            End If
-            If RecurrenceParentID > 0 Then
-                cmd.Parameters.AddWithValue("@RecurrenceParentID", RecurrenceParentID)
-            Else
-                cmd.Parameters.AddWithValue("@RecurrenceParentID", DBNull.Value)
-            End If
-
             cmd.Parameters.AddWithValue("@NotifyEmployee", IIf(NotifyEmployee, 1, 0))
 
             cmd.Parameters.AddWithValue("@RecurrenceFrequency", RecurrenceFrequency)
@@ -10733,6 +10721,66 @@ Public Class LocalAPI
 
             cnn1.Close()
             Return parOUT_ID.Value
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+
+    End Function
+    Public Shared Function Activity_UPDATE(Id As Integer, Subject As String, StartDate As DateTime, EndDate As DateTime, ActivityId As Integer, EmployeeId As Integer, ClientId As Integer, JobId As Integer, ProposalId As Integer, PreprojectId As Integer, statusId As Integer, Optional Description As String = "", Optional Location As String = "", Optional NotifyEmployee As Boolean = 0, Optional RecurrenceFrequency As Integer = 0, Optional RecurrenceInterval As Integer = 0, Optional RecurrenceUntil As String = "") As Boolean
+        Try
+
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Appointment_v21_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@Subject", Subject)
+
+            ' Validating Dates
+            If InStr(StartDate.ToString, "12:00:00 AM") > 0 Then
+                StartDate = DateAdd(DateInterval.Hour, 9, StartDate)
+            End If
+            If InStr(EndDate.ToString, "12:00:00 AM") > 0 Then
+                EndDate = DateAdd(DateInterval.Hour, 9, EndDate)
+            End If
+            If StartDate > EndDate Then
+                EndDate = DateAdd(DateInterval.Hour, 1, StartDate)
+            End If
+
+            cmd.Parameters.AddWithValue("@Start", StartDate)
+            cmd.Parameters.AddWithValue("@End", EndDate)
+            cmd.Parameters.AddWithValue("@ActivityId", ActivityId)
+            cmd.Parameters.AddWithValue("@EmployeeId", EmployeeId)
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@JobId", JobId)
+            cmd.Parameters.AddWithValue("@ProposalId", ProposalId)
+            cmd.Parameters.AddWithValue("@PreprojectId", PreprojectId)
+            cmd.Parameters.AddWithValue("@statusId", statusId)
+            cmd.Parameters.AddWithValue("@Id", Id)
+
+            ' Optional Parameters....
+            cmd.Parameters.AddWithValue("@Description", Description)
+            cmd.Parameters.AddWithValue("@Location", Location)
+
+            cmd.Parameters.AddWithValue("@NotifyEmployee", IIf(NotifyEmployee, 1, 0))
+
+            cmd.Parameters.AddWithValue("@RecurrenceFrequency", RecurrenceFrequency)
+            cmd.Parameters.AddWithValue("@RecurrenceInterval", RecurrenceInterval)
+            If Len(RecurrenceUntil) > 0 Then
+                cmd.Parameters.AddWithValue("@RecurrenceUntil", RecurrenceUntil)
+            Else
+                cmd.Parameters.AddWithValue("@RecurrenceUntil", DBNull.Value)
+            End If
+
+
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+            Return True
 
         Catch ex As Exception
             Throw ex
