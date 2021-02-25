@@ -266,24 +266,6 @@ Partial Public Class proposalnewwizard
     Protected WithEvents cboType As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''cboUse control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cboUse As Global.Telerik.Web.UI.RadComboBox
-
-    '''<summary>
-    '''txtProposalName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtProposalName As Global.Telerik.Web.UI.RadTextBox
-
-    '''<summary>
     '''txtUnit control.
     '''</summary>
     '''<remarks>
@@ -302,13 +284,13 @@ Partial Public Class proposalnewwizard
     Protected WithEvents cboMeasure As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''txtProjectAddressLine control.
+    '''txtProposalName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtProjectAddressLine As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents txtProposalName As Global.Telerik.Web.UI.RadTextBox
 
     '''<summary>
     '''cboSector control.
@@ -318,6 +300,24 @@ Partial Public Class proposalnewwizard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cboSector As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''txtProjectAddressLine control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtProjectAddressLine As Global.Telerik.Web.UI.RadTextBox
+
+    '''<summary>
+    '''cboUse control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboUse As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
     '''cboProjectType control.
@@ -1047,15 +1047,6 @@ Partial Public Class proposalnewwizard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCancelDelete As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''SqlDataSourceProposal_Step1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceProposal_Step1 As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
     '''SqlDataSourceProposalClient control.

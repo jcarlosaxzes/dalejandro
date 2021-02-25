@@ -299,7 +299,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 180px; text-align: right">Duration:
+                    <td style="width: 180px; text-align: right">Estimated Duration:
                     </td>
                     <td>
                         <telerik:RadComboBox ID="cboDuration" runat="server" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity">
@@ -341,7 +341,7 @@
             <table class="table-sm" style="width: 800px">
                 <tr>
                     <td>
-                        <telerik:RadCheckBox ID="chkMoreOptions" runat="server" Text="More Options...">
+                        <telerik:RadCheckBox ID="chkMoreOptions" runat="server" Text="More Options..." AutoPostBack="false">
                         </telerik:RadCheckBox>
                     </td>
                 </tr>

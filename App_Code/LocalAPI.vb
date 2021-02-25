@@ -5663,6 +5663,52 @@ Public Class LocalAPI
             Throw ex
         End Try
     End Function
+
+    Public Shared Function Proposal_Wizard_UPDATE(proposalId As Integer, clientId As Integer, lType As Integer, ProjectType As String, ProjectName As String, ProjectLocation As String, ProjectSector As Integer, ProjectUse As String, ProjectUse2 As String, DepartmentId As Integer, EmployeeAprovedId As Integer, Unit As Double, Measure As Integer, Owner As String, ProjectManagerId As Integer, employeeId As Integer, TextBegin As String, TextEnd As String) As Integer
+        Try
+            Dim cnn1 As SqlConnection = GetConnection()
+            Dim cmd As SqlCommand = cnn1.CreateCommand()
+
+            ' Setup the command to execute the stored procedure.
+            cmd.CommandText = "Proposal_Wizard_v21_UPDATE"
+            cmd.CommandType = CommandType.StoredProcedure
+            Dim taskId As String
+
+            ' Set up the input parameter 
+            cmd.Parameters.AddWithValue("@ClientId", clientId)
+            cmd.Parameters.AddWithValue("@Type", lType)
+            cmd.Parameters.AddWithValue("@ProjectType", ProjectType)
+            cmd.Parameters.AddWithValue("@ProjectName", ProjectName)
+            cmd.Parameters.AddWithValue("@ProjectLocation", ProjectLocation)
+            cmd.Parameters.AddWithValue("@ProjectSector", ProjectSector)
+            cmd.Parameters.AddWithValue("@ProjectUse", ProjectUse)
+            cmd.Parameters.AddWithValue("@ProjectUse2", ProjectUse2)
+            cmd.Parameters.AddWithValue("@DepartmentId", DepartmentId)
+            cmd.Parameters.AddWithValue("@EmployeeAprovedId", EmployeeAprovedId)
+            cmd.Parameters.AddWithValue("@Unit", FormatearNumero2Tsql(Unit))
+            cmd.Parameters.AddWithValue("@Measure", Measure)
+            cmd.Parameters.AddWithValue("@Owner", Owner)
+            cmd.Parameters.AddWithValue("@ProjectManagerId", ProjectManagerId)
+            cmd.Parameters.AddWithValue("@employeeId", employeeId)
+            cmd.Parameters.AddWithValue("@TextBegin", TextBegin)
+            cmd.Parameters.AddWithValue("@TextEnd", TextEnd)
+
+            cmd.Parameters.AddWithValue("@Id", proposalId)
+
+            ' Execute the stored procedure.
+            cmd.ExecuteNonQuery()
+
+            cnn1.Close()
+
+            Return proposalId
+
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+
+
     Public Shared Function CreateProposalFromRFP(guid As String, employeeId As Integer, companyId As Integer) As Integer
         Try
             Dim cnn1 As SqlConnection = GetConnection()
@@ -9913,67 +9959,45 @@ Public Class LocalAPI
     End Function
 
 
-    Public Shared Function GetEmployeeProperty(ByVal lId As Long, ByRef sProperty As String) As String
+    Public Shared Function GetEmployeeProperty(ByVal EmployeeId As Long, ByRef sProperty As String) As String
         Try
-            Dim cnn1 As SqlConnection = GetConnection()
-            Dim sSQL As String
-            Dim ret As String = ""
-
-            ' Analisis del tipo de dato de retorno
             Select Case sProperty
-                Case "DepartmentId", "companyId", "Inactive", "HourRate", "Benefits_vacations", "Benefits_personals", "PositionId"
+
+                Case "DepartmentId", "companyId", "Inactive", "HourRate", "Benefits_vacations", "Benefits_personals", "PositionId", "FilterCalendarViewAll"
                     'Enteros
-                    sSQL = "SELECT ISNULL(" & sProperty & ",0) FROM [Employees] WHERE [Id]=" & lId
+                    Return GetNumericEscalar($"SELECT ISNULL({sProperty},0) FROM [Employees] WHERE [Id]={EmployeeId}")
 
                 Case "RadScheduler_Default_View", "RadScheduler_JobEdit_View", "FilterJob_Employee", "FilterJob_Department", "FilterProposal_Department",
                      "Benefits_vacations", "Benefits_personals"
                     ' Enteros  Null es -1
-                    sSQL = "SELECT ISNULL(" & sProperty & ",-1) FROM [Employees] WHERE [Id]=" & lId
-                Case "FilterJob_Year", "FilterProposal_Year"
-                    ' Enteros Null es 0
-                    sSQL = "SELECT ISNULL(" & sProperty & "," & GetDateTime().Year & ") FROM [Employees] WHERE [Id]=" & lId
+                    Return GetNumericEscalar($"SELECT ISNULL({sProperty},-1) FROM [Employees] WHERE [Id]={EmployeeId}")
+
                 Case "FilterJob_Month", "FilterProposal_Month"
-                    ' Enteros Null es 30
-                    sSQL = "SELECT ISNULL(" & sProperty & "," & GetDateTime().Month & ") FROM [Employees] WHERE [Id]=" & lId
+                    Return GetNumericEscalar($"SELECT ISNULL({sProperty},{GetDateTime().Month}) FROM [Employees] WHERE [Id]={EmployeeId}")
+
+                Case "RadScheduler_Default_View", "RadScheduler_JobEdit_View"
+                    Dim ViewId As Integer = GetNumericEscalar($"SELECT ISNULL({sProperty},0) FROM [Employees] WHERE [Id]={EmployeeId}")
+                    Select Case ViewId
+                        Case 0
+                            Return SchedulerViewType.DayView
+                        Case 1
+                            Return SchedulerViewType.WeekView
+                        Case 2
+                            Return SchedulerViewType.MonthView
+                        Case 3
+                            Return SchedulerViewType.TimelineView
+                        Case 4
+                            Return SchedulerViewType.MultiDayView
+                        Case 5
+                            Return SchedulerViewType.AgendaView
+                        Case Else
+                            Return ViewId
+                    End Select
+
                 Case Else
                     ' String
-                    sSQL = "SELECT ISNULL(" & sProperty & ",'') FROM [Employees] WHERE [Id]=" & lId
+                    Return GetStringEscalar($"SELECT ISNULL({sProperty},'') FROM [Employees] WHERE [Id]={EmployeeId}")
             End Select
-
-            Dim cmd As New SqlCommand(sSQL, cnn1)
-            Dim rdr As SqlDataReader
-            rdr = cmd.ExecuteReader
-            rdr.Read()
-            If rdr.HasRows Then
-                Select Case sProperty
-                    Case "RadScheduler_Default_View", "RadScheduler_JobEdit_View"
-                        Select Case rdr(0)
-                            Case 0
-                                ret = SchedulerViewType.DayView
-                            Case 1
-                                ret = SchedulerViewType.WeekView
-                            Case 2
-                                ret = SchedulerViewType.MonthView
-                            Case 3
-                                ret = SchedulerViewType.TimelineView
-                            Case 4
-                                ret = SchedulerViewType.MultiDayView
-                            Case 5
-                                ret = SchedulerViewType.AgendaView
-                            Case Else
-                                ret = rdr(0).ToString()
-                        End Select
-
-
-                    Case Else
-
-                        ret = rdr(0).ToString
-                End Select
-            End If
-            rdr.Close()
-            cnn1.Close()
-
-            Return ret
 
         Catch ex As Exception
             Throw ex
@@ -10788,8 +10812,8 @@ Public Class LocalAPI
 
     End Function
 
-    Public Shared Function AppointmentComplete(ByVal Id As Integer) As Boolean
-        Return ExecuteNonQuery($"UPDATE [Appointments] SET statusId=2 WHERE Id={Id}")
+    Public Shared Function AppointmentComplete(ByVal Id As Integer, DateCompleted As DateTime, Duration As Integer) As Boolean
+        Return ExecuteNonQuery($"UPDATE [Appointments] SET statusId=2,DateCompleted='{DateCompleted}',Duration={Duration} WHERE Id={Id}")
     End Function
 
 #End Region
