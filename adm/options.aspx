@@ -259,7 +259,7 @@
                                             <telerik:RadDropDownList ID="RadDropDownList1" runat="server" Width="100%" SelectedValue='<%# Bind("FilterCalendarViewAll")%>'>
                                                 <Items>
                                                     <telerik:DropDownListItem Text="View My Activities" Value="0"/>
-                                                    <telerik:DropDownListItem Text="View Activities forf All Employees" Value="1" />
+                                                    <telerik:DropDownListItem Text="View Activities for All Employees" Value="1" />
                                                 </Items>
                                             </telerik:RadDropDownList>
                                         </td>

@@ -10,7 +10,7 @@ Public Class client
                 lblClientId.Text = Request.QueryString("clientId")
 
                 'Not necessary, Client_Select include @companyId
-                'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+                'If LocalAPI.IsCompanyViolation(lblClientId.Text, "Clients", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 If Not Request.QueryString("fromcontacts") Is Nothing Then
                     lblBackSource.Text = 1
@@ -168,4 +168,13 @@ Public Class client
     Private Sub SqlDataSource1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSource1.Updating
         Dim e1 As String = e.Command.Parameters("@SalesRep1").Value
     End Sub
+
+    Public Function GetDueDateColor(ByVal DueDate As DateTime) As System.Drawing.Color
+        If DueDate < Today Then
+            Return System.Drawing.Color.Red
+        Else
+            Return System.Drawing.Color.Black
+        End If
+    End Function
+
 End Class

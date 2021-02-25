@@ -16,7 +16,7 @@ Public Class multiplierwizard
                 ' Edit Record
                 lblModeInsert.Text = 0
                 lblMultiplierId.Text = Request.QueryString("Id")
-                If LocalAPI.IsCompanyViolation(lblMultiplierId.Text, "Company_MultiplierByYear", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+                If LocalAPI.IsCompanyViolation(lblMultiplierId.Text, "Company_MultiplierByYear", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
                 ReadYearInfo()
             End If
             lblYearTab1.Text = lblYear.Text

@@ -50,7 +50,7 @@ Public Class MasterPROPOSAL
                 RestoreLostVariables()
             End If
 
-            'If LocalAPI.IsCompanyViolation(lblProposalId.Text, "Proposals", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+            'If LocalAPI.IsCompanyViolation(lblProposalId.Text, "Proposals", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
             Page.Title = lblProposalName.Text
             'If Session("LastPage") <> HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path) Then
             '    Session("LastPage") = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)

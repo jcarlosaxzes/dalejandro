@@ -27,7 +27,7 @@ Public Class invoices
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Invoices"
             If (Not Page.IsPostBack) Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_InvoicesList") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_InvoicesList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Master.PageTitle = "Billing/Invoices"
                 Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"

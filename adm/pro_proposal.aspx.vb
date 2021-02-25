@@ -12,7 +12,7 @@ Public Class pro_proposal
                 lblEmployeeId.Text = Master.UserId
 
                 ' Si no tiene permiso, la dirijo a message
-                'If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+                'If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 lblProposalId.Text = LocalAPI.GetProposalIdFromGUID(Request.QueryString("guid"))
                 lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")

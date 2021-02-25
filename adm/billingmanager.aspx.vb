@@ -12,7 +12,7 @@ Public Class billingmanager
                 lblEmployeeEmail.Text = Master.UserEmail
                 lblEmployeeName.Text = LocalAPI.GetEmployeeName(lblEmployeeId.Text)
 
-                If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingManager") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingManager") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Master.PageTitle = "Billing/Assistant"
                 Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"

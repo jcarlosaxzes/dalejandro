@@ -9,7 +9,7 @@ Public Class contact
             If (Not Page.IsPostBack) Then
                 lblCompanyId.Text = Session("companyId")
                 lblContactId.Text = Request.QueryString("ContactId")
-                If LocalAPI.IsCompanyViolation(lblContactId.Text, "Contacts", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+                If LocalAPI.IsCompanyViolation(lblContactId.Text, "Contacts", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 FormView1.Enabled = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewClient")
             End If

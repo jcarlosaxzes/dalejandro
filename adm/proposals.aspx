@@ -494,7 +494,7 @@
                 <tr>
                     <td colspan="2">
                         <h3 style="margin: 0; text-align: center; color: white; width: 800px">
-                            <span class="navbar navbar-expand-md bg-dark text-white">New Pre-Proposal Activity</span>
+                            <span class="navbar navbar-expand-md bg-dark text-white">New Proposal Activity</span>
                         </h3>
                     </td>
                 </tr>

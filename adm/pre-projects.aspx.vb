@@ -5,7 +5,7 @@ Public Class pre_projects
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ProposalsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             Title = ConfigurationManager.AppSettings("Titulo") & ". Pre_Projects"
             Master.PageTitle = "Clients/Pre_Projects"

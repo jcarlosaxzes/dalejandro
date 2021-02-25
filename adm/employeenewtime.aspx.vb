@@ -288,7 +288,7 @@ Public Class employeenewtime
                 Response.Redirect(sUrl)
 
             Case Else
-                Response.Redirect("~/adm/default.aspx")
+                Response.RedirectPermanent("~/adm/schedule.aspx")
         End Select
 
     End Sub

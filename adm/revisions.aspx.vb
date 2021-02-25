@@ -8,7 +8,7 @@
             If (Not Page.IsPostBack) Then
 
                 '' Si no tiene permiso, la dirijo a message
-                'If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TransmittalList") Then Response.RedirectPermanent("~/adm/default.aspx")
+                'If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_TransmittalList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 lblCompanyId.Text = Session("companyId")
 

@@ -7,7 +7,7 @@ Public Class clients
         If Not IsPostBack Then
 
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             lblCompanyId.Text = Session("companyId")
             lblEmployee.Text = Master.UserEmail
@@ -189,7 +189,7 @@ Public Class clients
     Private Sub NewClientActivityDlg(bInitDlg As Boolean)
         If bInitDlg Then
             cboEmployees.SelectedValue = lblEmployeeId.Text
-            RadDateTimePicker1.DbSelectedDate = DateAdd(DateInterval.Hour, 24, RadDateTimePicker1.DbSelectedDate)
+            RadDateTimePicker1.DbSelectedDate = DateAdd(DateInterval.Hour, 24, Now)
             cboActivityType.SelectedValue = -1
             lblClientName.Text = LocalAPI.GetClientProperty(lblSelectedClientId.Text, "Client")
             txtSubject.Text = ""

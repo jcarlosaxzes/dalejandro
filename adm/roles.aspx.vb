@@ -10,7 +10,7 @@ Public Class roles
                 lblCompanyId.Text = Session("companyId")
 
                 If Not Master.IsMasterUser() Then
-                    Response.RedirectPermanent("~/adm/default.aspx")
+                    Response.RedirectPermanent("~/adm/schedule.aspx")
                 End If
 
                 Master.PageTitle = "Employee/Roles"
