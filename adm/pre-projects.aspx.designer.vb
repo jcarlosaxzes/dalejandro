@@ -131,13 +131,13 @@ Partial Public Class pre_projects
     Protected WithEvents RadToolTipNewActivity As Global.Telerik.Web.UI.RadToolTip
 
     '''<summary>
-    '''ValidationSummaryJobUpdate control.
+    '''ValidationSummaryActivity control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ValidationSummaryJobUpdate As Global.System.Web.UI.WebControls.ValidationSummary
+    Protected WithEvents ValidationSummaryActivity As Global.System.Web.UI.WebControls.ValidationSummary
 
     '''<summary>
     '''lblClientName control.
@@ -158,49 +158,49 @@ Partial Public Class pre_projects
     Protected WithEvents cboActivityType As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''cboEmployees control.
+    '''cboActivityEmployees control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboEmployees As Global.Telerik.Web.UI.RadComboBox
+    Protected WithEvents cboActivityEmployees As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''txtSubject control.
+    '''txtActivitySubject control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtSubject As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents txtActivitySubject As Global.Telerik.Web.UI.RadTextBox
 
     '''<summary>
-    '''RadDateTimePicker1 control.
+    '''RadDateTimePickerActivityDueDate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadDateTimePicker1 As Global.Telerik.Web.UI.RadDateTimePicker
+    Protected WithEvents RadDateTimePickerActivityDueDate As Global.Telerik.Web.UI.RadDateTimePicker
 
     '''<summary>
-    '''cboDuration control.
+    '''cboActivityDuration control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cboDuration As Global.Telerik.Web.UI.RadComboBox
+    Protected WithEvents cboActivityDuration As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
-    '''txtDescription control.
+    '''txtActivityDescription control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtDescription As Global.Telerik.Web.UI.RadTextBox
+    Protected WithEvents txtActivityDescription As Global.Telerik.Web.UI.RadTextBox
 
     '''<summary>
     '''PanelLocation control.
@@ -246,15 +246,6 @@ Partial Public Class pre_projects
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Comparevalidator1 As Global.System.Web.UI.WebControls.CompareValidator
-
-    '''<summary>
-    '''RequiredFieldValidator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''RequiredFieldValidator2 control.

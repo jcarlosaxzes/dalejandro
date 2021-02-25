@@ -241,6 +241,7 @@
         </HeaderContextMenu>
     </telerik:RadGrid>
 
+    <%--New Activity Dialog--%>
     <div>
         <telerik:RadToolTip ID="RadToolTipNewActivity" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
@@ -248,13 +249,13 @@
                 <tr>
                     <td colspan="2">
                         <h3 style="margin: 0; text-align: center; color: white; width: 800px">
-                            <span class="navbar navbar-expand-md bg-dark text-white">New Client Activity</span>
+                            <span class="navbar navbar-expand-md bg-dark text-white">New Pre-Proposal Activity</span>
                         </h3>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <asp:ValidationSummary ID="ValidationSummaryJobUpdate" runat="server" Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="vActivity" ForeColor="Red" />
+                        <asp:ValidationSummary ID="ValidationSummaryActivity" runat="server" Font-Size="X-Small" HeaderText="Following error occurs:" ShowMessageBox="false" DisplayMode="BulletList" ShowSummary="true" ValidationGroup="vActivity" ForeColor="Red" />
                     </td>
                 </tr>
                 <tr>
@@ -277,7 +278,7 @@
                     <td style="width: 180px; text-align: right">Employee:
                     </td>
                     <td>
-                        <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" ZIndex="50001"
+                        <telerik:RadComboBox ID="cboActivityEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" ZIndex="50001"
                             DataTextField="Name" DataValueField="Id" Width="100%" MarkFirstMatch="True" Filter="Contains" Height="300px">
                         </telerik:RadComboBox>
                     </td>
@@ -286,7 +287,7 @@
                     <td style="text-align: right">Subject:
                     </td>
                     <td>
-                        <telerik:RadTextBox ID="txtSubject" runat="server" MaxLength="255" Width="100%">
+                        <telerik:RadTextBox ID="txtActivitySubject" runat="server" MaxLength="255" Width="100%">
                         </telerik:RadTextBox>
                     </td>
                 </tr>
@@ -294,7 +295,7 @@
                     <td style="width: 180px; text-align: right">Due Date:
                     </td>
                     <td>
-                        <telerik:RadDateTimePicker ID="RadDateTimePicker1" runat="server" Width="250px" ZIndex="50001">
+                        <telerik:RadDateTimePicker ID="RadDateTimePickerActivityDueDate" runat="server" Width="250px" ZIndex="50001">
                         </telerik:RadDateTimePicker>
                     </td>
                 </tr>
@@ -302,7 +303,7 @@
                     <td style="width: 180px; text-align: right">Estimated Duration:
                     </td>
                     <td>
-                        <telerik:RadComboBox ID="cboDuration" runat="server" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity">
+                        <telerik:RadComboBox ID="cboActivityDuration" runat="server" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity">
                             <Items>
                                 <telerik:RadComboBoxItem runat="server" Text="15 Mins" Value="15" />
                                 <telerik:RadComboBoxItem runat="server" Text="30 Mins" Value="30" />
@@ -319,13 +320,13 @@
                     <td style="text-align: right">Description (optional):
                     </td>
                     <td>
-                        <telerik:RadTextBox ID="txtDescription" runat="server"
+                        <telerik:RadTextBox ID="txtActivityDescription" runat="server"
                             TextMode="MultiLine" Rows="4" MaxLength="1024" Width="100%">
                         </telerik:RadTextBox>
                     </td>
                 </tr>
             </table>
-            <asp:Panel runat="server" ID="PanelLocation" Visible="false" >
+            <asp:Panel runat="server" ID="PanelLocation" Visible="false">
                 <table class="table-sm" style="width: 800px">
                     <tr>
                         <td style="width: 180px; text-align: right">Location:
@@ -355,10 +356,8 @@
                 <tr>
                     <td>
                         <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Activity...)" ValidationGroup="vActivity" Operator="NotEqual" ControlToValidate="cboActivityType" Display="None" ErrorMessage="Activity Type is mandatory" SetFocusOnError="true"> </asp:CompareValidator>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="RadDateTimePicker1" ValidationGroup="vActivity"
-                            Text="*" ErrorMessage="Due Date is required" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtSubject" ValidationGroup="vActivity"
-                        Text="*" ErrorMessage="Subject is required" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtActivitySubject" ValidationGroup="vActivity"
+                            Text="*" ErrorMessage="Subject is required" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
 
                     </td>
                 </tr>
@@ -405,8 +404,9 @@
     </asp:SqlDataSource>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    
+
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
+    
     <asp:Label ID="lblSelectedClientId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblSelected" runat="server" Visible="False"></asp:Label>
 </asp:Content>

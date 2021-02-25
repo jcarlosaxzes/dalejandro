@@ -77,10 +77,11 @@ Public Class pre_projects
 #Region "Activity"
     Private Sub NewClientActivityDlg(bInitDlg As Boolean)
         If bInitDlg Then
-            cboEmployees.SelectedValue = lblEmployeeId.Text
+            cboActivityEmployees.SelectedValue = lblEmployeeId.Text
+            RadDateTimePickerActivityDueDate.DbSelectedDate = DateAdd(DateInterval.Hour, 24, Now)
             cboActivityType.SelectedValue = -1
             lblClientName.Text = LocalAPI.GetClientProperty(lblSelectedClientId.Text, "Client")
-            txtSubject.Text = ""
+            txtActivitySubject.Text = ""
         End If
 
         RadToolTipNewActivity.Visible = True
@@ -90,8 +91,8 @@ Public Class pre_projects
     Private Sub btnAddActivity_Click(sender As Object, e As EventArgs) Handles btnAddActivity.Click
         Try
             ' Insert new Activity
-            Dim EndDate As DateTime = DateAdd(DateInterval.Minute, CInt(cboDuration.SelectedValue), RadDateTimePicker1.DbSelectedDate)
-            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtSubject.Text, RadDateTimePicker1.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboEmployees.SelectedValue, lblSelectedClientId.Text, 0, 0, lblSelected.Text, lblCompanyId.Text, 1)
+            Dim EndDate As DateTime = DateAdd(DateInterval.Minute, CInt(cboActivityDuration.SelectedValue), RadDateTimePickerActivityDueDate.DbSelectedDate)
+            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtActivitySubject.Text, RadDateTimePickerActivityDueDate.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboActivityEmployees.SelectedValue, lblSelectedClientId.Text, 0, 0, lblSelected.Text, lblCompanyId.Text, 1, txtActivityDescription.Text)
             If chkMoreOptions.Checked Then
                 Response.Redirect($"~/adm/appointment?Id={ActivityId}&EntityType=Pre-Proposal&EntityId={lblSelected.Text}&backpage=pre-projects")
             Else
@@ -103,30 +104,5 @@ Public Class pre_projects
         End Try
     End Sub
 
-    'Private Sub cboActivityType_SelectedIndexChanged(sender As Object, e As RadComboBoxSelectedIndexChangedEventArgs) Handles cboActivityType.SelectedIndexChanged
-    '    Select Case cboActivityType.SelectedValue
-    '        Case 0  'Appointment
-    '            cboDuration.SelectedValue = 60
-    '            PanelLocation.Visible = True
-    '        Case 1  'Meeting
-    '            cboDuration.SelectedValue = 120
-    '            PanelLocation.Visible = True
-    '        Case 2  'Site Visit
-    '            cboDuration.SelectedValue = 240
-    '            PanelLocation.Visible = True
-    '        Case 3  'Email
-    '            cboDuration.SelectedValue = 15
-    '            PanelLocation.Visible = False
-    '        Case 4  'Call
-    '            cboDuration.SelectedValue = 15
-    '            PanelLocation.Visible = False
-    '        Case Else
-    '            cboDuration.SelectedValue = 60
-    '            PanelLocation.Visible = True
-
-    '    End Select
-
-    '    NewClientActivityDlg(False)
-    'End Sub
 #End Region
 End Class

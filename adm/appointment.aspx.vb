@@ -86,12 +86,12 @@ Public Class appointment
                 Case "Appointment"
 
 
-                Case "Client"
+                Case "Client", "Clients"
                     cboClient.Enabled = False
                     PanelPreProposal.Visible = False
                     PanelProposal.Visible = False
                     PanelJob.Visible = False
-                Case "Job"
+                Case "Job", "Jobs"
                     cboClient.Enabled = False
                     cboJob.Enabled = False
                     PanelPreProposal.Visible = False
