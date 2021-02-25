@@ -120,7 +120,7 @@
             <telerik:RadWizardStep runat="server" ID="RadWizardStep2" Title="Page Settings" StepType="Step">
                 <fieldset style="width: 800px; height: 520px;">
                     <legend>
-                        <h3>Page Settings</h3>
+                        <h3>Default Settings</h3>
                     </legend>
                     <div>
                         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" DefaultMode="Edit" Width="100%">
@@ -128,7 +128,7 @@
                                 <table class="table-sm" style="width: 100%">
                                     <tr>
                                         <td colspan="2" style="padding-left: 50px">
-                                            <h4>Favorite Home Page</h4>
+                                            <h4>Home Page Selection</h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -161,7 +161,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="padding-left: 50px">
-                                            <h4>Jobs Favorite Options</h4>
+                                            <h4>Job Filter Settings</h4>
                                         </td>
                                     </tr>
 
@@ -211,7 +211,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="padding-left: 50px">
-                                            <h4>Proposal Favorite Options</h4>
+                                            <h4>Proposal Filter Settings</h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -248,7 +248,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2" style="padding-left: 50px">
-                                            <h4>Activity Calendar Favorite Options</h4>
+                                            <h4>Calendar Filter Settings</h4>
                                         </td>
                                     </tr>
 
