@@ -9,7 +9,7 @@ Public Class clientmanagement
             If (Not Page.IsPostBack) Then
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientManagement") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_ClientManagement") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Master.PageTitle = "Clients/Client Management"
                 Master.Help = "http://blog.pasconcept.com/2012/06/billing-client-accounts-report.html"

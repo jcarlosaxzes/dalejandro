@@ -10,7 +10,7 @@
                 lblIPAddress.Text = Request.QueryString("IPAddress")
             Else
                 If Request.QueryString("LoginRole") Is Nothing Then
-                    Response.Redirect("~/adm/default.aspx")
+                    Response.RedirectPermanent("~/adm/schedule.aspx")
                 End If
             End If
 

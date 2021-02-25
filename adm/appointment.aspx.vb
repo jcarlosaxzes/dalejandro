@@ -41,19 +41,25 @@ Public Class appointment
             cboActivity.SelectedValue = AppointmentObject("ActivityId")
             cboEmployee.DataBind()
             cboEmployee.SelectedValue = AppointmentObject("EmployeeId")
-            cboClient.DataBind()
-            cboClient.SelectedValue = AppointmentObject("ClientId")
+            If AppointmentObject("ClientId") > 0 Then
+                cboClient.DataBind()
+                cboClient.SelectedValue = AppointmentObject("ClientId")
+                cboClient.Enabled = False
+            End If
             If AppointmentObject("JobId") > 0 Then
                 cboJob.DataBind()
                 cboJob.SelectedValue = AppointmentObject("JobId")
+                cboJob.Enabled = False
             End If
             If AppointmentObject("proposalId") > 0 Then
                 cboProposal.DataBind()
                 cboProposal.SelectedValue = AppointmentObject("proposalId")
+                cboProposal.Enabled = False
             End If
             If AppointmentObject("clientspreprojectId") > 0 Then
                 cboPreProposal.DataBind()
                 cboPreProposal.SelectedValue = AppointmentObject("clientspreprojectId")
+                cboPreProposal.Enabled = False
             End If
 
             txtDescription.Text = AppointmentObject("Description")

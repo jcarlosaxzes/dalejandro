@@ -9,7 +9,7 @@ Public Class calculator
             If (Not Page.IsPostBack) Then
 
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewProposal") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Master.PageTitle = "Proposals/Calculator"
                 Master.Help = "http://blog.pasconcept.com/2012/04/jobs-jobs-listhome-page.html"

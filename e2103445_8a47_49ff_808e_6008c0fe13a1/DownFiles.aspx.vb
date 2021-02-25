@@ -22,7 +22,7 @@
                 response.[End]()
             End If
         Else
-            Response.Redirect("~/adm/default")
+            Response.RedirectPermanent("~/adm/schedule.aspx")
         End If
 
 

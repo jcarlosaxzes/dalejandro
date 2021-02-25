@@ -4,11 +4,11 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack() Then
             If Not Master.IsMasterUser() Then
-                Response.RedirectPermanent("~/adm/default.aspx")
+                Response.RedirectPermanent("~/adm/schedule.aspx")
             End If
             lblCompanyId.Text = Session("companyId")
             lblEmployeeId.Text = Request.QueryString("employeeId")
-            If LocalAPI.IsCompanyViolation(lblEmployeeId.Text, "Employees", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+            If LocalAPI.IsCompanyViolation(lblEmployeeId.Text, "Employees", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             If Not Request.QueryString("backpage") Is Nothing Then
                 Session("permissionsbackpage") = Request.QueryString("backpage")

@@ -33,8 +33,7 @@ Public Class schedule
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            Master.PageTitle = "Schedule"
-            Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Calendar"
+            Master.PageTitle = "Activity Calendar"
             lblCompanyId.Text = Session("companyId")
             lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
 

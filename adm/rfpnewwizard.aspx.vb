@@ -6,7 +6,7 @@ Public Class rfpnewwizard
         Me.Title = ConfigurationManager.AppSettings("Titulo") & ". New Request for Proposals"
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewRequestProposals") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewRequestProposals") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             lblCompanyId.Text = Session("companyId")
 
@@ -25,7 +25,7 @@ Public Class rfpnewwizard
 
             If Not Request.QueryString("ParentId") Is Nothing Then
                 lblParentId.Text = Request.QueryString("ParentId")
-                If LocalAPI.IsCompanyViolation(lblParentId.Text, "RequestForProposals", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/default.aspx")
+                If LocalAPI.IsCompanyViolation(lblParentId.Text, "RequestForProposals", lblCompanyId.Text) Then Response.RedirectPermanent("~/adm/schedule.aspx")
                 ReadMasterRFP()
             End If
 

@@ -5,7 +5,7 @@ Public Class subconsultants
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_SubconsultantsList") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_SubconsultantsList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
             ' Si no tiene permiso New, boton.Visible=False
             btnNewSubconsultant.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewSubconsultant")
 

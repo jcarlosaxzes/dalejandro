@@ -7,7 +7,7 @@ Public Class employees
         Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Employees List"
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_EmployeesList") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_EmployeesList") Then Response.RedirectPermanent("~/adm/schedule.aspx")
             ' Si no tiene permiso New, boton.Visible=False
             btnNew.Visible = LocalAPI.GetEmployeePermission(Master.UserId, "Deny_NewEmployee")
 

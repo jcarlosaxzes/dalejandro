@@ -7,7 +7,7 @@ Public Class company
 
             If Not IsPostBack() Then
                 ' Si no tiene permiso, la dirijo a message
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_CompanyProfile") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_CompanyProfile") Then Response.RedirectPermanent("~/adm/schedule.aspx")
                 lblEmployeeEmail.Text = Master.UserEmail
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Company Profile"

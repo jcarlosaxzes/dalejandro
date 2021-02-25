@@ -7,7 +7,7 @@ Public Class reports_list
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not Page.IsPostBack) Then
             ' Si no tiene permiso, la dirijo a message
-            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_AnalyticReports") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
             lblCompanyId.Text = Session("companyId")
 

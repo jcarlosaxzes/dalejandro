@@ -74,7 +74,10 @@
                     <td style="width: 300px">
                         <telerik:RadComboBox ID="cboEmployee" runat="server" DropDownAutoWidth="Enabled"
                             DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
-                            Width="100%" Height="300px" EmptyMessage="(All Employees...)">
+                            Width="100%" Height="300px" AppendDataBoundItems="true">
+                                <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="(All Employees...)" Value="0" />
+                            </Items>
                         </telerik:RadComboBox>
                     </td>
                     <td style="width: 300px">

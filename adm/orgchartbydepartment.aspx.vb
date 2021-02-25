@@ -6,7 +6,7 @@
             If Not IsPostBack() Then
                 ' Si no tiene permiso, la dirijo a message
                 '!!! pending permiso especifico
-                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_OrganizationChart") Then Response.RedirectPermanent("~/adm/default.aspx")
+                If Not LocalAPI.GetEmployeePermission(Master.UserId, "Deny_OrganizationChart") Then Response.RedirectPermanent("~/adm/schedule.aspx")
 
                 Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Organization Chart"
                 Master.PageTitle = "Departments/Organization Chart"
@@ -17,7 +17,7 @@
 
                 SqlDataSource1.DataBind()
                 'Else
-                '    Response.RedirectPermanent("~/adm/default.aspx")
+                '    Then Response.RedirectPermanent("~/adm/schedule.aspx")
                 'End If
 
             End If

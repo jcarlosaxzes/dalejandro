@@ -6,7 +6,7 @@
 
             ' Si no tiene permiso, la dirijo a message
             lblEmployeeId.Text = Master.UserId
-            If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingManager") Then Response.RedirectPermanent("~/adm/default.aspx")
+            If Not LocalAPI.GetEmployeePermission(lblEmployeeId.Text, "Deny_BillingManager") Then Response.RedirectPermanent("~/adm/schedule.aspx")
             Master.PageTitle = "Billing/Activity"
             Master.Help = "http://blog.pasconcept.com/2012/05/billing-invoices-list-page.html"
             lblCompanyId.Text = Session("companyId")
