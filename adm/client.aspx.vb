@@ -176,5 +176,43 @@ Public Class client
             Return System.Drawing.Color.Black
         End If
     End Function
+    Private Sub SqlDataSourceAppointments_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceAppointments.Updating
+        LocalAPI.Appointment_DragAndDrop_UPDATE(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Start").Value, e.Command.Parameters("@End").Value)
+        RefreshData()
+        e.Cancel = True
+    End Sub
+    Private Sub RadGridPending_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPending.ItemCommand
+        Select Case e.CommandName
+            Case "Complete"
+                CompleteDlg(e.CommandArgument)
 
+            Case "EditActivity"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(12001, e.CommandArgument))
+
+
+
+        End Select
+    End Sub
+    Private Sub CompleteDlg(activityId As Integer)
+        lblSelectedAppointmentId.Text = activityId
+        Dim AppointmentObject = LocalAPI.GetRecord(lblSelectedAppointmentId.Text, "Appointment_v21_SELECT")
+
+        lblActivitySubject.Text = AppointmentObject("Subject")
+        RadDateTimePickerCompletedDate.DbSelectedDate = AppointmentObject("End")
+        cboDuration.SelectedValue = DateDiff(DateInterval.Minute, AppointmentObject("Start"), AppointmentObject("End"))
+
+        RadToolTipComplete.Visible = True
+        RadToolTipComplete.Show()
+
+    End Sub
+    Private Sub btnCompleteActivity_Click(sender As Object, e As EventArgs) Handles btnCompleteActivity.Click
+
+        LocalAPI.AppointmentComplete(lblSelectedAppointmentId.Text, RadDateTimePickerCompletedDate.DbSelectedDate, cboDuration.SelectedValue)
+        RefreshData()
+    End Sub
+    Private Sub RefreshData()
+        RadGridPending.DataBind()
+        RadScheduler1.Rebind()
+        RadScheduler1.DataBind()
+    End Sub
 End Class

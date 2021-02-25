@@ -40,12 +40,12 @@
             }
 
         </script>
-       <%-- <style>
+        <style>
             .table-sm td, .table-sm th {
                 padding-top: .05rem;
                 padding-bottom: .05rem;
             }
-        </style>--%>
+        </style>
     </telerik:RadCodeBlock>
 
     <div class="pasconcept-bar noprint">
@@ -69,7 +69,7 @@
     <div class="collapse" id="collapseFilter">
 
         <asp:Panel ID="pnlFind" runat="server" DefaultButton="btnFind">
-            <table class="table-sm" style="width: 100%">
+            <table class="table-borderless" style="width: 100%">
                 <tr>
                     <td style="width: 200px">
                         <telerik:RadComboBox ID="cboStatus" runat="server" AppendDataBoundItems="True"
@@ -297,7 +297,7 @@
     <div>
         <telerik:RadToolTip ID="RadToolTipNewActivity" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
 
-            <table class="table-sm" style="width: 800px">
+            <table class="table-borderless" style="width: 800px">
                 <tr>
                     <td colspan="2">
                         <h3 style="margin: 0; text-align: center; color: white; width: 800px">
@@ -379,7 +379,7 @@
                 </tr>
             </table>
             <asp:Panel runat="server" ID="PanelLocation" Visible="false" >
-                <table class="table-sm" style="width: 800px">
+                <table class="table-borderless" style="width: 800px">
                     <tr>
                         <td style="width: 180px; text-align: right">Location:
                         </td>
@@ -391,7 +391,7 @@
                     </tr>
                 </table>
             </asp:Panel>
-            <table class="table-sm" style="width: 800px">
+            <table class="table-borderless" style="width: 800px">
                 <tr>
                     <td>
                         <telerik:RadCheckBox ID="chkMoreOptions" runat="server" Text="More Options..." AutoPostBack="false">

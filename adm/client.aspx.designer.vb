@@ -437,15 +437,6 @@ Partial Public Class client
     Protected WithEvents SqlDataSourceType As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
-    '''SqlDataSourceClient control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SqlDataSourceClient As Global.System.Web.UI.WebControls.SqlDataSource
-
-    '''<summary>
     '''SqlDataSourceJob control.
     '''</summary>
     '''<remarks>
@@ -507,6 +498,15 @@ Partial Public Class client
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblBackSource As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblSelectedAppointmentId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelectedAppointmentId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

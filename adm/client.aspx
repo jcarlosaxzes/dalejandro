@@ -687,54 +687,6 @@
                                                             - <%# Eval("ActivityType") %> - <%# Eval("Subject") %>
                                                         </div>
                                                         <div>
-                                                            <%# Eval("EmployeeName") %>,
-                                            <asp:HyperLink ID="InitialsLabel" runat="server" NavigateUrl="javascript:void(0);"><%# Eval("ClientandCompany") %></asp:HyperLink>
-                                                            <telerik:RadToolTip ID="RadToolTipContact" runat="server" TargetControlID="InitialsLabel" RelativeTo="Element"
-                                                                RenderMode="Lightweight" EnableViewState="true" ShowCallout="false" RenderInPageRoot="true"
-                                                                Position="BottomCenter" Modal="True" Title="" ShowEvent="OnClick"
-                                                                HideDelay="300" HideEvent="ManualClose" IgnoreAltAttribute="true">
-                                                                <table class="table-sm">
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <asp:LinkButton ID="btnEditCli" runat="server" CommandArgument='<%# Eval("clientId") %>'
-                                                                                CommandName="EditClient" Text='<%# Eval("ClientName")%>' UseSubmitBehavior="false" Font-Size="Medium"
-                                                                                CssClass="badge badge-info ">
-                                                                            </asp:LinkButton>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="2" style="margin-top: 10px">
-                                                                            <%# Eval("Company") %>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="width: 60px">Phone:
-                                                                        </td>
-                                                                        <td>
-                                                                            <telerik:RadMaskedTextBox ID="PhoneTextBox" runat="server" ReadOnly="true"
-                                                                                Text='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Phone")%>' Mask="(###) ###-####" BorderStyle="None" />
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Cellular:
-                                                                        </td>
-                                                                        <td>
-                                                                            <telerik:RadMaskedTextBox ID="RadMaskedTextBox1" runat="server" ReadOnly="true"
-                                                                                Text='<%# LocalAPI.GetClientProperty(Eval("ClientId"), "Cellular")%>' Mask="(###) ###-####" BorderStyle="None" />
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Email:
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href='<%#String.Concat("mailto:", Eval("Email")) %>' title="Mail to"><%#Eval("Email") %></a>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </telerik:RadToolTip>
-
-                                                        </div>
-                                                        <div>
                                                             <a href='<%# LocalAPI.GetSharedLink_URL(Eval("SharedLink_URLId"), Eval("AdditionalEntityId")) %>' target="_blank">
                                                                 <%# Eval("AdditionalEntityName") %>
                                                             </a>
@@ -791,12 +743,6 @@
                                     StartEditingInAdvancedForm="False"
                                     CustomAttributeNames="Location"
                                     OnFormCreating="RadScheduler1_FormCreating">
-                                    <ResourceTypes>
-                                        <telerik:ResourceType KeyField="ID" Name="Activity Type" TextField="Name" ForeignKeyField="ActivityId" DataSourceID="SqlDataSourceType"></telerik:ResourceType>
-                                        <telerik:ResourceType KeyField="ID" Name="Assign to User" TextField="Name" ForeignKeyField="EmployeeId" DataSourceID="SqlDataSourceEmployees"></telerik:ResourceType>
-                                        <telerik:ResourceType KeyField="ID" Name="Client" TextField="Name" ForeignKeyField="ClientId" DataSourceID="SqlDataSourceClient"></telerik:ResourceType>
-                                        <telerik:ResourceType KeyField="ID" Name="Job" TextField="JobName" ForeignKeyField="JobId" DataSourceID="SqlDataSourceJob"></telerik:ResourceType>
-                                    </ResourceTypes>
                                     <ResourceStyles>
                                         <telerik:ResourceStyleMapping Type="Activity Type" Text="Appointment" ApplyCssClass="rsCategoryBlue"></telerik:ResourceStyleMapping>
                                         <telerik:ResourceStyleMapping Type="Activity Type" Text="Meeting" ApplyCssClass="rsCategoryOrange"></telerik:ResourceStyleMapping>
@@ -1142,12 +1088,6 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceType" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="SELECT [Id], [Name] FROM [Appointments_types] ORDER BY [Id]"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSourceClient" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="SELECT [Id], [Name]+' [' + isnull(Company,'...') + ']' As Name FROM [Clients] WHERE companyId=@companyId  ORDER BY [Name]">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
-        </SelectParameters>
-    </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceJob" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="JOBS_Active_SELECT" SelectCommandType="StoredProcedure">
         <SelectParameters>
@@ -1162,6 +1102,7 @@
     <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblBackSource" runat="server" Visible="False" Text="0"></asp:Label>
+    <asp:Label ID="lblSelectedAppointmentId" runat="server" Visible="False"></asp:Label>
 
 </asp:Content>
 
