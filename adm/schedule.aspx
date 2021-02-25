@@ -55,7 +55,7 @@
             <asp:LinkButton ID="btnOutlook" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" ToolTip="Export to Outlook">
                         <i class="far fa-calendar-alt"></i>&nbsp; Export to Outlook
             </asp:LinkButton>
-            <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" visible="false">
+            <asp:LinkButton ID="btnPDF" runat="server" CssClass="btn btn-secondary btn" UseSubmitBehavior="false" Visible="false">
                         Export to PDF
             </asp:LinkButton>
 
@@ -105,7 +105,7 @@
     <table class="table-sm" style="width: 100%; padding-top: 5px">
         <tr>
             <td style="width: 35%; vertical-align: top">
-                <asp:Label ID="lblTitle" runat="server" Font-Bold="true" Text="Pending Activities for all employees"></asp:Label>
+                Pending Activities for <asp:Label ID="lblTitle" runat="server" Font-Bold="true" Text="all employees"></asp:Label>
                 <div style="margin-top: 10px">
                     <telerik:RadGrid ID="RadGridPending" runat="server" DataSourceID="SqlDataSourcePending" AutoGenerateColumns="False" ItemStyle-Font-Size="Small" AlternatingItemStyle-Font-Size="Small" RenderMode="Lightweight" Width="100%" Skin="Material" ShowHeader="false">
                         <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSourcePending">
@@ -116,10 +116,10 @@
                                 <telerik:GridBoundColumn DataField="Id" Display="False" UniqueName="Id" HeaderStyle-Width="50px">
                                 </telerik:GridBoundColumn>
 
-                                <telerik:GridTemplateColumn  UniqueName="Subject">
+                                <telerik:GridTemplateColumn UniqueName="Subject">
                                     <ItemTemplate>
-                                        <div style="font-weight:bold">
-                                            <asp:Label ID="lblEmployee" runat="server" Text='<%# Eval("DueDate", "{0:d}") %>' ForeColor='<%# GetDueDateColor(Eval("DueDate")) %>'></asp:Label>
+                                        <div style="font-weight: bold">
+                                            <asp:Label ID="lblEmployeeName" runat="server" Text='<%# Eval("DueDate", "{0:d}") %>' ForeColor='<%# GetDueDateColor(Eval("DueDate")) %>'></asp:Label>
                                             - <%# Eval("ActivityType") %> - <%# Eval("Subject") %>
                                         </div>
                                         <div>
@@ -183,10 +183,22 @@
                                 </telerik:GridTemplateColumn>
 
 
-                                <telerik:GridButtonColumn  ButtonType="FontIconButton" CommandName="Edit" Text=" "  HeaderStyle-Width="50px" >
-                                </telerik:GridButtonColumn>
-                                <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Complete this Activity?" ConfirmTitle="Complete" ButtonType="FontIconButton" CommandName="Update" Text=" " HeaderStyle-Width="50px" >
-                                </telerik:GridButtonColumn>
+                                <telerik:GridTemplateColumn HeaderText="" UniqueName="EditActivity" HeaderStyle-Width="32px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton2" runat="server" UseSubmitBehavior="false" CommandName="EditActivity" CommandArgument='<%# Eval("Id")%>' ToolTip="Edit Activity">
+                                            <i style="color:dimgray" class="fas fa-pencil-alt"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+
+                                <telerik:GridTemplateColumn HeaderText="" UniqueName="Complete" HeaderStyle-Width="32px" ItemStyle-HorizontalAlign="Center">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" UseSubmitBehavior="false" CommandName="Complete" CommandArgument='<%# Eval("Id")%>' ToolTip="Complete this Activity">
+                                            <i style="color:dimgray" class="fas fa-check"></i>
+                                        </asp:LinkButton>
+                                    </ItemTemplate>
+                                </telerik:GridTemplateColumn>
+
                             </Columns>
                         </MasterTableView>
                     </telerik:RadGrid>
@@ -246,6 +258,58 @@
 
     </table>
 
+    <div>
+        <telerik:RadToolTip ID="RadToolTipComplete" runat="server" Position="Center" RelativeTo="BrowserWindow" Modal="true" ManualClose="true" ShowEvent="FromCode">
+
+            <table class="table-sm" style="width: 600px">
+                <tr>
+                    <td colspan="2">
+                        <h3 style="margin: 0; text-align: center; color: white; width: 600px">
+                            <span class="navbar navbar-expand-md bg-dark text-white">Complete Activity</span>
+                        </h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:Label ID="lblActivitySubject" runat="server" Visible="False"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 180px; text-align: right">Completed Date:
+                    </td>
+                    <td>
+                        <telerik:RadDateTimePicker ID="RadDateTimePickerCompletedDate" runat="server" Width="250px" ZIndex="50001">
+                        </telerik:RadDateTimePicker>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Duration:
+                    </td>
+                    <td>
+                        <telerik:RadComboBox ID="cboDuration" runat="server" Width="100%" ZIndex="50001" AppendDataBoundItems="True">
+                            <Items>
+                                <telerik:RadComboBoxItem runat="server" Text="15 Mins" Value="15" />
+                                <telerik:RadComboBoxItem runat="server" Text="30 Mins" Value="30" />
+                                <telerik:RadComboBoxItem runat="server" Text="45 Mins" Value="45" />
+                                <telerik:RadComboBoxItem runat="server" Text="1 Hr" Value="60" />
+                                <telerik:RadComboBoxItem runat="server" Text="2 Hrs" Value="120" />
+                                <telerik:RadComboBoxItem runat="server" Text="4 Hrs" Value="240" />
+                                <telerik:RadComboBoxItem runat="server" Text="8 Hrs" Value="480" />
+                            </Items>
+                        </telerik:RadComboBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right">
+                        <br /><br />
+                        <asp:LinkButton ID="btnCompleteActivity" runat="server" CssClass="btn btn-primary btn" UseSubmitBehavior="false" ValidationGroup="vActivity">
+                                    <i class="far fa-calendar"></i>&nbsp;Complete Activity
+                        </asp:LinkButton>
+                    </td>
+                </tr>
+            </table>
+        </telerik:RadToolTip>
+    </div>
 
     <asp:Label runat="server" ID="AppointmentsCount" Font-Size="Small"></asp:Label>
 
@@ -317,8 +381,7 @@
     <asp:Label ID="lblSelectedJob" runat="server" Visible="False"></asp:Label>
 
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
-    <asp:Label ID="lblEmployee" runat="server" Visible="False"></asp:Label>
-
+    <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
 
 
 </asp:Content>

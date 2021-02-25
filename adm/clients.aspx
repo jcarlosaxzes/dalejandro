@@ -327,7 +327,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 180px; text-align: right">Employee:
+                    <td style="text-align: right">Employee:
                     </td>
                     <td>
                         <telerik:RadComboBox ID="cboEmployees" runat="server" DataSourceID="SqlDataSourceEmployees" ZIndex="50001"
@@ -344,7 +344,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 180px; text-align: right">Due Date:
+                    <td style="text-align: right">Due Date:
                     </td>
                     <td>
                         <telerik:RadDateTimePicker ID="RadDateTimePicker1" runat="server" Width="250px" ZIndex="50001">
@@ -352,7 +352,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 180px; text-align: right">Duration:
+                    <td style="text-align: right">Estimated Duration:
                     </td>
                     <td>
                         <telerik:RadComboBox ID="cboDuration" runat="server" Width="100%" ZIndex="50001" AppendDataBoundItems="True" ValidationGroup="vActivity">
@@ -394,7 +394,7 @@
             <table class="table-sm" style="width: 800px">
                 <tr>
                     <td>
-                        <telerik:RadCheckBox ID="chkMoreOptions" runat="server" Text="More Options...">
+                        <telerik:RadCheckBox ID="chkMoreOptions" runat="server" Text="More Options..." AutoPostBack="false">
                         </telerik:RadCheckBox>
                     </td>
                 </tr>

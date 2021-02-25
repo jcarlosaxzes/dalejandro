@@ -177,8 +177,6 @@ Public Class proposalnewwizard
 
             ReadProposal(lblProposalId.Text)
 
-            SqlDataSourceProposal_Step1.DataBind()
-
             RadGridFees.DataBind()
 
             RefreshRatios()
@@ -197,31 +195,44 @@ Public Class proposalnewwizard
     End Sub
 
     Private Function NewProposal() As Boolean
-        ' INSERT NEW PROPOSAL
-        If Not LocalAPI.IsProposalOrJobName(txtProposalName.Text, lblCompanyId.Text) Then
-            lblProposalId.Text = LocalAPI.Proposal_Wizard_INSERT(cboType.SelectedValue, txtProposalName.Text, cboEmployee.SelectedValue, lblCompanyId.Text, lblEmployeeId.Text, cboSector.SelectedValue, cboUse.SelectedValue, cboUse2.SelectedValue, cboDepartment.SelectedValue, 0, txtProjectAddressLine.Text, txtUnit.DbValue, cboMeasure.SelectedValue, cboProjectType.SelectedValue, cboClients.SelectedValue, cboProjectManagerId.SelectedValue, TextBoxOwner.Text, radEditorBegin.Content, radEditorEnd.Content)
+        Try
+            ' INSERT NEW PROPOSAL
+            If Not LocalAPI.IsProposalOrJobName(txtProposalName.Text, lblCompanyId.Text) Then
+                lblProposalId.Text = LocalAPI.Proposal_Wizard_INSERT(cboType.SelectedValue, txtProposalName.Text, cboEmployee.SelectedValue, lblCompanyId.Text, lblEmployeeId.Text, cboSector.SelectedValue, cboUse.SelectedValue, cboUse2.SelectedValue, cboDepartment.SelectedValue, 0, txtProjectAddressLine.Text, txtUnit.DbValue, cboMeasure.SelectedValue, cboProjectType.SelectedValue, cboClients.SelectedValue, cboProjectManagerId.SelectedValue, TextBoxOwner.Text, radEditorBegin.Content, radEditorEnd.Content)
 
-            ' Update proposalId si viene de PreProject
-            If lblPreProjectId.Text > 0 Then
-                LocalAPI.SetPreProject_proposalId(lblPreProjectId.Text, lblProposalId.Text)
+                ' Update proposalId si viene de PreProject
+                If lblPreProjectId.Text > 0 Then
+                    LocalAPI.SetPreProject_proposalId(lblPreProjectId.Text, lblProposalId.Text)
+                End If
+
+                UpdatePS()
+
+                ProposalItemsDataBind()
+
+                ReadPaymentSchedule()
+
+                panelProposalCreated.Visible = (lblProposalId.Text > 0)
+                panelProposalCreated.DataBind()
+
+                Return (lblProposalId.Text > 0)
+            Else
+                RadWizard1.ActiveStepIndex = 1
+                lblMsg.Text = "'" & txtProposalName.Text & "' is the name of other proposal or job. Change this property."
+                txtProposalName.Focus()
             End If
-
-            UpdatePS()
-
-            ProposalItemsDataBind()
-
-            ReadPaymentSchedule()
-
-            panelProposalCreated.Visible = (lblProposalId.Text > 0)
-            panelProposalCreated.DataBind()
-
-            Return (lblProposalId.Text > 0)
-        Else
-            RadWizard1.ActiveStepIndex = 1
-            lblMsg.Text = "'" & txtProposalName.Text & "' is the name of other proposal or job. Change this property."
-            txtProposalName.Focus()
-        End If
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
     End Function
+
+    Private Sub UpdateProposal()
+        Try
+            LocalAPI.Proposal_Wizard_UPDATE(lblProposalId.Text, cboClients.SelectedValue, cboType.SelectedValue, cboProjectType.SelectedValue, txtProposalName.Text, txtProjectAddressLine.Text, cboSector.SelectedValue, cboUse.SelectedValue, cboUse2.SelectedValue, cboDepartment.SelectedValue, cboEmployee.SelectedValue, txtUnit.DbValue, cboMeasure.SelectedValue, TextBoxOwner.Text, cboProjectManagerId.SelectedValue, lblEmployeeId.Text, radEditorBegin.Content, radEditorEnd.Content)
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
 
 #Region "RadWizard Step Buttons"
     Protected Sub RadWizard1_NextButtonClick(sender As Object, e As WizardEventArgs) Handles RadWizard1.NextButtonClick
@@ -241,7 +252,8 @@ Public Class proposalnewwizard
 
                 Else
                     ' UPDATE PROPOSAL
-                    SqlDataSourceProposal_Step1.Update()
+                    UpdateProposal()
+
                     RefreshRatios()
                 End If
 
@@ -742,10 +754,6 @@ Public Class proposalnewwizard
         AzureStorageApi.DeleteFile(KeyName)
     End Sub
 
-    Private Sub SqlDataSourceProposal_Step1_Updating(sender As Object, e As SqlDataSourceCommandEventArgs) Handles SqlDataSourceProposal_Step1.Updating
-        Dim e1 As String = e.Command.Parameters("@ProjectSector").Value
-    End Sub
-
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
     End Sub
@@ -899,4 +907,5 @@ Public Class proposalnewwizard
 
         End Try
     End Sub
+
 End Class

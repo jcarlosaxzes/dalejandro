@@ -396,7 +396,7 @@
                             <td  style="width: 10%; text-align: right">Template:
                             </td>
                             <td style="width: 40%">
-                                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" MarkFirstMatch="True" Filter="Contains"
+                                <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" MarkFirstMatch="True" Filter="Contains" CausesValidation="false" 
                                     DataValueField="Id" Width="100%" Height="250px" AppendDataBoundItems="True" AutoPostBack="true"
                                     RenderMode="Lightweight">
                                     <Items>
@@ -404,12 +404,12 @@
                                     </Items>
                                 </telerik:RadComboBox>
                             </td>
-                            <td style="width: 10%; text-align: right">Use & Occupancy:
+                            <td style="width: 10%; text-align: right">Quantity - Units:
                             </td>
                             <td>
-
-                                <telerik:RadComboBox ID="cboUse" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceProjectUse" DataTextField="Name" DataValueField="Id"
-                                    Width="100%" MarkFirstMatch="True" Filter="Contains" Height="350px" AutoPostBack="True" CausesValidation="false"
+                                <telerik:RadNumericTextBox ID="txtUnit" runat="server" MaxLength="128" Width="45%" RenderMode="Lightweight">
+                                </telerik:RadNumericTextBox>
+                                <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="45%"
                                     RenderMode="Lightweight">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
@@ -426,13 +426,12 @@
                                     RenderMode="Lightweight">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="text-align: right">Quantity - Units:
+                            <td style="text-align: right">
+                                Sector:
                             </td>
                             <td>
-                                <telerik:RadNumericTextBox ID="txtUnit" runat="server" MaxLength="128" Width="45%" RenderMode="Lightweight">
-                                </telerik:RadNumericTextBox>
-                                <telerik:RadComboBox ID="cboMeasure" runat="server" DataSourceID="SqlDataSourceMeasure" DataTextField="Name" DataValueField="Id" Width="45%"
-                                    RenderMode="Lightweight">
+                                <telerik:RadComboBox ID="cboSector" runat="server" DataSourceID="SqlDataSourceProjectSector" DataTextField="Name" DataValueField="Id"
+                                    Width="100%" RenderMode="Lightweight" AppendDataBoundItems="true">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
                                     </Items>
@@ -447,12 +446,12 @@
                                     RenderMode="Lightweight" CssClass="input-address-2">
                                 </telerik:RadTextBox>
                             </td>
-                            <td style="text-align: right">Sector:
+                            <td style="text-align: right">Use & Occupancy:
                             </td>
                             <td>
-
-                                <telerik:RadComboBox ID="cboSector" runat="server" DataSourceID="SqlDataSourceProjectSector" DataTextField="Name" DataValueField="Id"
-                                    Width="100%" RenderMode="Lightweight" AppendDataBoundItems="true">
+                                <telerik:RadComboBox ID="cboUse" runat="server" AppendDataBoundItems="True" DataSourceID="SqlDataSourceProjectUse" DataTextField="Name" DataValueField="Id"
+                                    Width="100%" MarkFirstMatch="True" Filter="Contains" Height="350px" AutoPostBack="True" CausesValidation="false" 
+                                    RenderMode="Lightweight">
                                     <Items>
                                         <telerik:RadComboBoxItem runat="server" Text="(Not defined...)" Value="0" />
                                     </Items>
@@ -497,7 +496,7 @@
                             <td style="text-align: right">Department:
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True" AutoPostBack="true"
+                                <telerik:RadComboBox ID="cboDepartment" runat="server" AppendDataBoundItems="True" 
                                     DataSourceID="SqlDataSourceDepartments" DataTextField="Name" DataValueField="Id" Width="100%" Height="250px"
                                     RenderMode="Lightweight">
                                     <Items>
@@ -508,7 +507,7 @@
                             <td style="text-align: right">Prepared By:
                             </td>
                             <td>
-                                <telerik:RadComboBox ID="cboEmployee" runat="server" AutoPostBack="true"
+                                <telerik:RadComboBox ID="cboEmployee" runat="server" 
                                     DataSourceID="SqlDataSourceEmployees" DataTextField="Name" DataValueField="Id" MarkFirstMatch="true" Filter="Contains"
                                     Width="100%" CausesValidation="false" Height="350px"
                                     RenderMode="Lightweight">
@@ -1507,32 +1506,6 @@
         </table>
     </telerik:RadToolTip>
 
-    <asp:SqlDataSource ID="SqlDataSourceProposal_Step1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
-        SelectCommand="PROPOSAL_Adapter" SelectCommandType="StoredProcedure"
-        UpdateCommand="PROPOSAL3_Wizard_UPDATE" UpdateCommandType="StoredProcedure">
-        <SelectParameters>
-            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" Type="Int32" />
-        </SelectParameters>
-        <UpdateParameters>
-            <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
-            <asp:ControlParameter ControlID="cboClients" Name="ClientId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboType" Name="Type" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboProjectType" Name="ProjectType" PropertyName="SelectedValue" Type="String" />
-            <asp:ControlParameter ControlID="txtProposalName" Name="ProjectName" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="txtProjectAddressLine" Name="ProjectLocation" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="cboSector" Name="ProjectSector" PropertyName="SelectedValue" />
-            <asp:ControlParameter ControlID="cboUse" Name="ProjectUse" PropertyName="SelectedValue" Type="String" />
-            <asp:ControlParameter ControlID="cboUse2" Name="ProjectUse2" PropertyName="SelectedValue" Type="String" />
-            <asp:ControlParameter ControlID="cboDepartment" Name="DepartmentId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="cboEmployee" Name="EmployeeAprovedId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="txtUnit" Name="Unit" PropertyName="Text" Type="Double" />
-            <asp:ControlParameter ControlID="cboMeasure" Name="Measure" PropertyName="SelectedValue" Type="Int16" />
-            <asp:ControlParameter ControlID="TextBoxOwner" Name="Owner" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="cboProjectManagerId" Name="ProjectManagerId" PropertyName="SelectedValue" Type="Int32" />
-            <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
-            <asp:ControlParameter ControlID="lblProposalId" Name="Id" PropertyName="Text" Type="Int32" />
-        </UpdateParameters>
-    </asp:SqlDataSource>
     <asp:SqlDataSource ID="SqlDataSourceProposalClient" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         UpdateCommand="Client_UPDATE_or_INSERT" UpdateCommandType="StoredProcedure"
         SelectCommand="CLIENT_for_NewProposal_SELECT" SelectCommandType="StoredProcedure">

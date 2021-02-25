@@ -36,11 +36,18 @@ Public Class schedule
             Master.PageTitle = "Schedule"
             Me.Title = ConfigurationManager.AppSettings("Titulo") & ". Calendar"
             lblCompanyId.Text = Session("companyId")
-            lblEmployee.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
-            Dim ViewMode As SchedulerViewType = LocalAPI.GetEmployeeProperty(lblEmployee.Text, "RadScheduler_Default_View")
+            lblEmployeeId.Text = LocalAPI.GetEmployeeId(Master.UserEmail, lblCompanyId.Text)
+
+            Dim ViewMode As SchedulerViewType = LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "RadScheduler_Default_View")
             RadScheduler1.SelectedView = IIf(ViewMode = -1, 0, ViewMode)
 
             RadWindowManager1.EnableViewState = False
+
+            cboEmployee.DataBind()
+            If LocalAPI.GetEmployeeProperty(lblEmployeeId.Text, "FilterCalendarViewAll") = 0 Then
+                cboEmployee.SelectedValue = lblEmployeeId.Text
+            End If
+            RefreshTitle()
         End If
 
     End Sub
@@ -117,7 +124,7 @@ Public Class schedule
                  SchedulerNavigationCommand.SwitchToTimelineView,
                 SchedulerNavigationCommand.SwitchToMultiDayView,
                 SchedulerNavigationCommand.SwitchToAgendaView
-                LocalAPI.SetEmployeeIntegerProperty(lblEmployee.Text, "RadScheduler_Default_View", e.Command)
+                LocalAPI.SetEmployeeIntegerProperty(lblEmployeeId.Text, "RadScheduler_Default_View", e.Command)
         End Select
 
     End Sub
@@ -143,12 +150,16 @@ Public Class schedule
         ScriptManager.RegisterStartupScript(Page, [GetType](), "formScript", $"RedirectPage('{url}');", True)
     End Sub
 
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+    Private Sub RefreshTitle()
         If cboEmployee.SelectedValue > 0 Then
-            lblTitle.Text = "Pending Activities for " & cboEmployee.Text
+            lblTitle.Text = cboEmployee.Text
         Else
-            lblTitle.Text = "Pending Activities for all employees"
+            lblTitle.Text = "All Employees"
         End If
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        RefreshTitle()
         RefreshData()
     End Sub
     Private Sub RefreshData()
@@ -159,13 +170,11 @@ Public Class schedule
 
     Private Sub RadGridPending_ItemCommand(sender As Object, e As GridCommandEventArgs) Handles RadGridPending.ItemCommand
         Select Case e.CommandName
-            Case "Update"
-                Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
-                LocalAPI.AppointmentComplete(item("Id").Text)
-                RefreshData()
-            Case "Edit"
-                Dim item As GridDataItem = DirectCast(e.Item, GridDataItem)
-                Response.Redirect(LocalAPI.GetSharedLink_URL(12001, item("Id").Text))
+            Case "Complete"
+                CompleteDlg(e.CommandArgument)
+
+            Case "EditActivity"
+                Response.Redirect(LocalAPI.GetSharedLink_URL(12001, e.CommandArgument))
 
             Case "EditClient"
                 CreateRadWindows("ClientW", $"~/ADM/Client.aspx?clientId={e.CommandArgument}&Dialog=1", 970, 750, False)
@@ -199,6 +208,25 @@ Public Class schedule
         LocalAPI.Appointment_DragAndDrop_UPDATE(e.Command.Parameters("@Id").Value, e.Command.Parameters("@Start").Value, e.Command.Parameters("@End").Value)
         RefreshData()
         e.Cancel = True
+    End Sub
+
+    Private Sub CompleteDlg(activityId As Integer)
+        lblSelectedAppointmentId.Text = activityId
+        Dim AppointmentObject = LocalAPI.GetRecord(lblSelectedAppointmentId.Text, "Appointment_v21_SELECT")
+
+        lblActivitySubject.Text = AppointmentObject("Subject")
+        RadDateTimePickerCompletedDate.DbSelectedDate = AppointmentObject("End")
+        cboDuration.SelectedValue = DateDiff(DateInterval.Minute, AppointmentObject("Start"), AppointmentObject("End"))
+
+        RadToolTipComplete.Visible = True
+        RadToolTipComplete.Show()
+
+    End Sub
+    Private Sub btnCompleteActivity_Click(sender As Object, e As EventArgs) Handles btnCompleteActivity.Click
+
+        LocalAPI.AppointmentComplete(lblSelectedAppointmentId.Text, RadDateTimePickerCompletedDate.DbSelectedDate, cboDuration.SelectedValue)
+        RefreshData()
+
     End Sub
 End Class
 

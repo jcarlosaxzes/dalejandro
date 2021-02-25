@@ -125,15 +125,14 @@
                     <div>
                         <asp:FormView ID="FormView1" runat="server" DataKeyNames="Id" DataSourceID="SqlDataSource1" DefaultMode="Edit" Width="100%">
                             <EditItemTemplate>
-
-
                                 <table class="table-sm" style="width: 100%">
                                     <tr>
-                                        <td colspan="2" style="padding-left: 50px" class="NormalNegrita">You can define your favorite home page to begin PASconcept:
+                                        <td colspan="2" style="padding-left: 50px">
+                                            <h4>Favorite Home Page</h4>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: right; width: 150px" class="Normal">My home page:
+                                        <td style="text-align: right; width: 150px" class="Normal">My Home Page:
                                         </td>
                                         <td style="text-align: left">
                                             <telerik:RadComboBox ID="RadComboBox1" runat="server" Width="350px" SelectedValue='<%# Bind("MyHomePage")%>'>
@@ -161,11 +160,13 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2" style="padding-left: 100px; padding-top: 10px" class="NormalNegrita">Pre-defined filters for Job List page
+                                        <td colspan="2" style="padding-left: 50px">
+                                            <h4>Jobs Favorite Options</h4>
                                         </td>
                                     </tr>
+
                                     <tr>
-                                        <td style="text-align: right; width: 150px" class="Normal">Period:
+                                        <td style="text-align: right; width: 150px" class="Normal">Period Filter:
                                         </td>
                                         <td>
                                             <telerik:RadDropDownList ID="cboMesJob" runat="server" Width="100%" SelectedValue='<%# Bind("FilterJob_Month")%>'>
@@ -208,14 +209,13 @@
 
                                         </td>
                                     </tr>
-
-
                                     <tr>
-                                        <td colspan="2" style="padding-left: 100px; padding-top: 10px" class="NormalNegrita">Pre-defined filters for Proposal List page
+                                        <td colspan="2" style="padding-left: 50px">
+                                            <h4>Proposal Favorite Options</h4>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: right; width: 150px" class="Normal">Period:
+                                        <td style="text-align: right; width: 150px" class="Normal">Period Filter:
                                         </td>
                                         <td>
                                             <telerik:RadDropDownList ID="cboMesProposal" runat="server" Width="100%" SelectedValue='<%# Bind("FilterProposal_Month")%>'>
@@ -244,6 +244,24 @@
                                                 </Items>
                                             </telerik:RadComboBox>
 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="padding-left: 50px">
+                                            <h4>Activity Calendar Favorite Options</h4>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align: right; width: 150px" class="Normal">Activity Calendar Filter:
+                                        </td>
+                                        <td>
+                                            <telerik:RadDropDownList ID="RadDropDownList1" runat="server" Width="100%" SelectedValue='<%# Bind("FilterCalendarViewAll")%>'>
+                                                <Items>
+                                                    <telerik:DropDownListItem Text="View My Activities" Value="0"/>
+                                                    <telerik:DropDownListItem Text="View Activities forf All Employees" Value="1" />
+                                                </Items>
+                                            </telerik:RadDropDownList>
                                         </td>
                                     </tr>
                                 </table>
@@ -309,7 +327,7 @@
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
         SelectCommand="EmployyeOthersSettings_SELECT" SelectCommandType="StoredProcedure"
-        UpdateCommand="UPDATE Employees SET MyHomePage = @MyHomePage, FilterJob_Year = @FilterJob_Year, FilterJob_Month = @FilterJob_Month, FilterJob_Employee = @FilterJob_Employee, FilterJob_Department = @FilterJob_Department, FilterProposal_Year = @FilterProposal_Year, FilterProposal_Month = @FilterProposal_Month, FilterProposal_Department = @FilterProposal_Department WHERE (Id = @Id)">
+        UpdateCommand="UPDATE Employees SET MyHomePage = @MyHomePage, FilterJob_Year = @FilterJob_Year, FilterJob_Month = @FilterJob_Month, FilterJob_Employee = @FilterJob_Employee, FilterJob_Department = @FilterJob_Department, FilterProposal_Year = @FilterProposal_Year, FilterProposal_Month = @FilterProposal_Month, FilterProposal_Department = @FilterProposal_Department, FilterCalendarViewAll=@FilterCalendarViewAll WHERE (Id = @Id)">
         <SelectParameters>
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="employeeId" PropertyName="Text" Type="Int32" />
@@ -323,6 +341,7 @@
             <asp:Parameter Name="FilterProposal_Year" />
             <asp:Parameter Name="FilterProposal_Month" />
             <asp:Parameter Name="FilterProposal_Department" />
+            <asp:Parameter Name="FilterCalendarViewAll" />
             <asp:ControlParameter ControlID="lblEmployeeId" Name="Id" PropertyName="Text" />
         </UpdateParameters>
     </asp:SqlDataSource>
