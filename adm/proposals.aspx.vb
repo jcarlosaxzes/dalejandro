@@ -162,6 +162,12 @@ Public Class proposals
 
             Case "EditWizard"
                 Response.Redirect("~/adm/ProposalNewWizard.aspx?proposalId=" & e.CommandArgument)
+
+            Case "AddActivity"
+                lblSelected.Text = e.CommandArgument
+                lblSelectedClientId.Text = LocalAPI.GetProposalProperty(lblSelected.Text, "ClientId")
+                NewClientActivityDlg(True)
+
         End Select
     End Sub
 
@@ -291,4 +297,36 @@ Public Class proposals
         Catch ex As Exception
         End Try
     End Sub
+
+#Region "Activity"
+    Private Sub NewClientActivityDlg(bInitDlg As Boolean)
+        If bInitDlg Then
+            cboActivityEmployees.SelectedValue = lblEmployeeId.Text
+            RadDateTimePickerActivityDueDate.DbSelectedDate = DateAdd(DateInterval.Hour, 24, Now)
+            cboActivityType.SelectedValue = -1
+            lblClientName.Text = LocalAPI.GetClientProperty(lblSelectedClientId.Text, "Client")
+            txtActivitySubject.Text = ""
+        End If
+
+        RadToolTipNewActivity.Visible = True
+        RadToolTipNewActivity.Show()
+    End Sub
+
+    Private Sub btnAddActivity_Click(sender As Object, e As EventArgs) Handles btnAddActivity.Click
+        Try
+            ' Insert new Activity
+            Dim EndDate As DateTime = DateAdd(DateInterval.Minute, CInt(cboActivityDuration.SelectedValue), RadDateTimePickerActivityDueDate.DbSelectedDate)
+            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtActivitySubject.Text, RadDateTimePickerActivityDueDate.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboActivityEmployees.SelectedValue, lblSelectedClientId.Text, 0, lblSelected.Text, 0, lblCompanyId.Text, 1, txtActivityDescription.Text)
+            If chkMoreOptions.Checked Then
+                Response.Redirect($"~/adm/appointment?Id={ActivityId}&EntityType=Proposal&EntityId={lblSelected.Text}&backpage=Proposals")
+            Else
+                Master.InfoMessage("The Activity was inserted successfully!")
+            End If
+
+        Catch ex As Exception
+            Master.ErrorMessage(ex.Message)
+        End Try
+    End Sub
+
+#End Region
 End Class

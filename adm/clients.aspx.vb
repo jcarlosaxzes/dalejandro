@@ -189,6 +189,7 @@ Public Class clients
     Private Sub NewClientActivityDlg(bInitDlg As Boolean)
         If bInitDlg Then
             cboEmployees.SelectedValue = lblEmployeeId.Text
+            RadDateTimePicker1.DbSelectedDate = DateAdd(DateInterval.Hour, 24, RadDateTimePicker1.DbSelectedDate)
             cboActivityType.SelectedValue = -1
             lblClientName.Text = LocalAPI.GetClientProperty(lblSelectedClientId.Text, "Client")
             txtSubject.Text = ""
@@ -202,7 +203,7 @@ Public Class clients
         Try
             ' Insert new Activity
             Dim EndDate As DateTime = DateAdd(DateInterval.Minute, CInt(cboDuration.SelectedValue), RadDateTimePicker1.DbSelectedDate)
-            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtSubject.Text, RadDateTimePicker1.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboEmployees.SelectedValue, lblSelectedClientId.Text, 0, 0, 0, lblCompanyId.Text, 1)
+            Dim ActivityId As Integer = LocalAPI.Activity_INSERT(txtSubject.Text, RadDateTimePicker1.DbSelectedDate, EndDate, cboActivityType.SelectedValue, cboEmployees.SelectedValue, lblSelectedClientId.Text, 0, 0, 0, lblCompanyId.Text, 1, txtDescription.Text)
             If chkMoreOptions.Checked Then
                 Response.Redirect($"~/adm/appointment?Id={ActivityId}&EntityType=Client&EntityId={lblSelectedClientId.Text}&backpage=Clients")
             Else

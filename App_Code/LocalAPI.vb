@@ -5672,7 +5672,6 @@ Public Class LocalAPI
             ' Setup the command to execute the stored procedure.
             cmd.CommandText = "Proposal_Wizard_v21_UPDATE"
             cmd.CommandType = CommandType.StoredProcedure
-            Dim taskId As String
 
             ' Set up the input parameter 
             cmd.Parameters.AddWithValue("@ClientId", clientId)
