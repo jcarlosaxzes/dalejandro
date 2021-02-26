@@ -236,7 +236,7 @@ Public Class timesbyperiords
 
     Protected Sub btnOkNewMiscellaneousTime_Click(sender As Object, e As EventArgs) Handles btnOkNewMiscellaneousTime.Click
         Try
-            If LocalAPI.NewNonJobTime(cboEmployee.SelectedValue, cboType.SelectedValue, RadDatePicker1.SelectedDate, RadDatePicker2.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text) Then
+            If LocalAPI.NewNonJobTime(cboEmployee.SelectedValue, cboType.SelectedValue, RadDatePicker1.SelectedDate, RadDatePicker2.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, 0, 0, 0, 0) Then
                 RadToolTipMiscellaneous.Visible = False
                 SqlDataSource1.DataBind()
                 RadGrid1.DataBind()

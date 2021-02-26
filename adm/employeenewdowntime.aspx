@@ -50,6 +50,32 @@
                     </table>
                 </div>
                 <br />
+
+                <%--Proposal Source--%>
+                <asp:Panel runat="server" ID="PanelProposal">
+
+                    <table class="table-sm" style="width: 100%;">
+                        <tr>
+                            <td colspan="2" style="text-align:center;font-weight:bold">
+                                <asp:Label ID="lblProposalLabel" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td style="width: 100px; text-align: right">Task:
+                            </td>
+                            <td style="padding-right:32px">
+                                <telerik:RadComboBox ID="cboProposalTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="100%" Height="350px" 
+                                        DataTextField="Description" DataValueField="Id" CausesValidation="false" MarkFirstMatch="True" Filter="Contains" AppendDataBoundItems="true">
+                                        <Items>
+                                            <telerik:RadComboBoxItem Text="(Select Task...)" Value="0" />
+                                        </Items>
+                                    </telerik:RadComboBox>
+                            </td>
+                        </tr>
+                    </table>
+                </asp:Panel>
+
                 <div>
                     <table class="table-sm" style="width: 100%">
                         <tr>
@@ -65,15 +91,15 @@
                             </td>
                             <td style="width: 100px; text-align: right">Hrs/Day:
                             </td>
-                            <td style="width:100px">
+                            <td style="width: 100px">
                                 <telerik:RadNumericTextBox ID="txtMiscellaneousHours" runat="server"
                                     MinValue="0.25" ShowSpinButtons="True" ButtonsPosition="Right" ToolTip="Hours for each day"
                                     Value="1" Width="90px" MaxValue="24" AutoPostBack="false">
                                     <NumberFormat DecimalDigits="2" />
                                     <IncrementSettings Step="1" />
                                 </telerik:RadNumericTextBox>
-                                </td> 
-                                <td style="width:32px">
+                            </td>
+                            <td style="width: 32px">
 
                                 <asp:LinkButton ID="btnUpdateHours" runat="server" CssClass="selectedButtons" UseSubmitBehavior="false"
                                     ToolTip="Calculate Hours" Visible="false">
@@ -121,7 +147,7 @@
                         </tr>
 
                         <tr>
-                            <td style="text-align: right;vertical-align:top">Notes:
+                            <td style="text-align: right; vertical-align: top">Notes:
                             </td>
                             <td colspan="4">
                                 <telerik:RadTextBox ID="txtNotes" runat="server" TextMode="MultiLine" Rows="3" Width="100%"
@@ -131,7 +157,7 @@
                         </tr>
 
                         <tr>
-                            <td colspan="2" style="padding-left:10px;font-size:small; font-style:italic">
+                            <td colspan="2" style="padding-left: 10px; font-size: small; font-style: italic">
                                 <asp:Label ID="lblNotes" runat="server" Visible="false" Text="(*) Selected date range will automatically exclude Holidays and Weekends."></asp:Label>
                                 <br />
                                 <asp:Label ID="lblAprovedNote" runat="server" Visible="false" Text="(*) This Request need to be Approved by company managers "></asp:Label>
@@ -237,8 +263,9 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Hours" HeaderText="Time" SortExpression="Hours" UniqueName="Hours" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
-                        UniqueName="Notes" ItemStyle-HorizontalAlign="Left">
+                    <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes" UniqueName="Notes">
+                    </telerik:GridBoundColumn>
+                    <telerik:GridBoundColumn DataField="ExtraInfo" HeaderText="Additional Info" UniqueName="ExtraInfo" ReadOnly="true">
                     </telerik:GridBoundColumn>
                     <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                         CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText="" HeaderStyle-Width="50px"
@@ -290,168 +317,18 @@
             <asp:ControlParameter ControlID="lblCompanyId" Name="companyId" PropertyName="Text" />
         </SelectParameters>
     </asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSourceProposalTask" runat="server" ConnectionString="<%$ ConnectionStrings:cnnProjectsAccounting %>"
+       SelectCommand="ProposalTaskNewNonProductiveTime_v21_SELECT" SelectCommandType="StoredProcedure">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="lblProposalId" Name="ProposalId" PropertyName="Text" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 
     <asp:Label ID="lblEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblLogedEmployeeId" runat="server" Visible="False"></asp:Label>
     <asp:Label ID="lblCompanyId" runat="server" Visible="False"></asp:Label>
 
+    <asp:Label ID="lblClientId" runat="server" Visible="False" Text="0"></asp:Label>
+    <asp:Label ID="lblProposalId" runat="server" Visible="False" Text="0"></asp:Label>
 
-    <script type="text/javascript">
-
-
-<%--        var cal1;
-        var cal2;
-        var SelectedRange = true;
-        var DateRange = Array();
-        var disableCalEvents = false;
-
-        function biggerThanOrEqual(A, B) {
-            if (A[0] > B[0])
-                return true;
-            if (A[0] < B[0])
-                return false;
-
-            if (A[1] > B[1])
-                return true;
-            if (A[1] < B[1])
-                return false;
-
-            if (A[2] >= B[2])
-                return true;
-
-            return false;
-            return false;
-        }
-
-        function tripleToDate(T) {
-            return new Date(T[0], T[1] - 1, T[2]);
-        }
-        function dateToTriple(D) {
-            return [D.getFullYear(), D.getMonth() + 1, D.getDate()];
-        }
-
-        Date.prototype.addDays = function (days) {
-            var date = new Date(this.valueOf());
-            date.setDate(date.getDate() + days);
-            return date;
-        }
-
-        function ClearSelections() {
-            var selectedDates = cal1.get_selectedDates();
-            cal1.unselectDates(selectedDates);
-            selectedDates = cal2.get_selectedDates();
-            cal2.unselectDates(selectedDates);
-        }
-
-        function SelectRange(startDate, endDate) {
-            var selectedDates = [];
-            while (startDate <= endDate) {
-                if (startDate.getDay() > 0 && startDate.getDay() < 6) {
-                    selectedDates.push(dateToTriple(startDate));
-                }
-                startDate = startDate.addDays(1);
-            }
-            updateTotlasHours();
-            if (selectedDates.length == 0) {
-                return;
-            }
-            cal1.selectDates(selectedDates, false);
-            cal2.selectDates(selectedDates, false);
-        }
-
-        function updateTotlasHours() {
-
-            var selectedDates = cal1.get_selectedDates();
-            var lbTotlaDays = document.getElementById('<%= lbTotlaDays.ClientID %>');
-            var numeric = $find("<%= txtMiscellaneousHours.ClientID %>")
-            lbTotlaDays.innerText = 'Total Days: ' + selectedDates.length + '   Total Hours: ' + selectedDates.length * numeric.get_value();
-        }
-
-        function Cal1Change(sender, eventArgs) {
-            if (disableCalEvents)
-                return;
-
-            var date = eventArgs.get_renderDay().get_date();
-            disableCalEvents = true;
-            if (SelectedRange || biggerThanOrEqual(DateRange[0], date)) {
-                DateRange[0] = date;
-                ClearSelections()
-
-                cal1.selectDate(date, false)
-                cal2.selectDate(date, false)
-
-                var RadDatePickerFrom = $find("<%= RadDatePickerFrom.ClientID %>");
-                RadDatePickerFrom.set_selectedDate(new Date(tripleToDate(date))); 
-
-                var RadDatePickerTo = $find("<%= RadDatePickerTo.ClientID %>");
-                RadDatePickerTo.set_selectedDate(new Date(tripleToDate(date)));
-
-                SelectedRange = false;
-            }
-            else {
-                DateRange[1] = date;
-                var startDate = tripleToDate(DateRange[0]);
-                var endDate = tripleToDate(DateRange[1]);
-                SelectRange(startDate, endDate);
-                var RadDatePickerTo = $find("<%= RadDatePickerTo.ClientID %>");
-                RadDatePickerTo.set_selectedDate(new Date(tripleToDate(date)));
-                SelectedRange = true;
-            }
-
-            disableCalEvents = false;
-
-        }--%>
-
-
- <%--
-        $(function () {
-
-           cal1 = $find("<%= RadCalendar1.ClientID %>");
-                cal2 = $find("<%= RadCalendar2.ClientID %>");
-                var date1 = new Date(<%= LocalAPI.DateTimeToUnixTimeStamp(DateTime.Now) * 1000 %>);
-                var date2 = new Date(<%= LocalAPI.DateTimeToUnixTimeStamp(DateTime.Now.AddMonths(1)) * 1000 %>);
-                DateRange[0] = date1;
-                DateRange[1] = date1;
-
-                var triplet1 = dateToTriple(date1);
-                var triplet2 = dateToTriple(date2);
-                cal1.navigateToDate(triplet1);
-                cal2.navigateToDate(triplet2);
-
-            });--%>
-
-
-
-<%--        function updateRange() {
-            disableCalEvents = true;
-
-            var RadDatePickerFrom = $find("<%= RadDatePickerFrom.ClientID %>");
-            var RadDatePickerTo = $find("<%= RadDatePickerTo.ClientID %>");
-            var dateFrom = RadDatePickerFrom.get_selectedDate();
-            var dateTo = RadDatePickerTo.get_selectedDate();
-            if (dateFrom) {
-                if (dateTo) {
-                    ClearSelections();
-                    if (dateFrom <= dateTo) {
-                        SelectRange(dateFrom, dateTo);
-                    }
-                    else {
-                        SelectRange(dateFrom, dateFrom);
-                        cal1.navigateToDate(dateToTriple(dateFrom));
-                    }
-                }
-            }
-
-            disableCalEvents = false;
-        }--%>
-
-        //function changeHours(sender, eventArgs) {
-        //    updateTotlasHours();                
-        //}
-
-        //function RadDatePickerChange(obj, e) {
-        //    updateRange();
-        //    updateTotlasHours();
-        //}
-    </script>
 </asp:Content>

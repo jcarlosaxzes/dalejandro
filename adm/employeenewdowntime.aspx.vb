@@ -12,6 +12,15 @@ Public Class employeenewdowntime
                 lblCompanyId.Text = Session("companyId")
                 lblLogedEmployeeId.Text = Master.UserId
 
+                If Not Request.QueryString("proposalId") Is Nothing Then
+                    lblProposalId.Text = Request.QueryString("proposalId")
+                    lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
+                    lblProposalLabel.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ProjectName")
+                    PanelProposal.Visible = True
+                Else
+                    PanelProposal.Visible = False
+                End If
+
                 If Not Session("employeefortime") Is Nothing Then
                     lblEmployeeId.Text = Session("employeefortime")
                 Else
@@ -132,39 +141,9 @@ Public Class employeenewdowntime
 #Region "Add Record"
     Private Sub btnOkNewMiscellaneousTime_Click(sender As Object, e As EventArgs) Handles btnOkNewMiscellaneousTime.Click
         Try
-            'If (cboType.SelectedValue = 5 Or cboType.SelectedValue = 6 Or cboType.SelectedValue = 7) And RadDatePickerFrom.DbSelectedDate > RadDatePickerTo.DbSelectedDate Then
-            '    dateValidator.Visible = True
-            '    Return
-            'Else
-            '    dateValidator.Visible = False
-            'End If
-
             If LocalNewTMiscellaneousTime() Then
                 Master.InfoMessage("New Time inserted")
-                ''BackPage()
-                'SqlDataSourceEmployeeDailyTimeWorked.DataBind()
-                'RadScheduler1.DataBind()
-                'RadScheduler1.Rebind()
-                'ShowSumaryBox()
             End If
-
-            'cboType.SelectedValue = -1
-            'txtMiscellaneousHours.Text = "1"
-            'RadCalendar1.SelectedDates.Clear()
-            'lbTotlaDaysHours.Text = "Total Work Days: 0 Total Hours: 0"
-            'lbTotlaDaysHours.ForeColor = Drawing.Color.Black
-            'txtNotes.Text = ""
-            'RadDatePickerFrom.Visible = True
-            'btnOkNewMiscellaneousTime.Text = "Add Time"
-            'RadDatePickerFrom.Enabled = True
-            'RadDatePickerTo.Enabled = True
-            'txtDateFrom.Visible = True
-            'PanelTotlaHOursSelected.Visible = False
-            'PanelDateRagePicker.Visible = False
-            'lblAprovedNote.Visible = False
-            'btnUpdateHours.Visible = False
-            'lblNotes.Visible = False
-
             BackPage()
 
         Catch ex As Exception
@@ -194,7 +173,7 @@ Public Class employeenewdowntime
 
                     End If
                 Case Else
-                        bRet = LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerFrom.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text)
+                    bRet = LocalAPI.NewNonJobTime(lblEmployeeId.Text, cboType.SelectedValue, RadDatePickerFrom.SelectedDate, RadDatePickerFrom.SelectedDate, txtMiscellaneousHours.Text, txtNotes.Text, lblClientId.Text, 0, lblProposalId.Text, cboProposalTask.SelectedValue)
                     If bRet Then Master.InfoMessage(cboType.Text & " time inserted")
             End Select
 

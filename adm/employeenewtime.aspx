@@ -73,7 +73,7 @@
                                 <td style="text-align: right; width: 130px">Task:
                                 </td>
                                 <td style="text-align: left">
-                                    <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="100%" 
+                                    <telerik:RadComboBox ID="cboTask" runat="server" DataSourceID="SqlDataSourceProposalTask" Width="100%" Height="350px" 
                                         DataTextField="Description" DataValueField="Id" CausesValidation="false" MarkFirstMatch="True" Filter="Contains" AppendDataBoundItems="true">
                                         <Items>
                                             <telerik:RadComboBoxItem Text="(Select Task...)" Value="0" />

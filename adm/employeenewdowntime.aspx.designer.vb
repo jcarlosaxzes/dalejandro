@@ -86,6 +86,33 @@ Partial Public Class employeenewdowntime
     Protected WithEvents lblPer3 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''PanelProposal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelProposal As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lblProposalLabel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblProposalLabel As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''cboProposalTask control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cboProposalTask As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
     '''cboType control.
     '''</summary>
     '''<remarks>
@@ -293,6 +320,15 @@ Partial Public Class employeenewdowntime
     Protected WithEvents SqlDataSourceEmployeeDailyTimeWorked As Global.System.Web.UI.WebControls.SqlDataSource
 
     '''<summary>
+    '''SqlDataSourceProposalTask control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SqlDataSourceProposalTask As Global.System.Web.UI.WebControls.SqlDataSource
+
+    '''<summary>
     '''lblEmployeeId control.
     '''</summary>
     '''<remarks>
@@ -318,6 +354,24 @@ Partial Public Class employeenewdowntime
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblCompanyId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblClientId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblClientId As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblProposalId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblProposalId As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Master property.

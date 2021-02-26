@@ -4272,7 +4272,7 @@ Public Class LocalAPI
     End Function
 
 
-    Public Shared Function NewNonJobTime(ByVal EmployeeId As Integer, ByVal TypeId As Integer, ByVal DateFrom As DateTime, ByVal DateTo As DateTime, ByVal Hours As Double, ByVal Notes As String) As Boolean
+    Public Shared Function NewNonJobTime(ByVal EmployeeId As Integer, ByVal TypeId As Integer, ByVal DateFrom As DateTime, ByVal DateTo As DateTime, ByVal Hours As Double, ByVal Notes As String, ClientId As Integer, clientspreprojectId As Integer, proposalId As Integer, proposaldetalleId As Integer) As Boolean
         Try
             'InicializeEmployeeOfJob(lEmployee, lJob)
 
@@ -4280,7 +4280,7 @@ Public Class LocalAPI
             Dim cmd As SqlCommand = cnn1.CreateCommand()
 
             ' Setup the command to execute the stored procedure.
-            cmd.CommandText = "NonProductiveTime_INSERT"
+            cmd.CommandText = "NonProductiveTime_v21_INSERT"
             cmd.CommandType = CommandType.StoredProcedure
 
             ' Set up the input parameter 
@@ -4290,6 +4290,11 @@ Public Class LocalAPI
             cmd.Parameters.AddWithValue("@DateTo", DateTo)
             cmd.Parameters.AddWithValue("@Hours", Hours)
             cmd.Parameters.AddWithValue("@Notes", Notes)
+
+            cmd.Parameters.AddWithValue("@ClientId", ClientId)
+            cmd.Parameters.AddWithValue("@clientspreprojectId", clientspreprojectId)
+            cmd.Parameters.AddWithValue("@proposalId", proposalId)
+            cmd.Parameters.AddWithValue("@proposaldetalleId", proposaldetalleId)
 
             ' Execute the stored procedure.
             cmd.ExecuteNonQuery()
@@ -11423,7 +11428,7 @@ Public Class LocalAPI
         Select Case statusId
             Case 0  'Not Emitted
                 Return "badge badge-secondary statuslabel"
-            Case 1  'Emitted
+            Case 1  'Pending
                 Return "badge badge-warning statuslabel"
             Case 2  'Accepted
                 Return "badge badge-success statuslabel"
@@ -11431,6 +11436,19 @@ Public Class LocalAPI
                 Return "badge badge-danger statuslabel"
         End Select
 
+    End Function
+
+    Public Shared Function GetProposalStatusColorCSS(ByVal statusId As Integer) As String
+        Select Case statusId
+            Case 0  'Not Emitted
+                Return "color:#6c757d"
+            Case 1  'Pending
+                Return "color:#ff8000"
+            Case 2  'Accepted
+                Return "color:#28a745"
+            Case Else
+                Return "color:#dc3545"
+        End Select
     End Function
 
     Public Shared Function GetProposalIdFromGUID(ByVal guid As String) As Integer
