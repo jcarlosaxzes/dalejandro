@@ -52,6 +52,12 @@
                 <br />
 
                 <%--Proposal Source--%>
+                <asp:Panel runat="server" ID="PanelClient">
+                    <div  style="width:100%;text-align:center;font-weight:bold">
+                        <asp:Label ID="lblClientTitle" runat="server"></asp:Label>
+                    </div>
+                </asp:Panel>
+
                 <asp:Panel runat="server" ID="PanelProposal">
 
                     <table class="table-sm" style="width: 100%;">

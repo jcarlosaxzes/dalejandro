@@ -123,6 +123,9 @@ Public Class clients
                 lblSelectedClientId.Text = e.CommandArgument
                 NewClientActivityDlg(True)
 
+            Case "AddTime"
+                Response.Redirect("~/adm/employeenewdowntime.aspx?clientId=" & e.CommandArgument & "&backpage=clients")
+
             Case "AddNotifications"
                 Response.Redirect($"~/adm/notificationsnew.aspx?AppointmentId=&EntityType=Client&EntityId={e.CommandArgument}&backpage=Clients")
 

@@ -153,6 +153,13 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
+                                                        <asp:LinkButton ID="LinkButton1444" runat="server" UseSubmitBehavior="false" CommandName="AddTime" CommandArgument='<%# Eval("Id")%>' CssClass="dropdown-item">
+                                                            <i class="fas fa-user-clock"></i>&nbsp;&nbsp;Add Time
+                                                        </asp:LinkButton>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
                                                         <div class="dropdown-divider"></div>
                                                     </td>
                                                 </tr>
@@ -378,7 +385,7 @@
                     </td>
                 </tr>
             </table>
-            <asp:Panel runat="server" ID="PanelLocation" Visible="false" >
+            <asp:Panel runat="server" ID="PanelLocation" Visible="false">
                 <table class="table-borderless" style="width: 800px">
                     <tr>
                         <td style="width: 180px; text-align: right">Location:
@@ -410,8 +417,8 @@
                         <asp:CompareValidator runat="server" ID="Comparevalidator1" ValueToCompare="(Select Activity...)" ValidationGroup="vActivity" Operator="NotEqual" ControlToValidate="cboActivityType" Display="None" ErrorMessage="Activity Type is mandatory" SetFocusOnError="true"> </asp:CompareValidator>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="RadDateTimePicker1" ValidationGroup="vActivity"
                             Text="*" ErrorMessage="Due Date is required" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtSubject" ValidationGroup="vActivity"
-                        Text="*" ErrorMessage="Subject is required" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtSubject" ValidationGroup="vActivity"
+                            Text="*" ErrorMessage="Subject is required" SetFocusOnError="true" Display="None"></asp:RequiredFieldValidator>
 
                     </td>
                 </tr>

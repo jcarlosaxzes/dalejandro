@@ -168,6 +168,8 @@ Public Class proposals
                 lblSelectedClientId.Text = LocalAPI.GetProposalProperty(lblSelected.Text, "ClientId")
                 NewClientActivityDlg(True)
 
+            Case "AddTime"
+                Response.Redirect("~/adm/employeenewdowntime.aspx?proposalId=" & e.CommandArgument & "&backpage=proposals")
         End Select
     End Sub
 
