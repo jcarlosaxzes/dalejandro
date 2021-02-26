@@ -111,7 +111,12 @@ Public Class employeenewdowntime
         Select Case Session("employeenewnptimebackpage")
 
             Case "activejobsdashboad"
-                Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
+                If lblProposalId.Text > 0 Then
+                    Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true&ProposalTab=1")
+                Else
+                    Response.Redirect("~/adm/activejobsdashboad.aspx?restoreFilter=true")
+                End If
+
 
             Case "time"
                 Response.Redirect("~/adm/time.aspx?restoreFilter=true")
