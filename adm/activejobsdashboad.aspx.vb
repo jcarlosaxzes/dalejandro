@@ -23,7 +23,8 @@ Public Class activejobsdashboad
                 End If
 
                 If Not Request.QueryString("ProposalTab") Is Nothing Then
-                    RadWizardStepProposals.Active = True
+                    RadTabStrip1.Tabs(1).Selected = True
+                    RadPageView2.Selected = True
                 End If
 
                 RefrescarDatos()
