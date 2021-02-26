@@ -86,6 +86,24 @@ Partial Public Class employeenewdowntime
     Protected WithEvents lblPer3 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''PanelClient control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelClient As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lblClientTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblClientTitle As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''PanelProposal control.
     '''</summary>
     '''<remarks>

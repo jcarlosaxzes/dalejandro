@@ -21,6 +21,14 @@ Public Class employeenewdowntime
                     PanelProposal.Visible = False
                 End If
 
+                If Not Request.QueryString("clientId") Is Nothing Then
+                    lblClientId.Text = Request.QueryString("clientId")
+                    lblClientTitle.Text = LocalAPI.GetClientProperty(lblClientId.Text, "Client")
+                    PanelClient.Visible = True
+                Else
+                    PanelClient.Visible = False
+                End If
+
                 If Not Session("employeefortime") Is Nothing Then
                     lblEmployeeId.Text = Session("employeefortime")
                 Else
@@ -37,9 +45,9 @@ Public Class employeenewdowntime
                 End If
 
                 If Not Request.QueryString("backpage") Is Nothing Then
-                    Session("employeenewnptimebackpage") = Request.QueryString("backpage")
+                    Session("employeenewdowntimebackpage") = Request.QueryString("backpage")
                 Else
-                    Session("employeenewnptimebackpage") = ""
+                    Session("employeenewdowntimebackpage") = ""
                 End If
 
                 cboType.DataBind()
@@ -108,7 +116,7 @@ Public Class employeenewdowntime
 
     Private Sub BackPage()
         Dim sUrl As String
-        Select Case Session("employeenewnptimebackpage")
+        Select Case Session("employeenewdowntimebackpage")
 
             Case "activejobsdashboad"
                 If lblProposalId.Text > 0 Then
@@ -120,6 +128,12 @@ Public Class employeenewdowntime
 
             Case "time"
                 Response.Redirect("~/adm/time.aspx?restoreFilter=true")
+
+            Case "proposals"
+                Response.Redirect("~/adm/proposals.aspx?restoreFilter=true")
+
+            Case "clients"
+                Response.Redirect("~/adm/clients.aspx?restoreFilter=true")
 
             Case "vacationandholidays"
                 Response.Redirect("~/adm/vacationandholidays.aspx")
