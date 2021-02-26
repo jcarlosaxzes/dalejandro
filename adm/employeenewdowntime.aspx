@@ -263,7 +263,7 @@
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="Hours" HeaderText="Time" SortExpression="Hours" UniqueName="Hours" ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
                     </telerik:GridBoundColumn>
-                    <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes" UniqueName="Notes">
+                    <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes" UniqueName="Notes" HeaderStyle-Width="250px">
                     </telerik:GridBoundColumn>
                     <telerik:GridBoundColumn DataField="ExtraInfo" HeaderText="Additional Info" UniqueName="ExtraInfo" ReadOnly="true">
                     </telerik:GridBoundColumn>

@@ -355,14 +355,11 @@
                     <PagerStyle Mode="Slider" AlwaysVisible="false" />
                     <MasterTableView DataKeyNames="Id" DataSourceID="SqlDataSource2">
                         <Columns>
-                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn"
-                                HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
+                            <telerik:GridEditCommandColumn ButtonType="ImageButton" UniqueName="EditCommandColumn" HeaderText="" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="50px">
                             </telerik:GridEditCommandColumn>
-                            <telerik:GridBoundColumn AllowFiltering="False" DataField="nEmployee" HeaderText="Employee" ReadOnly="True"
-                                SortExpression="nEmployee" UniqueName="nEmployee" HeaderStyle-Width="250px" >
+                            <telerik:GridBoundColumn AllowFiltering="False" DataField="nEmployee" HeaderText="Employee" ReadOnly="True" SortExpression="nEmployee" UniqueName="nEmployee" HeaderStyle-Width="220px" >
                             </telerik:GridBoundColumn>
-                            <telerik:GridTemplateColumn DataField="Name" FilterControlAltText="Filter Name column" HeaderText="Category"
-                                SortExpression="Name" UniqueName="Name" >
+                            <telerik:GridTemplateColumn DataField="Name" HeaderStyle-Width="220px" HeaderText="Category" SortExpression="Name" UniqueName="Name" >
                                 <EditItemTemplate>
                                     <div style="margin: 5px">
                                         <telerik:RadComboBox ID="cboType" runat="server" DataSourceID="SqlDataSourceType" DataTextField="Name" Width="100%"
@@ -378,17 +375,17 @@
                                 </ItemTemplate>
                             </telerik:GridTemplateColumn>
 
-                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From"
-                                SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="100px"
+                            <telerik:GridBoundColumn DataField="DateFrom" DataType="System.DateTime" HeaderText="From" SortExpression="DateFrom" UniqueName="DateFrom" DataFormatString="{0:d}" HeaderStyle-Width="100px"
                                 ItemStyle-HorizontalAlign="Right" >
                             </telerik:GridBoundColumn>
                             <telerik:GridBoundColumn DataField="DateTo" DataType="System.DateTime" HeaderText="To" SortExpression="DateTo" UniqueName="DateTo" DataFormatString="{0:d}" HeaderStyle-Width="100px"
                                 ItemStyle-HorizontalAlign="Right">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Hours" HeaderText="Time" SortExpression="Hours" UniqueName="Hours"  ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="100px">
+                            <telerik:GridBoundColumn DataField="Hours" HeaderText="Time" SortExpression="Hours" UniqueName="Hours"  ItemStyle-HorizontalAlign="Center" HeaderStyle-Width="80px">
                             </telerik:GridBoundColumn>
-                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes"
-                                UniqueName="Notes"  ItemStyle-HorizontalAlign="Left">
+                            <telerik:GridBoundColumn DataField="Notes" HeaderText="Notes" SortExpression="Notes" UniqueName="Notes" HeaderStyle-Width="250px">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="ExtraInfo" HeaderText="Additional Info" UniqueName="ExtraInfo" ReadOnly="true">
                             </telerik:GridBoundColumn>
                             <telerik:GridButtonColumn ConfirmDialogType="RadWindow" ConfirmText="Delete this row?" ConfirmTitle="Delete" ButtonType="ImageButton"
                                 CommandName="Delete" Text="Delete" UniqueName="DeleteColumn" HeaderText="" HeaderStyle-Width="50px"
