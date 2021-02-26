@@ -131,22 +131,31 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadGridFooter As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''RadWizard1 control.
+    '''RadTabStrip1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizard1 As Global.Telerik.Web.UI.RadWizard
+    Protected WithEvents RadTabStrip1 As Global.Telerik.Web.UI.RadTabStrip
 
     '''<summary>
-    '''RadWizardStepJobs control.
+    '''RadMultiPage1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStepJobs As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadMultiPage1 As Global.Telerik.Web.UI.RadMultiPage
+
+    '''<summary>
+    '''RadPageView1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RadPageView1 As Global.Telerik.Web.UI.RadPageView
 
     '''<summary>
     '''RadListView1 control.
@@ -176,13 +185,13 @@ Partial Public Class activejobsdashboad
     Protected WithEvents RadListView3 As Global.Telerik.Web.UI.RadListView
 
     '''<summary>
-    '''RadWizardStepProposals control.
+    '''RadPageView2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadWizardStepProposals As Global.Telerik.Web.UI.RadWizardStep
+    Protected WithEvents RadPageView2 As Global.Telerik.Web.UI.RadPageView
 
     '''<summary>
     '''RadListViewProposal1 control.

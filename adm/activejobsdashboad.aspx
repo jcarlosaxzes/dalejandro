@@ -468,10 +468,15 @@
             </telerik:RadGrid>
         </div>
 
-        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" DisplayNavigationButtons="false" DisplayProgressBar="false" RenderMode="Lightweight" Skin="Silk" Font-Bold="true" Font-Size="Larger">
-            <WizardSteps>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStepJobs" Title="Jobs" StepType="Start">
-                    <%--Job Lists--%>
+         <telerik:RadTabStrip RenderMode="Lightweight" runat="server" ID="RadTabStrip1"  MultiPageID="RadMultiPage1" SelectedIndex="0" Skin="Silk">
+            <Tabs>
+                <telerik:RadTab Text="Jobs" Width="300px" Font-Bold="true" Font-Size="Larger"></telerik:RadTab>
+                <telerik:RadTab Text="Proposals" Width="300px" Font-Bold="true" Font-Size="Larger"></telerik:RadTab>
+            </Tabs>
+        </telerik:RadTabStrip>
+        <telerik:RadMultiPage runat="server" ID="RadMultiPage1"  SelectedIndex="0">
+            <telerik:RadPageView runat="server" ID="RadPageView1">
+                 <%--Job Lists--%>
                     <table class="table-sm" style="width: 100%; text-align: center; margin-top: 10px">
                         <tr>
                             <td style="width: 17%; text-align: center; vertical-align: top;">
@@ -704,9 +709,9 @@
                         </tr>
                     </table>
 
-                </telerik:RadWizardStep>
-                <telerik:RadWizardStep runat="server" ID="RadWizardStepProposals" Title="Proposals" StepType="Start">
-
+            </telerik:RadPageView>
+            <telerik:RadPageView runat="server" ID="RadPageView2">
+                 <%--Proposals--%>
                     <table class="table-sm" style="width: 100%; text-align: center; margin-top: 10px">
                         <tr>
                             <td style="width: 50%; text-align: center; vertical-align: top;">
@@ -863,10 +868,9 @@
                             </td>
                         </tr>
                     </table>
-                </telerik:RadWizardStep>
-            </WizardSteps>
-        </telerik:RadWizard>
+            </telerik:RadPageView>
 
+        </telerik:RadMultiPage>
 
     </div>
 
