@@ -21,6 +21,11 @@ Public Class activejobsdashboad
                 If Not Request.QueryString("restoreFilter") Is Nothing Then
                     RestoreFilter()
                 End If
+
+                If Not Request.QueryString("ProposalTab") Is Nothing Then
+                    RadWizardStepProposals.Active = True
+                End If
+
                 RefrescarDatos()
             End If
             RadWindowManager1.EnableViewState = False

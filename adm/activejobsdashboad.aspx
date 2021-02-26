@@ -468,7 +468,7 @@
             </telerik:RadGrid>
         </div>
 
-        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" DisplayNavigationButtons="false" DisplayProgressBar="false" RenderMode="Lightweight" Skin="Material">
+        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" DisplayNavigationButtons="false" DisplayProgressBar="false" RenderMode="Lightweight" Skin="Silk" Font-Bold="true" Font-Size="Larger">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepJobs" Title="Jobs" StepType="Start">
                     <%--Job Lists--%>
@@ -672,7 +672,7 @@
                                                                     <%# Eval("HoursUsed", "{0:N1}")%>/<%# Eval("HoursAssigned", "{0:N0}")%>
                                                                 </td>
                                                                 <td>
-                                                                    <telerik:RadProgressBar ID="RadProgressBar1" runat="server"
+                                                                    <telerik:RadProgressBar ID="RadProgressBar3" runat="server"
                                                                         RenderMode="Lightweight"
                                                                         Height="18px" ShowLabel="false"
                                                                         BarType="Value"
@@ -732,8 +732,7 @@
                                                                 <h4 style="margin: 0"><%# Eval("Code")%></h4>
                                                             </td>
                                                             <td style="width: 32px; text-align: right; font-size: 24px;">
-                                                                <asp:LinkButton ID="btnNewProposalTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
-                                                                    CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
+                                                                <asp:LinkButton ID="btnNewProposalTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>' CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
                                                                         <i title="Add Non-Productive Time" class="fas fa-user-clock" style='<%# LocalAPI.GetProposalStatusColorCSS(Eval("statusId")) %>'></i>
                                                                 </asp:LinkButton>
                                                             </td>
@@ -744,7 +743,7 @@
                                                     </table>
                                                 </div>
                                                 <div class="card-body" style="text-align: center">
-                                                    <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommanName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
+                                                    <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
                                                         <p style="width: 100%; text-align: center; margin: 0; flex-wrap: nowrap; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                                             <b><%# Eval("itemName")%></b><br />
                                                             <%# Eval("ClientCompany")%><br />
@@ -809,8 +808,7 @@
                                                                 <h4 style="margin: 0"><%# Eval("Code")%></h4>
                                                             </td>
                                                             <td style="width: 32px; text-align: right; font-size: 24px;">
-                                                                <asp:LinkButton ID="btnNewProposalTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>'
-                                                                    CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
+                                                                <asp:LinkButton ID="btnNewProposalTime" runat="server" UseSubmitBehavior="false" ToolTip='<%# Eval("itemNameFull")%>' CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>'>
                                                                         <i title="Add Non-Productive Time" class="fas fa-user-clock" style='<%# LocalAPI.GetProposalStatusColorCSS(Eval("statusId")) %>'></i>
                                                                 </asp:LinkButton>
                                                             </td>
@@ -821,7 +819,7 @@
                                                     </table>
                                                 </div>
                                                 <div class="card-body" style="text-align: center">
-                                                    <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommanName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
+                                                    <asp:LinkButton ID="btnNewTime2" runat="server" UseSubmitBehavior="false" CommandName="AddNewTime" CommandArgument='<%# Eval("Id")%>' ForeColor="Black" Font-Underline="false">
                                                         <p style="width: 100%; text-align: center; margin: 0; flex-wrap: nowrap; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                                             <b><%# Eval("itemName")%></b><br />
                                                             <%# Eval("ClientCompany")%><br />
