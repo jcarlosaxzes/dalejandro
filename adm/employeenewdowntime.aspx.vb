@@ -17,6 +17,8 @@ Public Class employeenewdowntime
                     lblClientId.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ClientId")
                     lblProposalLabel.Text = LocalAPI.GetProposalProperty(lblProposalId.Text, "ProjectName")
                     PanelProposal.Visible = True
+                Else
+                    PanelProposal.Visible = False
                 End If
 
                 If Not Session("employeefortime") Is Nothing Then
