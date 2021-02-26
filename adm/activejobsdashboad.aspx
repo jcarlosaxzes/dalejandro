@@ -468,7 +468,7 @@
             </telerik:RadGrid>
         </div>
 
-        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" DisplayNavigationButtons="false" DisplayProgressBar="false" RenderMode="Lightweight" Skin="Material">
+        <telerik:RadWizard ID="RadWizard1" runat="server" Height="800px" DisplayCancelButton="false" DisplayNavigationButtons="false" DisplayProgressBar="false" RenderMode="Lightweight" Skin="Silk" Font-Bold="true" Font-Size="Larger">
             <WizardSteps>
                 <telerik:RadWizardStep runat="server" ID="RadWizardStepJobs" Title="Jobs" StepType="Start">
                     <%--Job Lists--%>
